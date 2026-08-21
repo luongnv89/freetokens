@@ -167,8 +167,8 @@ push built output by hand:
    starts the `Deploy to GitHub Pages` workflow.
 2. **Build** — the workflow checks out the repo, runs
    `python3 scripts/build.py` to validate all offers and render
-   `site/index.html` plus `site/privacy.html`, then runs the test suite.
-   Any validation or test failure aborts the deploy.
+   `site/index.html`, `site/privacy.html`, and `site/favicon.svg`, then runs
+   the test suite. Any validation or test failure aborts the deploy.
 3. **Publish** — the built `site/` directory is uploaded as a Pages artifact
    and deployed with the official Actions toolchain (`actions/checkout`,
    `actions/setup-python`, `actions/configure-pages`,

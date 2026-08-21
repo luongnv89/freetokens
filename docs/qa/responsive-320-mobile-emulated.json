@@ -1,0 +1,88 @@
+{
+  "url": "http://127.0.0.1:8123/index.html",
+  "pointerCoarseMatches": true,
+  "viewport": {
+    "css_width": 320,
+    "css_height": 690
+  },
+  "scrollWidth": 320,
+  "bodyScrollWidth": 320,
+  "clientWidth": 320,
+  "horizontallyOverflows": false,
+  "counts": {
+    "chips": 6,
+    "search": 1,
+    "cardLinks": 11,
+    "footLinks": 2
+  },
+  "minHeightsPx": {
+    "chips": 44,
+    "search": 44,
+    "cardLinks": 22,
+    "footLinks": 18
+  },
+  "samples": {
+    "chips": [
+      {
+        "label": "All",
+        "w": 54.8,
+        "h": 44
+      },
+      {
+        "label": "API providers",
+        "w": 129.6,
+        "h": 44
+      },
+      {
+        "label": "Coding",
+        "w": 77.3,
+        "h": 44
+      },
+      {
+        "label": "Image",
+        "w": 69.8,
+        "h": 44
+      },
+      {
+        "label": "Voice",
+        "w": 69.8,
+        "h": 44
+      },
+      {
+        "label": "Video",
+        "w": 69.8,
+        "h": 44
+      }
+    ],
+    "search": [
+      {
+        "label": "ft-search",
+        "w": 280,
+        "h": 44
+      }
+    ],
+    "cardLinks": {
+      "label": "Devin Free Plan ↗",
+      "w": 151.1,
+      "h": 22
+    },
+    "footLinks": [
+      {
+        "label": "Offers",
+        "w": 43.2,
+        "h": 18
+      },
+      {
+        "label": "Privacy policy",
+        "w": 100.8,
+        "h": 18
+      }
+    ]
+  },
+  "title": "Free AI Credits",
+  "metaDescription": "Every currently-claimable free AI credit offer, hand-verified, on one fast page.",
+  "faviconLink": "./favicon.svg",
+  "focusableCount": 20,
+  "hasHorizontalScrollbar": false,
+  "user_agent_note": "Automated substitute for the manual iOS Safari + Android Chrome pass: Chromium headless emulating a 320x690 CSS px mobile viewport. Real-device pass remains an owner action."
+}
