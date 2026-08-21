@@ -978,6 +978,22 @@ class NodeAppJsTests(unittest.TestCase):
         self.assertEqual(first["pressed"]["all"], "true")
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_redundant_filter_click_does_not_spam_history(self):
+        snaps = self._run(
+            [
+                {"op": "click_chip", "value": "image"},
+                {"op": "click_chip", "value": "image"},
+                {"op": "click_reset"},
+            ]
+        )
+        final = snaps[-1]
+        # One entry per distinct state: image, then the reset to "/".
+        self.assertEqual(
+            final["historyUrls"], ["?category=image", "/"]
+        )
+        self.assertEqual(len(final["events"]), 3)  # each click still applies
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_silent_when_analytics_absent(self):
         snaps = self._run(
             [{"op": "click_chip", "value": "video"}, {"op": "click_reset"}],

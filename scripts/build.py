@@ -953,13 +953,17 @@ _APP_JS = """<script id="ft-app">
       syncControls();
       if (options.commit) {
         var query = ftSerializeState(state);
-        try {
-          window.history.pushState(
-            {},
-            "",
-            query ? "?" + query : window.location.pathname
-          );
-        } catch (err) {}
+        var nextSearch = query ? "?" + query : "";
+        // Skip redundant entries so Back always undoes a real change.
+        if (nextSearch !== window.location.search) {
+          try {
+            window.history.pushState(
+              {},
+              "",
+              nextSearch || window.location.pathname
+            );
+          } catch (err) {}
+        }
       }
     }
 

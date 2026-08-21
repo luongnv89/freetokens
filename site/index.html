@@ -402,7 +402,7 @@ a:focus-visible {
 </section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-21T19:21:46Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-21T19:22:36Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
 </footer>
 </div>
 
@@ -504,13 +504,17 @@ a:focus-visible {
       syncControls();
       if (options.commit) {
         var query = ftSerializeState(state);
-        try {
-          window.history.pushState(
-            {},
-            "",
-            query ? "?" + query : window.location.pathname
-          );
-        } catch (err) {}
+        var nextSearch = query ? "?" + query : "";
+        // Skip redundant entries so Back always undoes a real change.
+        if (nextSearch !== window.location.search) {
+          try {
+            window.history.pushState(
+              {},
+              "",
+              nextSearch || window.location.pathname
+            );
+          } catch (err) {}
+        }
       }
     }
 
