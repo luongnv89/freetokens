@@ -531,6 +531,7 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{meta_description}">
 <title>{title}</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -589,6 +590,22 @@ _EMPTY_TMPL = """<section class="empty" style="--i:0">
 <p>Every listing here is checked by hand against the provider, and none have passed the check at the moment.</p>
 <p>New and renewed offers appear automatically after the next rebuild &mdash; check back soon.</p>
 </section>"""
+
+
+# --- Favicon (launch checklist, PRD §8.1) -----------------------------------
+# One self-contained SVG emitted next to the HTML so every generated page
+# shares a single icon; the relative href stays deploy-base safe (GitHub
+# Pages project sites serve under /<repo>/).
+_FAVICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">\
+<rect width="64" height="64" rx="14" fill="#000000"/>\
+<g fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">\
+<rect x="13" y="25" width="38" height="10" rx="2"/>\
+<path d="M19 35v11a5 5 0 0 0 5 5h16a5 5 0 0 0 5-5V35"/>\
+<path d="M32 25v26"/>\
+<path d="M32 25c-8 0-11-4-11-7a4 4 0 0 1 7-2c3 3 4 9 4 9z"/>\
+<path d="M32 25c8 0 11-4 11-7a4 4 0 0 0-7-2c-3 3-4 9-4 9z"/>\
+</g></svg>
+"""
 
 
 def _human_date(iso: str) -> str:
@@ -869,6 +886,11 @@ button:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 3px;
 }
+
+/* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
+@media (pointer: coarse) {
+  .consent-actions button { min-height: 44px; }
+}
 """
 
 _APP_CSS = """
@@ -944,6 +966,19 @@ _APP_CSS = """
 .grid li[hidden] { display: none; }
 
 .empty .chip.reset { margin-top: 0.75rem; }
+
+/* Touch targets: WCAG 2.1 AA sets no size minimum, but iOS/Android HIG
+   guidance is 44 px; raised only on coarse-pointer (touch) devices so
+   mouse/keyboard layouts are unchanged. */
+@media (pointer: coarse) {
+  .chip,
+  #ft-search { min-height: 44px; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+  }
+}
 """
 
 # Client-side discovery runtime. Vanilla ES5-style IIFE, emitted inline so
@@ -1462,11 +1497,13 @@ def main(argv=None) -> int:
         fh.write(render_html(index, measurement_id))
     with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
         fh.write(render_privacy_html(index["generated_at"], measurement_id))
+    with open(os.path.join(out_dir, "favicon.svg"), "w", encoding="utf-8") as fh:
+        fh.write(_FAVICON_SVG)
 
     note = f" (analytics: {measurement_id})" if measurement_id else ""
     print(
         f"built {index['count']} offers -> index.json, site/index.html, "
-        f"site/privacy.html{note}"
+        f"site/privacy.html, site/favicon.svg{note}"
     )
     return 0
 

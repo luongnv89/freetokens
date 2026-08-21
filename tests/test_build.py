@@ -8,6 +8,7 @@ import html
 import io
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -1390,6 +1391,102 @@ class PrivacyPageTests(unittest.TestCase):
         self.assertIn("--ink: #000000;", page)
         self.assertIn("--paper: #ffffff;", page)
         self.assertIn('--gray: #6b7280;', page)
+
+
+class LaunchGateTests(unittest.TestCase):
+    """Task 3.7 / §8.1: favicon, meta tags, and responsive guards on all pages."""
+
+    FAVICON_LINK = '<link rel="icon" type="image/svg+xml" href="./favicon.svg">'
+
+    def _home_with_one(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        return build.render_html(build.build_index([offer]))
+
+    def _empty_home(self):
+        index = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
+        return build.render_html(index)
+
+    def _privacy(self):
+        return build.render_privacy_html("2026-08-21T00:00:00Z")
+
+    # --- favicon ------------------------------------------------------------
+
+    def test_favicon_emitted_next_to_html(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "alpha.yaml").write_text(offer_text(), encoding="utf-8")
+            out = os.path.join(tmp, "out")
+            code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            icon = Path(out, "site", "favicon.svg").read_text(encoding="utf-8")
+            self.assertIn("<svg", icon)
+            self.assertIn('xmlns="http://www.w3.org/2000/svg"', icon)
+            self.assertIn("</svg>", icon)
+
+    def test_every_generated_page_links_the_favicon_relatively(self):
+        for page in (self._home_with_one(), self._empty_home(), self._privacy()):
+            with self.subTest(page=page[:40]):
+                self.assertIn(self.FAVICON_LINK, page)
+                # Relative href only: absolute /favicon paths break under
+                # the GitHub Pages /<repo>/ project base.
+                self.assertNotIn('href="/favicon', page)
+
+    def test_favicon_is_valid_xml(self):
+        import xml.etree.ElementTree as ET
+
+        root = ET.fromstring(build._FAVICON_SVG)
+        self.assertEqual(root.tag, "{http://www.w3.org/2000/svg}svg")
+
+    # --- title + meta description on every page ------------------------------
+
+    def test_title_and_meta_description_on_every_page(self):
+        pages = {
+            "home": self._home_with_one(),
+            "home-empty": self._empty_home(),
+            "privacy": self._privacy(),
+        }
+        for name, page in pages.items():
+            with self.subTest(page=name):
+                self.assertRegex(page, r"<title>[^<]+</title>")
+                self.assertRegex(
+                    page, r'<meta name="description" content="[^"]{10,}"'
+                )
+
+    def test_titles_differ_between_pages(self):
+        home_title = re.search(r"<title>([^<]+)</title>", self._home_with_one())
+        privacy_title = re.search(r"<title>([^<]+)</title>", self._privacy())
+        self.assertNotEqual(home_title.group(1), privacy_title.group(1))
+
+    # --- 320 px + touch guards ------------------------------------------------
+
+    def test_layout_guards_for_320px_viewport(self):
+        page = self._home_with_one()
+        # Fluid grid that can never demand more than one column of space.
+        self.assertIn("repeat(auto-fill, minmax(min(100%, 19rem), 1fr))", page)
+        # Fluid gutters and type scale instead of fixed pixel widths.
+        self.assertIn("padding: clamp(1.25rem, 4vw, 3rem)", page)
+        # Long words/URLs wrap instead of forcing horizontal scroll.
+        self.assertIn("overflow-wrap", page)
+        # iOS text inflation must not fight the viewport meta.
+        self.assertIn("-webkit-text-size-adjust: 100%", page)
+
+    def test_touch_targets_meet_44px_on_coarse_pointers(self):
+        home = self._home_with_one()
+        self.assertIn("@media (pointer: coarse)", home)
+        coarse_block = home[home.index("@media (pointer: coarse)"):]
+        self.assertIn(".chip,", coarse_block[:200])
+        self.assertIn("#ft-search { min-height: 44px; }", coarse_block[:200])
+        # The consent banner ships its own copy of the rule because its CSS
+        # is emitted only when GA4 is configured.
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        banner_page = build.render_html(
+            build.build_index([offer]),
+            measurement_id="G-ABCDEF12345",
+        )
+        self.assertIn(".consent-actions button { min-height: 44px; }", banner_page)
 
 
 if __name__ == "__main__":
