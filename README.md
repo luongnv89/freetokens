@@ -60,6 +60,19 @@ The build runs in two stages:
    official source page. No client-side JavaScript; minimal hand-rolled CSS
    that works down to 320 px viewports.
 
+### Expiry handling
+
+Expiry is evaluated only at build/deploy time, never at view time: the build
+drops any offer whose `expiry_date` has passed before rendering, so expired
+offers disappear from the site on the **next deploy** (a push to `main`), not
+the moment their expiry passes. An offer that expires after the last deploy
+stays visible until the next rebuild. The trade-offs behind this decision —
+a stale window between deploys in exchange for zero runtime, cacheable static
+output, and simplicity — are recorded in
+[docs/adr/0001-build-time-expiry.md](docs/adr/0001-build-time-expiry.md),
+which also covers how the future archive view (F11) will retain expired
+offers while keeping evaluation at build time.
+
 Run the test suite (stdlib `unittest`, no dependencies):
 
 ```bash
