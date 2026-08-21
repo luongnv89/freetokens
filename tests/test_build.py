@@ -235,6 +235,55 @@ class BuildOutputTests(unittest.TestCase):
             self.assertIsNone(alpha["expiry_date"])
 
 
+class ExpiryFilterTests(unittest.TestCase):
+    """Build-time expiry: past expiry dropped, today/null kept (issue #9)."""
+
+    def _offer(self, slug, expiry):
+        return dict(
+            build.validate_offer(
+                dict(VALID, title=f"Offer {slug}", expiry_date=expiry), "a.yaml"
+            ),
+            slug=slug,
+        )
+
+    def test_null_expiry_is_ongoing_and_included(self):
+        offers = [self._offer("ongoing", None)]
+        self.assertEqual([o["slug"] for o in build.filter_expired(offers)], ["ongoing"])
+
+    def test_expiry_today_included(self):
+        today = dt.date.today()
+        offers = [self._offer("today", today.isoformat())]
+        self.assertEqual([o["slug"] for o in build.filter_expired(offers)], ["today"])
+
+    def test_expiry_yesterday_excluded(self):
+        yesterday = (dt.date.today() - dt.timedelta(days=1)).isoformat()
+        offers = [self._offer("stale", yesterday)]
+        self.assertEqual(build.filter_expired(offers), [])
+
+    def test_future_expiry_included(self):
+        future = (dt.date.today() + dt.timedelta(days=30)).isoformat()
+        offers = [self._offer("fresh", future)]
+        self.assertEqual([o["slug"] for o in build.filter_expired(offers)], ["fresh"])
+
+    def test_main_drops_expired_offer_from_built_index(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "live.yaml").write_text(offer_text(), encoding="utf-8")
+            expired = offer_text(
+                title="Expired Offer",
+                expiry_date=(dt.date.today() - dt.timedelta(days=1)).isoformat(),
+            )
+            Path(offers_dir, "expired.yaml").write_text(expired, encoding="utf-8")
+            out = os.path.join(tmp, "out")
+            code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            index = json.loads(Path(out, "index.json").read_text(encoding="utf-8"))
+            self.assertEqual([o["slug"] for o in index["offers"]], ["live"])
+            page = Path(out, "site", "index.html").read_text(encoding="utf-8")
+            self.assertNotIn("Expired Offer", page)
+
+
 class RenderTests(unittest.TestCase):
     def _render(self, offers):
         for i, offer in enumerate(offers):

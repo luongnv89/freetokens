@@ -139,6 +139,13 @@ def load_offers(offers_dir: str) -> list:
     return offers
 
 
+def filter_expired(offers: list, today: dt.date | None = None) -> list:
+    """Drop offers whose expiry_date is in the past; None means ongoing."""
+    if today is None:
+        today = dt.date.today()
+    return [o for o in offers if o["expiry_date"] is None or o["expiry_date"] >= today]
+
+
 def build_index(offers: list) -> dict:
     return {
         "generated_at": dt.datetime.now(dt.timezone.utc)
@@ -229,7 +236,7 @@ def main(argv=None) -> int:
         )
         return 1
 
-    index = build_index(offers)
+    index = build_index(filter_expired(offers))
 
     out_dir = os.path.join(args.out, "site")
     os.makedirs(out_dir, exist_ok=True)
