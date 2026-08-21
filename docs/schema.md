@@ -51,11 +51,20 @@ verified_date: 2026-08-21
 
 ## Validation
 
-`scripts/build.py` validates every file during the build:
+The canonical machine-readable schema is `schemas/offer.schema.json`
+(strict JSON Schema, Draft 2020-12). Two validators enforce it:
 
 ```bash
-python3 scripts/build.py        # validate + generate index.json + site/index.html
+python3 scripts/validate_offers.py   # schema-only check (CI gate)
+python3 scripts/build.py             # validate + generate index.json + site/index.html
 ```
 
-A file that fails any rule above fails the build with the offending file and
-field named in the error.
+Both reuse the same stdlib validator (`scripts/build.py`), so CI and the
+build cannot drift; `validate_offers.py` additionally cross-checks the JSON
+Schema against the validator's constants.
+
+CI runs the validator on every push or PR touching `offers/**`
+(`.github/workflows/validate.yml`).
+
+A file that fails any rule above fails with the offending file and field
+named in the error (date errors include a `YYYY-MM-DD` format hint).
