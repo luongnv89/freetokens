@@ -138,6 +138,12 @@ When enabled, the page ships a small progressive-enhancement layer:
   name; `search` events carry **only** `query_length`, never the raw query.
   Both fire through the same consent gate as page views: with analytics
   unconfigured or consent declined they are silent no-ops.
+- **Offer attribution** — every outbound offer link carries its identity as
+  data attributes and fires a single `offer_click` event with `offer_id`,
+  `provider`, and `category` when clicked (same consent gate). The send is
+  fire-and-forget and links open in a new tab without JS interception, so a
+  blocked or broken tracker can never delay or break navigation; accidental
+  rapid double-clicks on the same offer are deduplicated to one event.
 
 ## Deployment
 

@@ -29,6 +29,10 @@ CATEGORY_LABELS = {
 # list, updates the URL, and fires analytics. Must stay well under the PRD's
 # 200 ms perceived-latency budget (F3).
 SEARCH_DEBOUNCE_MS = 120
+# Rapid re-click suppression for offer_click (F6): a second click on the same
+# offer within this window is treated as an accidental double-click, not a
+# second attribution event. Distinct offers are never suppressed.
+OFFER_CLICK_DEDUPE_MS = 1000
 REQUIRED_FIELDS = (
     "title",
     "provider",
@@ -482,7 +486,7 @@ _CARD_TMPL = """<li style="--i:{index}">
 <span class="badge">{category}</span>
 {expiry_display}
 </div>
-<h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer" aria-label="Claim {title} from {provider}">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer" data-ft-offer-id="{offer_id}" data-ft-provider="{provider}" data-ft-offer-category="{category}" aria-label="Claim {title} from {provider}">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">{amount}</p>
 <p class="prov">{provider} &middot; verified <time datetime="{verified_date}">{verified_display}</time></p>
 </article>
@@ -861,6 +865,7 @@ _APP_JS = """<script id="ft-app">
   "use strict";
   var VALID_CATEGORIES = __FT_CATEGORIES__;
   var DEBOUNCE_MS = __FT_DEBOUNCE_MS__;
+  var OFFER_DEDUPE_MS = __FT_OFFER_DEDUPE_MS__;
 
   function ftNormalize(value) {
     return (value || "").toLowerCase();
@@ -925,6 +930,41 @@ _APP_JS = """<script id="ft-app">
     var items = Array.prototype.slice.call(grid.querySelectorAll("li"));
     var total = items.length;
     var state = ftParseState(window.location.search);
+
+    // Outbound offer-link attribution (F6). One delegated listener covers
+    // every card link. The send is fire-and-forget inside try/catch and the
+    // link's navigation is native (target=_blank, never intercepted), so a
+    // missing, blocked, or throwing tracker can never break or delay it —
+    // the navigate-away race is structurally impossible. A short dedupe
+    // window swallows accidental rapid double-clicks on the same offer only;
+    // different offers are never suppressed.
+    var lastOfferId = null;
+    var lastOfferAt = 0;
+    grid.addEventListener("click", function (event) {
+      var node = event.target;
+      var offerId = null;
+      while (node && node !== grid) {
+        if (node.getAttribute) {
+          offerId = node.getAttribute("data-ft-offer-id");
+          if (offerId) { break; }
+        }
+        node = node.parentNode || null;
+      }
+      if (!offerId) { return; }
+      var now = Date.now();
+      if (offerId === lastOfferId && now - lastOfferAt < OFFER_DEDUPE_MS) {
+        return;
+      }
+      lastOfferId = offerId;
+      lastOfferAt = now;
+      try {
+        ftTrack("offer_click", {
+          offer_id: offerId,
+          provider: node.getAttribute("data-ft-provider") || "",
+          category: node.getAttribute("data-ft-offer-category") || ""
+        });
+      } catch (err) {}
+    });
 
     function syncControls() {
       var chips = document.querySelectorAll("[data-ft-category]");
@@ -1095,7 +1135,9 @@ def build_app_js() -> str:
     """Client-side filter/search runtime (F2/F3), placeholders resolved."""
     return _APP_JS.replace(
         "__FT_CATEGORIES__", json.dumps(list(CATEGORIES))
-    ).replace("__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS))
+    ).replace("__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS)).replace(
+        "__FT_OFFER_DEDUPE_MS__", str(OFFER_CLICK_DEDUPE_MS)
+    )
 
 
 def render_html(index: dict, measurement_id: str = "") -> str:
@@ -1122,6 +1164,7 @@ def render_html(index: dict, measurement_id: str = "") -> str:
                 _CARD_TMPL.format(
                     index=i,
                     category=html.escape(o["category"]),
+                    offer_id=html.escape(o["slug"], quote=True),
                     source_url=html.escape(o["source_url"], quote=True),
                     title=html.escape(o["title"], quote=True),
                     amount=html.escape(o["amount"]),

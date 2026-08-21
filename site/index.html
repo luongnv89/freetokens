@@ -345,7 +345,7 @@ a:focus-visible {
 <span class="badge">voice</span>
 <span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
 </div>
-<h2 class="card-title"><a href="https://elevenlabs.io/pricing" target="_blank" rel="noopener noreferrer" aria-label="Claim ElevenLabs Free Plan from ElevenLabs">ElevenLabs Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<h2 class="card-title"><a href="https://elevenlabs.io/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="elevenlabs-free-plan" data-ft-provider="ElevenLabs" data-ft-offer-category="voice" aria-label="Claim ElevenLabs Free Plan from ElevenLabs">ElevenLabs Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">10k credits/month (~10 min of audio)</p>
 <p class="prov">ElevenLabs &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
@@ -356,7 +356,7 @@ a:focus-visible {
 <span class="badge">coding</span>
 <span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
 </div>
-<h2 class="card-title"><a href="https://github.com/features/copilot/plans" target="_blank" rel="noopener noreferrer" aria-label="Claim GitHub Copilot Free from GitHub">GitHub Copilot Free <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<h2 class="card-title"><a href="https://github.com/features/copilot/plans" target="_blank" rel="noopener noreferrer" data-ft-offer-id="github-copilot-free" data-ft-provider="GitHub" data-ft-offer-category="coding" aria-label="Claim GitHub Copilot Free from GitHub">GitHub Copilot Free <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">2,000 completions + 50 chat requests per month</p>
 <p class="prov">GitHub &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
@@ -367,7 +367,7 @@ a:focus-visible {
 <span class="badge">image</span>
 <span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
 </div>
-<h2 class="card-title"><a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" aria-label="Claim Google AI Studio — Free Image Generation from Google">Google AI Studio — Free Image Generation <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<h2 class="card-title"><a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="google-ai-studio-image" data-ft-provider="Google" data-ft-offer-category="image" aria-label="Claim Google AI Studio — Free Image Generation from Google">Google AI Studio — Free Image Generation <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">Free image generation in AI Studio (rate-limited)</p>
 <p class="prov">Google &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
@@ -378,7 +378,7 @@ a:focus-visible {
 <span class="badge">api_provider</span>
 <span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
 </div>
-<h2 class="card-title"><a href="https://cloud.google.com/free/docs/free-cloud-features" target="_blank" rel="noopener noreferrer" aria-label="Claim Google Cloud Free Trial — $300 Credit from Google Cloud">Google Cloud Free Trial — $300 Credit <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<h2 class="card-title"><a href="https://cloud.google.com/free/docs/free-cloud-features" target="_blank" rel="noopener noreferrer" data-ft-offer-id="google-cloud-300-free-trial" data-ft-provider="Google Cloud" data-ft-offer-category="api_provider" aria-label="Claim Google Cloud Free Trial — $300 Credit from Google Cloud">Google Cloud Free Trial — $300 Credit <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">$300 in credits (90 days from signup)</p>
 <p class="prov">Google Cloud &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
@@ -389,7 +389,7 @@ a:focus-visible {
 <span class="badge">api_provider</span>
 <span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
 </div>
-<h2 class="card-title"><a href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key" target="_blank" rel="noopener noreferrer" aria-label="Claim Mistral AI Studio Free Mode — Free API Tier from Mistral AI">Mistral AI Studio Free Mode — Free API Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<h2 class="card-title"><a href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key" target="_blank" rel="noopener noreferrer" data-ft-offer-id="mistral-experiment-free-tier" data-ft-provider="Mistral AI" data-ft-offer-category="api_provider" aria-label="Claim Mistral AI Studio Free Mode — Free API Tier from Mistral AI">Mistral AI Studio Free Mode — Free API Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">Free rate-limited API access (no credit card required)</p>
 <p class="prov">Mistral AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
@@ -402,7 +402,7 @@ a:focus-visible {
 </section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-21T19:31:51Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-21T19:54:57Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
 </footer>
 </div>
 
@@ -412,6 +412,7 @@ a:focus-visible {
   "use strict";
   var VALID_CATEGORIES = ["api_provider", "coding", "image", "voice", "video"];
   var DEBOUNCE_MS = 120;
+  var OFFER_DEDUPE_MS = 1000;
 
   function ftNormalize(value) {
     return (value || "").toLowerCase();
@@ -476,6 +477,41 @@ a:focus-visible {
     var items = Array.prototype.slice.call(grid.querySelectorAll("li"));
     var total = items.length;
     var state = ftParseState(window.location.search);
+
+    // Outbound offer-link attribution (F6). One delegated listener covers
+    // every card link. The send is fire-and-forget inside try/catch and the
+    // link's navigation is native (target=_blank, never intercepted), so a
+    // missing, blocked, or throwing tracker can never break or delay it —
+    // the navigate-away race is structurally impossible. A short dedupe
+    // window swallows accidental rapid double-clicks on the same offer only;
+    // different offers are never suppressed.
+    var lastOfferId = null;
+    var lastOfferAt = 0;
+    grid.addEventListener("click", function (event) {
+      var node = event.target;
+      var offerId = null;
+      while (node && node !== grid) {
+        if (node.getAttribute) {
+          offerId = node.getAttribute("data-ft-offer-id");
+          if (offerId) { break; }
+        }
+        node = node.parentNode || null;
+      }
+      if (!offerId) { return; }
+      var now = Date.now();
+      if (offerId === lastOfferId && now - lastOfferAt < OFFER_DEDUPE_MS) {
+        return;
+      }
+      lastOfferId = offerId;
+      lastOfferAt = now;
+      try {
+        ftTrack("offer_click", {
+          offer_id: offerId,
+          provider: node.getAttribute("data-ft-provider") || "",
+          category: node.getAttribute("data-ft-offer-category") || ""
+        });
+      } catch (err) {}
+    });
 
     function syncControls() {
       var chips = document.querySelectorAll("[data-ft-category]");
