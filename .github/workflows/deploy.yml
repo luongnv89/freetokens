@@ -40,6 +40,10 @@ jobs:
           python-version: "3.12"
 
       - name: Build site
+        env:
+          # Optional: create a repo secret named GA_MEASUREMENT_ID (G-XXXXXXX)
+          # to enable GA4. Unset/empty keeps analytics fully disabled.
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
         run: |
           python3 scripts/build.py
           python3 -m unittest discover -s tests

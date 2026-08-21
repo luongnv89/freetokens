@@ -79,6 +79,43 @@ Run the test suite (stdlib `unittest`, no dependencies):
 python3 -m unittest discover -s tests -v
 ```
 
+### Analytics & consent (GA4)
+
+Google Analytics 4 is **opt-in at build time** and off by default. While no
+measurement ID is configured, the build emits **no tracking code, no consent
+banner, and no JavaScript at all** — the site is byte-for-byte the
+zero-runtime page described above.
+
+To enable it:
+
+1. Create a GA4 web property and copy its Measurement ID (`G-XXXXXXXXXX`).
+2. Add it as a repository secret named `GA_MEASUREMENT_ID`
+   (**Settings → Secrets and variables → Actions**). The deploy workflow
+   already passes it to the build step; the next deploy turns tracking on.
+3. For local builds, export it in your shell: `GA_MEASUREMENT_ID=G-… python3 scripts/build.py`.
+
+A malformed ID never breaks a deploy — the build warns and continues with
+analytics disabled.
+
+When enabled, the page ships a small progressive-enhancement layer:
+
+- **Consent Mode v2 first** — consent defaults are installed as *denied*
+  in `<head>`, and `gtag.js` is only injected after an explicit grant, so
+  declining sends no tracking requests whatsoever.
+- **EU consent banner** — visitors whose IANA timezone starts with
+  `Europe/` (a client-side heuristic approximation of geo-targeting, not a
+  precise location check) see a lightweight banner until they choose
+  Accept or Decline; the decision persists in `localStorage` under
+  `ft_ga_consent`. The banner loads after `window.load` via
+  `requestIdleCallback`, is keyboard-accessible (native buttons,
+  <kbd>Esc</kbd> declines), and adds effectively nothing to page load.
+- **IP anonymization** — the gtag config sets `anonymize_ip: true`;
+  note that GA4 also anonymizes/geolocates at coarser granularity by
+  default before any hit leaves the browser.
+- **Silent degradation** — if GA4 is blocked by an adblocker or offline,
+  everything else on the page (including outbound offer links) works
+  exactly as before; tracking loss is accepted silently.
+
 ## Deployment
 
 Deployment is fully automated via GitHub Actions
