@@ -1,0 +1,9 @@
+# Verified 2026-08-21 against https://pika.art/pricing
+# ("$0 Free billed yearly — Basic — 80 monthly video credits.")
+title: Pika Free Plan
+provider: Pika
+category: video
+amount: 80 monthly video credits
+expiry_date: null
+source_url: https://pika.art/pricing
+verified_date: 2026-08-21

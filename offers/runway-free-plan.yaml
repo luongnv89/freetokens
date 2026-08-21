@@ -1,0 +1,9 @@
+# Verified 2026-08-21 against https://runwayml.com/pricing
+# ("Free — Free forever. 125 one-time credits to explore Runway's AI tools.")
+title: Runway Free Plan
+provider: Runway
+category: video
+amount: 125 one-time credits for AI video and image generation
+expiry_date: null
+source_url: https://runwayml.com/pricing
+verified_date: 2026-08-21
