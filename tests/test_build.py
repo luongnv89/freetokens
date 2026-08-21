@@ -4,6 +4,7 @@ python3 -m unittest discover -s tests -v
 """
 
 import datetime as dt
+import html
 import io
 import json
 import os
@@ -345,6 +346,57 @@ class RenderTests(unittest.TestCase):
     def test_verified_date_on_every_card(self):
         page = self._page_with_one()
         self.assertIn(f'verified <time datetime="{VALID["verified_date"]}">', page)
+
+
+class OfferClickMarkupTests(unittest.TestCase):
+    """F6 / Task 3.4: outbound links carry offer_id, provider, category."""
+
+    def _page_with_one(self, **overrides):
+        offer = build.validate_offer(dict(VALID, **overrides), "a.yaml")
+        offer.setdefault("slug", "test-offer")
+        return build.render_html(build.build_index([offer]))
+
+    def test_link_carries_attribution_attributes(self):
+        page = self._page_with_one(category="coding", provider="Alpha AI")
+        self.assertIn('data-ft-offer-id="test-offer"', page)
+        self.assertIn('data-ft-provider="Alpha AI"', page)
+        self.assertIn('data-ft-category="coding"', page)
+
+    def test_attributes_match_every_seeded_offer(self):
+        offers = build.load_offers(str(REPO / "offers"))
+        index = build.build_index(offers)
+        page = build.render_html(index)
+        for offer in index["offers"]:
+            with self.subTest(slug=offer["slug"]):
+                self.assertEqual(
+                    page.count(
+                        f'data-ft-offer-id="{html.escape(offer["slug"], quote=True)}"'
+                    ),
+                    1,
+                )
+                self.assertIn(
+                    f'data-ft-provider='
+                    f'"{html.escape(offer["provider"], quote=True)}"',
+                    page,
+                )
+                self.assertIn(
+                    f'data-ft-offer-category='
+                    f'"{html.escape(offer["category"], quote=True)}"',
+                    page,
+                )
+
+    def test_hostile_provider_is_attribute_safe(self):
+        page = self._page_with_one(provider='A&B "Quotes"')
+        self.assertIn('data-ft-provider="A&amp;B &quot;Quotes&quot;"', page)
+
+    def test_empty_page_has_no_offer_links(self):
+        empty_index = {
+            "generated_at": "2026-08-21T00:00:00Z",
+            "count": 0,
+            "offers": [],
+        }
+        page = build.render_html(empty_index)
+        self.assertNotIn("data-ft-offer-id", page)
 
 
 class SemanticPageTests(unittest.TestCase):
@@ -820,7 +872,8 @@ class NodeAppJsTests(unittest.TestCase):
 
     HARNESS = Path(__file__).resolve().parent / "app_js_harness.js"
 
-    def _run(self, steps, cards=None, init_search="", track_enabled=True):
+    def _run(self, steps, cards=None, init_search="", track_enabled=True,
+             track_mode="record"):
         page_script = build.build_app_js()
         bare = page_script[
             page_script.index(">") + 1 : page_script.rindex("</script>")
@@ -841,6 +894,7 @@ class NodeAppJsTests(unittest.TestCase):
             ],
             "init_search": init_search,
             "track_enabled": track_enabled,
+            "track_mode": track_mode,
             "valid_categories": list(build.CATEGORIES),
             "steps": steps,
         }
@@ -1011,6 +1065,99 @@ class NodeAppJsTests(unittest.TestCase):
         self.assertEqual(final["events"], [])  # recorder never registered
         self.assertEqual(len(final["visible"]), 3)
         self.assertNotIn("ftTrackEvent", json.dumps(final))
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_offer_click_fires_once_with_matching_params(self):
+        cards = [
+            {"slug": "copilot", "category": "coding", "provider": "GitHub", "text": "Copilot Coding GitHub"},
+        ]
+        snaps = self._run(
+            [{"op": "click_offer", "value": "copilot"}], cards=cards
+        )
+        final = snaps[-1]
+        self.assertEqual(
+            final["events"],
+            [["offer_click", {
+                "offer_id": "copilot",
+                "provider": "GitHub",
+                "category": "coding",
+            }]],
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_rapid_double_click_yields_single_event(self):
+        snaps = self._run(
+            [
+                {"op": "click_offer", "value": "alpha"},
+                {"op": "click_offer", "value": "alpha"},
+                {"op": "click_offer", "value": "alpha"},
+            ]
+        )
+        final = snaps[-1]
+        self.assertEqual(len(final["events"]), 1)
+        self.assertEqual(final["events"][0][1]["offer_id"], "alpha")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_second_click_after_dedupe_window_fires_again(self):
+        snaps = self._run(
+            [
+                {"op": "click_offer", "value": "mistral"},
+                {"op": "advance", "ms": build.OFFER_CLICK_DEDUPE_MS + 500},
+                {"op": "click_offer", "value": "mistral"},
+            ]
+        )
+        final = snaps[-1]
+        self.assertEqual(len(final["events"]), 2)
+        self.assertEqual(
+            [e[1]["offer_id"] for e in final["events"]],
+            ["mistral", "mistral"],
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_distinct_offers_both_fire_in_rapid_succession(self):
+        snaps = self._run(
+            [
+                {"op": "click_offer", "value": "alpha"},
+                {"op": "click_offer", "value": "copilot"},
+            ]
+        )
+        final = snaps[-1]
+        self.assertEqual(
+            [e[1]["offer_id"] for e in final["events"]], ["alpha", "copilot"]
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_click_on_inner_span_resolves_to_enclosing_offer(self):
+        snaps = self._run([{"op": "click_span", "value": "alpha"}])
+        final = snaps[-1]
+        self.assertEqual(len(final["events"]), 1)
+        self.assertEqual(final["events"][0][1]["offer_id"], "alpha")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_grid_click_without_offer_link_is_ignored(self):
+        snaps = self._run([{"op": "click_grid"}])
+        self.assertEqual(snaps[-1]["events"], [])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_navigation_never_prevented_even_when_tracker_throws(self):
+        snaps = self._run(
+            [{"op": "click_offer", "value": "copilot"}],
+            track_mode="throw",
+        )
+        final = snaps[-1]
+        # The blocked GA4 call must not break the click: no exception leaves
+        # the handler and the default navigation is never prevented.
+        self.assertEqual(final["preventDefaults"], 0)
+        self.assertEqual(final["events"], [])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_silent_when_analytics_absent_but_links_still_live(self):
+        snaps = self._run(
+            [{"op": "click_offer", "value": "alpha"}], track_enabled=False
+        )
+        final = snaps[-1]
+        self.assertEqual(final["events"], [])
+        self.assertEqual(final["preventDefaults"], 0)
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_filter_settle_under_200ms_over_500_offers(self):

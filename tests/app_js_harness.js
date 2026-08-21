@@ -1,12 +1,15 @@
 "use strict";
 /*
- * Behavioral harness for build.py's _APP_JS (issues #13/#14).
+ * Behavioral harness for build.py's _APP_JS (issues #13/#14, #16).
  *
  * Runs the site script inside a `node:vm` sandbox with a minimal DOM stub,
  * replays a JSON scenario from stdin, and prints one JSON line per step:
  *
  *   {visible, status, pressed, inputValue, emptyHidden, historyUrls,
- *    locationSearch, events, perf_ms?}
+ *    locationSearch, events, perf_ms?, preventDefaults?}
+ *
+ * Clicks bubble along parentNode chains, so the delegated grid listener
+ * behind `offer_click` attribution is exercised like a real click.
  *
  * Used by tests/test_build.py::NodeAppJsTests; skipped automatically when
  * no runnable node exists on the machine.
@@ -50,9 +53,11 @@ class FakeTimers {
 function makeElement(tag) {
   const el = {
     tag,
+    tagName: tag.toUpperCase(),
     attrs: {},
     listeners: {},
     children: [],
+    parentNode: null,
     hidden: false,
     value: "",
     textContent: "",
@@ -70,6 +75,7 @@ function makeElement(tag) {
     },
     appendChild(child) {
       el.children.push(child);
+      child.parentNode = el;
       return child;
     },
     querySelectorAll(selector) {
@@ -84,8 +90,15 @@ function makeElement(tag) {
   return el;
 }
 
+// Dispatch `type` on `el` and let it bubble along parentNode chains, so
+// delegated container listeners (grid -> offer_click) see the event.
 function fire(el, type, event) {
-  for (const fn of el.listeners[type] || []) fn(event);
+  let node = el;
+  while (node) {
+    const fns = (node.listeners[type] || []).slice();
+    for (const fn of fns) fn(event);
+    node = node.parentNode;
+  }
 }
 
 function runScenario(scenario) {
@@ -95,12 +108,23 @@ function runScenario(scenario) {
   const grid = makeElement("ul");
   const items = [];
   const slugOf = new Map();
+  const linksBySlug = new Map();
   for (const spec of scenario.cards) {
     const article = makeElement("article");
     article.attrs["data-category"] = spec.category;
     article.textContent = spec.text;
+    const link = makeElement("a");
+    link.attrs["href"] =
+      "https://provider.example/" + encodeURIComponent(spec.slug);
+    link.attrs["data-ft-offer-id"] = spec.slug;
+    link.attrs["data-ft-provider"] = spec.provider || spec.slug;
+    link.attrs["data-ft-offer-category"] = spec.category;
+    article.appendChild(link);
     const li = makeElement("li");
     li.card = article;
+    // Parent the card into the list item so click events can bubble
+    // link -> article -> li -> grid like they do on the real page.
+    li.appendChild(article);
     Object.defineProperty(li, "textContent", {
       get() {
         return article.textContent;
@@ -109,6 +133,7 @@ function runScenario(scenario) {
     grid.appendChild(li);
     items.push(li);
     slugOf.set(li, spec.slug);
+    linksBySlug.set(spec.slug, link);
   }
 
   const input = makeElement("input");
@@ -148,10 +173,21 @@ function runScenario(scenario) {
 
   const windowListeners = {};
   const events = [];
+  const meta = { preventDefaults: 0 };
+  function clickEvent(target) {
+    return {
+      target,
+      preventDefault() {
+        meta.preventDefaults++;
+      },
+    };
+  }
 
   const sandbox = {
     URLSearchParams,
-    Date,
+    // App script only reads Date.now(); pin it to the fake clock so the
+    // offer_click double-click window is deterministic under `advance`.
+    Date: { now: () => timers.now },
     console,
     setTimeout: (fn, ms) => timers.setTimeout(fn, ms),
     clearTimeout: (id) => timers.clearTimeout(id),
@@ -175,7 +211,12 @@ function runScenario(scenario) {
   sandbox.addEventListener = (type, fn) => {
     (windowListeners[type] = windowListeners[type] || []).push(fn);
   };
-  if (scenario.track_enabled !== false) {
+  if (scenario.track_mode === "throw") {
+    // Simulates an adblocker/gtag failure: the tracker exists but throws.
+    sandbox.ftTrackEvent = () => {
+      throw new Error("ga blocked");
+    };
+  } else if (scenario.track_enabled !== false) {
     sandbox.ftTrackEvent = (name, params) => events.push([name, params]);
   }
 
@@ -200,6 +241,7 @@ function runScenario(scenario) {
         historyUrls: historyUrls.slice(),
         locationSearch: location_.search,
         events: events.map((e) => e.slice()),
+        preventDefaults: meta.preventDefaults,
       },
       extra || {}
     );
@@ -219,6 +261,21 @@ function runScenario(scenario) {
       );
       if (!chip) throw new Error(`no chip ${step.value}`);
       fire(chip, "click", { currentTarget: chip });
+    } else if (step.op === "click_offer") {
+      const link = linksBySlug.get(step.value);
+      if (!link) throw new Error(`no offer link ${step.value}`);
+      fire(link, "click", clickEvent(link));
+    } else if (step.op === "click_span") {
+      // Click a non-anchor child inside the card: must resolve to its
+      // enclosing offer link via bubbling.
+      const link = linksBySlug.get(step.value);
+      if (!link) throw new Error(`no offer link ${step.value}`);
+      const span = makeElement("span");
+      link.appendChild(span);
+      fire(span, "click", clickEvent(span));
+    } else if (step.op === "click_grid") {
+      // A click that originates on the grid itself: no offer involved.
+      fire(grid, "click", clickEvent(grid));
     } else if (step.op === "click_reset") {
       fire(resetButton, "click", {});
     } else if (step.op === "popstate") {
