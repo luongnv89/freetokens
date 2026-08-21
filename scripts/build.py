@@ -891,7 +891,9 @@ _APP_JS = """<script id="ft-app">
       return false;
     }
     if (!state.q) { return true; }
-    return ftNormalize(card.textContent).indexOf(state.q) !== -1;
+    return (
+      ftNormalize(card.textContent).indexOf(ftNormalize(state.q)) !== -1
+    );
   }
 
   function ftDebounce(fn, ms) {

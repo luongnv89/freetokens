@@ -868,6 +868,14 @@ class NodeAppJsTests(unittest.TestCase):
         self.assertEqual(first["historyUrls"], [])
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_deep_link_with_mixed_case_query_matches_case_insensitively(self):
+        combined = self._run([], init_search="?category=coding&q=Copilot")[0]
+        self.assertEqual(combined["visible"], ["copilot"])
+        query_only = self._run([], init_search="?q=Mistral")[0]
+        self.assertEqual(query_only["visible"], ["mistral"])
+        self.assertEqual(query_only["status"], "Showing 1 of 3 offers")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_debounced_typing_narrows_and_fires_single_search_event(self):
         snaps = self._run(
             [

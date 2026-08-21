@@ -402,7 +402,7 @@ a:focus-visible {
 </section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-21T19:22:36Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-21T19:31:51Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
 </footer>
 </div>
 
@@ -442,7 +442,9 @@ a:focus-visible {
       return false;
     }
     if (!state.q) { return true; }
-    return ftNormalize(card.textContent).indexOf(state.q) !== -1;
+    return (
+      ftNormalize(card.textContent).indexOf(ftNormalize(state.q)) !== -1
+    );
   }
 
   function ftDebounce(fn, ms) {
