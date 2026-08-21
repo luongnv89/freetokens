@@ -14,6 +14,7 @@ import glob
 import html
 import json
 import os
+import re
 import sys
 
 CATEGORIES = ("api_provider", "coding", "image", "voice", "video")
@@ -27,6 +28,15 @@ REQUIRED_FIELDS = (
     "verified_date",
 )
 NULL_TOKENS = {"null", "~", ""}
+
+# --- Analytics configuration (F7) -----------------------------------------
+# GA4 is opt-in at build time: the measurement ID comes from the
+# GA_MEASUREMENT_ID environment variable. When it is unset (or malformed)
+# NO tracking code, consent banner, or analytics script is emitted at all.
+MEASUREMENT_ID_ENV_VAR = "GA_MEASUREMENT_ID"
+MEASUREMENT_ID_RE = re.compile(r"^G-[A-Z0-9]{6,12}$")
+CONSENT_STORAGE_KEY = "ft_ga_consent"
+EU_TIMEZONE_PREFIXES = ("Europe/",)
 
 
 class OfferError(ValueError):
@@ -428,6 +438,7 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+{ga_head}
 <style>
 {css}
 </style>
@@ -447,6 +458,8 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <p>Built {built_display} &middot; offers re-verified on every change</p>
 </footer>
 </div>
+{banner}
+{ga_init}
 </body>
 </html>
 """
@@ -477,7 +490,276 @@ def _human_date(iso: str) -> str:
     return f"{day.strftime('%b')} {day.day}, {day.year}"
 
 
-def render_html(index: dict) -> str:
+# --- Analytics (F7): consent-gated GA4 with EU banner ----------------------
+#
+# Design (silent degradation, PRD §4.1):
+#   * No measurement ID configured -> nothing analytics-related is emitted.
+#   * Consent Mode v2: defaults are denied in <head>; gtag.js is only
+#     injected after an explicit grant, so declining sends no tracking
+#     calls at all.
+#   * The banner targets visitors whose IANA timezone starts with the EU
+#     prefixes below — a client-side heuristic approximation of geo
+#     targeting, never a precise location.
+#   * Everything runs after window load via requestIdleCallback so page
+#     load/Lighthouse timing is unaffected.
+
+_CONSENT_HEAD_JS = """<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied',
+  wait_for_update: 500
+});
+</script>"""
+
+_ANALYTICS_INIT_JS = """<script>
+(function () {
+  "use strict";
+  var MEASUREMENT_ID = __FT_GA_ID__;
+  var EU_PREFIXES = __FT_EU_PREFIXES__;
+  var STORAGE_KEY = "__FT_STORAGE_KEY__";
+  function ftIsEuTimeZone(tz) {
+    if (!tz) { return false; }
+    for (var i = 0; i < EU_PREFIXES.length; i++) {
+      if (tz.indexOf(EU_PREFIXES[i]) === 0) { return true; }
+    }
+    return false;
+  }
+  function ftTimezone() {
+    try {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone || null;
+    } catch (err) {
+      return null;
+    }
+  }
+  function ftStoredDecision() {
+    try {
+      return window.localStorage.getItem(STORAGE_KEY);
+    } catch (err) {
+      return null;
+    }
+  }
+  function ftStoreDecision(value) {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, value);
+    } catch (err) {}
+  }
+  function ftLoadGa() {
+    if (document.getElementById("ft-ga4-script")) { return; }
+    var s = document.createElement("script");
+    s.id = "ft-ga4-script";
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" +
+      encodeURIComponent(MEASUREMENT_ID);
+    document.head.appendChild(s);
+  }
+  function ftGrant() {
+    if (typeof window.gtag !== "function") { return; }
+    gtag("consent", "update", { analytics_storage: "granted" });
+    ftLoadGa();
+    // send_page_view:false keeps config() from firing a duplicate page_view;
+    // page_location strips the query string so raw URLs never leave the page.
+    gtag("config", MEASUREMENT_ID,
+      { anonymize_ip: true, send_page_view: false });
+    gtag("event", "page_view", {
+      page_path: window.location.pathname,
+      page_location: window.location.origin + window.location.pathname
+    });
+  }
+  function ftDecline() {
+    if (typeof window.gtag !== "function") { return; }
+    gtag("consent", "update", { analytics_storage: "denied" });
+  }
+  function ftHideBanner() {
+    var b = document.getElementById("ft-consent-banner");
+    if (b && b.parentNode) { b.parentNode.removeChild(b); }
+  }
+  function ftAccept() {
+    ftStoreDecision("granted");
+    ftHideBanner();
+    ftGrant();
+  }
+  function ftReject() {
+    ftStoreDecision("denied");
+    ftHideBanner();
+    ftDecline();
+  }
+  function ftShowBanner() {
+    var b = document.getElementById("ft-consent-banner");
+    if (!b) { return; }
+    b.hidden = false;
+    var accept = document.getElementById("ft-consent-accept");
+    if (accept) { accept.focus(); }
+  }
+  function ftWire() {
+    var accept = document.getElementById("ft-consent-accept");
+    var reject = document.getElementById("ft-consent-decline");
+    if (accept) { accept.addEventListener("click", ftAccept); }
+    if (reject) { reject.addEventListener("click", ftReject); }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        var b = document.getElementById("ft-consent-banner");
+        if (b && !b.hidden) { ftReject(); }
+      }
+    });
+  }
+  function ftInit() {
+    var stored = ftStoredDecision();
+    if (stored === "granted") { ftGrant(); return; }
+    if (stored === "denied") { ftDecline(); return; }
+    ftWire();
+    if (ftIsEuTimeZone(ftTimezone())) {
+      ftShowBanner();
+    } else {
+      ftGrant();
+    }
+  }
+  function ftSchedule() {
+    try {
+      if (typeof window.requestIdleCallback === "function") {
+        window.requestIdleCallback(ftInit, { timeout: 2000 });
+      } else {
+        window.setTimeout(ftInit, 1);
+      }
+    } catch (err) {
+      window.setTimeout(ftInit, 1);
+    }
+  }
+  if (document.readyState === "complete") {
+    ftSchedule();
+  } else {
+    window.addEventListener("load", ftSchedule);
+  }
+})();
+</script>"""
+
+_BANNER_TMPL = """<div id="ft-consent-banner" class="consent" role="region" aria-label="Analytics consent" hidden>
+<p class="consent-text">This site uses Google Analytics 4 with IP anonymization to count visits and see which offers help people. Allow?</p>
+<div class="consent-actions">
+<button type="button" id="ft-consent-accept">Accept</button>
+<button type="button" id="ft-consent-decline">Decline</button>
+</div>
+</div>"""
+
+_BANNER_CSS = """
+/* ---- Consent banner (only emitted when GA4 is configured) -------------- */
+
+.consent {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 50;
+  max-width: 34rem;
+  margin: 0 auto;
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  padding: 1rem 1.25rem;
+}
+
+.consent[hidden] { display: none; }
+
+.consent-text {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+}
+
+.consent-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.consent-actions button {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.consent-actions button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+"""
+
+
+def resolve_measurement_id(raw) -> str:
+    """Return a valid GA4 measurement ID, or '' when analytics is disabled.
+
+    An unset/empty value disables analytics silently; a malformed value
+    disables it with a warning so a typo can never break the build.
+    """
+    value = (raw or "").strip()
+    if not value:
+        return ""
+    if not MEASUREMENT_ID_RE.match(value):
+        print(
+            f"warning: ignoring malformed {MEASUREMENT_ID_ENV_VAR}={value!r} "
+            "(expected G-XXXXXXXXXX); analytics disabled",
+            file=sys.stderr,
+        )
+        return ""
+    return value
+
+
+def get_measurement_id(env=None) -> str:
+    """Read the GA4 measurement ID from the environment ('' when disabled)."""
+    environ = os.environ if env is None else env
+    return resolve_measurement_id(environ.get(MEASUREMENT_ID_ENV_VAR, ""))
+
+
+def is_eu_timezone(tz) -> bool:
+    """Approximate EU-visitor detection from an IANA timezone name.
+
+    Mirrors the client-side heuristic embedded by build_analytics_init():
+    any 'Europe/*' zone counts as EU. This is deliberately coarse — it is
+    a privacy-friendly approximation, never a precise location check.
+    """
+    if not tz:
+        return False
+    return str(tz).startswith(EU_TIMEZONE_PREFIXES)
+
+
+def build_consent_head(measurement_id: str) -> str:
+    """Head snippet installing the gtag stub + Consent Mode v2 denied defaults."""
+    if not measurement_id:
+        return ""
+    return _CONSENT_HEAD_JS
+
+
+def build_analytics_init(measurement_id: str) -> str:
+    """Deferred end-of-body script: consent decision, EU banner, gtag loader."""
+    if not measurement_id:
+        return ""
+    return (
+        _ANALYTICS_INIT_JS.replace("__FT_GA_ID__", json.dumps(measurement_id))
+        .replace("__FT_EU_PREFIXES__", json.dumps(list(EU_TIMEZONE_PREFIXES)))
+        .replace("__FT_STORAGE_KEY__", CONSENT_STORAGE_KEY)
+    )
+
+
+def build_banner_markup() -> str:
+    """Consent banner markup ('' when analytics is disabled)."""
+    return _BANNER_TMPL
+
+
+def render_html(index: dict, measurement_id: str = "") -> str:
+    analytics = bool(measurement_id)
     if not index["offers"]:
         content = _EMPTY_TMPL
     else:
@@ -511,11 +793,14 @@ def render_html(index: dict) -> str:
         content = '<ul class="grid">\n' + "\n".join(cards) + "\n</ul>"
     built = index["generated_at"]
     return _PAGE_TMPL.format(
-        css=_CSS,
+        css=_CSS + (_BANNER_CSS if analytics else ""),
         count=index["count"],
         content=content,
         built_display=f'<time datetime="{html.escape(built, quote=True)}">'
         f'{_human_date(built[:10])}</time>',
+        ga_head=build_consent_head(measurement_id),
+        banner=_BANNER_TMPL if analytics else "",
+        ga_init=build_analytics_init(measurement_id),
     )
 
 
@@ -538,15 +823,18 @@ def main(argv=None) -> int:
 
     index = build_index(filter_expired(offers))
 
+    measurement_id = get_measurement_id()
+
     out_dir = os.path.join(args.out, "site")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(args.out, "index.json"), "w", encoding="utf-8") as fh:
         json.dump(index, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as fh:
-        fh.write(render_html(index))
+        fh.write(render_html(index, measurement_id))
 
-    print(f"built {index['count']} offers -> index.json, site/index.html")
+    note = f" (analytics: {measurement_id})" if measurement_id else ""
+    print(f"built {index['count']} offers -> index.json, site/index.html{note}")
     return 0
 
 

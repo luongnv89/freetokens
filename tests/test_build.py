@@ -10,13 +10,19 @@ import os
 import sys
 import tempfile
 import unittest
-from contextlib import redirect_stdout
+from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from unittest import mock
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
 
 import build  # noqa: E402
+
+
+def setUpModule():
+    # Keep analytics hermetic: tests opt in explicitly via patch.dict.
+    os.environ.pop(build.MEASUREMENT_ID_ENV_VAR, None)
 
 VALID = {
     "title": "Test Offer",
@@ -430,6 +436,207 @@ class EmptyStateTests(unittest.TestCase):
             self.assertNotIn("<article", page)
             index = json.loads(Path(out, "index.json").read_text(encoding="utf-8"))
             self.assertEqual(index["count"], 0)
+
+
+class MeasurementIdTests(unittest.TestCase):
+    """F7: GA4 is build-time opt-in via the GA_MEASUREMENT_ID env var."""
+
+    def test_unset_env_disables_analytics(self):
+        with mock.patch.dict(os.environ):
+            os.environ.pop(build.MEASUREMENT_ID_ENV_VAR, None)
+            self.assertEqual(build.get_measurement_id(), "")
+
+    def test_empty_value_disables_analytics(self):
+        self.assertEqual(build.resolve_measurement_id(""), "")
+        self.assertEqual(build.resolve_measurement_id("   "), "")
+
+    def test_valid_measurement_id_is_accepted(self):
+        self.assertEqual(
+            build.resolve_measurement_id("G-ABCDEF12345"), "G-ABCDEF12345"
+        )
+
+    def test_surrounding_whitespace_is_stripped(self):
+        self.assertEqual(
+            build.resolve_measurement_id("  G-ABCDEF12345 \n"), "G-ABCDEF12345"
+        )
+
+    def test_malformed_id_is_rejected_with_warning(self):
+        for bad in ("G-abcdef", "UA-12345", "G-", "not-an-id", "G-ABCDEF123456789"):
+            err = io.StringIO()
+            with redirect_stderr(err):
+                self.assertEqual(build.resolve_measurement_id(bad), "")
+            self.assertIn("analytics disabled", err.getvalue())
+
+    def test_malformed_id_never_breaks_the_build(self):
+        # A typo in the secret must degrade silently, not fail CI.
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "a.yaml").write_text(offer_text(), encoding="utf-8")
+            out = os.path.join(tmp, "out")
+            with mock.patch.dict(
+                os.environ, {build.MEASUREMENT_ID_ENV_VAR: "oops"}
+            ):
+                code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            page = Path(out, "site", "index.html").read_text(encoding="utf-8")
+            self.assertNotIn("googletagmanager", page)
+
+
+class GtagSnippetTests(unittest.TestCase):
+    """F7: consent-gated gtag bootstrap with IP anonymization."""
+
+    MID = "G-ABCDEF12345"
+
+    def test_disabled_yields_no_snippets(self):
+        self.assertEqual(build.build_consent_head(""), "")
+        self.assertEqual(build.build_analytics_init(""), "")
+
+    def test_consent_defaults_are_denied_in_head(self):
+        head = build.build_consent_head(self.MID)
+        self.assertIn("gtag('consent', 'default'", head)
+        for field in (
+            "ad_storage: 'denied'",
+            "ad_user_data: 'denied'",
+            "ad_personalization: 'denied'",
+            "analytics_storage: 'denied'",
+        ):
+            self.assertIn(field, head)
+
+    def test_init_loads_gtag_only_after_grant(self):
+        init = build.build_analytics_init(self.MID)
+        self.assertIn("googletagmanager.com/gtag/js?id=", init)
+        grant_pos = init.index("function ftGrant")
+        loader_pos = init.index("ftLoadGa();", grant_pos)
+        self.assertLess(grant_pos, loader_pos)
+
+    def test_ip_anonymization_enabled_on_config(self):
+        init = build.build_analytics_init(self.MID)
+        self.assertIn('anonymize_ip: true', init)
+
+    def test_page_view_carries_page_path(self):
+        init = build.build_analytics_init(self.MID)
+        self.assertIn('"event", "page_view"', init)
+        self.assertIn("page_path: window.location.pathname", init)
+
+    def test_config_disables_automatic_page_view(self):
+        # config() auto-sends page_view unless told not to; the explicit
+        # event must be the only one or every load is double-counted.
+        init = build.build_analytics_init(self.MID)
+        self.assertIn("send_page_view: false", init)
+
+    def test_page_view_does_not_leak_query_string(self):
+        # Only origin + pathname may reach GA; raw query strings stay local.
+        init = build.build_analytics_init(self.MID)
+        self.assertIn(
+            "page_location: window.location.origin + window.location.pathname",
+            init,
+        )
+        self.assertNotIn("window.location.search", init)
+
+    def test_eu_heuristic_uses_configured_prefixes(self):
+        init = build.build_analytics_init(self.MID)
+        self.assertIn(json.dumps(list(build.EU_TIMEZONE_PREFIXES)), init)
+        self.assertTrue(build.EU_TIMEZONE_PREFIXES[0].startswith("Europe"))
+
+    def test_is_eu_timezone_pure_function(self):
+        self.assertTrue(build.is_eu_timezone("Europe/Berlin"))
+        self.assertTrue(build.is_eu_timezone("Europe/London"))
+        self.assertFalse(build.is_eu_timezone("America/New_York"))
+        self.assertFalse(build.is_eu_timezone("UTC"))
+        self.assertFalse(build.is_eu_timezone(None))
+        self.assertFalse(build.is_eu_timezone(""))
+
+    def test_consent_decision_persisted_in_localstorage(self):
+        init = build.build_analytics_init(self.MID)
+        self.assertIn(build.CONSENT_STORAGE_KEY, init)
+        self.assertIn('localStorage.setItem(STORAGE_KEY, value)', init)
+
+    def test_init_runs_after_window_load_idle(self):
+        init = build.build_analytics_init(self.MID)
+        self.assertIn('addEventListener("load"', init)
+        self.assertIn("requestIdleCallback", init)
+
+    def test_measurement_id_safely_quoted(self):
+        init = build.build_analytics_init(self.MID)
+        self.assertIn(json.dumps(self.MID), init)
+
+
+class ConsentBannerTests(unittest.TestCase):
+    """F7: lightweight banner, keyboard accessible, only when GA4 configured."""
+
+    def _index(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        return build.build_index([offer])
+
+    def test_banner_absent_when_analytics_disabled(self):
+        page = build.render_html(self._index())
+        self.assertNotIn("ft-consent-banner", page)
+        self.assertNotIn("googletagmanager", page)
+        self.assertNotIn("dataLayer", page)
+
+    def test_default_render_stays_analytics_free(self):
+        page = build.render_html(self._index())
+        self.assertNotIn("<script>", page)
+
+    def test_banner_present_and_hidden_when_enabled(self):
+        page = build.render_html(self._index(), measurement_id="G-ABCDEF12345")
+        self.assertIn('id="ft-consent-banner"', page)
+        self.assertRegex(page, r'id="ft-consent-banner"[^>]*\bhidden\b')
+
+    def test_banner_is_keyboard_accessible_region(self):
+        page = build.render_html(self._index(), measurement_id="G-ABCDEF12345")
+        self.assertIn('role="region"', page)
+        self.assertIn('aria-label="Analytics consent"', page)
+        self.assertIn('<button type="button" id="ft-consent-accept">Accept</button>', page)
+        self.assertIn('<button type="button" id="ft-consent-decline">Decline</button>', page)
+
+    def test_decline_prevents_tracking_calls(self):
+        init = build.build_analytics_init("G-ABCDEF12345")
+        reject = init.index("function ftReject")
+        decline_body = init[reject:init.index("}", init.index("ftDecline();", reject))]
+        self.assertIn('ftStoreDecision("denied")', decline_body)
+        self.assertNotIn("ftGrant()", decline_body)
+
+
+class AnalyticsBuildOutputTests(unittest.TestCase):
+    """End-to-end: analytics assets are emitted exactly when configured."""
+
+    def _write_offers(self, tmp):
+        offers_dir = os.path.join(tmp, "offers")
+        os.makedirs(offers_dir)
+        Path(offers_dir, "alpha.yaml").write_text(offer_text(), encoding="utf-8")
+        return offers_dir
+
+    def test_main_without_id_emits_no_tracking_code(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = self._write_offers(tmp)
+            out = os.path.join(tmp, "out")
+            with mock.patch.dict(os.environ):
+                os.environ.pop(build.MEASUREMENT_ID_ENV_VAR, None)
+                code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            page = Path(out, "site", "index.html").read_text(encoding="utf-8")
+            for marker in ("googletagmanager", "dataLayer", "ft-consent-banner"):
+                self.assertNotIn(marker, page)
+
+    def test_main_with_id_emits_gtag_consent_and_banner(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = self._write_offers(tmp)
+            out = os.path.join(tmp, "out")
+            env = {build.MEASUREMENT_ID_ENV_VAR: "G-ABCDEF12345"}
+            with mock.patch.dict(os.environ, env):
+                code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            page = Path(out, "site", "index.html").read_text(encoding="utf-8")
+            self.assertIn("googletagmanager.com/gtag/js", page)
+            self.assertIn("analytics_storage: 'denied'", page)
+            self.assertIn("anonymize_ip: true", page)
+            self.assertIn('"page_view"', page)
+            self.assertIn('id="ft-consent-banner"', page)
+            index = json.loads(Path(out, "index.json").read_text(encoding="utf-8"))
+            self.assertEqual(index["count"], 1)
 
 
 if __name__ == "__main__":
