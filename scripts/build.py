@@ -827,6 +827,14 @@ _APP_CSS = """
 
 .chip:hover { background: var(--ink); color: var(--paper); }
 
+/* Visible keyboard focus must not depend on the analytics stylesheet
+   (_BANNER_CSS ships only when GA4 is configured). */
+.chip:focus-visible,
+#ft-search:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 
 .results-status {

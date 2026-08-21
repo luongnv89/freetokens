@@ -659,6 +659,13 @@ class ToolbarMarkupTests(unittest.TestCase):
         page = self._page()
         self.assertEqual(page.count('<script id="ft-app">'), 1)
 
+    def test_chips_have_visible_focus_without_analytics_css(self):
+        # The banner CSS (which owns button:focus-visible) ships only when
+        # GA4 is configured; the toolbar must own its focus styles too.
+        page = self._page()
+        self.assertIn(".chip:focus-visible", page)
+        self.assertIn("#ft-search:focus-visible", page)
+
     def test_no_toolbar_when_zero_offers(self):
         index = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
         page = build.render_html(index)

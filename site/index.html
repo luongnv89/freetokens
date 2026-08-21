@@ -304,6 +304,14 @@ a:focus-visible {
 
 .chip:hover { background: var(--ink); color: var(--paper); }
 
+/* Visible keyboard focus must not depend on the analytics stylesheet
+   (_BANNER_CSS ships only when GA4 is configured). */
+.chip:focus-visible,
+#ft-search:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 
 .results-status {
@@ -394,7 +402,7 @@ a:focus-visible {
 </section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-21T19:19:22Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-21T19:21:46Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
 </footer>
 </div>
 
