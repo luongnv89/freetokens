@@ -171,52 +171,352 @@ def build_index(offers: list) -> dict:
     }
 
 
+# Page CSS lives in its own constant so the stylesheet can use single braces;
+# it is substituted into _PAGE_TMPL as a format *value*, never re-scanned.
+_CSS = """
+:root {
+  --ink: #000000;
+  --paper: #ffffff;
+  --gray: #6b7280;
+  --green: #22c55e;
+  --hairline: rgba(0, 0, 0, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.wrap { max-width: 75rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem); }
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---- Masthead -------------------------------------------------------- */
+
+.kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 0.75rem;
+}
+
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 3px;
+  background: var(--green);
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  margin: 0 0 0.75rem;
+}
+
+.tagline { max-width: 42rem; margin: 0 0 0.5rem; font-size: 1.05rem; }
+
+.count {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin: 0 0 2.5rem;
+}
+
+.count strong { color: var(--ink); }
+
+/* ---- Card grid ------------------------------------------------------- */
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: var(--paper);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Decorative green accent line — meaning never depends on it alone. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.18s ease;
+}
+
+.card:hover, .card:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+}
+
+.card:hover::before, .card:focus-within::before { transform: scaleX(1); }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.14rem 0.6rem;
+}
+
+.status {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: var(--gray);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.22);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0.25rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-title a:hover,
+.card-title a:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.ext { font-size: 0.85em; }
+
+.amount {
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  font-weight: 700;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.prov {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  margin: auto 0 0;
+  padding-top: 0.75rem;
+}
+
+/* ---- Empty state ----------------------------------------------------- */
+
+.empty {
+  border: 1.5px dashed var(--hairline);
+  border-radius: 12px;
+  padding: clamp(2rem, 6vw, 3.5rem);
+  text-align: center;
+  max-width: 34rem;
+  margin: 1rem auto;
+}
+
+.empty h2 { margin: 0.75rem 0 0.5rem; font-size: 1.4rem; }
+
+.empty p { color: var(--gray); margin: 0.35rem 0; }
+
+.empty .glyph { color: var(--green); }
+
+/* ---- Footer ------------------------------------------------------------ */
+
+.foot {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.foot p {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* ---- Focus visibility (keyboard) -------------------------------------- */
+
+a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- Load reveal (CSS-only, motion-safe) ------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .card, .empty {
+    animation: rise 0.45s ease backwards;
+    animation-delay: calc(min(var(--i, 0), 10) * 45ms);
+  }
+  .card::before { transition-duration: 0.18s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+}
+"""
+
 _PAGE_TMPL = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Every currently-claimable free AI credit offer, hand-verified, on one fast page.">
 <title>Free AI Credits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-* {{ box-sizing: border-box; }}
-body {{ font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 48rem; padding: 0 1rem; overflow-wrap: break-word; }}
-.offer {{ border: 1px solid #ccc; border-radius: 8px; margin: 1rem 0; padding: 1rem; }}
-.meta {{ color: #666; font-size: 0.9rem; }}
-.badge {{ display: inline-block; background: #eef; color: #336; border-radius: 999px; padding: 0.1rem 0.6rem; font-size: 0.8rem; }}
-h2 a {{ overflow-wrap: anywhere; }}
+{css}
 </style>
 </head>
 <body>
+<div class="wrap">
+<header class="masthead">
+<p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
 <h1>Free AI Credits</h1>
-<p>Verified, currently-claimable free AI credit offers.</p>
-{cards}
+<p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
+<p class="count"><strong>{count}</strong> live offers</p>
+</header>
+<main>
+{content}
+</main>
+<footer class="foot">
+<p>Built {built_display} &middot; offers re-verified on every change</p>
+</footer>
+</div>
 </body>
 </html>
 """
 
-_CARD_TMPL = """<article class="offer" data-category="{category}">
-<h2><a href="{source_url}" rel="noopener" aria-label="{title} from {provider}">{title}</a></h2>
-<p>{amount}</p>
-<p class="meta">{provider} &middot; <span class="badge">{category}</span> &middot; {expiry_display}</p>
-</article>"""
+_CARD_TMPL = """<li style="--i:{index}">
+<article class="card" data-category="{category}">
+<div class="card-top">
+<span class="badge">{category}</span>
+{expiry_display}
+</div>
+<h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer" aria-label="Claim {title} from {provider}">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">{amount}</p>
+<p class="prov">{provider} &middot; verified <time datetime="{verified_date}">{verified_display}</time></p>
+</article>
+</li>"""
+
+_EMPTY_TMPL = """<section class="empty" style="--i:0">
+<p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8"/><path d="M16.5 8a2.5 2.5 0 0 0 0-5C13 3 12 8 12 8"/></svg></p>
+<h2>No live offers right now</h2>
+<p>Every listing here is checked by hand against the provider, and none have passed the check at the moment.</p>
+<p>New and renewed offers appear automatically after the next rebuild &mdash; check back soon.</p>
+</section>"""
+
+
+def _human_date(iso: str) -> str:
+    """Render a YYYY-MM-DD string as e.g. 'Dec 31, 2026'."""
+    day = dt.datetime.strptime(iso, "%Y-%m-%d").date()
+    return f"{day.strftime('%b')} {day.day}, {day.year}"
 
 
 def render_html(index: dict) -> str:
-    cards = []
-    for o in index["offers"]:
-        cards.append(
-            _CARD_TMPL.format(
-                category=html.escape(o["category"]),
-                source_url=html.escape(o["source_url"], quote=True),
-                title=html.escape(o["title"], quote=True),
-                amount=html.escape(o["amount"]),
-                provider=html.escape(o["provider"], quote=True),
-                expiry_display=f"expires: {o['expiry_date']}"
-                if o["expiry_date"]
-                else "ongoing",
+    if not index["offers"]:
+        content = _EMPTY_TMPL
+    else:
+        cards = []
+        for i, o in enumerate(index["offers"]):
+            if o["expiry_date"]:
+                expiry = (
+                    f'<span class="status">expires '
+                    f'<time datetime="{html.escape(o["expiry_date"], quote=True)}">'
+                    f'{_human_date(o["expiry_date"])}</time></span>'
+                )
+            else:
+                expiry = (
+                    '<span class="status"><span class="dot" aria-hidden="true">'
+                    '</span>ongoing</span>'
+                )
+            verified = o["verified_date"]
+            cards.append(
+                _CARD_TMPL.format(
+                    index=i,
+                    category=html.escape(o["category"]),
+                    source_url=html.escape(o["source_url"], quote=True),
+                    title=html.escape(o["title"], quote=True),
+                    amount=html.escape(o["amount"]),
+                    provider=html.escape(o["provider"], quote=True),
+                    verified_date=html.escape(verified, quote=True),
+                    verified_display=_human_date(verified),
+                    expiry_display=expiry,
+                )
             )
-        )
-    return _PAGE_TMPL.format(cards="\n".join(cards))
+        content = '<ul class="grid">\n' + "\n".join(cards) + "\n</ul>"
+    built = index["generated_at"]
+    return _PAGE_TMPL.format(
+        css=_CSS,
+        count=index["count"],
+        content=content,
+        built_display=f'<time datetime="{html.escape(built, quote=True)}">'
+        f'{_human_date(built[:10])}</time>',
+    )
 
 
 def main(argv=None) -> int:
