@@ -568,7 +568,7 @@ _HOME_HEADER = """<header class="masthead">
 # any deploy base (e.g. the GitHub Pages /<repo>/ project path). The current
 # page is marked aria-current for assistive tech.
 _FOOT_NAV = """<nav class="foot-nav" aria-label="Site">\
-<a href="./">Offers</a><span aria-hidden="true">&middot;</span>\
+<a href="./"{offers_current}>Offers</a><span aria-hidden="true">&middot;</span>\
 <a href="privacy.html"{privacy_current}>Privacy policy</a></nav>"""
 
 _CARD_TMPL = """<li style="--i:{index}">
@@ -1234,7 +1234,8 @@ def build_app_js() -> str:
 def _foot_nav(current: str) -> str:
     """Footer nav for every page; ``current`` marks the active link."""
     return _FOOT_NAV.format(
-        privacy_current=' aria-current="page"' if current == "privacy" else ""
+        offers_current=' aria-current="page"' if current == "home" else "",
+        privacy_current=' aria-current="page"' if current == "privacy" else "",
     )
 
 

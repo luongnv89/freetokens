@@ -1290,20 +1290,22 @@ class PrivacyPageTests(unittest.TestCase):
         self.assertIn('<a href="./">Offers</a>', page)
         self.assertNotIn('href="/index', page)
 
+    def test_aria_current_marks_active_page_only(self):
+        home = self._home_with_one()
+        privacy = self._render()
+        # The stylesheet carries the [aria-current] selector on both pages;
+        # only the active page's link element carries the attribute itself.
+        self.assertIn('href="./" aria-current="page"', home)
+        self.assertNotIn('aria-current="page">Privacy', home)
+        self.assertIn('href="privacy.html" aria-current="page"', privacy)
+        self.assertNotIn('aria-current="page">Offers', privacy)
+
     def test_footer_nav_present_on_both_pages(self):
         home = self._home_with_one()
         page = self._render()
         for marker in ('aria-label="Site"', 'class="foot-nav"'):
             self.assertIn(marker, home)
             self.assertIn(marker, page)
-
-    def test_aria_current_marks_active_page_only(self):
-        home = self._home_with_one()
-        privacy = self._render()
-        # The stylesheet carries the [aria-current] selector on both pages;
-        # only the active page's link element carries the attribute itself.
-        self.assertNotIn('aria-current="page">', home)
-        self.assertIn('href="privacy.html" aria-current="page"', privacy)
 
     # --- accuracy against implemented behavior ------------------------------
 
@@ -1371,7 +1373,8 @@ class PrivacyPageTests(unittest.TestCase):
     def test_single_h1_and_labelled_sections(self):
         page = self._render()
         self.assertEqual(page.count("<h1>"), 1)
-        self.assertEqual(page.count("<h2"), page.count("</section>") - 1 + 1)
+        # Every section owns exactly one heading (8 sections, 8 h2s).
+        self.assertEqual(page.count("<h2"), page.count("</section>"))
         self.assertIn('id="privacy-summary"', page)
         self.assertIn('aria-labelledby="privacy-summary"', page)
 
