@@ -7,6 +7,7 @@ import datetime as dt
 import io
 import json
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -368,7 +369,7 @@ class SemanticPageTests(unittest.TestCase):
 
     def test_cards_are_list_items_inside_unordered_grid(self):
         page = self._render_many()
-        self.assertIn('<ul class="grid">', page)
+        self.assertIn('<ul class="grid" id="ft-grid">', page)
         self.assertEqual(page.count("<li "), page.count("<article"))
 
     def test_responsive_viewport_and_fluid_layout_css(self):
@@ -416,7 +417,10 @@ class EmptyStateTests(unittest.TestCase):
         offer = build.validate_offer(dict(VALID), "a.yaml")
         offer.setdefault("slug", "offer-0")
         page = build.render_html(build.build_index([offer]))
-        self.assertNotIn('class="empty"', page)
+        # Build-time empty state stays off; the client-side no-results panel
+        # ships hidden and only reveals after a filtering interaction.
+        self.assertNotIn("No live offers right now", page)
+        self.assertIn('id="ft-no-results" hidden', page)
         self.assertIn("<article", page)
 
     def test_main_all_expired_renders_empty_state_exit_zero(self):
@@ -577,8 +581,11 @@ class ConsentBannerTests(unittest.TestCase):
         self.assertNotIn("dataLayer", page)
 
     def test_default_render_stays_analytics_free(self):
+        # The site script ships unconditionally; analytics code must not.
         page = build.render_html(self._index())
-        self.assertNotIn("<script>", page)
+        for marker in ("googletagmanager", "dataLayer", "gtag", "ft-consent-banner"):
+            self.assertNotIn(marker, page)
+        self.assertIn('id="ft-app"', page)
 
     def test_banner_present_and_hidden_when_enabled(self):
         page = build.render_html(self._index(), measurement_id="G-ABCDEF12345")
@@ -598,6 +605,429 @@ class ConsentBannerTests(unittest.TestCase):
         decline_body = init[reject:init.index("}", init.index("ftDecline();", reject))]
         self.assertIn('ftStoreDecision("denied")', decline_body)
         self.assertNotIn("ftGrant()", decline_body)
+
+
+class ToolbarMarkupTests(unittest.TestCase):
+    """F2/#13: search + category chips emitted with offers, a11y wired."""
+
+    def _page(self, n=2):
+        offers = [
+            build.validate_offer(
+                dict(VALID, title=f"Offer {i}", category="coding"), "a.yaml"
+            )
+            for i in range(n)
+        ]
+        for i, offer in enumerate(offers):
+            offer.setdefault("slug", f"offer-{i}")
+        return build.render_html(build.build_index(offers))
+
+    def test_toolbar_present_with_search_and_chips(self):
+        page = self._page()
+        self.assertIn('aria-label="Search and filter offers"', page)
+        self.assertIn('id="ft-search"', page)
+        self.assertIn('type="search"', page)
+        self.assertIn('for="ft-search"', page)
+        self.assertIn("placeholder=", page)
+
+    def test_all_five_categories_plus_all_chip(self):
+        page = self._page()
+        self.assertIn('data-ft-category=""', page)
+        for category in build.CATEGORIES:
+            self.assertIn(f'data-ft-category="{category}"', page)
+        self.assertEqual(page.count('data-ft-category='), len(build.CATEGORIES) + 1)
+
+    def test_all_chip_pressed_others_not(self):
+        page = self._page()
+        all_chip = page[page.index('data-ft-category=""'):]
+        self.assertIn('aria-pressed="true"', all_chip[:200])
+        self.assertEqual(page.count('aria-pressed="false"'), len(build.CATEGORIES))
+
+    def test_results_status_is_live_region_seeded_with_count(self):
+        page = self._page(n=4)
+        self.assertIn('id="ft-results-status"', page)
+        self.assertIn('role="status"', page)
+        self.assertIn("Showing all 4 offers", page)
+
+    def test_client_empty_panel_hidden_with_working_reset(self):
+        page = self._page()
+        self.assertIn('id="ft-no-results" hidden', page)
+        self.assertIn('id="ft-reset-filters"', page)
+        reset_pos = page.index('id="ft-reset-filters"')
+        self.assertIn("<button", page[max(0, reset_pos - 80):reset_pos])
+
+    def test_app_script_emitted_once(self):
+        page = self._page()
+        self.assertEqual(page.count('<script id="ft-app">'), 1)
+
+    def test_chips_have_visible_focus_without_analytics_css(self):
+        # The banner CSS (which owns button:focus-visible) ships only when
+        # GA4 is configured; the toolbar must own its focus styles too.
+        page = self._page()
+        self.assertIn(".chip:focus-visible", page)
+        self.assertIn("#ft-search:focus-visible", page)
+
+    def test_no_toolbar_when_zero_offers(self):
+        index = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
+        page = build.render_html(index)
+        self.assertNotIn('id="ft-search"', page)
+        self.assertNotIn("ft-app", page)
+        self.assertIn("No live offers right now", page)
+
+
+class AppJsSourceTests(unittest.TestCase):
+    """F2/F3 static guarantees over the generated site script."""
+
+    JS = build.build_app_js()
+
+    def test_categories_injected_from_build_constant(self):
+        self.assertIn(json.dumps(list(build.CATEGORIES)), self.JS)
+        self.assertNotIn("__FT_CATEGORIES__", self.JS)
+
+    def test_debounce_uses_configured_ms_under_200_budget(self):
+        self.assertIn(f"var DEBOUNCE_MS = {build.SEARCH_DEBOUNCE_MS};", self.JS)
+        self.assertLess(build.SEARCH_DEBOUNCE_MS, 200)
+        self.assertIn("setTimeout(", self.JS)
+        self.assertIn("clearTimeout(", self.JS)
+
+    def test_url_state_via_history_api(self):
+        self.assertIn("history.pushState(", self.JS)
+        self.assertIn('addEventListener("popstate"', self.JS)
+        self.assertIn("URLSearchParams", self.JS)
+
+    def test_unknown_category_param_rejected_on_restore(self):
+        parse_pos = self.JS.index("function ftParseState")
+        body = self.JS[parse_pos:self.JS.index("function ftSerializeState")]
+        self.assertIn("indexOf(category) === -1", body)
+
+    def test_and_combination_requires_both_category_and_query(self):
+        matches = self.JS[self.JS.index("function ftMatches"):]
+        category_check = matches.index('getAttribute("data-category")')
+        query_check = matches.index("ftNormalize")
+        self.assertLess(category_check, query_check)
+        # Both checks must gate the same boolean result (early returns).
+        self.assertIn("return false;", matches[:query_check])
+
+    def test_filter_event_carries_category_only(self):
+        self.assertIn('"filter_use", { category:', self.JS)
+
+    def test_search_event_carries_query_length_never_raw_query(self):
+        self.assertIn('"search", { query_length: state.q.length }', self.JS)
+        track_call = self.JS[self.JS.index("function commit"):]
+        self.assertNotIn("q: ", track_call[track_call.index("ftTrack"):])
+        self.assertNotIn("search_term", self.JS)
+
+    def test_events_dispatch_guarded_for_absent_analytics(self):
+        self.assertIn('typeof window.ftTrackEvent === "function"', self.JS)
+
+    def test_deep_link_restore_runs_without_committing_history_or_events(self):
+        init_body = self.JS[self.JS.index("function ftInitApp"):]
+        restore = init_body.rindex("apply(); // deep-link restore")
+        self.assertNotIn("commit(", init_body[restore:])
+        popstate = init_body[init_body.index('addEventListener("popstate"'):]
+        self.assertIn("apply(); // restore view", popstate)
+
+
+class FilterEventGateTests(unittest.TestCase):
+    """/#13,#14: filter/search events ride the consent-gated event bus."""
+
+    MID = "G-ABCDEF12345"
+
+    def test_analytics_init_exposes_consent_gated_ft_track_event(self):
+        init = build.build_analytics_init(self.MID)
+        self.assertIn("var TRACKING_ACTIVE = false;", init)
+        self.assertIn("function ftTrackEvent(name, params)", init)
+        self.assertIn("window.ftTrackEvent = ftTrackEvent;", init)
+        gate = init.index("function ftTrackEvent")
+        body = init[gate:init.index("}", init.index("!TRACKING_ACTIVE"))]
+        self.assertIn("!TRACKING_ACTIVE", body)
+        self.assertIn('typeof gtag !== "function"', body)
+
+    def test_grant_activates_tracking_before_loading_gtag(self):
+        init = build.build_analytics_init(self.MID)
+        grant = init.index("function ftGrant")
+        active = init.index("TRACKING_ACTIVE = true;", grant)
+        loader = init.index("ftLoadGa();", grant)
+        self.assertLess(active, loader)
+
+    def test_decline_deactivates_tracking(self):
+        init = build.build_analytics_init(self.MID)
+        decline = init.index("function ftDecline")
+        self.assertIn(
+            "TRACKING_ACTIVE = false;",
+            init[decline:decline + 120],
+        )
+
+    def test_disabled_analytics_ships_no_gate_but_site_script_still_works(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        page = build.render_html(build.build_index([offer]))
+        # Gate definition absent; the guarded call site remains (no-op).
+        self.assertNotIn("window.ftTrackEvent = ftTrackEvent;", page)
+        self.assertNotIn("TRACKING_ACTIVE", page)
+        self.assertIn('typeof window.ftTrackEvent === "function"', page)
+
+
+class LargeFixtureBuildTests(unittest.TestCase):
+    """F3 scale check: the build pipeline handles a 500-offer directory."""
+
+    def test_main_builds_500_offers_with_toolbar(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            categories = list(build.CATEGORIES)
+            for i in range(500):
+                Path(offers_dir, f"offer-{i:04d}.yaml").write_text(
+                    offer_text(
+                        title=f"Offer number {i} unique token zz{i}",
+                        category=categories[i % len(categories)],
+                    ),
+                    encoding="utf-8",
+                )
+            out = os.path.join(tmp, "out")
+            code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            index = json.loads(Path(out, "index.json").read_text(encoding="utf-8"))
+            self.assertEqual(index["count"], 500)
+            page = Path(out, "site", "index.html").read_text(encoding="utf-8")
+            self.assertEqual(page.count("<article"), 500)
+            self.assertIn('id="ft-search"', page)
+            self.assertIn('id="ft-grid"', page)
+
+
+def _probe_node():
+    """True when a runnable node exists; gates the VM behavioral tests."""
+    try:
+        proc = subprocess.run(
+            ["node", "-e", "process.stdout.write('ok')"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        return proc.returncode == 0 and proc.stdout.strip() == "ok"
+    except (OSError, subprocess.SubprocessError):
+        return False
+
+
+HAS_NODE = _probe_node()
+
+
+class NodeAppJsTests(unittest.TestCase):
+    """Behavioral tests driving _APP_JS in a Node VM with DOM stubs.
+
+    Skipped when no runnable node exists (e.g. CI installs Python only);
+    run locally via e.g. `mise x node@22 -- python3 -m unittest discover`.
+    """
+
+    HARNESS = Path(__file__).resolve().parent / "app_js_harness.js"
+
+    def _run(self, steps, cards=None, init_search="", track_enabled=True):
+        page_script = build.build_app_js()
+        bare = page_script[
+            page_script.index(">") + 1 : page_script.rindex("</script>")
+        ]
+        with tempfile.NamedTemporaryFile(
+            "w", suffix=".js", delete=False
+        ) as fh:
+            fh.write(bare)
+            app_path = fh.name
+        self.addCleanup(os.unlink, app_path)
+        scenario = {
+            "app": app_path,
+            "cards": cards
+            or [
+                {"slug": "alpha", "category": "image", "text": "Alpha Studio Image Google"},
+                {"slug": "copilot", "category": "coding", "text": "Copilot Coding GitHub"},
+                {"slug": "mistral", "category": "api_provider", "text": "Mistral API Provider"},
+            ],
+            "init_search": init_search,
+            "track_enabled": track_enabled,
+            "valid_categories": list(build.CATEGORIES),
+            "steps": steps,
+        }
+        proc = subprocess.run(
+            ["node", str(self.HARNESS)],
+            input=json.dumps(scenario),
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        self.assertEqual(
+            proc.returncode, 0, f"harness failed: {proc.stderr}"
+        )
+        return json.loads(proc.stdout)
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_deep_link_restores_combined_state_without_events(self):
+        snaps = self._run([], init_search="?category=coding&q=copilot")
+        first = snaps[0]
+        self.assertEqual(first["visible"], ["copilot"])
+        self.assertEqual(first["status"], "Showing 1 of 3 offers")
+        self.assertEqual(first["pressed"]["coding"], "true")
+        self.assertEqual(first["pressed"]["all"], "false")
+        self.assertEqual(first["events"], [])
+        self.assertEqual(first["historyUrls"], [])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_deep_link_with_mixed_case_query_matches_case_insensitively(self):
+        combined = self._run([], init_search="?category=coding&q=Copilot")[0]
+        self.assertEqual(combined["visible"], ["copilot"])
+        query_only = self._run([], init_search="?q=Mistral")[0]
+        self.assertEqual(query_only["visible"], ["mistral"])
+        self.assertEqual(query_only["status"], "Showing 1 of 3 offers")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_debounced_typing_narrows_and_fires_single_search_event(self):
+        snaps = self._run(
+            [
+                {"op": "type", "value": "mi"},
+                {"op": "advance", "ms": 50},
+                {"op": "type", "value": "mistral"},
+                {"op": "advance", "ms": 200},
+                {"op": "snapshot"},
+            ]
+        )
+        after_partial = snaps[2]  # before debounce window elapsed
+        self.assertEqual(after_partial["historyUrls"], [])
+        self.assertEqual(len(after_partial["visible"]), 3)
+        final = snaps[-1]
+        self.assertEqual(final["visible"], ["mistral"])
+        self.assertEqual(final["historyUrls"], ["?q=mistral"])
+        self.assertEqual(final["events"], [["search", {"query_length": 7}]])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_combined_search_and_filter_uses_and_semantics_with_empty_state(self):
+        snaps = self._run(
+            [
+                {"op": "type", "value": "google"},
+                {"op": "advance", "ms": 200},
+            ],
+            init_search="?category=coding",
+        )
+        final = snaps[-1]
+        # "google" matches only the image card; coding filter excludes it.
+        self.assertEqual(final["visible"], [])
+        self.assertEqual(final["status"], "Showing 0 of 3 offers")
+        self.assertFalse(final["emptyHidden"])
+        self.assertEqual(final["historyUrls"], ["?category=coding&q=google"])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_category_click_updates_url_and_fires_filter_use_once(self):
+        snaps = self._run(
+            [
+                {"op": "click_chip", "value": "image"},
+                {"op": "click_chip", "value": ""},
+            ]
+        )
+        after_image = snaps[1]
+        self.assertEqual(after_image["visible"], ["alpha"])
+        self.assertEqual(after_image["historyUrls"], ["?category=image"])
+        self.assertEqual(
+            after_image["events"], [["filter_use", {"category": "image"}]]
+        )
+        final = snaps[2]  # All resets
+        self.assertEqual(final["historyUrls"][-1], "/")
+        self.assertEqual(final["pressed"]["all"], "true")
+        self.assertEqual([e[0] for e in final["events"]],
+                         ["filter_use", "filter_use"])
+        self.assertEqual(final["events"][-1],
+                         ["filter_use", {"category": "all"}])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_popstate_restores_view_without_new_events_or_history(self):
+        snaps = self._run(
+            [
+                {"op": "click_chip", "value": "coding"},
+                {"op": "popstate", "search": "?category=image"},
+                {"op": "snapshot"},
+            ]
+        )
+        restored = snaps[-1]
+        self.assertEqual(restored["visible"], ["alpha"])
+        self.assertEqual(restored["pressed"]["image"], "true")
+        self.assertEqual(restored["pressed"]["coding"], "false")
+        self.assertEqual(
+            restored["events"], [["filter_use", {"category": "coding"}]]
+        )
+        self.assertEqual(restored["historyUrls"], ["?category=coding"])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_reset_clears_state_url_and_input(self):
+        snaps = self._run(
+            [
+                {"op": "type", "value": "copilot"},
+                {"op": "advance", "ms": 200},
+                {"op": "click_reset"},
+            ],
+            init_search="?category=image",
+        )
+        final = snaps[-1]
+        self.assertEqual(len(final["visible"]), 3)
+        self.assertEqual(final["inputValue"], "")
+        self.assertEqual(final["locationSearch"], "")
+        self.assertEqual(final["historyUrls"][-1], "/")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_whitespace_only_query_never_commits(self):
+        snaps = self._run(
+            [
+                {"op": "type", "value": "   "},
+                {"op": "advance", "ms": 200},
+            ]
+        )
+        final = snaps[-1]
+        self.assertEqual(final["historyUrls"], [])
+        self.assertEqual(final["events"], [])
+        self.assertEqual(len(final["visible"]), 3)
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_invalid_category_param_ignored_on_restore(self):
+        first = self._run([], init_search="?category=bogus")[0]
+        self.assertEqual(len(first["visible"]), 3)
+        self.assertEqual(first["pressed"]["all"], "true")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_redundant_filter_click_does_not_spam_history(self):
+        snaps = self._run(
+            [
+                {"op": "click_chip", "value": "image"},
+                {"op": "click_chip", "value": "image"},
+                {"op": "click_reset"},
+            ]
+        )
+        final = snaps[-1]
+        # One entry per distinct state: image, then the reset to "/".
+        self.assertEqual(
+            final["historyUrls"], ["?category=image", "/"]
+        )
+        self.assertEqual(len(final["events"]), 3)  # each click still applies
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_silent_when_analytics_absent(self):
+        snaps = self._run(
+            [{"op": "click_chip", "value": "video"}, {"op": "click_reset"}],
+            track_enabled=False,
+        )
+        final = snaps[-1]
+        self.assertEqual(final["events"], [])  # recorder never registered
+        self.assertEqual(len(final["visible"]), 3)
+        self.assertNotIn("ftTrackEvent", json.dumps(final))
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_filter_settle_under_200ms_over_500_offers(self):
+        cards = [
+            {
+                "slug": f"offer-{i:04d}",
+                "category": list(build.CATEGORIES)[i % len(build.CATEGORIES)],
+                "text": f"Offer number {i} provider token zz{i}",
+            }
+            for i in range(500)
+        ]
+        snaps = self._run(
+            [{"op": "perf_type_settle", "value": "zz499"}], cards=cards
+        )
+        perf = snaps[-1]["perf_ms"]
+        self.assertLess(perf, 200, f"settle took {perf}ms over 500 offers")
+        self.assertEqual(snaps[-1]["visible"], ["offer-0499"])
 
 
 class AnalyticsBuildOutputTests(unittest.TestCase):

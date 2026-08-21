@@ -254,6 +254,79 @@ a:focus-visible {
   from { opacity: 0; transform: translateY(10px); }
 }
 
+/* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.field { display: flex; flex-direction: column; gap: 0.35rem; flex: 1 1 16rem; }
+
+.tool-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+
+#ft-search {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  max-width: 24rem;
+  width: 100%;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.chip:hover { background: var(--ink); color: var(--paper); }
+
+/* Visible keyboard focus must not depend on the analytics stylesheet
+   (_BANNER_CSS ships only when GA4 is configured). */
+.chip:focus-visible,
+#ft-search:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+.results-status {
+  flex-basis: 100%;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* Hidden list items must leave the grid layout entirely. */
+.grid li[hidden] { display: none; }
+
+.empty .chip.reset { margin-top: 0.75rem; }
+
 </style>
 </head>
 <body>
@@ -265,7 +338,7 @@ a:focus-visible {
 <p class="count"><strong>5</strong> live offers</p>
 </header>
 <main>
-<ul class="grid">
+<section class="toolbar" aria-label="Search and filter offers"><div class="field"><label class="tool-label" for="ft-search">Search</label><input type="search" id="ft-search" name="q" placeholder="Search title, provider, or amount&hellip;" autocomplete="off" spellcheck="false" maxlength="200"></div><div class="chips" role="group" aria-label="Filter by category"><button type="button" class="chip" data-ft-category="" aria-pressed="true">All</button><button type="button" class="chip" data-ft-category="api_provider" aria-pressed="false">API providers</button><button type="button" class="chip" data-ft-category="coding" aria-pressed="false">Coding</button><button type="button" class="chip" data-ft-category="image" aria-pressed="false">Image</button><button type="button" class="chip" data-ft-category="voice" aria-pressed="false">Voice</button><button type="button" class="chip" data-ft-category="video" aria-pressed="false">Video</button></div><p class="results-status" id="ft-results-status" role="status" aria-live="polite">Showing all 5 offers</p></section><ul class="grid" id="ft-grid">
 <li style="--i:0">
 <article class="card" data-category="voice">
 <div class="card-top">
@@ -321,13 +394,191 @@ a:focus-visible {
 <p class="prov">Mistral AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
 </li>
-</ul>
+</ul><section class="empty" id="ft-no-results" hidden>
+<p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8.5 11h5"/></svg></p>
+<h2>No matching offers</h2>
+<p>Nothing matches your current search and category combination.</p>
+<button type="button" class="chip reset" id="ft-reset-filters">Clear search &amp; filters</button>
+</section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-21T18:36:31Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-21T19:31:51Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
 </footer>
 </div>
 
 
+<script id="ft-app">
+(function () {
+  "use strict";
+  var VALID_CATEGORIES = ["api_provider", "coding", "image", "voice", "video"];
+  var DEBOUNCE_MS = 120;
+
+  function ftNormalize(value) {
+    return (value || "").toLowerCase();
+  }
+
+  function ftParseState(search) {
+    var params = new URLSearchParams(search || "");
+    var category = params.get("category") || "";
+    if (VALID_CATEGORIES.indexOf(category) === -1) { category = ""; }
+    return { category: category, q: (params.get("q") || "").trim() };
+  }
+
+  function ftSerializeState(state) {
+    // Whitelist-only: unknown params are dropped, matching the analytics
+    // privacy stance of never persisting arbitrary query strings.
+    var params = new URLSearchParams();
+    if (state.category) { params.set("category", state.category); }
+    if (state.q) { params.set("q", state.q); }
+    return params.toString();
+  }
+
+  // AND semantics: an offer is shown only when it satisfies BOTH the active
+  // category filter and the search query.
+  function ftMatches(li, state) {
+    var card = li.querySelector("[data-category]");
+    if (!card) { return false; }
+    if (state.category && card.getAttribute("data-category") !== state.category) {
+      return false;
+    }
+    if (!state.q) { return true; }
+    return (
+      ftNormalize(card.textContent).indexOf(ftNormalize(state.q)) !== -1
+    );
+  }
+
+  function ftDebounce(fn, ms) {
+    var timer = null;
+    return function () {
+      var self = this;
+      var args = arguments;
+      if (timer) { clearTimeout(timer); }
+      timer = setTimeout(function () {
+        timer = null;
+        fn.apply(self, args);
+      }, ms);
+    };
+  }
+
+  function ftTrack(name, params) {
+    if (typeof window.ftTrackEvent === "function") {
+      window.ftTrackEvent(name, params);
+    }
+  }
+
+  function ftInitApp() {
+    var grid = document.getElementById("ft-grid");
+    var input = document.getElementById("ft-search");
+    var status = document.getElementById("ft-results-status");
+    var emptyBox = document.getElementById("ft-no-results");
+    var resetButton = document.getElementById("ft-reset-filters");
+    if (!grid || !input || !status) { return; }
+    var items = Array.prototype.slice.call(grid.querySelectorAll("li"));
+    var total = items.length;
+    var state = ftParseState(window.location.search);
+
+    function syncControls() {
+      var chips = document.querySelectorAll("[data-ft-category]");
+      for (var i = 0; i < chips.length; i++) {
+        var chip = chips[i];
+        var value = chip.getAttribute("data-ft-category") || "";
+        chip.setAttribute(
+          "aria-pressed",
+          value === state.category ? "true" : "false"
+        );
+      }
+      if (document.activeElement !== input) { input.value = state.q; }
+    }
+
+    function apply(options) {
+      options = options || {};
+      var shown = 0;
+      for (var i = 0; i < items.length; i++) {
+        var li = items[i];
+        var show = ftMatches(li, state);
+        li.hidden = !show;
+        if (show) { shown++; }
+      }
+      status.textContent = shown === total
+        ? "Showing all " + total + " offers"
+        : "Showing " + shown + " of " + total + " offers";
+      if (emptyBox) { emptyBox.hidden = shown !== 0; }
+      syncControls();
+      if (options.commit) {
+        var query = ftSerializeState(state);
+        var nextSearch = query ? "?" + query : "";
+        // Skip redundant entries so Back always undoes a real change.
+        if (nextSearch !== window.location.search) {
+          try {
+            window.history.pushState(
+              {},
+              "",
+              nextSearch || window.location.pathname
+            );
+          } catch (err) {}
+        }
+      }
+    }
+
+    function commit(source) {
+      apply({ commit: true });
+      if (source === "filter") {
+        ftTrack("filter_use", { category: state.category || "all" });
+      } else if (source === "search" && state.q) {
+        // Privacy: length only — the raw term never reaches analytics.
+        ftTrack("search", { query_length: state.q.length });
+      }
+    }
+
+    input.addEventListener(
+      "input",
+      ftDebounce(function () {
+        var q = input.value.trim().toLowerCase();
+        if (q === state.q) { return; }
+        state.q = q;
+        commit("search");
+      }, DEBOUNCE_MS)
+    );
+
+    var chips = document.querySelectorAll("[data-ft-category]");
+    for (var c = 0; c < chips.length; c++) {
+      chips[c].addEventListener("click", function (event) {
+        var value = event.currentTarget.getAttribute("data-ft-category") || "";
+        if (value && VALID_CATEGORIES.indexOf(value) === -1) { return; }
+        state.category = value;
+        commit("filter");
+      });
+    }
+
+    if (resetButton) {
+      resetButton.addEventListener("click", function () {
+        state.category = "";
+        state.q = "";
+        input.value = "";
+        commit("filter");
+      });
+    }
+
+    window.addEventListener("popstate", function () {
+      state = ftParseState(window.location.search);
+      apply(); // restore view; history navigation is not a new application
+    });
+
+    apply(); // deep-link restore without events or history churn
+  }
+
+  function ftBoot() {
+    try {
+      ftInitApp();
+    } catch (err) {}
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ftBoot);
+  } else {
+    ftBoot();
+  }
+})();
+</script>
 </body>
 </html>
