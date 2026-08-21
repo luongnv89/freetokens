@@ -64,8 +64,7 @@ def check_schema_matches_build(schema: dict) -> None:
         pattern = props.get(field, {}).get("pattern")
         if pattern != "^[0-9]{4}-[0-9]{2}-[0-9]{2}$":
             raise SchemaMismatch(
-                f"schema {field} pattern must enforce YYYY-MM-DD "
-                f"(got {pattern!r})"
+                f"schema {field} pattern must enforce YYYY-MM-DD (got {pattern!r})"
             )
     nullable = props.get("expiry_date", {}).get("type")
     if "null" not in (nullable or []):
