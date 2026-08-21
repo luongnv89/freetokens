@@ -143,11 +143,7 @@ def filter_expired(offers: list, today: dt.date | None = None) -> list:
     """Drop offers whose expiry_date is in the past; None means ongoing."""
     if today is None:
         today = dt.date.today()
-    return [
-        o
-        for o in offers
-        if o["expiry_date"] is None or o["expiry_date"] >= today
-    ]
+    return [o for o in offers if o["expiry_date"] is None or o["expiry_date"] >= today]
 
 
 def build_index(offers: list) -> dict:
