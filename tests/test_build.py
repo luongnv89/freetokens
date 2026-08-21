@@ -519,6 +519,21 @@ class GtagSnippetTests(unittest.TestCase):
         self.assertIn('"event", "page_view"', init)
         self.assertIn("page_path: window.location.pathname", init)
 
+    def test_config_disables_automatic_page_view(self):
+        # config() auto-sends page_view unless told not to; the explicit
+        # event must be the only one or every load is double-counted.
+        init = build.build_analytics_init(self.MID)
+        self.assertIn("send_page_view: false", init)
+
+    def test_page_view_does_not_leak_query_string(self):
+        # Only origin + pathname may reach GA; raw query strings stay local.
+        init = build.build_analytics_init(self.MID)
+        self.assertIn(
+            "page_location: window.location.origin + window.location.pathname",
+            init,
+        )
+        self.assertNotIn("window.location.search", init)
+
     def test_eu_heuristic_uses_configured_prefixes(self):
         init = build.build_analytics_init(self.MID)
         self.assertIn(json.dumps(list(build.EU_TIMEZONE_PREFIXES)), init)

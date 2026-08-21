@@ -560,8 +560,14 @@ _ANALYTICS_INIT_JS = """<script>
     if (typeof window.gtag !== "function") { return; }
     gtag("consent", "update", { analytics_storage: "granted" });
     ftLoadGa();
-    gtag("config", MEASUREMENT_ID, { anonymize_ip: true });
-    gtag("event", "page_view", { page_path: window.location.pathname });
+    // send_page_view:false keeps config() from firing a duplicate page_view;
+    // page_location strips the query string so raw URLs never leave the page.
+    gtag("config", MEASUREMENT_ID,
+      { anonymize_ip: true, send_page_view: false });
+    gtag("event", "page_view", {
+      page_path: window.location.pathname,
+      page_location: window.location.origin + window.location.pathname
+    });
   }
   function ftDecline() {
     if (typeof window.gtag !== "function") { return; }
