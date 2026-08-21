@@ -66,6 +66,30 @@ Run the test suite (stdlib `unittest`, no dependencies):
 python3 -m unittest discover -s tests -v
 ```
 
+## Deployment
+
+Deployment is fully automated via GitHub Actions
+([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). You never
+push built output by hand:
+
+1. **Trigger** — every push to `main` (or a manual `workflow_dispatch` run)
+   starts the `Deploy to GitHub Pages` workflow.
+2. **Build** — the workflow checks out the repo, runs
+   `python3 scripts/build.py` to validate all offers and render
+   `site/index.html`, then runs the test suite. Any validation or test failure
+   aborts the deploy.
+3. **Publish** — the built `site/` directory is uploaded as a Pages artifact
+   and deployed with the official Actions toolchain (`actions/checkout`,
+   `actions/setup-python`, `actions/configure-pages`,
+   `actions/upload-pages-artifact`, `actions/deploy-pages`), using Pages'
+   build type `workflow` (source = GitHub Actions).
+
+The live site is served at `https://luongnv89.github.io/freetokens/` — an
+offer edit merged to `main` is typically live within 1–2 minutes.
+
+To re-run a deploy manually: **Actions → Deploy to GitHub Pages → Run
+workflow**.
+
 ## Repository Layout
 
 ```
