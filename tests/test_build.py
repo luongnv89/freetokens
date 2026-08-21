@@ -120,6 +120,28 @@ class ValidateTests(unittest.TestCase):
         offer = build.validate_offer(dict(VALID, expiry_date="2026-12-31"), "a.yaml")
         self.assertEqual(offer["expiry_date"], dt.date(2026, 12, 31))
 
+    def test_null_verified_date_fails_with_format_hint_not_type_error(self):
+        with self.assertRaisesRegex(build.OfferError, "YYYY-MM-DD"):
+            build.validate_offer(dict(VALID, verified_date=None), "a.yaml")
+
+    def test_duplicate_slug_across_fixtures_names_both_files(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "alpha.yaml").write_text(offer_text(), encoding="utf-8")
+            Path(offers_dir, "alpha.yml").write_text(
+                offer_text(title="Alpha Again"), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(build.OfferError, "duplicate slug") as cm:
+                build.load_offers(offers_dir)
+            self.assertIn("alpha.yaml", str(cm.exception))
+            self.assertIn("alpha.yml", str(cm.exception))
+
+    def test_seed_offers_have_unique_slugs(self):
+        offers = build.load_offers(str(REPO / "offers"))
+        slugs = [o["slug"] for o in offers]
+        self.assertEqual(len(slugs), len(set(slugs)))
+
 
 class SeedContentTests(unittest.TestCase):
     """The seed offers committed under offers/ must satisfy the schema."""
@@ -209,6 +231,49 @@ class BuildOutputTests(unittest.TestCase):
             self.assertEqual(dated_entry["expiry_date"], "2026-12-31")
             alpha = next(o for o in index["offers"] if o["slug"] == "alpha")
             self.assertIsNone(alpha["expiry_date"])
+
+
+class RenderTests(unittest.TestCase):
+    def _render(self, offers):
+        for i, offer in enumerate(offers):
+            offer.setdefault("slug", f"offer-{i}")
+        return build.render_html(build.build_index(offers))
+
+    def test_null_expiry_renders_ongoing(self):
+        page = self._render([build.validate_offer(dict(VALID), "a.yaml")])
+        self.assertIn("ongoing", page)
+        self.assertNotIn("expires:", page)
+
+    def test_dated_expiry_renders_expires_prefix(self):
+        offer = build.validate_offer(dict(VALID, expiry_date="2026-12-31"), "a.yaml")
+        page = self._render([offer])
+        self.assertIn("expires: 2026-12-31", page)
+
+    def test_category_rendered_as_badge(self):
+        offer = build.validate_offer(dict(VALID, category="voice"), "a.yaml")
+        page = self._render([offer])
+        self.assertIn('<span class="badge">voice</span>', page)
+
+    def test_link_has_descriptive_aria_label(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        page = self._render([offer])
+        self.assertIn('aria-label="Test Offer from Test Provider"', page)
+        self.assertIn('href="https://example.com/offer"', page)
+
+    def test_quote_in_title_cannot_break_aria_label_attribute(self):
+        offer = build.validate_offer(dict(VALID, title='Say "hi"'), "a.yaml")
+        page = self._render([offer])
+        self.assertIn('aria-label="Say &quot;hi&quot; from Test Provider"', page)
+        self.assertNotIn('aria-label="Say "hi""', page)
+
+    def test_all_seed_offers_present_in_built_page(self):
+        offers = build.load_offers(str(REPO / "offers"))
+        page = self._render(offers)
+        for offer in offers:
+            self.assertIn(offer["title"], page)
+            self.assertIn(offer["provider"], page)
+            self.assertIn(f'class="badge">{offer["category"]}</span>', page)
+        self.assertEqual(page.count("<article"), len(offers))
 
 
 if __name__ == "__main__":
