@@ -1,0 +1,10 @@
+# Verified 2026-08-21 against https://hailuoai.video/doc/payment-policy.html
+# ("This product provides both free and paid service models"; new users
+# "will receive a one-time welcome package of free credits.")
+title: Hailuo AI Video Free Tier
+provider: Hailuo AI
+category: video
+amount: One-time welcome credit package + limited free generation (watermarked)
+expiry_date: null
+source_url: https://hailuoai.video/doc/payment-policy.html
+verified_date: 2026-08-21

@@ -1,7 +1,17 @@
 {
-  "generated_at": "2026-08-21T20:23:29Z",
-  "count": 5,
+  "generated_at": "2026-08-21T21:10:50Z",
+  "count": 11,
   "offers": [
+    {
+      "slug": "devin-free-plan",
+      "title": "Devin Free Plan",
+      "provider": "Cognition (Devin)",
+      "category": "coding",
+      "amount": "Light coding-agent quota + unlimited Tab completions ($0 plan)",
+      "expiry_date": null,
+      "source_url": "https://devin.ai/pricing",
+      "verified_date": "2026-08-21"
+    },
     {
       "slug": "elevenlabs-free-plan",
       "title": "ElevenLabs Free Plan",
@@ -43,6 +53,36 @@
       "verified_date": "2026-08-21"
     },
     {
+      "slug": "groq-free-tier",
+      "title": "Groq Free Tier — Free Rate-Limited API",
+      "provider": "Groq",
+      "category": "api_provider",
+      "amount": "Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)",
+      "expiry_date": null,
+      "source_url": "https://console.groq.com/docs/rate-limits",
+      "verified_date": "2026-08-21"
+    },
+    {
+      "slug": "hailuo-free-tier",
+      "title": "Hailuo AI Video Free Tier",
+      "provider": "Hailuo AI",
+      "category": "video",
+      "amount": "One-time welcome credit package + limited free generation (watermarked)",
+      "expiry_date": null,
+      "source_url": "https://hailuoai.video/doc/payment-policy.html",
+      "verified_date": "2026-08-21"
+    },
+    {
+      "slug": "leonardo-ai-free-plan",
+      "title": "Leonardo.Ai Free Plan",
+      "provider": "Leonardo.Ai",
+      "category": "image",
+      "amount": "150 fast tokens per day (resets daily)",
+      "expiry_date": null,
+      "source_url": "https://leonardo.ai/pricing/",
+      "verified_date": "2026-08-21"
+    },
+    {
       "slug": "mistral-experiment-free-tier",
       "title": "Mistral AI Studio Free Mode — Free API Tier",
       "provider": "Mistral AI",
@@ -50,6 +90,26 @@
       "amount": "Free rate-limited API access (no credit card required)",
       "expiry_date": null,
       "source_url": "https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key",
+      "verified_date": "2026-08-21"
+    },
+    {
+      "slug": "pika-free-plan",
+      "title": "Pika Free Plan",
+      "provider": "Pika",
+      "category": "video",
+      "amount": "80 monthly video credits",
+      "expiry_date": null,
+      "source_url": "https://pika.art/pricing",
+      "verified_date": "2026-08-21"
+    },
+    {
+      "slug": "runway-free-plan",
+      "title": "Runway Free Plan",
+      "provider": "Runway",
+      "category": "video",
+      "amount": "125 one-time credits for AI video and image generation",
+      "expiry_date": null,
+      "source_url": "https://runwayml.com/pricing",
       "verified_date": "2026-08-21"
     }
   ]
