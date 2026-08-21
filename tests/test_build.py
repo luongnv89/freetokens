@@ -260,6 +260,12 @@ class RenderTests(unittest.TestCase):
         self.assertIn('aria-label="Test Offer from Test Provider"', page)
         self.assertIn('href="https://example.com/offer"', page)
 
+    def test_quote_in_title_cannot_break_aria_label_attribute(self):
+        offer = build.validate_offer(dict(VALID, title='Say "hi"'), "a.yaml")
+        page = self._render([offer])
+        self.assertIn('aria-label="Say &quot;hi&quot; from Test Provider"', page)
+        self.assertNotIn('aria-label="Say "hi""', page)
+
     def test_all_seed_offers_present_in_built_page(self):
         offers = build.load_offers(str(REPO / "offers"))
         page = self._render(offers)

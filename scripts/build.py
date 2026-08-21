@@ -197,9 +197,9 @@ def render_html(index: dict) -> str:
             _CARD_TMPL.format(
                 category=html.escape(o["category"]),
                 source_url=html.escape(o["source_url"], quote=True),
-                title=html.escape(o["title"]),
+                title=html.escape(o["title"], quote=True),
                 amount=html.escape(o["amount"]),
-                provider=html.escape(o["provider"]),
+                provider=html.escape(o["provider"], quote=True),
                 expiry_display=f"expires: {o['expiry_date']}"
                 if o["expiry_date"]
                 else "ongoing",
