@@ -13,13 +13,21 @@ Configured via `PUT /repos/luongnv89/freetokens/branches/main/protection`
 | Setting | Value | Why |
 |---------|-------|-----|
 | Required pull request reviews | required (0 approvals minimum) | Direct pushes to `main` are rejected; all changes require a PR |
-| Required status checks | `Validate offers / validate`, strict = false | PRs merge only when the offer-schema validation check passes on the head commit |
+| Required status checks | context `validate`, strict = false | PRs merge only when the offer-schema validation check passes on the head commit |
 | Allow force pushes | false | History on `main` is immutable |
 | Allow deletions | false | `main` cannot be deleted |
 | Enforce for administrators | false | Kept minimal per issue #12 scope |
 
 Everything else (restrictions, conversation resolution, lock branch) is left at
 its default / unset.
+
+### Required-check naming
+
+Branch protection matches the **check-run name**, which for a GitHub Actions job
+is the job's display name — here `validate`, from the `validate` job of the
+*Validate offers* workflow — not the `Workflow / job` string shown in the UI.
+Requiring the display string leaves every PR stuck at "Expected — waiting for
+status to be reported" even while the underlying job passes.
 
 ## Why the validation check runs on every PR
 
