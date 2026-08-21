@@ -99,8 +99,12 @@ def validate_offer(data: dict, filename: str) -> dict:
         )
 
     if data["expiry_date"] is not None:
-        data["expiry_date"] = _validate_date(data["expiry_date"], "expiry_date", filename)
-    data["verified_date"] = _validate_date(data["verified_date"], "verified_date", filename)
+        data["expiry_date"] = _validate_date(
+            data["expiry_date"], "expiry_date", filename
+        )
+    data["verified_date"] = _validate_date(
+        data["verified_date"], "verified_date", filename
+    )
     if data["verified_date"] > dt.date.today():
         raise OfferError(
             f"{filename}: verified_date is in the future ({data['verified_date']})"
@@ -220,7 +224,9 @@ def main(argv=None) -> int:
         print(f"build failed: {exc}", file=sys.stderr)
         return 1
     if not offers:
-        print(f"build failed: no offer files found in {args.offers_dir}", file=sys.stderr)
+        print(
+            f"build failed: no offer files found in {args.offers_dir}", file=sys.stderr
+        )
         return 1
 
     index = build_index(offers)

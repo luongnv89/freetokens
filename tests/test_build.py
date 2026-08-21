@@ -1,6 +1,6 @@
 """Tests for scripts/build.py — stdlib unittest, run with:
 
-    python3 -m unittest discover -s tests -v
+python3 -m unittest discover -s tests -v
 """
 
 import datetime as dt
@@ -206,7 +206,9 @@ class BuildOutputTests(unittest.TestCase):
     def test_invalid_offer_fails_build_with_exit_1(self):
         with tempfile.TemporaryDirectory() as tmp:
             offers_dir = self._write_offers(tmp)
-            Path(offers_dir, "broken.yaml").write_text("title: Only\n", encoding="utf-8")
+            Path(offers_dir, "broken.yaml").write_text(
+                "title: Only\n", encoding="utf-8"
+            )
             err = io.StringIO()
             with redirect_stdout(err):
                 code = build.main(["--offers-dir", offers_dir, "--out", tmp])
