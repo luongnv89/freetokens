@@ -79,12 +79,31 @@ Run the test suite (stdlib `unittest`, no dependencies):
 python3 -m unittest discover -s tests -v
 ```
 
+### Search & category filtering
+
+The built page ships a small vanilla-JS layer (one inline `<script>`, no
+framework) that narrows offers without reloads or network fetches:
+
+- **Text search** over each card's title, provider, and amount, debounced at
+  120 ms so results stay well under the 200 ms latency budget even at 500
+  offers.
+- **Category filters** (`All`, API providers, Coding, Image, Voice, Video)
+  combine with search using AND semantics.
+- **Shareable URL state** — the active view persists in `?category=` and
+  `?q=`, deep-links restore it, and back/forward buttons work via the
+  history API. Only these two whitelisted params are ever written back;
+  anything else in the query string is dropped.
+- **Accessible by construction** — native buttons and inputs (keyboard
+  operable, visible focus), `aria-pressed` chip state, a labeled search box,
+  a `role="status"` live region announcing "Showing X of Y offers", and a
+  friendly empty state with a working reset button.
+
 ### Analytics & consent (GA4)
 
 Google Analytics 4 is **opt-in at build time** and off by default. While no
 measurement ID is configured, the build emits **no tracking code, no consent
-banner, and no JavaScript at all** — the site is byte-for-byte the
-zero-runtime page described above.
+banner, and no analytics script** — only the site's own filter/search script
+described above ships.
 
 To enable it:
 
@@ -115,6 +134,10 @@ When enabled, the page ships a small progressive-enhancement layer:
 - **Silent degradation** — if GA4 is blocked by an adblocker or offline,
   everything else on the page (including outbound offer links) works
   exactly as before; tracking loss is accepted silently.
+- **Privacy-safe feature events** — `filter_use` carries only the category
+  name; `search` events carry **only** `query_length`, never the raw query.
+  Both fire through the same consent gate as page views: with analytics
+  unconfigured or consent declined they are silent no-ops.
 
 ## Deployment
 

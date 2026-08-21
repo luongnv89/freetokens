@@ -18,6 +18,17 @@ import re
 import sys
 
 CATEGORIES = ("api_provider", "coding", "image", "voice", "video")
+CATEGORY_LABELS = {
+    "api_provider": "API providers",
+    "coding": "Coding",
+    "image": "Image",
+    "voice": "Voice",
+    "video": "Video",
+}
+# Search input debounce: settling delay before a keystroke batch filters the
+# list, updates the URL, and fires analytics. Must stay well under the PRD's
+# 200 ms perceived-latency budget (F3).
+SEARCH_DEBOUNCE_MS = 120
 REQUIRED_FIELDS = (
     "title",
     "provider",
@@ -460,6 +471,7 @@ _PAGE_TMPL = """<!DOCTYPE html>
 </div>
 {banner}
 {ga_init}
+{app_js}
 </body>
 </html>
 """
@@ -488,6 +500,62 @@ def _human_date(iso: str) -> str:
     """Render a YYYY-MM-DD string as e.g. 'Dec 31, 2026'."""
     day = dt.datetime.strptime(iso, "%Y-%m-%d").date()
     return f"{day.strftime('%b')} {day.day}, {day.year}"
+
+
+# --- Client-side discovery (F2/F3): category filter + text search ----------
+#
+# The toolbar is emitted whenever the page has offers. All narrowing happens
+# client-side over cards already in the DOM: no reload, no network fetch.
+# State lives in the URL (?category=, ?q=) so any view is shareable and the
+# back/forward buttons work (PRD §6.2).
+
+_CHIP = (
+    '<button type="button" class="chip" data-ft-category="{value}" '
+    'aria-pressed="{pressed}">{label}</button>'
+)
+
+
+def build_toolbar(count: int | None = None) -> str:
+    """Search box + All/five-category chips, keyboard-navigable by default.
+
+    ``count`` seeds the live-region status line so the pre-JS paint already
+    shows a truthful result count.
+    """
+    chips = [_CHIP.format(value="", pressed="true", label="All")]
+    for category in CATEGORIES:
+        chips.append(
+            _CHIP.format(
+                value=html.escape(category, quote=True),
+                pressed="false",
+                label=CATEGORY_LABELS.get(category, category),
+            )
+        )
+    seeded = (
+        f"Showing all {count} offers" if count is not None else ""
+    )
+    return (
+        '<section class="toolbar" aria-label="Search and filter offers">'
+        '<div class="field">'
+        '<label class="tool-label" for="ft-search">Search</label>'
+        '<input type="search" id="ft-search" name="q" '
+        'placeholder="Search title, provider, or amount&hellip;" '
+        'autocomplete="off" spellcheck="false" maxlength="200">'
+        "</div>"
+        '<div class="chips" role="group" aria-label="Filter by category">'
+        + "".join(chips)
+        + "</div>"
+        '<p class="results-status" id="ft-results-status" role="status" '
+        f'aria-live="polite">{seeded}</p>'
+        "</section>"
+    )
+
+
+_CLIENT_EMPTY_TMPL = """<section class="empty" id="ft-no-results" hidden>
+<p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8.5 11h5"/></svg></p>
+<h2>No matching offers</h2>
+<p>Nothing matches your current search and category combination.</p>
+<button type="button" class="chip reset" id="ft-reset-filters">Clear search &amp; filters</button>
+</section>"""
 
 
 # --- Analytics (F7): consent-gated GA4 with EU banner ----------------------
@@ -521,6 +589,15 @@ _ANALYTICS_INIT_JS = """<script>
   var MEASUREMENT_ID = __FT_GA_ID__;
   var EU_PREFIXES = __FT_EU_PREFIXES__;
   var STORAGE_KEY = "__FT_STORAGE_KEY__";
+  // Consent-gated event bus for feature events (filter_use, search).
+  // Stays false until an explicit grant; window.ftTrackEvent is the only
+  // door page features knock on, so declined/absent analytics no-ops.
+  var TRACKING_ACTIVE = false;
+  function ftTrackEvent(name, params) {
+    if (!TRACKING_ACTIVE || typeof gtag !== "function") { return; }
+    gtag("event", name, params);
+  }
+  window.ftTrackEvent = ftTrackEvent;
   function ftIsEuTimeZone(tz) {
     if (!tz) { return false; }
     for (var i = 0; i < EU_PREFIXES.length; i++) {
@@ -557,6 +634,7 @@ _ANALYTICS_INIT_JS = """<script>
     document.head.appendChild(s);
   }
   function ftGrant() {
+    TRACKING_ACTIVE = true;
     if (typeof window.gtag !== "function") { return; }
     gtag("consent", "update", { analytics_storage: "granted" });
     ftLoadGa();
@@ -570,6 +648,7 @@ _ANALYTICS_INIT_JS = """<script>
     });
   }
   function ftDecline() {
+    TRACKING_ACTIVE = false;
     if (typeof window.gtag !== "function") { return; }
     gtag("consent", "update", { analytics_storage: "denied" });
   }
@@ -697,6 +776,246 @@ button:focus-visible {
 }
 """
 
+_APP_CSS = """
+/* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.field { display: flex; flex-direction: column; gap: 0.35rem; flex: 1 1 16rem; }
+
+.tool-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+
+#ft-search {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  max-width: 24rem;
+  width: 100%;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.chip:hover { background: var(--ink); color: var(--paper); }
+
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+.results-status {
+  flex-basis: 100%;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* Hidden list items must leave the grid layout entirely. */
+.grid li[hidden] { display: none; }
+
+.empty .chip.reset { margin-top: 0.75rem; }
+"""
+
+# Client-side discovery runtime. Vanilla ES5-style IIFE, emitted inline so
+# the page stays a single self-contained file with zero framework/runtime.
+# Analytics calls go through window.ftTrackEvent, which only exists when GA4
+# is build-time configured AND consent was granted — absent or declined, the
+# calls are silent no-ops and every feature keeps working (PRD §4.1).
+_APP_JS = """<script id="ft-app">
+(function () {
+  "use strict";
+  var VALID_CATEGORIES = __FT_CATEGORIES__;
+  var DEBOUNCE_MS = __FT_DEBOUNCE_MS__;
+
+  function ftNormalize(value) {
+    return (value || "").toLowerCase();
+  }
+
+  function ftParseState(search) {
+    var params = new URLSearchParams(search || "");
+    var category = params.get("category") || "";
+    if (VALID_CATEGORIES.indexOf(category) === -1) { category = ""; }
+    return { category: category, q: (params.get("q") || "").trim() };
+  }
+
+  function ftSerializeState(state) {
+    // Whitelist-only: unknown params are dropped, matching the analytics
+    // privacy stance of never persisting arbitrary query strings.
+    var params = new URLSearchParams();
+    if (state.category) { params.set("category", state.category); }
+    if (state.q) { params.set("q", state.q); }
+    return params.toString();
+  }
+
+  // AND semantics: an offer is shown only when it satisfies BOTH the active
+  // category filter and the search query.
+  function ftMatches(li, state) {
+    var card = li.querySelector("[data-category]");
+    if (!card) { return false; }
+    if (state.category && card.getAttribute("data-category") !== state.category) {
+      return false;
+    }
+    if (!state.q) { return true; }
+    return ftNormalize(card.textContent).indexOf(state.q) !== -1;
+  }
+
+  function ftDebounce(fn, ms) {
+    var timer = null;
+    return function () {
+      var self = this;
+      var args = arguments;
+      if (timer) { clearTimeout(timer); }
+      timer = setTimeout(function () {
+        timer = null;
+        fn.apply(self, args);
+      }, ms);
+    };
+  }
+
+  function ftTrack(name, params) {
+    if (typeof window.ftTrackEvent === "function") {
+      window.ftTrackEvent(name, params);
+    }
+  }
+
+  function ftInitApp() {
+    var grid = document.getElementById("ft-grid");
+    var input = document.getElementById("ft-search");
+    var status = document.getElementById("ft-results-status");
+    var emptyBox = document.getElementById("ft-no-results");
+    var resetButton = document.getElementById("ft-reset-filters");
+    if (!grid || !input || !status) { return; }
+    var items = Array.prototype.slice.call(grid.querySelectorAll("li"));
+    var total = items.length;
+    var state = ftParseState(window.location.search);
+
+    function syncControls() {
+      var chips = document.querySelectorAll("[data-ft-category]");
+      for (var i = 0; i < chips.length; i++) {
+        var chip = chips[i];
+        var value = chip.getAttribute("data-ft-category") || "";
+        chip.setAttribute(
+          "aria-pressed",
+          value === state.category ? "true" : "false"
+        );
+      }
+      if (document.activeElement !== input) { input.value = state.q; }
+    }
+
+    function apply(options) {
+      options = options || {};
+      var shown = 0;
+      for (var i = 0; i < items.length; i++) {
+        var li = items[i];
+        var show = ftMatches(li, state);
+        li.hidden = !show;
+        if (show) { shown++; }
+      }
+      status.textContent = shown === total
+        ? "Showing all " + total + " offers"
+        : "Showing " + shown + " of " + total + " offers";
+      if (emptyBox) { emptyBox.hidden = shown !== 0; }
+      syncControls();
+      if (options.commit) {
+        var query = ftSerializeState(state);
+        try {
+          window.history.pushState(
+            {},
+            "",
+            query ? "?" + query : window.location.pathname
+          );
+        } catch (err) {}
+      }
+    }
+
+    function commit(source) {
+      apply({ commit: true });
+      if (source === "filter") {
+        ftTrack("filter_use", { category: state.category || "all" });
+      } else if (source === "search" && state.q) {
+        // Privacy: length only — the raw term never reaches analytics.
+        ftTrack("search", { query_length: state.q.length });
+      }
+    }
+
+    input.addEventListener(
+      "input",
+      ftDebounce(function () {
+        var q = input.value.trim().toLowerCase();
+        if (q === state.q) { return; }
+        state.q = q;
+        commit("search");
+      }, DEBOUNCE_MS)
+    );
+
+    var chips = document.querySelectorAll("[data-ft-category]");
+    for (var c = 0; c < chips.length; c++) {
+      chips[c].addEventListener("click", function (event) {
+        var value = event.currentTarget.getAttribute("data-ft-category") || "";
+        if (value && VALID_CATEGORIES.indexOf(value) === -1) { return; }
+        state.category = value;
+        commit("filter");
+      });
+    }
+
+    if (resetButton) {
+      resetButton.addEventListener("click", function () {
+        state.category = "";
+        state.q = "";
+        input.value = "";
+        commit("filter");
+      });
+    }
+
+    window.addEventListener("popstate", function () {
+      state = ftParseState(window.location.search);
+      apply(); // restore view; history navigation is not a new application
+    });
+
+    apply(); // deep-link restore without events or history churn
+  }
+
+  function ftBoot() {
+    try {
+      ftInitApp();
+    } catch (err) {}
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ftBoot);
+  } else {
+    ftBoot();
+  }
+})();
+</script>"""
+
 
 def resolve_measurement_id(raw) -> str:
     """Return a valid GA4 measurement ID, or '' when analytics is disabled.
@@ -758,9 +1077,17 @@ def build_banner_markup() -> str:
     return _BANNER_TMPL
 
 
+def build_app_js() -> str:
+    """Client-side filter/search runtime (F2/F3), placeholders resolved."""
+    return _APP_JS.replace(
+        "__FT_CATEGORIES__", json.dumps(list(CATEGORIES))
+    ).replace("__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS))
+
+
 def render_html(index: dict, measurement_id: str = "") -> str:
     analytics = bool(measurement_id)
-    if not index["offers"]:
+    has_offers = bool(index["offers"])
+    if not has_offers:
         content = _EMPTY_TMPL
     else:
         cards = []
@@ -790,10 +1117,18 @@ def render_html(index: dict, measurement_id: str = "") -> str:
                     expiry_display=expiry,
                 )
             )
-        content = '<ul class="grid">\n' + "\n".join(cards) + "\n</ul>"
+        content = (
+            build_toolbar(index["count"])
+            + '<ul class="grid" id="ft-grid">\n'
+            + "\n".join(cards)
+            + "\n</ul>"
+            + _CLIENT_EMPTY_TMPL
+        )
     built = index["generated_at"]
     return _PAGE_TMPL.format(
-        css=_CSS + (_BANNER_CSS if analytics else ""),
+        css=_CSS
+        + (_APP_CSS if has_offers else "")
+        + (_BANNER_CSS if analytics else ""),
         count=index["count"],
         content=content,
         built_display=f'<time datetime="{html.escape(built, quote=True)}">'
@@ -801,6 +1136,7 @@ def render_html(index: dict, measurement_id: str = "") -> str:
         ga_head=build_consent_head(measurement_id),
         banner=_BANNER_TMPL if analytics else "",
         ga_init=build_analytics_init(measurement_id),
+        app_js=build_app_js() if has_offers else "",
     )
 
 
