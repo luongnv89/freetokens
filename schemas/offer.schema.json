@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/luongnv89/freetokens/schemas/offer.schema.json",
+  "title": "freetokens offer front-matter",
+  "description": "Strict schema for offers/*.yaml front-matter. One flat key/value document per offer; the file name (without extension) is the offer slug.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "provider",
+    "category",
+    "amount",
+    "expiry_date",
+    "source_url",
+    "verified_date"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable offer name shown on cards."
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Company or product offering the credit."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["api_provider", "coding", "image", "voice", "video"],
+      "description": "Offer category badge."
+    },
+    "amount": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Free value in human terms, e.g. '$300 in credits'."
+    },
+    "expiry_date": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "format": "date",
+      "description": "Date the offer stops being claimable, YYYY-MM-DD. Use explicit null for ongoing offers."
+    },
+    "source_url": {
+      "type": "string",
+      "pattern": "^https?://",
+      "description": "Official provider page describing the offer."
+    },
+    "verified_date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "format": "date",
+      "description": "Date the curator last verified the offer is live, YYYY-MM-DD. Not nullable."
+    }
+  }
+}
