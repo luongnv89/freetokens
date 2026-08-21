@@ -38,11 +38,28 @@ The site is fully static with no server, no database, no runtime:
 3. Verify the offer is live and claimable before committing — never guess missing fields
 4. Commit and push; the pipeline validates and deploys automatically
 
+## Local Build
+
+The site is built by a dependency-free Python script (see
+[docs/adr-001-static-generator.md](docs/adr-001-static-generator.md) for why a
+plain script was chosen over Astro). Requires Python 3.9+, nothing else:
+
+```bash
+python3 scripts/build.py    # validates offers/, writes index.json + site/index.html
+```
+
+Run the test suite (stdlib `unittest`, no dependencies):
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
 ## Repository Layout
 
 ```
-offers/    # One YAML file per free-AI-credit offer
-scripts/   # Build/validation scripts
+offers/    # One YAML file per free-AI-credit offer (schema: docs/schema.md)
+scripts/   # Build/validation scripts (stdlib-only)
+tests/     # Build test suite (unittest)
 docs/      # Schema docs, ADRs, and other project documentation
 ```
 

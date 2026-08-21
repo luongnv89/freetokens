@@ -1,0 +1,9 @@
+# Verified 2026-08-21 against https://aistudio.google.com
+# (AI Studio offers free access to Gemini and Nano Banana image generation, no card.)
+title: Google AI Studio — Free Image Generation
+provider: Google
+category: image
+amount: Free image generation in AI Studio (rate-limited)
+expiry_date: null
+source_url: https://aistudio.google.com/
+verified_date: 2026-08-21
