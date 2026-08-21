@@ -3,43 +3,328 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Every currently-claimable free AI credit offer, hand-verified, on one fast page.">
 <title>Free AI Credits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
+
+:root {
+  --ink: #000000;
+  --paper: #ffffff;
+  --gray: #6b7280;
+  --green: #22c55e;
+  --hairline: rgba(0, 0, 0, 0.16);
+}
+
 * { box-sizing: border-box; }
-body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 48rem; padding: 0 1rem; overflow-wrap: break-word; }
-.offer { border: 1px solid #ccc; border-radius: 8px; margin: 1rem 0; padding: 1rem; }
-.meta { color: #666; font-size: 0.9rem; }
-.badge { display: inline-block; background: #eef; color: #336; border-radius: 999px; padding: 0.1rem 0.6rem; font-size: 0.8rem; }
-h2 a { overflow-wrap: anywhere; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.wrap { max-width: 75rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem); }
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---- Masthead -------------------------------------------------------- */
+
+.kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 0.75rem;
+}
+
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 3px;
+  background: var(--green);
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  margin: 0 0 0.75rem;
+}
+
+.tagline { max-width: 42rem; margin: 0 0 0.5rem; font-size: 1.05rem; }
+
+.count {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin: 0 0 2.5rem;
+}
+
+.count strong { color: var(--ink); }
+
+/* ---- Card grid ------------------------------------------------------- */
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: var(--paper);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Decorative green accent line — meaning never depends on it alone. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.18s ease;
+}
+
+.card:hover, .card:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+}
+
+.card:hover::before, .card:focus-within::before { transform: scaleX(1); }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.14rem 0.6rem;
+}
+
+.status {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: var(--gray);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.22);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0.25rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-title a:hover,
+.card-title a:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.ext { font-size: 0.85em; }
+
+.amount {
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  font-weight: 700;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.prov {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  margin: auto 0 0;
+  padding-top: 0.75rem;
+}
+
+/* ---- Empty state ----------------------------------------------------- */
+
+.empty {
+  border: 1.5px dashed var(--hairline);
+  border-radius: 12px;
+  padding: clamp(2rem, 6vw, 3.5rem);
+  text-align: center;
+  max-width: 34rem;
+  margin: 1rem auto;
+}
+
+.empty h2 { margin: 0.75rem 0 0.5rem; font-size: 1.4rem; }
+
+.empty p { color: var(--gray); margin: 0.35rem 0; }
+
+.empty .glyph { color: var(--green); }
+
+/* ---- Footer ------------------------------------------------------------ */
+
+.foot {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.foot p {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* ---- Focus visibility (keyboard) -------------------------------------- */
+
+a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- Load reveal (CSS-only, motion-safe) ------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .card, .empty {
+    animation: rise 0.45s ease backwards;
+    animation-delay: calc(min(var(--i, 0), 10) * 45ms);
+  }
+  .card::before { transition-duration: 0.18s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+}
+
 </style>
 </head>
 <body>
+<div class="wrap">
+<header class="masthead">
+<p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
 <h1>Free AI Credits</h1>
-<p>Verified, currently-claimable free AI credit offers.</p>
-<article class="offer" data-category="voice">
-<h2><a href="https://elevenlabs.io/pricing" rel="noopener" aria-label="ElevenLabs Free Plan from ElevenLabs">ElevenLabs Free Plan</a></h2>
-<p>10k credits/month (~10 min of audio)</p>
-<p class="meta">ElevenLabs &middot; <span class="badge">voice</span> &middot; ongoing</p>
+<p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
+<p class="count"><strong>5</strong> live offers</p>
+</header>
+<main>
+<ul class="grid">
+<li style="--i:0">
+<article class="card" data-category="voice">
+<div class="card-top">
+<span class="badge">voice</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://elevenlabs.io/pricing" target="_blank" rel="noopener noreferrer" aria-label="Claim ElevenLabs Free Plan from ElevenLabs">ElevenLabs Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">10k credits/month (~10 min of audio)</p>
+<p class="prov">ElevenLabs &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
-<article class="offer" data-category="coding">
-<h2><a href="https://github.com/features/copilot/plans" rel="noopener" aria-label="GitHub Copilot Free from GitHub">GitHub Copilot Free</a></h2>
-<p>2,000 completions + 50 chat requests per month</p>
-<p class="meta">GitHub &middot; <span class="badge">coding</span> &middot; ongoing</p>
+</li>
+<li style="--i:1">
+<article class="card" data-category="coding">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://github.com/features/copilot/plans" target="_blank" rel="noopener noreferrer" aria-label="Claim GitHub Copilot Free from GitHub">GitHub Copilot Free <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">2,000 completions + 50 chat requests per month</p>
+<p class="prov">GitHub &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
-<article class="offer" data-category="image">
-<h2><a href="https://aistudio.google.com/" rel="noopener" aria-label="Google AI Studio — Free Image Generation from Google">Google AI Studio — Free Image Generation</a></h2>
-<p>Free image generation in AI Studio (rate-limited)</p>
-<p class="meta">Google &middot; <span class="badge">image</span> &middot; ongoing</p>
+</li>
+<li style="--i:2">
+<article class="card" data-category="image">
+<div class="card-top">
+<span class="badge">image</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" aria-label="Claim Google AI Studio — Free Image Generation from Google">Google AI Studio — Free Image Generation <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free image generation in AI Studio (rate-limited)</p>
+<p class="prov">Google &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
-<article class="offer" data-category="api_provider">
-<h2><a href="https://cloud.google.com/free/docs/free-cloud-features" rel="noopener" aria-label="Google Cloud Free Trial — $300 Credit from Google Cloud">Google Cloud Free Trial — $300 Credit</a></h2>
-<p>$300 in credits (90 days from signup)</p>
-<p class="meta">Google Cloud &middot; <span class="badge">api_provider</span> &middot; ongoing</p>
+</li>
+<li style="--i:3">
+<article class="card" data-category="api_provider">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://cloud.google.com/free/docs/free-cloud-features" target="_blank" rel="noopener noreferrer" aria-label="Claim Google Cloud Free Trial — $300 Credit from Google Cloud">Google Cloud Free Trial — $300 Credit <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">$300 in credits (90 days from signup)</p>
+<p class="prov">Google Cloud &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
-<article class="offer" data-category="api_provider">
-<h2><a href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key" rel="noopener" aria-label="Mistral AI Studio Free Mode — Free API Tier from Mistral AI">Mistral AI Studio Free Mode — Free API Tier</a></h2>
-<p>Free rate-limited API access (no credit card required)</p>
-<p class="meta">Mistral AI &middot; <span class="badge">api_provider</span> &middot; ongoing</p>
+</li>
+<li style="--i:4">
+<article class="card" data-category="api_provider">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key" target="_blank" rel="noopener noreferrer" aria-label="Claim Mistral AI Studio Free Mode — Free API Tier from Mistral AI">Mistral AI Studio Free Mode — Free API Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free rate-limited API access (no credit card required)</p>
+<p class="prov">Mistral AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
 </article>
+</li>
+</ul>
+</main>
+<footer class="foot">
+<p>Built <time datetime="2026-08-21T17:30:08Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
+</footer>
+</div>
 </body>
 </html>
