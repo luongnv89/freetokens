@@ -145,6 +145,18 @@ When enabled, the page ships a small progressive-enhancement layer:
   blocked or broken tracker can never delay or break navigation; accidental
   rapid double-clicks on the same offer are deduplicated to one event.
 
+### Privacy policy page
+
+The build also emits [`site/privacy.html`](site/privacy.html) (Task 3.5,
+PRD §5.2): a plain-language policy generated from the same chrome and
+stylesheet as the home page, so it always matches the site design. The
+footer on every page links to it with relative hrefs, so the links resolve
+under any deploy base (including the `/freetokens/` Pages project path).
+Every factual claim in the policy mirrors implemented behavior in
+`scripts/build.py` — consent-gated GA4, anonymized IPs, length-only search
+metadata, the single `localStorage` consent key, no forms, no PII storage —
+and is pinned by tests (`PrivacyPageTests`).
+
 ## Deployment
 
 Deployment is fully automated via GitHub Actions
@@ -155,8 +167,8 @@ push built output by hand:
    starts the `Deploy to GitHub Pages` workflow.
 2. **Build** — the workflow checks out the repo, runs
    `python3 scripts/build.py` to validate all offers and render
-   `site/index.html`, then runs the test suite. Any validation or test failure
-   aborts the deploy.
+   `site/index.html` plus `site/privacy.html`, then runs the test suite.
+   Any validation or test failure aborts the deploy.
 3. **Publish** — the built `site/` directory is uploaded as a Pages artifact
    and deployed with the official Actions toolchain (`actions/checkout`,
    `actions/setup-python`, `actions/configure-pages`,

@@ -232,6 +232,87 @@ h1 {
   margin: 0;
 }
 
+.foot-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.75rem;
+  align-items: baseline;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  margin: 0.5rem 0 0;
+}
+
+.foot-nav a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.foot-nav a:hover,
+.foot-nav a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+}
+
+.foot-nav [aria-current="page"] {
+  color: var(--gray);
+  text-decoration: none;
+}
+
+/* ---- Policy prose ------------------------------------------------------ */
+
+.policy {
+  max-width: 46rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.policy section h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+}
+
+.policy section p, .policy section li {
+  margin: 0.35rem 0;
+}
+
+.policy section ul, .policy section ol {
+  margin: 0.35rem 0;
+  padding-left: 1.25rem;
+}
+
+.policy code {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 0.08rem 0.35rem;
+}
+
+.policy a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.policy .summary {
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--green);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.policy .summary ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
 /* ---- Focus visibility (keyboard) -------------------------------------- */
 
 a:focus-visible {
@@ -402,7 +483,8 @@ a:focus-visible {
 </section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-21T19:54:57Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-21T20:21:00Z">Aug 21, 2026</time> &middot; offers re-verified on every change</p>
+<nav class="foot-nav" aria-label="Site"><a href="./">Offers</a><span aria-hidden="true">&middot;</span><a href="privacy.html">Privacy policy</a></nav>
 </footer>
 </div>
 
