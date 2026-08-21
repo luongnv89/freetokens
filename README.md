@@ -48,6 +48,18 @@ plain script was chosen over Astro). Requires Python 3.9+, nothing else:
 python3 scripts/build.py    # validates offers/, writes index.json + site/index.html
 ```
 
+The build runs in two stages:
+
+1. **Validate** — every `offers/*.yaml` is checked against the schema in
+   `docs/schema.md`: required fields present, `YYYY-MM-DD` dates, category
+   within the enum, unique slugs. Any violation fails the build with a non-zero
+   exit naming the offending file and field.
+2. **Render** — all validated offers are rendered into a single static
+   `site/index.html`: one semantic card per offer with title, provider, amount,
+   expiry date (or "ongoing"), a category badge, and an outbound link to the
+   official source page. No client-side JavaScript; minimal hand-rolled CSS
+   that works down to 320 px viewports.
+
 Run the test suite (stdlib `unittest`, no dependencies):
 
 ```bash

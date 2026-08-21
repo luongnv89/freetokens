@@ -67,6 +67,11 @@ def parse_offer_text(text: str, filename: str) -> dict:
 
 
 def _validate_date(value, field: str, filename: str):
+    if not isinstance(value, str):
+        raise OfferError(
+            f"{filename}: {field} must be a YYYY-MM-DD date, got {value!r} "
+            "(this field is not nullable)"
+        )
     try:
         return dt.datetime.strptime(value, "%Y-%m-%d").date()
     except ValueError:
@@ -117,7 +122,16 @@ def load_offers(offers_dir: str) -> list:
             data = parse_offer_text(fh.read(), path)
         offer = validate_offer(data, path)
         offer["slug"] = slug
+        clash = next((o for o in offers if o["slug"] == slug), None)
+        if clash is not None:
+            raise OfferError(
+                f"duplicate slug {slug!r}: {clash.get('_path', '?')} and "
+                f"{path} produce the same slug; rename one file"
+            )
+        offer["_path"] = path
         offers.append(offer)
+    for offer in offers:
+        del offer["_path"]
     return offers
 
 
@@ -153,9 +167,12 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free AI Credits</title>
 <style>
-body {{ font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 48rem; padding: 0 1rem; }}
+* {{ box-sizing: border-box; }}
+body {{ font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 48rem; padding: 0 1rem; overflow-wrap: break-word; }}
 .offer {{ border: 1px solid #ccc; border-radius: 8px; margin: 1rem 0; padding: 1rem; }}
 .meta {{ color: #666; font-size: 0.9rem; }}
+.badge {{ display: inline-block; background: #eef; color: #336; border-radius: 999px; padding: 0.1rem 0.6rem; font-size: 0.8rem; }}
+h2 a {{ overflow-wrap: anywhere; }}
 </style>
 </head>
 <body>
@@ -167,9 +184,9 @@ body {{ font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 48rem;
 """
 
 _CARD_TMPL = """<article class="offer" data-category="{category}">
-<h2><a href="{source_url}" rel="noopener">{title}</a></h2>
+<h2><a href="{source_url}" rel="noopener" aria-label="{title} from {provider}">{title}</a></h2>
 <p>{amount}</p>
-<p class="meta">{provider} &middot; {category} &middot; expires: {expiry}</p>
+<p class="meta">{provider} &middot; <span class="badge">{category}</span> &middot; {expiry_display}</p>
 </article>"""
 
 
@@ -183,7 +200,9 @@ def render_html(index: dict) -> str:
                 title=html.escape(o["title"]),
                 amount=html.escape(o["amount"]),
                 provider=html.escape(o["provider"]),
-                expiry=o["expiry_date"] or "ongoing",
+                expiry_display=f"expires: {o['expiry_date']}"
+                if o["expiry_date"]
+                else "ongoing",
             )
         )
     return _PAGE_TMPL.format(cards="\n".join(cards))

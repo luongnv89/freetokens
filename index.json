@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-08-21T13:19:19Z",
+  "count": 5,
+  "offers": [
+    {
+      "slug": "elevenlabs-free-plan",
+      "title": "ElevenLabs Free Plan",
+      "provider": "ElevenLabs",
+      "category": "voice",
+      "amount": "10k credits/month (~10 min of audio)",
+      "expiry_date": null,
+      "source_url": "https://elevenlabs.io/pricing",
+      "verified_date": "2026-08-21"
+    },
+    {
+      "slug": "github-copilot-free",
+      "title": "GitHub Copilot Free",
+      "provider": "GitHub",
+      "category": "coding",
+      "amount": "2,000 completions + 50 chat requests per month",
+      "expiry_date": null,
+      "source_url": "https://github.com/features/copilot/plans",
+      "verified_date": "2026-08-21"
+    },
+    {
+      "slug": "google-ai-studio-image",
+      "title": "Google AI Studio — Free Image Generation",
+      "provider": "Google",
+      "category": "image",
+      "amount": "Free image generation in AI Studio (rate-limited)",
+      "expiry_date": null,
+      "source_url": "https://aistudio.google.com/",
+      "verified_date": "2026-08-21"
+    },
+    {
+      "slug": "google-cloud-300-free-trial",
+      "title": "Google Cloud Free Trial — $300 Credit",
+      "provider": "Google Cloud",
+      "category": "api_provider",
+      "amount": "$300 in credits (90 days from signup)",
+      "expiry_date": null,
+      "source_url": "https://cloud.google.com/free/docs/free-cloud-features",
+      "verified_date": "2026-08-21"
+    },
+    {
+      "slug": "mistral-experiment-free-tier",
+      "title": "Mistral AI Studio Free Mode — Free API Tier",
+      "provider": "Mistral AI",
+      "category": "api_provider",
+      "amount": "Free rate-limited API access (no credit card required)",
+      "expiry_date": null,
+      "source_url": "https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key",
+      "verified_date": "2026-08-21"
+    }
+  ]
+}
