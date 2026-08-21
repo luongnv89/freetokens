@@ -1216,5 +1216,181 @@ class AnalyticsBuildOutputTests(unittest.TestCase):
             self.assertEqual(index["count"], 1)
 
 
+class PrivacyPageTests(unittest.TestCase):
+    """Task 3.5 / §5.2: generated policy page sharing site chrome."""
+
+    MID = "G-ABCDEF12345"
+
+    def _built(self):
+        return "2026-08-21T00:00:00Z"
+
+    def _render(self, mid=""):
+        return build.render_privacy_html(self._built(), measurement_id=mid)
+
+    def _home_with_one(self, **overrides):
+        offer = build.validate_offer(dict(VALID, **overrides), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        return build.render_html(build.build_index([offer]))
+
+    # --- generation wiring -------------------------------------------------
+
+    def test_main_writes_privacy_page_alongside_index(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "alpha.yaml").write_text(offer_text(), encoding="utf-8")
+            out = os.path.join(tmp, "out")
+            code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            page = Path(out, "site", "privacy.html").read_text(encoding="utf-8")
+            self.assertIn("Privacy Policy", page)
+
+    def test_policy_page_built_even_when_analytics_disabled(self):
+        with mock.patch.dict(os.environ):
+            os.environ.pop(build.MEASUREMENT_ID_ENV_VAR, None)
+            page = self._render()
+            self.assertIn("Privacy Policy", page)
+            for marker in ("googletagmanager", "dataLayer", "ft-consent-banner"):
+                self.assertNotIn(marker, page)
+
+    def test_policy_page_ships_analytics_when_configured(self):
+        page = self._render(self.MID)
+        self.assertIn("googletagmanager.com/gtag/js", page)
+        self.assertIn("anonymize_ip: true", page)
+
+    # --- consistent chrome / responsive design ------------------------------
+
+    def test_shares_site_chrome_and_styling(self):
+        home = self._home_with_one()
+        page = self._render()
+        for marker in (
+            '<meta name="viewport" content="width=device-width, initial-scale=1">',
+            '<footer class="foot">',
+            "--ink:",
+            '"Bricolage Grotesque"',
+            'class="wrap"',
+        ):
+            self.assertIn(marker, home)
+            self.assertIn(marker, page)
+
+    def test_fluid_css_keeps_layout_responsive(self):
+        page = self._render()
+        self.assertIn("clamp(", page)
+        self.assertIn("max-width:", page)
+
+    # --- footer links on every page -----------------------------------------
+
+    def test_home_footer_links_to_privacy_relatively(self):
+        page = self._home_with_one()
+        self.assertIn('<a href="privacy.html">Privacy policy</a>', page)
+        self.assertNotIn('href="/privacy', page)  # deploy-base safe
+
+    def test_privacy_footer_links_back_to_offers_relatively(self):
+        page = self._render()
+        self.assertIn('<a href="./">Offers</a>', page)
+        self.assertNotIn('href="/index', page)
+
+    def test_aria_current_marks_active_page_only(self):
+        home = self._home_with_one()
+        privacy = self._render()
+        # The stylesheet carries the [aria-current] selector on both pages;
+        # only the active page's link element carries the attribute itself.
+        self.assertIn('href="./" aria-current="page"', home)
+        self.assertNotIn('aria-current="page">Privacy', home)
+        self.assertIn('href="privacy.html" aria-current="page"', privacy)
+        self.assertNotIn('aria-current="page">Offers', privacy)
+
+    def test_footer_nav_present_on_both_pages(self):
+        home = self._home_with_one()
+        page = self._render()
+        for marker in ('aria-label="Site"', 'class="foot-nav"'):
+            self.assertIn(marker, home)
+            self.assertIn(marker, page)
+
+    # --- accuracy against implemented behavior ------------------------------
+
+    def test_policy_states_raw_search_text_never_collected_length_only(self):
+        page = self._render()
+        self.assertIn("never</strong> collected", page)
+        self.assertIn("query_length", page)
+        self.assertIn("number of characters typed", page)
+
+    def test_policy_states_ip_anonymization(self):
+        page = self._render()
+        self.assertIn("Anonymized IP addresses", page)
+        self.assertIn("IP anonymization", page)
+
+    def test_policy_states_consent_gating_and_decline_means_zero_calls(self):
+        page = self._render()
+        self.assertIn("zero tracking requests", page)
+        self.assertIn("not even loaded until permission", page)
+
+    def test_policy_names_real_localstorage_key_and_no_own_cookies(self):
+        page = self._render()
+        self.assertIn(build.CONSENT_STORAGE_KEY, page)
+        self.assertIn("sets no cookies of its own", page)
+
+    def test_policy_describes_eu_banner_heuristic_honestly(self):
+        page = self._render()
+        self.assertIn("time zone indicates they are likely in the EU", page)
+        self.assertIn("counted without showing the banner", page)
+
+    def test_policy_covers_events_recorded(self):
+        page = self._render().lower()
+        for claim in (
+            "page views",
+            "offer clicks",
+            "which filter category you picked",
+        ):
+            self.assertIn(claim, page)
+
+    def test_policy_states_no_forms_no_pii_storage(self):
+        page = self._render()
+        self.assertIn("no forms", page.lower())
+        self.assertIn("no accounts", page.lower())
+
+    def test_policy_discloses_google_third_party_processing(self):
+        page = self._render()
+        self.assertIn(
+            'href="https://policies.google.com/privacy"', page
+        )
+        self.assertIn("Google Fonts", page)
+        self.assertIn("privacy policy applies, not this one", page.lower())
+
+    def test_policy_offers_block_and_still_works_choice(self):
+        page = self._render()
+        self.assertRegex(page, r"[Bb]lock everything")
+        self.assertIn("keeps working exactly the same", page)
+
+    def test_policy_has_contact_path(self):
+        page = self._render()
+        self.assertIn(
+            'href="https://github.com/luongnv89/freetokens/issues"', page
+        )
+
+    # --- accessibility spot-check -------------------------------------------
+
+    def test_single_h1_and_labelled_sections(self):
+        page = self._render()
+        self.assertEqual(page.count("<h1>"), 1)
+        # Every section owns exactly one heading (8 sections, 8 h2s).
+        self.assertEqual(page.count("<h2"), page.count("</section>"))
+        self.assertIn('id="privacy-summary"', page)
+        self.assertIn('aria-labelledby="privacy-summary"', page)
+
+    def test_keyboard_focus_styles_present(self):
+        page = self._render()
+        self.assertIn("a:focus-visible", page)
+        self.assertIn("outline: 3px solid var(--ink)", page)
+
+    def test_contrast_palette_matches_site_tokens(self):
+        # Same ink-on-paper tokens as the home page: #000 on #fff body copy;
+        # --gray (#6b7280) reserved for small mono metadata only.
+        page = self._render()
+        self.assertIn("--ink: #000000;", page)
+        self.assertIn("--paper: #ffffff;", page)
+        self.assertIn('--gray: #6b7280;', page)
+
+
 if __name__ == "__main__":
     unittest.main()

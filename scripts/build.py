@@ -420,6 +420,87 @@ h1 {
   margin: 0;
 }
 
+.foot-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.75rem;
+  align-items: baseline;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  margin: 0.5rem 0 0;
+}
+
+.foot-nav a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.foot-nav a:hover,
+.foot-nav a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+}
+
+.foot-nav [aria-current="page"] {
+  color: var(--gray);
+  text-decoration: none;
+}
+
+/* ---- Policy prose ------------------------------------------------------ */
+
+.policy {
+  max-width: 46rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.policy section h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+}
+
+.policy section p, .policy section li {
+  margin: 0.35rem 0;
+}
+
+.policy section ul, .policy section ol {
+  margin: 0.35rem 0;
+  padding-left: 1.25rem;
+}
+
+.policy code {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 0.08rem 0.35rem;
+}
+
+.policy a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.policy .summary {
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--green);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.policy .summary ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
 /* ---- Focus visibility (keyboard) -------------------------------------- */
 
 a:focus-visible {
@@ -448,8 +529,8 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Every currently-claimable free AI credit offer, hand-verified, on one fast page.">
-<title>Free AI Credits</title>
+<meta name="description" content="{meta_description}">
+<title>{title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -460,17 +541,13 @@ _PAGE_TMPL = """<!DOCTYPE html>
 </head>
 <body>
 <div class="wrap">
-<header class="masthead">
-<p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
-<h1>Free AI Credits</h1>
-<p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
-<p class="count"><strong>{count}</strong> live offers</p>
-</header>
+{header}
 <main>
 {content}
 </main>
 <footer class="foot">
 <p>Built {built_display} &middot; offers re-verified on every change</p>
+{foot_nav}
 </footer>
 </div>
 {banner}
@@ -479,6 +556,20 @@ _PAGE_TMPL = """<!DOCTYPE html>
 </body>
 </html>
 """
+
+_HOME_HEADER = """<header class="masthead">
+<p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
+<h1>Free AI Credits</h1>
+<p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
+<p class="count"><strong>{count}</strong> live offers</p>
+</header>"""
+
+# Footer nav shared by every page. Links stay relative so they resolve under
+# any deploy base (e.g. the GitHub Pages /<repo>/ project path). The current
+# page is marked aria-current for assistive tech.
+_FOOT_NAV = """<nav class="foot-nav" aria-label="Site">\
+<a href="./"{offers_current}>Offers</a><span aria-hidden="true">&middot;</span>\
+<a href="privacy.html"{privacy_current}>Privacy policy</a></nav>"""
 
 _CARD_TMPL = """<li style="--i:{index}">
 <article class="card" data-category="{category}">
@@ -1140,6 +1231,46 @@ def build_app_js() -> str:
     )
 
 
+def _foot_nav(current: str) -> str:
+    """Footer nav for every page; ``current`` marks the active link."""
+    return _FOOT_NAV.format(
+        offers_current=' aria-current="page"' if current == "home" else "",
+        privacy_current=' aria-current="page"' if current == "privacy" else "",
+    )
+
+
+def _page_shell(
+    *,
+    title: str,
+    meta_description: str,
+    header: str,
+    content: str,
+    built: str,
+    foot_current: str,
+    css_extra: str = "",
+    measurement_id: str = "",
+    app_js: bool = False,
+) -> str:
+    """Fill the shared page chrome (head, masthead slot, footer, analytics)."""
+    built_display = (
+        f'<time datetime="{html.escape(built, quote=True)}">'
+        f'{_human_date(built[:10])}</time>'
+    )
+    return _PAGE_TMPL.format(
+        title=title,
+        meta_description=meta_description,
+        header=header,
+        content=content,
+        css=_CSS + css_extra,
+        built_display=built_display,
+        foot_nav=_foot_nav(foot_current),
+        ga_head=build_consent_head(measurement_id),
+        banner=_BANNER_TMPL if measurement_id else "",
+        ga_init=build_analytics_init(measurement_id),
+        app_js=build_app_js() if app_js else "",
+    )
+
+
 def render_html(index: dict, measurement_id: str = "") -> str:
     analytics = bool(measurement_id)
     has_offers = bool(index["offers"])
@@ -1182,18 +1313,122 @@ def render_html(index: dict, measurement_id: str = "") -> str:
             + _CLIENT_EMPTY_TMPL
         )
     built = index["generated_at"]
-    return _PAGE_TMPL.format(
-        css=_CSS
-        + (_APP_CSS if has_offers else "")
-        + (_BANNER_CSS if analytics else ""),
-        count=index["count"],
+    return _page_shell(
+        title="Free AI Credits",
+        meta_description=(
+            "Every currently-claimable free AI credit offer, hand-verified, "
+            "on one fast page."
+        ),
+        header=_HOME_HEADER.format(count=index["count"]),
         content=content,
-        built_display=f'<time datetime="{html.escape(built, quote=True)}">'
-        f'{_human_date(built[:10])}</time>',
-        ga_head=build_consent_head(measurement_id),
-        banner=_BANNER_TMPL if analytics else "",
-        ga_init=build_analytics_init(measurement_id),
-        app_js=build_app_js() if has_offers else "",
+        built=built,
+        foot_current="home",
+        css_extra=(_APP_CSS if has_offers else "")
+        + (_BANNER_CSS if analytics else ""),
+        measurement_id=measurement_id,
+        app_js=has_offers,
+    )
+
+
+# --- Privacy policy (Task 3.5 / PRD §5.2) -----------------------------------
+#
+# Plain-language policy generated alongside the home page so it always shares
+# the site chrome and stays honest about what scripts/build.py actually does:
+# consent-gated GA4, anonymized IPs, length-only search metadata, no forms,
+# no PII storage. Every factual claim here mirrors the implemented behavior.
+
+_PRIVACY_HEADER = """<header class="masthead">
+<p class="kicker">free ai credits</p>
+<h1>Privacy Policy</h1>
+<p class="tagline">The short version: this is a static page that stores almost nothing about you &mdash; and asks before it counts your visit.</p>
+</header>"""
+
+_PRIVACY_CONTENT = """<div class="policy">
+<section class="summary" aria-labelledby="privacy-summary">
+<h2 id="privacy-summary">In short</h2>
+<ul>
+<li>No accounts, no forms, no logins &mdash; we have nowhere to store personal details.</li>
+<li>If visit-counting is switched on, it runs through Google Analytics 4 with IP anonymization.</li>
+<li>Your raw search text is <strong>never</strong> collected &mdash; only how many characters you typed.</li>
+<li>The only thing this site saves on your device is a single-word remember of your cookie choice.</li>
+<li>You can block all of it with an ad blocker and every feature still works.</li>
+</ul>
+</section>
+
+<section aria-labelledby="privacy-what-this-is">
+<h2 id="privacy-what-this-is">What this site is</h2>
+<p>This site is a hand-built static page: a fixed HTML file served from GitHub Pages. There are no user accounts, no comment forms, no newsletter sign-ups, and no server-side database. Nothing about you is written down on our side &mdash; we couldn't store your name or email address even by accident, because v1.0 has no form that could submit them.</p>
+</section>
+
+<section aria-labelledby="privacy-analytics">
+<h2 id="privacy-analytics">What the analytics measure</h2>
+<p>To learn which offers people find useful, the site can count visits with Google Analytics 4 (GA4). This is off entirely unless the site owner has configured a measurement ID at build time &mdash; if it is not configured, no analytics code exists on the page at all.</p>
+<p>When counting <em>is</em> active and you have allowed it, GA4 records:</p>
+<ul>
+<li><strong>Page views</strong> &mdash; which page you viewed (the path only; anything after <code>?</code> in the address is removed before sending).</li>
+<li><strong>Anonymized IP addresses</strong> &mdash; the last octet of your IP is zeroed out by IP anonymization, so we never see your full address.</li>
+<li><strong>Coarse technical metadata</strong> &mdash; things like browser family, screen size buckets, and approximate region derived from the anonymized IP.</li>
+<li><strong>Which filter category you picked</strong> (for example &ldquo;Image&rdquo;) &mdash; nothing else about your filtering.</li>
+<li><strong>Search activity as a length only</strong> &mdash; when you search, the event records just <code>query_length</code>, the number of characters typed. The words themselves stay in your browser and are never sent anywhere.</li>
+<li><strong>Offer clicks</strong> &mdash; which listing you clicked (its ID, provider name, and category).</li>
+</ul>
+</section>
+
+<section aria-labelledby="privacy-consent">
+<h2 id="privacy-consent">Consent, cookies, and local storage</h2>
+<p>Analytics starts from a denied state inside your browser: the measurement code is not even loaded until permission exists. Visitors whose browser time zone indicates they are likely in the EU see a small banner asking &ldquo;Allow?&rdquo; first &mdash; declining means zero tracking requests leave your browser. Elsewhere, visits are counted without showing the banner, matching the site's regional default; a previously recorded refusal is always honored.</p>
+<p>Your answer is remembered in your browser's local storage under the key <code>ft_ga_consent</code> as one word: <code>granted</code> or <code>denied</code>. That single word is the only data this site itself ever writes on your device &mdash; the site sets no cookies of its own. Once you allow counting, Google Analytics may set its own cookies (such as <code>_ga</code>) to tell repeat visits apart; those cookies belong to Google and follow Google's rules.</p>
+</section>
+
+<section aria-labelledby="privacy-third-parties">
+<h2 id="privacy-third-parties">Who else receives data</h2>
+<ul>
+<li><strong>Google LLC</strong> processes the analytics data under the <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google Privacy Policy</a> and Google Analytics' own terms (<a href="https://support.google.com/analytics/answer/6004245" rel="noopener noreferrer">how Google uses data from sites like this one</a>).</li>
+<li><strong>Google Fonts</strong> serves the typefaces this page displays; loading them is a plain request from your browser to Google's servers.</li>
+<li><strong>Offer providers</strong> &mdash; clicking an offer takes you to a third-party website. Once you are there, that company's privacy policy applies, not this one.</li>
+</ul>
+</section>
+
+<section aria-labelledby="privacy-never">
+<h2 id="privacy-never">What we never do</h2>
+<ul>
+<li>We never sell, rent, or trade data &mdash; there is no ad business on this site.</li>
+<li>We never collect your name, email, or any identifier tied to you personally.</li>
+<li>We never collect the text you type into search.</li>
+</ul>
+</section>
+
+<section aria-labelledby="privacy-choices">
+<h2 id="privacy-choices">Your choices</h2>
+<ul>
+<li><strong>Decline or accept</strong> the banner when it appears; press <kbd>Escape</kbd> to decline it.</li>
+<li><strong>Change your mind later</strong> by clearing your browser's site data for this site &mdash; the next visit starts fresh.</li>
+<li><strong>Block everything</strong> with an ad blocker or your browser's tracking protection. The site degrades silently: every offer, filter, and link keeps working exactly the same.</li>
+</ul>
+</section>
+
+<section aria-labelledby="privacy-changes">
+<h2 id="privacy-changes">Changes and contact</h2>
+<p>If the site's data practices change, this page will change with them &mdash; it is rebuilt together with the site on every update.</p>
+<p>Questions or concerns? <a href="https://github.com/luongnv89/freetokens/issues" rel="noopener noreferrer">Open an issue on GitHub</a>.</p>
+</section>
+</div>"""
+
+
+def render_privacy_html(built: str, measurement_id: str = "") -> str:
+    """Render the standalone privacy policy page sharing the site chrome."""
+    return _page_shell(
+        title="Privacy Policy · Free AI Credits",
+        meta_description=(
+            "How the Free AI Credits site handles data: consent-gated "
+            "anonymized analytics, no forms, no personal data storage."
+        ),
+        header=_PRIVACY_HEADER,
+        content=_PRIVACY_CONTENT,
+        built=built,
+        foot_current="privacy",
+        css_extra=(_BANNER_CSS if measurement_id else ""),
+        measurement_id=measurement_id,
     )
 
 
@@ -1225,9 +1460,14 @@ def main(argv=None) -> int:
         fh.write("\n")
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(render_html(index, measurement_id))
+    with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
+        fh.write(render_privacy_html(index["generated_at"], measurement_id))
 
     note = f" (analytics: {measurement_id})" if measurement_id else ""
-    print(f"built {index['count']} offers -> index.json, site/index.html{note}")
+    print(
+        f"built {index['count']} offers -> index.json, site/index.html, "
+        f"site/privacy.html{note}"
+    )
     return 0
 
 
