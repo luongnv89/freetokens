@@ -34,8 +34,7 @@ CATEGORY_LABELS = {
 DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens"
 FEED_TITLE = "Free AI Credits — hand-verified free AI credit offers"
 FEED_DESCRIPTION = (
-    "Newly published free AI credit offers from the hand-verified "
-    "freetokens directory."
+    "Newly published free AI credit offers from the hand-verified freetokens directory."
 )
 # Search input debounce: settling delay before a keystroke batch filters the
 # list, updates the URL, and fires analytics. Must stay well under the PRD's
@@ -278,8 +277,7 @@ def _check_str(value, name: str, filename: str, max_chars: int) -> str:
         raise OfferError(f"{filename}: {name} must be a non-empty string")
     if len(value) > max_chars:
         raise OfferError(
-            f"{filename}: {name} exceeds {max_chars} characters "
-            f"({len(value)} given)"
+            f"{filename}: {name} exceeds {max_chars} characters ({len(value)} given)"
         )
     return value
 
@@ -291,8 +289,7 @@ def _validate_proof(entry, filename: str, pos: int) -> dict:
     kind = entry.get("type")
     if kind not in DETAIL_TYPES:
         raise OfferError(
-            f"{where}: type must be one of {'|'.join(DETAIL_TYPES)}, "
-            f"got {kind!r}"
+            f"{where}: type must be one of {'|'.join(DETAIL_TYPES)}, got {kind!r}"
         )
     allowed = set(PROOF_REQUIRED[kind]) | set(PROOF_OPTIONAL[kind])
     if kind != "screenshot":
@@ -304,9 +301,7 @@ def _validate_proof(entry, filename: str, pos: int) -> dict:
         raise OfferError(f"{where}: unknown fields: {', '.join(sorted(unknown))}")
     clean = {"type": kind}
     if kind == "screenshot":
-        image = _check_str(
-            entry.get("image"), "image", where, PROOF_META_MAX_CHARS
-        )
+        image = _check_str(entry.get("image"), "image", where, PROOF_META_MAX_CHARS)
         if image.startswith(("http://", "https://", "/")) or ".." in image.split("/"):
             raise OfferError(
                 f"{where}: image must be a site-relative path under the "
@@ -316,25 +311,17 @@ def _validate_proof(entry, filename: str, pos: int) -> dict:
     else:
         url = _check_str(entry.get("url"), "url", where, PROOF_META_MAX_CHARS)
         if not url.startswith(("http://", "https://")):
-            raise OfferError(
-                f"{where}: url must be an http(s) URL, got {url!r}"
-            )
+            raise OfferError(f"{where}: url must be an http(s) URL, got {url!r}")
         clean["url"] = url
     for key in PROOF_REQUIRED[kind]:
         limit = (
-            PROOF_TEXT_MAX_CHARS
-            if key in ("text", "caption")
-            else PROOF_META_MAX_CHARS
+            PROOF_TEXT_MAX_CHARS if key in ("text", "caption") else PROOF_META_MAX_CHARS
         )
         clean[key] = _check_str(entry.get(key), key, where, limit)
     for key in PROOF_OPTIONAL[kind]:
         if key not in entry:
             continue
-        limit = (
-            PROOF_TEXT_MAX_CHARS
-            if key == "text"
-            else PROOF_META_MAX_CHARS
-        )
+        limit = PROOF_TEXT_MAX_CHARS if key == "text" else PROOF_META_MAX_CHARS
         clean[key] = _check_str(entry.get(key), key, where, limit)
     return clean
 
@@ -345,13 +332,10 @@ def validate_detail(data, filename: str) -> dict:
         raise OfferError(f"{filename}: detail document must be a JSON object")
     unknown = [k for k in data if k not in DETAIL_KEYS]
     if unknown:
-        raise OfferError(
-            f"{filename}: unknown fields: {', '.join(sorted(unknown))}"
-        )
+        raise OfferError(f"{filename}: unknown fields: {', '.join(sorted(unknown))}")
     if not any(k in data for k in DETAIL_KEYS):
         raise OfferError(
-            f"{filename}: must define at least one of "
-            f"{', '.join(DETAIL_KEYS)}"
+            f"{filename}: must define at least one of {', '.join(DETAIL_KEYS)}"
         )
     detail = {}
     if "summary" in data:
@@ -366,8 +350,7 @@ def validate_detail(data, filename: str) -> dict:
             )
         if len(steps) > 12:
             raise OfferError(
-                f"{filename}: claim_steps allows at most 12 steps "
-                f"({len(steps)} given)"
+                f"{filename}: claim_steps allows at most 12 steps ({len(steps)} given)"
             )
         detail["claim_steps"] = [
             _check_str(step, f"claim_steps[{i}]", filename, STEP_MAX_CHARS)
@@ -896,11 +879,8 @@ def _contact_nav() -> str:
                 label=html.escape(label),
             )
         )
-    return (
-        '<nav class="foot-nav" aria-label="Contact">'
-        + "".join(parts)
-        + "</nav>"
-    )
+    return '<nav class="foot-nav" aria-label="Contact">' + "".join(parts) + "</nav>"
+
 
 _CARD_TMPL = """<li style="--i:{index}">
 <article class="card" id="offer-{slug}" data-category="{category}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
@@ -980,11 +960,9 @@ def build_toolbar(count: int | None = None) -> str:
     for mode in SORT_MODES:
         sort_options.append(
             f'<option value="{html.escape(mode, quote=True)}">'
-            f'{html.escape(SORT_LABELS[mode])}</option>'
+            f"{html.escape(SORT_LABELS[mode])}</option>"
         )
-    seeded = (
-        f"Showing all {count} offers" if count is not None else ""
-    )
+    seeded = f"Showing all {count} offers" if count is not None else ""
     return (
         '<section class="toolbar" aria-label="Search and filter offers">'
         '<div class="field">'
@@ -1042,11 +1020,7 @@ def _resolve_asset(src: str, rel_prefix: str) -> str:
     untouched so depth-1 pages (offers/<slug>.html) resolve local
     screenshots against the site root instead of offers/.
     """
-    if (
-        not rel_prefix
-        or src.startswith(("../", "./", "/"))
-        or "://" in src
-    ):
+    if not rel_prefix or src.startswith(("../", "./", "/")) or "://" in src:
         return src
     return f"{rel_prefix}{src}"
 
@@ -1067,7 +1041,9 @@ def _proof_card(entry: dict, rel_prefix: str = "") -> str:
     if kind == "link":
         # A linked source has no post author; its required title acts as
         # the card headline instead.
-        head = f'<p class="proof-text"><strong>{html.escape(entry["title"])}</strong></p>'
+        head = (
+            f'<p class="proof-text"><strong>{html.escape(entry["title"])}</strong></p>'
+        )
     meta = html.escape(entry.get("author", ""))
     if kind == "x" and entry.get("handle"):
         meta += f' <span class="proof-meta">{html.escape(entry["handle"])}</span>'
@@ -1098,9 +1074,7 @@ def _detail_sections(detail: dict | None, rel_prefix: str = "") -> str:
     detail = detail or {}
     summary_html = ""
     if detail.get("summary"):
-        summary_html = (
-            f'<p class="od-summary">{html.escape(detail["summary"])}</p>'
-        )
+        summary_html = f'<p class="od-summary">{html.escape(detail["summary"])}</p>'
     steps_html = _FALLBACK_STEPS
     if detail.get("claim_steps"):
         steps_html = "".join(
@@ -1108,13 +1082,8 @@ def _detail_sections(detail: dict | None, rel_prefix: str = "") -> str:
         )
     proof_html = ""
     if detail.get("social_proof"):
-        cards = "".join(
-            _proof_card(e, rel_prefix) for e in detail["social_proof"]
-        )
-        proof_html = (
-            '<section class="od-proof"><h2>Social proof</h2>'
-            f"{cards}</section>"
-        )
+        cards = "".join(_proof_card(e, rel_prefix) for e in detail["social_proof"])
+        proof_html = f'<section class="od-proof"><h2>Social proof</h2>{cards}</section>'
     return (
         f"{summary_html}\n"
         f'<section class="od-steps"><h2>How to claim</h2><ol>{steps_html}</ol></section>\n'
@@ -1149,8 +1118,7 @@ def _share_section(page_url: str, title: str, slug: str) -> str:
         ),
         (
             "x",
-            "https://twitter.com/intent/tweet?url=" + q_url
-            + "&text=" + q_title,
+            "https://twitter.com/intent/tweet?url=" + q_url + "&text=" + q_title,
             "X",
         ),
         (
@@ -1270,10 +1238,9 @@ def render_offer_html(
     feeds the share bar's absolute page URL (#71); it falls back to the
     production deploy base so shared links always resolve.
     """
-    page_url = (
-        (base_url or DEFAULT_BASE_URL).rstrip("/")
-        + f"/offers/{offer['slug']}.html"
-    )
+    page_url = (base_url or DEFAULT_BASE_URL).rstrip(
+        "/"
+    ) + f"/offers/{offer['slug']}.html"
     expired = offer.get("status") == "expired"
     if expired:
         status = '<span class="badge badge-expired">Expired</span>'
@@ -1281,18 +1248,18 @@ def render_offer_html(
             status += (
                 f' <span class="status">ended '
                 f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
-                f'{_human_date(offer["expiry_date"])}</time></span>'
+                f"{_human_date(offer['expiry_date'])}</time></span>"
             )
     elif offer["expiry_date"]:
         status = (
             f'<span class="status">expires '
             f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
-            f'{_human_date(offer["expiry_date"])}</time></span>'
+            f"{_human_date(offer['expiry_date'])}</time></span>"
         )
     else:
         status = (
             '<span class="status"><span class="dot" aria-hidden="true">'
-            '</span>ongoing</span>'
+            "</span>ongoing</span>"
         )
     provider = html.escape(offer["provider"])
     summary_text = (detail or {}).get("summary", "")
@@ -1309,7 +1276,7 @@ def render_offer_html(
         )
     if expired:
         cta = (
-            "<p class=\"od-ended\">This offer ended &mdash; nothing here "
+            '<p class="od-ended">This offer ended &mdash; nothing here '
             "is claimable anymore.</p>"
         )
     else:
@@ -1327,9 +1294,8 @@ def render_offer_html(
         f"{_share_section(page_url, offer['title'], offer['slug'])}\n"
         "</article>"
     )
-    share_js = (
-        _SHARE_JS.replace("__FT_OFFER_ID__", json.dumps(offer["slug"]))
-        .replace("__FT_PAGE_URL__", json.dumps(page_url))
+    share_js = _SHARE_JS.replace("__FT_OFFER_ID__", json.dumps(offer["slug"])).replace(
+        "__FT_PAGE_URL__", json.dumps(page_url)
     )
     return _page_shell(
         title=html.escape(f"{offer['title']} · Free AI Credits"),
@@ -2427,7 +2393,7 @@ def build_stats_beacon(site: str = "") -> str:
         f"  var STORAGE_KEY = {json.dumps(CONSENT_STORAGE_KEY)};\n"
         "  function ftGcLoad() {\n"
         '    if (document.getElementById("ft-gc-script")) { return; }\n'
-        "    var s = document.createElement(\"script\");\n"
+        '    var s = document.createElement("script");\n'
         '    s.id = "ft-gc-script";\n'
         "    s.async = true;\n"
         '    s.src = "https://gc.zgo.at/count.js";\n'
@@ -2454,9 +2420,7 @@ def build_traffic_strip(site: str = "") -> str:
     """
     if not site:
         return ""
-    return _TRAFFIC_STRIP_TMPL.format(
-        stats_href=html.escape(site, quote=True)
-    )
+    return _TRAFFIC_STRIP_TMPL.format(stats_href=html.escape(site, quote=True))
 
 
 def is_eu_timezone(tz) -> bool:
@@ -2496,10 +2460,9 @@ def build_analytics_init(
         enabled = bool(measurement_id)
     if not enabled:
         return ""
-    return (
-        _ANALYTICS_INIT_JS.replace("__FT_GA_ID__", json.dumps(measurement_id))
-        .replace("__FT_STORAGE_KEY__", CONSENT_STORAGE_KEY)
-    )
+    return _ANALYTICS_INIT_JS.replace(
+        "__FT_GA_ID__", json.dumps(measurement_id)
+    ).replace("__FT_STORAGE_KEY__", CONSENT_STORAGE_KEY)
 
 
 def build_banner_markup() -> str:
@@ -2515,23 +2478,16 @@ def build_app_js(stats_site: str = "") -> str:
     that slot resolves to an empty string so unconfigured builds ship no
     stats code at all.
     """
-    js = _APP_JS.replace(
-        "__FT_CATEGORIES__", json.dumps(list(CATEGORIES))
-    ).replace("__FT_SORTS__", json.dumps(list(SORT_MODES))).replace(
-        "__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS)
-    ).replace(
-        "__FT_OFFER_DEDUPE_MS__", str(OFFER_CLICK_DEDUPE_MS)
+    js = (
+        _APP_JS.replace("__FT_CATEGORIES__", json.dumps(list(CATEGORIES)))
+        .replace("__FT_SORTS__", json.dumps(list(SORT_MODES)))
+        .replace("__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS))
+        .replace("__FT_OFFER_DEDUPE_MS__", str(OFFER_CLICK_DEDUPE_MS))
     )
     if stats_site:
-        stats_boot = (
-            "    try {\n"
-            "      ftInitStats();\n"
-            "    } catch (err) {}"
-        )
+        stats_boot = "    try {\n      ftInitStats();\n    } catch (err) {}"
         stats_module = (
-            _STATS_JS_MODULE.replace(
-                "__FT_STATS_SITE__", json.dumps(stats_site)
-            )
+            _STATS_JS_MODULE.replace("__FT_STATS_SITE__", json.dumps(stats_site))
         ).replace("__FT_STRIP_ID__", TRAFFIC_STRIP_ID)
     else:
         stats_boot = ""
@@ -2590,17 +2546,13 @@ def _page_shell(
     """
     built_display = (
         f'<time datetime="{html.escape(built, quote=True)}">'
-        f'{_human_date(built[:10])}</time>'
+        f"{_human_date(built[:10])}</time>"
     )
     rel_prefix = "../" if depth else "./"
     up = "../" * depth
     stats_on = bool(stats_site)
     tracking_on = bool(measurement_id or stats_site)
-    traffic_strip = (
-        build_traffic_strip(stats_site)
-        if stats_on and app_js
-        else ""
-    )
+    traffic_strip = build_traffic_strip(stats_site) if stats_on and app_js else ""
     if traffic_strip:
         css_extra += _TRAFFIC_CSS
     if tracking_on:
@@ -2615,9 +2567,7 @@ def _page_shell(
         foot_nav=_foot_nav(foot_current, depth),
         ga_head=build_consent_head(measurement_id),
         banner=_BANNER_TMPL if tracking_on else "",
-        ga_init=build_analytics_init(
-            measurement_id, enabled=tracking_on
-        ),
+        ga_init=build_analytics_init(measurement_id, enabled=tracking_on),
         app_js=build_app_js(stats_site) if app_js else "",
         stats_beacon=build_stats_beacon(stats_site),
         traffic_strip=traffic_strip,
@@ -2645,8 +2595,9 @@ def active_offers(index: dict) -> list:
 def expired_offers(index: dict) -> list:
     """Expired entries, newest expiration first (archive order, #26)."""
     flagged = [o for o in index["offers"] if o.get("status") == "expired"]
-    return sorted(flagged, key=lambda o: (o["expiry_date"] or "", o["slug"]),
-                  reverse=True)
+    return sorted(
+        flagged, key=lambda o: (o["expiry_date"] or "", o["slug"]), reverse=True
+    )
 
 
 def render_html(
@@ -2668,12 +2619,12 @@ def render_html(
                 expiry = (
                     f'<span class="status">expires '
                     f'<time datetime="{html.escape(o["expiry_date"], quote=True)}">'
-                    f'{_human_date(o["expiry_date"])}</time></span>'
+                    f"{_human_date(o['expiry_date'])}</time></span>"
                 )
             else:
                 expiry = (
                     '<span class="status"><span class="dot" aria-hidden="true">'
-                    '</span>ongoing</span>'
+                    "</span>ongoing</span>"
                 )
             verified = o["verified_date"]
             cards.append(
@@ -2798,9 +2749,7 @@ def render_archive_html(
                 )
             )
         content = (
-            '<ul class="grid" id="ft-archive-grid">\n'
-            + "\n".join(cards)
-            + "\n</ul>"
+            '<ul class="grid" id="ft-archive-grid">\n' + "\n".join(cards) + "\n</ul>"
         )
     else:
         content = _ARCHIVE_EMPTY_TMPL
@@ -2883,7 +2832,7 @@ def build_feed(index: dict, base_url: str) -> str:
             "<item>"
             f"<title>{_xml(o['title'])}</title>"
             f"<link>{anchor}</link>"
-            f"<guid isPermaLink=\"true\">{anchor}</guid>"
+            f'<guid isPermaLink="true">{anchor}</guid>'
             f"<description>{_xml(_feed_item_description(o))}</description>"
             f"<pubDate>{_rfc2822(_parse_generated_at(o['verified_date']))}</pubDate>"
             "</item>"
@@ -3049,9 +2998,7 @@ def main(argv=None) -> int:
         return 1
 
     try:
-        details = load_details(
-            args.offers_dir, {o["slug"] for o in offers}
-        )
+        details = load_details(args.offers_dir, {o["slug"] for o in offers})
     except OfferError as exc:
         print(f"build failed: {exc}", file=sys.stderr)
         return 1
@@ -3072,15 +3019,9 @@ def main(argv=None) -> int:
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(render_html(index, measurement_id, stats_site))
     with open(os.path.join(out_dir, "archive.html"), "w", encoding="utf-8") as fh:
-        fh.write(
-            render_archive_html(index, measurement_id, stats_site)
-        )
+        fh.write(render_archive_html(index, measurement_id, stats_site))
     with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
-        fh.write(
-            render_privacy_html(
-                index["generated_at"], measurement_id, stats_site
-            )
-        )
+        fh.write(render_privacy_html(index["generated_at"], measurement_id, stats_site))
     with open(os.path.join(out_dir, "favicon.svg"), "w", encoding="utf-8") as fh:
         fh.write(_FAVICON_SVG)
     with open(os.path.join(out_dir, "feed.xml"), "w", encoding="utf-8") as fh:
@@ -3116,8 +3057,7 @@ def main(argv=None) -> int:
     ]
     if missing_pages:
         print(
-            "build failed: no detail page emitted for: "
-            + ", ".join(missing_pages),
+            "build failed: no detail page emitted for: " + ", ".join(missing_pages),
             file=sys.stderr,
         )
         return 1
