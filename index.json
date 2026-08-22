@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-22T12:20:02Z",
-  "count": 21,
-  "active_count": 21,
+  "generated_at": "2026-08-22T22:25:58Z",
+  "count": 23,
+  "active_count": 23,
   "expired_count": 0,
   "offers": [
     {
@@ -49,6 +49,17 @@
       "status": "active"
     },
     {
+      "slug": "cline-ox-alpha-free",
+      "title": "Ox Alpha (Stealth Model) Free in Cline",
+      "provider": "Cline",
+      "category": "coding",
+      "amount": "Free model access, rate limited",
+      "expiry_date": null,
+      "source_url": "https://x.com/cline/status/2090854216399220985",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
       "slug": "cloudflare-workers-ai-free-tier",
       "title": "Cloudflare Workers AI Free Tier",
       "provider": "Cloudflare",
@@ -89,6 +100,39 @@
       "amount": "$200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)",
       "expiry_date": null,
       "source_url": "https://deepgram.com/pricing",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-ox-alpha-free-week",
+      "title": "Ox Alpha Free Week in OpenCode",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free model access, near unlimited usage (rate limited)",
+      "expiry_date": "2026-08-27",
+      "source_url": "https://x.com/opencode/status/2090544355824038300",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-free-models",
+      "title": "OpenRouter Free Models",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you hold $10 credits)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/docs/api-reference/limits",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "vidu-free-credits",
+      "title": "Vidu AI Video Free Credits",
+      "provider": "Vidu",
+      "category": "video",
+      "amount": "Trial credits for new users on signup, topped up with daily login bonus credits",
+      "expiry_date": null,
+      "source_url": "https://www.vidu.com/pricing",
       "verified_date": "2026-08-22",
       "status": "active"
     },
@@ -192,17 +236,6 @@
       "status": "active"
     },
     {
-      "slug": "openrouter-free-models",
-      "title": "OpenRouter Free Models",
-      "provider": "OpenRouter",
-      "category": "api_provider",
-      "amount": "Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you hold $10 credits)",
-      "expiry_date": null,
-      "source_url": "https://openrouter.ai/docs/api-reference/limits",
-      "verified_date": "2026-08-22",
-      "status": "active"
-    },
-    {
       "slug": "pika-free-plan",
       "title": "Pika Free Plan",
       "provider": "Pika",
@@ -222,17 +255,6 @@
       "expiry_date": null,
       "source_url": "https://runwayml.com/pricing",
       "verified_date": "2026-08-21",
-      "status": "active"
-    },
-    {
-      "slug": "vidu-free-credits",
-      "title": "Vidu AI Video Free Credits",
-      "provider": "Vidu",
-      "category": "video",
-      "amount": "Trial credits for new users on signup, topped up with daily login bonus credits",
-      "expiry_date": null,
-      "source_url": "https://www.vidu.com/pricing",
-      "verified_date": "2026-08-22",
       "status": "active"
     }
   ]

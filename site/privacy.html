@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 
+
 <style>
 
 :root {
@@ -371,6 +372,7 @@ a:focus-visible {
 <ul>
 <li>No accounts, no forms, no logins &mdash; we have nowhere to store personal details.</li>
 <li>If visit-counting is switched on, it runs through Google Analytics 4 with IP anonymization.</li>
+<li>If the live traffic counter is switched on, page views are recorded cookie-free by <a href="https://www.goatcounter.com" rel="noopener noreferrer">GoatCounter</a> and shown as anonymous totals on this site.</li>
 <li>Your raw search text is <strong>never</strong> collected &mdash; only how many characters you typed.</li>
 <li>The only thing this site saves on your device is a single-word remember of your cookie choice.</li>
 <li>You can block all of it with an ad blocker and every feature still works.</li>
@@ -397,6 +399,13 @@ a:focus-visible {
 </ul>
 </section>
 
+<section aria-labelledby="privacy-live-traffic">
+<h2 id="privacy-live-traffic">What the live traffic counter measures</h2>
+<p>Separately from GA4, the site can show live visit totals in its footer &mdash; the numbers you may see next to &ldquo;live traffic&rdquo;. Counting is done by <strong>GoatCounter</strong>, open-source software provided as a hosted service (goatcounter.com) under the EU's strict GDPR rules. Like GA4 above, it is off entirely unless configured at build time.</p>
+<p>When it <em>is</em> active, each page view records only technical, non-identifying details: the page path, the site's hostname, your browser's reported language and user-agent string, a coarse country derived from the IP at request time and then discarded, and the referring site. GoatCounter sets <strong>no cookies</strong>, uses no browser fingerprinting, and stores no personal identifiers or full IP addresses. Only anonymous aggregate totals are shown publicly on this site; nobody can browse individual visits.</p>
+<p>Blocking the counter with an ad blocker changes nothing else: pages, filters, and links all keep working exactly the same, and the footer totals simply stay hidden.</p>
+</section>
+
 <section aria-labelledby="privacy-consent">
 <h2 id="privacy-consent">Consent, cookies, and local storage</h2>
 <p>Analytics starts from a denied state inside your browser: the measurement code is not even loaded until permission exists. Visitors whose browser time zone indicates they are likely in the EU see a small banner asking &ldquo;Allow?&rdquo; first &mdash; declining means zero tracking requests leave your browser. Elsewhere, visits are counted without showing the banner, matching the site's regional default; a previously recorded refusal is always honored.</p>
@@ -407,6 +416,7 @@ a:focus-visible {
 <h2 id="privacy-third-parties">Who else receives data</h2>
 <ul>
 <li><strong>Google LLC</strong> processes the analytics data under the <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google Privacy Policy</a> and Google Analytics' own terms (<a href="https://support.google.com/analytics/answer/6004245" rel="noopener noreferrer">how Google uses data from sites like this one</a>).</li>
+<li><strong>GoatCounter (goatcounter.com)</strong> counts the live-traffic page views described above on our behalf when the traffic counter is switched on; its own terms apply (<a href="https://www.goatcounter.com/privacy" rel="noopener noreferrer">GoatCounter privacy policy</a>).</li>
 <li><strong>Google Fonts</strong> serves the typefaces this page displays; loading them is a plain request from your browser to Google's servers.</li>
 <li><strong>Offer providers</strong> &mdash; clicking an offer takes you to a third-party website. Once you are there, that company's privacy policy applies, not this one.</li>
 </ul>
@@ -438,7 +448,8 @@ a:focus-visible {
 </div>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-22T12:20:02Z">Aug 22, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-22T22:25:58Z">Aug 22, 2026</time> &middot; offers re-verified on every change</p>
+
 <nav class="foot-nav" aria-label="Site"><a href="./">Offers</a><span aria-hidden="true">&middot;</span><a href="archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="privacy.html" aria-current="page">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 </footer>
 </div>

@@ -56,7 +56,8 @@ OFFERS_OUTPUT_DIRNAME = "offers"
 
 # Sort modes (F10): client-side reordering driven by the ?sort= URL param,
 # consistent with the category/q state params. "" (absent) keeps the
-# build-time default order. The select's option labels live in SORT_LABELS.
+# build-time default order — newest-verified first since #70. The select's
+# option labels live in SORT_LABELS.
 SORT_MODES = ("newest", "expiring", "amount")
 SORT_LABELS = {
     "newest": "Newest verified",
@@ -425,9 +426,16 @@ def build_index(offers: list, today: dt.date | None = None) -> dict:
     ``"active" | "expired"``. Downstream consumers decide what to show — the
     home page renders only active entries, the archive page only expired
     ones, the feed only active ones.
+
+    Default order (#70): newest-verified first, so freshly added offers lead
+    the home list. ``verified_date`` is the catalog's add/refresh stamp (the
+    schema is frozen at seven fields); ties fall back to slug ascending via
+    a stable two-pass sort. Explicit client-side sorts (?sort=) still
+    override this build-time default.
     """
     stamped = []
-    for offer in sorted(offers, key=lambda o: o["slug"]):
+    by_slug = sorted(offers, key=lambda o: o["slug"])
+    for offer in sorted(by_slug, key=lambda o: o["verified_date"], reverse=True):
         entry = dict(offer)
         entry["status"] = "expired" if is_expired(offer, today) else "active"
         stamped.append(entry)
