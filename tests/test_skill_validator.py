@@ -7,9 +7,9 @@ path). Also guards SKILL.md loadability (frontmatter name matches dir).
 """
 
 import datetime as dt
-import io
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -220,6 +220,77 @@ class SkillManifestTests(unittest.TestCase):
         desc = re.search(r"^description:\s*(.+)$", text, re.MULTILINE)
         self.assertIsNotNone(desc)
         self.assertTrue(0 < len(desc.group(1)) <= 1024)
+
+
+class NeedsReviewStagingTests(unittest.TestCase):
+    """Issue #21: unverifiable drafts must be un-committable by construction."""
+
+    def test_gitignore_covers_needs_review(self):
+        gitignore = (REPO / ".gitignore").read_text(encoding="utf-8")
+        self.assertRegex(gitignore, r"(?m)^needs_review/$")
+
+    def test_draft_in_needs_review_is_ignored(self):
+        if not shutil.which("git"):
+            self.skipTest("git not available")
+        with tempfile.TemporaryDirectory() as tmp:
+            draft = Path(tmp, "unverified-offer.yaml")
+            draft.write_text(offer_text(), encoding="utf-8")
+            staging = REPO / "needs_review" / "unverified-offer.yaml"
+            staging.parent.mkdir(exist_ok=True)
+            shutil.copy(draft, staging)
+            try:
+                proc = subprocess.run(
+                    ["git", "check-ignore", "-v", str(staging.relative_to(REPO))],
+                    capture_output=True,
+                    text=True,
+                    cwd=str(REPO),
+                )
+                self.assertEqual(
+                    proc.returncode, 0, "needs_review/ draft must be git-ignored"
+                )
+                self.assertIn("needs_review/", proc.stdout)
+            finally:
+                staging.unlink(missing_ok=True)
+
+    def test_staged_draft_never_reaches_offers_validation(self):
+        # Even though the content is schema-valid, validate_offers_dir must
+        # only ever see offers/*.yaml — a full offers/ run cannot pick up
+        # staged drafts.
+        sys.path.insert(0, str(REPO / "scripts"))
+        import validate_offers
+
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            os.makedirs(os.path.join(tmp, "needs_review"))
+            Path(tmp, "needs_review", "sneaky.yaml").write_text(
+                offer_text(title="Sneaky"), encoding="utf-8"
+            )
+            offers = validate_offers.validate_offers_dir(offers_dir)
+            self.assertEqual(offers, [])
+
+
+class CommitGatePolicyTests(unittest.TestCase):
+    """The SKILL.md must keep the safety wording of the trust policy."""
+
+    REQUIRED_PHRASES = (
+        "needs_review",
+        "explicit",
+        "side-by-side",
+        "live",
+        "expired",
+        "unverifiable",
+    )
+
+    def test_skill_md_keeps_gate_policy(self):
+        text = SKILL_MD.read_text(encoding="utf-8").lower()
+        missing = [p for p in self.REQUIRED_PHRASES if p not in text]
+        self.assertEqual(missing, [])
+
+    def test_hard_commit_rule_present(self):
+        text = SKILL_MD.read_text(encoding="utf-8")
+        self.assertIn("Nothing is committed", text)
+        self.assertIn("without the curator's explicit yes", text)
 
 
 if __name__ == "__main__":

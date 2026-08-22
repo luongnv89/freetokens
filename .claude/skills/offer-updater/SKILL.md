@@ -1,25 +1,28 @@
 ---
 name: offer-updater
-description: Publish or refresh a free-AI-credit offer in the freetokens repo from a screenshot or pasted text. Extracts offer fields, normalizes them into the frozen F5 schema, validates the draft against CI's exact rules with a deterministic helper, and hands a commit-ready offers/<slug>.yaml to the curator. Use when adding, updating, or verifying an offer entry.
+description: Publish or refresh a free-AI-credit offer in the freetokens repo from a screenshot or pasted text. Extracts fields, web-verifies the offer is still live, normalizes into the frozen F5 schema, validates against CI's exact rules, presents the diff, and commits only after explicit curator confirmation. Use when adding, updating, or verifying an offer entry.
 license: MIT
 metadata:
-  issue: "#20"
+  issues: "#20,#21"
   epic: "#31"
 ---
 
 # offer-updater — publish a verified free-AI-credit offer
 
-Turn a screenshot or pasted text describing a free-credit offer into a valid
-`offers/<slug>.yaml` that is guaranteed to pass CI, without ever inventing a
-value. Schema reference: `docs/schema.md`. Ground rules: `CONTRIBUTING.md`.
+Turn a screenshot or pasted text describing a free-credit offer into a valid,
+web-verified `offers/<slug>.yaml`, without ever inventing a value and never
+committing anything the curator did not explicitly approve.
+Schema reference: `docs/schema.md`. Ground rules: `CONTRIBUTING.md`.
 
 ## What I do
 
 1. **Extract** offer fields from your input (screenshot transcript, pasted
    text, or a source URL you supply).
-2. **Normalize** them into the frozen seven-field schema and pick a slug.
-3. **Validate** the draft with the deterministic helper in this directory.
-4. **Present** the draft plus its validation proof for curator review.
+2. **Verify** on the web that the offer is still live and the terms match.
+3. **Normalize** them into the frozen seven-field schema and pick a slug.
+4. **Validate** the draft with the deterministic helper in this directory.
+5. **Present** the git diff of exactly what would change.
+6. **Commit** only after you say yes.
 
 ## The frozen schema (F5)
 
@@ -42,8 +45,6 @@ Read the screenshot/text and collect all seven fields. Hard rules:
 - **Never guess.** A value you cannot read or confirm stays unknown; it is
   never approximated, inferred from similar providers, or copied from stale
   data elsewhere in `offers/`.
-- `verified_date` is today's date only when you have actually confirmed the
-  offer is currently live (via the input itself or by fetching `source_url`).
 - If any required field is unknown after extraction, ask ONE targeted
   clarifying question naming exactly the missing fields, then stop. Do not
   write a partial file to `offers/`.
@@ -51,11 +52,41 @@ Read the screenshot/text and collect all seven fields. Hard rules:
 Illegible input (unreadable screenshot, truncated paste): say which parts are
 illegible and ask the targeted question above instead of guessing.
 
-### Step 2 — Normalize
+### Step 2 — Verify on the web (trust policy)
+
+Verification is on by default; the curator may explicitly say
+"skip verification", in which case `verified_date` keeps today's date ONLY if
+the input itself is first-hand evidence (a fresh screenshot), and every field
+the page would have confirmed must be reported as unverified in Step 6.
+
+When verification runs:
+
+1. Fetch `source_url`. If the curator supplied none, ask for it — an offer
+   without an official source is unpublishable.
+2. Render one of three verdicts, quoting the sentence(s) that prove it:
+   - **live** — offer currently claimable and terms match the extracted
+     values → `verified_date: <today>`, and record the quoted evidence as the
+     comment header's source note.
+   - **expired / dead URL** — page gone, offer withdrawn, or dates passed →
+     do NOT create or update any `offers/` file.
+   - **unverifiable** — page unreachable, bot-walled, or silent about the
+     claimed terms → treat as expired/dead above until proven otherwise.
+3. Any offer that is not **live** is staged as `needs_review/<slug>.yaml`
+   with a header note explaining what failed. **Nothing unverifiable is ever
+   committed** — `needs_review/` is gitignored precisely so a stray
+   `git add .` cannot leak an unverified entry into the site.
+4. **Conflicts** between the screenshot/input and the web page (different
+   amounts, expiry dates, eligibility) are surfaced side-by-side in a small
+   table — input claim vs page quote vs proposed resolution — and REQUIRE an
+   explicit human decision before any file is written. Never silently pick a
+   winner.
+
+### Step 3 — Normalize
 
 Slug = lowercase ASCII words separated by single hyphens
 (`^[a-z0-9]+(-[a-z0-9]+)*$`), matching the target filename
-`offers/<slug>.yaml`. Draft template:
+`offers/<slug>.yaml`. Draft template (written to `needs_review/<slug>.yaml`
+until Step 6):
 
 ```yaml
 # Verified <YYYY-MM-DD> against <source_url>
@@ -69,16 +100,12 @@ source_url: https://...
 verified_date: YYYY-MM-DD
 ```
 
-The comment header is mandatory curation evidence: quote the sentence(s) that
-prove title/amount/expiry. Optional enrichment (summary, claim steps, social
-proof) lives in `offers/details/<slug>.json` — see
+The comment header is mandatory curation evidence: quote the sentence(s) from
+Step 2 that prove title/amount/expiry. Optional enrichment (summary, claim
+steps, social proof) lives in `offers/details/<slug>.json` — see
 `docs/schema.md` for its rules.
 
-While drafting, keep incomplete work OUT of `offers/` (CI validates that
-directory wholesale). Use any scratch location, e.g. `needs_review/<slug>.yaml`
-or a temp dir.
-
-### Step 3 — Validate (deterministic, same rules as CI)
+### Step 4 — Validate (deterministic, same rules as CI)
 
 ```bash
 python3 .claude/skills/offer-updater/validate_offer.py <draft.yaml>
@@ -89,14 +116,36 @@ enforces — it cannot fail the build. Any failure names the offending file and
 field; fix ONLY formatting/validation errors here. If fixing would require
 inventing a value, go back to Step 1's clarifying-question rule instead.
 
-### Step 4 — Present for curator review
+### Step 5 — Present the diff
 
-Show the curator:
+Show the curator exactly what would change, no more and no less:
 
-- the final YAML,
-- the helper's `OK` line (validation proof),
-- the source URL you extracted from, and anything you could not verify.
+```bash
+git diff --no-index -- <existing-file-if-any> needs_review/<slug>.yaml  # updates
+```
 
-Do NOT commit on your own initiative. Moving the file into `offers/`,
-committing, pushing, and opening the PR follow `CONTRIBUTING.md` and happen
-only with the curator's explicit confirmation.
+plus the full draft content for brand-new offers. State plainly: the target
+path (`offers/<slug>.yaml` or `offers/details/<slug>.json`), whether it is a
+new file or an edit, and the verification verdict + evidence quote.
+
+### Step 6 — Commit gate (hard rule)
+
+**Nothing is committed, moved into `offers/`, pushed, or opened as a PR
+without the curator's explicit yes.**
+
+- Acceptable confirmation: a clear affirmative from the curator in the
+  conversation ("yes", "commit it", "ship it") AFTER seeing the Step 5 diff.
+  Silence, topic change, or ambiguity is a NO.
+- On YES: move the draft into `offers/` (`git mv` for edits), run the
+  validator once more on its final path, then follow `CONTRIBUTING.md`
+  (branch `<type>/<issue>-<slug>`, Conventional Commits message referencing
+  the tracking issue, push, PR whose body starts with `Closes #<issue>`).
+- On NO / no answer / unverifiable: leave the draft in `needs_review/`,
+  summarize why, and stop. Re-running the skill later resumes from Step 2.
+
+## Why this gate exists
+
+The directory's entire value is trust: every listed offer was verified by a
+human against a live official page (§9.3 link-rot/scam mitigation). An agent
+that auto-commits unverified entries converts one dead URL into a broken
+promise to every visitor. When in doubt, park it in `needs_review/` and ask.
