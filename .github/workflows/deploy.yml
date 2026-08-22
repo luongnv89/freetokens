@@ -47,6 +47,11 @@ jobs:
           # Optional: create a repo secret named GA_MEASUREMENT_ID (G-XXXXXXX)
           # to enable GA4. Unset/empty keeps analytics fully disabled.
           GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+          # Optional: live traffic stats (#62) via self-hosted Counterscale.
+          # Set both secrets (worker https origin + registered site ID);
+          # leaving either unset keeps traffic counting fully disabled.
+          STATS_ENDPOINT: ${{ secrets.STATS_ENDPOINT }}
+          STATS_SITE_ID: ${{ secrets.STATS_SITE_ID }}
         run: |
           python3 scripts/build.py
           python3 -m unittest discover -s tests

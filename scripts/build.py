@@ -17,6 +17,7 @@ import json
 import os
 import re
 import sys
+from urllib.parse import urlparse
 
 CATEGORIES = ("api_provider", "coding", "image", "voice", "video")
 CATEGORY_LABELS = {
@@ -108,6 +109,24 @@ MEASUREMENT_ID_ENV_VAR = "GA_MEASUREMENT_ID"
 MEASUREMENT_ID_RE = re.compile(r"^G-[A-Z0-9]{6,12}$")
 CONSENT_STORAGE_KEY = "ft_ga_consent"
 EU_TIMEZONE_PREFIXES = ("Europe/",)
+
+# --- Live traffic stats (#62) ------------------------------------------------
+# Aggregate visit counts shown on the site itself, refreshed per page load —
+# never baked in at build time. Provider: self-hosted Counterscale on Cloudflare
+# Workers (MIT, cookieless, free-tier friendly); see docs/traffic-stats-setup.md.
+# Like GA4 this is opt-in at build time via BOTH environment variables; unset
+# or half-configured means zero stats markup exists anywhere. These identifiers
+# describe visitor TRAFFIC — deliberately distinct from #49's build-time
+# offer-catalog counters in the masthead ("deal stats").
+STATS_ENDPOINT_ENV_VAR = "STATS_ENDPOINT"
+STATS_SITE_ID_ENV_VAR = "STATS_SITE_ID"
+# https-only so a typo can never downgrade visitors to plaintext; quotes and
+# whitespace are rejected outright so the value stays attribute-safe.
+STATS_ENDPOINT_RE = re.compile(r"^https://[^\s\"'<>]+$")
+# Counterscale site IDs are operator-chosen tokens (usually the hostname);
+# conservative charset keeps them safe unescaped anywhere.
+STATS_SITE_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
+TRAFFIC_STRIP_ID = "ft-traffic"
 
 
 class OfferError(ValueError):
@@ -802,6 +821,7 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 {ga_head}
+{stats_beacon}
 <style>
 {css}
 </style>
@@ -814,6 +834,7 @@ _PAGE_TMPL = """<!DOCTYPE html>
 </main>
 <footer class="foot">
 <p>Built {built_display} &middot; offers re-verified on every change</p>
+{traffic_strip}
 {foot_nav}
 </footer>
 </div>
@@ -1108,6 +1129,8 @@ def render_offer_html(
     detail: dict | None,
     built: str,
     measurement_id: str = "",
+    stats_endpoint: str = "",
+    stats_site_id: str = "",
 ) -> str:
     """Render one dedicated offer page at site/offers/<slug>.html (#60).
 
@@ -1187,6 +1210,8 @@ def render_offer_html(
         css_extra=_DETAIL_CSS,
         measurement_id=measurement_id,
         depth=1,
+        stats_endpoint=stats_endpoint,
+        stats_site_id=stats_site_id,
     )
 
 
@@ -1411,6 +1436,43 @@ button:focus-visible {
 @media (pointer: coarse) {
   .consent-actions button { min-height: 44px; }
 }
+"""
+
+# --- Live traffic strip (#62) -------------------------------------------------
+# Footer line filled client-side from the self-hosted Counterscale deployment.
+# Starts hidden and is revealed only after a successful fetch, so a blocked,
+# offline, or erroring stats backend degrades to nothing visible at all —
+# same silent-degradation contract as consent-gated analytics (PRD §4.1).
+# Wording ("live traffic", "views", "visitors") deliberately avoids the
+# masthead deal-counter vocabulary (#49) so the two can never be confused.
+_TRAFFIC_STRIP_TMPL = (
+    f'<p class="foot-traffic" id="{TRAFFIC_STRIP_ID}" role="status" '
+    'aria-live="polite" hidden>'
+    '<span class="dot" aria-hidden="true"></span>live traffic &middot; '
+    '<strong id="ft-traffic-today">&mdash;</strong> views today &middot; '
+    '<strong id="ft-traffic-period">&mdash;</strong> visitors in 90 days'
+    "</p>"
+)
+
+_TRAFFIC_CSS = """
+/* ---- Live traffic strip (only emitted when stats are configured) ------- */
+
+.foot-traffic {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 0.4rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin: 0.75rem 0 0;
+}
+
+.foot-traffic[hidden] { display: none; }
+
+.foot-traffic strong { color: var(--ink); }
+
+.foot-traffic .dot { flex: 0 0 auto; }
 """
 
 _APP_CSS = """
@@ -1960,6 +2022,7 @@ _APP_JS = """<script id="ft-app">
     try {
       ftInitApp();
     } catch (err) {}
+__FT_STATS_BOOT__
   }
 
   if (document.readyState === "loading") {
@@ -1967,8 +2030,80 @@ _APP_JS = """<script id="ft-app">
   } else {
     ftBoot();
   }
+__FT_STATS_MODULE__
 })();
 </script>"""
+
+# Live traffic module (#62), spliced into _APP_JS only when Counterscale is
+# configured. Shares the page IIFE's scope and boot lifecycle; every failure
+# path (missing slot, no fetch API, HTTP error status, network rejection,
+# malformed payload) is a silent no-op that leaves the strip hidden — the
+# same contract as ftTrackEvent's consent gate. Counts come from
+# GET <endpoint>/resources/stats?site=<id>&interval=<today|90d>, the JSON
+# route a public (password-less) Counterscale dashboard serves. The 90-day
+# window is Counterscale's full retention, so it is labeled as such rather
+# than claimed as all-time.
+_STATS_JS_MODULE = r"""
+  // --- Live traffic strip (#62) -------------------------------------------
+  var STATS_ENDPOINT = __FT_STATS_ENDPOINT__;
+  var STATS_SITE_ID = __FT_STATS_SITE_ID__;
+
+  function ftFormatCount(n) {
+    // Thousands separators keep large counts scannable (12345 -> 12,345).
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function ftStatUrl(interval) {
+    return (
+      STATS_ENDPOINT +
+      "/resources/stats?site=" +
+      encodeURIComponent(STATS_SITE_ID) +
+      "&interval=" +
+      encodeURIComponent(interval)
+    );
+  }
+
+  // Defensive extraction: only finite non-negative numbers count as data;
+  // anything else leaves the strip hidden instead of showing junk.
+  function ftStatNumber(data, key) {
+    var value = data ? data[key] : null;
+    if (typeof value !== "number" || !isFinite(value) || value < 0) {
+      return null;
+    }
+    return Math.floor(value);
+  }
+
+  function ftFillTraffic(box, viewsToday, visitors90d) {
+    if (viewsToday === null || visitors90d === null) { return; }
+    box.querySelector("#ft-traffic-today").textContent =
+      ftFormatCount(viewsToday);
+    box.querySelector("#ft-traffic-period").textContent =
+      ftFormatCount(visitors90d);
+    box.hidden = false;
+  }
+
+  function ftInitStats() {
+    var box = document.getElementById("__FT_STRIP_ID__");
+    if (!box || typeof window.fetch !== "function") { return; }
+    Promise.all([
+      window.fetch(ftStatUrl("today")),
+      window.fetch(ftStatUrl("90d"))
+    ]).then(function (responses) {
+      if (!responses[0].ok || !responses[1].ok) { return null; }
+      return Promise.all([
+        responses[0].json(),
+        responses[1].json()
+      ]);
+    }).then(function (payloads) {
+      if (!payloads) { return; }
+      ftFillTraffic(
+        box,
+        ftStatNumber(payloads[0], "views"),
+        ftStatNumber(payloads[1], "visitors")
+      );
+    }).catch(function () {});
+  }
+"""
 
 
 def resolve_measurement_id(raw) -> str:
@@ -1994,6 +2129,103 @@ def get_measurement_id(env=None) -> str:
     """Read the GA4 measurement ID from the environment ('' when disabled)."""
     environ = os.environ if env is None else env
     return resolve_measurement_id(environ.get(MEASUREMENT_ID_ENV_VAR, ""))
+
+
+def resolve_stats_endpoint(raw) -> str:
+    """Return a normalized https Counterscale origin, or '' when disabled.
+
+    Origin-only by design: the beacon and stats URLs append their own fixed
+    paths (/tracker.js, /resources/stats), so anything beyond the origin
+    would signal a misconfiguration — and rejecting it keeps hostile
+    characters out of emitted attributes entirely.
+    """
+    value = (raw or "").strip().rstrip("/")
+    if not value:
+        return ""
+    parsed = urlparse(value)
+    if (
+        parsed.scheme != "https"
+        or not parsed.netloc
+        or "@" in parsed.netloc
+        or parsed.params
+        or parsed.query
+        or parsed.fragment
+        or parsed.path not in ("",)
+        or not STATS_ENDPOINT_RE.match(f"{parsed.scheme}://{parsed.netloc}")
+    ):
+        print(
+            f"warning: ignoring malformed {STATS_ENDPOINT_ENV_VAR}={value!r} "
+            "(expected an https:// origin); traffic stats disabled",
+            file=sys.stderr,
+        )
+        return ""
+    return f"{parsed.scheme}://{parsed.netloc}"
+
+
+def resolve_stats_site_id(raw) -> str:
+    """Return a valid Counterscale site ID, or '' when stats are disabled."""
+    value = (raw or "").strip()
+    if not value:
+        return ""
+    if not STATS_SITE_ID_RE.match(value):
+        print(
+            f"warning: ignoring malformed {STATS_SITE_ID_ENV_VAR}={value!r} "
+            "(expected letters/digits/dots/dashes); traffic stats disabled",
+            file=sys.stderr,
+        )
+        return ""
+    return value
+
+
+def get_traffic_stats_config(env=None) -> tuple[str, str]:
+    """Read the (endpoint, site_id) pair; ("", "") when stats are disabled.
+
+    Both variables must be configured together. A half-configured pair is a
+    mistake and would strand half the wiring on the page, so it disables
+    stats entirely with a warning — mirroring how a malformed GA4 ID degrades.
+    """
+    environ = os.environ if env is None else env
+    endpoint = resolve_stats_endpoint(environ.get(STATS_ENDPOINT_ENV_VAR, ""))
+    site_id = resolve_stats_site_id(environ.get(STATS_SITE_ID_ENV_VAR, ""))
+    if bool(endpoint) != bool(site_id):
+        print(
+            "warning: ignoring partial live traffic stats configuration "
+            f"({STATS_ENDPOINT_ENV_VAR}, {STATS_SITE_ID_ENV_VAR}); both are "
+            "required; traffic stats disabled",
+            file=sys.stderr,
+        )
+        return ("", "")
+    return (endpoint, site_id)
+
+
+def build_stats_beacon(endpoint: str = "", site_id: str = "") -> str:
+    """Counterscale tracker <script> for <head> ('' when stats are disabled).
+
+    Emitted on every page so all traffic is counted; the strip that *displays*
+    the counts lives only where the site script runs. Values are attribute-
+    escaped even though the resolvers already reject hostile characters.
+    """
+    if not endpoint or not site_id:
+        return ""
+    src = f"{endpoint}/tracker.js"
+    return (
+        '<script defer src="'
+        + html.escape(src, quote=True)
+        + '" data-site-id="'
+        + html.escape(site_id, quote=True)
+        + '"></script>'
+    )
+
+
+def build_traffic_strip(endpoint: str = "", site_id: str = "") -> str:
+    """Hidden footer strip markup ('' until both stats values are set).
+
+    Starts ``hidden`` so a blocked or erroring backend degrades to nothing
+    visible; ftInitStats reveals it only after a successful fetch.
+    """
+    if not endpoint or not site_id:
+        return ""
+    return _TRAFFIC_STRIP_TMPL
 
 
 def is_eu_timezone(tz) -> bool:
@@ -2031,14 +2263,37 @@ def build_banner_markup() -> str:
     return _BANNER_TMPL
 
 
-def build_app_js() -> str:
-    """Client-side filter/search/sort runtime (F2/F3/F10), placeholders resolved."""
-    return _APP_JS.replace(
+def build_app_js(stats_endpoint: str = "", stats_site_id: str = "") -> str:
+    """Client-side filter/search/sort runtime (F2/F3/F10), placeholders resolved.
+
+    When both Counterscale values are configured the live traffic module
+    (#62) is spliced in ahead of the closing IIFE and hooked into ftBoot;
+    otherwise those slots resolve to empty strings so unconfigured builds
+    ship no stats code at all.
+    """
+    js = _APP_JS.replace(
         "__FT_CATEGORIES__", json.dumps(list(CATEGORIES))
     ).replace("__FT_SORTS__", json.dumps(list(SORT_MODES))).replace(
         "__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS)
     ).replace(
         "__FT_OFFER_DEDUPE_MS__", str(OFFER_CLICK_DEDUPE_MS)
+    )
+    if stats_endpoint and stats_site_id:
+        stats_boot = (
+            "    try {\n"
+            "      ftInitStats();\n"
+            "    } catch (err) {}"
+        )
+        stats_module = (
+            _STATS_JS_MODULE.replace(
+                "__FT_STATS_ENDPOINT__", json.dumps(stats_endpoint)
+            ).replace("__FT_STATS_SITE_ID__", json.dumps(stats_site_id))
+        ).replace("__FT_STRIP_ID__", TRAFFIC_STRIP_ID)
+    else:
+        stats_boot = ""
+        stats_module = ""
+    return js.replace("__FT_STATS_BOOT__", stats_boot).replace(
+        "__FT_STATS_MODULE__", stats_module
     )
 
 
@@ -2076,11 +2331,16 @@ def _page_shell(
     measurement_id: str = "",
     app_js: bool = False,
     depth: int = 0,
+    stats_endpoint: str = "",
+    stats_site_id: str = "",
 ) -> str:
     """Fill the shared page chrome (head, masthead slot, footer, analytics).
 
     ``depth`` parameterizes relative-path resolution: root pages reference
     ./favicon.svg and feed.xml; pages under offers/ must climb one level.
+    The Counterscale beacon ships on every page when configured, while the
+    traffic strip markup only appears where the site script (which fills
+    it) runs — i.e. alongside ``app_js``.
     """
     built_display = (
         f'<time datetime="{html.escape(built, quote=True)}">'
@@ -2088,6 +2348,14 @@ def _page_shell(
     )
     rel_prefix = "../" if depth else "./"
     up = "../" * depth
+    stats_on = bool(stats_endpoint and stats_site_id)
+    traffic_strip = (
+        build_traffic_strip(stats_endpoint, stats_site_id)
+        if stats_on and app_js
+        else ""
+    )
+    if traffic_strip:
+        css_extra += _TRAFFIC_CSS
     return _PAGE_TMPL.format(
         title=title,
         meta_description=meta_description,
@@ -2099,7 +2367,11 @@ def _page_shell(
         ga_head=build_consent_head(measurement_id),
         banner=_BANNER_TMPL if measurement_id else "",
         ga_init=build_analytics_init(measurement_id),
-        app_js=build_app_js() if app_js else "",
+        app_js=build_app_js(stats_endpoint, stats_site_id) if app_js else "",
+        stats_beacon=build_stats_beacon(
+            stats_endpoint, stats_site_id
+        ),
+        traffic_strip=traffic_strip,
         rss_autodiscovery=(
             '<link rel="alternate" type="application/rss+xml" '
             f'title="{html.escape(FEED_TITLE, quote=True)}" '
@@ -2126,7 +2398,12 @@ def expired_offers(index: dict) -> list:
                   reverse=True)
 
 
-def render_html(index: dict, measurement_id: str = "") -> str:
+def render_html(
+    index: dict,
+    measurement_id: str = "",
+    stats_endpoint: str = "",
+    stats_site_id: str = "",
+) -> str:
     analytics = bool(measurement_id)
     # Retain-and-flag (#25): expired entries stay in the index for the
     # archive/feed but never reach the default visitor list.
@@ -2198,6 +2475,8 @@ def render_html(index: dict, measurement_id: str = "") -> str:
         + (_BANNER_CSS if analytics else ""),
         measurement_id=measurement_id,
         app_js=has_offers,
+        stats_endpoint=stats_endpoint,
+        stats_site_id=stats_site_id,
     )
 
 
@@ -2238,7 +2517,12 @@ _ARCHIVE_EMPTY_TMPL = """<section class="empty" style="--i:0">
 </section>"""
 
 
-def render_archive_html(index: dict, measurement_id: str = "") -> str:
+def render_archive_html(
+    index: dict,
+    measurement_id: str = "",
+    stats_endpoint: str = "",
+    stats_site_id: str = "",
+) -> str:
     """Render site/archive.html over all entries flagged ``expired``."""
     archived = expired_offers(index)
     measurement_id = measurement_id or ""
@@ -2285,6 +2569,8 @@ def render_archive_html(index: dict, measurement_id: str = "") -> str:
         css_extra=(_DETAIL_CSS if archived else "")
         + (_BANNER_CSS if measurement_id else ""),
         measurement_id=measurement_id,
+        stats_endpoint=stats_endpoint,
+        stats_site_id=stats_site_id,
     )
 
 
@@ -2392,6 +2678,7 @@ _PRIVACY_CONTENT = """<div class="policy">
 <ul>
 <li>No accounts, no forms, no logins &mdash; we have nowhere to store personal details.</li>
 <li>If visit-counting is switched on, it runs through Google Analytics 4 with IP anonymization.</li>
+<li>If the live traffic counter is switched on, page views are recorded cookie-free by our self-hosted Counterscale instance and shown as anonymous totals on this site.</li>
 <li>Your raw search text is <strong>never</strong> collected &mdash; only how many characters you typed.</li>
 <li>The only thing this site saves on your device is a single-word remember of your cookie choice.</li>
 <li>You can block all of it with an ad blocker and every feature still works.</li>
@@ -2418,6 +2705,13 @@ _PRIVACY_CONTENT = """<div class="policy">
 </ul>
 </section>
 
+<section aria-labelledby="privacy-live-traffic">
+<h2 id="privacy-live-traffic">What the live traffic counter measures</h2>
+<p>Separately from GA4, the site can show live visit totals in its footer &mdash; the numbers you may see next to &ldquo;live traffic&rdquo;. Counting is done by <strong>Counterscale</strong>, open-source software we self-host on our own Cloudflare Workers account, so the data never leaves infrastructure under our control. Like GA4 above, it is off entirely unless configured at build time.</p>
+<p>When it <em>is</em> active, each page view records only technical, non-identifying details: the page path, the site's hostname, your browser's reported language, a coarse device/browser family, and the referring site. Counterscale sets <strong>no cookies</strong>, uses no browser fingerprinting, and stores no personal identifiers or full IP addresses. Only anonymous aggregate totals are shown publicly on this site; nobody can browse individual visits. Records are kept for about 90 days (Cloudflare Analytics Engine's retention window) and then age out automatically.</p>
+<p>Blocking the counter with an ad blocker changes nothing else: pages, filters, and links all keep working exactly the same, and the footer totals simply stay hidden.</p>
+</section>
+
 <section aria-labelledby="privacy-consent">
 <h2 id="privacy-consent">Consent, cookies, and local storage</h2>
 <p>Analytics starts from a denied state inside your browser: the measurement code is not even loaded until permission exists. Visitors whose browser time zone indicates they are likely in the EU see a small banner asking &ldquo;Allow?&rdquo; first &mdash; declining means zero tracking requests leave your browser. Elsewhere, visits are counted without showing the banner, matching the site's regional default; a previously recorded refusal is always honored.</p>
@@ -2428,6 +2722,7 @@ _PRIVACY_CONTENT = """<div class="policy">
 <h2 id="privacy-third-parties">Who else receives data</h2>
 <ul>
 <li><strong>Google LLC</strong> processes the analytics data under the <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google Privacy Policy</a> and Google Analytics' own terms (<a href="https://support.google.com/analytics/answer/6004245" rel="noopener noreferrer">how Google uses data from sites like this one</a>).</li>
+<li><strong>Cloudflare, Inc.</strong> stores the Counterscale traffic records described above on our behalf when the live traffic counter is switched on; the infrastructure runs in our own Cloudflare account under Cloudflare's <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer">Privacy Policy</a>.</li>
 <li><strong>Google Fonts</strong> serves the typefaces this page displays; loading them is a plain request from your browser to Google's servers.</li>
 <li><strong>Offer providers</strong> &mdash; clicking an offer takes you to a third-party website. Once you are there, that company's privacy policy applies, not this one.</li>
 </ul>
@@ -2459,7 +2754,12 @@ _PRIVACY_CONTENT = """<div class="policy">
 </div>"""
 
 
-def render_privacy_html(built: str, measurement_id: str = "") -> str:
+def render_privacy_html(
+    built: str,
+    measurement_id: str = "",
+    stats_endpoint: str = "",
+    stats_site_id: str = "",
+) -> str:
     """Render the standalone privacy policy page sharing the site chrome."""
     return _page_shell(
         title="Privacy Policy · Free AI Credits",
@@ -2473,6 +2773,8 @@ def render_privacy_html(built: str, measurement_id: str = "") -> str:
         foot_current="privacy",
         css_extra=(_BANNER_CSS if measurement_id else ""),
         measurement_id=measurement_id,
+        stats_endpoint=stats_endpoint,
+        stats_site_id=stats_site_id,
     )
 
 
@@ -2513,6 +2815,7 @@ def main(argv=None) -> int:
     index = build_index(offers)
 
     measurement_id = get_measurement_id()
+    stats_endpoint, stats_site_id = get_traffic_stats_config()
 
     out_dir = os.path.join(args.out, "site")
     os.makedirs(out_dir, exist_ok=True)
@@ -2520,11 +2823,17 @@ def main(argv=None) -> int:
         json.dump(index, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as fh:
-        fh.write(render_html(index, measurement_id))
+        fh.write(render_html(index, measurement_id, stats_endpoint, stats_site_id))
     with open(os.path.join(out_dir, "archive.html"), "w", encoding="utf-8") as fh:
-        fh.write(render_archive_html(index, measurement_id))
+        fh.write(
+            render_archive_html(index, measurement_id, stats_endpoint, stats_site_id)
+        )
     with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
-        fh.write(render_privacy_html(index["generated_at"], measurement_id))
+        fh.write(
+            render_privacy_html(
+                index["generated_at"], measurement_id, stats_endpoint, stats_site_id
+            )
+        )
     with open(os.path.join(out_dir, "favicon.svg"), "w", encoding="utf-8") as fh:
         fh.write(_FAVICON_SVG)
     with open(os.path.join(out_dir, "feed.xml"), "w", encoding="utf-8") as fh:
@@ -2544,6 +2853,8 @@ def main(argv=None) -> int:
                     details.get(entry["slug"]),
                     index["generated_at"],
                     measurement_id,
+                    stats_endpoint,
+                    stats_site_id,
                 )
             )
 
@@ -2565,6 +2876,8 @@ def main(argv=None) -> int:
         return 1
 
     note = f" (analytics: {measurement_id})" if measurement_id else ""
+    if stats_endpoint:
+        note += f" (live traffic stats: {stats_endpoint})"
     print(
         f"built {index['count']} offers ({index['active_count']} active, "
         f"{index['expired_count']} expired) -> index.json, site/index.html, "
