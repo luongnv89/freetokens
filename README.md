@@ -214,8 +214,10 @@ Deployment is fully automated via GitHub Actions
 ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). You never
 push built output by hand:
 
-1. **Trigger** — every push to `main` (a pushed `v*` tag, or a manual
-   `workflow_dispatch` run) starts the `Deploy to GitHub Pages` workflow.
+1. **Trigger** — every push to `main` (or a manual `workflow_dispatch` run)
+   starts the `Deploy to GitHub Pages` workflow. Release tags are cut on
+   main commits that have already deployed; the Pages environment is
+   branch-restricted, so tag pushes do not (and cannot) deploy directly.
 2. **Build** — the workflow checks out the repo, runs
    `python3 scripts/build.py` to validate all offers and render
    `site/index.html`, `site/archive.html`, `site/privacy.html`,

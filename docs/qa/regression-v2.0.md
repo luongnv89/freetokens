@@ -50,6 +50,10 @@ green.
 
 - README updated (retain-and-flag, archive, RSS sections); CHANGELOG added
   with v2.0 notes.
-- Annotated tag `v2.0` pushed after the main-branch deploy goes green; the
-  workflow now also triggers on `v*` tags so the tagged commit deploys
-  explicitly.
+- Annotated tag `v2.0` pushed on the release commit `a76b217`; that commit's
+  main-branch deploy went green (run 32559769075). A follow-up `v*` tag
+  trigger was removed again: the `github-pages` environment restricts
+  deployments by branch pattern, so tag runs are rejected at the deploy job
+  ("Tag v2.0 is not allowed to deploy..."). Enabling tag deploys would need a
+  settings change under Settings → Environments → github-pages; until then,
+  releases deploy via their tagged commit on main.
