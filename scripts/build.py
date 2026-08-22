@@ -1441,8 +1441,8 @@ _ANALYTICS_INIT_JS = """<script>
     // stored decision, so consent is never a one-way door.
     if (settings) {
       // Wiring happened once in ftInit before any early return, so this
-      // handler must not call ftWire() again — that would stack duplicate
-      // accept/reject/settings/keydown listeners on every click.
+      // handler must never re-run the wiring step — that would stack
+      // duplicate accept/reject/settings/keydown listeners on every click.
       settings.addEventListener("click", function () {
         ftShowBanner();
       });
