@@ -17,7 +17,7 @@ import json
 import os
 import re
 import sys
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 CATEGORIES = ("api_provider", "coding", "image", "voice", "video")
 CATEGORY_LABELS = {

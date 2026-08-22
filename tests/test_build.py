@@ -16,6 +16,7 @@ import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from unittest import mock
+from urllib.parse import quote
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
@@ -771,9 +772,14 @@ class GtagSnippetTests(unittest.TestCase):
         )
         self.assertNotIn("window.location.search", init)
 
-    def test_eu_heuristic_uses_configured_prefixes(self):
+    def test_eu_heuristic_no_longer_gates_the_banner(self):
+        # #72: every first-time visitor is asked, so the client runtime
+        # carries no time-zone gating at all any more.
         init = build.build_analytics_init(self.MID)
-        self.assertIn(json.dumps(list(build.EU_TIMEZONE_PREFIXES)), init)
+        self.assertNotIn("EU_PREFIXES", init)
+        self.assertNotIn("ftIsEuTimeZone", init)
+        self.assertNotIn("resolvedOptions().timeZone", init)
+        # The server-side helper stays available for diagnostics.
         self.assertTrue(build.EU_TIMEZONE_PREFIXES[0].startswith("Europe"))
 
     def test_is_eu_timezone_pure_function(self):
@@ -829,7 +835,7 @@ class ConsentBannerTests(unittest.TestCase):
         page = build.render_html(self._index(), measurement_id="G-ABCDEF12345")
         self.assertIn('role="region"', page)
         self.assertIn('aria-label="Analytics consent"', page)
-        self.assertIn('<button type="button" id="ft-consent-accept">Accept</button>', page)
+        self.assertIn('<button type="button" id="ft-consent-accept">Allow</button>', page)
         self.assertIn('<button type="button" id="ft-consent-decline">Decline</button>', page)
 
     def test_decline_prevents_tracking_calls(self):
@@ -909,18 +915,32 @@ class StatsBeaconTests(unittest.TestCase):
     def test_disabled_yields_no_beacon(self):
         self.assertEqual(build.build_stats_beacon(""), "")
 
-    def test_beacon_loads_goatcounter_tracker_with_data_attribute(self):
+    def test_beacon_is_consent_gated_loader(self):
+        # #72: no plain async tracker script any more — a loader that only
+        # injects gc.zgo.at after a stored grant, or the live grant event.
         beacon = build.build_stats_beacon(self.SITE)
         self.assertTrue(beacon.startswith("<script"))
         self.assertTrue(beacon.endswith("</script>"))
-        self.assertIn(" async ", beacon)
-        self.assertIn('src="https://gc.zgo.at/count.js"', beacon)
-        self.assertIn(f'data-goatcounter="{self.SITE}/count"', beacon)
+        self.assertNotIn('<script async src=', beacon)
+        self.assertIn('"https://gc.zgo.at/count.js"', beacon)
+        self.assertIn(json.dumps(f"{self.SITE}/count"), beacon)
+        self.assertIn('=== "granted"', beacon)
+        self.assertIn('addEventListener("ft-consent-granted", ftGcLoad)', beacon)
+
+    def test_beacon_loader_never_fires_without_consent(self):
+        beacon = build.build_stats_beacon(self.SITE)
+        load_pos = beacon.index("function ftGcLoad")
+        granted_check = beacon.index('=== "granted"')
+        event_hook = beacon.index("ft-consent-granted")
+        self.assertLess(granted_check, event_hook)
+        # The loader body itself is defined before either trigger runs it.
+        self.assertLess(load_pos, granted_check)
 
     def test_beacon_escapes_hostile_values_defensively(self):
         beacon = build.build_stats_beacon('https://e.com/x" onerror="y')
         self.assertNotIn('" onerror="', beacon)
-        self.assertIn("&quot;", beacon)
+        # Embedded as a JSON string applied via setAttribute, never raw HTML.
+        self.assertIn(json.dumps('https://e.com/x" onerror="y/count'), beacon)
 
     def test_strip_builder_disabled_yields_nothing(self):
         self.assertEqual(build.build_traffic_strip(""), "")
@@ -966,7 +986,7 @@ class TrafficStripMarkupTests(unittest.TestCase):
 
     def test_configured_home_ships_beacon_hidden_strip_and_css(self):
         page = self._home(self.SITE)
-        self.assertIn('src="https://gc.zgo.at/count.js"', page)
+        self.assertIn('"https://gc.zgo.at/count.js"', page)
         self.assertIn('id="ft-traffic" role="status" aria-live="polite" hidden', page)
         self.assertIn(".foot-traffic", page)
         self.assertIn(json.dumps(self.SITE), page)
@@ -1001,14 +1021,14 @@ class TrafficStripMarkupTests(unittest.TestCase):
         }
         for name, page in pages.items():
             with self.subTest(page=name):
-                self.assertIn('src="https://gc.zgo.at/count.js"', page)
+                self.assertIn('"https://gc.zgo.at/count.js"', page)
                 self.assertNotIn('id="ft-traffic"', page)
                 self.assertNotIn("ftInitStats", page)
 
     def test_empty_home_keeps_beacon_but_no_strip_or_module(self):
         empty = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
         page = build.render_html(empty, stats_site=self.SITE)
-        self.assertIn('src="https://gc.zgo.at/count.js"', page)
+        self.assertIn('"https://gc.zgo.at/count.js"', page)
         self.assertNotIn('id="ft-traffic"', page)
         self.assertNotIn("ftInitStats", page)
 
@@ -1278,7 +1298,6 @@ class FilterEventGateTests(unittest.TestCase):
         gate = init.index("function ftTrackEvent")
         body = init[gate:init.index("}", init.index("!TRACKING_ACTIVE"))]
         self.assertIn("!TRACKING_ACTIVE", body)
-        self.assertIn('typeof gtag !== "function"', body)
 
     def test_grant_activates_tracking_before_loading_gtag(self):
         init = build.build_analytics_init(self.MID)
@@ -2539,17 +2558,17 @@ class StatsBuildOutputTests(unittest.TestCase):
                 {build.STATS_SITE_ENV_VAR: self.SITE},
             )
             home = Path(out, "site", "index.html").read_text(encoding="utf-8")
-            self.assertIn('src="https://gc.zgo.at/count.js"', home)
+            self.assertIn('"https://gc.zgo.at/count.js"', home)
             self.assertIn('id="ft-traffic"', home)
             for name in ("privacy.html", "archive.html"):
                 page = Path(out, "site", name).read_text(encoding="utf-8")
                 with self.subTest(page=name):
-                    self.assertIn('src="https://gc.zgo.at/count.js"', page)
+                    self.assertIn('"https://gc.zgo.at/count.js"', page)
                     self.assertNotIn('id="ft-traffic"', page)
             detail = Path(
                 out, "site", "offers", "alpha.html"
             ).read_text(encoding="utf-8")
-            self.assertIn('src="https://gc.zgo.at/count.js"', detail)
+            self.assertIn('"https://gc.zgo.at/count.js"', detail)
             self.assertNotIn('id="ft-traffic"', detail)
 
     def test_main_without_stats_emits_nothing(self):
@@ -2680,17 +2699,23 @@ class PrivacyPageTests(unittest.TestCase):
     def test_policy_states_consent_gating_and_decline_means_zero_calls(self):
         page = self._render()
         self.assertIn("zero tracking requests", page)
-        self.assertIn("not even loaded until permission", page)
+        self.assertIn("no counting code is loaded until permission", page)
 
     def test_policy_names_real_localstorage_key_and_no_own_cookies(self):
         page = self._render()
         self.assertIn(build.CONSENT_STORAGE_KEY, page)
         self.assertIn("sets no cookies of its own", page)
 
-    def test_policy_describes_eu_banner_heuristic_honestly(self):
+    def test_policy_describes_all_visitor_banner_and_change_of_mind(self):
+        # #72: the banner is universal, and consent is revisitable.
         page = self._render()
-        self.assertIn("time zone indicates they are likely in the EU", page)
-        self.assertIn("counted without showing the banner", page)
+        self.assertIn("Every first-time visitor sees a small banner", page)
+        self.assertIn("Cookie settings", page)
+        self.assertNotIn("time zone indicates they are likely in the EU", page)
+        self.assertNotIn("counted without showing the banner", page)
+
+    def test_policy_covers_share_event(self):
+        self.assertIn("share button", self._render())
 
     def test_policy_covers_events_recorded(self):
         page = self._render().lower()
@@ -3252,6 +3277,248 @@ class FeedTests(unittest.TestCase):
             self.assertEqual(
                 len(self._channel(root).findall("item")), 1
             )
+
+
+
+class ConsentForEveryoneTests(unittest.TestCase):
+    """#72: universal banner, persistent change-of-mind, gated GoatCounter."""
+
+    MID = "G-ABCDEF12345"
+    SITE = "https://gc.example.com"
+
+    def _index(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        return build.build_index([offer])
+
+    def _init(self):
+        return build.build_analytics_init(self.MID)
+
+    # --- banner is shown to every first-time visitor -------------------------
+
+    def test_init_asks_every_first_time_visitor(self):
+        init = self._init()
+        seg = init[init.index("function ftInit"):init.index("function ftSchedule")]
+        self.assertIn("ftShowBanner();", seg)
+        # No time-zone branch and no silent auto-grant for the undecided.
+        self.assertNotIn("ftIsEuTimeZone", init)
+        granted_line = 'if (stored === "granted") { ftGrant(); return; }'
+        self.assertEqual(seg.count("ftGrant()"), 1, seg)
+        self.assertIn(granted_line, seg)
+
+    def test_banner_markup_on_every_page_when_any_tracking_configured(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer["slug"] = "test-offer"
+        index = build.build_index([offer])
+        pages = {
+            "home": build.render_html(
+                index, measurement_id=self.MID
+            ),
+            "detail": build.render_offer_html(
+                index["offers"][0], None, index["generated_at"],
+                measurement_id=self.MID,
+            ),
+            "stats-only home": build.render_html(
+                index, stats_site=self.SITE
+            ),
+            "privacy": build.render_privacy_html(
+                "2026-08-21T00:00:00Z", measurement_id=self.MID
+            ),
+        }
+        for name, page in pages.items():
+            with self.subTest(page=name):
+                self.assertIn('id="ft-consent-banner"', page)
+                self.assertIn("ftShowBanner", page)
+
+    # --- persistent change-of-mind entry point --------------------------------
+
+    def test_cookie_settings_control_on_every_tracked_page(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer["slug"] = "test-offer"
+        index = build.build_index([offer])
+        pages = {
+            "home": build.render_html(index, measurement_id=self.MID),
+            "archive": build.render_archive_html(
+                index, measurement_id=self.MID
+            ),
+            "privacy": build.render_privacy_html(
+                "2026-08-21T00:00:00Z", measurement_id=self.MID
+            ),
+            "detail": build.render_offer_html(
+                index["offers"][0], None, index["generated_at"],
+                measurement_id=self.MID,
+            ),
+        }
+        for name, page in pages.items():
+            with self.subTest(page=name):
+                self.assertIn('id="ft-consent-settings"', page)
+                self.assertIn(">Cookie settings</button>", page)
+
+    def test_settings_button_wired_to_reopen_banner(self):
+        init = self._init()
+        wire = init.index("function ftWire")
+        seg = init[wire:init.index("document.addEventListener", wire)]
+        self.assertIn('"ft-consent-settings"', seg)
+        self.assertIn("ftShowBanner();", seg)
+
+    def test_stored_denial_still_wires_the_settings_control(self):
+        init = self._init()
+        seg = init[init.index("function ftInit"):init.index("function ftSchedule")]
+        wire_pos = seg.index("ftWire();")
+        denied_pos = seg.index('stored === "denied"')
+        self.assertLess(wire_pos, denied_pos)
+
+    def test_no_settings_control_when_tracking_unconfigured(self):
+        page = build.render_html(self._index())
+        self.assertNotIn("ft-consent-settings", page)
+        self.assertNotIn("Cookie settings", page)
+        self.assertNotIn("ft-consent-banner", page)
+
+    # --- no non-essential tracking before consent ------------------------------
+
+    def test_grant_event_wakes_consent_gated_beacon(self):
+        init = self._init()
+        grant = init.index("function ftGrant")
+        seg = init[grant:init.index('gtag("consent", "update"', grant)]
+        self.assertIn('dispatchEvent(new CustomEvent("ft-consent-granted"))', seg)
+        beacon = build.build_stats_beacon(self.SITE)
+        self.assertIn('addEventListener("ft-consent-granted", ftGcLoad)', beacon)
+
+    def test_beacon_loader_checks_storage_before_injecting_tracker(self):
+        beacon = build.build_stats_beacon(self.SITE)
+        check = beacon.index('=== "granted"')
+        inject = beacon.index("ftGcLoad();")
+        self.assertLess(check, inject)
+
+    def test_stats_only_builds_get_full_consent_runtime(self):
+        index = self._index()
+        page = build.render_html(index, stats_site=self.SITE)
+        self.assertIn('var MEASUREMENT_ID = "";', page)
+        self.assertIn("function ftTrackEvent(name, params)", page)
+        self.assertIn('id="ft-consent-banner"', page)
+
+    def test_track_event_bus_requires_measurement_id_and_active_flag(self):
+        init = self._init()
+        gate = init.index("function ftTrackEvent")
+        body = init[gate:init.index("window.ftTrackEvent", gate)]
+        self.assertIn("!TRACKING_ACTIVE", body)
+        self.assertIn("MEASUREMENT_ID &&", body)
+
+
+class OfferShareBarTests(unittest.TestCase):
+    """#71: LinkedIn/X/Facebook/email + copy link on every detail page."""
+
+    SLUG = "test-offer"
+
+    def _offer(self, **overrides):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer["slug"] = self.SLUG
+        offer.update(overrides)
+        return offer
+
+    def _page(self, offer=None, base_url=""):
+        offer = offer or self._offer()
+        index = build.build_index([offer])
+        return build.render_offer_html(
+            index["offers"][0],
+            None,
+            index["generated_at"],
+            base_url=base_url,
+        )
+
+    def test_share_section_lists_all_five_channels(self):
+        page = self._page()
+        start = page.index('class="od-share"')
+        seg = page[start:page.index("</section>", start)]
+        for channel in ("linkedin", "x", "facebook", "email", "copy"):
+            self.assertIn(f'data-ft-share="{channel}"', seg)
+        for label in (">LinkedIn<", ">X<", ">Facebook<", ">Email<", "Copy link"):
+            self.assertIn(label, seg)
+        self.assertIn('aria-label="Share this offer"', seg)
+
+    def test_external_share_links_are_hardened_new_tabs(self):
+        import re as _re
+        page = self._page()
+        for match in _re.finditer(
+            r'<a class="share-link" href="([^"]+)" target="_blank" '
+            r'rel="noopener noreferrer"', page
+        ):
+            href = match.group(1)
+            self.assertTrue(href.startswith(("https://", "mailto:")), href)
+
+    def test_share_links_prefill_absolute_page_url(self):
+        custom = "https://pages.example.org/freetokens"
+        page = self._page(base_url=custom)
+        expected = quote(
+            f"{custom}/offers/{self.SLUG}.html", safe=""
+        )
+        # linkedin + x + facebook hrefs, plus the mailto body parameter.
+        self.assertEqual(page.count(expected), 4)
+
+    def test_base_url_defaults_to_production_pages_origin(self):
+        page = self._page()
+        expected = quote(
+            f"{build.DEFAULT_BASE_URL}/offers/{self.SLUG}.html", safe=""
+        )
+        self.assertIn(expected, page)
+
+    def test_x_intent_carries_encoded_title(self):
+        page = self._page()
+        expected = quote("Test Offer", safe="")
+        self.assertIn(f"text={expected}", page)
+
+    def test_copy_button_has_live_region_confirmation_slot(self):
+        page = self._page()
+        start = page.index('class="od-share"')
+        seg = page[start:page.index("</section>", start)]
+        self.assertIn('class="share-copy"', seg)
+        self.assertRegex(seg, r'class="share-status"[^>]*\bhidden\b')
+        self.assertIn('role="status"', seg)
+        self.assertIn('aria-live="polite"', seg)
+
+    def test_share_runtime_shipped_with_offer_id_and_page_url(self):
+        page = self._page(base_url="https://x.example.org/site")
+        self.assertIn('"offer_share"', page)
+        self.assertIn(json.dumps(self.SLUG), page)
+        self.assertIn(
+            json.dumps(f"https://x.example.org/site/offers/{self.SLUG}.html"),
+            page,
+        )
+        self.assertIn("navigator.clipboard", page)
+
+    def test_share_bar_absent_from_home_and_chrome(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        page = build.render_html(build.build_index([offer]))
+        self.assertNotIn('class="od-share"', page)
+        self.assertNotIn("data-ft-share", page)
+
+    def test_main_threads_base_url_into_share_links(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "alpha.yaml").write_text(
+                offer_text(), encoding="utf-8"
+            )
+            out = os.path.join(tmp, "out")
+            code = build.main([
+                "--offers-dir", offers_dir, "--out", out,
+                "--base-url", "https://custom.example.org/ft",
+            ])
+            self.assertEqual(code, 0)
+            detail = Path(out, "site", "offers", "alpha.html").read_text(
+                encoding="utf-8"
+            )
+            expected = quote(
+                "https://custom.example.org/ft/offers/alpha.html", safe=""
+            )
+            self.assertIn(expected, detail)
+
+    def test_expired_offer_pages_still_get_the_share_bar(self):
+        offer = self._offer(status="expired")
+        page = self._page(offer)
+        self.assertIn('class="od-share"', page)
+
 
 
 if __name__ == "__main__":
