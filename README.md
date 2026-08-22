@@ -136,17 +136,19 @@ framework) that narrows offers without reloads or network fetches:
   a `role="status"` live region announcing "Showing X of Y offers", and a
   friendly empty state with a working reset button.
 
-### Offer detail cards
+### Offer detail pages
 
-Every card carries a "How to claim & details" button that opens a native
-`<dialog>` rendered at build time — no extra fetches, no framework. The
-dialog shows the full offer picture: description, an ordered how-to-claim
-list, social-proof cards (static X/Reddit quote cards, links, and
-screenshots — never third-party embed scripts), and a direct claim link.
-Curated content comes from optional per-offer sidecar files,
-`offers/details/<slug>.json`, validated against
+Every card links to a dedicated detail page at `offers/<slug>.html`,
+generated at build time — no extra fetches, no framework, fully
+shareable URLs. The page shows the full offer picture: description, an
+ordered how-to-claim list, social-proof cards (static X/Reddit quote
+cards, links, and screenshots — never third-party embed scripts), and a
+direct claim link. Expired offers keep their page with an explicit
+"Expired" badge and no claim link. Archive rows and RSS items point at
+the same pages. Curated content comes from optional per-offer sidecar
+files, `offers/details/<slug>.json`, validated against
 `schemas/offer-detail.schema.json`; offers without one still get a detail
-card built from the core listing fields. The field reference lives in
+page built from the core listing fields. The field reference lives in
 [docs/schema.md](docs/schema.md#detail-files-offersdetailsslugjson--optional).
 
 ### Analytics & consent (GA4)
