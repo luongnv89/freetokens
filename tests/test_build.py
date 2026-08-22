@@ -495,6 +495,124 @@ class EmptyStateTests(unittest.TestCase):
             self.assertEqual(index["count"], 0)
 
 
+class MastheadStatsTests(unittest.TestCase):
+    """#49: masthead surfaces total, ongoing, and verified deal counters."""
+
+    def _index(self, expiries):
+        offers = []
+        for i, expiry in enumerate(expiries):
+            offer = build.validate_offer(
+                dict(VALID, title=f"Offer {i}", expiry_date=expiry), "a.yaml"
+            )
+            offer.setdefault("slug", f"offer-{i}")
+            offers.append(offer)
+        return build.build_index(offers)
+
+    def _count_line(self, page):
+        start = page.index('<p class="count">')
+        return page[start : page.index("</p>", start)]
+
+    def test_masthead_shows_total_ongoing_and_verified_counts(self):
+        future = (dt.date.today() + dt.timedelta(days=30)).isoformat()
+        page = build.render_html(self._index([None, None, future]))
+        line = self._count_line(page)
+        self.assertIn("<strong>3</strong> live offers", line)
+        self.assertIn("<strong>2</strong> ongoing", line)
+        self.assertIn("<strong>3</strong> verified", line)
+
+    def test_dated_expiries_are_not_counted_as_ongoing(self):
+        page = build.render_html(
+            self._index([None, "2026-12-31"])
+        )
+        line = self._count_line(page)
+        self.assertIn("<strong>1</strong> ongoing", line)
+
+    def test_empty_index_renders_zero_counters(self):
+        index = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
+        page = build.render_html(index)
+        line = self._count_line(page)
+        self.assertIn("<strong>0</strong> live offers", line)
+        self.assertIn("<strong>0</strong> ongoing", line)
+        self.assertIn("<strong>0</strong> verified", line)
+
+    def test_stats_match_the_built_seed_catalog(self):
+        offers = build.load_offers(str(REPO / "offers"))
+        index = build.build_index(build.filter_expired(offers))
+        page = build.render_html(index)
+        ongoing = sum(1 for o in index["offers"] if o["expiry_date"] is None)
+        line = self._count_line(page)
+        self.assertIn(f"<strong>{index['count']}</strong> live offers", line)
+        self.assertIn(f"<strong>{ongoing}</strong> ongoing", line)
+        # Every published offer carries a non-null verified_date (validator
+        # enforces it), so the verified counter always equals the total.
+        self.assertIn(f"<strong>{index['count']}</strong> verified", line)
+
+
+class FooterContactTests(unittest.TestCase):
+    """#50: maintainer contact links (X, LinkedIn, website) on every page."""
+
+    def _home(self):
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        return build.render_html(build.build_index([offer]))
+
+    def _privacy(self):
+        return build.render_privacy_html("2026-08-21T00:00:00Z")
+
+    def _contact_segment(self, page):
+        start = page.index('aria-label="Contact"')
+        return page[start : page.index("</nav>", start)]
+
+    def test_contact_nav_present_on_home_and_privacy_pages(self):
+        for name, page in (("home", self._home()), ("privacy", self._privacy())):
+            with self.subTest(page=name):
+                self.assertIn('<nav class="foot-nav" aria-label="Contact">', page)
+
+    def test_links_point_at_maintainer_profiles(self):
+        segment = self._contact_segment(self._home())
+        self.assertIn('href="https://x.com/luongnv89"', segment)
+        self.assertIn('href="https://linkedin.com/in/luongnv89"', segment)
+        self.assertIn('href="https://luongnv.com"', segment)
+
+    def test_labels_name_x_linkedin_and_website(self):
+        segment = self._contact_segment(self._home())
+        for label in ("X", "LinkedIn", "Website"):
+            self.assertIn(f">{label}</a>", segment)
+
+    def test_external_links_open_new_tab_with_noopener_hardening(self):
+        segment = self._contact_segment(self._home())
+        self.assertEqual(segment.count('target="_blank"'), 3)
+        self.assertEqual(segment.count('rel="noopener noreferrer"'), 3)
+
+    def test_exactly_three_contact_links_separated_by_middots(self):
+        segment = self._contact_segment(self._home())
+        self.assertEqual(segment.count("<a "), 3)
+        self.assertEqual(segment.count("&middot;"), 2)
+        self.assertFalse(segment.startswith("<span"))
+
+    def test_contact_links_follow_site_nav_and_never_carry_current(self):
+        home = self._home()
+        privacy = self._privacy()
+        for name, page in (("home", home), ("privacy", privacy)):
+            with self.subTest(page=name):
+                self.assertLess(
+                    page.index('aria-label="Site"'),
+                    page.index('aria-label="Contact"'),
+                )
+                self.assertNotIn("aria-current", self._contact_segment(page))
+        # The aria-current contract of the site nav itself stays intact.
+        self.assertIn('href="./" aria-current="page"', home)
+        self.assertIn('href="privacy.html" aria-current="page"', privacy)
+
+    def test_committed_artifacts_carry_contact_nav_and_stats(self):
+        for artifact in ("site/index.html", "site/privacy.html"):
+            with self.subTest(artifact=artifact):
+                page = (REPO / artifact).read_text(encoding="utf-8")
+                self.assertIn('aria-label="Contact"', page)
+        home = (REPO / "site/index.html").read_text(encoding="utf-8")
+        self.assertIn("</strong> ongoing &middot;", home)
+
+
 class MeasurementIdTests(unittest.TestCase):
     """F7: GA4 is build-time opt-in via the GA_MEASUREMENT_ID env var."""
 

@@ -562,7 +562,7 @@ _HOME_HEADER = """<header class="masthead">
 <p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
 <h1>Free AI Credits</h1>
 <p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
-<p class="count"><strong>{count}</strong> live offers</p>
+<p class="count"><strong>{count}</strong> live offers &middot; <strong>{ongoing}</strong> ongoing &middot; <strong>{verified}</strong> verified</p>
 </header>"""
 
 # Footer nav shared by every page. Links stay relative so they resolve under
@@ -571,6 +571,38 @@ _HOME_HEADER = """<header class="masthead">
 _FOOT_NAV = """<nav class="foot-nav" aria-label="Site">\
 <a href="./"{offers_current}>Offers</a><span aria-hidden="true">&middot;</span>\
 <a href="privacy.html"{privacy_current}>Privacy policy</a></nav>"""
+
+# Maintainer contact links (#50), rendered as a second footer nav on every
+# generated page. Destinations are the maintainer's own published profiles;
+# external anchors follow the site convention: new tab + noopener hardening.
+_CONTACT_LINKS = (
+    ("X", "https://x.com/luongnv89"),
+    ("LinkedIn", "https://linkedin.com/in/luongnv89"),
+    ("Website", "https://luongnv.com"),
+)
+
+_CONTACT_ANCHOR = (
+    '<a href="{url}" target="_blank" rel="noopener noreferrer">{label}</a>'
+)
+
+
+def _contact_nav() -> str:
+    """External maintainer-contact nav shared by every generated page."""
+    parts = []
+    for i, (label, url) in enumerate(_CONTACT_LINKS):
+        if i:
+            parts.append('<span aria-hidden="true">&middot;</span>')
+        parts.append(
+            _CONTACT_ANCHOR.format(
+                url=html.escape(url, quote=True),
+                label=html.escape(label),
+            )
+        )
+    return (
+        '<nav class="foot-nav" aria-label="Contact">'
+        + "".join(parts)
+        + "</nav>"
+    )
 
 _CARD_TMPL = """<li style="--i:{index}">
 <article class="card" data-category="{category}">
@@ -1268,9 +1300,12 @@ def build_app_js() -> str:
 
 def _foot_nav(current: str) -> str:
     """Footer nav for every page; ``current`` marks the active link."""
-    return _FOOT_NAV.format(
-        offers_current=' aria-current="page"' if current == "home" else "",
-        privacy_current=' aria-current="page"' if current == "privacy" else "",
+    return (
+        _FOOT_NAV.format(
+            offers_current=' aria-current="page"' if current == "home" else "",
+            privacy_current=' aria-current="page"' if current == "privacy" else "",
+        )
+        + _contact_nav()
     )
 
 
@@ -1348,13 +1383,18 @@ def render_html(index: dict, measurement_id: str = "") -> str:
             + _CLIENT_EMPTY_TMPL
         )
     built = index["generated_at"]
+    offers = index["offers"]
     return _page_shell(
         title="Free AI Credits",
         meta_description=(
             "Every currently-claimable free AI credit offer, hand-verified, "
             "on one fast page."
         ),
-        header=_HOME_HEADER.format(count=index["count"]),
+        header=_HOME_HEADER.format(
+            count=index["count"],
+            ongoing=sum(1 for o in offers if not o["expiry_date"]),
+            verified=sum(1 for o in offers if o.get("verified_date")),
+        ),
         content=content,
         built=built,
         foot_current="home",
