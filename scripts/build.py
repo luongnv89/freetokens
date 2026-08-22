@@ -2085,12 +2085,12 @@ _STATS_JS_MODULE = r"""
   function ftInitStats() {
     var box = document.getElementById("__FT_STRIP_ID__");
     if (!box || typeof window.fetch !== "function") { return; }
-    window.Promise.all([
+    Promise.all([
       window.fetch(ftStatUrl("today")),
       window.fetch(ftStatUrl("90d"))
     ]).then(function (responses) {
       if (!responses[0].ok || !responses[1].ok) { return null; }
-      return window.Promise.all([
+      return Promise.all([
         responses[0].json(),
         responses[1].json()
       ]);
@@ -2134,9 +2134,10 @@ def get_measurement_id(env=None) -> str:
 def resolve_stats_endpoint(raw) -> str:
     """Return a normalized https Counterscale origin, or '' when disabled.
 
-    An unset/empty value disables live traffic stats silently; a malformed
-    value (wrong scheme, stray whitespace, quotes) disables them with a
-    warning so a typo can never break the build or the emitted attributes.
+    Origin-only by design: the beacon and stats URLs append their own fixed
+    paths (/tracker.js, /resources/stats), so anything beyond the origin
+    would signal a misconfiguration — and rejecting it keeps hostile
+    characters out of emitted attributes entirely.
     """
     value = (raw or "").strip().rstrip("/")
     if not value:
@@ -2149,6 +2150,7 @@ def resolve_stats_endpoint(raw) -> str:
         or parsed.params
         or parsed.query
         or parsed.fragment
+        or parsed.path not in ("",)
         or not STATS_ENDPOINT_RE.match(f"{parsed.scheme}://{parsed.netloc}")
     ):
         print(
@@ -2213,6 +2215,17 @@ def build_stats_beacon(endpoint: str = "", site_id: str = "") -> str:
         + html.escape(site_id, quote=True)
         + '"></script>'
     )
+
+
+def build_traffic_strip(endpoint: str = "", site_id: str = "") -> str:
+    """Hidden footer strip markup ('' until both stats values are set).
+
+    Starts ``hidden`` so a blocked or erroring backend degrades to nothing
+    visible; ftInitStats reveals it only after a successful fetch.
+    """
+    if not endpoint or not site_id:
+        return ""
+    return _TRAFFIC_STRIP_TMPL
 
 
 def is_eu_timezone(tz) -> bool:
@@ -2336,7 +2349,11 @@ def _page_shell(
     rel_prefix = "../" if depth else "./"
     up = "../" * depth
     stats_on = bool(stats_endpoint and stats_site_id)
-    traffic_strip = _TRAFFIC_STRIP_TMPL if stats_on and app_js else ""
+    traffic_strip = (
+        build_traffic_strip(stats_endpoint, stats_site_id)
+        if stats_on and app_js
+        else ""
+    )
     if traffic_strip:
         css_extra += _TRAFFIC_CSS
     return _PAGE_TMPL.format(
