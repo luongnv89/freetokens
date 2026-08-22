@@ -2476,7 +2476,10 @@ class StatsBuildOutputTests(unittest.TestCase):
         offers_dir = self._write_offers(tmp)
         out = os.path.join(tmp, "out")
         err = io.StringIO()
-        with mock.patch.dict(os.environ, env), redirect_stderr(err):
+        # clear=True: CI exports GOATCOUNTER_SITE_URL into the step env, so
+        # merging over os.environ would leak the real secret into builds
+        # this test expects to be unconfigured.
+        with mock.patch.dict(os.environ, env, clear=True), redirect_stderr(err):
             code = build.main(
                 ["--offers-dir", offers_dir, "--out", out]
             )
