@@ -17,12 +17,13 @@ Schema reference: `docs/schema.md`. Ground rules: `CONTRIBUTING.md`.
 ## What I do
 
 1. **Extract** offer fields from your input (screenshot transcript, pasted
-   text, or a source URL you supply).
+   text, or a source URL you supply), plus any claim instructions the input
+   contains.
 2. **Verify** on the web that the offer is still live and the terms match.
 3. **Normalize** them into the frozen seven-field schema and pick a slug.
 4. **Validate** the draft with the deterministic helper in this directory.
 5. **Present** the git diff of exactly what would change.
-6. **Commit** only after you say yes.
+6. **Commit** only after you say yes — then open a tracking issue and PR.
 
 ## The frozen schema (F5)
 
@@ -51,6 +52,30 @@ Read the screenshot/text and collect all seven fields. Hard rules:
 
 Illegible input (unreadable screenshot, truncated paste): say which parts are
 illegible and ask the targeted question above instead of guessing.
+
+**Claim instructions.** While extracting, also capture HOW to get the offer if
+the input says so — signup URL, promo code, CLI command, plan tier, eligibility
+restrictions (region/student/new-user), or usage limits. Record them verbatim
+in the Step 5 presentation as a "How to claim" list; they feed the optional
+`offers/details/<slug>.json` `claim_steps` enrichment and the tracking issue
+body. Claim instructions never enter the seven YAML fields — they are
+supporting evidence only, and like everything else they are never invented:
+if the input is silent on how to claim, omit the section entirely.
+
+**X source posts become embedded evidence.** If `source_url` (or any cited
+evidence in the input) is an x.com/twitter.com post, ALWAYS create the detail
+file `offers/details/<slug>.json` alongside the YAML with a `social_proof`
+entry of type `x` so the post renders as a quote card on the offer's detail
+page — never leave an X-sourced offer without it. Fill `url` from the post;
+fetch `author`/`handle`/`text` automatically from Twitter's public oEmbed
+endpoint (`https://publish.twitter.com/oembed?url=<post-url>`) rather than
+asking the curator to copy-paste. The oEmbed response's `author_name` maps to
+`author` (`@author_name` → `handle`); take `text` from the post content you
+already fetched in Step 2 (oEmbed returns HTML, not plain text). If oEmbed is
+unreachable, fall back to the text captured during verification. This embeds
+the post statically at build time (no third-party scripts, per
+docs/schema.md) and preserves the evidence if the post is later deleted.
+Add `summary` and `claim_steps` to the same file when you have them.
 
 ### Step 2 — Verify on the web (trust policy)
 
@@ -124,9 +149,11 @@ Show the curator exactly what would change, no more and no less:
 git diff --no-index -- <existing-file-if-any> needs_review/<slug>.yaml  # updates
 ```
 
-plus the full draft content for brand-new offers. State plainly: the target
+plus the full draft content for brand-new offers (and the detail JSON if one
+was created). State plainly: the target
 path (`offers/<slug>.yaml` or `offers/details/<slug>.json`), whether it is a
-new file or an edit, and the verification verdict + evidence quote.
+new file or an edit, and the verification verdict + evidence quote. If claim
+instructions were extracted, include them under a "How to claim" heading.
 
 ### Step 6 — Commit gate (hard rule)
 
@@ -136,10 +163,19 @@ without the curator's explicit yes.**
 - Acceptable confirmation: a clear affirmative from the curator in the
   conversation ("yes", "commit it", "ship it") AFTER seeing the Step 5 diff.
   Silence, topic change, or ambiguity is a NO.
-- On YES: move the draft into `offers/` (`git mv` for edits), run the
-  validator once more on its final path, then follow `CONTRIBUTING.md`
-  (branch `<type>/<issue>-<slug>`, Conventional Commits message referencing
-  the tracking issue, push, PR whose body starts with `Closes #<issue>`).
+- On YES: move the draft into `offers/` (`git mv` for edits), stage the
+  matching `offers/details/<slug>.json` if one was created, run the
+  validator once more on its final path, then follow `CONTRIBUTING.md`:
+  1. **Create the tracking issue** with `gh issue create` (unless the curator
+     supplied one). Title: `Add <provider> <short offer name>`. Body: provider,
+     what is free, amount, expiry, source URL, and any extracted "How to
+     claim" steps, plus the verification date.
+  2. Branch `<type>/<issue>-<slug>` from current `main`.
+  3. Commit with a Conventional Commits message referencing the issue, e.g.
+     `feat(offers): add <Provider> offer (#<issue>)`, and push.
+  4. Open the PR whose body starts with `Closes #<issue>`, include the
+     verification verdict + evidence quote and the local-check results
+     (validator, `scripts/build.py`, test suite).
 - On NO / no answer / unverifiable: leave the draft in `needs_review/`,
   summarize why, and stop. Re-running the skill later resumes from Step 2.
 

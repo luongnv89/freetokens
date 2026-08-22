@@ -1,0 +1,17 @@
+{
+  "summary": "OpenCode is offering the Ox Alpha stealth model free for one week: 1M-token context, multi-modal input, zero data retention, and generous rate limits the team describes as near unlimited usage, backed by a claimed 100T tokens/day capacity. Announced by the official OpenCode account on August 20, 2026.",
+  "claim_steps": [
+    "Install OpenCode and connect the OpenCode Zen provider.",
+    "Open the model catalog with /models.",
+    "Select Ox Alpha (Free) and start a coding task."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2090544355824038300",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "Ox Alpha (stealth model) is free for the next week - 1M Context - Multi-modal - Zero Data Retention Generous rate limits, near unlimited usage We have capacity for 100T tokens per day, lets see what you can do"
+    }
+  ]
+}
