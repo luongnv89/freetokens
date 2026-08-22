@@ -203,6 +203,52 @@ class BuildOutputTests(unittest.TestCase):
             self.assertIn("Free AI Credits", page)
             self.assertIn("Test Offer", page)
 
+    def _dated_offer(self, slug, verified):
+        return dict(
+            build.validate_offer(
+                dict(VALID, title=f"Offer {slug}", verified_date=verified),
+                "a.yaml",
+            ),
+            slug=slug,
+        )
+
+    def test_index_orders_newest_verified_first(self):
+        # #70: the default listing order is latest-added first; verified_date
+        # doubles as the add stamp in the frozen seven-field schema.
+        offers = [
+            self._dated_offer("old", "2026-01-01"),
+            self._dated_offer("new", "2026-08-21"),
+            self._dated_offer("mid", "2026-05-05"),
+        ]
+        index = build.build_index(offers)
+        self.assertEqual(
+            [o["slug"] for o in index["offers"]], ["new", "mid", "old"]
+        )
+
+    def test_index_order_stable_on_verified_date_ties(self):
+        # #70: equal verified dates keep slug-ascending order so re-sorts and
+        # rebuilds never shuffle same-day additions.
+        offers = [
+            self._dated_offer("zeta", "2026-08-21"),
+            self._dated_offer("alpha", "2026-08-21"),
+            self._dated_offer("mid", "2026-08-21"),
+        ]
+        index = build.build_index(offers)
+        self.assertEqual(
+            [o["slug"] for o in index["offers"]], ["alpha", "mid", "zeta"]
+        )
+
+    def test_home_page_renders_newest_added_card_first(self):
+        # #70: with no ?sort= param the first card on the home page is the
+        # most recently added offer.
+        offers = [
+            self._dated_offer("old", "2026-01-01"),
+            self._dated_offer("new", "2026-08-21"),
+        ]
+        page = build.render_html(build.build_index(offers))
+        first = re.search(r'data-ft-offer-id="([^"]+)"', page)
+        self.assertEqual(first.group(1), "new")
+
     def test_html_escapes_titles(self):
         with tempfile.TemporaryDirectory() as tmp:
             offers_dir = self._write_offers(tmp)

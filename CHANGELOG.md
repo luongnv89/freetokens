@@ -3,6 +3,14 @@
 Notable changes to the Free AI Credits site and build. The site itself is
 regenerated on every deploy; entries here cover behavior, not content edits.
 
+## Unreleased
+
+- **Default order latest-added first (#70):** the home offers list now
+  defaults to newest-verified-first (verified_date doubles as the add
+  stamp), so returning visitors see fresh offers without touching the sort
+  control. Explicit `?sort=` choices still override; ties stay
+  slug-stable.
+
 ## v2.0 — 2026-08-22
 
 Archive, RSS, distribution groundwork (#25–#30).
