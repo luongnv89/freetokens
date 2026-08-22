@@ -223,8 +223,15 @@ build warning, and unset keeps zero stats markup in the output. When enabled:
 - **Silent degradation** — offline, ad-blocked, erroring, or malformed
   responses leave the strip hidden forever and nothing else changes.
 
+> **Important:** with a stock Counterscale deployment the strip stays
+> hidden even when everything above is configured correctly — upstream
+> Counterscale sends no `Access-Control-Allow-Origin` header on its stats
+> route, so browsers block the cross-origin fetch. Counting itself works
+> immediately; to make the visible numbers appear you must complete
+> **Step 4 of the setup guide** (CORS remediation) first.
+
 Full operator instructions — deploying Counterscale, minting the secrets,
-and the CORS note required to make cross-origin reads work — live in
+and the required CORS step before live numbers appear — live in
 [docs/traffic-stats-setup.md](docs/traffic-stats-setup.md).
 
 ### Privacy policy page
