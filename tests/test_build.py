@@ -1532,6 +1532,163 @@ class NodeAppJsTests(unittest.TestCase):
         self.assertEqual(len(final["visible"]), 3)
         self.assertNotIn("ftTrackEvent", json.dumps(final))
 
+    # --- F10 sort behavior (issue #22) --------------------------------------
+
+    SORT_CARDS = [
+        {
+            "slug": "old", "category": "coding",
+            "text": "Old Coding", "verified": "2026-01-01",
+            "expiry": "2026-09-30", "amount_sort": "80",
+        },
+        {
+            "slug": "new", "category": "image",
+            "text": "New Image", "verified": "2026-08-21",
+            "expiry": "", "amount_sort": "300",
+        },
+        {
+            "slug": "mid", "category": "api_provider",
+            "text": "Mid API", "verified": "2026-05-05",
+            "expiry": "2026-08-25", "amount_sort": "10000",
+        },
+    ]
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_expiring_soon_sorts_ascending_with_null_expiry_last(self):
+        snaps = self._run(
+            [{"op": "set_sort", "value": "expiring"}], cards=self.SORT_CARDS
+        )
+        final = snaps[-1]
+        self.assertEqual(final["visible"], ["mid", "old", "new"])
+        self.assertEqual(final["sortValue"], "expiring")
+        self.assertEqual(final["historyUrls"], ["?sort=expiring"])
+        self.assertEqual(
+            final["events"], [["sort_use", {"sort_option": "expiring"}]]
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_newest_sorts_verified_date_descending(self):
+        snaps = self._run(
+            [{"op": "set_sort", "value": "newest"}], cards=self.SORT_CARDS
+        )
+        final = snaps[-1]
+        self.assertEqual(final["visible"], ["new", "mid", "old"])
+        self.assertEqual(
+            final["events"], [["sort_use", {"sort_option": "newest"}]]
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_amount_sorts_descending(self):
+        snaps = self._run(
+            [{"op": "set_sort", "value": "amount"}], cards=self.SORT_CARDS
+        )
+        final = snaps[-1]
+        self.assertEqual(final["visible"], ["mid", "new", "old"])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_default_restores_build_order_and_reports_default_option(self):
+        snaps = self._run(
+            [
+                {"op": "set_sort", "value": "amount"},
+                {"op": "set_sort", "value": ""},
+            ],
+            cards=self.SORT_CARDS,
+        )
+        final = snaps[-1]
+        self.assertEqual(final["visible"], ["old", "new", "mid"])  # build order
+        self.assertEqual(final["sortValue"], "")
+        self.assertEqual(final["locationSearch"], "")
+        self.assertEqual(
+            final["events"],
+            [
+                ["sort_use", {"sort_option": "amount"}],
+                ["sort_use", {"sort_option": "default"}],
+            ],
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_deep_link_sort_param_reorders_on_load_without_events(self):
+        first = self._run([], init_search="?sort=expiring", cards=self.SORT_CARDS)[0]
+        self.assertEqual(first["visible"], ["mid", "old", "new"])
+        self.assertEqual(first["sortValue"], "expiring")
+        self.assertEqual(first["events"], [])
+        self.assertEqual(first["historyUrls"], [])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_invalid_sort_param_ignored_on_restore(self):
+        first = self._run([], init_search="?sort=bogus")[0]
+        self.assertEqual(len(first["visible"]), 3)
+        self.assertEqual(first["sortValue"], "")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_popstate_restores_sort_without_new_events_or_history(self):
+        snaps = self._run(
+            [
+                {"op": "set_sort", "value": "expiring"},
+                {"op": "popstate", "search": "?sort=newest"},
+                {"op": "snapshot"},
+            ],
+            cards=self.SORT_CARDS,
+        )
+        restored = snaps[-1]
+        self.assertEqual(restored["visible"], ["new", "mid", "old"])
+        self.assertEqual(restored["sortValue"], "newest")
+        self.assertEqual(restored["historyUrls"], ["?sort=expiring"])
+        self.assertEqual(
+            restored["events"], [["sort_use", {"sort_option": "expiring"}]]
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_redundant_sort_change_neither_commits_nor_tracks(self):
+        snaps = self._run(
+            [
+                {"op": "set_sort", "value": "expiring"},
+                {"op": "set_sort", "value": "expiring"},
+            ],
+            cards=self.SORT_CARDS,
+        )
+        final = snaps[-1]
+        self.assertEqual(final["historyUrls"], ["?sort=expiring"])
+        self.assertEqual(
+            final["events"], [["sort_use", {"sort_option": "expiring"}]]
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_sort_and_filter_compose_hidden_items_stay_sorted(self):
+        snaps = self._run(
+            [
+                {"op": "set_sort", "value": "newest"},
+                {"op": "click_chip", "value": "coding"},
+            ],
+            cards=self.SORT_CARDS,
+        )
+        final = snaps[-1]
+        self.assertEqual(final["visible"], ["old"])  # only coding offer shows
+        self.assertEqual(final["locationSearch"], "?category=coding&sort=newest")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_resort_of_25_offers_completes_under_200ms(self):
+        many_cards = []
+        for i in range(25):
+            many_cards.append(
+                {
+                    "slug": f"offer-{i:02d}",
+                    "category": "coding",
+                    "text": f"Offer {i}",
+                    "verified": f"2026-01-{(i % 28) + 1:02d}",
+                    "expiry": "" if i % 5 == 0 else "2026-12-01",
+                    "amount_sort": str((i * 37) % 900),
+                }
+            )
+        snaps = self._run(
+            [{"op": "perf_sort", "value": "expiring"}], cards=many_cards
+        )
+        final = snaps[-1]
+        self.assertLess(final["perf_ms"], 200)
+        ongoing_last = [
+            s for s in final["visible"] if not many_cards[int(s[-2:])]["expiry"]
+        ]
+        self.assertEqual(ongoing_last, final["visible"][-5:])
+
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_offer_click_fires_once_with_matching_params(self):
         cards = [
@@ -1992,7 +2149,7 @@ class LaunchGateTests(unittest.TestCase):
         self.assertIn("@media (pointer: coarse)", home)
         coarse_block = home[home.index("@media (pointer: coarse)"):]
         self.assertIn(".chip,", coarse_block[:200])
-        self.assertIn("#ft-search { min-height: 44px; }", coarse_block[:200])
+        self.assertIn("#ft-sort { min-height: 44px; }", coarse_block[:200])
         # The consent banner ships its own copy of the rule because its CSS
         # is emitted only when GA4 is configured.
         offer = build.validate_offer(dict(VALID), "a.yaml")
@@ -2002,6 +2159,73 @@ class LaunchGateTests(unittest.TestCase):
             measurement_id="G-ABCDEF12345",
         )
         self.assertIn(".consent-actions button { min-height: 44px; }", banner_page)
+
+
+class AmountSortValueTests(unittest.TestCase):
+    """F10 sort key heuristic: first-number magnitude with k/M suffixes."""
+
+    def test_dollar_amount(self):
+        self.assertEqual(build.amount_sort_value("$300 in credits"), 300.0)
+
+    def test_thousands_separator(self):
+        self.assertEqual(
+            build.amount_sort_value("2,000 completions + 50 chat requests"),
+            2000.0,
+        )
+
+    def test_k_suffix(self):
+        self.assertEqual(build.amount_sort_value("10k credits/month"), 10000.0)
+
+    def test_m_suffix_case_insensitive(self):
+        self.assertEqual(build.amount_sort_value("5M tokens"), 5_000_000.0)
+        self.assertEqual(build.amount_sort_value("3m requests"), 3_000_000.0)
+
+    def test_no_number_is_zero(self):
+        self.assertEqual(build.amount_sort_value("Free tier"), 0.0)
+        self.assertEqual(build.amount_sort_value(""), 0.0)
+
+    def test_never_crashes_on_hostile_input(self):
+        for junk in ("..", ",,,", "1.2.3 things", "9.", "-"):
+            self.assertIsInstance(build.amount_sort_value(junk), float)
+
+
+class SortMarkupTests(unittest.TestCase):
+    """Build-time markup behind F10: select control + per-card sort keys."""
+
+    def _home_with_one(self, **overrides):
+        offer = build.validate_offer(dict(VALID, **overrides), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        return build.render_html(build.build_index([offer]))
+
+    def test_toolbar_has_sort_select_with_default_plus_three_modes(self):
+        page = self._home_with_one()
+        self.assertIn('<select id="ft-sort">', page)
+        self.assertIn('<option value="">Default</option>', page)
+        for mode in build.SORT_MODES:
+            self.assertIn(f'<option value="{mode}">', page)
+        self.assertIn('<label class="tool-label" for="ft-sort">Sort</label>', page)
+
+    def test_option_labels_match_constants(self):
+        page = self._home_with_one()
+        for mode, label in build.SORT_LABELS.items():
+            self.assertIn(f">{label}</option>", page)
+
+    def test_card_carries_verified_expiry_and_amount_sort_keys(self):
+        page = self._page = self._home_with_one(
+            expiry_date="2026-12-31", amount="$300 in credits"
+        )
+        self.assertIn(f'data-verified="{VALID["verified_date"]}"', page)
+        self.assertIn('data-expiry="2026-12-31"', page)
+        self.assertIn('data-amount-sort="300"', page)
+
+    def test_ongoing_offer_has_empty_expiry_key(self):
+        page = self._home_with_one()
+        self.assertIn('data-expiry=""', page)
+
+    def test_empty_page_has_no_toolbar_or_select(self):
+        index = {"generated_at": "2026-01-01T00:00:00Z", "count": 0, "offers": []}
+        page = build.render_html(index)
+        self.assertNotIn('id="ft-sort"', page)
 
 
 if __name__ == "__main__":

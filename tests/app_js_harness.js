@@ -74,6 +74,10 @@ function makeElement(tag) {
       (el.listeners[type] = el.listeners[type] || []).push(fn);
     },
     appendChild(child) {
+      // Real-DOM semantics: appending a node that is already a child MOVES
+      // it to the end (the app's re-sort relies on this).
+      const idx = el.children.indexOf(child);
+      if (idx !== -1) el.children.splice(idx, 1);
       el.children.push(child);
       child.parentNode = el;
       return child;
@@ -114,6 +118,11 @@ function runScenario(scenario) {
   for (const spec of scenario.cards) {
     const article = makeElement("article");
     article.attrs["data-category"] = spec.category;
+    // Sort keys (F10): build-time attributes the app re-sorts on.
+    article.attrs["data-verified"] = spec.verified || "";
+    article.attrs["data-expiry"] = spec.expiry || "";
+    article.attrs["data-amount-sort"] =
+      spec.amount_sort !== undefined ? String(spec.amount_sort) : "0";
     article.textContent = spec.text;
     const link = makeElement("a");
     link.attrs["href"] =
@@ -157,6 +166,10 @@ function runScenario(scenario) {
   const status = makeElement("p");
   const emptyBox = makeElement("section");
   const resetButton = makeElement("button");
+  // Sort select (F10): a value-holding control the app syncs and listens to.
+  const sortSelect = makeElement("select");
+  sortSelect.attrs.id = "ft-sort";
+  sortSelect.value = "";
   const chips = [
     { value: "" },
     ...(scenario.valid_categories || []).map((c) => ({ value: c })),
@@ -170,6 +183,7 @@ function runScenario(scenario) {
   const byId = {
     "ft-grid": grid,
     "ft-search": input,
+    "ft-sort": sortSelect,
     "ft-results-status": status,
     "ft-no-results": emptyBox,
     "ft-reset-filters": resetButton,
@@ -248,7 +262,10 @@ function runScenario(scenario) {
   function snapshot(extra) {
     return Object.assign(
       {
-        visible: items.filter((li) => !li.hidden).map((li) => slugOf.get(li)),
+        // Read DOM order from the grid itself so re-sorts are observable.
+        visible: grid.children
+          .filter((li) => !li.hidden)
+          .map((li) => slugOf.get(li)),
         status: status.textContent,
         pressed: chips.reduce((acc, chip) => {
           acc[chip.attrs["data-ft-category"] || "all"] =
@@ -256,6 +273,7 @@ function runScenario(scenario) {
           return acc;
         }, {}),
         inputValue: input.value,
+        sortValue: sortSelect.value,
         emptyHidden: emptyBox.hidden,
         historyUrls: historyUrls.slice(),
         locationSearch: location_.search,
@@ -305,6 +323,10 @@ function runScenario(scenario) {
       fire(grid, "click", clickEvent(grid));
     } else if (step.op === "click_reset") {
       fire(resetButton, "click", {});
+    } else if (step.op === "set_sort") {
+      // F10: changing the select fires one change event, like a user pick.
+      sortSelect.value = step.value;
+      fire(sortSelect, "change", { currentTarget: sortSelect });
     } else if (step.op === "popstate") {
       location_.search = step.search;
       for (const fn of windowListeners.popstate || []) fn({});
@@ -313,6 +335,13 @@ function runScenario(scenario) {
       input.value = step.value;
       fire(input, "input", {});
       timers.advance(1000);
+      extra.perf_ms = Date.now() - t0;
+    } else if (step.op === "perf_sort") {
+      // F10 budget: a full change->sort->apply cycle must stay far under
+      // the 200 ms perceived-latency ceiling even with 20+ offers.
+      const t0 = Date.now();
+      sortSelect.value = step.value;
+      fire(sortSelect, "change", { currentTarget: sortSelect });
       extra.perf_ms = Date.now() - t0;
     } else if (step.op === "snapshot") {
       // Snapshots are taken after every step anyway.
