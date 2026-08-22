@@ -1291,8 +1291,34 @@ class DetailPageTests(unittest.TestCase):
             }
         )
         page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
-        self.assertIn('src="assets/shots/pricing.png"', page)
+        self.assertIn('src="../assets/shots/pricing.png"', page)
         self.assertIn('loading="lazy"', page)
+
+    def test_screenshot_src_leaves_absolute_and_external_paths_alone(self):
+        # Schema validation only admits site-relative image paths, so the
+        # escape guards are exercised directly on the resolver.
+        self.assertEqual(
+            build._resolve_asset("shots/local.png", "../"),
+            "../shots/local.png",
+        )
+        self.assertEqual(
+            build._resolve_asset("../shots/up.png", "../"), "../shots/up.png"
+        )
+        self.assertEqual(
+            build._resolve_asset("./shots/here.png", "../"),
+            "./shots/here.png",
+        )
+        self.assertEqual(
+            build._resolve_asset("/abs/shots/x.png", "../"),
+            "/abs/shots/x.png",
+        )
+        self.assertEqual(
+            build._resolve_asset("https://example.com/s.png", "../"),
+            "https://example.com/s.png",
+        )
+        self.assertEqual(
+            build._resolve_asset("shots/root-page.png", ""), "shots/root-page.png"
+        )
 
     def test_reddit_and_link_proofs_render_embed_style_cards(self):
         site = self._two_offer_site(

@@ -1008,13 +1008,30 @@ _FALLBACK_STEPS = (
 )
 
 
-def _proof_card(entry: dict) -> str:
+def _resolve_asset(src: str, rel_prefix: str) -> str:
+    """Prefix a page-relative asset src with ``rel_prefix`` when needed.
+
+    Absolute paths, already-climbing paths and external URLs are left
+    untouched so depth-1 pages (offers/<slug>.html) resolve local
+    screenshots against the site root instead of offers/.
+    """
+    if (
+        not rel_prefix
+        or src.startswith(("../", "./", "/"))
+        or "://" in src
+    ):
+        return src
+    return f"{rel_prefix}{src}"
+
+
+def _proof_card(entry: dict, rel_prefix: str = "") -> str:
     kind = entry["type"]
     if kind == "screenshot":
         caption = html.escape(entry["caption"])
+        image = _resolve_asset(entry["image"], rel_prefix)
         return (
             '<figure class="proof-card proof-screenshot">'
-            f'<img src="{html.escape(entry["image"], quote=True)}" '
+            f'<img src="{html.escape(image, quote=True)}" '
             f'alt="{caption}" loading="lazy">'
             f"<figcaption>{caption}</figcaption>"
             "</figure>"
@@ -1042,13 +1059,14 @@ def _proof_card(entry: dict) -> str:
     )
 
 
-def _detail_sections(detail: dict | None) -> str:
+def _detail_sections(detail: dict | None, rel_prefix: str = "") -> str:
     """Shared summary/claim-steps/social-proof partial for offer pages.
 
     Consumed by render_offer_html; heading levels assume a page context
     (h2 sections under the page's h1). Without a detail document the
     fallback claim steps apply and summary/proof sections stay absent,
-    matching what dialogs rendered for such offers.
+    matching what dialogs rendered for such offers. ``rel_prefix`` keeps
+    local screenshot srcs depth-aware (see _resolve_asset).
     """
     detail = detail or {}
     summary_html = ""
@@ -1063,7 +1081,9 @@ def _detail_sections(detail: dict | None) -> str:
         )
     proof_html = ""
     if detail.get("social_proof"):
-        cards = "".join(_proof_card(e) for e in detail["social_proof"])
+        cards = "".join(
+            _proof_card(e, rel_prefix) for e in detail["social_proof"]
+        )
         proof_html = (
             '<section class="od-proof"><h2>Social proof</h2>'
             f"{cards}</section>"
@@ -1143,7 +1163,7 @@ def render_offer_html(
         '<article class="offer-detail">\n'
         '<p class="od-back"><a href="../">&larr; All offers</a></p>\n'
         f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
-        f"{_detail_sections(detail)}\n"
+        f"{_detail_sections(detail, rel_prefix='../')}\n"
         f"{cta}\n"
         "</article>"
     )
