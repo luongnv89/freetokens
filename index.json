@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-22T22:25:58Z",
-  "count": 23,
-  "active_count": 23,
+  "generated_at": "2026-08-22T22:49:01Z",
+  "count": 26,
+  "active_count": 26,
   "expired_count": 0,
   "offers": [
     {
@@ -82,6 +82,17 @@
       "status": "active"
     },
     {
+      "slug": "commandcode-ox-alpha-free",
+      "title": "Ox Alpha Free on Command Code",
+      "provider": "Command Code",
+      "category": "coding",
+      "amount": "Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts",
+      "expiry_date": null,
+      "source_url": "https://commandcode.ai/docs/resources/pricing-limits",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
       "slug": "cursor-hobby-plan",
       "title": "Cursor Hobby Plan",
       "provider": "Cursor (Anysphere)",
@@ -104,6 +115,17 @@
       "status": "active"
     },
     {
+      "slug": "nous-ox-alpha-free",
+      "title": "Ox Alpha Free via Nous Portal",
+      "provider": "Nous Research",
+      "category": "api_provider",
+      "amount": "Free model access via Nous Portal - claimed 1 quadrillion tokens/day capacity, limited time",
+      "expiry_date": null,
+      "source_url": "https://x.com/NousResearch/status/2090899914700054780",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
       "slug": "opencode-ox-alpha-free-week",
       "title": "Ox Alpha Free Week in OpenCode",
       "provider": "OpenCode",
@@ -122,6 +144,17 @@
       "amount": "Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you hold $10 credits)",
       "expiry_date": null,
       "source_url": "https://openrouter.ai/docs/api-reference/limits",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "venice-ox-alpha-free",
+      "title": "Ox Alpha Free on Venice API",
+      "provider": "Venice AI",
+      "category": "api_provider",
+      "amount": "Free model access - stealth-ox-alpha at $0/M input, output and cache reads",
+      "expiry_date": null,
+      "source_url": "https://api.venice.ai/api/v1/models",
       "verified_date": "2026-08-22",
       "status": "active"
     },

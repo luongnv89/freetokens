@@ -1,0 +1,24 @@
+{
+  "summary": "Nous Research is offering Ox Alpha free through Nous Portal for a limited time, with claimed capacity of 1 quadrillion tokens per day. The free model access works inside Hermes Agent via the Nous Portal provider - install Hermes Agent, run hermes setup --portal, and pick Ox Alpha.",
+  "claim_steps": [
+    "Install Hermes Agent: curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash (or download the desktop app).",
+    "Run hermes setup --portal and sign in with Nous Portal OAuth.",
+    "Select Ox Alpha as the model - free for a limited time."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/NousResearch/status/2090899914700054780",
+      "author": "Nous Research",
+      "handle": "@NousResearch",
+      "text": "Ox Alpha is free via Nous Portal for a limited time. We have capacity for 1 quadrillion tokens per day. Let the tokens flow at portal.nousresearch.com"
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/qilua02/status/2090997310008541613",
+      "author": "qilua",
+      "handle": "@qilua02",
+      "text": "Ox Alpha is FREE on these 5 providers (~5T+ tokens total) : - OpenCode: opencode.ai - OpenRouter: openrouter.ai - Command Code: commandcode.ai - Hermes: nousresearch.com - Venice: venice.ai Bookmark this for later"
+    }
+  ]
+}
