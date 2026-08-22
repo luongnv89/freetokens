@@ -1,0 +1,17 @@
+{
+  "summary": "Devin's $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.",
+  "claim_steps": [
+    "Open devin.ai/pricing and pick the Free $0 plan.",
+    "Sign up with your email or a Google/GitHub account.",
+    "Start a Devin session from the dashboard within your free quota.",
+    "Install the IDE extension for unlimited Tab completions."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://devin.ai/pricing",
+      "title": "Devin pricing \u2014 Free $0 plan",
+      "text": "Free $0 \u2014 Light quota to code with agents. Unlimited Tab completions."
+    }
+  ]
+}

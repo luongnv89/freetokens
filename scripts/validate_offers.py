@@ -74,6 +74,32 @@ def check_schema_matches_build(schema: dict) -> None:
         raise SchemaMismatch("schema verified_date must not be nullable")
 
 
+def check_detail_schema_matches_build(schema: dict) -> None:
+    """Cross-check schemas/offer-detail.schema.json against build constants."""
+    if schema.get("$schema") != "https://json-schema.org/draft/2020-12/schema":
+        raise SchemaMismatch(
+            "offer-detail schema must declare the 2020-12 draft $schema"
+        )
+    props = schema.get("properties")
+    if not isinstance(props, dict):
+        raise SchemaMismatch("offer-detail 'properties' must be an object")
+    keys = set(props)
+    if keys != set(build.DETAIL_KEYS):
+        raise SchemaMismatch(
+            "offer-detail properties do not match build.py DETAIL_KEYS "
+            f"(schema-only: {sorted(keys - set(build.DETAIL_KEYS)) or '{}'}; "
+            f"build-only: {sorted(set(build.DETAIL_KEYS) - keys) or '{}'})"
+        )
+    proof = props.get("social_proof", {}).get("items", {})
+    enum = proof.get("properties", {}).get("type", {}).get("enum")
+    if enum != list(build.DETAIL_TYPES):
+        raise SchemaMismatch(
+            "offer-detail social_proof type enum does not match "
+            f"build.py DETAIL_TYPES (schema: {enum}, "
+            f"build: {list(build.DETAIL_TYPES)})"
+        )
+
+
 def check_slug(slug: str, filename: str) -> None:
     if not SLUG_RE.match(slug):
         raise build.OfferError(
@@ -105,12 +131,18 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--offers-dir", default="offers")
     parser.add_argument("--schema", default="schemas/offer.schema.json")
+    parser.add_argument(
+        "--detail-schema", default="schemas/offer-detail.schema.json"
+    )
     args = parser.parse_args(argv)
 
     try:
         schema = load_schema(args.schema)
         check_schema_matches_build(schema)
         offers = validate_offers_dir(args.offers_dir)
+        if os.path.exists(args.detail_schema):
+            check_detail_schema_matches_build(load_schema(args.detail_schema))
+            build.load_details(args.offers_dir, {o["slug"] for o in offers})
     except SchemaMismatch as exc:
         print(f"validation failed: {exc}", file=sys.stderr)
         return 1

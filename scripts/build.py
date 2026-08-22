@@ -33,6 +33,33 @@ SEARCH_DEBOUNCE_MS = 120
 # offer within this window is treated as an accidental double-click, not a
 # second attribution event. Distinct offers are never suppressed.
 OFFER_CLICK_DEDUPE_MS = 1000
+
+# --- Offer detail cards (#48) ----------------------------------------------
+# Optional per-offer detail data lives in offers/details/<slug>.json: one
+# JSON document extending a summary card with a description, how-to-claim
+# steps, and social proof. Stdlib json keeps ADR-001 intact; the flat YAML
+# parser for offers/*.yaml stays frozen at its seven required fields.
+DETAILS_DIRNAME = "details"
+DETAIL_KEYS = ("summary", "claim_steps", "social_proof")
+DETAIL_TYPES = ("x", "reddit", "screenshot", "link")
+# Required keys per social-proof type; every entry needs `url` except
+# screenshots, which need a committed image instead.
+PROOF_REQUIRED = {
+    "x": ("author", "text"),
+    "reddit": ("author", "text"),
+    "screenshot": ("image", "caption"),
+    "link": ("title",),
+}
+PROOF_OPTIONAL = {
+    "x": ("handle",),
+    "reddit": ("community",),
+    "screenshot": (),
+    "link": ("text",),
+}
+SUMMARY_MAX_CHARS = 2000
+STEP_MAX_CHARS = 300
+PROOF_TEXT_MAX_CHARS = 500
+PROOF_META_MAX_CHARS = 200
 REQUIRED_FIELDS = (
     "title",
     "provider",
@@ -169,6 +196,151 @@ def filter_expired(offers: list, today: dt.date | None = None) -> list:
     if today is None:
         today = dt.date.today()
     return [o for o in offers if o["expiry_date"] is None or o["expiry_date"] >= today]
+
+
+def _check_str(value, name: str, filename: str, max_chars: int) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise OfferError(f"{filename}: {name} must be a non-empty string")
+    if len(value) > max_chars:
+        raise OfferError(
+            f"{filename}: {name} exceeds {max_chars} characters "
+            f"({len(value)} given)"
+        )
+    return value
+
+
+def _validate_proof(entry, filename: str, pos: int) -> dict:
+    where = f"{filename}: social_proof[{pos}]"
+    if not isinstance(entry, dict):
+        raise OfferError(f"{where} must be an object")
+    kind = entry.get("type")
+    if kind not in DETAIL_TYPES:
+        raise OfferError(
+            f"{where}: type must be one of {'|'.join(DETAIL_TYPES)}, "
+            f"got {kind!r}"
+        )
+    allowed = set(PROOF_REQUIRED[kind]) | set(PROOF_OPTIONAL[kind])
+    if kind != "screenshot":
+        # Every linked evidence type carries a URL; screenshots point at a
+        # committed image instead.
+        allowed.add("url")
+    unknown = [k for k in entry if k != "type" and k not in allowed]
+    if unknown:
+        raise OfferError(f"{where}: unknown fields: {', '.join(sorted(unknown))}")
+    clean = {"type": kind}
+    if kind == "screenshot":
+        image = _check_str(
+            entry.get("image"), "image", where, PROOF_META_MAX_CHARS
+        )
+        if image.startswith(("http://", "https://", "/")) or ".." in image.split("/"):
+            raise OfferError(
+                f"{where}: image must be a site-relative path under the "
+                "built site (e.g. assets/example.png)"
+            )
+        clean["image"] = image
+    else:
+        url = _check_str(entry.get("url"), "url", where, PROOF_META_MAX_CHARS)
+        if not url.startswith(("http://", "https://")):
+            raise OfferError(
+                f"{where}: url must be an http(s) URL, got {url!r}"
+            )
+        clean["url"] = url
+    for key in PROOF_REQUIRED[kind]:
+        limit = (
+            PROOF_TEXT_MAX_CHARS
+            if key in ("text", "caption")
+            else PROOF_META_MAX_CHARS
+        )
+        clean[key] = _check_str(entry.get(key), key, where, limit)
+    for key in PROOF_OPTIONAL[kind]:
+        if key not in entry:
+            continue
+        limit = (
+            PROOF_TEXT_MAX_CHARS
+            if key == "text"
+            else PROOF_META_MAX_CHARS
+        )
+        clean[key] = _check_str(entry.get(key), key, where, limit)
+    return clean
+
+
+def validate_detail(data, filename: str) -> dict:
+    """Validate one offers/details/<slug>.json document (strict shape)."""
+    if not isinstance(data, dict):
+        raise OfferError(f"{filename}: detail document must be a JSON object")
+    unknown = [k for k in data if k not in DETAIL_KEYS]
+    if unknown:
+        raise OfferError(
+            f"{filename}: unknown fields: {', '.join(sorted(unknown))}"
+        )
+    if not any(k in data for k in DETAIL_KEYS):
+        raise OfferError(
+            f"{filename}: must define at least one of "
+            f"{', '.join(DETAIL_KEYS)}"
+        )
+    detail = {}
+    if "summary" in data:
+        detail["summary"] = _check_str(
+            data["summary"], "summary", filename, SUMMARY_MAX_CHARS
+        )
+    if "claim_steps" in data:
+        steps = data["claim_steps"]
+        if not isinstance(steps, list) or not steps:
+            raise OfferError(
+                f"{filename}: claim_steps must be a non-empty list of strings"
+            )
+        if len(steps) > 12:
+            raise OfferError(
+                f"{filename}: claim_steps allows at most 12 steps "
+                f"({len(steps)} given)"
+            )
+        detail["claim_steps"] = [
+            _check_str(step, f"claim_steps[{i}]", filename, STEP_MAX_CHARS)
+            for i, step in enumerate(steps)
+        ]
+    if "social_proof" in data:
+        proofs = data["social_proof"]
+        if not isinstance(proofs, list) or not proofs:
+            raise OfferError(
+                f"{filename}: social_proof must be a non-empty list of objects"
+            )
+        if len(proofs) > 10:
+            raise OfferError(
+                f"{filename}: social_proof allows at most 10 entries "
+                f"({len(proofs)} given)"
+            )
+        detail["social_proof"] = [
+            _validate_proof(entry, filename, i) for i, entry in enumerate(proofs)
+        ]
+    return detail
+
+
+def load_details(offers_dir: str, valid_slugs) -> dict:
+    """Load offers/details/<slug>.json keyed by slug; {} when none exist.
+
+    Orphan files (no matching offers/*.yaml slug) are a build error so a
+    renamed or deleted offer can never leave stale detail content behind.
+    """
+    details_dir = os.path.join(offers_dir, DETAILS_DIRNAME)
+    paths = sorted(glob.glob(os.path.join(details_dir, "*.json")))
+    slugs = set(valid_slugs)
+    details = {}
+    for path in paths:
+        slug = os.path.splitext(os.path.basename(path))[0]
+        if slug not in slugs:
+            raise OfferError(
+                f"{path}: no offer named {slug!r}; delete this detail file "
+                "or fix its file name"
+            )
+        try:
+            with open(path, encoding="utf-8") as fh:
+                data = json.load(fh)
+        except json.JSONDecodeError as exc:
+            raise OfferError(
+                f"{path}: invalid JSON at line {exc.lineno}, column {exc.colno}"
+            ) from None
+        details[slug] = validate_detail(data, path)
+    return details
 
 
 def build_index(offers: list) -> dict:
@@ -613,6 +785,9 @@ _CARD_TMPL = """<li style="--i:{index}">
 <h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer" data-ft-offer-id="{offer_id}" data-ft-provider="{provider}" data-ft-offer-category="{category}" aria-label="Claim {title} from {provider}">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">{amount}</p>
 <p class="prov">{provider} &middot; verified <time datetime="{verified_date}">{verified_display}</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="{offer_id}" aria-haspopup="dialog" aria-controls="ft-detail-{offer_id}">How to claim &amp; details</button>
+</div>
 </article>
 </li>"""
 
@@ -700,6 +875,114 @@ _CLIENT_EMPTY_TMPL = """<section class="empty" id="ft-no-results" hidden>
 <p>Nothing matches your current search and category combination.</p>
 <button type="button" class="chip reset" id="ft-reset-filters">Clear search &amp; filters</button>
 </section>"""
+
+
+# --- Offer detail dialogs (#48) ---------------------------------------------
+# One build-time-rendered <dialog> per offer. Core card fields are always
+# present; curated summary/claim_steps/social_proof sections appear only
+# when the offer has an offers/details/<slug>.json document. The close
+# button is a method="dialog" form so dismissal needs zero JavaScript.
+
+_PROOF_LINK_LABELS = {
+    "x": "View post on X",
+    "reddit": "View on Reddit",
+    "link": "Open source",
+}
+
+_FALLBACK_STEPS = (
+    "<li>Open the official offer page.</li>"
+    "<li>Create a free account or sign in.</li>"
+    "<li>The free credit applies per the terms shown there.</li>"
+)
+
+
+def _proof_card(entry: dict) -> str:
+    kind = entry["type"]
+    if kind == "screenshot":
+        caption = html.escape(entry["caption"])
+        return (
+            '<figure class="proof-card proof-screenshot">'
+            f'<img src="{html.escape(entry["image"], quote=True)}" '
+            f'alt="{caption}" loading="lazy">'
+            f"<figcaption>{caption}</figcaption>"
+            "</figure>"
+        )
+    head = ""
+    if kind == "link":
+        # A linked source has no post author; its required title acts as
+        # the card headline instead.
+        head = f'<p class="proof-text"><strong>{html.escape(entry["title"])}</strong></p>'
+    meta = html.escape(entry.get("author", ""))
+    if kind == "x" and entry.get("handle"):
+        meta += f' <span class="proof-meta">{html.escape(entry["handle"])}</span>'
+    if kind == "reddit" and entry.get("community"):
+        meta += f' <span class="proof-meta">{html.escape(entry["community"])}</span>'
+    text = ""
+    if entry.get("text"):
+        text = f'<p class="proof-text">&ldquo;{html.escape(entry["text"])}&rdquo;</p>'
+    label = _PROOF_LINK_LABELS[kind]
+    return (
+        f'<blockquote class="proof-card proof-{kind}">{head}{text}'
+        f'<footer>{meta} <a href="{html.escape(entry["url"], quote=True)}" '
+        'target="_blank" rel="noopener noreferrer">'
+        f'{label} <span aria-hidden="true">&#8599;</span></a></footer>'
+        "</blockquote>"
+    )
+
+
+def render_detail_dialog(offer: dict, detail: dict | None) -> str:
+    """Render one hidden <dialog> carrying the full detail view."""
+    slug = offer["slug"]
+    if offer["expiry_date"]:
+        status = (
+            f'<span class="status">expires '
+            f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
+            f'{_human_date(offer["expiry_date"])}</time></span>'
+        )
+    else:
+        status = (
+            '<span class="status"><span class="dot" aria-hidden="true">'
+            '</span>ongoing</span>'
+        )
+    provider = html.escape(offer["provider"])
+    title = html.escape(offer["title"], quote=True)
+    steps_html = _FALLBACK_STEPS
+    if detail and detail.get("claim_steps"):
+        steps_html = "".join(
+            f"<li>{html.escape(step)}</li>" for step in detail["claim_steps"]
+        )
+    summary_html = ""
+    if detail and detail.get("summary"):
+        summary_html = (
+            f'<p class="od-summary">{html.escape(detail["summary"])}</p>'
+        )
+    proof_html = ""
+    if detail and detail.get("social_proof"):
+        cards = "".join(_proof_card(e) for e in detail["social_proof"])
+        proof_html = (
+            f'<section class="od-proof"><h4>Social proof</h4>{cards}</section>'
+        )
+    return (
+        f'<dialog id="ft-detail-{html.escape(slug, quote=True)}" '
+        f'class="detail" aria-labelledby="ft-detail-{html.escape(slug, quote=True)}-title">\n'
+        f'<div class="od-head"><span class="badge">{html.escape(offer["category"])}</span>'
+        f"{status}"
+        '<form method="dialog" class="od-close-form">'
+        '<button type="submit" class="detail-close" aria-label="Close details">'
+        "&times;</button></form></div>\n"
+        f'<h3 id="ft-detail-{html.escape(slug, quote=True)}-title">{title}</h3>\n'
+        f'<p class="prov">{provider} &middot; verified '
+        f'<time datetime="{html.escape(offer["verified_date"], quote=True)}">'
+        f'{_human_date(offer["verified_date"])}</time></p>\n'
+        f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
+        f"{summary_html}\n"
+        f'<section class="od-steps"><h4>How to claim</h4><ol>{steps_html}</ol></section>\n'
+        f"{proof_html}\n"
+        f'<a class="od-cta" href="{html.escape(offer["source_url"], quote=True)}" '
+        f'target="_blank" rel="noopener noreferrer">Claim at {provider} '
+        '<span aria-hidden="true">&#8599;</span></a>\n'
+        "</dialog>"
+    )
 
 
 # --- Analytics (F7): consent-gated GA4 with EU banner ----------------------
@@ -1013,6 +1296,185 @@ _APP_CSS = """
 }
 """
 
+# Offer detail dialogs (#48): trigger buttons on cards plus the dialog
+# surface itself. Native <dialog> centers itself; the close button is a
+# method="dialog" form, so opening is the only scripted interaction.
+_DETAIL_CSS = """
+/* ---- Card detail trigger ---------------------------------------------- */
+
+.card-actions { margin-top: 0.75rem; }
+
+.detail-btn {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  width: 100%;
+}
+
+.detail-btn:hover { background: var(--ink); color: var(--paper); }
+
+.detail-btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---- Detail dialog ------------------------------------------------------ */
+
+.detail {
+  width: min(34rem, calc(100vw - 2rem));
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  padding: clamp(1.1rem, 4vw, 1.75rem);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+  /* Explicit containment: don't depend on UA default dialog sizing. */
+  max-height: min(85vh, calc(100dvh - 2rem));
+  overflow-y: auto;
+}
+
+.detail::backdrop { background: rgba(0, 0, 0, 0.45); }
+
+.detail h3 {
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0.5rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.od-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.od-close-form { margin: 0; line-height: 0; }
+
+.detail-close {
+  font-family: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.detail-close:hover { background: var(--ink); color: var(--paper); }
+
+.detail-close:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.detail .prov { margin: 0.35rem 0 0; padding-top: 0; }
+
+.detail .amount { margin-top: 0.6rem; }
+
+.od-summary { margin: 0.75rem 0 0; }
+
+.detail section h4 {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  margin: 1.25rem 0 0.35rem;
+}
+
+.od-steps ol,
+.od-proof ul {
+  margin: 0.35rem 0;
+  padding-left: 1.25rem;
+}
+
+.od-steps li { margin: 0.3rem 0; }
+
+.proof-card {
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--green);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0.6rem 0;
+}
+
+.proof-card p { margin: 0.15rem 0; }
+
+.proof-text { overflow-wrap: anywhere; }
+
+.proof-card footer,
+.proof-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+.proof-card footer { margin-top: 0.35rem; }
+
+.proof-card footer a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+figure.proof-screenshot { margin: 0.6rem 0; }
+
+.proof-screenshot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+}
+
+.proof-screenshot figcaption {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+  margin-top: 0.4rem;
+}
+
+.od-cta {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+}
+
+.od-cta:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.od-cta:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
+@media (pointer: coarse) {
+  .detail-btn,
+  .detail-close { min-height: 44px; }
+}
+
+@media (max-width: 480px) {
+  .detail { width: calc(100vw - 1.25rem); }
+}
+"""
+
 # Client-side discovery runtime. Vanilla ES5-style IIFE, emitted inline so
 # the page stays a single self-contained file with zero framework/runtime.
 # Analytics calls go through window.ftTrackEvent, which only exists when GA4
@@ -1078,6 +1540,20 @@ _APP_JS = """<script id="ft-app">
     }
   }
 
+  // Offer detail dialogs (#48): open the build-time-rendered <dialog> for
+  // this listing. Guarded so browsers without dialog support keep working;
+  // analytics carries only the listing ID, never panel content.
+  function ftOpenDetail(slug) {
+    var dlg = document.getElementById("ft-detail-" + slug);
+    if (!dlg || typeof dlg.showModal !== "function") { return; }
+    try {
+      dlg.showModal();
+    } catch (err) {}
+    try {
+      ftTrack("offer_details_open", { offer_id: slug });
+    } catch (err) {}
+  }
+
   function ftInitApp() {
     var grid = document.getElementById("ft-grid");
     var input = document.getElementById("ft-search");
@@ -1122,6 +1598,23 @@ _APP_JS = """<script id="ft-app">
           category: node.getAttribute("data-ft-offer-category") || ""
         });
       } catch (err) {}
+    });
+
+    // Detail triggers (#48): one delegated listener covers every card's
+    // "How to claim & details" button; clicks bubble exactly like the
+    // outbound-link attribution above.
+    grid.addEventListener("click", function (event) {
+      var node = event.target;
+      while (node && node !== grid) {
+        if (node.getAttribute) {
+          var slug = node.getAttribute("data-ft-detail");
+          if (slug) {
+            ftOpenDetail(slug);
+            return;
+          }
+        }
+        node = node.parentNode || null;
+      }
     });
 
     function syncControls() {
@@ -1341,11 +1834,15 @@ def _page_shell(
     )
 
 
-def render_html(index: dict, measurement_id: str = "") -> str:
+def render_html(
+    index: dict, measurement_id: str = "", details: dict | None = None
+) -> str:
     analytics = bool(measurement_id)
     has_offers = bool(index["offers"])
+    detail_map = details or {}
     if not has_offers:
         content = _EMPTY_TMPL
+        dialogs_html = ""
     else:
         cards = []
         for i, o in enumerate(index["offers"]):
@@ -1375,12 +1872,18 @@ def render_html(index: dict, measurement_id: str = "") -> str:
                     expiry_display=expiry,
                 )
             )
+        dialogs_html = "\n".join(
+            render_detail_dialog(offer, detail_map.get(offer["slug"]))
+            for offer in index["offers"]
+        )
         content = (
             build_toolbar(index["count"])
             + '<ul class="grid" id="ft-grid">\n'
             + "\n".join(cards)
             + "\n</ul>"
             + _CLIENT_EMPTY_TMPL
+            + "\n"
+            + dialogs_html
         )
     built = index["generated_at"]
     offers = index["offers"]
@@ -1398,7 +1901,7 @@ def render_html(index: dict, measurement_id: str = "") -> str:
         content=content,
         built=built,
         foot_current="home",
-        css_extra=(_APP_CSS if has_offers else "")
+        css_extra=(_APP_CSS + _DETAIL_CSS if has_offers else "")
         + (_BANNER_CSS if analytics else ""),
         measurement_id=measurement_id,
         app_js=has_offers,
@@ -1446,6 +1949,7 @@ _PRIVACY_CONTENT = """<div class="policy">
 <li><strong>Which filter category you picked</strong> (for example &ldquo;Image&rdquo;) &mdash; nothing else about your filtering.</li>
 <li><strong>Search activity as a length only</strong> &mdash; when you search, the event records just <code>query_length</code>, the number of characters typed. The words themselves stay in your browser and are never sent anywhere.</li>
 <li><strong>Offer clicks</strong> &mdash; which listing you clicked (its ID, provider name, and category).</li>
+<li><strong>Detail views</strong> &mdash; which offer&rsquo;s detail panel you opened (its listing ID).</li>
 </ul>
 </section>
 
@@ -1524,6 +2028,14 @@ def main(argv=None) -> int:
         )
         return 1
 
+    try:
+        details = load_details(
+            args.offers_dir, {o["slug"] for o in offers}
+        )
+    except OfferError as exc:
+        print(f"build failed: {exc}", file=sys.stderr)
+        return 1
+
     index = build_index(filter_expired(offers))
 
     measurement_id = get_measurement_id()
@@ -1534,7 +2046,7 @@ def main(argv=None) -> int:
         json.dump(index, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as fh:
-        fh.write(render_html(index, measurement_id))
+        fh.write(render_html(index, measurement_id, details))
     with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
         fh.write(render_privacy_html(index["generated_at"], measurement_id))
     with open(os.path.join(out_dir, "favicon.svg"), "w", encoding="utf-8") as fh:

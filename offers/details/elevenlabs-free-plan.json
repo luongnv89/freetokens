@@ -1,0 +1,9 @@
+{
+  "summary": "The ElevenLabs free plan includes 10,000 credits per month, roughly 10 minutes of audio, with access to the core text-to-speech voices. Credits reset monthly and no credit card is required.",
+  "claim_steps": [
+    "Open elevenlabs.io/pricing and choose the Free plan.",
+    "Sign up for a free ElevenLabs account.",
+    "Confirm your email to unlock the 10k monthly credits.",
+    "Generate speech from the Playground or API within the free quota."
+  ]
+}

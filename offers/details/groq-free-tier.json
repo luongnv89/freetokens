@@ -1,0 +1,9 @@
+{
+  "summary": "Groq's free tier serves open models at high speed through a rate-limited API at no cost \u2014 for example around 1,000 requests per day on GPT-OSS-class models. Rate limits vary per model and are published in Groq's docs.",
+  "claim_steps": [
+    "Create a free Groq Cloud account at console.groq.com.",
+    "Generate an API key from the console's API Keys page.",
+    "Point your client at api.groq.com and pick a supported model.",
+    "Stay within the free rate limits listed at console.groq.com/docs/rate-limits."
+  ]
+}

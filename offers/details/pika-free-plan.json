@@ -1,0 +1,9 @@
+{
+  "summary": "Pika's free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and credits refresh monthly.",
+  "claim_steps": [
+    "Sign up at pika.art with Google or Discord.",
+    "Open the generator from your workspace.",
+    "Create videos from text or image prompts; each generation spends credits.",
+    "Wait for the monthly reset to get your next 80 credits."
+  ]
+}

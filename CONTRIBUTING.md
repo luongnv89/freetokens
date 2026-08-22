@@ -45,6 +45,12 @@ fits you.
    verified_date: 2026-08-22
    ```
 
+   Optionally, enrich the offer's detail card with
+   `offers/details/<provider-slug>.json` — a description, how-to-claim
+   steps, and evidence-backed social proof (X/Reddit quote cards, links,
+   screenshots). Field reference and rules:
+   [docs/schema.md](docs/schema.md#detail-files-offersdetailsslugjson--optional).
+
 3. Check everything locally before pushing:
 
    ```bash

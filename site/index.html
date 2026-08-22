@@ -422,6 +422,180 @@ a:focus-visible {
   }
 }
 
+/* ---- Card detail trigger ---------------------------------------------- */
+
+.card-actions { margin-top: 0.75rem; }
+
+.detail-btn {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  width: 100%;
+}
+
+.detail-btn:hover { background: var(--ink); color: var(--paper); }
+
+.detail-btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---- Detail dialog ------------------------------------------------------ */
+
+.detail {
+  width: min(34rem, calc(100vw - 2rem));
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  padding: clamp(1.1rem, 4vw, 1.75rem);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+  /* Explicit containment: don't depend on UA default dialog sizing. */
+  max-height: min(85vh, calc(100dvh - 2rem));
+  overflow-y: auto;
+}
+
+.detail::backdrop { background: rgba(0, 0, 0, 0.45); }
+
+.detail h3 {
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0.5rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.od-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.od-close-form { margin: 0; line-height: 0; }
+
+.detail-close {
+  font-family: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.detail-close:hover { background: var(--ink); color: var(--paper); }
+
+.detail-close:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.detail .prov { margin: 0.35rem 0 0; padding-top: 0; }
+
+.detail .amount { margin-top: 0.6rem; }
+
+.od-summary { margin: 0.75rem 0 0; }
+
+.detail section h4 {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  margin: 1.25rem 0 0.35rem;
+}
+
+.od-steps ol,
+.od-proof ul {
+  margin: 0.35rem 0;
+  padding-left: 1.25rem;
+}
+
+.od-steps li { margin: 0.3rem 0; }
+
+.proof-card {
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--green);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0.6rem 0;
+}
+
+.proof-card p { margin: 0.15rem 0; }
+
+.proof-text { overflow-wrap: anywhere; }
+
+.proof-card footer,
+.proof-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+.proof-card footer { margin-top: 0.35rem; }
+
+.proof-card footer a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+figure.proof-screenshot { margin: 0.6rem 0; }
+
+.proof-screenshot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+}
+
+.proof-screenshot figcaption {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+  margin-top: 0.4rem;
+}
+
+.od-cta {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+}
+
+.od-cta:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.od-cta:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
+@media (pointer: coarse) {
+  .detail-btn,
+  .detail-close { min-height: 44px; }
+}
+
+@media (max-width: 480px) {
+  .detail { width: calc(100vw - 1.25rem); }
+}
+
 </style>
 </head>
 <body>
@@ -443,6 +617,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://devin.ai/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="devin-free-plan" data-ft-provider="Cognition (Devin)" data-ft-offer-category="coding" aria-label="Claim Devin Free Plan from Cognition (Devin)">Devin Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">Light coding-agent quota + unlimited Tab completions ($0 plan)</p>
 <p class="prov">Cognition (Devin) &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="devin-free-plan" aria-haspopup="dialog" aria-controls="ft-detail-devin-free-plan">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:1">
@@ -454,6 +631,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://elevenlabs.io/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="elevenlabs-free-plan" data-ft-provider="ElevenLabs" data-ft-offer-category="voice" aria-label="Claim ElevenLabs Free Plan from ElevenLabs">ElevenLabs Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">10k credits/month (~10 min of audio)</p>
 <p class="prov">ElevenLabs &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="elevenlabs-free-plan" aria-haspopup="dialog" aria-controls="ft-detail-elevenlabs-free-plan">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:2">
@@ -465,6 +645,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://github.com/features/copilot/plans" target="_blank" rel="noopener noreferrer" data-ft-offer-id="github-copilot-free" data-ft-provider="GitHub" data-ft-offer-category="coding" aria-label="Claim GitHub Copilot Free from GitHub">GitHub Copilot Free <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">2,000 completions + 50 chat requests per month</p>
 <p class="prov">GitHub &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="github-copilot-free" aria-haspopup="dialog" aria-controls="ft-detail-github-copilot-free">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:3">
@@ -476,6 +659,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="google-ai-studio-image" data-ft-provider="Google" data-ft-offer-category="image" aria-label="Claim Google AI Studio — Free Image Generation from Google">Google AI Studio — Free Image Generation <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">Free image generation in AI Studio (rate-limited)</p>
 <p class="prov">Google &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="google-ai-studio-image" aria-haspopup="dialog" aria-controls="ft-detail-google-ai-studio-image">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:4">
@@ -487,6 +673,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://cloud.google.com/free/docs/free-cloud-features" target="_blank" rel="noopener noreferrer" data-ft-offer-id="google-cloud-300-free-trial" data-ft-provider="Google Cloud" data-ft-offer-category="api_provider" aria-label="Claim Google Cloud Free Trial — $300 Credit from Google Cloud">Google Cloud Free Trial — $300 Credit <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">$300 in credits (90 days from signup)</p>
 <p class="prov">Google Cloud &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="google-cloud-300-free-trial" aria-haspopup="dialog" aria-controls="ft-detail-google-cloud-300-free-trial">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:5">
@@ -498,6 +687,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://console.groq.com/docs/rate-limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="groq-free-tier" data-ft-provider="Groq" data-ft-offer-category="api_provider" aria-label="Claim Groq Free Tier — Free Rate-Limited API from Groq">Groq Free Tier — Free Rate-Limited API <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)</p>
 <p class="prov">Groq &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="groq-free-tier" aria-haspopup="dialog" aria-controls="ft-detail-groq-free-tier">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:6">
@@ -509,6 +701,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://hailuoai.video/doc/payment-policy.html" target="_blank" rel="noopener noreferrer" data-ft-offer-id="hailuo-free-tier" data-ft-provider="Hailuo AI" data-ft-offer-category="video" aria-label="Claim Hailuo AI Video Free Tier from Hailuo AI">Hailuo AI Video Free Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">One-time welcome credit package + limited free generation (watermarked)</p>
 <p class="prov">Hailuo AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="hailuo-free-tier" aria-haspopup="dialog" aria-controls="ft-detail-hailuo-free-tier">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:7">
@@ -520,6 +715,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://leonardo.ai/pricing/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="leonardo-ai-free-plan" data-ft-provider="Leonardo.Ai" data-ft-offer-category="image" aria-label="Claim Leonardo.Ai Free Plan from Leonardo.Ai">Leonardo.Ai Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">150 fast tokens per day (resets daily)</p>
 <p class="prov">Leonardo.Ai &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="leonardo-ai-free-plan" aria-haspopup="dialog" aria-controls="ft-detail-leonardo-ai-free-plan">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:8">
@@ -531,6 +729,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key" target="_blank" rel="noopener noreferrer" data-ft-offer-id="mistral-experiment-free-tier" data-ft-provider="Mistral AI" data-ft-offer-category="api_provider" aria-label="Claim Mistral AI Studio Free Mode — Free API Tier from Mistral AI">Mistral AI Studio Free Mode — Free API Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">Free rate-limited API access (no credit card required)</p>
 <p class="prov">Mistral AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="mistral-experiment-free-tier" aria-haspopup="dialog" aria-controls="ft-detail-mistral-experiment-free-tier">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:9">
@@ -542,6 +743,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://pika.art/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="pika-free-plan" data-ft-provider="Pika" data-ft-offer-category="video" aria-label="Claim Pika Free Plan from Pika">Pika Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">80 monthly video credits</p>
 <p class="prov">Pika &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="pika-free-plan" aria-haspopup="dialog" aria-controls="ft-detail-pika-free-plan">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 <li style="--i:10">
@@ -553,6 +757,9 @@ a:focus-visible {
 <h2 class="card-title"><a href="https://runwayml.com/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="runway-free-plan" data-ft-provider="Runway" data-ft-offer-category="video" aria-label="Claim Runway Free Plan from Runway">Runway Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">125 one-time credits for AI video and image generation</p>
 <p class="prov">Runway &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<div class="card-actions">
+<button type="button" class="detail-btn" data-ft-detail="runway-free-plan" aria-haspopup="dialog" aria-controls="ft-detail-runway-free-plan">How to claim &amp; details</button>
+</div>
 </article>
 </li>
 </ul><section class="empty" id="ft-no-results" hidden>
@@ -561,9 +768,119 @@ a:focus-visible {
 <p>Nothing matches your current search and category combination.</p>
 <button type="button" class="chip reset" id="ft-reset-filters">Clear search &amp; filters</button>
 </section>
+<dialog id="ft-detail-devin-free-plan" class="detail" aria-labelledby="ft-detail-devin-free-plan-title">
+<div class="od-head"><span class="badge">coding</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-devin-free-plan-title">Devin Free Plan</h3>
+<p class="prov">Cognition (Devin) &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">Light coding-agent quota + unlimited Tab completions ($0 plan)</p>
+<p class="od-summary">Devin&#x27;s $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Open devin.ai/pricing and pick the Free $0 plan.</li><li>Sign up with your email or a Google/GitHub account.</li><li>Start a Devin session from the dashboard within your free quota.</li><li>Install the IDE extension for unlimited Tab completions.</li></ol></section>
+<section class="od-proof"><h4>Social proof</h4><blockquote class="proof-card proof-link"><p class="proof-text"><strong>Devin pricing — Free $0 plan</strong></p><p class="proof-text">&ldquo;Free $0 — Light quota to code with agents. Unlimited Tab completions.&rdquo;</p><footer> <a href="https://devin.ai/pricing" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">&#8599;</span></a></footer></blockquote></section>
+<a class="od-cta" href="https://devin.ai/pricing" target="_blank" rel="noopener noreferrer">Claim at Cognition (Devin) <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-elevenlabs-free-plan" class="detail" aria-labelledby="ft-detail-elevenlabs-free-plan-title">
+<div class="od-head"><span class="badge">voice</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-elevenlabs-free-plan-title">ElevenLabs Free Plan</h3>
+<p class="prov">ElevenLabs &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">10k credits/month (~10 min of audio)</p>
+<p class="od-summary">The ElevenLabs free plan includes 10,000 credits per month, roughly 10 minutes of audio, with access to the core text-to-speech voices. Credits reset monthly and no credit card is required.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Open elevenlabs.io/pricing and choose the Free plan.</li><li>Sign up for a free ElevenLabs account.</li><li>Confirm your email to unlock the 10k monthly credits.</li><li>Generate speech from the Playground or API within the free quota.</li></ol></section>
+
+<a class="od-cta" href="https://elevenlabs.io/pricing" target="_blank" rel="noopener noreferrer">Claim at ElevenLabs <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-github-copilot-free" class="detail" aria-labelledby="ft-detail-github-copilot-free-title">
+<div class="od-head"><span class="badge">coding</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-github-copilot-free-title">GitHub Copilot Free</h3>
+<p class="prov">GitHub &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">2,000 completions + 50 chat requests per month</p>
+<p class="od-summary">GitHub Copilot Free grants every developer 2,000 code completions and 50 chat requests per month at no cost, with model choice between Anthropic&#x27;s Claude 3.5 Sonnet and OpenAI&#x27;s GPT-4o. It works in VS Code, Visual Studio, JetBrains IDEs, and on GitHub.com.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Sign in to GitHub with your personal account.</li><li>Visit github.com/features/copilot/plans and select the Free plan.</li><li>Install the Copilot extension in your editor (VS Code, JetBrains, or Visual Studio).</li><li>Start completing and chatting — 2,000 completions + 50 chats refresh monthly.</li></ol></section>
+<section class="od-proof"><h4>Social proof</h4><blockquote class="proof-card proof-link"><p class="proof-text"><strong>Announcing 150M developers and a new free tier for GitHub Copilot in VS Code</strong></p><p class="proof-text">&ldquo;Today, we are adding GitHub Copilot to the mix by launching GitHub Copilot Free.&rdquo;</p><footer> <a href="https://github.blog/news-insights/product-news/github-copilot-in-vscode-free/" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">&#8599;</span></a></footer></blockquote><blockquote class="proof-card proof-link"><p class="proof-text"><strong>Announcing GitHub Copilot Free — GitHub Changelog</strong></p><p class="proof-text">&ldquo;By simply signing in with your personal GitHub account, you will have access to 2000 Code Completions and 50 chat messages per month!&rdquo;</p><footer> <a href="https://github.blog/changelog/2024-12-18-announcing-github-copilot-free/" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">&#8599;</span></a></footer></blockquote></section>
+<a class="od-cta" href="https://github.com/features/copilot/plans" target="_blank" rel="noopener noreferrer">Claim at GitHub <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-google-ai-studio-image" class="detail" aria-labelledby="ft-detail-google-ai-studio-image-title">
+<div class="od-head"><span class="badge">image</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-google-ai-studio-image-title">Google AI Studio — Free Image Generation</h3>
+<p class="prov">Google &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">Free image generation in AI Studio (rate-limited)</p>
+<p class="od-summary">Google AI Studio offers free, rate-limited image generation directly in the browser using Gemini image models — no billing account required for the free tier.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Open aistudio.google.com in your browser.</li><li>Sign in with a Google account.</li><li>Choose an image-capable Gemini model and start generating.</li><li>Stay within the per-minute/per-day free rate limits.</li></ol></section>
+
+<a class="od-cta" href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer">Claim at Google <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-google-cloud-300-free-trial" class="detail" aria-labelledby="ft-detail-google-cloud-300-free-trial-title">
+<div class="od-head"><span class="badge">api_provider</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-google-cloud-300-free-trial-title">Google Cloud Free Trial — $300 Credit</h3>
+<p class="prov">Google Cloud &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">$300 in credits (90 days from signup)</p>
+<p class="od-summary">New Google Cloud customers get $300 in free credits to spend on any Cloud Platform service during a 90-day trial window counted from signup. A billing account is created, but you are not charged until you manually upgrade.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Open cloud.google.com/free and click &#x27;Start free&#x27;.</li><li>Sign in with or create a Google account.</li><li>Complete the signup steps and create a billing account (no automatic charges).</li><li>Use the $300 credits on eligible services within the 90-day window.</li></ol></section>
+
+<a class="od-cta" href="https://cloud.google.com/free/docs/free-cloud-features" target="_blank" rel="noopener noreferrer">Claim at Google Cloud <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-groq-free-tier" class="detail" aria-labelledby="ft-detail-groq-free-tier-title">
+<div class="od-head"><span class="badge">api_provider</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-groq-free-tier-title">Groq Free Tier — Free Rate-Limited API</h3>
+<p class="prov">Groq &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)</p>
+<p class="od-summary">Groq&#x27;s free tier serves open models at high speed through a rate-limited API at no cost — for example around 1,000 requests per day on GPT-OSS-class models. Rate limits vary per model and are published in Groq&#x27;s docs.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Create a free Groq Cloud account at console.groq.com.</li><li>Generate an API key from the console&#x27;s API Keys page.</li><li>Point your client at api.groq.com and pick a supported model.</li><li>Stay within the free rate limits listed at console.groq.com/docs/rate-limits.</li></ol></section>
+
+<a class="od-cta" href="https://console.groq.com/docs/rate-limits" target="_blank" rel="noopener noreferrer">Claim at Groq <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-hailuo-free-tier" class="detail" aria-labelledby="ft-detail-hailuo-free-tier-title">
+<div class="od-head"><span class="badge">video</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-hailuo-free-tier-title">Hailuo AI Video Free Tier</h3>
+<p class="prov">Hailuo AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">One-time welcome credit package + limited free generation (watermarked)</p>
+<p class="od-summary">New Hailuo AI Video accounts receive a one-time welcome package of credits plus limited free video generation. Free-tier outputs are watermarked, and paid plans remove the limits.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Create a free account at hailuoai.video.</li><li>Receive the welcome credit package on signup.</li><li>Generate videos from prompts or images within the free allowance.</li><li>Note that free-tier generations are watermarked.</li></ol></section>
+
+<a class="od-cta" href="https://hailuoai.video/doc/payment-policy.html" target="_blank" rel="noopener noreferrer">Claim at Hailuo AI <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-leonardo-ai-free-plan" class="detail" aria-labelledby="ft-detail-leonardo-ai-free-plan-title">
+<div class="od-head"><span class="badge">image</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-leonardo-ai-free-plan-title">Leonardo.Ai Free Plan</h3>
+<p class="prov">Leonardo.Ai &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">150 fast tokens per day (resets daily)</p>
+<p class="od-summary">The Leonardo.Ai free plan grants 150 fast tokens every day (resetting daily) for image generation on the app&#x27;s core models. Slow-generation modes can stretch usage further at zero cost.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Create a free Leonardo.Ai account at leonardo.ai.</li><li>Confirm your email to activate the free plan.</li><li>Generate images from the app dashboard using your daily fast tokens.</li><li>Return daily — the 150 fast-token allowance resets every day.</li></ol></section>
+
+<a class="od-cta" href="https://leonardo.ai/pricing/" target="_blank" rel="noopener noreferrer">Claim at Leonardo.Ai <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-mistral-experiment-free-tier" class="detail" aria-labelledby="ft-detail-mistral-experiment-free-tier-title">
+<div class="od-head"><span class="badge">api_provider</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-mistral-experiment-free-tier-title">Mistral AI Studio Free Mode — Free API Tier</h3>
+<p class="prov">Mistral AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">Free rate-limited API access (no credit card required)</p>
+<p class="od-summary">Mistral&#x27;s La Plateforme &#x27;Experiment&#x27; plan provides free, rate-limited API access to Mistral models with no credit card required. Activating it opts your data into training in exchange for the free tier.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Create a free account at console.mistral.ai.</li><li>Activate the free &#x27;Experiment&#x27; plan from the subscription page (data-training opt-in applies).</li><li>Generate an API key from the API Keys page.</li><li>Call api.mistral.ai within the published rate limits.</li></ol></section>
+
+<a class="od-cta" href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key" target="_blank" rel="noopener noreferrer">Claim at Mistral AI <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-pika-free-plan" class="detail" aria-labelledby="ft-detail-pika-free-plan-title">
+<div class="od-head"><span class="badge">video</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-pika-free-plan-title">Pika Free Plan</h3>
+<p class="prov">Pika &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">80 monthly video credits</p>
+<p class="od-summary">Pika&#x27;s free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and credits refresh monthly.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Sign up at pika.art with Google or Discord.</li><li>Open the generator from your workspace.</li><li>Create videos from text or image prompts; each generation spends credits.</li><li>Wait for the monthly reset to get your next 80 credits.</li></ol></section>
+
+<a class="od-cta" href="https://pika.art/pricing" target="_blank" rel="noopener noreferrer">Claim at Pika <span aria-hidden="true">&#8599;</span></a>
+</dialog>
+<dialog id="ft-detail-runway-free-plan" class="detail" aria-labelledby="ft-detail-runway-free-plan-title">
+<div class="od-head"><span class="badge">video</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><form method="dialog" class="od-close-form"><button type="submit" class="detail-close" aria-label="Close details">&times;</button></form></div>
+<h3 id="ft-detail-runway-free-plan-title">Runway Free Plan</h3>
+<p class="prov">Runway &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="amount">125 one-time credits for AI video and image generation</p>
+<p class="od-summary">Runway grants every new account 125 one-time credits for AI video and image generation (Gen-4 and friends). The credits do not renew; upgrade or wait for promotional refreshes for more.</p>
+<section class="od-steps"><h4>How to claim</h4><ol><li>Create a free account at runwayml.com.</li><li>Receive the one-time 125-credit grant on signup.</li><li>Generate video or images from the dashboard, spending credits per run.</li><li>Upgrade to Standard when the one-time credits run out.</li></ol></section>
+
+<a class="od-cta" href="https://runwayml.com/pricing" target="_blank" rel="noopener noreferrer">Claim at Runway <span aria-hidden="true">&#8599;</span></a>
+</dialog>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-22T00:25:38Z">Aug 22, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-22T01:15:49Z">Aug 22, 2026</time> &middot; offers re-verified on every change</p>
 <nav class="foot-nav" aria-label="Site"><a href="./" aria-current="page">Offers</a><span aria-hidden="true">&middot;</span><a href="privacy.html">Privacy policy</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 </footer>
 </div>
@@ -629,6 +946,20 @@ a:focus-visible {
     }
   }
 
+  // Offer detail dialogs (#48): open the build-time-rendered <dialog> for
+  // this listing. Guarded so browsers without dialog support keep working;
+  // analytics carries only the listing ID, never panel content.
+  function ftOpenDetail(slug) {
+    var dlg = document.getElementById("ft-detail-" + slug);
+    if (!dlg || typeof dlg.showModal !== "function") { return; }
+    try {
+      dlg.showModal();
+    } catch (err) {}
+    try {
+      ftTrack("offer_details_open", { offer_id: slug });
+    } catch (err) {}
+  }
+
   function ftInitApp() {
     var grid = document.getElementById("ft-grid");
     var input = document.getElementById("ft-search");
@@ -673,6 +1004,23 @@ a:focus-visible {
           category: node.getAttribute("data-ft-offer-category") || ""
         });
       } catch (err) {}
+    });
+
+    // Detail triggers (#48): one delegated listener covers every card's
+    // "How to claim & details" button; clicks bubble exactly like the
+    // outbound-link attribution above.
+    grid.addEventListener("click", function (event) {
+      var node = event.target;
+      while (node && node !== grid) {
+        if (node.getAttribute) {
+          var slug = node.getAttribute("data-ft-detail");
+          if (slug) {
+            ftOpenDetail(slug);
+            return;
+          }
+        }
+        node = node.parentNode || null;
+      }
     });
 
     function syncControls() {
