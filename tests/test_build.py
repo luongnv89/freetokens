@@ -913,25 +913,17 @@ class AppJsSourceTests(unittest.TestCase):
         popstate = init_body[init_body.index('addEventListener("popstate"'):]
         self.assertIn("apply(); // restore view", popstate)
 
-    def test_open_detail_guarded_for_missing_dialog_support(self):
-        open_fn = self.JS[self.JS.index("function ftOpenDetail"):]
-        body = open_fn[:open_fn.index("function ", 10)]
-        self.assertIn('getElementById("ft-detail-" + slug)', body)
-        self.assertIn('typeof dlg.showModal !== "function"', body)
-        # Opening is best-effort: a throwing showModal must not break the page.
-        self.assertIn("try {", body)
-        self.assertIn("catch (err)", body)
-
-    def test_detail_event_carries_offer_id_only(self):
-        self.assertIn('"offer_details_open", { offer_id: slug }', self.JS)
-        # No panel content ever reaches analytics.
-        self.assertNotIn("offer_details_open", self.JS.split("ftOpenDetail")[0])
-
-    def test_delegated_trigger_walk_reads_data_ft_detail(self):
-        walk = self.JS[self.JS.index("// Detail triggers"):]
-        walk = walk[:walk.index("\n    function syncControls")]
-        self.assertIn('getAttribute("data-ft-detail")', walk)
-        self.assertIn("ftOpenDetail(slug);", walk)
+    def test_no_dialog_wiring_ships_in_site_script(self):
+        # #60: detail affordances are plain navigational links; every
+        # scripted dialog hook was removed with them.
+        for marker in (
+            "ftOpenDetail",
+            "data-ft-detail",
+            "showModal",
+            "offer_details_open",
+            'getElementById("ft-detail-',
+        ):
+            self.assertNotIn(marker, self.JS)
 
 
 class FilterEventGateTests(unittest.TestCase):
@@ -1152,97 +1144,136 @@ class DetailLoadTests(unittest.TestCase):
                 )
 
 
-def _detail_render(offers, details=None):
-    """Render the home page from validated offers plus a detail map."""
-    rendered = []
-    for i, offer in enumerate(offers):
-        offer.setdefault("slug", f"offer-{i}")
-        rendered.append(offer)
-    return build.render_html(build.build_index(rendered), "", details or {})
+class DetailPageTests(unittest.TestCase):
+    """#60: every offer emits a dedicated page at site/offers/<slug>.html."""
 
+    def _build(self, offers_by_name, details_by_slug=None):
+        """Run build.main over a temp offers dir; return the site Path."""
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        offers_dir = os.path.join(tmp.name, "offers")
+        os.makedirs(offers_dir)
+        for name, text in offers_by_name.items():
+            Path(offers_dir, f"{name}.yaml").write_text(text, encoding="utf-8")
+        for slug, payload in (details_by_slug or {}).items():
+            details_dir = os.path.join(offers_dir, "details")
+            os.makedirs(details_dir, exist_ok=True)
+            Path(details_dir, f"{slug}.json").write_text(
+                json.dumps(payload), encoding="utf-8"
+            )
+        out = os.path.join(tmp.name, "out")
+        code = build.main(["--offers-dir", offers_dir, "--out", out])
+        self.assertEqual(code, 0)
+        return Path(out, "site")
 
-class DetailRenderTests(unittest.TestCase):
-    """#48: every offer gets a trigger button and a full detail dialog."""
-
-    def _offer(self, **overrides):
-        return build.validate_offer(dict(VALID, **overrides), "a.yaml")
-
-    def test_every_card_has_trigger_button_wired_to_dialog(self):
-        page = _detail_render([self._offer()])
-        self.assertIn('data-ft-detail="offer-0"', page)
-        self.assertIn('aria-haspopup="dialog"', page)
-        self.assertIn('aria-controls="ft-detail-offer-0"', page)
-        self.assertIn('id="ft-detail-offer-0"', page)
-
-    def test_dialog_carries_core_fields_beyond_list_summary(self):
-        page = _detail_render(
-            [self._offer(title="Detail Me", provider="Prov Co")],
-            {"offer-0": {"summary": "Longer description here."}},
+    def _two_offer_site(self, details=None):
+        return self._build(
+            {"alpha": offer_text(), "beta": offer_text(title="Beta", category="image")},
+            details,
         )
-        start = page.index('id="ft-detail-offer-0"')
-        seg = page[start : page.index("</dialog>", start)]
-        self.assertIn("<h3", seg)
-        self.assertIn("Prov Co", seg)
-        self.assertIn("$10 in credits", seg)
-        self.assertIn("verified <time", seg)
-        self.assertIn("Longer description here.", seg)
 
-    def test_claim_steps_render_as_ordered_list(self):
-        page = _detail_render(
-            [self._offer()],
-            {"offer-0": {"claim_steps": ["Sign up.", "Claim credits."]}},
-        )
-        seg = page[page.index('<section class="od-steps">') :]
-        self.assertIn("<h4>How to claim</h4>", seg)
-        self.assertIn("<ol><li>Sign up.</li><li>Claim credits.</li></ol>", seg)
+    # --- emission ------------------------------------------------------------
 
-    def test_fallback_claim_steps_without_detail_data(self):
-        page = _detail_render([self._offer()])
-        self.assertIn("Open the official offer page.", page)
-        self.assertIn("How to claim</h4>", page)
+    def test_main_emits_one_page_per_offer(self):
+        site = self._two_offer_site()
+        for slug in ("alpha", "beta"):
+            page = (site / "offers" / f"{slug}.html").read_text(encoding="utf-8")
+            self.assertIn("Free AI Credits", page)
+            self.assertIn("<article", page)
 
-    def test_social_proof_variants_render_embed_style_cards(self):
-        details = {
-            "offer-0": {
-                "social_proof": [
-                    {
-                        "type": "x",
-                        "url": "https://x.com/dev/status/1",
-                        "author": "Dev One",
-                        "handle": "@devone",
-                        "text": "Loving this free tier!",
-                    },
-                    {
-                        "type": "reddit",
-                        "url": "https://www.reddit.com/r/AI/comments/x/",
-                        "author": "red_user",
-                        "community": "r/AI",
-                        "text": "Works as advertised.",
-                    },
-                    {
-                        "type": "link",
-                        "url": "https://blog.example/news",
-                        "title": "Big launch post",
-                    },
-                ]
-            }
+    def test_every_offer_slug_yields_its_named_page(self):
+        offers = {
+            "alpha": offer_text(),
+            "beta-two": offer_text(title="Beta Two", category="coding"),
+            "gamma-3": offer_text(title="Gamma 3", category="image"),
         }
-        page = _detail_render([self._offer()], details)
-        self.assertIn('class="proof-card proof-x"', page)
-        self.assertIn("@devone", page)
-        self.assertIn("Loving this free tier!", page)
-        self.assertIn("View post on X", page)
-        self.assertIn("r/AI", page)
-        self.assertIn("View on Reddit", page)
-        self.assertIn("<strong>Big launch post</strong>", page)
-        self.assertIn("Open source", page)
-        self.assertEqual(page.count('rel="noopener noreferrer"'), page.count("proof-card"))
+        site = self._build(offers)
+        for slug in offers:
+            page = (site / "offers" / f"{slug}.html").read_text(encoding="utf-8")
+            self.assertIn(offers[slug].split("title: ")[1].split("\n")[0], page)
 
-    def test_screenshot_proof_renders_lazy_figure(self):
-        page = _detail_render(
-            [self._offer()],
+    def test_expired_offers_get_pages_too(self):
+        expired = offer_text(
+            title="Expired Offer",
+            expiry_date=(dt.date.today() - dt.timedelta(days=1)).isoformat(),
+        )
+        site = self._build({"live": offer_text(), "expired": expired})
+        page = (site / "offers" / "expired.html").read_text(encoding="utf-8")
+        self.assertIn("Expired Offer", page)
+
+    # --- content parity -------------------------------------------------------
+
+    def test_page_carries_card_and_dialog_content(self):
+        site = self._two_offer_site(
             {
-                "offer-0": {
+                "alpha": {
+                    "summary": "Longer description here.",
+                    "claim_steps": ["Sign up.", "Claim credits."],
+                    "social_proof": [
+                        {
+                            "type": "x",
+                            "url": "https://x.com/dev/status/1",
+                            "author": "Dev One",
+                            "handle": "@devone",
+                            "text": "Loving this free tier!",
+                        }
+                    ],
+                }
+            }
+        )
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        start = page.index('class="offer-detail"')
+        seg = page[start : page.index("</article>", start)]
+        self.assertIn("$10 in credits", seg)
+        self.assertIn("<h2>How to claim</h2>", seg)
+        self.assertIn("<ol><li>Sign up.</li><li>Claim credits.</li></ol>", seg)
+        self.assertIn("Longer description here.", seg)
+        self.assertIn('<section class="od-proof"><h2>Social proof</h2>', seg)
+        self.assertIn("@devone", seg)
+        self.assertIn("View post on X", seg)
+
+    def test_page_header_carries_core_fields_and_status(self):
+        site = self._build(
+            {
+                "alpha": offer_text(
+                    title="Header Me", category="voice",
+                    expiry_date="2026-12-31",
+                )
+            },
+            {"alpha": {"summary": "Summary blurb."}},
+        )
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        header = page[page.index("<header") : page.index("</header>")]
+        self.assertEqual(header.count("<h1>"), 1)
+        self.assertIn("<h1>Header Me</h1>", header)
+        self.assertIn("Test Provider", header)
+        self.assertIn(
+            f'hand-verified on <time datetime="{VALID["verified_date"]}">', header
+        )
+        self.assertIn('<time datetime="2026-12-31">Dec 31, 2026</time>', header)
+
+    def test_page_without_detail_file_falls_back_like_dialogs_did(self):
+        site = self._two_offer_site({"beta": {"summary": "Only beta has detail."}})
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        self.assertIn("Open the official offer page.", page)
+        self.assertIn("How to claim</h2>", page)
+        self.assertNotIn("Social proof", page)
+        beta = (site / "offers" / "beta.html").read_text(encoding="utf-8")
+        self.assertIn("Only beta has detail.", beta)
+
+    def test_cta_link_points_at_source_and_opens_new_tab(self):
+        site = self._two_offer_site()
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        self.assertIn(
+            '<a class="od-cta" href="https://example.com/offer"'
+            ' target="_blank" rel="noopener noreferrer">Claim at Test Provider',
+            page,
+        )
+
+    def test_screenshot_proof_renders_lazy_figure_on_page(self):
+        site = self._two_offer_site(
+            {
+                "alpha": {
                     "social_proof": [
                         {
                             "type": "screenshot",
@@ -1251,54 +1282,163 @@ class DetailRenderTests(unittest.TestCase):
                         }
                     ]
                 }
-            },
+            }
         )
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
         self.assertIn('src="assets/shots/pricing.png"', page)
-        self.assertIn('alt="Pricing table showing $0 plan"', page)
         self.assertIn('loading="lazy"', page)
-        self.assertIn("<figcaption>Pricing table showing $0 plan</figcaption>", page)
 
-    def test_dialog_escapes_hostile_content(self):
-        page = _detail_render(
-            [self._offer(title='Bad <script>alert(1)</script>', provider='Q"uote')],
+    def test_reddit_and_link_proofs_render_embed_style_cards(self):
+        site = self._two_offer_site(
             {
-                "offer-0": {
+                "alpha": {
+                    "social_proof": [
+                        {
+                            "type": "reddit",
+                            "url": "https://www.reddit.com/r/AI/comments/x/",
+                            "author": "red_user",
+                            "community": "r/AI",
+                            "text": "Works as advertised.",
+                        },
+                        {
+                            "type": "link",
+                            "url": "https://blog.example/news",
+                            "title": "Big launch post",
+                        },
+                    ]
+                }
+            }
+        )
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        self.assertIn('class="proof-card proof-reddit"', page)
+        self.assertIn("r/AI", page)
+        self.assertIn("View on Reddit", page)
+        self.assertIn("<strong>Big launch post</strong>", page)
+        self.assertIn("Open source", page)
+        proof_seg = page[
+            page.index('<section class="od-proof">'):page.index('<a class="od-cta"')
+        ]
+        self.assertEqual(
+            proof_seg.count('rel="noopener noreferrer"'),
+            proof_seg.count("proof-card"),
+        )
+
+    def test_page_escapes_hostile_content(self):
+        site = self._build(
+            {"alpha": offer_text(title='Bad <script>alert(1)</script>')},
+            {
+                "alpha": {
                     "summary": "<script>evil()</script>",
                     "social_proof": [
                         {
                             "type": "x",
                             "url": 'https://x.com/h/status/9"><script>',
-                            "author": '<img src=x onerror=alert(1)>',
+                            "author": "<img src=x onerror=alert(1)>",
                             "text": '"quoted" & <b>bold</b>',
                         }
                     ],
                 }
             },
         )
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
         self.assertNotIn("<script>alert(1)</script>", page)
         self.assertNotIn("onerror=alert(1)>", page.replace("&quot;", '"'))
         self.assertIn("&lt;script&gt;", page)
         self.assertIn("&quot;quoted&quot; &amp; &lt;b&gt;bold&lt;/b&gt;", page)
 
-    def test_cta_link_points_at_source_and_opens_new_tab(self):
-        page = _detail_render([self._offer()])
-        self.assertIn(
-            '<a class="od-cta" href="https://example.com/offer"'
-            ' target="_blank" rel="noopener noreferrer">Claim at Test Provider',
-            page,
+    # --- depth-correct chrome --------------------------------------------------
+
+    def test_offer_page_chrome_climbs_one_level(self):
+        site = self._two_offer_site()
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        for marker in (
+            '<link rel="icon" type="image/svg+xml" href="../favicon.svg">',
+            '<a href="../">Offers</a>',
+            '<a href="../archive.html">Archive</a>',
+            '<a href="../privacy.html">Privacy policy</a>',
+            '<a href="../feed.xml">RSS</a>',
+            'href="../feed.xml">',
+            'href="../">',
+        ):
+            self.assertIn(marker, page)
+        # No absolute-root hrefs may leak onto subdirectory pages (GitHub
+        # Pages serves this under /<repo>/); external https anchors excepted.
+        self.assertNotIn(
+            'href="/', page.replace('href="https://fonts', "")
+            .replace('href="https://x.com', "")
         )
 
-    def test_detail_css_and_js_ship_with_offers(self):
-        page = _detail_render([self._offer()])
-        self.assertIn(".detail-btn", page)
-        self.assertIn(".detail::backdrop", page)
-        self.assertIn("ftOpenDetail", page)
+    def test_root_pages_keep_shallow_chrome(self):
+        site = self._two_offer_site()
+        index = (site / "index.html").read_text(encoding="utf-8")
+        archive = (site / "archive.html").read_text(encoding="utf-8")
+        privacy = (site / "privacy.html").read_text(encoding="utf-8")
+        for page in (index, archive, privacy):
+            self.assertIn(
+                '<link rel="icon" type="image/svg+xml" href="./favicon.svg">', page
+            )
+            self.assertIn('href="feed.xml">', page)
+        self.assertIn('<a href="./" aria-current="page">Offers</a>', index)
+        self.assertNotIn('href="/favicon', index)
 
-    def test_zero_offers_ships_no_dialogs_or_triggers(self):
-        index = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
-        page = build.render_html(index)
-        self.assertNotIn("<dialog", page)
-        self.assertNotIn("data-ft-detail", page)
+    # --- link consistency across index/archive/feed -----------------------------
+
+    def test_index_cards_link_to_each_offer_page(self):
+        site = self._two_offer_site()
+        index = (site / "index.html").read_text(encoding="utf-8")
+        for slug in ("alpha", "beta"):
+            self.assertEqual(index.count(f'href="offers/{slug}.html"'), 1)
+        self.assertNotIn("data-ft-detail", index)
+        self.assertNotIn("<dialog", index)
+
+    def test_archive_rows_link_to_expired_offer_pages(self):
+        expired = offer_text(
+            title="Expired Offer",
+            expiry_date=(dt.date.today() - dt.timedelta(days=1)).isoformat(),
+        )
+        site = self._build({"live": offer_text(), "expired": expired})
+        archive = (site / "archive.html").read_text(encoding="utf-8")
+        self.assertIn('href="offers/expired.html"', archive)
+        self.assertTrue((site / "offers" / "expired.html").is_file())
+
+    def test_feed_items_link_to_detail_pages(self):
+        site = self._two_offer_site()
+        feed = (site / "feed.xml").read_text(encoding="utf-8")
+        base = build.DEFAULT_BASE_URL
+        for slug in ("alpha", "beta"):
+            expected = f"<link>{base}/offers/{slug}.html</link>"
+            self.assertIn(expected, feed)
+            self.assertIn(f"<guid isPermaLink=\"true\">{base}/offers/{slug}.html</guid>", feed)
+        self.assertNotIn("#offer-", feed)
+
+    # --- no dialog machinery anywhere --------------------------------------------
+
+    def test_dialog_machinery_gone_from_all_outputs(self):
+        site = self._two_offer_site({"alpha": {"summary": "s"}})
+        pages = [
+            (site / "index.html").read_text(encoding="utf-8"),
+            (site / "archive.html").read_text(encoding="utf-8"),
+            (site / "privacy.html").read_text(encoding="utf-8"),
+            (site / "offers" / "alpha.html").read_text(encoding="utf-8"),
+        ]
+        for page in pages:
+            for marker in ("<dialog", "data-ft-detail", "ftOpenDetail", "showModal"):
+                self.assertNotIn(marker, page)
+
+    def test_offer_pages_never_mark_site_nav_current(self):
+        site = self._two_offer_site()
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        # The stylesheet mentions the [aria-current] selector; no link on a
+        # detail page may actually carry the attribute.
+        self.assertNotRegex(page, r'href="[^"]*" aria-current="page"')
+
+    def test_committed_site_ships_one_page_per_seed_offer(self):
+        offers = build.load_offers(str(REPO / "offers"))
+        for offer in offers:
+            path = REPO / "site" / "offers" / f"{offer['slug']}.html"
+            self.assertTrue(path.is_file(), offer["slug"])
+            page = path.read_text(encoding="utf-8")
+            self.assertIn(f"<h1>{offer['title']}</h1>", page)
 
 
 class LargeFixtureBuildTests(unittest.TestCase):
@@ -1799,54 +1939,28 @@ class NodeAppJsTests(unittest.TestCase):
         self.assertEqual(final["preventDefaults"], 0)
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
-    def test_clicking_detail_button_opens_dialog_and_tracks_once(self):
-        snaps = self._run([{"op": "click_detail", "value": "copilot"}])
+    def test_detail_affordance_is_plain_navigation_never_scripted(self):
+        # #60: the card's detail affordance is a plain link to the offer's
+        # page. Clicking it must produce zero events and never preventDefault
+        # — navigation stays fully native.
+        snaps = self._run([{"op": "click_detail_link", "value": "copilot"}])
         final = snaps[-1]
-        self.assertEqual(final["openDialogs"], ["copilot"])
-        self.assertEqual(
-            final["events"],
-            [["offer_details_open", {"offer_id": "copilot"}]],
-        )
-
-    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
-    def test_detail_click_never_fires_offer_click(self):
-        snaps = self._run([{"op": "click_detail", "value": "alpha"}])
-        final = snaps[-1]
-        kinds = [e[0] for e in final["events"]]
-        self.assertEqual(kinds, ["offer_details_open"])
-
-    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
-    def test_dialog_stays_open_after_opening_a_second_offer(self):
-        snaps = self._run(
-            [
-                {"op": "click_detail", "value": "alpha"},
-                {"op": "click_detail", "value": "mistral"},
-            ]
-        )
-        final = snaps[-1]
-        self.assertEqual(final["openDialogs"], ["alpha", "mistral"])
-
-    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
-    def test_detail_opening_silent_when_analytics_absent(self):
-        snaps = self._run(
-            [{"op": "click_detail", "value": "mistral"}], track_enabled=False
-        )
-        final = snaps[-1]
-        self.assertEqual(final["openDialogs"], ["mistral"])
+        self.assertEqual(final["detailLinks"]["copilot"], "offers/copilot.html")
         self.assertEqual(final["events"], [])
+        self.assertEqual(final["preventDefaults"], 0)
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
-    def test_filtering_still_works_with_dialogs_present(self):
-        snaps = self._run(
-            [
-                {"op": "click_detail", "value": "copilot"},
-                {"op": "type", "value": "mistral"},
-                {"op": "advance", "ms": 200},
-            ]
-        )
+    def test_every_card_ships_a_navigational_detail_link(self):
+        snaps = self._run([])
         final = snaps[-1]
-        self.assertEqual(final["visible"], ["mistral"])
-        self.assertEqual(final["openDialogs"], ["copilot"])
+        self.assertEqual(
+            final["detailLinks"],
+            {
+                "alpha": "offers/alpha.html",
+                "copilot": "offers/copilot.html",
+                "mistral": "offers/mistral.html",
+            },
+        )
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_filter_settle_under_200ms_over_500_offers(self):
@@ -2481,10 +2595,10 @@ class FeedTests(unittest.TestCase):
         self.assertEqual(titles, ["Offer live", "Offer fresh"])
         self.assertNotIn("Offer stale", titles)
 
-    def test_item_links_are_absolute_and_target_home_anchor(self):
+    def test_item_links_are_absolute_and_target_detail_page(self):
         _, root = self._feed([self._offer("copilot")])
         item = self._channel(root).find("item")
-        expected = f"{self.BASE}/#offer-copilot"
+        expected = f"{self.BASE}/offers/copilot.html"
         self.assertEqual(item.findtext("link"), expected)
         guid = item.find("guid")
         self.assertEqual(guid.get("isPermaLink"), "true")
@@ -2564,9 +2678,9 @@ class FeedTests(unittest.TestCase):
                 )
                 self.assertIn('<a href="feed.xml">RSS</a>', page)
 
-    def test_anchor_ids_on_home_cards_match_feed_targets(self):
+    def test_feed_links_match_card_detail_links(self):
         page = build.render_html(build.build_index([self._offer("copilot")]))
-        self.assertIn('<article class="card" id="offer-copilot"', page)
+        self.assertIn('href="offers/copilot.html"', page)
 
     def test_main_writes_feed_xml(self):
         with tempfile.TemporaryDirectory() as tmp:

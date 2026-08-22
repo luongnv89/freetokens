@@ -6,7 +6,7 @@
  * replays a JSON scenario from stdin, and prints one JSON line per step:
  *
  *   {visible, status, pressed, inputValue, emptyHidden, historyUrls,
- *    locationSearch, events, perf_ms?, preventDefaults?}
+ *    locationSearch, events, detailLinks, perf_ms?, preventDefaults?}
  *
  * Clicks bubble along parentNode chains, so the delegated grid listener
  * behind `offer_click` attribution is exercised like a real click.
@@ -113,8 +113,7 @@ function runScenario(scenario) {
   const items = [];
   const slugOf = new Map();
   const linksBySlug = new Map();
-  const buttonsBySlug = new Map();
-  const dialogsBySlug = new Map();
+  const detailLinksBySlug = new Map();
   for (const spec of scenario.cards) {
     const article = makeElement("article");
     article.attrs["data-category"] = spec.category;
@@ -131,20 +130,15 @@ function runScenario(scenario) {
     link.attrs["data-ft-provider"] = spec.provider || spec.slug;
     link.attrs["data-ft-offer-category"] = spec.category;
     article.appendChild(link);
-    // Detail trigger (#48): a button sibling of the outbound link, so its
-    // clicks bubble to the grid but never resolve to an offer link.
-    const btn = makeElement("button");
-    btn.attrs["data-ft-detail"] = spec.slug;
-    article.appendChild(btn);
-    // Build-time dialog stub: the real page ships one <dialog> per offer.
-    const dlg = makeElement("dialog");
-    dlg.attrs.id = "ft-detail-" + spec.slug;
-    dlg.open = false;
-    dlg.showModal = () => {
-      dlg.open = true;
-    };
-    buttonsBySlug.set(spec.slug, btn);
-    dialogsBySlug.set(spec.slug, dlg);
+    // Detail affordance (#60): a plain navigational link to the offer's
+    // dedicated page. No dialog wiring exists anymore, so its clicks must
+    // stay native — never prevented, never tracked.
+    const detailLink = makeElement("a");
+    detailLink.attrs["href"] =
+      "offers/" + encodeURIComponent(spec.slug) + ".html";
+    detailLink.attrs["class"] = "detail-btn";
+    article.appendChild(detailLink);
+    detailLinksBySlug.set(spec.slug, detailLink);
     const li = makeElement("li");
     li.card = article;
     // Parent the card into the list item so click events can bubble
@@ -188,9 +182,6 @@ function runScenario(scenario) {
     "ft-no-results": emptyBox,
     "ft-reset-filters": resetButton,
   };
-  for (const [slug, dlg] of dialogsBySlug) {
-    byId["ft-detail-" + slug] = dlg;
-  }
 
   const location_ = { pathname: "/", search: scenario.init_search || "" };
   const historyUrls = [];
@@ -279,9 +270,13 @@ function runScenario(scenario) {
         locationSearch: location_.search,
         events: events.map((e) => e.slice()),
         preventDefaults: meta.preventDefaults,
-        openDialogs: [...dialogsBySlug]
-          .filter(([, dlg]) => dlg.open)
-          .map(([slug]) => slug),
+        detailLinks: [...detailLinksBySlug].reduce(
+          (acc, [slug, a]) => {
+            acc[slug] = a.attrs.href;
+            return acc;
+          },
+          {}
+        ),
       },
       extra || {}
     );
@@ -305,11 +300,12 @@ function runScenario(scenario) {
       const link = linksBySlug.get(step.value);
       if (!link) throw new Error(`no offer link ${step.value}`);
       fire(link, "click", clickEvent(link));
-    } else if (step.op === "click_detail") {
-      // Click the card's detail trigger; must bubble to the grid handler.
-      const btn = buttonsBySlug.get(step.value);
-      if (!btn) throw new Error(`no detail button ${step.value}`);
-      fire(btn, "click", clickEvent(btn));
+    } else if (step.op === "click_detail_link") {
+      // Click the card's detail affordance; with dialogs gone it is a
+      // plain link, so the click must produce zero scripted side effects.
+      const a = detailLinksBySlug.get(step.value);
+      if (!a) throw new Error(`no detail link ${step.value}`);
+      fire(a, "click", clickEvent(a));
     } else if (step.op === "click_span") {
       // Click a non-anchor child inside the card: must resolve to its
       // enclosing offer link via bubbling.
