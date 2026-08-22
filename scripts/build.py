@@ -17,7 +17,7 @@ import json
 import os
 import re
 import sys
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 CATEGORIES = ("api_provider", "coding", "image", "voice", "video")
 CATEGORY_LABELS = {
@@ -34,8 +34,7 @@ CATEGORY_LABELS = {
 DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens"
 FEED_TITLE = "Free AI Credits — hand-verified free AI credit offers"
 FEED_DESCRIPTION = (
-    "Newly published free AI credit offers from the hand-verified "
-    "freetokens directory."
+    "Newly published free AI credit offers from the hand-verified freetokens directory."
 )
 # Search input debounce: settling delay before a keystroke batch filters the
 # list, updates the URL, and fires analytics. Must stay well under the PRD's
@@ -278,8 +277,7 @@ def _check_str(value, name: str, filename: str, max_chars: int) -> str:
         raise OfferError(f"{filename}: {name} must be a non-empty string")
     if len(value) > max_chars:
         raise OfferError(
-            f"{filename}: {name} exceeds {max_chars} characters "
-            f"({len(value)} given)"
+            f"{filename}: {name} exceeds {max_chars} characters ({len(value)} given)"
         )
     return value
 
@@ -291,8 +289,7 @@ def _validate_proof(entry, filename: str, pos: int) -> dict:
     kind = entry.get("type")
     if kind not in DETAIL_TYPES:
         raise OfferError(
-            f"{where}: type must be one of {'|'.join(DETAIL_TYPES)}, "
-            f"got {kind!r}"
+            f"{where}: type must be one of {'|'.join(DETAIL_TYPES)}, got {kind!r}"
         )
     allowed = set(PROOF_REQUIRED[kind]) | set(PROOF_OPTIONAL[kind])
     if kind != "screenshot":
@@ -304,9 +301,7 @@ def _validate_proof(entry, filename: str, pos: int) -> dict:
         raise OfferError(f"{where}: unknown fields: {', '.join(sorted(unknown))}")
     clean = {"type": kind}
     if kind == "screenshot":
-        image = _check_str(
-            entry.get("image"), "image", where, PROOF_META_MAX_CHARS
-        )
+        image = _check_str(entry.get("image"), "image", where, PROOF_META_MAX_CHARS)
         if image.startswith(("http://", "https://", "/")) or ".." in image.split("/"):
             raise OfferError(
                 f"{where}: image must be a site-relative path under the "
@@ -316,25 +311,17 @@ def _validate_proof(entry, filename: str, pos: int) -> dict:
     else:
         url = _check_str(entry.get("url"), "url", where, PROOF_META_MAX_CHARS)
         if not url.startswith(("http://", "https://")):
-            raise OfferError(
-                f"{where}: url must be an http(s) URL, got {url!r}"
-            )
+            raise OfferError(f"{where}: url must be an http(s) URL, got {url!r}")
         clean["url"] = url
     for key in PROOF_REQUIRED[kind]:
         limit = (
-            PROOF_TEXT_MAX_CHARS
-            if key in ("text", "caption")
-            else PROOF_META_MAX_CHARS
+            PROOF_TEXT_MAX_CHARS if key in ("text", "caption") else PROOF_META_MAX_CHARS
         )
         clean[key] = _check_str(entry.get(key), key, where, limit)
     for key in PROOF_OPTIONAL[kind]:
         if key not in entry:
             continue
-        limit = (
-            PROOF_TEXT_MAX_CHARS
-            if key == "text"
-            else PROOF_META_MAX_CHARS
-        )
+        limit = PROOF_TEXT_MAX_CHARS if key == "text" else PROOF_META_MAX_CHARS
         clean[key] = _check_str(entry.get(key), key, where, limit)
     return clean
 
@@ -345,13 +332,10 @@ def validate_detail(data, filename: str) -> dict:
         raise OfferError(f"{filename}: detail document must be a JSON object")
     unknown = [k for k in data if k not in DETAIL_KEYS]
     if unknown:
-        raise OfferError(
-            f"{filename}: unknown fields: {', '.join(sorted(unknown))}"
-        )
+        raise OfferError(f"{filename}: unknown fields: {', '.join(sorted(unknown))}")
     if not any(k in data for k in DETAIL_KEYS):
         raise OfferError(
-            f"{filename}: must define at least one of "
-            f"{', '.join(DETAIL_KEYS)}"
+            f"{filename}: must define at least one of {', '.join(DETAIL_KEYS)}"
         )
     detail = {}
     if "summary" in data:
@@ -366,8 +350,7 @@ def validate_detail(data, filename: str) -> dict:
             )
         if len(steps) > 12:
             raise OfferError(
-                f"{filename}: claim_steps allows at most 12 steps "
-                f"({len(steps)} given)"
+                f"{filename}: claim_steps allows at most 12 steps ({len(steps)} given)"
             )
         detail["claim_steps"] = [
             _check_str(step, f"claim_steps[{i}]", filename, STEP_MAX_CHARS)
@@ -840,11 +823,13 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <p>Built {built_display} &middot; offers re-verified on every change</p>
 {traffic_strip}
 {foot_nav}
+{consent_settings}
 </footer>
 </div>
 {banner}
 {ga_init}
 {app_js}
+{extra_js}
 </body>
 </html>
 """
@@ -894,11 +879,8 @@ def _contact_nav() -> str:
                 label=html.escape(label),
             )
         )
-    return (
-        '<nav class="foot-nav" aria-label="Contact">'
-        + "".join(parts)
-        + "</nav>"
-    )
+    return '<nav class="foot-nav" aria-label="Contact">' + "".join(parts) + "</nav>"
+
 
 _CARD_TMPL = """<li style="--i:{index}">
 <article class="card" id="offer-{slug}" data-category="{category}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
@@ -978,11 +960,9 @@ def build_toolbar(count: int | None = None) -> str:
     for mode in SORT_MODES:
         sort_options.append(
             f'<option value="{html.escape(mode, quote=True)}">'
-            f'{html.escape(SORT_LABELS[mode])}</option>'
+            f"{html.escape(SORT_LABELS[mode])}</option>"
         )
-    seeded = (
-        f"Showing all {count} offers" if count is not None else ""
-    )
+    seeded = f"Showing all {count} offers" if count is not None else ""
     return (
         '<section class="toolbar" aria-label="Search and filter offers">'
         '<div class="field">'
@@ -1040,11 +1020,7 @@ def _resolve_asset(src: str, rel_prefix: str) -> str:
     untouched so depth-1 pages (offers/<slug>.html) resolve local
     screenshots against the site root instead of offers/.
     """
-    if (
-        not rel_prefix
-        or src.startswith(("../", "./", "/"))
-        or "://" in src
-    ):
+    if not rel_prefix or src.startswith(("../", "./", "/")) or "://" in src:
         return src
     return f"{rel_prefix}{src}"
 
@@ -1065,7 +1041,9 @@ def _proof_card(entry: dict, rel_prefix: str = "") -> str:
     if kind == "link":
         # A linked source has no post author; its required title acts as
         # the card headline instead.
-        head = f'<p class="proof-text"><strong>{html.escape(entry["title"])}</strong></p>'
+        head = (
+            f'<p class="proof-text"><strong>{html.escape(entry["title"])}</strong></p>'
+        )
     meta = html.escape(entry.get("author", ""))
     if kind == "x" and entry.get("handle"):
         meta += f' <span class="proof-meta">{html.escape(entry["handle"])}</span>'
@@ -1096,9 +1074,7 @@ def _detail_sections(detail: dict | None, rel_prefix: str = "") -> str:
     detail = detail or {}
     summary_html = ""
     if detail.get("summary"):
-        summary_html = (
-            f'<p class="od-summary">{html.escape(detail["summary"])}</p>'
-        )
+        summary_html = f'<p class="od-summary">{html.escape(detail["summary"])}</p>'
     steps_html = _FALLBACK_STEPS
     if detail.get("claim_steps"):
         steps_html = "".join(
@@ -1106,13 +1082,8 @@ def _detail_sections(detail: dict | None, rel_prefix: str = "") -> str:
         )
     proof_html = ""
     if detail.get("social_proof"):
-        cards = "".join(
-            _proof_card(e, rel_prefix) for e in detail["social_proof"]
-        )
-        proof_html = (
-            '<section class="od-proof"><h2>Social proof</h2>'
-            f"{cards}</section>"
-        )
+        cards = "".join(_proof_card(e, rel_prefix) for e in detail["social_proof"])
+        proof_html = f'<section class="od-proof"><h2>Social proof</h2>{cards}</section>'
     return (
         f"{summary_html}\n"
         f'<section class="od-steps"><h2>How to claim</h2><ol>{steps_html}</ol></section>\n'
@@ -1128,19 +1099,148 @@ _OFFER_HEADER = """<header class="masthead">
 </header>"""
 
 
+def _share_section(page_url: str, title: str, slug: str) -> str:
+    """Offer share bar (#71): LinkedIn/X/Facebook/email + copy-link.
+
+    Every target link pre-fills the destination network with the offer
+    page's absolute URL (and title where supported). Each action carries a
+    ``data-ft-share`` channel attribute that both the tracking wiring and
+    tests key on; the copy button is a real <button> so clipboard access
+    never depends on navigation.
+    """
+    q_url = quote(page_url, safe="")
+    q_title = quote(title, safe="")
+    links = (
+        (
+            "linkedin",
+            "https://www.linkedin.com/sharing/share-offsite/?url=" + q_url,
+            "LinkedIn",
+        ),
+        (
+            "x",
+            "https://twitter.com/intent/tweet?url=" + q_url + "&text=" + q_title,
+            "X",
+        ),
+        (
+            "facebook",
+            "https://www.facebook.com/sharer/sharer.php?u=" + q_url,
+            "Facebook",
+        ),
+        (
+            "email",
+            "mailto:?subject=" + q_title + "&body=" + q_url,
+            "Email",
+        ),
+    )
+    anchors = "".join(
+        f'<a class="share-link" href="{href}" target="_blank" '
+        f'rel="noopener noreferrer" data-ft-share="{channel}">{label}</a>'
+        for channel, href, label in links
+    )
+    return (
+        '<section class="od-share" aria-label="Share this offer" '
+        f'data-ft-offer-id="{html.escape(slug, quote=True)}">\n'
+        "<h2>Share this offer</h2>\n"
+        f'<div class="share-actions">{anchors}'
+        '<button type="button" class="share-copy" data-ft-share="copy">'
+        "Copy link</button></div>\n"
+        '<p class="share-status" id="ft-share-status" role="status" '
+        'aria-live="polite" hidden></p>\n'
+        "</section>"
+    )
+
+
+# Share-bar runtime (#71). Inline on every detail page (they ship no
+# app_js). Tracking rides window.ftTrackEvent — the consent-gated bus — so
+# an offer_share event exists only after an explicit grant; sharing itself
+# never depends on analytics being allowed. Copy uses the async Clipboard
+# API when present and falls back to a hidden textarea + execCommand, and
+# confirms success via a polite live region.
+_SHARE_JS = """<script>
+(function () {
+  "use strict";
+  var OFFER_ID = __FT_OFFER_ID__;
+  var PAGE_URL = __FT_PAGE_URL__;
+  function ftTrack(channel) {
+    try {
+      if (typeof window.ftTrackEvent === "function") {
+        window.ftTrackEvent("offer_share", {
+          offer_id: OFFER_ID,
+          channel: channel
+        });
+      }
+    } catch (err) {}
+  }
+  function ftStatus(text) {
+    var box = document.getElementById("ft-share-status");
+    if (!box) { return; }
+    box.textContent = text;
+    box.hidden = false;
+  }
+  function ftCopyLegacy(text) {
+    var ok = false;
+    var box = document.createElement("textarea");
+    box.value = text;
+    box.setAttribute("readonly", "");
+    box.style.position = "fixed";
+    box.style.left = "-9999px";
+    document.body.appendChild(box);
+    box.select();
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    document.body.removeChild(box);
+    return ok;
+  }
+  function ftCopy() {
+    var done = function (ok) {
+      if (ok) { ftTrack("copy"); }
+      ftStatus(ok ? "Link copied!" : "Copy failed \u2014 long-press the address bar instead.");
+    };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(PAGE_URL).then(
+        function () { done(true); },
+        function () { done(ftCopyLegacy(PAGE_URL)); }
+      );
+    } else {
+      done(ftCopyLegacy(PAGE_URL));
+    }
+  }
+  var nodes = document.querySelectorAll("[data-ft-share]");
+  for (var i = 0; i < nodes.length; i++) {
+    (function (node) {
+      node.addEventListener("click", function () {
+        var channel = node.getAttribute("data-ft-share") || "";
+        if (channel === "copy") {
+          ftCopy();
+        } else {
+          // Fire-and-forget: navigation is native, never intercepted.
+          ftTrack(channel);
+        }
+      });
+    })(nodes[i]);
+  }
+})();
+</script>"""
+
+
 def render_offer_html(
     offer: dict,
     detail: dict | None,
     built: str,
     measurement_id: str = "",
     stats_site: str = "",
+    base_url: str = "",
 ) -> str:
     """Render one dedicated offer page at site/offers/<slug>.html (#60).
 
     Shares the site chrome at depth 1, so every chrome href climbs one
     level (../favicon.svg, ../archive.html, ...). The outbound claim link
-    stays hardened like every external anchor on the site.
+    stays hardened like every external anchor on the site. ``base_url``
+    feeds the share bar's absolute page URL (#71); it falls back to the
+    production deploy base so shared links always resolve.
     """
+    page_url = (base_url or DEFAULT_BASE_URL).rstrip(
+        "/"
+    ) + f"/offers/{offer['slug']}.html"
     expired = offer.get("status") == "expired"
     if expired:
         status = '<span class="badge badge-expired">Expired</span>'
@@ -1148,18 +1248,18 @@ def render_offer_html(
             status += (
                 f' <span class="status">ended '
                 f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
-                f'{_human_date(offer["expiry_date"])}</time></span>'
+                f"{_human_date(offer['expiry_date'])}</time></span>"
             )
     elif offer["expiry_date"]:
         status = (
             f'<span class="status">expires '
             f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
-            f'{_human_date(offer["expiry_date"])}</time></span>'
+            f"{_human_date(offer['expiry_date'])}</time></span>"
         )
     else:
         status = (
             '<span class="status"><span class="dot" aria-hidden="true">'
-            '</span>ongoing</span>'
+            "</span>ongoing</span>"
         )
     provider = html.escape(offer["provider"])
     summary_text = (detail or {}).get("summary", "")
@@ -1176,7 +1276,7 @@ def render_offer_html(
         )
     if expired:
         cta = (
-            "<p class=\"od-ended\">This offer ended &mdash; nothing here "
+            '<p class="od-ended">This offer ended &mdash; nothing here '
             "is claimable anymore.</p>"
         )
     else:
@@ -1191,7 +1291,11 @@ def render_offer_html(
         f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
         f"{_detail_sections(detail, rel_prefix='../')}\n"
         f"{cta}\n"
+        f"{_share_section(page_url, offer['title'], offer['slug'])}\n"
         "</article>"
+    )
+    share_js = _SHARE_JS.replace("__FT_OFFER_ID__", json.dumps(offer["slug"])).replace(
+        "__FT_PAGE_URL__", json.dumps(page_url)
     )
     return _page_shell(
         title=html.escape(f"{offer['title']} · Free AI Credits"),
@@ -1214,10 +1318,11 @@ def render_offer_html(
         measurement_id=measurement_id,
         depth=1,
         stats_site=stats_site,
+        extra_js=share_js,
     )
 
 
-# --- Analytics (F7): consent-gated GA4 with EU banner ----------------------
+# --- Analytics (F7): consent-gated GA4 with banner --------------------------
 #
 # Design (silent degradation, PRD §4.1):
 #   * No measurement ID configured -> nothing analytics-related is emitted.
@@ -1246,31 +1351,19 @@ _ANALYTICS_INIT_JS = """<script>
 (function () {
   "use strict";
   var MEASUREMENT_ID = __FT_GA_ID__;
-  var EU_PREFIXES = __FT_EU_PREFIXES__;
   var STORAGE_KEY = "__FT_STORAGE_KEY__";
-  // Consent-gated event bus for feature events (filter_use, search).
-  // Stays false until an explicit grant; window.ftTrackEvent is the only
-  // door page features knock on, so declined/absent analytics no-ops.
+  // Consent-gated event bus for feature events (filter_use, search,
+  // offer_share). Stays false until an explicit grant; window.ftTrackEvent
+  // is the only door page features knock on, so declined/absent analytics
+  // no-ops.
   var TRACKING_ACTIVE = false;
   function ftTrackEvent(name, params) {
-    if (!TRACKING_ACTIVE || typeof gtag !== "function") { return; }
-    gtag("event", name, params);
+    if (!TRACKING_ACTIVE) { return; }
+    if (MEASUREMENT_ID && typeof gtag === "function") {
+      gtag("event", name, params);
+    }
   }
   window.ftTrackEvent = ftTrackEvent;
-  function ftIsEuTimeZone(tz) {
-    if (!tz) { return false; }
-    for (var i = 0; i < EU_PREFIXES.length; i++) {
-      if (tz.indexOf(EU_PREFIXES[i]) === 0) { return true; }
-    }
-    return false;
-  }
-  function ftTimezone() {
-    try {
-      return Intl.DateTimeFormat().resolvedOptions().timeZone || null;
-    } catch (err) {
-      return null;
-    }
-  }
   function ftStoredDecision() {
     try {
       return window.localStorage.getItem(STORAGE_KEY);
@@ -1294,7 +1387,12 @@ _ANALYTICS_INIT_JS = """<script>
   }
   function ftGrant() {
     TRACKING_ACTIVE = true;
-    if (typeof window.gtag !== "function") { return; }
+    // Tell consent-gated companions (the GoatCounter loader) that tracking
+    // may start; they listen for this event instead of loading on their own.
+    try {
+      window.dispatchEvent(new CustomEvent("ft-consent-granted"));
+    } catch (err) {}
+    if (!MEASUREMENT_ID || typeof window.gtag !== "function") { return; }
     gtag("consent", "update", { analytics_storage: "granted" });
     ftLoadGa();
     // send_page_view:false keeps config() from firing a duplicate page_view;
@@ -1308,7 +1406,7 @@ _ANALYTICS_INIT_JS = """<script>
   }
   function ftDecline() {
     TRACKING_ACTIVE = false;
-    if (typeof window.gtag !== "function") { return; }
+    if (!MEASUREMENT_ID || typeof window.gtag !== "function") { return; }
     gtag("consent", "update", { analytics_storage: "denied" });
   }
   function ftHideBanner() {
@@ -1335,8 +1433,20 @@ _ANALYTICS_INIT_JS = """<script>
   function ftWire() {
     var accept = document.getElementById("ft-consent-accept");
     var reject = document.getElementById("ft-consent-decline");
+    var settings = document.getElementById("ft-consent-settings");
     if (accept) { accept.addEventListener("click", ftAccept); }
     if (reject) { reject.addEventListener("click", ftReject); }
+    // Persistent change-of-mind entry point (#72): the footer "Cookie
+    // settings" control re-opens the banner on every page, even after a
+    // stored decision, so consent is never a one-way door.
+    if (settings) {
+      // Wiring happened once in ftInit before any early return, so this
+      // handler must never re-run the wiring step — that would stack
+      // duplicate accept/reject/settings/keydown listeners on every click.
+      settings.addEventListener("click", function () {
+        ftShowBanner();
+      });
+    }
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         var b = document.getElementById("ft-consent-banner");
@@ -1345,15 +1455,15 @@ _ANALYTICS_INIT_JS = """<script>
     });
   }
   function ftInit() {
+    // The settings control must work even after a stored decision, so the
+    // wiring happens before any early return.
+    ftWire();
     var stored = ftStoredDecision();
     if (stored === "granted") { ftGrant(); return; }
-    if (stored === "denied") { ftDecline(); return; }
-    ftWire();
-    if (ftIsEuTimeZone(ftTimezone())) {
-      ftShowBanner();
-    } else {
-      ftGrant();
-    }
+    if (stored === "denied") { return; }
+    // GDPR (#72): every first-time visitor is asked, not only ones whose
+    // time zone looks European. No tracking starts until they answer.
+    ftShowBanner();
   }
   function ftSchedule() {
     try {
@@ -1375,12 +1485,21 @@ _ANALYTICS_INIT_JS = """<script>
 </script>"""
 
 _BANNER_TMPL = """<div id="ft-consent-banner" class="consent" role="region" aria-label="Analytics consent" hidden>
-<p class="consent-text">This site uses Google Analytics 4 with IP anonymization to count visits and see which offers help people. Allow?</p>
+<p class="consent-text">This site counts visits and offer clicks to see which offers help people. Counting uses Google Analytics 4 with IP anonymization (which may set cookies) and, when enabled, a cookie-free GoatCounter page counter. Nothing runs until you allow it. You can change your mind anytime via &ldquo;Cookie settings&rdquo; in the footer.</p>
 <div class="consent-actions">
-<button type="button" id="ft-consent-accept">Accept</button>
+<button type="button" id="ft-consent-accept">Allow</button>
 <button type="button" id="ft-consent-decline">Decline</button>
 </div>
 </div>"""
+
+# Persistent change-of-mind entry point (#72): rendered in every page's
+# footer whenever any tracking is configured. The analytics runtime wires
+# its click to re-open the banner.
+_CONSENT_SETTINGS_TMPL = (
+    '<p class="foot-consent">'
+    '<button type="button" id="ft-consent-settings"'
+    ' class="consent-settings">Cookie settings</button></p>'
+)
 
 _BANNER_CSS = """
 /* ---- Consent banner (only emitted when GA4 is configured) -------------- */
@@ -1437,6 +1556,27 @@ button:focus-visible {
 /* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
 @media (pointer: coarse) {
   .consent-actions button { min-height: 44px; }
+}
+
+/* Footer "Cookie settings" control (#72): quiet text-style button that
+   re-opens the consent banner on any page, at any time. */
+.foot-consent {
+  margin: 0.5rem 0 0;
+}
+
+.consent-settings {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--gray);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.consent-settings:hover {
+  color: var(--ink);
 }
 """
 
@@ -1743,6 +1883,53 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 @media (pointer: coarse) {
   .detail-btn,
   .od-cta { min-height: 44px; }
+}
+
+/* ---- Offer share bar (#71) ---------------------------------------------- */
+
+.share-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-link,
+.share-copy {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.share-link:hover,
+.share-copy:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.share-link:focus-visible,
+.share-copy:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.share-status {
+  margin: 0.5rem 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+@media (pointer: coarse) {
+  .share-link,
+  .share-copy { min-height: 44px; }
 }
 """
 
@@ -2186,18 +2373,43 @@ def get_traffic_stats_site(env=None) -> str:
 
 
 def build_stats_beacon(site: str = "") -> str:
-    """GoatCounter tracker <script> for <head> ('' when stats are disabled).
+    """Consent-gated GoatCounter loader ('' when stats are disabled).
 
-    Emitted on every page so all traffic is counted; the strip that *displays*
-    the counts lives only where the site script runs. Values are attribute-
-    escaped even though the resolver already rejects hostile characters.
+    GDPR (#72): the counting beacon is non-essential tracking, so it is
+    never emitted as a plain async <head> script any more. Instead a tiny
+    inline loader injects the real tracker only after consent exists —
+    either already granted in local storage or granted live via the
+    ``ft-consent-granted`` event the analytics runtime dispatches. With no
+    decision (or a refusal) zero bytes reach gc.zgo.at. The site value is
+    embedded as a JSON string and applied via setAttribute, so hostile
+    characters can never break out even though the resolver rejects them.
     """
     if not site:
         return ""
+    count_url = f"{site}/count"
     return (
-        '<script async src="https://gc.zgo.at/count.js" data-goatcounter="'
-        + html.escape(f"{site}/count", quote=True)
-        + '"></script>'
+        "<script>\n"
+        "(function () {\n"
+        '  "use strict";\n'
+        f"  var COUNT_URL = {json.dumps(count_url)};\n"
+        f"  var STORAGE_KEY = {json.dumps(CONSENT_STORAGE_KEY)};\n"
+        "  function ftGcLoad() {\n"
+        '    if (document.getElementById("ft-gc-script")) { return; }\n'
+        '    var s = document.createElement("script");\n'
+        '    s.id = "ft-gc-script";\n'
+        "    s.async = true;\n"
+        '    s.src = "https://gc.zgo.at/count.js";\n'
+        '    s.setAttribute("data-goatcounter", COUNT_URL);\n'
+        "    document.head.appendChild(s);\n"
+        "  }\n"
+        "  try {\n"
+        '    if (window.localStorage.getItem(STORAGE_KEY) === "granted") {\n'
+        "      ftGcLoad();\n"
+        "    }\n"
+        "  } catch (err) {}\n"
+        '  window.addEventListener("ft-consent-granted", ftGcLoad);\n'
+        "})();\n"
+        "</script>"
     )
 
 
@@ -2210,9 +2422,7 @@ def build_traffic_strip(site: str = "") -> str:
     """
     if not site:
         return ""
-    return _TRAFFIC_STRIP_TMPL.format(
-        stats_href=html.escape(site, quote=True)
-    )
+    return _TRAFFIC_STRIP_TMPL.format(stats_href=html.escape(site, quote=True))
 
 
 def is_eu_timezone(tz) -> bool:
@@ -2234,15 +2444,27 @@ def build_consent_head(measurement_id: str) -> str:
     return _CONSENT_HEAD_JS
 
 
-def build_analytics_init(measurement_id: str) -> str:
-    """Deferred end-of-body script: consent decision, EU banner, gtag loader."""
-    if not measurement_id:
+def build_analytics_init(
+    measurement_id: str = "",
+    enabled: bool | None = None,
+) -> str:
+    """Deferred end-of-body script: consent decision, banner, gtag loader.
+
+    Emitted whenever any tracking is configured (#72): ``enabled`` is true
+    when GA4 and/or the GoatCounter traffic counter are on, even if only
+    one of them carries a measurement ID. When omitted it defaults to
+    "GA4 configured", so a plain measurement ID keeps implying analytics.
+    The consent runtime drives both trackers — GA4 loads only when
+    MEASUREMENT_ID is set, and its grant event wakes the GoatCounter
+    loader.
+    """
+    if enabled is None:
+        enabled = bool(measurement_id)
+    if not enabled:
         return ""
-    return (
-        _ANALYTICS_INIT_JS.replace("__FT_GA_ID__", json.dumps(measurement_id))
-        .replace("__FT_EU_PREFIXES__", json.dumps(list(EU_TIMEZONE_PREFIXES)))
-        .replace("__FT_STORAGE_KEY__", CONSENT_STORAGE_KEY)
-    )
+    return _ANALYTICS_INIT_JS.replace(
+        "__FT_GA_ID__", json.dumps(measurement_id)
+    ).replace("__FT_STORAGE_KEY__", CONSENT_STORAGE_KEY)
 
 
 def build_banner_markup() -> str:
@@ -2258,23 +2480,16 @@ def build_app_js(stats_site: str = "") -> str:
     that slot resolves to an empty string so unconfigured builds ship no
     stats code at all.
     """
-    js = _APP_JS.replace(
-        "__FT_CATEGORIES__", json.dumps(list(CATEGORIES))
-    ).replace("__FT_SORTS__", json.dumps(list(SORT_MODES))).replace(
-        "__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS)
-    ).replace(
-        "__FT_OFFER_DEDUPE_MS__", str(OFFER_CLICK_DEDUPE_MS)
+    js = (
+        _APP_JS.replace("__FT_CATEGORIES__", json.dumps(list(CATEGORIES)))
+        .replace("__FT_SORTS__", json.dumps(list(SORT_MODES)))
+        .replace("__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS))
+        .replace("__FT_OFFER_DEDUPE_MS__", str(OFFER_CLICK_DEDUPE_MS))
     )
     if stats_site:
-        stats_boot = (
-            "    try {\n"
-            "      ftInitStats();\n"
-            "    } catch (err) {}"
-        )
+        stats_boot = "    try {\n      ftInitStats();\n    } catch (err) {}"
         stats_module = (
-            _STATS_JS_MODULE.replace(
-                "__FT_STATS_SITE__", json.dumps(stats_site)
-            )
+            _STATS_JS_MODULE.replace("__FT_STATS_SITE__", json.dumps(stats_site))
         ).replace("__FT_STRIP_ID__", TRAFFIC_STRIP_ID)
     else:
         stats_boot = ""
@@ -2319,29 +2534,31 @@ def _page_shell(
     app_js: bool = False,
     depth: int = 0,
     stats_site: str = "",
+    extra_js: str = "",
 ) -> str:
     """Fill the shared page chrome (head, masthead slot, footer, analytics).
 
     ``depth`` parameterizes relative-path resolution: root pages reference
     ./favicon.svg and feed.xml; pages under offers/ must climb one level.
-    The GoatCounter beacon ships on every page when configured, while the
-    traffic strip markup only appears where the site script (which fills
-    it) runs — i.e. alongside ``app_js``.
+    The GoatCounter beacon ships consent-gated on every page when
+    configured (#72), while the traffic strip markup only appears where the
+    site script (which fills it) runs — i.e. alongside ``app_js``. The
+    consent banner and its runtime appear whenever *any* tracking is on;
+    ``extra_js`` carries per-page scripts (offer share buttons).
     """
     built_display = (
         f'<time datetime="{html.escape(built, quote=True)}">'
-        f'{_human_date(built[:10])}</time>'
+        f"{_human_date(built[:10])}</time>"
     )
     rel_prefix = "../" if depth else "./"
     up = "../" * depth
     stats_on = bool(stats_site)
-    traffic_strip = (
-        build_traffic_strip(stats_site)
-        if stats_on and app_js
-        else ""
-    )
+    tracking_on = bool(measurement_id or stats_site)
+    traffic_strip = build_traffic_strip(stats_site) if stats_on and app_js else ""
     if traffic_strip:
         css_extra += _TRAFFIC_CSS
+    if tracking_on:
+        css_extra += _BANNER_CSS
     return _PAGE_TMPL.format(
         title=title,
         meta_description=meta_description,
@@ -2351,11 +2568,13 @@ def _page_shell(
         built_display=built_display,
         foot_nav=_foot_nav(foot_current, depth),
         ga_head=build_consent_head(measurement_id),
-        banner=_BANNER_TMPL if measurement_id else "",
-        ga_init=build_analytics_init(measurement_id),
+        banner=_BANNER_TMPL if tracking_on else "",
+        ga_init=build_analytics_init(measurement_id, enabled=tracking_on),
         app_js=build_app_js(stats_site) if app_js else "",
         stats_beacon=build_stats_beacon(stats_site),
         traffic_strip=traffic_strip,
+        consent_settings=_CONSENT_SETTINGS_TMPL if tracking_on else "",
+        extra_js=extra_js,
         rss_autodiscovery=(
             '<link rel="alternate" type="application/rss+xml" '
             f'title="{html.escape(FEED_TITLE, quote=True)}" '
@@ -2378,8 +2597,9 @@ def active_offers(index: dict) -> list:
 def expired_offers(index: dict) -> list:
     """Expired entries, newest expiration first (archive order, #26)."""
     flagged = [o for o in index["offers"] if o.get("status") == "expired"]
-    return sorted(flagged, key=lambda o: (o["expiry_date"] or "", o["slug"]),
-                  reverse=True)
+    return sorted(
+        flagged, key=lambda o: (o["expiry_date"] or "", o["slug"]), reverse=True
+    )
 
 
 def render_html(
@@ -2401,12 +2621,12 @@ def render_html(
                 expiry = (
                     f'<span class="status">expires '
                     f'<time datetime="{html.escape(o["expiry_date"], quote=True)}">'
-                    f'{_human_date(o["expiry_date"])}</time></span>'
+                    f"{_human_date(o['expiry_date'])}</time></span>"
                 )
             else:
                 expiry = (
                     '<span class="status"><span class="dot" aria-hidden="true">'
-                    '</span>ongoing</span>'
+                    "</span>ongoing</span>"
                 )
             verified = o["verified_date"]
             cards.append(
@@ -2531,9 +2751,7 @@ def render_archive_html(
                 )
             )
         content = (
-            '<ul class="grid" id="ft-archive-grid">\n'
-            + "\n".join(cards)
-            + "\n</ul>"
+            '<ul class="grid" id="ft-archive-grid">\n' + "\n".join(cards) + "\n</ul>"
         )
     else:
         content = _ARCHIVE_EMPTY_TMPL
@@ -2616,7 +2834,7 @@ def build_feed(index: dict, base_url: str) -> str:
             "<item>"
             f"<title>{_xml(o['title'])}</title>"
             f"<link>{anchor}</link>"
-            f"<guid isPermaLink=\"true\">{anchor}</guid>"
+            f'<guid isPermaLink="true">{anchor}</guid>'
             f"<description>{_xml(_feed_item_description(o))}</description>"
             f"<pubDate>{_rfc2822(_parse_generated_at(o['verified_date']))}</pubDate>"
             "</item>"
@@ -2657,7 +2875,7 @@ _PRIVACY_CONTENT = """<div class="policy">
 <h2 id="privacy-summary">In short</h2>
 <ul>
 <li>No accounts, no forms, no logins &mdash; we have nowhere to store personal details.</li>
-<li>If visit-counting is switched on, it runs through Google Analytics 4 with IP anonymization.</li>
+<li>If visit-counting is switched on, it runs through Google Analytics 4 with IP anonymization &mdash; and only after you allow it in the consent banner shown on your first visit.</li>
 <li>If the live traffic counter is switched on, page views are recorded cookie-free by <a href="https://www.goatcounter.com" rel="noopener noreferrer">GoatCounter</a> and shown as anonymous totals on this site.</li>
 <li>Your raw search text is <strong>never</strong> collected &mdash; only how many characters you typed.</li>
 <li>The only thing this site saves on your device is a single-word remember of your cookie choice.</li>
@@ -2682,20 +2900,22 @@ _PRIVACY_CONTENT = """<div class="policy">
 <li><strong>Which sort option you picked</strong> (for example &ldquo;Expiring soon&rdquo;) &mdash; nothing else about your sorting.</li>
 <li><strong>Search activity as a length only</strong> &mdash; when you search, the event records just <code>query_length</code>, the number of characters typed. The words themselves stay in your browser and are never sent anywhere.</li>
 <li><strong>Offer clicks</strong> &mdash; which listing you clicked (its ID, provider name, and category).</li>
+<li><strong>Share actions</strong> &mdash; when you use a share button on an offer page, the offer's ID and which channel you picked (for example &ldquo;linkedin&rdquo; or &ldquo;copy&rdquo;). The share itself happens between you and that platform.</li>
 </ul>
 </section>
 
 <section aria-labelledby="privacy-live-traffic">
 <h2 id="privacy-live-traffic">What the live traffic counter measures</h2>
-<p>Separately from GA4, the site can show live visit totals in its footer &mdash; the numbers you may see next to &ldquo;live traffic&rdquo;. Counting is done by <strong>GoatCounter</strong>, open-source software provided as a hosted service (goatcounter.com) under the EU's strict GDPR rules. Like GA4 above, it is off entirely unless configured at build time.</p>
+<p>Separately from GA4, the site can show live visit totals in its footer &mdash; the numbers you may see next to &ldquo;live traffic&rdquo;. Counting is done by <strong>GoatCounter</strong>, open-source software provided as a hosted service (goatcounter.com) under the EU's strict GDPR rules. Like GA4 above, it is off entirely unless configured at build time &mdash; and its counting script is not loaded until you allow tracking.</p>
 <p>When it <em>is</em> active, each page view records only technical, non-identifying details: the page path, the site's hostname, your browser's reported language and user-agent string, a coarse country derived from the IP at request time and then discarded, and the referring site. GoatCounter sets <strong>no cookies</strong>, uses no browser fingerprinting, and stores no personal identifiers or full IP addresses. Only anonymous aggregate totals are shown publicly on this site; nobody can browse individual visits.</p>
 <p>Blocking the counter with an ad blocker changes nothing else: pages, filters, and links all keep working exactly the same, and the footer totals simply stay hidden.</p>
 </section>
 
 <section aria-labelledby="privacy-consent">
 <h2 id="privacy-consent">Consent, cookies, and local storage</h2>
-<p>Analytics starts from a denied state inside your browser: the measurement code is not even loaded until permission exists. Visitors whose browser time zone indicates they are likely in the EU see a small banner asking &ldquo;Allow?&rdquo; first &mdash; declining means zero tracking requests leave your browser. Elsewhere, visits are counted without showing the banner, matching the site's regional default; a previously recorded refusal is always honored.</p>
+<p>Analytics starts from a denied state inside your browser: no counting code is loaded until permission exists. Every first-time visitor sees a small banner asking &ldquo;Allow?&rdquo; &mdash; declining means zero tracking requests leave your browser, and allowing is what switches GA4 (and the GoatCounter counter, when enabled) on.</p>
 <p>Your answer is remembered in your browser's local storage under the key <code>ft_ga_consent</code> as one word: <code>granted</code> or <code>denied</code>. That single word is the only data this site itself ever writes on your device &mdash; the site sets no cookies of its own. Once you allow counting, Google Analytics may set its own cookies (such as <code>_ga</code>) to tell repeat visits apart; those cookies belong to Google and follow Google's rules.</p>
+<p>Changed your mind? Use the <strong>Cookie settings</strong> link in the footer of any page to re-open the banner and switch your choice at any time.</p>
 </section>
 
 <section aria-labelledby="privacy-third-parties">
@@ -2720,8 +2940,8 @@ _PRIVACY_CONTENT = """<div class="policy">
 <section aria-labelledby="privacy-choices">
 <h2 id="privacy-choices">Your choices</h2>
 <ul>
-<li><strong>Decline or accept</strong> the banner when it appears; press <kbd>Escape</kbd> to decline it.</li>
-<li><strong>Change your mind later</strong> by clearing your browser's site data for this site &mdash; the next visit starts fresh.</li>
+<li><strong>Decline or accept</strong> the banner shown on your first visit; press <kbd>Escape</kbd> to decline it.</li>
+<li><strong>Change your mind anytime</strong> via the footer's <strong>Cookie settings</strong> link &mdash; it re-opens the banner on every page, even after you already answered.</li>
 <li><strong>Block everything</strong> with an ad blocker or your browser's tracking protection. The site degrades silently: every offer, filter, and link keeps working exactly the same.</li>
 </ul>
 </section>
@@ -2780,9 +3000,7 @@ def main(argv=None) -> int:
         return 1
 
     try:
-        details = load_details(
-            args.offers_dir, {o["slug"] for o in offers}
-        )
+        details = load_details(args.offers_dir, {o["slug"] for o in offers})
     except OfferError as exc:
         print(f"build failed: {exc}", file=sys.stderr)
         return 1
@@ -2803,15 +3021,9 @@ def main(argv=None) -> int:
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(render_html(index, measurement_id, stats_site))
     with open(os.path.join(out_dir, "archive.html"), "w", encoding="utf-8") as fh:
-        fh.write(
-            render_archive_html(index, measurement_id, stats_site)
-        )
+        fh.write(render_archive_html(index, measurement_id, stats_site))
     with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
-        fh.write(
-            render_privacy_html(
-                index["generated_at"], measurement_id, stats_site
-            )
-        )
+        fh.write(render_privacy_html(index["generated_at"], measurement_id, stats_site))
     with open(os.path.join(out_dir, "favicon.svg"), "w", encoding="utf-8") as fh:
         fh.write(_FAVICON_SVG)
     with open(os.path.join(out_dir, "feed.xml"), "w", encoding="utf-8") as fh:
@@ -2832,6 +3044,7 @@ def main(argv=None) -> int:
                     index["generated_at"],
                     measurement_id,
                     stats_site,
+                    base_url=args.base_url,
                 )
             )
 
@@ -2846,8 +3059,7 @@ def main(argv=None) -> int:
     ]
     if missing_pages:
         print(
-            "build failed: no detail page emitted for: "
-            + ", ".join(missing_pages),
+            "build failed: no detail page emitted for: " + ", ".join(missing_pages),
             file=sys.stderr,
         )
         return 1
