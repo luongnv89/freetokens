@@ -1246,31 +1246,19 @@ _ANALYTICS_INIT_JS = """<script>
 (function () {
   "use strict";
   var MEASUREMENT_ID = __FT_GA_ID__;
-  var EU_PREFIXES = __FT_EU_PREFIXES__;
   var STORAGE_KEY = "__FT_STORAGE_KEY__";
-  // Consent-gated event bus for feature events (filter_use, search).
-  // Stays false until an explicit grant; window.ftTrackEvent is the only
-  // door page features knock on, so declined/absent analytics no-ops.
+  // Consent-gated event bus for feature events (filter_use, search,
+  // offer_share). Stays false until an explicit grant; window.ftTrackEvent
+  // is the only door page features knock on, so declined/absent analytics
+  // no-ops.
   var TRACKING_ACTIVE = false;
   function ftTrackEvent(name, params) {
-    if (!TRACKING_ACTIVE || typeof gtag !== "function") { return; }
-    gtag("event", name, params);
+    if (!TRACKING_ACTIVE) { return; }
+    if (MEASUREMENT_ID && typeof gtag === "function") {
+      gtag("event", name, params);
+    }
   }
   window.ftTrackEvent = ftTrackEvent;
-  function ftIsEuTimeZone(tz) {
-    if (!tz) { return false; }
-    for (var i = 0; i < EU_PREFIXES.length; i++) {
-      if (tz.indexOf(EU_PREFIXES[i]) === 0) { return true; }
-    }
-    return false;
-  }
-  function ftTimezone() {
-    try {
-      return Intl.DateTimeFormat().resolvedOptions().timeZone || null;
-    } catch (err) {
-      return null;
-    }
-  }
   function ftStoredDecision() {
     try {
       return window.localStorage.getItem(STORAGE_KEY);
@@ -1294,7 +1282,12 @@ _ANALYTICS_INIT_JS = """<script>
   }
   function ftGrant() {
     TRACKING_ACTIVE = true;
-    if (typeof window.gtag !== "function") { return; }
+    // Tell consent-gated companions (the GoatCounter loader) that tracking
+    // may start; they listen for this event instead of loading on their own.
+    try {
+      window.dispatchEvent(new CustomEvent("ft-consent-granted"));
+    } catch (err) {}
+    if (!MEASUREMENT_ID || typeof window.gtag !== "function") { return; }
     gtag("consent", "update", { analytics_storage: "granted" });
     ftLoadGa();
     // send_page_view:false keeps config() from firing a duplicate page_view;
@@ -1308,7 +1301,7 @@ _ANALYTICS_INIT_JS = """<script>
   }
   function ftDecline() {
     TRACKING_ACTIVE = false;
-    if (typeof window.gtag !== "function") { return; }
+    if (!MEASUREMENT_ID || typeof window.gtag !== "function") { return; }
     gtag("consent", "update", { analytics_storage: "denied" });
   }
   function ftHideBanner() {
@@ -1335,8 +1328,18 @@ _ANALYTICS_INIT_JS = """<script>
   function ftWire() {
     var accept = document.getElementById("ft-consent-accept");
     var reject = document.getElementById("ft-consent-decline");
+    var settings = document.getElementById("ft-consent-settings");
     if (accept) { accept.addEventListener("click", ftAccept); }
     if (reject) { reject.addEventListener("click", ftReject); }
+    // Persistent change-of-mind entry point (#72): the footer "Cookie
+    // settings" control re-opens the banner on every page, even after a
+    // stored decision, so consent is never a one-way door.
+    if (settings) {
+      settings.addEventListener("click", function () {
+        ftWire();
+        ftShowBanner();
+      });
+    }
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         var b = document.getElementById("ft-consent-banner");
@@ -1345,15 +1348,15 @@ _ANALYTICS_INIT_JS = """<script>
     });
   }
   function ftInit() {
+    // The settings control must work even after a stored decision, so the
+    // wiring happens before any early return.
+    ftWire();
     var stored = ftStoredDecision();
     if (stored === "granted") { ftGrant(); return; }
-    if (stored === "denied") { ftDecline(); return; }
-    ftWire();
-    if (ftIsEuTimeZone(ftTimezone())) {
-      ftShowBanner();
-    } else {
-      ftGrant();
-    }
+    if (stored === "denied") { return; }
+    // GDPR (#72): every first-time visitor is asked, not only ones whose
+    // time zone looks European. No tracking starts until they answer.
+    ftShowBanner();
   }
   function ftSchedule() {
     try {
@@ -1375,12 +1378,21 @@ _ANALYTICS_INIT_JS = """<script>
 </script>"""
 
 _BANNER_TMPL = """<div id="ft-consent-banner" class="consent" role="region" aria-label="Analytics consent" hidden>
-<p class="consent-text">This site uses Google Analytics 4 with IP anonymization to count visits and see which offers help people. Allow?</p>
+<p class="consent-text">This site counts visits and offer clicks to see which offers help people. Counting uses Google Analytics 4 with IP anonymization (which may set cookies) and, when enabled, a cookie-free GoatCounter page counter. Nothing runs until you allow it. You can change your mind anytime via &ldquo;Cookie settings&rdquo; in the footer.</p>
 <div class="consent-actions">
-<button type="button" id="ft-consent-accept">Accept</button>
+<button type="button" id="ft-consent-accept">Allow</button>
 <button type="button" id="ft-consent-decline">Decline</button>
 </div>
 </div>"""
+
+# Persistent change-of-mind entry point (#72): rendered in every page's
+# footer whenever any tracking is configured. The analytics runtime wires
+# its click to re-open the banner.
+_CONSENT_SETTINGS_TMPL = (
+    '<p class="foot-consent">'
+    '<button type="button" id="ft-consent-settings"'
+    ' class="consent-settings">Cookie settings</button></p>'
+)
 
 _BANNER_CSS = """
 /* ---- Consent banner (only emitted when GA4 is configured) -------------- */
@@ -1437,6 +1449,27 @@ button:focus-visible {
 /* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
 @media (pointer: coarse) {
   .consent-actions button { min-height: 44px; }
+}
+
+/* Footer "Cookie settings" control (#72): quiet text-style button that
+   re-opens the consent banner on any page, at any time. */
+.foot-consent {
+  margin: 0.5rem 0 0;
+}
+
+.consent-settings {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--gray);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.consent-settings:hover {
+  color: var(--ink);
 }
 """
 
@@ -2186,18 +2219,43 @@ def get_traffic_stats_site(env=None) -> str:
 
 
 def build_stats_beacon(site: str = "") -> str:
-    """GoatCounter tracker <script> for <head> ('' when stats are disabled).
+    """Consent-gated GoatCounter loader ('' when stats are disabled).
 
-    Emitted on every page so all traffic is counted; the strip that *displays*
-    the counts lives only where the site script runs. Values are attribute-
-    escaped even though the resolver already rejects hostile characters.
+    GDPR (#72): the counting beacon is non-essential tracking, so it is
+    never emitted as a plain async <head> script any more. Instead a tiny
+    inline loader injects the real tracker only after consent exists —
+    either already granted in local storage or granted live via the
+    ``ft-consent-granted`` event the analytics runtime dispatches. With no
+    decision (or a refusal) zero bytes reach gc.zgo.at. The site value is
+    embedded as a JSON string and applied via setAttribute, so hostile
+    characters can never break out even though the resolver rejects them.
     """
     if not site:
         return ""
+    count_url = f"{site}/count"
     return (
-        '<script async src="https://gc.zgo.at/count.js" data-goatcounter="'
-        + html.escape(f"{site}/count", quote=True)
-        + '"></script>'
+        "<script>\n"
+        "(function () {\n"
+        '  "use strict";\n'
+        f"  var COUNT_URL = {json.dumps(count_url)};\n"
+        f"  var STORAGE_KEY = {json.dumps(CONSENT_STORAGE_KEY)};\n"
+        "  function ftGcLoad() {\n"
+        '    if (document.getElementById("ft-gc-script")) { return; }\n'
+        "    var s = document.createElement(\"script\");\n"
+        '    s.id = "ft-gc-script";\n'
+        "    s.async = true;\n"
+        '    s.src = "https://gc.zgo.at/count.js";\n'
+        '    s.setAttribute("data-goatcounter", COUNT_URL);\n'
+        "    document.head.appendChild(s);\n"
+        "  }\n"
+        "  try {\n"
+        '    if (window.localStorage.getItem(STORAGE_KEY) === "granted") {\n'
+        "      ftGcLoad();\n"
+        "    }\n"
+        "  } catch (err) {}\n"
+        '  window.addEventListener("ft-consent-granted", ftGcLoad);\n'
+        "})();\n"
+        "</script>"
     )
 
 
@@ -2234,13 +2292,19 @@ def build_consent_head(measurement_id: str) -> str:
     return _CONSENT_HEAD_JS
 
 
-def build_analytics_init(measurement_id: str) -> str:
-    """Deferred end-of-body script: consent decision, EU banner, gtag loader."""
-    if not measurement_id:
+def build_analytics_init(measurement_id: str = "", enabled: bool = False) -> str:
+    """Deferred end-of-body script: consent decision, banner, gtag loader.
+
+    Emitted whenever any tracking is configured (#72): ``enabled`` is true
+    when GA4 and/or the GoatCounter traffic counter are on, even if only
+    one of them carries a measurement ID. The consent runtime drives both —
+    GA4 loads only when MEASUREMENT_ID is set, and its grant event wakes
+    the GoatCounter loader.
+    """
+    if not enabled:
         return ""
     return (
         _ANALYTICS_INIT_JS.replace("__FT_GA_ID__", json.dumps(measurement_id))
-        .replace("__FT_EU_PREFIXES__", json.dumps(list(EU_TIMEZONE_PREFIXES)))
         .replace("__FT_STORAGE_KEY__", CONSENT_STORAGE_KEY)
     )
 
