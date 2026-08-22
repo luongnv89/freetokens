@@ -34,6 +34,16 @@ SEARCH_DEBOUNCE_MS = 120
 # second attribution event. Distinct offers are never suppressed.
 OFFER_CLICK_DEDUPE_MS = 1000
 
+# Sort modes (F10): client-side reordering driven by the ?sort= URL param,
+# consistent with the category/q state params. "" (absent) keeps the
+# build-time default order. The select's option labels live in SORT_LABELS.
+SORT_MODES = ("newest", "expiring", "amount")
+SORT_LABELS = {
+    "newest": "Newest verified",
+    "expiring": "Expiring soon",
+    "amount": "Largest amount",
+}
+
 # --- Offer detail cards (#48) ----------------------------------------------
 # Optional per-offer detail data lives in offers/details/<slug>.json: one
 # JSON document extending a summary card with a description, how-to-claim
@@ -196,6 +206,27 @@ def filter_expired(offers: list, today: dt.date | None = None) -> list:
     if today is None:
         today = dt.date.today()
     return [o for o in offers if o["expiry_date"] is None or o["expiry_date"] >= today]
+
+
+def amount_sort_value(amount: str) -> float:
+    """Best-effort numeric magnitude of a free-value string (F10 'amount').
+
+    Used ONLY as a sort key, never displayed. Heuristic: first number in the
+    string wins ("$300 in credits" -> 300, "2,000 completions + 50 chats"
+    -> 2000), with k/M multipliers honored ("10k credits/month" -> 10000).
+    Unparseable strings sort as 0 so they never crash the build.
+    """
+    match = re.search(r"[0-9][0-9.,]*", amount or "")
+    if not match:
+        return 0.0
+    try:
+        value = float(match.group(0).replace(",", "").rstrip("."))
+    except ValueError:
+        return 0.0
+    suffix = re.match(r"[0-9][0-9.,]*\s*([kKmM])", amount)
+    if suffix:
+        value *= {"k": 1_000, "m": 1_000_000}[suffix.group(1).lower()]
+    return value
 
 
 def _check_str(value, name: str, filename: str, max_chars: int) -> str:
@@ -777,7 +808,7 @@ def _contact_nav() -> str:
     )
 
 _CARD_TMPL = """<li style="--i:{index}">
-<article class="card" data-category="{category}">
+<article class="card" data-category="{category}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
 <div class="card-top">
 <span class="badge">{category}</span>
 {expiry_display}
@@ -835,7 +866,7 @@ _CHIP = (
 
 
 def build_toolbar(count: int | None = None) -> str:
-    """Search box + All/five-category chips, keyboard-navigable by default.
+    """Search box + sort select + All/five-category chips, keyboard-navigable.
 
     ``count`` seeds the live-region status line so the pre-JS paint already
     shows a truthful result count.
@@ -849,6 +880,12 @@ def build_toolbar(count: int | None = None) -> str:
                 label=CATEGORY_LABELS.get(category, category),
             )
         )
+    sort_options = ['<option value="">Default</option>']
+    for mode in SORT_MODES:
+        sort_options.append(
+            f'<option value="{html.escape(mode, quote=True)}">'
+            f'{html.escape(SORT_LABELS[mode])}</option>'
+        )
     seeded = (
         f"Showing all {count} offers" if count is not None else ""
     )
@@ -859,6 +896,10 @@ def build_toolbar(count: int | None = None) -> str:
         '<input type="search" id="ft-search" name="q" '
         'placeholder="Search title, provider, or amount&hellip;" '
         'autocomplete="off" spellcheck="false" maxlength="200">'
+        "</div>"
+        '<div class="field field-sort">'
+        '<label class="tool-label" for="ft-sort">Sort</label>'
+        '<select id="ft-sort">' + "".join(sort_options) + "</select>"
         "</div>"
         '<div class="chips" role="group" aria-label="Filter by category">'
         + "".join(chips)
@@ -1240,6 +1281,19 @@ _APP_CSS = """
   width: 100%;
 }
 
+.field-sort { flex: 0 1 auto; }
+
+#ft-sort {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.55rem 2.2rem 0.55rem 1rem;
+  cursor: pointer;
+}
+
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -1262,7 +1316,8 @@ _APP_CSS = """
 /* Visible keyboard focus must not depend on the analytics stylesheet
    (_BANNER_CSS ships only when GA4 is configured). */
 .chip:focus-visible,
-#ft-search:focus-visible {
+#ft-search:focus-visible,
+#ft-sort:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 3px;
 }
@@ -1287,7 +1342,8 @@ _APP_CSS = """
    mouse/keyboard layouts are unchanged. */
 @media (pointer: coarse) {
   .chip,
-  #ft-search { min-height: 44px; }
+  #ft-search,
+  #ft-sort { min-height: 44px; }
 
   .chip {
     display: inline-flex;
@@ -1484,6 +1540,7 @@ _APP_JS = """<script id="ft-app">
 (function () {
   "use strict";
   var VALID_CATEGORIES = __FT_CATEGORIES__;
+  var VALID_SORTS = __FT_SORTS__;
   var DEBOUNCE_MS = __FT_DEBOUNCE_MS__;
   var OFFER_DEDUPE_MS = __FT_OFFER_DEDUPE_MS__;
 
@@ -1495,7 +1552,9 @@ _APP_JS = """<script id="ft-app">
     var params = new URLSearchParams(search || "");
     var category = params.get("category") || "";
     if (VALID_CATEGORIES.indexOf(category) === -1) { category = ""; }
-    return { category: category, q: (params.get("q") || "").trim() };
+    var sort = params.get("sort") || "";
+    if (VALID_SORTS.indexOf(sort) === -1) { sort = ""; }
+    return { category: category, q: (params.get("q") || "").trim(), sort: sort };
   }
 
   function ftSerializeState(state) {
@@ -1504,7 +1563,53 @@ _APP_JS = """<script id="ft-app">
     var params = new URLSearchParams();
     if (state.category) { params.set("category", state.category); }
     if (state.q) { params.set("q", state.q); }
+    if (state.sort) { params.set("sort", state.sort); }
     return params.toString();
+  }
+
+  function ftCardAttr(li, name) {
+    var card = li.querySelector("[data-category]");
+    return card ? (card.getAttribute(name) || "") : "";
+  }
+
+  // F10 ordering. Every mode is stable: ties fall back to the build-time
+  // index captured once at init, so re-sorting never shuffles equal keys.
+  function ftApplySort(grid, items, mode) {
+    var ordered = items.slice();
+    var idx = function (li) {
+      return parseInt(li.getAttribute("data-ft-index") || "0", 10) || 0;
+    };
+    if (mode === "newest") {
+      ordered.sort(function (a, b) {
+        return (
+          ftCardAttr(b, "data-verified").localeCompare(
+            ftCardAttr(a, "data-verified")
+          ) || idx(a) - idx(b)
+        );
+      });
+    } else if (mode === "expiring") {
+      ordered.sort(function (a, b) {
+        var ea = ftCardAttr(a, "data-expiry");
+        var eb = ftCardAttr(b, "data-expiry");
+        if (!ea && !eb) { return idx(a) - idx(b); }
+        if (!ea) { return 1; }  // ongoing offers sink to the end
+        if (!eb) { return -1; }
+        return ea.localeCompare(eb) || idx(a) - idx(b);
+      });
+    } else if (mode === "amount") {
+      ordered.sort(function (a, b) {
+        return (
+          (parseFloat(ftCardAttr(b, "data-amount-sort")) || 0) -
+          (parseFloat(ftCardAttr(a, "data-amount-sort")) || 0) ||
+          idx(a) - idx(b)
+        );
+      });
+    } else {
+      ordered.sort(function (a, b) { return idx(a) - idx(b); });
+    }
+    for (var i = 0; i < ordered.length; i++) {
+      grid.appendChild(ordered[i]); // append moves the node, like the DOM
+    }
   }
 
   // AND semantics: an offer is shown only when it satisfies BOTH the active
@@ -1560,8 +1665,15 @@ _APP_JS = """<script id="ft-app">
     var status = document.getElementById("ft-results-status");
     var emptyBox = document.getElementById("ft-no-results");
     var resetButton = document.getElementById("ft-reset-filters");
+    var sortSelect = document.getElementById("ft-sort");
     if (!grid || !input || !status) { return; }
     var items = Array.prototype.slice.call(grid.querySelectorAll("li"));
+    // Freeze the build-time order so "" (default sort) can always restore it.
+    for (var n = 0; n < items.length; n++) {
+      if (items[n].getAttribute("data-ft-index") === null) {
+        items[n].setAttribute("data-ft-index", String(n));
+      }
+    }
     var total = items.length;
     var state = ftParseState(window.location.search);
 
@@ -1628,10 +1740,14 @@ _APP_JS = """<script id="ft-app">
         );
       }
       if (document.activeElement !== input) { input.value = state.q; }
+      if (sortSelect && document.activeElement !== sortSelect) {
+        sortSelect.value = state.sort;
+      }
     }
 
     function apply(options) {
       options = options || {};
+      ftApplySort(grid, items, state.sort);
       var shown = 0;
       for (var i = 0; i < items.length; i++) {
         var li = items[i];
@@ -1667,6 +1783,9 @@ _APP_JS = """<script id="ft-app">
       } else if (source === "search" && state.q) {
         // Privacy: length only — the raw term never reaches analytics.
         ftTrack("search", { query_length: state.q.length });
+      } else if (source === "sort") {
+        // F10: one event per change; "" is reported as "default".
+        ftTrack("sort_use", { sort_option: state.sort || "default" });
       }
     }
 
@@ -1687,6 +1806,18 @@ _APP_JS = """<script id="ft-app">
         if (value && VALID_CATEGORIES.indexOf(value) === -1) { return; }
         state.category = value;
         commit("filter");
+      });
+    }
+
+    // F10: sort changes reorder client-side, persist to the URL, and fire
+    // exactly one sort_use event per actual change.
+    if (sortSelect) {
+      sortSelect.addEventListener("change", function () {
+        var value = sortSelect.value || "";
+        if (VALID_SORTS.indexOf(value) === -1) { value = ""; }
+        if (value === state.sort) { return; }
+        state.sort = value;
+        commit("sort");
       });
     }
 
@@ -1783,10 +1914,12 @@ def build_banner_markup() -> str:
 
 
 def build_app_js() -> str:
-    """Client-side filter/search runtime (F2/F3), placeholders resolved."""
+    """Client-side filter/search/sort runtime (F2/F3/F10), placeholders resolved."""
     return _APP_JS.replace(
         "__FT_CATEGORIES__", json.dumps(list(CATEGORIES))
-    ).replace("__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS)).replace(
+    ).replace("__FT_SORTS__", json.dumps(list(SORT_MODES))).replace(
+        "__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS)
+    ).replace(
         "__FT_OFFER_DEDUPE_MS__", str(OFFER_CLICK_DEDUPE_MS)
     )
 
@@ -1870,6 +2003,8 @@ def render_html(
                     verified_date=html.escape(verified, quote=True),
                     verified_display=_human_date(verified),
                     expiry_display=expiry,
+                    expiry_iso=html.escape(o["expiry_date"] or "", quote=True),
+                    amount_sort=f"{amount_sort_value(o['amount']):g}",
                 )
             )
         dialogs_html = "\n".join(
@@ -1947,6 +2082,7 @@ _PRIVACY_CONTENT = """<div class="policy">
 <li><strong>Anonymized IP addresses</strong> &mdash; the last octet of your IP is zeroed out by IP anonymization, so we never see your full address.</li>
 <li><strong>Coarse technical metadata</strong> &mdash; things like browser family, screen size buckets, and approximate region derived from the anonymized IP.</li>
 <li><strong>Which filter category you picked</strong> (for example &ldquo;Image&rdquo;) &mdash; nothing else about your filtering.</li>
+<li><strong>Which sort option you picked</strong> (for example &ldquo;Expiring soon&rdquo;) &mdash; nothing else about your sorting.</li>
 <li><strong>Search activity as a length only</strong> &mdash; when you search, the event records just <code>query_length</code>, the number of characters typed. The words themselves stay in your browser and are never sent anywhere.</li>
 <li><strong>Offer clicks</strong> &mdash; which listing you clicked (its ID, provider name, and category).</li>
 <li><strong>Detail views</strong> &mdash; which offer&rsquo;s detail panel you opened (its listing ID).</li>
