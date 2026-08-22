@@ -27,10 +27,9 @@ results for the deploy-time pass.
 
 ## W3C RSS validator
 
-Run after deploy: paste `https://luongnv89.github.io/freetokens/feed.xml`
-into validator.w3.org/feed. Expected: zero errors (atom:self link included
-for the recommendation). Record the result here once the tagged deploy is
-green.
+Checked 2026-08-22 against the live feed
+(`https://luongnv.com/freetokens/feed.xml` — the github.io origin 301s to
+the custom domain): **"This is a valid RSS feed."**, zero errors.
 
 ## Manual browser pass (deploy-time)
 
