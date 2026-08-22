@@ -5,6 +5,18 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **GDPR cookie consent for everyone (#72):** the consent banner now shows
+  to all first-time visitors (the EU-timezone heuristic is gone), tracking
+  stays completely off until an explicit allow, and a persistent footer
+  "Cookie settings" control re-opens the banner on any page so the choice
+  can be changed at any time. The GoatCounter counting beacon is
+  consent-gated too: it loads only after a grant, never before.
+- **Share bar on offer detail pages (#71):** every offer page ships
+  LinkedIn, X, Facebook, and email share links pre-filled with the offer's
+  absolute URL plus a copy-link button with visible confirmation. Share
+  actions emit an `offer_share` event (offer id + channel) through the
+  consent-gated analytics bus — sharing works even when tracking is
+  declined.
 - **Default order latest-added first (#70):** the home offers list now
   defaults to newest-verified-first (verified_date doubles as the add
   stamp), so returning visitors see fresh offers without touching the sort
