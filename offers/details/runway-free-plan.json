@@ -1,0 +1,9 @@
+{
+  "summary": "Runway grants every new account 125 one-time credits for AI video and image generation (Gen-4 and friends). The credits do not renew; upgrade or wait for promotional refreshes for more.",
+  "claim_steps": [
+    "Create a free account at runwayml.com.",
+    "Receive the one-time 125-credit grant on signup.",
+    "Generate video or images from the dashboard, spending credits per run.",
+    "Upgrade to Standard when the one-time credits run out."
+  ]
+}

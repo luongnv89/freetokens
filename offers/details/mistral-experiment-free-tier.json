@@ -1,0 +1,9 @@
+{
+  "summary": "Mistral's La Plateforme 'Experiment' plan provides free, rate-limited API access to Mistral models with no credit card required. Activating it opts your data into training in exchange for the free tier.",
+  "claim_steps": [
+    "Create a free account at console.mistral.ai.",
+    "Activate the free 'Experiment' plan from the subscription page (data-training opt-in applies).",
+    "Generate an API key from the API Keys page.",
+    "Call api.mistral.ai within the published rate limits."
+  ]
+}

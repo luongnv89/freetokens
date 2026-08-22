@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/luongnv89/freetokens/schemas/offer-detail.schema.json",
+  "title": "freetokens offer detail document",
+  "description": "Strict schema for offers/details/<slug>.json. One optional JSON document per offer slug extending the summary card with a description, how-to-claim steps, and social proof. Every claim must be evidence-backed; never guess.",
+  "type": "object",
+  "additionalProperties": false,
+  "minProperties": 1,
+  "properties": {
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "Detailed offer description shown in the detail card, beyond the list-card amount line."
+    },
+    "claim_steps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      },
+      "description": "Ordered how-to-claim instructions rendered as an ordered list."
+    },
+    "social_proof": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["x", "reddit", "screenshot", "link"],
+            "description": "Evidence kind. x/reddit/link require url; screenshot requires a site-relative image path."
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^https?://",
+            "maxLength": 200,
+            "description": "Link to the post or source (required except for screenshots)."
+          },
+          "author": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Post author display name (x and reddit)."
+          },
+          "handle": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Author handle on X (optional)."
+          },
+          "community": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Subreddit name (optional)."
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Short quoted excerpt of the post (x, reddit, link)."
+          },
+          "image": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Site-relative path of a committed screenshot asset (screenshot)."
+          },
+          "caption": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Screenshot caption / alt text (screenshot)."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Link title (link)."
+          }
+        }
+      }
+    }
+  }
+}

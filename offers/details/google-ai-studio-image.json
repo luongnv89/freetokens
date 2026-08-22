@@ -1,0 +1,9 @@
+{
+  "summary": "Google AI Studio offers free, rate-limited image generation directly in the browser using Gemini image models \u2014 no billing account required for the free tier.",
+  "claim_steps": [
+    "Open aistudio.google.com in your browser.",
+    "Sign in with a Google account.",
+    "Choose an image-capable Gemini model and start generating.",
+    "Stay within the per-minute/per-day free rate limits."
+  ]
+}

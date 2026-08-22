@@ -109,6 +109,8 @@ function runScenario(scenario) {
   const items = [];
   const slugOf = new Map();
   const linksBySlug = new Map();
+  const buttonsBySlug = new Map();
+  const dialogsBySlug = new Map();
   for (const spec of scenario.cards) {
     const article = makeElement("article");
     article.attrs["data-category"] = spec.category;
@@ -120,6 +122,20 @@ function runScenario(scenario) {
     link.attrs["data-ft-provider"] = spec.provider || spec.slug;
     link.attrs["data-ft-offer-category"] = spec.category;
     article.appendChild(link);
+    // Detail trigger (#48): a button sibling of the outbound link, so its
+    // clicks bubble to the grid but never resolve to an offer link.
+    const btn = makeElement("button");
+    btn.attrs["data-ft-detail"] = spec.slug;
+    article.appendChild(btn);
+    // Build-time dialog stub: the real page ships one <dialog> per offer.
+    const dlg = makeElement("dialog");
+    dlg.attrs.id = "ft-detail-" + spec.slug;
+    dlg.open = false;
+    dlg.showModal = () => {
+      dlg.open = true;
+    };
+    buttonsBySlug.set(spec.slug, btn);
+    dialogsBySlug.set(spec.slug, dlg);
     const li = makeElement("li");
     li.card = article;
     // Parent the card into the list item so click events can bubble
@@ -158,6 +174,9 @@ function runScenario(scenario) {
     "ft-no-results": emptyBox,
     "ft-reset-filters": resetButton,
   };
+  for (const [slug, dlg] of dialogsBySlug) {
+    byId["ft-detail-" + slug] = dlg;
+  }
 
   const location_ = { pathname: "/", search: scenario.init_search || "" };
   const historyUrls = [];
@@ -242,6 +261,9 @@ function runScenario(scenario) {
         locationSearch: location_.search,
         events: events.map((e) => e.slice()),
         preventDefaults: meta.preventDefaults,
+        openDialogs: [...dialogsBySlug]
+          .filter(([, dlg]) => dlg.open)
+          .map(([slug]) => slug),
       },
       extra || {}
     );
@@ -265,6 +287,11 @@ function runScenario(scenario) {
       const link = linksBySlug.get(step.value);
       if (!link) throw new Error(`no offer link ${step.value}`);
       fire(link, "click", clickEvent(link));
+    } else if (step.op === "click_detail") {
+      // Click the card's detail trigger; must bubble to the grid handler.
+      const btn = buttonsBySlug.get(step.value);
+      if (!btn) throw new Error(`no detail button ${step.value}`);
+      fire(btn, "click", clickEvent(btn));
     } else if (step.op === "click_span") {
       // Click a non-anchor child inside the card: must resolve to its
       // enclosing offer link via bubbling.

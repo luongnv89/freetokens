@@ -68,3 +68,61 @@ CI runs the validator on every push or PR touching `offers/**`
 
 A file that fails any rule above fails with the offending file and field
 named in the error (date errors include a `YYYY-MM-DD` format hint).
+
+## Detail files (`offers/details/<slug>.json`) — optional
+
+Summary cards stay lean; richer per-offer content lives in an **optional**
+JSON sidecar next to the offer: `offers/details/<slug>.json`, where
+`<slug>` matches an existing offer file name exactly (an orphan detail file
+is a build error). Documents are strict JSON, parsed with the standard
+library and validated against `schemas/offer-detail.schema.json`
+(Draft 2020-12, `additionalProperties: false`). Every field is optional,
+but at least one must be present:
+
+| Field          | Type            | Limits                     | Description |
+|----------------|-----------------|----------------------------|-------------|
+| `summary`      | string          | 1–2000 chars               | Detailed description shown inside the offer's detail card. |
+| `claim_steps`  | list of strings | 1–12 steps, ≤300 chars each| Ordered how-to-claim instructions rendered as an `<ol>`. |
+| `social_proof` | list of objects | 1–10 entries                | Evidence entries rendered as embed-style cards (see below). |
+
+Social-proof entries carry a required `type` plus type-specific fields:
+
+| Type          | Required fields              | Optional fields |
+|---------------|------------------------------|-----------------|
+| `x`           | `url`, `author`, `text`      | `handle` |
+| `reddit`      | `url`, `author`, `text`      | `community` |
+| `link`        | `url`, `title`               | `text` |
+| `screenshot`  | `image` (site-relative path), `caption` | — |
+
+Rules:
+
+- **Evidence only.** Every entry must point at a real post or source you
+  have visited. Never guess URLs or invent quotes — unverified claims stay
+  out of the directory.
+- **No third-party embed scripts.** X/Reddit posts are rendered as static,
+  build-time quote cards linking out to the platform, keeping the page
+  free of third-party trackers (privacy policy §"Who else receives data").
+- **Screenshots** reference assets committed under the built `site/` tree
+  via a relative `image` path such as `assets/shots/pricing.png`; absolute
+  paths and `..` segments are rejected.
+- Text limits: `text`/`caption` ≤500 chars; other strings ≤200 chars.
+
+Example:
+
+```json
+{
+  "summary": "GitHub Copilot Free grants every developer 2,000 completions and 50 chats per month.",
+  "claim_steps": [
+    "Sign in to GitHub.",
+    "Select the Free plan on the Copilot plans page."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://github.blog/news-insights/product-news/github-copilot-in-vscode-free/",
+      "title": "Announcing GitHub Copilot Free",
+      "text": "Today we are launching GitHub Copilot Free."
+    }
+  ]
+}
+```

@@ -897,6 +897,26 @@ class AppJsSourceTests(unittest.TestCase):
         popstate = init_body[init_body.index('addEventListener("popstate"'):]
         self.assertIn("apply(); // restore view", popstate)
 
+    def test_open_detail_guarded_for_missing_dialog_support(self):
+        open_fn = self.JS[self.JS.index("function ftOpenDetail"):]
+        body = open_fn[:open_fn.index("function ", 10)]
+        self.assertIn('getElementById("ft-detail-" + slug)', body)
+        self.assertIn('typeof dlg.showModal !== "function"', body)
+        # Opening is best-effort: a throwing showModal must not break the page.
+        self.assertIn("try {", body)
+        self.assertIn("catch (err)", body)
+
+    def test_detail_event_carries_offer_id_only(self):
+        self.assertIn('"offer_details_open", { offer_id: slug }', self.JS)
+        # No panel content ever reaches analytics.
+        self.assertNotIn("offer_details_open", self.JS.split("ftOpenDetail")[0])
+
+    def test_delegated_trigger_walk_reads_data_ft_detail(self):
+        walk = self.JS[self.JS.index("// Detail triggers"):]
+        walk = walk[:walk.index("\n    function syncControls")]
+        self.assertIn('getAttribute("data-ft-detail")', walk)
+        self.assertIn("ftOpenDetail(slug);", walk)
+
 
 class FilterEventGateTests(unittest.TestCase):
     """/#13,#14: filter/search events ride the consent-gated event bus."""
@@ -936,6 +956,333 @@ class FilterEventGateTests(unittest.TestCase):
         self.assertNotIn("window.ftTrackEvent = ftTrackEvent;", page)
         self.assertNotIn("TRACKING_ACTIVE", page)
         self.assertIn('typeof window.ftTrackEvent === "function"', page)
+
+
+class DetailLoadTests(unittest.TestCase):
+    """#48: offers/details/<slug>.json loading and strict validation."""
+
+    def _load(self, tmp, payloads_by_slug):
+        details_dir = os.path.join(tmp, "details")
+        os.makedirs(details_dir, exist_ok=True)
+        for slug, payload in payloads_by_slug.items():
+            Path(details_dir, f"{slug}.json").write_text(
+                json.dumps(payload), encoding="utf-8"
+            )
+        return build.load_details(tmp, {"alpha", "beta"})
+
+    def test_missing_details_dir_yields_no_details(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(build.load_details(tmp, {"alpha"}), {})
+
+    def test_valid_documents_load_keyed_by_slug(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            details = self._load(
+                tmp,
+                {
+                    "alpha": {"summary": "Alpha detail."},
+                    "beta": {
+                        "claim_steps": ["Step one.", "Step two."],
+                        "social_proof": [
+                            {
+                                "type": "x",
+                                "url": "https://x.com/dev/status/123",
+                                "author": "Dev",
+                                "handle": "@dev",
+                                "text": "Great free tier!",
+                            }
+                        ],
+                    },
+                },
+            )
+            self.assertEqual(details["alpha"], {"summary": "Alpha detail."})
+            self.assertEqual(details["beta"]["claim_steps"], ["Step one.", "Step two."])
+
+    def test_orphan_slug_is_a_named_error(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "no offer named 'ghost'"):
+                self._load(tmp, {"ghost": {"summary": "Orphan."}})
+
+    def test_invalid_json_names_file_position(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            details_dir = os.path.join(tmp, "details")
+            os.makedirs(details_dir)
+            Path(details_dir, "alpha.json").write_text("{oops", encoding="utf-8")
+            with self.assertRaisesRegex(build.OfferError, "invalid JSON"):
+                build.load_details(tmp, {"alpha"})
+
+    def test_non_object_document_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "JSON object"):
+                self._load(tmp, {"alpha": [1, 2]})
+
+    def test_unknown_field_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "unknown fields: rating"):
+                self._load(tmp, {"alpha": {"summary": "x", "rating": 5}})
+
+    def test_document_without_any_known_field_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "at least one of"):
+                self._load(tmp, {"alpha": {}})
+
+    def test_claim_steps_must_be_non_empty_string_list(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            for bad in ([], "one", [""]):
+                with self.subTest(bad=bad):
+                    with self.assertRaisesRegex(build.OfferError, "claim_steps"):
+                        self._load(tmp, {"alpha": {"claim_steps": bad}})
+
+    def test_claim_steps_capped_at_twelve(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            steps = [f"Step {i}" for i in range(13)]
+            with self.assertRaisesRegex(build.OfferError, "at most 12"):
+                self._load(tmp, {"alpha": {"claim_steps": steps}})
+
+    def test_summary_length_cap_enforced(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "summary exceeds"):
+                self._load(
+                    tmp, {"alpha": {"summary": "x" * (build.SUMMARY_MAX_CHARS + 1)}}
+                )
+
+    def test_social_proof_type_must_be_known(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "type must be one of"):
+                self._load(
+                    tmp,
+                    {
+                        "alpha": {
+                            "social_proof": [{"type": "tiktok", "url": "https://x.co"}]
+                        }
+                    },
+                )
+
+    def test_linked_proofs_require_http_url(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "url must be an http"):
+                self._load(
+                    tmp,
+                    {
+                        "alpha": {
+                            "social_proof": [
+                                {
+                                    "type": "reddit",
+                                    "url": "javascript:alert(1)",
+                                    "author": "a",
+                                    "text": "t",
+                                }
+                            ]
+                        }
+                    },
+                )
+            with self.assertRaisesRegex(
+                build.OfferError, "url must be a non-empty string"
+            ):
+                self._load(
+                    tmp,
+                    {
+                        "alpha": {
+                            "social_proof": [
+                                {"type": "reddit", "author": "a", "text": "t"}
+                            ]
+                        }
+                    },
+                )
+
+    def test_link_entry_requires_title(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "title"):
+                self._load(
+                    tmp,
+                    {
+                        "alpha": {
+                            "social_proof": [
+                                {"type": "link", "url": "https://blog.example/post"}
+                            ]
+                        }
+                    },
+                )
+
+    def test_screenshot_requires_local_image_and_caption(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bad = [
+                {"type": "screenshot", "image": "../escape.png", "caption": "c"},
+                {"type": "screenshot", "image": "/abs/path.png", "caption": "c"},
+                {"type": "screenshot", "caption": "c"},
+            ]
+            for entry in bad:
+                with self.subTest(entry=entry):
+                    with self.assertRaisesRegex(build.OfferError, "image"):
+                        self._load(tmp, {"alpha": {"social_proof": [entry]}})
+
+    def test_unknown_proof_field_rejected_per_type(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(build.OfferError, "unknown fields: handle"):
+                self._load(
+                    tmp,
+                    {
+                        "alpha": {
+                            "social_proof": [
+                                {
+                                    "type": "reddit",
+                                    "url": "https://reddit.com/r/AI/1",
+                                    "author": "a",
+                                    "text": "t",
+                                    "handle": "@x",
+                                }
+                            ]
+                        }
+                    },
+                )
+
+
+def _detail_render(offers, details=None):
+    """Render the home page from validated offers plus a detail map."""
+    rendered = []
+    for i, offer in enumerate(offers):
+        offer.setdefault("slug", f"offer-{i}")
+        rendered.append(offer)
+    return build.render_html(build.build_index(rendered), "", details or {})
+
+
+class DetailRenderTests(unittest.TestCase):
+    """#48: every offer gets a trigger button and a full detail dialog."""
+
+    def _offer(self, **overrides):
+        return build.validate_offer(dict(VALID, **overrides), "a.yaml")
+
+    def test_every_card_has_trigger_button_wired_to_dialog(self):
+        page = _detail_render([self._offer()])
+        self.assertIn('data-ft-detail="offer-0"', page)
+        self.assertIn('aria-haspopup="dialog"', page)
+        self.assertIn('aria-controls="ft-detail-offer-0"', page)
+        self.assertIn('id="ft-detail-offer-0"', page)
+
+    def test_dialog_carries_core_fields_beyond_list_summary(self):
+        page = _detail_render(
+            [self._offer(title="Detail Me", provider="Prov Co")],
+            {"offer-0": {"summary": "Longer description here."}},
+        )
+        start = page.index('id="ft-detail-offer-0"')
+        seg = page[start : page.index("</dialog>", start)]
+        self.assertIn("<h3", seg)
+        self.assertIn("Prov Co", seg)
+        self.assertIn("$10 in credits", seg)
+        self.assertIn("verified <time", seg)
+        self.assertIn("Longer description here.", seg)
+
+    def test_claim_steps_render_as_ordered_list(self):
+        page = _detail_render(
+            [self._offer()],
+            {"offer-0": {"claim_steps": ["Sign up.", "Claim credits."]}},
+        )
+        seg = page[page.index('<section class="od-steps">') :]
+        self.assertIn("<h4>How to claim</h4>", seg)
+        self.assertIn("<ol><li>Sign up.</li><li>Claim credits.</li></ol>", seg)
+
+    def test_fallback_claim_steps_without_detail_data(self):
+        page = _detail_render([self._offer()])
+        self.assertIn("Open the official offer page.", page)
+        self.assertIn("How to claim</h4>", page)
+
+    def test_social_proof_variants_render_embed_style_cards(self):
+        details = {
+            "offer-0": {
+                "social_proof": [
+                    {
+                        "type": "x",
+                        "url": "https://x.com/dev/status/1",
+                        "author": "Dev One",
+                        "handle": "@devone",
+                        "text": "Loving this free tier!",
+                    },
+                    {
+                        "type": "reddit",
+                        "url": "https://www.reddit.com/r/AI/comments/x/",
+                        "author": "red_user",
+                        "community": "r/AI",
+                        "text": "Works as advertised.",
+                    },
+                    {
+                        "type": "link",
+                        "url": "https://blog.example/news",
+                        "title": "Big launch post",
+                    },
+                ]
+            }
+        }
+        page = _detail_render([self._offer()], details)
+        self.assertIn('class="proof-card proof-x"', page)
+        self.assertIn("@devone", page)
+        self.assertIn("Loving this free tier!", page)
+        self.assertIn("View post on X", page)
+        self.assertIn("r/AI", page)
+        self.assertIn("View on Reddit", page)
+        self.assertIn("<strong>Big launch post</strong>", page)
+        self.assertIn("Open source", page)
+        self.assertEqual(page.count('rel="noopener noreferrer"'), page.count("proof-card"))
+
+    def test_screenshot_proof_renders_lazy_figure(self):
+        page = _detail_render(
+            [self._offer()],
+            {
+                "offer-0": {
+                    "social_proof": [
+                        {
+                            "type": "screenshot",
+                            "image": "assets/shots/pricing.png",
+                            "caption": "Pricing table showing $0 plan",
+                        }
+                    ]
+                }
+            },
+        )
+        self.assertIn('src="assets/shots/pricing.png"', page)
+        self.assertIn('alt="Pricing table showing $0 plan"', page)
+        self.assertIn('loading="lazy"', page)
+        self.assertIn("<figcaption>Pricing table showing $0 plan</figcaption>", page)
+
+    def test_dialog_escapes_hostile_content(self):
+        page = _detail_render(
+            [self._offer(title='Bad <script>alert(1)</script>', provider='Q"uote')],
+            {
+                "offer-0": {
+                    "summary": "<script>evil()</script>",
+                    "social_proof": [
+                        {
+                            "type": "x",
+                            "url": 'https://x.com/h/status/9"><script>',
+                            "author": '<img src=x onerror=alert(1)>',
+                            "text": '"quoted" & <b>bold</b>',
+                        }
+                    ],
+                }
+            },
+        )
+        self.assertNotIn("<script>alert(1)</script>", page)
+        self.assertNotIn("onerror=alert(1)>", page.replace("&quot;", '"'))
+        self.assertIn("&lt;script&gt;", page)
+        self.assertIn("&quot;quoted&quot; &amp; &lt;b&gt;bold&lt;/b&gt;", page)
+
+    def test_cta_link_points_at_source_and_opens_new_tab(self):
+        page = _detail_render([self._offer()])
+        self.assertIn(
+            '<a class="od-cta" href="https://example.com/offer"'
+            ' target="_blank" rel="noopener noreferrer">Claim at Test Provider',
+            page,
+        )
+
+    def test_detail_css_and_js_ship_with_offers(self):
+        page = _detail_render([self._offer()])
+        self.assertIn(".detail-btn", page)
+        self.assertIn(".detail::backdrop", page)
+        self.assertIn("ftOpenDetail", page)
+
+    def test_zero_offers_ships_no_dialogs_or_triggers(self):
+        index = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
+        page = build.render_html(index)
+        self.assertNotIn("<dialog", page)
+        self.assertNotIn("data-ft-detail", page)
 
 
 class LargeFixtureBuildTests(unittest.TestCase):
@@ -1277,6 +1624,56 @@ class NodeAppJsTests(unittest.TestCase):
         final = snaps[-1]
         self.assertEqual(final["events"], [])
         self.assertEqual(final["preventDefaults"], 0)
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_clicking_detail_button_opens_dialog_and_tracks_once(self):
+        snaps = self._run([{"op": "click_detail", "value": "copilot"}])
+        final = snaps[-1]
+        self.assertEqual(final["openDialogs"], ["copilot"])
+        self.assertEqual(
+            final["events"],
+            [["offer_details_open", {"offer_id": "copilot"}]],
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_detail_click_never_fires_offer_click(self):
+        snaps = self._run([{"op": "click_detail", "value": "alpha"}])
+        final = snaps[-1]
+        kinds = [e[0] for e in final["events"]]
+        self.assertEqual(kinds, ["offer_details_open"])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_dialog_stays_open_after_opening_a_second_offer(self):
+        snaps = self._run(
+            [
+                {"op": "click_detail", "value": "alpha"},
+                {"op": "click_detail", "value": "mistral"},
+            ]
+        )
+        final = snaps[-1]
+        self.assertEqual(final["openDialogs"], ["alpha", "mistral"])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_detail_opening_silent_when_analytics_absent(self):
+        snaps = self._run(
+            [{"op": "click_detail", "value": "mistral"}], track_enabled=False
+        )
+        final = snaps[-1]
+        self.assertEqual(final["openDialogs"], ["mistral"])
+        self.assertEqual(final["events"], [])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_filtering_still_works_with_dialogs_present(self):
+        snaps = self._run(
+            [
+                {"op": "click_detail", "value": "copilot"},
+                {"op": "type", "value": "mistral"},
+                {"op": "advance", "ms": 200},
+            ]
+        )
+        final = snaps[-1]
+        self.assertEqual(final["visible"], ["mistral"])
+        self.assertEqual(final["openDialogs"], ["copilot"])
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_filter_settle_under_200ms_over_500_offers(self):
