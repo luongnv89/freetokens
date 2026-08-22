@@ -1,0 +1,9 @@
+{
+  "summary": "Cerebras Inference grants every new cloud account $5 in free credit for its wafer-scale inference API, which serves open models at extremely high tokens-per-second. Prototype prompts, agents, and real-time apps before spending anything.",
+  "claim_steps": [
+    "Open www.cerebras.ai/inference and click 'Get API Key' / free trial.",
+    "Create a free Cerebras Cloud account.",
+    "Generate an API key from the console.",
+    "Point your OpenAI-compatible client at the Cerebras endpoint; the $5 credit covers your first usage."
+  ]
+}

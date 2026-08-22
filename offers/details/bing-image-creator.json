@@ -1,0 +1,9 @@
+{
+  "summary": "Bing Image Creator is free for everyone with a personal Microsoft account, offering image generation with Microsoft MAI-Image, GPT-Image, and DALL-E-class models. You get 15 fast creations per day plus slower standard-speed generations (up to 200 prompts per 24 hours).",
+  "claim_steps": [
+    "Visit bing.com/create or the Bing Image Creator feature page.",
+    "Sign in with a personal Microsoft account (work/school Entra accounts are not supported).",
+    "Enter a prompt and press Create; each generation uses one of your daily creations.",
+    "Return daily - the 15 fast creations replenish every day."
+  ]
+}

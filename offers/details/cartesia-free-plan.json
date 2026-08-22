@@ -1,0 +1,9 @@
+{
+  "summary": "Cartesia's $0 Free plan includes 20,000 credits per month covering Sonic text-to-speech (about 27 minutes) and Ink speech-to-text (about 1h51m), plus one voice agent slot and unlimited workspace seats - no card required to start.",
+  "claim_steps": [
+    "Open cartesia.ai/pricing and choose the Free plan ('Start free').",
+    "Sign up at play.cartesia.ai - no credit card required.",
+    "Generate speech with Sonic or transcribe with Ink from the playground or API.",
+    "Stay within the 20K monthly credits; they reset each month."
+  ]
+}

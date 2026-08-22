@@ -1,0 +1,9 @@
+{
+  "summary": "Amazon Polly's free tier gives new AWS accounts 5 million characters per month on Standard voices and 1 million characters per month on Neural voices for the first 12 months after signup - roughly thousands of minutes of narration at zero cost.",
+  "claim_steps": [
+    "Create an AWS account at aws.amazon.com (free tier applies automatically).",
+    "Open the Amazon Polly console.",
+    "Convert text to speech using Standard or Neural voices within the monthly free character allowance.",
+    "Note the free window runs for the first 12 months from account creation."
+  ]
+}

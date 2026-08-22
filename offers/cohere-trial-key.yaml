@@ -1,0 +1,9 @@
+# Verified 2026-08-22 against https://docs.cohere.com/docs/rate-limits
+# ("evaluation keys (free but limited in usage) ... limited to 1,000 API calls a month")
+title: Cohere Trial API Key
+provider: Cohere
+category: api_provider
+amount: Free trial key - 1,000 API calls/month across Chat, Embed, and Rerank endpoints
+expiry_date: null
+source_url: https://docs.cohere.com/docs/rate-limits
+verified_date: 2026-08-22

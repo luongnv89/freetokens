@@ -1,0 +1,9 @@
+{
+  "summary": "Deepgram gives every new Pay As You Go account $200 in free credits for its speech APIs - Nova speech-to-text, Aura text-to-speech, and the Voice Agent API - with no credit card required and no expiration on the credits.",
+  "claim_steps": [
+    "Click 'Sign Up Free' at deepgram.com/pricing.",
+    "Create a console account (no credit card needed).",
+    "Create an API key in console.deepgram.com.",
+    "Call the Speech-to-Text or Text-to-Speech APIs; usage draws down the $200 credit."
+  ]
+}

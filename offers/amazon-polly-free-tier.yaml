@@ -1,0 +1,10 @@
+# Verified 2026-08-22 against https://aws.amazon.com/polly/pricing/
+# ("the free tier includes 5 million characters per month ... For Neural voices,
+#  the free tier includes 1 million characters per month ... for the first 12 months.")
+title: Amazon Polly Free Tier
+provider: AWS
+category: voice
+amount: 5M characters/month on Standard voices and 1M characters/month on Neural voices for your first 12 months
+expiry_date: null
+source_url: https://aws.amazon.com/polly/pricing/
+verified_date: 2026-08-22
