@@ -453,6 +453,9 @@ a:focus-visible {
   border-radius: 12px;
   padding: clamp(1.1rem, 4vw, 1.75rem);
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+  /* Explicit containment: don't depend on UA default dialog sizing. */
+  max-height: min(85vh, calc(100dvh - 2rem));
+  overflow-y: auto;
 }
 
 .detail::backdrop { background: rgba(0, 0, 0, 0.45); }
@@ -877,7 +880,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 </dialog>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-22T01:14:30Z">Aug 22, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-22T01:15:49Z">Aug 22, 2026</time> &middot; offers re-verified on every change</p>
 <nav class="foot-nav" aria-label="Site"><a href="./" aria-current="page">Offers</a><span aria-hidden="true">&middot;</span><a href="privacy.html">Privacy policy</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 </footer>
 </div>

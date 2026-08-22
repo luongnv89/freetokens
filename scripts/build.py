@@ -1331,6 +1331,9 @@ _DETAIL_CSS = """
   border-radius: 12px;
   padding: clamp(1.1rem, 4vw, 1.75rem);
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+  /* Explicit containment: don't depend on UA default dialog sizing. */
+  max-height: min(85vh, calc(100dvh - 2rem));
+  overflow-y: auto;
 }
 
 .detail::backdrop { background: rgba(0, 0, 0, 0.45); }
