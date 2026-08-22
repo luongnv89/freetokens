@@ -375,7 +375,7 @@ graph TB
 | # | Question | Impact | Owner | Due |
 |---|----------|--------|-------|-----|
 | 1 | Exact static generator: plain build script vs Astro? | M | Curator | Before scaffold |
-| 2 | Which communities/X accounts are the initial 5 distribution targets? | H | Curator | Week 1 |
+| 2 | Which communities/X accounts are the initial 5 distribution targets? **RESOLVED v1.1** — X, r/SideProject, Show HN, Indie Hackers, LinkedIn (see docs/outreach-log.md) | H | Curator | Week 1 |
 | 3 | GA4 vs privacy-first fallback if consent friction kills EU traffic? | M | Curator | After 2 weeks of data |
 | 4 | Repo public (transparency + stars signal) vs private content? | M | Curator | Before launch |
 
