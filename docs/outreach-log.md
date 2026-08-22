@@ -22,7 +22,9 @@ communities (Latent.Space, AI devs) where invited.
 
 All shareable copy lives in [announcement-copy.md](outreach/announcement-copy.md):
 short blurb, long blurb, Show HN text, and the screenshot shot-list that
-highlights the filter/sort/expiry UX.
+highlights the filter/sort/expiry UX. Provider-facing pitches (attribution-
+backed email template, GA4 export steps, tracking log) live separately in
+[outreach-kit.md](outreach-kit.md) (#28).
 
 ## Outreach log
 

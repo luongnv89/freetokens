@@ -1,7 +1,97 @@
 {
-  "generated_at": "2026-08-22T01:15:49Z",
-  "count": 11,
+  "generated_at": "2026-08-22T07:19:38Z",
+  "count": 21,
+  "active_count": 21,
+  "expired_count": 0,
   "offers": [
+    {
+      "slug": "amazon-polly-free-tier",
+      "title": "Amazon Polly Free Tier",
+      "provider": "AWS",
+      "category": "voice",
+      "amount": "5M characters/month on Standard voices and 1M characters/month on Neural voices for your first 12 months",
+      "expiry_date": null,
+      "source_url": "https://aws.amazon.com/polly/pricing/",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "bing-image-creator",
+      "title": "Bing Image Creator",
+      "provider": "Microsoft Bing",
+      "category": "image",
+      "amount": "Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h)",
+      "expiry_date": null,
+      "source_url": "https://www.microsoft.com/en-us/bing/features/bing-image-creator",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "cartesia-free-plan",
+      "title": "Cartesia Free Plan",
+      "provider": "Cartesia",
+      "category": "voice",
+      "amount": "20K credits/month for text-to-speech and speech-to-text on the $0 plan",
+      "expiry_date": null,
+      "source_url": "https://cartesia.ai/pricing",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "cerebras-free-credit",
+      "title": "Cerebras Inference Free Trial",
+      "provider": "Cerebras",
+      "category": "api_provider",
+      "amount": "$5 in free API credit after creating an account",
+      "expiry_date": null,
+      "source_url": "https://www.cerebras.ai/inference",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "cloudflare-workers-ai-free-tier",
+      "title": "Cloudflare Workers AI Free Tier",
+      "provider": "Cloudflare",
+      "category": "api_provider",
+      "amount": "10,000 Neurons per day at no charge (resets daily at 00:00 UTC)",
+      "expiry_date": null,
+      "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "cohere-trial-key",
+      "title": "Cohere Trial API Key",
+      "provider": "Cohere",
+      "category": "api_provider",
+      "amount": "Free trial key - 1,000 API calls/month across Chat, Embed, and Rerank endpoints",
+      "expiry_date": null,
+      "source_url": "https://docs.cohere.com/docs/rate-limits",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "cursor-hobby-plan",
+      "title": "Cursor Hobby Plan",
+      "provider": "Cursor (Anysphere)",
+      "category": "coding",
+      "amount": "Free Hobby plan - limited Agent requests plus Composer access, no credit card required",
+      "expiry_date": null,
+      "source_url": "https://cursor.com/pricing",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
+    {
+      "slug": "deepgram-free-credit",
+      "title": "Deepgram $200 Free Credit",
+      "provider": "Deepgram",
+      "category": "voice",
+      "amount": "$200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)",
+      "expiry_date": null,
+      "source_url": "https://deepgram.com/pricing",
+      "verified_date": "2026-08-22",
+      "status": "active"
+    },
     {
       "slug": "devin-free-plan",
       "title": "Devin Free Plan",
@@ -10,7 +100,8 @@
       "amount": "Light coding-agent quota + unlimited Tab completions ($0 plan)",
       "expiry_date": null,
       "source_url": "https://devin.ai/pricing",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "elevenlabs-free-plan",
@@ -20,7 +111,8 @@
       "amount": "10k credits/month (~10 min of audio)",
       "expiry_date": null,
       "source_url": "https://elevenlabs.io/pricing",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "github-copilot-free",
@@ -30,7 +122,8 @@
       "amount": "2,000 completions + 50 chat requests per month",
       "expiry_date": null,
       "source_url": "https://github.com/features/copilot/plans",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "google-ai-studio-image",
@@ -40,7 +133,8 @@
       "amount": "Free image generation in AI Studio (rate-limited)",
       "expiry_date": null,
       "source_url": "https://aistudio.google.com/",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "google-cloud-300-free-trial",
@@ -50,7 +144,8 @@
       "amount": "$300 in credits (90 days from signup)",
       "expiry_date": null,
       "source_url": "https://cloud.google.com/free/docs/free-cloud-features",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "groq-free-tier",
@@ -60,7 +155,8 @@
       "amount": "Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)",
       "expiry_date": null,
       "source_url": "https://console.groq.com/docs/rate-limits",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "hailuo-free-tier",
@@ -70,7 +166,8 @@
       "amount": "One-time welcome credit package + limited free generation (watermarked)",
       "expiry_date": null,
       "source_url": "https://hailuoai.video/doc/payment-policy.html",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "leonardo-ai-free-plan",
@@ -80,7 +177,8 @@
       "amount": "150 fast tokens per day (resets daily)",
       "expiry_date": null,
       "source_url": "https://leonardo.ai/pricing/",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "mistral-experiment-free-tier",
@@ -90,7 +188,19 @@
       "amount": "Free rate-limited API access (no credit card required)",
       "expiry_date": null,
       "source_url": "https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-free-models",
+      "title": "OpenRouter Free Models",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you hold $10 credits)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/docs/api-reference/limits",
+      "verified_date": "2026-08-22",
+      "status": "active"
     },
     {
       "slug": "pika-free-plan",
@@ -100,7 +210,8 @@
       "amount": "80 monthly video credits",
       "expiry_date": null,
       "source_url": "https://pika.art/pricing",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
     },
     {
       "slug": "runway-free-plan",
@@ -110,7 +221,19 @@
       "amount": "125 one-time credits for AI video and image generation",
       "expiry_date": null,
       "source_url": "https://runwayml.com/pricing",
-      "verified_date": "2026-08-21"
+      "verified_date": "2026-08-21",
+      "status": "active"
+    },
+    {
+      "slug": "vidu-free-credits",
+      "title": "Vidu AI Video Free Credits",
+      "provider": "Vidu",
+      "category": "video",
+      "amount": "Trial credits for new users on signup, topped up with daily login bonus credits",
+      "expiry_date": null,
+      "source_url": "https://www.vidu.com/pricing",
+      "verified_date": "2026-08-22",
+      "status": "active"
     }
   ]
 }

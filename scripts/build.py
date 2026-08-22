@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import email.utils
 import glob
 import html
 import json
@@ -25,6 +26,16 @@ CATEGORY_LABELS = {
     "voice": "Voice",
     "video": "Video",
 }
+# Absolute site origin used ONLY where syndication formats require it: RSS
+# item/channel links must be absolute per the RSS 2.0 spec (and the W3C feed
+# validator enforces it). Page-internal hrefs stay relative so they resolve
+# under any deploy base.
+DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens"
+FEED_TITLE = "Free AI Credits — hand-verified free AI credit offers"
+FEED_DESCRIPTION = (
+    "Newly published free AI credit offers from the hand-verified "
+    "freetokens directory."
+)
 # Search input debounce: settling delay before a keystroke batch filters the
 # list, updates the URL, and fires analytics. Must stay well under the PRD's
 # 200 ms perceived-latency budget (F3).
@@ -201,11 +212,20 @@ def load_offers(offers_dir: str) -> list:
     return offers
 
 
-def filter_expired(offers: list, today: dt.date | None = None) -> list:
-    """Drop offers whose expiry_date is in the past; None means ongoing."""
+def is_expired(offer: dict, today: dt.date | None = None) -> bool:
+    """True when the offer's expiry_date has passed at build time.
+
+    Null expiry means ongoing and never expires. An offer expiring *today*
+    is still active (matches the F4 semantics this refactor preserves).
+    """
     if today is None:
         today = dt.date.today()
-    return [o for o in offers if o["expiry_date"] is None or o["expiry_date"] >= today]
+    return offer["expiry_date"] is not None and offer["expiry_date"] < today
+
+
+def filter_expired(offers: list, today: dt.date | None = None) -> list:
+    """Return only non-expired offers; None expiry means ongoing."""
+    return [o for o in offers if not is_expired(o, today)]
 
 
 def amount_sort_value(amount: str) -> float:
@@ -374,13 +394,28 @@ def load_details(offers_dir: str, valid_slugs) -> dict:
     return details
 
 
-def build_index(offers: list) -> dict:
+def build_index(offers: list, today: dt.date | None = None) -> dict:
+    """Build the generated index over ALL validated offers (retain-and-flag).
+
+    Since v2.0 (#25) expired offers are no longer dropped: every entry is
+    retained and flagged with a build-time-computed ``status`` of
+    ``"active" | "expired"``. Downstream consumers decide what to show — the
+    home page renders only active entries, the archive page only expired
+    ones, the feed only active ones.
+    """
+    stamped = []
+    for offer in sorted(offers, key=lambda o: o["slug"]):
+        entry = dict(offer)
+        entry["status"] = "expired" if is_expired(offer, today) else "active"
+        stamped.append(entry)
     return {
         "generated_at": dt.datetime.now(dt.timezone.utc)
         .replace(microsecond=0)
         .isoformat()
         .replace("+00:00", "Z"),
-        "count": len(offers),
+        "count": len(stamped),
+        "active_count": sum(1 for o in stamped if o["status"] == "active"),
+        "expired_count": sum(1 for o in stamped if o["status"] == "expired"),
         "offers": [
             {
                 "slug": o["slug"],
@@ -393,8 +428,9 @@ def build_index(offers: list) -> dict:
                 else None,
                 "source_url": o["source_url"],
                 "verified_date": o["verified_date"].isoformat(),
+                "status": o["status"],
             }
-            for o in sorted(offers, key=lambda o: o["slug"])
+            for o in stamped
         ],
     }
 
@@ -534,6 +570,13 @@ h1 {
   padding: 0.14rem 0.6rem;
 }
 
+/* Archive "Expired" badge (#26): the word itself carries the meaning —
+   the muted styling is decoration only, never the sole signal. */
+.badge-expired {
+  border-color: var(--gray);
+  color: var(--gray);
+}
+
 .status {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.76rem;
@@ -607,6 +650,17 @@ h1 {
 .empty p { color: var(--gray); margin: 0.35rem 0; }
 
 .empty .glyph { color: var(--green); }
+
+.empty a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.empty a:hover,
+.empty a:focus-visible { text-decoration-thickness: 3px; }
 
 /* ---- Footer ------------------------------------------------------------ */
 
@@ -735,6 +789,7 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <meta name="description" content="{meta_description}">
 <title>{title}</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+{rss_autodiscovery}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -770,10 +825,13 @@ _HOME_HEADER = """<header class="masthead">
 
 # Footer nav shared by every page. Links stay relative so they resolve under
 # any deploy base (e.g. the GitHub Pages /<repo>/ project path). The current
-# page is marked aria-current for assistive tech.
+# page is marked aria-current for assistive tech. The RSS link targets the
+# build-generated feed (F12/#27); it is a document, never the current page.
 _FOOT_NAV = """<nav class="foot-nav" aria-label="Site">\
 <a href="./"{offers_current}>Offers</a><span aria-hidden="true">&middot;</span>\
-<a href="privacy.html"{privacy_current}>Privacy policy</a></nav>"""
+<a href="archive.html"{archive_current}>Archive</a><span aria-hidden="true">&middot;</span>\
+<a href="privacy.html"{privacy_current}>Privacy policy</a><span aria-hidden="true">&middot;</span>\
+<a href="feed.xml">RSS</a></nav>"""
 
 # Maintainer contact links (#50), rendered as a second footer nav on every
 # generated page. Destinations are the maintainer's own published profiles;
@@ -808,7 +866,7 @@ def _contact_nav() -> str:
     )
 
 _CARD_TMPL = """<li style="--i:{index}">
-<article class="card" data-category="{category}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
+<article class="card" id="offer-{slug}" data-category="{category}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
 <div class="card-top">
 <span class="badge">{category}</span>
 {expiry_display}
@@ -827,6 +885,7 @@ _EMPTY_TMPL = """<section class="empty" style="--i:0">
 <h2>No live offers right now</h2>
 <p>Every listing here is checked by hand against the provider, and none have passed the check at the moment.</p>
 <p>New and renewed offers appear automatically after the next rebuild &mdash; check back soon.</p>
+<p class="empty-archive">In the meantime, <a href="archive.html">browse the archive</a> of expired offers.</p>
 </section>"""
 
 
@@ -1929,6 +1988,7 @@ def _foot_nav(current: str) -> str:
     return (
         _FOOT_NAV.format(
             offers_current=' aria-current="page"' if current == "home" else "",
+            archive_current=' aria-current="page"' if current == "archive" else "",
             privacy_current=' aria-current="page"' if current == "privacy" else "",
         )
         + _contact_nav()
@@ -1964,21 +2024,45 @@ def _page_shell(
         banner=_BANNER_TMPL if measurement_id else "",
         ga_init=build_analytics_init(measurement_id),
         app_js=build_app_js() if app_js else "",
+        rss_autodiscovery=(
+            '<link rel="alternate" type="application/rss+xml" '
+            f'title="{html.escape(FEED_TITLE, quote=True)}" href="feed.xml">'
+        ),
     )
+
+
+def active_offers(index: dict) -> list:
+    """Entries a visitor may claim: everything not flagged expired (#25).
+
+    Indexes built before v2.0 (or hand-assembled in tests) carry no status
+    field; those entries default to active so the home page never hides an
+    offer just because it lacks the newer flag.
+    """
+    return [o for o in index["offers"] if o.get("status") != "expired"]
+
+
+def expired_offers(index: dict) -> list:
+    """Expired entries, newest expiration first (archive order, #26)."""
+    flagged = [o for o in index["offers"] if o.get("status") == "expired"]
+    return sorted(flagged, key=lambda o: (o["expiry_date"] or "", o["slug"]),
+                  reverse=True)
 
 
 def render_html(
     index: dict, measurement_id: str = "", details: dict | None = None
 ) -> str:
     analytics = bool(measurement_id)
-    has_offers = bool(index["offers"])
+    # Retain-and-flag (#25): expired entries stay in the index for the
+    # archive/feed but never reach the default visitor list.
+    offers_active = active_offers(index)
+    has_offers = bool(offers_active)
     detail_map = details or {}
     if not has_offers:
         content = _EMPTY_TMPL
         dialogs_html = ""
     else:
         cards = []
-        for i, o in enumerate(index["offers"]):
+        for i, o in enumerate(offers_active):
             if o["expiry_date"]:
                 expiry = (
                     f'<span class="status">expires '
@@ -1994,6 +2078,7 @@ def render_html(
             cards.append(
                 _CARD_TMPL.format(
                     index=i,
+                    slug=html.escape(o["slug"], quote=True),
                     category=html.escape(o["category"]),
                     offer_id=html.escape(o["slug"], quote=True),
                     source_url=html.escape(o["source_url"], quote=True),
@@ -2009,10 +2094,10 @@ def render_html(
             )
         dialogs_html = "\n".join(
             render_detail_dialog(offer, detail_map.get(offer["slug"]))
-            for offer in index["offers"]
+            for offer in offers_active
         )
         content = (
-            build_toolbar(index["count"])
+            build_toolbar(len(offers_active))
             + '<ul class="grid" id="ft-grid">\n'
             + "\n".join(cards)
             + "\n</ul>"
@@ -2021,7 +2106,6 @@ def render_html(
             + dialogs_html
         )
     built = index["generated_at"]
-    offers = index["offers"]
     return _page_shell(
         title="Free AI Credits",
         meta_description=(
@@ -2029,9 +2113,9 @@ def render_html(
             "on one fast page."
         ),
         header=_HOME_HEADER.format(
-            count=index["count"],
-            ongoing=sum(1 for o in offers if not o["expiry_date"]),
-            verified=sum(1 for o in offers if o.get("verified_date")),
+            count=len(offers_active),
+            ongoing=sum(1 for o in offers_active if not o["expiry_date"]),
+            verified=sum(1 for o in offers_active if o.get("verified_date")),
         ),
         content=content,
         built=built,
@@ -2040,6 +2124,168 @@ def render_html(
         + (_BANNER_CSS if analytics else ""),
         measurement_id=measurement_id,
         app_js=has_offers,
+    )
+
+
+# --- Offer archive (#26 / F11) ----------------------------------------------
+#
+# A static page over the expired entries retained by #25: newest expiration
+# first, each with a text "Expired" badge, provider, amount, original expiry,
+# category, and the outbound source link. No client-side script ships here —
+# every card is plain, crawlable markup reusing the home-page card styles.
+
+_ARCHIVE_HEADER = """<header class="masthead">
+<p class="kicker">free ai credits &middot; archive</p>
+<h1>Expired offer archive</h1>
+<p class="tagline">Every hand-verified offer that has since lapsed, kept for reference &mdash; newest expirations first. Nothing here is claimable anymore.</p>
+<p class="count"><strong>{count}</strong> expired offers</p>
+</header>"""
+
+_ARCHIVED_CARD_TMPL = """<li style="--i:{index}">
+<article class="card" data-category="{category}">
+<div class="card-top">
+<span class="badge">{category}</span>
+<span class="badge badge-expired">Expired</span>
+</div>
+<h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">{amount}</p>
+<p class="prov">{provider} &middot; expired <time datetime="{expiry_date}">{expiry_display}</time></p>
+</article>
+</li>"""
+
+_ARCHIVE_EMPTY_TMPL = """<section class="empty" style="--i:0">
+<p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M10 13h4"/></svg></p>
+<h2>The archive is empty</h2>
+<p>No offer has expired yet. When one does, it moves here on the next rebuild instead of vanishing.</p>
+<p><a href="./">Browse the live offers</a> in the meantime.</p>
+</section>"""
+
+
+def render_archive_html(index: dict, measurement_id: str = "") -> str:
+    """Render site/archive.html over all entries flagged ``expired``."""
+    archived = expired_offers(index)
+    measurement_id = measurement_id or ""
+    if archived:
+        cards = []
+        for i, o in enumerate(archived):
+            cards.append(
+                _ARCHIVED_CARD_TMPL.format(
+                    index=i,
+                    category=html.escape(o["category"]),
+                    source_url=html.escape(o["source_url"], quote=True),
+                    title=html.escape(o["title"], quote=True),
+                    amount=html.escape(o["amount"]),
+                    provider=html.escape(o["provider"], quote=True),
+                    expiry_date=html.escape(o["expiry_date"] or "", quote=True),
+                    expiry_display=_human_date(o["expiry_date"])
+                    if o["expiry_date"]
+                    else "unknown",
+                )
+            )
+        content = (
+            '<ul class="grid" id="ft-archive-grid">\n'
+            + "\n".join(cards)
+            + "\n</ul>"
+        )
+    else:
+        content = _ARCHIVE_EMPTY_TMPL
+    return _page_shell(
+        title="Offer Archive · Free AI Credits",
+        meta_description=(
+            "Reference archive of expired free AI credit offers, kept "
+            "newest-first with their original terms."
+        ),
+        header=_ARCHIVE_HEADER.format(count=len(archived)),
+        content=content,
+        built=index["generated_at"],
+        foot_current="archive",
+        css_extra=_BANNER_CSS if measurement_id else "",
+        measurement_id=measurement_id,
+    )
+
+
+# --- RSS feed (#27 / F12) ----------------------------------------------------
+#
+# A valid RSS 2.0 document emitted at build time covering every ACTIVE offer.
+# Item links point back at the offering's anchor on the home page
+# (#offer-<slug>); pubDate comes from the verified date. Syndication formats
+# require absolute URLs, so channel/item links use --base-url while every
+# in-page href elsewhere stays relative.
+
+_RSS_CHANNEL_LINK_PATH = "/"
+
+
+def _xml(text) -> str:
+    """Escape a dynamic value for XML text or double-quoted attributes."""
+    return html.escape(str(text), quote=True)
+
+
+def _rfc2822(date_or_datetime) -> str:
+    """RFC 2822 date string as required for RSS pubDate/lastBuildDate."""
+    if isinstance(date_or_datetime, dt.date) and not isinstance(
+        date_or_datetime, dt.datetime
+    ):
+        date_or_datetime = dt.datetime.combine(
+            date_or_datetime, dt.time.min, tzinfo=dt.timezone.utc
+        )
+    elif date_or_datetime.tzinfo is None:
+        date_or_datetime = date_or_datetime.replace(tzinfo=dt.timezone.utc)
+    return email.utils.format_datetime(date_or_datetime)
+
+
+def _parse_generated_at(generated_at: str) -> dt.datetime:
+    parsed = dt.datetime.fromisoformat(generated_at.replace("Z", "+00:00"))
+    return parsed
+
+
+def _feed_item_description(offer: dict) -> str:
+    """Amount/category/expiry summary line used as the item description."""
+    label = CATEGORY_LABELS.get(offer["category"], offer["category"])
+    if offer["expiry_date"]:
+        expiry = f"expires {_human_date(offer['expiry_date'])}"
+    else:
+        expiry = "ongoing"
+    return f"{offer['amount']} — {label} · {expiry}."
+
+
+def build_feed(index: dict, base_url: str) -> str:
+    """Render the RSS 2.0 document for every active offer in ``index``.
+
+    Expired entries are excluded; null-expiry offers are included normally.
+    Items are ordered newest-verified-first with slug as the stable tiebreak.
+    """
+    base = base_url.strip().rstrip("/")
+    items = []
+    for o in sorted(
+        active_offers(index),
+        key=lambda o: (o["verified_date"], o["slug"]),
+        reverse=True,
+    ):
+        anchor = f"{base}/#offer-{_xml(o['slug'])}"
+        items.append(
+            "<item>"
+            f"<title>{_xml(o['title'])}</title>"
+            f"<link>{anchor}</link>"
+            f"<guid isPermaLink=\"true\">{anchor}</guid>"
+            f"<description>{_xml(_feed_item_description(o))}</description>"
+            f"<pubDate>{_rfc2822(_parse_generated_at(o['verified_date']))}</pubDate>"
+            "</item>"
+        )
+    last_build = _rfc2822(_parse_generated_at(index["generated_at"]))
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
+        "<channel>\n"
+        f"<title>{_xml(FEED_TITLE)}</title>\n"
+        f"<link>{_xml(base + '/')}</link>\n"
+        f"<description>{_xml(FEED_DESCRIPTION)}</description>\n"
+        "<language>en</language>\n"
+        f"<lastBuildDate>{last_build}</lastBuildDate>\n"
+        "<generator>freetokens static build</generator>\n"
+        '<atom:link href="' + _xml(base + "/feed.xml") + '" '
+        'rel="self" type="application/rss+xml" />\n'
+        + "".join(items)
+        + "\n</channel>\n</rss>\n"
     )
 
 
@@ -2151,6 +2397,12 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--offers-dir", default="offers")
     parser.add_argument("--out", default=".")
+    parser.add_argument(
+        "--base-url",
+        default=DEFAULT_BASE_URL,
+        help="absolute site origin used for RSS channel/item links "
+        "(defaults to the production Pages URL)",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -2172,7 +2424,10 @@ def main(argv=None) -> int:
         print(f"build failed: {exc}", file=sys.stderr)
         return 1
 
-    index = build_index(filter_expired(offers))
+    # Retain-and-flag (#25): index.json keeps every offer with a build-time
+    # status; the home page renders only active entries, the archive only
+    # expired ones, and the feed only active ones.
+    index = build_index(offers)
 
     measurement_id = get_measurement_id()
 
@@ -2183,15 +2438,21 @@ def main(argv=None) -> int:
         fh.write("\n")
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(render_html(index, measurement_id, details))
+    with open(os.path.join(out_dir, "archive.html"), "w", encoding="utf-8") as fh:
+        fh.write(render_archive_html(index, measurement_id))
     with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
         fh.write(render_privacy_html(index["generated_at"], measurement_id))
     with open(os.path.join(out_dir, "favicon.svg"), "w", encoding="utf-8") as fh:
         fh.write(_FAVICON_SVG)
+    with open(os.path.join(out_dir, "feed.xml"), "w", encoding="utf-8") as fh:
+        fh.write(build_feed(index, args.base_url))
 
     note = f" (analytics: {measurement_id})" if measurement_id else ""
     print(
-        f"built {index['count']} offers -> index.json, site/index.html, "
-        f"site/privacy.html, site/favicon.svg{note}"
+        f"built {index['count']} offers ({index['active_count']} active, "
+        f"{index['expired_count']} expired) -> index.json, site/index.html, "
+        "site/archive.html, site/privacy.html, site/favicon.svg, "
+        f"site/feed.xml{note}"
     )
     return 0
 

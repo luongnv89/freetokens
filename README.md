@@ -52,7 +52,7 @@ The site is built by a dependency-free Python script (see
 plain script was chosen over Astro). Requires Python 3.9+, nothing else:
 
 ```bash
-python3 scripts/build.py    # validates offers/, writes index.json + site/index.html
+python3 scripts/build.py    # validates offers/, writes index.json + the site/ directory
 ```
 
 The build runs in two stages:
@@ -61,24 +61,55 @@ The build runs in two stages:
    `docs/schema.md`: required fields present, `YYYY-MM-DD` dates, category
    within the enum, unique slugs. Any violation fails the build with a non-zero
    exit naming the offending file and field.
-2. **Render** — all validated offers are rendered into a single static
-   `site/index.html`: one semantic card per offer with title, provider, amount,
-   expiry date (or "ongoing"), a category badge, and an outbound link to the
-   official source page. No client-side JavaScript; minimal hand-rolled CSS
-   that works down to 320 px viewports.
+2. **Render** — all validated offers are rendered into static pages in
+   `site/`: the offer list (`index.html`, one semantic card per active
+   offer), the expired-offer archive (`archive.html`), the privacy policy,
+   an RSS 2.0 feed (`feed.xml`), and the favicon. Cards carry title,
+   provider, amount, expiry date (or "ongoing"), a category badge, and an
+   outbound link to the official source page. Minimal hand-rolled CSS that
+   works down to 320 px viewports.
 
 ### Expiry handling
 
-Expiry is evaluated only at build/deploy time, never at view time: the build
-drops any offer whose `expiry_date` has passed before rendering, so expired
-offers disappear from the site on the **next deploy** (a push to `main`), not
-the moment their expiry passes. An offer that expires after the last deploy
-stays visible until the next rebuild. The trade-offs behind this decision —
+Expiry is evaluated only at build/deploy time, never at view time: an offer
+whose `expiry_date` has passed is flagged on the **next deploy** (a push to
+`main`), not the moment its expiry passes.
+
+Since v2.0 (#25) expiry works as **retain-and-flag**: every validated offer
+stays in the generated `index.json`, each entry stamped with a build-time
+`"status": "active" | "expired"` (null-expiry offers are always `active`).
+What changes between rebuilds is only visibility:
+
+- the home list renders **active** offers exactly as before;
+- expired entries move to the [offer archive](#offer-archive) and out of the
+  RSS feed instead of disappearing.
+
+The trade-offs behind evaluating expiry at build time rather than view time —
 a stale window between deploys in exchange for zero runtime, cacheable static
 output, and simplicity — are recorded in
-[docs/adr/0001-build-time-expiry.md](docs/adr/0001-build-time-expiry.md),
-which also covers how the future archive view (F11) will retain expired
-offers while keeping evaluation at build time.
+[docs/adr/0001-build-time-expiry.md](docs/adr/0001-build-time-expiry.md).
+
+### Offer archive
+
+[`site/archive.html`](site/archive.html) (`archive.html`, #26/F11) renders
+every entry flagged `expired`, newest expiration first. Each archived card
+keeps its full context — provider, amount, original expiry date, category
+badge, and the outbound source link — under an explicit text **Expired**
+badge, so the state never relies on color alone. The archive is linked from
+the footer of every page and from the home page's empty state ("browse the
+archive"), and it has its own friendly empty state while nothing has lapsed.
+
+### RSS feed
+
+The build emits a valid RSS 2.0 document at
+[`site/feed.xml`](site/feed.xml) (`feed.xml`, #27/F12) covering every
+**active** offer: title, absolute link back to the offer's anchor on the
+home page (`#offer-<slug>`), an amount/category/expiry summary, and the
+verified date as `pubDate`. Expired offers are excluded; ongoing ones are
+included normally. Every generated page ships RSS autodiscovery in `<head>`
+and a footer link. Item URLs must be absolute per the RSS spec, so the feed
+uses the production origin by default; override it locally with
+`python3 scripts/build.py --base-url https://your-host.example`.
 
 Run the test suite (stdlib `unittest`, no dependencies):
 
@@ -183,12 +214,13 @@ Deployment is fully automated via GitHub Actions
 ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). You never
 push built output by hand:
 
-1. **Trigger** — every push to `main` (or a manual `workflow_dispatch` run)
-   starts the `Deploy to GitHub Pages` workflow.
+1. **Trigger** — every push to `main` (a pushed `v*` tag, or a manual
+   `workflow_dispatch` run) starts the `Deploy to GitHub Pages` workflow.
 2. **Build** — the workflow checks out the repo, runs
    `python3 scripts/build.py` to validate all offers and render
-   `site/index.html`, `site/privacy.html`, and `site/favicon.svg`, then runs
-   the test suite. Any validation or test failure aborts the deploy.
+   `site/index.html`, `site/archive.html`, `site/privacy.html`,
+   `site/feed.xml`, and `site/favicon.svg`, then runs the test suite. Any
+   validation or test failure aborts the deploy.
 3. **Publish** — the built `site/` directory is uploaded as a Pages artifact
    and deployed with the official Actions toolchain (`actions/checkout`,
    `actions/setup-python`, `actions/configure-pages`,
@@ -206,10 +238,16 @@ workflow**.
 ```
 offers/    # One YAML file per free-AI-credit offer (schema: docs/schema.md)
            # plus optional offers/details/<slug>.json detail documents
+site/      # Generated pages (index, archive, privacy) + feed.xml + favicon
 scripts/   # Build/validation scripts (stdlib-only)
 tests/     # Build test suite (unittest)
-docs/      # Schema docs, ADRs, and other project documentation
+docs/      # Schema docs, ADRs, outreach kit, decision records, QA notes
+index.json # Generated index: every offer with build-time active/expired status
 ```
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

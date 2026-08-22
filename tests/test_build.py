@@ -274,7 +274,9 @@ class ExpiryFilterTests(unittest.TestCase):
         offers = [self._offer("fresh", future)]
         self.assertEqual([o["slug"] for o in build.filter_expired(offers)], ["fresh"])
 
-    def test_main_drops_expired_offer_from_built_index(self):
+    def test_main_retains_expired_offer_in_index_flagged_not_rendered(self):
+        # v2.0 retain-and-flag (#25): the expired offer stays in index.json
+        # with a build-time status, but the home page never shows it.
         with tempfile.TemporaryDirectory() as tmp:
             offers_dir = os.path.join(tmp, "offers")
             os.makedirs(offers_dir)
@@ -288,9 +290,16 @@ class ExpiryFilterTests(unittest.TestCase):
             code = build.main(["--offers-dir", offers_dir, "--out", out])
             self.assertEqual(code, 0)
             index = json.loads(Path(out, "index.json").read_text(encoding="utf-8"))
-            self.assertEqual([o["slug"] for o in index["offers"]], ["live"])
+            self.assertEqual(
+                [(o["slug"], o["status"]) for o in index["offers"]],
+                [("expired", "expired"), ("live", "active")],
+            )
+            self.assertEqual(index["count"], 2)
+            self.assertEqual(index["active_count"], 1)
+            self.assertEqual(index["expired_count"], 1)
             page = Path(out, "site", "index.html").read_text(encoding="utf-8")
             self.assertNotIn("Expired Offer", page)
+            self.assertIn("Test Offer", page)
 
 
 class RenderTests(unittest.TestCase):
@@ -491,8 +500,15 @@ class EmptyStateTests(unittest.TestCase):
             page = Path(out, "site", "index.html").read_text(encoding="utf-8")
             self.assertIn("No live offers right now", page)
             self.assertNotIn("<article", page)
+            # The empty state points visitors at the archive (#26).
+            self.assertIn('href="archive.html"', page)
             index = json.loads(Path(out, "index.json").read_text(encoding="utf-8"))
-            self.assertEqual(index["count"], 0)
+            # Retain-and-flag: the entry survives in the index; only its
+            # visibility changes.
+            self.assertEqual(index["count"], 1)
+            self.assertEqual(index["active_count"], 0)
+            self.assertEqual(index["expired_count"], 1)
+            self.assertEqual(index["offers"][0]["status"], "expired")
 
 
 class MastheadStatsTests(unittest.TestCase):
@@ -2226,6 +2242,348 @@ class SortMarkupTests(unittest.TestCase):
         index = {"generated_at": "2026-01-01T00:00:00Z", "count": 0, "offers": []}
         page = build.render_html(index)
         self.assertNotIn('id="ft-sort"', page)
+
+
+class RetainAndFlagTests(unittest.TestCase):
+    """#25: expired offers stay in the index with a build-time status."""
+
+    TODAY = dt.date(2026, 8, 22)
+
+    def _offer(self, slug, expiry):
+        return dict(
+            build.validate_offer(
+                dict(
+                    VALID,
+                    title=f"Offer {slug}",
+                    expiry_date=expiry.isoformat() if expiry else None,
+                ),
+                "a.yaml",
+            ),
+            slug=slug,
+        )
+
+    def _index(self, expiries):
+        return build.build_index(
+            [self._offer(f"offer-{i}", e) for i, e in enumerate(expiries)],
+            today=self.TODAY,
+        )
+
+    def test_expired_offer_retained_with_status_flag(self):
+        index = self._index([self.TODAY - dt.timedelta(days=1)])
+        self.assertEqual(index["count"], 1)
+        self.assertEqual(index["expired_count"], 1)
+        self.assertEqual(index["active_count"], 0)
+        self.assertEqual(index["offers"][0]["status"], "expired")
+
+    def test_null_expiry_is_active_regardless_of_build_date(self):
+        for today in (
+            dt.date(2026, 8, 22),
+            dt.date(2030, 1, 1),
+        ):
+            with self.subTest(today=today):
+                index = build.build_index([self._offer("ongoing", None)], today=today)
+                self.assertEqual(index["offers"][0]["status"], "active")
+                self.assertEqual(index["active_count"], 1)
+
+    def test_expiry_today_still_active_expiry_yesterday_expired(self):
+        index = self._index(
+            [self.TODAY, self.TODAY - dt.timedelta(days=1)]
+        )
+        statuses = {o["slug"]: o["status"] for o in index["offers"]}
+        self.assertEqual(statuses["offer-0"], "active")
+        self.assertEqual(statuses["offer-1"], "expired")
+        self.assertEqual((index["active_count"], index["expired_count"]), (1, 1))
+
+    def test_future_expiry_is_active(self):
+        index = self._index([self.TODAY + dt.timedelta(days=30)])
+        self.assertEqual(index["offers"][0]["status"], "active")
+
+    def test_home_page_never_renders_expired_entries(self):
+        offer = self._offer("live", None)
+        stale = self._offer("stale", self.TODAY - dt.timedelta(days=1))
+        page = build.render_html(build.build_index([offer, stale], today=self.TODAY))
+        self.assertIn("Offer live", page)
+        self.assertNotIn("Offer stale", page)
+
+    def test_render_treats_missing_status_as_active(self):
+        # Indexes built before v2.0 carry no status field; their entries
+        # must still render.
+        legacy = {
+            "generated_at": "2026-01-01T00:00:00Z",
+            "count": 1,
+            "offers": [
+                {
+                    "slug": "legacy",
+                    "title": "Legacy Offer",
+                    "provider": "P",
+                    "category": "coding",
+                    "amount": "$5",
+                    "expiry_date": None,
+                    "source_url": "https://example.com/x",
+                    "verified_date": "2026-01-01",
+                }
+            ],
+        }
+        page = build.render_html(legacy)
+        self.assertIn("Legacy Offer", page)
+
+
+class ArchivePageTests(unittest.TestCase):
+    """#26 / F11: static archive over expired entries with Expired badges."""
+
+    TODAY = dt.date(2026, 8, 22)
+
+    def _offer(self, slug, expiry, **overrides):
+        if isinstance(expiry, dt.date):
+            expiry = expiry.isoformat()
+        return dict(
+            build.validate_offer(
+                dict(
+                    VALID,
+                    title=overrides.pop("title", f"Offer {slug}"),
+                    expiry_date=expiry,
+                    **overrides,
+                ),
+                "a.yaml",
+            ),
+            slug=slug,
+        )
+
+    def _render(self, offers):
+        return build.render_archive_html(build.build_index(offers, today=self.TODAY))
+
+    def _mixed_index(self):
+        return [
+            self._offer("old", "2026-07-01"),
+            self._offer(
+                "mid", "2026-07-15", category="image", amount="$40 in credits"
+            ),
+            self._offer("new", "2026-08-01"),
+            self._offer("live", None),
+            self._offer("fresh", "2026-12-25"),
+        ]
+
+    def test_only_expired_offers_render_newest_expiration_first(self):
+        page = self._render(self._mixed_index())
+        order = [page.index(f"Offer {slug}") for slug in ("new", "mid", "old")]
+        self.assertEqual(order, sorted(order))
+        self.assertNotIn("Offer live", page)
+        self.assertNotIn("Offer fresh", page)
+
+    def test_every_archived_card_carries_text_expired_badge(self):
+        page = self._render(self._mixed_index())
+        self.assertEqual(page.count('<span class="badge badge-expired">Expired</span>'), 3)
+        self.assertIn(".badge-expired", page)  # styled, but text is the signal
+
+    def test_card_shows_provider_amount_original_expiry_category_and_link(self):
+        page = self._render(
+            [self._offer("mid", "2026-07-15", category="image",
+                         amount="$40 in credits")]
+        )
+        card = page[page.index("<article") : page.index("</article>")]
+        self.assertIn('href="https://example.com/offer"', card)
+        self.assertIn('target="_blank"', card)
+        self.assertIn('rel="noopener noreferrer"', card)
+        self.assertIn("$40 in credits", card)
+        self.assertIn('<span class="badge">image</span>', card)
+        self.assertIn("Test Provider", card)
+        self.assertIn('<time datetime="2026-07-15">Jul 15, 2026</time>', card)
+        self.assertIn("expired <time", card)
+
+    def test_zero_expired_offers_render_friendly_empty_state(self):
+        page = self._render([self._offer("live", None)])
+        self.assertIn("The archive is empty", page)
+        self.assertNotIn("<article", page)
+        self.assertIn('<a href="./">Browse the live offers</a>', page)
+
+    def test_archive_linked_from_home_empty_state_and_footer(self):
+        stale = self._offer("stale", self.TODAY - dt.timedelta(days=1))
+        empty_home = build.render_html(build.build_index([stale], today=self.TODAY))
+        home = build.render_html(
+            build.build_index([self._offer("live", None)], today=self.TODAY)
+        )
+        archive = self._render([stale])
+        self.assertIn('<a href="archive.html">browse the archive</a>', empty_home)
+        self.assertIn('<a href="archive.html">Archive</a>', home)
+        self.assertIn('>Archive</a>', archive)
+        # The archive page marks itself current; home never does.
+        self.assertRegex(archive, r'<a href="archive\.html" aria-current="page">')
+        self.assertNotIn('aria-current="page">Archive', home)
+
+    def test_archive_shares_chrome_and_320px_guards(self):
+        page = self._render([self._offer("old", "2026-07-01")])
+        self.assertIn('<meta name="viewport" content="width=device-width, initial-scale=1">', page)
+        self.assertIn("repeat(auto-fill, minmax(min(100%, 19rem), 1fr))", page)
+        self.assertIn("padding: clamp(1.25rem, 4vw, 3rem)", page)
+        self.assertIn("overflow-wrap", page)
+        self.assertEqual(page.count("<h1>"), 1)
+        self.assertIn("<footer", page)
+
+    def test_main_writes_archive_page(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "live.yaml").write_text(offer_text(), encoding="utf-8")
+            out = os.path.join(tmp, "out")
+            code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            page = Path(out, "site", "archive.html").read_text(encoding="utf-8")
+            self.assertIn("The archive is empty", page)
+
+
+class FeedTests(unittest.TestCase):
+    """#27 / F12: valid RSS 2.0 emitted at build time for active offers."""
+
+    TODAY = dt.date(2026, 8, 22)
+    BASE = "https://luongnv89.github.io/freetokens"
+
+    def _offer(self, slug, expiry=None, verified="2026-08-21", **overrides):
+        data = dict(VALID)
+        data["title"] = overrides.pop("title", f"Offer {slug}")
+        if isinstance(expiry, dt.date):
+            expiry = expiry.isoformat()
+        data["expiry_date"] = expiry
+        data["verified_date"] = verified
+        data.update(overrides)
+        return dict(build.validate_offer(data, "a.yaml"), slug=slug)
+
+    def _feed(self, offers):
+        import xml.etree.ElementTree as ET
+
+        xml_text = build.build_feed(
+            build.build_index(offers, today=self.TODAY), self.BASE
+        )
+        root = ET.fromstring(xml_text)  # raises on malformed XML
+        return xml_text, root
+
+    def _channel(self, root):
+        return root.find("channel")
+
+    def test_feed_is_wellformed_rss_with_channel_metadata(self):
+        _, root = self._feed([self._offer("a")])
+        self.assertEqual(root.tag, "rss")
+        self.assertEqual(root.get("version"), "2.0")
+        channel = self._channel(root)
+        self.assertEqual(channel.findtext("title"), build.FEED_TITLE)
+        self.assertEqual(channel.findtext("link"), f"{self.BASE}/")
+        self.assertTrue(channel.findtext("description"))
+        self.assertEqual(channel.findtext("language"), "en")
+        self.assertIsNotNone(channel.findtext("lastBuildDate"))
+
+    def test_items_cover_active_offers_only(self):
+        offers = [
+            self._offer("live", None),
+            self._offer("fresh", "2026-12-25"),
+            self._offer("stale", "2026-08-01"),
+        ]
+        _, root = self._feed(offers)
+        titles = [i.findtext("title") for i in self._channel(root).findall("item")]
+        self.assertEqual(titles, ["Offer live", "Offer fresh"])
+        self.assertNotIn("Offer stale", titles)
+
+    def test_item_links_are_absolute_and_target_home_anchor(self):
+        _, root = self._feed([self._offer("copilot")])
+        item = self._channel(root).find("item")
+        expected = f"{self.BASE}/#offer-copilot"
+        self.assertEqual(item.findtext("link"), expected)
+        guid = item.find("guid")
+        self.assertEqual(guid.get("isPermaLink"), "true")
+        self.assertEqual(guid.text, expected)
+
+    def test_pubdate_is_rfc2822_from_verified_date(self):
+        _, root = self._feed([self._offer("a", verified="2026-08-05")])
+        pub = self._channel(root).find("item").findtext("pubDate")
+        self.assertRegex(pub, r"^Wed, 0?5 Aug 2026 00:00:00 \+0000$")
+
+    def test_items_ordered_newest_verified_first(self):
+        offers = [
+            self._offer("oldy", verified="2026-01-01"),
+            self._offer("newie", verified="2026-08-20"),
+            self._offer("middy", verified="2026-05-05"),
+        ]
+        _, root = self._feed(offers)
+        titles = [i.findtext("title") for i in self._channel(root).findall("item")]
+        self.assertEqual(titles, ["Offer newie", "Offer middy", "Offer oldy"])
+
+    def test_description_summarizes_amount_category_expiry(self):
+        _, root = self._feed(
+            [
+                self._offer("dated", "2026-12-31", verified="2026-08-20",
+                            category="voice", amount="$10 in credits"),
+                self._offer("ongoing"),
+            ]
+        )
+        descriptions = {
+            i.findtext("title"): i.findtext("description")
+            for i in self._channel(root).findall("item")
+        }
+        self.assertEqual(
+            descriptions["Offer dated"],
+            "$10 in credits — Voice · expires Dec 31, 2026.",
+        )
+        self.assertEqual(
+            descriptions["Offer ongoing"],
+            "$10 in credits — API providers · ongoing.",
+        )
+
+    def test_hostile_titles_are_xml_escaped(self):
+        text, _ = self._feed(
+            [self._offer("evil", title='Bad "&\'<title>')]
+        )
+        self.assertNotIn('Bad "&\'<title>', text.replace("&quot;", '"').replace("&apos;", "'"))
+        self.assertIn("&lt;title&gt;", text)
+
+    def test_base_url_override_strips_trailing_slash(self):
+        xml_text = build.build_feed(
+            build.build_index([self._offer("a")]), "https://example.com/site/"
+        )
+        self.assertIn("<link>https://example.com/site/</link>", xml_text)
+
+    def test_atom_self_link_present_for_validator_recommendation(self):
+        text, root = self._feed([self._offer("a")])
+        self.assertIn("http://www.w3.org/2005/Atom", text)
+        atom_links = [
+            e
+            for e in self._channel(root).findall("{http://www.w3.org/2005/Atom}link")
+            if e.get("rel") == "self"
+        ]
+        self.assertEqual(len(atom_links), 1)
+        self.assertEqual(atom_links[0].get("href"), f"{self.BASE}/feed.xml")
+
+    def test_autodiscovery_and_footer_rss_on_every_generated_page(self):
+        home = build.render_html(build.build_index([self._offer("a")]))
+        privacy = build.render_privacy_html("2026-08-21T00:00:00Z")
+        archive = build.render_archive_html(
+            build.build_index([self._offer("a")])
+        )
+        for name, page in (("home", home), ("privacy", privacy), ("archive", archive)):
+            with self.subTest(page=name):
+                self.assertRegex(
+                    page,
+                    r'<link rel="alternate" type="application/rss\+xml"[^>]*href="feed\.xml">',
+                )
+                self.assertIn('<a href="feed.xml">RSS</a>', page)
+
+    def test_anchor_ids_on_home_cards_match_feed_targets(self):
+        page = build.render_html(build.build_index([self._offer("copilot")]))
+        self.assertIn('<article class="card" id="offer-copilot"', page)
+
+    def test_main_writes_feed_xml(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "a.yaml").write_text(offer_text(), encoding="utf-8")
+            out = os.path.join(tmp, "out")
+            code = build.main(["--offers-dir", offers_dir, "--out", out])
+            self.assertEqual(code, 0)
+            feed = Path(out, "site", "feed.xml").read_text(encoding="utf-8")
+            import xml.etree.ElementTree as ET
+
+            root = ET.fromstring(feed)
+            self.assertEqual(root.get("version"), "2.0")
+            self.assertEqual(
+                len(self._channel(root).findall("item")), 1
+            )
 
 
 if __name__ == "__main__":
