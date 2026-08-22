@@ -1095,7 +1095,16 @@ def render_offer_html(
     level (../favicon.svg, ../archive.html, ...). The outbound claim link
     stays hardened like every external anchor on the site.
     """
-    if offer["expiry_date"]:
+    expired = offer.get("status") == "expired"
+    if expired:
+        status = '<span class="badge badge-expired">Expired</span>'
+        if offer["expiry_date"]:
+            status += (
+                f' <span class="status">ended '
+                f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
+                f'{_human_date(offer["expiry_date"])}</time></span>'
+            )
+    elif offer["expiry_date"]:
         status = (
             f'<span class="status">expires '
             f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
@@ -1119,14 +1128,23 @@ def render_offer_html(
             f"{offer['amount']} from {offer['provider']} — hand-verified "
             "free AI credits."
         )
+    if expired:
+        cta = (
+            "<p class=\"od-ended\">This offer ended &mdash; nothing here "
+            "is claimable anymore.</p>"
+        )
+    else:
+        cta = (
+            f'<a class="od-cta" href="{html.escape(offer["source_url"], quote=True)}" '
+            f'target="_blank" rel="noopener noreferrer">Claim at {provider} '
+            '<span aria-hidden="true">&#8599;</span></a>'
+        )
     content = (
         '<article class="offer-detail">\n'
         '<p class="od-back"><a href="../">&larr; All offers</a></p>\n'
         f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
         f"{_detail_sections(detail)}\n"
-        f'<a class="od-cta" href="{html.escape(offer["source_url"], quote=True)}" '
-        f'target="_blank" rel="noopener noreferrer">Claim at {provider} '
-        '<span aria-hidden="true">&#8599;</span></a>\n'
+        f"{cta}\n"
         "</article>"
     )
     return _page_shell(
@@ -1620,6 +1638,19 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 .od-cta:focus-visible {
   outline: 3px solid var(--ink);
   outline-offset: 3px;
+}
+
+/* Ended offers (#25): muted, non-interactive notice in place of the CTA —
+   the wording itself carries the meaning, styling is decoration only. */
+.od-ended {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
 }
 
 /* Touch targets: same 44 px coarse-pointer floor as the toolbar. */

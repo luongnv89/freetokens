@@ -1200,6 +1200,12 @@ class DetailPageTests(unittest.TestCase):
         site = self._build({"live": offer_text(), "expired": expired})
         page = (site / "offers" / "expired.html").read_text(encoding="utf-8")
         self.assertIn("Expired Offer", page)
+        self.assertIn('<span class="badge badge-expired">Expired</span>', page)
+        self.assertNotIn('class="od-cta"', page)
+        self.assertIn("nothing here is claimable anymore", page)
+        live_page = (site / "offers" / "live.html").read_text(encoding="utf-8")
+        self.assertIn('class="od-cta"', live_page)
+        self.assertNotIn('<span class="badge badge-expired">Expired</span>', live_page)
 
     # --- content parity -------------------------------------------------------
 
