@@ -198,6 +198,35 @@ When enabled, the page ships a small progressive-enhancement layer:
   blocked or broken tracker can never delay or break navigation; accidental
   rapid double-clicks on the same offer are deduplicated to one event.
 
+### Live traffic stats (#62)
+
+Alongside GA4 the site can display **live visitor traffic** — a footer strip
+showing page views today and unique visitors over the trailing 90 days,
+refreshed on every page load. This is deliberately different from the
+masthead's build-time offer counters: these numbers move without a rebuild.
+
+The provider is [Counterscale](https://counterscale.dev) — open-source,
+cookieless analytics self-hosted on your own Cloudflare Workers account
+(free-tier friendly at ~50k pageviews/day). Like everything else it is
+**opt-in at build time** via two repository secrets:
+
+1. `STATS_ENDPOINT` — the https origin of your deployment (no path).
+2. `STATS_SITE_ID` — the site ID registered in its dashboard.
+
+Set **both**; either one missing/malformed disables traffic counting with a
+build warning, and unset keeps zero stats markup in the output. When enabled:
+
+- Every page ships the Counterscale tracker beacon so all traffic counts.
+- Pages that run the site script also emit the hidden footer strip; a small
+  client-side module fetches today + 90-day aggregates from Counterscale's
+  JSON route and reveals the numbers.
+- **Silent degradation** — offline, ad-blocked, erroring, or malformed
+  responses leave the strip hidden forever and nothing else changes.
+
+Full operator instructions — deploying Counterscale, minting the secrets,
+and the CORS note required to make cross-origin reads work — live in
+[docs/traffic-stats-setup.md](docs/traffic-stats-setup.md).
+
 ### Privacy policy page
 
 The build also emits [`site/privacy.html`](site/privacy.html) (Task 3.5,
