@@ -201,37 +201,34 @@ When enabled, the page ships a small progressive-enhancement layer:
 ### Live traffic stats (#62)
 
 Alongside GA4 the site can display **live visitor traffic** — a footer strip
-showing page views today and unique visitors over the trailing 90 days,
-refreshed on every page load. This is deliberately different from the
-masthead's build-time offer counters: these numbers move without a rebuild.
+showing visitors today and over the trailing 90 days, refreshed on every
+page load, plus a link to the full public dashboard. This is deliberately
+different from the masthead's build-time offer counters: these numbers move
+without a rebuild.
 
-The provider is [Counterscale](https://counterscale.dev) — open-source,
-cookieless analytics self-hosted on your own Cloudflare Workers account
-(free-tier friendly at ~50k pageviews/day). Like everything else it is
-**opt-in at build time** via two repository secrets:
+The provider is [GoatCounter](https://www.goatcounter.com) — open-source,
+cookieless analytics whose hosted service is free for non-commercial sites.
+Like everything else it is **opt-in at build time** via one repository
+secret:
 
-1. `STATS_ENDPOINT` — the https origin of your deployment (no path).
-2. `STATS_SITE_ID` — the site ID registered in its dashboard.
+1. `GOATCOUNTER_SITE_URL` — the https origin of your GoatCounter site
+   (e.g. `https://luongnv89.goatcounter.com`, no path).
 
-Set **both**; either one missing/malformed disables traffic counting with a
-build warning, and unset keeps zero stats markup in the output. When enabled:
+Unset keeps zero stats markup in the output; malformed values disable
+traffic counting with a build warning. When enabled:
 
-- Every page ships the Counterscale tracker beacon so all traffic counts.
+- Every page ships the GoatCounter tracker beacon so all traffic counts.
 - Pages that run the site script also emit the hidden footer strip; a small
-  client-side module fetches today + 90-day aggregates from Counterscale's
-  JSON route and reveals the numbers.
+  client-side module fetches today + 90-day totals from GoatCounter's public
+  JSON counter route (`/counter/TOTAL.json`) and reveals the numbers.
 - **Silent degradation** — offline, ad-blocked, erroring, or malformed
   responses leave the strip hidden forever and nothing else changes.
 
-> **Important:** with a stock Counterscale deployment the strip stays
-> hidden even when everything above is configured correctly — upstream
-> Counterscale sends no `Access-Control-Allow-Origin` header on its stats
-> route, so browsers block the cross-origin fetch. Counting itself works
-> immediately; to make the visible numbers appear you must complete
-> **Step 4 of the setup guide** (CORS remediation) first.
+> Requires enabling **"Allow adding visitor counts on your website"**
+> (Settings → Visitor counter) in the GoatCounter dashboard; otherwise the
+> counter route is private and the strip stays hidden.
 
-Full operator instructions — deploying Counterscale, minting the secrets,
-and the required CORS step before live numbers appear — live in
+Full operator instructions live in
 [docs/traffic-stats-setup.md](docs/traffic-stats-setup.md).
 
 ### Privacy policy page

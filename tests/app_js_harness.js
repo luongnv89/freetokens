@@ -14,7 +14,8 @@
  *
  * Live traffic scenarios (#62) add scenario.stats_mode ("ok", "http_error",
  * "network_error", "bad_json", "none") plus optional stats_payloads keyed by
- * Counterscale interval; the {"op":"settle"} step drains microtasks so
+ * counter window ("today" when start===end, else "period"); the
+ * {"op":"settle"} step drains microtasks so
  * pending fetch promise chains resolve deterministically.
  *
  * Used by tests/test_build.py::NodeAppJsTests; skipped automatically when
@@ -241,9 +242,17 @@ async function runScenario(scenario) {
 
   const sandbox = {
     URLSearchParams,
-    // App script only reads Date.now(); pin it to the fake clock so the
-    // offer_click double-click window is deterministic under `advance`.
-    Date: { now: () => timers.now },
+    // Pin Date to the fake clock so the offer_click double-click window is
+    // deterministic under `advance`, while still supporting `new Date(...)`
+    // for the live-traffic counter's date-range math (#62).
+    Date: class extends Date {
+      constructor(...args) {
+        super(args.length ? args[0] : timers.now);
+      }
+      static now() {
+        return timers.now;
+      }
+    },
     console,
     setTimeout: (fn, ms) => timers.setTimeout(fn, ms),
     clearTimeout: (id) => timers.clearTimeout(id),
@@ -276,19 +285,22 @@ async function runScenario(scenario) {
     sandbox.ftTrackEvent = (name, params) => events.push([name, params]);
   }
 
-  // Live traffic (#62): controllable fetch stub routed by interval param.
+  // Live traffic (#62): controllable fetch stub routed by counter date range.
+  // start===end means "today"; any other range is the 90-day period.
   const statsMode = scenario.stats_mode || "none";
   if (statsMode !== "none") {
     sandbox.fetch = (url) => {
       if (statsMode === "network_error") {
         return Promise.reject(new TypeError("NetworkError"));
       }
-      const match = /[?&]interval=([^&]+)/.exec(url);
-      const interval = match ? decodeURIComponent(match[1]) : "";
+      const start = /[?&]start=([^&]+)/.exec(url);
+      const end = /[?&]end=([^&]+)/.exec(url);
+      const key =
+        start && end && start[1] === end[1] ? "today" : "period";
       const payloads = scenario.stats_payloads || {};
-      const body = Object.prototype.hasOwnProperty.call(payloads, interval)
-        ? payloads[interval]
-        : { views: 0, visitors: 0 };
+      const body = Object.prototype.hasOwnProperty.call(payloads, key)
+        ? payloads[key]
+        : { count: "0" };
       if (statsMode === "http_error") {
         return Promise.resolve({ ok: false, status: 500, json: () => Promise.resolve(body) });
       }

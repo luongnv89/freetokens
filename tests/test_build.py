@@ -795,171 +795,113 @@ class ConsentBannerTests(unittest.TestCase):
 
 
 class StatsConfigTests(unittest.TestCase):
-    """#62: Counterscale endpoint/site-ID resolution, mirroring GA4 gating."""
+    """#62: GoatCounter site-URL resolution, mirroring GA4 gating."""
 
     def test_unset_env_disables_traffic_stats(self):
-        self.assertEqual(build.get_traffic_stats_config({}), ("", ""))
+        self.assertEqual(build.get_traffic_stats_site({}), "")
 
-    def test_empty_values_disable_traffic_stats_silently(self):
-        env = {build.STATS_ENDPOINT_ENV_VAR: "", build.STATS_SITE_ID_ENV_VAR: ""}
+    def test_empty_value_disables_traffic_stats_silently(self):
         err = io.StringIO()
         with redirect_stderr(err):
-            self.assertEqual(build.get_traffic_stats_config(env), ("", ""))
+            self.assertEqual(
+                build.get_traffic_stats_site({build.STATS_SITE_ENV_VAR: ""}), ""
+            )
         self.assertEqual(err.getvalue(), "")
 
-    def test_valid_pair_accepted_and_trailing_slash_normalized(self):
-        endpoint, site_id = build.get_traffic_stats_config(
-            {
-                build.STATS_ENDPOINT_ENV_VAR: "https://stats.example.com/",
-                build.STATS_SITE_ID_ENV_VAR: "Site-1.example",
-            }
+    def test_valid_url_accepted_and_trailing_slash_normalized(self):
+        site = build.get_traffic_stats_site(
+            {build.STATS_SITE_ENV_VAR: "https://luongnv89.goatcounter.com/"}
         )
-        self.assertEqual(endpoint, "https://stats.example.com")
-        self.assertEqual(site_id, "Site-1.example")
+        self.assertEqual(site, "https://luongnv89.goatcounter.com")
 
-    def test_whitespace_around_values_is_stripped(self):
-        endpoint, site_id = build.get_traffic_stats_config(
-            {
-                build.STATS_ENDPOINT_ENV_VAR: "  https://stats.example.com \n",
-                build.STATS_SITE_ID_ENV_VAR: "\tok-id ",
-            }
+    def test_whitespace_around_value_is_stripped(self):
+        site = build.get_traffic_stats_site(
+            {build.STATS_SITE_ENV_VAR: "  https://ok.goatcounter.com \n"}
         )
-        self.assertEqual(endpoint, "https://stats.example.com")
-        self.assertEqual(site_id, "ok-id")
+        self.assertEqual(site, "https://ok.goatcounter.com")
 
-    def test_malformed_endpoint_warns_and_disables(self):
+    def test_malformed_site_warns_and_disables(self):
         for bad in (
             "http://stats.example.com",
             "ftp://files.example.com",
             "javascript:alert(1)",
             "https://",
             "stats.example.com",
+            'https://evil.com/" onmouseover="x',
+            "https://a b.example.com",
+            "https://x.example.com/<script>",
         ):
             with self.subTest(bad=bad):
                 err = io.StringIO()
                 with redirect_stderr(err):
-                    self.assertEqual(build.resolve_stats_endpoint(bad), "")
+                    self.assertEqual(build.resolve_stats_site(bad), "")
                 self.assertIn("traffic stats disabled", err.getvalue())
 
-    def test_endpoint_never_carries_path_query_or_userinfo(self):
+    def test_site_never_carries_path_query_or_userinfo(self):
         for bad in (
             "https://stats.example.com/api?x=1",
             'https://user:pw@stats.example.com',
             "https://stats.example.com/#frag",
         ):
             with self.subTest(bad=bad):
-                self.assertEqual(build.resolve_stats_endpoint(bad), "")
-
-    def test_endpoint_rejects_quote_and_angle_breakouts(self):
-        # Even before escaping, hostile characters cannot reach attributes.
-        for bad in (
-            'https://evil.com/" onmouseover="x',
-            "https://a b.example.com",
-            "https://x.example.com/<script>",
-        ):
-            with self.subTest(bad=bad):
-                self.assertEqual(build.resolve_stats_endpoint(bad), "")
-
-    def test_malformed_site_id_warns_and_disables(self):
-        for bad in ('site "quoted"', "site id!", "../escape", "$token"):
-            with self.subTest(bad=bad):
-                err = io.StringIO()
-                with redirect_stderr(err):
-                    self.assertEqual(build.resolve_stats_site_id(bad), "")
-                self.assertIn("traffic stats disabled", err.getvalue())
-
-    def test_site_id_accepts_operator_style_tokens(self):
-        for good in ("freetokens", "www.luongnv.com", "site_01", "a" * 128):
-            with self.subTest(good=good):
-                self.assertEqual(build.resolve_stats_site_id(good), good)
-
-    def test_half_configured_pair_disables_both_with_warning(self):
-        err = io.StringIO()
-        with redirect_stderr(err):
-            self.assertEqual(
-                build.get_traffic_stats_config(
-                    {build.STATS_ENDPOINT_ENV_VAR: "https://s.example.com"}
-                ),
-                ("", ""),
-            )
-            self.assertEqual(
-                build.get_traffic_stats_config(
-                    {build.STATS_SITE_ID_ENV_VAR: "ok-id"}
-                ),
-                ("", ""),
-            )
-        self.assertIn("both are required", err.getvalue())
-        self.assertIn(build.STATS_ENDPOINT_ENV_VAR, err.getvalue())
-        self.assertIn(build.STATS_SITE_ID_ENV_VAR, err.getvalue())
+                self.assertEqual(build.resolve_stats_site(bad), "")
 
     def test_reads_from_process_environ_by_default(self):
-        env = {
-            build.STATS_ENDPOINT_ENV_VAR: "https://live.example.com",
-            build.STATS_SITE_ID_ENV_VAR: "live-site",
-        }
+        env = {build.STATS_SITE_ENV_VAR: "https://live.goatcounter.com"}
         with mock.patch.dict(os.environ, env):
             self.assertEqual(
-                build.get_traffic_stats_config(),
-                ("https://live.example.com", "live-site"),
+                build.get_traffic_stats_site(),
+                "https://live.goatcounter.com",
             )
 
 
 class StatsBeaconTests(unittest.TestCase):
     """#62: tracker snippet + strip markup builders ('' when disabled)."""
 
-    EP = "https://counterscale.example.com"
-    SID = "freetokens"
+    SITE = "https://gc.example.com"
 
     def test_disabled_yields_no_beacon(self):
-        for endpoint, site_id in (("", ""), (self.EP, ""), ("", self.SID)):
-            with self.subTest(endpoint=endpoint, site_id=site_id):
-                self.assertEqual(
-                    build.build_stats_beacon(endpoint, site_id), ""
-                )
+        self.assertEqual(build.build_stats_beacon(""), "")
 
-    def test_beacon_defers_tracker_with_site_id(self):
-        beacon = build.build_stats_beacon(self.EP, self.SID)
+    def test_beacon_loads_goatcounter_tracker_with_data_attribute(self):
+        beacon = build.build_stats_beacon(self.SITE)
         self.assertTrue(beacon.startswith("<script"))
         self.assertTrue(beacon.endswith("</script>"))
-        self.assertIn(" defer ", beacon)
-        self.assertIn(f'src="{self.EP}/tracker.js"', beacon)
-        self.assertIn(f'data-site-id="{self.SID}"', beacon)
+        self.assertIn(" async ", beacon)
+        self.assertIn('src="https://gc.zgo.at/count.js"', beacon)
+        self.assertIn(f'data-goatcounter="{self.SITE}/count"', beacon)
 
     def test_beacon_escapes_hostile_values_defensively(self):
-        beacon = build.build_stats_beacon(
-            'https://e.com/x" onerror="y', 's"><script>'
-        )
-        self.assertNotIn("<script>>", beacon.replace("<script", "", 1))
+        beacon = build.build_stats_beacon('https://e.com/x" onerror="y')
         self.assertNotIn('" onerror="', beacon)
         self.assertIn("&quot;", beacon)
 
     def test_strip_builder_disabled_yields_nothing(self):
-        self.assertEqual(build.build_traffic_strip("", ""), "")
+        self.assertEqual(build.build_traffic_strip(""), "")
 
-    def test_strip_builder_emits_hidden_status_region(self):
-        strip = build.build_traffic_strip(self.EP, self.SID)
+    def test_strip_builder_emits_hidden_status_region_with_dashboard_link(self):
+        strip = build.build_traffic_strip(self.SITE)
         self.assertIn(f'id="{build.TRAFFIC_STRIP_ID}"', strip)
         self.assertRegex(strip, r'id="ft-traffic"[^>]*\bhidden\b')
         self.assertIn('role="status"', strip)
         self.assertIn('aria-live="polite"', strip)
+        self.assertIn(f'href="{self.SITE}" rel="noopener noreferrer"', strip)
 
 
 class TrafficStripMarkupTests(unittest.TestCase):
     """#62: gating of beacon/strip/module across every generated page."""
 
-    EP = "https://counterscale.example.com"
-    SID = "freetokens"
+    SITE = "https://gc.example.com"
 
-    def _home(self, endpoint="", site_id=""):
+    def _home(self, site=""):
         offer = build.validate_offer(dict(VALID), "a.yaml")
         offer.setdefault("slug", "offer-0")
         return build.render_html(
             build.build_index([offer]),
-            stats_endpoint=endpoint,
-            stats_site_id=site_id,
+            stats_site=site,
         )
 
-    def _detail(self, endpoint="", site_id=""):
+    def _detail(self, site=""):
         offer = build.validate_offer(dict(VALID), "a.yaml")
         offer["slug"] = "test-offer"
         index = build.build_index([offer])
@@ -967,34 +909,33 @@ class TrafficStripMarkupTests(unittest.TestCase):
             index["offers"][0],
             None,
             index["generated_at"],
-            stats_endpoint=endpoint,
-            stats_site_id=site_id,
+            stats_site=site,
         )
 
     def test_default_render_ships_zero_stats_markers(self):
         page = self._home()
-        for marker in ("tracker.js", "ft-traffic", "ftInitStats",
-                       "resources/stats", ".foot-traffic"):
+        for marker in ("count.js", "ft-traffic", "ftInitStats",
+                       "counter/TOTAL.json", ".foot-traffic"):
             self.assertNotIn(marker, page)
 
     def test_configured_home_ships_beacon_hidden_strip_and_css(self):
-        page = self._home(self.EP, self.SID)
-        self.assertIn(f'src="{self.EP}/tracker.js"', page)
+        page = self._home(self.SITE)
+        self.assertIn('src="https://gc.zgo.at/count.js"', page)
         self.assertIn('id="ft-traffic" role="status" aria-live="polite" hidden', page)
         self.assertIn(".foot-traffic", page)
-        self.assertIn(json.dumps(self.SID), page)
+        self.assertIn(json.dumps(self.SITE), page)
         self.assertNotIn("__FT_STATS_", page)
         self.assertNotIn("__FT_STRIP_ID__", page)
 
     def test_strip_wording_distinct_from_build_time_deal_counters(self):
         # History hazard (#49): masthead deal counters say "live offers";
         # the traffic strip must never borrow that vocabulary.
-        page = self._home(self.EP, self.SID)
+        page = self._home(self.SITE)
         seg = page[page.index('id="ft-traffic"'):]
         seg = seg[: seg.index("</p>")]
         self.assertIn("live traffic", seg)
-        self.assertIn("views today", seg)
-        self.assertIn("visitors in 90 days", seg)
+        self.assertIn("visitors today", seg)
+        self.assertIn("in 90 days", seg)
         self.assertNotIn("live offers", seg)
         self.assertNotIn('class="count"', seg)
 
@@ -1004,27 +945,24 @@ class TrafficStripMarkupTests(unittest.TestCase):
         index = build.build_index([offer])
         pages = {
             "archive": build.render_archive_html(
-                index, stats_endpoint=self.EP, stats_site_id=self.SID
+                index, stats_site=self.SITE
             ),
             "privacy": build.render_privacy_html(
                 "2026-08-21T00:00:00Z",
-                stats_endpoint=self.EP,
-                stats_site_id=self.SID,
+                stats_site=self.SITE,
             ),
-            "detail": self._detail(self.EP, self.SID),
+            "detail": self._detail(self.SITE),
         }
         for name, page in pages.items():
             with self.subTest(page=name):
-                self.assertIn(f'src="{self.EP}/tracker.js"', page)
+                self.assertIn('src="https://gc.zgo.at/count.js"', page)
                 self.assertNotIn('id="ft-traffic"', page)
                 self.assertNotIn("ftInitStats", page)
 
     def test_empty_home_keeps_beacon_but_no_strip_or_module(self):
         empty = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
-        page = build.render_html(
-            empty, stats_endpoint=self.EP, stats_site_id=self.SID
-        )
-        self.assertIn(f'src="{self.EP}/tracker.js"', page)
+        page = build.render_html(empty, stats_site=self.SITE)
+        self.assertIn('src="https://gc.zgo.at/count.js"', page)
         self.assertNotIn('id="ft-traffic"', page)
         self.assertNotIn("ftInitStats", page)
 
@@ -1034,7 +972,7 @@ class TrafficStripMarkupTests(unittest.TestCase):
         page = build.render_html(
             build.build_index([offer]), measurement_id="G-ABCDEF12345"
         )
-        for marker in ("tracker.js", "ft-traffic"):
+        for marker in ("count.js", "ft-traffic"):
             self.assertNotIn(marker, page)
         self.assertIn("googletagmanager", page)  # GA4 path unaffected
 
@@ -1042,25 +980,21 @@ class TrafficStripMarkupTests(unittest.TestCase):
 class StatsModuleSourceTests(unittest.TestCase):
     """#62 static guarantees over the spliced live-traffic module."""
 
-    EP = "https://counterscale.example.com"
-    SID = "freetokens"
+    SITE = "https://gc.example.com"
 
     @classmethod
     def setUpClass(cls):
-        cls.js_on = build.build_app_js(
-            stats_endpoint=cls.EP, stats_site_id=cls.SID
-        )
+        cls.js_on = build.build_app_js(stats_site=cls.SITE)
         cls.js_off = build.build_app_js()
 
     def test_unconfigured_script_has_no_stats_code_or_tokens(self):
-        for marker in ("ftInitStats", "resources/stats", "__FT_STATS_",
+        for marker in ("ftInitStats", "counter/TOTAL.json", "__FT_STATS_",
                        "__FT_STRIP_ID__", "ftFormatCount"):
             self.assertNotIn(marker, self.js_off)
 
     def test_configured_placeholders_fully_resolved(self):
-        self.assertIn(json.dumps(self.EP), self.js_on)
-        self.assertIn(json.dumps(self.SID), self.js_on)
-        for token in ("__FT_STATS_ENDPOINT__", "__FT_STATS_SITE_ID__",
+        self.assertIn(json.dumps(self.SITE), self.js_on)
+        for token in ("__FT_STATS_SITE__",
                       "__FT_STRIP_ID__", "__FT_STATS_BOOT__",
                       "__FT_STATS_MODULE__"):
             self.assertNotIn(token, self.js_on)
@@ -1079,7 +1013,7 @@ class StatsModuleSourceTests(unittest.TestCase):
         body = self.js_on[pos:]
         guard_pos = body.index('typeof window.fetch !== "function"')
         slot_pos = body.index(f'getElementById("{build.TRAFFIC_STRIP_ID}")')
-        fetch_pos = body.index("window.fetch(ftStatUrl(")
+        fetch_pos = body.index("window.fetch(ftCounterUrl(")
         self.assertLess(max(guard_pos, slot_pos), fetch_pos)
 
     def test_http_error_status_short_circuits_rendering(self):
@@ -1094,22 +1028,24 @@ class StatsModuleSourceTests(unittest.TestCase):
         self.assertIn(".textContent =", self.js_on)
         self.assertNotIn("innerHTML", self.js_on)
 
-    def test_query_urls_encode_site_and_interval(self):
-        pos = self.js_on.index("function ftStatUrl")
-        body = self.js_on[pos:self.js_on.index("function ftStatNumber")]
-        self.assertIn("/resources/stats?site=", body)
-        self.assertEqual(body.count("encodeURIComponent("), 2)
+    def test_query_urls_target_counter_route_with_date_range(self):
+        pos = self.js_on.index("function ftCounterUrl")
+        body = self.js_on[pos:self.js_on.index("function ftFormatCount")]
+        self.assertIn('/counter/TOTAL.json?start=', body)
+        self.assertIn("&end=", body)
+        self.assertEqual(body.count("ftIsoDate("), 2)  # start + end
 
-    def test_only_finite_non_negative_numbers_are_trusted(self):
+    def test_only_digits_derived_non_negative_counts_are_trusted(self):
         pos = self.js_on.index("function ftStatNumber")
         body = self.js_on[pos:self.js_on.index("function ftFillTraffic")]
-        for frag in ('typeof value !== "number"', "!isFinite(value)",
-                     "value < 0"):
-            self.assertIn(frag, body)
+        self.assertIn('typeof data.count !== "string"', body)
+        self.assertIn("[^0-9]", body)
+        self.assertIn("!isFinite(n)", body)
+        self.assertIn("n < 0", body)
 
     def test_period_window_labeled_not_claimed_all_time(self):
-        # Counterscale retention caps at 90 days; copy must not overclaim.
-        self.assertIn("visitors in 90 days", build._TRAFFIC_STRIP_TMPL)
+        # Copy states the fixed window; it must not overclaim all-time totals.
+        self.assertIn("in 90 days", build._TRAFFIC_STRIP_TMPL)
         self.assertNotIn("all-time", build._TRAFFIC_STRIP_TMPL.lower())
 
 
@@ -1121,21 +1057,18 @@ class LiveTrafficPrivacyTests(unittest.TestCase):
     def _render(self):
         return build.render_privacy_html(self.BUILT)
 
-    def test_policy_discloses_self_hosted_cookieless_counter(self):
+    def test_policy_discloses_hosted_cookieless_counter(self):
         low = self._render().lower()
-        self.assertIn("counterscale", low)
-        self.assertIn("self-host", low)
+        self.assertIn("goatcounter", low)
         self.assertIn("no cookies", low)
 
-    def test_policy_states_aggregate_public_display_and_retention(self):
+    def test_policy_states_aggregate_public_display(self):
         page = self._render()
         self.assertIn("anonymous aggregate totals", page)
-        self.assertIn("90 days", page)
 
-    def test_policy_lists_cloudflare_as_processor_when_enabled(self):
+    def test_policy_lists_goatcounter_as_processor_when_enabled(self):
         page = self._render()
-        self.assertIn("Cloudflare", page)
-        self.assertIn("cloudflare.com/privacypolicy/", page)
+        self.assertIn("goatcounter.com/privacy", page)
 
     def test_summary_bullet_names_live_traffic_counter(self):
         page = self._render()
@@ -1887,9 +1820,9 @@ class NodeAppJsTests(unittest.TestCase):
     HARNESS = Path(__file__).resolve().parent / "app_js_harness.js"
 
     def _run(self, steps, cards=None, init_search="", track_enabled=True,
-             track_mode="record", stats_endpoint="", stats_site_id="",
+             track_mode="record", stats_site="",
              stats_mode="none", stats_payloads=None):
-        page_script = build.build_app_js(stats_endpoint, stats_site_id)
+        page_script = build.build_app_js(stats_site)
         bare = page_script[
             page_script.index(">") + 1 : page_script.rindex("</script>")
         ]
@@ -2377,8 +2310,7 @@ class NodeAppJsTests(unittest.TestCase):
 
     # --- live traffic strip (#62) --------------------------------------------
 
-    STATS_EP = "https://counterscale.example.com"
-    STATS_SID = "freetokens"
+    SITE = "https://gc.example.com"
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_traffic_success_fills_and_reveals_strip(self):
@@ -2387,17 +2319,13 @@ class NodeAppJsTests(unittest.TestCase):
                 {"op": "settle"},
                 {"op": "snapshot"},
             ],
-            stats_endpoint=self.STATS_EP,
-            stats_site_id=self.STATS_SID,
+            stats_site=self.SITE,
             stats_mode="ok",
-            stats_payloads={
-                "today": {"views": 12, "visitors": 8},
-                "90d": {"visitors": 321, "views": 900},
-            },
+            stats_payloads={"today": {"count": "8"}, "period": {"count": "321"}},
         )
         final = snaps[-1]
         self.assertFalse(final["trafficHidden"])
-        self.assertEqual(final["trafficToday"], "12")
+        self.assertEqual(final["trafficToday"], "8")
         self.assertEqual(final["trafficPeriod"], "321")
         # The strip is display-only: no analytics events, no history churn.
         self.assertEqual(final["events"], [])
@@ -2407,13 +2335,9 @@ class NodeAppJsTests(unittest.TestCase):
     def test_traffic_counts_get_thousands_separators(self):
         final = self._run(
             [{"op": "settle"}],
-            stats_endpoint=self.STATS_EP,
-            stats_site_id=self.STATS_SID,
+            stats_site=self.SITE,
             stats_mode="ok",
-            stats_payloads={
-                "today": {"views": 1234},
-                "90d": {"visitors": 1234567},
-            },
+            stats_payloads={"today": {"count": "1,234"}, "period": {"count": "1,234,567"}},
         )[-1]
         self.assertEqual(final["trafficToday"], "1,234")
         self.assertEqual(final["trafficPeriod"], "1,234,567")
@@ -2424,10 +2348,9 @@ class NodeAppJsTests(unittest.TestCase):
         # reveal the strip with honest zeros rather than staying hidden.
         final = self._run(
             [{"op": "settle"}],
-            stats_endpoint=self.STATS_EP,
-            stats_site_id=self.STATS_SID,
+            stats_site=self.SITE,
             stats_mode="ok",
-            stats_payloads={"today": {"views": 0}, "90d": {"visitors": 0}},
+            stats_payloads={"today": {"count": "0"}, "period": {"count": "0"}},
         )[-1]
         self.assertFalse(final["trafficHidden"])
         self.assertEqual(final["trafficToday"], "0")
@@ -2437,8 +2360,7 @@ class NodeAppJsTests(unittest.TestCase):
     def test_traffic_http_error_leaves_strip_inert(self):
         final = self._run(
             [{"op": "settle"}, {"op": "snapshot"}],
-            stats_endpoint=self.STATS_EP,
-            stats_site_id=self.STATS_SID,
+            stats_site=self.SITE,
             stats_mode="http_error",
         )[-1]
         self.assertTrue(final["trafficHidden"])
@@ -2449,8 +2371,7 @@ class NodeAppJsTests(unittest.TestCase):
     def test_traffic_network_rejection_leaves_strip_inert(self):
         final = self._run(
             [{"op": "settle"}, {"op": "snapshot"}],
-            stats_endpoint=self.STATS_EP,
-            stats_site_id=self.STATS_SID,
+            stats_site=self.SITE,
             stats_mode="network_error",
         )[-1]
         self.assertTrue(final["trafficHidden"])
@@ -2461,13 +2382,9 @@ class NodeAppJsTests(unittest.TestCase):
         # A string where a number belongs means "no trustworthy data".
         final = self._run(
             [{"op": "settle"}, {"op": "snapshot"}],
-            stats_endpoint=self.STATS_EP,
-            stats_site_id=self.STATS_SID,
+            stats_site=self.SITE,
             stats_mode="ok",
-            stats_payloads={
-                "today": {"views": "many"},
-                "90d": {"visitors": 5},
-            },
+            stats_payloads={"today": {"count": "many"}, "period": {"count": "5"}},
         )[-1]
         self.assertTrue(final["trafficHidden"])
         self.assertEqual(final["trafficPeriod"], "\u2014")
@@ -2476,8 +2393,7 @@ class NodeAppJsTests(unittest.TestCase):
     def test_traffic_bad_json_leaves_strip_inert(self):
         final = self._run(
             [{"op": "settle"}, {"op": "snapshot"}],
-            stats_endpoint=self.STATS_EP,
-            stats_site_id=self.STATS_SID,
+            stats_site=self.SITE,
             stats_mode="bad_json",
         )[-1]
         self.assertTrue(final["trafficHidden"])
@@ -2492,8 +2408,7 @@ class NodeAppJsTests(unittest.TestCase):
                 {"op": "settle"},
                 {"op": "snapshot"},
             ],
-            stats_endpoint=self.STATS_EP,
-            stats_site_id=self.STATS_SID,
+            stats_site=self.SITE,
             stats_mode="none",
         )
         final = snaps[-1]
@@ -2549,8 +2464,7 @@ class AnalyticsBuildOutputTests(unittest.TestCase):
 class StatsBuildOutputTests(unittest.TestCase):
     """End-to-end: live traffic assets are emitted exactly when configured."""
 
-    EP = "https://counterscale.example.com"
-    SID = "freetokens"
+    SITE = "https://gc.example.com"
 
     def _write_offers(self, tmp):
         offers_dir = os.path.join(tmp, "offers")
@@ -2573,21 +2487,20 @@ class StatsBuildOutputTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             out, _ = self._build(
                 tmp,
-                {build.STATS_ENDPOINT_ENV_VAR: self.EP,
-                 build.STATS_SITE_ID_ENV_VAR: self.SID},
+                {build.STATS_SITE_ENV_VAR: self.SITE},
             )
             home = Path(out, "site", "index.html").read_text(encoding="utf-8")
-            self.assertIn(f'src="{self.EP}/tracker.js"', home)
+            self.assertIn('src="https://gc.zgo.at/count.js"', home)
             self.assertIn('id="ft-traffic"', home)
             for name in ("privacy.html", "archive.html"):
                 page = Path(out, "site", name).read_text(encoding="utf-8")
                 with self.subTest(page=name):
-                    self.assertIn(f'src="{self.EP}/tracker.js"', page)
+                    self.assertIn('src="https://gc.zgo.at/count.js"', page)
                     self.assertNotIn('id="ft-traffic"', page)
             detail = Path(
                 out, "site", "offers", "alpha.html"
             ).read_text(encoding="utf-8")
-            self.assertIn(f'src="{self.EP}/tracker.js"', detail)
+            self.assertIn('src="https://gc.zgo.at/count.js"', detail)
             self.assertNotIn('id="ft-traffic"', detail)
 
     def test_main_without_stats_emits_nothing(self):
@@ -2596,30 +2509,19 @@ class StatsBuildOutputTests(unittest.TestCase):
             for name in ("index.html", "privacy.html", "archive.html"):
                 page = Path(out, "site", name).read_text(encoding="utf-8")
                 with self.subTest(page=name):
-                    self.assertNotIn("tracker.js", page)
+                    self.assertNotIn("count.js", page)
                     self.assertNotIn("ft-traffic", page)
-
-    def test_partial_stats_env_disables_with_warning_but_builds(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            out, warnings = self._build(
-                tmp, {build.STATS_ENDPOINT_ENV_VAR: self.EP}
-            )
-            self.assertIn("both are required", warnings)
-            page = Path(out, "site", "index.html").read_text(encoding="utf-8")
-            self.assertNotIn("tracker.js", page)
-            self.assertNotIn('id="ft-traffic"', page)
 
     def test_malformed_stats_env_never_breaks_the_build(self):
         # A typo in a secret must degrade silently, not fail CI.
         with tempfile.TemporaryDirectory() as tmp:
             out, warnings = self._build(
                 tmp,
-                {build.STATS_ENDPOINT_ENV_VAR: "not-a-url",
-                 build.STATS_SITE_ID_ENV_VAR: self.SID},
+                {build.STATS_SITE_ENV_VAR: "not-a-url"},
             )
             self.assertIn("traffic stats disabled", warnings)
             page = Path(out, "site", "index.html").read_text(encoding="utf-8")
-            self.assertNotIn("tracker.js", page)
+            self.assertNotIn("count.js", page)
 
 
 class PrivacyPageTests(unittest.TestCase):
