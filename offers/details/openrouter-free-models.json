@@ -1,0 +1,9 @@
+{
+  "summary": "OpenRouter routes many popular models with ':free' variants that cost nothing: 50 requests per day at up to 20 requests per minute on accounts holding under $10 in credits, rising to 1,000 requests per day once you have bought at least $10 of credits. One API key reaches dozens of free model endpoints.",
+  "claim_steps": [
+    "Create a free account at openrouter.ai and open the Keys page.",
+    "Create an API key.",
+    "Browse models filtered to the :free variants at openrouter.ai/models.",
+    "Call the OpenAI-compatible endpoint with your key, staying within the free rate limits."
+  ]
+}

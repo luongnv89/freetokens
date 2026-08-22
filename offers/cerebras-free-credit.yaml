@@ -1,0 +1,9 @@
+# Verified 2026-08-22 against https://www.cerebras.ai/inference
+# ("Free Trial - Get started with $5 in free credit after creating an account.")
+title: Cerebras Inference Free Trial
+provider: Cerebras
+category: api_provider
+amount: $5 in free API credit after creating an account
+expiry_date: null
+source_url: https://www.cerebras.ai/inference
+verified_date: 2026-08-22
