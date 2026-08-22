@@ -840,11 +840,13 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <p>Built {built_display} &middot; offers re-verified on every change</p>
 {traffic_strip}
 {foot_nav}
+{consent_settings}
 </footer>
 </div>
 {banner}
 {ga_init}
 {app_js}
+{extra_js}
 </body>
 </html>
 """
@@ -1128,19 +1130,150 @@ _OFFER_HEADER = """<header class="masthead">
 </header>"""
 
 
+def _share_section(page_url: str, title: str, slug: str) -> str:
+    """Offer share bar (#71): LinkedIn/X/Facebook/email + copy-link.
+
+    Every target link pre-fills the destination network with the offer
+    page's absolute URL (and title where supported). Each action carries a
+    ``data-ft-share`` channel attribute that both the tracking wiring and
+    tests key on; the copy button is a real <button> so clipboard access
+    never depends on navigation.
+    """
+    q_url = quote(page_url, safe="")
+    q_title = quote(title, safe="")
+    links = (
+        (
+            "linkedin",
+            "https://www.linkedin.com/sharing/share-offsite/?url=" + q_url,
+            "LinkedIn",
+        ),
+        (
+            "x",
+            "https://twitter.com/intent/tweet?url=" + q_url
+            + "&text=" + q_title,
+            "X",
+        ),
+        (
+            "facebook",
+            "https://www.facebook.com/sharer/sharer.php?u=" + q_url,
+            "Facebook",
+        ),
+        (
+            "email",
+            "mailto:?subject=" + q_title + "&body=" + q_url,
+            "Email",
+        ),
+    )
+    anchors = "".join(
+        f'<a class="share-link" href="{href}" target="_blank" '
+        f'rel="noopener noreferrer" data-ft-share="{channel}">{label}</a>'
+        for channel, href, label in links
+    )
+    return (
+        '<section class="od-share" aria-label="Share this offer" '
+        f'data-ft-offer-id="{html.escape(slug, quote=True)}">\n'
+        "<h2>Share this offer</h2>\n"
+        f'<div class="share-actions">{anchors}'
+        '<button type="button" class="share-copy" data-ft-share="copy">'
+        "Copy link</button></div>\n"
+        '<p class="share-status" id="ft-share-status" role="status" '
+        'aria-live="polite" hidden></p>\n'
+        "</section>"
+    )
+
+
+# Share-bar runtime (#71). Inline on every detail page (they ship no
+# app_js). Tracking rides window.ftTrackEvent — the consent-gated bus — so
+# an offer_share event exists only after an explicit grant; sharing itself
+# never depends on analytics being allowed. Copy uses the async Clipboard
+# API when present and falls back to a hidden textarea + execCommand, and
+# confirms success via a polite live region.
+_SHARE_JS = """<script>
+(function () {
+  "use strict";
+  var OFFER_ID = __FT_OFFER_ID__;
+  var PAGE_URL = __FT_PAGE_URL__;
+  function ftTrack(channel) {
+    try {
+      if (typeof window.ftTrackEvent === "function") {
+        window.ftTrackEvent("offer_share", {
+          offer_id: OFFER_ID,
+          channel: channel
+        });
+      }
+    } catch (err) {}
+  }
+  function ftStatus(text) {
+    var box = document.getElementById("ft-share-status");
+    if (!box) { return; }
+    box.textContent = text;
+    box.hidden = false;
+  }
+  function ftCopyLegacy(text) {
+    var ok = false;
+    var box = document.createElement("textarea");
+    box.value = text;
+    box.setAttribute("readonly", "");
+    box.style.position = "fixed";
+    box.style.left = "-9999px";
+    document.body.appendChild(box);
+    box.select();
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    document.body.removeChild(box);
+    return ok;
+  }
+  function ftCopy() {
+    var done = function (ok) {
+      if (ok) { ftTrack("copy"); }
+      ftStatus(ok ? "Link copied!" : "Copy failed \u2014 long-press the address bar instead.");
+    };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(PAGE_URL).then(
+        function () { done(true); },
+        function () { done(ftCopyLegacy(PAGE_URL)); }
+      );
+    } else {
+      done(ftCopyLegacy(PAGE_URL));
+    }
+  }
+  var nodes = document.querySelectorAll("[data-ft-share]");
+  for (var i = 0; i < nodes.length; i++) {
+    (function (node) {
+      node.addEventListener("click", function () {
+        var channel = node.getAttribute("data-ft-share") || "";
+        if (channel === "copy") {
+          ftCopy();
+        } else {
+          // Fire-and-forget: navigation is native, never intercepted.
+          ftTrack(channel);
+        }
+      });
+    })(nodes[i]);
+  }
+})();
+</script>"""
+
+
 def render_offer_html(
     offer: dict,
     detail: dict | None,
     built: str,
     measurement_id: str = "",
     stats_site: str = "",
+    base_url: str = "",
 ) -> str:
     """Render one dedicated offer page at site/offers/<slug>.html (#60).
 
     Shares the site chrome at depth 1, so every chrome href climbs one
     level (../favicon.svg, ../archive.html, ...). The outbound claim link
-    stays hardened like every external anchor on the site.
+    stays hardened like every external anchor on the site. ``base_url``
+    feeds the share bar's absolute page URL (#71); it falls back to the
+    production deploy base so shared links always resolve.
     """
+    page_url = (
+        (base_url or DEFAULT_BASE_URL).rstrip("/")
+        + f"/offers/{offer['slug']}.html"
+    )
     expired = offer.get("status") == "expired"
     if expired:
         status = '<span class="badge badge-expired">Expired</span>'
@@ -1191,7 +1324,12 @@ def render_offer_html(
         f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
         f"{_detail_sections(detail, rel_prefix='../')}\n"
         f"{cta}\n"
+        f"{_share_section(page_url, offer['title'], offer['slug'])}\n"
         "</article>"
+    )
+    share_js = (
+        _SHARE_JS.replace("__FT_OFFER_ID__", json.dumps(offer["slug"]))
+        .replace("__FT_PAGE_URL__", json.dumps(page_url))
     )
     return _page_shell(
         title=html.escape(f"{offer['title']} · Free AI Credits"),
@@ -1214,10 +1352,11 @@ def render_offer_html(
         measurement_id=measurement_id,
         depth=1,
         stats_site=stats_site,
+        extra_js=share_js,
     )
 
 
-# --- Analytics (F7): consent-gated GA4 with EU banner ----------------------
+# --- Analytics (F7): consent-gated GA4 with banner --------------------------
 #
 # Design (silent degradation, PRD §4.1):
 #   * No measurement ID configured -> nothing analytics-related is emitted.
@@ -1777,6 +1916,53 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   .detail-btn,
   .od-cta { min-height: 44px; }
 }
+
+/* ---- Offer share bar (#71) ---------------------------------------------- */
+
+.share-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-link,
+.share-copy {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.share-link:hover,
+.share-copy:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.share-link:focus-visible,
+.share-copy:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.share-status {
+  margin: 0.5rem 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+@media (pointer: coarse) {
+  .share-link,
+  .share-copy { min-height: 44px; }
+}
 """
 
 # Client-side discovery runtime. Vanilla ES5-style IIFE, emitted inline so
@@ -2292,15 +2478,22 @@ def build_consent_head(measurement_id: str) -> str:
     return _CONSENT_HEAD_JS
 
 
-def build_analytics_init(measurement_id: str = "", enabled: bool = False) -> str:
+def build_analytics_init(
+    measurement_id: str = "",
+    enabled: bool | None = None,
+) -> str:
     """Deferred end-of-body script: consent decision, banner, gtag loader.
 
     Emitted whenever any tracking is configured (#72): ``enabled`` is true
     when GA4 and/or the GoatCounter traffic counter are on, even if only
-    one of them carries a measurement ID. The consent runtime drives both —
-    GA4 loads only when MEASUREMENT_ID is set, and its grant event wakes
-    the GoatCounter loader.
+    one of them carries a measurement ID. When omitted it defaults to
+    "GA4 configured", so a plain measurement ID keeps implying analytics.
+    The consent runtime drives both trackers — GA4 loads only when
+    MEASUREMENT_ID is set, and its grant event wakes the GoatCounter
+    loader.
     """
+    if enabled is None:
+        enabled = bool(measurement_id)
     if not enabled:
         return ""
     return (
@@ -2383,14 +2576,17 @@ def _page_shell(
     app_js: bool = False,
     depth: int = 0,
     stats_site: str = "",
+    extra_js: str = "",
 ) -> str:
     """Fill the shared page chrome (head, masthead slot, footer, analytics).
 
     ``depth`` parameterizes relative-path resolution: root pages reference
     ./favicon.svg and feed.xml; pages under offers/ must climb one level.
-    The GoatCounter beacon ships on every page when configured, while the
-    traffic strip markup only appears where the site script (which fills
-    it) runs — i.e. alongside ``app_js``.
+    The GoatCounter beacon ships consent-gated on every page when
+    configured (#72), while the traffic strip markup only appears where the
+    site script (which fills it) runs — i.e. alongside ``app_js``. The
+    consent banner and its runtime appear whenever *any* tracking is on;
+    ``extra_js`` carries per-page scripts (offer share buttons).
     """
     built_display = (
         f'<time datetime="{html.escape(built, quote=True)}">'
@@ -2399,6 +2595,7 @@ def _page_shell(
     rel_prefix = "../" if depth else "./"
     up = "../" * depth
     stats_on = bool(stats_site)
+    tracking_on = bool(measurement_id or stats_site)
     traffic_strip = (
         build_traffic_strip(stats_site)
         if stats_on and app_js
@@ -2406,6 +2603,8 @@ def _page_shell(
     )
     if traffic_strip:
         css_extra += _TRAFFIC_CSS
+    if tracking_on:
+        css_extra += _BANNER_CSS
     return _PAGE_TMPL.format(
         title=title,
         meta_description=meta_description,
@@ -2415,11 +2614,15 @@ def _page_shell(
         built_display=built_display,
         foot_nav=_foot_nav(foot_current, depth),
         ga_head=build_consent_head(measurement_id),
-        banner=_BANNER_TMPL if measurement_id else "",
-        ga_init=build_analytics_init(measurement_id),
+        banner=_BANNER_TMPL if tracking_on else "",
+        ga_init=build_analytics_init(
+            measurement_id, enabled=tracking_on
+        ),
         app_js=build_app_js(stats_site) if app_js else "",
         stats_beacon=build_stats_beacon(stats_site),
         traffic_strip=traffic_strip,
+        consent_settings=_CONSENT_SETTINGS_TMPL if tracking_on else "",
+        extra_js=extra_js,
         rss_autodiscovery=(
             '<link rel="alternate" type="application/rss+xml" '
             f'title="{html.escape(FEED_TITLE, quote=True)}" '
@@ -2721,7 +2924,7 @@ _PRIVACY_CONTENT = """<div class="policy">
 <h2 id="privacy-summary">In short</h2>
 <ul>
 <li>No accounts, no forms, no logins &mdash; we have nowhere to store personal details.</li>
-<li>If visit-counting is switched on, it runs through Google Analytics 4 with IP anonymization.</li>
+<li>If visit-counting is switched on, it runs through Google Analytics 4 with IP anonymization &mdash; and only after you allow it in the consent banner shown on your first visit.</li>
 <li>If the live traffic counter is switched on, page views are recorded cookie-free by <a href="https://www.goatcounter.com" rel="noopener noreferrer">GoatCounter</a> and shown as anonymous totals on this site.</li>
 <li>Your raw search text is <strong>never</strong> collected &mdash; only how many characters you typed.</li>
 <li>The only thing this site saves on your device is a single-word remember of your cookie choice.</li>
@@ -2746,20 +2949,22 @@ _PRIVACY_CONTENT = """<div class="policy">
 <li><strong>Which sort option you picked</strong> (for example &ldquo;Expiring soon&rdquo;) &mdash; nothing else about your sorting.</li>
 <li><strong>Search activity as a length only</strong> &mdash; when you search, the event records just <code>query_length</code>, the number of characters typed. The words themselves stay in your browser and are never sent anywhere.</li>
 <li><strong>Offer clicks</strong> &mdash; which listing you clicked (its ID, provider name, and category).</li>
+<li><strong>Share actions</strong> &mdash; when you use a share button on an offer page, the offer's ID and which channel you picked (for example &ldquo;linkedin&rdquo; or &ldquo;copy&rdquo;). The share itself happens between you and that platform.</li>
 </ul>
 </section>
 
 <section aria-labelledby="privacy-live-traffic">
 <h2 id="privacy-live-traffic">What the live traffic counter measures</h2>
-<p>Separately from GA4, the site can show live visit totals in its footer &mdash; the numbers you may see next to &ldquo;live traffic&rdquo;. Counting is done by <strong>GoatCounter</strong>, open-source software provided as a hosted service (goatcounter.com) under the EU's strict GDPR rules. Like GA4 above, it is off entirely unless configured at build time.</p>
+<p>Separately from GA4, the site can show live visit totals in its footer &mdash; the numbers you may see next to &ldquo;live traffic&rdquo;. Counting is done by <strong>GoatCounter</strong>, open-source software provided as a hosted service (goatcounter.com) under the EU's strict GDPR rules. Like GA4 above, it is off entirely unless configured at build time &mdash; and its counting script is not loaded until you allow tracking.</p>
 <p>When it <em>is</em> active, each page view records only technical, non-identifying details: the page path, the site's hostname, your browser's reported language and user-agent string, a coarse country derived from the IP at request time and then discarded, and the referring site. GoatCounter sets <strong>no cookies</strong>, uses no browser fingerprinting, and stores no personal identifiers or full IP addresses. Only anonymous aggregate totals are shown publicly on this site; nobody can browse individual visits.</p>
 <p>Blocking the counter with an ad blocker changes nothing else: pages, filters, and links all keep working exactly the same, and the footer totals simply stay hidden.</p>
 </section>
 
 <section aria-labelledby="privacy-consent">
 <h2 id="privacy-consent">Consent, cookies, and local storage</h2>
-<p>Analytics starts from a denied state inside your browser: the measurement code is not even loaded until permission exists. Visitors whose browser time zone indicates they are likely in the EU see a small banner asking &ldquo;Allow?&rdquo; first &mdash; declining means zero tracking requests leave your browser. Elsewhere, visits are counted without showing the banner, matching the site's regional default; a previously recorded refusal is always honored.</p>
+<p>Analytics starts from a denied state inside your browser: no counting code is loaded until permission exists. Every first-time visitor sees a small banner asking &ldquo;Allow?&rdquo; &mdash; declining means zero tracking requests leave your browser, and allowing is what switches GA4 (and the GoatCounter counter, when enabled) on.</p>
 <p>Your answer is remembered in your browser's local storage under the key <code>ft_ga_consent</code> as one word: <code>granted</code> or <code>denied</code>. That single word is the only data this site itself ever writes on your device &mdash; the site sets no cookies of its own. Once you allow counting, Google Analytics may set its own cookies (such as <code>_ga</code>) to tell repeat visits apart; those cookies belong to Google and follow Google's rules.</p>
+<p>Changed your mind? Use the <strong>Cookie settings</strong> link in the footer of any page to re-open the banner and switch your choice at any time.</p>
 </section>
 
 <section aria-labelledby="privacy-third-parties">
@@ -2784,8 +2989,8 @@ _PRIVACY_CONTENT = """<div class="policy">
 <section aria-labelledby="privacy-choices">
 <h2 id="privacy-choices">Your choices</h2>
 <ul>
-<li><strong>Decline or accept</strong> the banner when it appears; press <kbd>Escape</kbd> to decline it.</li>
-<li><strong>Change your mind later</strong> by clearing your browser's site data for this site &mdash; the next visit starts fresh.</li>
+<li><strong>Decline or accept</strong> the banner shown on your first visit; press <kbd>Escape</kbd> to decline it.</li>
+<li><strong>Change your mind anytime</strong> via the footer's <strong>Cookie settings</strong> link &mdash; it re-opens the banner on every page, even after you already answered.</li>
 <li><strong>Block everything</strong> with an ad blocker or your browser's tracking protection. The site degrades silently: every offer, filter, and link keeps working exactly the same.</li>
 </ul>
 </section>
@@ -2896,6 +3101,7 @@ def main(argv=None) -> int:
                     index["generated_at"],
                     measurement_id,
                     stats_site,
+                    base_url=args.base_url,
                 )
             )
 
