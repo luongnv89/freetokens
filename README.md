@@ -38,6 +38,13 @@ The site is fully static with no server, no database, no runtime:
 3. Verify the offer is live and claimable before committing — never guess missing fields
 4. Commit and push; the pipeline validates and deploys automatically
 
+## Contributing
+
+Offer submissions go through pull requests — see
+[CONTRIBUTING.md](CONTRIBUTING.md) for both paths: opening a PR yourself, or
+supplying just the offer's source URL and letting the repository's agent
+skill verify it and open the PR for you.
+
 ## Local Build
 
 The site is built by a dependency-free Python script (see
