@@ -25,3 +25,7 @@ _site/
 
 # Local tooling state
 .gitissue/
+
+# offer-updater staging: drafts awaiting verification/curator decision are
+# NEVER committed (issue #21 trust policy)
+needs_review/
