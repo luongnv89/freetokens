@@ -3377,6 +3377,14 @@ class ConsentForEveryoneTests(unittest.TestCase):
         self.assertIn('"ft-consent-settings"', seg)
         self.assertIn("ftShowBanner();", seg)
 
+    def test_settings_handler_never_rewires(self):
+        # Regression: ftWire() inside the settings click handler stacked
+        # duplicate listeners on every "Cookie settings" click.
+        init = self._init()
+        handler = init.index('"ft-consent-settings"')
+        body = init[handler : init.index("document.addEventListener", handler)]
+        self.assertNotIn("ftWire()", body)
+
     def test_stored_denial_still_wires_the_settings_control(self):
         init = self._init()
         seg = init[init.index("function ftInit") : init.index("function ftSchedule")]
