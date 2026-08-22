@@ -1,0 +1,17 @@
+{
+  "summary": "Venice AI serves the anonymous stealth model Ox Alpha (model id stealth-ox-alpha) at $0 per million tokens for input, output, and cache reads, confirmed directly in Venice's public models API. Access it with a Venice API key through the OpenAI-compatible endpoint.",
+  "claim_steps": [
+    "Create an account and grab an API key at venice.ai.",
+    "Point your client at the base URL https://api.venice.ai/api.",
+    "Use model id stealth-ox-alpha - requests are billed at $0."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/qilua02/status/2090947790268715488",
+      "author": "qilua",
+      "handle": "@qilua02",
+      "text": "Another FUCKING ~1 TRILLION FREE TOKENS for Ox Alpha from Venice AI!! Grab API key: venice.ai - Base URL: api.venice.ai/api - Model: stealth-ox-alpha"
+    }
+  ]
+}

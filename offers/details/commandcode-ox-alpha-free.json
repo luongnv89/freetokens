@@ -1,0 +1,17 @@
+{
+  "summary": "Command Code offers the Ox Alpha stealth model completely free: input, output and cache reads are $0 per million tokens on every plan (Go, GOAT, Pro, Max, Team Pro), drawing down neither credits nor usage limits. The deal auto-applies when you pick ox-alpha and lasts while the stealth preview ends without notice.",
+  "claim_steps": [
+    "Install the CLI: npm i -g command-code, then sign in.",
+    "Have at least $1 of credits in your account to start a session.",
+    "Select Ox Alpha via /model - requests cost no credits while the stealth preview lasts."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/qilua02/status/2090997310008541613",
+      "author": "qilua",
+      "handle": "@qilua02",
+      "text": "Ox Alpha is FREE on these 5 providers (~5T+ tokens total) : - OpenCode: opencode.ai - OpenRouter: openrouter.ai - Command Code: commandcode.ai - Hermes: nousresearch.com - Venice: venice.ai Bookmark this for later"
+    }
+  ]
+}
