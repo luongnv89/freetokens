@@ -45,6 +45,14 @@ SEARCH_DEBOUNCE_MS = 120
 # second attribution event. Distinct offers are never suppressed.
 OFFER_CLICK_DEDUPE_MS = 1000
 
+# --- Dedicated offer detail pages (#60) --------------------------------------
+# Every offer gets its own page at site/offers/<slug>.html so cards, archive
+# rows, and feed items deep-link to a stable URL instead of a DOM anchor.
+# Slugs are validated lowercase-hyphen names (scripts/validate_offers.py),
+# making them safe path segments; the subdirectory also keeps them clear of
+# the reserved root output filenames (index.html, archive.html, ...).
+OFFERS_OUTPUT_DIRNAME = "offers"
+
 # Sort modes (F10): client-side reordering driven by the ?sort= URL param,
 # consistent with the category/q state params. "" (absent) keeps the
 # build-time default order. The select's option labels live in SORT_LABELS.
@@ -788,7 +796,7 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{meta_description}">
 <title>{title}</title>
-<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="icon" type="image/svg+xml" href="{favicon_href}">
 {rss_autodiscovery}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -824,14 +832,16 @@ _HOME_HEADER = """<header class="masthead">
 </header>"""
 
 # Footer nav shared by every page. Links stay relative so they resolve under
-# any deploy base (e.g. the GitHub Pages /<repo>/ project path). The current
-# page is marked aria-current for assistive tech. The RSS link targets the
-# build-generated feed (F12/#27); it is a document, never the current page.
+# any deploy base (e.g. the GitHub Pages /<repo>/ project path); ``depth``
+# prefixes them so pages one level down (offers/<slug>.html) climb back to
+# the site root. The current page is marked aria-current for assistive tech.
+# The RSS link targets the build-generated feed (F12/#27); it is a document,
+# never the current page.
 _FOOT_NAV = """<nav class="foot-nav" aria-label="Site">\
-<a href="./"{offers_current}>Offers</a><span aria-hidden="true">&middot;</span>\
-<a href="archive.html"{archive_current}>Archive</a><span aria-hidden="true">&middot;</span>\
-<a href="privacy.html"{privacy_current}>Privacy policy</a><span aria-hidden="true">&middot;</span>\
-<a href="feed.xml">RSS</a></nav>"""
+<a href="{home_href}"{offers_current}>Offers</a><span aria-hidden="true">&middot;</span>\
+<a href="{archive_href}"{archive_current}>Archive</a><span aria-hidden="true">&middot;</span>\
+<a href="{privacy_href}"{privacy_current}>Privacy policy</a><span aria-hidden="true">&middot;</span>\
+<a href="{feed_href}">RSS</a></nav>"""
 
 # Maintainer contact links (#50), rendered as a second footer nav on every
 # generated page. Destinations are the maintainer's own published profiles;
@@ -875,7 +885,7 @@ _CARD_TMPL = """<li style="--i:{index}">
 <p class="amount">{amount}</p>
 <p class="prov">{provider} &middot; verified <time datetime="{verified_date}">{verified_display}</time></p>
 <div class="card-actions">
-<button type="button" class="detail-btn" data-ft-detail="{offer_id}" aria-haspopup="dialog" aria-controls="ft-detail-{offer_id}">How to claim &amp; details</button>
+<a class="detail-btn" href="{detail_href}">How to claim &amp; details</a>
 </div>
 </article>
 </li>"""
@@ -977,11 +987,13 @@ _CLIENT_EMPTY_TMPL = """<section class="empty" id="ft-no-results" hidden>
 </section>"""
 
 
-# --- Offer detail dialogs (#48) ---------------------------------------------
-# One build-time-rendered <dialog> per offer. Core card fields are always
-# present; curated summary/claim_steps/social_proof sections appear only
-# when the offer has an offers/details/<slug>.json document. The close
-# button is a method="dialog" form so dismissal needs zero JavaScript.
+# --- Dedicated offer detail pages (#60) --------------------------------------
+# Every offer gets one static page under offers/ promoting the former dialog
+# content: core card fields always present; curated summary/claim_steps/
+# social_proof sections appear only when the offer has an
+# offers/details/<slug>.json document. Sections use h2 headings beneath the
+# page's h1, and the proof layout keeps the screenshot/x/reddit/link slots
+# open for future evidence types (#60 acceptance criterion 4).
 
 _PROOF_LINK_LABELS = {
     "x": "View post on X",
@@ -996,13 +1008,30 @@ _FALLBACK_STEPS = (
 )
 
 
-def _proof_card(entry: dict) -> str:
+def _resolve_asset(src: str, rel_prefix: str) -> str:
+    """Prefix a page-relative asset src with ``rel_prefix`` when needed.
+
+    Absolute paths, already-climbing paths and external URLs are left
+    untouched so depth-1 pages (offers/<slug>.html) resolve local
+    screenshots against the site root instead of offers/.
+    """
+    if (
+        not rel_prefix
+        or src.startswith(("../", "./", "/"))
+        or "://" in src
+    ):
+        return src
+    return f"{rel_prefix}{src}"
+
+
+def _proof_card(entry: dict, rel_prefix: str = "") -> str:
     kind = entry["type"]
     if kind == "screenshot":
         caption = html.escape(entry["caption"])
+        image = _resolve_asset(entry["image"], rel_prefix)
         return (
             '<figure class="proof-card proof-screenshot">'
-            f'<img src="{html.escape(entry["image"], quote=True)}" '
+            f'<img src="{html.escape(image, quote=True)}" '
             f'alt="{caption}" loading="lazy">'
             f"<figcaption>{caption}</figcaption>"
             "</figure>"
@@ -1030,10 +1059,72 @@ def _proof_card(entry: dict) -> str:
     )
 
 
-def render_detail_dialog(offer: dict, detail: dict | None) -> str:
-    """Render one hidden <dialog> carrying the full detail view."""
-    slug = offer["slug"]
-    if offer["expiry_date"]:
+def _detail_sections(detail: dict | None, rel_prefix: str = "") -> str:
+    """Shared summary/claim-steps/social-proof partial for offer pages.
+
+    Consumed by render_offer_html; heading levels assume a page context
+    (h2 sections under the page's h1). Without a detail document the
+    fallback claim steps apply and summary/proof sections stay absent,
+    matching what dialogs rendered for such offers. ``rel_prefix`` keeps
+    local screenshot srcs depth-aware (see _resolve_asset).
+    """
+    detail = detail or {}
+    summary_html = ""
+    if detail.get("summary"):
+        summary_html = (
+            f'<p class="od-summary">{html.escape(detail["summary"])}</p>'
+        )
+    steps_html = _FALLBACK_STEPS
+    if detail.get("claim_steps"):
+        steps_html = "".join(
+            f"<li>{html.escape(step)}</li>" for step in detail["claim_steps"]
+        )
+    proof_html = ""
+    if detail.get("social_proof"):
+        cards = "".join(
+            _proof_card(e, rel_prefix) for e in detail["social_proof"]
+        )
+        proof_html = (
+            '<section class="od-proof"><h2>Social proof</h2>'
+            f"{cards}</section>"
+        )
+    return (
+        f"{summary_html}\n"
+        f'<section class="od-steps"><h2>How to claim</h2><ol>{steps_html}</ol></section>\n'
+        f"{proof_html}"
+    )
+
+
+_OFFER_HEADER = """<header class="masthead">
+<p class="kicker">free ai credits &middot; {category_label}</p>
+<h1>{title}</h1>
+<p class="tagline">{amount} from <strong>{provider}</strong>, hand-verified on <time datetime="{verified_date}">{verified_display}</time>.</p>
+<p class="count">{status}</p>
+</header>"""
+
+
+def render_offer_html(
+    offer: dict,
+    detail: dict | None,
+    built: str,
+    measurement_id: str = "",
+) -> str:
+    """Render one dedicated offer page at site/offers/<slug>.html (#60).
+
+    Shares the site chrome at depth 1, so every chrome href climbs one
+    level (../favicon.svg, ../archive.html, ...). The outbound claim link
+    stays hardened like every external anchor on the site.
+    """
+    expired = offer.get("status") == "expired"
+    if expired:
+        status = '<span class="badge badge-expired">Expired</span>'
+        if offer["expiry_date"]:
+            status += (
+                f' <span class="status">ended '
+                f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
+                f'{_human_date(offer["expiry_date"])}</time></span>'
+            )
+    elif offer["expiry_date"]:
         status = (
             f'<span class="status">expires '
             f'<time datetime="{html.escape(offer["expiry_date"], quote=True)}">'
@@ -1045,43 +1136,57 @@ def render_detail_dialog(offer: dict, detail: dict | None) -> str:
             '</span>ongoing</span>'
         )
     provider = html.escape(offer["provider"])
-    title = html.escape(offer["title"], quote=True)
-    steps_html = _FALLBACK_STEPS
-    if detail and detail.get("claim_steps"):
-        steps_html = "".join(
-            f"<li>{html.escape(step)}</li>" for step in detail["claim_steps"]
+    summary_text = (detail or {}).get("summary", "")
+    if summary_text:
+        blurb = (
+            summary_text[:157].rstrip() + "..."
+            if len(summary_text) > 160
+            else summary_text
         )
-    summary_html = ""
-    if detail and detail.get("summary"):
-        summary_html = (
-            f'<p class="od-summary">{html.escape(detail["summary"])}</p>'
+    else:
+        blurb = (
+            f"{offer['amount']} from {offer['provider']} — hand-verified "
+            "free AI credits."
         )
-    proof_html = ""
-    if detail and detail.get("social_proof"):
-        cards = "".join(_proof_card(e) for e in detail["social_proof"])
-        proof_html = (
-            f'<section class="od-proof"><h4>Social proof</h4>{cards}</section>'
+    if expired:
+        cta = (
+            "<p class=\"od-ended\">This offer ended &mdash; nothing here "
+            "is claimable anymore.</p>"
         )
-    return (
-        f'<dialog id="ft-detail-{html.escape(slug, quote=True)}" '
-        f'class="detail" aria-labelledby="ft-detail-{html.escape(slug, quote=True)}-title">\n'
-        f'<div class="od-head"><span class="badge">{html.escape(offer["category"])}</span>'
-        f"{status}"
-        '<form method="dialog" class="od-close-form">'
-        '<button type="submit" class="detail-close" aria-label="Close details">'
-        "&times;</button></form></div>\n"
-        f'<h3 id="ft-detail-{html.escape(slug, quote=True)}-title">{title}</h3>\n'
-        f'<p class="prov">{provider} &middot; verified '
-        f'<time datetime="{html.escape(offer["verified_date"], quote=True)}">'
-        f'{_human_date(offer["verified_date"])}</time></p>\n'
+    else:
+        cta = (
+            f'<a class="od-cta" href="{html.escape(offer["source_url"], quote=True)}" '
+            f'target="_blank" rel="noopener noreferrer">Claim at {provider} '
+            '<span aria-hidden="true">&#8599;</span></a>'
+        )
+    content = (
+        '<article class="offer-detail">\n'
+        '<p class="od-back"><a href="../">&larr; All offers</a></p>\n'
         f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
-        f"{summary_html}\n"
-        f'<section class="od-steps"><h4>How to claim</h4><ol>{steps_html}</ol></section>\n'
-        f"{proof_html}\n"
-        f'<a class="od-cta" href="{html.escape(offer["source_url"], quote=True)}" '
-        f'target="_blank" rel="noopener noreferrer">Claim at {provider} '
-        '<span aria-hidden="true">&#8599;</span></a>\n'
-        "</dialog>"
+        f"{_detail_sections(detail, rel_prefix='../')}\n"
+        f"{cta}\n"
+        "</article>"
+    )
+    return _page_shell(
+        title=html.escape(f"{offer['title']} · Free AI Credits"),
+        meta_description=html.escape(blurb, quote=True),
+        header=_OFFER_HEADER.format(
+            category_label=html.escape(
+                CATEGORY_LABELS.get(offer["category"], offer["category"])
+            ),
+            title=html.escape(offer["title"], quote=True),
+            amount=html.escape(offer["amount"]),
+            provider=provider,
+            verified_date=html.escape(offer["verified_date"], quote=True),
+            verified_display=_human_date(offer["verified_date"]),
+            status=status,
+        ),
+        content=content,
+        built=built,
+        foot_current="",
+        css_extra=_DETAIL_CSS,
+        measurement_id=measurement_id,
+        depth=1,
     )
 
 
@@ -1411,15 +1516,16 @@ _APP_CSS = """
 }
 """
 
-# Offer detail dialogs (#48): trigger buttons on cards plus the dialog
-# surface itself. Native <dialog> centers itself; the close button is a
-# method="dialog" form, so opening is the only scripted interaction.
+# Offer detail affordances (#60): the card trigger is now a plain
+# navigational link to the offer's page, and the page itself reuses the
+# former dialog content styles scoped under .offer-detail.
 _DETAIL_CSS = """
-/* ---- Card detail trigger ---------------------------------------------- */
+/* ---- Card detail link -------------------------------------------------- */
 
 .card-actions { margin-top: 0.75rem; }
 
 .detail-btn {
+  display: block;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.78rem;
   padding: 0.42rem 0.95rem;
@@ -1428,7 +1534,8 @@ _DETAIL_CSS = """
   background: var(--paper);
   color: var(--ink);
   cursor: pointer;
-  width: 100%;
+  text-align: center;
+  text-decoration: none;
 }
 
 .detail-btn:hover { background: var(--ink); color: var(--paper); }
@@ -1438,72 +1545,46 @@ _DETAIL_CSS = """
   outline-offset: 3px;
 }
 
-/* ---- Detail dialog ------------------------------------------------------ */
+/* ---- Offer detail page --------------------------------------------------- */
 
-.detail {
-  width: min(34rem, calc(100vw - 2rem));
-  border: 1px solid var(--ink);
-  border-radius: 12px;
-  padding: clamp(1.1rem, 4vw, 1.75rem);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
-  /* Explicit containment: don't depend on UA default dialog sizing. */
-  max-height: min(85vh, calc(100dvh - 2rem));
-  overflow-y: auto;
+.offer-detail {
+  max-width: 42rem;
+  margin: 0 auto;
 }
 
-.detail::backdrop { background: rgba(0, 0, 0, 0.45); }
-
-.detail h3 {
-  font-size: clamp(1.3rem, 4vw, 1.6rem);
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin: 0.5rem 0 0;
-  overflow-wrap: anywhere;
+.od-back {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  margin: 0 0 1.5rem;
 }
 
-.od-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.od-close-form { margin: 0; line-height: 0; }
-
-.detail-close {
-  font-family: inherit;
-  font-size: 1.1rem;
-  line-height: 1;
-  padding: 0.3rem 0.65rem;
-  border-radius: 999px;
-  border: 1px solid var(--ink);
-  background: var(--paper);
+.od-back a {
   color: var(--ink);
-  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
 }
 
-.detail-close:hover { background: var(--ink); color: var(--paper); }
-
-.detail-close:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+.od-back a:hover,
+.od-back a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
 }
 
-.detail .prov { margin: 0.35rem 0 0; padding-top: 0; }
+.offer-detail .amount {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  margin: 0.75rem 0 0;
+}
 
-.detail .amount { margin-top: 0.6rem; }
+.od-summary { margin: 1.25rem 0 0; }
 
-.od-summary { margin: 0.75rem 0 0; }
-
-.detail section h4 {
+.offer-detail section h2 {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--gray);
-  margin: 1.25rem 0 0.35rem;
+  margin: 1.5rem 0 0.35rem;
 }
 
 .od-steps ol,
@@ -1562,7 +1643,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 
 .od-cta {
   display: inline-block;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
   padding: 0.55rem 1.15rem;
   border-radius: 999px;
   background: var(--ink);
@@ -1579,14 +1660,23 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   outline-offset: 3px;
 }
 
+/* Ended offers (#25): muted, non-interactive notice in place of the CTA —
+   the wording itself carries the meaning, styling is decoration only. */
+.od-ended {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+}
+
 /* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
 @media (pointer: coarse) {
   .detail-btn,
-  .detail-close { min-height: 44px; }
-}
-
-@media (max-width: 480px) {
-  .detail { width: calc(100vw - 1.25rem); }
+  .od-cta { min-height: 44px; }
 }
 """
 
@@ -1704,20 +1794,6 @@ _APP_JS = """<script id="ft-app">
     }
   }
 
-  // Offer detail dialogs (#48): open the build-time-rendered <dialog> for
-  // this listing. Guarded so browsers without dialog support keep working;
-  // analytics carries only the listing ID, never panel content.
-  function ftOpenDetail(slug) {
-    var dlg = document.getElementById("ft-detail-" + slug);
-    if (!dlg || typeof dlg.showModal !== "function") { return; }
-    try {
-      dlg.showModal();
-    } catch (err) {}
-    try {
-      ftTrack("offer_details_open", { offer_id: slug });
-    } catch (err) {}
-  }
-
   function ftInitApp() {
     var grid = document.getElementById("ft-grid");
     var input = document.getElementById("ft-search");
@@ -1769,23 +1845,6 @@ _APP_JS = """<script id="ft-app">
           category: node.getAttribute("data-ft-offer-category") || ""
         });
       } catch (err) {}
-    });
-
-    // Detail triggers (#48): one delegated listener covers every card's
-    // "How to claim & details" button; clicks bubble exactly like the
-    // outbound-link attribution above.
-    grid.addEventListener("click", function (event) {
-      var node = event.target;
-      while (node && node !== grid) {
-        if (node.getAttribute) {
-          var slug = node.getAttribute("data-ft-detail");
-          if (slug) {
-            ftOpenDetail(slug);
-            return;
-          }
-        }
-        node = node.parentNode || null;
-      }
     });
 
     function syncControls() {
@@ -1983,10 +2042,20 @@ def build_app_js() -> str:
     )
 
 
-def _foot_nav(current: str) -> str:
-    """Footer nav for every page; ``current`` marks the active link."""
+def _foot_nav(current: str, depth: int = 0) -> str:
+    """Footer nav for every page; ``current`` marks the active link.
+
+    ``depth`` is the page's directory distance from site root (0 for
+    index/archive/privacy, 1 for offers/<slug>.html) and prefixes every
+    href so links stay relative and deploy-base safe.
+    """
+    up = "../" * depth
     return (
         _FOOT_NAV.format(
+            home_href=up or "./",
+            archive_href=f"{up}archive.html",
+            privacy_href=f"{up}privacy.html",
+            feed_href=f"{up}feed.xml",
             offers_current=' aria-current="page"' if current == "home" else "",
             archive_current=' aria-current="page"' if current == "archive" else "",
             privacy_current=' aria-current="page"' if current == "privacy" else "",
@@ -2006,12 +2075,19 @@ def _page_shell(
     css_extra: str = "",
     measurement_id: str = "",
     app_js: bool = False,
+    depth: int = 0,
 ) -> str:
-    """Fill the shared page chrome (head, masthead slot, footer, analytics)."""
+    """Fill the shared page chrome (head, masthead slot, footer, analytics).
+
+    ``depth`` parameterizes relative-path resolution: root pages reference
+    ./favicon.svg and feed.xml; pages under offers/ must climb one level.
+    """
     built_display = (
         f'<time datetime="{html.escape(built, quote=True)}">'
         f'{_human_date(built[:10])}</time>'
     )
+    rel_prefix = "../" if depth else "./"
+    up = "../" * depth
     return _PAGE_TMPL.format(
         title=title,
         meta_description=meta_description,
@@ -2019,15 +2095,17 @@ def _page_shell(
         content=content,
         css=_CSS + css_extra,
         built_display=built_display,
-        foot_nav=_foot_nav(foot_current),
+        foot_nav=_foot_nav(foot_current, depth),
         ga_head=build_consent_head(measurement_id),
         banner=_BANNER_TMPL if measurement_id else "",
         ga_init=build_analytics_init(measurement_id),
         app_js=build_app_js() if app_js else "",
         rss_autodiscovery=(
             '<link rel="alternate" type="application/rss+xml" '
-            f'title="{html.escape(FEED_TITLE, quote=True)}" href="feed.xml">'
+            f'title="{html.escape(FEED_TITLE, quote=True)}" '
+            f'href="{up}feed.xml">'
         ),
+        favicon_href=f"{rel_prefix}favicon.svg",
     )
 
 
@@ -2048,18 +2126,14 @@ def expired_offers(index: dict) -> list:
                   reverse=True)
 
 
-def render_html(
-    index: dict, measurement_id: str = "", details: dict | None = None
-) -> str:
+def render_html(index: dict, measurement_id: str = "") -> str:
     analytics = bool(measurement_id)
     # Retain-and-flag (#25): expired entries stay in the index for the
     # archive/feed but never reach the default visitor list.
     offers_active = active_offers(index)
     has_offers = bool(offers_active)
-    detail_map = details or {}
     if not has_offers:
         content = _EMPTY_TMPL
-        dialogs_html = ""
     else:
         cards = []
         for i, o in enumerate(offers_active):
@@ -2090,20 +2164,20 @@ def render_html(
                     expiry_display=expiry,
                     expiry_iso=html.escape(o["expiry_date"] or "", quote=True),
                     amount_sort=f"{amount_sort_value(o['amount']):g}",
+                    # Relative from site root; stays deploy-base safe under
+                    # the GitHub Pages /<repo>/ project path (#60).
+                    detail_href=(
+                        f"{OFFERS_OUTPUT_DIRNAME}/"
+                        f"{html.escape(o['slug'], quote=True)}.html"
+                    ),
                 )
             )
-        dialogs_html = "\n".join(
-            render_detail_dialog(offer, detail_map.get(offer["slug"]))
-            for offer in offers_active
-        )
         content = (
             build_toolbar(len(offers_active))
             + '<ul class="grid" id="ft-grid">\n'
             + "\n".join(cards)
             + "\n</ul>"
             + _CLIENT_EMPTY_TMPL
-            + "\n"
-            + dialogs_html
         )
     built = index["generated_at"]
     return _page_shell(
@@ -2150,6 +2224,9 @@ _ARCHIVED_CARD_TMPL = """<li style="--i:{index}">
 <h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">{amount}</p>
 <p class="prov">{provider} &middot; expired <time datetime="{expiry_date}">{expiry_display}</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="{detail_href}">View details</a>
+</div>
 </article>
 </li>"""
 
@@ -2180,6 +2257,12 @@ def render_archive_html(index: dict, measurement_id: str = "") -> str:
                     expiry_display=_human_date(o["expiry_date"])
                     if o["expiry_date"]
                     else "unknown",
+                    # Expired offers keep their detail page too (#60): the
+                    # archive links to the retained record, not just out.
+                    detail_href=(
+                        f"{OFFERS_OUTPUT_DIRNAME}/"
+                        f"{html.escape(o['slug'], quote=True)}.html"
+                    ),
                 )
             )
         content = (
@@ -2199,7 +2282,8 @@ def render_archive_html(index: dict, measurement_id: str = "") -> str:
         content=content,
         built=index["generated_at"],
         foot_current="archive",
-        css_extra=_BANNER_CSS if measurement_id else "",
+        css_extra=(_DETAIL_CSS if archived else "")
+        + (_BANNER_CSS if measurement_id else ""),
         measurement_id=measurement_id,
     )
 
@@ -2207,10 +2291,10 @@ def render_archive_html(index: dict, measurement_id: str = "") -> str:
 # --- RSS feed (#27 / F12) ----------------------------------------------------
 #
 # A valid RSS 2.0 document emitted at build time covering every ACTIVE offer.
-# Item links point back at the offering's anchor on the home page
-# (#offer-<slug>); pubDate comes from the verified date. Syndication formats
-# require absolute URLs, so channel/item links use --base-url while every
-# in-page href elsewhere stays relative.
+# Item links point at the offer's dedicated detail page (#60,
+# /offers/<slug>.html); pubDate comes from the verified date. Syndication
+# formats require absolute URLs, so channel/item links use --base-url while
+# every in-page href elsewhere stays relative.
 
 _RSS_CHANNEL_LINK_PATH = "/"
 
@@ -2261,7 +2345,7 @@ def build_feed(index: dict, base_url: str) -> str:
         key=lambda o: (o["verified_date"], o["slug"]),
         reverse=True,
     ):
-        anchor = f"{base}/#offer-{_xml(o['slug'])}"
+        anchor = f"{base}/{OFFERS_OUTPUT_DIRNAME}/{_xml(o['slug'])}.html"
         items.append(
             "<item>"
             f"<title>{_xml(o['title'])}</title>"
@@ -2331,7 +2415,6 @@ _PRIVACY_CONTENT = """<div class="policy">
 <li><strong>Which sort option you picked</strong> (for example &ldquo;Expiring soon&rdquo;) &mdash; nothing else about your sorting.</li>
 <li><strong>Search activity as a length only</strong> &mdash; when you search, the event records just <code>query_length</code>, the number of characters typed. The words themselves stay in your browser and are never sent anywhere.</li>
 <li><strong>Offer clicks</strong> &mdash; which listing you clicked (its ID, provider name, and category).</li>
-<li><strong>Detail views</strong> &mdash; which offer&rsquo;s detail panel you opened (its listing ID).</li>
 </ul>
 </section>
 
@@ -2437,7 +2520,7 @@ def main(argv=None) -> int:
         json.dump(index, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as fh:
-        fh.write(render_html(index, measurement_id, details))
+        fh.write(render_html(index, measurement_id))
     with open(os.path.join(out_dir, "archive.html"), "w", encoding="utf-8") as fh:
         fh.write(render_archive_html(index, measurement_id))
     with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
@@ -2447,12 +2530,46 @@ def main(argv=None) -> int:
     with open(os.path.join(out_dir, "feed.xml"), "w", encoding="utf-8") as fh:
         fh.write(build_feed(index, args.base_url))
 
+    # Dedicated detail pages (#60): one per offer — active AND expired, so
+    # archive rows resolve too. Detail documents are optional; offers
+    # without one render the fallback claim steps.
+    offers_out = os.path.join(out_dir, OFFERS_OUTPUT_DIRNAME)
+    os.makedirs(offers_out, exist_ok=True)
+    for entry in index["offers"]:
+        page_path = os.path.join(offers_out, f"{entry['slug']}.html")
+        with open(page_path, "w", encoding="utf-8") as fh:
+            fh.write(
+                render_offer_html(
+                    entry,
+                    details.get(entry["slug"]),
+                    index["generated_at"],
+                    measurement_id,
+                )
+            )
+
+    # Orphan-detail validation extended (#60): the build fails loudly unless
+    # every offer yielded its page file.
+    missing_pages = [
+        o["slug"]
+        for o in index["offers"]
+        if not os.path.isfile(
+            os.path.join(out_dir, OFFERS_OUTPUT_DIRNAME, f"{o['slug']}.html")
+        )
+    ]
+    if missing_pages:
+        print(
+            "build failed: no detail page emitted for: "
+            + ", ".join(missing_pages),
+            file=sys.stderr,
+        )
+        return 1
+
     note = f" (analytics: {measurement_id})" if measurement_id else ""
     print(
         f"built {index['count']} offers ({index['active_count']} active, "
         f"{index['expired_count']} expired) -> index.json, site/index.html, "
         "site/archive.html, site/privacy.html, site/favicon.svg, "
-        f"site/feed.xml{note}"
+        f"site/feed.xml, site/{OFFERS_OUTPUT_DIRNAME}/*.html{note}"
     )
     return 0
 

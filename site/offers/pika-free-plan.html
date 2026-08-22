@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage.">
-<title>Privacy Policy · Free AI Credits</title>
-<link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<link rel="alternate" type="application/rss+xml" title="Free AI Credits — hand-verified free AI credit offers" href="feed.xml">
+<meta name="description" content="Pika&#x27;s free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and cred...">
+<title>Pika Free Plan · Free AI Credits</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate" type="application/rss+xml" title="Free AI Credits — hand-verified free AI credit offers" href="../feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -355,91 +355,188 @@ a:focus-visible {
   from { opacity: 0; transform: translateY(10px); }
 }
 
+/* ---- Card detail link -------------------------------------------------- */
+
+.card-actions { margin-top: 0.75rem; }
+
+.detail-btn {
+  display: block;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.detail-btn:hover { background: var(--ink); color: var(--paper); }
+
+.detail-btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---- Offer detail page --------------------------------------------------- */
+
+.offer-detail {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.od-back {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  margin: 0 0 1.5rem;
+}
+
+.od-back a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.od-back a:hover,
+.od-back a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+}
+
+.offer-detail .amount {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  margin: 0.75rem 0 0;
+}
+
+.od-summary { margin: 1.25rem 0 0; }
+
+.offer-detail section h2 {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  margin: 1.5rem 0 0.35rem;
+}
+
+.od-steps ol,
+.od-proof ul {
+  margin: 0.35rem 0;
+  padding-left: 1.25rem;
+}
+
+.od-steps li { margin: 0.3rem 0; }
+
+.proof-card {
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--green);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0.6rem 0;
+}
+
+.proof-card p { margin: 0.15rem 0; }
+
+.proof-text { overflow-wrap: anywhere; }
+
+.proof-card footer,
+.proof-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+.proof-card footer { margin-top: 0.35rem; }
+
+.proof-card footer a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+figure.proof-screenshot { margin: 0.6rem 0; }
+
+.proof-screenshot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+}
+
+.proof-screenshot figcaption {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+  margin-top: 0.4rem;
+}
+
+.od-cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+}
+
+.od-cta:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.od-cta:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Ended offers (#25): muted, non-interactive notice in place of the CTA —
+   the wording itself carries the meaning, styling is decoration only. */
+.od-ended {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+}
+
+/* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
+@media (pointer: coarse) {
+  .detail-btn,
+  .od-cta { min-height: 44px; }
+}
+
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="masthead">
-<p class="kicker">free ai credits</p>
-<h1>Privacy Policy</h1>
-<p class="tagline">The short version: this is a static page that stores almost nothing about you &mdash; and asks before it counts your visit.</p>
+<p class="kicker">free ai credits &middot; Video</p>
+<h1>Pika Free Plan</h1>
+<p class="tagline">80 monthly video credits from <strong>Pika</strong>, hand-verified on <time datetime="2026-08-21">Aug 21, 2026</time>.</p>
+<p class="count"><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span></p>
 </header>
 <main>
-<div class="policy">
-<section class="summary" aria-labelledby="privacy-summary">
-<h2 id="privacy-summary">In short</h2>
-<ul>
-<li>No accounts, no forms, no logins &mdash; we have nowhere to store personal details.</li>
-<li>If visit-counting is switched on, it runs through Google Analytics 4 with IP anonymization.</li>
-<li>Your raw search text is <strong>never</strong> collected &mdash; only how many characters you typed.</li>
-<li>The only thing this site saves on your device is a single-word remember of your cookie choice.</li>
-<li>You can block all of it with an ad blocker and every feature still works.</li>
-</ul>
-</section>
+<article class="offer-detail">
+<p class="od-back"><a href="../">&larr; All offers</a></p>
+<p class="amount">80 monthly video credits</p>
+<p class="od-summary">Pika&#x27;s free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and credits refresh monthly.</p>
+<section class="od-steps"><h2>How to claim</h2><ol><li>Sign up at pika.art with Google or Discord.</li><li>Open the generator from your workspace.</li><li>Create videos from text or image prompts; each generation spends credits.</li><li>Wait for the monthly reset to get your next 80 credits.</li></ol></section>
 
-<section aria-labelledby="privacy-what-this-is">
-<h2 id="privacy-what-this-is">What this site is</h2>
-<p>This site is a hand-built static page: a fixed HTML file served from GitHub Pages. There are no user accounts, no comment forms, no newsletter sign-ups, and no server-side database. Nothing about you is written down on our side &mdash; we couldn't store your name or email address even by accident, because v1.0 has no form that could submit them.</p>
-</section>
-
-<section aria-labelledby="privacy-analytics">
-<h2 id="privacy-analytics">What the analytics measure</h2>
-<p>To learn which offers people find useful, the site can count visits with Google Analytics 4 (GA4). This is off entirely unless the site owner has configured a measurement ID at build time &mdash; if it is not configured, no analytics code exists on the page at all.</p>
-<p>When counting <em>is</em> active and you have allowed it, GA4 records:</p>
-<ul>
-<li><strong>Page views</strong> &mdash; which page you viewed (the path only; anything after <code>?</code> in the address is removed before sending).</li>
-<li><strong>Anonymized IP addresses</strong> &mdash; the last octet of your IP is zeroed out by IP anonymization, so we never see your full address.</li>
-<li><strong>Coarse technical metadata</strong> &mdash; things like browser family, screen size buckets, and approximate region derived from the anonymized IP.</li>
-<li><strong>Which filter category you picked</strong> (for example &ldquo;Image&rdquo;) &mdash; nothing else about your filtering.</li>
-<li><strong>Which sort option you picked</strong> (for example &ldquo;Expiring soon&rdquo;) &mdash; nothing else about your sorting.</li>
-<li><strong>Search activity as a length only</strong> &mdash; when you search, the event records just <code>query_length</code>, the number of characters typed. The words themselves stay in your browser and are never sent anywhere.</li>
-<li><strong>Offer clicks</strong> &mdash; which listing you clicked (its ID, provider name, and category).</li>
-</ul>
-</section>
-
-<section aria-labelledby="privacy-consent">
-<h2 id="privacy-consent">Consent, cookies, and local storage</h2>
-<p>Analytics starts from a denied state inside your browser: the measurement code is not even loaded until permission exists. Visitors whose browser time zone indicates they are likely in the EU see a small banner asking &ldquo;Allow?&rdquo; first &mdash; declining means zero tracking requests leave your browser. Elsewhere, visits are counted without showing the banner, matching the site's regional default; a previously recorded refusal is always honored.</p>
-<p>Your answer is remembered in your browser's local storage under the key <code>ft_ga_consent</code> as one word: <code>granted</code> or <code>denied</code>. That single word is the only data this site itself ever writes on your device &mdash; the site sets no cookies of its own. Once you allow counting, Google Analytics may set its own cookies (such as <code>_ga</code>) to tell repeat visits apart; those cookies belong to Google and follow Google's rules.</p>
-</section>
-
-<section aria-labelledby="privacy-third-parties">
-<h2 id="privacy-third-parties">Who else receives data</h2>
-<ul>
-<li><strong>Google LLC</strong> processes the analytics data under the <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google Privacy Policy</a> and Google Analytics' own terms (<a href="https://support.google.com/analytics/answer/6004245" rel="noopener noreferrer">how Google uses data from sites like this one</a>).</li>
-<li><strong>Google Fonts</strong> serves the typefaces this page displays; loading them is a plain request from your browser to Google's servers.</li>
-<li><strong>Offer providers</strong> &mdash; clicking an offer takes you to a third-party website. Once you are there, that company's privacy policy applies, not this one.</li>
-</ul>
-</section>
-
-<section aria-labelledby="privacy-never">
-<h2 id="privacy-never">What we never do</h2>
-<ul>
-<li>We never sell, rent, or trade data &mdash; there is no ad business on this site.</li>
-<li>We never collect your name, email, or any identifier tied to you personally.</li>
-<li>We never collect the text you type into search.</li>
-</ul>
-</section>
-
-<section aria-labelledby="privacy-choices">
-<h2 id="privacy-choices">Your choices</h2>
-<ul>
-<li><strong>Decline or accept</strong> the banner when it appears; press <kbd>Escape</kbd> to decline it.</li>
-<li><strong>Change your mind later</strong> by clearing your browser's site data for this site &mdash; the next visit starts fresh.</li>
-<li><strong>Block everything</strong> with an ad blocker or your browser's tracking protection. The site degrades silently: every offer, filter, and link keeps working exactly the same.</li>
-</ul>
-</section>
-
-<section aria-labelledby="privacy-changes">
-<h2 id="privacy-changes">Changes and contact</h2>
-<p>If the site's data practices change, this page will change with them &mdash; it is rebuilt together with the site on every update.</p>
-<p>Questions or concerns? <a href="https://github.com/luongnv89/freetokens/issues" rel="noopener noreferrer">Open an issue on GitHub</a>.</p>
-</section>
-</div>
+<a class="od-cta" href="https://pika.art/pricing" target="_blank" rel="noopener noreferrer">Claim at Pika <span aria-hidden="true">&#8599;</span></a>
+</article>
 </main>
 <footer class="foot">
 <p>Built <time datetime="2026-08-22T12:20:02Z">Aug 22, 2026</time> &middot; offers re-verified on every change</p>
-<nav class="foot-nav" aria-label="Site"><a href="./">Offers</a><span aria-hidden="true">&middot;</span><a href="archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="privacy.html" aria-current="page">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
+<nav class="foot-nav" aria-label="Site"><a href="../">Offers</a><span aria-hidden="true">&middot;</span><a href="../archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="../privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="../feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 </footer>
 </div>
 
