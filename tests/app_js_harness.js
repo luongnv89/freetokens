@@ -1,15 +1,21 @@
 "use strict";
 /*
- * Behavioral harness for build.py's _APP_JS (issues #13/#14, #16).
+ * Behavioral harness for build.py's _APP_JS (issues #13/#14, #16, #62).
  *
  * Runs the site script inside a `node:vm` sandbox with a minimal DOM stub,
  * replays a JSON scenario from stdin, and prints one JSON line per step:
  *
  *   {visible, status, pressed, inputValue, emptyHidden, historyUrls,
- *    locationSearch, events, detailLinks, perf_ms?, preventDefaults?}
+ *    locationSearch, events, detailLinks, perf_ms?, preventDefaults?,
+ *    trafficHidden?, trafficToday?, trafficPeriod?}
  *
  * Clicks bubble along parentNode chains, so the delegated grid listener
  * behind `offer_click` attribution is exercised like a real click.
+ *
+ * Live traffic scenarios (#62) add scenario.stats_mode ("ok", "http_error",
+ * "network_error", "bad_json", "none") plus optional stats_payloads keyed by
+ * Counterscale interval; the {"op":"settle"} step drains microtasks so
+ * pending fetch promise chains resolve deterministically.
  *
  * Used by tests/test_build.py::NodeAppJsTests; skipped automatically when
  * no runnable node exists on the machine.
@@ -88,6 +94,16 @@ function makeElement(tag) {
     },
     querySelector(selector) {
       if (selector === "[data-category]") return el.card;
+      // "#id" lookup over this element's subtree (traffic strip slots).
+      const m = /^#([\w-]+)$/.exec(selector);
+      if (m) {
+        const stack = [...el.children];
+        while (stack.length) {
+          const node = stack.shift();
+          if (node.attrs && node.attrs.id === m[1]) return node;
+          stack.push(...(node.children || []));
+        }
+      }
       return null;
     },
   };
@@ -105,7 +121,7 @@ function fire(el, type, event) {
   }
 }
 
-function runScenario(scenario) {
+async function runScenario(scenario) {
   const timers = new FakeTimers();
 
   // --- DOM -------------------------------------------------------------
@@ -174,6 +190,19 @@ function runScenario(scenario) {
     return chip;
   });
 
+  // Live traffic strip (#62): hidden until the stats module fills it.
+  const trafficBox = makeElement("p");
+  trafficBox.attrs.id = "ft-traffic";
+  trafficBox.hidden = true;
+  const trafficToday = makeElement("strong");
+  trafficToday.attrs.id = "ft-traffic-today";
+  trafficToday.textContent = "\u2014";
+  const trafficPeriod = makeElement("strong");
+  trafficPeriod.attrs.id = "ft-traffic-period";
+  trafficPeriod.textContent = "\u2014";
+  trafficBox.appendChild(trafficToday);
+  trafficBox.appendChild(trafficPeriod);
+
   const byId = {
     "ft-grid": grid,
     "ft-search": input,
@@ -181,6 +210,9 @@ function runScenario(scenario) {
     "ft-results-status": status,
     "ft-no-results": emptyBox,
     "ft-reset-filters": resetButton,
+    "ft-traffic": trafficBox,
+    "ft-traffic-today": trafficToday,
+    "ft-traffic-period": trafficPeriod,
   };
 
   const location_ = { pathname: "/", search: scenario.init_search || "" };
@@ -244,6 +276,33 @@ function runScenario(scenario) {
     sandbox.ftTrackEvent = (name, params) => events.push([name, params]);
   }
 
+  // Live traffic (#62): controllable fetch stub routed by interval param.
+  const statsMode = scenario.stats_mode || "none";
+  if (statsMode !== "none") {
+    sandbox.fetch = (url) => {
+      if (statsMode === "network_error") {
+        return Promise.reject(new TypeError("NetworkError"));
+      }
+      const match = /[?&]interval=([^&]+)/.exec(url);
+      const interval = match ? decodeURIComponent(match[1]) : "";
+      const payloads = scenario.stats_payloads || {};
+      const body = Object.prototype.hasOwnProperty.call(payloads, interval)
+        ? payloads[interval]
+        : { views: 0, visitors: 0 };
+      if (statsMode === "http_error") {
+        return Promise.resolve({ ok: false, status: 500, json: () => Promise.resolve(body) });
+      }
+      if (statsMode === "bad_json") {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => Promise.reject(new Error("invalid json")),
+        });
+      }
+      return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve(body) });
+    };
+  }
+
   vm.createContext(sandbox);
   vm.runInContext(fs.readFileSync(scenario.app, "utf8"), sandbox, {
     filename: "app.js",
@@ -277,6 +336,9 @@ function runScenario(scenario) {
           },
           {}
         ),
+        trafficHidden: trafficBox.hidden,
+        trafficToday: trafficToday.textContent,
+        trafficPeriod: trafficPeriod.textContent,
       },
       extra || {}
     );
@@ -341,6 +403,11 @@ function runScenario(scenario) {
       extra.perf_ms = Date.now() - t0;
     } else if (step.op === "snapshot") {
       // Snapshots are taken after every step anyway.
+    } else if (step.op === "settle") {
+      // Drain microtasks so pending fetch promise chains resolve
+      // deterministically before the next snapshot.
+      for (let i = 0; i < 8; i++) await Promise.resolve();
+      await new Promise((resolve) => setImmediate(resolve));
     } else {
       throw new Error(`unknown op ${step.op}`);
     }
@@ -349,5 +416,12 @@ function runScenario(scenario) {
   return results;
 }
 
-const scenario = JSON.parse(fs.readFileSync(0, "utf8"));
-process.stdout.write(JSON.stringify(runScenario(scenario)));
+(async () => {
+  try {
+    const scenario = JSON.parse(fs.readFileSync(0, "utf8"));
+    process.stdout.write(JSON.stringify(await runScenario(scenario)));
+  } catch (err) {
+    console.error((err && err.stack) || String(err));
+    process.exit(1);
+  }
+})();
