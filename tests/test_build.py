@@ -477,7 +477,7 @@ class SemanticPageTests(unittest.TestCase):
 
     def test_cards_are_list_items_inside_ordered_grid(self):
         page = self._render_many()
-        self.assertIn('<ol class="grid" id="ft-grid">', page)
+        self.assertIn('<ol class="grid" id="ft-grid" role="list">', page)
         self.assertIn("</ol>", page)
         self.assertNotIn('<ul class="grid" id="ft-grid">', page)
         self.assertEqual(page.count("<li "), page.count("<article"))
@@ -2987,6 +2987,14 @@ class HomeListingTests(unittest.TestCase):
         amount_css = page[page.index(".r-amount {") : page.index(".r-amount {") + 220]
         self.assertNotIn("white-space: nowrap", amount_css)
         self.assertIn("overflow-wrap: anywhere", amount_css)
+
+    def test_unbroken_provider_wraps_instead_of_forcing_horizontal_scroll(self):
+        provider = "Provider" * 40
+        page = self._page(n=1, provider=provider)
+        self.assertIn(f'<span class="r-prov">{provider}</span>', page)
+        provider_css = page[page.index(".r-prov {") : page.index(".r-prov {") + 120]
+        self.assertIn("min-width: 0", provider_css)
+        self.assertIn("overflow-wrap: anywhere", provider_css)
 
     def test_row_shows_amount_provider_category_expiry_verified_and_details(self):
         page = self._page(n=1, amount="$50 credit", provider="Alpha AI")

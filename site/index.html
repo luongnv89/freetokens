@@ -608,6 +608,11 @@ a:focus-visible {
 
 .row-meta .sep { color: var(--hairline); }
 
+.r-prov {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 #ft-grid .badge {
   font-size: 0.63rem;
   font-weight: 600;
@@ -663,7 +668,7 @@ a:focus-visible {
 <p class="count"><strong>32</strong> live offers &middot; <strong>30</strong> ongoing &middot; <strong>32</strong> verified</p>
 </header>
 <main>
-<section class="toolbar" aria-label="Search and filter offers"><div class="field"><label class="tool-label" for="ft-search">Search</label><input type="search" id="ft-search" name="q" placeholder="Search title, provider, or amount&hellip;" autocomplete="off" spellcheck="false" maxlength="200"></div><div class="field field-sort"><label class="tool-label" for="ft-sort">Sort</label><select id="ft-sort"><option value="">Default</option><option value="newest">Newest verified</option><option value="expiring">Expiring soon</option><option value="amount">Largest amount</option></select></div><div class="chips" role="group" aria-label="Filter by category"><button type="button" class="chip" data-ft-category="" aria-pressed="true">All</button><button type="button" class="chip" data-ft-category="api_provider" aria-pressed="false">API providers</button><button type="button" class="chip" data-ft-category="coding" aria-pressed="false">Coding</button><button type="button" class="chip" data-ft-category="image" aria-pressed="false">Image</button><button type="button" class="chip" data-ft-category="voice" aria-pressed="false">Voice</button><button type="button" class="chip" data-ft-category="video" aria-pressed="false">Video</button></div><p class="results-status" id="ft-results-status" role="status" aria-live="polite">Showing all 32 offers</p></section><ul class="grid" id="ft-grid">
+<section class="toolbar" aria-label="Search and filter offers"><div class="field"><label class="tool-label" for="ft-search">Search</label><input type="search" id="ft-search" name="q" placeholder="Search title, provider, or amount&hellip;" autocomplete="off" spellcheck="false" maxlength="200"></div><div class="field field-sort"><label class="tool-label" for="ft-sort">Sort</label><select id="ft-sort"><option value="">Default</option><option value="newest">Newest verified</option><option value="expiring">Expiring soon</option><option value="amount">Largest amount</option></select></div><div class="chips" role="group" aria-label="Filter by category"><button type="button" class="chip" data-ft-category="" aria-pressed="true">All</button><button type="button" class="chip" data-ft-category="api_provider" aria-pressed="false">API providers</button><button type="button" class="chip" data-ft-category="coding" aria-pressed="false">Coding</button><button type="button" class="chip" data-ft-category="image" aria-pressed="false">Image</button><button type="button" class="chip" data-ft-category="voice" aria-pressed="false">Voice</button><button type="button" class="chip" data-ft-category="video" aria-pressed="false">Video</button></div><p class="results-status" id="ft-results-status" role="status" aria-live="polite">Showing all 32 offers</p></section><ol class="grid" id="ft-grid" role="list">
 <li style="--i:0">
 <article class="card" id="offer-aihubmix-free-model-catalog" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="5e+07">
 <div class="row-head">
@@ -1016,7 +1021,7 @@ a:focus-visible {
 </p>
 </article>
 </li>
-</ul><section class="empty" id="ft-no-results" hidden>
+</ol><section class="empty" id="ft-no-results" hidden>
 <p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8.5 11h5"/></svg></p>
 <h2>No matching offers</h2>
 <p>Nothing matches your current search and category combination.</p>

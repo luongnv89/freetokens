@@ -1194,6 +1194,11 @@ _HOME_CSS = """
 
 .row-meta .sep { color: var(--hairline); }
 
+.r-prov {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 #ft-grid .badge {
   font-size: 0.63rem;
   font-weight: 600;
@@ -2914,7 +2919,7 @@ def render_html(
             )
         content = (
             build_toolbar(len(offers_active))
-            + '<ol class="grid" id="ft-grid">\n'
+            + '<ol class="grid" id="ft-grid" role="list">\n'
             + "\n".join(cards)
             + "\n</ol>"
             + _CLIENT_EMPTY_TMPL
