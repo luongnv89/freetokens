@@ -1,0 +1,15 @@
+# Verified 2026-08-22 against https://talentgenius.io/chatgpt/request
+# ("Complete the form below to unlock your ChatGPT Business signup link")
+# NOTE (2026-08-22): TalentGenius confirms being an OpenAI SMB Channel Partner
+# (https://talentgenius.io/talentgenius-becomes-an-openai-smb-channel-partner)
+# and the request form is live, BUT neither page states the X post's claimed
+# terms ("pay $25/mo for 1 seat, get a 2nd seat free for 4 years"). Those
+# terms come solely from an X post by @Rakib_Web3; published as UNVERIFIED
+# by explicit curator decision (issue #83).
+title: "[UNVERIFIED] ChatGPT Business — Free Second Seat via TalentGenius"
+provider: TalentGenius (OpenAI SMB Channel Partner)
+category: coding
+amount: "1 extra ChatGPT Business seat free for 4 years (with a paid $25/mo seat) — UNVERIFIED, claimed only in an X post"
+expiry_date: null
+source_url: https://talentgenius.io/chatgpt/request
+verified_date: 2026-08-22
