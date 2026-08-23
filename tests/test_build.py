@@ -2971,6 +2971,17 @@ class HomeListingTests(unittest.TestCase):
         self.assertIn("counter-increment: ftrank;", page)
         self.assertIn('content: counter(ftrank) ".";', page)
 
+    def test_rank_keeps_accessible_contrast_on_hover_and_focus(self):
+        page = self._page()
+        self.assertIn(
+            "#ft-grid > li:hover::before,\n"
+            "#ft-grid > li:focus-within::before { color: var(--gray); }",
+            page,
+        )
+        self.assertNotIn(
+            "#ft-grid > li:focus-within::before { color: var(--green); }", page
+        )
+
     def test_hidden_rows_are_hidden_despite_the_id_scoped_display_rule(self):
         # #ft-grid > li sets `display: grid`, which out-specifies the shared
         # `.grid li[hidden]` rule from _APP_CSS. Without an id-scoped hide

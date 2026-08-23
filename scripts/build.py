@@ -1120,7 +1120,7 @@ _HOME_CSS = """
 #ft-grid > li:focus-within { background: rgba(0, 0, 0, 0.035); }
 
 #ft-grid > li:hover::before,
-#ft-grid > li:focus-within::before { color: var(--green); }
+#ft-grid > li:focus-within::before { color: var(--gray); }
 
 /* Strip the card chrome: on the home listing the row IS the container. */
 #ft-grid .card {
