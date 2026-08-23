@@ -5,5 +5,13 @@
     "Receive the sign-up trial credits automatically.",
     "Log in daily to collect bonus credits.",
     "Spend credits on text-to-video or image-to-video generations."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.vidu.com/pricing",
+      "title": "Vidu Pricing Plans for AI Video Generation | Vidu AI",
+      "text": "Compare Vidu pricing plans, credits, and features to choose the right option for AI video generation, image-to-video, an"
+    }
   ]
 }

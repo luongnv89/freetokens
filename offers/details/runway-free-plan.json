@@ -5,5 +5,13 @@
     "Receive the one-time 125-credit grant on signup.",
     "Generate video or images from the dashboard, spending credits per run.",
     "Upgrade to Standard when the one-time credits run out."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://runwayml.com/pricing",
+      "title": "AI Image and Video Pricing from $12/month | Runway AI",
+      "text": "Compare Runway pricing plans for AI video generation. Choose from Free, Standard, Pro and Max plans with flexible credit"
+    }
   ]
 }

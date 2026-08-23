@@ -5,5 +5,13 @@
     "Receive the welcome credit package on signup.",
     "Generate videos from prompts or images within the free allowance.",
     "Note that free-tier generations are watermarked."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://hailuoai.video/doc/payment-policy.html",
+      "title": "Hailuo AI — Payment Policy",
+      "text": "Hailuo AI Video payment policy and credit pricing."
+    }
   ]
 }

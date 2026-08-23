@@ -5,5 +5,13 @@
     "Create a free Cerebras Cloud account.",
     "Generate an API key from the console.",
     "Point your OpenAI-compatible client at the Cerebras endpoint; the $5 credit covers your first usage."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.cerebras.ai/inference",
+      "title": "Inference - Cerebras",
+      "text": "Cerebras inference - the fastest inference API for generative AI"
+    }
   ]
 }

@@ -5,5 +5,13 @@
     "Sign up at play.cartesia.ai - no credit card required.",
     "Generate speech with Sonic or transcribe with Ink from the playground or API.",
     "Stay within the 20K monthly credits; they reset each month."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cartesia.ai/pricing",
+      "title": "Cartesia | Pricing",
+      "text": "Plans for every stage — from your first prototype to mission-critical voice infrastructure."
+    }
   ]
 }

@@ -5,5 +5,13 @@
     "Navigate to the Workers AI section and accept the terms.",
     "Create a Workers AI API token, or add the AI binding inside any Worker.",
     "Run models via REST or Worker bindings within the daily 10,000-Neuron free allowance."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+      "title": "Pricing · Cloudflare Workers AI docs",
+      "text": "Workers AI pricing is based on Neurons, with a free daily allocation and per-model rates."
+    }
   ]
 }

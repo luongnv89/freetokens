@@ -12,6 +12,12 @@
       "author": "qilua",
       "handle": "@qilua02",
       "text": "Ox Alpha is FREE on these 5 providers (~5T+ tokens total) : - OpenCode: opencode.ai - OpenRouter: openrouter.ai - Command Code: commandcode.ai - Hermes: nousresearch.com - Venice: venice.ai Bookmark this for later"
+    },
+    {
+      "type": "link",
+      "url": "https://commandcode.ai/docs/resources/pricing-limits",
+      "title": "Pricing Limits | Command Code - Command Code Docs",
+      "text": "Pricing limits for Command Code."
     }
   ]
 }

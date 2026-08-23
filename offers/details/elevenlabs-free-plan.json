@@ -5,5 +5,13 @@
     "Sign up for a free ElevenLabs account.",
     "Confirm your email to unlock the 10k monthly credits.",
     "Generate speech from the Playground or API within the free quota."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://elevenlabs.io/pricing",
+      "title": "ElevenLabs Pricing for Creators & Businesses of All Sizes",
+      "text": "Explore all subscription plans and find which one is right for you. Choose from a range of individual, professional and enterprise tiers."
+    }
   ]
 }

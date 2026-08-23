@@ -5,5 +5,13 @@
     "Create an API key.",
     "Browse models filtered to the :free variants at openrouter.ai/models.",
     "Call the OpenAI-compatible endpoint with your key, staying within the free rate limits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/docs/api-reference/limits",
+      "title": "API Credit & Rate Limits - Handle 402 and 429 Errors",
+      "text": "Credit Limits and Rate Limits"
+    }
   ]
 }

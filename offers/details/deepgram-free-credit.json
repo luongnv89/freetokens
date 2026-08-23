@@ -5,5 +5,13 @@
     "Create a console account (no credit card needed).",
     "Create an API key in console.deepgram.com.",
     "Call the Speech-to-Text or Text-to-Speech APIs; usage draws down the $200 credit."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://deepgram.com/pricing",
+      "title": "Deepgram Pricing | Scalable Speech-to-Text, Text-to-Speech & Voice Agent APIs",
+      "text": "Simple, transparent pricing for Speech-to-Text (STT), Text-to-Speech (TTS), and Voice Agent APIs. Start for free with $2"
+    }
   ]
 }

@@ -5,5 +5,13 @@
     "Open dashboard.cohere.com/api-keys.",
     "Create a Trial (evaluation) key - it is free by design.",
     "Call api.cohere.com within the trial rate limits (1,000 calls/month)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.cohere.com/docs/rate-limits",
+      "title": "Different Types of API Keys and Rate Limits | Cohere",
+      "text": "This page describes Cohere API rate limits for production and evaluation keys."
+    }
   ]
 }

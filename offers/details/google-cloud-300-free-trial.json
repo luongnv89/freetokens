@@ -5,5 +5,13 @@
     "Sign in with or create a Google account.",
     "Complete the signup steps and create a billing account (no automatic charges).",
     "Use the $300 credits on eligible services within the 90-day window."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cloud.google.com/free/docs/free-cloud-features",
+      "title": "Free Google Cloud features and trial offer | Google Cloud Free Program | Google Cloud Documentation",
+      "text": "Learn about Google Cloud's free offerings and free trials, plus how to upgrade your account."
+    }
   ]
 }

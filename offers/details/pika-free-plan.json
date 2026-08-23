@@ -5,5 +5,13 @@
     "Open the generator from your workspace.",
     "Create videos from text or image prompts; each generation spends credits.",
     "Wait for the monthly reset to get your next 80 credits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://pika.art/pricing",
+      "title": "Pika",
+      "text": "The idea-to-video platform that sets your creativity in motion."
+    }
   ]
 }

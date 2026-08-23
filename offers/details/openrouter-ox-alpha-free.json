@@ -11,7 +11,13 @@
       "url": "https://x.com/OpenRouter/status/2090544970923184269",
       "author": "OpenRouter",
       "handle": "@OpenRouter",
-      "text": "\ud83e\udd77 New stealth model: Ox Alpha\n\nOx Alpha is a frontier model built for efficient coding, sustained agentic work, and real-world production use.\n\n- 1M token context window\n- Text, image, and video input\n\nTry it now and share feedback to improve the model!"
+      "text": "🥷 New stealth model: Ox Alpha\n\nOx Alpha is a frontier model built for efficient coding, sustained agentic work, and real-world production use.\n\n- 1M token context window\n- Text, image, and video input\n\nTry it now and share feedback to improve the model!"
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/stealth/ox-alpha",
+      "title": "Ox Alpha - API Pricing & Providers | OpenRouter",
+      "text": "Ox Alpha is a reasoning model designed for coding, sustained agentic work, and production workloads. This model is free"
     }
   ]
 }

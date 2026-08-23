@@ -1,8 +1,9 @@
 ---
 name: offer-updater
-description: Publish or refresh a free-AI-credit offer in the freetokens repo from a screenshot or pasted text. Extracts fields, web-verifies the offer is still live, normalizes into the frozen F5 schema, validates against CI's exact rules, presents the diff, and commits only after explicit curator confirmation. Use when adding, updating, or verifying an offer entry.
+description: "Publish or refresh a verified free-AI-credit offer from screenshot or text — extracts, web-verifies live status, normalizes to F5 schema, validates, diffs, commits on approval. Don't use for general scraping, unrelated YAML, or bulk imports."
 license: MIT
 metadata:
+  version: "1.1.0"
   issues: "#20,#21"
   epic: "#31"
 ---
@@ -14,15 +15,29 @@ web-verified `offers/<slug>.yaml`, without ever inventing a value and never
 committing anything the curator did not explicitly approve.
 Schema reference: `docs/schema.md`. Ground rules: `CONTRIBUTING.md`.
 
+## Repo Sync Before Edits (mandatory)
+
+Before touching `offers/`, `offers/details/`, or any git-tracked file:
+
+```bash
+branch="$(git rev-parse --abbrev-ref HEAD)"
+git fetch origin && git pull --rebase origin "$branch"
+```
+
+- If the working tree is dirty (`git status --porcelain` non-empty): `git stash push -m "offer-updater pre-sync"`, sync, then `git stash pop`. If pop conflicts, stop and ask the curator how to resolve before continuing.
+- If `origin` is missing or the rebase conflicts: stop, report the error verbatim, and ask the curator before continuing. Never force-push or skip the sync.
+
 ## What I do
 
 1. **Extract** offer fields from your input (screenshot transcript, pasted
    text, or a source URL you supply), plus any claim instructions the input
    contains.
-2. **Verify** on the web that the offer is still live and the terms match.
-3. **Normalize** them into the frozen seven-field schema and pick a slug.
+2. **Verify** on the web that the offer is still live and the terms match —
+   keeping a full **reference trace** of every URL visited for evidence.
+3. **Normalize** them into the frozen seven-field schema and pick a slug,
+   writing the reference trace into `offers/details/<slug>.json`.
 4. **Validate** the draft with the deterministic helper in this directory.
-5. **Present** the git diff of exactly what would change.
+5. **Present** the git diff of exactly what would change (including the reference trace).
 6. **Commit** only after you say yes — then open a tracking issue and PR.
 
 ## The frozen schema (F5)
@@ -106,6 +121,49 @@ When verification runs:
    explicit human decision before any file is written. Never silently pick a
    winner.
 
+#### Reference trace — keep every URL you touch (mandatory)
+
+During verification you will inevitably fetch more than just `source_url`:
+redirects, docs pages, pricing pages, announcement blog posts, changelog
+entries, or a secondary search result that confirms eligibility. **Keep a
+trace of every relevant URL you visit** and persist it as evidence — never
+discard the chain of sources that justified the verdict.
+
+Rules:
+
+- **Collect as you go.** Start the trace with `source_url`. Append every
+  additional URL you actually fetched whose content informed the verdict
+  (HTTP 200 and contains terms you quoted or relied on). Skip dead links,
+  bot-wall pages, and incidental search-engine result pages that added
+  nothing.
+- **Capture title + excerpt.** For each URL, record `title` (page
+  `<title>` or first `h1`, ≤200 chars) and a short `text` excerpt (the
+  quoted sentence that proves the offer, ≤500 chars). These map directly to
+  `social_proof` `link` fields in `offers/details/<slug>.json` — see
+  `docs/schema.md` and `schemas/offer-detail.schema.json` for limits.
+- **Deduplicate and cap.** Normalize URLs (strip fragments, trailing
+  slashes), deduplicate, keep `source_url` first, then discovery order.
+  Hard cap at **10 entries total** for `social_proof` (schema limit); if
+  the trace would exceed 10, keep `source_url` + the 9 most authoritative
+  provider-domain pages and drop aggregators/third-party mirrors first.
+  X/Reddit posts remain type `x`/`reddit` — only generic pages use type
+  `link`.
+- **Persist in the detail file.** The trace lives in
+  `offers/details/<slug>.json` under `social_proof` as entries of type
+  `link` (or `x`/`reddit` where applicable). If a detail file already
+  exists, **merge**: preserve existing `summary`/`claim_steps`, append new
+  trace entries that are not already present (compare normalized `url`),
+  and never duplicate the same URL. If no detail file exists, create one
+  with the trace as its `social_proof` (at least one entry is enough to
+  satisfy `minProperties: 1`).
+- **Evidence only.** Every traced URL must be one you fetched and verified.
+  Never invent titles, excerpts, or URLs. If a fetch failed, do not add it.
+- **Why this exists.** The reference trace is the audit trail that lets any
+  future curator re-verify the offer without re-discovering sources, and it
+  satisfies `docs/schema.md` "Evidence only" for `social_proof`.
+
+The Step 3 normalizer and Step 5 presentation both consume this trace.
+
 ### Step 3 — Normalize
 
 Slug = lowercase ASCII words separated by single hyphens
@@ -127,19 +185,48 @@ verified_date: YYYY-MM-DD
 
 The comment header is mandatory curation evidence: quote the sentence(s) from
 Step 2 that prove title/amount/expiry. Optional enrichment (summary, claim
-steps, social proof) lives in `offers/details/<slug>.json` — see
-`docs/schema.md` for its rules.
+steps, social proof / reference trace) lives in `offers/details/<slug>.json` — see
+`docs/schema.md` for its rules. When a reference trace was collected in Step 2,
+the detail file MUST contain it as `social_proof` entries of type `link`
+(or `x`/`reddit` for social posts), merged as described above. Example detail
+with a reference trace:
+
+```json
+{
+  "summary": "Cerebras grants $20 in inference credits for new signups.",
+  "claim_steps": ["Create an account at inference.cerebras.ai.", "Credits apply automatically at signup."],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://inference.cerebras.ai/policies/credits",
+      "title": "Cerebras Inference Credits Policy",
+      "text": "New users receive $20 in free inference credits upon signup."
+    },
+    {
+      "type": "link",
+      "url": "https://cerebras.ai/blog/announcing-free-credits",
+      "title": "Announcing Free Inference Credits",
+      "text": "We are offering $20 in free credits to try Cerebras Inference."
+    }
+  ]
+}
+```
 
 ### Step 4 — Validate (deterministic, same rules as CI)
 
 ```bash
 python3 .claude/skills/offer-updater/validate_offer.py <draft.yaml>
+# also validate the detail file if one was created/updated:
+python3 scripts/build.py --help  # validates offers/details/*.json as part of the build
 ```
 
 Exit `0` + `OK` means the file is byte-for-byte compliant with what CI
 enforces — it cannot fail the build. Any failure names the offending file and
 field; fix ONLY formatting/validation errors here. If fixing would require
 inventing a value, go back to Step 1's clarifying-question rule instead.
+For detail files, watch the `social_proof` limits: ≤10 entries, `url`
+≤200 chars, `title` ≤200 chars, `text` ≤500 chars — the validator reports the
+exact offending index.
 
 ### Step 5 — Present the diff
 
@@ -147,6 +234,8 @@ Show the curator exactly what would change, no more and no less:
 
 ```bash
 git diff --no-index -- <existing-file-if-any> needs_review/<slug>.yaml  # updates
+# and for the detail file:
+git diff --no-index -- offers/details/<slug>.json needs_review/details/<slug>.json  # if new or updated
 ```
 
 plus the full draft content for brand-new offers (and the detail JSON if one
@@ -154,6 +243,9 @@ was created). State plainly: the target
 path (`offers/<slug>.yaml` or `offers/details/<slug>.json`), whether it is a
 new file or an edit, and the verification verdict + evidence quote. If claim
 instructions were extracted, include them under a "How to claim" heading.
+**Always list the reference trace** under a "References verified" heading —
+each URL with its title and the quoted excerpt — so the curator can see the
+audit trail before approving.
 
 ### Step 6 — Commit gate (hard rule)
 
@@ -164,20 +256,26 @@ without the curator's explicit yes.**
   conversation ("yes", "commit it", "ship it") AFTER seeing the Step 5 diff.
   Silence, topic change, or ambiguity is a NO.
 - On YES: move the draft into `offers/` (`git mv` for edits), stage the
-  matching `offers/details/<slug>.json` if one was created, run the
-  validator once more on its final path, then follow `CONTRIBUTING.md`:
+  matching `offers/details/<slug>.json` if one was created or updated (it
+  now carries the reference trace), run the
+  validator once more on its final path (`validate_offer.py` for the YAML
+  and `python3 scripts/build.py` or `python3 scripts/validate_offers.py`
+  for the detail JSON), then follow `CONTRIBUTING.md`:
   1. **Create the tracking issue** with `gh issue create` (unless the curator
      supplied one). Title: `Add <provider> <short offer name>`. Body: provider,
-     what is free, amount, expiry, source URL, and any extracted "How to
+     what is free, amount, expiry, source URL, the full **References
+     verified** list (one bullet per traced URL with title), and any extracted "How to
      claim" steps, plus the verification date.
   2. Branch `<type>/<issue>-<slug>` from current `main`.
   3. Commit with a Conventional Commits message referencing the issue, e.g.
      `feat(offers): add <Provider> offer (#<issue>)`, and push.
   4. Open the PR whose body starts with `Closes #<issue>`, include the
-     verification verdict + evidence quote and the local-check results
+     verification verdict + evidence quote, the **References verified** list,
+     and the local-check results
      (validator, `scripts/build.py`, test suite).
 - On NO / no answer / unverifiable: leave the draft in `needs_review/`,
-  summarize why, and stop. Re-running the skill later resumes from Step 2.
+  summarize why (including which reference URLs were checked and why they
+  failed), and stop. Re-running the skill later resumes from Step 2.
 
 ## Why this gate exists
 

@@ -12,6 +12,12 @@
       "author": "qilua",
       "handle": "@qilua02",
       "text": "Another FUCKING ~1 TRILLION FREE TOKENS for Ox Alpha from Venice AI!! Grab API key: venice.ai - Base URL: api.venice.ai/api - Model: stealth-ox-alpha"
+    },
+    {
+      "type": "link",
+      "url": "https://api.venice.ai/api/v1/models",
+      "title": "Venice AI — API Models",
+      "text": "Venice AI public models API showing stealth-ox-alpha at $0 per million tokens."
     }
   ]
 }

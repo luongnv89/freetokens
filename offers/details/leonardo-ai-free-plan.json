@@ -4,6 +4,14 @@
     "Create a free Leonardo.Ai account at leonardo.ai.",
     "Confirm your email to activate the free plan.",
     "Generate images from the app dashboard using your daily fast tokens.",
-    "Return daily \u2014 the 150 fast-token allowance resets every day."
+    "Return daily — the 150 fast-token allowance resets every day."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://leonardo.ai/pricing/",
+      "title": "Leonardo.Ai Pricing: Individual, Team & API Plans | Leonardo.Ai",
+      "text": "Creative, developer, team or business – whatever your setup, Leo has a plan to match. Explore free and premium features"
+    }
   ]
 }

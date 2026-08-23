@@ -5,5 +5,13 @@
     "Sign in with a personal Microsoft account (work/school Entra accounts are not supported).",
     "Enter a prompt and press Create; each generation uses one of your daily creations.",
     "Return daily - the 15 fast creations replenish every day."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.microsoft.com/en-us/bing/features/bing-image-creator",
+      "title": "Bing Image Creator | Microsoft Bing",
+      "text": "Bing Image Creator is a cutting-edge, AI-powered tool that transforms your words into stunning visuals in seconds. Av"
+    }
   ]
 }

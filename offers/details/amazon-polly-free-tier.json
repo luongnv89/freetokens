@@ -5,5 +5,13 @@
     "Open the Amazon Polly console.",
     "Convert text to speech using Standard or Neural voices within the monthly free character allowance.",
     "Note the free window runs for the first 12 months from account creation."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://aws.amazon.com/polly/pricing/",
+      "title": "Amazon Polly Pricing",
+      "text": "Amazon Polly Pricing – Amazon Web Services (AWS)"
+    }
   ]
 }

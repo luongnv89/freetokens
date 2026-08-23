@@ -5,5 +5,13 @@
     "Download and install the Cursor editor.",
     "Sign in with a free account - no credit card needed.",
     "Use Agent within the limited free quota; upgrade only if you need more."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cursor.com/pricing",
+      "title": "Cursor · Pricing",
+      "text": "Choose the plan that's right for you"
+    }
   ]
 }
