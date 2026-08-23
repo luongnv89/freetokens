@@ -1,0 +1,18 @@
+{
+  "summary": "AIHubMix, an OpenAI-compatible AI gateway, offers a free catalog of 50 models at $0/M input and output — including Ox Alpha (listed at $0/$0), Kimi K3, Gemini 3.7 Flash, GLM-5.2, MiniMax M3, GPT-5.5 and more. Signup needs only email or OAuth; no credit card. One API key covers both free and paid models via https://aihubmix.com/v1. Provider fine print: free model resources are limited and intended for trial use — stability is not guaranteed and 429 errors can occur.",
+  "claim_steps": [
+    "Sign up at https://aihubmix.com with email or OAuth — no credit card required.",
+    "Create an API key in the dashboard (one key works for free and paid models).",
+    "Call any model with a -free suffix through the OpenAI-compatible endpoint https://aihubmix.com/v1 (e.g. coding-glm-5.2-free, gpt-5.5-free, ox-alpha).",
+    "Use it in any OpenAI-compatible tool; expect occasional 429s since free capacity is trial-grade."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/_0xpainn/status/2091459288665321905",
+      "author": "painn",
+      "handle": "@_0xpainn",
+      "text": "you can now use Ox Alpha, Kimi K3, gemini 3.7 flash and 47 other models for FREEE with no credit card 😳\n\naihubmix just opened a 50-model free catalog, every model $0/M in and out.\n\nthe models:\n-Ox Aplha\n-gemini-3.7-flash\n-glm-5.2\n-kimi-k3\n-minimax-m3"
+    }
+  ]
+}
