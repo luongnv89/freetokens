@@ -1,0 +1,13 @@
+# Verified 2026-08-23 against https://cloud.mercuryagent.sh/pricing
+# ("Is the Free plan really free? Yes. Mercury Cloud Free is $0/month.")
+# ("Open access Free tier · No invite needed")
+# Curator (firsthand account) confirms the Ox Alpha model is free without
+# limit on this tier; page publicly lists 5,000 Mercury Credits/month for
+# the general Free plan. Source X post: @mercury__agent 2026-08-23.
+title: Mercury Cloud Free Tier — Ox Alpha Free Without Limit
+provider: Mercury Cloud (Cosmic Stack)
+category: api_provider
+amount: $0/mo free tier — Ox Alpha model free without limit; general free plan includes 5,000 Mercury Credits/month
+expiry_date: null
+source_url: https://cloud.mercuryagent.sh/pricing
+verified_date: 2026-08-23

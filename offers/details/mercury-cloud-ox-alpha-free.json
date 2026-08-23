@@ -1,0 +1,18 @@
+{
+  "summary": "Mercury Cloud (by Cosmic Stack) is the cloud cockpit for the local Mercury Agent CLI. Its Free plan is $0/month with open access — no invite needed — and includes access to free-enabled models. Per the official @mercury__agent announcement, Ox Alpha is available free for coding, complex reasoning, large-context work, and long-running agent workflows; the curator with firsthand access confirms Ox Alpha is free without limit on this tier. The general Free plan publicly lists 5,000 Mercury Credits/month and 1 agent connection; card validation may be required but the plan itself is not charged.",
+  "claim_steps": [
+    "Install the local runtime: npm i -g @cosmicstack/mercury-agent (v1.2.0+ required).",
+    "Create a Mercury Cloud account at https://cloud.mercuryagent.sh and choose the Free plan.",
+    "Run 'mercury cloud connect' locally to pair your agent.",
+    "Use Ox Alpha through the cloud cockpit — free without limit per the provider's announcement."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/mercury__agent/status/2091440781328576608",
+      "author": "Mercury",
+      "handle": "@mercury__agent",
+      "text": "The response to Ox Alpha on Mercury Cloud has been overwhelming.\n\nSo here’s your sign to give it a real challenge.\n\nUse it for coding, complex reasoning, large-context work, and long-running agent workflows.\n\nFree for everyone to explore without letting a paywall or token meter limit the experiment.\n\ncloud.mercuryagent.sh"
+    }
+  ]
+}
