@@ -251,7 +251,12 @@ class BuildOutputTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             offers_dir = self._write_offers(tmp)
             out = os.path.join(tmp, "out")
-            build.main(["--offers-dir", offers_dir, "--out", out])
+            # Scrub tracker config so consent-gate scripts (#72) are never
+            # emitted; the assertion below relies on a script-free page.
+            with mock.patch.dict(os.environ):
+                os.environ.pop(build.MEASUREMENT_ID_ENV_VAR, None)
+                os.environ.pop(build.STATS_SITE_ENV_VAR, None)
+                build.main(["--offers-dir", offers_dir, "--out", out])
             page = Path(out, "site", "index.html").read_text(encoding="utf-8")
             self.assertNotIn("<script>", page)
             self.assertIn("&lt;script&gt;", page)
@@ -703,6 +708,7 @@ class MeasurementIdTests(unittest.TestCase):
             Path(offers_dir, "a.yaml").write_text(offer_text(), encoding="utf-8")
             out = os.path.join(tmp, "out")
             with mock.patch.dict(os.environ, {build.MEASUREMENT_ID_ENV_VAR: "oops"}):
+                os.environ.pop(build.STATS_SITE_ENV_VAR, None)
                 code = build.main(["--offers-dir", offers_dir, "--out", out])
             self.assertEqual(code, 0)
             page = Path(out, "site", "index.html").read_text(encoding="utf-8")
@@ -2525,6 +2531,7 @@ class AnalyticsBuildOutputTests(unittest.TestCase):
             out = os.path.join(tmp, "out")
             with mock.patch.dict(os.environ):
                 os.environ.pop(build.MEASUREMENT_ID_ENV_VAR, None)
+                os.environ.pop(build.STATS_SITE_ENV_VAR, None)
                 code = build.main(["--offers-dir", offers_dir, "--out", out])
             self.assertEqual(code, 0)
             page = Path(out, "site", "index.html").read_text(encoding="utf-8")
