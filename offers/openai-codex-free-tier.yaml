@@ -1,0 +1,16 @@
+# Verified 2026-08-23 against https://openai.com/chatgpt/pricing/
+# ("Free ... Limited Codex access"; plan table: "Codex - Free: Limited",
+# "GPT-5.6 Luna - Free: Yes", "GPT-5.6 Sol - Free: No") and
+# https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan
+# ("Codex is included across ChatGPT plans, including Free and Go.
+# Usage limits vary by plan."). Standing free tier, not a limited-time
+# promo despite the X post's "free right now" framing; OpenAI publishes no
+# numeric free-tier quotas, so the amount stays qualitative by the
+# never-guess rule. Source input: X post @kr0der/status/2091177578854035733.
+title: OpenAI Codex Free Tier
+provider: OpenAI
+category: coding
+amount: Limited free Codex access on the ChatGPT Free plan, incl. GPT-5.6 Luna (no credit card)
+expiry_date: null
+source_url: https://openai.com/chatgpt/pricing/
+verified_date: 2026-08-23

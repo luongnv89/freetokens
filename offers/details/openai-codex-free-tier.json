@@ -1,0 +1,26 @@
+{
+  "summary": "Every ChatGPT Free account ($0, no credit card) includes limited access to Codex, OpenAI's coding agent, across its clients (desktop app Codex mode, CLI, IDE extension, web). The free tier runs GPT-5.6 Luna (OpenAI's cheapest model) and gives limited access to GPT-5.6 Terra in Work and Codex on desktop; the flagship GPT-5.6 Sol is not available on Free. OpenAI does not publish numeric free quotas - usage draws from a shared allowance with rolling reset windows, visible in the usage dashboard. Note 'Luna Max' is not a separate model: it means GPT-5.6 Luna running at the 'max' reasoning-effort setting, which ships disabled by default in Codex settings.",
+  "claim_steps": [
+    "Create or sign in to a free ChatGPT account at chatgpt.com - no credit card needed.",
+    "Launch any Codex client (ChatGPT desktop app Codex mode, Codex CLI, IDE extension, or chatgpt.com/codex) and sign in with your ChatGPT account.",
+    "Select GPT-5.6 Luna as the model - it is available on the Free plan (Terra is limited to Work/Codex-on-desktop; Sol requires a paid plan).",
+    "Optional: enable the hidden 'max' reasoning effort under Settings > Configuration > Available reasoning efforts (it is off by default, per community guides - not documented on OpenAI's help pages).",
+    "Track consumption with /status in the CLI or the usage dashboard at chatgpt.com/codex/settings/usage; Free accounts cannot buy credit top-ups, so wait for the window reset."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/kr0der/status/2091177578854035733",
+      "author": "Anthony Kroeger",
+      "handle": "@kr0der",
+      "text": "wait Luna Max is free right now if you don't have a Codex subscription\n\ni thought Luna was only free in ChatGPT so i tried it just in case\n\nbut it's actually free in Codex too, and in Max mode as well\n\ni'm not subscribed and i'm able to use it \ud83e\udd91"
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/1kartikkabadi1/status/2091179584662425861",
+      "author": "Kartik",
+      "handle": "@1kartikkabadi1",
+      "text": "There's small free tier limits"
+    }
+  ]
+}
