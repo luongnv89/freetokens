@@ -1,0 +1,19 @@
+# Verified 2026-08-23 against https://vercel.com/changelog/glm-5-2-free-for-eve-agents-through-august-27-via-blackbox-on-ai-gateway
+# ("GLM 5.2 ... is free for eve agents through August 27, served by Blackbox AI
+# on AI Gateway."; "New eve agents come with GLM 5.2 as their default model.
+# Use npx eve@latest init my-agent to get started."; "This offer does not apply
+# to Fast mode or the zai/glm-5.2-fast variant of the model."; "After August 27,
+# GLM 5.2 stays available on AI Gateway at standard provider rates.")
+# Post-Aug-27 price context (~$0.80/1M in, ~$2.52/1M out) from
+# https://vercel.com/ai-gateway/models/glm-5.2 ("Pricing: $0.8/1M input
+# tokens, $2.5234/1M output tokens").
+# Source input: X post @StudentOffersHQ/status/2091322643316421027, which
+# misattributes the deal to Vercel's fx agent; per curator decision 2026-08-23
+# the entry is published as officially scoped to eve agents.
+title: Vercel AI Gateway GLM 5.2 Free for Eve Agents
+provider: Vercel
+category: coding
+amount: GLM 5.2 (1M-token context) free for eve agents via Blackbox on AI Gateway through August 27
+expiry_date: 2026-08-27
+source_url: https://vercel.com/changelog/glm-5-2-free-for-eve-agents-through-august-27-via-blackbox-on-ai-gateway
+verified_date: 2026-08-23

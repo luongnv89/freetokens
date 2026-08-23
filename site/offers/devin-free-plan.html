@@ -515,6 +515,53 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   .od-cta { min-height: 44px; }
 }
 
+/* ---- Offer share bar (#71) ---------------------------------------------- */
+
+.share-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-link,
+.share-copy {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.share-link:hover,
+.share-copy:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.share-link:focus-visible,
+.share-copy:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.share-status {
+  margin: 0.5rem 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+@media (pointer: coarse) {
+  .share-link,
+  .share-copy { min-height: 44px; }
+}
+
 </style>
 </head>
 <body>
@@ -522,7 +569,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 <header class="masthead">
 <p class="kicker">free ai credits &middot; Coding</p>
 <h1>Devin Free Plan</h1>
-<p class="tagline">Light coding-agent quota + unlimited Tab completions ($0 plan) from <strong>Cognition (Devin)</strong>, hand-verified on <time datetime="2026-08-21">Aug 21, 2026</time>.</p>
+<p class="tagline">Light coding-agent quota + unlimited Tab completions ($0 plan) from <strong>Cognition (Devin)</strong>, hand-verified on <time datetime="2026-08-23">Aug 23, 2026</time>.</p>
 <p class="count"><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span></p>
 </header>
 <main>
@@ -533,16 +580,86 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 <section class="od-steps"><h2>How to claim</h2><ol><li>Open devin.ai/pricing and pick the Free $0 plan.</li><li>Sign up with your email or a Google/GitHub account.</li><li>Start a Devin session from the dashboard within your free quota.</li><li>Install the IDE extension for unlimited Tab completions.</li></ol></section>
 <section class="od-proof"><h2>Social proof</h2><blockquote class="proof-card proof-link"><p class="proof-text"><strong>Devin pricing — Free $0 plan</strong></p><p class="proof-text">&ldquo;Free $0 — Light quota to code with agents. Unlimited Tab completions.&rdquo;</p><footer> <a href="https://devin.ai/pricing" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">&#8599;</span></a></footer></blockquote></section>
 <a class="od-cta" href="https://devin.ai/pricing" target="_blank" rel="noopener noreferrer">Claim at Cognition (Devin) <span aria-hidden="true">&#8599;</span></a>
+<section class="od-share" aria-label="Share this offer" data-ft-offer-id="devin-free-plan">
+<h2>Share this offer</h2>
+<div class="share-actions"><a class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fdevin-free-plan.html" target="_blank" rel="noopener noreferrer" data-ft-share="linkedin">LinkedIn</a><a class="share-link" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fdevin-free-plan.html&text=Devin%20Free%20Plan" target="_blank" rel="noopener noreferrer" data-ft-share="x">X</a><a class="share-link" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fdevin-free-plan.html" target="_blank" rel="noopener noreferrer" data-ft-share="facebook">Facebook</a><a class="share-link" href="mailto:?subject=Devin%20Free%20Plan&body=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fdevin-free-plan.html" target="_blank" rel="noopener noreferrer" data-ft-share="email">Email</a><button type="button" class="share-copy" data-ft-share="copy">Copy link</button></div>
+<p class="share-status" id="ft-share-status" role="status" aria-live="polite" hidden></p>
+</section>
 </article>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-23T00:05:16Z">Aug 23, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-23T06:54:16Z">Aug 23, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="../">Offers</a><span aria-hidden="true">&middot;</span><a href="../archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="../privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="../feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
+
 </footer>
 </div>
 
 
 
+<script>
+(function () {
+  "use strict";
+  var OFFER_ID = "devin-free-plan";
+  var PAGE_URL = "https://luongnv89.github.io/freetokens/offers/devin-free-plan.html";
+  function ftTrack(channel) {
+    try {
+      if (typeof window.ftTrackEvent === "function") {
+        window.ftTrackEvent("offer_share", {
+          offer_id: OFFER_ID,
+          channel: channel
+        });
+      }
+    } catch (err) {}
+  }
+  function ftStatus(text) {
+    var box = document.getElementById("ft-share-status");
+    if (!box) { return; }
+    box.textContent = text;
+    box.hidden = false;
+  }
+  function ftCopyLegacy(text) {
+    var ok = false;
+    var box = document.createElement("textarea");
+    box.value = text;
+    box.setAttribute("readonly", "");
+    box.style.position = "fixed";
+    box.style.left = "-9999px";
+    document.body.appendChild(box);
+    box.select();
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    document.body.removeChild(box);
+    return ok;
+  }
+  function ftCopy() {
+    var done = function (ok) {
+      if (ok) { ftTrack("copy"); }
+      ftStatus(ok ? "Link copied!" : "Copy failed — long-press the address bar instead.");
+    };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(PAGE_URL).then(
+        function () { done(true); },
+        function () { done(ftCopyLegacy(PAGE_URL)); }
+      );
+    } else {
+      done(ftCopyLegacy(PAGE_URL));
+    }
+  }
+  var nodes = document.querySelectorAll("[data-ft-share]");
+  for (var i = 0; i < nodes.length; i++) {
+    (function (node) {
+      node.addEventListener("click", function () {
+        var channel = node.getAttribute("data-ft-share") || "";
+        if (channel === "copy") {
+          ftCopy();
+        } else {
+          // Fire-and-forget: navigation is native, never intercepted.
+          ftTrack(channel);
+        }
+      });
+    })(nodes[i]);
+  }
+})();
+</script>
 </body>
 </html>
