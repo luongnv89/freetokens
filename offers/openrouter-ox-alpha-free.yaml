@@ -1,0 +1,9 @@
+# Verified 2026-08-23 against https://openrouter.ai/stealth/ox-alpha
+# ("Is Ox Alpha free? Yes. The pricing shown on this page for Ox Alpha is zero, so you are not charged for prompt or completion tokens.")
+title: Ox Alpha Free on OpenRouter
+provider: OpenRouter
+category: api_provider
+amount: Free model access - $0 per million input and output tokens on stealth/ox-alpha during the stealth preview
+expiry_date: null
+source_url: https://openrouter.ai/stealth/ox-alpha
+verified_date: 2026-08-23

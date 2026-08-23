@@ -1,0 +1,17 @@
+{
+  "summary": "OpenRouter lists the stealth model Ox Alpha (stealth/ox-alpha) at $0 per million input and output tokens during the anonymous-provider preview. The official model page confirms the zero price in its FAQ. Press coverage reports the free preview lasts about a week from the August 20 release; OpenRouter states prompts and completions are retained by the provider and not used for training.",
+  "claim_steps": [
+    "Sign in or create an account at openrouter.ai.",
+    "Create an API key at openrouter.ai/settings/keys.",
+    "Call the model with slug stealth/ox-alpha via the OpenAI-compatible API at https://openrouter.ai/api/v1 (or use it in any OpenRouter-supported app)."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/OpenRouter/status/2090544970923184269",
+      "author": "OpenRouter",
+      "handle": "@OpenRouter",
+      "text": "\ud83e\udd77 New stealth model: Ox Alpha\n\nOx Alpha is a frontier model built for efficient coding, sustained agentic work, and real-world production use.\n\n- 1M token context window\n- Text, image, and video input\n\nTry it now and share feedback to improve the model!"
+    }
+  ]
+}
