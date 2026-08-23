@@ -1,4 +1,4 @@
-# Verified 2026-08-21 against https://leonardo.ai/pricing/
+# Verified 2026-08-23 against https://leonardo.ai/pricing/
 # ("FREE $0/month ... Fast Tokens 150/day"; FAQ: free tokens "reset daily".)
 title: Leonardo.Ai Free Plan
 provider: Leonardo.Ai
@@ -6,4 +6,4 @@ category: image
 amount: 150 fast tokens per day (resets daily)
 expiry_date: null
 source_url: https://leonardo.ai/pricing/
-verified_date: 2026-08-21
+verified_date: 2026-08-23

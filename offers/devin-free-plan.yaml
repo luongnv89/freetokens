@@ -1,4 +1,4 @@
-# Verified 2026-08-21 against https://devin.ai/pricing
+# Verified 2026-08-23 against https://devin.ai/pricing
 # ("Free $0 — Light quota to code with agents ... Unlimited Tab completions.")
 title: Devin Free Plan
 provider: Cognition (Devin)
@@ -6,4 +6,4 @@ category: coding
 amount: Light coding-agent quota + unlimited Tab completions ($0 plan)
 expiry_date: null
 source_url: https://devin.ai/pricing
-verified_date: 2026-08-21
+verified_date: 2026-08-23

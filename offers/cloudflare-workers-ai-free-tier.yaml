@@ -1,4 +1,4 @@
-# Verified 2026-08-22 against https://developers.cloudflare.com/workers-ai/platform/pricing/
+# Verified 2026-08-23 against https://developers.cloudflare.com/workers-ai/platform/pricing/
 # ("Our free allocation allows anyone to use a total of 10,000 Neurons per day at no charge.")
 title: Cloudflare Workers AI Free Tier
 provider: Cloudflare
@@ -6,4 +6,4 @@ category: api_provider
 amount: 10,000 Neurons per day at no charge (resets daily at 00:00 UTC)
 expiry_date: null
 source_url: https://developers.cloudflare.com/workers-ai/platform/pricing/
-verified_date: 2026-08-22
+verified_date: 2026-08-23

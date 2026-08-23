@@ -1,4 +1,4 @@
-# Verified 2026-08-21 against https://elevenlabs.io/pricing
+# Verified 2026-08-23 against https://elevenlabs.io/pricing
 # (Free plan: "10k credits per month", no credit card.)
 title: ElevenLabs Free Plan
 provider: ElevenLabs
@@ -6,4 +6,4 @@ category: voice
 amount: 10k credits/month (~10 min of audio)
 expiry_date: null
 source_url: https://elevenlabs.io/pricing
-verified_date: 2026-08-21
+verified_date: 2026-08-23

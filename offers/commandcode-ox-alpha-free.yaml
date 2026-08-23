@@ -1,9 +1,10 @@
 # Verified 2026-08-23 against https://commandcode.ai/docs/resources/pricing-limits
-# ("DEAL `stealth/ox-alpha` is free. Requests on this model cost no credits. while the stealth preview lasts")
+# ("DEAL `stealth/ox-alpha` is free. Requests on this model cost no credits. while the stealth preview lasts"
+#  — note: an account needs at least $1 of credits to start a session.)
 title: Ox Alpha Free on Command Code
 provider: Command Code
 category: coding
-amount: Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts
+amount: Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts (requires >=$1 credit balance in account to start a session)
 expiry_date: null
 source_url: https://commandcode.ai/docs/resources/pricing-limits
-verified_date: 2026-08-22
+verified_date: 2026-08-23

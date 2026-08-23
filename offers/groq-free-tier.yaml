@@ -1,4 +1,4 @@
-# Verified 2026-08-21 against https://console.groq.com/docs/rate-limits
+# Verified 2026-08-23 against https://console.groq.com/docs/rate-limits
 # ("Free Plan Limits" table — e.g. openai/gpt-oss-120b: 30 RPM, 1K RPD, 200K TPD.)
 title: Groq Free Tier — Free Rate-Limited API
 provider: Groq
@@ -6,4 +6,4 @@ category: api_provider
 amount: Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)
 expiry_date: null
 source_url: https://console.groq.com/docs/rate-limits
-verified_date: 2026-08-21
+verified_date: 2026-08-23

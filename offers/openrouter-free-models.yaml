@@ -1,9 +1,10 @@
-# Verified 2026-08-22 against https://openrouter.ai/docs/api-reference/limits
-# ("If you're using a free model variant (with an ID ending in :free) ... 50 requests per day")
+# Verified 2026-08-23 against https://openrouter.ai/docs/api-reference/limits
+# ("Credits purchased (all time) < 10 → 20 requests per minute / 50 per day;
+#  At least 10 → 20 rpm / 1,000 per day")
 title: OpenRouter Free Models
 provider: OpenRouter
 category: api_provider
-amount: Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you hold $10 credits)
+amount: Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time)
 expiry_date: null
 source_url: https://openrouter.ai/docs/api-reference/limits
-verified_date: 2026-08-22
+verified_date: 2026-08-23
