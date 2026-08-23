@@ -1,9 +1,20 @@
 {
-  "generated_at": "2026-08-23T13:48:09Z",
-  "count": 31,
-  "active_count": 31,
+  "generated_at": "2026-08-23T16:04:49Z",
+  "count": 32,
+  "active_count": 32,
   "expired_count": 0,
   "offers": [
+    {
+      "slug": "aihubmix-free-model-catalog",
+      "title": "AIHubMix Free Model Catalog — 50 Models at $0",
+      "provider": "AIHubMix",
+      "category": "api_provider",
+      "amount": "50 models at $0/M input & output incl. Ox Alpha, Kimi K3, Gemini 3.7 Flash, GLM-5.2 — trial-grade, 429s possible",
+      "expiry_date": null,
+      "source_url": "https://aihubmix.com/models?filter=free",
+      "verified_date": "2026-08-23",
+      "status": "active"
+    },
     {
       "slug": "amazon-polly-free-tier",
       "title": "Amazon Polly Free Tier",
