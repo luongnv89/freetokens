@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-23T06:54:16Z",
-  "count": 29,
-  "active_count": 29,
+  "generated_at": "2026-08-23T13:48:09Z",
+  "count": 31,
+  "active_count": 31,
   "expired_count": 0,
   "offers": [
     {
@@ -203,6 +203,17 @@
       "status": "active"
     },
     {
+      "slug": "mercury-cloud-ox-alpha-free",
+      "title": "Mercury Cloud Free Tier — Ox Alpha Free Without Limit",
+      "provider": "Mercury Cloud (Cosmic Stack)",
+      "category": "api_provider",
+      "amount": "$0/mo free tier — Ox Alpha model free without limit; general free plan includes 5,000 Mercury Credits/month",
+      "expiry_date": null,
+      "source_url": "https://cloud.mercuryagent.sh/pricing",
+      "verified_date": "2026-08-23",
+      "status": "active"
+    },
+    {
       "slug": "mistral-experiment-free-tier",
       "title": "Mistral AI Studio Free Mode — Free API Tier",
       "provider": "Mistral AI",
@@ -321,6 +332,17 @@
       "expiry_date": null,
       "source_url": "https://www.vidu.com/pricing",
       "verified_date": "2026-08-23",
+      "status": "active"
+    },
+    {
+      "slug": "chatgpt-business-second-seat",
+      "title": "[UNVERIFIED] ChatGPT Business — Free Second Seat via TalentGenius",
+      "provider": "TalentGenius (OpenAI SMB Channel Partner)",
+      "category": "coding",
+      "amount": "1 extra ChatGPT Business seat free for 4 years (with a paid $25/mo seat) — UNVERIFIED, claimed only in an X post",
+      "expiry_date": null,
+      "source_url": "https://talentgenius.io/chatgpt/request",
+      "verified_date": "2026-08-22",
       "status": "active"
     }
   ]
