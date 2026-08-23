@@ -1,0 +1,19 @@
+{
+  "summary": "Through August 27, 2026, Vercel serves GLM 5.2 - Z.ai's open-weights, long-horizon coding model with a 1M-token context window - at no cost for eve agents via Blackbox AI on AI Gateway. New eve agents get GLM 5.2 as their default model out of the box; existing agents switch with one line. The offer excludes Fast mode and the zai/glm-5.2-fast variant. After August 27, GLM 5.2 stays on AI Gateway at standard provider rates (about $0.80 per 1M input and $2.52 per 1M output). Note: a widely shared X post attributed this deal to Vercel's fx coding agent; Vercel's official changelog scopes it to eve agents (fx merely ships zai/glm-5.2 as its session default).",
+  "claim_steps": [
+    "Initialize a new agent: npx eve@latest init my-agent - GLM 5.2 comes as the default model.",
+    "Existing agents: set model: \"zai/glm-5.2\" in agent/agent.ts, or run: eve set --model zai/glm-5.2.",
+    "Requests are served by Blackbox AI through Vercel AI Gateway at no cost through August 27, 2026.",
+    "Do not use Fast mode or the zai/glm-5.2-fast variant - both are excluded from the free offer.",
+    "After August 27, GLM 5.2 remains available on AI Gateway at standard provider rates."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/StudentOffersHQ/status/2091322643316421027",
+      "author": "Student Offers",
+      "handle": "@StudentOffersHQ",
+      "text": "Two AI models are free right now for everyone. Ox Alpha and GLM 5.2.\n\nGLM 5.2 free via Vercel fx\nVercel Labs' new coding agent runs GLM 5.2 as the default model, free through Aug 27, via Blackbox on AI Gateway.\nTo claim:\n\u2192 Install fx: fx.sh/docs/using-fx/cli\n\u2192 Sign in with Vercel\n\u2192 GLM 5.2 is already the default"
+    }
+  ]
+}

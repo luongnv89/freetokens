@@ -616,6 +616,53 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   .od-cta { min-height: 44px; }
 }
 
+/* ---- Offer share bar (#71) ---------------------------------------------- */
+
+.share-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-link,
+.share-copy {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.share-link:hover,
+.share-copy:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.share-link:focus-visible,
+.share-copy:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.share-status {
+  margin: 0.5rem 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+@media (pointer: coarse) {
+  .share-link,
+  .share-copy { min-height: 44px; }
+}
+
 </style>
 </head>
 <body>
@@ -624,11 +671,333 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 <p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
 <h1>Free AI Credits</h1>
 <p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
-<p class="count"><strong>27</strong> live offers &middot; <strong>26</strong> ongoing &middot; <strong>27</strong> verified</p>
+<p class="count"><strong>29</strong> live offers &middot; <strong>27</strong> ongoing &middot; <strong>29</strong> verified</p>
 </header>
 <main>
-<section class="toolbar" aria-label="Search and filter offers"><div class="field"><label class="tool-label" for="ft-search">Search</label><input type="search" id="ft-search" name="q" placeholder="Search title, provider, or amount&hellip;" autocomplete="off" spellcheck="false" maxlength="200"></div><div class="field field-sort"><label class="tool-label" for="ft-sort">Sort</label><select id="ft-sort"><option value="">Default</option><option value="newest">Newest verified</option><option value="expiring">Expiring soon</option><option value="amount">Largest amount</option></select></div><div class="chips" role="group" aria-label="Filter by category"><button type="button" class="chip" data-ft-category="" aria-pressed="true">All</button><button type="button" class="chip" data-ft-category="api_provider" aria-pressed="false">API providers</button><button type="button" class="chip" data-ft-category="coding" aria-pressed="false">Coding</button><button type="button" class="chip" data-ft-category="image" aria-pressed="false">Image</button><button type="button" class="chip" data-ft-category="voice" aria-pressed="false">Voice</button><button type="button" class="chip" data-ft-category="video" aria-pressed="false">Video</button></div><p class="results-status" id="ft-results-status" role="status" aria-live="polite">Showing all 27 offers</p></section><ul class="grid" id="ft-grid">
+<section class="toolbar" aria-label="Search and filter offers"><div class="field"><label class="tool-label" for="ft-search">Search</label><input type="search" id="ft-search" name="q" placeholder="Search title, provider, or amount&hellip;" autocomplete="off" spellcheck="false" maxlength="200"></div><div class="field field-sort"><label class="tool-label" for="ft-sort">Sort</label><select id="ft-sort"><option value="">Default</option><option value="newest">Newest verified</option><option value="expiring">Expiring soon</option><option value="amount">Largest amount</option></select></div><div class="chips" role="group" aria-label="Filter by category"><button type="button" class="chip" data-ft-category="" aria-pressed="true">All</button><button type="button" class="chip" data-ft-category="api_provider" aria-pressed="false">API providers</button><button type="button" class="chip" data-ft-category="coding" aria-pressed="false">Coding</button><button type="button" class="chip" data-ft-category="image" aria-pressed="false">Image</button><button type="button" class="chip" data-ft-category="voice" aria-pressed="false">Voice</button><button type="button" class="chip" data-ft-category="video" aria-pressed="false">Video</button></div><p class="results-status" id="ft-results-status" role="status" aria-live="polite">Showing all 29 offers</p></section><ul class="grid" id="ft-grid">
 <li style="--i:0">
+<article class="card" id="offer-amazon-polly-free-tier" data-category="voice" data-verified="2026-08-23" data-expiry="" data-amount-sort="15">
+<div class="card-top">
+<span class="badge">voice</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://aws.amazon.com/polly/pricing/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="amazon-polly-free-tier" data-ft-provider="AWS" data-ft-offer-category="voice" aria-label="Claim Amazon Polly Free Tier from AWS">Amazon Polly Free Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Legacy accounts (created before July 15, 2025): 5M chars/month Standard + 1M chars/month Neural voices for first 12 months. New accounts get up to $200 in AWS Free Tier credits on a 6-month free plan.</p>
+<p class="prov">AWS &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/amazon-polly-free-tier.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:1">
+<article class="card" id="offer-bing-image-creator" data-category="image" data-verified="2026-08-23" data-expiry="" data-amount-sort="15">
+<div class="card-top">
+<span class="badge">image</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://www.microsoft.com/en-us/bing/features/bing-image-creator" target="_blank" rel="noopener noreferrer" data-ft-offer-id="bing-image-creator" data-ft-provider="Microsoft Bing" data-ft-offer-category="image" aria-label="Claim Bing Image Creator from Microsoft Bing">Bing Image Creator <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h)</p>
+<p class="prov">Microsoft Bing &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/bing-image-creator.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:2">
+<article class="card" id="offer-cartesia-free-plan" data-category="voice" data-verified="2026-08-23" data-expiry="" data-amount-sort="20000">
+<div class="card-top">
+<span class="badge">voice</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://cartesia.ai/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cartesia-free-plan" data-ft-provider="Cartesia" data-ft-offer-category="voice" aria-label="Claim Cartesia Free Plan from Cartesia">Cartesia Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">20K credits/month for text-to-speech and speech-to-text on the $0 plan</p>
+<p class="prov">Cartesia &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/cartesia-free-plan.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:3">
+<article class="card" id="offer-cerebras-free-credit" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="5">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://www.cerebras.ai/inference" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cerebras-free-credit" data-ft-provider="Cerebras" data-ft-offer-category="api_provider" aria-label="Claim Cerebras Inference Free Trial from Cerebras">Cerebras Inference Free Trial <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">$5 in free API credit after creating an account</p>
+<p class="prov">Cerebras &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/cerebras-free-credit.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:4">
+<article class="card" id="offer-cline-ox-alpha-free" data-category="coding" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://x.com/cline/status/2090854216399220985" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cline-ox-alpha-free" data-ft-provider="Cline" data-ft-offer-category="coding" aria-label="Claim Ox Alpha (Stealth Model) Free in Cline from Cline">Ox Alpha (Stealth Model) Free in Cline <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free model access, rate limited</p>
+<p class="prov">Cline &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/cline-ox-alpha-free.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:5">
+<article class="card" id="offer-cloudflare-workers-ai-free-tier" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="10000">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://developers.cloudflare.com/workers-ai/platform/pricing/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cloudflare-workers-ai-free-tier" data-ft-provider="Cloudflare" data-ft-offer-category="api_provider" aria-label="Claim Cloudflare Workers AI Free Tier from Cloudflare">Cloudflare Workers AI Free Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">10,000 Neurons per day at no charge (resets daily at 00:00 UTC)</p>
+<p class="prov">Cloudflare &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/cloudflare-workers-ai-free-tier.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:6">
+<article class="card" id="offer-cohere-trial-key" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="1000">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://docs.cohere.com/docs/rate-limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cohere-trial-key" data-ft-provider="Cohere" data-ft-offer-category="api_provider" aria-label="Claim Cohere Trial API Key from Cohere">Cohere Trial API Key <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free trial key - 1,000 API calls/month across Chat, Embed, and Rerank endpoints</p>
+<p class="prov">Cohere &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/cohere-trial-key.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:7">
+<article class="card" id="offer-commandcode-ox-alpha-free" data-category="coding" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://commandcode.ai/docs/resources/pricing-limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="commandcode-ox-alpha-free" data-ft-provider="Command Code" data-ft-offer-category="coding" aria-label="Claim Ox Alpha Free on Command Code from Command Code">Ox Alpha Free on Command Code <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts (requires &gt;=$1 credit balance in account to start a session)</p>
+<p class="prov">Command Code &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/commandcode-ox-alpha-free.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:8">
+<article class="card" id="offer-cursor-hobby-plan" data-category="coding" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cursor-hobby-plan" data-ft-provider="Cursor (Anysphere)" data-ft-offer-category="coding" aria-label="Claim Cursor Hobby Plan from Cursor (Anysphere)">Cursor Hobby Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free Hobby plan - limited Agent requests plus Composer access, no credit card required</p>
+<p class="prov">Cursor (Anysphere) &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/cursor-hobby-plan.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:9">
+<article class="card" id="offer-deepgram-free-credit" data-category="voice" data-verified="2026-08-23" data-expiry="" data-amount-sort="200">
+<div class="card-top">
+<span class="badge">voice</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://deepgram.com/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="deepgram-free-credit" data-ft-provider="Deepgram" data-ft-offer-category="voice" aria-label="Claim Deepgram $200 Free Credit from Deepgram">Deepgram $200 Free Credit <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">$200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)</p>
+<p class="prov">Deepgram &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/deepgram-free-credit.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:10">
+<article class="card" id="offer-devin-free-plan" data-category="coding" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://devin.ai/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="devin-free-plan" data-ft-provider="Cognition (Devin)" data-ft-offer-category="coding" aria-label="Claim Devin Free Plan from Cognition (Devin)">Devin Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Light coding-agent quota + unlimited Tab completions ($0 plan)</p>
+<p class="prov">Cognition (Devin) &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/devin-free-plan.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:11">
+<article class="card" id="offer-elevenlabs-free-plan" data-category="voice" data-verified="2026-08-23" data-expiry="" data-amount-sort="10000">
+<div class="card-top">
+<span class="badge">voice</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://elevenlabs.io/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="elevenlabs-free-plan" data-ft-provider="ElevenLabs" data-ft-offer-category="voice" aria-label="Claim ElevenLabs Free Plan from ElevenLabs">ElevenLabs Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">10k credits/month (~10 min of audio)</p>
+<p class="prov">ElevenLabs &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/elevenlabs-free-plan.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:12">
+<article class="card" id="offer-github-copilot-free" data-category="coding" data-verified="2026-08-23" data-expiry="" data-amount-sort="2000">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://github.com/features/copilot/plans" target="_blank" rel="noopener noreferrer" data-ft-offer-id="github-copilot-free" data-ft-provider="GitHub" data-ft-offer-category="coding" aria-label="Claim GitHub Copilot Free from GitHub">GitHub Copilot Free <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">2,000 completions + 50 chat requests per month</p>
+<p class="prov">GitHub &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/github-copilot-free.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:13">
+<article class="card" id="offer-google-ai-studio-image" data-category="image" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">image</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="google-ai-studio-image" data-ft-provider="Google" data-ft-offer-category="image" aria-label="Claim Google AI Studio — Free Image Generation from Google">Google AI Studio — Free Image Generation <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free image generation in the AI Studio web app (rate-limited; not available via API free tier)</p>
+<p class="prov">Google &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/google-ai-studio-image.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:14">
+<article class="card" id="offer-google-cloud-300-free-trial" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="300">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://cloud.google.com/free/docs/free-cloud-features" target="_blank" rel="noopener noreferrer" data-ft-offer-id="google-cloud-300-free-trial" data-ft-provider="Google Cloud" data-ft-offer-category="api_provider" aria-label="Claim Google Cloud Free Trial — $300 Credit from Google Cloud">Google Cloud Free Trial — $300 Credit <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">$300 in credits (90 days from signup)</p>
+<p class="prov">Google Cloud &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/google-cloud-300-free-trial.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:15">
+<article class="card" id="offer-groq-free-tier" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="1">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://console.groq.com/docs/rate-limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="groq-free-tier" data-ft-provider="Groq" data-ft-offer-category="api_provider" aria-label="Claim Groq Free Tier — Free Rate-Limited API from Groq">Groq Free Tier — Free Rate-Limited API <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)</p>
+<p class="prov">Groq &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/groq-free-tier.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:16">
+<article class="card" id="offer-hailuo-free-tier" data-category="video" data-verified="2026-08-23" data-expiry="" data-amount-sort="3">
+<div class="card-top">
+<span class="badge">video</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://hailuoai.video/doc/payment-policy.html" target="_blank" rel="noopener noreferrer" data-ft-offer-id="hailuo-free-tier" data-ft-provider="Hailuo AI" data-ft-offer-category="video" aria-label="Claim Hailuo AI Video Free Tier from Hailuo AI">Hailuo AI Video Free Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">One-time welcome credit package (expires 3 days after grant) + limited free generation (watermarked)</p>
+<p class="prov">Hailuo AI &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/hailuo-free-tier.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:17">
+<article class="card" id="offer-leonardo-ai-free-plan" data-category="image" data-verified="2026-08-23" data-expiry="" data-amount-sort="150">
+<div class="card-top">
+<span class="badge">image</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://leonardo.ai/pricing/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="leonardo-ai-free-plan" data-ft-provider="Leonardo.Ai" data-ft-offer-category="image" aria-label="Claim Leonardo.Ai Free Plan from Leonardo.Ai">Leonardo.Ai Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">150 fast tokens per day (resets daily)</p>
+<p class="prov">Leonardo.Ai &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/leonardo-ai-free-plan.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:18">
+<article class="card" id="offer-mistral-experiment-free-tier" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key" target="_blank" rel="noopener noreferrer" data-ft-offer-id="mistral-experiment-free-tier" data-ft-provider="Mistral AI" data-ft-offer-category="api_provider" aria-label="Claim Mistral AI Studio Free Mode — Free API Tier from Mistral AI">Mistral AI Studio Free Mode — Free API Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free rate-limited API access (no credit card required)</p>
+<p class="prov">Mistral AI &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/mistral-experiment-free-tier.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:19">
+<article class="card" id="offer-nous-ox-alpha-free" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="1">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://x.com/NousResearch/status/2090899914700054780" target="_blank" rel="noopener noreferrer" data-ft-offer-id="nous-ox-alpha-free" data-ft-provider="Nous Research" data-ft-offer-category="api_provider" aria-label="Claim Ox Alpha Free via Nous Portal from Nous Research">Ox Alpha Free via Nous Portal <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free model access via Nous Portal - claimed 1 quadrillion tokens/day capacity, limited time</p>
+<p class="prov">Nous Research &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/nous-ox-alpha-free.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:20">
+<article class="card" id="offer-openai-codex-free-tier" data-category="coding" data-verified="2026-08-23" data-expiry="" data-amount-sort="5.6">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="openai-codex-free-tier" data-ft-provider="OpenAI" data-ft-offer-category="coding" aria-label="Claim OpenAI Codex Free Tier from OpenAI">OpenAI Codex Free Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Limited free Codex access on the ChatGPT Free plan, incl. GPT-5.6 Luna (no credit card)</p>
+<p class="prov">OpenAI &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/openai-codex-free-tier.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:21">
+<article class="card" id="offer-opencode-ox-alpha-free-week" data-category="coding" data-verified="2026-08-23" data-expiry="2026-08-27" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status">expires <time datetime="2026-08-27">Aug 27, 2026</time></span>
+</div>
+<h2 class="card-title"><a href="https://x.com/opencode/status/2090544355824038300" target="_blank" rel="noopener noreferrer" data-ft-offer-id="opencode-ox-alpha-free-week" data-ft-provider="OpenCode" data-ft-offer-category="coding" aria-label="Claim Ox Alpha Free Week in OpenCode from OpenCode">Ox Alpha Free Week in OpenCode <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free model access, near unlimited usage (rate limited)</p>
+<p class="prov">OpenCode &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/opencode-ox-alpha-free-week.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:22">
+<article class="card" id="offer-openrouter-free-models" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="50">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://openrouter.ai/docs/api-reference/limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="openrouter-free-models" data-ft-provider="OpenRouter" data-ft-offer-category="api_provider" aria-label="Claim OpenRouter Free Models from OpenRouter">OpenRouter Free Models <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time)</p>
+<p class="prov">OpenRouter &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/openrouter-free-models.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:23">
 <article class="card" id="offer-openrouter-ox-alpha-free" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
 <div class="card-top">
 <span class="badge">api_provider</span>
@@ -642,367 +1011,73 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 </div>
 </article>
 </li>
-<li style="--i:1">
-<article class="card" id="offer-amazon-polly-free-tier" data-category="voice" data-verified="2026-08-22" data-expiry="" data-amount-sort="5e+06">
-<div class="card-top">
-<span class="badge">voice</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://aws.amazon.com/polly/pricing/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="amazon-polly-free-tier" data-ft-provider="AWS" data-ft-offer-category="voice" aria-label="Claim Amazon Polly Free Tier from AWS">Amazon Polly Free Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">5M characters/month on Standard voices and 1M characters/month on Neural voices for your first 12 months</p>
-<p class="prov">AWS &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/amazon-polly-free-tier.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:2">
-<article class="card" id="offer-bing-image-creator" data-category="image" data-verified="2026-08-22" data-expiry="" data-amount-sort="15">
-<div class="card-top">
-<span class="badge">image</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://www.microsoft.com/en-us/bing/features/bing-image-creator" target="_blank" rel="noopener noreferrer" data-ft-offer-id="bing-image-creator" data-ft-provider="Microsoft Bing" data-ft-offer-category="image" aria-label="Claim Bing Image Creator from Microsoft Bing">Bing Image Creator <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h)</p>
-<p class="prov">Microsoft Bing &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/bing-image-creator.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:3">
-<article class="card" id="offer-cartesia-free-plan" data-category="voice" data-verified="2026-08-22" data-expiry="" data-amount-sort="20000">
-<div class="card-top">
-<span class="badge">voice</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://cartesia.ai/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cartesia-free-plan" data-ft-provider="Cartesia" data-ft-offer-category="voice" aria-label="Claim Cartesia Free Plan from Cartesia">Cartesia Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">20K credits/month for text-to-speech and speech-to-text on the $0 plan</p>
-<p class="prov">Cartesia &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/cartesia-free-plan.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:4">
-<article class="card" id="offer-cerebras-free-credit" data-category="api_provider" data-verified="2026-08-22" data-expiry="" data-amount-sort="5">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://www.cerebras.ai/inference" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cerebras-free-credit" data-ft-provider="Cerebras" data-ft-offer-category="api_provider" aria-label="Claim Cerebras Inference Free Trial from Cerebras">Cerebras Inference Free Trial <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">$5 in free API credit after creating an account</p>
-<p class="prov">Cerebras &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/cerebras-free-credit.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:5">
-<article class="card" id="offer-cline-ox-alpha-free" data-category="coding" data-verified="2026-08-22" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">coding</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://x.com/cline/status/2090854216399220985" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cline-ox-alpha-free" data-ft-provider="Cline" data-ft-offer-category="coding" aria-label="Claim Ox Alpha (Stealth Model) Free in Cline from Cline">Ox Alpha (Stealth Model) Free in Cline <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free model access, rate limited</p>
-<p class="prov">Cline &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/cline-ox-alpha-free.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:6">
-<article class="card" id="offer-cloudflare-workers-ai-free-tier" data-category="api_provider" data-verified="2026-08-22" data-expiry="" data-amount-sort="10000">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://developers.cloudflare.com/workers-ai/platform/pricing/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cloudflare-workers-ai-free-tier" data-ft-provider="Cloudflare" data-ft-offer-category="api_provider" aria-label="Claim Cloudflare Workers AI Free Tier from Cloudflare">Cloudflare Workers AI Free Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">10,000 Neurons per day at no charge (resets daily at 00:00 UTC)</p>
-<p class="prov">Cloudflare &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/cloudflare-workers-ai-free-tier.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:7">
-<article class="card" id="offer-cohere-trial-key" data-category="api_provider" data-verified="2026-08-22" data-expiry="" data-amount-sort="1000">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://docs.cohere.com/docs/rate-limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cohere-trial-key" data-ft-provider="Cohere" data-ft-offer-category="api_provider" aria-label="Claim Cohere Trial API Key from Cohere">Cohere Trial API Key <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free trial key - 1,000 API calls/month across Chat, Embed, and Rerank endpoints</p>
-<p class="prov">Cohere &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/cohere-trial-key.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:8">
-<article class="card" id="offer-commandcode-ox-alpha-free" data-category="coding" data-verified="2026-08-22" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">coding</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://commandcode.ai/docs/resources/pricing-limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="commandcode-ox-alpha-free" data-ft-provider="Command Code" data-ft-offer-category="coding" aria-label="Claim Ox Alpha Free on Command Code from Command Code">Ox Alpha Free on Command Code <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts</p>
-<p class="prov">Command Code &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/commandcode-ox-alpha-free.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:9">
-<article class="card" id="offer-cursor-hobby-plan" data-category="coding" data-verified="2026-08-22" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">coding</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="cursor-hobby-plan" data-ft-provider="Cursor (Anysphere)" data-ft-offer-category="coding" aria-label="Claim Cursor Hobby Plan from Cursor (Anysphere)">Cursor Hobby Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free Hobby plan - limited Agent requests plus Composer access, no credit card required</p>
-<p class="prov">Cursor (Anysphere) &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/cursor-hobby-plan.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:10">
-<article class="card" id="offer-deepgram-free-credit" data-category="voice" data-verified="2026-08-22" data-expiry="" data-amount-sort="200">
-<div class="card-top">
-<span class="badge">voice</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://deepgram.com/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="deepgram-free-credit" data-ft-provider="Deepgram" data-ft-offer-category="voice" aria-label="Claim Deepgram $200 Free Credit from Deepgram">Deepgram $200 Free Credit <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">$200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)</p>
-<p class="prov">Deepgram &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/deepgram-free-credit.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:11">
-<article class="card" id="offer-nous-ox-alpha-free" data-category="api_provider" data-verified="2026-08-22" data-expiry="" data-amount-sort="1">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://x.com/NousResearch/status/2090899914700054780" target="_blank" rel="noopener noreferrer" data-ft-offer-id="nous-ox-alpha-free" data-ft-provider="Nous Research" data-ft-offer-category="api_provider" aria-label="Claim Ox Alpha Free via Nous Portal from Nous Research">Ox Alpha Free via Nous Portal <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free model access via Nous Portal - claimed 1 quadrillion tokens/day capacity, limited time</p>
-<p class="prov">Nous Research &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/nous-ox-alpha-free.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:12">
-<article class="card" id="offer-opencode-ox-alpha-free-week" data-category="coding" data-verified="2026-08-22" data-expiry="2026-08-27" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">coding</span>
-<span class="status">expires <time datetime="2026-08-27">Aug 27, 2026</time></span>
-</div>
-<h2 class="card-title"><a href="https://x.com/opencode/status/2090544355824038300" target="_blank" rel="noopener noreferrer" data-ft-offer-id="opencode-ox-alpha-free-week" data-ft-provider="OpenCode" data-ft-offer-category="coding" aria-label="Claim Ox Alpha Free Week in OpenCode from OpenCode">Ox Alpha Free Week in OpenCode <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free model access, near unlimited usage (rate limited)</p>
-<p class="prov">OpenCode &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/opencode-ox-alpha-free-week.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:13">
-<article class="card" id="offer-openrouter-free-models" data-category="api_provider" data-verified="2026-08-22" data-expiry="" data-amount-sort="50">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://openrouter.ai/docs/api-reference/limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="openrouter-free-models" data-ft-provider="OpenRouter" data-ft-offer-category="api_provider" aria-label="Claim OpenRouter Free Models from OpenRouter">OpenRouter Free Models <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you hold $10 credits)</p>
-<p class="prov">OpenRouter &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/openrouter-free-models.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:14">
-<article class="card" id="offer-venice-ox-alpha-free" data-category="api_provider" data-verified="2026-08-22" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://api.venice.ai/api/v1/models" target="_blank" rel="noopener noreferrer" data-ft-offer-id="venice-ox-alpha-free" data-ft-provider="Venice AI" data-ft-offer-category="api_provider" aria-label="Claim Ox Alpha Free on Venice API from Venice AI">Ox Alpha Free on Venice API <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free model access - stealth-ox-alpha at $0/M input, output and cache reads</p>
-<p class="prov">Venice AI &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/venice-ox-alpha-free.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:15">
-<article class="card" id="offer-vidu-free-credits" data-category="video" data-verified="2026-08-22" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">video</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://www.vidu.com/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="vidu-free-credits" data-ft-provider="Vidu" data-ft-offer-category="video" aria-label="Claim Vidu AI Video Free Credits from Vidu">Vidu AI Video Free Credits <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Trial credits for new users on signup, topped up with daily login bonus credits</p>
-<p class="prov">Vidu &middot; verified <time datetime="2026-08-22">Aug 22, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/vidu-free-credits.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:16">
-<article class="card" id="offer-devin-free-plan" data-category="coding" data-verified="2026-08-21" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">coding</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://devin.ai/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="devin-free-plan" data-ft-provider="Cognition (Devin)" data-ft-offer-category="coding" aria-label="Claim Devin Free Plan from Cognition (Devin)">Devin Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Light coding-agent quota + unlimited Tab completions ($0 plan)</p>
-<p class="prov">Cognition (Devin) &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/devin-free-plan.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:17">
-<article class="card" id="offer-elevenlabs-free-plan" data-category="voice" data-verified="2026-08-21" data-expiry="" data-amount-sort="10000">
-<div class="card-top">
-<span class="badge">voice</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://elevenlabs.io/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="elevenlabs-free-plan" data-ft-provider="ElevenLabs" data-ft-offer-category="voice" aria-label="Claim ElevenLabs Free Plan from ElevenLabs">ElevenLabs Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">10k credits/month (~10 min of audio)</p>
-<p class="prov">ElevenLabs &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/elevenlabs-free-plan.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:18">
-<article class="card" id="offer-github-copilot-free" data-category="coding" data-verified="2026-08-21" data-expiry="" data-amount-sort="2000">
-<div class="card-top">
-<span class="badge">coding</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://github.com/features/copilot/plans" target="_blank" rel="noopener noreferrer" data-ft-offer-id="github-copilot-free" data-ft-provider="GitHub" data-ft-offer-category="coding" aria-label="Claim GitHub Copilot Free from GitHub">GitHub Copilot Free <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">2,000 completions + 50 chat requests per month</p>
-<p class="prov">GitHub &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/github-copilot-free.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:19">
-<article class="card" id="offer-google-ai-studio-image" data-category="image" data-verified="2026-08-21" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">image</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="google-ai-studio-image" data-ft-provider="Google" data-ft-offer-category="image" aria-label="Claim Google AI Studio — Free Image Generation from Google">Google AI Studio — Free Image Generation <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free image generation in AI Studio (rate-limited)</p>
-<p class="prov">Google &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/google-ai-studio-image.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:20">
-<article class="card" id="offer-google-cloud-300-free-trial" data-category="api_provider" data-verified="2026-08-21" data-expiry="" data-amount-sort="300">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://cloud.google.com/free/docs/free-cloud-features" target="_blank" rel="noopener noreferrer" data-ft-offer-id="google-cloud-300-free-trial" data-ft-provider="Google Cloud" data-ft-offer-category="api_provider" aria-label="Claim Google Cloud Free Trial — $300 Credit from Google Cloud">Google Cloud Free Trial — $300 Credit <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">$300 in credits (90 days from signup)</p>
-<p class="prov">Google Cloud &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/google-cloud-300-free-trial.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:21">
-<article class="card" id="offer-groq-free-tier" data-category="api_provider" data-verified="2026-08-21" data-expiry="" data-amount-sort="1">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://console.groq.com/docs/rate-limits" target="_blank" rel="noopener noreferrer" data-ft-offer-id="groq-free-tier" data-ft-provider="Groq" data-ft-offer-category="api_provider" aria-label="Claim Groq Free Tier — Free Rate-Limited API from Groq">Groq Free Tier — Free Rate-Limited API <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)</p>
-<p class="prov">Groq &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/groq-free-tier.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:22">
-<article class="card" id="offer-hailuo-free-tier" data-category="video" data-verified="2026-08-21" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">video</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://hailuoai.video/doc/payment-policy.html" target="_blank" rel="noopener noreferrer" data-ft-offer-id="hailuo-free-tier" data-ft-provider="Hailuo AI" data-ft-offer-category="video" aria-label="Claim Hailuo AI Video Free Tier from Hailuo AI">Hailuo AI Video Free Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">One-time welcome credit package + limited free generation (watermarked)</p>
-<p class="prov">Hailuo AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/hailuo-free-tier.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:23">
-<article class="card" id="offer-leonardo-ai-free-plan" data-category="image" data-verified="2026-08-21" data-expiry="" data-amount-sort="150">
-<div class="card-top">
-<span class="badge">image</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://leonardo.ai/pricing/" target="_blank" rel="noopener noreferrer" data-ft-offer-id="leonardo-ai-free-plan" data-ft-provider="Leonardo.Ai" data-ft-offer-category="image" aria-label="Claim Leonardo.Ai Free Plan from Leonardo.Ai">Leonardo.Ai Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">150 fast tokens per day (resets daily)</p>
-<p class="prov">Leonardo.Ai &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/leonardo-ai-free-plan.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
 <li style="--i:24">
-<article class="card" id="offer-mistral-experiment-free-tier" data-category="api_provider" data-verified="2026-08-21" data-expiry="" data-amount-sort="0">
-<div class="card-top">
-<span class="badge">api_provider</span>
-<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
-</div>
-<h2 class="card-title"><a href="https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key" target="_blank" rel="noopener noreferrer" data-ft-offer-id="mistral-experiment-free-tier" data-ft-provider="Mistral AI" data-ft-offer-category="api_provider" aria-label="Claim Mistral AI Studio Free Mode — Free API Tier from Mistral AI">Mistral AI Studio Free Mode — Free API Tier <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">Free rate-limited API access (no credit card required)</p>
-<p class="prov">Mistral AI &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="offers/mistral-experiment-free-tier.html">How to claim &amp; details</a>
-</div>
-</article>
-</li>
-<li style="--i:25">
-<article class="card" id="offer-pika-free-plan" data-category="video" data-verified="2026-08-21" data-expiry="" data-amount-sort="8e+07">
+<article class="card" id="offer-pika-free-plan" data-category="video" data-verified="2026-08-23" data-expiry="" data-amount-sort="8e+07">
 <div class="card-top">
 <span class="badge">video</span>
 <span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
 </div>
 <h2 class="card-title"><a href="https://pika.art/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="pika-free-plan" data-ft-provider="Pika" data-ft-offer-category="video" aria-label="Claim Pika Free Plan from Pika">Pika Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">80 monthly video credits</p>
-<p class="prov">Pika &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="prov">Pika &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
 <div class="card-actions">
 <a class="detail-btn" href="offers/pika-free-plan.html">How to claim &amp; details</a>
 </div>
 </article>
 </li>
-<li style="--i:26">
-<article class="card" id="offer-runway-free-plan" data-category="video" data-verified="2026-08-21" data-expiry="" data-amount-sort="125">
+<li style="--i:25">
+<article class="card" id="offer-runway-free-plan" data-category="video" data-verified="2026-08-23" data-expiry="" data-amount-sort="125">
 <div class="card-top">
 <span class="badge">video</span>
 <span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
 </div>
 <h2 class="card-title"><a href="https://runwayml.com/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="runway-free-plan" data-ft-provider="Runway" data-ft-offer-category="video" aria-label="Claim Runway Free Plan from Runway">Runway Free Plan <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">125 one-time credits for AI video and image generation</p>
-<p class="prov">Runway &middot; verified <time datetime="2026-08-21">Aug 21, 2026</time></p>
+<p class="prov">Runway &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
 <div class="card-actions">
 <a class="detail-btn" href="offers/runway-free-plan.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:26">
+<article class="card" id="offer-venice-ox-alpha-free" data-category="api_provider" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">api_provider</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://api.venice.ai/api/v1/models" target="_blank" rel="noopener noreferrer" data-ft-offer-id="venice-ox-alpha-free" data-ft-provider="Venice AI" data-ft-offer-category="api_provider" aria-label="Claim Ox Alpha Free on Venice API from Venice AI">Ox Alpha Free on Venice API <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Free model access - stealth-ox-alpha at $0/M input, output and cache reads</p>
+<p class="prov">Venice AI &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/venice-ox-alpha-free.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:27">
+<article class="card" id="offer-vercel-glm-5-2-free-eve-agents" data-category="coding" data-verified="2026-08-23" data-expiry="2026-08-27" data-amount-sort="5.2">
+<div class="card-top">
+<span class="badge">coding</span>
+<span class="status">expires <time datetime="2026-08-27">Aug 27, 2026</time></span>
+</div>
+<h2 class="card-title"><a href="https://vercel.com/changelog/glm-5-2-free-for-eve-agents-through-august-27-via-blackbox-on-ai-gateway" target="_blank" rel="noopener noreferrer" data-ft-offer-id="vercel-glm-5-2-free-eve-agents" data-ft-provider="Vercel" data-ft-offer-category="coding" aria-label="Claim Vercel AI Gateway GLM 5.2 Free for Eve Agents from Vercel">Vercel AI Gateway GLM 5.2 Free for Eve Agents <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">GLM 5.2 (1M-token context) free for eve agents via Blackbox on AI Gateway through August 27</p>
+<p class="prov">Vercel &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/vercel-glm-5-2-free-eve-agents.html">How to claim &amp; details</a>
+</div>
+</article>
+</li>
+<li style="--i:28">
+<article class="card" id="offer-vidu-free-credits" data-category="video" data-verified="2026-08-23" data-expiry="" data-amount-sort="0">
+<div class="card-top">
+<span class="badge">video</span>
+<span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span>
+</div>
+<h2 class="card-title"><a href="https://www.vidu.com/pricing" target="_blank" rel="noopener noreferrer" data-ft-offer-id="vidu-free-credits" data-ft-provider="Vidu" data-ft-offer-category="video" aria-label="Claim Vidu AI Video Free Credits from Vidu">Vidu AI Video Free Credits <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<p class="amount">Trial credits for new users on signup, topped up with daily login bonus credits</p>
+<p class="prov">Vidu &middot; verified <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<div class="card-actions">
+<a class="detail-btn" href="offers/vidu-free-credits.html">How to claim &amp; details</a>
 </div>
 </article>
 </li>
@@ -1014,9 +1089,10 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 </section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-23T00:05:16Z">Aug 23, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-23T06:54:16Z">Aug 23, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="./" aria-current="page">Offers</a><span aria-hidden="true">&middot;</span><a href="archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
+
 </footer>
 </div>
 
@@ -1307,5 +1383,6 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 
 })();
 </script>
+
 </body>
 </html>

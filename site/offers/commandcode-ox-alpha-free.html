@@ -515,6 +515,53 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   .od-cta { min-height: 44px; }
 }
 
+/* ---- Offer share bar (#71) ---------------------------------------------- */
+
+.share-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-link,
+.share-copy {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.share-link:hover,
+.share-copy:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.share-link:focus-visible,
+.share-copy:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.share-status {
+  margin: 0.5rem 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+@media (pointer: coarse) {
+  .share-link,
+  .share-copy { min-height: 44px; }
+}
+
 </style>
 </head>
 <body>
@@ -522,27 +569,97 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 <header class="masthead">
 <p class="kicker">free ai credits &middot; Coding</p>
 <h1>Ox Alpha Free on Command Code</h1>
-<p class="tagline">Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts from <strong>Command Code</strong>, hand-verified on <time datetime="2026-08-22">Aug 22, 2026</time>.</p>
+<p class="tagline">Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts (requires &gt;=$1 credit balance in account to start a session) from <strong>Command Code</strong>, hand-verified on <time datetime="2026-08-23">Aug 23, 2026</time>.</p>
 <p class="count"><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span></p>
 </header>
 <main>
 <article class="offer-detail">
 <p class="od-back"><a href="../">&larr; All offers</a></p>
-<p class="amount">Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts</p>
+<p class="amount">Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts (requires &gt;=$1 credit balance in account to start a session)</p>
 <p class="od-summary">Command Code offers the Ox Alpha stealth model completely free: input, output and cache reads are $0 per million tokens on every plan (Go, GOAT, Pro, Max, Team Pro), drawing down neither credits nor usage limits. The deal auto-applies when you pick ox-alpha and lasts while the stealth preview ends without notice.</p>
 <section class="od-steps"><h2>How to claim</h2><ol><li>Install the CLI: npm i -g command-code, then sign in.</li><li>Have at least $1 of credits in your account to start a session.</li><li>Select Ox Alpha via /model - requests cost no credits while the stealth preview lasts.</li></ol></section>
 <section class="od-proof"><h2>Social proof</h2><blockquote class="proof-card proof-x"><p class="proof-text">&ldquo;Ox Alpha is FREE on these 5 providers (~5T+ tokens total) : - OpenCode: opencode.ai - OpenRouter: openrouter.ai - Command Code: commandcode.ai - Hermes: nousresearch.com - Venice: venice.ai Bookmark this for later&rdquo;</p><footer>qilua <span class="proof-meta">@qilua02</span> <a href="https://x.com/qilua02/status/2090997310008541613" target="_blank" rel="noopener noreferrer">View post on X <span aria-hidden="true">&#8599;</span></a></footer></blockquote></section>
 <a class="od-cta" href="https://commandcode.ai/docs/resources/pricing-limits" target="_blank" rel="noopener noreferrer">Claim at Command Code <span aria-hidden="true">&#8599;</span></a>
+<section class="od-share" aria-label="Share this offer" data-ft-offer-id="commandcode-ox-alpha-free">
+<h2>Share this offer</h2>
+<div class="share-actions"><a class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fcommandcode-ox-alpha-free.html" target="_blank" rel="noopener noreferrer" data-ft-share="linkedin">LinkedIn</a><a class="share-link" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fcommandcode-ox-alpha-free.html&text=Ox%20Alpha%20Free%20on%20Command%20Code" target="_blank" rel="noopener noreferrer" data-ft-share="x">X</a><a class="share-link" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fcommandcode-ox-alpha-free.html" target="_blank" rel="noopener noreferrer" data-ft-share="facebook">Facebook</a><a class="share-link" href="mailto:?subject=Ox%20Alpha%20Free%20on%20Command%20Code&body=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fcommandcode-ox-alpha-free.html" target="_blank" rel="noopener noreferrer" data-ft-share="email">Email</a><button type="button" class="share-copy" data-ft-share="copy">Copy link</button></div>
+<p class="share-status" id="ft-share-status" role="status" aria-live="polite" hidden></p>
+</section>
 </article>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-23T00:05:16Z">Aug 23, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-23T06:54:16Z">Aug 23, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="../">Offers</a><span aria-hidden="true">&middot;</span><a href="../archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="../privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="../feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
+
 </footer>
 </div>
 
 
 
+<script>
+(function () {
+  "use strict";
+  var OFFER_ID = "commandcode-ox-alpha-free";
+  var PAGE_URL = "https://luongnv89.github.io/freetokens/offers/commandcode-ox-alpha-free.html";
+  function ftTrack(channel) {
+    try {
+      if (typeof window.ftTrackEvent === "function") {
+        window.ftTrackEvent("offer_share", {
+          offer_id: OFFER_ID,
+          channel: channel
+        });
+      }
+    } catch (err) {}
+  }
+  function ftStatus(text) {
+    var box = document.getElementById("ft-share-status");
+    if (!box) { return; }
+    box.textContent = text;
+    box.hidden = false;
+  }
+  function ftCopyLegacy(text) {
+    var ok = false;
+    var box = document.createElement("textarea");
+    box.value = text;
+    box.setAttribute("readonly", "");
+    box.style.position = "fixed";
+    box.style.left = "-9999px";
+    document.body.appendChild(box);
+    box.select();
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    document.body.removeChild(box);
+    return ok;
+  }
+  function ftCopy() {
+    var done = function (ok) {
+      if (ok) { ftTrack("copy"); }
+      ftStatus(ok ? "Link copied!" : "Copy failed — long-press the address bar instead.");
+    };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(PAGE_URL).then(
+        function () { done(true); },
+        function () { done(ftCopyLegacy(PAGE_URL)); }
+      );
+    } else {
+      done(ftCopyLegacy(PAGE_URL));
+    }
+  }
+  var nodes = document.querySelectorAll("[data-ft-share]");
+  for (var i = 0; i < nodes.length; i++) {
+    (function (node) {
+      node.addEventListener("click", function () {
+        var channel = node.getAttribute("data-ft-share") || "";
+        if (channel === "copy") {
+          ftCopy();
+        } else {
+          // Fire-and-forget: navigation is native, never intercepted.
+          ftTrack(channel);
+        }
+      });
+    })(nodes[i]);
+  }
+})();
+</script>
 </body>
 </html>
