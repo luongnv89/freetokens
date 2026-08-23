@@ -834,9 +834,11 @@ _PAGE_TMPL = """<!DOCTYPE html>
 </html>
 """
 
-_HOME_HEADER = """<header class="masthead">
-<p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
+_HOME_HEADER = """<header class="masthead masthead-home">
+<div class="bar">
 <h1>Free AI Credits</h1>
+<p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
+</div>
 <p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
 <p class="count"><strong>{count}</strong> live offers &middot; <strong>{ongoing}</strong> ongoing &middot; <strong>{verified}</strong> verified</p>
 </header>"""
@@ -882,20 +884,30 @@ def _contact_nav() -> str:
     return '<nav class="foot-nav" aria-label="Contact">' + "".join(parts) + "</nav>"
 
 
+# Home listing row (#ft-grid). The element vocabulary stays deliberately
+# close to the archive card — same <li><article> nesting, same data-* hooks
+# the site script reads (data-category / -verified / -expiry / -amount-sort),
+# same outbound-link attribution attributes — so filter, search and all three
+# sort modes keep working untouched. Only the internal layout is new: a
+# title+amount head line over one muted meta line, with the rank number drawn
+# by a CSS counter (see _HOME_CSS) rather than baked into markup, so it
+# renumbers correctly after any filter or re-sort.
 _CARD_TMPL = """<li style="--i:{index}">
 <article class="card" id="offer-{slug}" data-category="{category}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
-<div class="card-top">
-<span class="badge">{category}</span>
-{expiry_display}
-</div>
+<div class="row-head">
 <h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer" data-ft-offer-id="{offer_id}" data-ft-provider="{provider}" data-ft-offer-category="{category}" aria-label="Claim {title} from {provider}">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
-<p class="amount">{amount}</p>
-<p class="prov">{provider} &middot; verified <time datetime="{verified_date}">{verified_display}</time></p>
-<div class="card-actions">
-<a class="detail-btn" href="{detail_href}">How to claim &amp; details</a>
+<span class="r-amount">{amount}</span>
 </div>
+<p class="row-meta">
+<span class="badge">{category}</span><span class="sep" aria-hidden="true">&middot;</span>\
+<span class="r-prov">{provider}</span><span class="sep" aria-hidden="true">&middot;</span>\
+{expiry_display}<span class="sep" aria-hidden="true">&middot;</span>\
+<span class="r-vfd" title="verified {verified_display}">verified <time datetime="{verified_date}">{verified_rel}</time></span><span class="sep" aria-hidden="true">&middot;</span>\
+<a class="r-details" href="{detail_href}">details</a>
+</p>
 </article>
 </li>"""
+
 
 _EMPTY_TMPL = """<section class="empty" style="--i:0">
 <p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8"/><path d="M16.5 8a2.5 2.5 0 0 0 0-5C13 3 12 8 12 8"/></svg></p>
@@ -926,6 +938,50 @@ def _human_date(iso: str) -> str:
     """Render a YYYY-MM-DD string as e.g. 'Dec 31, 2026'."""
     day = dt.datetime.strptime(iso, "%Y-%m-%d").date()
     return f"{day.strftime('%b')} {day.day}, {day.year}"
+
+
+# Past this many days an age stops being the more useful reading and starts
+# being a liability: the string is frozen at build time, so a page that has
+# not been rebuilt for weeks would keep insisting an offer was verified
+# "today". Inside the window the relative form is both truthful and faster to
+# scan; outside it, the absolute date lets the reader judge staleness itself.
+RELATIVE_DATE_MAX_DAYS = 14
+
+
+def _relative_date(iso: str, today: dt.date) -> str:
+    """Render a YYYY-MM-DD string as an age relative to ``today``.
+
+    The listing shows "3d ago" where the card showed "Aug 20, 2026": age is
+    what a visitor actually judges freshness by. ``today`` is always the
+    build's own date (index["generated_at"]), never the viewer's clock — the
+    string is baked into the HTML at build time, so this stays inside the
+    deploy-time-only evaluation rule of ADR #11. Future dates (a verified_date
+    ahead of the build clock) collapse to "today" rather than a negative age,
+    and anything older than RELATIVE_DATE_MAX_DAYS falls back to the absolute
+    date so a stale build can never overstate how fresh an offer is.
+    """
+    try:
+        day = dt.datetime.strptime(iso, "%Y-%m-%d").date()
+    except (ValueError, TypeError):
+        return iso or ""
+    days = (today - day).days
+    if days <= 0:
+        return "today"
+    if days == 1:
+        return "yesterday"
+    if days < 7:
+        return f"{days}d ago"
+    if days < RELATIVE_DATE_MAX_DAYS:
+        return f"{days // 7}w ago"
+    return _human_date(iso)
+
+
+def _build_date(generated_at: str) -> dt.date:
+    """The build's own calendar date, used as the "now" for relative ages."""
+    try:
+        return dt.datetime.strptime(generated_at[:10], "%Y-%m-%d").date()
+    except (ValueError, TypeError, IndexError):
+        return dt.date.today()
 
 
 # --- Client-side discovery (F2/F3): category filter + text search ----------
@@ -983,6 +1039,203 @@ def build_toolbar(count: int | None = None) -> str:
         "</section>"
     )
 
+
+# --- Home listing: ranked mono rows (#89) ------------------------------------
+# Scoped hard to `.masthead-home` and `#ft-grid`, the two selectors that only
+# ever appear on the home page. /archive renders under `#ft-archive-grid` and
+# the offer detail pages under `.offer-detail`, so both keep the original card
+# vocabulary untouched — one design system, two densities, no fork.
+_HOME_CSS = """
+/* ---- Home masthead: thin bar ------------------------------------------ */
+
+.masthead-home .bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1.1rem;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 0.55rem;
+}
+
+.masthead-home h1 {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.masthead-home .kicker { margin: 0; }
+
+.masthead-home .tagline {
+  font-size: 0.92rem;
+  color: var(--gray);
+  margin: 0.7rem 0 0.3rem;
+  max-width: 46rem;
+}
+
+.masthead-home .count { margin: 0 0 1.1rem; }
+
+/* ---- Ranked listing rows ---------------------------------------------- */
+
+#ft-grid {
+  display: block;
+  counter-reset: ftrank;
+  border-top: 1px solid var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* The shared card stagger (_CSS `rise`) is right for a handful of cards and
+   wrong for 32 dense rows, where it reads as the list twitching into place.
+   The listing fades in once, as one object; the archive keeps the stagger. */
+@media (prefers-reduced-motion: no-preference) {
+  #ft-grid .card { animation: none; }
+  #ft-grid { animation: rise 0.3s ease backwards; }
+}
+
+#ft-grid > li {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  align-items: baseline;
+  padding: 0.62rem 0.4rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Must out-specify `.grid li[hidden]` from _APP_CSS: the row above is an
+   id-scoped `display: grid`, so the plain-class hide rule alone would lose. */
+#ft-grid > li[hidden] { display: none; }
+
+/* Rank is drawn, not stored. A CSS counter skips `display: none` rows, so a
+   filtered list renumbers 1..n on its own, and re-sorting (which moves the
+   nodes) renumbers with it — no JS involvement, nothing to keep in sync. */
+#ft-grid > li::before {
+  counter-increment: ftrank;
+  content: counter(ftrank) ".";
+  font-size: 0.8rem;
+  color: var(--gray);
+  text-align: right;
+  padding-right: 0.7rem;
+  font-variant-numeric: tabular-nums;
+}
+
+#ft-grid > li:hover,
+#ft-grid > li:focus-within { background: rgba(0, 0, 0, 0.035); }
+
+#ft-grid > li:hover::before,
+#ft-grid > li:focus-within::before { color: var(--green); }
+
+/* Strip the card chrome: on the home listing the row IS the container. */
+#ft-grid .card {
+  display: block;
+  height: auto;
+  gap: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+#ft-grid .card::before { content: none; }
+
+#ft-grid .card:hover,
+#ft-grid .card:focus-within {
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.row-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.7rem;
+}
+
+.row-head > * { min-width: 0; }
+
+#ft-grid .card-title {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
+}
+
+#ft-grid .card-title a { color: var(--ink); text-decoration: none; }
+
+#ft-grid .card-title a:hover,
+#ft-grid .card-title a:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* The credit amount is the one thing a visitor is scanning for, so it keeps
+   ink-black weight while everything else on the row recedes to gray. It must
+   still wrap: the field ranges from "$5" to a full eligibility sentence, and
+   any nowrap here pushes the whole page into horizontal scroll. */
+.r-amount {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.42rem;
+  margin: 0.18rem 0 0;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+.row-meta .sep { color: var(--hairline); }
+
+#ft-grid .badge {
+  font-size: 0.63rem;
+  font-weight: 600;
+  padding: 0.06rem 0.42rem;
+  border-color: var(--gray);
+  color: var(--ink);
+}
+
+#ft-grid .status { font-size: inherit; }
+
+#ft-grid .dot { width: 0.42rem; height: 0.42rem; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22); }
+
+.r-details {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.r-details:hover,
+.r-details:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+}
+
+/* Touch: the title link already spans the row, but the secondary "details"
+   link needs its own comfortable target on coarse pointers. */
+@media (pointer: coarse) {
+  #ft-grid > li { padding-block: 0.75rem; }
+  .r-details {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* Narrow viewports: reclaim the rank gutter rather than squeezing the row. */
+@media (max-width: 24rem) {
+  #ft-grid > li { grid-template-columns: 1.9rem minmax(0, 1fr); }
+  #ft-grid > li::before { padding-right: 0.45rem; }
+}
+"""
 
 _CLIENT_EMPTY_TMPL = """<section class="empty" id="ft-no-results" hidden>
 <p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8.5 11h5"/></svg></p>
@@ -1626,11 +1879,11 @@ _APP_CSS = """
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  gap: 1rem 1.5rem;
-  margin: 0 0 1.25rem;
+  gap: 0.7rem 1.1rem;
+  margin: 0 0 0.9rem;
 }
 
-.field { display: flex; flex-direction: column; gap: 0.35rem; flex: 1 1 16rem; }
+.field { display: flex; flex-direction: column; gap: 0.28rem; flex: 1 1 15rem; }
 
 .tool-label {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
@@ -1640,13 +1893,16 @@ _APP_CSS = """
   color: var(--gray);
 }
 
+/* Squared-off controls read as terminal furniture next to the mono listing,
+   but the borders stay full ink so both still look unmistakably operable. */
 #ft-search {
-  font: inherit;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.84rem;
   color: var(--ink);
   background: var(--paper);
   border: 1px solid var(--ink);
-  border-radius: 999px;
-  padding: 0.55rem 1rem;
+  border-radius: 4px;
+  padding: 0.42rem 0.7rem;
   max-width: 24rem;
   width: 100%;
 }
@@ -1655,26 +1911,26 @@ _APP_CSS = """
 
 #ft-sort {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   color: var(--ink);
   background: var(--paper);
   border: 1px solid var(--ink);
-  border-radius: 999px;
-  padding: 0.55rem 2.2rem 0.55rem 1rem;
+  border-radius: 4px;
+  padding: 0.42rem 1.9rem 0.42rem 0.7rem;
   cursor: pointer;
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.35rem;
 }
 
 .chip {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.78rem;
-  padding: 0.42rem 0.95rem;
-  border-radius: 999px;
+  font-size: 0.74rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 4px;
   border: 1px solid var(--ink);
   background: var(--paper);
   color: var(--ink);
@@ -1697,7 +1953,7 @@ _APP_CSS = """
 .results-status {
   flex-basis: 100%;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: var(--gray);
   margin: 0;
 }
@@ -2616,6 +2872,9 @@ def render_html(
         content = _EMPTY_TMPL
     else:
         cards = []
+        # "verified 3d ago" is measured against the build's own date, so the
+        # string is fixed at deploy time like every other expiry decision.
+        build_day = _build_date(index["generated_at"])
         for i, o in enumerate(offers_active):
             if o["expiry_date"]:
                 expiry = (
@@ -2641,6 +2900,7 @@ def render_html(
                     provider=html.escape(o["provider"], quote=True),
                     verified_date=html.escape(verified, quote=True),
                     verified_display=_human_date(verified),
+                    verified_rel=_relative_date(verified, build_day),
                     expiry_display=expiry,
                     expiry_iso=html.escape(o["expiry_date"] or "", quote=True),
                     amount_sort=f"{amount_sort_value(o['amount']):g}",
@@ -2674,7 +2934,10 @@ def render_html(
         content=content,
         built=built,
         foot_current="home",
-        css_extra=(_APP_CSS + _DETAIL_CSS if has_offers else "")
+        # _HOME_CSS ships even on the empty page: it carries the masthead
+        # bar, which renders with or without offers.
+        css_extra=(_APP_CSS if has_offers else "")
+        + _HOME_CSS
         + (_BANNER_CSS if analytics else ""),
         measurement_id=measurement_id,
         app_js=has_offers,

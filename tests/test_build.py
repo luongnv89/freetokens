@@ -2892,6 +2892,138 @@ class LaunchGateTests(unittest.TestCase):
         self.assertIn(".consent-actions button { min-height: 44px; }", banner_page)
 
 
+class RelativeDateTests(unittest.TestCase):
+    """The listing shows verification age, computed against the build date."""
+
+    TODAY = dt.date(2026, 8, 23)
+
+    def test_same_day_and_future_read_as_today(self):
+        self.assertEqual(build._relative_date("2026-08-23", self.TODAY), "today")
+        # A verified_date ahead of the build clock must not render "-2d ago".
+        self.assertEqual(build._relative_date("2026-08-25", self.TODAY), "today")
+
+    def test_day_and_week_buckets_inside_the_relative_window(self):
+        cases = {
+            "2026-08-22": "yesterday",
+            "2026-08-20": "3d ago",
+            "2026-08-16": "1w ago",
+            "2026-08-11": "1w ago",
+        }
+        for iso, expected in cases.items():
+            with self.subTest(iso=iso):
+                self.assertEqual(build._relative_date(iso, self.TODAY), expected)
+
+    def test_stale_dates_fall_back_to_the_absolute_date(self):
+        # A build that has not run in weeks must not keep claiming an offer
+        # was verified "1mo ago" — past the window the reader gets the date
+        # and judges staleness themselves.
+        cases = {
+            "2026-08-09": "Aug 9, 2026",   # exactly RELATIVE_DATE_MAX_DAYS
+            "2026-07-20": "Jul 20, 2026",
+            "2025-08-23": "Aug 23, 2025",
+        }
+        for iso, expected in cases.items():
+            with self.subTest(iso=iso):
+                self.assertEqual(build._relative_date(iso, self.TODAY), expected)
+
+    def test_relative_window_boundary_is_exact(self):
+        edge = self.TODAY - dt.timedelta(days=build.RELATIVE_DATE_MAX_DAYS - 1)
+        self.assertEqual(build._relative_date(edge.isoformat(), self.TODAY), "1w ago")
+        past = self.TODAY - dt.timedelta(days=build.RELATIVE_DATE_MAX_DAYS)
+        self.assertEqual(
+            build._relative_date(past.isoformat(), self.TODAY),
+            build._human_date(past.isoformat()),
+        )
+
+    def test_malformed_input_degrades_to_the_raw_string(self):
+        self.assertEqual(build._relative_date("not-a-date", self.TODAY), "not-a-date")
+        self.assertEqual(build._relative_date("", self.TODAY), "")
+
+    def test_build_date_comes_from_generated_at_not_the_wall_clock(self):
+        self.assertEqual(
+            build._build_date("2026-08-23T18:39:18Z"), dt.date(2026, 8, 23)
+        )
+
+    def test_build_date_falls_back_when_generated_at_is_unusable(self):
+        self.assertIsInstance(build._build_date("garbage"), dt.date)
+
+
+class HomeListingTests(unittest.TestCase):
+    """#89: the home page renders ranked rows, not the card grid."""
+
+    def _page(self, n=3, **overrides):
+        offers = []
+        for i in range(n):
+            offer = build.validate_offer(
+                dict(VALID, title=f"Offer {i}", **overrides), "a.yaml"
+            )
+            offer.setdefault("slug", f"offer-{i}")
+            offers.append(offer)
+        return build.render_html(build.build_index(offers))
+
+    def test_rank_is_a_css_counter_not_baked_into_markup(self):
+        # Baked-in numbers would go stale the moment a filter or re-sort ran;
+        # the counter is what makes a filtered list read 1..n on its own.
+        page = self._page()
+        self.assertIn("counter-reset: ftrank;", page)
+        self.assertIn("counter-increment: ftrank;", page)
+        self.assertIn('content: counter(ftrank) ".";', page)
+
+    def test_hidden_rows_are_hidden_despite_the_id_scoped_display_rule(self):
+        # #ft-grid > li sets `display: grid`, which out-specifies the shared
+        # `.grid li[hidden]` rule from _APP_CSS. Without an id-scoped hide
+        # rule, filtering would stop hiding anything.
+        page = self._page()
+        self.assertIn("#ft-grid > li[hidden] { display: none; }", page)
+        app_css_pos = page.index(".grid li[hidden]")
+        home_css_pos = page.index("#ft-grid > li[hidden]")
+        self.assertLess(app_css_pos, home_css_pos, "home CSS must win the cascade")
+
+    def test_amount_wraps_so_prose_amounts_cannot_force_page_scroll(self):
+        # Several real offers put a full eligibility sentence in `amount`.
+        page = self._page(amount="Legacy accounts only: 5M chars/month " * 4)
+        amount_css = page[page.index(".r-amount {") : page.index(".r-amount {") + 220]
+        self.assertNotIn("white-space: nowrap", amount_css)
+        self.assertIn("overflow-wrap: anywhere", amount_css)
+
+    def test_row_shows_amount_provider_category_expiry_verified_and_details(self):
+        page = self._page(n=1, amount="$50 credit", provider="Alpha AI")
+        row = page[page.index('<li style="--i:0">') : page.index("</li>")]
+        self.assertIn('<span class="r-amount">$50 credit</span>', row)
+        self.assertIn('<span class="badge">api_provider</span>', row)
+        self.assertIn('<span class="r-prov">Alpha AI</span>', row)
+        self.assertIn("verified <time", row)
+        self.assertIn('<a class="r-details" href="offers/offer-0.html">details</a>', row)
+
+    def test_verified_cell_carries_both_relative_text_and_exact_date(self):
+        page = self._page(n=1)
+        self.assertIn(f'title="verified {build._human_date(VALID["verified_date"])}"', page)
+        self.assertIn(f'<time datetime="{VALID["verified_date"]}">', page)
+
+    def test_listing_fades_as_one_block_instead_of_staggering_32_rows(self):
+        page = self._page()
+        self.assertIn("#ft-grid .card { animation: none; }", page)
+        self.assertIn("#ft-grid { animation: rise", page)
+
+    def test_home_row_styles_never_reach_the_archive(self):
+        # The archive keeps the card vocabulary; its grid has a different id,
+        # and _HOME_CSS is home-only, so none of it may ship there.
+        expired = build.validate_offer(dict(VALID, expiry_date="2020-01-01"), "a.yaml")
+        expired.setdefault("slug", "old-offer")
+        index = build.build_index([expired])
+        archive = build.render_archive_html(index)
+        self.assertIn('id="ft-archive-grid"', archive)
+        for marker in ("#ft-grid", "counter-reset: ftrank", ".r-amount", ".row-meta"):
+            with self.subTest(marker=marker):
+                self.assertNotIn(marker, archive)
+
+    def test_masthead_bar_styles_ship_even_with_zero_offers(self):
+        index = {"generated_at": "2026-08-21T00:00:00Z", "count": 0, "offers": []}
+        page = build.render_html(index)
+        self.assertIn('class="masthead masthead-home"', page)
+        self.assertIn(".masthead-home .bar {", page)
+
+
 class AmountSortValueTests(unittest.TestCase):
     """F10 sort key heuristic: first-number magnitude with k/M suffixes."""
 
