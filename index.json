@@ -1,9 +1,20 @@
 {
-  "generated_at": "2026-08-22T22:49:01Z",
-  "count": 26,
-  "active_count": 26,
+  "generated_at": "2026-08-23T00:05:16Z",
+  "count": 27,
+  "active_count": 27,
   "expired_count": 0,
   "offers": [
+    {
+      "slug": "openrouter-ox-alpha-free",
+      "title": "Ox Alpha Free on OpenRouter",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free model access - $0 per million input and output tokens on stealth/ox-alpha during the stealth preview",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/stealth/ox-alpha",
+      "verified_date": "2026-08-23",
+      "status": "active"
+    },
     {
       "slug": "amazon-polly-free-tier",
       "title": "Amazon Polly Free Tier",
