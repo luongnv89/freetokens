@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="TalentGenius, an OpenAI SMB Channel Partner, distributes ChatGPT Business signup links via a request form. An X post by @Rakib_Web3 (2026-08-22) claims that...">
+<title>[UNVERIFIED] ChatGPT Business — Free Second Seat via TalentGenius · Free AI Credits</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate" type="application/rss+xml" title="Free AI Credits — hand-verified free AI credit offers" href="../feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+
+<style>
+
+:root {
+  --ink: #000000;
+  --paper: #ffffff;
+  --gray: #6b7280;
+  --green: #22c55e;
+  --hairline: rgba(0, 0, 0, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+.wrap { max-width: 75rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem); }
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---- Masthead -------------------------------------------------------- */
+
+.kicker {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 0.75rem;
+}
+
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 3px;
+  background: var(--green);
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  margin: 0 0 0.75rem;
+}
+
+.tagline { max-width: 42rem; margin: 0 0 0.5rem; font-size: 1.05rem; }
+
+.count {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin: 0 0 2.5rem;
+}
+
+.count strong { color: var(--ink); }
+
+/* ---- Card grid ------------------------------------------------------- */
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: var(--paper);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Decorative green accent line — meaning never depends on it alone. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.18s ease;
+}
+
+.card:hover, .card:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+}
+
+.card:hover::before, .card:focus-within::before { transform: scaleX(1); }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.14rem 0.6rem;
+}
+
+/* Archive "Expired" badge (#26): the word itself carries the meaning —
+   the muted styling is decoration only, never the sole signal. */
+.badge-expired {
+  border-color: var(--gray);
+  color: var(--gray);
+}
+
+.status {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.76rem;
+  color: var(--gray);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.22);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0.25rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-title a:hover,
+.card-title a:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.ext { font-size: 0.85em; }
+
+.amount {
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  font-weight: 700;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.prov {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  margin: auto 0 0;
+  padding-top: 0.75rem;
+}
+
+/* ---- Empty state ----------------------------------------------------- */
+
+.empty {
+  border: 1.5px dashed var(--hairline);
+  border-radius: 12px;
+  padding: clamp(2rem, 6vw, 3.5rem);
+  text-align: center;
+  max-width: 34rem;
+  margin: 1rem auto;
+}
+
+.empty h2 { margin: 0.75rem 0 0.5rem; font-size: 1.4rem; }
+
+.empty p { color: var(--gray); margin: 0.35rem 0; }
+
+.empty .glyph { color: var(--green); }
+
+.empty a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.empty a:hover,
+.empty a:focus-visible { text-decoration-thickness: 3px; }
+
+/* ---- Footer ------------------------------------------------------------ */
+
+.foot {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.foot p {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin: 0;
+}
+
+.foot-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.75rem;
+  align-items: baseline;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  margin: 0.5rem 0 0;
+}
+
+.foot-nav a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.foot-nav a:hover,
+.foot-nav a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+}
+
+.foot-nav [aria-current="page"] {
+  color: var(--gray);
+  text-decoration: none;
+}
+
+/* ---- Policy prose ------------------------------------------------------ */
+
+.policy {
+  max-width: 46rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.policy section h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+}
+
+.policy section p, .policy section li {
+  margin: 0.35rem 0;
+}
+
+.policy section ul, .policy section ol {
+  margin: 0.35rem 0;
+  padding-left: 1.25rem;
+}
+
+.policy code {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 0.08rem 0.35rem;
+}
+
+.policy a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.policy .summary {
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--green);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.policy .summary ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+/* ---- Focus visibility (keyboard) -------------------------------------- */
+
+a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- Load reveal (CSS-only, motion-safe) ------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .card, .empty {
+    animation: rise 0.45s ease backwards;
+    animation-delay: calc(min(var(--i, 0), 10) * 45ms);
+  }
+  .card::before { transition-duration: 0.18s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+}
+
+/* ---- Card detail link -------------------------------------------------- */
+
+.card-actions { margin-top: 0.75rem; }
+
+.detail-btn {
+  display: block;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.detail-btn:hover { background: var(--ink); color: var(--paper); }
+
+.detail-btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---- Offer detail page --------------------------------------------------- */
+
+.offer-detail {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.od-back {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  margin: 0 0 1.5rem;
+}
+
+.od-back a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.od-back a:hover,
+.od-back a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+}
+
+.offer-detail .amount {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  margin: 0.75rem 0 0;
+}
+
+.od-summary { margin: 1.25rem 0 0; }
+
+.offer-detail section h2 {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  margin: 1.5rem 0 0.35rem;
+}
+
+.od-steps ol,
+.od-proof ul {
+  margin: 0.35rem 0;
+  padding-left: 1.25rem;
+}
+
+.od-steps li { margin: 0.3rem 0; }
+
+.proof-card {
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--green);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0.6rem 0;
+}
+
+.proof-card p { margin: 0.15rem 0; }
+
+.proof-text { overflow-wrap: anywhere; }
+
+.proof-card footer,
+.proof-meta {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+.proof-card footer { margin-top: 0.35rem; }
+
+.proof-card footer a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+figure.proof-screenshot { margin: 0.6rem 0; }
+
+.proof-screenshot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+}
+
+.proof-screenshot figcaption {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+  margin-top: 0.4rem;
+}
+
+.od-cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+}
+
+.od-cta:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.od-cta:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Ended offers (#25): muted, non-interactive notice in place of the CTA —
+   the wording itself carries the meaning, styling is decoration only. */
+.od-ended {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+}
+
+/* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
+@media (pointer: coarse) {
+  .detail-btn,
+  .od-cta { min-height: 44px; }
+}
+
+/* ---- Offer share bar (#71) ---------------------------------------------- */
+
+.share-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-link,
+.share-copy {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.share-link:hover,
+.share-copy:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.share-link:focus-visible,
+.share-copy:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.share-status {
+  margin: 0.5rem 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+@media (pointer: coarse) {
+  .share-link,
+  .share-copy { min-height: 44px; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="masthead">
+<p class="kicker">free ai credits &middot; Coding</p>
+<h1>[UNVERIFIED] ChatGPT Business — Free Second Seat via TalentGenius</h1>
+<p class="tagline">1 extra ChatGPT Business seat free for 4 years (with a paid $25/mo seat) — UNVERIFIED, claimed only in an X post from <strong>TalentGenius (OpenAI SMB Channel Partner)</strong>, hand-verified on <time datetime="2026-08-22">Aug 22, 2026</time>.</p>
+<p class="count"><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span></p>
+</header>
+<main>
+<article class="offer-detail">
+<p class="od-back"><a href="../">&larr; All offers</a></p>
+<p class="amount">1 extra ChatGPT Business seat free for 4 years (with a paid $25/mo seat) — UNVERIFIED, claimed only in an X post</p>
+<p class="od-summary">TalentGenius, an OpenAI SMB Channel Partner, distributes ChatGPT Business signup links via a request form. An X post by @Rakib_Web3 (2026-08-22) claims that paying $25/mo for one seat gets a second seat completely free for 4 years through this partner program. The claim terms are not stated on TalentGenius&#x27;s public pages and remain unverified.</p>
+<section class="od-steps"><h2>How to claim</h2><ol><li>Fill out the form at https://talentgenius.io/chatgpt/request (name, work email, company, region, team size).</li><li>Receive your unique ChatGPT Business signup link from TalentGenius.</li><li>Subscribe to ChatGPT Business ($25/mo per seat) using the link.</li><li>Add the second seat to the workspace at no extra cost, per the claimed partner promotion.</li></ol></section>
+<section class="od-proof"><h2>Social proof</h2><blockquote class="proof-card proof-x"><p class="proof-text">&ldquo;openai partners are apparently handing out a second chatgpt business seat for FREE
+
+pay $25/mo for 1 seat.
+
+you get a 2nd seat completely free for 4 YEARS.
+
+the setup is pretty simple:
+
+→ fill out the partner form
+→ get your unique signup link
+→ subscribe monthly
+→ add your 2nd seat for free
+
+signup: talentgenius.io/chatgptcode
+
+a free second workspace for 4 years is kinda crazy.&rdquo;</p><footer>Rakib <span class="proof-meta">@Rakib_Web3</span> <a href="https://x.com/Rakib_Web3/status/2091074492608950443" target="_blank" rel="noopener noreferrer">View post on X <span aria-hidden="true">&#8599;</span></a></footer></blockquote></section>
+<a class="od-cta" href="https://talentgenius.io/chatgpt/request" target="_blank" rel="noopener noreferrer">Claim at TalentGenius (OpenAI SMB Channel Partner) <span aria-hidden="true">&#8599;</span></a>
+<section class="od-share" aria-label="Share this offer" data-ft-offer-id="chatgpt-business-second-seat">
+<h2>Share this offer</h2>
+<div class="share-actions"><a class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fchatgpt-business-second-seat.html" target="_blank" rel="noopener noreferrer" data-ft-share="linkedin">LinkedIn</a><a class="share-link" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fchatgpt-business-second-seat.html&text=%5BUNVERIFIED%5D%20ChatGPT%20Business%20%E2%80%94%20Free%20Second%20Seat%20via%20TalentGenius" target="_blank" rel="noopener noreferrer" data-ft-share="x">X</a><a class="share-link" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fchatgpt-business-second-seat.html" target="_blank" rel="noopener noreferrer" data-ft-share="facebook">Facebook</a><a class="share-link" href="mailto:?subject=%5BUNVERIFIED%5D%20ChatGPT%20Business%20%E2%80%94%20Free%20Second%20Seat%20via%20TalentGenius&body=https%3A%2F%2Fluongnv89.github.io%2Ffreetokens%2Foffers%2Fchatgpt-business-second-seat.html" target="_blank" rel="noopener noreferrer" data-ft-share="email">Email</a><button type="button" class="share-copy" data-ft-share="copy">Copy link</button></div>
+<p class="share-status" id="ft-share-status" role="status" aria-live="polite" hidden></p>
+</section>
+</article>
+</main>
+<footer class="foot">
+<p>Built <time datetime="2026-08-23T10:21:23Z">Aug 23, 2026</time> &middot; offers re-verified on every change</p>
+
+<nav class="foot-nav" aria-label="Site"><a href="../">Offers</a><span aria-hidden="true">&middot;</span><a href="../archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="../privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="../feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
+
+</footer>
+</div>
+
+
+
+<script>
+(function () {
+  "use strict";
+  var OFFER_ID = "chatgpt-business-second-seat";
+  var PAGE_URL = "https://luongnv89.github.io/freetokens/offers/chatgpt-business-second-seat.html";
+  function ftTrack(channel) {
+    try {
+      if (typeof window.ftTrackEvent === "function") {
+        window.ftTrackEvent("offer_share", {
+          offer_id: OFFER_ID,
+          channel: channel
+        });
+      }
+    } catch (err) {}
+  }
+  function ftStatus(text) {
+    var box = document.getElementById("ft-share-status");
+    if (!box) { return; }
+    box.textContent = text;
+    box.hidden = false;
+  }
+  function ftCopyLegacy(text) {
+    var ok = false;
+    var box = document.createElement("textarea");
+    box.value = text;
+    box.setAttribute("readonly", "");
+    box.style.position = "fixed";
+    box.style.left = "-9999px";
+    document.body.appendChild(box);
+    box.select();
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    document.body.removeChild(box);
+    return ok;
+  }
+  function ftCopy() {
+    var done = function (ok) {
+      if (ok) { ftTrack("copy"); }
+      ftStatus(ok ? "Link copied!" : "Copy failed — long-press the address bar instead.");
+    };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(PAGE_URL).then(
+        function () { done(true); },
+        function () { done(ftCopyLegacy(PAGE_URL)); }
+      );
+    } else {
+      done(ftCopyLegacy(PAGE_URL));
+    }
+  }
+  var nodes = document.querySelectorAll("[data-ft-share]");
+  for (var i = 0; i < nodes.length; i++) {
+    (function (node) {
+      node.addEventListener("click", function () {
+        var channel = node.getAttribute("data-ft-share") || "";
+        if (channel === "copy") {
+          ftCopy();
+        } else {
+          // Fire-and-forget: navigation is native, never intercepted.
+          ftTrack(channel);
+        }
+      });
+    })(nodes[i]);
+  }
+})();
+</script>
+</body>
+</html>
