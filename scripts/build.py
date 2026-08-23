@@ -2914,9 +2914,9 @@ def render_html(
             )
         content = (
             build_toolbar(len(offers_active))
-            + '<ul class="grid" id="ft-grid">\n'
+            + '<ol class="grid" id="ft-grid">\n'
             + "\n".join(cards)
-            + "\n</ul>"
+            + "\n</ol>"
             + _CLIENT_EMPTY_TMPL
         )
     built = index["generated_at"]

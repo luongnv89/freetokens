@@ -475,9 +475,11 @@ class SemanticPageTests(unittest.TestCase):
         self.assertIn("<main>", page)
         self.assertIn("<footer", page)
 
-    def test_cards_are_list_items_inside_unordered_grid(self):
+    def test_cards_are_list_items_inside_ordered_grid(self):
         page = self._render_many()
-        self.assertIn('<ul class="grid" id="ft-grid">', page)
+        self.assertIn('<ol class="grid" id="ft-grid">', page)
+        self.assertIn("</ol>", page)
+        self.assertNotIn('<ul class="grid" id="ft-grid">', page)
         self.assertEqual(page.count("<li "), page.count("<article"))
 
     def test_responsive_viewport_and_fluid_layout_css(self):
