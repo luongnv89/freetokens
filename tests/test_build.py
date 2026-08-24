@@ -1619,6 +1619,19 @@ class DetailPageTests(unittest.TestCase):
         self.assertIn("@devone", seg)
         self.assertIn("View post on X", seg)
 
+    def test_runbook_css_hits_touch_minimum_and_progress_contrast(self):
+        # Touch: the label itself must grow on coarse pointers — li padding
+        # alone is not clickable. Contrast: the progress fill is scoped to a
+        # darker green (>=3:1 vs the light track) without touching --green.
+        site = self._two_offer_site()
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        coarse = page[page.index(".claim-step { padding-block: 0.7rem; }") :]
+        self.assertIn(".claim-step label { padding-block: 0.35rem; }", coarse[:400])
+        fill_start = page.index(".progress-fill {")
+        fill = page[fill_start : page.index("}", fill_start)]
+        self.assertIn("background: #15803d;", fill)
+        self.assertNotIn("var(--green)", fill)
+
     def test_page_header_carries_core_fields_and_status(self):
         site = self._build(
             {
@@ -1638,6 +1651,8 @@ class DetailPageTests(unittest.TestCase):
         self.assertIn(
             f'hand-verified on <time datetime="{VALID["verified_date"]}">', header
         )
+        # Amount renders once, in the od-hero; the tagline must not repeat it.
+        self.assertNotIn(VALID["amount"], header)
         self.assertIn('<time datetime="2026-12-31">Dec 31, 2026</time>', header)
 
     def test_page_without_detail_file_falls_back_like_dialogs_did(self):

@@ -1396,7 +1396,7 @@ def _detail_sections(detail: dict | None, rel_prefix: str = "", slug: str = "") 
 _OFFER_HEADER = """<header class="masthead">
 <p class="kicker">free ai credits &middot; {category_label}</p>
 <h1>{title}</h1>
-<p class="tagline">{amount} from <strong>{provider}</strong>, hand-verified on <time datetime="{verified_date}">{verified_display}</time>.</p>
+<p class="tagline">From <strong>{provider}</strong>, hand-verified on <time datetime="{verified_date}">{verified_display}</time>.</p>
 <p class="count">{status}</p>
 </header>"""
 
@@ -2254,7 +2254,9 @@ _DETAIL_CSS = """
   display: block;
   height: 100%;
   width: 100%;
-  background: var(--green);
+  /* Darker than --green on purpose: keeps >=3:1 against the track
+     (#ebebeb) and page white; the global token stays for dashes/ticks. */
+  background: #15803d;
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -2380,6 +2382,10 @@ _DETAIL_CSS = """
 
 @media (pointer: coarse) {
   .claim-step { padding-block: 0.7rem; }
+
+  /* li padding is not part of the hit area; pad the label itself so the
+     clickable row reaches the 44px touch minimum on single-line steps. */
+  .claim-step label { padding-block: 0.35rem; }
 }
 
 .proof-card {

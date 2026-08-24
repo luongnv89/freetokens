@@ -499,7 +499,9 @@ a:focus-visible {
   display: block;
   height: 100%;
   width: 100%;
-  background: var(--green);
+  /* Darker than --green on purpose: keeps >=3:1 against the track
+     (#ebebeb) and page white; the global token stays for dashes/ticks. */
+  background: #15803d;
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -625,6 +627,10 @@ a:focus-visible {
 
 @media (pointer: coarse) {
   .claim-step { padding-block: 0.7rem; }
+
+  /* li padding is not part of the hit area; pad the label itself so the
+     clickable row reaches the 44px touch minimum on single-line steps. */
+  .claim-step label { padding-block: 0.35rem; }
 }
 
 .proof-card {
@@ -774,7 +780,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 <header class="masthead">
 <p class="kicker">free ai credits &middot; Image</p>
 <h1>Bing Image Creator</h1>
-<p class="tagline">Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h) from <strong>Microsoft Bing</strong>, hand-verified on <time datetime="2026-08-23">Aug 23, 2026</time>.</p>
+<p class="tagline">From <strong>Microsoft Bing</strong>, hand-verified on <time datetime="2026-08-23">Aug 23, 2026</time>.</p>
 <p class="count"><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span></p>
 </header>
 <main>
@@ -799,7 +805,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 </article>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-24T10:16:08Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-24T11:45:35Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="../">Offers</a><span aria-hidden="true">&middot;</span><a href="../archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="../privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="../feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 
