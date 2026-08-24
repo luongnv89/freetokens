@@ -116,3 +116,15 @@ export function formatAmountSort(value: number): string {
 export function activeOffers(index: OffersIndex): Offer[] {
   return index.offers.filter((o) => o.status !== "expired")
 }
+
+/** Newest expiration first, slug as stable tiebreak (build.py expired_offers). */
+export function expiredOffers(index: OffersIndex): Offer[] {
+  return index.offers
+    .filter((o) => o.status === "expired")
+    .sort((a, b) => {
+      const ka = a.expiry_date ?? ""
+      const kb = b.expiry_date ?? ""
+      if (ka !== kb) return ka < kb ? 1 : -1
+      return a.slug < b.slug ? 1 : a.slug > b.slug ? -1 : 0
+    })
+}

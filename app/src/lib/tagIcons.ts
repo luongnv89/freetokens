@@ -16,4 +16,5 @@ export const TAG_ICONS: Record<string, string> = {
     '<circle cx="12" cy="12" r="9" stroke-dasharray="3.2 3"/><path d="M9.7 9.4a2.4 2.4 0 0 1 4.7.6c0 1.6-2.4 1.9-2.4 3.4"/><path d="M12 16.8h.01"/>',
   none: '<rect x="4" y="10.5" width="16" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 7.7-1.6"/>',
   required: '<rect x="4" y="10.5" width="16" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>',
+  expired: '<circle cx="12" cy="12" r="9"/><path d="M12 7.2V12l3.1 1.9"/>',
 }
