@@ -1,0 +1,16 @@
+{
+  "summary": "SiliconFlow's current API pricing page marks selected models free, including THUDM/GLM-Z1-9B-0414, PaddlePaddle/PaddleOCR-VL-1.5, and tencent/Hunyuan-MT-7B.",
+  "claim_steps": [
+    "Sign in to SiliconFlow Cloud.",
+    "Choose a model marked 免费/free in the API pricing catalog.",
+    "Use the selected model through SiliconFlow's API."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://siliconflow.cn/pricing",
+      "title": "SiliconFlow API Pricing",
+      "text": "THUDM/GLM-Z1-9B-0414, PaddlePaddle/PaddleOCR-VL-1.5, and tencent/Hunyuan-MT-7B are listed with 免费 input/output prices."
+    }
+  ]
+}

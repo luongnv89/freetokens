@@ -1,0 +1,16 @@
+{
+  "summary": "OVHcloud AI Endpoints documents an anonymous free access mode limited to 2 requests per minute per IP and per model. API-key access requires a Public Cloud project with a payment method.",
+  "claim_steps": [
+    "Use a supported AI Endpoint in anonymous mode within the 2 requests per minute per IP and model limit.",
+    "For API-key access, create an OVHcloud Public Cloud project and define a payment method.",
+    "Choose a model from the AI Endpoints catalog and call its OpenAI-compatible API."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.ovhcloud.com/en/guides/public-cloud/ai-machine-learning/ai-endpoints-getting-started",
+      "title": "AI Endpoints - Getting started - OVHcloud Documentation",
+      "text": "Anonymous: 2 requests per minute, per IP and per model. If you exceed this limit, a 429 error code will be returned."
+    }
+  ]
+}

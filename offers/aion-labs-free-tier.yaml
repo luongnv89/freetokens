@@ -1,0 +1,9 @@
+# Verified 2026-08-24 against https://www.aionlabs.ai/docs/rate-limits/
+# ("Free | Default on signup"; "Free | 15" requests per minute; "Free | 20,000 | 20,000" token limits.)
+title: Aion Labs Free API Tier
+provider: Aion Labs
+category: api_provider
+amount: 20,000 tokens/day and 15 requests/minute
+expiry_date: null
+source_url: https://www.aionlabs.ai/docs/rate-limits/
+verified_date: 2026-08-24

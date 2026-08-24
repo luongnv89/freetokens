@@ -1,0 +1,16 @@
+{
+  "summary": "LLM7 provides anonymous text generation with limits of 1 request per second, 10 per minute, 60 per hour, and 500,000 tokens per 24 hours. A free token raises the request and token limits.",
+  "claim_steps": [
+    "Send an OpenAI-compatible request without a key using a currently available turbo model.",
+    "Stay within the anonymous limits of 10 requests per minute, 60 per hour, and 500,000 tokens per 24 hours.",
+    "Optionally get a free token from the LLM7 dashboard for higher limits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.llm7.io/limits",
+      "title": "Limits | LLM7.io Documentation",
+      "text": "Anonymous access allows 1 request per second, 10 per minute, 60 per hour, and 500,000 tokens per 24 hours."
+    }
+  ]
+}

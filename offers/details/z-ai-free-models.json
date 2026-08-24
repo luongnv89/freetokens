@@ -1,0 +1,16 @@
+{
+  "summary": "Z.AI's pricing table lists GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash with Free input, cached input, cached input storage, and output prices.",
+  "claim_steps": [
+    "Register or sign in to the Z.AI Open Platform.",
+    "Create an API key in the API Keys management page.",
+    "Call one of the free models through Z.AI's API."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.z.ai/guides/overview/pricing.md",
+      "title": "Pricing | Z.AI Documentation",
+      "text": "GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash are listed with Free input and output prices."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Verified 2026-08-24 against https://ai.google.dev/gemini-api/docs/pricing
+# ("Free input & output tokens" are listed for supported Gemini API models.)
+title: Google Gemini API Free Tier
+provider: Google Gemini
+category: api_provider
+amount: Free input and output tokens on supported Gemini API models (quotas vary by model)
+expiry_date: null
+source_url: https://ai.google.dev/gemini-api/docs/pricing
+verified_date: 2026-08-24

@@ -1,0 +1,9 @@
+# Verified 2026-08-24 against https://huggingface.co/docs/inference-providers/pricing
+# ("Free Users" receive "$0.10" in monthly credits for "Inference Providers".)
+title: Hugging Face Inference Provider Credits
+provider: Hugging Face
+category: api_provider
+amount: $0.10/month in Inference Provider credits for free users (subject to change)
+expiry_date: null
+source_url: https://huggingface.co/docs/inference-providers/pricing
+verified_date: 2026-08-24

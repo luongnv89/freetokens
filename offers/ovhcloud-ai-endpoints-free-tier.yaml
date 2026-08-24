@@ -1,0 +1,9 @@
+# Verified 2026-08-24 against https://docs.ovhcloud.com/en/guides/public-cloud/ai-machine-learning/ai-endpoints-getting-started
+# ("Anonymous: 2 requests per minute, per IP and per model." API-key mode requires a payment method.)
+title: OVHcloud AI Endpoints Free Tier
+provider: OVHcloud
+category: api_provider
+amount: Anonymous access at 2 requests/minute per IP and per model
+expiry_date: null
+source_url: https://docs.ovhcloud.com/en/guides/public-cloud/ai-machine-learning/ai-endpoints-getting-started
+verified_date: 2026-08-24

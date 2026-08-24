@@ -1,0 +1,9 @@
+# Verified 2026-08-24 against https://ollama.com/pricing
+# (The $0 Free plan includes "Access cloud models"; cloud usage has session and weekly limits.)
+title: Ollama Cloud Free Tier
+provider: Ollama
+category: api_provider
+amount: Light cloud usage on the $0 Free plan, with limits resetting every 5 hours and 7 days
+expiry_date: null
+source_url: https://ollama.com/pricing
+verified_date: 2026-08-24
