@@ -3,27 +3,11 @@
 // same badge vocabulary — so the React home listing renders byte-for-byte
 // equivalent markup from src/data/offers.json.
 
-export interface Offer {
-  slug: string
-  title: string
-  provider: string
-  category: string
-  amount: string
-  expiry_date: string | null
-  source_url: string
-  verified_date: string
-  verification: string
-  signup: string
-  status: "active" | "expired"
-}
-
-export interface OffersIndex {
-  generated_at: string
-  count: number
-  active_count: number
-  expired_count: number
-  offers: Offer[]
-}
+// The Offer / OffersIndex types are GENERATED from the frozen data contract
+// (schemas/offers-index.schema.json, issue #120) — never edit them by hand;
+// a schema change that breaks a component is a compile error.
+import type { Offer, OffersIndex } from "../types/offers-index"
+export type { Offer, OffersIndex }
 
 export const CATEGORIES = ["api_provider", "coding", "image", "voice", "video"] as const
 
