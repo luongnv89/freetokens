@@ -14,6 +14,11 @@ import { readdir, readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  ArtifactSchemaError,
+  validateIndexData,
+  validateJsonlText,
+} from "./validate-artifacts.mjs";
 
 const REQUIRED_FIELDS = [
   "title",
@@ -251,7 +256,31 @@ export async function runPipeline({ offersDir, outDir, now = new Date() }) {
     // Detail JSON passes through unchanged — it is already validated content.
     await writeFile(path.join(detailsOut, `${slug}.json`), `${JSON.stringify(detail, null, 2)}\n`);
   }
+
+  await validateWrittenArtifacts(outDir);
   return index;
+}
+
+// Data-contract gate (#120): the pipeline validates its OWN OUTPUT against
+// schemas/offers-index.schema.json by reading the artifacts back off disk —
+// a loader regression fails the build naming artifact and field instead of
+// silently shipping a malformed index.
+export async function validateWrittenArtifacts(outDir) {
+  try {
+    const written = JSON.parse(await readFile(path.join(outDir, "offers.json"), "utf8"));
+    validateIndexData(written, path.join(outDir, "offers.json"));
+    const jsonl = await readFile(path.join(outDir, "offers.jsonl"), "utf8");
+    const lines = validateJsonlText(jsonl, path.join(outDir, "offers.jsonl"));
+    if (lines !== written.count || written.offers.length !== written.count) {
+      throw new ArtifactSchemaError(
+        `${path.join(outDir, "offers.json")}: count is ${written.count} but there are ` +
+          `${written.offers.length} offers / ${lines} JSONL lines`,
+      );
+    }
+  } catch (exc) {
+    if (exc instanceof ArtifactSchemaError) throw new OfferError(exc.message);
+    throw exc;
+  }
 }
 
 async function main(argv) {

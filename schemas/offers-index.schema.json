@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/luongnv89/freetokens/schemas/offers-index.schema.json",
+  "title": "OffersIndex",
+  "description": "Frozen data contract (issue #120, tasks.md Task 2.1) for the GENERATED offers.json / offers.jsonl artifacts produced by app/scripts/load-offers.mjs. This governs the build OUTPUT only — schemas/offer.schema.json still governs the YAML source and does not change. The pipeline validates its own output against this schema and fails the build on mismatch.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "generated_at",
+    "count",
+    "active_count",
+    "expired_count",
+    "offers"
+  ],
+  "properties": {
+    "generated_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "Build timestamp, UTC, second precision with a trailing Z."
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of entries in offers (active + expired)."
+    },
+    "active_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Entries whose status is active at build time."
+    },
+    "expired_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Entries whose status is expired at build time."
+    },
+    "offers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Offer" },
+      "description": "All validated offers, newest-verified first (ties by slug ascending). Expired entries are retained and flagged, never dropped."
+    }
+  },
+  "$defs": {
+    "Offer": {
+      "title": "Offer",
+      "description": "One offer entry in the generated index. Mirrors the YAML source fields plus the slug and the build-time-computed status.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slug",
+        "title",
+        "provider",
+        "category",
+        "amount",
+        "expiry_date",
+        "source_url",
+        "verified_date",
+        "verification",
+        "signup",
+        "status"
+      ],
+      "properties": {
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "description": "File name of the source offers/<slug>.yaml without extension."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable offer name shown on cards."
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Company or product offering the credit."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["api_provider", "coding", "image", "voice", "video"],
+          "description": "Offer category badge."
+        },
+        "amount": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Free value in human terms, e.g. '$300 in credits'."
+        },
+        "expiry_date": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "description": "Date the offer stops being claimable, YYYY-MM-DD. Null means ongoing."
+        },
+        "source_url": {
+          "type": "string",
+          "pattern": "^https?://",
+          "description": "Official provider page describing the offer."
+        },
+        "verified_date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "description": "Date the curator last verified the offer is live, YYYY-MM-DD."
+        },
+        "verification": {
+          "type": "string",
+          "enum": ["hand_verified", "social_proof", "unverified"],
+          "description": "How the listing was checked."
+        },
+        "signup": {
+          "type": "string",
+          "enum": ["none", "required"],
+          "description": "Whether claiming needs an account."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "expired"],
+          "description": "Build-time expiry verdict (ADR 0001): computed against the BUILD clock, never a client clock."
+        }
+      }
+    }
+  }
+}

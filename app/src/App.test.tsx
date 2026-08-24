@@ -106,7 +106,7 @@ describe("App empty state", () => {
           status: "expired" as const,
         },
       ],
-    };
+    } satisfies import("./types/offers-index").OffersIndex;
     const markup = renderToStaticMarkup(<HomePage index={empty} />);
     expect(markup).toContain("No live offers right now");
     expect(markup).not.toContain('id="ft-grid"');

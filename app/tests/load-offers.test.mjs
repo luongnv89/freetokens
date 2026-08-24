@@ -8,7 +8,13 @@ import {
   isExpired,
   loadOffers,
   runPipeline,
+  validateWrittenArtifacts,
 } from "../scripts/load-offers.mjs";
+import {
+  ArtifactSchemaError,
+  validateIndexData,
+  validateJsonlText,
+} from "../scripts/validate-artifacts.mjs";
 
 const REPO_ROOT = path.resolve(import.meta.dirname, "..", "..");
 const OFFERS_DIR = path.join(REPO_ROOT, "offers");
@@ -140,6 +146,129 @@ describe("generated artifacts vs committed index.json", () => {
       const dst = await readFile(path.join(detailsOut, f), "utf8");
       expect(JSON.parse(dst)).toEqual(JSON.parse(src));
     }
+  });
+});
+
+describe("data contract: schemas/offers-index.schema.json (#120)", () => {
+  // A minimal valid entry, mutated per test case to violate the contract.
+  function validOffer() {
+    return {
+      slug: "test-offer",
+      title: "Test Offer",
+      provider: "Test Provider",
+      category: "coding",
+      amount: "$100 in credits",
+      expiry_date: null,
+      source_url: "https://example.com/offer",
+      verified_date: "2026-01-01",
+      verification: "hand_verified",
+      signup: "none",
+      status: "active",
+    };
+  }
+
+  function validIndex() {
+    const offer = validOffer();
+    return {
+      generated_at: "2026-08-24T00:00:00Z",
+      count: 1,
+      active_count: 1,
+      expired_count: 0,
+      offers: [offer],
+    };
+  }
+
+  it("the committed index.json validates against the schema", async () => {
+    const committed = JSON.parse(
+      await readFile(path.join(REPO_ROOT, "index.json"), "utf8"),
+    );
+    expect(validateIndexData(committed, "index.json")).toBe(true);
+  });
+
+  it("runPipeline artifacts pass the schema gate (no throw)", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "ft-gate-"));
+    try {
+      const out = path.join(root, "out");
+      await runPipeline({ offersDir: OFFERS_DIR, outDir: out });
+      await expect(validateWrittenArtifacts(out)).resolves.toBeUndefined();
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it.each([
+    [
+      "missing status field",
+      (ix) => delete ix.offers[0].status,
+      /must have required property 'status'/,
+    ],
+    [
+      "bad date format",
+      (ix) => {
+        ix.offers[0].expiry_date = "01/02/2026";
+      },
+      /\/offers\/0\/expiry_date must match/,
+    ],
+    [
+      "unknown category",
+      (ix) => {
+        ix.offers[0].category = "crypto";
+      },
+      /\/offers\/0\/category must be equal to one of/,
+    ],
+    [
+      "unknown extra field",
+      (ix) => {
+        ix.offers[0].promo = "flash sale";
+      },
+      /additional propert/,
+    ],
+    [
+      "bad status value",
+      (ix) => {
+        ix.offers[0].status = "zombie";
+      },
+      /\/offers\/0\/status must be equal to one of/,
+    ],
+  ])("fixture violation fails naming the field: %s", (_label, mutate, pattern) => {
+    const index = validIndex();
+    mutate(index);
+    expect(() => validateIndexData(index)).toThrow(pattern);
+  });
+
+  it("a corrupted artifact fails validateWrittenArtifacts with an OfferError", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "ft-contract-"));
+    try {
+      const index = validIndex();
+      delete index.offers[0].status;
+      await writeFile(
+        path.join(root, "offers.json"),
+        `${JSON.stringify(index, null, 2)}\n`,
+      );
+      await writeFile(
+        path.join(root, "offers.jsonl"),
+        `${JSON.stringify(index.offers[0])}\n`,
+      );
+      await expect(validateWrittenArtifacts(root)).rejects.toThrow(OfferError);
+      await expect(validateWrittenArtifacts(root)).rejects.toThrow(/status/);
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("every JSONL line validates and line count equals count", () => {
+    expect(() =>
+      validateJsonlText(
+        `${JSON.stringify(validOffer())}\n`,
+        "offers.jsonl",
+      ),
+    ).not.toThrow();
+    expect(() =>
+      validateJsonlText(
+        `${JSON.stringify({ ...validOffer(), status: "zombie" })}\n`,
+        "offers.jsonl",
+      ),
+    ).toThrow(ArtifactSchemaError);
   });
 });
 
