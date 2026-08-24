@@ -1,6 +1,6 @@
 # ADR 001 — Static site generator choice
 
-- **Status:** Accepted
+- **Status:** Superseded by [ADR 002 — React + Vite migration](adr/0002-react-vite-migration.md)
 - **Date:** 2026-08-21
 - **Deciders:** Project owner (curator)
 - **Resolves:** PRD Open Question #1 (issue #2, timeboxed spike)
