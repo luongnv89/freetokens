@@ -8,6 +8,11 @@
   ],
   "social_proof": [
     {
+      "type": "screenshot",
+      "image": "assets/gmi-minimax-m3-curator-run.jpg",
+      "caption": "Curator's firsthand run: MiniMax M3 served through GMI Cloud driving an agent session at ~170 tok/s (status bar: gmi/MiniMaxAI/MiniMax-M3 · $0.05 spent, cache hits). \"Very fast.\""
+    },
+    {
       "type": "x",
       "url": "https://x.com/gmi_cloud/status/2091925007756857368",
       "author": "GMI Cloud",
