@@ -93,3 +93,41 @@ The cost ADR 001 refused is now paid consciously, with controls:
   `scripts/build.py` removal.
 - Reversing a two-day-old ADR is cheap now; reversing it after the UX roadmap
   lands on top of string templates would not be.
+
+## Addendum (2026-08-25): prerender approach chosen (Task 1.5, issue #119)
+
+Task 1.5 required proving the home listing renders at parity with the
+Python builder and choosing between `vite-react-ssg`, Vite's built-in
+prerender, and a custom render script. Measured evidence (full report:
+[`docs/qa/prerender-poc-report.md`](../qa/prerender-poc-report.md)):
+
+| Metric (Lighthouse 12, mobile) | Python build | React prerender |
+|---|---|---|
+| Performance | 76–81 | **100** |
+| Accessibility | 96 | **96** |
+| FCP | ~3.7–3.9 s | **1.2 s** |
+| Transferred bytes | 127 KB | **81 KB** |
+
+Rendered-HTML diff against `site/index.html`: identical row count, slug
+sets, and per-row data attributes; the two parity bugs the diff exposed
+(amount-sort multiplier anchoring, `%g` formatting) are fixed with unit
+tests.
+
+**Decision: custom render script** (`app/scripts/prerender.mjs`,
+wired as the npm `postbuild` step). After `vite build`, esbuild bundles a
+node-side entry that renders `<App/>` with `react-dom/server`
+(`renderToStaticMarkup`) and injects the markup into `dist/index.html`;
+the client bundle hydrates onto it via `hydrateRoot`.
+
+Rationale:
+
+- **Zero new dependencies.** `vite-react-ssg` would add a plugin tree for a
+  single-route site; ADR 001's supply-chain concern was traded knowingly in
+  this ADR but not gratuitously — one route needs no SSG framework.
+- **Vite has no built-in prerender**; the gap is exactly what the script
+  fills, in ~40 lines we own.
+- **Same static-output guarantee:** what ships is plain HTML/CSS/JS on
+  GitHub Pages; the full listing is present with JavaScript disabled.
+- Escape hatch preserved: if multi-route prerendering (offer detail pages,
+  Sprint 2/3) outgrows the script, swapping to `vite-react-ssg` touches only
+  the build step — components and data flow stay unchanged.
