@@ -865,6 +865,20 @@ h1 {
   background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
 }
 
+/* Tags render as <button> on the listing but as <a> on /archive and every
+   offer page, which ship no filter runtime. Both forms are real targets, so
+   both are owed the touch minimum — and this has to live in the shared
+   stylesheet, because the listing's own CSS never reaches those pages. At
+   the base size a pill is ~20px, under the 24px WCAG 2.2 AA floor, and the
+   spacing exception does not rescue it: once a row wraps, tags sit ~21.6px
+   apart centre-to-centre. */
+@media (pointer: coarse) {
+  a.badge {
+    min-height: 32px;
+    padding-inline: 0.6rem;
+  }
+}
+
 /* The glyph tracks its text size, so tags stay proportional wherever the
    base font-size is overridden (the home listing runs them at 0.63rem). */
 .tag-i {
@@ -2562,6 +2576,12 @@ button.badge:focus-visible {
     min-height: 32px;
     padding-inline: 0.6rem;
   }
+
+  /* `#ft-grid .badge` sets padding at id specificity (1,1,0), which outranks
+     the (0,1,1) rule above, so on the listing the widening is dead unless it
+     is matched. Only the inline padding needs restating — min-height is
+     uncontested. */
+  #ft-grid button.badge { padding-inline: 0.6rem; }
 }
 """
 
@@ -3106,8 +3126,20 @@ _APP_JS = """<script id="ft-app">
     } else {
       ordered.sort(function (a, b) { return idx(a) - idx(b); });
     }
+    // Appending moves a node (remove + insert), and removing the element
+    // that holds focus resets focus to <body>. Every filter application runs
+    // through here, so re-appending unconditionally would blur the row tag a
+    // keyboard user just activated and drop them to the top of the listing.
+    // Filtering never changes the order, so check first and touch nothing in
+    // the common case; a real re-sort still needs the full pass, because
+    // appending moves to the end and a partial pass cannot place a node.
     for (var i = 0; i < ordered.length; i++) {
-      grid.appendChild(ordered[i]); // append moves the node, like the DOM
+      if (grid.children[i] !== ordered[i]) {
+        for (var j = 0; j < ordered.length; j++) {
+          grid.appendChild(ordered[j]); // append moves the node, like the DOM
+        }
+        return;
+      }
     }
   }
 
@@ -3235,7 +3267,17 @@ _APP_JS = """<script id="ft-app">
           state[tagDim] === tagValue && tagValue ? "true" : "false"
         );
       }
-      if (clearButton) { clearButton.hidden = !ftHasFilters(state); }
+      if (clearButton) {
+        // This control hides itself the moment it does its job, and hiding
+        // the element that holds focus drops the user to <body> -- at the top
+        // of a long listing, with nothing announced. Hand focus to the search
+        // box, which is always present, before it goes.
+        var hideClear = !ftHasFilters(state);
+        if (hideClear && document.activeElement === clearButton) {
+          input.focus();
+        }
+        clearButton.hidden = hideClear;
+      }
       var chips = document.querySelectorAll("[data-ft-category]");
       for (var i = 0; i < chips.length; i++) {
         var chip = chips[i];
@@ -3271,7 +3313,20 @@ _APP_JS = """<script id="ft-app">
           ? "Showing all " + total + " offers"
           : "Showing " + shown + " of " + total + " offers") +
         (active.length ? " \u00b7 " + active.join(" \u00b7 ") : "");
-      if (emptyBox) { emptyBox.hidden = shown !== 0; }
+      if (emptyBox) {
+        // Same trap as the clear button: the empty state's reset control
+        // disappears with the box that holds it the instant it brings offers
+        // back, so focus has to be moved off it deliberately.
+        var hideEmpty = shown !== 0;
+        if (
+          hideEmpty &&
+          resetButton &&
+          document.activeElement === resetButton
+        ) {
+          input.focus();
+        }
+        emptyBox.hidden = hideEmpty;
+      }
       syncControls();
       if (options.commit) {
         var query = ftSerializeState(state);

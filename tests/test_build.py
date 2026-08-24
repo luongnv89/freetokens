@@ -2247,6 +2247,67 @@ class NodeAppJsTests(unittest.TestCase):
         return json.loads(proc.stdout)
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_filtering_does_not_reorder_rows(self):
+        # Tags inside the grid are buttons now, so a keyboard user can be
+        # focused *inside* a row when a filter applies. Re-appending rows
+        # detaches them, and detaching the focused element drops focus to
+        # <body>. Filtering never changes the order, so it must not move a
+        # single row.
+        snaps = self._run([{"op": "click_chip", "value": "coding"}])
+        before, after = snaps[0], snaps[1]
+        self.assertEqual(after["visible"], ["copilot"])
+        self.assertEqual(after["rowAppends"] - before["rowAppends"], 0)
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_real_sort_change_still_reorders_rows(self):
+        # The guard above must not cost the reorder a genuine sort needs:
+        # appending moves a node to the end, so a partial pass cannot place
+        # one and the full pass has to run.
+        snaps = self._run(
+            [{"op": "set_sort", "value": "amount"}], cards=self.SORT_CARDS
+        )
+        self.assertEqual(snaps[1]["visible"], ["mid", "new", "old"])
+        moved = snaps[1]["rowAppends"] - snaps[0]["rowAppends"]
+        self.assertEqual(moved, len(self.SORT_CARDS))
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_clear_all_moves_focus_before_hiding_itself(self):
+        # "Clear all filters" hides the moment it does its job. Hiding the
+        # focused element strands the user at <body>, at the top of a long
+        # listing, with nothing announced — so focus must be handed over
+        # deliberately first.
+        snaps = self._run(
+            [
+                {"op": "click_chip", "value": "coding"},
+                {"op": "focus", "target": "clear"},
+                {"op": "click_clear"},
+            ],
+            init_search="",
+        )
+        filtered, focused, cleared = snaps[1], snaps[2], snaps[3]
+        self.assertFalse(filtered["clearHidden"])
+        self.assertEqual(focused["activeElementId"], "ft-clear-filters")
+        # The control is gone, and focus went somewhere real.
+        self.assertTrue(cleared["clearHidden"])
+        self.assertEqual(cleared["activeElementId"], "ft-search")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_empty_state_reset_moves_focus_before_hiding_itself(self):
+        # Same trap, other control: the reset button disappears with the
+        # empty state it lives in, the instant it brings offers back.
+        snaps = self._run(
+            [
+                {"op": "focus", "target": "reset"},
+                {"op": "click_reset"},
+            ],
+            init_search="?q=nothingmatchesthis",
+        )
+        self.assertTrue(snaps[0]["emptyHidden"] is False)
+        self.assertEqual(snaps[1]["activeElementId"], "ft-reset-filters")
+        self.assertTrue(snaps[2]["emptyHidden"])
+        self.assertEqual(snaps[2]["activeElementId"], "ft-search")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_deep_link_restores_combined_state_without_events(self):
         snaps = self._run([], init_search="?category=coding&q=copilot")
         first = snaps[0]
@@ -3182,9 +3243,16 @@ class LaunchGateTests(unittest.TestCase):
     def test_touch_targets_meet_44px_on_coarse_pointers(self):
         home = self._home_with_one()
         self.assertIn("@media (pointer: coarse)", home)
-        coarse_block = home[home.index("@media (pointer: coarse)") :]
-        self.assertIn(".chip,", coarse_block[:200])
-        self.assertIn("#ft-sort { min-height: 44px; }", coarse_block[:200])
+        # Several coarse-pointer blocks ship now (the shared one sizing link
+        # tags, the listing's own). Find the one that sizes the toolbar
+        # rather than assuming it is the first on the page.
+        blocks = [
+            chunk[: chunk.index("\n}")]
+            for chunk in home.split("@media (pointer: coarse)")[1:]
+        ]
+        toolbar = [b for b in blocks if ".chip," in b]
+        self.assertEqual(len(toolbar), 1, "expected exactly one toolbar block")
+        self.assertIn("#ft-sort { min-height: 44px; }", toolbar[0])
         # The consent banner ships its own copy of the rule because its CSS
         # is emitted only when GA4 is configured.
         offer = build.validate_offer(dict(VALID), "a.yaml")
@@ -3194,6 +3262,36 @@ class LaunchGateTests(unittest.TestCase):
             measurement_id="G-ABCDEF12345",
         )
         self.assertIn(".consent-actions button { min-height: 44px; }", banner_page)
+
+    def test_link_form_tags_get_the_same_touch_minimum_as_buttons(self):
+        # Tags render as <button> on the listing but as <a> on /archive and
+        # every detail page, where no filter runtime ships. Both forms are
+        # real targets, so both are owed the minimum — at the base size a
+        # pill is ~20px, under the 24px WCAG 2.2 AA floor, and the spacing
+        # exception does not rescue it once a row wraps.
+        # The rule must ship on the pages that actually render link tags.
+        # The listing's own stylesheet never reaches them, so asserting on
+        # the shared CSS alone would pass while archive stayed uncovered.
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        index = build.build_index([offer])
+        for page in (
+            build.render_archive_html(index),
+            build.render_offer_html(
+                index["offers"][0], None, index["generated_at"]
+            ),
+        ):
+            self.assertIn("a.badge", page)
+            coarse = page[page.index("@media (pointer: coarse)") :]
+            self.assertIn("min-height: 32px", coarse[: coarse.index("\n}")])
+
+    def test_listing_touch_padding_outranks_the_density_rule(self):
+        # `#ft-grid .badge` sets padding at id specificity, so the touch
+        # rule's padding-inline is dead on the listing unless it is matched.
+        # Without this the widening silently does nothing where it matters.
+        home = self._home_with_one()
+        self.assertIn("#ft-grid .badge {", home)
+        self.assertIn("#ft-grid button.badge { padding-inline: 0.6rem; }", home)
 
 
 class RelativeDateTests(unittest.TestCase):

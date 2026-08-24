@@ -22,7 +22,14 @@ regenerated on every deploy; entries here cover behavior, not content edits.
   its explanatory tooltip, and all eleven hues clear WCAG AA both as text at
   rest and under white text when filled (enforced by tests). Glyphs ship as a
   single per-page SVG sprite; inlining them at each of ~120 tag sites cost
-  +70 KB of HTML for no visual difference.
+  +70 KB of HTML for no visual difference. Keyboard focus survives a filter:
+  applying one no longer re-appends every row (which detached — and so
+  blurred — the tag the user had just activated), and the two controls that
+  hide themselves the moment they do their job, "Clear all filters" and the
+  empty-state reset, hand focus to the search box before they go instead of
+  dropping it to the top of the page. Tags rendered as links on /archive and
+  the detail pages get the same touch-target minimum the listing's buttons
+  already had.
 - **Claim runbook on offer detail pages:** the detail page is redesigned
   around the task — hero amount with a mono status line, cheatsheet-style
   section labels, and "How to claim" rendered as a checkable step-by-step

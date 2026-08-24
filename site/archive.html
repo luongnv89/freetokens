@@ -188,6 +188,20 @@ h1 {
   background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
 }
 
+/* Tags render as <button> on the listing but as <a> on /archive and every
+   offer page, which ship no filter runtime. Both forms are real targets, so
+   both are owed the touch minimum — and this has to live in the shared
+   stylesheet, because the listing's own CSS never reaches those pages. At
+   the base size a pill is ~20px, under the 24px WCAG 2.2 AA floor, and the
+   spacing exception does not rescue it: once a row wraps, tags sit ~21.6px
+   apart centre-to-centre. */
+@media (pointer: coarse) {
+  a.badge {
+    min-height: 32px;
+    padding-inline: 0.6rem;
+  }
+}
+
 /* The glyph tracks its text size, so tags stay proportional wherever the
    base font-size is overridden (the home listing runs them at 0.63rem). */
 .tag-i {
@@ -465,7 +479,7 @@ a:focus-visible {
 </section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-24T15:33:45Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-24T16:10:39Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="./">Offers</a><span aria-hidden="true">&middot;</span><a href="archive.html" aria-current="page">Archive</a><span aria-hidden="true">&middot;</span><a href="privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 

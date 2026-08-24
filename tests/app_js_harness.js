@@ -57,6 +57,11 @@ class FakeTimers {
   }
 }
 
+// Focus tracking. One scenario runs per process, so a module-level "what is
+// focused" is enough to model the one browser behaviour that matters here:
+// hiding or detaching the focused element resets focus to <body> (null).
+let focusedElement = null;
+
 function makeElement(tag) {
   const el = {
     tag,
@@ -65,7 +70,6 @@ function makeElement(tag) {
     listeners: {},
     children: [],
     parentNode: null,
-    hidden: false,
     value: "",
     textContent: "",
     card: null,
@@ -79,6 +83,9 @@ function makeElement(tag) {
     },
     addEventListener(type, fn) {
       (el.listeners[type] = el.listeners[type] || []).push(fn);
+    },
+    focus() {
+      focusedElement = el;
     },
     appendChild(child) {
       // Real-DOM semantics: appending a node that is already a child MOVES
@@ -108,6 +115,21 @@ function makeElement(tag) {
       return null;
     },
   };
+  // Model the browser rule this harness exists to police: hiding the element
+  // that currently holds focus resets focus to <body>. Without it a
+  // self-hiding control looks fine here while stranding real keyboard users.
+  let hiddenState = false;
+  Object.defineProperty(el, "hidden", {
+    get() {
+      return hiddenState;
+    },
+    set(value) {
+      hiddenState = !!value;
+      if (hiddenState && focusedElement === el) {
+        focusedElement = null;
+      }
+    },
+  });
   return el;
 }
 
@@ -127,6 +149,15 @@ async function runScenario(scenario) {
 
   // --- DOM -------------------------------------------------------------
   const grid = makeElement("ul");
+  // Count row moves. Appending an <li> detaches it first, which in a real
+  // browser blurs anything focused inside it, so "did this operation reorder
+  // the grid at all" is the observable that pins the focus fix.
+  let rowAppends = 0;
+  const gridAppendChild = grid.appendChild;
+  grid.appendChild = function (child) {
+    rowAppends++;
+    return gridAppendChild.call(grid, child);
+  };
   const items = [];
   const slugOf = new Map();
   const linksBySlug = new Map();
@@ -177,6 +208,12 @@ async function runScenario(scenario) {
   const status = makeElement("p");
   const emptyBox = makeElement("section");
   const resetButton = makeElement("button");
+  resetButton.attrs.id = "ft-reset-filters";
+  // The toolbar escape hatch (#99). It hides itself the instant nothing is
+  // filtering, so it is the element most likely to vanish under its own focus.
+  const clearButton = makeElement("button");
+  clearButton.attrs.id = "ft-clear-filters";
+  clearButton.hidden = true;
   // Sort select (F10): a value-holding control the app syncs and listens to.
   const sortSelect = makeElement("select");
   sortSelect.attrs.id = "ft-sort";
@@ -211,6 +248,7 @@ async function runScenario(scenario) {
     "ft-results-status": status,
     "ft-no-results": emptyBox,
     "ft-reset-filters": resetButton,
+    "ft-clear-filters": clearButton,
     "ft-traffic": trafficBox,
     "ft-traffic-today": trafficToday,
     "ft-traffic-period": trafficPeriod,
@@ -258,7 +296,10 @@ async function runScenario(scenario) {
     clearTimeout: (id) => timers.clearTimeout(id),
     document: {
       readyState: "complete",
-      activeElement: null,
+      // Live, so the app sees focus move exactly as a browser reports it.
+      get activeElement() {
+        return focusedElement;
+      },
       getElementById: (id) => byId[id] || null,
       querySelectorAll: (selector) =>
         selector === "[data-ft-category]" ? chips : [],
@@ -337,6 +378,12 @@ async function runScenario(scenario) {
         inputValue: input.value,
         sortValue: sortSelect.value,
         emptyHidden: emptyBox.hidden,
+        clearHidden: clearButton.hidden,
+        // Cumulative; tests compare deltas across steps.
+        rowAppends,
+        activeElementId: focusedElement
+          ? focusedElement.attrs.id || focusedElement.tag
+          : null,
         historyUrls: historyUrls.slice(),
         locationSearch: location_.search,
         events: events.map((e) => e.slice()),
@@ -393,6 +440,11 @@ async function runScenario(scenario) {
       fire(grid, "click", clickEvent(grid));
     } else if (step.op === "click_reset") {
       fire(resetButton, "click", {});
+    } else if (step.op === "focus") {
+      const target = { clear: clearButton, reset: resetButton, search: input };
+      focusedElement = target[step.target] || null;
+    } else if (step.op === "click_clear") {
+      fire(clearButton, "click", {});
     } else if (step.op === "set_sort") {
       // F10: changing the select fires one change event, like a user pick.
       sortSelect.value = step.value;
