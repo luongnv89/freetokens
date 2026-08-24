@@ -29,7 +29,14 @@ regenerated on every deploy; entries here cover behavior, not content edits.
   empty-state reset, hand focus to the search box before they go instead of
   dropping it to the top of the page. Tags rendered as links on /archive and
   the detail pages get the same touch-target minimum the listing's buttons
-  already had.
+  already had. Each name in the status line is now the control that
+  removes just that filter, so one dimension can be dropped without wiping
+  the other two and the search box. Toolbar chips wear their hue at rest
+  rather than only when hovered, matching the row tags they mirror, and both
+  list pages ship a bypass link past the tag-heavy list. The `social_proof`
+  hue was black — identical to body ink and to the fallback an unknown tag
+  value gets — and is now navy, so a missing hue token can no longer pass for
+  a real tag.
 - **Claim runbook on offer detail pages:** the detail page is redesigned
   around the task — hero amount with a mono status line, cheatsheet-style
   section labels, and "How to claim" rendered as a checkable step-by-step

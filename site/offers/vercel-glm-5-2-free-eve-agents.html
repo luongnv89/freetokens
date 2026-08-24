@@ -34,14 +34,29 @@
      Green is deliberately absent from the category set: it is spoken for by
      "strongest claim" on the verification and sign-up tags next door, and a
      green category tag would read as an endorsement of the offer rather than
-     a description of it. That is why `coding` is teal. */
+     a description of it. That is why `coding` is teal.
+
+     Eleven values, seven hues -- the repeats are the point, not an oversight.
+     Hue encodes the *claim*, not the value: green is "strongest claim"
+     (hand-verified; no sign-up wall) and the muted gray is "weakest, treat
+     with care" (unverified; sign-up required; expired). The five categories,
+     which make no claim at all, are the five hues nothing else uses. Repeats
+     only ever occur ACROSS families, and a row renders one tag per family in
+     a fixed slot, so two greens on one row never compete to mean the same
+     thing. The word and the glyph stay distinct throughout, so nothing here
+     is carried by colour alone.
+
+     No hue may equal --ink: that is the `.badge` fallback for an unknown
+     value, so a tag colliding with it would make a missing token look
+     exactly like a real tag. `social_proof` was that collision until it
+     became navy; TagHueDistinctnessTests holds the line. */
   --t-api_provider: #3538cd;
   --t-coding: #0e7490;
   --t-image: #955906;
   --t-voice: #7e22ce;
   --t-video: #be123c;
   --t-hand_verified: #15803d;
-  --t-social_proof: #000000;
+  --t-social_proof: #1e3a5f;
   --t-unverified: #5f6673;
   --t-none: #15803d;
   --t-required: #5f6673;
@@ -187,6 +202,40 @@ h1 {
      Browsers without color-mix keep the flat paper background above. */
   background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
 }
+
+/* Bypass block (WCAG 2.4.1). Three tag controls per row turned a listing of
+   ~2 stops per row into ~5, so reaching the footer by keyboard now means
+   traversing a few hundred controls. The link is off-screen until focused,
+   where it becomes the first thing a keyboard user meets. */
+.skip-list {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-list:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* The bypass target must not draw a focus ring when it is reached by the
+   skip link — it is a landmark, not a control. */
+#site-footer:focus { outline: none; }
 
 /* Tags render as <button> on the listing but as <a> on /archive and every
    offer page, which ship no filter runtime. Both forms are real targets, so
@@ -916,8 +965,8 @@ To claim:
 </section>
 </article>
 </main>
-<footer class="foot">
-<p>Built <time datetime="2026-08-24T16:10:39Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
+<footer class="foot" id="site-footer" tabindex="-1">
+<p>Built <time datetime="2026-08-24T16:23:36Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="../">Offers</a><span aria-hidden="true">&middot;</span><a href="../archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="../privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="../feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 

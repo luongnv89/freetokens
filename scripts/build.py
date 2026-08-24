@@ -711,14 +711,29 @@ _CSS = """
      Green is deliberately absent from the category set: it is spoken for by
      "strongest claim" on the verification and sign-up tags next door, and a
      green category tag would read as an endorsement of the offer rather than
-     a description of it. That is why `coding` is teal. */
+     a description of it. That is why `coding` is teal.
+
+     Eleven values, seven hues -- the repeats are the point, not an oversight.
+     Hue encodes the *claim*, not the value: green is "strongest claim"
+     (hand-verified; no sign-up wall) and the muted gray is "weakest, treat
+     with care" (unverified; sign-up required; expired). The five categories,
+     which make no claim at all, are the five hues nothing else uses. Repeats
+     only ever occur ACROSS families, and a row renders one tag per family in
+     a fixed slot, so two greens on one row never compete to mean the same
+     thing. The word and the glyph stay distinct throughout, so nothing here
+     is carried by colour alone.
+
+     No hue may equal --ink: that is the `.badge` fallback for an unknown
+     value, so a tag colliding with it would make a missing token look
+     exactly like a real tag. `social_proof` was that collision until it
+     became navy; TagHueDistinctnessTests holds the line. */
   --t-api_provider: #3538cd;
   --t-coding: #0e7490;
   --t-image: #955906;
   --t-voice: #7e22ce;
   --t-video: #be123c;
   --t-hand_verified: #15803d;
-  --t-social_proof: #000000;
+  --t-social_proof: #1e3a5f;
   --t-unverified: #5f6673;
   --t-none: #15803d;
   --t-required: #5f6673;
@@ -864,6 +879,40 @@ h1 {
      Browsers without color-mix keep the flat paper background above. */
   background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
 }
+
+/* Bypass block (WCAG 2.4.1). Three tag controls per row turned a listing of
+   ~2 stops per row into ~5, so reaching the footer by keyboard now means
+   traversing a few hundred controls. The link is off-screen until focused,
+   where it becomes the first thing a keyboard user meets. */
+.skip-list {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-list:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* The bypass target must not draw a focus ring when it is reached by the
+   skip link — it is a landmark, not a control. */
+#site-footer:focus { outline: none; }
 
 /* Tags render as <button> on the listing but as <a> on /archive and every
    offer page, which ship no filter runtime. Both forms are real targets, so
@@ -1162,7 +1211,7 @@ _PAGE_TMPL = """<!DOCTYPE html>
 <main>
 {content}
 </main>
-<footer class="foot">
+<footer class="foot" id="site-footer" tabindex="-1">
 <p>Built {built_display} &middot; offers re-verified on every change</p>
 {traffic_strip}
 {foot_nav}
@@ -1599,6 +1648,12 @@ _HOME_CSS = """
   #ft-grid > li::before { padding-right: 0.45rem; }
 }
 """
+
+# Bypass block (WCAG 2.4.1) for the two pages that render a tag-bearing list.
+# Every row carries three tag controls, so without this the footer sits a few
+# hundred tab stops down. Placed after the toolbar so the filters — the reason
+# to be on the page — still come first in DOM order.
+_SKIP_LIST_LINK = '<a class="skip-list" href="#site-footer">Skip the offer list</a>\n'
 
 _CLIENT_EMPTY_TMPL = """<section class="empty" id="ft-no-results" hidden>
 <p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8.5 11h5"/></svg></p>
@@ -2509,13 +2564,19 @@ button.badge:focus-visible {
   a.badge, button.badge { transition: none; }
 }
 
-/* Chips carry the same hue as the row tag they mirror. Only the pressed and
-   hover states use the fill, matching the tags exactly. */
+/* Chips carry the same hue as the row tag they mirror, in every state — the
+   two controls are the same mechanism seen at two distances, so a chip at
+   rest has to look like a tag at rest (hue text over a 7% wash of that hue)
+   and not like plain ink. Only the pressed and hover states use the fill,
+   matching the tags exactly. */
 .chip {
   --tag-hue: var(--ink);
   display: inline-flex;
   align-items: center;
   gap: 0.34em;
+  border-color: var(--tag-hue);
+  color: var(--tag-hue);
+  background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
 }
 
 .chip .tag-i { width: 1.05em; height: 1.05em; flex: 0 0 auto; }
@@ -2525,6 +2586,42 @@ button.badge:focus-visible {
 .chip-category-image { --tag-hue: var(--t-image); }
 .chip-category-voice { --tag-hue: var(--t-voice); }
 .chip-category-video { --tag-hue: var(--t-video); }
+
+/* Applied-filter pills in the status line. They are filled, like the row tag
+   and toolbar chip for the same value in their applied state, so all three
+   places a filter is visible agree on what "applied" looks like. */
+.filter-pill {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0 0.45rem;
+  border: 1px solid var(--tag-hue);
+  border-radius: 999px;
+  background: var(--tag-hue);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+/* ::after, not a text node: the empty-state copy and the search both read
+   textContent, and a literal × would quietly become part of it. */
+.filter-pill::after {
+  content: "×";
+  margin-left: 0.25em;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.filter-pill:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (pointer: coarse) {
+  .filter-pill { min-height: 32px; padding-inline: 0.6rem; }
+}
 
 /* Result count and the escape hatch share one baseline; the button only
    exists in the DOM-visible sense while something is actually filtered. */
@@ -3060,14 +3157,49 @@ _APP_JS = """<script id="ft-app">
   }
 
   function ftActiveTags(state) {
-    // Human-readable names of the applied tag filters, for the status line.
+    // The applied tag filters. Each carries the label a reader sees plus the
+    // dimension its pill has to clear, so the status line can name what is
+    // filtering AND hand back a control that removes just that one.
     var out = [];
     for (var i = 0; i < DIMENSIONS.length; i++) {
       var dim = DIMENSIONS[i];
       if (!state[dim]) { continue; }
-      out.push((TAG_LABELS[dim] || {})[state[dim]] || state[dim]);
+      out.push({
+        dim: dim,
+        value: state[dim],
+        label: (TAG_LABELS[dim] || {})[state[dim]] || state[dim]
+      });
     }
     return out;
+  }
+
+  // "Clear all filters" is a blunt instrument once three dimensions can be
+  // applied at once and only one of them is in the way. Every name in the
+  // status line is therefore the control that drops that dimension: same
+  // hue as the tag it came from, trailing × to say it is removable. The ×
+  // is drawn with ::after so it never joins the row text the search matches.
+  function ftRenderStatus(status, shown, total, active) {
+    while (status.firstChild) { status.removeChild(status.firstChild); }
+    status.appendChild(
+      document.createTextNode(
+        shown === total
+          ? "Showing all " + total + " offers"
+          : "Showing " + shown + " of " + total + " offers"
+      )
+    );
+    for (var i = 0; i < active.length; i++) {
+      status.appendChild(document.createTextNode(" · "));
+      var pill = document.createElement("button");
+      pill.setAttribute("type", "button");
+      pill.setAttribute(
+        "class",
+        "filter-pill badge-" + active[i].dim + "-" + active[i].value
+      );
+      pill.setAttribute("data-ft-remove", active[i].dim);
+      pill.setAttribute("aria-label", "Remove " + active[i].label + " filter");
+      pill.appendChild(document.createTextNode(active[i].label));
+      status.appendChild(pill);
+    }
   }
 
   function ftHasFilters(state) {
@@ -3308,11 +3440,7 @@ _APP_JS = """<script id="ft-app">
       // toolbar is scrolled out of sight and nothing else would say why the
       // list shrank.
       var active = ftActiveTags(state);
-      status.textContent =
-        (shown === total
-          ? "Showing all " + total + " offers"
-          : "Showing " + shown + " of " + total + " offers") +
-        (active.length ? " \u00b7 " + active.join(" \u00b7 ") : "");
+      ftRenderStatus(status, shown, total, active);
       if (emptyBox) {
         // Same trap as the clear button: the empty state's reset control
         // disappears with the box that holds it the instant it brings offers
@@ -3402,6 +3530,28 @@ _APP_JS = """<script id="ft-app">
     // without hunting for that row again).
     if (resetButton) { resetButton.addEventListener("click", clearAll); }
     if (clearButton) { clearButton.addEventListener("click", clearAll); }
+
+    // Removing one dimension from the status line. Delegated, because the
+    // pills are rebuilt on every apply().
+    status.addEventListener("click", function (event) {
+      var node = event.target;
+      var dim = null;
+      while (node && node !== status) {
+        if (node.getAttribute) {
+          dim = node.getAttribute("data-ft-remove");
+          if (dim) { break; }
+        }
+        node = node.parentNode || null;
+      }
+      if (!dim || DIMENSIONS.indexOf(dim) === -1) { return; }
+      state[dim] = "";
+      commit("filter");
+      // The pill just activated no longer exists -- the same trap the clear
+      // button had. Prefer the next remaining pill so removing several in a
+      // row keeps the keyboard in one place; fall back to the search box.
+      var next = status.querySelector("[data-ft-remove]");
+      if (next && next.focus) { next.focus(); } else { input.focus(); }
+    });
 
     window.addEventListener("popstate", function () {
       state = ftParseState(window.location.search);
@@ -3882,6 +4032,7 @@ def render_html(
             )
         content = (
             build_toolbar(len(offers_active))
+            + _SKIP_LIST_LINK
             + '<ol class="grid" id="ft-grid" role="list">\n'
             + "\n".join(cards)
             + "\n</ol>"
@@ -3993,7 +4144,10 @@ def render_archive_html(
                 )
             )
         content = (
-            '<ul class="grid" id="ft-archive-grid">\n' + "\n".join(cards) + "\n</ul>"
+            _SKIP_LIST_LINK
+            + '<ul class="grid" id="ft-archive-grid">\n'
+            + "\n".join(cards)
+            + "\n</ul>"
         )
     else:
         content = _ARCHIVE_EMPTY_TMPL

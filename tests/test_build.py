@@ -2246,6 +2246,156 @@ class NodeAppJsTests(unittest.TestCase):
         self.assertEqual(proc.returncode, 0, f"harness failed: {proc.stderr}")
         return json.loads(proc.stdout)
 
+    # Cards spanning all three dimensions, so cross-family AND-filtering has
+    # something to actually narrow.
+    TAG_CARDS = [
+        {
+            "slug": "hand-free",
+            "category": "coding",
+            "text": "Hand Free Coding",
+            "verification": "hand_verified",
+            "signup": "none",
+        },
+        {
+            "slug": "hand-gated",
+            "category": "image",
+            "text": "Hand Gated Image",
+            "verification": "hand_verified",
+            "signup": "required",
+        },
+        {
+            "slug": "social-free",
+            "category": "coding",
+            "text": "Social Free Coding",
+            "verification": "social_proof",
+            "signup": "none",
+        },
+    ]
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_row_tag_click_filters_and_clicking_it_again_clears(self):
+        snaps = self._run(
+            [
+                {"op": "click_tag", "slug": "hand-free", "dimension": "verification"},
+                {"op": "click_tag", "slug": "hand-free", "dimension": "verification"},
+            ],
+            cards=self.TAG_CARDS,
+        )
+        applied, cleared = snaps[1], snaps[2]
+        self.assertEqual(applied["visible"], ["hand-free", "hand-gated"])
+        self.assertEqual(applied["locationSearch"], "?verification=hand_verified")
+        # The control that applied the filter is the one that removes it.
+        self.assertEqual(cleared["visible"], ["hand-free", "hand-gated", "social-free"])
+        self.assertEqual(cleared["locationSearch"], "")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_row_tag_pressed_state_syncs_across_every_row(self):
+        # aria-pressed is the single source of truth, so every row showing
+        # that value must report it — not just the row that was clicked.
+        snaps = self._run(
+            [{"op": "click_tag", "slug": "hand-free", "dimension": "verification"}],
+            cards=self.TAG_CARDS,
+        )
+        pressed = snaps[1]["tagPressed"]
+        self.assertEqual(pressed["hand-free:verification"], "true")
+        self.assertEqual(pressed["hand-gated:verification"], "true")
+        self.assertEqual(pressed["social-free:verification"], "false")
+        # A different dimension is untouched by a verification filter.
+        self.assertEqual(pressed["hand-free:signup"], "false")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_tags_and_search_and_chips_combine_with_and_semantics(self):
+        snaps = self._run(
+            [
+                {"op": "click_tag", "slug": "hand-free", "dimension": "verification"},
+                {"op": "click_tag", "slug": "hand-free", "dimension": "signup"},
+                {"op": "type", "value": "coding"},
+                {"op": "advance", "ms": 400},
+            ],
+            cards=self.TAG_CARDS,
+        )
+        final = snaps[-1]
+        # hand_verified AND no-sign-up AND matches "coding" leaves exactly one.
+        self.assertEqual(final["visible"], ["hand-free"])
+        self.assertIn("verification=hand_verified", final["locationSearch"])
+        self.assertIn("signup=none", final["locationSearch"])
+        self.assertIn("q=coding", final["locationSearch"])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_deep_link_restores_every_dimension_and_back_undoes_one_step(self):
+        snaps = self._run(
+            [
+                {"op": "click_tag", "slug": "hand-free", "dimension": "signup"},
+                {"op": "popstate", "search": "?verification=hand_verified"},
+            ],
+            cards=self.TAG_CARDS,
+            init_search="?verification=hand_verified",
+        )
+        first, narrowed, back = snaps[0], snaps[1], snaps[2]
+        self.assertEqual(first["visible"], ["hand-free", "hand-gated"])
+        self.assertEqual(narrowed["visible"], ["hand-free"])
+        # History navigation restores, and never pushes a new entry.
+        self.assertEqual(back["visible"], ["hand-free", "hand-gated"])
+        self.assertEqual(len(back["historyUrls"]), 1)
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_hostile_dimension_params_degrade_to_unfiltered(self):
+        # A hand-edited URL must never strand a visitor on an empty listing,
+        # and nothing outside the closed enum may reach state or analytics.
+        for hostile in (
+            "?verification=__proto__",
+            "?signup=<script>alert(1)</script>",
+            "?category=' OR 1=1--",
+            "?verification=hand_verified%00",
+        ):
+            with self.subTest(search=hostile):
+                snap = self._run([], cards=self.TAG_CARDS, init_search=hostile)[0]
+                self.assertEqual(
+                    snap["visible"],
+                    ["hand-free", "hand-gated", "social-free"],
+                )
+                self.assertEqual(snap["status"], "Showing all 3 offers")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_status_line_names_are_controls_that_drop_one_dimension(self):
+        # "Clear all filters" is the wrong tool when three dimensions are
+        # applied and only one is in the way — and the row that set it may
+        # have been filtered off the page, so the row tag is not a way back.
+        snaps = self._run(
+            [
+                {"op": "click_tag", "slug": "hand-free", "dimension": "verification"},
+                {"op": "click_tag", "slug": "hand-free", "dimension": "signup"},
+                {"op": "remove_filter", "dimension": "signup"},
+            ],
+            cards=self.TAG_CARDS,
+        )
+        both, dropped = snaps[2], snaps[3]
+        self.assertEqual(both["visible"], ["hand-free"])
+        # Only the sign-up dimension goes; verification and the count stay.
+        self.assertEqual(dropped["visible"], ["hand-free", "hand-gated"])
+        self.assertEqual(dropped["locationSearch"], "?verification=hand_verified")
+        self.assertEqual(
+            dropped["status"], "Showing 2 of 3 offers · hand-verified"
+        )
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_removing_a_filter_never_strands_focus(self):
+        # The pill destroys itself by doing its job, so focus must be placed
+        # deliberately: the next remaining pill, else the search box.
+        snaps = self._run(
+            [
+                {"op": "click_tag", "slug": "hand-free", "dimension": "verification"},
+                {"op": "click_tag", "slug": "hand-free", "dimension": "signup"},
+                {"op": "remove_filter", "dimension": "verification"},
+                {"op": "remove_filter", "dimension": "signup"},
+            ],
+            cards=self.TAG_CARDS,
+        )
+        # One pill left, so the keyboard stays among the pills.
+        self.assertEqual(snaps[3]["activeElementId"], "filter-pill")
+        # None left, so it falls back to a control that still exists.
+        self.assertEqual(snaps[4]["activeElementId"], "ft-search")
+
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_filtering_does_not_reorder_rows(self):
         # Tags inside the grid are buttons now, so a keyboard user can be
@@ -3034,7 +3184,7 @@ class PrivacyPageTests(unittest.TestCase):
         page = self._render()
         for marker in (
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
-            '<footer class="foot">',
+            '<footer class="foot" id="site-footer"',
             "--ink:",
             '"Bricolage Grotesque"',
             'class="wrap"',
@@ -3285,6 +3435,51 @@ class LaunchGateTests(unittest.TestCase):
             coarse = page[page.index("@media (pointer: coarse)") :]
             self.assertIn("min-height: 32px", coarse[: coarse.index("\n}")])
 
+    def test_tag_bearing_lists_ship_a_bypass_block(self):
+        # WCAG 2.4.1. Three tag controls per row put the footer a few hundred
+        # tab stops down, so both list pages need a way past the list.
+        offer = build.validate_offer(dict(VALID), "a.yaml")
+        offer.setdefault("slug", "offer-0")
+        index = build.build_index([offer])
+        expired = build.validate_offer(
+            dict(VALID, title="Gone", expiry_date="2020-01-01"), "b.yaml"
+        )
+        expired.setdefault("slug", "offer-gone")
+        for page in (
+            self._home_with_one(),
+            build.render_archive_html(build.build_index([expired])),
+        ):
+            self.assertIn('href="#site-footer"', page)
+            self.assertIn("Skip the offer list", page)
+            # The target has to be able to receive focus for the jump to
+            # land; without tabindex the browser moves the viewport but
+            # leaves focus stranded back in the list.
+            self.assertIn('id="site-footer" tabindex="-1"', page)
+            # Off-screen until focused, never display:none (which would drop
+            # it out of the tab order entirely).
+            self.assertIn(".skip-list {", page)
+            self.assertIn(".skip-list:focus {", page)
+            self.assertNotIn(".skip-list { display: none", page)
+
+    def test_chips_wear_their_hue_at_rest_like_the_tags_they_mirror(self):
+        # A chip and the row tag it mirrors are the same control at two
+        # distances; if the chip is plain ink until hovered, the two read as
+        # unrelated filter systems.
+        home = self._home_with_one()
+        blocks = [
+            chunk[: chunk.index("\n}")]
+            for chunk in home.split("\n.chip {")[1:]
+        ]
+        hued = [b for b in blocks if "--tag-hue: var(--ink)" in b]
+        self.assertEqual(len(hued), 1, "expected one hue-bearing .chip block")
+        block = hued[0]
+        self.assertIn("color: var(--tag-hue)", block)
+        self.assertIn("border-color: var(--tag-hue)", block)
+        self.assertIn(
+            "background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper))",
+            block,
+        )
+
     def test_listing_touch_padding_outranks_the_density_rule(self):
         # `#ft-grid .badge` sets padding at id specificity, so the touch
         # rule's padding-inline is dead on the listing unless it is matched.
@@ -3292,6 +3487,58 @@ class LaunchGateTests(unittest.TestCase):
         home = self._home_with_one()
         self.assertIn("#ft-grid .badge {", home)
         self.assertIn("#ft-grid button.badge { padding-inline: 0.6rem; }", home)
+
+
+class TagHueDistinctnessTests(unittest.TestCase):
+    """Which tag hues may repeat, and which collision is never allowed.
+
+    Eleven tag values share seven hues on purpose: hue encodes the strength
+    of the claim, not the value, so "strongest" and "weakest" repeat across
+    families. These tests pin that as a decision rather than leaving it to
+    look like drift — and pin the one repeat that is a genuine bug.
+    """
+
+    @staticmethod
+    def _tokens():
+        found = re.findall(r"--t-([a-z_]+): (#[0-9a-f]{6});", build._CSS)
+        return {name: value for name, value in found}
+
+    def test_no_tag_hue_collides_with_the_unknown_value_fallback(self):
+        # `.badge` falls back to `--tag-hue: var(--ink)` for a value with no
+        # token. A hue equal to --ink would render a missing token as a
+        # perfectly ordinary tag, so the failure would ship silently.
+        ink = re.search(r"--ink: (#[0-9a-f]{6});", build._CSS)
+        self.assertIsNotNone(ink, "--ink token missing")
+        for name, value in self._tokens().items():
+            with self.subTest(tag=name):
+                self.assertNotEqual(value, ink.group(1))
+
+    def test_categories_never_share_a_hue_with_each_other(self):
+        # Within a family the hue IS the identifier, so repeats there would
+        # be a real ambiguity — unlike the cross-family ones below.
+        tokens = self._tokens()
+        for family in (
+            build.CATEGORIES,
+            build.VERIFICATION_LEVELS,
+            build.SIGNUP_MODES,
+        ):
+            hues = [tokens[v] for v in family]
+            with self.subTest(family=family):
+                self.assertEqual(len(hues), len(set(hues)))
+
+    def test_claim_strength_repeats_across_families_on_purpose(self):
+        # Green = strongest claim, muted = weakest. If someone "fixes" this
+        # into eleven unique hues, the semantic ladder is what they broke.
+        tokens = self._tokens()
+        self.assertEqual(tokens["hand_verified"], tokens["none"])
+        self.assertEqual(tokens["unverified"], tokens["required"])
+        self.assertEqual(tokens["unverified"], tokens["expired"])
+        # The five categories make no claim, so they own hues nothing else
+        # uses.
+        claim = {tokens["hand_verified"], tokens["unverified"]}
+        for category in build.CATEGORIES:
+            with self.subTest(category=category):
+                self.assertNotIn(tokens[category], claim)
 
 
 class RelativeDateTests(unittest.TestCase):

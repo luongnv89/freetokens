@@ -96,12 +96,28 @@ function makeElement(tag) {
       child.parentNode = el;
       return child;
     },
+    removeChild(child) {
+      const idx = el.children.indexOf(child);
+      if (idx !== -1) el.children.splice(idx, 1);
+      child.parentNode = null;
+      // Detaching the focused node resets focus to <body>, exactly as a
+      // browser does — the behaviour the status-line pills have to survive.
+      if (focusedElement === child) focusedElement = null;
+      return child;
+    },
+    get firstChild() {
+      return el.children.length ? el.children[0] : null;
+    },
     querySelectorAll(selector) {
       if (selector === "li") return el.children.slice();
       return [];
     },
     querySelector(selector) {
       if (selector === "[data-category]") return el.card;
+      if (selector === "[data-ft-remove]") {
+        return el.children.find((c) => c.attrs && c.attrs["data-ft-remove"])
+          || null;
+      }
       // "#id" lookup over this element's subtree (traffic strip slots).
       const m = /^#([\w-]+)$/.exec(selector);
       if (m) {
@@ -118,6 +134,24 @@ function makeElement(tag) {
   // Model the browser rule this harness exists to police: hiding the element
   // that currently holds focus resets focus to <body>. Without it a
   // self-hiding control looks fine here while stranding real keyboard users.
+  // textContent reads through children, as the DOM does — the status line is
+  // built from text nodes and pill elements now, and the assertions on it
+  // (and the search, which matches on card text) must see the whole string.
+  // Configurable, because <li> replaces it with a card-delegating getter.
+  let ownText = "";
+  Object.defineProperty(el, "textContent", {
+    configurable: true,
+    get() {
+      return (
+        ownText + el.children.map((c) => c.textContent || "").join("")
+      );
+    },
+    set(value) {
+      // Real DOM: assigning textContent drops every child.
+      ownText = String(value);
+      el.children.length = 0;
+    },
+  });
   let hiddenState = false;
   Object.defineProperty(el, "hidden", {
     get() {
@@ -159,6 +193,8 @@ async function runScenario(scenario) {
     return gridAppendChild.call(grid, child);
   };
   const items = [];
+  const rowTags = [];
+  const tagsBySlug = new Map();
   const slugOf = new Map();
   const linksBySlug = new Map();
   const detailLinksBySlug = new Map();
@@ -170,6 +206,11 @@ async function runScenario(scenario) {
     article.attrs["data-expiry"] = spec.expiry || "";
     article.attrs["data-amount-sort"] =
       spec.amount_sort !== undefined ? String(spec.amount_sort) : "0";
+    // The other two filter dimensions (#99). ftMatches reads every dimension
+    // off the card as `data-<dim>`, so a card without these can never be
+    // narrowed by anything except category.
+    article.attrs["data-verification"] = spec.verification || "";
+    article.attrs["data-signup"] = spec.signup || "";
     article.textContent = spec.text;
     const link = makeElement("a");
     link.attrs["href"] =
@@ -187,6 +228,23 @@ async function runScenario(scenario) {
     detailLink.attrs["class"] = "detail-btn";
     article.appendChild(detailLink);
     detailLinksBySlug.set(spec.slug, detailLink);
+    // Row tags: the real page renders one <button data-ft-tag> per family on
+    // every row, and they are what the delegated toggle listener and the
+    // aria-pressed sync actually operate on.
+    for (const [dim, value] of [
+      ["category", spec.category],
+      ["verification", spec.verification],
+      ["signup", spec.signup],
+    ]) {
+      if (!value) continue;
+      const tag = makeElement("button");
+      tag.attrs["data-ft-tag"] = dim;
+      tag.attrs["data-ft-tag-value"] = value;
+      tag.setAttribute("aria-pressed", "false");
+      article.appendChild(tag);
+      rowTags.push(tag);
+      tagsBySlug.set(spec.slug + ":" + dim, tag);
+    }
     const li = makeElement("li");
     li.card = article;
     // Parent the card into the list item so click events can bubble
@@ -202,6 +260,16 @@ async function runScenario(scenario) {
     slugOf.set(li, spec.slug);
     linksBySlug.set(spec.slug, link);
   }
+
+  // syncControls() reaches for every row tag on the page through the grid.
+  // Tags carry no label text here on purpose: the real ones contribute their
+  // word to the row, but adding it would silently change what the search
+  // scenarios match on.
+  const gridQuerySelectorAll = grid.querySelectorAll;
+  grid.querySelectorAll = function (selector) {
+    if (selector === "[data-ft-tag]") return rowTags.slice();
+    return gridQuerySelectorAll.call(grid, selector);
+  };
 
   const input = makeElement("input");
   input.attrs.id = "ft-search";
@@ -301,6 +369,12 @@ async function runScenario(scenario) {
         return focusedElement;
       },
       getElementById: (id) => byId[id] || null,
+      createElement: (tag) => makeElement(tag),
+      createTextNode: (text) => {
+        const node = makeElement("#text");
+        node.textContent = String(text);
+        return node;
+      },
       querySelectorAll: (selector) =>
         selector === "[data-ft-category]" ? chips : [],
       addEventListener() {},
@@ -376,13 +450,23 @@ async function runScenario(scenario) {
           return acc;
         }, {}),
         inputValue: input.value,
+        // Row-tag pressed state, keyed "<slug>:<dimension>". aria-pressed is
+        // the app's only state carrier, so this is the whole contract.
+        tagPressed: [...tagsBySlug].reduce((acc, [key, tag]) => {
+          acc[key] = tag.attrs["aria-pressed"];
+          return acc;
+        }, {}),
         sortValue: sortSelect.value,
         emptyHidden: emptyBox.hidden,
         clearHidden: clearButton.hidden,
         // Cumulative; tests compare deltas across steps.
         rowAppends,
+        // id when it has one, else its first class (the status-line pills
+        // are built by the app and carry no id), else the tag name.
         activeElementId: focusedElement
-          ? focusedElement.attrs.id || focusedElement.tag
+          ? focusedElement.attrs.id ||
+            (focusedElement.attrs.class || "").split(" ")[0] ||
+            focusedElement.tag
           : null,
         historyUrls: historyUrls.slice(),
         locationSearch: location_.search,
@@ -440,6 +524,19 @@ async function runScenario(scenario) {
       fire(grid, "click", clickEvent(grid));
     } else if (step.op === "click_reset") {
       fire(resetButton, "click", {});
+    } else if (step.op === "click_tag") {
+      // Clicks the row tag for one dimension on one card, exactly as a user
+      // would: the event bubbles to the delegated listener on the grid.
+      const tag = tagsBySlug.get(step.slug + ":" + step.dimension);
+      if (!tag) throw new Error("no tag " + step.slug + ":" + step.dimension);
+      fire(tag, "click", clickEvent(tag));
+    } else if (step.op === "remove_filter") {
+      // Clicks the status-line pill that drops one dimension.
+      const pill = status.children.find(
+        (c) => c.attrs && c.attrs["data-ft-remove"] === step.dimension
+      );
+      if (!pill) throw new Error("no pill for " + step.dimension);
+      fire(pill, "click", clickEvent(pill));
     } else if (step.op === "focus") {
       const target = { clear: clearButton, reset: resetButton, search: input };
       focusedElement = target[step.target] || null;
