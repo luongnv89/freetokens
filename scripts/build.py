@@ -895,7 +895,7 @@ def _contact_nav() -> str:
 _CARD_TMPL = """<li style="--i:{index}">
 <article class="card" id="offer-{slug}" data-category="{category}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
 <div class="row-head">
-<h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer" data-ft-offer-id="{offer_id}" data-ft-provider="{provider}" data-ft-offer-category="{category}" aria-label="Claim {title} from {provider}">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
+<h2 class="card-title"><a href="{detail_href}" data-ft-offer-id="{offer_id}" data-ft-provider="{provider}" data-ft-offer-category="{category}" aria-label="View details for {title}">{title}</a></h2>
 <span class="r-amount">{amount}</span>
 </div>
 <p class="row-meta">
