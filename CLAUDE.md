@@ -5,12 +5,13 @@ Pre-code repo: planning docs + GitHub issue backlog only. Implementation happens
 See @prd.md and @tasks.md for scope. Epic: #31.
 
 ## Critical commands
-- No build system yet. Task #2 (generator spike) decides: plain build script vs Astro. Do NOT pick one ad hoc.
-- After #8 lands, deploys run automatically on push to main. Never push directly to main after #12 (branch protection).
+- Build (current, until React migration reaches parity): `python3 scripts/build.py` → `site/`; validate offers with `python3 scripts/validate_offers.py`.
+- After the Vite scaffold lands (ADR 0002): `npm ci` (never bare `npm install` in CI) then `npm run build` — see ADR-002 (`docs/adr/0002-react-vite-migration.md`).
+- Deploys run automatically on push to main. Never push directly to main (branch protection).
 
 ## Architecture map (planned)
 - `offers/*.yaml` — one file per offer; the entire content model
-- Build script → static HTML → GitHub Pages (`<user>.github.io/freetokens`)
+- `offers/*.yaml` → Vite build (offer data → JSON/JSONL at build time) → prerendered HTML → GitHub Pages (`<user>.github.io/freetokens`) — React 19 + TypeScript + Tailwind + shadcn/ui per ADR-002 (`docs/adr/0002-react-vite-migration.md`); until migration parity, the Python builder `scripts/build.py` produces the same static output
 - GA4 for `page_view` + `offer_click` events; no backend, ever
 
 ## Offer content schema (non-negotiable)

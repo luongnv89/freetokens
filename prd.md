@@ -5,8 +5,8 @@
 | Field | Value |
 |-------|-------|
 | Product Name | Free AI Credits |
-| Version | 1.0 |
-| Last Updated | 2026-08-21 |
+| Version | 1.1 |
+| Last Updated | 2026-08-24 |
 | Status | Draft |
 
 Source: `idea.md`, `validate.md` (Scope Reduction v2 plan). Monetization model clarified in session: provider sponsorship only, never user payment.
@@ -265,10 +265,10 @@ graph TB
 
 ### 6.2 Frontend
 
-- **Framework**: Minimal static build — either plain HTML + vanilla JS over a JSON index generated from offer files, or Astro (static-only) if templating helps; zero client framework.
+- **Framework**: React 19 + TypeScript as the client framework and render layer (per [ADR 0002](docs/adr/0002-react-vite-migration.md), which supersedes the earlier zero-client-framework constraint). All pages are statically prerendered to plain HTML/CSS/JS served from GitHub Pages — no server, no runtime rendering.
 - **State management**: URL query params for active filter/search/sort (shareable, back-button-safe).
-- **Design system**: Hand-rolled minimal CSS (system font stack, dark-mode-friendly); no UI library.
-- **Build tools**: GitHub Actions; Node only if a generator is chosen, otherwise a small Python/bash build script.
+- **Design system**: Tailwind CSS v4 with shadcn/ui components (source-copied, accessible primitives) and lucide-react icons; dark-mode-friendly.
+- **Build tools**: Vite with static prerendering; offer data flows from `offers/*.yaml` into JSON/JSONL at build time. Dependencies installed via `npm ci` against a committed lockfile only.
 
 ### 6.3 Backend
 
@@ -277,7 +277,7 @@ graph TB
 ### 6.4 Infrastructure
 
 - **Hosting**: GitHub Pages (`<user>.github.io/<repo>`), custom domain deferred.
-- **CI/CD**: GitHub Actions — validate → build → deploy on push to main.
+- **CI/CD**: GitHub Actions — validate → `npm ci` → Vite build (JSON/JSONL generation + prerender) → deploy to GitHub Pages on push to main. Actions pinned to full commit SHAs; installs only via the committed lockfile (see [ADR 0002](docs/adr/0002-react-vite-migration.md) for supply-chain mitigations). Target build + deploy < 3 min.
 - **Monitoring**: GA4 analytics; GitHub Actions failure notifications; external uptime check optional (Could).
 
 ### 6.5 Third-Party Integrations
@@ -427,3 +427,4 @@ graph TB
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | 2026-08-21 | ox-alpha | Initial draft — v2 reduced-scope static site plan |
+| 1.1 | 2026-08-24 | ox-alpha | §6.2/§6.4: authorize React 19 + TypeScript + Vite + Tailwind + shadcn/ui stack per ADR 0002 (supersedes zero-client-framework constraint); §6.3 backend-none unchanged |
