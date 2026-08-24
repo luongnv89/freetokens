@@ -134,21 +134,196 @@ SIGNUP_TITLES = {
 NULL_TOKENS = {"null", "~", ""}
 
 
-def _verification_badge(level: str) -> str:
-    """Render the per-offer verification-level badge (#97)."""
+# --- Tag system: one hue + one glyph per tag, every tag a filter -----------
+# Three tag families ride every offer row (category / verification / signup)
+# and until now all three rendered as the same gray pill, so the row read as
+# one undifferentiated smear of uppercase mono. Each tag value now carries:
+#
+#   * its own hue, applied as text + 1px border + a 7% tint on paper. The hue
+#     is NEVER a solid fill at rest -- solid fill is reserved for the active
+#     (filtering) state, so "colored" and "applied" can never be confused.
+#   * its own glyph, so the tag survives grayscale, color blindness, and the
+#     3-character glance a dense listing actually gets. Color is decoration;
+#     the word plus the glyph carry the meaning (the #97 rule, kept).
+#
+# Every hue clears WCAG AA (>=4.5:1) BOTH as text on white and under white
+# text when filled, so a tag is legible in either state -- see
+# TAG_HUES for the measured ratios.
+#
+# NOTE ON `coding`: it is teal, not green, even though green is the obvious
+# "code" color. Green already means "strongest claim" on the verification and
+# sign-up tags sitting immediately beside it; a green category tag would read
+# as an endorsement of the offer rather than a description of it.
+TAG_HUES = {
+    # value: (hex, contrast-vs-white)
+    "api_provider": ("#3538cd", 8.08),
+    "coding": ("#0e7490", 5.36),
+    "image": ("#955906", 5.66),
+    "voice": ("#7e22ce", 6.98),
+    "video": ("#be123c", 6.29),
+    "hand_verified": ("#15803d", 5.02),
+    "social_proof": ("#000000", 21.00),
+    "unverified": ("#5f6673", 5.78),
+    "none": ("#15803d", 5.02),
+    "required": ("#5f6673", 5.78),
+    "expired": ("#5f6673", 5.78),
+}
+
+# Glyphs ship as ONE inline <symbol> sprite per page, referenced by <use>.
+# Pasting the paths inline at each of the ~120 tag sites instead cost +70 KB
+# of raw HTML on the home listing for zero visual difference — a real bite out
+# of the >=95 Lighthouse budget (PRD 5.1). The sprite is same-document, so
+# there is still no extra request and no external-reference CORS problem.
+#
+# Presentation attributes live on the <symbol>, and `currentColor` resolves
+# against the <use> element's inherited colour — which is what lets one copy
+# of each glyph serve the rest, hover, and active states of every hue.
+_ICON = (
+    '<svg class="tag-i" aria-hidden="true" focusable="false">'
+    '<use href="#ti-{name}"/></svg>'
+)
+_SYMBOL = (
+    '<symbol id="ti-{name}" viewBox="0 0 24 24" fill="none" '
+    'stroke="currentColor" stroke-width="2.2" stroke-linecap="round" '
+    'stroke-linejoin="round">{paths}</symbol>'
+)
+TAG_ICONS = {
+    # Categories: what the credits BUY.
+    "api_provider": '<rect x="3" y="4" width="18" height="7" rx="1.5"/>'
+    '<rect x="3" y="13" width="18" height="7" rx="1.5"/>'
+    '<path d="M6.8 7.5h.01M6.8 16.5h.01"/>',
+    "coding": '<path d="m9 6-6 6 6 6"/><path d="m15 6 6 6-6 6"/>',
+    "image": '<rect x="3" y="4" width="18" height="16" rx="2"/>'
+    '<circle cx="8.6" cy="9.4" r="1.4"/><path d="m3.5 17.5 4.6-4.6 4 4 3-3 5.4 5.4"/>',
+    "voice": '<path d="M4 10.5v3M8 6.5v11M12 3.5v17M16 6.5v11M20 10.5v3"/>',
+    "video": '<rect x="3" y="5" width="18" height="14" rx="2.5"/>'
+    '<path d="m10.4 9.4 5 2.6-5 2.6z"/>',
+    # Verification: how hard the listing was CHECKED. The glyphs form their
+    # own ladder -- sealed check, hearsay bubble, open question.
+    "hand_verified": '<circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.4"/>',
+    "social_proof": '<path d="M20.5 13.5a2 2 0 0 1-2 2H8.5l-4.5 4V5.5a2 2 0 0 1 2-2h12.5a2 2 0 0 1 2 2z"/>'
+    '<path d="M8.5 9.5h8M8.5 12.5h5"/>',
+    "unverified": '<circle cx="12" cy="12" r="9" stroke-dasharray="3.2 3"/>'
+    '<path d="M9.7 9.4a2.4 2.4 0 0 1 4.7.6c0 1.6-2.4 1.9-2.4 3.4"/>'
+    '<path d="M12 16.8h.01"/>',
+    # Sign-up: whether a wall stands between you and the credits.
+    "none": '<rect x="4" y="10.5" width="16" height="10.5" rx="2"/>'
+    '<path d="M8 10.5V7a4 4 0 0 1 7.7-1.6"/>',
+    "required": '<rect x="4" y="10.5" width="16" height="10.5" rx="2"/>'
+    '<path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>',
+    "expired": '<circle cx="12" cy="12" r="9"/><path d="M12 7.2V12l3.1 1.9"/>',
+}
+
+
+def _tag_icon(value: str) -> str:
+    """Reference to one tag glyph in the page sprite ('' when it has none)."""
+    return _ICON.format(name=value) if value in TAG_ICONS else ""
+
+
+def _icon_sprite() -> str:
+    """The page's single hidden <symbol> set backing every _tag_icon().
+
+    Emitted once per page directly after <body>, so a <use> anywhere in the
+    document resolves without a network request. `aria-hidden` plus zero
+    dimensions keep it out of both the accessibility tree and the layout.
+    """
+    symbols = "".join(
+        _SYMBOL.format(name=name, paths=paths) for name, paths in TAG_ICONS.items()
+    )
     return (
-        f'<span class="badge badge-v-{html.escape(level)}" '
-        f'title="{html.escape(VERIFICATION_TITLES[level], quote=True)}">'
-        f"{html.escape(VERIFICATION_LABELS[level])}</span>"
+        '<svg class="tag-sprite" width="0" height="0" aria-hidden="true" '
+        f"focusable=\"false\"><defs>{symbols}</defs></svg>"
     )
 
 
-def _signup_badge(mode: str) -> str:
-    """Render the per-offer sign-up-requirement badge (#97)."""
+# The three filterable families, in the order they appear on a row. The keys
+# double as the URL parameter names (?category=/?verification=/?signup=) and
+# as the `data-ft-tag` dimension the client runtime switches on, so there is
+# exactly one spelling of each dimension across Python, HTML, and JS.
+TAG_DIMENSIONS = ("category", "verification", "signup")
+
+
+def _tag(
+    dimension: str,
+    value: str,
+    label: str,
+    title: str = "",
+    *,
+    interactive: bool = True,
+    href_prefix: str = "",
+) -> str:
+    """Render one tag.
+
+    ``interactive`` picks the affordance, and both affordances resolve to the
+    SAME filtered view -- the home listing narrowed to this tag:
+
+      * True  -> a real <button> that toggles the filter in place. Used on
+        the home listing, the only page carrying the filter runtime.
+      * False -> an <a> to the home page with the filter pre-applied. Used on
+        /archive and the offer detail pages, which ship no runtime; a button
+        there would be a dead control, and a link is honest about navigating.
+
+    ``href_prefix`` is the caller's climb back to site root ('' at root,
+    '../' from offers/<slug>.html) so the link stays deploy-base safe.
+    """
+    classes = f"badge badge-{dimension} badge-{dimension}-{html.escape(value)}"
+    attrs = f' title="{html.escape(title, quote=True)}"' if title else ""
+    body = f"{_tag_icon(value)}<span>{html.escape(label)}</span>"
+    if interactive:
+        return (
+            f'<button type="button" class="{classes}" data-ft-tag="{dimension}" '
+            f'data-ft-tag-value="{html.escape(value, quote=True)}" '
+            f'aria-pressed="false" '
+            f'aria-label="Filter by {html.escape(label, quote=True)}"'
+            f"{attrs}>{body}</button>"
+        )
+    href = f"{href_prefix}index.html?{dimension}={quote(value, safe='')}"
     return (
-        f'<span class="badge badge-signup-{html.escape(mode)}" '
-        f'title="{html.escape(SIGNUP_TITLES[mode], quote=True)}">'
-        f"{html.escape(SIGNUP_LABELS[mode])}</span>"
+        f'<a class="{classes}" href="{html.escape(href, quote=True)}" '
+        f'aria-label="See offers tagged {html.escape(label, quote=True)}"'
+        f"{attrs}>{body}</a>"
+    )
+
+
+def _category_badge(
+    category: str, *, interactive: bool = True, href_prefix: str = ""
+) -> str:
+    """Render the offer's category tag."""
+    return _tag(
+        "category",
+        category,
+        CATEGORY_LABELS.get(category, category),
+        f"Free AI credits in the {CATEGORY_LABELS.get(category, category)} category",
+        interactive=interactive,
+        href_prefix=href_prefix,
+    )
+
+
+def _verification_badge(
+    level: str, *, interactive: bool = True, href_prefix: str = ""
+) -> str:
+    """Render the per-offer verification-level badge (#97)."""
+    return _tag(
+        "verification",
+        level,
+        VERIFICATION_LABELS[level],
+        VERIFICATION_TITLES[level],
+        interactive=interactive,
+        href_prefix=href_prefix,
+    )
+
+
+def _signup_badge(
+    mode: str, *, interactive: bool = True, href_prefix: str = ""
+) -> str:
+    """Render the per-offer sign-up-requirement badge (#97)."""
+    return _tag(
+        "signup",
+        mode,
+        SIGNUP_LABELS[mode],
+        SIGNUP_TITLES[mode],
+        interactive=interactive,
+        href_prefix=href_prefix,
     )
 
 # --- Analytics configuration (F7) -----------------------------------------
@@ -522,6 +697,47 @@ _CSS = """
   --gray: #6b7280;
   --green: #22c55e;
   --hairline: rgba(0, 0, 0, 0.16);
+
+  /* Tag hues. Each clears WCAG AA in BOTH painted states a tag has: as text
+     over the 7% tint it sits on at rest, and under white text when filled on
+     hover/active. Measured minimums across the two: indigo 7.20, teal 4.86,
+     ochre 5.13, violet 6.25, crimson 5.56, green 4.57, muted 5.26.
+
+     Ochre and the muted gray are darker than the obvious #a16207 / #6b7280
+     for exactly that reason -- both land at ~4.45:1 once the tint is behind
+     them, and contrast is owed against the background actually painted, not
+     against the white the tag is not sitting on.
+
+     Green is deliberately absent from the category set: it is spoken for by
+     "strongest claim" on the verification and sign-up tags next door, and a
+     green category tag would read as an endorsement of the offer rather than
+     a description of it. That is why `coding` is teal.
+
+     Eleven values, seven hues -- the repeats are the point, not an oversight.
+     Hue encodes the *claim*, not the value: green is "strongest claim"
+     (hand-verified; no sign-up wall) and the muted gray is "weakest, treat
+     with care" (unverified; sign-up required; expired). The five categories,
+     which make no claim at all, are the five hues nothing else uses. Repeats
+     only ever occur ACROSS families, and a row renders one tag per family in
+     a fixed slot, so two greens on one row never compete to mean the same
+     thing. The word and the glyph stay distinct throughout, so nothing here
+     is carried by colour alone.
+
+     No hue may equal --ink: that is the `.badge` fallback for an unknown
+     value, so a tag colliding with it would make a missing token look
+     exactly like a real tag. `social_proof` was that collision until it
+     became navy; TagHueDistinctnessTests holds the line. */
+  --t-api_provider: #3538cd;
+  --t-coding: #0e7490;
+  --t-image: #955906;
+  --t-voice: #7e22ce;
+  --t-video: #be123c;
+  --t-hand_verified: #15803d;
+  --t-social_proof: #1e3a5f;
+  --t-unverified: #5f6673;
+  --t-none: #15803d;
+  --t-required: #5f6673;
+  --t-expired: #5f6673;
 }
 
 * { box-sizing: border-box; }
@@ -637,41 +853,133 @@ h1 {
   flex-wrap: wrap;
 }
 
+/* ---- Tags ------------------------------------------------------------- */
+/* One rule set serves all three families and all three element types a tag
+   can be (<span> on static chrome, <a> on archive/detail, <button> on the
+   home listing) — the hue arrives through --tag-hue, so nothing below is
+   duplicated per colour. Color never carries meaning alone: the word is
+   always spelled out, the glyph repeats it, and `title` explains it. */
 .badge {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34em;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--tag-hue);
   border-radius: 999px;
   padding: 0.14rem 0.6rem;
+  color: var(--tag-hue);
+  background: var(--paper);
+  /* 7% of the hue: enough to separate three adjacent tags at a glance, far
+     too little to be mistaken for the solid fill that means "active".
+     Browsers without color-mix keep the flat paper background above. */
+  background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
 }
 
-/* Per-offer verification & sign-up badges (#97). Color never carries the
-   meaning alone: the word is always spelled out and the tooltip (title)
-   explains the level. Green = strongest claim (hand-checked / no account);
-   gray = weakest (unverified); plain ink = middle tiers. */
-.badge-v-hand_verified {
-  border-color: var(--green);
+/* Bypass block (WCAG 2.4.1). Three tag controls per row turned a listing of
+   ~2 stops per row into ~5, so reaching the footer by keyboard now means
+   traversing a few hundred controls. The link is off-screen until focused,
+   where it becomes the first thing a keyboard user meets. */
+.skip-list {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-list:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper);
   color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
 }
 
-.badge-v-unverified {
-  border-color: var(--gray);
-  color: var(--gray);
+/* The bypass target must not draw a focus ring when it is reached by the
+   skip link — it is a landmark, not a control. */
+#site-footer:focus { outline: none; }
+
+/* Tags render as <button> on the listing but as <a> on /archive and every
+   offer page, which ship no filter runtime. Both forms are real targets, so
+   both are owed the touch minimum — and this has to live in the shared
+   stylesheet, because the listing's own CSS never reaches those pages. At
+   the base size a pill is ~20px, under the 24px WCAG 2.2 AA floor, and the
+   spacing exception does not rescue it: once a row wraps, tags sit ~21.6px
+   apart centre-to-centre. */
+@media (pointer: coarse) {
+  a.badge {
+    min-height: 32px;
+    padding-inline: 0.6rem;
+  }
 }
 
-.badge-signup-none {
-  border-color: var(--green);
-  color: var(--ink);
+/* The glyph tracks its text size, so tags stay proportional wherever the
+   base font-size is overridden (the home listing runs them at 0.63rem). */
+.tag-i {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
 }
+
+/* The sprite is markup, not content: it must occupy no space and never
+   catch a pointer, on any page that renders a tag. */
+.tag-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.badge-category-api_provider { --tag-hue: var(--t-api_provider); }
+.badge-category-coding { --tag-hue: var(--t-coding); }
+.badge-category-image { --tag-hue: var(--t-image); }
+.badge-category-voice { --tag-hue: var(--t-voice); }
+.badge-category-video { --tag-hue: var(--t-video); }
+.badge-verification-hand_verified { --tag-hue: var(--t-hand_verified); }
+.badge-verification-social_proof { --tag-hue: var(--t-social_proof); }
+.badge-verification-unverified { --tag-hue: var(--t-unverified); }
+.badge-signup-none { --tag-hue: var(--t-none); }
+.badge-signup-required { --tag-hue: var(--t-required); }
 
 /* Archive "Expired" badge (#26): the word itself carries the meaning —
    the muted styling is decoration only, never the sole signal. */
 .badge-expired {
-  border-color: var(--gray);
-  color: var(--gray);
+  --tag-hue: var(--t-expired);
+}
+
+/* Link-form tags (/archive, offer detail) navigate to the home listing with
+   this filter pre-applied. They must not pick up the global underline
+   treatment, but must still announce themselves as operable. */
+a.badge {
+  text-decoration: none;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+a.badge:hover,
+a.badge:focus-visible {
+  background: var(--tag-hue);
+  color: var(--paper);
+}
+
+a.badge:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .status {
@@ -897,12 +1205,13 @@ _PAGE_TMPL = """<!DOCTYPE html>
 </style>
 </head>
 <body>
+{icon_sprite}
 <div class="wrap">
 {header}
 <main>
 {content}
 </main>
-<footer class="foot">
+<footer class="foot" id="site-footer" tabindex="-1">
 <p>Built {built_display} &middot; offers re-verified on every change</p>
 {traffic_strip}
 {foot_nav}
@@ -976,14 +1285,13 @@ def _contact_nav() -> str:
 # by a CSS counter (see _HOME_CSS) rather than baked into markup, so it
 # renumbers correctly after any filter or re-sort.
 _CARD_TMPL = """<li style="--i:{index}">
-<article class="card" id="offer-{slug}" data-category="{category}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
+<article class="card" id="offer-{slug}" data-category="{category}" data-verification="{verification}" data-signup="{signup}" data-verified="{verified_date}" data-expiry="{expiry_iso}" data-amount-sort="{amount_sort}">
 <div class="row-head">
 <h2 class="card-title"><a href="{detail_href}" data-ft-offer-id="{offer_id}" data-ft-provider="{provider}" data-ft-offer-category="{category}" aria-label="View details for {title}">{title}</a></h2>
 <span class="r-amount">{amount}</span>
 </div>
 <p class="row-meta">
-<span class="badge">{category}</span><span class="sep" aria-hidden="true">&middot;</span>\
-{verification_badge}{signup_badge}<span class="sep" aria-hidden="true">&middot;</span>\
+{category_badge}{verification_badge}{signup_badge}<span class="sep" aria-hidden="true">&middot;</span>\
 <span class="r-prov">{provider}</span><span class="sep" aria-hidden="true">&middot;</span>\
 {expiry_display}<span class="sep" aria-hidden="true">&middot;</span>\
 <span class="r-vfd" title="verified {verified_display}">verified <time datetime="{verified_date}">{verified_rel}</time></span><span class="sep" aria-hidden="true">&middot;</span>\
@@ -1075,9 +1383,12 @@ def _build_date(generated_at: str) -> dt.date:
 # State lives in the URL (?category=, ?q=) so any view is shareable and the
 # back/forward buttons work (PRD §6.2).
 
+# Toolbar chips mirror the row tags exactly — same glyph, same hue, same
+# filled-when-active convention — so the two controls read as one mechanism
+# seen from two distances rather than as two parallel filter systems.
 _CHIP = (
-    '<button type="button" class="chip" data-ft-category="{value}" '
-    'aria-pressed="{pressed}">{label}</button>'
+    '<button type="button" class="chip {hue}" data-ft-category="{value}" '
+    'aria-pressed="{pressed}">{icon}<span>{label}</span></button>'
 )
 
 
@@ -1087,13 +1398,17 @@ def build_toolbar(count: int | None = None) -> str:
     ``count`` seeds the live-region status line so the pre-JS paint already
     shows a truthful result count.
     """
-    chips = [_CHIP.format(value="", pressed="true", label="All")]
+    chips = [
+        _CHIP.format(value="", pressed="true", label="All", hue="", icon="")
+    ]
     for category in CATEGORIES:
         chips.append(
             _CHIP.format(
                 value=html.escape(category, quote=True),
                 pressed="false",
                 label=CATEGORY_LABELS.get(category, category),
+                hue=f"chip-category-{html.escape(category, quote=True)}",
+                icon=_tag_icon(category),
             )
         )
     sort_options = ['<option value="">Default</option>']
@@ -1118,8 +1433,12 @@ def build_toolbar(count: int | None = None) -> str:
         '<div class="chips" role="group" aria-label="Filter by category">'
         + "".join(chips)
         + "</div>"
+        '<div class="results-line">'
         '<p class="results-status" id="ft-results-status" role="status" '
         f'aria-live="polite">{seeded}</p>'
+        '<button type="button" class="chip clear" id="ft-clear-filters" '
+        'hidden>Clear all filters</button>'
+        "</div>"
         "</section>"
     )
 
@@ -1283,13 +1602,17 @@ _HOME_CSS = """
   overflow-wrap: anywhere;
 }
 
+/* Listing density: tags shrink, but keep their own hue (set in _CSS) —
+   this rule must never re-assert a colour or it would flatten them again. */
 #ft-grid .badge {
   font-size: 0.63rem;
-  font-weight: 600;
-  padding: 0.06rem 0.42rem;
-  border-color: var(--gray);
-  color: var(--ink);
+  padding: 0.08rem 0.45rem;
 }
+
+/* The three tag families sit side by side on one meta line, so they need a
+   little more air between them than the 0.42rem the rest of the line uses,
+   or the pills collide into a single bar of colour. */
+.row-meta .badge + .badge { margin-left: 0.1rem; }
 
 #ft-grid .status { font-size: inherit; }
 
@@ -1326,10 +1649,16 @@ _HOME_CSS = """
 }
 """
 
+# Bypass block (WCAG 2.4.1) for the two pages that render a tag-bearing list.
+# Every row carries three tag controls, so without this the footer sits a few
+# hundred tab stops down. Placed after the toolbar so the filters — the reason
+# to be on the page — still come first in DOM order.
+_SKIP_LIST_LINK = '<a class="skip-list" href="#site-footer">Skip the offer list</a>\n'
+
 _CLIENT_EMPTY_TMPL = """<section class="empty" id="ft-no-results" hidden>
 <p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8.5 11h5"/></svg></p>
 <h2>No matching offers</h2>
-<p>Nothing matches your current search and category combination.</p>
+<p>Nothing matches every filter you have applied at once. The status line above lists them; clearing one usually brings offers back.</p>
 <button type="button" class="chip reset" id="ft-reset-filters">Clear search &amp; filters</button>
 </section>"""
 
@@ -1478,7 +1807,8 @@ def _detail_sections(detail: dict | None, rel_prefix: str = "", slug: str = "") 
 
 
 _OFFER_HEADER = """<header class="masthead">
-<p class="kicker">free ai credits &middot; {category_label}</p>
+<p class="kicker">free ai credits</p>
+<p class="od-tags">{category_badge}</p>
 <h1>{title}</h1>
 <p class="tagline">From <strong>{provider}</strong> &middot; {verification_badge} {signup_badge} &middot; checked on <time datetime="{verified_date}">{verified_display}</time>.</p>
 <p class="count">{status}</p>
@@ -1698,7 +2028,10 @@ def render_offer_html(
     ) + f"/offers/{offer['slug']}.html"
     expired = offer.get("status") == "expired"
     if expired:
-        status = '<span class="badge badge-expired">Expired</span>'
+        status = (
+            '<span class="badge badge-expired">'
+            f'{_tag_icon("expired")}<span>Expired</span></span>'
+        )
         if offer["expiry_date"]:
             status += (
                 f' <span class="status">ended '
@@ -1747,7 +2080,7 @@ def render_offer_html(
         f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
         f'<p class="od-statusline mono">{status}'
         f' <span class="sep" aria-hidden="true">&middot;</span>'
-        f" {_signup_badge(offer['signup'])}"
+        f" {_signup_badge(offer['signup'], interactive=False, href_prefix='../')}"
         f' <span class="sep" aria-hidden="true">&middot;</span>'
         f' checked <time datetime="'
         f'{html.escape(offer["verified_date"], quote=True)}">'
@@ -1769,14 +2102,18 @@ def render_offer_html(
         title=html.escape(f"{offer['title']} · Free AI Credits"),
         meta_description=html.escape(blurb, quote=True),
         header=_OFFER_HEADER.format(
-            category_label=html.escape(
-                CATEGORY_LABELS.get(offer["category"], offer["category"])
+            category_badge=_category_badge(
+                offer["category"], interactive=False, href_prefix="../"
             ),
             title=html.escape(offer["title"], quote=True),
             amount=html.escape(offer["amount"]),
             provider=provider,
-            verification_badge=_verification_badge(offer["verification"]),
-            signup_badge=_signup_badge(offer["signup"]),
+            verification_badge=_verification_badge(
+                offer["verification"], interactive=False, href_prefix="../"
+            ),
+            signup_badge=_signup_badge(
+                offer["signup"], interactive=False, href_prefix="../"
+            ),
             verified_date=html.escape(offer["verified_date"], quote=True),
             verified_display=_human_date(offer["verified_date"]),
             status=status,
@@ -2154,7 +2491,11 @@ _APP_CSS = """
   cursor: pointer;
 }
 
-.chip:hover { background: var(--ink); color: var(--paper); }
+.chip:hover {
+  background: var(--tag-hue);
+  border-color: var(--tag-hue);
+  color: var(--paper);
+}
 
 /* Visible keyboard focus must not depend on the analytics stylesheet
    (_BANNER_CSS ships only when GA4 is configured). */
@@ -2165,14 +2506,152 @@ _APP_CSS = """
   outline-offset: 3px;
 }
 
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.chip[aria-pressed="true"] {
+  background: var(--tag-hue);
+  border-color: var(--tag-hue);
+  color: var(--paper);
+}
 
 .results-status {
   flex-basis: 100%;
+  min-width: 0;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.74rem;
   color: var(--gray);
   margin: 0;
+}
+
+/* ---- Clickable tags: every tag is a filter ----------------------------- */
+/* A tag is a real <button>, so it is keyboard-reachable and announces its
+   own pressed state for free. The three states are deliberately far apart:
+     rest   -> hue text on a 7% hue tint  (readable, clearly not applied)
+     hover  -> solid hue under white text (clearly operable)
+     active -> solid hue, and a trailing × (clearly applied, clearly undoable)
+   `aria-pressed` is the single source of truth for the active state; the
+   runtime never adds a class, so style and semantics cannot drift apart. */
+button.badge {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  cursor: pointer;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+button.badge:hover,
+button.badge:focus-visible,
+button.badge[aria-pressed="true"] {
+  background: var(--tag-hue);
+  color: var(--paper);
+}
+
+/* Drawn with ::after rather than a real element: the search runtime matches
+   against the row's textContent, and a literal × node would silently join
+   every offer's searchable text. */
+button.badge[aria-pressed="true"]::after {
+  /* Literal glyph, not the CSS escape "\\00d7": _APP_CSS is a plain
+     triple-quoted string, so Python would read that backslash-zero as an
+     octal escape and emit a NUL byte into the stylesheet. */
+  content: "×";
+  margin-left: 0.1em;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+button.badge:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.badge, button.badge { transition: none; }
+}
+
+/* Chips carry the same hue as the row tag they mirror, in every state — the
+   two controls are the same mechanism seen at two distances, so a chip at
+   rest has to look like a tag at rest (hue text over a 7% wash of that hue)
+   and not like plain ink. Only the pressed and hover states use the fill,
+   matching the tags exactly. */
+.chip {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34em;
+  border-color: var(--tag-hue);
+  color: var(--tag-hue);
+  background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
+}
+
+.chip .tag-i { width: 1.05em; height: 1.05em; flex: 0 0 auto; }
+
+.chip-category-api_provider { --tag-hue: var(--t-api_provider); }
+.chip-category-coding { --tag-hue: var(--t-coding); }
+.chip-category-image { --tag-hue: var(--t-image); }
+.chip-category-voice { --tag-hue: var(--t-voice); }
+.chip-category-video { --tag-hue: var(--t-video); }
+
+/* Applied-filter pills in the status line. They are filled, like the row tag
+   and toolbar chip for the same value in their applied state, so all three
+   places a filter is visible agree on what "applied" looks like. */
+.filter-pill {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0 0.45rem;
+  border: 1px solid var(--tag-hue);
+  border-radius: 999px;
+  background: var(--tag-hue);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+/* ::after, not a text node: the empty-state copy and the search both read
+   textContent, and a literal × would quietly become part of it. */
+.filter-pill::after {
+  content: "×";
+  margin-left: 0.25em;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.filter-pill:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (pointer: coarse) {
+  .filter-pill { min-height: 32px; padding-inline: 0.6rem; }
+}
+
+/* Result count and the escape hatch share one baseline; the button only
+   exists in the DOM-visible sense while something is actually filtered. */
+.results-line {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+}
+
+/* .results-status still carries flex-basis: 100% from when it was itself the
+   toolbar's flex child; left alone it would push the clear button onto its
+   own line every time. */
+.results-line .results-status { flex: 0 1 auto; }
+
+.chip.clear[hidden] { display: none; }
+
+.chip.clear {
+  font-size: 0.7rem;
+  padding: 0.24rem 0.6rem;
+  border-color: var(--gray);
+  color: var(--gray);
+}
+
+.chip.clear:hover,
+.chip.clear:focus-visible {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 /* Hidden list items must leave the grid layout entirely. */
@@ -2188,10 +2667,18 @@ _APP_CSS = """
   #ft-search,
   #ft-sort { min-height: 44px; }
 
-  .chip {
-    display: inline-flex;
-    align-items: center;
+  /* Row tags are the dense control, so they get the touch minimum too —
+     without it a 0.63rem pill is roughly a 22px target. */
+  button.badge {
+    min-height: 32px;
+    padding-inline: 0.6rem;
   }
+
+  /* `#ft-grid .badge` sets padding at id specificity (1,1,0), which outranks
+     the (0,1,1) rule above, so on the listing the widening is dead unless it
+     is matched. Only the inline padding needs restating — min-height is
+     uncontested. */
+  #ft-grid button.badge { padding-inline: 0.6rem; }
 }
 """
 
@@ -2625,7 +3112,13 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 _APP_JS = """<script id="ft-app">
 (function () {
   "use strict";
-  var VALID_CATEGORIES = __FT_CATEGORIES__;
+  // Every tag family is a filter dimension. The dimension name is the URL
+  // parameter, the `data-ft-tag` value, AND the card's `data-*` attribute, so
+  // adding a fourth family later means adding one entry here and nothing else.
+  var DIMENSIONS = __FT_DIMENSIONS__;
+  var VALID = __FT_TAG_VALUES__;
+  var TAG_LABELS = __FT_TAG_LABELS__;
+  var VALID_CATEGORIES = VALID.category;
   var VALID_SORTS = __FT_SORTS__;
   var DEBOUNCE_MS = __FT_DEBOUNCE_MS__;
   var OFFER_DEDUPE_MS = __FT_OFFER_DEDUPE_MS__;
@@ -2636,21 +3129,93 @@ _APP_JS = """<script id="ft-app">
 
   function ftParseState(search) {
     var params = new URLSearchParams(search || "");
-    var category = params.get("category") || "";
-    if (VALID_CATEGORIES.indexOf(category) === -1) { category = ""; }
     var sort = params.get("sort") || "";
     if (VALID_SORTS.indexOf(sort) === -1) { sort = ""; }
-    return { category: category, q: (params.get("q") || "").trim(), sort: sort };
+    var state = { q: (params.get("q") || "").trim(), sort: sort };
+    // Each dimension is whitelisted against its own enum, so a hand-edited
+    // or stale URL degrades to "unfiltered" rather than an empty listing.
+    for (var i = 0; i < DIMENSIONS.length; i++) {
+      var dim = DIMENSIONS[i];
+      var value = params.get(dim) || "";
+      state[dim] = VALID[dim].indexOf(value) === -1 ? "" : value;
+    }
+    return state;
   }
 
   function ftSerializeState(state) {
     // Whitelist-only: unknown params are dropped, matching the analytics
     // privacy stance of never persisting arbitrary query strings.
     var params = new URLSearchParams();
-    if (state.category) { params.set("category", state.category); }
+    for (var i = 0; i < DIMENSIONS.length; i++) {
+      if (state[DIMENSIONS[i]]) {
+        params.set(DIMENSIONS[i], state[DIMENSIONS[i]]);
+      }
+    }
     if (state.q) { params.set("q", state.q); }
     if (state.sort) { params.set("sort", state.sort); }
     return params.toString();
+  }
+
+  function ftActiveTags(state) {
+    // The applied tag filters. Each carries the label a reader sees plus the
+    // dimension its pill has to clear, so the status line can name what is
+    // filtering AND hand back a control that removes just that one.
+    var out = [];
+    for (var i = 0; i < DIMENSIONS.length; i++) {
+      var dim = DIMENSIONS[i];
+      if (!state[dim]) { continue; }
+      out.push({
+        dim: dim,
+        value: state[dim],
+        label: (TAG_LABELS[dim] || {})[state[dim]] || state[dim]
+      });
+    }
+    return out;
+  }
+
+  // "Clear all filters" is a blunt instrument once three dimensions can be
+  // applied at once and only one of them is in the way. Every name in the
+  // status line is therefore the control that drops that dimension: same
+  // hue as the tag it came from, trailing × to say it is removable. The ×
+  // is drawn with ::after so it never joins the row text the search matches.
+  function ftRenderStatus(status, shown, total, active) {
+    while (status.firstChild) { status.removeChild(status.firstChild); }
+    status.appendChild(
+      document.createTextNode(
+        shown === total
+          ? "Showing all " + total + " offers"
+          : "Showing " + shown + " of " + total + " offers"
+      )
+    );
+    for (var i = 0; i < active.length; i++) {
+      status.appendChild(document.createTextNode(" · "));
+      var pill = document.createElement("button");
+      pill.setAttribute("type", "button");
+      pill.setAttribute(
+        "class",
+        "filter-pill badge-" + active[i].dim + "-" + active[i].value
+      );
+      pill.setAttribute("data-ft-remove", active[i].dim);
+      pill.setAttribute("aria-label", "Remove " + active[i].label + " filter");
+      pill.appendChild(document.createTextNode(active[i].label));
+      status.appendChild(pill);
+    }
+  }
+
+  function ftHasFilters(state) {
+    return !!(state.q || ftActiveTags(state).length);
+  }
+
+  // The enum values every filter_use event reports. All three are drawn from
+  // closed build-time enums, never from anything a visitor typed, so this
+  // stays inside the "no free text in analytics" rule that keeps `search`
+  // limited to query_length.
+  function ftFilterParams(state) {
+    var params = {};
+    for (var i = 0; i < DIMENSIONS.length; i++) {
+      params[DIMENSIONS[i]] = state[DIMENSIONS[i]] || "all";
+    }
+    return params;
   }
 
   function ftCardAttr(li, name) {
@@ -2693,18 +3258,33 @@ _APP_JS = """<script id="ft-app">
     } else {
       ordered.sort(function (a, b) { return idx(a) - idx(b); });
     }
+    // Appending moves a node (remove + insert), and removing the element
+    // that holds focus resets focus to <body>. Every filter application runs
+    // through here, so re-appending unconditionally would blur the row tag a
+    // keyboard user just activated and drop them to the top of the listing.
+    // Filtering never changes the order, so check first and touch nothing in
+    // the common case; a real re-sort still needs the full pass, because
+    // appending moves to the end and a partial pass cannot place a node.
     for (var i = 0; i < ordered.length; i++) {
-      grid.appendChild(ordered[i]); // append moves the node, like the DOM
+      if (grid.children[i] !== ordered[i]) {
+        for (var j = 0; j < ordered.length; j++) {
+          grid.appendChild(ordered[j]); // append moves the node, like the DOM
+        }
+        return;
+      }
     }
   }
 
-  // AND semantics: an offer is shown only when it satisfies BOTH the active
-  // category filter and the search query.
+  // AND semantics: an offer is shown only when it satisfies EVERY active tag
+  // filter (category, verification, sign-up) and the search query.
   function ftMatches(li, state) {
     var card = li.querySelector("[data-category]");
     if (!card) { return false; }
-    if (state.category && card.getAttribute("data-category") !== state.category) {
-      return false;
+    for (var i = 0; i < DIMENSIONS.length; i++) {
+      var dim = DIMENSIONS[i];
+      if (state[dim] && card.getAttribute("data-" + dim) !== state[dim]) {
+        return false;
+      }
     }
     if (!state.q) { return true; }
     return (
@@ -2737,6 +3317,7 @@ _APP_JS = """<script id="ft-app">
     var status = document.getElementById("ft-results-status");
     var emptyBox = document.getElementById("ft-no-results");
     var resetButton = document.getElementById("ft-reset-filters");
+    var clearButton = document.getElementById("ft-clear-filters");
     var sortSelect = document.getElementById("ft-sort");
     if (!grid || !input || !status) { return; }
     var items = Array.prototype.slice.call(grid.querySelectorAll("li"));
@@ -2784,7 +3365,51 @@ _APP_JS = """<script id="ft-app">
       } catch (err) {}
     });
 
+    // Row-tag clicks. One delegated listener covers every tag on every row,
+    // including rows re-ordered by a sort, and it toggles: clicking the tag
+    // that is already filtering clears it, so the control that applied a
+    // filter is always the control that removes it. The listener sits beside
+    // the offer_click one above and never collides with it -- a tag carries
+    // no data-ft-offer-id, so that handler's walk finds nothing and returns.
+    grid.addEventListener("click", function (event) {
+      var node = event.target;
+      var dim = null;
+      while (node && node !== grid) {
+        if (node.getAttribute) {
+          dim = node.getAttribute("data-ft-tag");
+          if (dim) { break; }
+        }
+        node = node.parentNode || null;
+      }
+      if (!dim || DIMENSIONS.indexOf(dim) === -1) { return; }
+      var value = node.getAttribute("data-ft-tag-value") || "";
+      if (VALID[dim].indexOf(value) === -1) { return; }
+      state[dim] = state[dim] === value ? "" : value;
+      commit("filter");
+    });
+
     function syncControls() {
+      var tags = grid.querySelectorAll("[data-ft-tag]");
+      for (var t = 0; t < tags.length; t++) {
+        var tag = tags[t];
+        var tagDim = tag.getAttribute("data-ft-tag") || "";
+        var tagValue = tag.getAttribute("data-ft-tag-value") || "";
+        tag.setAttribute(
+          "aria-pressed",
+          state[tagDim] === tagValue && tagValue ? "true" : "false"
+        );
+      }
+      if (clearButton) {
+        // This control hides itself the moment it does its job, and hiding
+        // the element that holds focus drops the user to <body> -- at the top
+        // of a long listing, with nothing announced. Hand focus to the search
+        // box, which is always present, before it goes.
+        var hideClear = !ftHasFilters(state);
+        if (hideClear && document.activeElement === clearButton) {
+          input.focus();
+        }
+        clearButton.hidden = hideClear;
+      }
       var chips = document.querySelectorAll("[data-ft-category]");
       for (var i = 0; i < chips.length; i++) {
         var chip = chips[i];
@@ -2810,10 +3435,26 @@ _APP_JS = """<script id="ft-app">
         li.hidden = !show;
         if (show) { shown++; }
       }
-      status.textContent = shown === total
-        ? "Showing all " + total + " offers"
-        : "Showing " + shown + " of " + total + " offers";
-      if (emptyBox) { emptyBox.hidden = shown !== 0; }
+      // Naming the applied tags matters more here than the raw count: a
+      // filter can be applied from a row tag far down the page, where the
+      // toolbar is scrolled out of sight and nothing else would say why the
+      // list shrank.
+      var active = ftActiveTags(state);
+      ftRenderStatus(status, shown, total, active);
+      if (emptyBox) {
+        // Same trap as the clear button: the empty state's reset control
+        // disappears with the box that holds it the instant it brings offers
+        // back, so focus has to be moved off it deliberately.
+        var hideEmpty = shown !== 0;
+        if (
+          hideEmpty &&
+          resetButton &&
+          document.activeElement === resetButton
+        ) {
+          input.focus();
+        }
+        emptyBox.hidden = hideEmpty;
+      }
       syncControls();
       if (options.commit) {
         var query = ftSerializeState(state);
@@ -2834,7 +3475,7 @@ _APP_JS = """<script id="ft-app">
     function commit(source) {
       apply({ commit: true });
       if (source === "filter") {
-        ftTrack("filter_use", { category: state.category || "all" });
+        ftTrack("filter_use", ftFilterParams(state));
       } else if (source === "search" && state.q) {
         // Privacy: length only — the raw term never reaches analytics.
         ftTrack("search", { query_length: state.q.length });
@@ -2876,14 +3517,41 @@ _APP_JS = """<script id="ft-app">
       });
     }
 
-    if (resetButton) {
-      resetButton.addEventListener("click", function () {
-        state.category = "";
-        state.q = "";
-        input.value = "";
-        commit("filter");
-      });
+    function clearAll() {
+      for (var i = 0; i < DIMENSIONS.length; i++) { state[DIMENSIONS[i]] = ""; }
+      state.q = "";
+      input.value = "";
+      commit("filter");
     }
+
+    // Two entry points, one behaviour: the empty-state reset (only reachable
+    // when nothing matches) and the toolbar clear (present whenever anything
+    // is filtered, so a filter applied from a row tag is always undoable
+    // without hunting for that row again).
+    if (resetButton) { resetButton.addEventListener("click", clearAll); }
+    if (clearButton) { clearButton.addEventListener("click", clearAll); }
+
+    // Removing one dimension from the status line. Delegated, because the
+    // pills are rebuilt on every apply().
+    status.addEventListener("click", function (event) {
+      var node = event.target;
+      var dim = null;
+      while (node && node !== status) {
+        if (node.getAttribute) {
+          dim = node.getAttribute("data-ft-remove");
+          if (dim) { break; }
+        }
+        node = node.parentNode || null;
+      }
+      if (!dim || DIMENSIONS.indexOf(dim) === -1) { return; }
+      state[dim] = "";
+      commit("filter");
+      // The pill just activated no longer exists -- the same trap the clear
+      // button had. Prefer the next remaining pill so removing several in a
+      // row keeps the keyboard in one place; fall back to the search box.
+      var next = status.querySelector("[data-ft-remove]");
+      if (next && next.focus) { next.focus(); } else { input.focus(); }
+    });
 
     window.addEventListener("popstate", function () {
       state = ftParseState(window.location.search);
@@ -3164,8 +3832,24 @@ def build_app_js(stats_site: str = "") -> str:
     that slot resolves to an empty string so unconfigured builds ship no
     stats code at all.
     """
+    # The runtime's filter enums and display labels are generated from the
+    # same Python constants the markup is generated from, so a new category
+    # or verification level can never be renderable but unfilterable.
+    tag_values = {
+        "category": list(CATEGORIES),
+        "verification": list(VERIFICATION_LEVELS),
+        "signup": list(SIGNUP_MODES),
+    }
+    tag_labels = {
+        "category": dict(CATEGORY_LABELS),
+        "verification": dict(VERIFICATION_LABELS),
+        "signup": dict(SIGNUP_LABELS),
+    }
     js = (
-        _APP_JS.replace("__FT_CATEGORIES__", json.dumps(list(CATEGORIES)))
+        _APP_JS.replace("__FT_DIMENSIONS__", json.dumps(list(TAG_DIMENSIONS)))
+        .replace("__FT_TAG_VALUES__", json.dumps(tag_values))
+        .replace("__FT_TAG_LABELS__", json.dumps(tag_labels))
+        .replace("__FT_CATEGORIES__", json.dumps(list(CATEGORIES)))
         .replace("__FT_SORTS__", json.dumps(list(SORT_MODES)))
         .replace("__FT_DEBOUNCE_MS__", str(SEARCH_DEBOUNCE_MS))
         .replace("__FT_OFFER_DEDUPE_MS__", str(OFFER_CLICK_DEDUPE_MS))
@@ -3259,6 +3943,7 @@ def _page_shell(
         traffic_strip=traffic_strip,
         consent_settings=_CONSENT_SETTINGS_TMPL if tracking_on else "",
         extra_js=extra_js,
+        icon_sprite=_icon_sprite(),
         rss_autodiscovery=(
             '<link rel="alternate" type="application/rss+xml" '
             f'title="{html.escape(FEED_TITLE, quote=True)}" '
@@ -3321,6 +4006,9 @@ def render_html(
                     index=i,
                     slug=html.escape(o["slug"], quote=True),
                     category=html.escape(o["category"]),
+                    verification=html.escape(o["verification"], quote=True),
+                    signup=html.escape(o["signup"], quote=True),
+                    category_badge=_category_badge(o["category"]),
                     verification_badge=_verification_badge(o["verification"]),
                     signup_badge=_signup_badge(o["signup"]),
                     offer_id=html.escape(o["slug"], quote=True),
@@ -3344,6 +4032,7 @@ def render_html(
             )
         content = (
             build_toolbar(len(offers_active))
+            + _SKIP_LIST_LINK
             + '<ol class="grid" id="ft-grid" role="list">\n'
             + "\n".join(cards)
             + "\n</ol>"
@@ -3394,9 +4083,9 @@ _ARCHIVE_HEADER = """<header class="masthead">
 _ARCHIVED_CARD_TMPL = """<li style="--i:{index}">
 <article class="card" data-category="{category}">
 <div class="card-top">
-<span class="badge">{category}</span>
+{category_badge}
 {verification_badge}{signup_badge}
-<span class="badge badge-expired">Expired</span>
+<span class="badge badge-expired">{expired_icon}<span>Expired</span></span>
 </div>
 <h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
 <p class="amount">{amount}</p>
@@ -3430,8 +4119,14 @@ def render_archive_html(
                 _ARCHIVED_CARD_TMPL.format(
                     index=i,
                     category=html.escape(o["category"]),
-                    verification_badge=_verification_badge(o["verification"]),
-                    signup_badge=_signup_badge(o["signup"]),
+                    category_badge=_category_badge(
+                        o["category"], interactive=False
+                    ),
+                    verification_badge=_verification_badge(
+                        o["verification"], interactive=False
+                    ),
+                    signup_badge=_signup_badge(o["signup"], interactive=False),
+                    expired_icon=_tag_icon("expired"),
                     source_url=html.escape(o["source_url"], quote=True),
                     title=html.escape(o["title"], quote=True),
                     amount=html.escape(o["amount"]),
@@ -3449,7 +4144,10 @@ def render_archive_html(
                 )
             )
         content = (
-            '<ul class="grid" id="ft-archive-grid">\n' + "\n".join(cards) + "\n</ul>"
+            _SKIP_LIST_LINK
+            + '<ul class="grid" id="ft-archive-grid">\n'
+            + "\n".join(cards)
+            + "\n</ul>"
         )
     else:
         content = _ARCHIVE_EMPTY_TMPL

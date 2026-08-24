@@ -5,6 +5,38 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Every tag is a colour, a glyph, and a filter:** the three tag families
+  on each row (category, verification level, sign-up need) used to render as
+  one undifferentiated gray pill. Each tag value now carries its own hue and
+  its own glyph, and each is a real control: clicking one narrows the listing
+  to it, clicking it again clears it. Verification and sign-up join category
+  as filter dimensions (`?verification=`, `?signup=`), AND-combined with the
+  category chips and the search box, all shareable and back-button-safe.
+  The status line names what is filtering and a "Clear all filters" control
+  appears alongside it, so a filter applied from a row far down the page is
+  always undoable without scrolling back. Toolbar chips pick up the same
+  glyphs and hues, so the two controls read as one mechanism. On /archive and
+  the offer detail pages — which ship no filter runtime — tags are links to
+  the pre-filtered home listing rather than dead buttons. Colour never
+  carries meaning alone: every tag keeps its spelled-out word, its glyph, and
+  its explanatory tooltip, and all eleven hues clear WCAG AA both as text at
+  rest and under white text when filled (enforced by tests). Glyphs ship as a
+  single per-page SVG sprite; inlining them at each of ~120 tag sites cost
+  +70 KB of HTML for no visual difference. Keyboard focus survives a filter:
+  applying one no longer re-appends every row (which detached — and so
+  blurred — the tag the user had just activated), and the two controls that
+  hide themselves the moment they do their job, "Clear all filters" and the
+  empty-state reset, hand focus to the search box before they go instead of
+  dropping it to the top of the page. Tags rendered as links on /archive and
+  the detail pages get the same touch-target minimum the listing's buttons
+  already had. Each name in the status line is now the control that
+  removes just that filter, so one dimension can be dropped without wiping
+  the other two and the search box. Toolbar chips wear their hue at rest
+  rather than only when hovered, matching the row tags they mirror, and both
+  list pages ship a bypass link past the tag-heavy list. The `social_proof`
+  hue was black — identical to body ink and to the fallback an unknown tag
+  value gets — and is now navy, so a missing hue token can no longer pass for
+  a real tag.
 - **Claim runbook on offer detail pages:** the detail page is redesigned
   around the task — hero amount with a mono status line, cheatsheet-style
   section labels, and "How to claim" rendered as a checkable step-by-step
