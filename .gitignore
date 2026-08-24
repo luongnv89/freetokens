@@ -19,6 +19,10 @@ build/
 dist/
 _site/
 
+# Vite / Vitest caches (app/ scaffold, issue #117)
+.vite/
+coverage/
+
 # Env & secrets
 .env
 .env.*
