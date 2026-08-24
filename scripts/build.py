@@ -1311,19 +1311,26 @@ _EMPTY_TMPL = """<section class="empty" style="--i:0">
 
 
 # --- Favicon (launch checklist, PRD §8.1) -----------------------------------
-# One self-contained SVG emitted next to the HTML so every generated page
-# shares a single icon; the relative href stays deploy-base safe (GitHub
-# Pages project sites serve under /<repo>/).
-_FAVICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">\
-<rect width="64" height="64" rx="14" fill="#000000"/>\
-<g fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">\
-<rect x="13" y="25" width="38" height="10" rx="2"/>\
-<path d="M19 35v11a5 5 0 0 0 5 5h16a5 5 0 0 0 5-5V35"/>\
-<path d="M32 25v26"/>\
-<path d="M32 25c-8 0-11-4-11-7a4 4 0 0 1 7-2c3 3 4 9 4 9z"/>\
-<path d="M32 25c8 0 11-4 11-7a4 4 0 0 0-7-2c-3 3-4 9-4 9z"/>\
-</g></svg>
-"""
+# The icon is a brand asset, not generated markup: it lives in the repo next
+# to the rest of the logo system (assets/logo/) so the mark has exactly one
+# source of truth and designers can edit it without touching the build. The
+# build copies it next to the HTML so every generated page shares a single
+# icon; the relative href stays deploy-base safe (GitHub Pages project sites
+# serve under /<repo>/).
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FAVICON_SOURCE = os.path.join(REPO_ROOT, "assets", "logo", "favicon.svg")
+
+
+def favicon_svg(path: str | None = None) -> str:
+    """Read the brand favicon from the logo assets.
+
+    The source path is resolved at call time (not bound as a default) so the
+    location stays overridable. Raises OSError if the asset is missing, so
+    the build fails loudly rather than deploying pages that link an icon
+    which was never written.
+    """
+    with open(path or FAVICON_SOURCE, encoding="utf-8") as fh:
+        return fh.read()
 
 
 def _human_date(iso: str) -> str:
@@ -4434,8 +4441,13 @@ def main(argv=None) -> int:
         fh.write(render_archive_html(index, measurement_id, stats_site))
     with open(os.path.join(out_dir, "privacy.html"), "w", encoding="utf-8") as fh:
         fh.write(render_privacy_html(index["generated_at"], measurement_id, stats_site))
+    try:
+        icon = favicon_svg()
+    except OSError as exc:
+        print(f"build failed: cannot read favicon asset: {exc}", file=sys.stderr)
+        return 1
     with open(os.path.join(out_dir, "favicon.svg"), "w", encoding="utf-8") as fh:
-        fh.write(_FAVICON_SVG)
+        fh.write(icon)
     with open(os.path.join(out_dir, "feed.xml"), "w", encoding="utf-8") as fh:
         fh.write(build_feed(index, args.base_url))
 

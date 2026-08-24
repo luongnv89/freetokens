@@ -3442,8 +3442,35 @@ class LaunchGateTests(unittest.TestCase):
     def test_favicon_is_valid_xml(self):
         import xml.etree.ElementTree as ET
 
-        root = ET.fromstring(build._FAVICON_SVG)
+        root = ET.fromstring(build.favicon_svg())
         self.assertEqual(root.tag, "{http://www.w3.org/2000/svg}svg")
+
+    def test_favicon_comes_from_the_logo_assets(self):
+        # The icon is a committed brand asset, not markup embedded in the
+        # build: emitting a copy keeps assets/logo/ the single source of
+        # truth for the mark.
+        source = Path(build.FAVICON_SOURCE)
+        self.assertTrue(source.is_file(), f"missing brand asset {source}")
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "alpha.yaml").write_text(offer_text(), encoding="utf-8")
+            out = os.path.join(tmp, "out")
+            self.assertEqual(build.main(["--offers-dir", offers_dir, "--out", out]), 0)
+            emitted = Path(out, "site", "favicon.svg").read_text(encoding="utf-8")
+        self.assertEqual(emitted, source.read_text(encoding="utf-8"))
+
+    def test_build_fails_loudly_when_the_favicon_asset_is_missing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "alpha.yaml").write_text(offer_text(), encoding="utf-8")
+            missing = os.path.join(tmp, "nope", "favicon.svg")
+            with mock.patch.object(build, "FAVICON_SOURCE", missing):
+                code = build.main(
+                    ["--offers-dir", offers_dir, "--out", os.path.join(tmp, "out")]
+                )
+        self.assertEqual(code, 1)
 
     # --- title + meta description on every page ------------------------------
 
