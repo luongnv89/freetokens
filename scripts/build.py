@@ -1349,7 +1349,7 @@ def _claim_step_parts(steps, slug: str) -> tuple[str, str]:
         f'<span class="progress-track" aria-hidden="true">'
         f'<span class="progress-fill"></span></span></p>'
     )
-    return progress, f'<ol class="claim-list">{"".join(items)}</ol>'
+    return progress, f'<ol class="claim-list" role="list">{"".join(items)}</ol>'
 
 
 def _proof_section(detail: dict | None, rel_prefix: str = "") -> str:

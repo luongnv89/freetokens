@@ -1606,7 +1606,7 @@ class DetailPageTests(unittest.TestCase):
         # Steps render as a checkable runbook: one checkbox per step,
         # each text wrapped in .step-text, plus a progress readout.
         self.assertIn('<section class="od-steps" data-ft-checklist', seg)
-        self.assertIn('<ol class="claim-list">', seg)
+        self.assertIn('<ol class="claim-list" role="list">', seg)
         self.assertEqual(seg.count('type="checkbox"'), 2)
         self.assertIn('<span class="step-text">Sign up.</span>', seg)
         self.assertIn('<span class="step-text">Claim credits.</span>', seg)
