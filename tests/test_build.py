@@ -1603,7 +1603,17 @@ class DetailPageTests(unittest.TestCase):
         seg = page[start : page.index("</article>", start)]
         self.assertIn("$10 in credits", seg)
         self.assertIn("<h2>How to claim</h2>", seg)
-        self.assertIn("<ol><li>Sign up.</li><li>Claim credits.</li></ol>", seg)
+        # Steps render as a checkable runbook: one checkbox per step,
+        # each text wrapped in .step-text, plus a progress readout.
+        self.assertIn('<section class="od-steps" data-ft-checklist', seg)
+        self.assertIn('<ol class="claim-list">', seg)
+        self.assertEqual(seg.count('type="checkbox"'), 2)
+        self.assertIn('<span class="step-text">Sign up.</span>', seg)
+        self.assertIn('<span class="step-text">Claim credits.</span>', seg)
+        self.assertIn(">2-step guide</span>", seg)
+        # Per-offer persistence: the runtime keys storage by offer slug,
+        # so sibling pages never collide.
+        self.assertIn('var KEY = "ft-claim-" + OFFER_ID;', page)
         self.assertIn("Longer description here.", seg)
         self.assertIn('<section class="od-proof"><h2>Social proof</h2>', seg)
         self.assertIn("@devone", seg)
