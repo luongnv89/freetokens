@@ -9,8 +9,9 @@
   "scripts": {
     "load:data": "node scripts/load-offers.mjs",
     "prebuild": "npm run load:data",
-    "dev": "vite",
     "build": "tsc -b && vite build",
+    "postbuild": "node scripts/prerender.mjs",
+    "prerender": "node scripts/prerender.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint ."
