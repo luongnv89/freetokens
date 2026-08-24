@@ -12,6 +12,7 @@
     "build": "tsc -b && vite build",
     "postbuild": "node scripts/prerender.mjs",
     "prerender": "node scripts/prerender.mjs",
+    "pretest": "npm run load:data",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint ."
