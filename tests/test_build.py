@@ -397,17 +397,18 @@ class RenderTests(unittest.TestCase):
         page = self._page_with_one(category="voice")
         self.assertIn('<span class="badge">voice</span>', page)
 
-    def test_outbound_link_hardened_and_described(self):
+    def test_title_link_targets_detail_page_not_provider(self):
+        # Issue #95: the home-page title must open the post detail page,
+        # never the external provider site.
         page = self._page_with_one()
-        self.assertIn('href="https://example.com/offer"', page)
-        self.assertIn('target="_blank"', page)
-        self.assertIn('rel="noopener noreferrer"', page)
-        self.assertIn('aria-label="Claim Test Offer from Test Provider"', page)
+        self.assertIn('href="offers/offer-0.html"', page)
+        self.assertIn('aria-label="View details for Test Offer"', page)
+        self.assertNotIn('href="https://example.com/offer"', page)
 
     def test_quote_in_title_cannot_break_aria_label_attribute(self):
         page = self._page_with_one(title='Say "hi"')
-        self.assertIn('aria-label="Claim Say &quot;hi&quot; from Test Provider"', page)
-        self.assertNotIn('aria-label="Claim Say "hi""', page)
+        self.assertIn('aria-label="View details for Say &quot;hi&quot;"', page)
+        self.assertNotIn('aria-label="View details for Say "hi""', page)
 
     def test_all_seed_offers_present_in_built_page(self):
         offers = build.load_offers(str(REPO / "offers"))
@@ -1833,8 +1834,10 @@ class DetailPageTests(unittest.TestCase):
     def test_index_cards_link_to_each_offer_page(self):
         site = self._two_offer_site()
         index = (site / "index.html").read_text(encoding="utf-8")
+        # Issue #95: each slug is referenced twice on the index — once by
+        # the card-title link and once by the row-meta "details" link.
         for slug in ("alpha", "beta"):
-            self.assertEqual(index.count(f'href="offers/{slug}.html"'), 1)
+            self.assertEqual(index.count(f'href="offers/{slug}.html"'), 2)
         self.assertNotIn("data-ft-detail", index)
         self.assertNotIn("<dialog", index)
 
