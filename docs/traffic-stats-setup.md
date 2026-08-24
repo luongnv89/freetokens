@@ -13,14 +13,42 @@ Why this provider fits the freetokens constraints:
   credit card, no self-hosting infrastructure.
 - **Static-friendly** — nothing to run alongside GitHub Pages; the site
   only gains one `<script>` beacon and one client-side fetch.
-- **Live, not build-time** — counts come from GoatCounter's public JSON
+- **Not build-time** — counts come from GoatCounter's public JSON
   counter route per page load, so displayed totals move without any
-  rebuild or redeploy.
+  rebuild or redeploy. They are not live to the minute, though; see
+  *Freshness* below.
 - **Cookieless** — no cookies, no fingerprinting, no personal
   identifiers; GDPR-compliant by design.
 - **Silent degradation** — if the deployment is unreachable or blocked by
   an ad blocker, the footer strip simply stays hidden and every other
   page feature works unchanged.
+
+## Freshness (measured, #102)
+
+The figures are a rough popularity signal, not a live readout. GoatCounter
+serves the counter route through a CDN that caches each response for about
+four hours, keyed on `(path, start, end)`. Measured against the live site:
+
+- unknown query params are stripped from the cache key — `_cb=111111`,
+  `_cb=222222` and a random value all returned the same cached object
+- `Cache-Control: no-cache`, `Pragma: no-cache` and `max-age=0` request
+  headers changed nothing
+- the CORS preflight returns no `access-control-allow-headers`, so sending
+  `Cache-Control` from `fetch` would fail CORS regardless
+
+So the cache cannot be bypassed from the page, and a cache-buster param is
+inert — do not add one. This staleness is accepted deliberately: the footer
+copy reads "site traffic" and the privacy policy states the lag, rather than
+promising a live number the provider will not serve. Anyone who needs the
+real-time figure follows the "full stats" link to the dashboard.
+
+Two consequences worth remembering:
+
+- **The window boundary matters.** `end` is an *exclusive* midnight
+  boundary, so every window must end on tomorrow to include today. A window
+  with `start == end` returns 0 forever — that was the #102 bug.
+- **Only consenting visitors are counted at all.** The beacon loads solely
+  after an explicit "Allow", so every figure here undercounts real traffic.
 
 ## Step 1 — Create the account
 

@@ -1116,8 +1116,11 @@ class TrafficStripMarkupTests(unittest.TestCase):
         page = self._home(self.SITE)
         seg = page[page.index('id="ft-traffic"') :]
         seg = seg[: seg.index("</p>")]
-        self.assertIn("live traffic", seg)
+        self.assertIn("site traffic", seg)
         self.assertIn("visitors today", seg)
+        # #102: the figures are hours-stale, so the strip must not claim
+        # to be live.
+        self.assertNotIn("live traffic", seg)
         self.assertIn("in 90 days", seg)
         self.assertNotIn("live offers", seg)
         self.assertNotIn('class="count"', seg)
@@ -1224,6 +1227,22 @@ class StatsModuleSourceTests(unittest.TestCase):
         self.assertIn("&end=", body)
         self.assertEqual(body.count("ftIsoDate("), 2)  # start + end
 
+    def test_window_end_clears_today_because_goatcounter_end_is_exclusive(self):
+        # #102: `end` is an exclusive midnight boundary, so an end computed
+        # from `new Date()` alone excludes everything recorded today and the
+        # today window silently reported 0 forever.
+        pos = self.js_on.index("function ftCounterUrl")
+        body = self.js_on[pos : self.js_on.index("function ftFormatCount")]
+        self.assertIn("now.getTime() + 86400000", body)
+
+    def test_today_window_is_requested_as_one_day_not_a_collapsed_date(self):
+        # The regression was ftCounterUrl(0) collapsing start onto end.
+        pos = self.js_on.index("function ftInitStats")
+        body = self.js_on[pos:]
+        self.assertIn("ftCounterUrl(1)", body)
+        self.assertIn("ftCounterUrl(90)", body)
+        self.assertNotIn("ftCounterUrl(0)", body)
+
     def test_only_digits_derived_non_negative_counts_are_trusted(self):
         pos = self.js_on.index("function ftStatNumber")
         body = self.js_on[pos : self.js_on.index("function ftFillTraffic")]
@@ -1259,11 +1278,20 @@ class LiveTrafficPrivacyTests(unittest.TestCase):
         page = self._render()
         self.assertIn("goatcounter.com/privacy", page)
 
-    def test_summary_bullet_names_live_traffic_counter(self):
+    def test_summary_bullet_names_traffic_counter(self):
         page = self._render()
         start = page.index('id="privacy-summary"')
         seg = page[start : page.index("</ul>", start)]
-        self.assertIn("live traffic counter", seg)
+        self.assertIn("traffic counter", seg)
+
+    def test_policy_does_not_promise_live_figures(self):
+        # #102: counts are CDN cached for hours, and that staleness is
+        # accepted -- so the section explaining the counter has to say so.
+        page = self._render()
+        seg = page[page.index('id="privacy-live-traffic"') :]
+        seg = seg[: seg.index("</section>")]
+        self.assertIn("lag", seg)
+        self.assertNotIn("live visit totals", seg)
 
     def test_new_section_labelled_single_heading_per_section(self):
         page = self._render()
@@ -2936,6 +2964,64 @@ class NodeAppJsTests(unittest.TestCase):
         # The strip is display-only: no analytics events, no history churn.
         self.assertEqual(final["events"], [])
         self.assertEqual(final["historyUrls"], [])
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_traffic_windows_never_collapse_start_and_end_onto_one_date(self):
+        # #102 in behavioral form: a same-date window is a zero-length range
+        # that GoatCounter answers with 0 no matter how much traffic there
+        # was, so no requested window may have start === end. The today
+        # window must span exactly one day and end on tomorrow.
+        final = self._run(
+            [{"op": "settle"}],
+            stats_site=self.SITE,
+            stats_mode="ok",
+            stats_payloads={"today": {"count": "8"}, "period": {"count": "321"}},
+        )[-1]
+        urls = final["statsUrls"]
+        self.assertEqual(len(urls), 2)
+        spans = []
+        for url in urls:
+            start = re.search(r"[?&]start=([0-9-]+)", url).group(1)
+            end = re.search(r"[?&]end=([0-9-]+)", url).group(1)
+            self.assertNotEqual(start, end, f"zero-length window: {url}")
+            spans.append(
+                (dt.date.fromisoformat(end) - dt.date.fromisoformat(start)).days
+            )
+        self.assertEqual(sorted(spans), [1, 90])
+        # And the corrected windows still reach the right slots.
+        self.assertEqual(final["trafficToday"], "8")
+        self.assertEqual(final["trafficPeriod"], "321")
+
+    @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
+    def test_both_windows_share_one_exclusive_end_a_day_past_today(self):
+        # Clock-independent (the harness pins its clock to the epoch): the
+        # exclusive boundary means today is [T, T+1) and the trailing period
+        # is [T-89, T+1) -- 90 calendar days that include today. Both windows
+        # must therefore end on the same date, one day after today's start.
+        final = self._run(
+            [{"op": "settle"}],
+            stats_site=self.SITE,
+            stats_mode="ok",
+            stats_payloads={"today": {"count": "8"}, "period": {"count": "321"}},
+        )[-1]
+        windows = []
+        for url in final["statsUrls"]:
+            windows.append(
+                (
+                    dt.date.fromisoformat(
+                        re.search(r"[?&]start=([0-9-]+)", url).group(1)
+                    ),
+                    dt.date.fromisoformat(
+                        re.search(r"[?&]end=([0-9-]+)", url).group(1)
+                    ),
+                )
+            )
+        ends = {end for _, end in windows}
+        self.assertEqual(len(ends), 1, "windows must share one end boundary")
+        end = ends.pop()
+        starts = sorted(start for start, _ in windows)
+        self.assertEqual(end - starts[1], dt.timedelta(days=1))   # today
+        self.assertEqual(end - starts[0], dt.timedelta(days=90))  # period
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_traffic_counts_get_thousands_separators(self):
