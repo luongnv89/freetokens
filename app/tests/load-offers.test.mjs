@@ -1,0 +1,171 @@
+import { describe, it, expect } from "vitest";
+import { mkdtemp, writeFile, mkdir, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import {
+  OfferError,
+  buildIndex,
+  isExpired,
+  loadOffers,
+  runPipeline,
+} from "../scripts/load-offers.mjs";
+
+const REPO_ROOT = path.resolve(import.meta.dirname, "..", "..");
+const OFFERS_DIR = path.join(REPO_ROOT, "offers");
+const TODAY = new Date().toISOString().slice(0, 10);
+
+function offerText(overrides = {}, extra = "") {
+  const fields = {
+    title: "Test Offer",
+    provider: "Test Provider",
+    category: "coding",
+    amount: "$100 in credits",
+    expiry_date: "null",
+    source_url: "https://example.com/offer",
+    verified_date: "2026-01-01",
+    verification: "hand_verified",
+    signup: "none",
+    ...overrides,
+  };
+  return (
+    Object.entries(fields)
+      .filter(([, v]) => v !== undefined)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join("\n") +
+    "\n" +
+    extra
+  );
+}
+
+describe("expiry boundaries (build-time status, ADR 0001)", () => {
+  const base = { slug: "s", title: "t" };
+  it("offer expiring today is active", () => {
+    expect(isExpired({ ...base, expiry_date: TODAY }, TODAY)).toBe(false);
+  });
+  it("offer expired yesterday is expired", () => {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    expect(isExpired({ ...base, expiry_date: yesterday }, TODAY)).toBe(true);
+  });
+  it("null expiry never expires", () => {
+    expect(isExpired({ ...base, expiry_date: null }, TODAY)).toBe(false);
+  });
+  it("buildIndex stamps status for all three cases", () => {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const index = buildIndex(
+      [
+        { ...base, slug: "a", verified_date: "2026-01-01", expiry_date: TODAY },
+        { ...base, slug: "b", verified_date: "2026-01-02", expiry_date: yesterday },
+        { ...base, slug: "c", verified_date: "2026-01-03", expiry_date: null },
+      ],
+      new Date(`${TODAY}T00:00:00Z`),
+    );
+    const byStatus = Object.fromEntries(index.offers.map((o) => [o.slug, o.status]));
+    expect(byStatus).toEqual({ a: "active", b: "expired", c: "active" });
+    expect(index.count).toBe(3);
+    expect(index.active_count).toBe(2);
+    expect(index.expired_count).toBe(1);
+  });
+});
+
+describe("malformed input fails naming file and field", () => {
+  it.each([
+    ["missing required field", { signup: undefined }, /missing required fields: .*signup/],
+    ["invalid date format", { expiry_date: "01/02/2026" }, /expiry_date must be a YYYY-MM-DD date/],
+    ["out-of-enum category", { category: "crypto" }, /category must be one of/],
+    ["future verified_date", { verified_date: "2099-01-01" }, /verified_date is in the future/],
+    ["bad source_url", { source_url: "ftp://example.com" }, /source_url must be an http\(s\) URL/],
+    ["indented line", {}, /nested\/indented lines are not allowed/, "  oops: yes\n"],
+  ])("%s", async (_label, overrides, pattern, extra = "") => {
+    const root = await mkdtemp(path.join(tmpdir(), "ft-bad-"));
+    const dir = path.join(root, "offers");
+    await mkdir(dir);
+    const badPath = path.join(dir, "broken-offer.yaml");
+    await writeFile(badPath, offerText(overrides, extra));
+    await expect(loadOffers(dir)).rejects.toThrow(badPath);
+    await expect(loadOffers(dir)).rejects.toThrow(pattern);
+    await rm(root, { recursive: true, force: true });
+  });
+
+  it("orphan detail file is a build error", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "ft-orphan-"));
+    const offersDir = path.join(root, "offers");
+    await mkdir(offersDir);
+    await writeFile(path.join(offersDir, "test-offer.yaml"), offerText());
+    await mkdir(path.join(offersDir, "details"));
+    await writeFile(
+      path.join(offersDir, "details", "ghost-offer.json"),
+      JSON.stringify({ summary: "hi" }),
+    );
+    await expect(
+      runPipeline({ offersDir, outDir: path.join(root, "out") }),
+    ).rejects.toThrow(OfferError);
+    await rm(root, { recursive: true, force: true });
+  });
+});
+
+describe("generated artifacts vs committed index.json", () => {
+  let index;
+  beforeAll(async () => {
+    const out = await mkdtemp(path.join(tmpdir(), "ft-out-"));
+    index = await runPipeline({ offersDir: OFFERS_DIR, outDir: out });
+    globalThis.__ftOut = out;
+  });
+
+  it("offers.json is deep-equal to committed index.json ignoring generated_at", async () => {
+    const committed = JSON.parse(
+      await readFile(path.join(REPO_ROOT, "index.json"), "utf8"),
+    );
+    delete committed.generated_at;
+    const generated = structuredClone(index);
+    delete generated.generated_at;
+    expect(generated).toEqual(committed);
+  });
+
+  it("offers.jsonl has one valid object per line and line count equals count", async () => {
+    const text = await readFile(path.join(globalThis.__ftOut, "offers.jsonl"), "utf8");
+    const lines = text.trimEnd().split("\n");
+    expect(lines.length).toBe(index.count);
+    const parsed = lines.map((l) => JSON.parse(l));
+    expect(parsed).toEqual(index.offers);
+    expect(text.endsWith("\n")).toBe(true);
+  });
+
+  it("detail JSON passes through unchanged", async () => {
+    const detailsOut = path.join(globalThis.__ftOut, "details");
+    const { readdir } = await import("node:fs/promises");
+    const files = await readdir(detailsOut);
+    expect(files.length).toBeGreaterThan(0);
+    for (const f of files) {
+      const src = await readFile(path.join(OFFERS_DIR, "details", f), "utf8");
+      const dst = await readFile(path.join(detailsOut, f), "utf8");
+      expect(JSON.parse(dst)).toEqual(JSON.parse(src));
+    }
+  });
+});
+
+describe("performance", () => {
+  it("500 synthetic offers load and index well under 1s", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "ft-perf-"));
+    const dir = path.join(root, "offers");
+    await mkdir(dir);
+    await Promise.all(
+      Array.from({ length: 500 }, (_, i) =>
+        writeFile(
+          path.join(dir, `perf-offer-${String(i).padStart(4, "0")}.yaml`),
+          offerText({
+            title: `Perf Offer ${i}`,
+            provider: `Provider ${i % 50}`,
+            verified_date: "2026-01-15",
+          }),
+        ),
+      ),
+    );
+    const started = performance.now();
+    const index = await runPipeline({ offersDir: dir, outDir: path.join(root, "out") });
+    const elapsed = performance.now() - started;
+    expect(index.count).toBe(500);
+    expect(elapsed).toBeLessThan(1000);
+    console.log(`500-offer fixture pipeline: ${elapsed.toFixed(0)}ms`);
+    await rm(root, { recursive: true, force: true });
+  }, 10000);
+});

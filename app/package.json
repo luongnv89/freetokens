@@ -7,6 +7,8 @@
     "node": ">=22"
   },
   "scripts": {
+    "load:data": "node scripts/load-offers.mjs",
+    "prebuild": "npm run load:data",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest run",
