@@ -1116,8 +1116,11 @@ class TrafficStripMarkupTests(unittest.TestCase):
         page = self._home(self.SITE)
         seg = page[page.index('id="ft-traffic"') :]
         seg = seg[: seg.index("</p>")]
-        self.assertIn("live traffic", seg)
+        self.assertIn("site traffic", seg)
         self.assertIn("visitors today", seg)
+        # #102: the figures are hours-stale, so the strip must not claim
+        # to be live.
+        self.assertNotIn("live traffic", seg)
         self.assertIn("in 90 days", seg)
         self.assertNotIn("live offers", seg)
         self.assertNotIn('class="count"', seg)
@@ -1275,11 +1278,20 @@ class LiveTrafficPrivacyTests(unittest.TestCase):
         page = self._render()
         self.assertIn("goatcounter.com/privacy", page)
 
-    def test_summary_bullet_names_live_traffic_counter(self):
+    def test_summary_bullet_names_traffic_counter(self):
         page = self._render()
         start = page.index('id="privacy-summary"')
         seg = page[start : page.index("</ul>", start)]
-        self.assertIn("live traffic counter", seg)
+        self.assertIn("traffic counter", seg)
+
+    def test_policy_does_not_promise_live_figures(self):
+        # #102: counts are CDN cached for hours, and that staleness is
+        # accepted -- so the section explaining the counter has to say so.
+        page = self._render()
+        seg = page[page.index('id="privacy-live-traffic"') :]
+        seg = seg[: seg.index("</section>")]
+        self.assertIn("lag", seg)
+        self.assertNotIn("live visit totals", seg)
 
     def test_new_section_labelled_single_heading_per_section(self):
         page = self._render()

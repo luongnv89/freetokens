@@ -2398,7 +2398,7 @@ button:focus-visible {
 _TRAFFIC_STRIP_TMPL = (
     f'<p class="foot-traffic" id="{TRAFFIC_STRIP_ID}" role="status" '
     'aria-live="polite" hidden>'
-    '<span class="dot" aria-hidden="true"></span>live traffic &middot; '
+    '<span class="dot" aria-hidden="true"></span>site traffic &middot; '
     '<strong id="ft-traffic-today">&mdash;</strong> visitors today &middot; '
     '<strong id="ft-traffic-period">&mdash;</strong> in 90 days &middot; '
     '<a href="{stats_href}" rel="noopener noreferrer">full stats</a>'
@@ -3594,6 +3594,8 @@ __FT_STATS_MODULE__
 # stripped from that key and a Cache-Control request header fails CORS, so
 # the cache cannot be bypassed from the page -- displayed figures can lag
 # the source by hours. Do not add a cache-buster param; it is inert.
+# That staleness is accepted rather than engineered around (#102), so the
+# copy reads "site traffic" and never claims the figures are live.
 _STATS_JS_MODULE = r"""
   // --- Live traffic strip (#62) -------------------------------------------
   var STATS_SITE = __FT_STATS_SITE__;
@@ -4313,8 +4315,8 @@ _PRIVACY_CONTENT = """<div class="policy">
 </section>
 
 <section aria-labelledby="privacy-live-traffic">
-<h2 id="privacy-live-traffic">What the live traffic counter measures</h2>
-<p>Separately from GA4, the site can show live visit totals in its footer &mdash; the numbers you may see next to &ldquo;live traffic&rdquo;. Counting is done by <strong>GoatCounter</strong>, open-source software provided as a hosted service (goatcounter.com) under the EU's strict GDPR rules. Like GA4 above, it is off entirely unless configured at build time &mdash; and its counting script is not loaded until you allow tracking.</p>
+<h2 id="privacy-live-traffic">What the site traffic counter measures</h2>
+<p>Separately from GA4, the site can show visit totals in its footer &mdash; the numbers you may see next to &ldquo;site traffic&rdquo;. They are a rough popularity signal rather than a live readout: GoatCounter caches the totals, so they can lag the real figure by a few hours. Counting is done by <strong>GoatCounter</strong>, open-source software provided as a hosted service (goatcounter.com) under the EU's strict GDPR rules. Like GA4 above, it is off entirely unless configured at build time &mdash; and its counting script is not loaded until you allow tracking.</p>
 <p>When it <em>is</em> active, each page view records only technical, non-identifying details: the page path, the site's hostname, your browser's reported language and user-agent string, a coarse country derived from the IP at request time and then discarded, and the referring site. GoatCounter sets <strong>no cookies</strong>, uses no browser fingerprinting, and stores no personal identifiers or full IP addresses. Only anonymous aggregate totals are shown publicly on this site; nobody can browse individual visits.</p>
 <p>Blocking the counter with an ad blocker changes nothing else: pages, filters, and links all keep working exactly the same, and the footer totals simply stay hidden.</p>
 </section>
