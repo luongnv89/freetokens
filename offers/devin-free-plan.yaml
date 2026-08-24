@@ -7,3 +7,6 @@ amount: Light coding-agent quota + unlimited Tab completions ($0 plan)
 expiry_date: null
 source_url: https://devin.ai/pricing
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

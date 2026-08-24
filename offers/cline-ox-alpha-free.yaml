@@ -7,3 +7,6 @@ amount: Free model access, rate limited
 expiry_date: null
 source_url: https://x.com/cline/status/2090854216399220985
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

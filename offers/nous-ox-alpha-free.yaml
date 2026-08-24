@@ -7,3 +7,6 @@ amount: Free model access via Nous Portal - claimed 1 quadrillion tokens/day cap
 expiry_date: null
 source_url: https://x.com/NousResearch/status/2090899914700054780
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

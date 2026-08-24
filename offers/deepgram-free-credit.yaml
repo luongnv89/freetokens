@@ -8,3 +8,6 @@ amount: $200 in free credits for speech-to-text, text-to-speech, and voice agent
 expiry_date: null
 source_url: https://deepgram.com/pricing
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

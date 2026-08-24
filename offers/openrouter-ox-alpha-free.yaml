@@ -7,3 +7,6 @@ amount: Free model access - $0 per million input and output tokens on stealth/ox
 expiry_date: null
 source_url: https://openrouter.ai/stealth/ox-alpha
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: hand_verified
+signup: required

@@ -7,3 +7,6 @@ amount: Light cloud usage on the $0 Free plan, with limits resetting every 5 hou
 expiry_date: null
 source_url: https://ollama.com/pricing
 verified_date: 2026-08-24
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

@@ -8,3 +8,6 @@ amount: Free :free model variants - 50 requests/day at 20 req/min (1,000/day onc
 expiry_date: null
 source_url: https://openrouter.ai/docs/api-reference/limits
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

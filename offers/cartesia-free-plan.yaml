@@ -8,3 +8,6 @@ amount: 20K credits/month for text-to-speech and speech-to-text on the $0 plan
 expiry_date: null
 source_url: https://cartesia.ai/pricing
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

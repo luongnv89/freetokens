@@ -10,3 +10,6 @@ amount: 50 models at $0/M input & output incl. Ox Alpha, Kimi K3, Gemini 3.7 Fla
 expiry_date: null
 source_url: https://aihubmix.com/models?filter=free
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

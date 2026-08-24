@@ -17,3 +17,6 @@ amount: GLM 5.2 (1M-token context) free for eve agents via Blackbox on AI Gatewa
 expiry_date: 2026-08-27
 source_url: https://vercel.com/changelog/glm-5-2-free-for-eve-agents-through-august-27-via-blackbox-on-ai-gateway
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

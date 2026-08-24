@@ -8,3 +8,6 @@ amount: Free model access - $0/M input, output and cache reads on every plan whi
 expiry_date: null
 source_url: https://commandcode.ai/docs/resources/pricing-limits
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

@@ -11,3 +11,6 @@ amount: $0/mo free tier — Ox Alpha model free without limit; general free plan
 expiry_date: null
 source_url: https://cloud.mercuryagent.sh/pricing
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

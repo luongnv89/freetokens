@@ -7,3 +7,6 @@ amount: Selected API models are free for input and output, including GLM-Z1-9B-0
 expiry_date: null
 source_url: https://siliconflow.cn/pricing
 verified_date: 2026-08-24
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

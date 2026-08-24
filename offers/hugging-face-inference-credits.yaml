@@ -7,3 +7,6 @@ amount: $0.10/month in Inference Provider credits for free users (subject to cha
 expiry_date: null
 source_url: https://huggingface.co/docs/inference-providers/pricing
 verified_date: 2026-08-24
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

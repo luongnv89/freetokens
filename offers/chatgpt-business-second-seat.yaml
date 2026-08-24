@@ -13,3 +13,6 @@ amount: "1 extra ChatGPT Business seat free for 4 years (with a paid $25/mo seat
 expiry_date: null
 source_url: https://talentgenius.io/chatgpt/request
 verified_date: 2026-08-22
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

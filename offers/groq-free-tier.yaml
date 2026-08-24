@@ -7,3 +7,6 @@ amount: Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)
 expiry_date: null
 source_url: https://console.groq.com/docs/rate-limits
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

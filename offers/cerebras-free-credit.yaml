@@ -7,3 +7,6 @@ amount: $5 in free API credit after creating an account
 expiry_date: null
 source_url: https://www.cerebras.ai/inference
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required
