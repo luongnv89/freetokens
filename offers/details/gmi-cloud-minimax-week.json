@@ -1,0 +1,24 @@
+{
+  "summary": "GMI Cloud's MiniMax Week (Aug 24 – Sep 6, 2026) makes the MiniMax lineup free for fourteen days: M3 (frontier reasoning), M2.7 (fast agent/coding reasoning), Speech 2.8 (TTS and voice cloning), and Music 3.0 (full generated tracks). Access via a GMI API key or OpenRouter's :free variants, with native integrations in Pi, Oh My Pi, Hermes Agent, Trae, and OpenCode, and BYOK support for Claude Code, Codex, and Cursor. Account creation is free; H3 generative video is not included and stays at standard pricing. A concurrent MiniMaxathon challenge awards $200 in GMI credits plus a 3-month MiniMax token plan per track winner.",
+  "claim_steps": [
+    "Create a free GMI Cloud account at https://console.gmicloud.ai.",
+    "Use MiniMax models via the GMI Model Hub API key, or through OpenRouter using the :free variants (e.g. openrouter.ai/minimax/minimax-m3:free).",
+    "Optionally integrate natively in Pi, Oh My Pi, Hermes Agent, Trae, or OpenCode — or BYOK into Claude Code, Codex, or Cursor.",
+    "Use the models free until September 6, 2026; standard pricing applies afterward."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/gmi_cloud/status/2091925007756857368",
+      "author": "GMI Cloud",
+      "handle": "@gmi_cloud",
+      "text": "unlimited MiniMax M3 and M2.7, 14 days FREE on GMI Cloud\n\nfrom 8/24 to 9/6, Speech 2.8 and Music 3.0 too.\n\naccess via both GMI API key or @OpenRouter👇"
+    },
+    {
+      "type": "link",
+      "url": "https://www.gmicloud.ai/minimax-week",
+      "title": "MiniMax Week × GMI Cloud",
+      "text": "MiniMax M3, M2.7, Speech 2.8, and Music 3.0 are free for fourteen days."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-24T16:23:36Z",
-  "count": 41,
-  "active_count": 41,
+  "generated_at": "2026-08-24T20:32:34Z",
+  "count": 42,
+  "active_count": 42,
   "expired_count": 0,
   "offers": [
     {
@@ -14,6 +14,19 @@
       "source_url": "https://www.aionlabs.ai/docs/rate-limits/",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "gmi-cloud-minimax-week",
+      "title": "GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free",
+      "provider": "GMI Cloud",
+      "category": "api_provider",
+      "amount": "MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter",
+      "expiry_date": "2026-09-06",
+      "source_url": "https://www.gmicloud.ai/minimax-week",
+      "verified_date": "2026-08-24",
+      "verification": "hand_verified",
       "signup": "required",
       "status": "active"
     },
