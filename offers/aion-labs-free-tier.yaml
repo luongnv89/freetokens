@@ -7,3 +7,6 @@ amount: 20,000 tokens/day and 15 requests/minute
 expiry_date: null
 source_url: https://www.aionlabs.ai/docs/rate-limits/
 verified_date: 2026-08-24
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

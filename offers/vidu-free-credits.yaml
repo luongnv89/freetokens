@@ -8,3 +8,6 @@ amount: Trial credits for new users on signup, topped up with daily login bonus 
 expiry_date: null
 source_url: https://www.vidu.com/pricing
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

@@ -7,3 +7,6 @@ amount: Free :free models without an API key, limited to 200 requests/hour per I
 expiry_date: null
 source_url: https://kilo.ai/docs/gateway/authentication
 verified_date: 2026-08-24
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

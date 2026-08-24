@@ -7,3 +7,6 @@ amount: Free model access - stealth-ox-alpha at $0/M input, output and cache rea
 expiry_date: null
 source_url: https://api.venice.ai/api/v1/models
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Every currently-claimable free AI credit offer, hand-verified, on one fast page.">
+<meta name="description" content="Every currently-claimable free AI credit offer, labeled per offer with its verification level and sign-up need, on one fast page.">
 <title>Free AI Credits</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<link rel="alternate" type="application/rss+xml" title="Free AI Credits — hand-verified free AI credit offers" href="feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Free AI Credits — free AI credit offers, tagged by verification" href="feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -144,6 +144,25 @@ h1 {
   border: 1px solid var(--ink);
   border-radius: 999px;
   padding: 0.14rem 0.6rem;
+}
+
+/* Per-offer verification & sign-up badges (#97). Color never carries the
+   meaning alone: the word is always spelled out and the tooltip (title)
+   explains the level. Green = strongest claim (hand-checked / no account);
+   gray = weakest (unverified); plain ink = middle tiers. */
+.badge-v-hand_verified {
+  border-color: var(--green);
+  color: var(--ink);
+}
+
+.badge-v-unverified {
+  border-color: var(--gray);
+  color: var(--gray);
+}
+
+.badge-signup-none {
+  border-color: var(--green);
+  color: var(--ink);
 }
 
 /* Archive "Expired" badge (#26): the word itself carries the meaning —
@@ -662,10 +681,10 @@ a:focus-visible {
 <header class="masthead masthead-home">
 <div class="bar">
 <h1>Free AI Credits</h1>
-<p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
+<p class="kicker">zero runtime &middot; every offer labeled with verification level &amp; sign-up need</p>
 </div>
-<p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
-<p class="count"><strong>41</strong> live offers &middot; <strong>39</strong> ongoing &middot; <strong>41</strong> verified</p>
+<p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Each carries a verification level (hand-checked or community-sourced) and a sign-up tag, refreshed on every rebuild.</p>
+<p class="count"><strong>41</strong> live offers &middot; <strong>39</strong> ongoing &middot; <strong>3</strong> hand-verified by the maintainer</p>
 </header>
 <main>
 <section class="toolbar" aria-label="Search and filter offers"><div class="field"><label class="tool-label" for="ft-search">Search</label><input type="search" id="ft-search" name="q" placeholder="Search title, provider, or amount&hellip;" autocomplete="off" spellcheck="false" maxlength="200"></div><div class="field field-sort"><label class="tool-label" for="ft-sort">Sort</label><select id="ft-sort"><option value="">Default</option><option value="newest">Newest verified</option><option value="expiring">Expiring soon</option><option value="amount">Largest amount</option></select></div><div class="chips" role="group" aria-label="Filter by category"><button type="button" class="chip" data-ft-category="" aria-pressed="true">All</button><button type="button" class="chip" data-ft-category="api_provider" aria-pressed="false">API providers</button><button type="button" class="chip" data-ft-category="coding" aria-pressed="false">Coding</button><button type="button" class="chip" data-ft-category="image" aria-pressed="false">Image</button><button type="button" class="chip" data-ft-category="voice" aria-pressed="false">Voice</button><button type="button" class="chip" data-ft-category="video" aria-pressed="false">Video</button></div><p class="results-status" id="ft-results-status" role="status" aria-live="polite">Showing all 41 offers</p></section><ol class="grid" id="ft-grid" role="list">
@@ -676,7 +695,7 @@ a:focus-visible {
 <span class="r-amount">20,000 tokens/day and 15 requests/minute</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Aion Labs</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/aion-labs-free-tier.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Aion Labs</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/aion-labs-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -687,7 +706,7 @@ a:focus-visible {
 <span class="r-amount">Free input and output tokens on supported Gemini API models (quotas vary by model)</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Google Gemini</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/google-gemini-free-api-tier.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Google Gemini</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/google-gemini-free-api-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -698,7 +717,7 @@ a:focus-visible {
 <span class="r-amount">$0.10/month in Inference Provider credits for free users (subject to change)</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Hugging Face</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/hugging-face-inference-credits.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Hugging Face</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/hugging-face-inference-credits.html">details</a>
 </p>
 </article>
 </li>
@@ -709,7 +728,7 @@ a:focus-visible {
 <span class="r-amount">Free :free models without an API key, limited to 200 requests/hour per IP</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Kilo Code</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/kilo-code-free-models.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Kilo Code</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/kilo-code-free-models.html">details</a>
 </p>
 </article>
 </li>
@@ -720,7 +739,7 @@ a:focus-visible {
 <span class="r-amount">Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">LLM7.io</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/llm7-free-tier.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">LLM7.io</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/llm7-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -731,7 +750,7 @@ a:focus-visible {
 <span class="r-amount">Light cloud usage on the $0 Free plan, with limits resetting every 5 hours and 7 days</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Ollama</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/ollama-cloud-free-tier.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Ollama</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/ollama-cloud-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -742,7 +761,7 @@ a:focus-visible {
 <span class="r-amount">Anonymous access at 2 requests/minute per IP and per model</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OVHcloud</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/ovhcloud-ai-endpoints-free-tier.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OVHcloud</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/ovhcloud-ai-endpoints-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -753,7 +772,7 @@ a:focus-visible {
 <span class="r-amount">Selected API models are free for input and output, including GLM-Z1-9B-0414</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">SiliconFlow</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/siliconflow-free-models.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">SiliconFlow</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/siliconflow-free-models.html">details</a>
 </p>
 </article>
 </li>
@@ -764,7 +783,7 @@ a:focus-visible {
 <span class="r-amount">Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Z AI (Zhipu AI)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/z-ai-free-models.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Z AI (Zhipu AI)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 24, 2026">verified <time datetime="2026-08-24">today</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/z-ai-free-models.html">details</a>
 </p>
 </article>
 </li>
@@ -775,7 +794,7 @@ a:focus-visible {
 <span class="r-amount">50 models at $0/M input &amp; output incl. Ox Alpha, Kimi K3, Gemini 3.7 Flash, GLM-5.2 — trial-grade, 429s possible</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">AIHubMix</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/aihubmix-free-model-catalog.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">AIHubMix</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/aihubmix-free-model-catalog.html">details</a>
 </p>
 </article>
 </li>
@@ -786,7 +805,7 @@ a:focus-visible {
 <span class="r-amount">Legacy accounts (created before July 15, 2025): 5M chars/month Standard + 1M chars/month Neural voices for first 12 months. New accounts get up to $200 in AWS Free Tier credits on a 6-month free plan.</span>
 </div>
 <p class="row-meta">
-<span class="badge">voice</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">AWS</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/amazon-polly-free-tier.html">details</a>
+<span class="badge">voice</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">AWS</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/amazon-polly-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -797,7 +816,7 @@ a:focus-visible {
 <span class="r-amount">Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h)</span>
 </div>
 <p class="row-meta">
-<span class="badge">image</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Microsoft Bing</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/bing-image-creator.html">details</a>
+<span class="badge">image</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Microsoft Bing</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/bing-image-creator.html">details</a>
 </p>
 </article>
 </li>
@@ -808,7 +827,7 @@ a:focus-visible {
 <span class="r-amount">20K credits/month for text-to-speech and speech-to-text on the $0 plan</span>
 </div>
 <p class="row-meta">
-<span class="badge">voice</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cartesia</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cartesia-free-plan.html">details</a>
+<span class="badge">voice</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cartesia</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cartesia-free-plan.html">details</a>
 </p>
 </article>
 </li>
@@ -819,7 +838,7 @@ a:focus-visible {
 <span class="r-amount">$5 in free API credit after creating an account</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cerebras</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cerebras-free-credit.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cerebras</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cerebras-free-credit.html">details</a>
 </p>
 </article>
 </li>
@@ -830,7 +849,7 @@ a:focus-visible {
 <span class="r-amount">Free model access, rate limited</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cline</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cline-ox-alpha-free.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cline</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cline-ox-alpha-free.html">details</a>
 </p>
 </article>
 </li>
@@ -841,7 +860,7 @@ a:focus-visible {
 <span class="r-amount">10,000 Neurons per day at no charge (resets daily at 00:00 UTC)</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cloudflare</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cloudflare-workers-ai-free-tier.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cloudflare</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cloudflare-workers-ai-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -852,7 +871,7 @@ a:focus-visible {
 <span class="r-amount">Free trial key - 1,000 API calls/month across Chat, Embed, and Rerank endpoints</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cohere</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cohere-trial-key.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cohere</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cohere-trial-key.html">details</a>
 </p>
 </article>
 </li>
@@ -863,7 +882,7 @@ a:focus-visible {
 <span class="r-amount">Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts (requires &gt;=$1 credit balance in account to start a session)</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Command Code</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/commandcode-ox-alpha-free.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Command Code</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/commandcode-ox-alpha-free.html">details</a>
 </p>
 </article>
 </li>
@@ -874,7 +893,7 @@ a:focus-visible {
 <span class="r-amount">Free Hobby plan - limited Agent requests plus Composer access, no credit card required</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cursor (Anysphere)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cursor-hobby-plan.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cursor (Anysphere)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/cursor-hobby-plan.html">details</a>
 </p>
 </article>
 </li>
@@ -885,7 +904,7 @@ a:focus-visible {
 <span class="r-amount">$200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)</span>
 </div>
 <p class="row-meta">
-<span class="badge">voice</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Deepgram</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/deepgram-free-credit.html">details</a>
+<span class="badge">voice</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Deepgram</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/deepgram-free-credit.html">details</a>
 </p>
 </article>
 </li>
@@ -896,7 +915,7 @@ a:focus-visible {
 <span class="r-amount">Light coding-agent quota + unlimited Tab completions ($0 plan)</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cognition (Devin)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/devin-free-plan.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Cognition (Devin)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/devin-free-plan.html">details</a>
 </p>
 </article>
 </li>
@@ -907,7 +926,7 @@ a:focus-visible {
 <span class="r-amount">10k credits/month (~10 min of audio)</span>
 </div>
 <p class="row-meta">
-<span class="badge">voice</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">ElevenLabs</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/elevenlabs-free-plan.html">details</a>
+<span class="badge">voice</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">ElevenLabs</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/elevenlabs-free-plan.html">details</a>
 </p>
 </article>
 </li>
@@ -918,7 +937,7 @@ a:focus-visible {
 <span class="r-amount">2,000 completions + 50 chat requests per month</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">GitHub</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/github-copilot-free.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">GitHub</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/github-copilot-free.html">details</a>
 </p>
 </article>
 </li>
@@ -929,7 +948,7 @@ a:focus-visible {
 <span class="r-amount">Free image generation in the AI Studio web app (rate-limited; not available via API free tier)</span>
 </div>
 <p class="row-meta">
-<span class="badge">image</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Google</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/google-ai-studio-image.html">details</a>
+<span class="badge">image</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Google</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/google-ai-studio-image.html">details</a>
 </p>
 </article>
 </li>
@@ -940,7 +959,7 @@ a:focus-visible {
 <span class="r-amount">$300 in credits (90 days from signup)</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Google Cloud</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/google-cloud-300-free-trial.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Google Cloud</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/google-cloud-300-free-trial.html">details</a>
 </p>
 </article>
 </li>
@@ -951,7 +970,7 @@ a:focus-visible {
 <span class="r-amount">Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Groq</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/groq-free-tier.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Groq</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/groq-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -962,7 +981,7 @@ a:focus-visible {
 <span class="r-amount">One-time welcome credit package (expires 3 days after grant) + limited free generation (watermarked)</span>
 </div>
 <p class="row-meta">
-<span class="badge">video</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Hailuo AI</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/hailuo-free-tier.html">details</a>
+<span class="badge">video</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Hailuo AI</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/hailuo-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -973,7 +992,7 @@ a:focus-visible {
 <span class="r-amount">150 fast tokens per day (resets daily)</span>
 </div>
 <p class="row-meta">
-<span class="badge">image</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Leonardo.Ai</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/leonardo-ai-free-plan.html">details</a>
+<span class="badge">image</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Leonardo.Ai</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/leonardo-ai-free-plan.html">details</a>
 </p>
 </article>
 </li>
@@ -984,7 +1003,7 @@ a:focus-visible {
 <span class="r-amount">$0/mo free tier — Ox Alpha model free without limit; general free plan includes 5,000 Mercury Credits/month</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Mercury Cloud (Cosmic Stack)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/mercury-cloud-ox-alpha-free.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Mercury Cloud (Cosmic Stack)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/mercury-cloud-ox-alpha-free.html">details</a>
 </p>
 </article>
 </li>
@@ -995,7 +1014,7 @@ a:focus-visible {
 <span class="r-amount">Free rate-limited API access (no credit card required)</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Mistral AI</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/mistral-experiment-free-tier.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Mistral AI</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/mistral-experiment-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -1006,7 +1025,7 @@ a:focus-visible {
 <span class="r-amount">Free model access via Nous Portal - claimed 1 quadrillion tokens/day capacity, limited time</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Nous Research</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/nous-ox-alpha-free.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Nous Research</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/nous-ox-alpha-free.html">details</a>
 </p>
 </article>
 </li>
@@ -1017,7 +1036,7 @@ a:focus-visible {
 <span class="r-amount">Limited free Codex access on the ChatGPT Free plan, incl. GPT-5.6 Luna (no credit card)</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OpenAI</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/openai-codex-free-tier.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-hand_verified" title="Checked by the maintainer against the official provider website">hand-verified</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OpenAI</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/openai-codex-free-tier.html">details</a>
 </p>
 </article>
 </li>
@@ -1028,7 +1047,7 @@ a:focus-visible {
 <span class="r-amount">Free model access, near unlimited usage (rate limited)</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OpenCode</span><span class="sep" aria-hidden="true">&middot;</span><span class="status">expires <time datetime="2026-08-27">Aug 27, 2026</time></span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/opencode-ox-alpha-free-week.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-hand_verified" title="Checked by the maintainer against the official provider website">hand-verified</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OpenCode</span><span class="sep" aria-hidden="true">&middot;</span><span class="status">expires <time datetime="2026-08-27">Aug 27, 2026</time></span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/opencode-ox-alpha-free-week.html">details</a>
 </p>
 </article>
 </li>
@@ -1039,7 +1058,7 @@ a:focus-visible {
 <span class="r-amount">Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time)</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OpenRouter</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/openrouter-free-models.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OpenRouter</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/openrouter-free-models.html">details</a>
 </p>
 </article>
 </li>
@@ -1050,7 +1069,7 @@ a:focus-visible {
 <span class="r-amount">Free model access - $0 per million input and output tokens on stealth/ox-alpha during the stealth preview</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OpenRouter</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/openrouter-ox-alpha-free.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-hand_verified" title="Checked by the maintainer against the official provider website">hand-verified</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">OpenRouter</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/openrouter-ox-alpha-free.html">details</a>
 </p>
 </article>
 </li>
@@ -1061,7 +1080,7 @@ a:focus-visible {
 <span class="r-amount">80 monthly video credits</span>
 </div>
 <p class="row-meta">
-<span class="badge">video</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Pika</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/pika-free-plan.html">details</a>
+<span class="badge">video</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Pika</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/pika-free-plan.html">details</a>
 </p>
 </article>
 </li>
@@ -1072,7 +1091,7 @@ a:focus-visible {
 <span class="r-amount">125 one-time credits for AI video and image generation</span>
 </div>
 <p class="row-meta">
-<span class="badge">video</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Runway</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/runway-free-plan.html">details</a>
+<span class="badge">video</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Runway</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/runway-free-plan.html">details</a>
 </p>
 </article>
 </li>
@@ -1083,7 +1102,7 @@ a:focus-visible {
 <span class="r-amount">Free model access - stealth-ox-alpha at $0/M input, output and cache reads</span>
 </div>
 <p class="row-meta">
-<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Venice AI</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/venice-ox-alpha-free.html">details</a>
+<span class="badge">api_provider</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Venice AI</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/venice-ox-alpha-free.html">details</a>
 </p>
 </article>
 </li>
@@ -1094,7 +1113,7 @@ a:focus-visible {
 <span class="r-amount">GLM 5.2 (1M-token context) free for eve agents via Blackbox on AI Gateway through August 27</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Vercel</span><span class="sep" aria-hidden="true">&middot;</span><span class="status">expires <time datetime="2026-08-27">Aug 27, 2026</time></span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/vercel-glm-5-2-free-eve-agents.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Vercel</span><span class="sep" aria-hidden="true">&middot;</span><span class="status">expires <time datetime="2026-08-27">Aug 27, 2026</time></span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/vercel-glm-5-2-free-eve-agents.html">details</a>
 </p>
 </article>
 </li>
@@ -1105,7 +1124,7 @@ a:focus-visible {
 <span class="r-amount">Trial credits for new users on signup, topped up with daily login bonus credits</span>
 </div>
 <p class="row-meta">
-<span class="badge">video</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Vidu</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/vidu-free-credits.html">details</a>
+<span class="badge">video</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">Vidu</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 23, 2026">verified <time datetime="2026-08-23">yesterday</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/vidu-free-credits.html">details</a>
 </p>
 </article>
 </li>
@@ -1116,7 +1135,7 @@ a:focus-visible {
 <span class="r-amount">1 extra ChatGPT Business seat free for 4 years (with a paid $25/mo seat) — UNVERIFIED, claimed only in an X post</span>
 </div>
 <p class="row-meta">
-<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">TalentGenius (OpenAI SMB Channel Partner)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 22, 2026">verified <time datetime="2026-08-22">2d ago</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/chatgpt-business-second-seat.html">details</a>
+<span class="badge">coding</span><span class="sep" aria-hidden="true">&middot;</span><span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span><span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-prov">TalentGenius (OpenAI SMB Channel Partner)</span><span class="sep" aria-hidden="true">&middot;</span><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span><span class="sep" aria-hidden="true">&middot;</span><span class="r-vfd" title="verified Aug 22, 2026">verified <time datetime="2026-08-22">2d ago</time></span><span class="sep" aria-hidden="true">&middot;</span><a class="r-details" href="offers/chatgpt-business-second-seat.html">details</a>
 </p>
 </article>
 </li>
@@ -1128,7 +1147,7 @@ a:focus-visible {
 </section>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-24T14:00:04Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-24T14:47:53Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="./" aria-current="page">Offers</a><span aria-hidden="true">&middot;</span><a href="archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 

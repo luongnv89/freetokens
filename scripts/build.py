@@ -32,9 +32,10 @@ CATEGORY_LABELS = {
 # validator enforces it). Page-internal hrefs stay relative so they resolve
 # under any deploy base.
 DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens"
-FEED_TITLE = "Free AI Credits — hand-verified free AI credit offers"
+FEED_TITLE = "Free AI Credits — free AI credit offers, tagged by verification"
 FEED_DESCRIPTION = (
-    "Newly published free AI credit offers from the hand-verified freetokens directory."
+    "Newly published free AI credit offers from the freetokens directory, "
+    "each tagged with its verification level and sign-up requirement."
 )
 # Search input debounce: settling delay before a keystroke batch filters the
 # list, updates the URL, and fires analytics. Must stay well under the PRD's
@@ -98,8 +99,57 @@ REQUIRED_FIELDS = (
     "expiry_date",
     "source_url",
     "verified_date",
+    "verification",
+    "signup",
 )
+# Per-offer honesty tags (#97): the site no longer claims blanket
+# "hand-verified / no sign-up walls" status. Every offer states exactly how
+# its listing was checked and whether claiming needs an account.
+VERIFICATION_LEVELS = ("hand_verified", "social_proof", "unverified")
+VERIFICATION_LABELS = {
+    "hand_verified": "hand-verified",
+    "social_proof": "social proof",
+    "unverified": "unverified",
+}
+# Tooltip copy spells out what each level means — the badge word alone must
+# never be the only explanation (same principle as the Expired badge).
+VERIFICATION_TITLES = {
+    "hand_verified": (
+        "Checked by the maintainer against the official provider website"
+    ),
+    "social_proof": (
+        "Not personally verified, but corroborated by the official website "
+        "and social proof"
+    ),
+    "unverified": (
+        "Only social-media proofs — no official-website confirmation yet"
+    ),
+}
+SIGNUP_MODES = ("none", "required")
+SIGNUP_LABELS = {"none": "no sign-up", "required": "sign-up required"}
+SIGNUP_TITLES = {
+    "none": "Claimable without creating an account",
+    "required": "Claiming requires creating a (free) account",
+}
 NULL_TOKENS = {"null", "~", ""}
+
+
+def _verification_badge(level: str) -> str:
+    """Render the per-offer verification-level badge (#97)."""
+    return (
+        f'<span class="badge badge-v-{html.escape(level)}" '
+        f'title="{html.escape(VERIFICATION_TITLES[level], quote=True)}">'
+        f"{html.escape(VERIFICATION_LABELS[level])}</span>"
+    )
+
+
+def _signup_badge(mode: str) -> str:
+    """Render the per-offer sign-up-requirement badge (#97)."""
+    return (
+        f'<span class="badge badge-signup-{html.escape(mode)}" '
+        f'title="{html.escape(SIGNUP_TITLES[mode], quote=True)}">'
+        f"{html.escape(SIGNUP_LABELS[mode])}</span>"
+    )
 
 # --- Analytics configuration (F7) -----------------------------------------
 # GA4 is opt-in at build time: the measurement ID comes from the
@@ -192,6 +242,18 @@ def validate_offer(data: dict, filename: str) -> dict:
         raise OfferError(
             f"{filename}: category must be one of {'|'.join(CATEGORIES)}, "
             f"got {data['category']!r}"
+        )
+
+    if data["verification"] not in VERIFICATION_LEVELS:
+        raise OfferError(
+            f"{filename}: verification must be one of "
+            f"{'|'.join(VERIFICATION_LEVELS)}, got {data['verification']!r}"
+        )
+
+    if data["signup"] not in SIGNUP_MODES:
+        raise OfferError(
+            f"{filename}: signup must be one of {'|'.join(SIGNUP_MODES)}, "
+            f"got {data['signup']!r}"
         )
 
     if data["expiry_date"] is not None:
@@ -442,6 +504,8 @@ def build_index(offers: list, today: dt.date | None = None) -> dict:
                 else None,
                 "source_url": o["source_url"],
                 "verified_date": o["verified_date"].isoformat(),
+                "verification": o["verification"],
+                "signup": o["signup"],
                 "status": o["status"],
             }
             for o in stamped
@@ -582,6 +646,25 @@ h1 {
   border: 1px solid var(--ink);
   border-radius: 999px;
   padding: 0.14rem 0.6rem;
+}
+
+/* Per-offer verification & sign-up badges (#97). Color never carries the
+   meaning alone: the word is always spelled out and the tooltip (title)
+   explains the level. Green = strongest claim (hand-checked / no account);
+   gray = weakest (unverified); plain ink = middle tiers. */
+.badge-v-hand_verified {
+  border-color: var(--green);
+  color: var(--ink);
+}
+
+.badge-v-unverified {
+  border-color: var(--gray);
+  color: var(--gray);
+}
+
+.badge-signup-none {
+  border-color: var(--green);
+  color: var(--ink);
 }
 
 /* Archive "Expired" badge (#26): the word itself carries the meaning —
@@ -837,10 +920,10 @@ _PAGE_TMPL = """<!DOCTYPE html>
 _HOME_HEADER = """<header class="masthead masthead-home">
 <div class="bar">
 <h1>Free AI Credits</h1>
-<p class="kicker">hand-verified &middot; zero runtime &middot; no sign-up walls</p>
+<p class="kicker">zero runtime &middot; every offer labeled with verification level &amp; sign-up need</p>
 </div>
-<p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Checked by hand, refreshed on every rebuild.</p>
-<p class="count"><strong>{count}</strong> live offers &middot; <strong>{ongoing}</strong> ongoing &middot; <strong>{verified}</strong> verified</p>
+<p class="tagline">Every claimable free-credit offer worth your time, on one fast page. Each carries a verification level (hand-checked or community-sourced) and a sign-up tag, refreshed on every rebuild.</p>
+<p class="count"><strong>{count}</strong> live offers &middot; <strong>{ongoing}</strong> ongoing &middot; <strong>{verified}</strong> hand-verified by the maintainer</p>
 </header>"""
 
 # Footer nav shared by every page. Links stay relative so they resolve under
@@ -900,6 +983,7 @@ _CARD_TMPL = """<li style="--i:{index}">
 </div>
 <p class="row-meta">
 <span class="badge">{category}</span><span class="sep" aria-hidden="true">&middot;</span>\
+{verification_badge}{signup_badge}<span class="sep" aria-hidden="true">&middot;</span>\
 <span class="r-prov">{provider}</span><span class="sep" aria-hidden="true">&middot;</span>\
 {expiry_display}<span class="sep" aria-hidden="true">&middot;</span>\
 <span class="r-vfd" title="verified {verified_display}">verified <time datetime="{verified_date}">{verified_rel}</time></span><span class="sep" aria-hidden="true">&middot;</span>\
@@ -912,7 +996,7 @@ _CARD_TMPL = """<li style="--i:{index}">
 _EMPTY_TMPL = """<section class="empty" style="--i:0">
 <p class="glyph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="presentation"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8"/><path d="M16.5 8a2.5 2.5 0 0 0 0-5C13 3 12 8 12 8"/></svg></p>
 <h2>No live offers right now</h2>
-<p>Every listing here is checked by hand against the provider, and none have passed the check at the moment.</p>
+<p>Every listing here is screened against the provider, and none have passed the check at the moment.</p>
 <p>New and renewed offers appear automatically after the next rebuild &mdash; check back soon.</p>
 <p class="empty-archive">In the meantime, <a href="archive.html">browse the archive</a> of expired offers.</p>
 </section>"""
@@ -1396,7 +1480,7 @@ def _detail_sections(detail: dict | None, rel_prefix: str = "", slug: str = "") 
 _OFFER_HEADER = """<header class="masthead">
 <p class="kicker">free ai credits &middot; {category_label}</p>
 <h1>{title}</h1>
-<p class="tagline">From <strong>{provider}</strong>, hand-verified on <time datetime="{verified_date}">{verified_display}</time>.</p>
+<p class="tagline">From <strong>{provider}</strong> &middot; {verification_badge} {signup_badge} &middot; checked on <time datetime="{verified_date}">{verified_display}</time>.</p>
 <p class="count">{status}</p>
 </header>"""
 
@@ -1642,8 +1726,8 @@ def render_offer_html(
         )
     else:
         blurb = (
-            f"{offer['amount']} from {offer['provider']} — hand-verified "
-            "free AI credits."
+            f"{offer['amount']} from {offer['provider']} — free AI credits, "
+            "tagged by verification level and sign-up need."
         )
     if expired:
         cta = (
@@ -1663,7 +1747,9 @@ def render_offer_html(
         f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
         f'<p class="od-statusline mono">{status}'
         f' <span class="sep" aria-hidden="true">&middot;</span>'
-        f' hand-verified <time datetime="'
+        f" {_signup_badge(offer['signup'])}"
+        f' <span class="sep" aria-hidden="true">&middot;</span>'
+        f' checked <time datetime="'
         f'{html.escape(offer["verified_date"], quote=True)}">'
         f"{_human_date(offer['verified_date'])}</time></p>\n"
         "</div>\n"
@@ -1689,6 +1775,8 @@ def render_offer_html(
             title=html.escape(offer["title"], quote=True),
             amount=html.escape(offer["amount"]),
             provider=provider,
+            verification_badge=_verification_badge(offer["verification"]),
+            signup_badge=_signup_badge(offer["signup"]),
             verified_date=html.escape(offer["verified_date"], quote=True),
             verified_display=_human_date(offer["verified_date"]),
             status=status,
@@ -3233,6 +3321,8 @@ def render_html(
                     index=i,
                     slug=html.escape(o["slug"], quote=True),
                     category=html.escape(o["category"]),
+                    verification_badge=_verification_badge(o["verification"]),
+                    signup_badge=_signup_badge(o["signup"]),
                     offer_id=html.escape(o["slug"], quote=True),
                     source_url=html.escape(o["source_url"], quote=True),
                     title=html.escape(o["title"], quote=True),
@@ -3263,13 +3353,15 @@ def render_html(
     return _page_shell(
         title="Free AI Credits",
         meta_description=(
-            "Every currently-claimable free AI credit offer, hand-verified, "
-            "on one fast page."
+            "Every currently-claimable free AI credit offer, labeled per offer "
+            "with its verification level and sign-up need, on one fast page."
         ),
         header=_HOME_HEADER.format(
             count=len(offers_active),
             ongoing=sum(1 for o in offers_active if not o["expiry_date"]),
-            verified=sum(1 for o in offers_active if o.get("verified_date")),
+            verified=sum(
+                1 for o in offers_active if o.get("verification") == "hand_verified"
+            ),
         ),
         content=content,
         built=built,
@@ -3295,7 +3387,7 @@ def render_html(
 _ARCHIVE_HEADER = """<header class="masthead">
 <p class="kicker">free ai credits &middot; archive</p>
 <h1>Expired offer archive</h1>
-<p class="tagline">Every hand-verified offer that has since lapsed, kept for reference &mdash; newest expirations first. Nothing here is claimable anymore.</p>
+<p class="tagline">Every offer that has since lapsed, kept for reference &mdash; newest expirations first. Nothing here is claimable anymore.</p>
 <p class="count"><strong>{count}</strong> expired offers</p>
 </header>"""
 
@@ -3303,6 +3395,7 @@ _ARCHIVED_CARD_TMPL = """<li style="--i:{index}">
 <article class="card" data-category="{category}">
 <div class="card-top">
 <span class="badge">{category}</span>
+{verification_badge}{signup_badge}
 <span class="badge badge-expired">Expired</span>
 </div>
 <h2 class="card-title"><a href="{source_url}" target="_blank" rel="noopener noreferrer">{title} <span class="ext" aria-hidden="true">&#8599;</span></a></h2>
@@ -3337,6 +3430,8 @@ def render_archive_html(
                 _ARCHIVED_CARD_TMPL.format(
                     index=i,
                     category=html.escape(o["category"]),
+                    verification_badge=_verification_badge(o["verification"]),
+                    signup_badge=_signup_badge(o["signup"]),
                     source_url=html.escape(o["source_url"], quote=True),
                     title=html.escape(o["title"], quote=True),
                     amount=html.escape(o["amount"]),

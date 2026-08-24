@@ -33,6 +33,8 @@ def offer_text(**overrides):
         "expiry_date": None,
         "source_url": "https://example.com/offer",
         "verified_date": dt.date.today().isoformat(),
+        "verification": "social_proof",
+        "signup": "required",
     }
     data.update(overrides)
     lines = []

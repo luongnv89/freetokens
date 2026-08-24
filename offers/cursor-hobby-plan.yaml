@@ -7,3 +7,6 @@ amount: Free Hobby plan - limited Agent requests plus Composer access, no credit
 expiry_date: null
 source_url: https://cursor.com/pricing
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

@@ -8,3 +8,6 @@ amount: Free image generation with a Microsoft account - 15 fast creations/day p
 expiry_date: null
 source_url: https://www.microsoft.com/en-us/bing/features/bing-image-creator
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

@@ -37,6 +37,8 @@ VALID = {
     "expiry_date": None,
     "source_url": "https://example.com/offer",
     "verified_date": dt.date.today().isoformat(),
+    "verification": "social_proof",
+    "signup": "required",
 }
 
 
@@ -405,6 +407,26 @@ class RenderTests(unittest.TestCase):
         self.assertIn('aria-label="View details for Test Offer"', page)
         self.assertNotIn('href="https://example.com/offer"', page)
 
+    def test_card_renders_verification_and_signup_badges(self):
+        # Issue #97: every row carries its honesty tags.
+        page = self._page_with_one(verification="hand_verified", signup="none")
+        self.assertIn('badge badge-v-hand_verified"', page)
+        self.assertIn(">hand-verified</span>", page)
+        self.assertIn('badge-signup-none"', page)
+        self.assertIn(">no sign-up</span>", page)
+
+    def test_verification_level_must_be_from_enum(self):
+        for level in ("unverified", "social_proof", "hand_verified"):
+            build.validate_offer(dict(VALID, verification=level), "a.yaml")
+        with self.assertRaisesRegex(build.OfferError, "verification must be"):
+            build.validate_offer(dict(VALID, verification="checked"), "a.yaml")
+
+    def test_signup_mode_must_be_from_enum(self):
+        for mode in ("none", "required"):
+            build.validate_offer(dict(VALID, signup=mode), "a.yaml")
+        with self.assertRaisesRegex(build.OfferError, "signup must be"):
+            build.validate_offer(dict(VALID, signup="optional"), "a.yaml")
+
     def test_quote_in_title_cannot_break_aria_label_attribute(self):
         page = self._page_with_one(title='Say "hi"')
         self.assertIn('aria-label="View details for Say &quot;hi&quot;"', page)
@@ -540,7 +562,7 @@ class EmptyStateTests(unittest.TestCase):
     def test_empty_state_is_friendly_and_actionable(self):
         page = build.render_html(self._empty_index())
         self.assertIn("check back soon", page.lower())
-        self.assertIn("checked by hand", page.lower())
+        self.assertIn("screened against the provider", page.lower())
 
     def test_nonzero_offers_do_not_render_empty_state(self):
         offer = build.validate_offer(dict(VALID), "a.yaml")
@@ -597,11 +619,24 @@ class MastheadStatsTests(unittest.TestCase):
 
     def test_masthead_shows_total_ongoing_and_verified_counts(self):
         future = (dt.date.today() + dt.timedelta(days=30)).isoformat()
-        page = build.render_html(self._index([None, None, future]))
+        hand = build.validate_offer(
+            dict(VALID, title="Offer 0", expiry_date=None, verification="hand_verified"),
+            "a.yaml",
+        )
+        hand.setdefault("slug", "offer-0")
+        offers = [hand]
+        for i, expiry in enumerate((None, future), start=1):
+            offer = build.validate_offer(
+                dict(VALID, title=f"Offer {i}", expiry_date=expiry), "a.yaml"
+            )
+            offer.setdefault("slug", f"offer-{i}")
+            offers.append(offer)
+        page = build.render_html(build.build_index(offers))
         line = self._count_line(page)
         self.assertIn("<strong>3</strong> live offers", line)
         self.assertIn("<strong>2</strong> ongoing", line)
-        self.assertIn("<strong>3</strong> verified", line)
+        # #97: the third counter now means hand-verified by the maintainer.
+        self.assertIn("<strong>1</strong> hand-verified by the maintainer", line)
 
     def test_dated_expiries_are_not_counted_as_ongoing(self):
         page = build.render_html(self._index([None, "2026-12-31"]))
@@ -614,7 +649,7 @@ class MastheadStatsTests(unittest.TestCase):
         line = self._count_line(page)
         self.assertIn("<strong>0</strong> live offers", line)
         self.assertIn("<strong>0</strong> ongoing", line)
-        self.assertIn("<strong>0</strong> verified", line)
+        self.assertIn("<strong>0</strong> hand-verified by the maintainer", line)
 
     def test_stats_match_the_built_seed_catalog(self):
         offers = build.load_offers(str(REPO / "offers"))
@@ -625,8 +660,12 @@ class MastheadStatsTests(unittest.TestCase):
         self.assertIn(f"<strong>{index['count']}</strong> live offers", line)
         self.assertIn(f"<strong>{ongoing}</strong> ongoing", line)
         # Every published offer carries a non-null verified_date (validator
-        # enforces it), so the verified counter always equals the total.
-        self.assertIn(f"<strong>{index['count']}</strong> verified", line)
+        # enforces it); the hand-verified counter (#97) equals how many of
+        # the seed offers are tagged verification: hand_verified.
+        hand = sum(
+            1 for o in index["offers"] if o.get("verification") == "hand_verified"
+        )
+        self.assertIn(f"<strong>{hand}</strong> hand-verified by the maintainer", line)
 
 
 class FooterContactTests(unittest.TestCase):
@@ -1668,8 +1707,12 @@ class DetailPageTests(unittest.TestCase):
         self.assertIn("<h1>Header Me</h1>", header)
         self.assertIn("Test Provider", header)
         self.assertIn(
-            f'hand-verified on <time datetime="{VALID["verified_date"]}">', header
+            f'checked on <time datetime="{VALID["verified_date"]}">', header
         )
+        # #97: honesty tags render as badges in the tagline.
+        self.assertIn('badge badge-v-social_proof', header)
+        self.assertIn('badge-signup-required', header)
+        self.assertNotIn('badge-v-hand_verified', header)
         # Amount renders once, in the od-hero; the tagline must not repeat it.
         self.assertNotIn(VALID["amount"], header)
         self.assertIn('<time datetime="2026-12-31">Dec 31, 2026</time>', header)
@@ -3233,6 +3276,8 @@ class RetainAndFlagTests(unittest.TestCase):
                     "expiry_date": None,
                     "source_url": "https://example.com/x",
                     "verified_date": "2026-01-01",
+                    "verification": "social_proof",
+                    "signup": "required",
                 }
             ],
         }

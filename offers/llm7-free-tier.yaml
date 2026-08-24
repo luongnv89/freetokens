@@ -7,3 +7,6 @@ amount: Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 
 expiry_date: null
 source_url: https://docs.llm7.io/limits
 verified_date: 2026-08-24
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

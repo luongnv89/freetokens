@@ -7,3 +7,6 @@ amount: $300 in credits (90 days from signup)
 expiry_date: null
 source_url: https://cloud.google.com/free/docs/free-cloud-features
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

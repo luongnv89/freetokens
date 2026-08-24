@@ -7,3 +7,6 @@ amount: Free rate-limited API access (no credit card required)
 expiry_date: null
 source_url: https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

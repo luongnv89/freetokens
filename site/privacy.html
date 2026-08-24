@@ -6,7 +6,7 @@
 <meta name="description" content="How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage.">
 <title>Privacy Policy · Free AI Credits</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<link rel="alternate" type="application/rss+xml" title="Free AI Credits — hand-verified free AI credit offers" href="feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Free AI Credits — free AI credit offers, tagged by verification" href="feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -144,6 +144,25 @@ h1 {
   border: 1px solid var(--ink);
   border-radius: 999px;
   padding: 0.14rem 0.6rem;
+}
+
+/* Per-offer verification & sign-up badges (#97). Color never carries the
+   meaning alone: the word is always spelled out and the tooltip (title)
+   explains the level. Green = strongest claim (hand-checked / no account);
+   gray = weakest (unverified); plain ink = middle tiers. */
+.badge-v-hand_verified {
+  border-color: var(--green);
+  color: var(--ink);
+}
+
+.badge-v-unverified {
+  border-color: var(--gray);
+  color: var(--gray);
+}
+
+.badge-signup-none {
+  border-color: var(--green);
+  color: var(--ink);
 }
 
 /* Archive "Expired" badge (#26): the word itself carries the meaning —
@@ -450,7 +469,7 @@ a:focus-visible {
 </div>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-24T12:31:14Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-24T14:47:53Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="./">Offers</a><span aria-hidden="true">&middot;</span><a href="archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="privacy.html" aria-current="page">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 

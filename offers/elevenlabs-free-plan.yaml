@@ -7,3 +7,6 @@ amount: 10k credits/month (~10 min of audio)
 expiry_date: null
 source_url: https://elevenlabs.io/pricing
 verified_date: 2026-08-23
+# Verification & sign-up tags (#97): conservative defaults.
+verification: social_proof
+signup: required

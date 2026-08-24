@@ -12,7 +12,9 @@
     "amount",
     "expiry_date",
     "source_url",
-    "verified_date"
+    "verified_date",
+    "verification",
+    "signup"
   ],
   "properties": {
     "title": {
@@ -51,6 +53,16 @@
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
       "format": "date",
       "description": "Date the curator last verified the offer is live, YYYY-MM-DD. Not nullable."
+    },
+    "verification": {
+      "type": "string",
+      "enum": ["hand_verified", "social_proof", "unverified"],
+      "description": "How the listing was checked: hand_verified = confirmed by the maintainer on the official provider page; social_proof = corroborated by official-site info plus social proof, not personally verified; unverified = only social-media proofs, no official-website confirmation."
+    },
+    "signup": {
+      "type": "string",
+      "enum": ["none", "required"],
+      "description": "Whether claiming needs an account: none = claimable without sign-up; required = needs a (free) account."
     }
   }
 }
