@@ -7,14 +7,14 @@
  *
  *   {visible, status, pressed, inputValue, emptyHidden, historyUrls,
  *    locationSearch, events, detailLinks, perf_ms?, preventDefaults?,
- *    trafficHidden?, trafficToday?, trafficPeriod?}
+ *    trafficHidden?, trafficToday?, trafficPeriod?, statsUrls?}
  *
  * Clicks bubble along parentNode chains, so the delegated grid listener
  * behind `offer_click` attribution is exercised like a real click.
  *
  * Live traffic scenarios (#62) add scenario.stats_mode ("ok", "http_error",
  * "network_error", "bad_json", "none") plus optional stats_payloads keyed by
- * counter window ("today" when start===end, else "period"); the
+ * counter window ("today" for a one-day span, else "period"); the
  * {"op":"settle"} step drains microtasks so
  * pending fetch promise chains resolve deterministically.
  *
@@ -401,17 +401,29 @@ async function runScenario(scenario) {
   }
 
   // Live traffic (#62): controllable fetch stub routed by counter date range.
-  // start===end means "today"; any other range is the 90-day period.
+  // GoatCounter's `end` is an exclusive midnight boundary, so the today
+  // window spans exactly one day (today -> tomorrow) rather than collapsing
+  // onto a single date (#102); anything wider is the 90-day period. Every
+  // requested URL is recorded so tests can assert the window shape itself.
+  const statsUrls = [];
   const statsMode = scenario.stats_mode || "none";
   if (statsMode !== "none") {
     sandbox.fetch = (url) => {
+      statsUrls.push(String(url));
       if (statsMode === "network_error") {
         return Promise.reject(new TypeError("NetworkError"));
       }
       const start = /[?&]start=([^&]+)/.exec(url);
       const end = /[?&]end=([^&]+)/.exec(url);
-      const key =
-        start && end && start[1] === end[1] ? "today" : "period";
+      const spanDays =
+        start && end
+          ? Math.round(
+              (Date.parse(end[1] + "T00:00:00Z") -
+                Date.parse(start[1] + "T00:00:00Z")) /
+                86400000
+            )
+          : 0;
+      const key = spanDays === 1 ? "today" : "period";
       const payloads = scenario.stats_payloads || {};
       const body = Object.prototype.hasOwnProperty.call(payloads, key)
         ? payloads[key]
@@ -482,6 +494,7 @@ async function runScenario(scenario) {
         trafficHidden: trafficBox.hidden,
         trafficToday: trafficToday.textContent,
         trafficPeriod: trafficPeriod.textContent,
+        statsUrls: statsUrls.slice(),
       },
       extra || {}
     );

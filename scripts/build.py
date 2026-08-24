@@ -3585,8 +3585,15 @@ __FT_STATS_MODULE__
 # public visitor-counter route,
 # GET <site>/counter/TOTAL.json?start=<YYYY-MM-DD>&end=<YYYY-MM-DD>, which
 # returns {"count": "<formatted visitors>"} and requires "Allow adding
-# visitor counts on your website" to be enabled in the dashboard. The 90-day
-# window is fixed copy, not a provider retention claim.
+# visitor counts on your website" to be enabled in the dashboard. `end` is
+# an EXCLUSIVE midnight boundary, so every window ends on tomorrow (#102).
+# The 90-day window is fixed copy, not a provider retention claim.
+#
+# Freshness is capped by the provider, not by us (#102): responses are CDN
+# cached for ~4h keyed on (path, start, end). Unknown query params are
+# stripped from that key and a Cache-Control request header fails CORS, so
+# the cache cannot be bypassed from the page -- displayed figures can lag
+# the source by hours. Do not add a cache-buster param; it is inert.
 _STATS_JS_MODULE = r"""
   // --- Live traffic strip (#62) -------------------------------------------
   var STATS_SITE = __FT_STATS_SITE__;
@@ -3600,9 +3607,14 @@ _STATS_JS_MODULE = r"""
   }
 
   function ftCounterUrl(days) {
-    // days=0 collapses start/end onto today; 90 gives the trailing window.
-    var end = new Date();
-    var start = new Date(end.getTime() - days * 86400000);
+    // `days` counts calendar days INCLUDING today: 1 is today alone, 90 is
+    // the trailing 90 days. GoatCounter reads `end` as an exclusive
+    // midnight boundary, so the window has to end on tomorrow to contain
+    // anything recorded today -- start and end on one date describes a
+    // zero-length range and always returned 0 (#102).
+    var now = new Date();
+    var end = new Date(now.getTime() + 86400000);
+    var start = new Date(now.getTime() - (days - 1) * 86400000);
     return (
       STATS_SITE +
       "/counter/TOTAL.json?start=" + ftIsoDate(start) +
@@ -3638,7 +3650,7 @@ _STATS_JS_MODULE = r"""
     var box = document.getElementById("__FT_STRIP_ID__");
     if (!box || typeof window.fetch !== "function") { return; }
     Promise.all([
-      window.fetch(ftCounterUrl(0)),
+      window.fetch(ftCounterUrl(1)),
       window.fetch(ftCounterUrl(90))
     ]).then(function (responses) {
       if (!responses[0].ok || !responses[1].ok) { return null; }
