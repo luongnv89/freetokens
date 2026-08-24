@@ -1,0 +1,16 @@
+{
+  "summary": "Ollama's $0 Free plan includes access to cloud models. Cloud usage is light on Free, with session limits resetting every 5 hours and weekly limits resetting every 7 days.",
+  "claim_steps": [
+    "Create or sign in to an Ollama account.",
+    "Use a cloud model through Ollama, or create an API key for direct cloud API access.",
+    "Stay within the Free plan's session, weekly, and one-concurrent-model limits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://ollama.com/pricing",
+      "title": "Pricing | Ollama",
+      "text": "The $0 Free plan includes access to cloud models. Free cloud usage is light, with session limits resetting every 5 hours and weekly limits resetting every 7 days."
+    }
+  ]
+}

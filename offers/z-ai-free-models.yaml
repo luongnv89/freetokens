@@ -1,0 +1,9 @@
+# Verified 2026-08-24 against https://docs.z.ai/guides/overview/pricing.md
+# ("GLM-4.7-Flash", "GLM-4.5-Flash", and "GLM-4.6V-Flash" are listed with Free prices.)
+title: Z AI Free Model APIs
+provider: Z AI (Zhipu AI)
+category: api_provider
+amount: Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash
+expiry_date: null
+source_url: https://docs.z.ai/guides/overview/pricing.md
+verified_date: 2026-08-24

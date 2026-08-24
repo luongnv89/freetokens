@@ -1,0 +1,16 @@
+{
+  "summary": "Aion Labs' Free tier is the default on signup and allows 15 requests per minute with 20,000 tokens per minute and a 20,000-token daily limit.",
+  "claim_steps": [
+    "Create an Aion Labs account; the Free tier is the default on signup.",
+    "Create an API key in the dashboard.",
+    "Use the OpenAI-compatible API within 15 requests per minute and 20,000 tokens per day."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.aionlabs.ai/docs/rate-limits/",
+      "title": "Rate Limits | Aion Labs Docs",
+      "text": "Free | Default on signup; Free | 15 requests per minute; Free | 20,000 tokens per minute and 20,000 daily tokens."
+    }
+  ]
+}

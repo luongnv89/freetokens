@@ -1,0 +1,16 @@
+{
+  "summary": "Every Hugging Face free user receives $0.10 in monthly credits for Inference Providers, subject to change. Credits apply when requests are routed through Hugging Face.",
+  "claim_steps": [
+    "Create or sign in to a Hugging Face account and create an access token.",
+    "Route requests through Hugging Face Inference Providers so the monthly credits apply.",
+    "Use the included credits before enabling additional pay-as-you-go usage."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://huggingface.co/docs/inference-providers/pricing",
+      "title": "Pricing and Billing | Hugging Face Inference Providers",
+      "text": "Free Users receive $0.10 in monthly credits that can be spent on Inference Providers."
+    }
+  ]
+}
