@@ -1265,9 +1265,9 @@ _PROOF_LINK_LABELS = {
 }
 
 _FALLBACK_STEPS = (
-    "<li>Open the official offer page.</li>"
-    "<li>Create a free account or sign in.</li>"
-    "<li>The free credit applies per the terms shown there.</li>"
+    "Open the official offer page.",
+    "Create a free account or sign in.",
+    "The free credit applies per the terms shown there.",
 )
 
 
@@ -1320,39 +1320,83 @@ def _proof_card(entry: dict, rel_prefix: str = "") -> str:
     )
 
 
-def _detail_sections(detail: dict | None, rel_prefix: str = "") -> str:
-    """Shared summary/claim-steps/social-proof partial for offer pages.
+def _claim_step_parts(steps, slug: str) -> tuple[str, str]:
+    """Render claim steps as a checkable runbook checklist.
+
+    Each step is a real checkbox + label pair so the guide works with
+    zero JS; the inline checklist runtime (see _CHECKLIST_JS) only adds
+    the progress readout and per-offer persistence. ``slug`` namespaces
+    ids and the localStorage key so sibling pages never collide.
+    Returns ``(progress_readout_html, claim_list_html)``.
+    """
+    key = html.escape(slug or "offer", quote=True)
+    items = []
+    for i, step in enumerate(steps, 1):
+        items.append(
+            f'<li class="claim-step">'
+            f'<input type="checkbox" id="ft-step-{key}-{i}">'
+            f'<label for="ft-step-{key}-{i}">'
+            f'<span class="step-num" aria-hidden="true">'
+            f'<span class="num">{i}</span>'
+            f'<span class="tick">&#10003;</span></span>'
+            f'<span class="step-text">{html.escape(step)}</span>'
+            f"</label></li>"
+        )
+    progress = (
+        f'<p class="steps-progress">'
+        f'<span class="progress-readout" id="ft-progress-readout" '
+        f'role="status" aria-live="polite">{len(steps)}-step guide</span>'
+        f'<span class="progress-track" aria-hidden="true">'
+        f'<span class="progress-fill"></span></span></p>'
+    )
+    return progress, f'<ol class="claim-list" role="list">{"".join(items)}</ol>'
+
+
+def _proof_section(detail: dict | None, rel_prefix: str = "") -> str:
+    """Social-proof section; empty when the offer ships no proof entries."""
+    detail = detail or {}
+    if not detail.get("social_proof"):
+        return ""
+    cards = "".join(_proof_card(e, rel_prefix) for e in detail["social_proof"])
+    return f'<section class="od-proof"><h2>Social proof</h2>{cards}</section>'
+
+
+def _detail_sections(detail: dict | None, rel_prefix: str = "", slug: str = "") -> str:
+    """Shared summary/claim-steps partial for offer pages.
 
     Consumed by render_offer_html; heading levels assume a page context
     (h2 sections under the page's h1). Without a detail document the
-    fallback claim steps apply and summary/proof sections stay absent,
+    fallback claim steps apply and the summary section stays absent,
     matching what dialogs rendered for such offers. ``rel_prefix`` keeps
-    local screenshot srcs depth-aware (see _resolve_asset).
+    local screenshot srcs depth-aware (see _resolve_asset). ``slug``
+    namespaces the checklist ids/localStorage key. Social proof renders
+    separately (see _proof_section) so the page can slot the claim CTA
+    directly after the checklist.
     """
     detail = detail or {}
     summary_html = ""
     if detail.get("summary"):
-        summary_html = f'<p class="od-summary">{html.escape(detail["summary"])}</p>'
-    steps_html = _FALLBACK_STEPS
-    if detail.get("claim_steps"):
-        steps_html = "".join(
-            f"<li>{html.escape(step)}</li>" for step in detail["claim_steps"]
+        summary_html = (
+            '<section class="od-brief"><h2>The offer</h2>'
+            f'<p class="od-summary">{html.escape(detail["summary"])}</p></section>'
         )
-    proof_html = ""
-    if detail.get("social_proof"):
-        cards = "".join(_proof_card(e, rel_prefix) for e in detail["social_proof"])
-        proof_html = f'<section class="od-proof"><h2>Social proof</h2>{cards}</section>'
+    progress_html, steps_list = _claim_step_parts(
+        detail.get("claim_steps") or _FALLBACK_STEPS, slug
+    )
     return (
         f"{summary_html}\n"
-        f'<section class="od-steps"><h2>How to claim</h2><ol>{steps_html}</ol></section>\n'
-        f"{proof_html}"
+        f'<section class="od-steps" data-ft-checklist '
+        f'data-ft-offer-id="{html.escape(slug or "offer", quote=True)}">\n'
+        f'<header class="od-steps-head"><h2>How to claim</h2>{progress_html}</header>\n'
+        f"{steps_list}\n"
+        f"</section>"
     )
 
 
 _OFFER_HEADER = """<header class="masthead">
 <p class="kicker">free ai credits &middot; {category_label}</p>
 <h1>{title}</h1>
-<p class="tagline">{amount} from <strong>{provider}</strong>, hand-verified on <time datetime="{verified_date}">{verified_display}</time>.</p>
+<p class="tagline">From <strong>{provider}</strong>, hand-verified on <time datetime="{verified_date}">{verified_display}</time>.</p>
 <p class="count">{status}</p>
 </header>"""
 
@@ -1480,6 +1524,75 @@ _SHARE_JS = """<script>
 </script>"""
 
 
+# Checklist runtime for the claim runbook. The steps are real checkboxes,
+# so ticking/striking works with JS disabled; this script only adds the
+# live "n/total done" readout, the progress fill, and per-offer
+# persistence in localStorage. Nothing leaves the device — no analytics
+# event, no network — so it needs no consent gate. Storage failures
+# (private mode, quota) degrade to session-only state silently.
+_CHECKLIST_JS = """<script>
+(function () {
+  "use strict";
+  var OFFER_ID = __FT_OFFER_ID__;
+  var KEY = "ft-claim-" + OFFER_ID;
+  function ftInit() {
+    var root = document.querySelector(
+      '[data-ft-checklist][data-ft-offer-id="' + OFFER_ID + '"]'
+    );
+    if (!root) { return; }
+    var boxes = root.querySelectorAll(".claim-step input[type=checkbox]");
+    var total = boxes.length;
+    var readout = document.getElementById("ft-progress-readout");
+    var fill = root.querySelector(".progress-fill");
+    if (!total) { return; }
+    function savedDone() {
+      try {
+        var raw = window.localStorage.getItem(KEY);
+        var arr = raw ? JSON.parse(raw) : null;
+        return Object.prototype.toString.call(arr) === "[object Array]" ? arr : [];
+      } catch (err) {
+        return [];
+      }
+    }
+    function persist() {
+      var done = [];
+      for (var i = 0; i < total; i++) {
+        if (boxes[i].checked) { done.push(i); }
+      }
+      try {
+        window.localStorage.setItem(KEY, JSON.stringify(done));
+      } catch (err) {}
+    }
+    function render() {
+      var done = 0;
+      for (var i = 0; i < total; i++) {
+        if (boxes[i].checked) { done += 1; }
+      }
+      if (readout) {
+        readout.textContent =
+          done === 0 ? total + "-step guide" : done + "/" + total + " done";
+      }
+      if (fill) { fill.style.transform = "scaleX(" + done / total + ")"; }
+    }
+    var prior = savedDone();
+    for (var j = 0; j < total; j++) {
+      if (prior.indexOf(j) !== -1) { boxes[j].checked = true; }
+      boxes[j].addEventListener("change", function () {
+        render();
+        persist();
+      });
+    }
+    render();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ftInit);
+  } else {
+    ftInit();
+  }
+})();
+</script>"""
+
+
 def render_offer_html(
     offer: dict,
     detail: dict | None,
@@ -1546,14 +1659,25 @@ def render_offer_html(
     content = (
         '<article class="offer-detail">\n'
         '<p class="od-back"><a href="../">&larr; All offers</a></p>\n'
+        '<div class="od-hero">\n'
         f'<p class="amount">{html.escape(offer["amount"])}</p>\n'
-        f"{_detail_sections(detail, rel_prefix='../')}\n"
+        f'<p class="od-statusline mono">{status}'
+        f' <span class="sep" aria-hidden="true">&middot;</span>'
+        f' hand-verified <time datetime="'
+        f'{html.escape(offer["verified_date"], quote=True)}">'
+        f"{_human_date(offer['verified_date'])}</time></p>\n"
+        "</div>\n"
+        f"{_detail_sections(detail, rel_prefix='../', slug=offer['slug'])}\n"
         f"{cta}\n"
+        f"{_proof_section(detail, rel_prefix='../')}\n"
         f"{_share_section(page_url, offer['title'], offer['slug'])}\n"
         "</article>"
     )
     share_js = _SHARE_JS.replace("__FT_OFFER_ID__", json.dumps(offer["slug"])).replace(
         "__FT_PAGE_URL__", json.dumps(page_url)
+    )
+    checklist_js = _CHECKLIST_JS.replace(
+        "__FT_OFFER_ID__", json.dumps(offer["slug"])
     )
     return _page_shell(
         title=html.escape(f"{offer['title']} · Free AI Credits"),
@@ -1576,7 +1700,7 @@ def render_offer_html(
         measurement_id=measurement_id,
         depth=1,
         stats_site=stats_site,
-        extra_js=share_js,
+        extra_js=share_js + checklist_js,
     )
 
 
@@ -2012,17 +2136,21 @@ _DETAIL_CSS = """
   outline-offset: 3px;
 }
 
-/* ---- Offer detail page --------------------------------------------------- */
+/* ---- Offer detail page: the claim runbook --------------------------------
+   Hero amount up top, mono status line, then a checkable step-by-step
+   guide on a hairline rail. Green stays highlight-only (lines, dots,
+   borders, fills of the progress track); solid fills are ink-on-paper,
+   matching every other operable control on the site. */
 
 .offer-detail {
-  max-width: 42rem;
+  max-width: 46rem;
   margin: 0 auto;
 }
 
 .od-back {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.78rem;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.75rem;
 }
 
 .od-back a {
@@ -2038,29 +2166,227 @@ _DETAIL_CSS = """
   text-decoration-thickness: 3px;
 }
 
+/* The amount is the one thing a visitor came for — give it hero weight. */
+
 .offer-detail .amount {
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  margin: 0.75rem 0 0;
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
-.od-summary { margin: 1.25rem 0 0; }
+.od-statusline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.45rem;
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin: 0.9rem 0 0;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.od-statusline .sep { color: var(--hairline); }
+
+/* Section labels: small mono furniture with the home-page green dash. */
 
 .offer-detail section h2 {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.72rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--gray);
-  margin: 1.5rem 0 0.35rem;
+  margin: 2rem 0 0.6rem;
 }
 
-.od-steps ol,
-.od-proof ul {
-  margin: 0.35rem 0;
-  padding-left: 1.25rem;
+.offer-detail section h2::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 3px;
+  background: var(--green);
+  margin-right: 0.6rem;
+  vertical-align: middle;
 }
 
-.od-steps li { margin: 0.3rem 0; }
+.od-brief p {
+  margin: 0.35rem 0 0;
+  max-width: 42rem;
+}
+
+/* Steps head: label left, live progress readout right. */
+
+.od-steps-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+}
+
+.od-steps-head h2 { margin: 2rem 0 0.6rem; }
+
+.steps-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 2rem 0 0.6rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--gray);
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  width: clamp(3.5rem, 12vw, 6rem);
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  /* Darker than --green on purpose: keeps >=3:1 against the track
+     (#ebebeb) and page white; the global token stays for dashes/ticks. */
+  background: #15803d;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* The checklist itself: real checkboxes (JS-free ticking), a rail that
+   threads the number squares, and strike-through on completed steps.
+   The input is visually hidden but focusable; focus and checked states
+   are drawn on the sibling label's box so keyboard users get the same
+   picture as pointer users. */
+
+.claim-list {
+  --step-box: 2.1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.claim-list::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--step-box) / 2);
+  top: calc(var(--step-box) / 2 + 0.55rem);
+  bottom: calc(var(--step-box) / 2 + 0.55rem);
+  width: 1px;
+  background: var(--hairline);
+  transform: translateX(-50%);
+}
+
+.claim-step {
+  position: relative;
+  padding-block: 0.55rem;
+}
+
+.claim-step input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  margin: 0;
+}
+
+/* The label is the grid: number box left, text right. The checkbox input
+   itself is visually hidden; the label carries the whole interaction. */
+.claim-step label {
+  display: grid;
+  grid-template-columns: var(--step-box) minmax(0, 1fr);
+  column-gap: 0.95rem;
+  align-items: start;
+  cursor: pointer;
+}
+
+.step-num {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--step-box);
+  height: var(--step-box);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  background: var(--paper);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  user-select: none;
+}
+
+.step-num > span {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+}
+
+.step-num .tick {
+  opacity: 0;
+  transform: scale(0.4);
+}
+
+.claim-step label:hover .step-num { background: rgba(0, 0, 0, 0.05); }
+
+.claim-step input:focus-visible + label .step-num {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.claim-step input:checked + label .step-num {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.claim-step input:checked + label .num { opacity: 0; }
+
+.claim-step input:checked + label .tick {
+  opacity: 1;
+  transform: scale(1);
+  color: var(--paper);
+}
+
+.step-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  padding-top: 0.32rem;
+  overflow-wrap: anywhere;
+}
+
+.claim-step input:checked + label .step-text {
+  color: var(--gray);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: rgba(0, 0, 0, 0.35);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .progress-fill { transition: transform 0.25s ease; }
+
+  .step-num,
+  .step-num > span {
+    transition: background-color 0.15s ease, opacity 0.15s ease,
+      transform 0.18s ease;
+  }
+}
+
+@media (pointer: coarse) {
+  .claim-step { padding-block: 0.7rem; }
+
+  /* li padding is not part of the hit area; pad the label itself so the
+     clickable row reaches the 44px touch minimum on single-line steps. */
+  .claim-step label { padding-block: 0.35rem; }
+}
 
 .proof-card {
   border: 1px solid var(--hairline);
@@ -2110,17 +2436,26 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 
 .od-cta {
   display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.55rem 1.15rem;
+  margin-top: 2rem;
+  padding: 0.7rem 1.4rem;
   border-radius: 999px;
   background: var(--ink);
   color: var(--paper);
   text-decoration: none;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.82rem;
+  font-size: 0.86rem;
+  font-weight: 600;
 }
 
-.od-cta:hover { text-decoration: underline; text-underline-offset: 3px; }
+.od-cta:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.od-cta span[aria-hidden] { display: inline-block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .od-cta span[aria-hidden] { transition: transform 0.15s ease; }
+
+  .od-cta:hover span[aria-hidden] { transform: translate(2px, -2px); }
+}
 
 .od-cta:focus-visible {
   outline: 3px solid var(--ink);

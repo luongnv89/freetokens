@@ -5,6 +5,14 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Claim runbook on offer detail pages:** the detail page is redesigned
+  around the task — hero amount with a mono status line, cheatsheet-style
+  section labels, and "How to claim" rendered as a checkable step-by-step
+  guide (numbered boxes on a hairline rail, strike-through on completed
+  steps) with a live progress readout. Steps are real checkboxes, so
+  ticking works with JS off; a small inline script adds the progress bar
+  and persists check state per offer in localStorage (device-only, no
+  tracking). The claim CTA now sits directly after the checklist.
 - **GDPR cookie consent for everyone (#72):** the consent banner now shows
   to all first-time visitors (the EU-timezone heuristic is gone), tracking
   stays completely off until an explicit allow, and a persistent footer

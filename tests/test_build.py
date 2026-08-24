@@ -1603,11 +1603,34 @@ class DetailPageTests(unittest.TestCase):
         seg = page[start : page.index("</article>", start)]
         self.assertIn("$10 in credits", seg)
         self.assertIn("<h2>How to claim</h2>", seg)
-        self.assertIn("<ol><li>Sign up.</li><li>Claim credits.</li></ol>", seg)
+        # Steps render as a checkable runbook: one checkbox per step,
+        # each text wrapped in .step-text, plus a progress readout.
+        self.assertIn('<section class="od-steps" data-ft-checklist', seg)
+        self.assertIn('<ol class="claim-list" role="list">', seg)
+        self.assertEqual(seg.count('type="checkbox"'), 2)
+        self.assertIn('<span class="step-text">Sign up.</span>', seg)
+        self.assertIn('<span class="step-text">Claim credits.</span>', seg)
+        self.assertIn(">2-step guide</span>", seg)
+        # Per-offer persistence: the runtime keys storage by offer slug,
+        # so sibling pages never collide.
+        self.assertIn('var KEY = "ft-claim-" + OFFER_ID;', page)
         self.assertIn("Longer description here.", seg)
         self.assertIn('<section class="od-proof"><h2>Social proof</h2>', seg)
         self.assertIn("@devone", seg)
         self.assertIn("View post on X", seg)
+
+    def test_runbook_css_hits_touch_minimum_and_progress_contrast(self):
+        # Touch: the label itself must grow on coarse pointers — li padding
+        # alone is not clickable. Contrast: the progress fill is scoped to a
+        # darker green (>=3:1 vs the light track) without touching --green.
+        site = self._two_offer_site()
+        page = (site / "offers" / "alpha.html").read_text(encoding="utf-8")
+        coarse = page[page.index(".claim-step { padding-block: 0.7rem; }") :]
+        self.assertIn(".claim-step label { padding-block: 0.35rem; }", coarse[:400])
+        fill_start = page.index(".progress-fill {")
+        fill = page[fill_start : page.index("}", fill_start)]
+        self.assertIn("background: #15803d;", fill)
+        self.assertNotIn("var(--green)", fill)
 
     def test_page_header_carries_core_fields_and_status(self):
         site = self._build(
@@ -1628,6 +1651,8 @@ class DetailPageTests(unittest.TestCase):
         self.assertIn(
             f'hand-verified on <time datetime="{VALID["verified_date"]}">', header
         )
+        # Amount renders once, in the od-hero; the tagline must not repeat it.
+        self.assertNotIn(VALID["amount"], header)
         self.assertIn('<time datetime="2026-12-31">Dec 31, 2026</time>', header)
 
     def test_page_without_detail_file_falls_back_like_dialogs_did(self):
