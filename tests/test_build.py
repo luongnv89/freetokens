@@ -247,6 +247,24 @@ class BuildOutputTests(unittest.TestCase):
         first = re.search(r'data-ft-offer-id="([^"]+)"', page)
         self.assertEqual(first.group(1), "new")
 
+    def test_home_title_links_open_matching_detail_pages(self):
+        offers = [
+            self._dated_offer("alpha", "2026-01-01"),
+            self._dated_offer("beta", "2026-08-21"),
+        ]
+        offers[0]["source_url"] = "https://provider.example/alpha"
+        offers[1]["source_url"] = "https://provider.example/beta"
+        page = build.render_html(build.build_index(offers))
+        title_links = re.findall(
+            r'<h2 class="card-title"><a href="([^"]+)"[^>]*>([^<]+)</a></h2>',
+            page,
+        )
+        self.assertEqual(
+            title_links,
+            [("offers/beta.html", "Offer beta"), ("offers/alpha.html", "Offer alpha")],
+        )
+        self.assertNotIn("https://provider.example/", " ".join(href for href, _ in title_links))
+
     def test_html_escapes_titles(self):
         with tempfile.TemporaryDirectory() as tmp:
             offers_dir = self._write_offers(tmp)
