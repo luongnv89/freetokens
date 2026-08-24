@@ -1,0 +1,51 @@
+/* Design-system tokens (issue #121, Sprint 2 Task 2.2).
+   The Python builder's hand-rolled palette ported to Tailwind v4 CSS-first
+   tokens (@theme). Every value below is load-bearing and transferred
+   numerically unchanged from scripts/build.py `_CSS` — the WCAG contrast
+   notes there were measured against exactly these hexes.
+
+   Tag hues: eleven values, seven hues — the repeats are the point. Hue
+   encodes the *claim*, not the value: green (#15803d) is "strongest claim"
+   (hand-verified; no sign-up wall) and the muted gray (#5f6673) is "weakest,
+   treat with care" (unverified; sign-up required; expired). The five
+   categories make no claim and own the five hues nothing else uses — which
+   is why `coding` is teal #0e7490 and deliberately NOT green: green already
+   signals "strongest claim" on the verification/sign-up tags beside it.
+   social_proof is navy #1e3a5f so no hue collides with --color-ink, the
+   .badge fallback for an unknown value (TagHueDistinctnessTests holds this
+   line on the Python side; design-tokens.test.mjs mirrors it here).
+
+   Each hue clears WCAG AA (>= 4.5:1) in BOTH painted states a tag has: as
+   text over its 7% tint at rest, and under white text when filled on
+   hover/active — asserted per token in tests/design-tokens.test.mjs.
+
+   Spacing stays on Tailwind's default scale: the design speaks in plain rem
+   values that the scale already expresses, so no custom spacing tokens.
+*/
+@theme {
+  /* Base palette */
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-muted: #6b7280;
+  --color-accent: #22c55e;
+  --color-hairline: rgba(0, 0, 0, 0.16);
+
+  /* Typography */
+  --font-sans: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Tag hues — category family (what the credits BUY) */
+  --color-tag-api-provider: #3538cd;
+  --color-tag-coding: #0e7490;
+  --color-tag-image: #955906;
+  --color-tag-voice: #7e22ce;
+  --color-tag-video: #be123c;
+
+  /* Tag hues — verification + sign-up families (how CHECKED / how walled) */
+  --color-tag-hand-verified: #15803d;
+  --color-tag-social-proof: #1e3a5f;
+  --color-tag-unverified: #5f6673;
+  --color-tag-none: #15803d;
+  --color-tag-required: #5f6673;
+  --color-tag-expired: #5f6673;
+}

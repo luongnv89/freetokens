@@ -1,9 +1,13 @@
+/* Legacy variable names kept so every rule below stays byte-identical to
+   build.py `_CSS` (issue #119 parity contract). The values are no longer
+   defined here — they resolve against the Tailwind @theme tokens in
+   tokens.css (issue #121), which are the single source of truth. */
 :root {
-  --ink: #000000;
-  --paper: #ffffff;
-  --gray: #6b7280;
-  --green: #22c55e;
-  --hairline: rgba(0, 0, 0, 0.16);
+  --ink: var(--color-ink);
+  --paper: var(--color-paper);
+  --gray: var(--color-muted);
+  --green: var(--color-accent);
+  --hairline: var(--color-hairline);
 
   /* Tag hues. Each clears WCAG AA in BOTH painted states a tag has: as text
      over the 7% tint it sits on at rest, and under white text when filled on
@@ -28,23 +32,23 @@
      only ever occur ACROSS families, and a row renders one tag per family in
      a fixed slot, so two greens on one row never compete to mean the same
      thing. The word and the glyph stay distinct throughout, so nothing here
-     is carried by colour alone.
+   is carried by colour alone.
 
-     No hue may equal --ink: that is the `.badge` fallback for an unknown
-     value, so a tag colliding with it would make a missing token look
-     exactly like a real tag. `social_proof` was that collision until it
-     became navy; TagHueDistinctnessTests holds the line. */
-  --t-api_provider: #3538cd;
-  --t-coding: #0e7490;
-  --t-image: #955906;
-  --t-voice: #7e22ce;
-  --t-video: #be123c;
-  --t-hand_verified: #15803d;
-  --t-social_proof: #1e3a5f;
-  --t-unverified: #5f6673;
-  --t-none: #15803d;
-  --t-required: #5f6673;
-  --t-expired: #5f6673;
+      No hue may equal --ink: that is the `.badge` fallback for an unknown
+      value, so a tag colliding with it would make a missing token look
+      exactly like a real tag. `social_proof` was that collision until it
+      became navy; design-tokens.test.mjs holds the line. */
+  --t-api_provider: var(--color-tag-api-provider);
+  --t-coding: var(--color-tag-coding);
+  --t-image: var(--color-tag-image);
+  --t-voice: var(--color-tag-voice);
+  --t-video: var(--color-tag-video);
+  --t-hand_verified: var(--color-tag-hand-verified);
+  --t-social_proof: var(--color-tag-social-proof);
+  --t-unverified: var(--color-tag-unverified);
+  --t-none: var(--color-tag-none);
+  --t-required: var(--color-tag-required);
+  --t-expired: var(--color-tag-expired);
 }
 
 * { box-sizing: border-box; }
