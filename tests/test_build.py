@@ -395,9 +395,16 @@ class RenderTests(unittest.TestCase):
         self.assertEqual(build._human_date("2026-12-31"), "Dec 31, 2026")
         self.assertEqual(build._human_date("2026-01-05"), "Jan 5, 2026")
 
-    def test_category_rendered_as_badge(self):
+    def test_category_rendered_as_a_clickable_hued_tag(self):
         page = self._page_with_one(category="voice")
-        self.assertIn('<span class="badge">voice</span>', page)
+        self.assertIn('class="badge badge-category badge-category-voice"', page)
+        self.assertIn('data-ft-tag="category"', page)
+        self.assertIn('data-ft-tag-value="voice"', page)
+        self.assertIn("<span>Voice</span>", page)
+        # Colour never travels alone: a glyph and the spelled-out word ride
+        # with it, and the hue is declared as a token, not hard-coded here.
+        self.assertIn('<use href="#ti-voice"/>', page)
+        self.assertIn(".badge-category-voice { --tag-hue: var(--t-voice); }", page)
 
     def test_title_link_targets_detail_page_not_provider(self):
         # Issue #95: the home-page title must open the post detail page,
@@ -410,10 +417,55 @@ class RenderTests(unittest.TestCase):
     def test_card_renders_verification_and_signup_badges(self):
         # Issue #97: every row carries its honesty tags.
         page = self._page_with_one(verification="hand_verified", signup="none")
-        self.assertIn('badge badge-v-hand_verified"', page)
-        self.assertIn(">hand-verified</span>", page)
-        self.assertIn('badge-signup-none"', page)
-        self.assertIn(">no sign-up</span>", page)
+        self.assertIn("badge-verification-hand_verified", page)
+        self.assertIn("<span>hand-verified</span>", page)
+        self.assertIn("badge-signup-none", page)
+        self.assertIn("<span>no sign-up</span>", page)
+
+    def test_every_tag_family_is_a_filter_control(self):
+        # All three tag families narrow the listing on click, so each must be
+        # a real button carrying its dimension, its value, and a pressed state.
+        page = self._page_with_one(
+            category="voice", verification="hand_verified", signup="none"
+        )
+        for dimension, value in (
+            ("category", "voice"),
+            ("verification", "hand_verified"),
+            ("signup", "none"),
+        ):
+            with self.subTest(dimension=dimension):
+                self.assertIn(
+                    f'<button type="button" class="badge badge-{dimension} '
+                    f'badge-{dimension}-{value}" data-ft-tag="{dimension}" '
+                    f'data-ft-tag-value="{value}" aria-pressed="false"',
+                    page,
+                )
+
+    def test_row_exposes_every_tag_dimension_for_filtering(self):
+        page = self._page_with_one(
+            category="voice", verification="unverified", signup="required"
+        )
+        self.assertIn('data-category="voice"', page)
+        self.assertIn('data-verification="unverified"', page)
+        self.assertIn('data-signup="required"', page)
+
+    def test_every_tag_button_has_an_accessible_name_beyond_its_word(self):
+        # "image" alone is not a button name; the label must say what the
+        # control does, and the tooltip must still explain the tier.
+        page = self._page_with_one(verification="social_proof")
+        self.assertIn('aria-label="Filter by social proof"', page)
+        self.assertIn(
+            f'title="{build.VERIFICATION_TITLES["social_proof"]}"', page
+        )
+
+    def test_glyphs_ship_once_as_a_sprite_not_inline_per_tag(self):
+        # ~120 tags per page: inlining the paths at each site cost +70 KB of
+        # HTML for no visual difference (PRD 5.1 Lighthouse budget).
+        offers = build.load_offers(str(REPO / "offers"))
+        page = self._render(offers)
+        for value in build.TAG_ICONS:
+            self.assertEqual(page.count(f'<symbol id="ti-{value}"'), 1)
+        self.assertGreater(page.count("<use href=\"#ti-"), page.count("<symbol"))
 
     def test_verification_level_must_be_from_enum(self):
         for level in ("unverified", "social_proof", "hand_verified"):
@@ -438,7 +490,7 @@ class RenderTests(unittest.TestCase):
         for offer in offers:
             self.assertIn(offer["title"], page)
             self.assertIn(offer["provider"], page)
-            self.assertIn(f'class="badge">{offer["category"]}</span>', page)
+            self.assertIn(f'badge-category-{offer["category"]}"', page)
         self.assertEqual(page.count("<article"), len(offers))
 
     def test_verified_date_on_every_card(self):
@@ -1224,6 +1276,105 @@ class LiveTrafficPrivacyTests(unittest.TestCase):
         self.assertIn("keep working exactly the same", page)
 
 
+class TagContrastTests(unittest.TestCase):
+    """WCAG AA over the two backgrounds a tag is actually painted on.
+
+    Tag hues are the one place on the site where colour and legibility trade
+    against each other, and the trade is easy to lose silently: picking a
+    prettier ochre, or nudging the tint up, can drop a tag under 4.5:1 with
+    nothing visibly broken. These tests read the tokens out of the shipped
+    stylesheet, so they fail on the CSS as served rather than on a table of
+    numbers kept beside it.
+    """
+
+    TINT = 0.07  # must track the color-mix percentage in .badge
+
+    @staticmethod
+    def _rgb(value):
+        value = value.lstrip("#")
+        return tuple(int(value[i : i + 2], 16) for i in (0, 2, 4))
+
+    @classmethod
+    def _luminance(cls, rgb):
+        channels = []
+        for raw in rgb:
+            c = raw / 255
+            channels.append(c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4)
+        r, g, b = channels
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+    @classmethod
+    def _ratio(cls, fg, bg):
+        light, dark = sorted((cls._luminance(fg), cls._luminance(bg)), reverse=True)
+        return (light + 0.05) / (dark + 0.05)
+
+    @classmethod
+    def _tokens(cls):
+        css = build._CSS
+        found = re.findall(r"--t-([a-z_]+): (#[0-9a-f]{6});", css)
+        return {name: value for name, value in found}
+
+    def test_every_tag_value_has_a_hue_token(self):
+        tokens = self._tokens()
+        expected = set(build.CATEGORIES) | set(build.VERIFICATION_LEVELS)
+        expected |= set(build.SIGNUP_MODES) | {"expired"}
+        self.assertEqual(set(tokens), expected)
+
+    def test_hue_readable_as_text_over_its_own_rest_tint(self):
+        # At rest a tag is its hue over a 7% wash of that same hue -- the
+        # background AA is owed against, not the white behind the wash.
+        for name, value in self._tokens().items():
+            with self.subTest(tag=name):
+                hue = self._rgb(value)
+                tint = tuple(
+                    round(c * self.TINT + 255 * (1 - self.TINT)) for c in hue
+                )
+                self.assertGreaterEqual(round(self._ratio(hue, tint), 2), 4.5)
+
+    def test_hue_readable_under_white_text_when_filled(self):
+        # Hover and the active (filtering) state invert the tag to a solid
+        # fill, so the same hue must also carry white text.
+        for name, value in self._tokens().items():
+            with self.subTest(tag=name):
+                ratio = self._ratio((255, 255, 255), self._rgb(value))
+                self.assertGreaterEqual(round(ratio, 2), 4.5)
+
+    def test_rest_tint_is_never_mistakable_for_the_filled_state(self):
+        # The whole "is this filter applied?" read rests on rest being a wash
+        # and active being a fill; a heavy tint would collapse the two.
+        self.assertIn(
+            f"color-mix(in srgb, var(--tag-hue) {int(self.TINT * 100)}%, var(--paper))",
+            build._CSS,
+        )
+        self.assertLessEqual(self.TINT, 0.1)
+
+    def test_active_tag_marker_is_a_real_glyph_not_an_octal_escape(self):
+        # _APP_CSS is a plain triple-quoted string, so the CSS escape
+        # "\\00d7" would be read by Python as octal and put a NUL byte in the
+        # stylesheet -- which is what shipped the first time, rendering the
+        # remove-marker as literal "D7" beside every applied tag.
+        page = build.render_html(
+            build.build_index(
+                [
+                    dict(
+                        build.validate_offer(dict(VALID), "a.yaml"),
+                        slug="test-offer",
+                    )
+                ]
+            )
+        )
+        self.assertNotIn("\x00", page)
+        self.assertIn('content: "\u00d7";', page)
+
+    def test_no_category_borrows_the_verification_green(self):
+        # Green means "strongest claim" on the tag sitting immediately beside
+        # the category one; sharing it would read as an endorsement.
+        tokens = self._tokens()
+        green = tokens["hand_verified"]
+        for category in build.CATEGORIES:
+            self.assertNotEqual(tokens[category], green, category)
+
+
 class ToolbarMarkupTests(unittest.TestCase):
     """F2/#13: search + category chips emitted with offers, a11y wired."""
 
@@ -1257,7 +1408,28 @@ class ToolbarMarkupTests(unittest.TestCase):
         page = self._page()
         all_chip = page[page.index('data-ft-category=""') :]
         self.assertIn('aria-pressed="true"', all_chip[:200])
-        self.assertEqual(page.count('aria-pressed="false"'), len(build.CATEGORIES))
+        chips = page[page.index('<div class="chips"') : page.index("</div>", page.index('<div class="chips"'))]
+        self.assertEqual(chips.count('aria-pressed="false"'), len(build.CATEGORIES))
+        self.assertEqual(chips.count('aria-pressed="true"'), 1)
+
+    def test_chips_mirror_the_row_tags_glyph_and_hue(self):
+        # The toolbar and the row tags must read as one mechanism seen at two
+        # distances, not as two parallel filter systems.
+        page = self._page()
+        for category in build.CATEGORIES:
+            with self.subTest(category=category):
+                self.assertIn(f"chip-category-{category}", page)
+                self.assertIn(
+                    f".chip-category-{category} {{ --tag-hue: var(--t-{category}); }}",
+                    page,
+                )
+
+    def test_clear_control_present_but_hidden_until_something_filters(self):
+        # A filter applied from a row tag far down the page must be undoable
+        # without scrolling back to find that same row.
+        page = self._page()
+        self.assertIn('id="ft-clear-filters"', page)
+        self.assertIn('id="ft-clear-filters" hidden', page)
 
     def test_results_status_is_live_region_seeded_with_count(self):
         page = self._page(n=4)
@@ -1311,21 +1483,45 @@ class AppJsSourceTests(unittest.TestCase):
         self.assertIn('addEventListener("popstate"', self.JS)
         self.assertIn("URLSearchParams", self.JS)
 
-    def test_unknown_category_param_rejected_on_restore(self):
+    def test_every_tag_dimension_injected_from_build_constants(self):
+        # Filter enums and labels are generated from the same constants the
+        # markup is, so a renderable tag can never be an unfilterable one.
+        self.assertIn(json.dumps(list(build.TAG_DIMENSIONS)), self.JS)
+        for values in (
+            build.CATEGORIES,
+            build.VERIFICATION_LEVELS,
+            build.SIGNUP_MODES,
+        ):
+            for value in values:
+                self.assertIn(f'"{value}"', self.JS)
+        for placeholder in ("__FT_DIMENSIONS__", "__FT_TAG_VALUES__", "__FT_TAG_LABELS__"):
+            self.assertNotIn(placeholder, self.JS)
+
+    def test_unknown_tag_param_rejected_on_restore(self):
         parse_pos = self.JS.index("function ftParseState")
         body = self.JS[parse_pos : self.JS.index("function ftSerializeState")]
-        self.assertIn("indexOf(category) === -1", body)
+        # Every dimension is whitelisted against its own enum before it can
+        # reach state, so a hand-edited URL degrades to unfiltered.
+        self.assertIn("VALID[dim].indexOf(value) === -1", body)
 
-    def test_and_combination_requires_both_category_and_query(self):
+    def test_and_combination_requires_every_tag_and_the_query(self):
         matches = self.JS[self.JS.index("function ftMatches") :]
-        category_check = matches.index('getAttribute("data-category")')
+        tag_check = matches.index('getAttribute("data-" + dim)')
         query_check = matches.index("ftNormalize")
-        self.assertLess(category_check, query_check)
+        self.assertLess(tag_check, query_check)
+        # Tag checks loop over every dimension, not just category.
+        self.assertIn("for (var i = 0; i < DIMENSIONS.length; i++)", matches[:query_check])
         # Both checks must gate the same boolean result (early returns).
         self.assertIn("return false;", matches[:query_check])
 
-    def test_filter_event_carries_category_only(self):
-        self.assertIn('"filter_use", { category:', self.JS)
+    def test_filter_event_carries_only_closed_enum_values(self):
+        self.assertIn('ftTrack("filter_use", ftFilterParams(state))', self.JS)
+        params = self.JS[self.JS.index("function ftFilterParams") :]
+        params = params[: params.index("return params;")]
+        # Values come from state keyed by dimension, defaulting to "all" --
+        # never from the search box, so no free text can reach analytics.
+        self.assertIn('state[DIMENSIONS[i]] || "all"', params)
+        self.assertNotIn("state.q", params)
 
     def test_search_event_carries_query_length_never_raw_query(self):
         self.assertIn('"search", { query_length: state.q.length }', self.JS)
@@ -1629,12 +1825,13 @@ class DetailPageTests(unittest.TestCase):
         site = self._build({"live": offer_text(), "expired": expired})
         page = (site / "offers" / "expired.html").read_text(encoding="utf-8")
         self.assertIn("Expired Offer", page)
-        self.assertIn('<span class="badge badge-expired">Expired</span>', page)
+        self.assertIn('class="badge badge-expired"', page)
+        self.assertIn("<span>Expired</span>", page)
         self.assertNotIn('class="od-cta"', page)
         self.assertIn("nothing here is claimable anymore", page)
         live_page = (site / "offers" / "live.html").read_text(encoding="utf-8")
         self.assertIn('class="od-cta"', live_page)
-        self.assertNotIn('<span class="badge badge-expired">Expired</span>', live_page)
+        self.assertNotIn('class="badge badge-expired"', live_page)
 
     # --- content parity -------------------------------------------------------
 
@@ -1710,9 +1907,14 @@ class DetailPageTests(unittest.TestCase):
             f'checked on <time datetime="{VALID["verified_date"]}">', header
         )
         # #97: honesty tags render as badges in the tagline.
-        self.assertIn('badge badge-v-social_proof', header)
-        self.assertIn('badge-signup-required', header)
-        self.assertNotIn('badge-v-hand_verified', header)
+        self.assertIn("badge-verification-social_proof", header)
+        self.assertIn("badge-signup-required", header)
+        self.assertNotIn("badge-verification-hand_verified", header)
+        # No filter runtime ships here, so tags are links back to the home
+        # listing pre-filtered -- never dead buttons.
+        self.assertIn('href="../index.html?verification=social_proof"', header)
+        self.assertIn('href="../index.html?category=voice"', header)
+        self.assertNotIn("data-ft-tag=", header)
         # Amount renders once, in the od-hero; the tagline must not repeat it.
         self.assertNotIn(VALID["amount"], header)
         self.assertIn('<time datetime="2026-12-31">Dec 31, 2026</time>', header)
@@ -2049,7 +2251,9 @@ class NodeAppJsTests(unittest.TestCase):
         snaps = self._run([], init_search="?category=coding&q=copilot")
         first = snaps[0]
         self.assertEqual(first["visible"], ["copilot"])
-        self.assertEqual(first["status"], "Showing 1 of 3 offers")
+        # The status line names what is filtering: a filter can be applied
+        # from a row tag far below the toolbar, where nothing else says why.
+        self.assertEqual(first["status"], "Showing 1 of 3 offers \u00b7 Coding")
         self.assertEqual(first["pressed"]["coding"], "true")
         self.assertEqual(first["pressed"]["all"], "false")
         self.assertEqual(first["events"], [])
@@ -2094,7 +2298,7 @@ class NodeAppJsTests(unittest.TestCase):
         final = snaps[-1]
         # "google" matches only the image card; coding filter excludes it.
         self.assertEqual(final["visible"], [])
-        self.assertEqual(final["status"], "Showing 0 of 3 offers")
+        self.assertEqual(final["status"], "Showing 0 of 3 offers \u00b7 Coding")
         self.assertFalse(final["emptyHidden"])
         self.assertEqual(final["historyUrls"], ["?category=coding&q=google"])
 
@@ -2109,12 +2313,18 @@ class NodeAppJsTests(unittest.TestCase):
         after_image = snaps[1]
         self.assertEqual(after_image["visible"], ["alpha"])
         self.assertEqual(after_image["historyUrls"], ["?category=image"])
-        self.assertEqual(after_image["events"], [["filter_use", {"category": "image"}]])
+        self.assertEqual(
+            after_image["events"],
+            [["filter_use", {"category": "image", "verification": "all", "signup": "all"}]],
+        )
         final = snaps[2]  # All resets
         self.assertEqual(final["historyUrls"][-1], "/")
         self.assertEqual(final["pressed"]["all"], "true")
         self.assertEqual([e[0] for e in final["events"]], ["filter_use", "filter_use"])
-        self.assertEqual(final["events"][-1], ["filter_use", {"category": "all"}])
+        self.assertEqual(
+            final["events"][-1],
+            [["filter_use", {"category": "all", "verification": "all", "signup": "all"}]][0],
+        )
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
     def test_popstate_restores_view_without_new_events_or_history(self):
@@ -2129,7 +2339,10 @@ class NodeAppJsTests(unittest.TestCase):
         self.assertEqual(restored["visible"], ["alpha"])
         self.assertEqual(restored["pressed"]["image"], "true")
         self.assertEqual(restored["pressed"]["coding"], "false")
-        self.assertEqual(restored["events"], [["filter_use", {"category": "coding"}]])
+        self.assertEqual(
+            restored["events"],
+            [["filter_use", {"category": "coding", "verification": "all", "signup": "all"}]],
+        )
         self.assertEqual(restored["historyUrls"], ["?category=coding"])
 
     @unittest.skipUnless(HAS_NODE, "node runtime unavailable")
@@ -3100,7 +3313,8 @@ class HomeListingTests(unittest.TestCase):
         page = self._page(n=1, amount="$50 credit", provider="Alpha AI")
         row = page[page.index('<li style="--i:0">') : page.index("</li>")]
         self.assertIn('<span class="r-amount">$50 credit</span>', row)
-        self.assertIn('<span class="badge">api_provider</span>', row)
+        self.assertIn('badge-category-api_provider"', row)
+        self.assertIn("<span>API providers</span>", row)
         self.assertIn('<span class="r-prov">Alpha AI</span>', row)
         self.assertIn("verified <time", row)
         self.assertIn('<a class="r-details" href="offers/offer-0.html">details</a>', row)
@@ -3327,10 +3541,16 @@ class ArchivePageTests(unittest.TestCase):
 
     def test_every_archived_card_carries_text_expired_badge(self):
         page = self._render(self._mixed_index())
-        self.assertEqual(
-            page.count('<span class="badge badge-expired">Expired</span>'), 3
-        )
+        self.assertEqual(page.count("<span>Expired</span>"), 3)
+        self.assertEqual(page.count('class="badge badge-expired"'), 3)
         self.assertIn(".badge-expired", page)  # styled, but text is the signal
+
+    def test_archive_tags_are_links_not_dead_buttons(self):
+        # The archive ships no filter runtime, so its tags navigate to the
+        # home listing with that filter applied instead of pretending to act.
+        page = self._render(self._mixed_index())
+        self.assertIn('href="index.html?category=image"', page)
+        self.assertNotIn("data-ft-tag=", page)
 
     def test_card_shows_provider_amount_original_expiry_category_and_link(self):
         page = self._render(
@@ -3345,7 +3565,8 @@ class ArchivePageTests(unittest.TestCase):
         self.assertIn('target="_blank"', card)
         self.assertIn('rel="noopener noreferrer"', card)
         self.assertIn("$40 in credits", card)
-        self.assertIn('<span class="badge">image</span>', card)
+        self.assertIn("badge-category-image", card)
+        self.assertIn("<span>Image</span>", card)
         self.assertIn("Test Provider", card)
         self.assertIn('<time datetime="2026-07-15">Jul 15, 2026</time>', card)
         self.assertIn("expired <time", card)

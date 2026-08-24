@@ -20,6 +20,32 @@
   --gray: #6b7280;
   --green: #22c55e;
   --hairline: rgba(0, 0, 0, 0.16);
+
+  /* Tag hues. Each clears WCAG AA in BOTH painted states a tag has: as text
+     over the 7% tint it sits on at rest, and under white text when filled on
+     hover/active. Measured minimums across the two: indigo 7.20, teal 4.86,
+     ochre 5.13, violet 6.25, crimson 5.56, green 4.57, muted 5.26.
+
+     Ochre and the muted gray are darker than the obvious #a16207 / #6b7280
+     for exactly that reason -- both land at ~4.45:1 once the tint is behind
+     them, and contrast is owed against the background actually painted, not
+     against the white the tag is not sitting on.
+
+     Green is deliberately absent from the category set: it is spoken for by
+     "strongest claim" on the verification and sign-up tags next door, and a
+     green category tag would read as an endorsement of the offer rather than
+     a description of it. That is why `coding` is teal. */
+  --t-api_provider: #3538cd;
+  --t-coding: #0e7490;
+  --t-image: #955906;
+  --t-voice: #7e22ce;
+  --t-video: #be123c;
+  --t-hand_verified: #15803d;
+  --t-social_proof: #000000;
+  --t-unverified: #5f6673;
+  --t-none: #15803d;
+  --t-required: #5f6673;
+  --t-expired: #5f6673;
 }
 
 * { box-sizing: border-box; }
@@ -135,41 +161,85 @@ h1 {
   flex-wrap: wrap;
 }
 
+/* ---- Tags ------------------------------------------------------------- */
+/* One rule set serves all three families and all three element types a tag
+   can be (<span> on static chrome, <a> on archive/detail, <button> on the
+   home listing) — the hue arrives through --tag-hue, so nothing below is
+   duplicated per colour. Color never carries meaning alone: the word is
+   always spelled out, the glyph repeats it, and `title` explains it. */
 .badge {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34em;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--tag-hue);
   border-radius: 999px;
   padding: 0.14rem 0.6rem;
+  color: var(--tag-hue);
+  background: var(--paper);
+  /* 7% of the hue: enough to separate three adjacent tags at a glance, far
+     too little to be mistaken for the solid fill that means "active".
+     Browsers without color-mix keep the flat paper background above. */
+  background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
 }
 
-/* Per-offer verification & sign-up badges (#97). Color never carries the
-   meaning alone: the word is always spelled out and the tooltip (title)
-   explains the level. Green = strongest claim (hand-checked / no account);
-   gray = weakest (unverified); plain ink = middle tiers. */
-.badge-v-hand_verified {
-  border-color: var(--green);
-  color: var(--ink);
+/* The glyph tracks its text size, so tags stay proportional wherever the
+   base font-size is overridden (the home listing runs them at 0.63rem). */
+.tag-i {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
 }
 
-.badge-v-unverified {
-  border-color: var(--gray);
-  color: var(--gray);
+/* The sprite is markup, not content: it must occupy no space and never
+   catch a pointer, on any page that renders a tag. */
+.tag-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.badge-signup-none {
-  border-color: var(--green);
-  color: var(--ink);
-}
+.badge-category-api_provider { --tag-hue: var(--t-api_provider); }
+.badge-category-coding { --tag-hue: var(--t-coding); }
+.badge-category-image { --tag-hue: var(--t-image); }
+.badge-category-voice { --tag-hue: var(--t-voice); }
+.badge-category-video { --tag-hue: var(--t-video); }
+.badge-verification-hand_verified { --tag-hue: var(--t-hand_verified); }
+.badge-verification-social_proof { --tag-hue: var(--t-social_proof); }
+.badge-verification-unverified { --tag-hue: var(--t-unverified); }
+.badge-signup-none { --tag-hue: var(--t-none); }
+.badge-signup-required { --tag-hue: var(--t-required); }
 
 /* Archive "Expired" badge (#26): the word itself carries the meaning —
    the muted styling is decoration only, never the sole signal. */
 .badge-expired {
-  border-color: var(--gray);
-  color: var(--gray);
+  --tag-hue: var(--t-expired);
+}
+
+/* Link-form tags (/archive, offer detail) navigate to the home listing with
+   this filter pre-applied. They must not pick up the global underline
+   treatment, but must still announce themselves as operable. */
+a.badge {
+  text-decoration: none;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+a.badge:hover,
+a.badge:focus-visible {
+  background: var(--tag-hue);
+  color: var(--paper);
+}
+
+a.badge:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .status {
@@ -795,11 +865,13 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 </style>
 </head>
 <body>
+<svg class="tag-sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs><symbol id="ti-api_provider" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M6.8 7.5h.01M6.8 16.5h.01"/></symbol><symbol id="ti-coding" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-6 6 6 6"/><path d="m15 6 6 6-6 6"/></symbol><symbol id="ti-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.6" cy="9.4" r="1.4"/><path d="m3.5 17.5 4.6-4.6 4 4 3-3 5.4 5.4"/></symbol><symbol id="ti-voice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5v3M8 6.5v11M12 3.5v17M16 6.5v11M20 10.5v3"/></symbol><symbol id="ti-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m10.4 9.4 5 2.6-5 2.6z"/></symbol><symbol id="ti-hand_verified" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.4"/></symbol><symbol id="ti-social_proof" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.5a2 2 0 0 1-2 2H8.5l-4.5 4V5.5a2 2 0 0 1 2-2h12.5a2 2 0 0 1 2 2z"/><path d="M8.5 9.5h8M8.5 12.5h5"/></symbol><symbol id="ti-unverified" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" stroke-dasharray="3.2 3"/><path d="M9.7 9.4a2.4 2.4 0 0 1 4.7.6c0 1.6-2.4 1.9-2.4 3.4"/><path d="M12 16.8h.01"/></symbol><symbol id="ti-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 7.7-1.6"/></symbol><symbol id="ti-required" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></symbol><symbol id="ti-expired" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.2V12l3.1 1.9"/></symbol></defs></svg>
 <div class="wrap">
 <header class="masthead">
-<p class="kicker">free ai credits &middot; Voice</p>
+<p class="kicker">free ai credits</p>
+<p class="od-tags"><a class="badge badge-category badge-category-voice" href="../index.html?category=voice" aria-label="See offers tagged Voice" title="Free AI credits in the Voice category"><svg class="tag-i" aria-hidden="true" focusable="false"><use href="#ti-voice"/></svg><span>Voice</span></a></p>
 <h1>ElevenLabs Free Plan</h1>
-<p class="tagline">From <strong>ElevenLabs</strong> &middot; <span class="badge badge-v-social_proof" title="Not personally verified, but corroborated by the official website and social proof">social proof</span> <span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span> &middot; checked on <time datetime="2026-08-23">Aug 23, 2026</time>.</p>
+<p class="tagline">From <strong>ElevenLabs</strong> &middot; <a class="badge badge-verification badge-verification-social_proof" href="../index.html?verification=social_proof" aria-label="See offers tagged social proof" title="Not personally verified, but corroborated by the official website and social proof"><svg class="tag-i" aria-hidden="true" focusable="false"><use href="#ti-social_proof"/></svg><span>social proof</span></a> <a class="badge badge-signup badge-signup-required" href="../index.html?signup=required" aria-label="See offers tagged sign-up required" title="Claiming requires creating a (free) account"><svg class="tag-i" aria-hidden="true" focusable="false"><use href="#ti-required"/></svg><span>sign-up required</span></a> &middot; checked on <time datetime="2026-08-23">Aug 23, 2026</time>.</p>
 <p class="count"><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span></p>
 </header>
 <main>
@@ -807,7 +879,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 <p class="od-back"><a href="../">&larr; All offers</a></p>
 <div class="od-hero">
 <p class="amount">10k credits/month (~10 min of audio)</p>
-<p class="od-statusline mono"><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span> <span class="sep" aria-hidden="true">&middot;</span> <span class="badge badge-signup-required" title="Claiming requires creating a (free) account">sign-up required</span> <span class="sep" aria-hidden="true">&middot;</span> checked <time datetime="2026-08-23">Aug 23, 2026</time></p>
+<p class="od-statusline mono"><span class="status"><span class="dot" aria-hidden="true"></span>ongoing</span> <span class="sep" aria-hidden="true">&middot;</span> <a class="badge badge-signup badge-signup-required" href="../index.html?signup=required" aria-label="See offers tagged sign-up required" title="Claiming requires creating a (free) account"><svg class="tag-i" aria-hidden="true" focusable="false"><use href="#ti-required"/></svg><span>sign-up required</span></a> <span class="sep" aria-hidden="true">&middot;</span> checked <time datetime="2026-08-23">Aug 23, 2026</time></p>
 </div>
 <section class="od-brief"><h2>The offer</h2><p class="od-summary">The ElevenLabs free plan includes 10,000 credits per month, roughly 10 minutes of audio, with access to the core text-to-speech voices. Credits reset monthly and no credit card is required.</p></section>
 <section class="od-steps" data-ft-checklist data-ft-offer-id="elevenlabs-free-plan">
@@ -824,7 +896,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 </article>
 </main>
 <footer class="foot">
-<p>Built <time datetime="2026-08-24T14:47:53Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
+<p>Built <time datetime="2026-08-24T15:33:45Z">Aug 24, 2026</time> &middot; offers re-verified on every change</p>
 
 <nav class="foot-nav" aria-label="Site"><a href="../">Offers</a><span aria-hidden="true">&middot;</span><a href="../archive.html">Archive</a><span aria-hidden="true">&middot;</span><a href="../privacy.html">Privacy policy</a><span aria-hidden="true">&middot;</span><a href="../feed.xml">RSS</a></nav><nav class="foot-nav" aria-label="Contact"><a href="https://x.com/luongnv89" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">&middot;</span><a href="https://linkedin.com/in/luongnv89" target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">&middot;</span><a href="https://luongnv.com" target="_blank" rel="noopener noreferrer">Website</a></nav>
 
