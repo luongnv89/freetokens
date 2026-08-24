@@ -1,5 +1,6 @@
 import { CATEGORIES, activeOffers, buildDate, type OffersIndex } from "../lib/offers"
 import { IconSprite, OfferRow } from "./OfferRow"
+import { SiteFooter } from "./SiteFooter"
 
 function Toolbar({ count }: { count: number }) {
   const seeded = `Showing all ${count} offers`
@@ -127,19 +128,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
           </section>
         )}
 
-        <footer className="foot" id="site-footer">
-          <nav className="foot-nav" aria-label="Site">
-            <a href="./index.html" aria-current="page">
-              Offers
-            </a>
-            <span aria-hidden="true">&middot;</span>
-            <a href="./archive.html">Archive</a>
-            <span aria-hidden="true">&middot;</span>
-            <a href="./privacy.html">Privacy policy</a>
-            <span aria-hidden="true">&middot;</span>
-            <a href="./feed.xml">RSS</a>
-          </nav>
-        </footer>
+        <SiteFooter current="home" />
       </div>
     </>
   )

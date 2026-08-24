@@ -16,6 +16,7 @@ import html
 import json
 import os
 import re
+import shutil
 import sys
 from urllib.parse import quote, urlparse
 
@@ -4432,6 +4433,16 @@ def main(argv=None) -> int:
 
     out_dir = os.path.join(args.out, "site")
     os.makedirs(out_dir, exist_ok=True)
+    # Hand-committed source assets now live in the Vite public/ tree
+    # (issue #123): site/ becomes purely generated output, and the images the
+    # offer detail JSON references keep shipping at their existing paths.
+    public_assets = os.path.join(REPO_ROOT, "app", "public", "assets")
+    if os.path.isdir(public_assets):
+        shutil.copytree(
+            public_assets,
+            os.path.join(out_dir, "assets"),
+            dirs_exist_ok=True,
+        )
     with open(os.path.join(args.out, "index.json"), "w", encoding="utf-8") as fh:
         json.dump(index, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
