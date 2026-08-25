@@ -5,6 +5,16 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Offer detail pages, claim checklist, and social proof land in React (#128):**
+  every offer has `/offers/<slug>.html`. When `offers/details/<slug>.json`
+  exists the page renders summary, claim steps, and social-proof cards of
+  type `x` / `reddit` / `screenshot` / `link`; without a sidecar the hero
+  card still renders with fallback steps. Claim checkboxes persist under
+  `ft-claim-<slug>` (including live-site legacy arrays). Copy-to-clipboard
+  uses the modern API with an `execCommand` fallback and a live-region
+  confirm. Detail HTML carries per-offer title, 160-char meta description,
+  and `rel=canonical`. Copy-only share — no `offer_share` tracking.
+
 - **Expired-offer archive lands in React (#129):** `/archive` lists every
   `expired` offer newest-expiry-first with a text+ARIA "Expired" badge,
   provider, amount, original expiry, category, and outbound link. Tags on
