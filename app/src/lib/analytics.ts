@@ -357,22 +357,6 @@ export function onDelegatedOfferClick(event: Event): void {
   }
 }
 
-function bindToolbarListeners(signal: AbortSignal): void {
-  if (!isBrowser()) return;
-  // Search and sort are owned by HomePage (trackSearch / trackSortUse) so
-  // this layer must not attach #ft-search / #ft-sort — that double-fired.
-  for (const chip of document.querySelectorAll("[data-ft-category]")) {
-    chip.addEventListener(
-      "click",
-      () => {
-        const value = chip.getAttribute("data-ft-category") || "";
-        trackFilterUse({ category: value || "all" });
-      },
-      { signal },
-    );
-  }
-}
-
 function bindConsentChrome(signal: AbortSignal): void {
   if (!isBrowser()) return;
   // Allow/Decline are React onClick on ConsentBanner so they cannot double-fire.
@@ -402,7 +386,9 @@ export function bindAnalyticsListeners(): void {
   listenerAbort = new AbortController();
   const { signal } = listenerAbort;
   document.addEventListener("click", onDelegatedOfferClick, { signal });
-  bindToolbarListeners(signal);
+  // Search, sort, and category chips are owned by HomePage (trackSearch /
+  // trackSortUse / trackFilterUse) so this layer must not attach them —
+  // a second listener would double-fire filter_use on every chip click.
   bindConsentChrome(signal);
 }
 
