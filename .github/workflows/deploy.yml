@@ -70,6 +70,17 @@ jobs:
         working-directory: app
         run: npm test
 
+      - name: Build with Vite
+        working-directory: app
+        env:
+          # Same optional analytics plumbing as the Python build: unset/empty
+          # keeps GA4 and the traffic strip fully disabled. The Pages artifact
+          # still comes from the Python builder; flipping it to this Vite
+          # output is the #138 cutover.
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+          GOATCOUNTER_SITE_URL: ${{ secrets.GOATCOUNTER_SITE_URL }}
+        run: npm run build
+
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 

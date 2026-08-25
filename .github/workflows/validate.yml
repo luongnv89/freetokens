@@ -2,8 +2,6 @@ name: Validate offers
 
 on:
   push:
-    paths:
-      - "offers/**"
   pull_request:
   workflow_dispatch:
 
@@ -24,3 +22,37 @@ jobs:
 
       - name: Validate offer schema
         run: python3 scripts/validate_offers.py
+
+  node-tests:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install app dependencies
+        working-directory: app
+        run: npm ci
+
+      - name: Run Node unit suites
+        working-directory: app
+        run: npm test
+
+      - name: Build with Vite
+        working-directory: app
+        run: npm run build
+
+      - name: Install Playwright browsers
+        working-directory: app
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright e2e
+        working-directory: app
+        run: npm run test:e2e
