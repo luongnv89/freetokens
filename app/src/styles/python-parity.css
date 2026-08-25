@@ -714,6 +714,260 @@ a:focus-visible {
   #ft-grid > li::before { padding-right: 0.45rem; }
 }
 
+/* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.7rem 1.1rem;
+  margin: 0 0 0.9rem;
+}
+
+.field { display: flex; flex-direction: column; gap: 0.28rem; flex: 1 1 15rem; }
+
+.tool-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+
+/* Squared-off controls read as terminal furniture next to the mono listing,
+   but the borders stay full ink so both still look unmistakably operable. */
+#ft-search {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.84rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  padding: 0.42rem 0.7rem;
+  max-width: 24rem;
+  width: 100%;
+}
+
+.field-sort { flex: 0 1 auto; }
+
+#ft-sort {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.84rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  padding: 0.42rem 1.9rem 0.42rem 0.7rem;
+  cursor: pointer;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.chip {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: var(--tag-hue);
+  border-color: var(--tag-hue);
+  color: var(--paper);
+}
+
+/* Visible keyboard focus must not depend on the analytics stylesheet
+   (_BANNER_CSS ships only when GA4 is configured). */
+.chip:focus-visible,
+#ft-search:focus-visible,
+#ft-sort:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--tag-hue);
+  border-color: var(--tag-hue);
+  color: var(--paper);
+}
+
+.results-status {
+  flex-basis: 100%;
+  min-width: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+  margin: 0;
+}
+
+/* ---- Clickable tags: every tag is a filter ----------------------------- */
+/* A tag is a real <button>, so it is keyboard-reachable and announces its
+   own pressed state for free. The three states are deliberately far apart:
+     rest   -> hue text on a 7% hue tint  (readable, clearly not applied)
+     hover  -> solid hue under white text (clearly operable)
+     active -> solid hue, and a trailing × (clearly applied, clearly undoable)
+   `aria-pressed` is the single source of truth for the active state; the
+   runtime never adds a class, so style and semantics cannot drift apart. */
+button.badge {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  cursor: pointer;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+button.badge:hover,
+button.badge:focus-visible,
+button.badge[aria-pressed="true"] {
+  background: var(--tag-hue);
+  color: var(--paper);
+}
+
+/* Drawn with ::after rather than a real element: the search runtime matches
+   against the row's textContent, and a literal × node would silently join
+   every offer's searchable text. */
+button.badge[aria-pressed="true"]::after {
+  /* Literal glyph, not the CSS escape "\00d7": _APP_CSS is a plain
+     triple-quoted string, so Python would read that backslash-zero as an
+     octal escape and emit a NUL byte into the stylesheet. */
+  content: "×";
+  margin-left: 0.1em;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+button.badge:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.badge, button.badge { transition: none; }
+}
+
+/* Chips carry the same hue as the row tag they mirror, in every state — the
+   two controls are the same mechanism seen at two distances, so a chip at
+   rest has to look like a tag at rest (hue text over a 7% wash of that hue)
+   and not like plain ink. Only the pressed and hover states use the fill,
+   matching the tags exactly. */
+.chip {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34em;
+  border-color: var(--tag-hue);
+  color: var(--tag-hue);
+  background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
+}
+
+.chip .tag-i { width: 1.05em; height: 1.05em; flex: 0 0 auto; }
+
+.chip-category-api_provider { --tag-hue: var(--t-api_provider); }
+.chip-category-coding { --tag-hue: var(--t-coding); }
+.chip-category-image { --tag-hue: var(--t-image); }
+.chip-category-voice { --tag-hue: var(--t-voice); }
+.chip-category-video { --tag-hue: var(--t-video); }
+
+/* Applied-filter pills in the status line. They are filled, like the row tag
+   and toolbar chip for the same value in their applied state, so all three
+   places a filter is visible agree on what "applied" looks like. */
+.filter-pill {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0 0.45rem;
+  border: 1px solid var(--tag-hue);
+  border-radius: 999px;
+  background: var(--tag-hue);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+/* ::after, not a text node: the empty-state copy and the search both read
+   textContent, and a literal × would quietly become part of it. */
+.filter-pill::after {
+  content: "×";
+  margin-left: 0.25em;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.filter-pill:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (pointer: coarse) {
+  .filter-pill { min-height: 32px; padding-inline: 0.6rem; }
+}
+
+/* Result count and the escape hatch share one baseline; the button only
+   exists in the DOM-visible sense while something is actually filtered. */
+.results-line {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+}
+
+/* .results-status still carries flex-basis: 100% from when it was itself the
+   toolbar's flex child; left alone it would push the clear button onto its
+   own line every time. */
+.results-line .results-status { flex: 0 1 auto; }
+
+.chip.clear[hidden] { display: none; }
+
+.chip.clear {
+  font-size: 0.7rem;
+  padding: 0.24rem 0.6rem;
+  border-color: var(--gray);
+  color: var(--gray);
+}
+
+.chip.clear:hover,
+.chip.clear:focus-visible {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Hidden list items must leave the grid layout entirely. */
+.grid li[hidden] { display: none; }
+
+.empty .chip.reset { margin-top: 0.75rem; }
+
+/* Touch targets: WCAG 2.1 AA sets no size minimum, but iOS/Android HIG
+   guidance is 44 px; raised only on coarse-pointer (touch) devices so
+   mouse/keyboard layouts are unchanged. */
+@media (pointer: coarse) {
+  .chip,
+  #ft-search,
+  #ft-sort { min-height: 44px; }
+
+  /* Row tags are the dense control, so they get the touch minimum too —
+     without it a 0.63rem pill is roughly a 22px target. */
+  button.badge {
+    min-height: 32px;
+    padding-inline: 0.6rem;
+  }
+
+  /* `#ft-grid .badge` sets padding at id specificity (1,1,0), which outranks
+     the (0,1,1) rule above, so on the listing the widening is dead unless it
+     is matched. Only the inline padding needs restating — min-height is
+     uncontested. */
+  #ft-grid button.badge { padding-inline: 0.6rem; }
+}
+
 /* ---- Consent banner (build.py _BANNER_CSS, issue #131) ----------------- */
 
 .consent {
