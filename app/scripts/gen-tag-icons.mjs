@@ -12,7 +12,7 @@
  *
  * Run: node scripts/gen-tag-icons.mjs
  */
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
