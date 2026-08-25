@@ -73,6 +73,7 @@ let lastOfferId: string | null = null;
 let lastOfferAt = 0;
 let listenerAbort: AbortController | null = null;
 const bannerListeners = new Set<BannerListener>();
+let bannerOpen = false;
 
 function gtagWindow(): Window & { dataLayer?: unknown[]; gtag?: GtagFn } {
   return window;
@@ -118,12 +119,15 @@ export function configureAnalytics(partial: Partial<AnalyticsConfig>): void {
 
 export function subscribeConsentBanner(fn: BannerListener): () => void {
   bannerListeners.add(fn);
+  // Replay so a late mount (hydrate after idle init) still sees the banner.
+  if (bannerOpen) fn(true);
   return () => {
     bannerListeners.delete(fn);
   };
 }
 
 export function showConsentBanner(): void {
+  bannerOpen = true;
   bannerListeners.forEach((fn) => fn(true));
   if (!isBrowser()) return;
   const banner = document.getElementById("ft-consent-banner");
@@ -132,6 +136,7 @@ export function showConsentBanner(): void {
 }
 
 export function hideConsentBanner(): void {
+  bannerOpen = false;
   bannerListeners.forEach((fn) => fn(false));
   if (!isBrowser()) return;
   const banner = document.getElementById("ft-consent-banner");
@@ -464,6 +469,7 @@ export function resetAnalyticsForTests(): void {
   listenerAbort?.abort();
   listenerAbort = null;
   bannerListeners.clear();
+  bannerOpen = false;
   config = {
     measurementId: resolveMeasurementId(readGaDefine()),
     statsSite: resolveStatsSite(readGcDefine()),
