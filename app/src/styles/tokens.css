@@ -49,3 +49,58 @@
   --color-tag-required: #5f6673;
   --color-tag-expired: #5f6673;
 }
+
+/*
+   shadcn/ui semantic-variable bridge (issue #122, Task 2.3).
+
+   shadcn components read --background/--foreground/--primary/… rather than
+   any palette of their own — but only if every variable they touch is
+   defined HERE. Mapping each one to the Task 2.2 tokens above (never to a
+   literal) is what guarantees no shadcn default palette leaks into the
+   page: a component can only paint with ink, paper, muted, accent, and the
+   tag hues. The @theme inline block re-exposes them under the --color-*
+   names Tailwind v4 utilities resolve against.
+*/
+:root {
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+  --card: var(--color-paper);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-paper);
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-ink);
+  --primary-foreground: var(--color-paper);
+  --secondary: var(--color-paper);
+  --secondary-foreground: var(--color-ink);
+  --muted: var(--color-paper);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-accent);
+  --accent-foreground: var(--color-ink);
+  --destructive: var(--color-tag-video);
+  --border: var(--color-hairline);
+  --input: var(--color-hairline);
+  --ring: var(--color-accent);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}

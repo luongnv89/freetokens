@@ -5,6 +5,25 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Tag glyphs now come from lucide-react:** the eleven hand-authored SVG
+  paths behind the honesty-tag glyphs are generated from lucide icon node
+  data (`app/scripts/gen-tag-icons.mjs`, rerun via `npm run gen:tag-icons`),
+  with a committed mapping table recording each tag's lucide icon and any
+  shape difference (the `unverified` ring loses its dash pattern). The
+  single per-page sprite stays: glyphs still ship once per page and each of
+  the ~120 tag sites keeps its one short `<use>` reference, so the home
+  listing's icon payload drops from ~1,630 to 1,230 bytes instead of
+  regrowing the +70 KB that motivated the sprite. No lucide runtime reaches
+  the JS bundle. Every glyph remains `aria-hidden`, with the tag's word
+  carrying the accessible name.
+- **shadcn/ui is initialised on the Task 2.2 tokens:** `components.json`,
+  `cn()`, `@` alias, and the first primitives (`button`, `badge`) land in
+  `app/src/components/ui/`. A semantic-variable bridge in
+  `app/src/styles/tokens.css` points every shadcn color variable at an
+  existing design token — ink, paper, muted, accent, and the tag hues — so
+  no shadcn default palette can leak into the page (enforced by tests).
+  The listing's parity-pinned markup is untouched; primitives serve new
+  surfaces as they arrive in later sprint tasks.
 - **Every tag is a colour, a glyph, and a filter:** the three tag families
   on each row (category, verification level, sign-up need) used to render as
   one undifferentiated gray pill. Each tag value now carries its own hue and
