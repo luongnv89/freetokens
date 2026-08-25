@@ -5,6 +5,12 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Text search and sort land in React with privacy-safe analytics (#127):**
+  `?q=` and `?sort=` round-trip AND-combined with category / verification /
+  signup, debounce is 120 ms, and `search` events carry `query_length` only
+  (never the raw query). HomePage is the sole owner of `search` / `sort_use`;
+  `bindToolbarListeners` no longer attaches `#ft-search` / `#ft-sort`.
+  Null-expiry offers sort last under expiring.
 - **Consent-gated GA4 and the live traffic strip land in React (#131):** the
   Python analytics runtime is ported as typed modules — grant-only `gtag.js`
   (never Advanced Consent Mode), `ft_ga_consent` via the existing

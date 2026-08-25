@@ -1,4 +1,18 @@
-import { CATEGORIES, activeOffers, buildDate, type OffersIndex } from "../lib/offers"
+import { useEffect, useRef, useState } from "react"
+import {
+  SEARCH_DEBOUNCE_MS,
+  trackSearch,
+  trackSortUse,
+} from "../lib/analytics"
+import { CATEGORIES, activeOffers, applySort, offerMatches, buildDate, type OffersIndex } from "../lib/offers"
+import {
+  emptyState,
+  hasQueryOrFilters,
+  normalizeSort,
+  parseState,
+  serializeState,
+  type UrlState,
+} from "../lib/urlState"
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { Button } from "./ui/button"
@@ -49,8 +63,27 @@ function SearchGlyph() {
   )
 }
 
-function Toolbar({ count }: { count: number }) {
-  const seeded = `Showing all ${count} offers`
+function Toolbar({
+  total,
+  shown,
+  searchValue,
+  sortValue,
+  category,
+  clearHidden,
+  onSearchChange,
+  onSortChange,
+}: {
+  total: number
+  shown: number
+  searchValue: string
+  sortValue: string
+  category: string
+  clearHidden: boolean
+  onSearchChange: (value: string) => void
+  onSortChange: (value: string) => void
+}) {
+  const status =
+    shown === total ? `Showing all ${total} offers` : `Showing ${shown} of ${total} offers`
   return (
     <section className="toolbar" aria-label="Search and filter offers">
       <div className="field">
@@ -65,13 +98,15 @@ function Toolbar({ count }: { count: number }) {
           autoComplete="off"
           spellCheck={false}
           maxLength={200}
+          value={searchValue}
+          onChange={(e) => onSearchChange(e.target.value)}
         />
       </div>
       <div className="field field-sort">
         <label className="tool-label" htmlFor="ft-sort">
           Sort
         </label>
-        <select id="ft-sort" defaultValue="">
+        <select id="ft-sort" value={sortValue} onChange={(e) => onSortChange(e.target.value)}>
           <option value="">Default</option>
           <option value="newest">Newest verified</option>
           <option value="expiring">Expiring soon</option>
@@ -79,31 +114,43 @@ function Toolbar({ count }: { count: number }) {
         </select>
       </div>
       <div className="chips" role="group" aria-label="Filter by category">
-        <Button type="button" variant="unstyled" className="chip " data-ft-category="" aria-pressed="true">
+        <Button
+          type="button"
+          variant="unstyled"
+          className="chip "
+          data-ft-category=""
+          aria-pressed={category === "" ? "true" : "false"}
+        >
           <span>All</span>
         </Button>
-        {CATEGORIES.map((category) => (
+        {CATEGORIES.map((cat) => (
           <Button
-            key={category}
+            key={cat}
             type="button"
             variant="unstyled"
-            className={`chip chip-category-${category}`}
-            data-ft-category={category}
-            aria-pressed="false"
+            className={`chip chip-category-${cat}`}
+            data-ft-category={cat}
+            aria-pressed={category === cat ? "true" : "false"}
           >
             <span>
-              {category === "api_provider"
+              {cat === "api_provider"
                 ? "API providers"
-                : category[0].toUpperCase() + category.slice(1)}
+                : cat[0].toUpperCase() + cat.slice(1)}
             </span>
           </Button>
         ))}
       </div>
       <div className="results-line">
         <p className="results-status" id="ft-results-status" role="status" aria-live="polite">
-          {seeded}
+          {status}
         </p>
-        <Button type="button" variant="unstyled" className="chip clear" id="ft-clear-filters" hidden>
+        <Button
+          type="button"
+          variant="unstyled"
+          className="chip clear"
+          id="ft-clear-filters"
+          hidden={clearHidden}
+        >
           Clear all filters
         </Button>
       </div>
@@ -111,16 +158,89 @@ function Toolbar({ count }: { count: number }) {
   )
 }
 
+function visibleOffers(offers: ReturnType<typeof activeOffers>, state: UrlState) {
+  return applySort(offers, state.sort).filter((offer) => offerMatches(offer, state))
+}
+
 /**
  * The full home page (F1): masthead, toolbar, ranked mono rows. Rendered both
  * by the prerender script (react-dom/server) and hydrated client-side —
  * markup mirrors build.py's render_html exactly.
+ *
+ * First render (SSR/prerender) shows every active offer so static markup
+ * tests stay matching. After mount, URL state is applied without events.
  */
 export default function HomePage({ index }: { index: OffersIndex }) {
   const offers = activeOffers(index)
   const buildDay = buildDate(index.generated_at)
   const ongoing = offers.filter((o) => !o.expiry_date).length
   const verified = offers.filter((o) => o.verification === "hand_verified").length
+
+  const [state, setState] = useState(emptyState)
+  const [searchInput, setSearchInput] = useState("")
+  const stateRef = useRef(state)
+  stateRef.current = state
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const shownList = visibleOffers(offers, state)
+
+  function commit(patch: Partial<UrlState>, source: "search" | "sort") {
+    const next: UrlState = { ...stateRef.current, ...patch }
+    if (source === "sort" && next.sort === stateRef.current.sort) return
+    if (source === "search" && next.q === stateRef.current.q) return
+    stateRef.current = next
+    setState(next)
+    const query = serializeState(next)
+    const nextSearch = query ? `?${query}` : ""
+    if (typeof window !== "undefined" && nextSearch !== window.location.search) {
+      try {
+        window.history.pushState({}, "", nextSearch || window.location.pathname)
+      } catch {
+        /* ignore */
+      }
+    }
+    if (source === "search" && next.q) {
+      trackSearch(next.q.length)
+    } else if (source === "sort") {
+      trackSortUse(next.sort || "default")
+    }
+  }
+
+  useEffect(() => {
+    const applyFromLocation = () => {
+      if (debounceRef.current !== null) {
+        clearTimeout(debounceRef.current)
+        debounceRef.current = null
+      }
+      const parsed = parseState(window.location.search)
+      stateRef.current = parsed
+      setState(parsed)
+      setSearchInput(parsed.q)
+    }
+    applyFromLocation()
+    window.addEventListener("popstate", applyFromLocation)
+    return () => {
+      window.removeEventListener("popstate", applyFromLocation)
+      if (debounceRef.current !== null) clearTimeout(debounceRef.current)
+    }
+  }, [])
+
+  function onSearchChange(value: string) {
+    setSearchInput(value)
+    if (debounceRef.current !== null) clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => {
+      debounceRef.current = null
+      const q = value.trim().toLowerCase()
+      if (q === stateRef.current.q) return
+      commit({ q }, "search")
+    }, SEARCH_DEBOUNCE_MS)
+  }
+
+  function onSortChange(value: string) {
+    const sort = normalizeSort(value)
+    if (sort === stateRef.current.sort) return
+    commit({ sort }, "sort")
+  }
 
   return (
     <>
@@ -146,16 +266,25 @@ export default function HomePage({ index }: { index: OffersIndex }) {
 
         {offers.length > 0 ? (
           <>
-            <Toolbar count={offers.length} />
+            <Toolbar
+              total={offers.length}
+              shown={shownList.length}
+              searchValue={searchInput}
+              sortValue={state.sort}
+              category={state.category}
+              clearHidden={!hasQueryOrFilters(state)}
+              onSearchChange={onSearchChange}
+              onSortChange={onSortChange}
+            />
             <a className="skip-list" href="#site-footer">
               Skip the offer list
             </a>
             <ol className="grid" id="ft-grid" role="list">
-              {offers.map((offer, i) => (
+              {shownList.map((offer, i) => (
                 <OfferRow key={offer.slug} offer={offer} index={i} buildDay={buildDay} />
               ))}
             </ol>
-            <section className="empty" id="ft-no-results" hidden>
+            <section className="empty" id="ft-no-results" hidden={shownList.length !== 0}>
               <SearchGlyph />
               <h2>No matching offers</h2>
               <p>

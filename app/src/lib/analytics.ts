@@ -71,7 +71,6 @@ let config: AnalyticsConfig = {
 let trackingActive = false;
 let lastOfferId: string | null = null;
 let lastOfferAt = 0;
-let searchTimer: ReturnType<typeof setTimeout> | null = null;
 let listenerAbort: AbortController | null = null;
 const bannerListeners = new Set<BannerListener>();
 
@@ -360,32 +359,8 @@ export function onDelegatedOfferClick(event: Event): void {
 
 function bindToolbarListeners(signal: AbortSignal): void {
   if (!isBrowser()) return;
-  const input = document.getElementById("ft-search");
-  if (input instanceof HTMLInputElement) {
-    input.addEventListener(
-      "input",
-      () => {
-        if (searchTimer !== null) clearTimeout(searchTimer);
-        searchTimer = setTimeout(() => {
-          searchTimer = null;
-          trackSearch(input.value.trim().length);
-        }, SEARCH_DEBOUNCE_MS);
-      },
-      { signal },
-    );
-  }
-
-  const sortSelect = document.getElementById("ft-sort");
-  if (sortSelect instanceof HTMLSelectElement) {
-    sortSelect.addEventListener(
-      "change",
-      () => {
-        trackSortUse(sortSelect.value || "default");
-      },
-      { signal },
-    );
-  }
-
+  // Search and sort are owned by HomePage (trackSearch / trackSortUse) so
+  // this layer must not attach #ft-search / #ft-sort — that double-fired.
   for (const chip of document.querySelectorAll("[data-ft-category]")) {
     chip.addEventListener(
       "click",
@@ -500,10 +475,6 @@ export function resetAnalyticsForTests(): void {
   trackingActive = false;
   lastOfferId = null;
   lastOfferAt = 0;
-  if (searchTimer !== null) {
-    clearTimeout(searchTimer);
-    searchTimer = null;
-  }
   listenerAbort?.abort();
   listenerAbort = null;
   bannerListeners.clear();
