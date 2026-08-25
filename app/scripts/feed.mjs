@@ -20,12 +20,14 @@ const CATEGORY_LABELS = {
   video: "Video",
 }
 
+// html.escape(s, quote=True): & < > " and apostrophe as &#x27; (not &apos;).
 function xml(text) {
   return String(text)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#x27;")
 }
 
 function parseISO(iso) {
@@ -55,8 +57,9 @@ function itemDescription(offer) {
 
 export function buildFeed(index, baseUrl = DEFAULT_BASE_URL) {
   const base = baseUrl.trim().replace(/\/+$/, "")
+  // Matches scripts/build.py active_offers: missing status defaults to active.
   const items = index.offers
-    .filter((o) => o.status === "active")
+    .filter((o) => o.status !== "expired")
     .sort((a, b) => (a.verified_date === b.verified_date
       ? a.slug < b.slug ? 1 : -1
       : a.verified_date < b.verified_date ? 1 : -1))
