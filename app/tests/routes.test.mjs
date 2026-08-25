@@ -86,6 +86,15 @@ describe("static route coverage (#123)", () => {
     expect(archive).toContain('href="./favicon.svg"');
   });
 
+  it("discovers archive CSS before the module graph so FCP is not queued behind JS", () => {
+    const archive = readFileSync(path.join(outDir, "archive.html"), "utf8");
+    const cssAt = archive.search(/<link[^>]*rel="stylesheet"/i);
+    const jsAt = archive.search(/<script[^>]*type="module"/i);
+    expect(cssAt).toBeGreaterThan(-1);
+    expect(jsAt).toBeGreaterThan(-1);
+    expect(cssAt).toBeLessThan(jsAt);
+  });
+
   it("ships RSS with absolute links off DEFAULT_BASE_URL", async () => {
     const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
     const feed = readFileSync(path.join(outDir, "feed.xml"), "utf8");

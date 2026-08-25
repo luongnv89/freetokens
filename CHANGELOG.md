@@ -5,6 +5,14 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Expired-offer archive lands in React (#129):** `/archive` lists every
+  `expired` offer newest-expiry-first with a text+ARIA "Expired" badge,
+  provider, amount, original expiry, category, and outbound link. Tags on
+  archive rows are links to the pre-filtered home listing (`?category=` /
+  `?verification=` / `?signup=`). Zero expired offers render a friendly
+  empty state; the page is reachable from the footer and the home empty
+  state, and the card grid collapses at 320 px without overflow.
+
 - **Privacy policy, footer, favicon, and brand assets land in React (#132):**
   `/privacy` describes the shipped React behaviour — `query_length`-only
   search, cookieless consent-gated GoatCounter with exclusive-end windows and

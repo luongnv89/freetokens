@@ -51,7 +51,10 @@ describe("ArchivePage (#26 parity)", () => {
   it("renders the empty state when nothing has expired", () => {
     const markup = renderToStaticMarkup(<ArchivePage index={index} />);
     expect(markup).toContain("The archive is empty");
+    expect(markup).toContain('class="glyph"');
+    expect(markup).toContain('href="./index.html"');
     expect(markup).not.toContain('id="ft-archive-grid"');
+    expect(markup).not.toContain("Skip the offer list");
   });
 
   it("renders archived cards with the Expired badge and a retained detail link", () => {
@@ -62,8 +65,11 @@ describe("ArchivePage (#26 parity)", () => {
     const markup = renderToStaticMarkup(<ArchivePage index={fixture} />);
     expect(markup).toContain('id="ft-archive-grid"');
     expect(markup).toContain("badge-expired");
+    expect(markup).toMatch(/<span>Expired<\/span>/);
     expect(markup).toContain('href="offers/gone.html"');
     expect(markup).toMatch(/expired <time [Dd]ate[Tt]ime="2026-01-15">/);
+    expect(markup).toContain("Skip the offer list");
+    expect(markup).toContain('class="detail-btn"');
   });
 
   it("archive tags are links to a pre-filtered home, never inert buttons", () => {
@@ -79,6 +85,31 @@ describe("ArchivePage (#26 parity)", () => {
     expect(markup).toContain('aria-label="See offers tagged hand-verified"');
     expect(markup).toContain('aria-label="See offers tagged no sign-up"');
     expect(markup).not.toMatch(/<button[^>]*data-ft-tag/);
+  });
+});
+
+describe("archive layout at 320 px (#129)", () => {
+  const css = readFileSync(
+    path.resolve(import.meta.dirname, "styles/python-parity.css"),
+    "utf8",
+  );
+
+  it("lets the archive grid collapse to the wrap width instead of overflowing", () => {
+    expect(css).toMatch(
+      /\.grid \{[^}]*grid-template-columns:\s*repeat\(auto-fill,\s*minmax\(min\(100%,\s*19rem\),\s*1fr\)\)/s,
+    );
+    expect(css).toMatch(/#ft-archive-grid \{ min-width: 0; \}/);
+    expect(css).toMatch(/#ft-archive-grid \.card \{ min-width: 0; \}/);
+    expect(css).toMatch(/\.card-title \{[^}]*overflow-wrap:\s*anywhere/s);
+    expect(css).toMatch(/\.amount \{[^}]*overflow-wrap:\s*anywhere/s);
+    expect(css).toMatch(/\.card-top \{[^}]*flex-wrap:\s*wrap/s);
+    expect(css).toMatch(/\.wrap \{[^}]*padding:\s*clamp\(1\.25rem/s);
+    expect(css).toMatch(/\[data-page="archive"\] \.empty \{\s*animation:\s*none/s);
+  });
+
+  it("styles the archive View-details control as a real tap target", () => {
+    expect(css).toMatch(/\.detail-btn \{/);
+    expect(css).toMatch(/\.detail-btn \{[^}]*min-height:\s*44px/s);
   });
 });
 
@@ -206,6 +237,11 @@ describe("page chrome landmarks and footer (#132)", () => {
     expect(archive).toContain('<a href="privacy.html">Privacy policy</a>');
     expect(privacy).toContain('<a href="privacy.html" aria-current="page">Privacy policy</a>');
     expect(detail).toContain('<a href="../privacy.html">Privacy policy</a>');
+  });
+
+  it("marks the archive footer link active and reachable from home empty-state copy", () => {
+    expect(archive).toContain('href="archive.html" aria-current="page"');
+    expect(home).toContain('href="archive.html"');
   });
 
   it("puts a main landmark and one h1 on every route type", () => {

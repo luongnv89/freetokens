@@ -350,6 +350,39 @@ a.badge:focus-visible {
   padding-top: 0.75rem;
 }
 
+/* Archive card actions (#129): View-details control from build.py _DETAIL_CSS. */
+.card-actions { margin-top: 0.75rem; }
+
+.detail-btn {
+  display: block;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.detail-btn:hover { background: var(--ink); color: var(--paper); }
+
+.detail-btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (pointer: coarse) {
+  .detail-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+  }
+}
+
 /* ---- Empty state ----------------------------------------------------- */
 
 .empty {
@@ -509,6 +542,14 @@ a:focus-visible {
     animation-delay: calc(min(var(--i, 0), 10) * 45ms);
   }
   .card::before { transition-duration: 0.18s; }
+}
+
+/* Archive LCP is the empty state or the first card; the rise animation
+   holds opacity:0 (fill-mode backwards) and tanks mobile Lighthouse
+   performance below the #129 ≥95 gate. Home listing already opts out. */
+[data-page="archive"] .card,
+[data-page="archive"] .empty {
+  animation: none;
 }
 
 @keyframes rise {
@@ -708,10 +749,14 @@ a:focus-visible {
   }
 }
 
-/* Narrow viewports: reclaim the rank gutter rather than squeezing the row. */
+/* Narrow viewports: reclaim the rank gutter rather than squeezing the row.
+   Archive cards sit in the same wrap; min-width:0 lets the 19rem grid floor
+   collapse to 100% at 320 px instead of overflowing. */
 @media (max-width: 24rem) {
   #ft-grid > li { grid-template-columns: 1.9rem minmax(0, 1fr); }
   #ft-grid > li::before { padding-right: 0.45rem; }
+  #ft-archive-grid { min-width: 0; }
+  #ft-archive-grid .card { min-width: 0; }
 }
 
 /* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
