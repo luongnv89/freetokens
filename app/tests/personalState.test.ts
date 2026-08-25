@@ -570,6 +570,17 @@ describe("exportPersonalState / importPersonalState (issue #141)", () => {
     importPersonalState(JSON.stringify(exportPersonalState()));
     expect(fetchSpy).not.toHaveBeenCalled();
   });
+
+  it("a crafted __proto__ claim key cannot reach Object.prototype", () => {
+    window.localStorage.setItem(claimStorageKey("__proto__"), "[0]");
+    const data = exportPersonalState();
+    expect(Object.getPrototypeOf(data.claims)).toBeNull();
+    expect(Object.prototype.hasOwnProperty.call(data, "claims")).toBe(true);
+    expect(function () {
+      JSON.stringify(data);
+    }).not.toThrow();
+    expect(Object.keys(data.claims)).toContain("__proto__");
+  });
 });
 
 describe("privacy: personal state never leaves the browser", () => {  it("no network request of any kind is made during reads or writes", () => {

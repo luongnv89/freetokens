@@ -432,10 +432,19 @@ export function exportPersonalState(
   claimSlugs?: Iterable<string>,
 ): PersonalStateExport {
   const slugs = claimSlugs ? [...claimSlugs] : claimSlugsInStorage();
-  const claims: Record<string, number[]> = {};
+  // Null-prototype map: slugs come from raw localStorage keys, so a
+  // crafted "__proto__" key must never reach Object.prototype.
+  const claims: Record<string, number[]> = Object.create(null);
   for (const slug of normalizeSlugList(slugs)) {
     const done = parseClaimRaw(safeRead(claimStorageKey(slug)));
-    if (done && done.length > 0) claims[slug] = done;
+    if (done && done.length > 0) {
+      Object.defineProperty(claims, slug, {
+        value: done,
+        enumerable: true,
+        writable: true,
+        configurable: true,
+      });
+    }
   }
   return {
     format: EXPORT_FORMAT,
