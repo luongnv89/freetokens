@@ -1,14 +1,24 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
+  DISMISSED_KEY,
   GA_CONSENT_KEY,
+  PREFS_KEY,
+  SAVED_KEY,
   SCHEMA_VERSION,
   claimStorageKey,
   clearAllPersonalState,
   clearClaimProgress,
+  clearDismissedSlugs,
   readClaimProgress,
+  readDismissedSlugs,
   readGaConsent,
+  readPrefs,
+  readSavedSlugs,
   writeClaimProgress,
+  writeDismissedSlugs,
   writeGaConsent,
+  writePrefs,
+  writeSavedSlugs,
 } from "../src/lib/personalState";
 
 // The four hostile failure modes the issue requires us to simulate:
@@ -234,6 +244,119 @@ describe("schema versioning & migration path", () => {
   });
 });
 
+describe("saved shortlist (issue #140)", () => {
+  it("round-trips through the versioned envelope", () => {
+    expect(readSavedSlugs()).toEqual([]);
+    expect(writeSavedSlugs(["alpha", "beta"])).toBe(true);
+    const raw: unknown = JSON.parse(
+      window.localStorage.getItem(SAVED_KEY) as string,
+    );
+    expect(raw).toEqual({ v: SCHEMA_VERSION, slugs: ["alpha", "beta"] });
+    expect(readSavedSlugs()).toEqual(["alpha", "beta"]);
+  });
+
+  it("normalizes duplicates, blanks, and oversized entries", () => {
+    writeSavedSlugs(["alpha", "  ", "alpha", "  beta  ".trim(), "x".repeat(500)]);
+    const saved = readSavedSlugs();
+    expect(saved).toContain("alpha");
+    expect(saved.every((s) => s.length <= 128)).toBe(true);
+    expect(new Set(saved).size).toBe(saved.length);
+  });
+
+  it("corrupted payloads degrade to [] without throwing", () => {
+    for (const bad of [
+      "{broken",
+      '"just a string"',
+      "42",
+      "null",
+      "[\"bare-legacy-array\"]", // no envelope: not a saved record
+      '{"v": 1}', // missing slugs
+      '{"v": 999, "slugs": ["a"]}', // unknown future schema
+      '{"v": 1, "slugs": ["a", 42, null]}', // non-string entries filtered
+    ]) {
+      window.localStorage.setItem(SAVED_KEY, bad);
+      expect(() => readSavedSlugs()).not.toThrow();
+      if (bad === '{"v": 999, "slugs": ["a"]}') {
+        expect(readSavedSlugs()).toEqual([]);
+      }
+    }
+    window.localStorage.setItem(
+      SAVED_KEY,
+      '{"v": 1, "slugs": ["a", 42, null]}',
+    );
+    expect(readSavedSlugs()).toEqual(["a"]);
+  });
+});
+
+describe("dismissed list (issue #140)", () => {
+  it("round-trips and clears with one call", () => {
+    expect(writeDismissedSlugs(["gamma"])).toBe(true);
+    expect(readDismissedSlugs()).toEqual(["gamma"]);
+    clearDismissedSlugs();
+    expect(readDismissedSlugs()).toEqual([]);
+    expect(window.localStorage.getItem(DISMISSED_KEY)).toBeNull();
+  });
+
+  it("degrades to [] on hostile storage like every other reader", () => {
+    installStorage(makeLocalStorage({ throwOnAccess: true }).impl);
+    expect(readDismissedSlugs()).toEqual([]);
+    expect(writeDismissedSlugs(["x"])).toBe(false);
+    expect(clearDismissedSlugs()).toBeUndefined();
+  });
+});
+
+describe("last-used prefs (issue #140)", () => {
+  it("round-trips through the versioned envelope", () => {
+    expect(readPrefs()).toBeNull();
+    expect(
+      writePrefs({ category: "coding", sort: "amount", verification: "", signup: "none" }),
+    ).toBe(true);
+    const raw: unknown = JSON.parse(window.localStorage.getItem(PREFS_KEY) as string);
+    expect(raw).toMatchObject({ v: SCHEMA_VERSION, category: "coding", sort: "amount" });
+    expect(readPrefs()).toEqual({
+      v: SCHEMA_VERSION,
+      category: "coding",
+      verification: "",
+      signup: "none",
+      sort: "amount",
+    });
+  });
+
+  it("missing fields store as empty defaults; hostile data degrades to null", () => {
+    writePrefs({ sort: "expiring" });
+    expect(readPrefs()).toEqual({
+      v: SCHEMA_VERSION,
+      category: "",
+      verification: "",
+      signup: "",
+      sort: "expiring",
+    });
+    for (const bad of ["{broken", '"s"', "42", "null", '{"v": 2, "sort": "x"}']) {
+      window.localStorage.setItem(PREFS_KEY, bad);
+      expect(readPrefs()).toBeNull();
+    }
+  });
+});
+
+describe("clearAllPersonalState covers the issue #140 keys", () => {
+  it("wipes saved, dismissed, and prefs alongside consent and claims", () => {
+    writeGaConsent("granted");
+    writeClaimProgress(SLUG, [0]);
+    writeSavedSlugs(["alpha"]);
+    writeDismissedSlugs(["beta"]);
+    writePrefs({ sort: "amount" });
+    clearAllPersonalState([SLUG]);
+    expect(window.localStorage.getItem(GA_CONSENT_KEY)).toBeNull();
+    expect(window.localStorage.getItem(KEY)).toBeNull();
+    expect(window.localStorage.getItem(SAVED_KEY)).toBeNull();
+    expect(window.localStorage.getItem(DISMISSED_KEY)).toBeNull();
+    expect(window.localStorage.getItem(PREFS_KEY)).toBeNull();
+    expect(readSavedSlugs()).toEqual([]);
+    expect(readDismissedSlugs()).toEqual([]);
+    expect(readPrefs()).toBeNull();
+  });
+});
+
 describe("privacy: personal state never leaves the browser", () => {
   it("no network request of any kind is made during reads or writes", () => {
     const networkSpies = [
@@ -263,6 +386,13 @@ describe("privacy: personal state never leaves the browser", () => {
     readClaimProgress(SLUG);
     writeGaConsent("granted");
     writeClaimProgress(SLUG, [2]);
+    readSavedSlugs();
+    readDismissedSlugs();
+    readPrefs();
+    writeSavedSlugs(["a"]);
+    writeDismissedSlugs(["b"]);
+    clearDismissedSlugs();
+    writePrefs({ sort: "amount" });
 
     expect(networkSpies[0]).not.toHaveBeenCalled();
     expect(beacon).not.toHaveBeenCalled();

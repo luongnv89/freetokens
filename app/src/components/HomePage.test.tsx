@@ -8,6 +8,7 @@ import {
   grantConsent,
   resetAnalyticsForTests,
 } from "../lib/analytics"
+import { DISMISSED_KEY, PREFS_KEY, SAVED_KEY } from "../lib/personalState"
 import type { Offer, OffersIndex } from "../lib/offers"
 
 const MID = "G-TESTID12345"
@@ -563,5 +564,187 @@ describe("HomePage three-dimension filters (#126)", () => {
       verification: "all",
       signup: "all",
     })
+  })
+})
+
+describe("HomePage saved and dismissed personal state (#140)", () => {
+  let store: Record<string, string>
+
+  function installPersonalStorage() {
+    store = {}
+    Object.defineProperty(window, "localStorage", {
+      value: {
+        getItem: (key: string) => (key in store ? store[key] : null),
+        setItem: (key: string, value: string) => {
+          store[key] = String(value)
+        },
+        removeItem: (key: string) => {
+          delete store[key]
+        },
+        clear: () => {
+          for (const k of Object.keys(store)) delete store[k]
+        },
+      },
+      configurable: true,
+      writable: true,
+    })
+  }
+
+  function stored(key: string) {
+    return key in store ? JSON.parse(store[key]) : null
+  }
+
+  beforeEach(() => {
+    installPersonalStorage()
+  })
+
+  function saveButton(slug: string) {
+    return document.querySelector(`[data-ft-save="${slug}"]`) as HTMLButtonElement
+  }
+
+  function dismissButton(slug: string) {
+    return document.querySelector(`[data-ft-dismiss="${slug}"]`) as HTMLButtonElement
+  }
+
+  function savedToggle() {
+    return document.querySelector("[data-ft-saved-toggle]") as HTMLButtonElement
+  }
+
+  it("saving persists to localStorage and survives a remount (reload/routes)", () => {
+    const { unmount } = render(<HomePage index={index} />)
+    fireEvent.click(saveButton("alpha-copilot"))
+    expect(saveButton("alpha-copilot").getAttribute("aria-pressed")).toBe("true")
+    expect(stored(SAVED_KEY)).toEqual({ v: 1, slugs: ["alpha-copilot"] })
+    unmount()
+
+    render(<HomePage index={index} />)
+    expect(saveButton("alpha-copilot").getAttribute("aria-pressed")).toBe("true")
+    expect(saveButton("alpha-image").getAttribute("aria-pressed")).toBe("false")
+  })
+
+  it("saved-only view lists exactly the saved offers", () => {
+    store[SAVED_KEY] = JSON.stringify({ v: 1, slugs: ["alpha-social", "beta-copilot"] })
+    render(<HomePage index={index} />)
+    fireEvent.click(savedToggle())
+    expect(listedSlugs()).toEqual(["alpha-social", "beta-copilot"])
+    expect(savedToggle().getAttribute("aria-pressed")).toBe("true")
+    // Toggling back restores the default list.
+    fireEvent.click(savedToggle())
+    expect(listedSlugs()).toHaveLength(fixtureOffers.length)
+  })
+
+  it("dismissed offers vanish from the default list; count shows and one click restores all", () => {
+    const { unmount } = render(<HomePage index={index} />)
+    act(() => {
+      dismissButton("alpha-copilot").click()
+      dismissButton("alpha-free").click()
+    })
+    expect(stored(DISMISSED_KEY).slugs).toContain("alpha-copilot")
+    expect(listedSlugs()).not.toContain("alpha-copilot")
+    expect(listedSlugs()).not.toContain("alpha-free")
+    expect(statusText()).toContain("2 hidden — restore")
+
+    const restore = document.querySelector("[data-ft-restore-dismissed]") as HTMLButtonElement
+    expect(restore.getAttribute("aria-label")).toBe("Restore 2 hidden offers")
+    fireEvent.click(restore)
+    expect(listedSlugs()).toHaveLength(fixtureOffers.length)
+    expect(store[DISMISSED_KEY]).toBeUndefined()
+
+    // Remount keeps the restored state.
+    unmount()
+    render(<HomePage index={index} />)
+    expect(listedSlugs()).toHaveLength(fixtureOffers.length)
+  })
+
+  it("dismissing an offer removes it from the saved shortlist until restored", () => {
+    store[SAVED_KEY] = JSON.stringify({ v: 1, slugs: ["alpha-copilot"] })
+    render(<HomePage index={index} />)
+    fireEvent.click(dismissButton("alpha-copilot"))
+    expect(stored(SAVED_KEY).slugs).toEqual([])
+    expect(listedSlugs()).not.toContain("alpha-copilot")
+
+    fireEvent.click(document.querySelector("[data-ft-restore-dismissed]") as HTMLButtonElement)
+    expect(listedSlugs()).toContain("alpha-copilot")
+    expect(saveButton("alpha-copilot").getAttribute("aria-pressed")).toBe("false")
+    expect(saveButton("alpha-copilot").textContent).toBe("Save")
+  })
+
+  it("personal actions never leak into the URL or analytics events", () => {
+    const gtag = grantedGtag()
+    render(<HomePage index={index} />)
+    fireEvent.click(saveButton("alpha-copilot"))
+    fireEvent.click(dismissButton("alpha-image"))
+    fireEvent.click(savedToggle())
+    expect(window.location.search).toBe("")
+    const eventNames = gtag.mock.calls.filter((c) => c[0] === "event").map((c) => c[1])
+    expect(eventNames).not.toContain("save_offer")
+    expect(eventNames).not.toContain("dismiss_offer")
+    expect(eventNames.filter((n) => n !== "page_view")).toEqual([])
+  })
+
+  it("restores last-used filter/sort prefs on reload with an empty URL", () => {
+    store[PREFS_KEY] = JSON.stringify({
+      v: 1,
+      category: "image",
+      verification: "",
+      signup: "",
+      sort: "amount",
+    })
+    render(<HomePage index={index} />)
+    expect(categoryChip("image").getAttribute("aria-pressed")).toBe("true")
+    expect(listedSlugs()[0]).toBe("alpha-image")
+    // URL may reflect only filter/search/sort — never saved/dismissed flags.
+    expect(window.location.search).toContain("category=image")
+    expect(window.location.search).not.toContain("saved")
+    expect(window.location.search).not.toContain("dismissed")
+  })
+
+  it("a URL with explicit state always wins over stored prefs", () => {
+    store[PREFS_KEY] = JSON.stringify({
+      v: 1,
+      category: "image",
+      verification: "",
+      signup: "",
+      sort: "",
+    })
+    setSearch("?category=coding")
+    render(<HomePage index={index} />)
+    expect(categoryChip("coding").getAttribute("aria-pressed")).toBe("true")
+    expect(categoryChip("image").getAttribute("aria-pressed")).toBe("false")
+  })
+
+  it("invalid stored pref values degrade to defaults instead of applying", () => {
+    store[PREFS_KEY] = JSON.stringify({ v: 1, category: "not-a-category", sort: "bogus" })
+    render(<HomePage index={index} />)
+    expect(categoryChip("not-a-category")).toBeNull()
+    expect(window.location.search).toBe("")
+  })
+
+  it("clearing browser storage returns the site to its default state with no error", () => {
+    store[SAVED_KEY] = JSON.stringify({ v: 1, slugs: ["alpha-copilot"] })
+    store[DISMISSED_KEY] = JSON.stringify({ v: 1, slugs: ["alpha-image"] })
+    const { unmount } = render(<HomePage index={index} />)
+    expect(listedSlugs()).toHaveLength(fixtureOffers.length - 1)
+
+    window.localStorage.clear()
+    unmount()
+    render(<HomePage index={index} />)
+    expect(() => listedSlugs()).not.toThrow()
+    expect(listedSlugs()).toHaveLength(fixtureOffers.length)
+    expect(savedToggle().textContent).toContain("Saved (0)")
+  })
+
+  it("save/dismiss controls are real keyboard-operable buttons with announced state", () => {
+    render(<HomePage index={index} />)
+    const save = saveButton("beta-copilot")
+    save.focus()
+    expect(document.activeElement).toBe(save)
+    fireEvent.click(save) // keyboard activation of a button fires click
+    expect(save.getAttribute("aria-pressed")).toBe("true")
+    expect(save.getAttribute("aria-label")).toBe("Remove Beta Copilot from saved")
+    const dismiss = dismissButton("beta-copilot")
+    expect(dismiss.tagName).toBe("BUTTON")
+    expect(dismiss.getAttribute("aria-label")).toBe("Hide Beta Copilot from the list")
+    expect(document.getElementById("ft-results-status")?.getAttribute("role")).toBe("status")
   })
 })

@@ -16,6 +16,15 @@ import {
   buildDate,
   type OffersIndex,
 } from "../lib/offers"
+import {
+  clearDismissedSlugs,
+  readDismissedSlugs,
+  readPrefs,
+  readSavedSlugs,
+  writeDismissedSlugs,
+  writePrefs,
+  writeSavedSlugs,
+} from "../lib/personalState"
 import { TAG_ICONS } from "../lib/tagIcons"
 import {
   DIMENSIONS,
@@ -111,11 +120,16 @@ function Toolbar({
   category,
   active,
   clearHidden,
+  savedCount,
+  savedOnly,
+  dismissedCount,
   onSearchChange,
   onSortChange,
   onCategorySet,
   onRemoveFilter,
   onClear,
+  onToggleSavedOnly,
+  onRestoreDismissed,
 }: {
   total: number
   shown: number
@@ -124,11 +138,16 @@ function Toolbar({
   category: string
   active: { dim: FilterDimension; value: string; label: string }[]
   clearHidden: boolean
+  savedCount: number
+  savedOnly: boolean
+  dismissedCount: number
   onSearchChange: (value: string) => void
   onSortChange: (value: string) => void
   onCategorySet: (category: string) => void
   onRemoveFilter: (dim: FilterDimension) => void
   onClear: () => void
+  onToggleSavedOnly: () => void
+  onRestoreDismissed: () => void
 }) {
   const countText =
     shown === total ? `Showing all ${total} offers` : `Showing ${shown} of ${total} offers`
@@ -187,9 +206,38 @@ function Toolbar({
           </Button>
         ))}
       </div>
+      <div className="chips" role="group" aria-label="Personal lists">
+        <Button
+          type="button"
+          variant="unstyled"
+          className={`chip chip-saved-view${savedOnly ? " chip-active" : ""}`}
+          id="ft-saved-toggle"
+          data-ft-saved-toggle
+          aria-pressed={savedOnly ? "true" : "false"}
+          onClick={onToggleSavedOnly}
+        >
+          <span>Saved ({savedCount})</span>
+        </Button>
+      </div>
       <div className="results-line">
         <p className="results-status" id="ft-results-status" role="status" aria-live="polite">
           {countText}
+          {dismissedCount > 0 && !savedOnly && (
+            <span>
+              {" · "}
+              <Button
+                type="button"
+                variant="unstyled"
+                className="chip restore-dismissed"
+                id="ft-restore-dismissed"
+                data-ft-restore-dismissed
+                aria-label={`Restore ${dismissedCount} hidden offer${dismissedCount === 1 ? "" : "s"}`}
+                onClick={onRestoreDismissed}
+              >
+                {dismissedCount} hidden — restore
+              </Button>
+            </span>
+          )}
           {active.map((tag) => (
             <span key={tag.dim}>
               {" · "}
@@ -221,8 +269,21 @@ function Toolbar({
   )
 }
 
-function visibleOffers(offers: ReturnType<typeof activeOffers>, state: UrlState) {
-  return applySort(offers, state.sort).filter((offer) => offerMatches(offer, state))
+function visibleOffers(
+  offers: ReturnType<typeof activeOffers>,
+  state: UrlState,
+  personal?: { savedOnly: boolean; saved: ReadonlySet<string>; dismissed: ReadonlySet<string> },
+) {
+  const base = applySort(offers, state.sort).filter((offer) =>
+    offerMatches(offer, state),
+  )
+  if (!personal) return base
+  if (personal.savedOnly) {
+    // Saved-only view lists exactly the saved offers.
+    return base.filter((offer) => personal.saved.has(offer.slug))
+  }
+  // Default view hides dismissed offers.
+  return base.filter((offer) => !personal.dismissed.has(offer.slug))
 }
 
 /**
@@ -241,12 +302,17 @@ export default function HomePage({ index }: { index: OffersIndex }) {
 
   const [state, setState] = useState(emptyState)
   const [searchInput, setSearchInput] = useState("")
+  // Personal state hydrates after mount (ClaimChecklist pattern): the
+  // prerendered first paint always shows every active offer.
+  const [saved, setSaved] = useState<ReadonlySet<string>>(new Set())
+  const [dismissed, setDismissed] = useState<ReadonlySet<string>>(new Set())
+  const [savedOnly, setSavedOnly] = useState(false)
   const stateRef = useRef(state)
   stateRef.current = state
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pendingFocusRef = useRef<"search" | "next-pill" | null>(null)
 
-  const shownList = visibleOffers(offers, state)
+  const shownList = visibleOffers(offers, state, { savedOnly, saved, dismissed })
 
   function commit(patch: Partial<UrlState>, source: "search" | "sort" | "filter") {
     const next: UrlState = { ...stateRef.current, ...patch }
@@ -274,6 +340,15 @@ export default function HomePage({ index }: { index: OffersIndex }) {
         signup: next.signup,
       })
     }
+    // Remember the last filter/sort locally (issue #140). Never serialized
+    // into the URL by this layer — the URL keeps reflecting only
+    // filter/search/sort, which serializeState already whitelists.
+    writePrefs({
+      category: next.category,
+      verification: next.verification,
+      signup: next.signup,
+      sort: next.sort,
+    })
   }
 
   useEffect(() => {
@@ -288,12 +363,101 @@ export default function HomePage({ index }: { index: OffersIndex }) {
       setSearchInput(parsed.q)
     }
     applyFromLocation()
+    // Hydrate personal shortlists from localStorage.
+    setSaved(new Set(readSavedSlugs()))
+    setDismissed(new Set(readDismissedSlugs()))
+    // Restore last-used preferences only when the URL carries no explicit
+    // view state; a shared link must always win over stored prefs.
+    if (!window.location.search) {
+      const prefs = readPrefs()
+      if (prefs) {
+        const current = stateRef.current
+        const validCategory = CATEGORIES.includes(
+          prefs.category as (typeof CATEGORIES)[number],
+        )
+          ? prefs.category
+          : ""
+        const validVerification = prefs.verification in VERIFICATION_LABELS
+          ? prefs.verification
+          : ""
+        const validSignup = prefs.signup in SIGNUP_LABELS ? prefs.signup : ""
+        const sort = normalizeSort(prefs.sort)
+        const patch: Partial<UrlState> = {}
+        if (current.category !== validCategory) patch.category = validCategory
+        if (current.verification !== validVerification) {
+          patch.verification = validVerification
+        }
+        if (current.signup !== validSignup) patch.signup = validSignup
+        if (current.sort !== sort) patch.sort = sort
+        if (Object.keys(patch).length > 0) {
+          const next = { ...current, ...patch }
+          stateRef.current = next
+          setState(next)
+          const query = serializeState(next)
+          try {
+            window.history.replaceState(
+              {},
+              "",
+              query
+                ? `${window.location.pathname}?${query}`
+                : window.location.pathname,
+            )
+          } catch {
+            /* ignore */
+          }
+        }
+      }
+    }
     window.addEventListener("popstate", applyFromLocation)
     return () => {
       window.removeEventListener("popstate", applyFromLocation)
       if (debounceRef.current !== null) clearTimeout(debounceRef.current)
     }
   }, [])
+
+  function onToggleSave(slug: string) {
+    setSaved((prev) => {
+      const next = new Set(prev)
+      if (next.has(slug)) next.delete(slug)
+      else next.add(slug)
+      writeSavedSlugs([...next])
+      return next
+    })
+    // Dismissing and saving are exclusive: saving unhides, dismissing unsaves.
+    setDismissed((prev) => {
+      if (!prev.has(slug)) return prev
+      const next = new Set(prev)
+      next.delete(slug)
+      writeDismissedSlugs([...next])
+      return next
+    })
+  }
+
+  function onDismiss(slug: string) {
+    setDismissed((prev) => {
+      if (prev.has(slug)) return prev
+      const next = new Set(prev)
+      next.add(slug)
+      writeDismissedSlugs([...next])
+      return next
+    })
+    setSaved((prev) => {
+      if (!prev.has(slug)) return prev
+      const next = new Set(prev)
+      next.delete(slug)
+      writeSavedSlugs([...next])
+      return next
+    })
+  }
+
+  function onRestoreDismissed() {
+    clearDismissedSlugs()
+    setDismissed(new Set())
+  }
+
+  function onToggleSavedOnly() {
+    setSavedOnly((prev) => !prev)
+  }
 
   function onSearchChange(value: string) {
     setSearchInput(value)
@@ -384,11 +548,16 @@ export default function HomePage({ index }: { index: OffersIndex }) {
               category={state.category}
               active={namedFilters(state)}
               clearHidden={!hasQueryOrFilters(state)}
+              savedCount={saved.size}
+              savedOnly={savedOnly}
+              dismissedCount={dismissed.size}
               onSearchChange={onSearchChange}
               onSortChange={onSortChange}
               onCategorySet={onCategorySet}
               onRemoveFilter={onRemoveFilter}
               onClear={onClear}
+              onToggleSavedOnly={onToggleSavedOnly}
+              onRestoreDismissed={onRestoreDismissed}
             />
             <a className="skip-list" href="#site-footer">
               Skip the offer list
@@ -406,6 +575,9 @@ export default function HomePage({ index }: { index: OffersIndex }) {
                     signup: state.signup,
                   }}
                   onToggleTag={onTagToggle}
+                  saved={saved.has(offer.slug)}
+                  onToggleSave={onToggleSave}
+                  onDismiss={onDismiss}
                 />
               ))}
             </ol>

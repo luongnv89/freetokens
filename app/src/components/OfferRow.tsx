@@ -95,12 +95,18 @@ export function OfferRow({
   buildDay,
   pressed,
   onToggleTag,
+  saved = false,
+  onToggleSave,
+  onDismiss,
 }: {
   offer: Offer
   index: number
   buildDay: string
   pressed: { category: string; verification: string; signup: string }
   onToggleTag: (dim: FilterDimension, value: string) => void
+  saved?: boolean
+  onToggleSave?: (slug: string) => void
+  onDismiss?: (slug: string) => void
 }) {
   const detailHref = `offers/${offer.slug}.html`
   return (
@@ -186,6 +192,33 @@ export function OfferRow({
           <a className="r-details" href={detailHref}>
             details
           </a>
+          {(onToggleSave || onDismiss) && (
+            <span className="r-actions">
+              {onToggleSave && (
+                <button
+                  type="button"
+                  className="chip r-save"
+                  data-ft-save={offer.slug}
+                  aria-pressed={saved ? "true" : "false"}
+                  aria-label={saved ? `Remove ${offer.title} from saved` : `Save ${offer.title}`}
+                  onClick={() => onToggleSave(offer.slug)}
+                >
+                  {saved ? "Saved" : "Save"}
+                </button>
+              )}
+              {onDismiss && (
+                <button
+                  type="button"
+                  className="chip r-dismiss"
+                  data-ft-dismiss={offer.slug}
+                  aria-label={`Hide ${offer.title} from the list`}
+                  onClick={() => onDismiss(offer.slug)}
+                >
+                  Dismiss
+                </button>
+              )}
+            </span>
+          )}
         </p>
       </article>
     </li>
