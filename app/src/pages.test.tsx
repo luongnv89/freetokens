@@ -1,10 +1,16 @@
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
 import ArchivePage from "./components/ArchivePage";
+import HomePage from "./components/HomePage";
 import PrivacyPage from "./components/PrivacyPage";
 import OfferDetailPage from "./components/OfferDetailPage";
+import { FILTER_DIMENSIONS } from "./lib/analytics";
 import { expiredOffers, type OffersIndex } from "./lib/offers";
 import indexData from "./data/offers.json";
+
+const PUBLIC_DIR = path.resolve(import.meta.dirname, "../public");
 
 const index = indexData as OffersIndex;
 
@@ -94,14 +100,19 @@ describe("OfferDetailPage (F2 shell, #123)", () => {
   });
 });
 
-describe("PrivacyPage (Task 3.5 parity)", () => {
+describe("PrivacyPage (#132 shipped-analytics claims)", () => {
+  const markup = renderToStaticMarkup(<PrivacyPage />);
+
   it("carries the policy sections with stable anchor ids", () => {
-    const markup = renderToStaticMarkup(<PrivacyPage />);
     for (const id of [
       "privacy-summary",
+      "privacy-what-this-is",
       "privacy-analytics",
+      "privacy-live-traffic",
       "privacy-consent",
       "privacy-third-parties",
+      "privacy-never",
+      "privacy-choices",
       "privacy-changes",
     ]) {
       expect(markup).toContain(`id="${id}"`);
@@ -109,7 +120,93 @@ describe("PrivacyPage (Task 3.5 parity)", () => {
   });
 
   it("marks the privacy footer link active", () => {
-    const markup = renderToStaticMarkup(<PrivacyPage />);
     expect(markup).toContain('<a href="privacy.html" aria-current="page">Privacy policy</a>');
+  });
+
+  it("wraps the policy in a main landmark with one h1", () => {
+    expect(markup.match(/<main>/g)?.length).toBe(1);
+    expect(markup.match(/<h1>/g)?.length).toBe(1);
+    expect(markup).toContain("<h1>Privacy Policy</h1>");
+    expect(markup.match(/<h2 /g)?.length).toBe(markup.match(/<section/g)?.length);
+  });
+
+  it("states shipped claims and omits unshipped ones", () => {
+    for (const claim of [
+      "query_length",
+      "anonymize_ip",
+      "GoatCounter",
+      "no cookies",
+      "ft_ga_consent",
+      "exclusive-end",
+      "four hours",
+      "home page",
+      "not shown in the footer of every page",
+      "never</strong> collected",
+      "zero tracking requests",
+    ]) {
+      expect(markup).toContain(claim);
+    }
+    for (const dim of FILTER_DIMENSIONS) {
+      expect(markup).toContain(`<code>${dim}</code>`);
+    }
+    for (const absent of [
+      "Google Fonts",
+      "offer_share",
+      "share button",
+      "Share actions",
+      "fonts.googleapis",
+      "Built ",
+    ]) {
+      expect(markup).not.toContain(absent);
+    }
+  });
+});
+
+describe("page chrome landmarks and footer (#132)", () => {
+  const home = renderToStaticMarkup(<HomePage index={index} />);
+  const archive = renderToStaticMarkup(<ArchivePage index={index} />);
+  const privacy = renderToStaticMarkup(<PrivacyPage />);
+  const detail = renderToStaticMarkup(
+    <OfferDetailPage index={index} slug={index.offers[0].slug} />,
+  );
+
+  it("links privacy from the footer on every route type", () => {
+    expect(home).toContain('<a href="privacy.html">Privacy policy</a>');
+    expect(archive).toContain('<a href="privacy.html">Privacy policy</a>');
+    expect(privacy).toContain('<a href="privacy.html" aria-current="page">Privacy policy</a>');
+    expect(detail).toContain('<a href="../privacy.html">Privacy policy</a>');
+  });
+
+  it("puts a main landmark and one h1 on every route type", () => {
+    for (const markup of [home, archive, privacy, detail]) {
+      expect(markup.match(/<main>/g)?.length).toBe(1);
+      expect(markup.match(/<h1>/g)?.length).toBe(1);
+    }
+  });
+
+  it("renders the #106 mark in the footer without a Built date", () => {
+    expect(home).toContain('src="./logo-mark.svg"');
+    expect(detail).toContain('src="../logo-mark.svg"');
+    expect(home).not.toContain("Built ");
+    expect(privacy).not.toContain("Built ");
+  });
+});
+
+describe("brand assets (#106 / #132)", () => {
+  it("copies declared SVG sizes into public chrome", () => {
+    const expected: [string, string, string][] = [
+      ["favicon.svg", 'width="16"', 'height="16"'],
+      ["logo-mark.svg", 'width="64"', 'height="64"'],
+      ["logo-icon.svg", 'width="512"', 'height="512"'],
+      ["logo-full.svg", 'width="320"', 'height="72"'],
+      ["logo-wordmark.svg", 'width="180"', 'height="40"'],
+      ["logo-white.svg", 'width="320"', 'height="72"'],
+      ["logo-black.svg", 'width="320"', 'height="72"'],
+    ];
+    for (const [file, w, h] of expected) {
+      const svg = readFileSync(path.join(PUBLIC_DIR, file), "utf8");
+      expect(svg).toContain(w);
+      expect(svg).toContain(h);
+    }
   });
 });
