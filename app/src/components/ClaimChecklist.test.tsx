@@ -66,6 +66,40 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
+describe("ClaimChecklist linkified steps (#109)", () => {
+  const LINKED = ["Visit https://example.com/pricing and sign in."]
+
+  it("renders bare URLs in step text as clickable links", () => {
+    render(<ClaimChecklist slug={SLUG} steps={LINKED} />)
+    const link = screen.getByRole("link", { name: "https://example.com/pricing" })
+    expect(link).toHaveAttribute("href", "https://example.com/pricing")
+    expect(link).toHaveAttribute("target", "_blank")
+    expect(link).toHaveAttribute("rel", "noopener noreferrer")
+  })
+
+  it("keeps surrounding text and trailing punctuation outside the href", () => {
+    render(<ClaimChecklist slug={OTHER} steps={LINKED} />)
+    const link = screen.getByRole("link")
+    expect(link.parentElement).toHaveTextContent(/^Visit .* and sign in\.$/)
+    expect(link.textContent).not.toMatch(/[.,]$/)
+  })
+
+  it("does not linkify steps without URLs and keeps them as plain text", () => {
+    render(<ClaimChecklist slug={SLUG} steps={STEPS} />)
+    expect(screen.queryByRole("link")).toBeNull()
+    expect(screen.getByText("Open the page.")).toBeInTheDocument()
+  })
+
+  it("excludes an unbalanced closing paren from the link target", () => {
+    render(<ClaimChecklist slug={OTHER} steps={["See https://en.wikipedia.org/wiki/AI_(disambiguation) for details.)"]} />)
+    const link = screen.getByRole("link")
+    expect(link).toHaveAttribute(
+      "href",
+      "https://en.wikipedia.org/wiki/AI_(disambiguation)",
+    )
+  })
+})
+
 describe("ClaimChecklist persistence (#128)", () => {
   it("persists a checked step across remount for that slug only", async () => {
     const { unmount } = render(<ClaimChecklist slug={SLUG} steps={STEPS} />)

@@ -1336,6 +1336,11 @@ button:focus-visible {
   overflow-wrap: anywhere;
 }
 
+.step-text a {
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
 .claim-step input:checked + label .step-text {
   color: var(--gray);
   text-decoration: line-through;

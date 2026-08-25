@@ -7,6 +7,32 @@ import { readClaimProgress, writeClaimProgress } from "../lib/personalState"
  * live progress readout are a hydrate-time enhancement via personalState,
  * honouring legacy `ft-claim-<slug>` bare arrays.
  */
+const URL_PATTERN = /https?:\/\/[^\s"'<>]+/g
+
+type StepPart = string | { href: string; text: string }
+
+/** Split step text into plain segments and bare URLs, trimming
+ * trailing punctuation and unbalanced closing parens out of the href. */
+function splitStepLinks(text: string): StepPart[] {
+  const parts: StepPart[] = []
+  let cursor = 0
+  for (const match of text.matchAll(URL_PATTERN)) {
+    let url = match[0]
+    while (url.endsWith(")") && (url.match(/\)/g) ?? []).length > (url.match(/\(/g) ?? []).length) {
+      url = url.slice(0, -1)
+    }
+    url = url.replace(/[.,;:!?]+$/, "")
+    if (!url) continue
+    const start = match.index ?? 0
+    const end = start + url.length
+    if (start > cursor) parts.push(text.slice(cursor, start))
+    parts.push({ href: url, text: url })
+    cursor = end
+  }
+  if (cursor < text.length) parts.push(text.slice(cursor))
+  return parts
+}
+
 export function ClaimChecklist({ slug, steps }: { slug: string; steps: readonly string[] }) {
   const [done, setDone] = useState<number[]>([])
   const total = steps.length
@@ -57,7 +83,17 @@ export function ClaimChecklist({ slug, steps }: { slug: string; steps: readonly 
                 <span className="num">{i + 1}</span>
                 <span className="tick">&#10003;</span>
               </span>
-              <span className="step-text">{step}</span>
+              <span className="step-text">
+                {splitStepLinks(step).map((part, j) =>
+                  typeof part === "string" ? (
+                    part
+                  ) : (
+                    <a key={j} href={part.href} target="_blank" rel="noopener noreferrer">
+                      {part.text}
+                    </a>
+                  ),
+                )}
+              </span>
             </label>
           </li>
         ))}
