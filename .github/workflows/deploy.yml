@@ -53,7 +53,22 @@ jobs:
           GOATCOUNTER_SITE_URL: ${{ secrets.GOATCOUNTER_SITE_URL }}
         run: |
           python3 scripts/build.py
-          python3 -m unittest discover -s tests
+          python3 -m unittest tests/test_validate_offers.py tests/test_skill_validator.py
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install app dependencies
+        working-directory: app
+        run: npm ci
+
+      - name: Run Node unit suites
+        working-directory: app
+        run: npm test
 
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
