@@ -502,13 +502,26 @@ describe("shared header chrome (#112)", () => {
 
   it("marks the active route in the primary nav without losing the footer state", () => {
     expect(home).toContain('<a href="./index.html" aria-current="page">Offers</a>');
-    expect(archive).toContain('<a href="archive.html" aria-current="page">Archive</a>');
+    expect(archive).toContain('href="archive.html" aria-current="page"');
     expect(privacy).toContain('<a href="privacy.html" aria-current="page">Privacy</a>');
     expect(detail).not.toMatch(/<a href="\.\.\/index\.html" aria-current="page">Offers<\/a>/);
     // Footer active state is untouched by #112.
     expect(privacy).toContain(
       '<a href="privacy.html" aria-current="page">Privacy policy</a>',
     );
+  });
+
+  it("renders a clickable all-deals icon in the primary nav (#113)", () => {
+    for (const [, markup] of routes) {
+      const nav = markup.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? "";
+      expect(nav).toContain('class="nav-archive"');
+      // The icon lives inside the archive anchor, so clicking it navigates
+      // to the all-deals page and inherits the same hover/focus styles.
+      expect(nav).toMatch(
+        /<a class="nav-archive"[^>]*>\s*<svg[^>]*aria-hidden="true"[^>]*>[\s\S]*<\/svg>\s*Archive\s*<\/a>/,
+      );
+      expect(nav).toContain('aria-label="All deals"');
+    }
   });
 
   it("still puts exactly one main landmark and one h1 per page", () => {
