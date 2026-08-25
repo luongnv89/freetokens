@@ -4,7 +4,7 @@ import { readdirSync, readFileSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-// Acceptance criterion 3 (#122): only the 11 mapped lucide glyphs may be
+// Acceptance criterion 3 (#122): only the 12 mapped lucide glyphs may be
 // consumed, and they enter the page as a <symbol> sprite serialized at
 // generate-time — never as a lucide-react runtime import. A barrel (or even
 // a single <Icon />) import would reintroduce the JS cost the sprite path
@@ -43,7 +43,7 @@ describe("lucide-react stays out of the runtime bundle (#122)", () => {
     }
   });
 
-  it("gen-tag-icons.mjs only dynamically imports the 11 mapped icon modules", () => {
+  it("gen-tag-icons.mjs only dynamically imports the 12 mapped icon modules", () => {
     const src = readFileSync(GEN_SCRIPT, "utf8");
     expect(src).not.toMatch(/from\s+["']lucide-react["']/);
     expect(src).not.toMatch(/from\s+["']lucide-react\//);
@@ -51,8 +51,8 @@ describe("lucide-react stays out of the runtime bundle (#122)", () => {
     const mapped = [...src.matchAll(/\bicon:\s*"([a-z0-9-]+)"/g)].map(
       (m) => m[1],
     );
-    expect(mapped).toHaveLength(11);
-    expect(new Set(mapped).size).toBe(11);
+    expect(mapped).toHaveLength(12);
+    expect(new Set(mapped).size).toBe(12);
 
     const lucideImports = [...src.matchAll(/import\(([^)]*lucide-react[^)]*)\)/g)];
     expect(lucideImports).toHaveLength(1);

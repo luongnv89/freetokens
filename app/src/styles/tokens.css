@@ -40,6 +40,7 @@
   --color-tag-image: #955906;
   --color-tag-voice: #7e22ce;
   --color-tag-video: #be123c;
+  --color-tag-startup-program: #a21caf;
 
   /* Tag hues — verification + sign-up families (how CHECKED / how walled) */
   --color-tag-hand-verified: #15803d;

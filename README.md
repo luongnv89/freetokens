@@ -29,7 +29,7 @@ The site is fully static with no server, no database, no runtime:
    ```yaml
    title: My Provider Free Credits
    provider: My Provider
-   category: api_provider   # api_provider | coding | image | voice | video
+   category: api_provider   # api_provider | coding | image | voice | video | startup_program
    amount: $100 in API credits
    expiry_date: 2026-12-31  # null if ongoing
    source_url: https://example.com/offer

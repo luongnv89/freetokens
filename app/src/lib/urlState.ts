@@ -17,7 +17,7 @@ export type UrlState = {
 }
 
 const VALID: Record<FilterDimension, readonly string[]> = {
-  category: ["api_provider", "coding", "image", "voice", "video"],
+  category: ["api_provider", "coding", "image", "voice", "video", "startup_program"],
   verification: ["hand_verified", "social_proof", "unverified"],
   signup: ["none", "required"],
 }

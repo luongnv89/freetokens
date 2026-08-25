@@ -14,7 +14,7 @@ build validator.
 |-----------------|-----------------------|----------|-------------|-------------|
 | `title`         | string (non-empty)    | yes      | no          | Human-readable offer name shown on cards. |
 | `provider`      | string (non-empty)    | yes      | no          | Company or product offering the credit. |
-| `category`      | enum (string)         | yes      | no          | One of: `api_provider`, `coding`, `image`, `voice`, `video`. |
+| `category`      | enum (string)         | yes      | no          | One of: `api_provider`, `coding`, `image`, `voice`, `video`, `startup_program`. |
 | `amount`        | string (non-empty)    | yes      | no          | Free value in human terms, e.g. `$300 in credits` or `10k credits/month`. |
 | `expiry_date`   | date or null          | yes      | **yes**     | Date the offer stops being claimable, `YYYY-MM-DD`. `null` = ongoing offer with no fixed end date. |
 | `source_url`    | URL string            | yes      | no          | Official provider page where the offer is described. Must start with `http://` or `https://`. |
@@ -27,7 +27,7 @@ build validator.
 - **Nullability:** write `expiry_date: null` (or `~`) for ongoing offers.
   An empty value also parses as null. Never use `N/A`, `none`, or `0`.
 - **Category enum:** exactly one of
-  `api_provider | coding | image | voice | video`.
+  `api_provider | coding | image | voice | video | startup_program`.
 - **Quoting:** plain scalars need no quotes; quote values containing leading
   or trailing spaces. Values may contain colons (e.g. URLs).
 - **No nesting:** files are flat key/value documents — no lists, no maps,
