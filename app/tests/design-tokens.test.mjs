@@ -108,3 +108,30 @@ describe("Tailwind tag-hue tokens (#121)", () => {
     }
   });
 });
+
+describe("Clear-all-filters chip rest-state contrast (#126)", () => {
+  const parityCss = readFileSync(
+    path.join(APP_ROOT, "src/styles/python-parity.css"),
+    "utf8",
+  );
+
+  it("paints gray-on-paper at rest so 0.7rem text clears WCAG AA", () => {
+    const rest = parityCss.match(/\.chip\.clear \{([^}]+)\}/);
+    expect(rest, ".chip.clear rest rule").toBeTruthy();
+    expect(rest[1]).toMatch(/background:\s*var\(--paper\)/);
+    expect(rest[1]).toMatch(/color:\s*var\(--gray\)/);
+    // --gray → --color-muted #6b7280 on --paper #ffffff is ~4.83:1.
+    // The inherited 7% ink wash (~#ededed) drops that to ~4.1:1.
+    expect(contrast(themeToken("--color-muted"), themeToken("--color-paper")))
+      .toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("keeps the ink fill on hover and focus-visible", () => {
+    const hover = parityCss.match(
+      /\.chip\.clear:hover,\s*\.chip\.clear:focus-visible \{([^}]+)\}/,
+    );
+    expect(hover, ".chip.clear hover/focus rule").toBeTruthy();
+    expect(hover[1]).toMatch(/background:\s*var\(--ink\)/);
+    expect(hover[1]).toMatch(/color:\s*var\(--paper\)/);
+  });
+});
