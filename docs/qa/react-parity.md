@@ -80,7 +80,7 @@ deployed origin; steps as documented in
 
 ## Verdict
 
-**18/18 parity items PASS · quality gate green locally, two deploy-time
+**18/18 parity items PASS · quality gate green locally, three deploy-time
 confirmations explicitly deferred (Lighthouse-on-preview, GA4 DebugView,
 real-device 320 px). No failing item — cutover unblocked pending #138's
 deploy-time checks.**
