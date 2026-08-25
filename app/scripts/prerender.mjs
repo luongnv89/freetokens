@@ -127,9 +127,11 @@ try {
   function fillPage({ markup, title, description, depth = 0, page, slug }) {
     let doc = template;
     doc = doc.replace(/<title>.*?<\/title>/s, `<title>${title}</title>`);
+    // Vite pretty-prints the shell meta tag across lines; match either form
+    // so archive/privacy/detail get their own description (#132).
     doc = doc.replace(
-      /(<meta name="description" content=").*?(" \/>)/s,
-      `$1${description}$2`,
+      /<meta\s+name="description"\s+content="[^"]*"\s*\/>/,
+      `<meta name="description" content="${description}" />`,
     );
     // Depth-1 documents must climb out of offers/: every root-relative asset
     // reference emitted by Vite gets one ../ prefix.
