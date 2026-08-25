@@ -238,6 +238,70 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
     expect(markup).not.toContain('class="od-proof"');
   });
 
+  it("renders a skimmable details table with every key fact (#110)", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{
+          ...index,
+          offers: [
+            offer({
+              provider: "Example Co",
+              amount: "$10 credits",
+              expiry_date: "2026-12-31",
+            }),
+          ],
+        }}
+        slug="example-offer"
+        details={{}}
+      />,
+    );
+    expect(markup).toContain('class="od-table"');
+    for (const label of [
+      "Provider",
+      "Amount",
+      "Category",
+      "Sign-up",
+      "Ends",
+      "Verification",
+      "Last checked",
+    ]) {
+      expect(markup).toContain(`<th scope="row">${label}</th>`);
+    }
+    // Values are scannable without reading prose.
+    expect(markup).toMatch(/<th scope="row">Provider<\/th><td>Example Co<\/td>/);
+    expect(markup).toContain('<time dateTime="2026-12-31">');
+    // No information is lost: the hero and status line stay intact.
+    expect(markup).toContain('class="od-hero"');
+    expect(markup).toContain("$10 credits");
+  });
+
+  it("details table shows the ongoing state for offers with no end date (#110)", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer({ expiry_date: null })] }}
+        slug="example-offer"
+        details={{}}
+      />,
+    );
+    expect(markup).toContain("ongoing — no fixed end date");
+  });
+
+  it("keeps free-form summary prose below the details table (#110)", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+        details={{
+          "example-offer": { summary: "Prose lives under the table." },
+        }}
+      />,
+    );
+    const tableAt = markup.indexOf('class="od-table"');
+    const proseAt = markup.indexOf("Prose lives under the table.");
+    expect(tableAt).toBeGreaterThan(-1);
+    expect(proseAt).toBeGreaterThan(tableAt);
+  });
+
   it("marks the claim CTA as an outbound offer click for GoatCounter (#101)", () => {
     const markup = renderToStaticMarkup(
       <OfferDetailPage
