@@ -17,7 +17,8 @@ Free AI credit offers are scattered across X threads, Reddit posts, and vendor b
 The site is fully static with no server, no database, no runtime:
 
 - Every offer lives as one YAML file: `offers/<slug>.yaml`
-- The build pipeline (`scripts/`) validates offer files, generates a JSON index, and renders static HTML
+- The build pipeline validates offer files, bundles the React app, and
+  prerenders every route to static HTML
 - Hosting is GitHub Pages; CI/CD runs validate → build → deploy on push to `main`
 
 ## How to Add an Offer
@@ -53,8 +54,12 @@ for why the Python builder was replaced). Requires Node 22+:
 
 ```bash
 cd app && npm ci             # installs dependencies (never bare npm install in CI)
+npm run dev                  # dev server with hot reload at http://localhost:5173/
 npm run build                # validates offers/, bundles, and prerenders every route
 ```
+
+Components and pages live in `app/src/components/`, data/analytics helpers
+in `app/src/lib/`, and routing in `app/src/routes.ts`.
 
 The build runs in two stages:
 
@@ -111,7 +116,15 @@ ships RSS autodiscovery in `<head>` and a footer link. Item URLs must be
 absolute per the RSS spec, so the feed
 uses the production origin by default.
 
-Run the test suite (stdlib `unittest`, no dependencies):
+Run the test suites:
+
+```bash
+cd app && npm test           # unit + budget tests (Vitest)
+npm run test:e2e             # Playwright end-to-end tests
+```
+
+The content model has its own stdlib test suite at the repo root (no Node
+required):
 
 ```bash
 python3 -m unittest discover -s tests -v

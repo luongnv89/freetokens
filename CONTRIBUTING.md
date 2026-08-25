@@ -5,6 +5,10 @@ every offer is one YAML file under `offers/`, and every change reaches the
 site through a pull request. There are two ways to open one — pick whichever
 fits you.
 
+> **The React migration did not change this flow.** The site's code moved to
+> a Vite + React app under `app/`, but for curators adding an offer is still
+> exactly one YAML file — no JavaScript knowledge required.
+
 ## Ground rules
 
 - **All changes arrive via pull request.** `main` is protected: direct pushes
@@ -55,7 +59,7 @@ fits you.
 
    ```bash
    python3 scripts/validate_offers.py         # validates offers/ against the schema
-   (cd app && npm test)                       # test suite
+   (cd app && npm test)                       # app unit + budget tests (Vitest)
    ```
 
 4. Commit and push:
