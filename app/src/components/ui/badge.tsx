@@ -3,28 +3,31 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
+
+const badgeChrome =
+  "inline-flex items-center justify-center gap-1 rounded-md border border-border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:pointer-events-none [&>svg]:size-3";
 
 // shadcn/ui badge primitive (new-york), token-bridged like button.tsx.
-// NOTE (#122): the listing's honesty tags keep their parity-pinned .badge
-// markup (styles/python-parity.css) — this primitive serves NEW surfaces so
-// future UI starts on the design system instead of hand-rolled spans.
-const badgeVariants = cva(
-  "inline-flex items-center justify-center gap-1 rounded-md border border-border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:pointer-events-none [&>svg]:size-3",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground",
-        secondary: "bg-secondary text-secondary-foreground",
-        destructive: "bg-destructive text-primary-foreground",
-        outline: "text-foreground",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
+// NOTE (#124): the home listing composes honesty tags through
+// `variant="unstyled"` (asChild onto the existing
+// `<button class="badge …">`). That variant emits no Tailwind chrome so
+// python-parity.css remains the paint. Default / secondary / etc. stay for
+// future surfaces and must not wrap listing rows.
+const badgeVariants = cva("", {
+  variants: {
+    variant: {
+      default: `${badgeChrome} bg-primary text-primary-foreground`,
+      secondary: `${badgeChrome} bg-secondary text-secondary-foreground`,
+      destructive: `${badgeChrome} bg-destructive text-primary-foreground`,
+      outline: `${badgeChrome} text-foreground`,
+      unstyled: "",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 function Badge({
   className,

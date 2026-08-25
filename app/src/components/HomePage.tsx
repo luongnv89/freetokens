@@ -1,6 +1,53 @@
 import { CATEGORIES, activeOffers, buildDate, type OffersIndex } from "../lib/offers"
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
+import { Button } from "./ui/button"
+
+function GiftGlyph() {
+  return (
+    <p className="glyph" aria-hidden="true">
+      <svg
+        width="44"
+        height="44"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        role="presentation"
+      >
+        <rect x="3" y="8" width="18" height="4" rx="1" />
+        <path d="M12 8v13" />
+        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+        <path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8" />
+        <path d="M16.5 8a2.5 2.5 0 0 0 0-5C13 3 12 8 12 8" />
+      </svg>
+    </p>
+  )
+}
+
+function SearchGlyph() {
+  return (
+    <p className="glyph" aria-hidden="true">
+      <svg
+        width="44"
+        height="44"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        role="presentation"
+      >
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.35-4.35" />
+        <path d="M8.5 11h5" />
+      </svg>
+    </p>
+  )
+}
 
 function Toolbar({ count }: { count: number }) {
   const seeded = `Showing all ${count} offers`
@@ -32,13 +79,14 @@ function Toolbar({ count }: { count: number }) {
         </select>
       </div>
       <div className="chips" role="group" aria-label="Filter by category">
-        <button type="button" className="chip " data-ft-category="" aria-pressed="true">
+        <Button type="button" variant="unstyled" className="chip " data-ft-category="" aria-pressed="true">
           <span>All</span>
-        </button>
+        </Button>
         {CATEGORIES.map((category) => (
-          <button
+          <Button
             key={category}
             type="button"
+            variant="unstyled"
             className={`chip chip-category-${category}`}
             data-ft-category={category}
             aria-pressed="false"
@@ -48,16 +96,16 @@ function Toolbar({ count }: { count: number }) {
                 ? "API providers"
                 : category[0].toUpperCase() + category.slice(1)}
             </span>
-          </button>
+          </Button>
         ))}
       </div>
       <div className="results-line">
         <p className="results-status" id="ft-results-status" role="status" aria-live="polite">
           {seeded}
         </p>
-        <button type="button" className="chip clear" id="ft-clear-filters" hidden>
+        <Button type="button" variant="unstyled" className="chip clear" id="ft-clear-filters" hidden>
           Clear all filters
-        </button>
+        </Button>
       </div>
     </section>
   )
@@ -108,11 +156,20 @@ export default function HomePage({ index }: { index: OffersIndex }) {
               ))}
             </ol>
             <section className="empty" id="ft-no-results" hidden>
-              <p>No offers match the current search or filters.</p>
+              <SearchGlyph />
+              <h2>No matching offers</h2>
+              <p>
+                Nothing matches every filter you have applied at once. The status line above lists
+                them; clearing one usually brings offers back.
+              </p>
+              <Button type="button" variant="unstyled" className="chip reset" id="ft-reset-filters">
+                Clear search & filters
+              </Button>
             </section>
           </>
         ) : (
           <section className="empty" style={{ "--i": 0 } as React.CSSProperties}>
+            <GiftGlyph />
             <h2>No live offers right now</h2>
             <p>
               Every listing here is screened against the provider, and none have passed the check
