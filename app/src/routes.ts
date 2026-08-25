@@ -18,7 +18,9 @@ export type Route =
 export function resolveRoute(
   doc?: Document,
 ): Route {
-  const root = doc?.getElementById("root")
+  const scope =
+    doc ?? (typeof document !== "undefined" ? document : undefined)
+  const root = scope?.getElementById("root")
   switch (root?.dataset.page) {
     case "archive":
       return { page: "archive" }

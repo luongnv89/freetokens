@@ -15,6 +15,8 @@
     "pretest": "npm run load:data",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install --with-deps",
     "lint": "eslint .",
     "gen:types": "node scripts/generate-types.mjs",
     "gen:tag-icons": "node scripts/gen-tag-icons.mjs"
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/vite": "^4.1.0",
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.3.0",

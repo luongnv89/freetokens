@@ -283,6 +283,14 @@ describe("consent decisions", () => {
     expect(document.getElementById(GA_SCRIPT_ID)).toBeNull();
   });
 
+  it("replays a visible banner to subscribers that mount after init", () => {
+    configureAnalytics({ measurementId: MID });
+    initAnalytics();
+    const shown = vi.fn();
+    subscribeConsentBanner(shown);
+    expect(shown).toHaveBeenCalledWith(true);
+  });
+
   it("schedules init via requestIdleCallback with a 2000ms timeout", () => {
     configureAnalytics({ measurementId: MID });
     const ric = vi.fn();

@@ -5,6 +5,10 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Playwright e2e suite against prerendered dist (#134):** keyboard path,
+  320px overflow, JS-disabled prerender, consent-decline GA4 intercept,
+  Chromium/Firefox/WebKit headless.
+
 - **Offer detail pages, claim checklist, and social proof land in React (#128):**
   every offer has `/offers/<slug>.html`. When `offers/details/<slug>.json`
   exists the page renders summary, claim steps, and social-proof cards of

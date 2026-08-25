@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { resolveMeasurementId, resolveStatsSite } from './src/lib/analyticsEnv.ts'
@@ -55,5 +55,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/setupTests.ts',
+    // Playwright specs live in e2e/*.spec.ts; keep them out of vitest.
+    exclude: [...configDefaults.exclude, 'e2e/**'],
   },
 })
