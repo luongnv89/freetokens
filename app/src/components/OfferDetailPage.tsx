@@ -1,17 +1,41 @@
 import { humanDate, type OffersIndex } from "../lib/offers"
+import {
+  claimSteps,
+  type DetailsMap,
+  type OfferDetail,
+} from "../lib/offerDetails"
+import { offerAbsoluteUrl } from "../lib/site"
+import detailsCatalog from "../data/details.json"
 import { CategoryBadge, SignupBadge, VerificationBadge } from "./Badge"
+import { ClaimChecklist } from "./ClaimChecklist"
+import { CopyLinkButton } from "./CopyLinkButton"
 import { IconSprite } from "./OfferRow"
+import { SocialProofList } from "./SocialProofList"
 import { SiteFooter } from "./SiteFooter"
 
+const catalog = detailsCatalog as DetailsMap
+
 /**
- * Offer detail page (F2 / #60) — placeholder shell (full content port is
- * task #128). Everything the shell shows is real data from the frozen
- * contract, server-rendered so a JS-off deep link to /offers/<slug>.html
- * renders the full document. An unknown slug renders the graceful
- * not-found state instead of throwing during hydration.
+ * Offer detail page (F2 / #60, full content port #128). Everything the
+ * page shows is real data from the frozen contract plus optional
+ * `src/data/details.json`, server-rendered so a JS-off deep link to
+ * /offers/<slug>.html renders the full document. An unknown slug renders
+ * the graceful not-found state instead of throwing during hydration.
+ * Offers without a details document still render the summary card and
+ * fallback claim steps without layout breakage.
  */
-export default function OfferDetailPage({ index, slug }: { index: OffersIndex; slug: string }) {
+export default function OfferDetailPage({
+  index,
+  slug,
+  details,
+}: {
+  index: OffersIndex
+  slug: string
+  details?: DetailsMap
+}) {
   const offer = index.offers.find((o) => o.slug === slug)
+  const map = details ?? catalog
+  const detail: OfferDetail | undefined = offer ? map[offer.slug] : undefined
   return (
     <>
       <IconSprite />
@@ -27,9 +51,10 @@ export default function OfferDetailPage({ index, slug }: { index: OffersIndex; s
                 <CategoryBadge offer={offer} hrefPrefix="../" />
               </p>
               <h1>{offer.title}</h1>
-              <p className="count">
-                <strong>{offer.amount}</strong> &middot; {offer.provider}
-              </p>
+              <p className="count">{offer.provider}</p>
+            </header>
+            <div className="od-hero">
+              <p className="amount">{offer.amount}</p>
               <p className="od-statusline mono">
                 {offer.status === "expired" ? (
                   <span className="status">ended</span>
@@ -51,7 +76,14 @@ export default function OfferDetailPage({ index, slug }: { index: OffersIndex; s
                 checked{" "}
                 <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
               </p>
-            </header>
+            </div>
+            {detail?.summary ? (
+              <section className="od-brief">
+                <h2>The offer</h2>
+                <p className="od-summary">{detail.summary}</p>
+              </section>
+            ) : null}
+            <ClaimChecklist slug={offer.slug} steps={claimSteps(detail)} />
             {offer.status === "expired" ? (
               <p className="od-ended">This offer ended &mdash; nothing here is claimable anymore.</p>
             ) : (
@@ -64,6 +96,8 @@ export default function OfferDetailPage({ index, slug }: { index: OffersIndex; s
                 Claim at {offer.provider} <span aria-hidden="true">&#8599;</span>
               </a>
             )}
+            <SocialProofList proofs={detail?.social_proof} relPrefix="../" />
+            <CopyLinkButton url={offerAbsoluteUrl(offer.slug)} />
           </article>
         ) : (
           <section className="empty" style={{ "--i": 0 } as React.CSSProperties}>
