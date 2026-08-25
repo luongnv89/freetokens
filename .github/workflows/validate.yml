@@ -49,6 +49,27 @@ jobs:
         working-directory: app
         run: npm run build
 
+      # Performance budgets (#142): Lighthouse asserts Performance >= 0.95 and
+      # Accessibility >= 0.90 on the home listing, the archive, and an offer
+      # detail page (assertions in app/lighthouserc.json) against the built
+      # static dist. Uses the runner's preinstalled Chrome when present, else
+      # the one puppeteer fetched during npm ci.
+      #
+      # The detail page is picked from whatever dist/offers/ contains right
+      # now — prerender drops expired offers, so a hard-coded slug would 404
+      # once it lapses. --collect.url replaces the config file's list.
+      - name: Run Lighthouse CI budgets
+        working-directory: app
+        run: |
+          CHROME_PATH="$(command -v google-chrome-stable || command -v google-chrome || true)"
+          export CHROME_PATH
+          DETAIL_URL="http://localhost/$(ls dist/offers/*.html | head -1 | sed 's|^dist/||')"
+          npx --no-install lhci autorun \
+            --collect.staticDistDir=dist \
+            --collect.url="http://localhost/" \
+            --collect.url="http://localhost/archive.html" \
+            --collect.url="$DETAIL_URL"
+
       - name: Install Playwright browsers
         working-directory: app
         run: npx playwright install --with-deps

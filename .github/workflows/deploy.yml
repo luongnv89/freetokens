@@ -36,9 +36,17 @@ jobs:
   build:
     needs: validate
     runs-on: ubuntu-latest
+    outputs:
+      # Wall-clock seconds spent inside this job, fed into the duration
+      # budget enforced by the deploy job (#142).
+      duration_s: ${{ steps.duration.outputs.duration_s }}
     steps:
       - name: Checkout
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - name: Start duration timer
+        id: timer_start
+        run: echo "start=$(date +%s)" >> "$GITHUB_OUTPUT"
 
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -66,6 +74,11 @@ jobs:
           GOATCOUNTER_SITE_URL: ${{ secrets.GOATCOUNTER_SITE_URL }}
         run: npm run build
 
+      - name: Stop duration timer
+        id: duration
+        if: always()
+        run: echo "duration_s=$(( $(date +%s) - ${{ steps.timer_start.outputs.start }} ))" >> "$GITHUB_OUTPUT"
+
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
@@ -84,6 +97,29 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Start duration timer
+        id: timer_start
+        run: echo "start=$(date +%s)" >> "$GITHUB_OUTPUT"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+
+      - name: Stop duration timer
+        id: duration
+        if: always()
+        run: echo "duration_s=$(( $(date +%s) - ${{ steps.timer_start.outputs.start }} ))" >> "$GITHUB_OUTPUT"
+
+      # Duration budget (#142): the Python build shipped a small page fast;
+      # the Node pipeline must stay under 3 minutes of combined build+deploy
+      # runner time. Durations are measured per job and summed — comparing
+      # raw epochs across jobs would compare two different runners' clocks.
+      - name: Enforce 3-minute build+deploy budget
+        if: always()
+        env:
+          BUILD_S: ${{ needs.build.outputs.duration_s || 0 }}
+          DEPLOY_S: ${{ steps.duration.outputs.duration_s || 0 }}
+        run: |
+          total=$((BUILD_S + DEPLOY_S))
+          echo "build ${BUILD_S}s + deploy ${DEPLOY_S}s = ${total}s (budget 180s)"
+          [ "$total" -le 180 ]

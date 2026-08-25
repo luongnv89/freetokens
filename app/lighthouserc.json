@@ -1,0 +1,27 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "dist",
+      "numberOfRuns": 3
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": [
+          "error",
+          { "minScore": 0.95, "aggregationMethod": "median" }
+        ],
+        "categories:accessibility": [
+          "error",
+          { "minScore": 0.9, "aggregationMethod": "median" }
+        ],
+        "categories:best-practices": "off",
+        "categories:seo": "off",
+        "categories:pwa": "off"
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci"
+    }
+  }
+}
