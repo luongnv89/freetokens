@@ -3,8 +3,21 @@
 Notable changes to the Free AI Credits site and build. The site itself is
 regenerated on every deploy; entries here cover behavior, not content edits.
 
-## Unreleased
+## v3.0 — 2026-08-25
 
+The React + Vite rebuild ships to production (#114).
+
+- **Deploy cutover (#138):** `deploy.yml` now publishes the Vite build
+  (`app/dist`, prerendered for every route) instead of the Python-built
+  `site/`. The Python content-model gate (schema validation +
+  `test_validate_offers.py` / `test_skill_validator.py`) stays as the first
+  CI gate. Live-site continuity preserved at the same URLs: GoatCounter keeps
+  counting on the same paths and GA4 page paths are unchanged; returning
+  visitors keep their `ft_ga_consent` decision and `ft-claim-<slug>`
+  checklist progress via the legacy-compatible personal-state layer.
+  Rollback is one revert: restore this workflow commit and the previous
+  deploy republishes the Python-built site (`scripts/build.py` remains in
+  tree until #139).
 - **CI reworked for the Node build (#136):** `validate.yml` runs on every
   branch push and now gates a Node job behind the Python schema validation —
   `npm ci`, Vitest unit suites, the Vite production build, and the Playwright
