@@ -7,6 +7,7 @@
 // (schemas/offers-index.schema.json, issue #120) — never edit them by hand;
 // a schema change that breaks a component is a compile error.
 import type { Offer, OffersIndex } from "../types/offers-index"
+import type { UrlState } from "./urlState"
 export type { Offer, OffersIndex }
 
 export const CATEGORIES = ["api_provider", "coding", "image", "voice", "video"] as const
@@ -115,6 +116,55 @@ export function formatAmountSort(value: number): string {
 /** Expired entries never reach the default visitor list (#25). */
 export function activeOffers(index: OffersIndex): Offer[] {
   return index.offers.filter((o) => o.status !== "expired")
+}
+
+/**
+ * AND semantics (build.py ftMatches): an offer is shown only when it
+ * satisfies EVERY active tag filter and the search query. Search is a
+ * lowercase substring over the card-visible fields (title, provider,
+ * amount) — offers have no description field.
+ */
+export function offerMatches(offer: Offer, state: UrlState): boolean {
+  if (state.category && offer.category !== state.category) return false
+  if (state.verification && offer.verification !== state.verification) return false
+  if (state.signup && offer.signup !== state.signup) return false
+  if (!state.q) return true
+  const needle = state.q.toLowerCase()
+  const haystack = `${offer.title} ${offer.provider} ${offer.amount}`.toLowerCase()
+  return haystack.includes(needle)
+}
+
+/**
+ * Client listing order (build.py ftApplySort). Stable: ties fall back to
+ * the offer's index in `offers` (the activeOffers order). Empty / invalid
+ * mode restores that original index order. Null expiry sorts last under
+ * expiring.
+ */
+export function applySort(offers: Offer[], mode: string): Offer[] {
+  const indexed = offers.map((offer, index) => ({ offer, index }))
+  if (mode === "newest") {
+    indexed.sort(
+      (a, b) =>
+        b.offer.verified_date.localeCompare(a.offer.verified_date) || a.index - b.index,
+    )
+  } else if (mode === "expiring") {
+    indexed.sort((a, b) => {
+      const ea = a.offer.expiry_date ?? ""
+      const eb = b.offer.expiry_date ?? ""
+      if (!ea && !eb) return a.index - b.index
+      if (!ea) return 1
+      if (!eb) return -1
+      return ea.localeCompare(eb) || a.index - b.index
+    })
+  } else if (mode === "amount") {
+    indexed.sort(
+      (a, b) =>
+        amountSortValue(b.offer.amount) - amountSortValue(a.offer.amount) || a.index - b.index,
+    )
+  } else {
+    indexed.sort((a, b) => a.index - b.index)
+  }
+  return indexed.map((row) => row.offer)
 }
 
 /** Newest expiration first, slug as stable tiebreak (build.py expired_offers). */
