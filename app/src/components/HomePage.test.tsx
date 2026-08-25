@@ -152,6 +152,11 @@ function statusText() {
 beforeEach(() => {
   resetAnalyticsForTests()
   setSearch("")
+  // Personal state (saved/dismissed/prefs) must not leak between tests:
+  // HomePage restores stored prefs on mount, so leftover keys would
+  // reorder or filter later tests' fixture lists. Optional chaining
+  // keeps this a no-op under jsdom builds where storage is absent.
+  window.localStorage?.clear()
 })
 
 afterEach(() => {
