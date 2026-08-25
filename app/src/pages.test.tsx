@@ -65,6 +65,21 @@ describe("ArchivePage (#26 parity)", () => {
     expect(markup).toContain('href="offers/gone.html"');
     expect(markup).toMatch(/expired <time [Dd]ate[Tt]ime="2026-01-15">/);
   });
+
+  it("archive tags are links to a pre-filtered home, never inert buttons", () => {
+    const fixture = {
+      ...index,
+      offers: [offer({ slug: "gone", expiry_date: "2026-01-15", status: "expired" as const })],
+    };
+    const markup = renderToStaticMarkup(<ArchivePage index={fixture} />);
+    expect(markup).toContain('href="index.html?category=coding"');
+    expect(markup).toContain('href="index.html?verification=hand_verified"');
+    expect(markup).toContain('href="index.html?signup=none"');
+    expect(markup).toContain('aria-label="See offers tagged Coding"');
+    expect(markup).toContain('aria-label="See offers tagged hand-verified"');
+    expect(markup).toContain('aria-label="See offers tagged no sign-up"');
+    expect(markup).not.toMatch(/<button[^>]*data-ft-tag/);
+  });
 });
 
 describe("OfferDetailPage (F2 shell, #123)", () => {
@@ -89,6 +104,22 @@ describe("OfferDetailPage (F2 shell, #123)", () => {
     );
     expect(markup).toContain("This offer ended");
     expect(markup).not.toContain('class="od-cta"');
+  });
+
+  it("detail tags are links to a pre-filtered home, never inert buttons", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+      />,
+    );
+    expect(markup).toContain('href="../index.html?category=coding"');
+    expect(markup).toContain('href="../index.html?verification=hand_verified"');
+    expect(markup).toContain('href="../index.html?signup=none"');
+    expect(markup).toContain('aria-label="See offers tagged Coding"');
+    expect(markup).toContain('aria-label="See offers tagged hand-verified"');
+    expect(markup).toContain('aria-label="See offers tagged no sign-up"');
+    expect(markup).not.toMatch(/<button[^>]*data-ft-tag/);
   });
 
   it("renders a graceful not-found state for an unknown slug — never a blank page or throw", () => {

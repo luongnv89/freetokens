@@ -11,6 +11,7 @@ import {
   type Offer,
 } from "../lib/offers"
 import { TAG_ICONS } from "../lib/tagIcons"
+import type { FilterDimension } from "../lib/urlState"
 import { Badge } from "./ui/badge"
 
 // Tag glyphs ship as ONE inline <symbol> sprite per page, referenced by
@@ -55,11 +56,15 @@ function TagButton({
   value,
   label,
   title,
+  pressed,
+  onToggle,
 }: {
-  dimension: string
+  dimension: FilterDimension
   value: string
   label: string
   title: string
+  pressed: boolean
+  onToggle: (dim: FilterDimension, value: string) => void
 }) {
   return (
     <Badge asChild variant="unstyled">
@@ -68,9 +73,10 @@ function TagButton({
         className={`badge badge-${dimension} badge-${dimension}-${value}`}
         data-ft-tag={dimension}
         data-ft-tag-value={value}
-        aria-pressed="false"
+        aria-pressed={pressed ? "true" : "false"}
         aria-label={`Filter by ${label}`}
         title={title}
+        onClick={() => onToggle(dimension, value)}
       >
         {tagIcon(value)}
         <span>{label}</span>
@@ -83,7 +89,19 @@ function TagButton({
  * One ranked mono row — mirrors build.py _CARD_TMPL exactly: same <li>
  * <article> nesting, same data-* hooks, CSS-counter rank drawn by #ft-grid.
  */
-export function OfferRow({ offer, index, buildDay }: { offer: Offer; index: number; buildDay: string }) {
+export function OfferRow({
+  offer,
+  index,
+  buildDay,
+  pressed,
+  onToggleTag,
+}: {
+  offer: Offer
+  index: number
+  buildDay: string
+  pressed: { category: string; verification: string; signup: string }
+  onToggleTag: (dim: FilterDimension, value: string) => void
+}) {
   const detailHref = `offers/${offer.slug}.html`
   return (
     <li style={{ "--i": index } as React.CSSProperties}>
@@ -117,18 +135,24 @@ export function OfferRow({ offer, index, buildDay }: { offer: Offer; index: numb
             value={offer.category}
             label={CATEGORY_LABELS[offer.category] ?? offer.category}
             title={`Free AI credits in the ${CATEGORY_LABELS[offer.category] ?? offer.category} category`}
+            pressed={pressed.category === offer.category}
+            onToggle={onToggleTag}
           />
           <TagButton
             dimension="verification"
             value={offer.verification}
             label={VERIFICATION_LABELS[offer.verification]}
             title={VERIFICATION_TITLES[offer.verification]}
+            pressed={pressed.verification === offer.verification}
+            onToggle={onToggleTag}
           />
           <TagButton
             dimension="signup"
             value={offer.signup}
             label={SIGNUP_LABELS[offer.signup]}
             title={SIGNUP_TITLES[offer.signup]}
+            pressed={pressed.signup === offer.signup}
+            onToggle={onToggleTag}
           />
           <span className="sep" aria-hidden="true">
             &middot;

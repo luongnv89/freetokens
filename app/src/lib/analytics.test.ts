@@ -555,8 +555,8 @@ describe("traffic strip silent hide", () => {
   });
 });
 
-describe("bindToolbarListeners leaves search/sort to React", () => {
-  it("does not emit search or sort_use from #ft-search/#ft-sort; chips still emit filter_use", () => {
+describe("bindToolbarListeners leaves search/sort/chips to React", () => {
+  it("does not emit search, sort_use, or filter_use from toolbar controls", () => {
     configureAnalytics({ measurementId: MID });
     const gtag = installGtag();
     grantConsent();
@@ -584,11 +584,6 @@ describe("bindToolbarListeners leaves search/sort to React", () => {
 
     const chip = document.querySelector("[data-ft-category]") as HTMLButtonElement;
     chip.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    expect(eventCalls(gtag, "filter_use")).toHaveLength(1);
-    expect(eventCalls(gtag, "filter_use")[0][2]).toEqual({
-      category: "coding",
-      verification: "all",
-      signup: "all",
-    });
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(0);
   });
 });

@@ -1,23 +1,61 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import {
   SEARCH_DEBOUNCE_MS,
   trackFilterUse,
   trackSearch,
   trackSortUse,
 } from "../lib/analytics"
-import { CATEGORIES, activeOffers, applySort, offerMatches, buildDate, type OffersIndex } from "../lib/offers"
 import {
+  CATEGORIES,
+  CATEGORY_LABELS,
+  SIGNUP_LABELS,
+  VERIFICATION_LABELS,
+  activeOffers,
+  applySort,
+  offerMatches,
+  buildDate,
+  type OffersIndex,
+} from "../lib/offers"
+import { TAG_ICONS } from "../lib/tagIcons"
+import {
+  DIMENSIONS,
   emptyState,
   hasQueryOrFilters,
   normalizeSort,
   parseState,
   serializeState,
+  type FilterDimension,
   type UrlState,
 } from "../lib/urlState"
 import { BrandMark } from "./BrandMark"
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { Button } from "./ui/button"
+
+const FILTER_LABELS: Record<FilterDimension, Record<string, string>> = {
+  category: CATEGORY_LABELS,
+  verification: VERIFICATION_LABELS,
+  signup: SIGNUP_LABELS,
+}
+
+function namedFilters(state: UrlState) {
+  const out: { dim: FilterDimension; value: string; label: string }[] = []
+  for (const dim of DIMENSIONS) {
+    const value = state[dim]
+    if (!value) continue
+    out.push({ dim, value, label: FILTER_LABELS[dim][value] || value })
+  }
+  return out
+}
+
+function ChipGlyph({ value }: { value: string }) {
+  if (!(value in TAG_ICONS)) return null
+  return (
+    <svg className="tag-i" aria-hidden="true" focusable="false">
+      <use href={`#ti-${value}`} />
+    </svg>
+  )
+}
 
 function GiftGlyph() {
   return (
@@ -71,9 +109,12 @@ function Toolbar({
   searchValue,
   sortValue,
   category,
+  active,
   clearHidden,
   onSearchChange,
   onSortChange,
+  onCategorySet,
+  onRemoveFilter,
   onClear,
 }: {
   total: number
@@ -81,12 +122,15 @@ function Toolbar({
   searchValue: string
   sortValue: string
   category: string
+  active: { dim: FilterDimension; value: string; label: string }[]
   clearHidden: boolean
   onSearchChange: (value: string) => void
   onSortChange: (value: string) => void
+  onCategorySet: (category: string) => void
+  onRemoveFilter: (dim: FilterDimension) => void
   onClear: () => void
 }) {
-  const status =
+  const countText =
     shown === total ? `Showing all ${total} offers` : `Showing ${shown} of ${total} offers`
   return (
     <section className="toolbar" aria-label="Search and filter offers">
@@ -124,6 +168,7 @@ function Toolbar({
           className="chip "
           data-ft-category=""
           aria-pressed={category === "" ? "true" : "false"}
+          onClick={() => onCategorySet("")}
         >
           <span>All</span>
         </Button>
@@ -135,18 +180,31 @@ function Toolbar({
             className={`chip chip-category-${cat}`}
             data-ft-category={cat}
             aria-pressed={category === cat ? "true" : "false"}
+            onClick={() => onCategorySet(cat)}
           >
-            <span>
-              {cat === "api_provider"
-                ? "API providers"
-                : cat[0].toUpperCase() + cat.slice(1)}
-            </span>
+            <ChipGlyph value={cat} />
+            <span>{CATEGORY_LABELS[cat] ?? cat}</span>
           </Button>
         ))}
       </div>
       <div className="results-line">
         <p className="results-status" id="ft-results-status" role="status" aria-live="polite">
-          {status}
+          {countText}
+          {active.map((tag) => (
+            <span key={tag.dim}>
+              {" · "}
+              <Button
+                type="button"
+                variant="unstyled"
+                className={`filter-pill badge-${tag.dim}-${tag.value}`}
+                data-ft-remove={tag.dim}
+                aria-label={`Remove ${tag.label} filter`}
+                onClick={() => onRemoveFilter(tag.dim)}
+              >
+                {tag.label}
+              </Button>
+            </span>
+          ))}
         </p>
         <Button
           type="button"
@@ -186,6 +244,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
   const stateRef = useRef(state)
   stateRef.current = state
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const pendingFocusRef = useRef<"search" | "next-pill" | null>(null)
 
   const shownList = visibleOffers(offers, state)
 
@@ -253,6 +312,20 @@ export default function HomePage({ index }: { index: OffersIndex }) {
     commit({ sort }, "sort")
   }
 
+  function onCategorySet(category: string) {
+    commit({ category }, "filter")
+  }
+
+  function onTagToggle(dim: FilterDimension, value: string) {
+    const current = stateRef.current[dim]
+    commit({ [dim]: current === value ? "" : value }, "filter")
+  }
+
+  function onRemoveFilter(dim: FilterDimension) {
+    commit({ [dim]: "" }, "filter")
+    pendingFocusRef.current = "next-pill"
+  }
+
   function onClear() {
     if (debounceRef.current !== null) {
       clearTimeout(debounceRef.current)
@@ -260,8 +333,22 @@ export default function HomePage({ index }: { index: OffersIndex }) {
     }
     commit({ q: "", category: "", verification: "", signup: "" }, "filter")
     setSearchInput("")
+    pendingFocusRef.current = "search"
     document.getElementById("ft-search")?.focus()
   }
+
+  useLayoutEffect(() => {
+    const pending = pendingFocusRef.current
+    if (!pending) return
+    pendingFocusRef.current = null
+    if (pending === "next-pill") {
+      const next = document.querySelector("#ft-results-status [data-ft-remove]")
+      if (next instanceof HTMLElement) next.focus()
+      else document.getElementById("ft-search")?.focus()
+      return
+    }
+    document.getElementById("ft-search")?.focus()
+  })
 
   return (
     <>
@@ -295,9 +382,12 @@ export default function HomePage({ index }: { index: OffersIndex }) {
               searchValue={searchInput}
               sortValue={state.sort}
               category={state.category}
+              active={namedFilters(state)}
               clearHidden={!hasQueryOrFilters(state)}
               onSearchChange={onSearchChange}
               onSortChange={onSortChange}
+              onCategorySet={onCategorySet}
+              onRemoveFilter={onRemoveFilter}
               onClear={onClear}
             />
             <a className="skip-list" href="#site-footer">
@@ -305,7 +395,18 @@ export default function HomePage({ index }: { index: OffersIndex }) {
             </a>
             <ol className="grid" id="ft-grid" role="list">
               {shownList.map((offer, i) => (
-                <OfferRow key={offer.slug} offer={offer} index={i} buildDay={buildDay} />
+                <OfferRow
+                  key={offer.slug}
+                  offer={offer}
+                  index={i}
+                  buildDay={buildDay}
+                  pressed={{
+                    category: state.category,
+                    verification: state.verification,
+                    signup: state.signup,
+                  }}
+                  onToggleTag={onTagToggle}
+                />
               ))}
             </ol>
             <section className="empty" id="ft-no-results" hidden={shownList.length !== 0}>

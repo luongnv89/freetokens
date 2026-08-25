@@ -3,6 +3,7 @@ import { act, fireEvent, render, screen } from "@testing-library/react"
 import HomePage from "./HomePage"
 import {
   SEARCH_DEBOUNCE_MS,
+  bindAnalyticsListeners,
   configureAnalytics,
   grantConsent,
   resetAnalyticsForTests,
@@ -133,6 +134,18 @@ function listedSlugs() {
   return [...document.querySelectorAll("#ft-grid article[id^='offer-']")].map((el) =>
     el.id.replace(/^offer-/, ""),
   )
+}
+
+function categoryChip(value: string) {
+  return document.querySelector(`[data-ft-category="${value}"]`) as HTMLButtonElement
+}
+
+function tagOn(slug: string, dimension: string) {
+  return document.querySelector(`#offer-${slug} [data-ft-tag="${dimension}"]`) as HTMLButtonElement
+}
+
+function statusText() {
+  return document.getElementById("ft-results-status")?.textContent ?? ""
 }
 
 beforeEach(() => {
@@ -272,7 +285,7 @@ describe("HomePage deep link and popstate", () => {
     expect(screen.getByLabelText("Search")).toHaveValue("alpha")
     expect(screen.getByLabelText("Sort")).toHaveValue("expiring")
     expect(document.getElementById("ft-results-status")?.textContent).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers`,
+      `Showing 1 of ${fixtureOffers.length} offers · Coding · hand-verified · sign-up required`,
     )
     expect(eventCalls(gtag, "search")).toHaveLength(0)
     expect(eventCalls(gtag, "sort_use")).toHaveLength(0)
@@ -298,5 +311,247 @@ describe("HomePage deep link and popstate", () => {
     expect(screen.getByLabelText("Sort")).toHaveValue("amount")
     expect(eventCalls(gtag, "search")).toHaveLength(0)
     expect(eventCalls(gtag, "sort_use")).toHaveLength(0)
+  })
+})
+
+describe("HomePage three-dimension filters (#126)", () => {
+  it("chip click SETs category, does not toggle, and fires filter_use once per click", () => {
+    const gtag = grantedGtag()
+    const pushSpy = vi.spyOn(window.history, "pushState")
+    render(<HomePage index={index} />)
+
+    fireEvent.click(categoryChip("coding"))
+    expect(listedSlugs()).toEqual([
+      "alpha-copilot",
+      "alpha-social",
+      "alpha-free",
+      "beta-copilot",
+    ])
+    expect(new URLSearchParams(window.location.search).get("category")).toBe("coding")
+    expect(categoryChip("coding")).toHaveAttribute("aria-pressed", "true")
+    expect(categoryChip("")).toHaveAttribute("aria-pressed", "false")
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(1)
+    expect(eventCalls(gtag, "filter_use")[0][2]).toEqual({
+      category: "coding",
+      verification: "all",
+      signup: "all",
+    })
+    expect(pushSpy).toHaveBeenCalledTimes(1)
+
+    fireEvent.click(categoryChip("coding"))
+    expect(new URLSearchParams(window.location.search).get("category")).toBe("coding")
+    expect(listedSlugs()).toEqual([
+      "alpha-copilot",
+      "alpha-social",
+      "alpha-free",
+      "beta-copilot",
+    ])
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(2)
+    expect(pushSpy).toHaveBeenCalledTimes(1)
+
+    fireEvent.click(categoryChip("image"))
+    expect(listedSlugs()).toEqual(["alpha-image"])
+    expect(new URLSearchParams(window.location.search).get("category")).toBe("image")
+    expect(categoryChip("image")).toHaveAttribute("aria-pressed", "true")
+    expect(categoryChip("coding")).toHaveAttribute("aria-pressed", "false")
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(3)
+    expect(eventCalls(gtag, "filter_use")[2][2]).toEqual({
+      category: "image",
+      verification: "all",
+      signup: "all",
+    })
+
+    fireEvent.click(categoryChip(""))
+    expect(listedSlugs()).toHaveLength(fixtureOffers.length)
+    expect(new URLSearchParams(window.location.search).get("category")).toBeNull()
+    expect(categoryChip("")).toHaveAttribute("aria-pressed", "true")
+    expect(eventCalls(gtag, "filter_use")[3][2]).toEqual({
+      category: "all",
+      verification: "all",
+      signup: "all",
+    })
+  })
+
+  it("row tag click applies that dimension and clicking again clears it", () => {
+    const gtag = grantedGtag()
+    render(<HomePage index={index} />)
+    fireEvent.click(tagOn("alpha-free", "verification"))
+    expect(listedSlugs()).toEqual([
+      "alpha-copilot",
+      "alpha-image",
+      "alpha-free",
+      "beta-copilot",
+    ])
+    expect(window.location.search).toBe("?verification=hand_verified")
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(1)
+
+    fireEvent.click(tagOn("alpha-free", "verification"))
+    expect(listedSlugs()).toEqual([
+      "alpha-copilot",
+      "alpha-image",
+      "alpha-social",
+      "alpha-free",
+      "beta-copilot",
+    ])
+    expect(window.location.search).toBe("")
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(2)
+  })
+
+  it("aria-pressed syncs across every row showing the applied value", () => {
+    render(<HomePage index={index} />)
+    fireEvent.click(tagOn("alpha-free", "verification"))
+    expect(tagOn("alpha-free", "verification")).toHaveAttribute("aria-pressed", "true")
+    expect(tagOn("alpha-copilot", "verification")).toHaveAttribute("aria-pressed", "true")
+    expect(tagOn("alpha-image", "verification")).toHaveAttribute("aria-pressed", "true")
+    expect(tagOn("alpha-social", "verification")).toBeNull()
+    expect(tagOn("alpha-free", "signup")).toHaveAttribute("aria-pressed", "false")
+  })
+
+  it("chips, tags, and search AND-combine and stay shareable", () => {
+    vi.useFakeTimers()
+    render(<HomePage index={index} />)
+    fireEvent.click(tagOn("alpha-free", "verification"))
+    fireEvent.click(tagOn("alpha-free", "signup"))
+    fireEvent.click(categoryChip("coding"))
+    fireEvent.change(screen.getByLabelText("Search"), { target: { value: "free" } })
+    act(() => {
+      vi.advanceTimersByTime(SEARCH_DEBOUNCE_MS)
+    })
+    expect(listedSlugs()).toEqual(["alpha-free"])
+    const params = new URLSearchParams(window.location.search)
+    expect(params.get("verification")).toBe("hand_verified")
+    expect(params.get("signup")).toBe("none")
+    expect(params.get("category")).toBe("coding")
+    expect(params.get("q")).toBe("free")
+    expect(statusText()).toBe(
+      `Showing 1 of ${fixtureOffers.length} offers · Coding · hand-verified · no sign-up`,
+    )
+  })
+
+  it("status pills name active filters and dropping one leaves the others", () => {
+    render(<HomePage index={index} />)
+    fireEvent.click(tagOn("alpha-free", "verification"))
+    fireEvent.click(tagOn("alpha-free", "signup"))
+    expect(listedSlugs()).toEqual(["alpha-free"])
+    expect(statusText()).toBe(
+      `Showing 1 of ${fixtureOffers.length} offers · hand-verified · no sign-up`,
+    )
+    fireEvent.click(screen.getByRole("button", { name: "Remove no sign-up filter" }))
+    expect(listedSlugs()).toEqual([
+      "alpha-copilot",
+      "alpha-image",
+      "alpha-free",
+      "beta-copilot",
+    ])
+    expect(window.location.search).toBe("?verification=hand_verified")
+    expect(statusText()).toBe(
+      `Showing 4 of ${fixtureOffers.length} offers · hand-verified`,
+    )
+  })
+
+  it("removing a pill focuses the next pill, then search when none remain", () => {
+    render(<HomePage index={index} />)
+    fireEvent.click(tagOn("alpha-free", "verification"))
+    fireEvent.click(tagOn("alpha-free", "signup"))
+    fireEvent.click(screen.getByRole("button", { name: "Remove hand-verified filter" }))
+    expect(document.activeElement).toBe(
+      screen.getByRole("button", { name: "Remove no sign-up filter" }),
+    )
+    fireEvent.click(screen.getByRole("button", { name: "Remove no sign-up filter" }))
+    expect(document.activeElement).toBe(screen.getByLabelText("Search"))
+  })
+
+  it("filtering does not reorder remaining rows", () => {
+    render(<HomePage index={index} />)
+    const before = listedSlugs()
+    expect(before).toEqual([
+      "alpha-copilot",
+      "alpha-image",
+      "alpha-social",
+      "alpha-free",
+      "beta-copilot",
+    ])
+    fireEvent.click(categoryChip("coding"))
+    expect(listedSlugs()).toEqual(before.filter((slug) => slug !== "alpha-image"))
+  })
+
+  it("keeps keyboard focus on the row tag that applied the filter", () => {
+    render(<HomePage index={index} />)
+    const tag = tagOn("alpha-free", "verification")
+    tag.focus()
+    expect(document.activeElement).toBe(tag)
+    fireEvent.click(tag)
+    expect(document.activeElement).toBe(tagOn("alpha-free", "verification"))
+    expect(tagOn("alpha-free", "verification")).toHaveAttribute("aria-pressed", "true")
+  })
+
+  it("empty result set from filters shows a working reset that focuses search", () => {
+    const gtag = grantedGtag()
+    render(<HomePage index={index} />)
+    fireEvent.click(categoryChip("video"))
+    expect(listedSlugs()).toEqual([])
+    expect(document.getElementById("ft-no-results")?.hidden).toBe(false)
+    expect(statusText()).toBe(`Showing 0 of ${fixtureOffers.length} offers · Video`)
+    gtag.mockClear()
+    fireEvent.click(screen.getByRole("button", { name: "Clear search & filters" }))
+    expect(listedSlugs()).toHaveLength(fixtureOffers.length)
+    expect(document.getElementById("ft-no-results")?.hidden).toBe(true)
+    expect(document.activeElement).toBe(screen.getByLabelText("Search"))
+    expect(window.location.search).toBe("")
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(1)
+  })
+
+  it("All chip SETs category empty without clearing other dimensions", () => {
+    render(<HomePage index={index} />)
+    fireEvent.click(tagOn("alpha-free", "verification"))
+    fireEvent.click(categoryChip("coding"))
+    expect(new URLSearchParams(window.location.search).get("category")).toBe("coding")
+    fireEvent.click(categoryChip(""))
+    const params = new URLSearchParams(window.location.search)
+    expect(params.get("category")).toBeNull()
+    expect(params.get("verification")).toBe("hand_verified")
+    expect(listedSlugs()).toEqual([
+      "alpha-copilot",
+      "alpha-image",
+      "alpha-free",
+      "beta-copilot",
+    ])
+  })
+
+  it("Clear all filters removes every filter and names them in the status line first", () => {
+    const gtag = grantedGtag()
+    render(<HomePage index={index} />)
+    fireEvent.click(categoryChip("coding"))
+    fireEvent.click(tagOn("alpha-free", "signup"))
+    expect(statusText()).toContain("Coding")
+    expect(statusText()).toContain("no sign-up")
+    expect(screen.getByRole("button", { name: "Clear all filters" })).not.toHaveAttribute(
+      "hidden",
+    )
+    gtag.mockClear()
+    fireEvent.click(screen.getByRole("button", { name: "Clear all filters" }))
+    expect(listedSlugs()).toHaveLength(fixtureOffers.length)
+    expect(statusText()).toBe(`Showing all ${fixtureOffers.length} offers`)
+    expect(window.location.search).toBe("")
+    expect(document.activeElement).toBe(screen.getByLabelText("Search"))
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(1)
+    expect(eventCalls(gtag, "filter_use")[0][2]).toEqual({
+      category: "all",
+      verification: "all",
+      signup: "all",
+    })
+  })
+
+  it("bindAnalyticsListeners does not double-fire filter_use on chip click", () => {
+    const gtag = grantedGtag()
+    render(<HomePage index={index} />)
+    bindAnalyticsListeners()
+    fireEvent.click(categoryChip("image"))
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(1)
+    expect(eventCalls(gtag, "filter_use")[0][2]).toEqual({
+      category: "image",
+      verification: "all",
+      signup: "all",
+    })
   })
 })

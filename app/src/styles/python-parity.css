@@ -714,6 +714,205 @@ a:focus-visible {
   #ft-grid > li::before { padding-right: 0.45rem; }
 }
 
+/* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.7rem 1.1rem;
+  margin: 0 0 0.9rem;
+}
+
+.field { display: flex; flex-direction: column; gap: 0.28rem; flex: 1 1 15rem; }
+
+.tool-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+
+#ft-search {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.84rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  padding: 0.42rem 0.7rem;
+  max-width: 24rem;
+  width: 100%;
+}
+
+.field-sort { flex: 0 1 auto; }
+
+#ft-sort {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.84rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  padding: 0.42rem 1.9rem 0.42rem 0.7rem;
+  cursor: pointer;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.chip {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34em;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid var(--tag-hue);
+  background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
+  color: var(--tag-hue);
+  cursor: pointer;
+}
+
+.chip:hover,
+.chip[aria-pressed="true"] {
+  background: var(--tag-hue);
+  border-color: var(--tag-hue);
+  color: var(--paper);
+}
+
+.chip:focus-visible,
+#ft-search:focus-visible,
+#ft-sort:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.chip-category-api_provider { --tag-hue: var(--t-api_provider); }
+.chip-category-coding { --tag-hue: var(--t-coding); }
+.chip-category-image { --tag-hue: var(--t-image); }
+.chip-category-voice { --tag-hue: var(--t-voice); }
+.chip-category-video { --tag-hue: var(--t-video); }
+
+.results-status {
+  flex-basis: 100%;
+  min-width: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--gray);
+  margin: 0;
+}
+
+button.badge {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  cursor: pointer;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+button.badge:hover,
+button.badge:focus-visible,
+button.badge[aria-pressed="true"] {
+  background: var(--tag-hue);
+  color: var(--paper);
+}
+
+/* ::after, not a text node — a literal × would join searchable text.
+   Literal glyph, not "\00d7": a triple-quoted string would emit a NUL. */
+button.badge[aria-pressed="true"]::after {
+  content: "×";
+  margin-left: 0.1em;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+button.badge:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.badge, button.badge { transition: none; }
+}
+
+.filter-pill {
+  --tag-hue: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0 0.45rem;
+  border: 1px solid var(--tag-hue);
+  border-radius: 999px;
+  background: var(--tag-hue);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+.filter-pill::after {
+  content: "×";
+  margin-left: 0.25em;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.filter-pill:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.results-line {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+}
+
+.results-line .results-status { flex: 0 1 auto; }
+
+.chip.clear[hidden] { display: none; }
+
+.chip.clear {
+  font-size: 0.7rem;
+  padding: 0.24rem 0.6rem;
+  border-color: var(--gray);
+  background: var(--paper);
+  color: var(--gray);
+}
+
+.chip.clear:hover,
+.chip.clear:focus-visible {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.grid li[hidden] { display: none; }
+
+.empty .chip.reset { margin-top: 0.75rem; }
+
+@media (pointer: coarse) {
+  .chip,
+  #ft-search,
+  #ft-sort { min-height: 44px; }
+
+  button.badge {
+    min-height: 32px;
+    padding-inline: 0.6rem;
+  }
+
+  #ft-grid button.badge { padding-inline: 0.6rem; }
+
+  .filter-pill { min-height: 32px; padding-inline: 0.6rem; }
+}
+
 /* ---- Consent banner (build.py _BANNER_CSS, issue #131) ----------------- */
 
 .consent {
