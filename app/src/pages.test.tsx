@@ -264,6 +264,7 @@ describe("PrivacyPage (#132 shipped-analytics claims)", () => {
       "privacy-analytics",
       "privacy-live-traffic",
       "privacy-consent",
+      "privacy-local-data",
       "privacy-third-parties",
       "privacy-never",
       "privacy-choices",
@@ -313,6 +314,29 @@ describe("PrivacyPage (#132 shipped-analytics claims)", () => {
     ]) {
       expect(markup).not.toContain(absent);
     }
+  });
+
+  it("names every personal-state key and hosts export/import/erase (#141)", () => {
+    for (const key of [
+      "<code>ft_ga_consent</code>",
+      "<code>ft-saved</code>",
+      "<code>ft-dismissed</code>",
+      "<code>ft-prefs</code>",
+      "<code>ft-claim-&lt;offer&gt;</code>",
+    ]) {
+      expect(markup).toContain(key);
+    }
+    // The policy states nothing stored locally is ever transmitted.
+    expect(markup).toContain("never leaves your browser");
+    expect(markup).toContain("never transmitted");
+    // Export, import, and clear-all controls are present.
+    expect(markup).toContain('id="ft-export-data"');
+    expect(markup).toContain('id="ft-import-data"');
+    expect(markup).toContain('id="ft-clear-data"');
+    expect(markup).toContain("Export my data (JSON)");
+    expect(markup).toContain("Clear all my local data");
+    expect(markup).toContain('type="file"');
+    expect(markup).toContain('aria-live="polite"');
   });
 });
 

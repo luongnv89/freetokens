@@ -38,8 +38,10 @@ export type GaConsent = "granted" | "denied";
 
 export const GA_CONSENT_KEY = "ft_ga_consent";
 
+export const CLAIM_KEY_PREFIX = "ft-claim-";
+
 export function claimStorageKey(slug: string): string {
-  return `ft-claim-${slug}`;
+  return `${CLAIM_KEY_PREFIX}${slug}`;
 }
 
 /** v1 claim-progress envelope written by this layer. */
@@ -359,4 +361,251 @@ export function clearAllPersonalState(slugs: Iterable<string>): void {
   for (const slug of slugs) {
     safeRemove(claimStorageKey(slug));
   }
+}
+
+// ---------------------------------------------------------------------------
+// Portable export / import of every personal-state key (issue #141).
+//
+// Export serializes the full local snapshot as a versioned JSON document;
+// import validates it strictly (schema, types, size) and writes it back
+// all-or-nothing: an invalid file is rejected BEFORE any key is touched.
+// Everything stays in the browser — no network call of any kind.
+// ---------------------------------------------------------------------------
+
+/** Marker string identifying a freetokens personal-state export. */
+export const EXPORT_FORMAT = "freetokens-personal-state" as const;
+
+/** Bump on any breaking change to the exported document's shape. */
+export const EXPORT_VERSION = 1 as const;
+
+/**
+ * Hard cap on accepted import payloads, measured on the raw JSON text
+ * before parsing — a multi-megabyte "export" is rejected outright.
+ */
+export const IMPORT_MAX_LENGTH = 1_000_000;
+
+const MAX_CLAIM_SLUGS = MAX_SLUGS;
+
+/** Versioned personal-state export document. */
+export interface PersonalStateExport {
+  format: typeof EXPORT_FORMAT;
+  version: typeof EXPORT_VERSION;
+  exported_at: string;
+  consent: GaConsent | null;
+  saved: string[];
+  dismissed: string[];
+  prefs: PrefsRecordV1 | null;
+  claims: Record<string, number[]>;
+}
+
+export type ImportResult =
+  | { ok: true; saved: number; dismissed: number; claims: number }
+  | { ok: false; reason: string };
+
+/**
+ * List the offer slugs that currently have a `ft-claim-<slug>` key in
+ * storage. Degrades to [] when storage is unavailable or disabled.
+ */
+export function claimSlugsInStorage(): string[] {
+  const ls = windowLocalStorage();
+  if (!ls) return [];
+  const slugs: string[] = [];
+  try {
+    for (let i = 0; i < ls.length; i++) {
+      const key = ls.key(i);
+      if (typeof key === "string" && key.startsWith(CLAIM_KEY_PREFIX)) {
+        slugs.push(key.slice(CLAIM_KEY_PREFIX.length));
+      }
+    }
+  } catch {
+    return [];
+  }
+  return normalizeSlugList(slugs);
+}
+
+/**
+ * Build the portable JSON snapshot of every personal-state key.
+ * When `claimSlugs` is omitted the stored `ft-claim-*` keys are enumerated
+ * automatically. Never throws and never touches the network.
+ */
+export function exportPersonalState(
+  claimSlugs?: Iterable<string>,
+): PersonalStateExport {
+  const slugs = claimSlugs ? [...claimSlugs] : claimSlugsInStorage();
+  const claims: Record<string, number[]> = {};
+  for (const slug of normalizeSlugList(slugs)) {
+    const done = parseClaimRaw(safeRead(claimStorageKey(slug)));
+    if (done && done.length > 0) claims[slug] = done;
+  }
+  return {
+    format: EXPORT_FORMAT,
+    version: EXPORT_VERSION,
+    exported_at: new Date().toISOString(),
+    consent: readGaConsent(),
+    saved: readSavedSlugs(),
+    dismissed: readDismissedSlugs(),
+    prefs: readPrefs(),
+    claims,
+  };
+}
+
+function reject(reason: string): ImportResult {
+  return { ok: false, reason };
+}
+
+/**
+ * Validate an untrusted import payload against the exact export schema.
+ * Returns the normalized records or null — never writes anything.
+ */
+function validateImport(parsed: unknown):
+  | {
+      consent: GaConsent | null;
+      saved: string[];
+      dismissed: string[];
+      prefs: PrefsRecordV1 | null;
+      claims: [string, number[]][];
+    }
+  | null {
+  if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
+    return null;
+  }
+  const doc = parsed as Record<string, unknown>;
+  if (doc.format !== EXPORT_FORMAT) return null;
+  if (doc.version !== EXPORT_VERSION) return null;
+
+  // Consent: absent/null or exactly one of the two legal words.
+  const consent =
+    doc.consent === undefined || doc.consent === null
+      ? null
+      : doc.consent === "granted" || doc.consent === "denied"
+        ? doc.consent
+        : null;
+  if (
+    doc.consent !== undefined &&
+    doc.consent !== null &&
+    consent === null
+  ) {
+    return null;
+  }
+
+  // Saved/dismissed: absent → empty; present but malformed → rejected.
+  // Arrays of strings, normalized like live writes are.
+  const list = (value: unknown): string[] | null => {
+    if (value === undefined) return [];
+    if (!Array.isArray(value)) return null;
+    if (!value.every((s) => typeof s === "string")) return null;
+    return normalizeSlugList(value);
+  };
+  const saved = list(doc.saved);
+  if (saved === null) return null;
+  const dismissed = list(doc.dismissed);
+  if (dismissed === null) return null;
+
+  // Prefs: absent/null or only known string fields.
+  let prefs: PrefsRecordV1 | null = null;
+  if (doc.prefs !== undefined && doc.prefs !== null) {
+    if (typeof doc.prefs !== "object" || Array.isArray(doc.prefs)) return null;
+    const p = doc.prefs as Record<string, unknown>;
+    const field = (value: unknown): string | null =>
+      value === undefined
+        ? ""
+        : typeof value === "string"
+          ? value.trim().slice(0, MAX_PREF_LENGTH)
+          : null;
+    const category = field(p.category);
+    const verification = field(p.verification);
+    const signup = field(p.signup);
+    const sort = field(p.sort);
+    if (
+      category === null ||
+      verification === null ||
+      signup === null ||
+      sort === null
+    ) {
+      return null;
+    }
+    prefs = { v: SCHEMA_VERSION, category, verification, signup, sort };
+  }
+
+  // Claims: object mapping slug -> array of non-negative integers.
+  if (
+    doc.claims !== undefined &&
+    doc.claims !== null &&
+    (typeof doc.claims !== "object" || Array.isArray(doc.claims))
+  ) {
+    return null;
+  }
+  const claims: [string, number[]][] = [];
+  if (doc.claims !== undefined && doc.claims !== null) {
+    const raw = doc.claims as Record<string, unknown>;
+    for (const [slug, done] of Object.entries(raw)) {
+      if (typeof slug !== "string" || !slug.trim()) return null;
+      if (slug.length > MAX_SLUG_LENGTH) return null;
+      if (!Array.isArray(done)) return null;
+      if (!done.every((n) => typeof n === "number" && Number.isInteger(n) && n >= 0)) {
+        return null;
+      }
+      claims.push([slug.trim().slice(0, MAX_SLUG_LENGTH), done]);
+      if (claims.length > MAX_CLAIM_SLUGS) return null;
+    }
+  }
+
+  return { consent, saved, dismissed, prefs, claims };
+}
+
+/**
+ * Import a previously exported personal-state document (raw JSON text or
+ * an already-parsed value). Strictly validated first — malformed,
+ * foreign, oversized, or future-version payloads are rejected with no
+ * partial write. Returns why the file was rejected on failure.
+ */
+export function importPersonalState(raw: string | unknown): ImportResult {
+  if (!windowLocalStorage()) {
+    return reject("Local storage is unavailable in this browser.");
+  }
+  if (typeof raw === "string") {
+    if (raw.length > IMPORT_MAX_LENGTH) {
+      return reject("That file is too large to be a personal-state export.");
+    }
+    try {
+      raw = JSON.parse(raw) as unknown;
+    } catch {
+      return reject("That file is not valid JSON.");
+    }
+  } else if (raw !== null && typeof raw === "object") {
+    // Parsed values skip the text-size gate but must still be small
+    // enough to serialize under the same cap.
+    try {
+      if (JSON.stringify(raw).length > IMPORT_MAX_LENGTH) {
+        return reject("That data is too large to be a personal-state export.");
+      }
+    } catch {
+      return reject("That file is not valid JSON.");
+    }
+  }
+  const validated = validateImport(raw);
+  if (!validated) {
+    return reject(
+      "That file does not match the freetokens personal-state format.",
+    );
+  }
+
+  const { consent, saved, dismissed, prefs, claims } = validated;
+  let refused = false;
+  if (consent !== null && !writeGaConsent(consent)) refused = true;
+  if (prefs !== null && !writePrefs(prefs)) refused = true;
+  if (!writeSavedSlugs(saved)) refused = true;
+  if (!writeDismissedSlugs(dismissed)) refused = true;
+  for (const [slug, done] of claims) {
+    if (!writeClaimProgress(slug, done)) refused = true;
+  }
+  if (refused) {
+    return reject("Local storage refused the write. Nothing was imported.");
+  }
+  return {
+    ok: true,
+    saved: saved.length,
+    dismissed: dismissed.length,
+    claims: claims.length,
+  };
 }
