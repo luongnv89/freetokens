@@ -54,8 +54,8 @@ fits you.
 3. Check everything locally before pushing:
 
    ```bash
-   python3 scripts/build.py                    # validates offers/ against the schema
-   python3 -m unittest discover -s tests -v    # test suite
+   python3 scripts/validate_offers.py         # validates offers/ against the schema
+   (cd app && npm test)                       # test suite
    ```
 
 4. Commit and push:
@@ -104,7 +104,7 @@ than publishing — unverified entries never enter the directory.
 
 ## Pull-request checklist
 
-- [ ] `python3 scripts/build.py` passes locally
+- [ ] `python3 scripts/validate_offers.py` passes locally
 - [ ] You personally visited `source_url`; `verified_date` is today's date
 - [ ] No guessed values — uncertain fields are marked unknown, not filled in
 - [ ] Commit message follows Conventional Commits and references the issue

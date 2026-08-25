@@ -217,7 +217,7 @@ with a reference trace:
 ```bash
 python3 .claude/skills/offer-updater/validate_offer.py <draft.yaml>
 # also validate the detail file if one was created/updated:
-python3 scripts/build.py --help  # validates offers/details/*.json as part of the build
+python3 scripts/validate_offers.py  # validates offers/ and offers/details/*.json (CI gate)
 ```
 
 Exit `0` + `OK` means the file is byte-for-byte compliant with what CI
@@ -259,7 +259,7 @@ without the curator's explicit yes.**
   matching `offers/details/<slug>.json` if one was created or updated (it
   now carries the reference trace), run the
   validator once more on its final path (`validate_offer.py` for the YAML
-  and `python3 scripts/build.py` or `python3 scripts/validate_offers.py`
+  and `python3 scripts/validate_offers.py`
   for the detail JSON), then follow `CONTRIBUTING.md`:
   1. **Create the tracking issue** with `gh issue create` (unless the curator
      supplied one). Title: `Add <provider> <short offer name>`. Body: provider,
@@ -272,7 +272,7 @@ without the curator's explicit yes.**
   4. Open the PR whose body starts with `Closes #<issue>`, include the
      verification verdict + evidence quote, the **References verified** list,
      and the local-check results
-     (validator, `scripts/build.py`, test suite).
+     (validator, `scripts/offer_model.py`, test suite).
 - On NO / no answer / unverifiable: leave the draft in `needs_review/`,
   summarize why (including which reference URLs were checked and why they
   failed), and stop. Re-running the skill later resumes from Step 2.

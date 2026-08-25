@@ -56,12 +56,12 @@ The canonical machine-readable schema is `schemas/offer.schema.json`
 
 ```bash
 python3 scripts/validate_offers.py   # schema-only check (CI gate)
-python3 scripts/build.py             # validate + generate index.json + site/index.html
 ```
 
-Both reuse the same stdlib validator (`scripts/build.py`), so CI and the
-build cannot drift; `validate_offers.py` additionally cross-checks the JSON
-Schema against the validator's constants.
+The validator reuses the frozen stdlib content model (`scripts/offer_model.py`,
+formerly the Python builder's validator), so local checks and CI cannot
+drift; `validate_offers.py` additionally cross-checks the JSON Schema
+against the content model's constants.
 
 CI runs the validator on every push or PR touching `offers/**`
 (`.github/workflows/validate.yml`).
@@ -102,9 +102,9 @@ Rules:
 - **No third-party embed scripts.** X/Reddit posts are rendered as static,
   build-time quote cards linking out to the platform, keeping the page
   free of third-party trackers (privacy policy §"Who else receives data").
-- **Screenshots** reference assets committed under the built `site/` tree
-  via a relative `image` path such as `assets/shots/pricing.png`; absolute
-  paths and `..` segments are rejected.
+- **Screenshots** reference assets committed under `app/public/` (served at
+  the site root) via a relative `image` path such as
+  `assets/shots/pricing.png`; absolute paths and `..` segments are rejected.
 - Text limits: `text`/`caption` ≤500 chars; other strings ≤200 chars.
 
 Example:

@@ -61,7 +61,7 @@ jobs:
           # Same optional analytics plumbing as the retired Python build:
           # unset/empty keeps GA4 and the traffic strip fully disabled.
           # Since the #138 cutover the Pages artifact comes from this Vite
-          # output; reverting this workflow restores scripts/build.py.
+          # output; #139 retired the legacy Python builder and site/ output.
           GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
           GOATCOUNTER_SITE_URL: ${{ secrets.GOATCOUNTER_SITE_URL }}
         run: npm run build

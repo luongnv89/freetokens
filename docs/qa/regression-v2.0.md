@@ -1,8 +1,8 @@
 # v2.0 regression pass — QA record
 
 Issue #30 · Executed 2026-08-22, commit range `v1.1..v2.0` · Environment:
-local build (`python3 scripts/build.py` + stdlib unittest; Node VM harness
-via node@22).
+local build (the Python builder, retired in #139, plus stdlib
+unittest; Node VM harness via node@22).
 
 Scope: the v2.0 surface (#25 retain-and-flag expiry, #26 archive, #27 feed)
 plus regression over everything v1.0/v1.1 shipped. Automated checks ran in
