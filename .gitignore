@@ -23,6 +23,9 @@ _site/
 .vite/
 coverage/
 
+# Lighthouse CI local reports (issue #142)
+.lighthouseci/
+
 # Generated app data (app/scripts/load-offers.mjs, issue #118) — offers/*.yaml
 # stays the source of truth; these artifacts are rebuilt on every build.
 app/src/data/

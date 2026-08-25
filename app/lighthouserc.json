@@ -1,0 +1,26 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "dist",
+      "numberOfRuns": 1,
+      "url": [
+        "http://localhost/",
+        "http://localhost/archive.html",
+        "http://localhost/offers/cartesia-free-plan.html"
+      ]
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.95 }],
+        "categories:accessibility": ["error", { "minScore": 0.9 }],
+        "categories:best-practices": "off",
+        "categories:seo": "off",
+        "categories:pwa": "off"
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci"
+    }
+  }
+}
