@@ -90,6 +90,14 @@ describe("App home listing prerender", () => {
     expect(markup).not.toContain("<div class=\"card\"");
     expect(markup.match(/<li style/g)?.length).toBe(offers.length);
   });
+
+  it("emits no tracker markup when analytics env is unset (#131)", () => {
+    expect(markup).not.toContain("googletagmanager");
+    expect(markup).not.toContain("ft-consent-banner");
+    expect(markup).not.toContain("id=\"ft-traffic\"");
+    expect(markup).not.toContain("gc.zgo.at");
+    expect(markup).not.toContain("ft-consent-settings");
+  });
 });
 
 // Icon contract after the lucide-react migration (#122): glyphs still ship
