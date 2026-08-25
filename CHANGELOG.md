@@ -5,6 +5,14 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Python HTML test suite retired (#135):** `tests/test_build.py` and its
+  `tests/app_js_harness.js` Node VM harness are deleted — every behaviour was
+  mapped by `docs/qa/coverage-mapping.md` (#133) to Vitest/RTL, Playwright
+  (#134), retained Python, or an explicit drop. CI keeps Python solely for the
+  content-model gate (`test_validate_offers.py` + `test_skill_validator.py`,
+  invoked explicitly instead of `unittest discover`) and now also runs the
+  Node unit suites via SHA-pinned `actions/setup-node`.
+
 - **Coverage mapping of the Python builder suite (#133):** `docs/qa/coverage-mapping.md`
   accounts for all 41 `tests/test_build.py` classes — Vitest/RTL, Playwright
   (#134), retained Python, or dropped with a reason. Gap-fills: tag-hue
