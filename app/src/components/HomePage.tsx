@@ -37,9 +37,9 @@ import {
   type FilterDimension,
   type UrlState,
 } from "../lib/urlState"
-import { BrandMark } from "./BrandMark"
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
+import { SiteHeader } from "./SiteHeader"
 import { Button } from "./ui/button"
 
 const FILTER_LABELS: Record<FilterDimension, Record<string, string>> = {
@@ -528,13 +528,10 @@ export default function HomePage({ index }: { index: OffersIndex }) {
       <div className="wrap">
         <main>
         <header className="masthead masthead-home">
-          <div className="bar">
-            <BrandMark size={32} alt="" />
-            <h1>Free AI Credits</h1>
-            <p className="kicker">
-              zero runtime &middot; every offer labeled with verification level &amp; sign-up need
-            </p>
-          </div>
+          <SiteHeader current="home" />
+          <p className="kicker">
+            zero runtime &middot; every offer labeled with verification level &amp; sign-up need
+          </p>
           <p className="tagline">
             Every claimable free-credit offer worth your time, on one fast page. Each carries a
             verification level (hand-checked or community-sourced) and a sign-up tag, refreshed on

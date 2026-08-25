@@ -1,6 +1,7 @@
 import { useRef, useState, type ChangeEvent } from "react"
 import { IconSprite } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
+import { SiteHeader } from "./SiteHeader"
 import {
   IMPORT_MAX_LENGTH,
   clearAllPersonalState,
@@ -128,6 +129,7 @@ export default function PrivacyPage() {
       <div className="wrap">
         <main>
           <header className="masthead">
+            <SiteHeader current="privacy" />
             <p className="kicker">free ai credits</p>
             <h1>Privacy Policy</h1>
             <p className="tagline">

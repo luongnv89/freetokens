@@ -465,6 +465,63 @@ describe("page chrome landmarks and footer (#132)", () => {
   });
 });
 
+describe("shared header chrome (#112)", () => {
+  const home = renderToStaticMarkup(<HomePage index={index} />);
+  const archive = renderToStaticMarkup(<ArchivePage index={index} />);
+  const privacy = renderToStaticMarkup(<PrivacyPage />);
+  const detail = renderToStaticMarkup(
+    <OfferDetailPage index={index} slug={index.offers[0].slug} />,
+  );
+  const routes: [string, string][] = [
+    ["home", home],
+    ["archive", archive],
+    ["privacy", privacy],
+    ["detail", detail],
+  ];
+
+  it("renders the same brand bar on every route, depth-aware", () => {
+    for (const [, markup] of routes) {
+      expect(markup).toContain('class="site-bar"');
+      expect((markup.match(/class="site-brand"/g) ?? []).length).toBe(1);
+      expect(markup).toContain('src="');
+    }
+    expect(home).toContain('<a class="site-brand" href="./index.html">');
+    expect(detail).toContain('<a class="site-brand" href="../index.html">');
+  });
+
+  it("keeps the wordmark and primary nav identical across routes", () => {
+    for (const [, markup] of routes) {
+      expect(markup).toContain(">Free AI Credits</");
+      expect((markup.match(/class="site-nav"/g) ?? []).length).toBe(1);
+      expect(markup).toContain('aria-label="Primary"');
+      expect(markup).toContain(">Offers</a>");
+      expect(markup).toContain(">Archive</a>");
+      expect(markup).toContain(">Privacy</a>");
+    }
+  });
+
+  it("marks the active route in the primary nav without losing the footer state", () => {
+    expect(home).toContain('<a href="./index.html" aria-current="page">Offers</a>');
+    expect(archive).toContain('<a href="archive.html" aria-current="page">Archive</a>');
+    expect(privacy).toContain('<a href="privacy.html" aria-current="page">Privacy</a>');
+    expect(detail).not.toMatch(/<a href="\.\.\/index\.html" aria-current="page">Offers<\/a>/);
+    // Footer active state is untouched by #112.
+    expect(privacy).toContain(
+      '<a href="privacy.html" aria-current="page">Privacy policy</a>',
+    );
+  });
+
+  it("still puts exactly one main landmark and one h1 per page", () => {
+    for (const [, markup] of routes) {
+      expect(markup.match(/<main>/g)?.length).toBe(1);
+      expect(markup.match(/<h1>/g)?.length).toBe(1);
+    }
+    expect(home).toMatch(/<h1>Free AI Credits<\/h1>/);
+    expect(archive).toContain("<h1>Expired offer archive</h1>");
+    expect(privacy).toContain("<h1>Privacy Policy</h1>");
+  });
+});
+
 describe("brand assets (#106 / #132)", () => {
   it("copies declared SVG sizes into public chrome", () => {
     const expected: [string, string, string][] = [
