@@ -30,6 +30,10 @@ const TAG_TO_LUCIDE = {
     icon: "square-play",
     note: "rounded-square frame replaces rx-2.5 rect; play glyph kept",
   },
+  startup_program: {
+    icon: "rocket",
+    note: "lucide rocket; hand-drawn set uses the same four-path rocket",
+  },
   hand_verified: { icon: "circle-check", note: "same circle+check seal" },
   social_proof: { icon: "message-square-text", note: "bubble keeps its hearsay lines" },
   unverified: {

@@ -29,7 +29,7 @@
     },
     "category": {
       "type": "string",
-      "enum": ["api_provider", "coding", "image", "voice", "video"],
+      "enum": ["api_provider", "coding", "image", "voice", "video", "startup_program"],
       "description": "Offer category badge."
     },
     "amount": {

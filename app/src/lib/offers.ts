@@ -10,7 +10,7 @@ import type { Offer, OffersIndex } from "../types/offers-index"
 import type { UrlState } from "./urlState"
 export type { Offer, OffersIndex }
 
-export const CATEGORIES = ["api_provider", "coding", "image", "voice", "video"] as const
+export const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program"] as const
 
 export const CATEGORY_LABELS: Record<string, string> = {
   api_provider: "API providers",
@@ -18,6 +18,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
   image: "Image",
   voice: "Voice",
   video: "Video",
+  startup_program: "Startup programs",
 }
 
 export const VERIFICATION_LABELS: Record<string, string> = {

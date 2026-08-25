@@ -157,13 +157,16 @@ try {
   }
 
   function fillPage({ markup, title, description, canonical, depth = 0, page, slug }) {
+    // All dynamic replacements go through replacer FUNCTIONS: offer copy
+    // routinely contains "$15K"-style amounts, and a string replacement
+    // would treat "$1" as a regex backreference and corrupt the text.
     let doc = template;
-    doc = doc.replace(/<title>.*?<\/title>/s, `<title>${htmlAttr(title)}</title>`);
+    doc = doc.replace(/<title>.*?<\/title>/s, () => `<title>${htmlAttr(title)}</title>`);
     // Vite pretty-prints the shell meta tag across lines; match either form
     // so archive/privacy/detail get their own description (#132).
     doc = doc.replace(
       /<meta\s+name="description"\s+content="[^"]*"\s*\/>/,
-      `<meta name="description" content="${htmlAttr(description)}" />`,
+      () => `<meta name="description" content="${htmlAttr(description)}" />`,
     );
     if (canonical) {
       doc = doc.replace(/\s*<link\s+rel="canonical"[^>]*>/g, "");
@@ -183,7 +186,7 @@ try {
     }
     return doc.replace(
       MOUNT_RE,
-      `<div id="root"${attrs}>${normalize(markup)}</div>`,
+      () => `<div id="root"${attrs}>${normalize(markup)}</div>`,
     );
   }
 

@@ -43,6 +43,7 @@
   --t-image: var(--color-tag-image);
   --t-voice: var(--color-tag-voice);
   --t-video: var(--color-tag-video);
+  --t-startup_program: var(--color-tag-startup-program);
   --t-hand_verified: var(--color-tag-hand-verified);
   --t-social_proof: var(--color-tag-social-proof);
   --t-unverified: var(--color-tag-unverified);
@@ -262,6 +263,7 @@ h1 {
 .badge-category-image { --tag-hue: var(--t-image); }
 .badge-category-voice { --tag-hue: var(--t-voice); }
 .badge-category-video { --tag-hue: var(--t-video); }
+.badge-category-startup_program { --tag-hue: var(--t-startup_program); }
 .badge-verification-hand_verified { --tag-hue: var(--t-hand_verified); }
 .badge-verification-social_proof { --tag-hue: var(--t-social_proof); }
 .badge-verification-unverified { --tag-hue: var(--t-unverified); }
@@ -849,6 +851,7 @@ a:focus-visible {
 .chip-category-image { --tag-hue: var(--t-image); }
 .chip-category-voice { --tag-hue: var(--t-voice); }
 .chip-category-video { --tag-hue: var(--t-video); }
+.chip-category-startup_program { --tag-hue: var(--t-startup_program); }
 
 .results-status {
   flex-basis: 100%;

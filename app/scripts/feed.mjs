@@ -18,6 +18,7 @@ const CATEGORY_LABELS = {
   image: "Image",
   voice: "Voice",
   video: "Video",
+  startup_program: "Startup programs",
 }
 
 // html.escape(s, quote=True): & < > " and apostrophe as &#x27; (not &apos;).

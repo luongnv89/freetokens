@@ -31,7 +31,7 @@ const REQUIRED_FIELDS = [
   "verification",
   "signup",
 ];
-const CATEGORIES = ["api_provider", "coding", "image", "voice", "video"];
+const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program"];
 const VERIFICATION_LEVELS = ["hand_verified", "social_proof", "unverified"];
 const SIGNUP_MODES = ["none", "required"];
 const NULL_TOKENS = new Set(["null", "~", ""]);
