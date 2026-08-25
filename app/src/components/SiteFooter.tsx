@@ -1,4 +1,7 @@
 import { Fragment } from "react"
+import { Button } from "./ui/button"
+import { TrafficStrip } from "./TrafficStrip"
+import { isTrackingConfigured, showConsentBanner } from "../lib/analytics"
 
 const CONTACT_LINKS = [
   ["X", "https://x.com/luongnv89"],
@@ -11,11 +14,23 @@ const CONTACT_LINKS = [
  * `depth` is the page's directory distance from site root (0 for
  * index/archive/privacy, 1 for offers/<slug>.html) and prefixes every href
  * so links stay relative and deploy-base safe (#60).
+ * `showTrafficStrip` is home-only — Python only emits #ft-traffic next to
+ * the filter runtime (app_js).
  */
-export function SiteFooter({ depth = 0, current }: { depth?: number; current?: "home" | "archive" | "privacy" }) {
+export function SiteFooter({
+  depth = 0,
+  current,
+  showTrafficStrip = false,
+}: {
+  depth?: number
+  current?: "home" | "archive" | "privacy"
+  showTrafficStrip?: boolean
+}) {
   const up = "../".repeat(depth)
+  const trackingOn = isTrackingConfigured()
   return (
     <footer className="foot" id="site-footer">
+      {showTrafficStrip ? <TrafficStrip /> : null}
       <nav className="foot-nav" aria-label="Site">
         <a href={`${up || "./"}index.html`} aria-current={current === "home" ? "page" : undefined}>
           Offers
@@ -41,6 +56,19 @@ export function SiteFooter({ depth = 0, current }: { depth?: number; current?: "
           </Fragment>
         ))}
       </nav>
+      {trackingOn ? (
+        <p className="foot-consent">
+          <Button
+            type="button"
+            id="ft-consent-settings"
+            variant="unstyled"
+            className="consent-settings"
+            onClick={() => showConsentBanner()}
+          >
+            Cookie settings
+          </Button>
+        </p>
+      ) : null}
     </footer>
   )
 }

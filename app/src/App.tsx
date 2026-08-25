@@ -5,19 +5,30 @@ import HomePage from "./components/HomePage"
 import ArchivePage from "./components/ArchivePage"
 import PrivacyPage from "./components/PrivacyPage"
 import OfferDetailPage from "./components/OfferDetailPage"
+import { ConsentBanner } from "./components/ConsentBanner"
 
 const index = indexData as OffersIndex
 
 export default function App({ route }: { route?: Route }) {
   const r = route ?? resolveRoute()
+  let page
   switch (r.page) {
     case "archive":
-      return <ArchivePage index={index} />
+      page = <ArchivePage index={index} />
+      break
     case "privacy":
-      return <PrivacyPage />
+      page = <PrivacyPage />
+      break
     case "detail":
-      return <OfferDetailPage index={index} slug={r.slug} />
+      page = <OfferDetailPage index={index} slug={r.slug} />
+      break
     default:
-      return <HomePage index={index} />
+      page = <HomePage index={index} />
   }
+  return (
+    <>
+      {page}
+      <ConsentBanner />
+    </>
+  )
 }

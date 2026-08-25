@@ -72,20 +72,37 @@ Add a secret (**Settings → Secrets and variables → Actions**):
 | --- | --- | --- |
 | `GOATCOUNTER_SITE_URL` | https origin of your GoatCounter site (no path) | `https://luongnv89.goatcounter.com` |
 
-The deploy workflow already passes it to the build step. Rules the build
-enforces:
+The deploy workflow already passes it to the build step (Python builder until
+the React cutover). The Vite app reads the **same** secret names
+(`GA_MEASUREMENT_ID`, `GOATCOUNTER_SITE_URL`) at `vite build` / prerender
+time via `app/vite.config.ts` — do not invent `VITE_` aliases. Unset or
+malformed values compile to empty strings so no tracker id reaches the
+bundle. Rules both builders enforce:
 
 - Unset/empty keeps every piece of stats markup out of the built pages —
   zero beacon, zero strip, zero script.
 - Malformed values (non-https, quotes, paths) are rejected with a build
   warning; they never break a deploy.
 
-For local builds:
+For local Python builds:
 
 ```bash
 GOATCOUNTER_SITE_URL=https://luongnv89.goatcounter.com \
 python3 scripts/build.py
 ```
+
+For local Vite builds (`app/`):
+
+```bash
+GA_MEASUREMENT_ID=G-XXXXXXXXXX \
+GOATCOUNTER_SITE_URL=https://luongnv89.goatcounter.com \
+npm run build
+```
+
+The React counter helper (`ftCounterUrl` in `app/src/lib/analytics.ts`)
+sends only `start` and `end`. Do not add a cache-buster query param —
+it is inert (see *Freshness* above). Every window still ends on tomorrow
+so today is included (`end` is exclusive; that was the #102 bug).
 
 ## Verification
 
@@ -100,8 +117,10 @@ python3 scripts/build.py
    Step 1.3 — the visitor counter must be allowed.)
 3. Block the request (devtools) and reload: everything else must work
    identically and the strip must remain invisible.
-4. Run `python3 -m unittest discover -s tests` — the suite covers all
-   gating and degradation behavior.
+4. Run `python3 -m unittest discover -s tests` — the Python suite covers
+   gating and degradation on the live builder.
+5. In `app/`, run `npm test` — Vitest covers the React port: grant-only
+   `gtag.js`, exclusive-end windows (#102), and no cache-buster param.
 
 ## History
 

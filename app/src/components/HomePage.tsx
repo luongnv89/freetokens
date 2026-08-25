@@ -185,7 +185,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
           </section>
         )}
 
-        <SiteFooter current="home" />
+        <SiteFooter current="home" showTrafficStrip />
       </div>
     </>
   )

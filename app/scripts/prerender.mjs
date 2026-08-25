@@ -43,6 +43,35 @@ if (!existsSync(dataFile)) {
 }
 const index = JSON.parse(await readFile(dataFile, "utf8"));
 
+function resolveMeasurementId(raw) {
+  const value = (raw ?? "").trim();
+  if (!value) return "";
+  return /^G-[A-Z0-9]{6,12}$/.test(value) ? value : "";
+}
+function resolveStatsSite(raw) {
+  const value = (raw ?? "").trim().replace(/\/+$/, "");
+  if (!value) return "";
+  try {
+    const parsed = new URL(value);
+    const origin = `${parsed.protocol}//${parsed.host}`;
+    if (
+      parsed.protocol !== "https:" ||
+      !parsed.host ||
+      parsed.username ||
+      parsed.password ||
+      parsed.search ||
+      parsed.hash ||
+      (parsed.pathname !== "/" && parsed.pathname !== "") ||
+      !/^https:\/\/[^\s"'<>]+$/.test(origin)
+    ) {
+      return "";
+    }
+    return origin;
+  } catch {
+    return "";
+  }
+}
+
 const outfile = path.join(distDir, ".prerender", "entry.cjs");
 await mkdir(path.dirname(outfile), { recursive: true });
 await build({
@@ -54,6 +83,12 @@ await build({
   jsx: "automatic",
   loader: { ".css": "empty" },
   logLevel: "silent",
+  // Same env names as vite.config.ts / deploy.yml. Empty when unset so
+  // prerendered HTML never leaks tracker ids or loader markup.
+  define: {
+    __FT_GA_ID__: JSON.stringify(resolveMeasurementId(process.env.GA_MEASUREMENT_ID)),
+    __FT_GC_SITE__: JSON.stringify(resolveStatsSite(process.env.GOATCOUNTER_SITE_URL)),
+  },
   // Render from the SAME dataset that drives route emission (--data), not
   // whatever was frozen into the bundle at build time.
   plugins: [
