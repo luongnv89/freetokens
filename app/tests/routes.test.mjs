@@ -73,6 +73,12 @@ describe("static route coverage (#123)", () => {
     expect(detail).toContain(offer.amount);
     // The claim CTA is real prerendered markup, not something JS injects.
     expect(detail).toMatch(new RegExp(`href="${offer.source_url}"`));
+    expect(detail).toContain('class="claim-list"');
+    expect(detail).toContain('type="checkbox"');
+    expect(detail).toContain('class="share-copy"');
+    expect(detail).not.toContain("offer_share");
+    expect(detail).not.toContain("linkedin.com/sharing");
+    expect(detail).not.toContain("data-ft-share");
   });
 
   it("keeps depth-1 asset references climbing back to site root", () => {
@@ -138,6 +144,8 @@ describe("static route coverage (#123)", () => {
     const page = path.join(outDir, "offers", "zz-synthetic-new-offer.html");
     expect(existsSync(page)).toBe(true);
     expect(readFileSync(page, "utf8")).toContain("<h1>Synthetic New Offer</h1>");
+    expect(readFileSync(page, "utf8")).toContain("Open the official offer page.");
+    expect(readFileSync(page, "utf8")).not.toContain('class="od-brief"');
     const feed = readFileSync(path.join(outDir, "feed.xml"), "utf8");
     expect(feed).toContain("<title>Synthetic New Offer</title>");
     expect(feed).toContain("/offers/zz-synthetic-new-offer.html");
@@ -205,5 +213,25 @@ describe("static route coverage (#123)", () => {
     );
     // Internal page hrefs stay relative; only the feed uses the absolute origin.
     expect(home).not.toContain(`href="${DEFAULT_BASE_URL}`);
+  });
+
+  it("stamps detail pages with summary-based meta, title, and rel=canonical (#128)", async () => {
+    const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
+    const { offerMetaDescription } = await import("../src/lib/offerDetails.ts");
+    const details = JSON.parse(
+      readFileSync(path.join(APP_ROOT, "src/data/details.json"), "utf8"),
+    );
+    const offer = index.offers.find((o) => details[o.slug]?.summary) ?? index.offers[0];
+    const detail = readFileSync(path.join(outDir, "offers", `${offer.slug}.html`), "utf8");
+    const expected = offerMetaDescription(offer, details[offer.slug]);
+    expect(detail).toContain(`<title>${offer.title} · Free AI Credits</title>`);
+    expect(detail).toContain(`content="${expected}"`);
+    expect(detail).toContain(
+      `<link rel="canonical" href="${DEFAULT_BASE_URL}/offers/${offer.slug}.html" />`,
+    );
+    const shot = details[offer.slug]?.social_proof?.find((p) => p.type === "screenshot");
+    if (shot) {
+      expect(detail).toContain(`src="../${shot.image}"`);
+    }
   });
 });
