@@ -471,10 +471,6 @@ a.badge:focus-visible {
   flex: 0 0 auto;
 }
 
-.masthead-home .bar .brand-mark {
-  align-self: center;
-}
-
 /* ---- Policy prose ------------------------------------------------------ */
 
 .policy {
@@ -558,9 +554,9 @@ a:focus-visible {
   from { opacity: 0; transform: translateY(10px); }
 }
 
-/* ---- Home masthead: thin bar ------------------------------------------ */
+/* ---- Shared site header (#112): identical chrome on every page -------- */
 
-.masthead-home .bar {
+.site-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -569,13 +565,44 @@ a:focus-visible {
   padding-bottom: 0.55rem;
 }
 
-.masthead-home h1 {
+.site-bar .site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-bar :is(h1, .site-wordmark) {
   font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 800;
   letter-spacing: -0.015em;
+  line-height: 1.02;
   margin: 0;
 }
 
-.masthead-home .kicker { margin: 0; }
+.site-bar .brand-mark { align-self: center; }
+
+.site-nav {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-left: auto;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+}
+
+.site-nav a { color: var(--gray); }
+
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
 
 .masthead-home .tagline {
   font-size: 0.92rem;

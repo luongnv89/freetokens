@@ -2,6 +2,7 @@ import { expiredOffers, humanDate, type OffersIndex, type Offer } from "../lib/o
 import { CategoryBadge, ExpiredBadge, SignupBadge, VerificationBadge } from "./Badge"
 import { IconSprite } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
+import { SiteHeader } from "./SiteHeader"
 
 function ArchiveEmptyGlyph() {
   return (
@@ -75,6 +76,7 @@ export default function ArchivePage({ index }: { index: OffersIndex }) {
       <div className="wrap">
         <main>
         <header className="masthead">
+          <SiteHeader current="archive" />
           <p className="kicker">free ai credits &middot; archive</p>
           <h1>Expired offer archive</h1>
           <p className="tagline">

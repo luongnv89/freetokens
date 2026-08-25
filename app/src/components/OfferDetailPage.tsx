@@ -15,6 +15,7 @@ import { CopyLinkButton } from "./CopyLinkButton"
 import { IconSprite } from "./OfferRow"
 import { SocialProofList } from "./SocialProofList"
 import { SiteFooter } from "./SiteFooter"
+import { SiteHeader } from "./SiteHeader"
 
 const catalog = detailsCatalog as DetailsMap
 
@@ -47,6 +48,7 @@ export default function OfferDetailPage({
       <IconSprite />
       <div className="wrap">
         <main>
+        <SiteHeader depth={1} />
         {offer ? (
           <article className="offer-detail">
             <p className="od-back">
