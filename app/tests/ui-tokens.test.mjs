@@ -22,6 +22,14 @@ describe("shadcn/ui token inheritance (#122)", () => {
       );
       expect(src, file).not.toMatch(/#[0-9a-fA-F]{3,8}\b/);
       expect(src, file).not.toMatch(/\b(?:rgb|hsl)a?\(/);
+      // shadcn's default destructive variant paints with `text-white`;
+      // Task 2.2 tokens use `text-primary-foreground` / `bg-background`.
+      // Strip comments so the word "white" in prose is not banned.
+      const code = src
+        .replace(/\/\*[\s\S]*?\*\//g, "")
+        .replace(/\/\/.*$/gm, "");
+      expect(code, file).not.toMatch(/\btext-white\b/);
+      expect(code, file).not.toMatch(/\bbg-white\b/);
     }
   });
 
