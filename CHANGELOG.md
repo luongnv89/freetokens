@@ -5,6 +5,12 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Consent-gated GA4 and the live traffic strip land in React (#131):** the
+  Python analytics runtime is ported as typed modules — grant-only `gtag.js`
+  (never Advanced Consent Mode), `ft_ga_consent` via the existing
+  personal-state layer, a non-modal `#ft-consent-banner` with shadcn Button,
+  GoatCounter windows that end tomorrow (#102), and delegated `offer_click`
+  with 1000 ms dedupe. Search events still carry `query_length` only.
 - **Home listing composes on shadcn Badge and Button:** honesty tags, toolbar
   chips, and the filter-empty reset go through the primitives' `unstyled`
   variant (`data-slot` only, no default chrome). Ranked mono rows stay
