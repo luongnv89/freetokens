@@ -5,6 +5,10 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Home listing composes on shadcn Badge and Button:** honesty tags, toolbar
+  chips, and the filter-empty reset go through the primitives' `unstyled`
+  variant (`data-slot` only, no default chrome). Ranked mono rows stay
+  visually pinned to python-parity.css.
 - **Tag glyphs now come from lucide-react:** the eleven hand-authored SVG
   paths behind the honesty-tag glyphs are generated from lucide icon node
   data (`app/scripts/gen-tag-icons.mjs`, rerun via `npm run gen:tag-icons`),

@@ -11,6 +11,7 @@ import {
   type Offer,
 } from "../lib/offers"
 import { TAG_ICONS } from "../lib/tagIcons"
+import { Badge } from "./ui/badge"
 
 // Tag glyphs ship as ONE inline <symbol> sprite per page, referenced by
 // <use> — mirrors build.py _icon_sprite/_SYMBOL so rows keep the same
@@ -61,18 +62,20 @@ function TagButton({
   title: string
 }) {
   return (
-    <button
-      type="button"
-      className={`badge badge-${dimension} badge-${dimension}-${value}`}
-      data-ft-tag={dimension}
-      data-ft-tag-value={value}
-      aria-pressed="false"
-      aria-label={`Filter by ${label}`}
-      title={title}
-    >
-      {tagIcon(value)}
-      <span>{label}</span>
-    </button>
+    <Badge asChild variant="unstyled">
+      <button
+        type="button"
+        className={`badge badge-${dimension} badge-${dimension}-${value}`}
+        data-ft-tag={dimension}
+        data-ft-tag-value={value}
+        aria-pressed="false"
+        aria-label={`Filter by ${label}`}
+        title={title}
+      >
+        {tagIcon(value)}
+        <span>{label}</span>
+      </button>
+    </Badge>
   )
 }
 
