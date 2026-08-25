@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
-import { act, fireEvent, render, screen } from "@testing-library/react"
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import HomePage from "./HomePage"
 import {
   SEARCH_DEBOUNCE_MS,
@@ -12,6 +12,7 @@ import { DISMISSED_KEY, PREFS_KEY, SAVED_KEY } from "../lib/personalState"
 import type { Offer, OffersIndex } from "../lib/offers"
 
 const MID = "G-TESTID12345"
+const SITE = "https://luongnv89.goatcounter.com"
 const SECRET_QUERY = "secret-query-xyz"
 
 function offer(overrides: Partial<Offer> = {}): Offer {
@@ -752,5 +753,80 @@ describe("HomePage saved and dismissed personal state (#140)", () => {
     expect(dismiss.tagName).toBe("BUTTON")
     expect(dismiss.getAttribute("aria-label")).toBe("Hide Beta Copilot from the list")
     expect(document.getElementById("ft-results-status")?.getAttribute("role")).toBe("status")
+  })
+})
+
+describe("HomePage per-offer live view counts (#101)", () => {
+  function counterResponse(count: unknown, ok = true) {
+    return {
+      ok,
+      json: async () => ({ count }),
+    } as unknown as Response
+  }
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it("fetches counts live from GoatCounter and shows them per row", async () => {
+    configureAnalytics({ statsSite: SITE })
+    const calls: string[] = []
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: RequestInfo | URL) => {
+        calls.push(String(url))
+        if (String(url).includes("alpha-copilot")) return counterResponse("1,234")
+        return counterResponse("8")
+      }),
+    )
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(
+        document.querySelector("#offer-alpha-copilot .r-views")?.textContent,
+      ).toBe("1,234 views")
+    })
+    expect(document.querySelector("#offer-alpha-image .r-views")?.textContent).toBe("8 views")
+    expect(calls[0]).toBe(`${SITE}/counter/%2Foffers%2Falpha-copilot.html.json`)
+    expect(calls.every((u) => u.startsWith(`${SITE}/counter/%2Foffers%2F`))).toBe(true)
+  })
+
+  it("hides the count for an offer whose counter request fails", async () => {
+    configureAnalytics({ statsSite: SITE })
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: RequestInfo | URL) =>
+        String(url).includes("beta-copilot")
+          ? Promise.reject(new Error("network blocked"))
+          : counterResponse("12"),
+      ),
+    )
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(document.querySelector("#offer-alpha-free .r-views")?.textContent).toBe("12 views")
+    })
+    expect(document.querySelector("#offer-beta-copilot .r-views")).toBeNull()
+  })
+
+  it("shows no counts at all when GoatCounter is unconfigured", async () => {
+    const fetchSpy = vi.fn()
+    vi.stubGlobal("fetch", fetchSpy)
+    render(<HomePage index={index} />)
+    await act(async () => {})
+    expect(fetchSpy).not.toHaveBeenCalled()
+    expect(document.querySelector(".r-views")).toBeNull()
+  })
+
+  it("keeps the count textually announced with its unit", async () => {
+    configureAnalytics({ statsSite: SITE })
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => counterResponse("42")),
+    )
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(screen.getAllByText(/ views$/).length).toBeGreaterThan(0)
+    })
+    const el = document.querySelector("#offer-alpha-copilot .r-views")
+    expect(el?.textContent).toMatch(/^\d[\d,]* views$/)
   })
 })

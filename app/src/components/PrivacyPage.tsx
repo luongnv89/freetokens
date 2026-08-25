@@ -151,7 +151,8 @@ export default function PrivacyPage() {
                   <a href="https://www.goatcounter.com" rel="noopener noreferrer">
                     GoatCounter
                   </a>{" "}
-                  after you allow counting, and shown as anonymous running totals on the home page.
+                  after you allow counting, shown as anonymous running totals on the home page and as
+                  anonymous per-offer view counts next to each offer.
                 </li>
                 <li>
                   Your raw search text is <strong>never</strong> collected &mdash; only how many
@@ -251,6 +252,15 @@ export default function PrivacyPage() {
                 Blocking the counter with an ad blocker changes nothing else: pages, filters, and
                 links all keep working exactly the same, and the home-page totals simply stay hidden.
               </p>
+              <p>
+                The same anonymous totals are also shown per offer: each listing can display how many
+                times its detail page was viewed &mdash; an aggregate number only, with the same CDN
+                caching lag. And when counting is allowed and you follow a &ldquo;Claim&rdquo; link
+                from an offer page, GoatCounter records an anonymous event noting that this
+                offer&apos;s claim link was used. The event carries the offer&apos;s ID alone &mdash;
+                nothing about you, and nothing about what you do on the provider&apos;s site. If you
+                decline counting, those claim-click events are never recorded.
+              </p>
             </section>
 
             <section aria-labelledby="privacy-consent">
@@ -328,8 +338,8 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <strong>GoatCounter (goatcounter.com)</strong> counts the live-traffic page views
-                  described above on our behalf when the traffic counter is switched on; its own terms
-                  apply (
+                  and claim-click events described above on our behalf when the traffic counter is
+                  switched on; its own terms apply (
                   <a href="https://www.goatcounter.com/privacy" rel="noopener noreferrer">
                     GoatCounter privacy policy
                   </a>

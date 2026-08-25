@@ -35,6 +35,7 @@ import {
   scheduleAnalyticsInit,
   subscribeConsentBanner,
   trackFilterUse,
+  trackGoatCounterEvent,
   trackOfferClick,
   SEARCH_DEBOUNCE_MS,
   trackSearch,
@@ -73,15 +74,27 @@ function mountOfferLink(attrs?: {
   id?: string;
   provider?: string;
   category?: string;
+  outbound?: boolean;
 }): HTMLAnchorElement {
   const a = document.createElement("a");
   a.href = "#";
   a.setAttribute("data-ft-offer-id", attrs?.id ?? "copilot");
   a.setAttribute("data-ft-provider", attrs?.provider ?? "GitHub");
   a.setAttribute("data-ft-offer-category", attrs?.category ?? "coding");
+  if (attrs?.outbound) a.setAttribute("data-ft-outbound", "true");
   a.textContent = "Copilot";
   document.body.appendChild(a);
   return a;
+}
+
+function installGoatCounter() {
+  const gc = { count: vi.fn() };
+  Object.defineProperty(window, "goatcounter", {
+    value: gc,
+    configurable: true,
+    writable: true,
+  });
+  return gc;
 }
 
 function eventCalls(gtag: ReturnType<typeof vi.fn>, name: string) {
@@ -593,5 +606,84 @@ describe("bindToolbarListeners leaves search/sort/chips to React", () => {
     const chip = document.querySelector("[data-ft-category]") as HTMLButtonElement;
     chip.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     expect(eventCalls(gtag, "filter_use")).toHaveLength(0);
+  });
+});
+
+describe("GoatCounter outbound claim-click events (#101)", () => {
+  it("fires one consent-gated event per outbound claim click with the offer id as path", () => {
+    configureAnalytics({ measurementId: MID, statsSite: SITE });
+    const gtag = installGtag();
+    const gc = installGoatCounter();
+    grantConsent();
+    gtag.mockClear();
+    const link = mountOfferLink({ id: "copilot", outbound: true });
+    bindAnalyticsListeners();
+    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    expect(gc.count).toHaveBeenCalledTimes(1);
+    expect(gc.count).toHaveBeenCalledWith({
+      path: "offer_click:copilot",
+      event: true,
+    });
+  });
+
+  it("never fires for internal offer links without data-ft-outbound", () => {
+    configureAnalytics({ measurementId: MID, statsSite: SITE });
+    installGtag();
+    const gc = installGoatCounter();
+    grantConsent();
+    const link = mountOfferLink({ id: "copilot" });
+    bindAnalyticsListeners();
+    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    expect(gc.count).not.toHaveBeenCalled();
+  });
+
+  it("stays silent before a grant even when count.js is present", () => {
+    configureAnalytics({ measurementId: MID, statsSite: SITE });
+    installGtag();
+    const gc = installGoatCounter();
+    declineConsent();
+    const link = mountOfferLink({ id: "copilot", outbound: true });
+    bindAnalyticsListeners();
+    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    expect(gc.count).not.toHaveBeenCalled();
+  });
+
+  it("stays silent when GoatCounter is unconfigured even with a stale count.js", () => {
+    configureAnalytics({ measurementId: MID });
+    installGtag();
+    installGoatCounter();
+    grantConsent();
+    trackGoatCounterEvent("offer_click:copilot");
+  });
+
+  it("swallows a throwing goatcounter.count so navigation still completes", () => {
+    configureAnalytics({ measurementId: MID, statsSite: SITE });
+    installGtag();
+    const gc = installGoatCounter();
+    gc.count.mockImplementation(() => {
+      throw new Error("goatcounter blocked");
+    });
+    grantConsent();
+    const link = mountOfferLink({ id: "copilot", outbound: true });
+    bindAnalyticsListeners();
+    const prevent = vi.spyOn(Event.prototype, "preventDefault");
+    expect(() =>
+      link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true })),
+    ).not.toThrow();
+    expect(prevent).not.toHaveBeenCalled();
+  });
+
+  it("dedupes rapid clicks of the same offer into one GoatCounter event", () => {
+    configureAnalytics({ measurementId: MID, statsSite: SITE });
+    installGtag();
+    const gc = installGoatCounter();
+    grantConsent();
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-08-25T12:00:00Z"));
+    const link = mountOfferLink({ id: "copilot", outbound: true });
+    bindAnalyticsListeners();
+    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    expect(gc.count).toHaveBeenCalledTimes(1);
   });
 });

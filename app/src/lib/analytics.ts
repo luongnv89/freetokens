@@ -45,6 +45,7 @@ type AnalyticsConfig = {
 };
 
 type GtagFn = (...args: unknown[]) => void;
+type GoatCounterApi = { count?: (hit: { path: string; event?: boolean }) => void };
 type BannerListener = (visible: boolean) => void;
 
 function readGaDefine(): string {
@@ -274,6 +275,22 @@ export function trackPageView(): void {
   trackEvent("page_view", buildPageViewParams());
 }
 
+/**
+ * Consent-gated GoatCounter event (#101). Fires only after a grant, when
+ * count.js has loaded window.goatcounter; events never start with "/".
+ */
+export function trackGoatCounterEvent(path: string): void {
+  if (!isBrowser() || !trackingActive || !config.statsSite) return;
+  const gc = (gtagWindow() as Window & { goatcounter?: GoatCounterApi })
+    .goatcounter;
+  if (!gc || typeof gc.count !== "function") return;
+  try {
+    gc.count({ path, event: true });
+  } catch {
+    /* never block navigation */
+  }
+}
+
 export function trackOfferClick(input: OfferClickParams): void {
   trackEvent("offer_click", buildOfferClickParams(input));
 }
@@ -357,6 +374,9 @@ export function onDelegatedOfferClick(event: Event): void {
       provider: node.getAttribute("data-ft-provider") || "",
       category: node.getAttribute("data-ft-offer-category") || "",
     });
+    if (node.getAttribute("data-ft-outbound") === "true") {
+      trackGoatCounterEvent(`offer_click:${offerId}`);
+    }
   } catch {
     /* never block navigation */
   }

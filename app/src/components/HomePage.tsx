@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import {
   SEARCH_DEBOUNCE_MS,
   trackFilterUse,
@@ -26,6 +26,7 @@ import {
   writeSavedSlugs,
 } from "../lib/personalState"
 import { TAG_ICONS } from "../lib/tagIcons"
+import { useOfferViews } from "../lib/offerStats"
 import {
   DIMENSIONS,
   emptyState,
@@ -318,6 +319,9 @@ export default function HomePage({ index }: { index: OffersIndex }) {
 
   const shownList = visibleOffers(offers, state, { savedOnly, saved, dismissed })
 
+  const offerSlugs = useMemo(() => activeOffers(index).map((o) => o.slug), [index])
+  const views = useOfferViews(offerSlugs)
+
   function commit(patch: Partial<UrlState>, source: "search" | "sort" | "filter") {
     const next: UrlState = { ...stateRef.current, ...patch }
     if (source === "sort" && next.sort === stateRef.current.sort) return
@@ -582,6 +586,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
                   saved={saved.has(offer.slug)}
                   onToggleSave={onToggleSave}
                   onDismiss={onDismiss}
+                  views={views[offer.slug] ?? null}
                 />
               ))}
             </ol>
