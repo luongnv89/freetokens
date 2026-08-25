@@ -5,6 +5,14 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **CI reworked for the Node build (#136):** `validate.yml` runs on every
+  branch push and now gates a Node job behind the Python schema validation —
+  `npm ci`, Vitest unit suites, the Vite production build, and the Playwright
+  e2e suite (all three browsers). `deploy.yml` additionally builds with Vite
+  (same optional `GA_MEASUREMENT_ID` / `GOATCOUNTER_SITE_URL` plumbing; unset
+  keeps analytics disabled) while still publishing the Python-built artifact
+  until the #138 cutover.
+
 - **Python HTML test suite retired (#135):** `tests/test_build.py` and its
   `tests/app_js_harness.js` Node VM harness are deleted — every behaviour was
   mapped by `docs/qa/coverage-mapping.md` (#133) to Vitest/RTL, Playwright
