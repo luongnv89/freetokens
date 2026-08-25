@@ -1,14 +1,20 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   DISMISSED_KEY,
+  EXPORT_FORMAT,
+  EXPORT_VERSION,
   GA_CONSENT_KEY,
+  IMPORT_MAX_LENGTH,
   PREFS_KEY,
   SAVED_KEY,
   SCHEMA_VERSION,
+  claimSlugsInStorage,
   claimStorageKey,
   clearAllPersonalState,
   clearClaimProgress,
   clearDismissedSlugs,
+  exportPersonalState,
+  importPersonalState,
   readClaimProgress,
   readDismissedSlugs,
   readGaConsent,
@@ -357,8 +363,227 @@ describe("clearAllPersonalState covers the issue #140 keys", () => {
   });
 });
 
-describe("privacy: personal state never leaves the browser", () => {
-  it("no network request of any kind is made during reads or writes", () => {
+describe("claimSlugsInStorage (issue #141)", () => {
+  it("enumerates only ft-claim-<slug> keys", () => {
+    writeClaimProgress("alpha", [0]);
+    writeClaimProgress("beta", []);
+    window.localStorage.setItem(SAVED_KEY, '{"v":1,"slugs":["x"]}');
+    expect(claimSlugsInStorage()).toEqual(["alpha", "beta"]);
+  });
+
+  it("returns [] on hostile storage without throwing", () => {
+    installStorage(makeLocalStorage({ throwOnAccess: true }).impl);
+    expect(claimSlugsInStorage()).toEqual([]);
+  });
+});
+
+describe("exportPersonalState / importPersonalState (issue #141)", () => {
+  function seedAll() {
+    writeGaConsent("granted");
+    writeSavedSlugs(["alpha", "beta"]);
+    writeDismissedSlugs(["gamma"]);
+    writePrefs({ category: "coding", sort: "amount" });
+    writeClaimProgress(SLUG, [2, 0]);
+  }
+
+  function snapshot(): Record<string, unknown> {
+    return JSON.parse(JSON.stringify(exportPersonalState())) as Record<
+      string,
+      unknown
+    >;
+  }
+
+  it("export carries the format envelope and every personal-state key", () => {
+    seedAll();
+    const data = exportPersonalState();
+    expect(data.format).toBe(EXPORT_FORMAT);
+    expect(data.version).toBe(EXPORT_VERSION);
+    expect(data.consent).toBe("granted");
+    expect(data.saved).toEqual(["alpha", "beta"]);
+    expect(data.dismissed).toEqual(["gamma"]);
+    expect(data.prefs).toMatchObject({ category: "coding", sort: "amount" });
+    expect(data.claims).toEqual({ [SLUG]: [0, 2] });
+    expect(new Date(data.exported_at).toString()).not.toBe("Invalid Date");
+  });
+
+  it("round-trip: export → wipe → import restores all three groups plus consent", () => {
+    seedAll();
+    const data = exportPersonalState();
+    clearAllPersonalState(claimSlugsInStorage());
+    expect(readSavedSlugs()).toEqual([]);
+    expect(readDismissedSlugs()).toEqual([]);
+    expect(readPrefs()).toBeNull();
+    expect(readGaConsent()).toBeNull();
+    expect(readClaimProgress(SLUG)).toEqual([]);
+
+    const result = importPersonalState(JSON.stringify(data));
+    expect(result).toEqual({
+      ok: true,
+      saved: 2,
+      dismissed: 1,
+      claims: 1,
+    });
+    expect(readGaConsent()).toBe("granted");
+    expect(readSavedSlugs()).toEqual(["alpha", "beta"]);
+    expect(readDismissedSlugs()).toEqual(["gamma"]);
+    expect(readPrefs()).toMatchObject({ category: "coding", sort: "amount" });
+    expect(readClaimProgress(SLUG)).toEqual([0, 2]);
+  });
+
+  it.each([
+    ["not JSON at all", "{broken"],
+    ["a bare string", '"just a string"'],
+    ["a bare number", "42"],
+    ["foreign JSON object", '{"hello": "world"}'],
+    ["wrong format marker", JSON.stringify({ format: "other-app", version: 1 })],
+    [
+      "unknown future export version",
+      JSON.stringify({ format: EXPORT_FORMAT, version: 99 }),
+    ],
+    [
+      "invalid consent value",
+      JSON.stringify({
+        format: EXPORT_FORMAT,
+        version: EXPORT_VERSION,
+        consent: "yes-please",
+      }),
+    ],
+    [
+      "saved list with non-string entries",
+      JSON.stringify({
+        format: EXPORT_FORMAT,
+        version: EXPORT_VERSION,
+        saved: ["ok", 42],
+      }),
+    ],
+    [
+      "dismissed list not an array",
+      JSON.stringify({
+        format: EXPORT_FORMAT,
+        version: EXPORT_VERSION,
+        dismissed: "gamma",
+      }),
+    ],
+    [
+      "prefs with non-string fields",
+      JSON.stringify({
+        format: EXPORT_FORMAT,
+        version: EXPORT_VERSION,
+        prefs: { sort: 3 },
+      }),
+    ],
+    [
+      "claims value not an array of integers",
+      JSON.stringify({
+        format: EXPORT_FORMAT,
+        version: EXPORT_VERSION,
+        claims: { [SLUG]: ["zero"] },
+      }),
+    ],
+    [
+      "claims with negative step index",
+      JSON.stringify({
+        format: EXPORT_FORMAT,
+        version: EXPORT_VERSION,
+        claims: { [SLUG]: [-1] },
+      }),
+    ],
+    [
+      "oversized slug in claims",
+      JSON.stringify({
+        format: EXPORT_FORMAT,
+        version: EXPORT_VERSION,
+        claims: { ["x".repeat(500)]: [0] },
+      }),
+    ],
+  ])("import rejects %s with no partial write", (_label, bad) => {
+    seedAll();
+    const before = { ...snapshot(), exported_at: null };
+    const result = importPersonalState(bad);
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.reason.length).toBeGreaterThan(0);
+    // Nothing changed — rejection happens before any key is written.
+    expect({ ...snapshot(), exported_at: null }).toEqual(before);
+  });
+
+  it("rejects payloads over the size cap before parsing", () => {
+    const big = JSON.stringify({
+      format: EXPORT_FORMAT,
+      version: EXPORT_VERSION,
+      saved: ["x".repeat(IMPORT_MAX_LENGTH)],
+    });
+    expect(big.length).toBeGreaterThan(IMPORT_MAX_LENGTH);
+    const result = importPersonalState(big);
+    expect(result.ok).toBe(false);
+    expect(readSavedSlugs()).toEqual([]);
+  });
+
+  it("missing optional fields import cleanly as empty state", () => {
+    const result = importPersonalState(
+      JSON.stringify({ format: EXPORT_FORMAT, version: EXPORT_VERSION }),
+    );
+    expect(result).toEqual({ ok: true, saved: 0, dismissed: 0, claims: 0 });
+    expect(readSavedSlugs()).toEqual([]);
+    expect(readGaConsent()).toBeNull();
+  });
+
+  it("already-parsed objects are accepted too (defensive re-validation)", () => {
+    const result = importPersonalState({
+      format: EXPORT_FORMAT,
+      version: EXPORT_VERSION,
+      saved: ["alpha"],
+    });
+    expect(result.ok).toBe(true);
+    expect(readSavedSlugs()).toEqual(["alpha"]);
+  });
+
+  it("degrades to ok:false on unavailable storage without throwing", () => {
+    Object.defineProperty(window, "localStorage", {
+      get() {
+        return undefined;
+      },
+      configurable: true,
+    });
+    expect(importPersonalState('{"format":"freetokens-personal-state","version":1}').ok).toBe(
+      false,
+    );
+    expect(() => exportPersonalState()).not.toThrow();
+  });
+
+  it("degrades to ok:false on disabled storage (SecurityError)", () => {
+    installStorage(makeLocalStorage({ throwOnAccess: true }).impl);
+    const result = importPersonalState(
+      JSON.stringify({ format: EXPORT_FORMAT, version: EXPORT_VERSION }),
+    );
+    expect(result.ok).toBe(false);
+    expect(() => exportPersonalState()).not.toThrow();
+  });
+
+  it("no network request is made during export or import", () => {
+    const fetchSpy = vi
+      .spyOn(globalThis, "fetch")
+      .mockImplementation(() => {
+        throw new Error("network use forbidden");
+      });
+    seedAll();
+    exportPersonalState();
+    importPersonalState(JSON.stringify(exportPersonalState()));
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it("a crafted __proto__ claim key cannot reach Object.prototype", () => {
+    window.localStorage.setItem(claimStorageKey("__proto__"), "[0]");
+    const data = exportPersonalState();
+    expect(Object.getPrototypeOf(data.claims)).toBeNull();
+    expect(Object.prototype.hasOwnProperty.call(data, "claims")).toBe(true);
+    expect(function () {
+      JSON.stringify(data);
+    }).not.toThrow();
+    expect(Object.keys(data.claims)).toContain("__proto__");
+  });
+});
+
+describe("privacy: personal state never leaves the browser", () => {  it("no network request of any kind is made during reads or writes", () => {
     const networkSpies = [
       vi.spyOn(globalThis, "fetch").mockImplementation(() => {
         throw new Error("network use forbidden");

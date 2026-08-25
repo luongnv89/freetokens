@@ -5,6 +5,13 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Personal-state export/import (#141):** `/privacy` now names every
+  localStorage key the app owns (`ft_ga_consent`, `ft-saved`, `ft-dismissed`,
+  `ft-prefs`, `ft-claim-<slug>`) and hosts client-side controls to download
+  all of it as a versioned JSON backup, restore that backup on any browser
+  (strictly validated, size-capped, all-or-nothing), and clear every key in
+  one click. Nothing stored locally is ever transmitted.
+
 - **Python builder decommissioned (#139):** one stable week after the v3.0
   cutover (#138), `scripts/build.py`, its committed HTML output
   (`site/*.html`, `site/offers/`, `site/feed.xml`), and the legacy assets

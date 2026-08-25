@@ -1,12 +1,126 @@
+import { useRef, useState, type ChangeEvent } from "react"
 import { IconSprite } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
+import {
+  IMPORT_MAX_LENGTH,
+  clearAllPersonalState,
+  claimSlugsInStorage,
+  exportPersonalState,
+  importPersonalState,
+} from "../lib/personalState"
 
 /**
  * The privacy policy page (Task 3.5 / PRD §5.2 / #132). Every factual claim
  * mirrors shipped React analytics (#127 / #131): query_length-only search,
  * cookieless GoatCounter, GA4 after grant with anonymize_ip, exclusive-end
  * counter windows, and ~4h CDN lag. No Google Fonts. No offer_share (#128).
+ *
+ * #141 adds the "Your local data" section: names every personal-state
+ * localStorage key, hosts client-side-only export/import/erase controls,
+ * and documents that nothing stored locally is ever transmitted.
  */
+
+const EXPORT_FILENAME = "freetokens-personal-state.json"
+
+/**
+ * Client-side-only controls for the visitor's own localStorage snapshot.
+ * Storage is touched strictly inside event handlers, so the static
+ * prerender stays SSR-safe.
+ */
+function LocalDataControls() {
+  const [status, setStatus] = useState("")
+  const fileRef = useRef<HTMLInputElement>(null)
+
+  const onExport = () => {
+    try {
+      const blob = new Blob([JSON.stringify(exportPersonalState(), null, 2)], {
+        type: "application/json",
+      })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement("a")
+      link.href = url
+      link.download = EXPORT_FILENAME
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      URL.revokeObjectURL(url)
+      setStatus(`Exported your local data as ${EXPORT_FILENAME}.`)
+    } catch {
+      setStatus("Export failed in this browser.")
+    }
+  }
+
+  const onImportFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.currentTarget
+    const file = input.files?.[0]
+    input.value = ""
+    if (!file) return
+    if (file.size > IMPORT_MAX_LENGTH) {
+      setStatus("That file is too large to be a personal-state export.")
+      return
+    }
+    let text: string
+    try {
+      text = await file.text()
+    } catch {
+      setStatus("Could not read that file.")
+      return
+    }
+    const result = importPersonalState(text)
+    setStatus(
+      result.ok
+        ? "Backup restored: your saved offers, dismissed offers, filters, and claim progress were imported."
+        : result.reason,
+    )
+  }
+
+  const onClearAll = () => {
+    if (
+      !window.confirm(
+        "Erase everything this site stores in this browser? Your saved offers, dismissed offers, filters, claim progress, and cookie choice will be removed. This cannot be undone.",
+      )
+    ) {
+      return
+    }
+    clearAllPersonalState(claimSlugsInStorage())
+    setStatus("All of your local data has been erased.")
+  }
+
+  return (
+    <div className="local-data">
+      <div className="local-data-actions">
+        <button type="button" id="ft-export-data" onClick={onExport}>
+          Export my data (JSON)
+        </button>
+        <button
+          type="button"
+          id="ft-import-data"
+          onClick={() => fileRef.current?.click()}
+        >
+          Import a backup&hellip;
+        </button>
+        <input
+          ref={fileRef}
+          type="file"
+          accept="application/json,.json"
+          className="local-data-file"
+          onChange={onImportFile}
+        />
+        <button
+          type="button"
+          id="ft-clear-data"
+          className="local-data-danger"
+          onClick={onClearAll}
+        >
+          Clear all my local data
+        </button>
+      </div>
+      <p className="local-data-status" role="status" aria-live="polite">
+        {status}
+      </p>
+    </div>
+  )
+}
 export default function PrivacyPage() {
   return (
     <>
@@ -43,7 +157,12 @@ export default function PrivacyPage() {
                   Your raw search text is <strong>never</strong> collected &mdash; only how many
                   characters you typed (<code>query_length</code>).
                 </li>
-                <li>The only thing this site saves on your device is a single-word remember of your cookie choice.</li>
+                <li>
+                  Everything this site saves on your device lives in your browser&apos;s local
+                  storage &mdash; your cookie choice, saved offers, dismissed offers, filters, and
+                  claim checklists. It never leaves your browser, and you can export or erase it in{" "}
+                  <a href="#privacy-local-data">Your local data</a> below.
+                </li>
                 <li>You can block all of it with an ad blocker and every feature still works.</li>
               </ul>
             </section>
@@ -145,15 +264,49 @@ export default function PrivacyPage() {
               <p>
                 Your answer is remembered in your browser&apos;s local storage under the key{" "}
                 <code>ft_ga_consent</code> as one word: <code>granted</code> or <code>denied</code>.
-                That single word is the only data this site itself ever writes on your device &mdash;
-                the site sets no cookies of its own. Once you allow counting, Google Analytics may set
-                its own cookies (such as <code>_ga</code>) to tell repeat visits apart; those cookies
-                belong to Google and follow Google&apos;s rules.
+                It is one of several small entries this site keeps in your browser&apos;s local
+                storage &mdash; every one of them is listed in <a href="#privacy-local-data">Your
+                local data</a> below. The site sets no cookies of its own. Once you allow counting,
+                Google Analytics may set its own cookies (such as <code>_ga</code>) to tell repeat
+                visits apart; those cookies belong to Google and follow Google&apos;s rules.
               </p>
               <p>
                 Changed your mind? Use the <strong>Cookie settings</strong> link in the footer of any
                 page to re-open the banner and switch your choice at any time.
               </p>
+            </section>
+
+            <section aria-labelledby="privacy-local-data">
+              <h2 id="privacy-local-data">Your local data</h2>
+              <p>
+                Besides the analytics choices above, this site keeps your personal settings in your
+                browser&apos;s local storage, under these keys:
+              </p>
+              <ul>
+                <li>
+                  <code>ft_ga_consent</code> &mdash; your cookie and analytics choice (one word).
+                </li>
+                <li>
+                  <code>ft-saved</code> &mdash; the offers you saved to your shortlist.
+                </li>
+                <li>
+                  <code>ft-dismissed</code> &mdash; the offers you chose to hide.
+                </li>
+                <li>
+                  <code>ft-prefs</code> &mdash; your last-used filters and sort order.
+                </li>
+                <li>
+                  <code>ft-claim-&lt;offer&gt;</code> &mdash; your step-by-step checklist progress for
+                  one offer.
+                </li>
+              </ul>
+              <p>
+                None of this ever leaves your browser. It is never transmitted to us or to anyone
+                else &mdash; this is a static page with no server that could receive it. Clearing
+                your browser data removes all of it automatically.
+              </p>
+              <p>You can also take it with you or erase it right here:</p>
+              <LocalDataControls />
             </section>
 
             <section aria-labelledby="privacy-third-parties">
@@ -209,6 +362,11 @@ export default function PrivacyPage() {
                 <li>
                   Change your mind anytime via the footer&apos;s <strong>Cookie settings</strong> link
                   &mdash; it re-opens the banner on every page, even after you already answered.
+                </li>
+                <li>
+                  Export everything stored locally as a JSON backup, restore it on another browser,
+                  or erase it all with one click &mdash; in{" "}
+                  <a href="#privacy-local-data">Your local data</a> above.
                 </li>
                 <li>
                   Block everything with an ad blocker or your browser&apos;s tracking protection. The
