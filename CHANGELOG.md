@@ -5,6 +5,12 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Coverage mapping of the Python builder suite (#133):** `docs/qa/coverage-mapping.md`
+  accounts for all 41 `tests/test_build.py` classes — Vitest/RTL, Playwright
+  (#134), retained Python, or dropped with a reason. Gap-fills: tag-hue
+  distinctness rules (family uniqueness + deliberate claim-strength repeats)
+  and masthead live/ongoing/hand-verified counters.
+
 - **Playwright e2e suite against prerendered dist (#134):** keyboard path,
   320px overflow, JS-disabled prerender, consent-decline GA4 intercept,
   Chromium/Firefox/WebKit headless.

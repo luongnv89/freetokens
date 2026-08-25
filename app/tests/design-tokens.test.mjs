@@ -109,6 +109,32 @@ describe("Tailwind tag-hue tokens (#121)", () => {
   });
 });
 
+describe("Tag hue distinctness rules (port of TagHueDistinctnessTests)", () => {
+  // Eleven tag values share hues on purpose: hue encodes the strength of the
+  // claim, not the value — but within a family the hue IS the identifier.
+  const hex = (value) => EXPECTED[value][1];
+  const CATEGORIES = ["api_provider", "coding", "image", "voice", "video"];
+  const VERIFICATION_LEVELS = ["hand_verified", "social_proof", "unverified"];
+  const SIGNUP_MODES = ["none", "required"]; // build.py SIGNUP_MODES — expired is a status, not a mode
+
+  it("never repeats a hue inside a family", () => {
+    for (const family of [CATEGORIES, VERIFICATION_LEVELS, SIGNUP_MODES]) {
+      const hues = family.map(hex);
+      expect(new Set(hues).size, family.join(",")).toBe(hues.length);
+    }
+  });
+
+  it("repeats claim strength across families on purpose, never with a category", () => {
+    expect(hex("hand_verified")).toBe(hex("none"));
+    expect(hex("unverified")).toBe(hex("required"));
+    expect(hex("unverified")).toBe(hex("expired"));
+    const claim = new Set([hex("hand_verified"), hex("unverified")]);
+    for (const category of CATEGORIES) {
+      expect(claim.has(hex(category)), category).toBe(false);
+    }
+  });
+});
+
 describe("Clear-all-filters chip rest-state contrast (#126)", () => {
   const parityCss = readFileSync(
     path.join(APP_ROOT, "src/styles/python-parity.css"),

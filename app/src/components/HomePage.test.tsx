@@ -160,6 +160,16 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
+describe("HomePage masthead counters (#49 port)", () => {
+  it("surfaces live, ongoing, and hand-verified counts in the masthead", () => {
+    render(<HomePage index={index} />)
+    const count = screen.getByText(/live offers/)
+    expect(count).toHaveTextContent(
+      "5 live offers · 1 ongoing · 4 hand-verified by the maintainer",
+    )
+  })
+})
+
 describe("HomePage search a11y", () => {
   it("labels the search input and keeps it keyboard-focusable", () => {
     render(<HomePage index={index} />)
