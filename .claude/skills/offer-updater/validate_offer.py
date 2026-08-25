@@ -2,8 +2,8 @@
 """Validate candidate offer YAML files against CI's exact schema rules.
 
 Deterministic helper behind the offer-updater agent skill (issue #20). It
-reuses scripts/build.py's parser/validator — the same code path CI runs — so
-a draft that passes here cannot fail the build on schema grounds.
+reuses scripts/offer_model.py's parser/validator — the same code path CI runs
+— so a draft that passes here cannot fail the build on schema grounds.
 
 Usage:
 
@@ -26,12 +26,12 @@ VALID_EXTENSIONS = (".yaml", ".yml")
 
 
 def _repo_root(start: Path) -> Path:
-    """Walk up from *start* until scripts/build.py is found."""
+    """Walk up from *start* until scripts/offer_model.py is found."""
     for candidate in (start, *start.parents):
-        if (candidate / "scripts" / "build.py").is_file():
+        if (candidate / "scripts" / "offer_model.py").is_file():
             return candidate
     raise SystemExit(
-        "validate_offer.py: could not locate scripts/build.py above "
+        "validate_offer.py: could not locate scripts/offer_model.py above "
         f"{start}; run this helper from inside the freetokens repository"
     )
 
@@ -41,9 +41,9 @@ def _load_build_module():
     scripts_dir = str(root / "scripts")
     if scripts_dir not in sys.path:
         sys.path.insert(0, scripts_dir)
-    import build
+    import offer_model
 
-    return build
+    return offer_model
 
 
 def validate_file(path: str, build) -> str:
