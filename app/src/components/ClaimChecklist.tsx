@@ -28,7 +28,7 @@ export function ClaimChecklist({ slug, steps }: { slug: string; steps: readonly 
   const readout = completed === 0 ? `${total}-step guide` : `${completed}/${total} done`
 
   return (
-    <section className="od-steps" data-ft-checklist data-ft-offer-id={key}>
+    <section className="od-steps" data-ft-checklist>
       <header className="od-steps-head">
         <h2>How to claim</h2>
         <p className="steps-progress">

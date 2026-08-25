@@ -5,16 +5,18 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 // CSS payload budget (issue #121): the rendered Tailwind build must not
-// outweigh the inline stylesheet the Python builder ships on the page this
-// app replaces. Baseline is measured live from scripts/build.py — the home
-// listing inlines `_CSS + _APP_CSS + _HOME_CSS` on every view.
+// outweigh the inline stylesheet the Python builder ships on the pages this
+// app replaces. Baseline is measured live from scripts/build.py — home
+// inlines `_CSS + _APP_CSS + _HOME_CSS`; `_DETAIL_CSS` is css_extra on
+// Python offer-detail pages only (never the home listing). The React app
+// now also replaces those detail pages (#128), so the budget includes it.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 const REPO_ROOT = path.resolve(APP_ROOT, "..");
 
 function pythonInlineCssBytes() {
   const src = readFileSync(path.join(REPO_ROOT, "scripts/build.py"), "utf8");
   let total = 0;
-  for (const name of ["_CSS", "_APP_CSS", "_HOME_CSS"]) {
+  for (const name of ["_CSS", "_APP_CSS", "_HOME_CSS", "_DETAIL_CSS"]) {
     const m = src.match(new RegExp(`${name} = """\\n([\\s\\S]*?)\\n"""`));
     if (!m) throw new Error(`could not extract ${name} from scripts/build.py`);
     total += Buffer.byteLength(m[1], "utf8");
