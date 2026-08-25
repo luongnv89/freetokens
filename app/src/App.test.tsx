@@ -111,10 +111,13 @@ describe("App tag icon sprite (lucide mapping)", () => {
   });
 
   it("renders one aria-hidden glyph per honesty tag", () => {
-    // Three tags per row, each an <svg class="tag-i" aria-hidden="true">.
-    expect(markup.match(/<svg class="tag-i" aria-hidden="true"/g)?.length).toBe(
+    // Three tags per row. ChipGlyph also paints toolbar SVGs with the same
+    // class, so count only glyphs inside the listing / [data-ft-tag].
+    const grid = markup.match(/<ol class="grid" id="ft-grid"[\s\S]*?<\/ol>/)?.[0] ?? "";
+    expect(grid.match(/<svg class="tag-i" aria-hidden="true"/g)?.length).toBe(
       offers.length * 3,
     );
+    expect(grid.match(/data-ft-tag="/g)?.length).toBe(offers.length * 3);
   });
 
   it("never renders a lucide glyph with its own accessible name", () => {

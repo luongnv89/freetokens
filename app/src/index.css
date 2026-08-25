@@ -1,3 +1,8 @@
-@import "tailwindcss";
+/* Skip Tailwind preflight: python-parity.css already resets box-sizing,
+   body, lists (.grid), and form chrome. Shipping both blew the #121 budget
+   once _APP_CSS (toolbar/chips/filter-pill) landed in the sheet. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 @import "./styles/tokens.css";
 @import "./styles/python-parity.css";
