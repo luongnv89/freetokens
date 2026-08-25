@@ -3,6 +3,28 @@ import { CategoryBadge, ExpiredBadge, SignupBadge, VerificationBadge } from "./B
 import { IconSprite } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 
+function ArchiveEmptyGlyph() {
+  return (
+    <p className="glyph" aria-hidden="true">
+      <svg
+        width="44"
+        height="44"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        role="presentation"
+      >
+        <rect x="3" y="4" width="18" height="5" rx="1" />
+        <path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9" />
+        <path d="M10 13h4" />
+      </svg>
+    </p>
+  )
+}
+
 function ArchivedCard({ offer, index }: { offer: Offer; index: number }) {
   const detailHref = `offers/${offer.slug}.html`
   return (
@@ -65,13 +87,19 @@ export default function ArchivePage({ index }: { index: OffersIndex }) {
         </header>
 
         {archived.length > 0 ? (
-          <ul className="grid" id="ft-archive-grid">
-            {archived.map((offer, i) => (
-              <ArchivedCard key={offer.slug} offer={offer} index={i} />
-            ))}
-          </ul>
+          <>
+            <a className="skip-list" href="#site-footer">
+              Skip the offer list
+            </a>
+            <ul className="grid" id="ft-archive-grid">
+              {archived.map((offer, i) => (
+                <ArchivedCard key={offer.slug} offer={offer} index={i} />
+              ))}
+            </ul>
+          </>
         ) : (
           <section className="empty" style={{ "--i": 0 } as React.CSSProperties}>
+            <ArchiveEmptyGlyph />
             <h2>The archive is empty</h2>
             <p>
               No offer has expired yet. When one does, it moves here on the next rebuild instead of
