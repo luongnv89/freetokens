@@ -11,7 +11,6 @@ import path from "node:path";
 // adding an offer to offers.json (regenerated from YAML by load:data)
 // produces its page on the next build with no source edit.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
-const REPO_ROOT = path.resolve(APP_ROOT, "..");
 
 function prerender(distDir, dataFile) {
   const args = ["scripts/prerender.mjs", "--dist", distDir];
@@ -48,11 +47,6 @@ describe("static route coverage (#123)", () => {
     const emitted = readdirSync(path.join(outDir, "offers")).sort();
     const expected = index.offers.map((o) => `${o.slug}.html`).sort();
     expect(emitted).toEqual(expected);
-
-    // Route-path diff old-vs-new must be empty: every path the Python
-    // builder serves today exists in the app output.
-    const legacy = readdirSync(path.join(REPO_ROOT, "site", "offers")).sort();
-    expect(emitted).toEqual(legacy);
   });
 
   it("stamps each document so hydration lands on the right page", () => {

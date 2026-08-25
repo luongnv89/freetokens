@@ -180,7 +180,7 @@ class ParityWithCiTests(unittest.TestCase):
             import validate_offer as helper
         finally:
             sys.path.remove(str(HELPER.parent))
-        import build
+        import offer_model as build
 
         self.assertIs(helper._load_build_module(), build)
 

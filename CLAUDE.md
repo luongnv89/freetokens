@@ -5,13 +5,13 @@ Pre-code repo: planning docs + GitHub issue backlog only. Implementation happens
 See @prd.md and @tasks.md for scope. Epic: #31.
 
 ## Critical commands
-- Build (current, until React migration reaches parity): `python3 scripts/build.py` → `site/`; validate offers with `python3 scripts/validate_offers.py`.
-- After the Vite scaffold lands (ADR 0002): `npm ci` (never bare `npm install` in CI) then `npm run build` — see ADR-002 (`docs/adr/0002-react-vite-migration.md`).
+- Build: `npm ci` (never bare `npm install` in CI) then `npm run build` in `app/` — see ADR-002 (`docs/adr/0002-react-vite-migration.md`).
+- Validate offers: `python3 scripts/validate_offers.py` — the content gate.
 - Deploys run automatically on push to main. Never push directly to main (branch protection).
 
 ## Architecture map (planned)
 - `offers/*.yaml` — one file per offer; the entire content model
-- `offers/*.yaml` → Vite build (offer data → JSON/JSONL at build time) → prerendered HTML → GitHub Pages (`<user>.github.io/freetokens`) — React 19 + TypeScript + Tailwind + shadcn/ui per ADR-002 (`docs/adr/0002-react-vite-migration.md`); until migration parity, the Python builder `scripts/build.py` produces the same static output
+- `offers/*.yaml` → Vite build (offer data → JSON/JSONL at build time) → prerendered HTML → GitHub Pages (`<user>.github.io/freetokens`) — React 19 + TypeScript + Tailwind + shadcn/ui per ADR-002 (`docs/adr/0002-react-vite-migration.md`); the Python builder was decommissioned after the v3.0 cutover (#139), its validator core living on in `scripts/offer_model.py`
 - GA4 for `page_view` + `offer_click` events; no backend, ever
 
 ## Offer content schema (non-negotiable)

@@ -47,12 +47,13 @@ skill verify it and open the PR for you.
 
 ## Local Build
 
-The site is built by a dependency-free Python script (see
-[docs/adr-001-static-generator.md](docs/adr-001-static-generator.md) for why a
-plain script was chosen over Astro). Requires Python 3.9+, nothing else:
+The site is a Vite + React 19 app under `app/` (see
+[docs/adr/0002-react-vite-migration.md](docs/adr/0002-react-vite-migration.md)
+for why the Python builder was replaced). Requires Node 22+:
 
 ```bash
-python3 scripts/build.py    # validates offers/, writes index.json + the site/ directory
+cd app && npm ci             # installs dependencies (never bare npm install in CI)
+npm run build                # validates offers/, bundles, and prerenders every route
 ```
 
 The build runs in two stages:
@@ -61,13 +62,13 @@ The build runs in two stages:
    `docs/schema.md`: required fields present, `YYYY-MM-DD` dates, category
    within the enum, unique slugs. Any violation fails the build with a non-zero
    exit naming the offending file and field.
-2. **Render** — all validated offers are rendered into static pages in
-   `site/`: the offer list (`index.html`, one semantic card per active
-   offer), the expired-offer archive (`archive.html`), the privacy policy,
-   an RSS 2.0 feed (`feed.xml`), and the favicon. Cards carry title,
+2. **Render** — validated offers are compiled into static pages: the offer
+   list (`index.html`, one semantic card per active offer), the
+   expired-offer archive (`archive.html`), the privacy policy, an RSS 2.0
+   feed (`feed.xml`), and a detail page per offer. Cards carry title,
    provider, amount, expiry date (or "ongoing"), a category badge, and an
-   outbound link to the official source page. Minimal hand-rolled CSS that
-   works down to 320 px viewports.
+   outbound link to the official source page. Tailwind CSS that works down
+   to 320 px viewports.
 
 ### Expiry handling
 
@@ -91,7 +92,7 @@ output, and simplicity — are recorded in
 
 ### Offer archive
 
-[`site/archive.html`](site/archive.html) (`archive.html`, #26/F11) renders
+The archive route (`/archive.html`, #26/F11) renders
 every entry flagged `expired`, newest expiration first. Each archived card
 keeps its full context — provider, amount, original expiry date, category
 badge, and the outbound source link — under an explicit text **Expired**
@@ -102,14 +103,13 @@ archive"), and it has its own friendly empty state while nothing has lapsed.
 ### RSS feed
 
 The build emits a valid RSS 2.0 document at
-[`site/feed.xml`](site/feed.xml) (`feed.xml`, #27/F12) covering every
-**active** offer: title, absolute link back to the offer's anchor on the
-home page (`#offer-<slug>`), an amount/category/expiry summary, and the
-verified date as `pubDate`. Expired offers are excluded; ongoing ones are
-included normally. Every generated page ships RSS autodiscovery in `<head>`
-and a footer link. Item URLs must be absolute per the RSS spec, so the feed
-uses the production origin by default; override it locally with
-`python3 scripts/build.py --base-url https://your-host.example`.
+`/feed.xml` (`feed.xml`, #27/F12) covering every
+**active** offer: title, absolute link to the offer's detail page, an
+amount/category/expiry summary, and the verified date as `pubDate`. Expired
+offers are excluded; ongoing ones are included normally. Every generated page
+ships RSS autodiscovery in `<head>` and a footer link. Item URLs must be
+absolute per the RSS spec, so the feed
+uses the production origin by default.
 
 Run the test suite (stdlib `unittest`, no dependencies):
 
@@ -164,7 +164,7 @@ To enable it:
 2. Add it as a repository secret named `GA_MEASUREMENT_ID`
    (**Settings → Secrets and variables → Actions**). The deploy workflow
    already passes it to the build step; the next deploy turns tracking on.
-3. For local builds, export it in your shell: `GA_MEASUREMENT_ID=G-… python3 scripts/build.py`.
+3. For local builds, export it in your shell: `GA_MEASUREMENT_ID=G-… npm run build`.
 
 A malformed ID never breaks a deploy — the build warns and continues with
 analytics disabled.
@@ -233,15 +233,16 @@ Full operator instructions live in
 
 ### Privacy policy page
 
-The build also emits [`site/privacy.html`](site/privacy.html) (Task 3.5,
-PRD §5.2): a plain-language policy generated from the same chrome and
-stylesheet as the home page, so it always matches the site design. The
-footer on every page links to it with relative hrefs, so the links resolve
-under any deploy base (including the `/freetokens/` Pages project path).
-Every factual claim in the policy mirrors implemented behavior in
-`scripts/build.py` — consent-gated GA4, anonymized IPs, length-only search
-metadata, the single `localStorage` consent key, no forms, no PII storage —
-and is pinned by tests (`PrivacyPageTests`).
+The app also serves [`/privacy.html`](https://luongnv89.github.io/freetokens/privacy.html)
+(Task 3.5, PRD §5.2): a plain-language policy rendered from the same
+components and design tokens as the home page, so it always matches the site
+design. The footer on every page links to it with relative hrefs, so the
+links resolve under any deploy base (including the `/freetokens/` Pages
+project path). Every factual claim in the policy mirrors implemented
+behavior in `app/src/lib/analytics.ts` — consent-gated GA4, anonymized IPs,
+length-only search metadata, the single `localStorage` consent key, no
+forms, no PII storage — and is pinned by tests (`ConsentBanner.test.tsx`,
+`analytics.test.ts`).
 
 ## Deployment
 
@@ -254,13 +255,13 @@ push built output by hand:
    main commits that have already deployed; the Pages environment is
    branch-restricted, so tag pushes do not (and cannot) deploy directly.
 2. **Build** — the workflow checks out the repo, runs
-   `python3 scripts/build.py` to validate all offers and render
-   `site/index.html`, `site/archive.html`, `site/privacy.html`,
-   `site/feed.xml`, and `site/favicon.svg`, then runs the test suite. Any
-   validation or test failure aborts the deploy.
-3. **Publish** — the built `site/` directory is uploaded as a Pages artifact
-   and deployed with the official Actions toolchain (`actions/checkout`,
-   `actions/setup-python`, `actions/configure-pages`,
+   `python3 scripts/validate_offers.py` to validate all offers, then
+   `npm test` and `npm run build` in `app/` to prerender `index.html`,
+   `archive.html`, `privacy.html`, `feed.xml`, and every offer detail page.
+   Any validation or test failure aborts the deploy.
+3. **Publish** — the built `app/dist` directory is uploaded as a Pages
+   artifact and deployed with the official Actions toolchain
+   (`actions/checkout`, `actions/setup-node`, `actions/configure-pages`,
    `actions/upload-pages-artifact`, `actions/deploy-pages`), using Pages'
    build type `workflow` (source = GitHub Actions).
 
@@ -275,11 +276,11 @@ workflow**.
 ```
 offers/    # One YAML file per free-AI-credit offer (schema: docs/schema.md)
            # plus optional offers/details/<slug>.json detail documents
-site/      # Generated pages (index, archive, privacy) + feed.xml + favicon
-scripts/   # Build/validation scripts (stdlib-only)
-tests/     # Build test suite (unittest)
+app/       # Vite + React source: components, lib, tests, prerender scripts
+scripts/   # offer_model.py (frozen schema/validation core) + validate_offers.py
+tests/     # Content-model test suite (unittest)
 docs/      # Schema docs, ADRs, outreach kit, decision records, QA notes
-index.json # Generated index: every offer with build-time active/expired status
+index.json # Frozen generated index: every offer with build-time active/expired status
 ```
 
 ## Changelog

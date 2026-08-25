@@ -7,7 +7,6 @@ import path from "node:path";
 // keep clearing WCAG AA (>= 4.5:1) in every painted state a tag has.
 
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
-const REPO_ROOT = path.resolve(APP_ROOT, "..");
 
 // value: (token, hex) — mirrors scripts/build.py TAG_HUES / `_CSS` --t-*.
 const EXPECTED = {
@@ -35,14 +34,22 @@ function themeToken(name) {
 }
 
 function pythonTagTokens() {
-  const css = readFileSync(path.join(REPO_ROOT, "scripts/build.py"), "utf8");
-  const m = css.match(/_CSS = """\n([\s\S]*?)\n"""/);
-  if (!m) throw new Error("could not extract _CSS from scripts/build.py");
-  const found = {};
-  for (const match of m[1].matchAll(/--t-([a-z_]+): (#[0-9a-f]{6});/g)) {
-    found[match[1]] = match[2];
-  }
-  return found;
+  // Frozen baseline extracted from scripts/build.py `_CSS` before the Python
+  // builder was decommissioned (#139). The builder is gone; these are the
+  // historical porting-source values tokens.css must never drift from.
+  return {
+    api_provider: "#3538cd",
+    coding: "#0e7490",
+    image: "#955906",
+    voice: "#7e22ce",
+    video: "#be123c",
+    hand_verified: "#15803d",
+    social_proof: "#1e3a5f",
+    unverified: "#5f6673",
+    none: "#15803d",
+    required: "#5f6673",
+    expired: "#5f6673",
+  };
 }
 
 function luminance(hex) {

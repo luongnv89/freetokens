@@ -84,13 +84,6 @@ bundle. Rules both builders enforce:
 - Malformed values (non-https, quotes, paths) are rejected with a build
   warning; they never break a deploy.
 
-For local Python builds:
-
-```bash
-GOATCOUNTER_SITE_URL=https://luongnv89.goatcounter.com \
-python3 scripts/build.py
-```
-
 For local Vite builds (`app/`):
 
 ```bash

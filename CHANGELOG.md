@@ -3,6 +3,20 @@
 Notable changes to the Free AI Credits site and build. The site itself is
 regenerated on every deploy; entries here cover behavior, not content edits.
 
+## Unreleased
+
+- **Python builder decommissioned (#139):** one stable week after the v3.0
+  cutover (#138), `scripts/build.py`, its committed HTML output
+  (`site/*.html`, `site/offers/`, `site/feed.xml`), and the legacy assets
+  are removed from the tree. The frozen parser/validator core lives on as
+  `scripts/offer_model.py`; `scripts/validate_offers.py` and the content-model
+  tests remain the CI gate unchanged. The old builder stays recoverable from
+  git history — to restore it plus the legacy output:
+
+  ```bash
+  git checkout 6aec62a -- scripts/build.py site/
+  ```
+
 ## v3.0 — 2026-08-25
 
 The React + Vite rebuild ships to production (#114).

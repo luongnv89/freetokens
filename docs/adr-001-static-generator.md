@@ -42,13 +42,11 @@ are recorded here.
 
 ## Decision
 
-**Option (a): plain Python build script** (`scripts/build.py`, stdlib only).
+**Option (a): plain Python build script** (`scripts/build.py`, stdlib only;
+since decommissioned by #139 after the v3.0 React cutover).
 
-Reproducible local build command:
-
-```bash
-python3 scripts/build.py
-```
+The local build was a single stdlib-only invocation of the builder script
+(recoverable from git history — see `CHANGELOG.md`).
 
 Outputs: `index.json` (offer index consumed by the page's vanilla-JS
 filter/search) and `site/index.html`.

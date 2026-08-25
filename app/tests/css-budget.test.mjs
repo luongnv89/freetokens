@@ -1,28 +1,19 @@
 import { describe, it, expect } from "vitest";
 import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync, rmSync, statSync } from "node:fs";
+import { readdirSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
 // CSS payload budget (issue #121): the rendered Tailwind build must not
-// outweigh the inline stylesheet the Python builder ships on the pages this
-// app replaces. Baseline is measured live from scripts/build.py — home
-// inlines `_CSS + _APP_CSS + _HOME_CSS`; `_DETAIL_CSS` is css_extra on
-// Python offer-detail pages only (never the home listing). The React app
-// now also replaces those detail pages (#128), so the budget includes it.
+// outweigh the inline stylesheet the Python builder shipped on the pages
+// this app replaces. Baseline was measured live from scripts/build.py —
+// home inlined `_CSS + _APP_CSS + _HOME_CSS`; `_DETAIL_CSS` is css_extra on
+// Python offer-detail pages only (never the home listing) — and frozen when
+// the builder was decommissioned (#139). The React app now also replaces
+// those detail pages (#128), so the budget includes it.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
-const REPO_ROOT = path.resolve(APP_ROOT, "..");
 
-function pythonInlineCssBytes() {
-  const src = readFileSync(path.join(REPO_ROOT, "scripts/build.py"), "utf8");
-  let total = 0;
-  for (const name of ["_CSS", "_APP_CSS", "_HOME_CSS", "_DETAIL_CSS"]) {
-    const m = src.match(new RegExp(`${name} = """\\n([\\s\\S]*?)\\n"""`));
-    if (!m) throw new Error(`could not extract ${name} from scripts/build.py`);
-    total += Buffer.byteLength(m[1], "utf8");
-  }
-  return total;
-}
+const PYTHON_INLINE_CSS_BYTES = 35118;
 
 function cssBytesIn(dir) {
   let total = 0;
@@ -53,7 +44,7 @@ describe("rendered CSS payload budget (#121)", () => {
           { cwd: APP_ROOT, stdio: "pipe" },
         );
         const rendered = cssBytesIn(outDir);
-        const baseline = pythonInlineCssBytes();
+        const baseline = PYTHON_INLINE_CSS_BYTES;
         expect(rendered).toBeGreaterThan(0);
         // Purge must be on: an unpurged utility sheet would blow the budget.
         expect(rendered).toBeLessThanOrEqual(baseline);
