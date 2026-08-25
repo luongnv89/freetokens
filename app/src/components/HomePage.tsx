@@ -274,16 +274,20 @@ function visibleOffers(
   state: UrlState,
   personal?: { savedOnly: boolean; saved: ReadonlySet<string>; dismissed: ReadonlySet<string> },
 ) {
-  const base = applySort(offers, state.sort).filter((offer) =>
-    offerMatches(offer, state),
-  )
-  if (!personal) return base
+  const base = applySort(offers, state.sort)
+  if (!personal) {
+    return base.filter((offer) => offerMatches(offer, state))
+  }
   if (personal.savedOnly) {
-    // Saved-only view lists exactly the saved offers.
+    // Saved-only view lists exactly the saved offers — query and filter
+    // dimensions are ignored here so an active filter can never hide part
+    // of the shortlist.
     return base.filter((offer) => personal.saved.has(offer.slug))
   }
   // Default view hides dismissed offers.
-  return base.filter((offer) => !personal.dismissed.has(offer.slug))
+  return base
+    .filter((offer) => offerMatches(offer, state))
+    .filter((offer) => !personal.dismissed.has(offer.slug))
 }
 
 /**

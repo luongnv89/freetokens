@@ -622,15 +622,16 @@ describe("HomePage saved and dismissed personal state (#140)", () => {
     expect(saveButton("alpha-image").getAttribute("aria-pressed")).toBe("false")
   })
 
-  it("saved-only view lists exactly the saved offers", () => {
+  it("saved-only view lists exactly the saved offers, even with filters active", () => {
     store[SAVED_KEY] = JSON.stringify({ v: 1, slugs: ["alpha-social", "beta-copilot"] })
+    setSearch("?category=image")
     render(<HomePage index={index} />)
     fireEvent.click(savedToggle())
     expect(listedSlugs()).toEqual(["alpha-social", "beta-copilot"])
     expect(savedToggle().getAttribute("aria-pressed")).toBe("true")
-    // Toggling back restores the default list.
+    // Toggling back restores the default (filtered) list.
     fireEvent.click(savedToggle())
-    expect(listedSlugs()).toHaveLength(fixtureOffers.length)
+    expect(listedSlugs()).toEqual(["alpha-image"])
   })
 
   it("dismissed offers vanish from the default list; count shows and one click restores all", () => {
