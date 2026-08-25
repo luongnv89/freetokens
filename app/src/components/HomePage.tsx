@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import {
   SEARCH_DEBOUNCE_MS,
+  trackFilterUse,
   trackSearch,
   trackSortUse,
 } from "../lib/analytics"
@@ -72,6 +73,7 @@ function Toolbar({
   clearHidden,
   onSearchChange,
   onSortChange,
+  onClear,
 }: {
   total: number
   shown: number
@@ -81,6 +83,7 @@ function Toolbar({
   clearHidden: boolean
   onSearchChange: (value: string) => void
   onSortChange: (value: string) => void
+  onClear: () => void
 }) {
   const status =
     shown === total ? `Showing all ${total} offers` : `Showing ${shown} of ${total} offers`
@@ -150,6 +153,7 @@ function Toolbar({
           className="chip clear"
           id="ft-clear-filters"
           hidden={clearHidden}
+          onClick={onClear}
         >
           Clear all filters
         </Button>
@@ -184,7 +188,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
 
   const shownList = visibleOffers(offers, state)
 
-  function commit(patch: Partial<UrlState>, source: "search" | "sort") {
+  function commit(patch: Partial<UrlState>, source: "search" | "sort" | "filter") {
     const next: UrlState = { ...stateRef.current, ...patch }
     if (source === "sort" && next.sort === stateRef.current.sort) return
     if (source === "search" && next.q === stateRef.current.q) return
@@ -203,6 +207,12 @@ export default function HomePage({ index }: { index: OffersIndex }) {
       trackSearch(next.q.length)
     } else if (source === "sort") {
       trackSortUse(next.sort || "default")
+    } else if (source === "filter") {
+      trackFilterUse({
+        category: next.category,
+        verification: next.verification,
+        signup: next.signup,
+      })
     }
   }
 
@@ -242,6 +252,16 @@ export default function HomePage({ index }: { index: OffersIndex }) {
     commit({ sort }, "sort")
   }
 
+  function onClear() {
+    if (debounceRef.current !== null) {
+      clearTimeout(debounceRef.current)
+      debounceRef.current = null
+    }
+    commit({ q: "", category: "", verification: "", signup: "" }, "filter")
+    setSearchInput("")
+    document.getElementById("ft-search")?.focus()
+  }
+
   return (
     <>
       <IconSprite />
@@ -275,6 +295,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
               clearHidden={!hasQueryOrFilters(state)}
               onSearchChange={onSearchChange}
               onSortChange={onSortChange}
+              onClear={onClear}
             />
             <a className="skip-list" href="#site-footer">
               Skip the offer list
@@ -291,7 +312,13 @@ export default function HomePage({ index }: { index: OffersIndex }) {
                 Nothing matches every filter you have applied at once. The status line above lists
                 them; clearing one usually brings offers back.
               </p>
-              <Button type="button" variant="unstyled" className="chip reset" id="ft-reset-filters">
+              <Button
+                type="button"
+                variant="unstyled"
+                className="chip reset"
+                id="ft-reset-filters"
+                onClick={onClear}
+              >
                 Clear search & filters
               </Button>
             </section>

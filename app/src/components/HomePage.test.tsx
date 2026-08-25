@@ -220,6 +220,47 @@ describe("HomePage sort_use", () => {
   })
 })
 
+describe("HomePage clear and reset filters", () => {
+  it("clears q and filters, keeps sort, focuses search, and fires filter_use not search/sort_use", () => {
+    vi.useFakeTimers()
+    const gtag = grantedGtag()
+    render(<HomePage index={index} />)
+    fireEvent.change(screen.getByLabelText("Sort"), { target: { value: "amount" } })
+    expect(eventCalls(gtag, "sort_use")).toHaveLength(1)
+    fireEvent.change(screen.getByLabelText("Search"), { target: { value: "nomatch-xyz" } })
+    act(() => {
+      vi.advanceTimersByTime(SEARCH_DEBOUNCE_MS)
+    })
+    expect(listedSlugs()).toEqual([])
+    expect(eventCalls(gtag, "search")).toHaveLength(1)
+    gtag.mockClear()
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear search & filters" }))
+
+    expect(listedSlugs()).toEqual([
+      "beta-copilot",
+      "alpha-image",
+      "alpha-copilot",
+      "alpha-free",
+      "alpha-social",
+    ])
+    expect(screen.getByLabelText("Search")).toHaveValue("")
+    expect(screen.getByLabelText("Sort")).toHaveValue("amount")
+    const params = new URLSearchParams(window.location.search)
+    expect(params.get("q")).toBeNull()
+    expect(params.get("sort")).toBe("amount")
+    expect(document.activeElement).toBe(screen.getByLabelText("Search"))
+    expect(eventCalls(gtag, "search")).toHaveLength(0)
+    expect(eventCalls(gtag, "sort_use")).toHaveLength(0)
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(1)
+    expect(eventCalls(gtag, "filter_use")[0][2]).toEqual({
+      category: "all",
+      verification: "all",
+      signup: "all",
+    })
+  })
+})
+
 describe("HomePage deep link and popstate", () => {
   it("applies q+sort AND filters from the URL without search or sort_use on load", () => {
     setSearch(
