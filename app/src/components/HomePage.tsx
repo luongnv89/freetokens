@@ -14,6 +14,7 @@ import {
   serializeState,
   type UrlState,
 } from "../lib/urlState"
+import { BrandMark } from "./BrandMark"
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { Button } from "./ui/button"
@@ -266,8 +267,10 @@ export default function HomePage({ index }: { index: OffersIndex }) {
     <>
       <IconSprite />
       <div className="wrap">
+        <main>
         <header className="masthead masthead-home">
           <div className="bar">
+            <BrandMark size={32} alt="" />
             <h1>Free AI Credits</h1>
             <p className="kicker">
               zero runtime &middot; every offer labeled with verification level &amp; sign-up need
@@ -341,6 +344,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
           </section>
         )}
 
+        </main>
         <SiteFooter current="home" showTrafficStrip />
       </div>
     </>

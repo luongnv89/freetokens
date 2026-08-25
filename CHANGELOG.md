@@ -5,6 +5,13 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Privacy policy, footer, favicon, and brand assets land in React (#132):**
+  `/privacy` describes the shipped React behaviour — `query_length`-only
+  search, cookieless consent-gated GoatCounter with exclusive-end windows and
+  ~4h CDN lag, and GA4 after grant with `anonymize_ip`. The footer links the
+  policy on every route; `#106` logo variants ship from `assets/logo` into
+  `app/public` (favicon 16, mark 64, apple-touch 512); every route has a
+  `<main>` landmark plus title and meta description.
 - **Text search and sort land in React with privacy-safe analytics (#127):**
   `?q=` and `?sort=` round-trip AND-combined with category / verification /
   signup, debounce is 120 ms, and `search` events carry `query_length` only

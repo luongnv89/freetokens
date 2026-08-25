@@ -134,6 +134,47 @@ describe("static route coverage (#123)", () => {
     expect(feed).toContain("/offers/zz-synthetic-new-offer.html");
   });
 
+  it("stamps /privacy.html with its own title and meta description", () => {
+    const privacy = readFileSync(path.join(outDir, "privacy.html"), "utf8");
+    expect(privacy).toContain("<title>Privacy Policy · Free AI Credits</title>");
+    expect(privacy).toContain(
+      'content="How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage."',
+    );
+    expect(privacy).toContain("<main>");
+  });
+
+  it("puts a title and meta description on every route type", () => {
+    const pages = [
+      ["index.html", "Free AI Credits"],
+      ["archive.html", "Offer Archive · Free AI Credits"],
+      ["privacy.html", "Privacy Policy · Free AI Credits"],
+    ];
+    for (const [file, title] of pages) {
+      const html = readFileSync(path.join(outDir, file), "utf8");
+      expect(html).toContain(`<title>${title}</title>`);
+      expect(html).toMatch(/<meta name="description" content="[^"]+"/);
+    }
+    const slug = index.offers[0].slug;
+    const detail = readFileSync(path.join(outDir, "offers", `${slug}.html`), "utf8");
+    expect(detail).toContain(`<title>${index.offers[0].title} · Free AI Credits</title>`);
+    expect(detail).toMatch(/<meta name="description" content="[^"]+"/);
+  });
+
+  it("declares favicon and logo variants at #106 sizes", () => {
+    const home = readFileSync(path.join(outDir, "index.html"), "utf8");
+    expect(home).toContain('href="./favicon.svg"');
+    expect(home).toContain('sizes="16x16"');
+    expect(home).toContain('href="./logo-mark.svg"');
+    expect(home).toContain('sizes="64x64"');
+    expect(home).toContain('href="./logo-icon.svg"');
+    expect(home).toContain('sizes="512x512"');
+    expect(existsSync(path.join(outDir, "favicon.svg"))).toBe(true);
+    expect(existsSync(path.join(outDir, "logo-mark.svg"))).toBe(true);
+    expect(existsSync(path.join(outDir, "logo-icon.svg"))).toBe(true);
+    expect(existsSync(path.join(outDir, "logo-full.svg"))).toBe(true);
+    expect(existsSync(path.join(outDir, "logo-wordmark.svg"))).toBe(true);
+  });
+
   it("ships RSS autodiscovery in <head> and keeps the footer RSS link", async () => {
     const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
     const home = readFileSync(path.join(outDir, "index.html"), "utf8");

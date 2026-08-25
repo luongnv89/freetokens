@@ -16,6 +16,7 @@ export default function OfferDetailPage({ index, slug }: { index: OffersIndex; s
     <>
       <IconSprite />
       <div className="wrap">
+        <main>
         {offer ? (
           <article className="offer-detail">
             <p className="od-back">
@@ -76,6 +77,7 @@ export default function OfferDetailPage({ index, slug }: { index: OffersIndex; s
             </p>
           </section>
         )}
+        </main>
         <SiteFooter depth={1} />
       </div>
     </>

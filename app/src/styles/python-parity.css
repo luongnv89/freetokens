@@ -421,6 +421,25 @@ a.badge:focus-visible {
   text-decoration: none;
 }
 
+.foot-brand {
+  margin: 0 0 0.15rem;
+}
+
+.foot-brand a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 2px;
+}
+
+.brand-mark {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.masthead-home .bar .brand-mark {
+  align-self: center;
+}
+
 /* ---- Policy prose ------------------------------------------------------ */
 
 .policy {
