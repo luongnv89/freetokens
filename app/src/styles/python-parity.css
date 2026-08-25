@@ -1237,6 +1237,39 @@ button:focus-visible {
   max-width: 42rem;
 }
 
+/* Key-facts table (#110): one scannable place for provider, amount,
+   window, and trust tags — prose stays below it. */
+
+.od-table {
+  width: 100%;
+  max-width: 42rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.od-table th,
+.od-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.45rem 0.75rem 0.45rem 0;
+  border-bottom: 1px solid var(--hairline);
+  overflow-wrap: anywhere;
+}
+
+.od-table th[scope="row"] {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  white-space: nowrap;
+  width: 8.5rem;
+}
+
+.od-table tr:last-child th,
+.od-table tr:last-child td { border-bottom: none; }
+
 /* Steps head: label left, live progress readout right. */
 
 .od-steps-head {

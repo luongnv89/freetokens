@@ -91,6 +91,57 @@ export default function OfferDetailPage({
                 )}
               </p>
             </div>
+            <section className="od-facts" aria-label="Key offer details">
+              <h2>Details</h2>
+              <table className="od-table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Provider</th>
+                    <td>{offer.provider}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Amount</th>
+                    <td className="mono">{offer.amount}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Category</th>
+                    <td>
+                      <CategoryBadge offer={offer} hrefPrefix="../" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sign-up</th>
+                    <td>
+                      <SignupBadge offer={offer} hrefPrefix="../" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Ends</th>
+                    <td>
+                      {offer.status === "expired" ? (
+                        <>ended</>
+                      ) : offer.expiry_date ? (
+                        <time dateTime={offer.expiry_date}>{humanDate(offer.expiry_date)}</time>
+                      ) : (
+                        <>ongoing &mdash; no fixed end date</>
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Verification</th>
+                    <td>
+                      <VerificationBadge offer={offer} hrefPrefix="../" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Last checked</th>
+                    <td>
+                      <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
             {detail?.summary ? (
               <section className="od-brief">
                 <h2>The offer</h2>
