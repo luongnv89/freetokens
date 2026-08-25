@@ -36,7 +36,7 @@ export function SiteHeader({
           className="nav-archive"
           href={`${up}archive.html`}
           title="All deals"
-          aria-label="All deals"
+          aria-label="Archive: all deals"
           aria-current={current === "archive" ? "page" : undefined}
         >
           {/* lucide "archive" glyph (#113): inline SVG, no extra request */}

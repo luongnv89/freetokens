@@ -520,7 +520,8 @@ describe("shared header chrome (#112)", () => {
       expect(nav).toMatch(
         /<a class="nav-archive"[^>]*>\s*<svg[^>]*aria-hidden="true"[^>]*>[\s\S]*<\/svg>\s*Archive\s*<\/a>/,
       );
-      expect(nav).toContain('aria-label="All deals"');
+      // Accessible name contains the visible label "Archive" (WCAG 2.5.3).
+      expect(nav).toContain('aria-label="Archive: all deals"');
     }
   });
 
