@@ -89,7 +89,7 @@ describe("static route coverage (#123)", () => {
   it("ships RSS with absolute links off DEFAULT_BASE_URL", async () => {
     const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
     const feed = readFileSync(path.join(outDir, "feed.xml"), "utf8");
-    const active = index.offers.filter((o) => o.status === "active");
+    const active = index.offers.filter((o) => o.status !== "expired");
     expect(feed.match(/<item>/g)?.length).toBe(active.length);
     expect(feed).toContain(`<link>${DEFAULT_BASE_URL}/</link>`);
     for (const m of feed.matchAll(/<link>([^<]+)<\/link>/g)) {
@@ -129,5 +129,31 @@ describe("static route coverage (#123)", () => {
     const page = path.join(outDir, "offers", "zz-synthetic-new-offer.html");
     expect(existsSync(page)).toBe(true);
     expect(readFileSync(page, "utf8")).toContain("<h1>Synthetic New Offer</h1>");
+    const feed = readFileSync(path.join(outDir, "feed.xml"), "utf8");
+    expect(feed).toContain("<title>Synthetic New Offer</title>");
+    expect(feed).toContain("/offers/zz-synthetic-new-offer.html");
+  });
+
+  it("ships RSS autodiscovery in <head> and keeps the footer RSS link", async () => {
+    const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
+    const home = readFileSync(path.join(outDir, "index.html"), "utf8");
+    const head = home.slice(0, home.indexOf("</head>"));
+    expect(head).toMatch(
+      /<link[^>]*rel="alternate"[^>]*type="application\/rss\+xml"[^>]*href="(?:\.\/)?feed\.xml"/,
+    );
+    expect(home).toMatch(/<a href="(?:\.\/)?feed\.xml">RSS<\/a>/);
+
+    const archive = readFileSync(path.join(outDir, "archive.html"), "utf8");
+    expect(archive.slice(0, archive.indexOf("</head>"))).toMatch(
+      /<link[^>]*rel="alternate"[^>]*type="application\/rss\+xml"[^>]*href="(?:\.\/)?feed\.xml"/,
+    );
+
+    const slug = index.offers[0].slug;
+    const detail = readFileSync(path.join(outDir, "offers", `${slug}.html`), "utf8");
+    expect(detail.slice(0, detail.indexOf("</head>"))).toMatch(
+      /<link[^>]*rel="alternate"[^>]*type="application\/rss\+xml"[^>]*href="\.\.\/feed\.xml"/,
+    );
+    // Internal page hrefs stay relative; only the feed uses the absolute origin.
+    expect(home).not.toContain(`href="${DEFAULT_BASE_URL}`);
   });
 });
