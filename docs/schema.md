@@ -64,7 +64,10 @@ drift; `validate_offers.py` additionally cross-checks the JSON Schema
 against the content model's constants.
 
 CI runs the validator on every push or PR touching `offers/**`
-(`.github/workflows/validate.yml`).
+(`.github/workflows/validate.yml`). The Vite app enforces the same rules at
+build time: `cd app && npm run build` loads every offer through
+`app/scripts/load-offers.mjs` before bundling, so an invalid YAML fails the
+app build too — locally and in the deploy workflow.
 
 A file that fails any rule above fails with the offending file and field
 named in the error (date errors include a `YYYY-MM-DD` format hint).

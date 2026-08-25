@@ -1,16 +1,24 @@
 # CLAUDE.md — freetokens
 
-Pre-code repo: planning docs + GitHub issue backlog only. Implementation happens issue-by-issue — do not scaffold anything not covered by an open issue.
+Since the v3.0 cutover this repo ships a real app: a Vite + React 19 static
+site under `app/`, deployed to GitHub Pages. Implementation still happens
+issue-by-issue — do not scaffold anything not covered by an open issue.
 
 See @prd.md and @tasks.md for scope. Epic: #31.
 
 ## Critical commands
-- Build: `npm ci` (never bare `npm install` in CI) then `npm run build` in `app/` — see ADR-002 (`docs/adr/0002-react-vite-migration.md`).
+- Install: `cd app && npm ci` (never bare `npm install` in CI)
+- Dev server: `cd app && npm run dev`
+- Build: `npm run build` in `app/` — see ADR-002 (`docs/adr/0002-react-vite-migration.md`).
+- Test: `npm test` in `app/` (Vitest unit + budget gates); `npm run test:e2e` for Playwright.
 - Validate offers: `python3 scripts/validate_offers.py` — the content gate.
 - Deploys run automatically on push to main. Never push directly to main (branch protection).
 
-## Architecture map (planned)
+## Architecture map
 - `offers/*.yaml` — one file per offer; the entire content model
+- `app/src/components/` — React components (HomePage, OfferRow, ConsentBanner, …)
+- `app/src/lib/` — data loading, analytics, URL state, personal state helpers
+- `app/src/routes.ts` + `app/src/prerender/` — routing and build-time prerender to static HTML
 - `offers/*.yaml` → Vite build (offer data → JSON/JSONL at build time) → prerendered HTML → GitHub Pages (`<user>.github.io/freetokens`) — React 19 + TypeScript + Tailwind + shadcn/ui per ADR-002 (`docs/adr/0002-react-vite-migration.md`); the Python builder was decommissioned after the v3.0 cutover (#139), its validator core living on in `scripts/offer_model.py`
 - GA4 for `page_view` + `offer_click` events; no backend, ever
 

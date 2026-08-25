@@ -36,3 +36,19 @@ Output: root cause, one-line fix, and whether the last good deploy is still serv
 - Skip confirmations like "I'll continue..." Just do it.
 - If a task needs 1 tool call, don't use 3. Plan before acting.
 - Do not summarize what you just did unless the result is ambiguous or you need additional input.
+
+## Repository toolchain
+
+The site is a Vite + React 19 + TypeScript + Tailwind app under `app/`
+(ADR-002); the legacy Python builder `scripts/build.py` is decommissioned —
+do not reference or run it.
+
+- Install: `cd app && npm ci` (never bare `npm install`)
+- Dev server: `cd app && npm run dev`
+- Build: `cd app && npm run build` (loads and validates all offers, bundles, prerenders)
+- Tests: `cd app && npm test` (Vitest unit + budget gates), `npm run test:e2e` (Playwright)
+- Content gate: `python3 scripts/validate_offers.py`; content-model tests:
+  `python3 -m unittest discover -s tests -v`
+
+Adding an offer is unchanged by the migration: one YAML file in `offers/`
+(schema: docs/schema.md), verified against its `source_url`, then a PR.

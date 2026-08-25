@@ -8,6 +8,7 @@
   },
   "scripts": {
     "load:data": "node scripts/load-offers.mjs",
+    "dev": "vite",
     "prebuild": "npm run load:data",
     "build": "tsc -b && vite build",
     "postbuild": "node scripts/prerender.mjs",
