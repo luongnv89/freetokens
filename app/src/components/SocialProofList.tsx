@@ -21,7 +21,7 @@ function ProofCard({ entry, relPrefix }: { entry: SocialProof; relPrefix: string
         <strong>{entry.title}</strong>
       </p>
     ) : null
-  let meta = "author" in entry ? entry.author : ""
+  const meta = "author" in entry ? entry.author : ""
   const handle = entry.type === "x" ? entry.handle : undefined
   const community = entry.type === "reddit" ? entry.community : undefined
   const text = "text" in entry ? entry.text : undefined
