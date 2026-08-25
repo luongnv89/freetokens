@@ -1,12 +1,13 @@
-import { describe, it, expect } from "vitest";
+import { afterEach, describe, it, expect, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
+import { render, waitFor } from "@testing-library/react";
 import ArchivePage from "./components/ArchivePage";
 import HomePage from "./components/HomePage";
 import PrivacyPage from "./components/PrivacyPage";
 import OfferDetailPage from "./components/OfferDetailPage";
-import { FILTER_DIMENSIONS } from "./lib/analytics";
+import { FILTER_DIMENSIONS, configureAnalytics, resetAnalyticsForTests } from "./lib/analytics";
 import { expiredOffers, type OffersIndex } from "./lib/offers";
 import indexData from "./data/offers.json";
 
@@ -235,6 +236,95 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
     expect(markup).toContain("Open the official offer page.");
     expect(markup).not.toContain('class="od-brief"');
     expect(markup).not.toContain('class="od-proof"');
+  });
+
+  it("marks the claim CTA as an outbound offer click for GoatCounter (#101)", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+        details={{}}
+      />,
+    );
+    const cta = markup.match(/<a class="od-cta"[^>]*>/)?.[0] ?? "";
+    expect(cta).toContain('data-ft-offer-id="example-offer"');
+    expect(cta).toContain('data-ft-provider="Example Co"');
+    expect(cta).toContain('data-ft-offer-category="coding"');
+    expect(cta).toContain('data-ft-outbound="true"');
+  });
+
+  it("shows no view count in prerendered markup — it is fetched live (#101)", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+        details={{}}
+      />,
+    );
+    expect(markup).not.toContain("views");
+  });
+
+  it("fetches the live per-offer view count from GoatCounter at page load (#101)", async () => {
+    configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
+    const calls: string[] = [];
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: RequestInfo | URL) => {
+        calls.push(String(url));
+        return {
+          ok: true,
+          json: async () => ({ count: "42" }),
+        } as Response;
+      }),
+    );
+    try {
+      render(
+        <OfferDetailPage
+          index={{ ...index, offers: [offer()] }}
+          slug="example-offer"
+          details={{}}
+        />,
+      );
+      await waitFor(() => {
+        expect(document.querySelector(".od-views")?.textContent).toBe("42 views");
+      });
+      expect(calls[0]).toBe(
+        "https://luongnv89.goatcounter.com/counter/%2Foffers%2Fexample-offer.html.json",
+      );
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("keeps the detail page fully working when GoatCounter never answers (#101)", async () => {
+    configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.reject(new Error("network blocked"))),
+    );
+    try {
+      render(
+        <OfferDetailPage
+          index={{ ...index, offers: [offer()] }}
+          slug="example-offer"
+          details={{}}
+        />,
+      );
+      await waitFor(() => {
+        expect(vi.mocked(fetch)).toHaveBeenCalled();
+      });
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      expect(document.querySelector(".od-views")).toBeNull();
+      expect(document.querySelector(".od-cta")?.getAttribute("href")).toBe(
+        "https://example.com/offer",
+      );
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  afterEach(() => {
+    resetAnalyticsForTests();
   });
 });
 

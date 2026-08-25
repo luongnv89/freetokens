@@ -11,6 +11,7 @@ import {
   type Offer,
 } from "../lib/offers"
 import { TAG_ICONS } from "../lib/tagIcons"
+import { ftFormatCount } from "../lib/analytics"
 import type { FilterDimension } from "../lib/urlState"
 import { Badge } from "./ui/badge"
 
@@ -98,6 +99,7 @@ export function OfferRow({
   saved = false,
   onToggleSave,
   onDismiss,
+  views = null,
 }: {
   offer: Offer
   index: number
@@ -107,6 +109,7 @@ export function OfferRow({
   saved?: boolean
   onToggleSave?: (slug: string) => void
   onDismiss?: (slug: string) => void
+  views?: number | null
 }) {
   const detailHref = `offers/${offer.slug}.html`
   return (
@@ -192,6 +195,14 @@ export function OfferRow({
           <a className="r-details" href={detailHref}>
             details
           </a>
+          {typeof views === "number" && (
+            <>
+              <span className="sep" aria-hidden="true">
+                &middot;
+              </span>
+              <span className="r-views">{ftFormatCount(views)} views</span>
+            </>
+          )}
           {(onToggleSave || onDismiss) && (
             <span className="r-actions">
               {onToggleSave && (

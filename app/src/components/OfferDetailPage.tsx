@@ -1,4 +1,7 @@
+import { useMemo } from "react"
 import { humanDate, type OffersIndex } from "../lib/offers"
+import { ftFormatCount } from "../lib/analytics"
+import { useOfferViews } from "../lib/offerStats"
 import {
   claimSteps,
   type DetailsMap,
@@ -36,6 +39,9 @@ export default function OfferDetailPage({
   const offer = index.offers.find((o) => o.slug === slug)
   const map = details ?? catalog
   const detail: OfferDetail | undefined = offer ? map[offer.slug] : undefined
+  const viewSlug = useMemo(() => [slug], [slug])
+  const views = useOfferViews(viewSlug)
+  const viewCount = offer ? views[offer.slug] : null
   return (
     <>
       <IconSprite />
@@ -75,6 +81,12 @@ export default function OfferDetailPage({
                 <span className="sep" aria-hidden="true">&middot;</span>
                 checked{" "}
                 <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
+                {typeof viewCount === "number" && (
+                  <>
+                    <span className="sep" aria-hidden="true">&middot;</span>
+                    <span className="od-views">{ftFormatCount(viewCount)} views</span>
+                  </>
+                )}
               </p>
             </div>
             {detail?.summary ? (
@@ -92,6 +104,10 @@ export default function OfferDetailPage({
                 href={offer.source_url}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-ft-offer-id={offer.slug}
+                data-ft-provider={offer.provider}
+                data-ft-offer-category={offer.category}
+                data-ft-outbound="true"
               >
                 Claim at {offer.provider} <span aria-hidden="true">&#8599;</span>
               </a>

@@ -732,6 +732,11 @@ a:focus-visible {
   text-underline-offset: 3px;
 }
 
+/* Live per-offer view counts (#101): one unbreakable token so the number and
+   its unit never split across wrapped lines at 320 px. */
+.r-views,
+.od-views { white-space: nowrap; }
+
 .r-details:hover,
 .r-details:focus-visible {
   text-decoration-color: var(--green);

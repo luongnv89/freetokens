@@ -23,6 +23,22 @@ Why this provider fits the freetokens constraints:
   an ad blocker, the footer strip simply stays hidden and every other
   page feature works unchanged.
 
+## Per-offer view counts and claim-click events (#101)
+
+The same counter route also serves per-path totals, so the home page list
+and each offer detail page fetch
+`/counter/%2Foffers%2F<slug>.html.json` live at page load (all-time
+window) and show `<count> views` next to the offer. Same rules apply: it
+needs *Allow adding visitor counts on your website* enabled, degrades to
+nothing when unreachable, and is subject to the same CDN cache lag.
+
+When a visitor allows counting and follows an offer's "Claim" link, the
+delegated outbound-click handler additionally reports a GoatCounter
+**event** (`offer_click:<slug>`) via the already-loaded count.js — no new
+infrastructure. Events are visible in the GoatCounter dashboard but are
+not exposed through the public counter route, which is why only view
+counts are displayed on the site.
+
 ## Freshness (measured, #102)
 
 The figures are a rough popularity signal, not a live readout. GoatCounter
