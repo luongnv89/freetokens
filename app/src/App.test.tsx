@@ -83,6 +83,28 @@ describe("App home listing prerender", () => {
   });
 });
 
+// Icon contract after the lucide-react migration (#122): glyphs still ship
+// once per page as a <symbol> sprite, and every glyph stays aria-hidden so
+// the spelled-out tag word carries the accessible name.
+describe("App tag icon sprite (lucide mapping)", () => {
+  const markup = html();
+
+  it("ships exactly one sprite per page", () => {
+    expect(markup.match(/class="tag-sprite"/g)?.length).toBe(1);
+  });
+
+  it("renders one aria-hidden glyph per honesty tag", () => {
+    // Three tags per row, each an <svg class="tag-i" aria-hidden="true">.
+    expect(markup.match(/<svg class="tag-i" aria-hidden="true"/g)?.length).toBe(
+      offers.length * 3,
+    );
+  });
+
+  it("never renders a lucide glyph with its own accessible name", () => {
+    expect(markup).not.toMatch(/<svg[^>]*aria-label=/);
+  });
+});
+
 describe("App empty state", () => {
   it("renders the no-offers fallback when the catalog is empty", async () => {
     const { default: HomePage } = await import("./components/HomePage");
