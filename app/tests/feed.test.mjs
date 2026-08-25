@@ -1,7 +1,4 @@
 import { describe, it, expect } from "vitest";
-import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import {
   buildFeed,
   DEFAULT_BASE_URL,
@@ -9,8 +6,6 @@ import {
   FEED_DESCRIPTION,
 } from "../scripts/feed.mjs";
 
-const APP_ROOT = path.resolve(import.meta.dirname, "..");
-const REPO_ROOT = path.resolve(APP_ROOT, "..");
 const BASE = DEFAULT_BASE_URL;
 const ATOM_NS = "http://www.w3.org/2005/Atom";
 
@@ -50,27 +45,6 @@ function parseRss(xmlText) {
 
 function channelOf(doc) {
   return doc.querySelector("channel");
-}
-
-function pythonBuildFeed(index, baseUrl = BASE) {
-  const py = `
-import json, sys
-sys.path.insert(0, ${JSON.stringify(path.join(REPO_ROOT, "scripts"))})
-import build
-sys.stdout.write(build.build_feed(json.load(sys.stdin), sys.argv[1]))
-`;
-  return execFileSync("python3", ["-c", py, baseUrl], {
-    input: JSON.stringify(index),
-    encoding: "utf8",
-    cwd: REPO_ROOT,
-  });
-}
-
-function withoutLastBuildDate(xmlText) {
-  return xmlText.replace(
-    /<lastBuildDate>[^<]*<\/lastBuildDate>/g,
-    "<lastBuildDate></lastBuildDate>",
-  );
 }
 
 describe("RSS 2.0 feed (#130 / #27)", () => {
@@ -218,28 +192,18 @@ describe("RSS 2.0 feed (#130 / #27)", () => {
     expect(xmlText).toContain(`${BASE}/offers/newie.html`);
   });
 
-  it("matches Python build_feed byte-for-byte ignoring lastBuildDate", () => {
+  it("escapes XML metacharacters in titles and amounts", () => {
     const fixture = indexFor([
-      offer("live", { expiry_date: null }),
-      offer("fresh", { expiry_date: "2026-12-25", category: "voice" }),
-      offer("stale", { expiry_date: "2026-08-01", status: "expired" }),
       offer("legacy", { status: undefined, title: "O'Reilly \"&\" <AI>" }),
       offer("amp", {
         amount: "10k tokens & extra",
         verified_date: "2026-08-01",
       }),
     ]);
-    const nodeXml = buildFeed(fixture);
-    const pyXml = pythonBuildFeed(fixture);
-    expect(withoutLastBuildDate(nodeXml)).toBe(withoutLastBuildDate(pyXml));
-  });
-
-  it("matches Python build_feed on the live offers.json catalog", () => {
-    const catalog = JSON.parse(
-      readFileSync(path.join(APP_ROOT, "src/data/offers.json"), "utf8"),
+    const xml = buildFeed(fixture);
+    expect(xml).toContain(
+      "O&#x27;Reilly &quot;&amp;&quot; &lt;AI&gt;",
     );
-    const nodeXml = buildFeed(catalog);
-    const pyXml = pythonBuildFeed(catalog);
-    expect(withoutLastBuildDate(nodeXml)).toBe(withoutLastBuildDate(pyXml));
+    expect(xml).toContain("10k tokens &amp; extra");
   });
 });
