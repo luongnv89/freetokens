@@ -36,6 +36,7 @@ import {
   subscribeConsentBanner,
   trackFilterUse,
   trackOfferClick,
+  SEARCH_DEBOUNCE_MS,
   trackSearch,
   trackSortUse,
 } from "./analytics";
@@ -357,6 +358,7 @@ describe("five events with correct properties", () => {
     const payload = eventCalls(gtag, "search")[0][2] as Record<string, unknown>;
     expect(payload).toEqual({ query_length: 11 });
     expect(Object.keys(payload)).toEqual(["query_length"]);
+    expect(JSON.stringify(payload)).not.toMatch(/q=|query[^_]|search_term/i);
   });
 
   it("search of length 0 is not sent", () => {
@@ -550,5 +552,43 @@ describe("traffic strip silent hide", () => {
         "start",
       ]);
     }
+  });
+});
+
+describe("bindToolbarListeners leaves search/sort to React", () => {
+  it("does not emit search or sort_use from #ft-search/#ft-sort; chips still emit filter_use", () => {
+    configureAnalytics({ measurementId: MID });
+    const gtag = installGtag();
+    grantConsent();
+    gtag.mockClear();
+    vi.useFakeTimers();
+    document.body.innerHTML = `
+      <input id="ft-search" />
+      <select id="ft-sort">
+        <option value=""></option>
+        <option value="newest">newest</option>
+      </select>
+      <button type="button" data-ft-category="coding">coding</button>
+    `;
+    bindAnalyticsListeners();
+    const input = document.getElementById("ft-search") as HTMLInputElement;
+    input.value = "secret-query-xyz";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    vi.advanceTimersByTime(SEARCH_DEBOUNCE_MS + 50);
+    expect(eventCalls(gtag, "search")).toHaveLength(0);
+
+    const sort = document.getElementById("ft-sort") as HTMLSelectElement;
+    sort.value = "newest";
+    sort.dispatchEvent(new Event("change", { bubbles: true }));
+    expect(eventCalls(gtag, "sort_use")).toHaveLength(0);
+
+    const chip = document.querySelector("[data-ft-category]") as HTMLButtonElement;
+    chip.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(1);
+    expect(eventCalls(gtag, "filter_use")[0][2]).toEqual({
+      category: "coding",
+      verification: "all",
+      signup: "all",
+    });
   });
 });
