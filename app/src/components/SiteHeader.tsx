@@ -32,7 +32,31 @@ export function SiteHeader({
           Offers
         </a>
         <span aria-hidden="true">&middot;</span>
-        <a href={`${up}archive.html`} aria-current={current === "archive" ? "page" : undefined}>
+        <a
+          className="nav-archive"
+          href={`${up}archive.html`}
+          title="All deals"
+          aria-label="Archive: all deals"
+          aria-current={current === "archive" ? "page" : undefined}
+        >
+          {/* lucide "archive" glyph (#113): inline SVG, no extra request */}
+          <svg
+            className="nav-i"
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="20" height="5" x="2" y="3" rx="1" />
+            <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+            <path d="M10 12h4" />
+          </svg>
           Archive
         </a>
         <span aria-hidden="true">&middot;</span>

@@ -595,6 +595,17 @@ a:focus-visible {
 
 .site-nav a { color: var(--gray); }
 
+/* All-deals icon link (#113): the archive anchor carries an inline lucide
+   "archive" glyph; inline-flex keeps it on the text baseline so hover,
+   focus, and aria-current styling stay identical to the other nav items. */
+.site-nav .nav-archive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.site-nav .nav-archive .nav-i { flex-shrink: 0; }
+
 .site-nav a[aria-current="page"] {
   color: var(--ink);
   font-weight: 700;
