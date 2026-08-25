@@ -256,6 +256,10 @@ export async function runPipeline({ offersDir, outDir, now = new Date() }) {
     // Detail JSON passes through unchanged — it is already validated content.
     await writeFile(path.join(detailsOut, `${slug}.json`), `${JSON.stringify(detail, null, 2)}\n`);
   }
+  // Single slug-keyed map so Vite and prerender's esbuild can both import
+  // one JSON module (issue #128). import.meta.glob is Vite-only and would
+  // fail the prerender bundle.
+  await writeFile(path.join(outDir, "details.json"), `${JSON.stringify(details, null, 2)}\n`);
 
   await validateWrittenArtifacts(outDir);
   return index;
@@ -295,7 +299,7 @@ async function main(argv) {
   const index = await runPipeline({ offersDir, outDir });
   console.log(
     `loaded ${index.count} offers (${index.active_count} active, ${index.expired_count} expired)` +
-      ` -> ${path.join(outDir, "offers.json")}, offers.jsonl, details/*.json in ${Date.now() - started}ms`,
+      ` -> ${path.join(outDir, "offers.json")}, offers.jsonl, details.json, details/*.json in ${Date.now() - started}ms`,
   );
 }
 

@@ -147,6 +147,24 @@ describe("generated artifacts vs committed index.json", () => {
       expect(JSON.parse(dst)).toEqual(JSON.parse(src));
     }
   });
+
+  it("writes a slug-keyed details.json map matching the per-file documents", async () => {
+    const aggregated = JSON.parse(
+      await readFile(path.join(globalThis.__ftOut, "details.json"), "utf8"),
+    );
+    const { readdir } = await import("node:fs/promises");
+    const files = await readdir(path.join(globalThis.__ftOut, "details"));
+    expect(Object.keys(aggregated).sort()).toEqual(
+      files.map((f) => f.replace(/\.json$/, "")).sort(),
+    );
+    for (const f of files) {
+      const slug = f.replace(/\.json$/, "");
+      const perFile = JSON.parse(
+        await readFile(path.join(globalThis.__ftOut, "details", f), "utf8"),
+      );
+      expect(aggregated[slug]).toEqual(perFile);
+    }
+  });
 });
 
 describe("data contract: schemas/offers-index.schema.json (#120)", () => {

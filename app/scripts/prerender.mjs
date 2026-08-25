@@ -23,7 +23,7 @@ import { readFile, writeFile, rm, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { buildFeed } from "./feed.mjs";
+import { buildFeed, DEFAULT_BASE_URL } from "./feed.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 let distDir = path.join(here, "..", "dist");
@@ -99,6 +99,18 @@ await build({
           contents: await readFile(dataFile, "utf8"),
           loader: "json",
         }));
+        // Aggregated details map (issue #128). Sibling of --data when present,
+        // else the generated src/data/details.json. Empty object if neither
+        // exists so a synthetic --data-only prerender still bundles.
+        b.onLoad({ filter: /(?:^|\/)src\/data\/details\.json$/ }, async () => {
+          const sibling = path.join(path.dirname(dataFile), "details.json");
+          const fallback = path.join(here, "..", "src", "data", "details.json");
+          const file = existsSync(sibling) ? sibling : fallback;
+          return {
+            contents: existsSync(file) ? await readFile(file, "utf8") : "{}",
+            loader: "json",
+          };
+        });
       },
     },
   ],
@@ -124,15 +136,42 @@ try {
   // markup's own divs close inside it.
   const MOUNT_RE = /<div id="root"( data-page="[^"]*")?( data-slug="[^"]*")?>[\s\S]*<\/div>(?=\s*<\/body>)/;
 
-  function fillPage({ markup, title, description, depth = 0, page, slug }) {
+  function htmlAttr(text) {
+    return String(text)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  // build.py render_offer_html: summary truncated at 160 chars, else generic.
+  function offerMetaDescription(offer, detail) {
+    const summary = detail?.summary ?? "";
+    if (summary) {
+      return summary.length > 160 ? summary.slice(0, 157).trimEnd() + "..." : summary;
+    }
+    return (
+      `${offer.amount} from ${offer.provider} — free AI credits, ` +
+      "tagged by verification level and sign-up need."
+    );
+  }
+
+  function fillPage({ markup, title, description, canonical, depth = 0, page, slug }) {
     let doc = template;
-    doc = doc.replace(/<title>.*?<\/title>/s, `<title>${title}</title>`);
+    doc = doc.replace(/<title>.*?<\/title>/s, `<title>${htmlAttr(title)}</title>`);
     // Vite pretty-prints the shell meta tag across lines; match either form
     // so archive/privacy/detail get their own description (#132).
     doc = doc.replace(
       /<meta\s+name="description"\s+content="[^"]*"\s*\/>/,
-      `<meta name="description" content="${description}" />`,
+      `<meta name="description" content="${htmlAttr(description)}" />`,
     );
+    if (canonical) {
+      doc = doc.replace(/\s*<link\s+rel="canonical"[^>]*>/g, "");
+      doc = doc.replace(
+        "</title>",
+        `</title>\n    <link rel="canonical" href="${htmlAttr(canonical)}" />`,
+      );
+    }
     // Depth-1 documents must climb out of offers/: every root-relative asset
     // reference emitted by Vite gets one ../ prefix.
     if (depth > 0) doc = doc.replaceAll(/((?:src|href)=")\.\//g, `$1${"../".repeat(depth)}`);
@@ -189,22 +228,29 @@ try {
   );
   written.push("privacy.html");
 
-  // One detail page per offer — active AND expired (#60), placeholder shells
-  // until task #128 ports the full layout. Unknown slugs can only come from
-  // stale links, which GitHub Pages answers with its own 404; the graceful
-  // not-found state still ships inside the app for hydration safety.
+  // One detail page per offer — active AND expired (#60), with summary /
+  // claim steps / social proof when details.json has an entry (#128).
+  // Unknown slugs can only come from stale links, which GitHub Pages
+  // answers with its own 404; the graceful not-found state still ships
+  // inside the app for hydration safety.
+  const detailsSibling = path.join(path.dirname(dataFile), "details.json");
+  const detailsFallback = path.join(here, "..", "src", "data", "details.json");
+  const detailsPath = existsSync(detailsSibling) ? detailsSibling : detailsFallback;
+  const details = existsSync(detailsPath)
+    ? JSON.parse(await readFile(detailsPath, "utf8"))
+    : {};
+  const origin = (baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
   const offersDir = path.join(distDir, "offers");
   await mkdir(offersDir, { recursive: true });
   for (const offer of index.offers) {
-    const blurb =
-      `${offer.amount} from ${offer.provider} — free AI credits, ` +
-      "tagged by verification level and sign-up need.";
+    const canonical = `${origin}/offers/${offer.slug}.html`;
     await writeFile(
       path.join(offersDir, `${offer.slug}.html`),
       fillPage({
         markup: await renderRoute({ page: "detail", slug: offer.slug }),
         title: `${offer.title} · Free AI Credits`,
-        description: blurb,
+        description: offerMetaDescription(offer, details[offer.slug]),
+        canonical,
         depth: 1,
         page: "detail",
         slug: offer.slug,

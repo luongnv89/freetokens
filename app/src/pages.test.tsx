@@ -113,7 +113,7 @@ describe("archive layout at 320 px (#129)", () => {
   });
 });
 
-describe("OfferDetailPage (F2 shell, #123)", () => {
+describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
   it("server-renders real offer content for JS-off deep links", () => {
     const live = index.offers[0];
     const markup = renderToStaticMarkup(
@@ -131,6 +131,7 @@ describe("OfferDetailPage (F2 shell, #123)", () => {
       <OfferDetailPage
         index={{ ...index, offers: [offer({ status: "expired" as const })] }}
         slug="example-offer"
+        details={{}}
       />,
     );
     expect(markup).toContain("This offer ended");
@@ -142,6 +143,7 @@ describe("OfferDetailPage (F2 shell, #123)", () => {
       <OfferDetailPage
         index={{ ...index, offers: [offer()] }}
         slug="example-offer"
+        details={{}}
       />,
     );
     expect(markup).toContain('href="../index.html?category=coding"');
@@ -159,6 +161,96 @@ describe("OfferDetailPage (F2 shell, #123)", () => {
     );
     expect(markup).toContain("Offer not found");
     expect(markup).toContain('href="../index.html"');
+  });
+
+  it("renders summary, claim steps, and social proof when details JSON is present", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+        details={{
+          "example-offer": {
+            summary: "A detailed summary of the example offer.",
+            claim_steps: ["Open the provider page.", "Sign in and claim."],
+            social_proof: [
+              {
+                type: "x",
+                url: "https://x.com/ada/status/1",
+                author: "Ada",
+                handle: "@ada",
+                text: "Live now.",
+              },
+              {
+                type: "reddit",
+                url: "https://www.reddit.com/r/LocalLLaMA/comments/abc/offer/",
+                author: "u/ada",
+                community: "r/LocalLLaMA",
+                text: "Confirmed on the official page.",
+              },
+              {
+                type: "screenshot",
+                image: "assets/gmi-minimax-m3-curator-run.jpg",
+                caption: "Curator run of the free model.",
+              },
+              {
+                type: "link",
+                url: "https://example.com/pricing",
+                title: "Official pricing",
+              },
+            ],
+          },
+        }}
+      />,
+    );
+    expect(markup).toContain('class="od-brief"');
+    expect(markup).toContain("A detailed summary of the example offer.");
+    expect(markup).toContain("Open the provider page.");
+    expect(markup).toContain("Sign in and claim.");
+    expect(markup).toContain('class="od-proof"');
+    expect(markup).toContain("View post on X");
+    expect(markup).toContain("View on Reddit");
+    expect(markup).toContain('src="../assets/gmi-minimax-m3-curator-run.jpg"');
+    expect(markup).toContain("Official pricing");
+    expect(markup).toContain('class="share-copy"');
+    expect(markup).not.toContain("offer_share");
+    expect(markup).not.toContain("linkedin.com/sharing");
+    expect(markup).not.toContain("twitter.com/intent/tweet");
+    expect(markup).not.toContain("facebook.com/sharer");
+    expect(markup).not.toContain("data-ft-share");
+  });
+
+  it("renders the summary card and fallback steps without details JSON — no layout break", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+        details={{}}
+      />,
+    );
+    expect(markup).toContain('class="offer-detail"');
+    expect(markup).toContain('class="od-hero"');
+    expect(markup).toContain("<h1>Example Offer</h1>");
+    expect(markup).toContain("$10 credits");
+    expect(markup).toContain('class="od-cta"');
+    expect(markup).toContain("Open the official offer page.");
+    expect(markup).not.toContain('class="od-brief"');
+    expect(markup).not.toContain('class="od-proof"');
+  });
+});
+
+describe("offer detail layout CSS (#128)", () => {
+  const css = readFileSync(
+    path.resolve(import.meta.dirname, "styles/python-parity.css"),
+    "utf8",
+  );
+
+  it("ports the Python detail, checklist, proof, and copy-button rules", () => {
+    expect(css).toMatch(/\.offer-detail \{/);
+    expect(css).toMatch(/\.od-hero|\.offer-detail \.amount/);
+    expect(css).toMatch(/\.claim-list \{/);
+    expect(css).toMatch(/\.proof-card \{/);
+    expect(css).toMatch(/\.share-copy \{/);
+    expect(css).toMatch(/\.od-cta \{[^}]*min-height:\s*44px/s);
   });
 });
 
