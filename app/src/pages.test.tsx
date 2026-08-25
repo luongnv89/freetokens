@@ -8,7 +8,12 @@ import HomePage from "./components/HomePage";
 import PrivacyPage from "./components/PrivacyPage";
 import OfferDetailPage from "./components/OfferDetailPage";
 import { FILTER_DIMENSIONS, configureAnalytics, resetAnalyticsForTests } from "./lib/analytics";
-import { expiredOffers, type OffersIndex } from "./lib/offers";
+import {
+  SIGNUP_LABELS,
+  VERIFICATION_LABELS,
+  expiredOffers,
+  type OffersIndex,
+} from "./lib/offers";
 import indexData from "./data/offers.json";
 
 const PUBLIC_DIR = path.resolve(import.meta.dirname, "../public");
@@ -389,6 +394,44 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
 
   afterEach(() => {
     resetAnalyticsForTests();
+  });
+});
+
+describe("no-signup and hand-verified honesty badges (#111)", () => {
+  const css = readFileSync(
+    path.resolve(import.meta.dirname, "styles/python-parity.css"),
+    "utf8",
+  );
+
+  it("renders signup and verification badge classes on the detail page like the listing rows", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+        details={{}}
+      />,
+    );
+    // Status line + details table = two badge instances per dimension.
+    expect((markup.match(/badge-signup-none\b/g) ?? []).length).toBe(2);
+    expect((markup.match(/badge-verification-hand_verified\b/g) ?? []).length).toBe(2);
+    expect(markup).toContain(">no sign-up</span>");
+    expect(markup).toContain(">hand-verified</span>");
+  });
+
+  it("gives every verification state a pairwise-distinct label and CSS marker", () => {
+    const labels = Object.values(VERIFICATION_LABELS);
+    expect(new Set(labels).size).toBe(labels.length);
+    for (const value of Object.keys(VERIFICATION_LABELS)) {
+      expect(css).toMatch(
+        new RegExp(`\\.badge-verification-${value} \\{ --tag-hue:`),
+      );
+    }
+  });
+
+  it("marks no-sign-up distinctly from sign-up-required", () => {
+    expect(SIGNUP_LABELS.none).not.toBe(SIGNUP_LABELS.required);
+    expect(css).toMatch(/\.badge-signup-none \{ --tag-hue:/);
+    expect(css).toMatch(/\.badge-signup-required \{ --tag-hue:/);
   });
 });
 
