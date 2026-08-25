@@ -25,11 +25,11 @@ The constraints that frame the choice:
 | Zero client framework/runtime | PRD §6.2, ADR 001 | No client-side JavaScript |
 | Freshness | PRD §3.1 F4 | Expired offers hidden from the default list |
 
-Today the build implements this directly: `filter_expired()` in
-`scripts/build.py` drops every offer whose `expiry_date` is earlier than the
-build date (`null` means ongoing and is always kept). The Deploy workflow runs
-the build on every push to `main`, so expiry is re-evaluated each time content
-changes.
+At the time of writing the Python builder implemented this directly:
+`filter_expired()` in `scripts/build.py` (retired by #139; expiry is now
+evaluated against the build clock in `app/scripts/load-offers.mjs`) drops
+every offer whose `expiry_date` is earlier than the
+build date (`null` means ongoing and is always kept).
 
 ## Options considered
 
@@ -47,7 +47,7 @@ changes.
 ## Decision
 
 **Option 1: expiry is evaluated only at build/deploy time.**
-`python3 scripts/build.py` is the single point where an offer is declared
+The Python builder was the single point where an offer was declared
 expired; the deployed artifacts contain only offers that were valid at the
 moment of the last build.
 
