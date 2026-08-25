@@ -1,4 +1,5 @@
 import { Fragment } from "react"
+import { BrandMark } from "./BrandMark"
 import { Button } from "./ui/button"
 import { TrafficStrip } from "./TrafficStrip"
 import { isTrackingConfigured, showConsentBanner } from "../lib/analytics"
@@ -27,12 +28,18 @@ export function SiteFooter({
   showTrafficStrip?: boolean
 }) {
   const up = "../".repeat(depth)
+  const homeHref = `${up || "./"}index.html`
   const trackingOn = isTrackingConfigured()
   return (
     <footer className="foot" id="site-footer">
       {showTrafficStrip ? <TrafficStrip /> : null}
+      <p className="foot-brand">
+        <a href={homeHref}>
+          <BrandMark depth={depth} size={24} />
+        </a>
+      </p>
       <nav className="foot-nav" aria-label="Site">
-        <a href={`${up || "./"}index.html`} aria-current={current === "home" ? "page" : undefined}>
+        <a href={homeHref} aria-current={current === "home" ? "page" : undefined}>
           Offers
         </a>
         <span aria-hidden="true">&middot;</span>

@@ -51,6 +51,7 @@ export default function ArchivePage({ index }: { index: OffersIndex }) {
     <>
       <IconSprite />
       <div className="wrap">
+        <main>
         <header className="masthead">
           <p className="kicker">free ai credits &middot; archive</p>
           <h1>Expired offer archive</h1>
@@ -82,6 +83,7 @@ export default function ArchivePage({ index }: { index: OffersIndex }) {
           </section>
         )}
 
+        </main>
         <SiteFooter current="archive" />
       </div>
     </>
