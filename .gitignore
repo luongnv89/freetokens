@@ -31,6 +31,12 @@ app/src/data/
 .env
 .env.*
 
+# Playwright (issue #134)
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
 # Local tooling state
 .gitissue/
 
