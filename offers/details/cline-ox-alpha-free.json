@@ -1,0 +1,43 @@
+{
+  "summary": "Cline's August 26, 2026 announcement says GLM-5.3 Flash (formerly Ox Alpha) is free in Cline. The current Cline documentation says free model promotions are available to any user with a Cline account, provide a limited usage quota, rotate over time, and work in the Cline IDE extension and CLI—not the Cline API. No fixed end date is published, so this listing uses a null expiry date to mean no announced end date, not permanent availability.",
+  "claim_steps": [
+    "Install the Cline CLI if needed: npm i -g cline.",
+    "Open the model picker with /models; in the current CLI, go to /settings, select Cline as the provider, and browse available free models.",
+    "Select GLM-5.3 Flash (Ox Alpha) under the free options while it is listed.",
+    "Use it in the Cline CLI or IDE extension within the limited free quota; Cline's free models are not available through the Cline API."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/cline/status/2092666316125864191",
+      "author": "Cline",
+      "handle": "@cline",
+      "text": "GLM-5.3 Flash (Ox Alpha) is free in Cline.\n\n320B params with 18B active, and beating frontier models on benchmarks.\n\nIt’s been our fastest growing model in Cline history, now driving over 11% of all traffic in less than a week."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.cline.bot/getting-started/free-models",
+      "title": "Cline Free Models - Cline",
+      "text": "Cline periodically offers free model promotions that let you try select models at no cost, up to a limited usage quota. Free model promotions are offered on a rotating, limited-time basis. Free models are available to any user with a Cline account. Free model usage is not supported through the Cline API. Free models are only available in the Cline IDE Extension and CLI."
+    },
+    {
+      "type": "screenshot",
+      "image": "assets/cline-glm-5-3-flash-curator-run.png",
+      "caption": "Curator's firsthand Cline CLI run: GLM-5.3-Flash (high) is selected and the session shows $0.00."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/cline/status/2090854216399220985",
+      "author": "Cline",
+      "handle": "@cline",
+      "text": "Ox Alpha (stealth model) is now free in Cline. Early benchmarks shows marginal improvement over Fable and GPT. Try it with: npm i -g cline and use /models to see it under Free options"
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/Zai_org/status/2092616204787626030",
+      "author": "Z.ai",
+      "handle": "@Zai_org",
+      "text": "Introducing GLM-5.3-Flash\n\n- Leading capabilities at a highly competitive price\n- Natively multimodal with a 1M-token context window\n- A 320B-A18B model released under the MIT License\n- Previously previewed as Ox Alpha, running entirely on Chinese AI chips\n\nBlog:…"
+    }
+  ]
+}

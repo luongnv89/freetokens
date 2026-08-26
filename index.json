@@ -1,9 +1,22 @@
 {
-  "generated_at": "2026-08-26T17:22:42Z",
+  "generated_at": "2026-08-26T20:37:33Z",
   "count": 43,
-  "active_count": 36,
-  "expired_count": 7,
+  "active_count": 37,
+  "expired_count": 6,
   "offers": [
+    {
+      "slug": "cline-ox-alpha-free",
+      "title": "GLM-5.3 Flash (Ox Alpha) Free in Cline",
+      "provider": "Cline",
+      "category": "coding",
+      "amount": "Free GLM-5.3 Flash (Ox Alpha) model access, rate limited",
+      "expiry_date": null,
+      "source_url": "https://x.com/cline/status/2092666316125864191",
+      "verified_date": "2026-08-26",
+      "verification": "hand_verified",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "devin-startups-program",
       "title": "Devin for Startups — $65K Credits and Grants",
@@ -211,19 +224,6 @@
       "verification": "social_proof",
       "signup": "required",
       "status": "active"
-    },
-    {
-      "slug": "cline-ox-alpha-free",
-      "title": "Ox Alpha (Stealth Model) Free in Cline",
-      "provider": "Cline",
-      "category": "coding",
-      "amount": "Free model access, rate limited",
-      "expiry_date": "2026-08-24",
-      "source_url": "https://x.com/cline/status/2090854216399220985",
-      "verified_date": "2026-08-23",
-      "verification": "social_proof",
-      "signup": "required",
-      "status": "expired"
     },
     {
       "slug": "cloudflare-workers-ai-free-tier",

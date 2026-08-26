@@ -1,0 +1,15 @@
+# Verified 2026-08-26 against https://x.com/cline/status/2092666316125864191
+# ("GLM-5.3 Flash (Ox Alpha) is free in Cline.")
+# Cline's current free-model documentation confirms limited usage quotas for
+# account holders and says promotions rotate; no fixed end date is published.
+# This refreshes the existing cline-ox-alpha-free identity: Z.ai's official
+# announcement says GLM-5.3-Flash was previously previewed as Ox Alpha.
+title: GLM-5.3 Flash (Ox Alpha) Free in Cline
+provider: Cline
+category: coding
+amount: Free GLM-5.3 Flash (Ox Alpha) model access, rate limited
+expiry_date: null
+source_url: https://x.com/cline/status/2092666316125864191
+verified_date: 2026-08-26
+verification: hand_verified
+signup: required
