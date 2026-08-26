@@ -5,6 +5,8 @@ import {
   SIGNUP_TITLES,
   VERIFICATION_LABELS,
   VERIFICATION_TITLES,
+  REVIEW_STATUS_LABELS,
+  REVIEW_STATUS_TITLES,
   type Offer,
 } from "../lib/offers"
 
@@ -71,6 +73,25 @@ export function VerificationBadge({ offer, hrefPrefix }: { offer: Offer; hrefPre
       title={VERIFICATION_TITLES[offer.verification]}
       hrefPrefix={hrefPrefix}
     />
+  )
+}
+
+const REVIEW_STATUS_ICONS: Record<string, string> = {
+  verified: "hand_verified",
+  unverified: "unverified",
+  "under-review": "expired",
+}
+
+export function ReviewStatusBadge({ offer }: { offer: Offer }) {
+  const status = offer.review_status
+  return (
+    <span
+      className={`badge badge-review-status badge-review-status-${status}`}
+      title={REVIEW_STATUS_TITLES[status] ?? status}
+    >
+      {tagIcon(REVIEW_STATUS_ICONS[status] ?? "unverified")}
+      <span>{REVIEW_STATUS_LABELS[status] ?? status}</span>
+    </span>
   )
 }
 

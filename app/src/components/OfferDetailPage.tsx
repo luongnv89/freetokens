@@ -9,7 +9,12 @@ import {
 } from "../lib/offerDetails"
 import { offerAbsoluteUrl } from "../lib/site"
 import detailsCatalog from "../data/details.json"
-import { CategoryBadge, SignupBadge, VerificationBadge } from "./Badge"
+import {
+  CategoryBadge,
+  ReviewStatusBadge,
+  SignupBadge,
+  VerificationBadge,
+} from "./Badge"
 import { ClaimChecklist } from "./ClaimChecklist"
 import { CopyLinkButton } from "./CopyLinkButton"
 import { IconSprite } from "./OfferRow"
@@ -81,6 +86,8 @@ export default function OfferDetailPage({
                 <span className="sep" aria-hidden="true">&middot;</span>
                 <VerificationBadge offer={offer} hrefPrefix="../" />
                 <span className="sep" aria-hidden="true">&middot;</span>
+                <ReviewStatusBadge offer={offer} />
+                <span className="sep" aria-hidden="true">&middot;</span>
                 checked{" "}
                 <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
                 {typeof viewCount === "number" && (
@@ -131,6 +138,12 @@ export default function OfferDetailPage({
                     <th scope="row">Verification</th>
                     <td>
                       <VerificationBadge offer={offer} hrefPrefix="../" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Review status</th>
+                    <td>
+                      <ReviewStatusBadge offer={offer} />
                     </td>
                   </tr>
                   <tr>

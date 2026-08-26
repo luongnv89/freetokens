@@ -1,0 +1,28 @@
+{
+  "summary": "AIHubMix advertises 50 models at $0/M input and output, but a firsthand test found that an account that has not been recharged can only try the free resources 10 times. The provider's message says the free quota can be increased after recharging, so this catalog is archived as not worthwhile for genuinely free use.",
+  "claim_steps": [
+    "Open AIHubMix's free-model catalog at https://aihubmix.com/models?filter=free.",
+    "Without a recharge, an account can try the free resources only 10 times.",
+    "Increasing the free quota requires recharging; this limitation is why the offer is archived."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/_0xpainn/status/2091459288665321905",
+      "author": "painn",
+      "handle": "@_0xpainn",
+      "text": "you can now use Ox Alpha, Kimi K3, gemini 3.7 flash and 47 other models for FREEE with no credit card 😳\n\naihubmix just opened a 50-model free catalog, every model $0/M in and out.\n\nthe models:\n-Ox Aplha\n-gemini-3.7-flash\n-glm-5.2\n-kimi-k3\n-minimax-m3"
+    },
+    {
+      "type": "link",
+      "url": "https://aihubmix.com/models?filter=free",
+      "title": "AI Models & Pricing - AIHubMix",
+      "text": "Explore our comprehensive AI model marketplace with transparent pricing. Access ChatGPT, Claude, Gemini, DeepSeek, Douba"
+    },
+    {
+      "type": "screenshot",
+      "image": "assets/aihubmix-free-quota-limit.png",
+      "caption": "Curator's firsthand test: AIHubMix says accounts that have not been recharged can only try the free resources 10 times, and increasing the quota requires recharging."
+    }
+  ]
+}

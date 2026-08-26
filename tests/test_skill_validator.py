@@ -33,6 +33,7 @@ def offer_text(**overrides):
         "source_url": "https://example.com/offer",
         "verified_date": dt.date.today().isoformat(),
         "verification": "social_proof",
+        "review_status": "unverified",
         "signup": "required",
     }
     data.update(overrides)

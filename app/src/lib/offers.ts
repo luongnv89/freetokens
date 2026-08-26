@@ -34,6 +34,18 @@ export const VERIFICATION_TITLES: Record<string, string> = {
   unverified: "Only social-media proofs — no official-website confirmation yet",
 }
 
+export const REVIEW_STATUS_LABELS: Record<string, string> = {
+  verified: "verified",
+  unverified: "unverified",
+  "under-review": "under review",
+}
+
+export const REVIEW_STATUS_TITLES: Record<string, string> = {
+  verified: "The curator has reviewed this offer firsthand",
+  unverified: "The curator has not reviewed this offer firsthand yet",
+  "under-review": "The curator is currently testing this offer",
+}
+
 export const SIGNUP_LABELS: Record<string, string> = {
   none: "no sign-up",
   required: "sign-up required",

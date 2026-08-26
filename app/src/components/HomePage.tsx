@@ -530,12 +530,12 @@ export default function HomePage({ index }: { index: OffersIndex }) {
         <header className="masthead masthead-home">
           <SiteHeader current="home" />
           <p className="kicker">
-            zero runtime &middot; every offer labeled with verification level &amp; sign-up need
+            zero runtime &middot; every offer labeled with review status, verification level &amp; sign-up need
           </p>
           <p className="tagline">
             Every claimable free-credit offer worth your time, on one fast page. Each carries a
-            verification level (hand-checked or community-sourced) and a sign-up tag, refreshed on
-            every rebuild.
+            curator review status, verification level (hand-checked or community-sourced), and a
+            sign-up tag, refreshed on every rebuild.
           </p>
           <p className="count">
             <strong>{offers.length}</strong> live offers &middot; <strong>{ongoing}</strong>{" "}

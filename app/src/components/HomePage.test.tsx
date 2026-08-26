@@ -26,6 +26,7 @@ function offer(overrides: Partial<Offer> = {}): Offer {
     source_url: "https://example.com/offer",
     verified_date: "2026-08-01",
     verification: "hand_verified",
+    review_status: "unverified",
     signup: "none",
     status: "active",
     ...overrides,

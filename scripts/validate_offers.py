@@ -60,6 +60,12 @@ def check_schema_matches_build(schema: dict) -> None:
             "schema category enum does not match build.py CATEGORIES "
             f"(schema: {enum}, build: {list(build.CATEGORIES)})"
         )
+    review_status = props.get("review_status", {}).get("enum")
+    if review_status != list(build.REVIEW_STATUSES):
+        raise SchemaMismatch(
+            "schema review_status enum does not match build.py REVIEW_STATUSES "
+            f"(schema: {review_status}, build: {list(build.REVIEW_STATUSES)})"
+        )
     for field in ("expiry_date", "verified_date"):
         pattern = props.get(field, {}).get("pattern")
         if pattern != "^[0-9]{4}-[0-9]{2}-[0-9]{2}$":

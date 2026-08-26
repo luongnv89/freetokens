@@ -269,6 +269,9 @@ h1 {
 .badge-verification-hand_verified { --tag-hue: var(--t-hand_verified); }
 .badge-verification-social_proof { --tag-hue: var(--t-social_proof); }
 .badge-verification-unverified { --tag-hue: var(--t-unverified); }
+.badge-review-status-verified { --tag-hue: var(--t-hand_verified); }
+.badge-review-status-unverified { --tag-hue: var(--t-unverified); }
+.badge-review-status-under-review { --tag-hue: var(--t-social_proof); }
 .badge-signup-none { --tag-hue: var(--t-none); }
 .badge-signup-required { --tag-hue: var(--t-required); }
 

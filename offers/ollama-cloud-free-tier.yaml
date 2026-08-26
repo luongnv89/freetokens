@@ -9,4 +9,5 @@ source_url: https://ollama.com/pricing
 verified_date: 2026-08-24
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: verified
 signup: required

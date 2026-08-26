@@ -4,9 +4,11 @@ title: Groq Free Tier — Free Rate-Limited API
 provider: Groq
 category: api_provider
 amount: Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)
-expiry_date: null
+expiry_date: 2026-08-25
+# Archived 2026-08-26 after curator review: no good models.
 source_url: https://console.groq.com/docs/rate-limits
 verified_date: 2026-08-23
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: verified
 signup: required

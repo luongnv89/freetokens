@@ -30,6 +30,7 @@ function offerText(overrides = {}, extra = "") {
     source_url: "https://example.com/offer",
     verified_date: "2026-01-01",
     verification: "hand_verified",
+    review_status: "unverified",
     signup: "none",
     ...overrides,
   };
@@ -78,6 +79,7 @@ describe("malformed input fails naming file and field", () => {
     ["missing required field", { signup: undefined }, /missing required fields: .*signup/],
     ["invalid date format", { expiry_date: "01/02/2026" }, /expiry_date must be a YYYY-MM-DD date/],
     ["out-of-enum category", { category: "crypto" }, /category must be one of/],
+    ["out-of-enum review_status", { review_status: "pending" }, /review_status must be one of/],
     ["future verified_date", { verified_date: "2099-01-01" }, /verified_date is in the future/],
     ["bad source_url", { source_url: "ftp://example.com" }, /source_url must be an http\(s\) URL/],
     ["indented line", {}, /nested\/indented lines are not allowed/, "  oops: yes\n"],
@@ -193,6 +195,7 @@ describe("data contract: schemas/offers-index.schema.json (#120)", () => {
       source_url: "https://example.com/offer",
       verified_date: "2026-01-01",
       verification: "hand_verified",
+      review_status: "unverified",
       signup: "none",
       status: "active",
     };

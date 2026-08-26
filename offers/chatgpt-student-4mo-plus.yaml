@@ -1,0 +1,13 @@
+# Verified 2026-08-27 against https://chatgpt.com/students/2026
+# "Four free months of ChatGPT Plus ... An $80 value for eligible U.S. college students. Claim by October 31."
+title: ChatGPT Student — 4 Months of Plus Free
+provider: OpenAI
+category: api_provider
+amount: 4 months of ChatGPT Plus (up to $80 value)
+expiry_date: 2026-10-31
+source_url: https://chatgpt.com/students/2026
+verified_date: 2026-08-26
+# Verification & sign-up tags (#97): checked against the official OpenAI page.
+verification: hand_verified
+review_status: unverified
+signup: required

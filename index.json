@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-08-26T20:37:33Z",
-  "count": 43,
-  "active_count": 37,
-  "expired_count": 6,
+  "generated_at": "2026-08-26T22:56:26Z",
+  "count": 44,
+  "active_count": 30,
+  "expired_count": 14,
   "offers": [
+    {
+      "slug": "chatgpt-student-4mo-plus",
+      "title": "ChatGPT Student — 4 Months of Plus Free",
+      "provider": "OpenAI",
+      "category": "api_provider",
+      "amount": "4 months of ChatGPT Plus (up to $80 value)",
+      "expiry_date": "2026-10-31",
+      "source_url": "https://chatgpt.com/students/2026",
+      "verified_date": "2026-08-26",
+      "verification": "hand_verified",
+      "review_status": "unverified",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "cline-ox-alpha-free",
       "title": "GLM-5.3 Flash (Ox Alpha) Free in Cline",
@@ -14,6 +28,7 @@
       "source_url": "https://x.com/cline/status/2092666316125864191",
       "verified_date": "2026-08-26",
       "verification": "hand_verified",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -27,6 +42,7 @@
       "source_url": "https://devin.ai/startups",
       "verified_date": "2026-08-25",
       "verification": "hand_verified",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -36,12 +52,13 @@
       "provider": "Aion Labs",
       "category": "api_provider",
       "amount": "20,000 tokens/day and 15 requests/minute",
-      "expiry_date": null,
+      "expiry_date": "2026-08-25",
       "source_url": "https://www.aionlabs.ai/docs/rate-limits/",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "gmi-cloud-minimax-week",
@@ -53,6 +70,7 @@
       "source_url": "https://www.gmicloud.ai/minimax-week",
       "verified_date": "2026-08-24",
       "verification": "hand_verified",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -66,6 +84,7 @@
       "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -75,12 +94,13 @@
       "provider": "Hugging Face",
       "category": "api_provider",
       "amount": "$0.10/month in Inference Provider credits for free users (subject to change)",
-      "expiry_date": null,
+      "expiry_date": "2026-08-25",
       "source_url": "https://huggingface.co/docs/inference-providers/pricing",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "kilo-code-free-models",
@@ -92,6 +112,7 @@
       "source_url": "https://kilo.ai/docs/gateway/authentication",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -105,6 +126,7 @@
       "source_url": "https://docs.llm7.io/limits",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -118,6 +140,7 @@
       "source_url": "https://ollama.com/pricing",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -127,12 +150,13 @@
       "provider": "OVHcloud",
       "category": "api_provider",
       "amount": "Anonymous access at 2 requests/minute per IP and per model",
-      "expiry_date": null,
+      "expiry_date": "2026-08-25",
       "source_url": "https://docs.ovhcloud.com/en/guides/public-cloud/ai-machine-learning/ai-endpoints-getting-started",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "siliconflow-free-models",
@@ -144,6 +168,7 @@
       "source_url": "https://siliconflow.cn/pricing",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -157,6 +182,7 @@
       "source_url": "https://docs.z.ai/guides/overview/pricing.md",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -165,13 +191,14 @@
       "title": "AIHubMix Free Model Catalog — 50 Models at $0",
       "provider": "AIHubMix",
       "category": "api_provider",
-      "amount": "50 models at $0/M input & output incl. Ox Alpha, Kimi K3, Gemini 3.7 Flash, GLM-5.2 — trial-grade, 429s possible",
-      "expiry_date": null,
+      "amount": "50 models at $0/M input & output, but only 10 free tries without recharge; higher quota requires recharging",
+      "expiry_date": "2026-08-25",
       "source_url": "https://aihubmix.com/models?filter=free",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "amazon-polly-free-tier",
@@ -183,6 +210,7 @@
       "source_url": "https://aws.amazon.com/polly/pricing/",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -196,6 +224,7 @@
       "source_url": "https://www.microsoft.com/en-us/bing/features/bing-image-creator",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -209,6 +238,7 @@
       "source_url": "https://cartesia.ai/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -218,12 +248,13 @@
       "provider": "Cerebras",
       "category": "api_provider",
       "amount": "$5 in free API credit after creating an account",
-      "expiry_date": null,
+      "expiry_date": "2026-08-25",
       "source_url": "https://www.cerebras.ai/inference",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "cloudflare-workers-ai-free-tier",
@@ -235,6 +266,7 @@
       "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -244,12 +276,13 @@
       "provider": "Cohere",
       "category": "api_provider",
       "amount": "Free trial key - 1,000 API calls/month across Chat, Embed, and Rerank endpoints",
-      "expiry_date": null,
+      "expiry_date": "2026-08-25",
       "source_url": "https://docs.cohere.com/docs/rate-limits",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "commandcode-ox-alpha-free",
@@ -261,6 +294,7 @@
       "source_url": "https://commandcode.ai/docs/resources/pricing-limits",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "expired"
     },
@@ -274,6 +308,7 @@
       "source_url": "https://cursor.com/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -287,6 +322,7 @@
       "source_url": "https://deepgram.com/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -300,6 +336,7 @@
       "source_url": "https://devin.ai/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -313,6 +350,7 @@
       "source_url": "https://elevenlabs.io/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -322,12 +360,13 @@
       "provider": "GitHub",
       "category": "coding",
       "amount": "2,000 completions + 50 chat requests per month",
-      "expiry_date": null,
+      "expiry_date": "2026-08-25",
       "source_url": "https://github.com/features/copilot/plans",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "google-ai-studio-image",
@@ -339,6 +378,7 @@
       "source_url": "https://aistudio.google.com/",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -352,6 +392,7 @@
       "source_url": "https://cloud.google.com/free/docs/free-cloud-features",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -361,12 +402,13 @@
       "provider": "Groq",
       "category": "api_provider",
       "amount": "Free rate-limited API access (e.g. 1K requests/day on GPT-OSS models)",
-      "expiry_date": null,
+      "expiry_date": "2026-08-25",
       "source_url": "https://console.groq.com/docs/rate-limits",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "hailuo-free-tier",
@@ -378,6 +420,7 @@
       "source_url": "https://hailuoai.video/doc/payment-policy.html",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -391,6 +434,7 @@
       "source_url": "https://leonardo.ai/pricing/",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -404,6 +448,7 @@
       "source_url": "https://cloud.mercuryagent.sh/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "expired"
     },
@@ -417,6 +462,7 @@
       "source_url": "https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -430,6 +476,7 @@
       "source_url": "https://x.com/NousResearch/status/2090899914700054780",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "expired"
     },
@@ -443,6 +490,7 @@
       "source_url": "https://openai.com/chatgpt/pricing/",
       "verified_date": "2026-08-23",
       "verification": "hand_verified",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -456,6 +504,7 @@
       "source_url": "https://x.com/opencode/status/2090544355824038300",
       "verified_date": "2026-08-23",
       "verification": "hand_verified",
+      "review_status": "unverified",
       "signup": "required",
       "status": "expired"
     },
@@ -469,6 +518,7 @@
       "source_url": "https://openrouter.ai/docs/api-reference/limits",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -482,6 +532,7 @@
       "source_url": "https://openrouter.ai/stealth/ox-alpha",
       "verified_date": "2026-08-23",
       "verification": "hand_verified",
+      "review_status": "verified",
       "signup": "required",
       "status": "expired"
     },
@@ -495,6 +546,7 @@
       "source_url": "https://pika.art/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -508,6 +560,7 @@
       "source_url": "https://runwayml.com/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -521,6 +574,7 @@
       "source_url": "https://api.venice.ai/api/v1/models",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "expired"
     },
@@ -534,6 +588,7 @@
       "source_url": "https://vercel.com/changelog/glm-5-2-free-for-eve-agents-through-august-27-via-blackbox-on-ai-gateway",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -547,6 +602,7 @@
       "source_url": "https://www.vidu.com/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
@@ -560,6 +616,7 @@
       "source_url": "https://talentgenius.io/chatgpt/request",
       "verified_date": "2026-08-22",
       "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     }

@@ -4,9 +4,11 @@ title: Cerebras Inference Free Trial
 provider: Cerebras
 category: api_provider
 amount: $5 in free API credit after creating an account
-expiry_date: null
+expiry_date: 2026-08-25
+# Archived 2026-08-26 after curator review: not enough good models.
 source_url: https://www.cerebras.ai/inference
 verified_date: 2026-08-23
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: verified
 signup: required

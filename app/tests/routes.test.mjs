@@ -127,6 +127,7 @@ describe("static route coverage (#123)", () => {
             source_url: "https://example.com",
             verified_date: "2026-08-01",
             verification: "unverified",
+            review_status: "unverified",
             signup: "none",
             status: "active",
           },

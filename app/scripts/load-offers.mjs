@@ -29,10 +29,12 @@ const REQUIRED_FIELDS = [
   "source_url",
   "verified_date",
   "verification",
+  "review_status",
   "signup",
 ];
 const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program"];
 const VERIFICATION_LEVELS = ["hand_verified", "social_proof", "unverified"];
+const REVIEW_STATUSES = ["verified", "unverified", "under-review"];
 const SIGNUP_MODES = ["none", "required"];
 const NULL_TOKENS = new Set(["null", "~", ""]);
 const DETAILS_DIRNAME = "details";
@@ -121,6 +123,11 @@ export function validateOffer(data, filename, today) {
   if (!VERIFICATION_LEVELS.includes(data.verification)) {
     throw new OfferError(
       `${filename}: verification must be one of ${VERIFICATION_LEVELS.join("|")}, got ${JSON.stringify(data.verification)}`,
+    );
+  }
+  if (!REVIEW_STATUSES.includes(data.review_status)) {
+    throw new OfferError(
+      `${filename}: review_status must be one of ${REVIEW_STATUSES.join("|")}, got ${JSON.stringify(data.review_status)}`,
     );
   }
   if (!SIGNUP_MODES.includes(data.signup)) {
@@ -268,6 +275,7 @@ export function buildIndex(offers, now = new Date()) {
       source_url: o.source_url,
       verified_date: o.verified_date,
       verification: o.verification,
+      review_status: o.review_status,
       signup: o.signup,
       status: o.status,
     })),

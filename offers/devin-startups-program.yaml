@@ -10,4 +10,5 @@ expiry_date: null
 source_url: https://devin.ai/startups
 verified_date: 2026-08-25
 verification: hand_verified
+review_status: verified
 signup: required

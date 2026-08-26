@@ -68,6 +68,10 @@ export interface Offer {
    */
   verification: "hand_verified" | "social_proof" | "unverified";
   /**
+   * Curator testing state, separate from evidence verification and build-time expiry.
+   */
+  review_status: "verified" | "unverified" | "under-review";
+  /**
    * Whether claiming needs an account.
    */
   signup: "none" | "required";

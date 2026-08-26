@@ -11,6 +11,7 @@ import { FILTER_DIMENSIONS, configureAnalytics, resetAnalyticsForTests } from ".
 import {
   SIGNUP_LABELS,
   VERIFICATION_LABELS,
+  REVIEW_STATUS_LABELS,
   expiredOffers,
   type OffersIndex,
 } from "./lib/offers";
@@ -33,6 +34,7 @@ function offer(overrides: Partial<OfferEntry> = {}): OfferEntry {
     source_url: "https://example.com/offer",
     verified_date: "2026-08-01",
     verification: "hand_verified",
+    review_status: "unverified",
     signup: "none",
     status: "active",
     ...overrides,
@@ -280,6 +282,7 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
       "Sign-up",
       "Ends",
       "Verification",
+      "Review status",
       "Last checked",
     ]) {
       expect(markup).toContain(`<th scope="row">${label}</th>`);
@@ -426,8 +429,10 @@ describe("no-signup and hand-verified honesty badges (#111)", () => {
     // Status line + details table = two badge instances per dimension.
     expect((markup.match(/badge-signup-none\b/g) ?? []).length).toBe(2);
     expect((markup.match(/badge-verification-hand_verified\b/g) ?? []).length).toBe(2);
+    expect((markup.match(/badge-review-status-unverified\b/g) ?? []).length).toBe(2);
     expect(markup).toContain(">no sign-up</span>");
     expect(markup).toContain(">hand-verified</span>");
+    expect(markup).toContain(`>${REVIEW_STATUS_LABELS.unverified}</span>`);
   });
 
   it("gives every verification state a pairwise-distinct label and CSS marker", () => {

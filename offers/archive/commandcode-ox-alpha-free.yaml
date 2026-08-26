@@ -10,4 +10,5 @@ source_url: https://commandcode.ai/docs/resources/pricing-limits
 verified_date: 2026-08-23
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: unverified
 signup: required

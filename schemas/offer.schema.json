@@ -14,6 +14,7 @@
     "source_url",
     "verified_date",
     "verification",
+    "review_status",
     "signup"
   ],
   "properties": {
@@ -58,6 +59,11 @@
       "type": "string",
       "enum": ["hand_verified", "social_proof", "unverified"],
       "description": "How the listing was checked: hand_verified = confirmed by the maintainer on the official provider page; social_proof = corroborated by official-site info plus social proof, not personally verified; unverified = only social-media proofs, no official-website confirmation."
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["verified", "unverified", "under-review"],
+      "description": "Curator testing state: verified = reviewed firsthand, unverified = not reviewed firsthand, under-review = currently being tested. This is separate from verification evidence level and offer expiry."
     },
     "signup": {
       "type": "string",

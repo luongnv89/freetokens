@@ -14,6 +14,7 @@ import { TAG_ICONS } from "../lib/tagIcons"
 import { ftFormatCount } from "../lib/analytics"
 import type { FilterDimension } from "../lib/urlState"
 import { Badge } from "./ui/badge"
+import { ReviewStatusBadge } from "./Badge"
 
 // Tag glyphs ship as ONE inline <symbol> sprite per page, referenced by
 // <use> — mirrors build.py _icon_sprite/_SYMBOL so rows keep the same
@@ -155,6 +156,7 @@ export function OfferRow({
             pressed={pressed.verification === offer.verification}
             onToggle={onToggleTag}
           />
+          <ReviewStatusBadge offer={offer} />
           <TagButton
             dimension="signup"
             value={offer.signup}

@@ -27,7 +27,7 @@ describe("claimSteps", () => {
 describe("offerMetaDescription", () => {
   it("uses the generic amount/provider blurb without a summary", () => {
     expect(offerMetaDescription(offer, undefined)).toBe(
-      "$10 credits from Example Co — free AI credits, tagged by verification level and sign-up need.",
+      "$10 credits from Example Co — free AI credits, tagged by review status, verification level, and sign-up need.",
     )
   })
 

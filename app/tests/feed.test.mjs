@@ -20,6 +20,7 @@ function offer(slug, overrides = {}) {
     source_url: "https://example.com/offer",
     verified_date: "2026-08-21",
     verification: "social_proof",
+    review_status: "unverified",
     signup: "none",
     status: "active",
     ...overrides,

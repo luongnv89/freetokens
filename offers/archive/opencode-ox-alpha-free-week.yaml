@@ -9,4 +9,5 @@ source_url: https://x.com/opencode/status/2090544355824038300
 verified_date: 2026-08-23
 # Verification & sign-up tags (#97): conservative defaults.
 verification: hand_verified
+review_status: unverified
 signup: required

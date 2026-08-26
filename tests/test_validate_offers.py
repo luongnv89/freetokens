@@ -31,6 +31,7 @@ def offer_text(**overrides):
         "source_url": "https://example.com/offer",
         "verified_date": dt.date.today().isoformat(),
         "verification": "social_proof",
+        "review_status": "unverified",
         "signup": "required",
     }
     data.update(overrides)
@@ -96,6 +97,17 @@ class ValidateDirTests(unittest.TestCase):
             offers_dir = self._write(tmp, "broken.yaml", text)
             with self.assertRaisesRegex(
                 validate_offers.build.OfferError, r"broken\.yaml.*provider"
+            ):
+                validate_offers.validate_offers_dir(offers_dir)
+
+    def test_invalid_review_status_names_file_and_field(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = self._write(
+                tmp, "review-status.yaml", offer_text(review_status="pending")
+            )
+            with self.assertRaisesRegex(
+                validate_offers.build.OfferError,
+                r"review-status\.yaml.*review_status must be one of",
             ):
                 validate_offers.validate_offers_dir(offers_dir)
 

@@ -55,6 +55,7 @@
         "source_url",
         "verified_date",
         "verification",
+        "review_status",
         "signup",
         "status"
       ],
@@ -103,6 +104,11 @@
           "type": "string",
           "enum": ["hand_verified", "social_proof", "unverified"],
           "description": "How the listing was checked."
+        },
+        "review_status": {
+          "type": "string",
+          "enum": ["verified", "unverified", "under-review"],
+          "description": "Curator testing state, separate from evidence verification and build-time expiry."
         },
         "signup": {
           "type": "string",

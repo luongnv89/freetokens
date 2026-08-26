@@ -6,6 +6,7 @@ import {
   CATEGORY_LABELS,
   SIGNUP_LABELS,
   VERIFICATION_LABELS,
+  REVIEW_STATUS_LABELS,
   activeOffers,
   type OffersIndex,
 } from "./lib/offers";
@@ -72,8 +73,8 @@ describe("App home listing prerender", () => {
     const expiring = offers.find((o) => o.expiry_date !== null);
     if (!expiring) return;
     const rowStart = markup.indexOf(`id="offer-${expiring.slug}"`);
-    expect(markup.slice(rowStart, rowStart + 2500)).toMatch(
-      /<time [Dd]ate[Tt]ime="2026-09-06">/,
+    expect(markup.slice(rowStart, rowStart + 2500)).toContain(
+      `<time dateTime="${expiring.expiry_date}">`,
     );
   });
 
@@ -110,12 +111,13 @@ describe("App tag icon sprite (lucide mapping)", () => {
     expect(markup.match(/class="tag-sprite"/g)?.length).toBe(1);
   });
 
-  it("renders one aria-hidden glyph per honesty tag", () => {
-    // Three tags per row. ChipGlyph also paints toolbar SVGs with the same
-    // class, so count only glyphs inside the listing / [data-ft-tag].
+  it("renders one aria-hidden glyph per visible tag", () => {
+    // Four visible tags per row, including review status. ChipGlyph also
+    // paints toolbar SVGs with the same class, so count only glyphs inside
+    // the listing / [data-ft-tag].
     const grid = markup.match(/<ol class="grid" id="ft-grid"[\s\S]*?<\/ol>/)?.[0] ?? "";
     expect(grid.match(/<svg class="tag-i" aria-hidden="true"/g)?.length).toBe(
-      offers.length * 3,
+      offers.length * 4,
     );
     expect(grid.match(/data-ft-tag="/g)?.length).toBe(offers.length * 3);
   });
@@ -151,6 +153,7 @@ function offerEntry(overrides: Partial<Offer> = {}): Offer {
     source_url: "https://example.com/offer",
     verified_date: "2026-08-01",
     verification: "hand_verified",
+    review_status: "unverified",
     signup: "none",
     status: "active",
     ...overrides,
@@ -188,6 +191,8 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
       expect(row).toContain(`>${CATEGORY_LABELS[offer.category]}<`);
       expect(row).toContain(`badge-verification-${offer.verification}`);
       expect(row).toContain(`>${VERIFICATION_LABELS[offer.verification]}<`);
+      expect(row).toContain(`badge-review-status-${offer.review_status}`);
+      expect(row).toContain(`>${REVIEW_STATUS_LABELS[offer.review_status]}<`);
       expect(row).toContain(`badge-signup-${offer.signup}`);
       expect(row).toContain(`>${SIGNUP_LABELS[offer.signup]}<`);
       if (offer.expiry_date) {

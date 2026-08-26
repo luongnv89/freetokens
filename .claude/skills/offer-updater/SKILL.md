@@ -34,7 +34,7 @@ git fetch origin && git pull --rebase origin "$branch"
    contains.
 2. **Verify** on the web that the offer is still live and the terms match —
    keeping a full **reference trace** of every URL visited for evidence.
-3. **Normalize** them into the frozen seven-field schema and pick a slug,
+3. **Normalize** them into the frozen ten-field schema and pick a slug,
    writing the reference trace into `offers/details/<slug>.json`.
 4. **Validate** the draft with the deterministic helper in this directory.
 5. **Present** the git diff of exactly what would change (including the reference trace).
@@ -51,12 +51,15 @@ git fetch origin && git pull --rebase origin "$branch"
 | `expiry_date`   | `YYYY-MM-DD` the offer stops being claimable, or explicit `null` if ongoing. |
 | `source_url`    | Official provider page describing the offer (`http(s)://`).           |
 | `verified_date` | Date YOU verified the offer is live, `YYYY-MM-DD`, never null, never future. |
+| `verification` | Evidence level: `hand_verified`, `social_proof`, or `unverified`. |
+| `review_status` | Curator testing state: `verified`, `unverified`, or `under-review`. |
+| `signup` | Whether claiming needs an account: `none` or `required`. |
 
 ## Pipeline
 
 ### Step 1 — Extract
 
-Read the screenshot/text and collect all seven fields. Hard rules:
+Read the screenshot/text and collect all ten fields. Hard rules:
 
 - **Never guess.** A value you cannot read or confirm stays unknown; it is
   never approximated, inferred from similar providers, or copied from stale
@@ -73,7 +76,7 @@ the input says so — signup URL, promo code, CLI command, plan tier, eligibilit
 restrictions (region/student/new-user), or usage limits. Record them verbatim
 in the Step 5 presentation as a "How to claim" list; they feed the optional
 `offers/details/<slug>.json` `claim_steps` enrichment and the tracking issue
-body. Claim instructions never enter the seven YAML fields — they are
+body. Claim instructions never enter the ten YAML fields — they are
 supporting evidence only, and like everything else they are never invented:
 if the input is silent on how to claim, omit the section entirely.
 
@@ -181,6 +184,9 @@ amount: ...
 expiry_date: null        # or YYYY-MM-DD
 source_url: https://...
 verified_date: YYYY-MM-DD
+verification: hand_verified
+review_status: under-review
+signup: required
 ```
 
 The comment header is mandatory curation evidence: quote the sentence(s) from

@@ -199,7 +199,7 @@ try {
       markup: await renderRoute({ page: "home" }),
       title: "Free AI Credits",
       description:
-        "Every currently-claimable free AI credit offer, labeled per offer with its verification level and sign-up need, on one fast page.",
+        "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
       page: "home",
     }),
   );

@@ -9,4 +9,5 @@ source_url: https://openrouter.ai/stealth/ox-alpha
 verified_date: 2026-08-23
 # Verification & sign-up tags (#97): conservative defaults.
 verification: hand_verified
+review_status: verified
 signup: required

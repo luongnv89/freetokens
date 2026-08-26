@@ -3,13 +3,16 @@
 # card shows Input: $ 0 /M · Output: $ 0 /M)
 # Provider fine print: free model resources are limited, trial use only,
 # stability not guaranteed — 429 errors possible.
+# Archived 2026-08-26 after a firsthand test found only 10 tries without
+# recharging; increasing the free quota requires a recharge (see screenshot).
 title: AIHubMix Free Model Catalog — 50 Models at $0
 provider: AIHubMix
 category: api_provider
-amount: 50 models at $0/M input & output incl. Ox Alpha, Kimi K3, Gemini 3.7 Flash, GLM-5.2 — trial-grade, 429s possible
-expiry_date: null
+amount: 50 models at $0/M input & output, but only 10 free tries without recharge; higher quota requires recharging
+expiry_date: 2026-08-25
 source_url: https://aihubmix.com/models?filter=free
 verified_date: 2026-08-23
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: verified
 signup: required

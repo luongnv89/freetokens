@@ -47,6 +47,9 @@ fits you.
    expiry_date: 2026-12-31  # null if ongoing
    source_url: https://example.com/offer
    verified_date: 2026-08-22
+   verification: hand_verified
+   review_status: under-review
+   signup: required
    ```
 
    Optionally, enrich the offer's detail card with

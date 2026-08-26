@@ -4,9 +4,11 @@ title: Hugging Face Inference Provider Credits
 provider: Hugging Face
 category: api_provider
 amount: $0.10/month in Inference Provider credits for free users (subject to change)
-expiry_date: null
+expiry_date: 2026-08-25
+# Archived 2026-08-26 after curator review: not worth.
 source_url: https://huggingface.co/docs/inference-providers/pricing
 verified_date: 2026-08-24
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: verified
 signup: required

@@ -98,12 +98,19 @@ REQUIRED_FIELDS = (
     "source_url",
     "verified_date",
     "verification",
+    "review_status",
     "signup",
 )
 # Per-offer honesty tags (#97): the site no longer claims blanket
 # "hand-verified / no sign-up walls" status. Every offer states exactly how
 # its listing was checked and whether claiming needs an account.
 VERIFICATION_LEVELS = ("hand_verified", "social_proof", "unverified")
+REVIEW_STATUSES = ("verified", "unverified", "under-review")
+REVIEW_STATUS_LABELS = {
+    "verified": "verified",
+    "unverified": "unverified",
+    "under-review": "under review",
+}
 VERIFICATION_LABELS = {
     "hand_verified": "hand-verified",
     "social_proof": "social proof",
@@ -428,6 +435,12 @@ def validate_offer(data: dict, filename: str) -> dict:
             f"{'|'.join(VERIFICATION_LEVELS)}, got {data['verification']!r}"
         )
 
+    if data["review_status"] not in REVIEW_STATUSES:
+        raise OfferError(
+            f"{filename}: review_status must be one of "
+            f"{'|'.join(REVIEW_STATUSES)}, got {data['review_status']!r}"
+        )
+
     if data["signup"] not in SIGNUP_MODES:
         raise OfferError(
             f"{filename}: signup must be one of {'|'.join(SIGNUP_MODES)}, "
@@ -716,6 +729,7 @@ def build_index(offers: list, today: dt.date | None = None) -> dict:
                 "source_url": o["source_url"],
                 "verified_date": o["verified_date"].isoformat(),
                 "verification": o["verification"],
+                "review_status": o["review_status"],
                 "signup": o["signup"],
                 "status": o["status"],
             }

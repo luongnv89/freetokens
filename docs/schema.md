@@ -7,7 +7,7 @@ it becomes the offer's identity in the JSON index and URLs.
 
 ## Fields
 
-Exactly seven fields. All are required; unknown fields are rejected by the
+Exactly ten fields. All are required; unknown fields are rejected by the
 build validator.
 
 | Field           | Type                  | Required | Nullability | Description |
@@ -19,6 +19,9 @@ build validator.
 | `expiry_date`   | date or null          | yes      | **yes**     | Date the offer stops being claimable, `YYYY-MM-DD`. `null` = ongoing offer with no fixed end date. |
 | `source_url`    | URL string            | yes      | no          | Official provider page where the offer is described. Must start with `http://` or `https://`. |
 | `verified_date` | date                  | yes      | no          | Date the curator last confirmed the offer is live and claimable, `YYYY-MM-DD`. |
+| `verification` | enum (string)         | yes      | no          | Evidence level: `hand_verified`, `social_proof`, or `unverified`. |
+| `review_status` | enum (string)        | yes      | no          | Curator testing state: `verified`, `unverified`, or `under-review`. |
+| `signup`       | enum (string)         | yes      | no          | Whether claiming needs an account: `none` or `required`. |
 
 ## Conventions
 
@@ -47,6 +50,9 @@ amount: $300 in credits (90 days)
 expiry_date: null            # ongoing program; per-account window is 90 days
 source_url: https://cloud.google.com/free/docs/free-cloud-features
 verified_date: 2026-08-21
+verification: hand_verified
+review_status: verified
+signup: required
 ```
 
 ## Validation

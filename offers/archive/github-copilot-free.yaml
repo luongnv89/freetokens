@@ -4,9 +4,11 @@ title: GitHub Copilot Free
 provider: GitHub
 category: coding
 amount: 2,000 completions + 50 chat requests per month
-expiry_date: null
+expiry_date: 2026-08-25
+# Archived 2026-08-26 after curator review: not worth.
 source_url: https://github.com/features/copilot/plans
 verified_date: 2026-08-23
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: verified
 signup: required

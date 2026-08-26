@@ -84,6 +84,9 @@ whose `expiry_date` has passed is flagged on the **next deploy** (a push to
 Since v2.0 (#25) expiry works as **retain-and-flag**: every validated offer
 stays in the generated `index.json`, each entry stamped with a build-time
 `"status": "active" | "expired"` (null-expiry offers are always `active`).
+Each entry also carries a curator `review_status`: `verified`, `unverified`,
+or `under-review`; this testing state is independent of expiry and evidence
+level.
 What changes between rebuilds is only visibility:
 
 - the home list renders **active** offers exactly as before;

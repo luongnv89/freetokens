@@ -4,9 +4,11 @@ title: Aion Labs Free API Tier
 provider: Aion Labs
 category: api_provider
 amount: 20,000 tokens/day and 15 requests/minute
-expiry_date: null
+expiry_date: 2026-08-25
+# Archived 2026-08-26 after curator review: not worth for coding.
 source_url: https://www.aionlabs.ai/docs/rate-limits/
 verified_date: 2026-08-24
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: verified
 signup: required

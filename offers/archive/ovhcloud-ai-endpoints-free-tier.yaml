@@ -4,9 +4,11 @@ title: OVHcloud AI Endpoints Free Tier
 provider: OVHcloud
 category: api_provider
 amount: Anonymous access at 2 requests/minute per IP and per model
-expiry_date: null
+expiry_date: 2026-08-25
+# Archived 2026-08-26 after curator review: not worth.
 source_url: https://docs.ovhcloud.com/en/guides/public-cloud/ai-machine-learning/ai-endpoints-getting-started
 verified_date: 2026-08-24
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
+review_status: verified
 signup: required
