@@ -206,7 +206,23 @@ export async function loadDetails(offersDir, validSlugs) {
   const detailsDir = path.join(offersDir, DETAILS_DIRNAME);
   const details = {};
   if (!existsSync(detailsDir)) return details;
-  const paths = (await readdir(detailsDir)).filter((f) => f.endsWith(".json")).sort();
+  // Collect detail files from the root details/ and any subdirectories
+  const entries = await readdir(detailsDir);
+  const subdirs = [];
+  for (const f of entries) {
+    if (f === "." || f === "..") continue;
+    const st = await lstat(path.join(detailsDir, f));
+    if (st.isDirectory()) subdirs.push(f);
+  }
+  const paths = [
+    ...entries.filter((f) => f.endsWith(".json") && !subdirs.includes(f)).sort(),
+    ...(await Promise.all(
+      subdirs.map(async (subdir) => {
+        const subEntries = await readdir(path.join(detailsDir, subdir));
+        return subEntries.filter((f) => f.endsWith(".json")).sort();
+      }),
+    )).flat(),
+  ];
   for (const name of paths) {
     const full = path.join(detailsDir, name);
     const slug = name.replace(/\.json$/, "");
