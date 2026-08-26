@@ -138,11 +138,24 @@ describe("generated artifacts vs committed index.json", () => {
 
   it("detail JSON passes through unchanged", async () => {
     const detailsOut = path.join(globalThis.__ftOut, "details");
-    const { readdir } = await import("node:fs/promises");
-    const files = await readdir(detailsOut);
+    const fs = await import("node:fs/promises");
+    const files = await fs.readdir(detailsOut);
     expect(files.length).toBeGreaterThan(0);
     for (const f of files) {
-      const src = await readFile(path.join(OFFERS_DIR, "details", f), "utf8");
+      // Find source: try root details/ first, then subdirectories
+      let srcPath = path.join(OFFERS_DIR, "details", f);
+      let srcExists = false;
+      try { await fs.access(srcPath); srcExists = true; } catch {}
+      if (!srcExists) {
+        const subEntries = await fs.readdir(path.join(OFFERS_DIR, "details"));
+        for (const subdir of subEntries) {
+          if (subdir === "." || subdir === "..") continue;
+          const candidate = path.join(OFFERS_DIR, "details", subdir, f);
+          try { await fs.access(candidate); srcPath = candidate; srcExists = true; break; } catch {}
+        }
+      }
+      expect(srcExists).toBe(true);
+      const src = await readFile(srcPath, "utf8");
       const dst = await readFile(path.join(detailsOut, f), "utf8");
       expect(JSON.parse(dst)).toEqual(JSON.parse(src));
     }

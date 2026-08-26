@@ -109,9 +109,24 @@ def check_slug(slug: str, filename: str) -> None:
         )
 
 
+def _yaml_paths(offers_dir: str) -> list:
+    """Recursively find .yaml/.yml files under offers_dir."""
+    entries = sorted(os.listdir(offers_dir))
+    paths = sorted(
+        os.path.join(offers_dir, f)
+        for f in entries
+        if f.endswith(".yaml") or f.endswith(".yml")
+    )
+    for entry in entries:
+        full = os.path.join(offers_dir, entry)
+        if os.path.isdir(full) and entry not in (".", "..", "details"):
+            for sub in _yaml_paths(full):
+                paths.append(sub)
+    return paths
+
+
 def validate_offers_dir(offers_dir: str) -> list:
-    paths = sorted(_glob.glob(os.path.join(offers_dir, "*.yaml")))
-    paths += sorted(_glob.glob(os.path.join(offers_dir, "*.yml")))
+    paths = _yaml_paths(offers_dir)
     slugs = {}
     for path in paths:
         slug = os.path.splitext(os.path.basename(path))[0]

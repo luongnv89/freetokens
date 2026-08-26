@@ -215,16 +215,20 @@ export async function loadDetails(offersDir, validSlugs) {
     if (st.isDirectory()) subdirs.push(f);
   }
   const paths = [
-    ...entries.filter((f) => f.endsWith(".json") && !subdirs.includes(f)).sort(),
+    ...entries
+      .filter((f) => f.endsWith(".json") && !subdirs.includes(f))
+      .map((f) => ({ dir: detailsDir, name: f })),
     ...(await Promise.all(
       subdirs.map(async (subdir) => {
         const subEntries = await readdir(path.join(detailsDir, subdir));
-        return subEntries.filter((f) => f.endsWith(".json")).sort();
+        return subEntries
+          .filter((f) => f.endsWith(".json"))
+          .map((f) => ({ dir: path.join(detailsDir, subdir), name: f }));
       }),
     )).flat(),
   ];
-  for (const name of paths) {
-    const full = path.join(detailsDir, name);
+  for (const { dir, name } of paths) {
+    const full = path.join(dir, name);
     const slug = name.replace(/\.json$/, "");
     if (!validSlugs.includes(slug)) {
       throw new OfferError(

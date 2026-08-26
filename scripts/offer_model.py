@@ -452,9 +452,24 @@ def validate_offer(data: dict, filename: str) -> dict:
     return data
 
 
+def _yaml_paths(offers_dir: str) -> list:
+    """Yield .yaml/.yml paths from offers_dir and any subdirectories."""
+    entries = os.listdir(offers_dir)
+    paths = sorted(
+        os.path.join(offers_dir, f)
+        for f in entries
+        if f.endswith(".yaml") or f.endswith(".yml")
+    )
+    for entry in sorted(entries):
+        full = os.path.join(offers_dir, entry)
+        if os.path.isdir(full) and entry not in (".", "..", DETAILS_DIRNAME):
+            for sub in _yaml_paths(full):
+                paths.append(sub)
+    return paths
+
+
 def load_offers(offers_dir: str) -> list:
-    paths = sorted(glob.glob(os.path.join(offers_dir, "*.yaml")))
-    paths += sorted(glob.glob(os.path.join(offers_dir, "*.yml")))
+    paths = _yaml_paths(offers_dir)
     offers = []
     for path in paths:
         slug = os.path.splitext(os.path.basename(path))[0]
@@ -613,6 +628,24 @@ def validate_detail(data, filename: str) -> dict:
     return detail
 
 
+def _json_paths(details_dir: str) -> list:
+    """Yield .json paths from details_dir and any subdirectories."""
+    if not os.path.isdir(details_dir):
+        return []
+    entries = os.listdir(details_dir)
+    paths = sorted(
+        os.path.join(details_dir, f)
+        for f in entries
+        if f.endswith(".json") and os.path.isfile(os.path.join(details_dir, f))
+    )
+    for entry in sorted(entries):
+        full = os.path.join(details_dir, entry)
+        if os.path.isdir(full) and entry not in (".", ".."):
+            for sub in _json_paths(full):
+                paths.append(sub)
+    return paths
+
+
 def load_details(offers_dir: str, valid_slugs) -> dict:
     """Load offers/details/<slug>.json keyed by slug; {} when none exist.
 
@@ -620,7 +653,7 @@ def load_details(offers_dir: str, valid_slugs) -> dict:
     renamed or deleted offer can never leave stale detail content behind.
     """
     details_dir = os.path.join(offers_dir, DETAILS_DIRNAME)
-    paths = sorted(glob.glob(os.path.join(details_dir, "*.json")))
+    paths = _json_paths(details_dir)
     slugs = set(valid_slugs)
     details = {}
     for path in paths:
