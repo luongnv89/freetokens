@@ -4,7 +4,7 @@ title: Ox Alpha Free on OpenRouter
 provider: OpenRouter
 category: api_provider
 amount: Free model access - $0 per million input and output tokens on stealth/ox-alpha during the stealth preview
-expiry_date: null
+expiry_date: 2026-08-24
 source_url: https://openrouter.ai/stealth/ox-alpha
 verified_date: 2026-08-23
 # Verification & sign-up tags (#97): conservative defaults.

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-25T22:00:30Z",
+  "generated_at": "2026-08-26T17:22:42Z",
   "count": 43,
-  "active_count": 43,
-  "expired_count": 0,
+  "active_count": 36,
+  "expired_count": 7,
   "offers": [
     {
       "slug": "devin-startups-program",
@@ -218,12 +218,12 @@
       "provider": "Cline",
       "category": "coding",
       "amount": "Free model access, rate limited",
-      "expiry_date": null,
+      "expiry_date": "2026-08-24",
       "source_url": "https://x.com/cline/status/2090854216399220985",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "cloudflare-workers-ai-free-tier",
@@ -257,12 +257,12 @@
       "provider": "Command Code",
       "category": "coding",
       "amount": "Free model access - $0/M input, output and cache reads on every plan while the stealth preview lasts (requires >=$1 credit balance in account to start a session)",
-      "expiry_date": null,
+      "expiry_date": "2026-08-24",
       "source_url": "https://commandcode.ai/docs/resources/pricing-limits",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "cursor-hobby-plan",
@@ -400,12 +400,12 @@
       "provider": "Mercury Cloud (Cosmic Stack)",
       "category": "api_provider",
       "amount": "$0/mo free tier — Ox Alpha model free without limit; general free plan includes 5,000 Mercury Credits/month",
-      "expiry_date": null,
+      "expiry_date": "2026-08-24",
       "source_url": "https://cloud.mercuryagent.sh/pricing",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "mistral-experiment-free-tier",
@@ -426,12 +426,12 @@
       "provider": "Nous Research",
       "category": "api_provider",
       "amount": "Free model access via Nous Portal - claimed 1 quadrillion tokens/day capacity, limited time",
-      "expiry_date": null,
+      "expiry_date": "2026-08-24",
       "source_url": "https://x.com/NousResearch/status/2090899914700054780",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openai-codex-free-tier",
@@ -452,12 +452,12 @@
       "provider": "OpenCode",
       "category": "coding",
       "amount": "Free model access, near unlimited usage (rate limited)",
-      "expiry_date": "2026-08-27",
+      "expiry_date": "2026-08-24",
       "source_url": "https://x.com/opencode/status/2090544355824038300",
       "verified_date": "2026-08-23",
       "verification": "hand_verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openrouter-free-models",
@@ -478,12 +478,12 @@
       "provider": "OpenRouter",
       "category": "api_provider",
       "amount": "Free model access - $0 per million input and output tokens on stealth/ox-alpha during the stealth preview",
-      "expiry_date": null,
+      "expiry_date": "2026-08-24",
       "source_url": "https://openrouter.ai/stealth/ox-alpha",
       "verified_date": "2026-08-23",
       "verification": "hand_verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "pika-free-plan",
@@ -517,12 +517,12 @@
       "provider": "Venice AI",
       "category": "api_provider",
       "amount": "Free model access - stealth-ox-alpha at $0/M input, output and cache reads",
-      "expiry_date": null,
+      "expiry_date": "2026-08-24",
       "source_url": "https://api.venice.ai/api/v1/models",
       "verified_date": "2026-08-23",
       "verification": "social_proof",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "vercel-glm-5-2-free-eve-agents",

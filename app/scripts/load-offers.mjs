@@ -10,7 +10,7 @@
 //
 // Usage: node scripts/load-offers.mjs [--offers-dir ../offers] [--out src/data]
 
-import { readdir, readFile, writeFile, mkdir, rm } from "node:fs/promises";
+import { readdir, readFile, writeFile, mkdir, rm, lstat } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -158,13 +158,32 @@ export function todayISO(now = new Date()) {
 }
 
 export async function loadOffers(offersDir, today = todayISO()) {
+  // Recurse into subdirectories (e.g. offers/archive/) so archived offers
+  // are loaded alongside live ones.
   const entries = await readdir(offersDir);
-  const paths = entries
-    .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
-    .sort();
+  // Identify subdirectories (skip ., .., and details/)
+  const subdirs = [];
+  for (const f of entries) {
+    if (f === "." || f === ".." || f === DETAILS_DIRNAME) continue;
+    const st = await lstat(path.join(offersDir, f));
+    if (st.isDirectory()) subdirs.push(f);
+  }
+  const candidates = [
+    ...entries
+      .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
+      .map((f) => ({ dir: offersDir, name: f })),
+    ...(await Promise.all(
+      subdirs.map(async (subdir) => {
+        const subEntries = await readdir(path.join(offersDir, subdir));
+        return subEntries
+          .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
+          .map((f) => ({ dir: path.join(offersDir, subdir), name: f }));
+      }),
+    )).flat(),
+  ];
   const offers = [];
-  for (const name of paths) {
-    const full = path.join(offersDir, name);
+  for (const { dir, name } of candidates) {
+    const full = path.join(dir, name);
     const slug = name.replace(/\.(yaml|yml)$/, "");
     const data = parseOfferText(await readFile(full, "utf8"), full);
     const offer = validateOffer(data, full, today);

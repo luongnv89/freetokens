@@ -55,7 +55,13 @@ describe("ArchivePage (#26 parity)", () => {
   });
 
   it("renders the empty state when nothing has expired", () => {
-    const markup = renderToStaticMarkup(<ArchivePage index={index} />);
+    const emptyIndex: OffersIndex = {
+      ...index,
+      offers: index.offers.filter((o) => o.status !== "expired"),
+      expired_count: 0,
+      active_count: index.offers.filter((o) => o.status !== "expired").length,
+    };
+    const markup = renderToStaticMarkup(<ArchivePage index={emptyIndex} />);
     expect(markup).toContain("The archive is empty");
     expect(markup).toContain('class="glyph"');
     expect(markup).toContain('href="./index.html"');
