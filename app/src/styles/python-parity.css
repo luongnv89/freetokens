@@ -8,6 +8,8 @@
   --gray: var(--color-muted);
   --green: var(--color-accent);
   --hairline: var(--color-hairline);
+  --archive-bg: var(--color-muted);
+  --archive-bg-soft: color-mix(in srgb, var(--color-muted) 12%, var(--color-paper));
 
   /* Tag hues. Each clears WCAG AA in BOTH painted states a tag has: as text
      over the 7% tint it sits on at rest, and under white text when filled on
@@ -548,6 +550,16 @@ a:focus-visible {
 [data-page="archive"] .card,
 [data-page="archive"] .empty {
   animation: none;
+}
+
+/* Archive page: warm tinted background to signal expired status. */
+[data-page="archive"] {
+  background: var(--archive-bg-soft);
+}
+
+/* Archive cards get a slightly muted paper background. */
+[data-page="archive"] .card {
+  background: color-mix(in srgb, var(--archive-bg) 15%, var(--paper));
 }
 
 @keyframes rise {

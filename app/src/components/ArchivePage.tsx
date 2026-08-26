@@ -1,6 +1,5 @@
-import { expiredOffers, humanDate, type OffersIndex, type Offer } from "../lib/offers"
-import { CategoryBadge, ExpiredBadge, SignupBadge, VerificationBadge } from "./Badge"
-import { IconSprite } from "./OfferRow"
+import { expiredOffers, type OffersIndex } from "../lib/offers"
+import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
 
@@ -26,56 +25,20 @@ function ArchiveEmptyGlyph() {
   )
 }
 
-function ArchivedCard({ offer, index }: { offer: Offer; index: number }) {
-  const detailHref = `offers/${offer.slug}.html`
-  return (
-    <li style={{ "--i": index } as React.CSSProperties}>
-      <article className="card" data-category={offer.category}>
-        <div className="card-top">
-          <CategoryBadge offer={offer} />
-          <VerificationBadge offer={offer} />
-          <SignupBadge offer={offer} />
-          <ExpiredBadge />
-        </div>
-        <h2 className="card-title">
-          <a href={offer.source_url} target="_blank" rel="noopener noreferrer">
-            {offer.title} <span className="ext" aria-hidden="true">&#8599;</span>
-          </a>
-        </h2>
-        <p className="amount">{offer.amount}</p>
-        <p className="prov">
-          {offer.provider} &middot; expired{" "}
-          {offer.expiry_date ? (
-            <time dateTime={offer.expiry_date}>{humanDate(offer.expiry_date)}</time>
-          ) : (
-            "unknown"
-          )}
-        </p>
-        <div className="card-actions">
-          {/* Expired offers keep their detail page too (#60): the archive
-              links to the retained record, not just out. */}
-          <a className="detail-btn" href={detailHref}>
-            View details
-          </a>
-        </div>
-      </article>
-    </li>
-  )
-}
-
 /**
- * The expired-offer archive (F11 / #26), mirroring build.py
- * render_archive_html: newest expirations first, plain crawlable markup,
- * no client script behavior beyond hydration parity.
+ * The expired-offer archive (F11 / #26): same listing style as home page
+ * but with a muted background tint to signal expired status. Newest
+ * expirations first, plain crawlable markup.
  */
 export default function ArchivePage({ index }: { index: OffersIndex }) {
   const archived = expiredOffers(index)
+  const buildDay = index.generated_at.slice(0, 10)
   return (
     <>
       <IconSprite />
       <div className="wrap">
         <main>
-        <header className="masthead">
+        <header className="masthead masthead-home">
           <SiteHeader current="archive" />
           <p className="kicker">free ai credits &middot; archive</p>
           <h1>Expired offer archive</h1>
@@ -93,11 +56,18 @@ export default function ArchivePage({ index }: { index: OffersIndex }) {
             <a className="skip-list" href="#site-footer">
               Skip the offer list
             </a>
-            <ul className="grid" id="ft-archive-grid">
+            <ol className="grid" id="ft-archive-grid" role="list">
               {archived.map((offer, i) => (
-                <ArchivedCard key={offer.slug} offer={offer} index={i} />
+                <OfferRow
+                  key={offer.slug}
+                  offer={offer}
+                  index={i}
+                  buildDay={buildDay}
+                  pressed={{ category: "", verification: "", signup: "" }}
+                  onToggleTag={() => {}}
+                />
               ))}
-            </ul>
+            </ol>
           </>
         ) : (
           <section className="empty" style={{ "--i": 0 } as React.CSSProperties}>

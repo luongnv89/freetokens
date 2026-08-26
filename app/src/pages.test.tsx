@@ -76,27 +76,33 @@ describe("ArchivePage (#26 parity)", () => {
     };
     const markup = renderToStaticMarkup(<ArchivePage index={fixture} />);
     expect(markup).toContain('id="ft-archive-grid"');
-    expect(markup).toContain("badge-expired");
-    expect(markup).toMatch(/<span>Expired<\/span>/);
+    // Archive uses OfferRow: data-expiry attribute + status span with expiry
+    expect(markup).toContain('data-expiry="2026-01-15"');
     expect(markup).toContain('href="offers/gone.html"');
-    expect(markup).toMatch(/expired <time [Dd]ate[Tt]ime="2026-01-15">/);
+    expect(markup).toMatch(/expires <time [Dd]ate[Tt]ime="2026-01-15">/);
     expect(markup).toContain("Skip the offer list");
-    expect(markup).toContain('class="detail-btn"');
+    // OfferRow uses .r-details link instead of .detail-btn
+    expect(markup).toContain('class="r-details"');
   });
 
-  it("archive tags are links to a pre-filtered home, never inert buttons", () => {
+  it("archive tags are interactive buttons, not inert links", () => {
     const fixture = {
       ...index,
       offers: [offer({ slug: "gone", expiry_date: "2026-01-15", status: "expired" as const })],
     };
     const markup = renderToStaticMarkup(<ArchivePage index={fixture} />);
-    expect(markup).toContain('href="index.html?category=coding"');
-    expect(markup).toContain('href="index.html?verification=hand_verified"');
-    expect(markup).toContain('href="index.html?signup=none"');
-    expect(markup).toContain('aria-label="See offers tagged Coding"');
-    expect(markup).toContain('aria-label="See offers tagged hand-verified"');
-    expect(markup).toContain('aria-label="See offers tagged no sign-up"');
-    expect(markup).not.toMatch(/<button[^>]*data-ft-tag/);
+    // Archive now uses OfferRow: tags are buttons, not links
+    expect(markup).toContain('type="button"');
+    expect(markup).toContain('class="badge badge-category badge-category-coding"');
+    expect(markup).toContain('class="badge badge-verification badge-verification-hand_verified"');
+    expect(markup).toContain('class="badge badge-signup badge-signup-none"');
+    expect(markup).toContain('data-ft-tag="category"');
+    expect(markup).toContain('data-ft-tag="verification"');
+    expect(markup).toContain('data-ft-tag="signup"');
+    // OfferRow uses "Filter by" aria-labels, not "See offers tagged"
+    expect(markup).toContain('aria-label="Filter by Coding"');
+    expect(markup).toContain('aria-label="Filter by hand-verified"');
+    expect(markup).toContain('aria-label="Filter by no sign-up"');
   });
 });
 
