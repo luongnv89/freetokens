@@ -33,7 +33,7 @@ const REQUIRED_FIELDS = [
   "signup",
 ];
 const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program"];
-const VERIFICATION_LEVELS = ["hand_verified", "social_proof", "unverified"];
+const VERIFICATION_LEVELS = ["social_proof", "unverified"];
 const REVIEW_STATUSES = ["verified", "unverified", "under-review"];
 const SIGNUP_MODES = ["none", "required"];
 const NULL_TOKENS = new Set(["null", "~", ""]);

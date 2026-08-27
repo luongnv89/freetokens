@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-08-26T22:56:26Z",
-  "count": 44,
-  "active_count": 30,
+  "generated_at": "2026-08-27T12:20:27Z",
+  "count": 45,
+  "active_count": 31,
   "expired_count": 14,
   "offers": [
+    {
+      "slug": "merge-gateway-10-monthly-credits",
+      "title": "Merge Gateway — $10 in Free LLM Credits Every Month",
+      "provider": "Merge",
+      "category": "api_provider",
+      "amount": "$10 in free LLM credits every month (Pro plan)",
+      "expiry_date": null,
+      "source_url": "https://www.merge.dev/pricing/gateway",
+      "verified_date": "2026-08-27",
+      "verification": "social_proof",
+      "review_status": "verified",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "chatgpt-student-4mo-plus",
       "title": "ChatGPT Student — 4 Months of Plus Free",
@@ -13,7 +27,7 @@
       "expiry_date": "2026-10-31",
       "source_url": "https://chatgpt.com/students/2026",
       "verified_date": "2026-08-26",
-      "verification": "hand_verified",
+      "verification": "social_proof",
       "review_status": "unverified",
       "signup": "required",
       "status": "active"
@@ -27,7 +41,7 @@
       "expiry_date": null,
       "source_url": "https://x.com/cline/status/2092666316125864191",
       "verified_date": "2026-08-26",
-      "verification": "hand_verified",
+      "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
       "status": "active"
@@ -41,7 +55,7 @@
       "expiry_date": null,
       "source_url": "https://devin.ai/startups",
       "verified_date": "2026-08-25",
-      "verification": "hand_verified",
+      "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
       "status": "active"
@@ -69,7 +83,7 @@
       "expiry_date": "2026-09-06",
       "source_url": "https://www.gmicloud.ai/minimax-week",
       "verified_date": "2026-08-24",
-      "verification": "hand_verified",
+      "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
       "status": "active"
@@ -489,7 +503,7 @@
       "expiry_date": null,
       "source_url": "https://openai.com/chatgpt/pricing/",
       "verified_date": "2026-08-23",
-      "verification": "hand_verified",
+      "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
       "status": "active"
@@ -503,7 +517,7 @@
       "expiry_date": "2026-08-24",
       "source_url": "https://x.com/opencode/status/2090544355824038300",
       "verified_date": "2026-08-23",
-      "verification": "hand_verified",
+      "verification": "social_proof",
       "review_status": "unverified",
       "signup": "required",
       "status": "expired"
@@ -531,7 +545,7 @@
       "expiry_date": "2026-08-24",
       "source_url": "https://openrouter.ai/stealth/ox-alpha",
       "verified_date": "2026-08-23",
-      "verification": "hand_verified",
+      "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
       "status": "expired"

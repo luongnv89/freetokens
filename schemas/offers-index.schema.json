@@ -102,7 +102,7 @@
         },
         "verification": {
           "type": "string",
-          "enum": ["hand_verified", "social_proof", "unverified"],
+          "enum": ["social_proof", "unverified"],
           "description": "How the listing was checked."
         },
         "review_status": {

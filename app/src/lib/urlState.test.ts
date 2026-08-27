@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import { emptyState, parseState, serializeState } from "./urlState"
 
 const FULL =
-  "?q=foo&sort=expiring&category=coding&verification=hand_verified&signup=required"
+  "?q=foo&sort=expiring&category=coding&verification=social_proof&signup=required"
 
 function paramsOf(state: ReturnType<typeof parseState>) {
   return new URLSearchParams(serializeState(state))
@@ -15,14 +15,14 @@ describe("parseState / serializeState", () => {
       q: "foo",
       sort: "expiring",
       category: "coding",
-      verification: "hand_verified",
+      verification: "social_proof",
       signup: "required",
     })
     const params = paramsOf(state)
     expect(params.get("q")).toBe("foo")
     expect(params.get("sort")).toBe("expiring")
     expect(params.get("category")).toBe("coding")
-    expect(params.get("verification")).toBe("hand_verified")
+    expect(params.get("verification")).toBe("social_proof")
     expect(params.get("signup")).toBe("required")
     expect(parseState("?" + serializeState(state))).toEqual(state)
   })
@@ -33,7 +33,7 @@ describe("parseState / serializeState", () => {
     expect(params.get("q")).toBe("bar")
     expect(params.get("sort")).toBe("expiring")
     expect(params.get("category")).toBe("coding")
-    expect(params.get("verification")).toBe("hand_verified")
+    expect(params.get("verification")).toBe("social_proof")
     expect(params.get("signup")).toBe("required")
   })
 

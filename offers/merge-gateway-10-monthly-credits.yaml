@@ -9,6 +9,6 @@ expiry_date: null
 source_url: https://www.merge.dev/pricing/gateway
 verified_date: 2026-08-27
 # Verification & sign-up tags (#97): checked against the official Merge pricing page.
-verification: hand_verified
+verification: social_proof
 review_status: verified
 signup: required

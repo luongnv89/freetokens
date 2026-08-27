@@ -102,9 +102,9 @@ REQUIRED_FIELDS = (
     "signup",
 )
 # Per-offer honesty tags (#97): the site no longer claims blanket
-# "hand-verified / no sign-up walls" status. Every offer states exactly how
-# its listing was checked and whether claiming needs an account.
-VERIFICATION_LEVELS = ("hand_verified", "social_proof", "unverified")
+# verification / no-sign-up status. Every offer states exactly how its
+# listing was checked and whether claiming needs an account.
+VERIFICATION_LEVELS = ("social_proof", "unverified")
 REVIEW_STATUSES = ("verified", "unverified", "under-review")
 REVIEW_STATUS_LABELS = {
     "verified": "verified",
@@ -112,16 +112,12 @@ REVIEW_STATUS_LABELS = {
     "under-review": "under review",
 }
 VERIFICATION_LABELS = {
-    "hand_verified": "hand-verified",
     "social_proof": "social proof",
     "unverified": "unverified",
 }
 # Tooltip copy spells out what each level means — the badge word alone must
 # never be the only explanation (same principle as the Expired badge).
 VERIFICATION_TITLES = {
-    "hand_verified": (
-        "Checked by the maintainer against the official provider website"
-    ),
     "social_proof": (
         "Not personally verified, but corroborated by the official website "
         "and social proof"
@@ -167,8 +163,8 @@ TAG_HUES = {
     "voice": ("#7e22ce", 6.98),
     "video": ("#be123c", 6.29),
     "startup_program": ("#a21caf", 6.33),
-    "hand_verified": ("#15803d", 5.02),
-    "social_proof": ("#000000", 21.00),
+    "review_verified": ("#15803d", 5.02),
+    "social_proof": ("#1e3a5f", 11.50),
     "unverified": ("#5f6673", 5.78),
     "none": ("#15803d", 5.02),
     "required": ("#5f6673", 5.78),
@@ -209,8 +205,8 @@ TAG_ICONS = {
     '<path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>'
     '<path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
     # Verification: how hard the listing was CHECKED. The glyphs form their
-    # own ladder -- sealed check, hearsay bubble, open question.
-    "hand_verified": '<circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.4"/>',
+    # own ladder -- hearsay bubble, open question.
+    "review_verified": '<circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.4"/>',
     "social_proof": '<path d="M20.5 13.5a2 2 0 0 1-2 2H8.5l-4.5 4V5.5a2 2 0 0 1 2-2h12.5a2 2 0 0 1 2 2z"/>'
     '<path d="M8.5 9.5h8M8.5 12.5h5"/>',
     "unverified": '<circle cx="12" cy="12" r="9" stroke-dasharray="3.2 3"/>'

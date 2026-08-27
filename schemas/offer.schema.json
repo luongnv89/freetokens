@@ -57,8 +57,8 @@
     },
     "verification": {
       "type": "string",
-      "enum": ["hand_verified", "social_proof", "unverified"],
-      "description": "How the listing was checked: hand_verified = confirmed by the maintainer on the official provider page; social_proof = corroborated by official-site info plus social proof, not personally verified; unverified = only social-media proofs, no official-website confirmation."
+      "enum": ["social_proof", "unverified"],
+      "description": "How the listing was checked: social_proof = corroborated by official-site info plus social proof, not personally verified; unverified = only social-media proofs, no official-website confirmation."
     },
     "review_status": {
       "type": "string",

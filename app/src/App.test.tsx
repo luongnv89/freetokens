@@ -54,9 +54,10 @@ describe("App home listing prerender", () => {
     }
   });
 
-  it("renders the three honesty-tag families per row as buttons with labels", () => {
+  it("renders the visible tag families as buttons with labels", () => {
+    const visibleVerificationTags = offers.length;
     expect(markup.match(/data-ft-tag="category"/g)?.length).toBe(offers.length);
-    expect(markup.match(/data-ft-tag="verification"/g)?.length).toBe(offers.length);
+    expect(markup.match(/data-ft-tag="verification"/g)?.length).toBe(visibleVerificationTags);
     expect(markup.match(/data-ft-tag="signup"/g)?.length).toBe(offers.length);
   });
 
@@ -79,11 +80,11 @@ describe("App home listing prerender", () => {
   });
 
   it("states truthful counts in the masthead", () => {
-    const verified = offers.filter((o) => o.verification === "hand_verified").length;
+    const corroborated = offers.filter((o) => o.verification === "social_proof").length;
     const ongoingCount = offers.filter((o) => !o.expiry_date).length;
     expect(markup).toContain(`<strong>${offers.length}</strong> live offers`);
     expect(markup).toContain(`<strong>${ongoingCount}</strong> ongoing`);
-    expect(markup).toContain(`<strong>${verified}</strong> hand-verified`);
+    expect(markup).toContain(`<strong>${corroborated}</strong> corroborated by official source`);
   });
 
   it("keeps semantic list markup — no div-based rows", () => {
@@ -112,14 +113,15 @@ describe("App tag icon sprite (lucide mapping)", () => {
   });
 
   it("renders one aria-hidden glyph per visible tag", () => {
-    // Four visible tags per row, including review status. ChipGlyph also
-    // paints toolbar SVGs with the same class, so count only glyphs inside
-    // the listing / [data-ft-tag].
+    // Category, review status, and sign-up are visible on every row.
     const grid = markup.match(/<ol class="grid" id="ft-grid"[\s\S]*?<\/ol>/)?.[0] ?? "";
+    const visibleVerificationTags = offers.length;
     expect(grid.match(/<svg class="tag-i" aria-hidden="true"/g)?.length).toBe(
-      offers.length * 4,
+      offers.length * 3 + visibleVerificationTags,
     );
-    expect(grid.match(/data-ft-tag="/g)?.length).toBe(offers.length * 3);
+    expect(grid.match(/data-ft-tag="/g)?.length).toBe(
+      offers.length * 2 + visibleVerificationTags,
+    );
   });
 
   it("never renders a lucide glyph with its own accessible name", () => {
@@ -152,7 +154,7 @@ function offerEntry(overrides: Partial<Offer> = {}): Offer {
     expiry_date: null,
     source_url: "https://example.com/offer",
     verified_date: "2026-08-01",
-    verification: "hand_verified",
+    verification: "social_proof",
     review_status: "unverified",
     signup: "none",
     status: "active",
@@ -244,8 +246,11 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
     expect(markup).toContain("Clear search &amp; filters");
   });
 
-  it("composes honesty tags through shadcn Badge (data-slot) as real buttons", () => {
-    expect(markup.match(/data-slot="badge"/g)?.length).toBe(offers.length * 3);
+  it("composes visible tags through shadcn Badge (data-slot) as real buttons", () => {
+    const visibleVerificationTags = offers.length;
+    expect(markup.match(/data-slot="badge"/g)?.length).toBe(
+      offers.length * 2 + visibleVerificationTags,
+    );
     expect(markup).toMatch(
       /<button type="button" class="badge badge-category[^"]*"[\s\S]*?data-slot="badge"/,
     );

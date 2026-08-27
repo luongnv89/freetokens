@@ -66,7 +66,7 @@ export interface Offer {
   /**
    * How the listing was checked.
    */
-  verification: "hand_verified" | "social_proof" | "unverified";
+  verification: "social_proof" | "unverified";
   /**
    * Curator testing state, separate from evidence verification and build-time expiry.
    */

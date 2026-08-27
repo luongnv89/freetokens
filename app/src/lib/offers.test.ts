@@ -125,7 +125,7 @@ function offer(overrides: Partial<Offer> = {}): Offer {
     expiry_date: null,
     source_url: "https://example.com/offer",
     verified_date: "2026-08-01",
-    verification: "hand_verified",
+    verification: "social_proof",
     review_status: "unverified",
     signup: "none",
     status: "active",
@@ -147,7 +147,7 @@ describe("offerMatches", () => {
   it("requires every active filter AND the query", () => {
     const row = offer({
       category: "coding",
-      verification: "hand_verified",
+      verification: "social_proof",
       signup: "required",
       title: "Alpha",
     });
@@ -155,7 +155,7 @@ describe("offerMatches", () => {
       ...base,
       q: "alpha",
       category: "coding",
-      verification: "hand_verified",
+      verification: "social_proof",
       signup: "required",
     };
     expect(offerMatches(row, state)).toBe(true);
