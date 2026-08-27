@@ -7,8 +7,8 @@ being shown.
 ## One-liner (X, LinkedIn, chat)
 
 > I built Free AI Credits — every currently-claimable free AI credit offer
-> (API credits, coding agents, image/video/voice tiers), hand-verified
-> against the official page, with expiry dates front and center.
+> (API credits, coding agents, image/video/voice tiers), with curator review
+> status and expiry dates front and center.
 > https://luongnv89.github.io/freetokens/
 
 ## Short blurb (Reddit r/SideProject, Indie Hackers)
@@ -24,14 +24,14 @@ being shown.
 
 ## Show HN text
 
-> Show HN: Free AI Credits – hand-verified directory of free AI credit offers
+> Show HN: Free AI Credits – curator-reviewed directory of free AI credit offers
 >
 > Hi HN! I kept missing time-limited free-credit deals (the "$300 cloud
 > credit" class of offers) because permanent-tier lists exclude anything
-> that expires. This is a hand-verified directory that treats expiry as a
-> first-class field: every offer carries its source URL, the date it was
-> last verified live, and its expiry if it has one. Expired offers drop out
-> on rebuild; everything remaining is claimable right now.
+> that expires. This directory treats expiry as a first-class field: every
+> offer carries its source URL, its curator review status, the date it was
+> last checked live, and its expiry if it has one. Expired offers drop out on
+> rebuild; everything remaining is claimable right now.
 >
 > It's a fully static page — a Python build script validates 21 YAML offer
 > files against a JSON Schema in CI, generates the index, and GitHub Pages
@@ -45,8 +45,8 @@ being shown.
 
 ## Feature callouts (drop into any post)
 
-- **Hand-verified:** every card shows when the offer was last confirmed
-  live against the official source — refreshed on every rebuild.
+- **Curator review:** every card shows the offer's review status and when it
+  was last checked against the available source — refreshed on every rebuild.
 - **Expiring soon sort:** one click reorders the catalog by expiry date;
   ongoing offers sink to the end.
 - **Instant filter + search:** category chips and debounced text search,

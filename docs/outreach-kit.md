@@ -95,7 +95,7 @@ Address DevRel / growth / partnerships contacts. Subject options:
 ```text
 Hi {{FIRST_NAME}},
 
-I run freetokens (https://luongnv89.github.io/freetokens/) — a hand-verified
+I run freetokens (https://luongnv89.github.io/freetokens/) — a curator-reviewed
 directory of free AI credit offers. Every listing is checked against your own
 pricing/docs pages, and every outbound link is click-attributed.
 
@@ -142,7 +142,7 @@ business days, then stop.
 
 > Subject: Your free tier on Free AI Credits: [S]47 claim clicks in 2 weeks
 >
-> Hi Sam, I run freetokens — a hand-verified directory of free AI credit
+> Hi Sam, I run freetokens — a curator-reviewed directory of free AI credit
 > offers. Your listing has been live since [S]Aug 21. From our GA4 export for
 > [S]Aug 22–Sep 5: [S]47 claim clicks ([S]31 distinct developers), [S]12% of
 > all offer clicks on the site, strongest around the Voice category
@@ -158,7 +158,7 @@ business days, then stop.
 
 > Subject: [S]38 clicks in 6 days on your expiring credits — renewal data
 >
-> Hi Dana, quick one from freetokens (hand-verified free-AI-credit directory).
+> Hi Dana, quick one from freetokens (curator-reviewed free-AI-credit directory).
 > Your [S]double-credits promo listing went up [S]Aug 24; through [S]Aug 30 it
 > drew [S]38 claim clicks ([S]26 distinct developers) — [S]18% of all offer
 > clicks that week, and [S]64% arrived in the final 48 hours before expiry.

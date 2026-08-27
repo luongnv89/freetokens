@@ -16,7 +16,7 @@ const EXPECTED = {
   voice: ["--color-tag-voice", "#7e22ce"],
   video: ["--color-tag-video", "#be123c"],
   startup_program: ["--color-tag-startup-program", "#a21caf"],
-  hand_verified: ["--color-tag-hand-verified", "#15803d"],
+  review_verified: ["--color-tag-review-verified", "#15803d"],
   social_proof: ["--color-tag-social-proof", "#1e3a5f"],
   unverified: ["--color-tag-unverified", "#5f6673"],
   none: ["--color-tag-none", "#15803d"],
@@ -45,7 +45,7 @@ function pythonTagTokens() {
     voice: "#7e22ce",
     video: "#be123c",
     startup_program: "#a21caf",
-    hand_verified: "#15803d",
+    review_verified: "#15803d",
     social_proof: "#1e3a5f",
     unverified: "#5f6673",
     none: "#15803d",
@@ -123,7 +123,7 @@ describe("Tag hue distinctness rules (port of TagHueDistinctnessTests)", () => {
   // claim, not the value — but within a family the hue IS the identifier.
   const hex = (value) => EXPECTED[value][1];
   const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program"];
-  const VERIFICATION_LEVELS = ["hand_verified", "social_proof", "unverified"];
+  const VERIFICATION_LEVELS = ["review_verified", "social_proof", "unverified"];
   const SIGNUP_MODES = ["none", "required"]; // build.py SIGNUP_MODES — expired is a status, not a mode
 
   it("never repeats a hue inside a family", () => {
@@ -134,10 +134,10 @@ describe("Tag hue distinctness rules (port of TagHueDistinctnessTests)", () => {
   });
 
   it("repeats claim strength across families on purpose, never with a category", () => {
-    expect(hex("hand_verified")).toBe(hex("none"));
+    expect(hex("review_verified")).toBe(hex("none"));
     expect(hex("unverified")).toBe(hex("required"));
     expect(hex("unverified")).toBe(hex("expired"));
-    const claim = new Set([hex("hand_verified"), hex("unverified")]);
+    const claim = new Set([hex("review_verified"), hex("unverified")]);
     for (const category of CATEGORIES) {
       expect(claim.has(hex(category)), category).toBe(false);
     }

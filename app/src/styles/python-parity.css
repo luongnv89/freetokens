@@ -28,7 +28,7 @@
 
      Eleven values, seven hues -- the repeats are the point, not an oversight.
      Hue encodes the *claim*, not the value: green is "strongest claim"
-     (hand-verified; no sign-up wall) and the muted gray is "weakest, treat
+     (review-verified; no sign-up wall) and the muted gray is "weakest, treat
      with care" (unverified; sign-up required; expired). The five categories,
      which make no claim at all, are the five hues nothing else uses. Repeats
      only ever occur ACROSS families, and a row renders one tag per family in
@@ -46,7 +46,7 @@
   --t-voice: var(--color-tag-voice);
   --t-video: var(--color-tag-video);
   --t-startup_program: var(--color-tag-startup-program);
-  --t-hand_verified: var(--color-tag-hand-verified);
+  --t-review-verified: var(--color-tag-review-verified);
   --t-social_proof: var(--color-tag-social-proof);
   --t-unverified: var(--color-tag-unverified);
   --t-none: var(--color-tag-none);
@@ -266,10 +266,9 @@ h1 {
 .badge-category-voice { --tag-hue: var(--t-voice); }
 .badge-category-video { --tag-hue: var(--t-video); }
 .badge-category-startup_program { --tag-hue: var(--t-startup_program); }
-.badge-verification-hand_verified { --tag-hue: var(--t-hand_verified); }
 .badge-verification-social_proof { --tag-hue: var(--t-social_proof); }
 .badge-verification-unverified { --tag-hue: var(--t-unverified); }
-.badge-review-status-verified { --tag-hue: var(--t-hand_verified); }
+.badge-review-status-verified { --tag-hue: var(--t-review-verified); }
 .badge-review-status-unverified { --tag-hue: var(--t-unverified); }
 .badge-review-status-under-review { --tag-hue: var(--t-social_proof); }
 .badge-signup-none { --tag-hue: var(--t-none); }

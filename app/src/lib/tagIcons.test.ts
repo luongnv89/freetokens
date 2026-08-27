@@ -13,7 +13,7 @@ const EXPECTED_TAGS = [
   "voice",
   "video",
   "startup_program",
-  "hand_verified",
+  "review_verified",
   "social_proof",
   "unverified",
   "none",

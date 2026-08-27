@@ -25,7 +25,7 @@ function offer(overrides: Partial<Offer> = {}): Offer {
     expiry_date: null,
     source_url: "https://example.com/offer",
     verified_date: "2026-08-01",
-    verification: "hand_verified",
+    verification: "social_proof",
     review_status: "unverified",
     signup: "none",
     status: "active",
@@ -42,7 +42,7 @@ const fixtureOffers: Offer[] = [
     amount: "$10 credits",
     expiry_date: "2026-09-01",
     verified_date: "2026-01-01",
-    verification: "hand_verified",
+    verification: "social_proof",
     signup: "required",
   }),
   offer({
@@ -53,7 +53,7 @@ const fixtureOffers: Offer[] = [
     amount: "$30 credits",
     expiry_date: "2026-12-01",
     verified_date: "2026-06-01",
-    verification: "hand_verified",
+    verification: "social_proof",
     signup: "required",
   }),
   offer({
@@ -64,7 +64,7 @@ const fixtureOffers: Offer[] = [
     amount: "$5 credits",
     expiry_date: "2026-10-01",
     verified_date: "2026-03-01",
-    verification: "social_proof",
+    verification: "unverified",
     signup: "required",
   }),
   offer({
@@ -75,7 +75,7 @@ const fixtureOffers: Offer[] = [
     amount: "$8 credits",
     expiry_date: "2026-11-01",
     verified_date: "2026-04-01",
-    verification: "hand_verified",
+    verification: "social_proof",
     signup: "none",
   }),
   offer({
@@ -86,7 +86,7 @@ const fixtureOffers: Offer[] = [
     amount: "$50 credits",
     expiry_date: null,
     verified_date: "2026-08-01",
-    verification: "hand_verified",
+    verification: "social_proof",
     signup: "required",
   }),
 ]
@@ -169,11 +169,11 @@ afterEach(() => {
 })
 
 describe("HomePage masthead counters (#49 port)", () => {
-  it("surfaces live, ongoing, and hand-verified counts in the masthead", () => {
+  it("surfaces live, ongoing, and corroborated counts in the masthead", () => {
     render(<HomePage index={index} />)
     const count = screen.getByText(/live offers/)
     expect(count).toHaveTextContent(
-      "5 live offers · 1 ongoing · 4 hand-verified by the maintainer",
+      "5 live offers · 1 ongoing · 4 corroborated by official source",
     )
   })
 })
@@ -210,7 +210,7 @@ describe("HomePage debounce and URL commit", () => {
 
   it("keeps filter params when q changes and never sends the raw query", () => {
     vi.useFakeTimers()
-    setSearch("?category=coding&verification=hand_verified&signup=required&sort=expiring")
+    setSearch("?category=coding&verification=social_proof&signup=required&sort=expiring")
     const gtag = grantedGtag()
     render(<HomePage index={index} />)
     expect(listedSlugs()).toEqual(["alpha-copilot", "beta-copilot"])
@@ -221,7 +221,7 @@ describe("HomePage debounce and URL commit", () => {
     const params = new URLSearchParams(window.location.search)
     expect(params.get("q")).toBe(SECRET_QUERY)
     expect(params.get("category")).toBe("coding")
-    expect(params.get("verification")).toBe("hand_verified")
+    expect(params.get("verification")).toBe("social_proof")
     expect(params.get("signup")).toBe("required")
     expect(params.get("sort")).toBe("expiring")
     const searchEvents = eventCalls(gtag, "search")
@@ -295,7 +295,7 @@ describe("HomePage clear and reset filters", () => {
 describe("HomePage deep link and popstate", () => {
   it("applies q+sort AND filters from the URL without search or sort_use on load", () => {
     setSearch(
-      "?q=alpha&sort=expiring&category=coding&verification=hand_verified&signup=required",
+      "?q=alpha&sort=expiring&category=coding&verification=social_proof&signup=required",
     )
     const gtag = grantedGtag()
     render(<HomePage index={index} />)
@@ -303,7 +303,7 @@ describe("HomePage deep link and popstate", () => {
     expect(screen.getByLabelText("Search")).toHaveValue("alpha")
     expect(screen.getByLabelText("Sort")).toHaveValue("expiring")
     expect(document.getElementById("ft-results-status")?.textContent).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · Coding · hand-verified · sign-up required`,
+      `Showing 1 of ${fixtureOffers.length} offers · Coding · social proof · sign-up required`,
     )
     expect(eventCalls(gtag, "search")).toHaveLength(0)
     expect(eventCalls(gtag, "sort_use")).toHaveLength(0)
@@ -393,17 +393,12 @@ describe("HomePage three-dimension filters (#126)", () => {
   it("row tag click applies that dimension and clicking again clears it", () => {
     const gtag = grantedGtag()
     render(<HomePage index={index} />)
-    fireEvent.click(tagOn("alpha-free", "verification"))
-    expect(listedSlugs()).toEqual([
-      "alpha-copilot",
-      "alpha-image",
-      "alpha-free",
-      "beta-copilot",
-    ])
-    expect(window.location.search).toBe("?verification=hand_verified")
+    fireEvent.click(tagOn("alpha-social", "verification"))
+    expect(listedSlugs()).toEqual(["alpha-social"])
+    expect(window.location.search).toBe("?verification=unverified")
     expect(eventCalls(gtag, "filter_use")).toHaveLength(1)
 
-    fireEvent.click(tagOn("alpha-free", "verification"))
+    fireEvent.click(tagOn("alpha-social", "verification"))
     expect(listedSlugs()).toEqual([
       "alpha-copilot",
       "alpha-image",
@@ -417,65 +412,60 @@ describe("HomePage three-dimension filters (#126)", () => {
 
   it("aria-pressed syncs across every row showing the applied value", () => {
     render(<HomePage index={index} />)
-    fireEvent.click(tagOn("alpha-free", "verification"))
-    expect(tagOn("alpha-free", "verification")).toHaveAttribute("aria-pressed", "true")
-    expect(tagOn("alpha-copilot", "verification")).toHaveAttribute("aria-pressed", "true")
-    expect(tagOn("alpha-image", "verification")).toHaveAttribute("aria-pressed", "true")
-    expect(tagOn("alpha-social", "verification")).toBeNull()
-    expect(tagOn("alpha-free", "signup")).toHaveAttribute("aria-pressed", "false")
+    fireEvent.click(tagOn("alpha-social", "verification"))
+    expect(tagOn("alpha-social", "verification")).toHaveAttribute("aria-pressed", "true")
+    expect(tagOn("alpha-copilot", "verification")).toBeNull()
+    expect(tagOn("alpha-image", "verification")).toBeNull()
+    expect(tagOn("alpha-free", "verification")).toBeNull()
+    expect(tagOn("alpha-social", "signup")).toHaveAttribute("aria-pressed", "false")
   })
 
   it("chips, tags, and search AND-combine and stay shareable", () => {
     vi.useFakeTimers()
     render(<HomePage index={index} />)
-    fireEvent.click(tagOn("alpha-free", "verification"))
-    fireEvent.click(tagOn("alpha-free", "signup"))
+    fireEvent.click(tagOn("alpha-social", "verification"))
+    fireEvent.click(tagOn("alpha-social", "signup"))
     fireEvent.click(categoryChip("coding"))
-    fireEvent.change(screen.getByLabelText("Search"), { target: { value: "free" } })
+    fireEvent.change(screen.getByLabelText("Search"), { target: { value: "social" } })
     act(() => {
       vi.advanceTimersByTime(SEARCH_DEBOUNCE_MS)
     })
-    expect(listedSlugs()).toEqual(["alpha-free"])
+    expect(listedSlugs()).toEqual(["alpha-social"])
     const params = new URLSearchParams(window.location.search)
-    expect(params.get("verification")).toBe("hand_verified")
-    expect(params.get("signup")).toBe("none")
+    expect(params.get("verification")).toBe("unverified")
+    expect(params.get("signup")).toBe("required")
     expect(params.get("category")).toBe("coding")
-    expect(params.get("q")).toBe("free")
+    expect(params.get("q")).toBe("social")
     expect(statusText()).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · Coding · hand-verified · no sign-up`,
+      `Showing 1 of ${fixtureOffers.length} offers · Coding · unverified · sign-up required`,
     )
   })
 
   it("status pills name active filters and dropping one leaves the others", () => {
     render(<HomePage index={index} />)
-    fireEvent.click(tagOn("alpha-free", "verification"))
-    fireEvent.click(tagOn("alpha-free", "signup"))
-    expect(listedSlugs()).toEqual(["alpha-free"])
+    fireEvent.click(tagOn("alpha-social", "verification"))
+    fireEvent.click(tagOn("alpha-social", "signup"))
+    expect(listedSlugs()).toEqual(["alpha-social"])
     expect(statusText()).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · hand-verified · no sign-up`,
+      `Showing 1 of ${fixtureOffers.length} offers · unverified · sign-up required`,
     )
-    fireEvent.click(screen.getByRole("button", { name: "Remove no sign-up filter" }))
-    expect(listedSlugs()).toEqual([
-      "alpha-copilot",
-      "alpha-image",
-      "alpha-free",
-      "beta-copilot",
-    ])
-    expect(window.location.search).toBe("?verification=hand_verified")
+    fireEvent.click(screen.getByRole("button", { name: "Remove sign-up required filter" }))
+    expect(listedSlugs()).toEqual(["alpha-social"])
+    expect(window.location.search).toBe("?verification=unverified")
     expect(statusText()).toBe(
-      `Showing 4 of ${fixtureOffers.length} offers · hand-verified`,
+      `Showing 1 of ${fixtureOffers.length} offers · unverified`,
     )
   })
 
   it("removing a pill focuses the next pill, then search when none remain", () => {
     render(<HomePage index={index} />)
-    fireEvent.click(tagOn("alpha-free", "verification"))
-    fireEvent.click(tagOn("alpha-free", "signup"))
-    fireEvent.click(screen.getByRole("button", { name: "Remove hand-verified filter" }))
+    fireEvent.click(tagOn("alpha-social", "verification"))
+    fireEvent.click(tagOn("alpha-social", "signup"))
+    fireEvent.click(screen.getByRole("button", { name: "Remove unverified filter" }))
     expect(document.activeElement).toBe(
-      screen.getByRole("button", { name: "Remove no sign-up filter" }),
+      screen.getByRole("button", { name: "Remove sign-up required filter" }),
     )
-    fireEvent.click(screen.getByRole("button", { name: "Remove no sign-up filter" }))
+    fireEvent.click(screen.getByRole("button", { name: "Remove sign-up required filter" }))
     expect(document.activeElement).toBe(screen.getByLabelText("Search"))
   })
 
@@ -495,12 +485,12 @@ describe("HomePage three-dimension filters (#126)", () => {
 
   it("keeps keyboard focus on the row tag that applied the filter", () => {
     render(<HomePage index={index} />)
-    const tag = tagOn("alpha-free", "verification")
+    const tag = tagOn("alpha-social", "verification")
     tag.focus()
     expect(document.activeElement).toBe(tag)
     fireEvent.click(tag)
-    expect(document.activeElement).toBe(tagOn("alpha-free", "verification"))
-    expect(tagOn("alpha-free", "verification")).toHaveAttribute("aria-pressed", "true")
+    expect(document.activeElement).toBe(tagOn("alpha-social", "verification"))
+    expect(tagOn("alpha-social", "verification")).toHaveAttribute("aria-pressed", "true")
   })
 
   it("empty result set from filters shows a working reset that focuses search", () => {
@@ -521,19 +511,14 @@ describe("HomePage three-dimension filters (#126)", () => {
 
   it("All chip SETs category empty without clearing other dimensions", () => {
     render(<HomePage index={index} />)
-    fireEvent.click(tagOn("alpha-free", "verification"))
+    fireEvent.click(tagOn("alpha-social", "verification"))
     fireEvent.click(categoryChip("coding"))
     expect(new URLSearchParams(window.location.search).get("category")).toBe("coding")
     fireEvent.click(categoryChip(""))
     const params = new URLSearchParams(window.location.search)
     expect(params.get("category")).toBeNull()
-    expect(params.get("verification")).toBe("hand_verified")
-    expect(listedSlugs()).toEqual([
-      "alpha-copilot",
-      "alpha-image",
-      "alpha-free",
-      "beta-copilot",
-    ])
+    expect(params.get("verification")).toBe("unverified")
+    expect(listedSlugs()).toEqual(["alpha-social"])
   })
 
   it("Clear all filters removes every filter and names them in the status line first", () => {

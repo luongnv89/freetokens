@@ -303,7 +303,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
   const offers = activeOffers(index)
   const buildDay = buildDate(index.generated_at)
   const ongoing = offers.filter((o) => !o.expiry_date).length
-  const verified = offers.filter((o) => o.verification === "hand_verified").length
+  const corroborated = offers.filter((o) => o.verification === "social_proof").length
 
   const [state, setState] = useState(emptyState)
   const [searchInput, setSearchInput] = useState("")
@@ -534,12 +534,12 @@ export default function HomePage({ index }: { index: OffersIndex }) {
           </p>
           <p className="tagline">
             Every claimable free-credit offer worth your time, on one fast page. Each carries a
-            curator review status, verification level (hand-checked or community-sourced), and a
+            curator review status, verification level (corroborated or community-sourced), and a
             sign-up tag, refreshed on every rebuild.
           </p>
           <p className="count">
             <strong>{offers.length}</strong> live offers &middot; <strong>{ongoing}</strong>{" "}
-            ongoing &middot; <strong>{verified}</strong> hand-verified by the maintainer
+            ongoing &middot; <strong>{corroborated}</strong> corroborated by official source
           </p>
         </header>
 

@@ -77,7 +77,7 @@ export function VerificationBadge({ offer, hrefPrefix }: { offer: Offer; hrefPre
 }
 
 const REVIEW_STATUS_ICONS: Record<string, string> = {
-  verified: "hand_verified",
+  verified: "review_verified",
   unverified: "unverified",
   "under-review": "expired",
 }

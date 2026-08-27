@@ -22,13 +22,11 @@ export const CATEGORY_LABELS: Record<string, string> = {
 }
 
 export const VERIFICATION_LABELS: Record<string, string> = {
-  hand_verified: "hand-verified",
   social_proof: "social proof",
   unverified: "unverified",
 }
 
 export const VERIFICATION_TITLES: Record<string, string> = {
-  hand_verified: "Checked by the maintainer against the official provider website",
   social_proof:
     "Not personally verified, but corroborated by the official website and social proof",
   unverified: "Only social-media proofs — no official-website confirmation yet",

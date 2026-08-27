@@ -51,7 +51,7 @@ git fetch origin && git pull --rebase origin "$branch"
 | `expiry_date`   | `YYYY-MM-DD` the offer stops being claimable, or explicit `null` if ongoing. |
 | `source_url`    | Official provider page describing the offer (`http(s)://`).           |
 | `verified_date` | Date YOU verified the offer is live, `YYYY-MM-DD`, never null, never future. |
-| `verification` | Evidence level: `hand_verified`, `social_proof`, or `unverified`. |
+| `verification` | Evidence level: `social_proof` or `unverified`. |
 | `review_status` | Curator testing state: `verified`, `unverified`, or `under-review`. |
 | `signup` | Whether claiming needs an account: `none` or `required`. |
 
@@ -184,7 +184,7 @@ amount: ...
 expiry_date: null        # or YYYY-MM-DD
 source_url: https://...
 verified_date: YYYY-MM-DD
-verification: hand_verified
+verification: social_proof
 review_status: under-review
 signup: required
 ```

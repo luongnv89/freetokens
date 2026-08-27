@@ -33,7 +33,7 @@ function offer(overrides: Partial<OfferEntry> = {}): OfferEntry {
     expiry_date: null,
     source_url: "https://example.com/offer",
     verified_date: "2026-08-01",
-    verification: "hand_verified",
+    verification: "social_proof",
     review_status: "unverified",
     signup: "none",
     status: "active",
@@ -96,14 +96,15 @@ describe("ArchivePage (#26 parity)", () => {
     // Archive now uses OfferRow: tags are buttons, not links
     expect(markup).toContain('type="button"');
     expect(markup).toContain('class="badge badge-category badge-category-coding"');
-    expect(markup).toContain('class="badge badge-verification badge-verification-hand_verified"');
+    expect(markup).toContain('class="badge badge-verification badge-verification-social_proof"');
     expect(markup).toContain('class="badge badge-signup badge-signup-none"');
     expect(markup).toContain('data-ft-tag="category"');
     expect(markup).toContain('data-ft-tag="verification"');
     expect(markup).toContain('data-ft-tag="signup"');
     // OfferRow uses "Filter by" aria-labels, not "See offers tagged"
     expect(markup).toContain('aria-label="Filter by Coding"');
-    expect(markup).toContain('aria-label="Filter by hand-verified"');
+    expect(markup).not.toContain('aria-label="Filter by hand-verified"');
+    expect(markup).toContain('aria-label="Filter by social proof"');
     expect(markup).toContain('aria-label="Filter by no sign-up"');
   });
 });
@@ -167,10 +168,11 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
       />,
     );
     expect(markup).toContain('href="../index.html?category=coding"');
-    expect(markup).toContain('href="../index.html?verification=hand_verified"');
+    expect(markup).toContain('href="../index.html?verification=social_proof"');
     expect(markup).toContain('href="../index.html?signup=none"');
     expect(markup).toContain('aria-label="See offers tagged Coding"');
-    expect(markup).toContain('aria-label="See offers tagged hand-verified"');
+    expect(markup).not.toContain('aria-label="See offers tagged hand-verified"');
+    expect(markup).toContain('aria-label="See offers tagged social proof"');
     expect(markup).toContain('aria-label="See offers tagged no sign-up"');
     expect(markup).not.toMatch(/<button[^>]*data-ft-tag/);
   });
@@ -267,6 +269,7 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
               provider: "Example Co",
               amount: "$10 credits",
               expiry_date: "2026-12-31",
+              verification: "social_proof",
             }),
           ],
         }}
@@ -412,13 +415,13 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
   });
 });
 
-describe("no-signup and hand-verified honesty badges (#111)", () => {
+describe("no-signup and verification honesty badges (#111)", () => {
   const css = readFileSync(
     path.resolve(import.meta.dirname, "styles/python-parity.css"),
     "utf8",
   );
 
-  it("renders signup and verification badge classes on the detail page like the listing rows", () => {
+  it("retains signup, verification, and review badges on detail surfaces", () => {
     const markup = renderToStaticMarkup(
       <OfferDetailPage
         index={{ ...index, offers: [offer()] }}
@@ -426,12 +429,13 @@ describe("no-signup and hand-verified honesty badges (#111)", () => {
         details={{}}
       />,
     );
-    // Status line + details table = two badge instances per dimension.
+    // The verification tag is now shown on both detail surfaces.
     expect((markup.match(/badge-signup-none\b/g) ?? []).length).toBe(2);
-    expect((markup.match(/badge-verification-hand_verified\b/g) ?? []).length).toBe(2);
+    expect((markup.match(/badge-verification-social_proof\b/g) ?? []).length).toBe(2);
     expect((markup.match(/badge-review-status-unverified\b/g) ?? []).length).toBe(2);
     expect(markup).toContain(">no sign-up</span>");
-    expect(markup).toContain(">hand-verified</span>");
+    expect(markup).toContain(">social proof</span>");
+    expect(markup).toContain('<th scope="row">Verification</th>');
     expect(markup).toContain(`>${REVIEW_STATUS_LABELS.unverified}</span>`);
   });
 

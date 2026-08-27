@@ -6,7 +6,7 @@
 
    Tag hues: eleven values, seven hues — the repeats are the point. Hue
    encodes the *claim*, not the value: green (#15803d) is "strongest claim"
-   (hand-verified; no sign-up wall) and the muted gray (#5f6673) is "weakest,
+   (review-verified; no sign-up wall) and the muted gray (#5f6673) is "weakest,
    treat with care" (unverified; sign-up required; expired). The five
    categories make no claim and own the five hues nothing else uses — which
    is why `coding` is teal #0e7490 and deliberately NOT green: green already
@@ -43,7 +43,7 @@
   --color-tag-startup-program: #a21caf;
 
   /* Tag hues — verification + sign-up families (how CHECKED / how walled) */
-  --color-tag-hand-verified: #15803d;
+  --color-tag-review-verified: #15803d;
   --color-tag-social-proof: #1e3a5f;
   --color-tag-unverified: #5f6673;
   --color-tag-none: #15803d;

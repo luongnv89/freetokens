@@ -8,6 +8,6 @@ expiry_date: 2026-10-31
 source_url: https://chatgpt.com/students/2026
 verified_date: 2026-08-26
 # Verification & sign-up tags (#97): checked against the official OpenAI page.
-verification: hand_verified
+verification: social_proof
 review_status: unverified
 signup: required
