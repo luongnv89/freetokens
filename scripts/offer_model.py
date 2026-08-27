@@ -164,7 +164,7 @@ TAG_HUES = {
     "video": ("#be123c", 6.29),
     "startup_program": ("#a21caf", 6.33),
     "review_verified": ("#15803d", 5.02),
-    "social_proof": ("#000000", 21.00),
+    "social_proof": ("#1e3a5f", 11.50),
     "unverified": ("#5f6673", 5.78),
     "none": ("#15803d", 5.02),
     "required": ("#5f6673", 5.78),

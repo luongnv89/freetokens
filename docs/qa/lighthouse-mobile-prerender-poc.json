@@ -5940,8 +5940,8 @@
                 "width": 120,
                 "height": 20
               },
-              "snippet": "<button type=\"button\" class=\"badge badge-verification badge-verification-hand_verified\" data-ft-tag=\"verification\" data-ft-tag-value=\"hand_verified\" aria-pressed=\"false\" aria-label=\"Filter by hand-verified\">",
-              "nodeLabel": "HAND-VERIFIED",
+              "snippet": "<button type=\"button\" class=\"badge badge-verification badge-verification-social_proof\" data-ft-tag=\"verification\" data-ft-tag-value=\"social_proof\" aria-pressed=\"false\" aria-label=\"Filter by social proof\">",
+              "nodeLabel": "SOCIAL-PROOF",
               "explanation": "Fix any of the following:\n  Target has insufficient size (119.8px by 19.6px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 22.8px instead of at least 24px."
             },
             "subItems": {
@@ -6066,8 +6066,8 @@
                 "width": 120,
                 "height": 20
               },
-              "snippet": "<button type=\"button\" class=\"badge badge-verification badge-verification-hand_verified\" data-ft-tag=\"verification\" data-ft-tag-value=\"hand_verified\" aria-pressed=\"false\" aria-label=\"Filter by hand-verified\">",
-              "nodeLabel": "HAND-VERIFIED",
+              "snippet": "<button type=\"button\" class=\"badge badge-verification badge-verification-social_proof\" data-ft-tag=\"verification\" data-ft-tag-value=\"social_proof\" aria-pressed=\"false\" aria-label=\"Filter by social proof\">",
+              "nodeLabel": "SOCIAL-PROOF",
               "explanation": "Fix any of the following:\n  Target has insufficient size (119.8px by 19.6px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 22.8px instead of at least 24px."
             },
             "subItems": {
