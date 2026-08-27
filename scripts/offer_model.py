@@ -163,6 +163,7 @@ TAG_HUES = {
     "voice": ("#7e22ce", 6.98),
     "video": ("#be123c", 6.29),
     "startup_program": ("#a21caf", 6.33),
+    "review_verified": ("#15803d", 5.02),
     "social_proof": ("#000000", 21.00),
     "unverified": ("#5f6673", 5.78),
     "none": ("#15803d", 5.02),
@@ -205,6 +206,7 @@ TAG_ICONS = {
     '<path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
     # Verification: how hard the listing was CHECKED. The glyphs form their
     # own ladder -- hearsay bubble, open question.
+    "review_verified": '<circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.4"/>',
     "social_proof": '<path d="M20.5 13.5a2 2 0 0 1-2 2H8.5l-4.5 4V5.5a2 2 0 0 1 2-2h12.5a2 2 0 0 1 2 2z"/>'
     '<path d="M8.5 9.5h8M8.5 12.5h5"/>',
     "unverified": '<circle cx="12" cy="12" r="9" stroke-dasharray="3.2 3"/>'
