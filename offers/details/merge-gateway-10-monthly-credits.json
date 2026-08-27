@@ -1,0 +1,17 @@
+{
+  "summary": "Merge Gateway routes every major LLM through one API with built-in routing, spend caps, and security. The Pro plan grants $10 in complimentary LLM credits every month (issued on the 1st of each month), with unused credits expiring at month end. A credit card is required.",
+  "claim_steps": [
+    "Sign up at https://gateway.merge.dev/signup",
+    "Choose the Pro plan (requires a credit card).",
+    "Receive $10 in complimentary credits each month; use them against any supported model via the gateway.merge.dev/v1 endpoint."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/merge_api/status/2074889972059115755",
+      "author": "Merge",
+      "handle": "@merge_api",
+      "text": "Meet Merge Gateway. One API, every model. $10 in Free LLM Credits on us each month."
+    }
+  ]
+}
