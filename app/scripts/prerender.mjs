@@ -124,6 +124,7 @@ try {
     process.exit(1);
   }
   const template = await readFile(indexPath, "utf8");
+  const origin = (baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
 
   // React SSR emits camelCase `dateTime`; normalize to the lowercase spelling
   // build.py ships for byte parity (HTML attribute names are case-insensitive,
@@ -200,6 +201,7 @@ try {
       title: "Free AI Credits",
       description:
         "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
+      canonical: `${origin}/`,
       page: "home",
     }),
   );
@@ -213,6 +215,7 @@ try {
       title: "Offer Archive · Free AI Credits",
       description:
         "Reference archive of expired free AI credit offers, kept newest-first with their original terms.",
+      canonical: `${origin}/archive.html`,
       page: "archive",
     }),
   );
@@ -226,6 +229,7 @@ try {
       title: "Privacy Policy · Free AI Credits",
       description:
         "How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage.",
+      canonical: `${origin}/privacy.html`,
       page: "privacy",
     }),
   );
@@ -242,7 +246,6 @@ try {
   const details = existsSync(detailsPath)
     ? JSON.parse(await readFile(detailsPath, "utf8"))
     : {};
-  const origin = (baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
   const offersDir = path.join(distDir, "offers");
   await mkdir(offersDir, { recursive: true });
   for (const offer of index.offers) {
