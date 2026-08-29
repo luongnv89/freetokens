@@ -26,6 +26,38 @@ function viteBuild(outDir) {
   );
 }
 
+function headOf(html) {
+  const end = html.indexOf("</head>");
+  if (end < 0) throw new Error("document has no </head>");
+  return html.slice(0, end);
+}
+
+function htmlAttr(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function metaContents(html, attribute, name) {
+  const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return [
+    ...headOf(html).matchAll(
+      new RegExp(
+        `<meta\\s+${attribute}="${escapedName}"\\s+content="([^"]*)"\\s*/?>`,
+        "g",
+      ),
+    ),
+  ].map((match) => match[1]);
+}
+
+function canonicalValues(html) {
+  return [
+    ...headOf(html).matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?>(?:\s*)/g),
+  ].map((match) => match[1]);
+}
+
 describe("static route coverage (#123)", () => {
   const outDir = path.join(tmpdir(), `ft-routes-${process.pid}`);
   let index;
@@ -256,6 +288,111 @@ describe("static route coverage (#123)", () => {
     const shot = details[offer.slug]?.social_proof?.find((p) => p.type === "screenshot");
     if (shot) {
       expect(detail).toContain(`src="../${shot.image}"`);
+    }
+  });
+
+  it("stamps every generated head with one complete social metadata set", async () => {
+    const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
+    const { offerMetaDescription } = await import("../src/lib/offerDetails.ts");
+    const details = JSON.parse(
+      readFileSync(path.join(APP_ROOT, "src/data/details.json"), "utf8"),
+    );
+    const pages = [
+      {
+        file: "index.html",
+        title: "Free AI Credits",
+        description:
+          "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
+        canonical: `${DEFAULT_BASE_URL}/`,
+        type: "website",
+      },
+      {
+        file: "archive.html",
+        title: "Offer Archive · Free AI Credits",
+        description:
+          "Reference archive of expired free AI credit offers, kept newest-first with their original terms.",
+        canonical: `${DEFAULT_BASE_URL}/archive.html`,
+        type: "website",
+      },
+      {
+        file: "privacy.html",
+        title: "Privacy Policy · Free AI Credits",
+        description:
+          "How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage.",
+        canonical: `${DEFAULT_BASE_URL}/privacy.html`,
+        type: "website",
+      },
+      ...index.offers.map((offer) => ({
+        file: path.join("offers", `${offer.slug}.html`),
+        title: `${offer.title} · Free AI Credits`,
+        description: offerMetaDescription(offer, details[offer.slug]),
+        canonical: `${DEFAULT_BASE_URL}/offers/${offer.slug}.html`,
+        type: "article",
+      })),
+    ];
+    const image = `${DEFAULT_BASE_URL}/logo-mark.svg`;
+    const properties = ["og:title", "og:description", "og:url", "og:type", "og:site_name", "og:image"];
+    const twitter = ["twitter:card", "twitter:title", "twitter:description", "twitter:image"];
+
+    for (const page of pages) {
+      const html = readFileSync(path.join(outDir, page.file), "utf8");
+      expect(html).toContain(`<title>${htmlAttr(page.title)}</title>`);
+      expect(canonicalValues(html)).toEqual([page.canonical]);
+      const expected = {
+        "og:title": page.title,
+        "og:description": page.description,
+        "og:url": page.canonical,
+        "og:type": page.type,
+        "og:site_name": "Free AI Credits",
+        "og:image": image,
+      };
+      for (const property of properties) {
+        expect(metaContents(html, "property", property)).toEqual([htmlAttr(expected[property])]);
+      }
+      const expectedTwitter = {
+        "twitter:card": "summary_large_image",
+        "twitter:title": page.title,
+        "twitter:description": page.description,
+        "twitter:image": image,
+      };
+      for (const name of twitter) {
+        expect(metaContents(html, "name", name)).toEqual([htmlAttr(expectedTwitter[name])]);
+      }
+    }
+  });
+
+  it("keeps the complete production fallback metadata in the Vite shell", () => {
+    const shell = readFileSync(path.join(APP_ROOT, "index.html"), "utf8");
+    const image = "https://luongnv89.github.io/freetokens/logo-mark.svg";
+    expect(canonicalValues(shell)).toEqual(["https://luongnv89.github.io/freetokens/"]);
+    expect(metaContents(shell, "property", "og:title")).toEqual(["Free AI Credits"]);
+    expect(metaContents(shell, "property", "og:type")).toEqual(["website"]);
+    expect(metaContents(shell, "property", "og:site_name")).toEqual(["Free AI Credits"]);
+    expect(metaContents(shell, "property", "og:image")).toEqual([image]);
+    expect(metaContents(shell, "name", "twitter:card")).toEqual(["summary_large_image"]);
+    expect(metaContents(shell, "name", "twitter:title")).toEqual(["Free AI Credits"]);
+    expect(metaContents(shell, "name", "twitter:image")).toEqual([image]);
+  });
+
+  it("does not duplicate metadata when prerender runs again", () => {
+    const files = [
+      "index.html",
+      "archive.html",
+      "privacy.html",
+      ...index.offers.slice(0, 3).map((offer) => path.join("offers", `${offer.slug}.html`)),
+    ];
+    // The synthetic-data test above intentionally changes this shared output;
+    // reset it to the default dataset before comparing two real prerenders.
+    prerender(outDir);
+    const before = files.map((file) => readFileSync(path.join(outDir, file), "utf8"));
+    prerender(outDir);
+    const after = files.map((file) => readFileSync(path.join(outDir, file), "utf8"));
+    expect(after).toEqual(before);
+    for (const html of after) {
+      expect(metaContents(html, "property", "og:title")).toHaveLength(1);
+      expect(metaContents(html, "property", "og:description")).toHaveLength(1);
+      expect(metaContents(html, "property", "og:url")).toHaveLength(1);
+      expect(metaContents(html, "name", "twitter:card")).toHaveLength(1);
     }
   });
 });
