@@ -58,6 +58,10 @@ function canonicalValues(html) {
   ].map((match) => match[1]);
 }
 
+function headings(html) {
+  return html.match(/<h1\b[^>]*>[\s\S]*?<\/h1>/g) ?? [];
+}
+
 describe("static route coverage (#123)", () => {
   const outDir = path.join(tmpdir(), `ft-routes-${process.pid}`);
   let index;
@@ -105,6 +109,28 @@ describe("static route coverage (#123)", () => {
     expect(detail).not.toContain("offer_share");
     expect(detail).not.toContain("linkedin.com/sharing");
     expect(detail).not.toContain("data-ft-share");
+  });
+
+  it("emits exactly one primary h1 on every prerendered page", () => {
+    const home = readFileSync(path.join(outDir, "index.html"), "utf8");
+    expect(headings(home)).toHaveLength(1);
+    expect(home).toContain(
+      '<h1 class="kicker">Free AI Credits — every claimable offer on one page</h1>',
+    );
+    expect(home).toMatch(
+      /<header class="masthead masthead-home">[\s\S]*<h1 class="kicker">Free AI Credits/,
+    );
+
+    for (const file of ["archive.html", "privacy.html"]) {
+      expect(headings(readFileSync(path.join(outDir, file), "utf8"))).toHaveLength(1);
+    }
+    for (const offer of index.offers) {
+      const detail = readFileSync(
+        path.join(outDir, "offers", `${offer.slug}.html`),
+        "utf8",
+      );
+      expect(headings(detail)).toHaveLength(1);
+    }
   });
 
   it("keeps depth-1 asset references climbing back to site root", () => {

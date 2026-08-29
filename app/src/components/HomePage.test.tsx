@@ -169,8 +169,15 @@ afterEach(() => {
 })
 
 describe("HomePage masthead counters (#49 port)", () => {
-  it("surfaces live, ongoing, and corroborated counts in the masthead", () => {
+  it("surfaces the primary heading and live counts in the masthead", () => {
     render(<HomePage index={index} />)
+    const heading = screen.getByRole("heading", {
+      level: 1,
+      name: "Free AI Credits — every claimable offer on one page",
+    })
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1)
+    expect(heading.closest("header")).toHaveClass("masthead-home")
+
     const count = screen.getByText(/live offers/)
     expect(count).toHaveTextContent(
       "5 live offers · 1 ongoing · 4 corroborated by official source",

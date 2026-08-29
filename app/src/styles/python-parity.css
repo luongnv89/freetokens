@@ -631,6 +631,8 @@ a:focus-visible {
   text-underline-offset: 3px;
 }
 
+.masthead-home > h1.kicker { font-weight: 400; }
+
 .masthead-home .tagline {
   font-size: 0.92rem;
   color: var(--gray);

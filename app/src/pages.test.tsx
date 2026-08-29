@@ -581,7 +581,7 @@ describe("page chrome landmarks and footer (#132)", () => {
   it("puts a main landmark and one h1 on every route type", () => {
     for (const markup of [home, archive, privacy, detail]) {
       expect(markup.match(/<main>/g)?.length).toBe(1);
-      expect(markup.match(/<h1>/g)?.length).toBe(1);
+      expect(markup.match(/<h1\b/g)?.length).toBe(1);
     }
   });
 
@@ -656,9 +656,11 @@ describe("shared header chrome (#112)", () => {
   it("still puts exactly one main landmark and one h1 per page", () => {
     for (const [, markup] of routes) {
       expect(markup.match(/<main>/g)?.length).toBe(1);
-      expect(markup.match(/<h1>/g)?.length).toBe(1);
+      expect(markup.match(/<h1\b/g)?.length).toBe(1);
     }
-    expect(home).toMatch(/<h1>Free AI Credits<\/h1>/);
+    expect(home).toContain(
+      '<h1 class="kicker">Free AI Credits — every claimable offer on one page</h1>',
+    );
     expect(archive).toContain("<h1>Expired offer archive</h1>");
     expect(privacy).toContain("<h1>Privacy Policy</h1>");
   });

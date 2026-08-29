@@ -5,8 +5,8 @@ import { BrandMark } from "./BrandMark"
  * primary nav render on every route, so navigating between pages shows
  * no jump in layout or branding. `depth` mirrors SiteFooter (0 for root
  * pages, 1 for offers/<slug>.html) and prefixes every href; `current`
- * drives the active nav state. The home route owns the document <h1>;
- * every other route renders its own page heading below this bar.
+ * drives the active nav state. The shared bar renders a wordmark; each route
+ * renders its own page heading below this bar.
  */
 export function SiteHeader({
   depth = 0,
@@ -21,11 +21,7 @@ export function SiteHeader({
     <div className="site-bar">
       <a className="site-brand" href={homeHref}>
         <BrandMark depth={depth} size={32} alt="" />
-        {current === "home" ? (
-          <h1>Free AI Credits</h1>
-        ) : (
-          <p className="site-wordmark">Free AI Credits</p>
-        )}
+        <p className="site-wordmark">Free AI Credits</p>
       </a>
       <nav className="site-nav" aria-label="Primary">
         <a href={homeHref} aria-current={current === "home" ? "page" : undefined}>
