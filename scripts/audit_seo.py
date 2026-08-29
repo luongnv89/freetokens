@@ -60,6 +60,7 @@ class MetadataParser(HTMLParser):
         self.h1_count = 0
         self.html_lang = ""
         self.in_head = False
+        self._head_closed = False
         self._json_ld_buffer: list[str] | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -70,12 +71,16 @@ class MetadataParser(HTMLParser):
             self.html_lang = attributes.get("lang", "")
             return
         if tag == "head":
-            self.in_head = True
+            if not self._head_closed:
+                self.in_head = True
             return
-        if self.in_head and tag not in HEAD_CONTENT_TAGS:
-            self.in_head = False
         if tag == "body":
+            self.in_head = False
+            self._head_closed = True
             return
+        if tag not in HEAD_CONTENT_TAGS:
+            self.in_head = False
+            self._head_closed = True
         if tag == "h1":
             self.h1_count += 1
             return
@@ -117,6 +122,7 @@ class MetadataParser(HTMLParser):
             self._finish_json_ld()
         elif tag == "head":
             self.in_head = False
+            self._head_closed = True
 
     def close(self) -> None:
         super().close()

@@ -93,6 +93,15 @@ class AuditSeoTests(unittest.TestCase):
         self.assertEqual(parser.meta_names, set())
         self.assertFalse(parser.in_head)
 
+    def test_head_cannot_reopen_after_body_content(self):
+        parser = audit_seo.parse_document(
+            "<html><body><h1>Example</h1><head>"
+            "<meta name='description' content='Body only'></head></body></html>"
+        )
+
+        self.assertEqual(parser.meta_names, set())
+        self.assertFalse(parser.in_head)
+
     def test_json_ld_requires_non_empty_objects(self):
         for payload in ("null", "true", '"text"', "[]", "[null]", "{}", "[{}]"):
             with self.subTest(payload=payload):
