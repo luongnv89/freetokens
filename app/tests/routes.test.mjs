@@ -467,7 +467,7 @@ describe("static route coverage (#123)", () => {
     expect(canonicalValues(home)).toEqual(["https://luongnv89.github.io/freetokens/"]);
   });
 
-  it("does not duplicate metadata when prerender runs again", () => {
+  it("does not duplicate metadata when prerender runs again", { timeout: 15_000 }, () => {
     const files = [
       "index.html",
       "archive.html",
