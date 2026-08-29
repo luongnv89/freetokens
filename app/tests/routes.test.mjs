@@ -207,7 +207,36 @@ describe("static route coverage (#123)", () => {
       /<link[^>]*rel="alternate"[^>]*type="application\/rss\+xml"[^>]*href="\.\.\/feed\.xml"/,
     );
     // Internal page hrefs stay relative; only the feed uses the absolute origin.
-    expect(home).not.toContain(`href="${DEFAULT_BASE_URL}`);
+    // Canonical metadata is absolute; internal anchor hrefs remain relative.
+    expect(home).not.toMatch(/<a[^>]+href="https:\/\/luongnv89\.github\.io\/freetokens\//);
+  });
+
+  it("stamps every prerendered page with one route-matching canonical", async () => {
+    const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
+    const canonicalLinks = (html) =>
+      [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?>(?:\s*)/g)].map(
+        (match) => match[1],
+      );
+    const pages = [
+      ["index.html", `${DEFAULT_BASE_URL}/`],
+      ["archive.html", `${DEFAULT_BASE_URL}/archive.html`],
+      ["privacy.html", `${DEFAULT_BASE_URL}/privacy.html`],
+    ];
+
+    for (const [file, expected] of pages) {
+      expect(canonicalLinks(readFileSync(path.join(outDir, file), "utf8"))).toEqual([
+        expected,
+      ]);
+    }
+    for (const offer of index.offers) {
+      const detail = readFileSync(
+        path.join(outDir, "offers", `${offer.slug}.html`),
+        "utf8",
+      );
+      expect(canonicalLinks(detail)).toEqual([
+        `${DEFAULT_BASE_URL}/offers/${offer.slug}.html`,
+      ]);
+    }
   });
 
   it("stamps detail pages with summary-based meta, title, and rel=canonical (#128)", async () => {
