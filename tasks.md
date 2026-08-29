@@ -15,6 +15,13 @@ Generated: 2026-08-21
 - **Deploy pipeline (Task 2.2)** gates every release verification.
 - **GA4 instrumentation (Tasks 3.3–3.4)** gates attribution-dependent work (outreach kit, newsletter decision).
 
+### SEO baseline dependency (Task 1.1)
+
+The SEO follow-up tasks tracked by epic #197 use [`docs/seo-baseline-2026-08-29.md`](./docs/seo-baseline-2026-08-29.md) at commit `185e74550d5e76ec79d8f365c51e8f80010a8817` as their shared baseline:
+
+- **Task 2.4 / issue #207:** validate structured data and sitemap against tooling.
+- **Task 3.1 / issue #210:** publish `llms.txt` and related AI-readable content.
+
 ## Sprint Overview
 
 | Sprint | Phase | Focus | Task Count |
