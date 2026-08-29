@@ -363,15 +363,33 @@ describe("static route coverage (#123)", () => {
 
   it("keeps the complete production fallback metadata in the Vite shell", () => {
     const shell = readFileSync(path.join(APP_ROOT, "index.html"), "utf8");
+    const canonical = "https://luongnv89.github.io/freetokens/";
+    const description =
+      "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
     const image = "https://luongnv89.github.io/freetokens/logo-mark.svg";
-    expect(canonicalValues(shell)).toEqual(["https://luongnv89.github.io/freetokens/"]);
-    expect(metaContents(shell, "property", "og:title")).toEqual(["Free AI Credits"]);
-    expect(metaContents(shell, "property", "og:type")).toEqual(["website"]);
-    expect(metaContents(shell, "property", "og:site_name")).toEqual(["Free AI Credits"]);
-    expect(metaContents(shell, "property", "og:image")).toEqual([image]);
-    expect(metaContents(shell, "name", "twitter:card")).toEqual(["summary_large_image"]);
-    expect(metaContents(shell, "name", "twitter:title")).toEqual(["Free AI Credits"]);
-    expect(metaContents(shell, "name", "twitter:image")).toEqual([image]);
+    const expectedProperties = {
+      "og:title": "Free AI Credits",
+      "og:description": description,
+      "og:url": canonical,
+      "og:type": "website",
+      "og:site_name": "Free AI Credits",
+      "og:image": image,
+    };
+    for (const [property, value] of Object.entries(expectedProperties)) {
+      expect(metaContents(shell, "property", property)).toEqual([htmlAttr(value)]);
+    }
+    const expectedTwitter = {
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Free AI Credits",
+      "twitter:description": description,
+      "twitter:image": image,
+    };
+    for (const [name, value] of Object.entries(expectedTwitter)) {
+      expect(metaContents(shell, "name", name)).toEqual([htmlAttr(value)]);
+    }
+    expect(canonicalValues(shell)).toEqual([canonical]);
+    expect(shell.match(/free-ai-credits:social-meta:start/g)).toHaveLength(1);
+    expect(shell.match(/free-ai-credits:social-meta:end/g)).toHaveLength(1);
   });
 
   it("does not duplicate metadata when prerender runs again", () => {
@@ -379,7 +397,7 @@ describe("static route coverage (#123)", () => {
       "index.html",
       "archive.html",
       "privacy.html",
-      ...index.offers.slice(0, 3).map((offer) => path.join("offers", `${offer.slug}.html`)),
+      ...index.offers.map((offer) => path.join("offers", `${offer.slug}.html`)),
     ];
     // The synthetic-data test above intentionally changes this shared output;
     // reset it to the default dataset before comparing two real prerenders.
