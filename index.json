@@ -1,9 +1,65 @@
 {
-  "generated_at": "2026-08-27T12:20:27Z",
-  "count": 45,
-  "active_count": 31,
-  "expired_count": 14,
+  "generated_at": "2026-08-29T15:11:06Z",
+  "count": 49,
+  "active_count": 34,
+  "expired_count": 15,
   "offers": [
+    {
+      "slug": "genspark-free-trial-10k-credits",
+      "title": "GenSpark Free Trial — 1 Month + 10K Credits",
+      "provider": "GenSpark",
+      "category": "api_provider",
+      "amount": "1 month free subscription + 10,000 credits (code: WELCOME25)",
+      "expiry_date": null,
+      "source_url": "https://x.com/ariskaa_ai/status/2093696041417846888",
+      "verified_date": "2026-08-29",
+      "verification": "social_proof",
+      "review_status": "verified",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "github-copilot-student-pack-2yr",
+      "title": "GitHub Copilot Student Pack — 2 Years Free",
+      "provider": "GitHub",
+      "category": "coding",
+      "amount": "2 years of Copilot Pro + 100+ dev tools ($240 value)",
+      "expiry_date": "2026-09-01",
+      "source_url": "https://x.com/alannnfx/status/2093574538923823345",
+      "verified_date": "2026-08-29",
+      "verification": "social_proof",
+      "review_status": "verified",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "google-gemini-student-free-year",
+      "title": "Google Gemini Student Free Year",
+      "provider": "Google",
+      "category": "api_provider",
+      "amount": "1 year of Google AI Pro (US) or Google AI Plus (140+ countries) free",
+      "expiry_date": "2026-09-30",
+      "source_url": "https://x.com/GeminiApp/status/2090165248196252003",
+      "verified_date": "2026-08-29",
+      "verification": "social_proof",
+      "review_status": "verified",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "workbuddy-hy4-preview-free",
+      "title": "WorkBuddy Hy4 Preview Free",
+      "provider": "WorkBuddy",
+      "category": "coding",
+      "amount": "Free access to Hy4 preview (2 weeks)",
+      "expiry_date": "2026-09-11",
+      "source_url": "https://x.com/WorkBuddy_AI/status/2093282334896431224",
+      "verified_date": "2026-08-29",
+      "verification": "social_proof",
+      "review_status": "verified",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "merge-gateway-10-monthly-credits",
       "title": "Merge Gateway — $10 in Free LLM Credits Every Month",
@@ -604,7 +660,7 @@
       "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "vidu-free-credits",
