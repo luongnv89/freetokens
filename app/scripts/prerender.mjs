@@ -157,6 +157,30 @@ try {
     );
   }
 
+  const SOCIAL_META_START = "<!-- free-ai-credits:social-meta:start -->";
+  const SOCIAL_META_END = "<!-- free-ai-credits:social-meta:end -->";
+  const SOCIAL_META_RE =
+    /[ \t]*<!-- free-ai-credits:social-meta:start -->[\s\S]*?[ \t]*<!-- free-ai-credits:social-meta:end -->/g;
+
+  function renderSocialMetadata({ title, description, canonical, type }) {
+    const image = `${origin}/logo-mark.svg`;
+    return [
+      `    ${SOCIAL_META_START}`,
+      `    <link rel="canonical" href="${htmlAttr(canonical)}" />`,
+      `    <meta property="og:title" content="${htmlAttr(title)}" />`,
+      `    <meta property="og:description" content="${htmlAttr(description)}" />`,
+      `    <meta property="og:url" content="${htmlAttr(canonical)}" />`,
+      `    <meta property="og:type" content="${type}" />`,
+      `    <meta property="og:site_name" content="Free AI Credits" />`,
+      `    <meta property="og:image" content="${htmlAttr(image)}" />`,
+      `    <meta name="twitter:card" content="summary_large_image" />`,
+      `    <meta name="twitter:title" content="${htmlAttr(title)}" />`,
+      `    <meta name="twitter:description" content="${htmlAttr(description)}" />`,
+      `    <meta name="twitter:image" content="${htmlAttr(image)}" />`,
+      `    ${SOCIAL_META_END}`,
+    ].join("\n");
+  }
+
   function fillPage({ markup, title, description, canonical, depth = 0, page, slug }) {
     // All dynamic replacements go through replacer FUNCTIONS: offer copy
     // routinely contains "$15K"-style amounts, and a string replacement
@@ -169,13 +193,22 @@ try {
       /<meta\s+name="description"\s+content="[^"]*"\s*\/>/,
       () => `<meta name="description" content="${htmlAttr(description)}" />`,
     );
-    if (canonical) {
-      doc = doc.replace(/\s*<link\s+rel="canonical"[^>]*>/g, "");
-      doc = doc.replace(
-        "</title>",
-        `</title>\n    <link rel="canonical" href="${htmlAttr(canonical)}" />`,
+    doc = doc.replace(/\s*<link\s+rel="canonical"[^>]*>/g, "");
+    const socialBlocks = doc.match(SOCIAL_META_RE) ?? [];
+    if (socialBlocks.length !== 1) {
+      console.error(
+        `error: expected one social metadata block, found ${socialBlocks.length}`,
       );
+      process.exit(1);
     }
+    doc = doc.replace(SOCIAL_META_RE, () =>
+      renderSocialMetadata({
+        title,
+        description,
+        canonical,
+        type: page === "detail" ? "article" : "website",
+      }),
+    );
     // Depth-1 documents must climb out of offers/: every root-relative asset
     // reference emitted by Vite gets one ../ prefix.
     if (depth > 0) doc = doc.replaceAll(/((?:src|href)=")\.\//g, `$1${"../".repeat(depth)}`);
