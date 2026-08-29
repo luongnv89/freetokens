@@ -58,6 +58,23 @@ function canonicalValues(html) {
   ].map((match) => match[1]);
 }
 
+const OG_PROPERTIES = ["og:title", "og:description", "og:url", "og:type", "og:site_name", "og:image"];
+const TWITTER_PROPERTIES = ["twitter:card", "twitter:title", "twitter:description", "twitter:image"];
+
+function headShape(html) {
+  const head = headOf(html);
+  const count = (pattern) => head.match(pattern)?.length ?? 0;
+  return {
+    lang: [...html.matchAll(/<html\s+lang="([^"]+)"/g)].map((match) => match[1]),
+    charset: count(/<meta\s+charset="[^"]+"\s*\/?\s*>/g),
+    viewport: metaContents(html, "name", "viewport").length,
+    description: metaContents(html, "name", "description").length,
+    canonical: canonicalValues(html).length,
+    og: OG_PROPERTIES.map((property) => metaContents(html, "property", property).length),
+    twitter: TWITTER_PROPERTIES.map((name) => metaContents(html, "name", name).length),
+  };
+}
+
 function headings(html) {
   return html.match(/<h1\b[^>]*>[\s\S]*?<\/h1>/g) ?? [];
 }
@@ -357,9 +374,6 @@ describe("static route coverage (#123)", () => {
       })),
     ];
     const image = `${DEFAULT_BASE_URL}/logo-mark.svg`;
-    const properties = ["og:title", "og:description", "og:url", "og:type", "og:site_name", "og:image"];
-    const twitter = ["twitter:card", "twitter:title", "twitter:description", "twitter:image"];
-
     for (const page of pages) {
       const html = readFileSync(path.join(outDir, page.file), "utf8");
       expect(html).toContain(`<title>${htmlAttr(page.title)}</title>`);
@@ -372,7 +386,7 @@ describe("static route coverage (#123)", () => {
         "og:site_name": "Free AI Credits",
         "og:image": image,
       };
-      for (const property of properties) {
+      for (const property of OG_PROPERTIES) {
         expect(metaContents(html, "property", property)).toEqual([htmlAttr(expected[property])]);
       }
       const expectedTwitter = {
@@ -381,7 +395,7 @@ describe("static route coverage (#123)", () => {
         "twitter:description": page.description,
         "twitter:image": image,
       };
-      for (const name of twitter) {
+      for (const name of TWITTER_PROPERTIES) {
         expect(metaContents(html, "name", name)).toEqual([htmlAttr(expectedTwitter[name])]);
       }
     }
@@ -416,6 +430,41 @@ describe("static route coverage (#123)", () => {
     expect(canonicalValues(shell)).toEqual([canonical]);
     expect(shell.match(/free-ai-credits:social-meta:start/g)).toHaveLength(1);
     expect(shell.match(/free-ai-credits:social-meta:end/g)).toHaveLength(1);
+  });
+
+  it("keeps a single metadata shape in the Vite shell and prerendered home", () => {
+    const shell = readFileSync(path.join(APP_ROOT, "index.html"), "utf8");
+    const home = readFileSync(path.join(outDir, "index.html"), "utf8");
+    expect(headShape(shell)).toEqual({
+      lang: ["en"],
+      charset: 1,
+      viewport: 1,
+      description: 1,
+      canonical: 1,
+      og: [1, 1, 1, 1, 1, 1],
+      twitter: [1, 1, 1, 1],
+    });
+    expect(headShape(home)).toEqual(headShape(shell));
+  });
+
+  it("removes duplicate description and canonical tags from a prerender template", () => {
+    const indexPath = path.join(outDir, "index.html");
+    const shell = readFileSync(indexPath, "utf8");
+    writeFileSync(
+      indexPath,
+      shell.replace(
+        "</head>",
+        '    <meta name="description" content="stale description" />\n' +
+          '    <link rel="canonical" href="https://example.test/stale/" />\n' +
+          "</head>",
+      ),
+    );
+    prerender(outDir);
+    const home = readFileSync(indexPath, "utf8");
+    const description =
+      "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
+    expect(metaContents(home, "name", "description")).toEqual([htmlAttr(description)]);
+    expect(canonicalValues(home)).toEqual(["https://luongnv89.github.io/freetokens/"]);
   });
 
   it("does not duplicate metadata when prerender runs again", () => {
