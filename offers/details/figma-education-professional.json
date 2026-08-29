@@ -1,0 +1,22 @@
+{
+  "summary": "Figma Education gives verified higher-education students the Professional plan free for one year (educators two years), including Figma Make, Figma Sites (one publishable site), and 3,000 AI credits per month. Access renews with re-verification via SheerID.",
+  "claim_steps": [
+    "Create a Figma account using your school email.",
+    "Go to https://www.figma.com/education/apply, select Higher ed, and complete SheerID verification.",
+    "Once approved, create an Education team to start building with Professional features and AI credits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.figma.com/education/",
+      "title": "Figma for Education",
+      "text": "Students and faculty get Figma for free. Use your student email address to sign up for Figma Education."
+    },
+    {
+      "type": "link",
+      "url": "https://help.figma.com/hc/en-us/articles/360041061214",
+      "title": "Figma for Education — Help Center",
+      "text": "Figma for Education provides free Figma access to students and educators. Higher education users get the Professional plan with AI tools and 3,000 AI credits per month for one year students, two years educators."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "summary": "Notion gives verified college/university students a free Education Plus plan (same as paid Plus: unlimited blocks and file uploads, 30-day version history, up to 10 guests) while enrolled via a school email recognised in the WHED. Stays active as long as the school email remains valid.",
+  "claim_steps": [
+    "Sign up to Notion with your school email address.",
+    "Go to Settings → Upgrade plan → Get free Education plan.",
+    "If your school is recognised, you are upgraded to Plus automatically; otherwise email team@makenotion.com to allowlist your domain."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.notion.com/help/notion-for-education",
+      "title": "Get the Education Plan for students & teachers",
+      "text": "The Education Plan for individual students and teachers is a free plan for a one-member workspace. It is available for students at accredited colleges and universities with a WHED school email."
+    }
+  ]
+}

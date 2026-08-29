@@ -1,0 +1,22 @@
+{
+  "summary": "Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.",
+  "claim_steps": [
+    "Go to https://azure.microsoft.com/en-us/free/students and click Activate.",
+    "Sign in with your school email and complete student verification via the Azure Education Hub.",
+    "Once approved, start building with $100 credit and free-tier services for 12 months."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://azure.microsoft.com/en-us/free/students",
+      "title": "Azure for Students",
+      "text": "Build in the cloud with Azure for Students for free. Get $100 credit for 12 months plus select free services, no credit card required."
+    },
+    {
+      "type": "link",
+      "url": "https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0170p",
+      "title": "Azure for Students — Offer Details",
+      "text": "Azure for Students gets you started with $100 in Azure credits to be used within the first 12 months, plus select free services without requiring a credit card at sign-up."
+    }
+  ]
+}
