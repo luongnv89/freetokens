@@ -52,6 +52,24 @@ class SchemaConsistencyTests(unittest.TestCase):
             set(self.schema["required"]), set(validate_offers.build.REQUIRED_FIELDS)
         )
 
+    def test_schema_is_strict_object_covering_each_required_field(self):
+        self.assertEqual(
+            self.schema["$schema"], "https://json-schema.org/draft/2020-12/schema"
+        )
+        self.assertEqual(self.schema["type"], "object")
+        self.assertIs(self.schema["additionalProperties"], False)
+        self.assertEqual(
+            set(self.schema["properties"]), set(self.schema["required"])
+        )
+
+    def test_non_strict_root_fails_consistency_check(self):
+        schema = json.loads(json.dumps(self.schema))
+        schema["additionalProperties"] = True
+        with self.assertRaisesRegex(
+            validate_offers.SchemaMismatch, "additionalProperties"
+        ):
+            validate_offers.check_schema_matches_build(schema)
+
     def test_schema_category_enum_matches_build(self):
         self.assertEqual(
             self.schema["properties"]["category"]["enum"],
@@ -158,6 +176,20 @@ class ValidateDirTests(unittest.TestCase):
                 validate_offers.validate_offers_dir(offers_dir)
 
 
+class WorkflowTests(unittest.TestCase):
+    WORKFLOW = REPO / ".github" / "workflows" / "validate.yml"
+
+    def test_offer_validation_filters_pushes_to_offer_files(self):
+        text = self.WORKFLOW.read_text(encoding="utf-8")
+        triggers = text.split("permissions:", 1)[0]
+        self.assertRegex(
+            triggers,
+            r'(?m)^  push:\n    paths:\n      - "offers/\*\*"\n  pull_request:\n  workflow_dispatch:',
+        )
+        pull_request = triggers.split("  pull_request:", 1)[1]
+        self.assertNotIn("paths:", pull_request)
+
+
 class MainTests(unittest.TestCase):
     def _run_main(self, argv):
         out, err = io.StringIO(), io.StringIO()
@@ -184,7 +216,16 @@ class MainTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             schema_path = os.path.join(tmp, "schema.json")
             with open(schema_path, "w", encoding="utf-8") as fh:
-                json.dump({"required": [], "properties": {}}, fh)
+                json.dump(
+                    {
+                        "$schema": "https://json-schema.org/draft/2020-12/schema",
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": [],
+                        "properties": {},
+                    },
+                    fh,
+                )
             code, _, err = self._run_main(["--schema", schema_path])
             self.assertEqual(code, 1)
             self.assertIn("REQUIRED_FIELDS", err)
