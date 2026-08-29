@@ -161,6 +161,10 @@ try {
   const SOCIAL_META_END = "<!-- free-ai-credits:social-meta:end -->";
   const SOCIAL_META_RE =
     /[ \t]*<!-- free-ai-credits:social-meta:start -->[\s\S]*?[ \t]*<!-- free-ai-credits:social-meta:end -->/g;
+  const DESCRIPTION_META_RE =
+    /[ \t]*<meta\s+name="description"\s+content="[^"]*"\s*\/?>(?:[ \t]*(?:\r?\n))?/gi;
+  const CANONICAL_LINK_RE =
+    /[ \t]*<link\b(?=[^>]*\brel="[^"]*\bcanonical\b[^"]*")[^>]*>(?:[ \t]*(?:\r?\n))?/gi;
 
   function renderSocialMetadata({ title, description, canonical, type }) {
     const image = `${origin}/logo-mark.svg`;
@@ -189,11 +193,18 @@ try {
     doc = doc.replace(/<title>.*?<\/title>/s, () => `<title>${htmlAttr(title)}</title>`);
     // Vite pretty-prints the shell meta tag across lines; match either form
     // so archive/privacy/detail get their own description (#132).
-    doc = doc.replace(
-      /<meta\s+name="description"\s+content="[^"]*"\s*\/>/,
-      () => `<meta name="description" content="${htmlAttr(description)}" />`,
-    );
-    doc = doc.replace(/\s*<link\s+rel="canonical"[^>]*>/g, "");
+    let descriptionCount = 0;
+    doc = doc.replace(DESCRIPTION_META_RE, () => {
+      descriptionCount += 1;
+      return descriptionCount === 1
+        ? `    <meta name="description" content="${htmlAttr(description)}" />\n`
+        : "";
+    });
+    if (descriptionCount === 0) {
+      console.error("error: expected one description meta tag, found none");
+      process.exit(1);
+    }
+    doc = doc.replace(CANONICAL_LINK_RE, "");
     const socialBlocks = doc.match(SOCIAL_META_RE) ?? [];
     if (socialBlocks.length !== 1) {
       console.error(
