@@ -6,7 +6,7 @@ const ROUTES = [
   "/index.html",
   "/archive.html",
   "/privacy.html",
-  "/offers/github-copilot-free.html",
+  "/offers/cursor-hobby-plan.html",
 ] as const;
 
 async function assertNoHorizontalOverflow(page: import("@playwright/test").Page) {
@@ -32,7 +32,7 @@ for (const route of ROUTES) {
     } else if (route === "/privacy.html") {
       await expect(page.locator("h1")).toHaveText("Privacy Policy");
     } else {
-      await expect(page.locator("h1")).toContainText(/Copilot/i);
+      await expect(page.locator("h1")).toContainText(/Cursor/i);
     }
     await assertNoHorizontalOverflow(page);
   });

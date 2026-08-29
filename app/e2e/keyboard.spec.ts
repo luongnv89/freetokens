@@ -31,11 +31,11 @@ test("keyboard path: filter → search → sort → offer click", async ({ page 
 
   const search = page.locator("#ft-search");
   await focusVisibly(search);
-  await page.keyboard.type("Copilot");
+  await page.keyboard.type("Cursor");
   await expect
     .poll(() => new URL(page.url()).searchParams.get("q"), { timeout: 3000 })
-    .toBe("copilot");
-  await expect(page.locator("#offer-github-copilot-free")).toBeVisible();
+    .toBe("cursor");
+  await expect(page.locator("#offer-cursor-hobby-plan")).toBeVisible();
 
   const sort = page.locator("#ft-sort");
   await focusVisibly(sort);

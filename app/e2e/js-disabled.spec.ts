@@ -13,8 +13,8 @@ test("home prerenders the offer grid without JS", async ({ page }) => {
 });
 
 test("offer detail prerenders full content without JS", async ({ page }) => {
-  await page.goto("/offers/github-copilot-free.html");
-  await expect(page.locator("h1")).toContainText(/Copilot/i);
+  await page.goto("/offers/cursor-hobby-plan.html");
+  await expect(page.locator("h1")).toContainText(/Cursor/i);
   await expect(page.locator("a.od-cta")).toBeVisible();
   await expect(page.locator("[data-ft-checklist]")).toBeVisible();
   const rootMarkup = await page.locator("#root").innerHTML();
