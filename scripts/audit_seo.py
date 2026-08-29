@@ -69,6 +69,9 @@ class MetadataParser(HTMLParser):
         if tag == "head":
             self.in_head = True
             return
+        if tag == "body":
+            self.in_head = False
+            return
         if tag == "h1":
             self.h1_count += 1
             return
@@ -120,11 +123,19 @@ class MetadataParser(HTMLParser):
             return
         payload = "".join(self._json_ld_buffer).strip()
         try:
-            json.loads(payload)
+            decoded = json.loads(payload)
         except (json.JSONDecodeError, TypeError):
             self.invalid_json_ld_blocks += 1
         else:
-            self.json_ld_blocks += 1
+            is_json_ld_document = isinstance(decoded, dict) or (
+                isinstance(decoded, list)
+                and bool(decoded)
+                and all(isinstance(item, dict) for item in decoded)
+            )
+            if is_json_ld_document:
+                self.json_ld_blocks += 1
+            else:
+                self.invalid_json_ld_blocks += 1
         self._json_ld_buffer = None
 
 

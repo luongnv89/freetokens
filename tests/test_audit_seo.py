@@ -75,6 +75,32 @@ class AuditSeoTests(unittest.TestCase):
         self.assertEqual(len(result["warning"]), 1)
         self.assertIn("index.html: Missing Twitter tags: twitter:card, twitter:title, twitter:description, twitter:image", result["warning"])
 
+    def test_metadata_after_implicit_head_end_is_not_counted(self):
+        parser = audit_seo.parse_document(
+            "<html><head><body><meta name='description' content='Body only'></body></html>"
+        )
+
+        self.assertEqual(parser.meta_names, set())
+        self.assertEqual(parser.meta_properties, set())
+        self.assertFalse(parser.in_head)
+
+    def test_json_ld_requires_objects(self):
+        for payload in ("null", "true", '"text"', "[]", "[null]"):
+            with self.subTest(payload=payload):
+                dist = self.make_dist(
+                    {
+                        "index.html": f"""<html lang="en"><head>
+                          <script type="application/ld+json">{payload}</script>
+                        </head><body><h1>Example</h1></body></html>""",
+                        "robots.txt": "",
+                        "sitemap.xml": "",
+                    }
+                )
+
+                result = audit_seo.audit_directory(dist)
+
+                self.assertIn("index.html: Invalid JSON-LD structured data", result["critical"])
+
     def test_head_scope_empty_values_and_json_validity_are_checked(self):
         dist = self.make_dist(
             {
