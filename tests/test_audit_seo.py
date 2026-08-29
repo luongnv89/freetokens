@@ -75,7 +75,7 @@ class AuditSeoTests(unittest.TestCase):
         self.assertEqual(len(result["warning"]), 1)
         self.assertIn("index.html: Missing Twitter tags: twitter:card, twitter:title, twitter:description, twitter:image", result["warning"])
 
-    def test_metadata_after_implicit_head_end_is_not_counted(self):
+    def test_metadata_after_implicit_body_start_is_not_counted(self):
         parser = audit_seo.parse_document(
             "<html><head><body><meta name='description' content='Body only'></body></html>"
         )
@@ -84,8 +84,17 @@ class AuditSeoTests(unittest.TestCase):
         self.assertEqual(parser.meta_properties, set())
         self.assertFalse(parser.in_head)
 
-    def test_json_ld_requires_objects(self):
-        for payload in ("null", "true", '"text"', "[]", "[null]"):
+    def test_metadata_after_implicit_body_content_is_not_counted(self):
+        parser = audit_seo.parse_document(
+            "<html><head><title>Title</title><h1>Example</h1>"
+            "<meta name='description' content='Body only'></html>"
+        )
+
+        self.assertEqual(parser.meta_names, set())
+        self.assertFalse(parser.in_head)
+
+    def test_json_ld_requires_non_empty_objects(self):
+        for payload in ("null", "true", '"text"', "[]", "[null]", "{}", "[{}]"):
             with self.subTest(payload=payload):
                 dist = self.make_dist(
                     {

@@ -38,6 +38,9 @@ TWITTER_PROPERTIES = (
     "twitter:description",
     "twitter:image",
 )
+HEAD_CONTENT_TAGS = frozenset(
+    {"base", "link", "meta", "title", "noscript", "noframes", "style", "template", "script"}
+)
 
 
 class AuditError(Exception):
@@ -69,8 +72,9 @@ class MetadataParser(HTMLParser):
         if tag == "head":
             self.in_head = True
             return
-        if tag == "body":
+        if self.in_head and tag not in HEAD_CONTENT_TAGS:
             self.in_head = False
+        if tag == "body":
             return
         if tag == "h1":
             self.h1_count += 1
@@ -127,10 +131,13 @@ class MetadataParser(HTMLParser):
         except (json.JSONDecodeError, TypeError):
             self.invalid_json_ld_blocks += 1
         else:
-            is_json_ld_document = isinstance(decoded, dict) or (
+            is_json_ld_document = (
+                isinstance(decoded, dict)
+                and bool(decoded)
+            ) or (
                 isinstance(decoded, list)
                 and bool(decoded)
-                and all(isinstance(item, dict) for item in decoded)
+                and all(isinstance(item, dict) and bool(item) for item in decoded)
             )
             if is_json_ld_document:
                 self.json_ld_blocks += 1
