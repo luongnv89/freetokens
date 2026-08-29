@@ -529,6 +529,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
         <main>
         <header className="masthead masthead-home">
           <SiteHeader current="home" />
+          <h1 className="kicker">Free AI Credits — every claimable offer on one page</h1>
           <p className="kicker">
             zero runtime &middot; every offer labeled with review status, verification level &amp; sign-up need
           </p>
