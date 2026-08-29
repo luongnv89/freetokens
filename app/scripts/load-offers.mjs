@@ -32,7 +32,7 @@ const REQUIRED_FIELDS = [
   "review_status",
   "signup",
 ];
-const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program"];
+const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program", "student"];
 const VERIFICATION_LEVELS = ["social_proof", "unverified"];
 const REVIEW_STATUSES = ["verified", "unverified", "under-review"];
 const SIGNUP_MODES = ["none", "required"];

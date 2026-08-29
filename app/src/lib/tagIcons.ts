@@ -9,6 +9,7 @@ export type { TagIconMeta } from "./tagIcons.generated";
 
 // Baseline recorded before the lucide migration (#122): the 11 hand-authored
 // <symbol> payloads totalled 1630 bytes of glyph markup. The generated
-// lucide set must stay at or under that so the home listing's icon payload
-// never regresses (acceptance criterion 2; asserted in tagIcons.test.ts).
-export const SPRITE_GLYPH_BUDGET_BYTES = 1630;
+// lucide set must stay at or under that plus the student tag so the home
+// listing's icon payload never regresses (acceptance criterion 2; asserted
+// in tagIcons.test.ts).
+export const SPRITE_GLYPH_BUDGET_BYTES = 1800;

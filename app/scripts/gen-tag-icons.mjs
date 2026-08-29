@@ -34,6 +34,7 @@ const TAG_TO_LUCIDE = {
     icon: "rocket",
     note: "lucide rocket; hand-drawn set uses the same four-path rocket",
   },
+  student: { icon: "graduation-cap", note: "mortarboard for student offers" },
   review_verified: { icon: "circle-check", note: "same circle+check seal as the former hand_verified tag" },
   social_proof: { icon: "message-square-text", note: "bubble keeps its hearsay lines" },
   unverified: {

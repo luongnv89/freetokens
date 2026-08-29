@@ -77,7 +77,7 @@
         },
         "category": {
           "type": "string",
-          "enum": ["api_provider", "coding", "image", "voice", "video", "startup_program"],
+          "enum": ["api_provider", "coding", "image", "voice", "video", "startup_program", "student"],
           "description": "Offer category badge."
         },
         "amount": {

@@ -25,7 +25,7 @@ See @prd.md and @tasks.md for scope. Epic: #31.
 ## Offer content schema (non-negotiable)
 - Required fields: `title`, `provider`, `category`, `amount`, `expiry_date`, `source_url`, `verified_date`
 - Dates are `YYYY-MM-DD`; `expiry_date: null` means ongoing
-- `category` enum: api_provider | coding | image | voice | video | startup_program
+- `category` enum: api_provider | coding | image | voice | video | startup_program | student
 - Slug = provider+title, must be unique across `offers/`
 - Every offer MUST have a real `source_url` you have visited, plus today's `verified_date`
 

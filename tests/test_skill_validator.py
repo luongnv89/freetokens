@@ -126,7 +126,7 @@ class HelperCliTests(unittest.TestCase):
             code, _, err = run_helper(draft)
             self.assertEqual(code, 1)
             self.assertIn("category", err)
-            self.assertIn("api_provider|coding|image|voice|video|startup_program", err)
+            self.assertIn("api_provider|coding|image|voice|video|startup_program|student", err)
 
     def test_bad_slug_convention_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:

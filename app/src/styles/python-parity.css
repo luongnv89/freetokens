@@ -26,11 +26,11 @@
      green category tag would read as an endorsement of the offer rather than
      a description of it. That is why `coding` is teal.
 
-     Eleven values, seven hues -- the repeats are the point, not an oversight.
+     Thirteen values, eight hues -- the repeats are the point, not an oversight.
      Hue encodes the *claim*, not the value: green is "strongest claim"
      (review-verified; no sign-up wall) and the muted gray is "weakest, treat
-     with care" (unverified; sign-up required; expired). The five categories,
-     which make no claim at all, are the five hues nothing else uses. Repeats
+     with care" (unverified; sign-up required; expired). The seven categories,
+     which make no claim at all, are the seven hues nothing else uses. Repeats
      only ever occur ACROSS families, and a row renders one tag per family in
      a fixed slot, so two greens on one row never compete to mean the same
      thing. The word and the glyph stay distinct throughout, so nothing here
@@ -46,6 +46,7 @@
   --t-voice: var(--color-tag-voice);
   --t-video: var(--color-tag-video);
   --t-startup_program: var(--color-tag-startup-program);
+  --t-student: var(--color-tag-student);
   --t-review-verified: var(--color-tag-review-verified);
   --t-social_proof: var(--color-tag-social-proof);
   --t-unverified: var(--color-tag-unverified);
@@ -266,6 +267,7 @@ h1 {
 .badge-category-voice { --tag-hue: var(--t-voice); }
 .badge-category-video { --tag-hue: var(--t-video); }
 .badge-category-startup_program { --tag-hue: var(--t-startup_program); }
+.badge-category-student { --tag-hue: var(--t-student); }
 .badge-verification-social_proof { --tag-hue: var(--t-social_proof); }
 .badge-verification-unverified { --tag-hue: var(--t-unverified); }
 .badge-review-status-verified { --tag-hue: var(--t-review-verified); }
@@ -904,6 +906,7 @@ a:focus-visible {
 .chip-category-voice { --tag-hue: var(--t-voice); }
 .chip-category-video { --tag-hue: var(--t-video); }
 .chip-category-startup_program { --tag-hue: var(--t-startup_program); }
+.chip-category-student { --tag-hue: var(--t-student); }
 
 .results-status {
   flex-basis: 100%;

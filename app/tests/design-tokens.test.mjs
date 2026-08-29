@@ -16,6 +16,7 @@ const EXPECTED = {
   voice: ["--color-tag-voice", "#7e22ce"],
   video: ["--color-tag-video", "#be123c"],
   startup_program: ["--color-tag-startup-program", "#a21caf"],
+  student: ["--color-tag-student", "#c2410c"],
   review_verified: ["--color-tag-review-verified", "#15803d"],
   social_proof: ["--color-tag-social-proof", "#1e3a5f"],
   unverified: ["--color-tag-unverified", "#5f6673"],
@@ -45,6 +46,7 @@ function pythonTagTokens() {
     voice: "#7e22ce",
     video: "#be123c",
     startup_program: "#a21caf",
+    student: "#c2410c",
     review_verified: "#15803d",
     social_proof: "#1e3a5f",
     unverified: "#5f6673",
@@ -77,13 +79,13 @@ function tint(hex) {
 }
 
 describe("Tailwind tag-hue tokens (#121)", () => {
-  it("defines all 12 hues as @theme tokens with the exact ported values", () => {
+  it("defines all 13 hues as @theme tokens with the exact ported values", () => {
     for (const [value, [token, hex]] of Object.entries(EXPECTED)) {
       expect(themeToken(token), value).toBe(hex);
     }
-    // No extras beyond the twelve.
+    // No extras beyond the thirteen.
     const defined = [...tokensCss().matchAll(/--color-tag-[a-z-]+:/g)].length;
-    expect(defined).toBe(12);
+    expect(defined).toBe(13);
   });
 
   it("stays in lockstep with build.py `_CSS` — no cross-language drift", () => {
@@ -122,7 +124,7 @@ describe("Tag hue distinctness rules (port of TagHueDistinctnessTests)", () => {
   // Twelve tag values share hues on purpose: hue encodes the strength of the
   // claim, not the value — but within a family the hue IS the identifier.
   const hex = (value) => EXPECTED[value][1];
-  const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program"];
+  const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program", "student"];
   const VERIFICATION_LEVELS = ["review_verified", "social_proof", "unverified"];
   const SIGNUP_MODES = ["none", "required"]; // build.py SIGNUP_MODES — expired is a status, not a mode
 

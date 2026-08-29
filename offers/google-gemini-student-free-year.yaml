@@ -2,7 +2,7 @@
 # "eligible college students can get a full year of Gemini on us"
 title: Google Gemini Student Free Year
 provider: Google
-category: api_provider
+category: student
 amount: 1 year of Google AI Pro (US) or Google AI Plus (140+ countries) free
 expiry_date: 2026-09-30
 source_url: https://x.com/GeminiApp/status/2090165248196252003

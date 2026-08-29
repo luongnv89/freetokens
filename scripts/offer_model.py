@@ -16,7 +16,7 @@ import json
 import os
 import re
 
-CATEGORIES = ("api_provider", "coding", "image", "voice", "video", "startup_program")
+CATEGORIES = ("api_provider", "coding", "image", "voice", "video", "startup_program", "student")
 CATEGORY_LABELS = {
     "api_provider": "API providers",
     "coding": "Coding",
@@ -24,6 +24,7 @@ CATEGORY_LABELS = {
     "voice": "Voice",
     "video": "Video",
     "startup_program": "Startup programs",
+    "student": "Student",
 }
 # Absolute site origin used ONLY where syndication formats require it: RSS
 # item/channel links must be absolute per the RSS 2.0 spec (and the W3C feed
@@ -163,6 +164,7 @@ TAG_HUES = {
     "voice": ("#7e22ce", 6.98),
     "video": ("#be123c", 6.29),
     "startup_program": ("#a21caf", 6.33),
+    "student": ("#c2410c", 5.18),
     "review_verified": ("#15803d", 5.02),
     "social_proof": ("#1e3a5f", 11.50),
     "unverified": ("#5f6673", 5.78),
@@ -204,6 +206,8 @@ TAG_ICONS = {
     '<path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>'
     '<path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>'
     '<path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
+    "student": '<path d="M12 4L2 8l10 4 10-4-10-4z"/><path d="M6 12l6 3 6-3"/><path d="M12 15v4"/>'
+    '<path d="M22 10v3"/>',
     # Verification: how hard the listing was CHECKED. The glyphs form their
     # own ladder -- hearsay bubble, open question.
     "review_verified": '<circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.4"/>',

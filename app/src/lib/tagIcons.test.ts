@@ -5,7 +5,7 @@ import {
   SPRITE_GLYPH_BUDGET_BYTES,
 } from "./tagIcons";
 
-// The twelve honesty-tag values shared with scripts/offer_model.py TAG_ICONS.
+// The thirteen honesty-tag values shared with scripts/offer_model.py TAG_ICONS.
 const EXPECTED_TAGS = [
   "api_provider",
   "coding",
@@ -13,6 +13,7 @@ const EXPECTED_TAGS = [
   "voice",
   "video",
   "startup_program",
+  "student",
   "review_verified",
   "social_proof",
   "unverified",
@@ -22,7 +23,7 @@ const EXPECTED_TAGS = [
 ];
 
 describe("lucide tag-icon mapping (#122)", () => {
-  it("maps exactly the twelve tag values", () => {
+  it("maps exactly the thirteen tag values", () => {
     expect(Object.keys(TAG_ICONS).sort()).toEqual([...EXPECTED_TAGS].sort());
     expect(Object.keys(TAG_LUCIDE_MAP).sort()).toEqual([...EXPECTED_TAGS].sort());
   });

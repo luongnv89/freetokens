@@ -4,11 +4,11 @@
    numerically unchanged from scripts/build.py `_CSS` — the WCAG contrast
    notes there were measured against exactly these hexes.
 
-   Tag hues: eleven values, seven hues — the repeats are the point. Hue
+   Tag hues: thirteen values, eight hues — the repeats are the point. Hue
    encodes the *claim*, not the value: green (#15803d) is "strongest claim"
    (review-verified; no sign-up wall) and the muted gray (#5f6673) is "weakest,
-   treat with care" (unverified; sign-up required; expired). The five
-   categories make no claim and own the five hues nothing else uses — which
+   treat with care" (unverified; sign-up required; expired). The seven
+   categories make no claim and own the seven hues nothing else uses — which
    is why `coding` is teal #0e7490 and deliberately NOT green: green already
    signals "strongest claim" on the verification/sign-up tags beside it.
    social_proof is navy #1e3a5f so no hue collides with --color-ink, the
@@ -41,6 +41,7 @@
   --color-tag-voice: #7e22ce;
   --color-tag-video: #be123c;
   --color-tag-startup-program: #a21caf;
+  --color-tag-student: #c2410c;
 
   /* Tag hues — verification + sign-up families (how CHECKED / how walled) */
   --color-tag-review-verified: #15803d;
