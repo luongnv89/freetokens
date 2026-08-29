@@ -1,0 +1,24 @@
+{
+  "summary": "GitHub is giving away 2 years of Copilot Pro (worth $240) plus 100+ dev tools in the student pack. Students can verify their status through GitHub Education to unlock Copilot Pro, free domains, and free cloud credits.",
+  "claim_steps": [
+    "Get a student email via UMGC application (fee waived until Sept 1).",
+    "Register a class so the @student.umgc.edu email activates.",
+    "Go to github.com/education/students and sign in.",
+    "Verify your .edu email and claim the student pack."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/alannnfx/status/2093574538923823345",
+      "author": "Alannnfx",
+      "handle": "@alannnfx",
+      "text": "github is giving away 2 years of copilot worth $240. plus 100+ dev tools in the student pack. you get copilot pro, free domains, free cloud credits."
+    },
+    {
+      "type": "link",
+      "url": "https://education.github.com/students",
+      "title": "Students - GitHub Education",
+      "text": "GitHub Education offers students free access to developer tools including Copilot, free domains, and cloud credits."
+    }
+  ]
+}
