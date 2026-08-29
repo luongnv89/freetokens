@@ -1,7 +1,11 @@
 name: Validate offers
 
 on:
+  # Offer pushes get the dedicated validation workflow; pull requests stay
+  # unfiltered so the required `validate` check is always reported.
   push:
+    paths:
+      - "offers/**"
   pull_request:
   workflow_dispatch:
 

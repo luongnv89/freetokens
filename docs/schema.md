@@ -69,7 +69,8 @@ formerly the Python builder's validator), so local checks and CI cannot
 drift; `validate_offers.py` additionally cross-checks the JSON Schema
 against the content model's constants.
 
-CI runs the validator on every push or PR touching `offers/**`
+CI runs the validator on every push touching `offers/**` and on every
+pull request (the required check is intentionally unfiltered)
 (`.github/workflows/validate.yml`). The Vite app enforces the same rules at
 build time: `cd app && npm run build` loads every offer through
 `app/scripts/load-offers.mjs` before bundling, so an invalid YAML fails the

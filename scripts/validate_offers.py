@@ -43,6 +43,13 @@ def load_schema(path: str) -> dict:
 
 
 def check_schema_matches_build(schema: dict) -> None:
+    if schema.get("$schema") != "https://json-schema.org/draft/2020-12/schema":
+        raise SchemaMismatch("schema must declare the Draft 2020-12 $schema")
+    if schema.get("type") != "object":
+        raise SchemaMismatch("schema root type must be object")
+    if schema.get("additionalProperties") is not False:
+        raise SchemaMismatch("schema root additionalProperties must be false")
+
     required = set(schema.get("required", []))
     if required != set(build.REQUIRED_FIELDS):
         missing = sorted(set(build.REQUIRED_FIELDS) - required)
@@ -54,6 +61,14 @@ def check_schema_matches_build(schema: dict) -> None:
     props = schema.get("properties")
     if not isinstance(props, dict):
         raise SchemaMismatch("schema 'properties' must be an object")
+    property_names = set(props)
+    if property_names != set(build.REQUIRED_FIELDS):
+        missing = sorted(set(build.REQUIRED_FIELDS) - property_names)
+        extra = sorted(property_names - set(build.REQUIRED_FIELDS))
+        raise SchemaMismatch(
+            "schema 'properties' must cover exactly the required fields "
+            f"(schema-only: {extra or '{}'}; build-only: {missing or '{}'})"
+        )
     enum = props.get("category", {}).get("enum")
     if enum != list(build.CATEGORIES):
         raise SchemaMismatch(
