@@ -74,6 +74,10 @@ jobs:
           GOATCOUNTER_SITE_URL: ${{ secrets.GOATCOUNTER_SITE_URL }}
         run: npm run build
 
+      - name: Check SEO heads
+        working-directory: app
+        run: node scripts/check-seo.mjs
+
       - name: Stop duration timer
         id: duration
         if: always()
