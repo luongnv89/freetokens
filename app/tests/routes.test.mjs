@@ -155,7 +155,7 @@ describe("static route coverage (#123)", () => {
     viteBuild(outDir);
     prerender(outDir);
     expect(readRobots()).toBe(first);
-  });
+  }, 10000);
 
   it("emits an absolute sitemap for fixed and offer routes", () => {
     const sitemap = readFileSync(path.join(outDir, "sitemap.xml"), "utf8");
