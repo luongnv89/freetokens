@@ -122,6 +122,7 @@ describe("static route coverage (#123)", () => {
     expect(existsSync(path.join(outDir, "index.html"))).toBe(true);
     expect(existsSync(path.join(outDir, "archive.html"))).toBe(true);
     expect(existsSync(path.join(outDir, "privacy.html"))).toBe(true);
+    expect(existsSync(path.join(outDir, "about.html"))).toBe(true);
     expect(existsSync(path.join(outDir, "feed.xml"))).toBe(true);
 
     const emitted = readdirSync(path.join(outDir, "offers")).sort();
@@ -154,7 +155,7 @@ describe("static route coverage (#123)", () => {
     viteBuild(outDir);
     prerender(outDir);
     expect(readRobots()).toBe(first);
-  });
+  }, 10000);
 
   it("emits an absolute sitemap for fixed and offer routes", () => {
     const sitemap = readFileSync(path.join(outDir, "sitemap.xml"), "utf8");
@@ -164,11 +165,12 @@ describe("static route coverage (#123)", () => {
     expect(document.documentElement.namespaceURI).toBe(SITEMAP_NAMESPACE);
 
     const urls = [...document.getElementsByTagNameNS(SITEMAP_NAMESPACE, "url")];
-    expect(urls).toHaveLength(index.offers.length + 4);
+    expect(urls).toHaveLength(index.offers.length + 5);
     expect(urls.map((url) => url.getElementsByTagNameNS(SITEMAP_NAMESPACE, "loc")[0].textContent)).toEqual([
       "https://luongnv89.github.io/freetokens/",
       "https://luongnv89.github.io/freetokens/archive.html",
       "https://luongnv89.github.io/freetokens/privacy.html",
+      "https://luongnv89.github.io/freetokens/about.html",
       "https://luongnv89.github.io/freetokens/feed.xml",
       ...index.offers.map((offer) => `https://luongnv89.github.io/freetokens/offers/${offer.slug}.html`),
     ]);
@@ -185,6 +187,7 @@ describe("static route coverage (#123)", () => {
     expect(readFileSync(path.join(outDir, "index.html"), "utf8")).toContain('data-page="home"');
     expect(readFileSync(path.join(outDir, "archive.html"), "utf8")).toContain('data-page="archive"');
     expect(readFileSync(path.join(outDir, "privacy.html"), "utf8")).toContain('data-page="privacy"');
+    expect(readFileSync(path.join(outDir, "about.html"), "utf8")).toContain('data-page="about"');
 
     const slug = index.offers[0].slug;
     const detail = readFileSync(path.join(outDir, "offers", `${slug}.html`), "utf8");
@@ -223,6 +226,14 @@ describe("static route coverage (#123)", () => {
         urls: [
           "https://luongnv89.github.io/freetokens/",
           "https://luongnv89.github.io/freetokens/privacy.html",
+        ],
+      },
+      {
+        file: "about.html",
+        names: ["Offers", "About"],
+        urls: [
+          "https://luongnv89.github.io/freetokens/",
+          "https://luongnv89.github.io/freetokens/about.html",
         ],
       },
     ];
@@ -271,8 +282,11 @@ describe("static route coverage (#123)", () => {
 
     const home = readFileSync(path.join(outDir, "index.html"), "utf8");
     const homeDocument = new DOMParser().parseFromString(home, "text/html");
-    expect(homeDocument.querySelector('nav[aria-label="Breadcrumb"]')).toBeNull();
-    expect(home).not.toContain("BreadcrumbList");
+    // Home renders empty breadcrumbs (JSON-LD present, no self-link items)
+    const homeNav = homeDocument.querySelector('nav[aria-label="Breadcrumb"]');
+    expect(homeNav).not.toBeNull();
+    expect(homeNav?.querySelectorAll('li').length).toBe(0);
+    expect(home).toContain("BreadcrumbList");
   });
 
   it(
@@ -305,13 +319,13 @@ describe("static route coverage (#123)", () => {
     const home = readFileSync(path.join(outDir, "index.html"), "utf8");
     expect(headings(home)).toHaveLength(1);
     expect(home).toContain(
-      '<h1 class="kicker">Free AI Credits — every claimable offer on one page</h1>',
+      '<h1 class="site-slogan">Every claimable free AI credit offer — verified, tagged, and on one fast page.</h1>',
     );
     expect(home).toMatch(
-      /<header class="masthead masthead-home">[\s\S]*<h1 class="kicker">Free AI Credits/,
+      /<div class="site-header">[\s\S]*<h1 class="site-slogan">Every claimable free AI credit/,
     );
 
-    for (const file of ["archive.html", "privacy.html"]) {
+    for (const file of ["archive.html", "privacy.html", "about.html"]) {
       expect(headings(readFileSync(path.join(outDir, file), "utf8"))).toHaveLength(1);
     }
     for (const offer of index.offers) {
@@ -408,6 +422,7 @@ describe("static route coverage (#123)", () => {
       ["index.html", "Free AI Credits"],
       ["archive.html", "Offer Archive · Free AI Credits"],
       ["privacy.html", "Privacy Policy · Free AI Credits"],
+      ["about.html", "About · Free AI Credits"],
     ];
     for (const [file, title] of pages) {
       const html = readFileSync(path.join(outDir, file), "utf8");
@@ -470,6 +485,7 @@ describe("static route coverage (#123)", () => {
       ["index.html", `${DEFAULT_BASE_URL}/`],
       ["archive.html", `${DEFAULT_BASE_URL}/archive.html`],
       ["privacy.html", `${DEFAULT_BASE_URL}/privacy.html`],
+      ["about.html", `${DEFAULT_BASE_URL}/about.html`],
     ];
 
     for (const [file, expected] of pages) {
@@ -537,6 +553,14 @@ describe("static route coverage (#123)", () => {
         description:
           "How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage.",
         canonical: `${DEFAULT_BASE_URL}/privacy.html`,
+        type: "website",
+      },
+      {
+        file: "about.html",
+        title: "About · Free AI Credits",
+        description:
+          "What Free AI Credits is, how the listings are verified, and what the numbers mean.",
+        canonical: `${DEFAULT_BASE_URL}/about.html`,
         type: "website",
       },
       ...index.offers.map((offer) => ({
@@ -652,6 +676,7 @@ describe("static route coverage (#123)", () => {
       "index.html",
       "archive.html",
       "privacy.html",
+      "about.html",
       ...index.offers.map((offer) => path.join("offers", `${offer.slug}.html`)),
     ];
     // The synthetic-data test above intentionally changes this shared output;

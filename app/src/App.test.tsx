@@ -79,12 +79,17 @@ describe("App home listing prerender", () => {
     );
   });
 
-  it("states truthful counts in the masthead", () => {
-    const corroborated = offers.filter((o) => o.verification === "social_proof").length;
-    const ongoingCount = offers.filter((o) => !o.expiry_date).length;
-    expect(markup).toContain(`<strong>${offers.length}</strong> live offers`);
-    expect(markup).toContain(`<strong>${ongoingCount}</strong> ongoing`);
-    expect(markup).toContain(`<strong>${corroborated}</strong> corroborated by official source`);
+  it("states truthful counts in the masthead", async () => {
+    // Counts moved to About — verify About page carries them
+    const { default: AboutPage } = await import("./components/AboutPage")
+    const aboutMarkup = renderToStaticMarkup(<AboutPage index={index} />)
+    const corroborated = offers.filter((o) => o.verification === "social_proof").length
+    const ongoingCount = offers.filter((o) => !o.expiry_date).length
+    expect(aboutMarkup).toContain(`<strong>${offers.length}</strong> live offers`)
+    expect(aboutMarkup).toContain(`<strong>${ongoingCount}</strong> ongoing`)
+    expect(aboutMarkup).toContain(`<strong>${corroborated}</strong> corroborated by official source`)
+    // Home is now minimal header only
+    expect(markup).not.toContain("live offers")
   });
 
   it("keeps semantic list markup — no div-based rows", () => {

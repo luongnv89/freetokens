@@ -40,6 +40,7 @@ import {
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
+import { Breadcrumbs } from "./Breadcrumbs"
 import { Button } from "./ui/button"
 
 const FILTER_LABELS: Record<FilterDimension, Record<string, string>> = {
@@ -302,8 +303,6 @@ function visibleOffers(
 export default function HomePage({ index }: { index: OffersIndex }) {
   const offers = activeOffers(index)
   const buildDay = buildDate(index.generated_at)
-  const ongoing = offers.filter((o) => !o.expiry_date).length
-  const corroborated = offers.filter((o) => o.verification === "social_proof").length
 
   const [state, setState] = useState(emptyState)
   const [searchInput, setSearchInput] = useState("")
@@ -527,22 +526,8 @@ export default function HomePage({ index }: { index: OffersIndex }) {
       <IconSprite />
       <div className="wrap">
         <main>
-        <header className="masthead masthead-home">
-          <SiteHeader current="home" />
-          <h1 className="kicker">Free AI Credits — every claimable offer on one page</h1>
-          <p className="kicker">
-            zero runtime &middot; every offer labeled with review status, verification level &amp; sign-up need
-          </p>
-          <p className="tagline">
-            Every claimable free-credit offer worth your time, on one fast page. Each carries a
-            curator review status, verification level (corroborated or community-sourced), and a
-            sign-up tag, refreshed on every rebuild.
-          </p>
-          <p className="count">
-            <strong>{offers.length}</strong> live offers &middot; <strong>{ongoing}</strong>{" "}
-            ongoing &middot; <strong>{corroborated}</strong> corroborated by official source
-          </p>
-        </header>
+        <SiteHeader current="home" />
+        <Breadcrumbs page="home" />
 
         {offers.length > 0 ? (
           <>

@@ -8,11 +8,18 @@ type BreadcrumbItem = {
 
 type BreadcrumbsProps =
   | {
+      page: "home"
+    }
+  | {
       page: "archive"
       baseUrl?: string
     }
   | {
       page: "privacy"
+      baseUrl?: string
+    }
+  | {
+      page: "about"
       baseUrl?: string
     }
   | {
@@ -28,6 +35,10 @@ function normalizeBaseUrl(baseUrl?: string): string {
 
 /** Build the one breadcrumb model shared by the visible trail and JSON-LD. */
 function buildBreadcrumbItems(props: BreadcrumbsProps): BreadcrumbItem[] {
+  if (props.page === "home") {
+    return []
+  }
+
   const baseUrl = normalizeBaseUrl(props.baseUrl)
 
   if (props.page === "archive") {
@@ -41,6 +52,13 @@ function buildBreadcrumbItems(props: BreadcrumbsProps): BreadcrumbItem[] {
     return [
       { name: "Offers", href: "./index.html", item: `${baseUrl}/` },
       { name: "Privacy", item: `${baseUrl}/privacy.html` },
+    ]
+  }
+
+  if (props.page === "about") {
+    return [
+      { name: "Offers", href: "./index.html", item: `${baseUrl}/` },
+      { name: "About", item: `${baseUrl}/about.html` },
     ]
   }
 

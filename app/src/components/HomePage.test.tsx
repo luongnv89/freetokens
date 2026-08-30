@@ -173,15 +173,14 @@ describe("HomePage masthead counters (#49 port)", () => {
     render(<HomePage index={index} />)
     const heading = screen.getByRole("heading", {
       level: 1,
-      name: "Free AI Credits — every claimable offer on one page",
+      name: "Every claimable free AI credit offer — verified, tagged, and on one fast page.",
     })
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1)
-    expect(heading.closest("header")).toHaveClass("masthead-home")
+    expect(heading.closest(".site-header")).not.toBeNull()
+    expect(heading).toHaveClass("site-slogan")
 
-    const count = screen.getByText(/live offers/)
-    expect(count).toHaveTextContent(
-      "5 live offers · 1 ongoing · 4 corroborated by official source",
-    )
+    // Counts moved to About — home header is now minimal (logo+name+slogan+list)
+    expect(screen.queryByText(/live offers/)).toBeNull()
   })
 })
 

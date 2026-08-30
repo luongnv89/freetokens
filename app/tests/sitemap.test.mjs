@@ -7,7 +7,7 @@ import {
 } from "../scripts/sitemap.mjs"
 
 const BASE = "https://example.com/freetokens"
-const FIXED_PATHS = ["/", "/archive.html", "/privacy.html", "/feed.xml"]
+const FIXED_PATHS = ["/", "/archive.html", "/privacy.html", "/about.html", "/feed.xml"]
 
 function offer(slug, overrides = {}) {
   return {
@@ -52,6 +52,7 @@ describe("sitemap generation", () => {
       `${BASE}/offers/expired.html`,
     ])
     expect(entries.map(({ lastmod }) => lastmod)).toEqual([
+      "2026-08-21",
       "2026-08-21",
       "2026-08-21",
       "2026-08-21",
@@ -101,6 +102,7 @@ describe("sitemap generation", () => {
     const entries = sitemapEntries(xml)
 
     expect(entries.map(({ lastmod }) => lastmod)).toEqual([
+      "2026-08-29",
       "2026-08-29",
       "2026-08-29",
       "2026-08-29",
@@ -176,7 +178,7 @@ describe("sitemap generation", () => {
   })
 
   it("rejects a URL set above the sitemap protocol limit", () => {
-    const offers = Array.from({ length: MAX_SITEMAP_URLS - 4 }, (_, index) =>
+    const offers = Array.from({ length: MAX_SITEMAP_URLS - 5 }, (_, index) =>
       offer(`offer-${index}`),
     )
     expect(() =>

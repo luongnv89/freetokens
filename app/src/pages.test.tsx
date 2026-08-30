@@ -6,6 +6,7 @@ import { render, waitFor } from "@testing-library/react";
 import ArchivePage from "./components/ArchivePage";
 import HomePage from "./components/HomePage";
 import PrivacyPage from "./components/PrivacyPage";
+import AboutPage from "./components/AboutPage";
 import OfferDetailPage from "./components/OfferDetailPage";
 import { FILTER_DIMENSIONS, configureAnalytics, resetAnalyticsForTests } from "./lib/analytics";
 import {
@@ -89,6 +90,12 @@ describe("SSR breadcrumbs (#208)", () => {
         urls: [`${DEFAULT_BASE_URL}/`, `${DEFAULT_BASE_URL}/privacy.html`],
       },
       {
+        markup: renderToStaticMarkup(<AboutPage index={index} baseUrl={DEFAULT_BASE_URL} />),
+        names: ["Offers", "About"],
+        href: "./index.html",
+        urls: [`${DEFAULT_BASE_URL}/`, `${DEFAULT_BASE_URL}/about.html`],
+      },
+      {
         markup: renderToStaticMarkup(
           <OfferDetailPage
             index={index}
@@ -122,11 +129,14 @@ describe("SSR breadcrumbs (#208)", () => {
     }
   });
 
-  it("keeps home free of a self-link breadcrumb", () => {
+  it("renders empty breadcrumbs on home (JSON-LD only, no self-link)", () => {
     const markup = renderToStaticMarkup(<HomePage index={index} />);
     const document = new DOMParser().parseFromString(markup, "text/html");
-    expect(document.querySelector('nav[aria-label="Breadcrumb"]')).toBeNull();
-    expect(markup).not.toContain('"@type":"BreadcrumbList"');
+    // Breadcrumbs component renders for JSON-LD but with zero items (no self-link)
+    const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
+    expect(nav).not.toBeNull();
+    expect(nav!.querySelectorAll('li').length).toBe(0);
+    expect(markup).toContain('"@type":"BreadcrumbList"');
   });
 
   it("serializes offer titles safely while keeping the JSON-LD parseable", () => {
@@ -747,8 +757,10 @@ describe("shared header chrome (#112)", () => {
       expect((markup.match(/class="site-brand"/g) ?? []).length).toBe(1);
       expect(markup).toContain('src="');
     }
-    expect(home).toContain('<a class="site-brand" href="./index.html">');
-    expect(detail).toContain('<a class="site-brand" href="../index.html">');
+    expect(home).toContain('class="site-brand"');
+    expect(home).toContain('href="./index.html"');
+    expect(detail).toContain('class="site-brand"');
+    expect(detail).toContain('href="../index.html"');
   });
 
   it("keeps the wordmark and primary nav identical across routes", () => {
@@ -758,6 +770,7 @@ describe("shared header chrome (#112)", () => {
       expect(markup).toContain('aria-label="Primary"');
       expect(markup).toContain(">Offers</a>");
       expect(markup).toContain(">Archive</a>");
+      expect(markup).toContain(">About</a>");
       expect(markup).toContain(">Privacy</a>");
     }
   });
@@ -793,7 +806,7 @@ describe("shared header chrome (#112)", () => {
       expect(markup.match(/<h1\b/g)?.length).toBe(1);
     }
     expect(home).toContain(
-      '<h1 class="kicker">Free AI Credits — every claimable offer on one page</h1>',
+      '<h1 class="site-slogan">Every claimable free AI credit offer — verified, tagged, and on one fast page.</h1>',
     );
     expect(archive).toContain("<h1>Expired offer archive</h1>");
     expect(privacy).toContain("<h1>Privacy Policy</h1>");

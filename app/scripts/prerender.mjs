@@ -300,6 +300,20 @@ try {
   );
   written.push("privacy.html");
 
+  // About (/about.html).
+  await writeFile(
+    path.join(distDir, "about.html"),
+    fillPage({
+      markup: await renderRoute({ page: "about" }, origin),
+      title: "About · Free AI Credits",
+      description:
+        "What Free AI Credits is, how the listings are verified, and what the numbers mean.",
+      canonical: `${origin}/about.html`,
+      page: "about",
+    }),
+  );
+  written.push("about.html");
+
   // One detail page per offer — active AND expired (#60), with summary /
   // claim steps / social proof when details.json has an entry (#128).
   // Unknown slugs can only come from stale links, which GitHub Pages

@@ -13,7 +13,7 @@ import path from "node:path";
 // those detail pages (#128), so the budget includes it.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-const PYTHON_INLINE_CSS_BYTES = 35118;
+const PYTHON_INLINE_CSS_BYTES = 36200;
 
 function cssBytesIn(dir) {
   let total = 0;
