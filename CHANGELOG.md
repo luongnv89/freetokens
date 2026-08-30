@@ -24,6 +24,73 @@ regenerated on every deploy; entries here cover behavior, not content edits.
   git checkout 6aec62a -- scripts/build.py site/
   ```
 
+## seo/v1.0 — 2026-08-30
+
+SEO uplift ships to production (epic #197, Pre + P0–P2). Full regression:
+re-run audit on `dist/`, Lighthouse on 4 routes, crawl-depth check, feed
+validation, GA4 DebugView — see `docs/seo-runbook.md` and
+`docs/seo-baseline-2026-08-29.md`. Deploy artifact is the artifact; annotated
+tag `seo/v1.0` is pushed on green `main` after merge and published as the
+GitHub Release for this section (tag creation is post-merge, documented here).
+
+- **Baseline frozen & AI-bot policy A (#197):** `docs/seo-baseline-2026-08-29.md`
+  captures the 2026-08-29 `app/dist/*.html` audit (11 criticals) and Policy A
+  — search + user-requested retrieval allowed, training crawlers blocked —
+  which drives the `robots.txt` directives
+  ([#222](https://github.com/luongnv89/freetokens/pull/222)).
+- **Self-referencing canonical on every prerendered page:** `app/scripts/prerender.mjs`
+  emits exactly one `<link rel="canonical">` per document via `DEFAULT_BASE_URL`
+  ([#223](https://github.com/luongnv89/freetokens/pull/223)).
+- **Open Graph & Twitter Cards via prerender:** `renderSocialMetadata()`
+  injects `og:title/description/url/type/image/site_name` + `twitter:card/title/description/image`
+  with `og:image` → `logo-mark.svg` absolute
+  ([#224](https://github.com/luongnv89/freetokens/pull/224)).
+- **Exactly one H1 on home:** home heading hardened, verified by `routes.test.mjs`
+  ([#225](https://github.com/luongnv89/freetokens/pull/225)).
+- **Shell head hardening:** `app/index.html` fallback + no duplicate meta guard
+  ([#226](https://github.com/luongnv89/freetokens/pull/226)).
+- **POC exit-gate audit (#203):** `dist/*.html`-filtered re-audit at `94b5aec`
+  records 0 missing canonical/viewport/lang, 1 canonical + 1 `og:title` per page,
+  `feed.xml` valid with 38 items
+  ([#227](https://github.com/luongnv89/freetokens/pull/227)).
+- **Sitemap at build time (#205):** `app/scripts/sitemap.mjs` + `prerender.mjs`
+  postbuild emits `sitemap.xml` covering `/`, `/archive.html`, `/privacy.html`,
+  `feed.xml` and all `offers/*.html` with `lastmod` clamped to today; audit
+  "No sitemap.xml" cleared
+  ([#229](https://github.com/luongnv89/freetokens/pull/229)).
+- **Robots crawl policy (#206):** `app/public/robots.txt` — `Allow: /` + `Sitemap:` + Policy A
+  allow/block lists (`GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `Bytespider`
+  blocked; `Googlebot`, `Bingbot`, `DuckDuckBot`, `OAI-SearchBot`, `PerplexityBot` allowed;
+  `ChatGPT-User`/`Claude-User` allowed)
+  ([#231](https://github.com/luongnv89/freetokens/pull/231)).
+- **BreadcrumbList JSON-LD + visible trail (#208):** `Breadcrumbs.tsx` shares
+  `buildBreadcrumbItems()` between DOM trail and `BreadcrumbList` JSON-LD (escaped via
+  `safeJsonLd()`); home has no breadcrumbs, `/archive`/`/privacy` → `Offers → …`,
+  `/offers/<slug>` → `Offers → <title>`
+  ([#233](https://github.com/luongnv89/freetokens/pull/233)).
+- **CI SEO head guard (#209):** `app/tests/routes.test.mjs` + `app/tests/check-seo.mjs`
+  enforce exactly one canonical/OG/description per route and build `dist` before `checkDist`
+  ([#235](https://github.com/luongnv89/freetokens/pull/235) staged).
+- **Internal-link & crawl-depth hardening (#211):** every offer reachable within ≤3
+  hops from `/`; link graph validated
+  ([#237](https://github.com/luongnv89/freetokens/pull/237)).
+- **llms.txt + llms-full.txt (#210):** `app/scripts/generate-llms.mjs` emits AI-readable
+  feeds (staged)
+  ([#236](https://github.com/luongnv89/freetokens/pull/236) staged;
+  live at `/llms.txt` / `/llms-full.txt` once merged).
+- **Security headers, verification, and quality follow-ups** staged for the same
+  tag train: `llms.txt` follow-on, OG raster (#213
+  [#239](https://github.com/luongnv89/freetokens/pull/239)), Search Console token
+  [#242](https://github.com/luongnv89/freetokens/pull/242), GA4 instrumentation
+  [#243](https://github.com/luongnv89/freetokens/pull/243), CSP/headers
+  [#244](https://github.com/luongnv89/freetokens/pull/244), alerting
+  [#245](https://github.com/luongnv89/freetokens/pull/245), CLS/alt
+  [#238](https://github.com/luongnv89/freetokens/pull/238), CWV
+  [#240](https://github.com/luongnv89/freetokens/pull/240), audit-noise
+  [#241](https://github.com/luongnv89/freetokens/pull/241), and runbook
+  [#246](https://github.com/luongnv89/freetokens/pull/246) — all land before or
+  with the `seo/v1.0` tag.
+
 ## v3.0 — 2026-08-25
 
 The React + Vite rebuild ships to production (#114).
