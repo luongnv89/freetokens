@@ -12,9 +12,10 @@ import path from "node:path";
 // produces its page on the next build with no source edit.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-function prerender(distDir, dataFile) {
+function prerender(distDir, dataFile, baseUrl) {
   const args = ["scripts/prerender.mjs", "--dist", distDir];
   if (dataFile) args.push("--data", dataFile);
+  if (baseUrl) args.push("--base-url", baseUrl);
   execFileSync(process.execPath, args, { cwd: APP_ROOT, stdio: "pipe" });
 }
 
@@ -79,6 +80,30 @@ function headings(html) {
   return html.match(/<h1\b[^>]*>[\s\S]*?<\/h1>/g) ?? [];
 }
 
+function breadcrumbData(html) {
+  const marker = '<script type="application/ld+json">';
+  let cursor = 0;
+  while (true) {
+    const start = html.indexOf(marker, cursor);
+    if (start < 0) break;
+    const end = html.indexOf("</script>", start);
+    if (end < 0) break;
+    const parsed = JSON.parse(html.slice(start + marker.length, end));
+    if (parsed["@type"] === "BreadcrumbList") return parsed;
+    cursor = end + "</script>".length;
+  }
+  throw new Error("document has no breadcrumb JSON-LD");
+}
+
+function breadcrumbNames(html) {
+  const document = new DOMParser().parseFromString(html, "text/html");
+  const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
+  if (!nav) throw new Error("document has no breadcrumb nav");
+  return [...nav.querySelectorAll('a, [aria-current="page"]')].map((element) =>
+    element.textContent?.trim() ?? "",
+  );
+}
+
 describe("static route coverage (#123)", () => {
   const outDir = path.join(tmpdir(), `ft-routes-${process.pid}`);
   let index;
@@ -126,6 +151,96 @@ describe("static route coverage (#123)", () => {
     expect(detail).not.toContain("offer_share");
     expect(detail).not.toContain("linkedin.com/sharing");
     expect(detail).not.toContain("data-ft-share");
+  });
+
+  it("emits crawlable breadcrumbs aligned with JSON-LD on every non-home route", () => {
+    const rootPages = [
+      {
+        file: "archive.html",
+        names: ["Offers", "Archive"],
+        urls: [
+          "https://luongnv89.github.io/freetokens/",
+          "https://luongnv89.github.io/freetokens/archive.html",
+        ],
+      },
+      {
+        file: "privacy.html",
+        names: ["Offers", "Privacy"],
+        urls: [
+          "https://luongnv89.github.io/freetokens/",
+          "https://luongnv89.github.io/freetokens/privacy.html",
+        ],
+      },
+    ];
+
+    for (const page of rootPages) {
+      const html = readFileSync(path.join(outDir, page.file), "utf8");
+      const document = new DOMParser().parseFromString(html, "text/html");
+      const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
+      expect(nav).not.toBeNull();
+      expect(nav?.querySelector('a[href="./index.html"]')).not.toBeNull();
+      expect(nav?.querySelector('a[aria-current="page"]')).toBeNull();
+      expect(nav?.querySelector('[aria-current="page"]')).not.toBeNull();
+      expect(breadcrumbNames(html)).toEqual(page.names);
+
+      const data = breadcrumbData(html);
+      expect(data["@type"]).toBe("BreadcrumbList");
+      expect(data.itemListElement.map((item) => item.name)).toEqual(page.names);
+      expect(data.itemListElement.map((item) => item.position)).toEqual([1, 2]);
+      expect(data.itemListElement.map((item) => item.item)).toEqual(page.urls);
+    }
+
+    for (const offer of index.offers) {
+      const html = readFileSync(
+        path.join(outDir, "offers", `${offer.slug}.html`),
+        "utf8",
+      );
+      const document = new DOMParser().parseFromString(html, "text/html");
+      const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
+      expect(nav).not.toBeNull();
+      expect(nav?.querySelector('a[href="../index.html"]')).not.toBeNull();
+      expect(nav?.querySelector('a[aria-current="page"]')).toBeNull();
+      expect(breadcrumbNames(html)).toEqual(["Offers", offer.title]);
+
+      const data = breadcrumbData(html);
+      expect(data["@type"]).toBe("BreadcrumbList");
+      expect(data.itemListElement.map((item) => item.name)).toEqual([
+        "Offers",
+        offer.title,
+      ]);
+      expect(data.itemListElement.map((item) => item.position)).toEqual([1, 2]);
+      expect(data.itemListElement.map((item) => item.item)).toEqual([
+        "https://luongnv89.github.io/freetokens/",
+        `https://luongnv89.github.io/freetokens/offers/${offer.slug}.html`,
+      ]);
+    }
+
+    const home = readFileSync(path.join(outDir, "index.html"), "utf8");
+    const homeDocument = new DOMParser().parseFromString(home, "text/html");
+    expect(homeDocument.querySelector('nav[aria-label="Breadcrumb"]')).toBeNull();
+    expect(home).not.toContain("BreadcrumbList");
+  });
+
+  it("uses the configured prerender base URL in breadcrumb JSON-LD", () => {
+    const customDir = path.join(tmpdir(), `ft-routes-base-${process.pid}`);
+    viteBuild(customDir);
+    prerender(customDir, undefined, "https://example.test/subpath/");
+
+    const archive = readFileSync(path.join(customDir, "archive.html"), "utf8");
+    expect(breadcrumbData(archive).itemListElement.map((item) => item.item)).toEqual([
+      "https://example.test/subpath/",
+      "https://example.test/subpath/archive.html",
+    ]);
+
+    const offer = index.offers[0];
+    const detail = readFileSync(
+      path.join(customDir, "offers", `${offer.slug}.html`),
+      "utf8",
+    );
+    expect(breadcrumbData(detail).itemListElement.map((item) => item.item)).toEqual([
+      "https://example.test/subpath/",
+      `https://example.test/subpath/offers/${offer.slug}.html`,
+    ]);
   });
 
   it("emits exactly one primary h1 on every prerendered page", () => {

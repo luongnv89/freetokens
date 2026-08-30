@@ -16,6 +16,7 @@ import {
   type OffersIndex,
 } from "./lib/offers";
 import indexData from "./data/offers.json";
+import { DEFAULT_BASE_URL } from "./lib/site";
 
 const PUBLIC_DIR = path.resolve(import.meta.dirname, "../public");
 
@@ -40,6 +41,134 @@ function offer(overrides: Partial<OfferEntry> = {}): OfferEntry {
     ...overrides,
   };
 }
+
+type BreadcrumbJson = {
+  "@type": string;
+  itemListElement: { position: number; name: string; item: string }[];
+};
+
+function breadcrumbJson(markup: string): BreadcrumbJson {
+  const marker = '<script type="application/ld+json">';
+  let cursor = 0;
+  while (true) {
+    const start = markup.indexOf(marker, cursor);
+    if (start < 0) break;
+    const end = markup.indexOf("</script>", start);
+    if (end < 0) break;
+    const parsed = JSON.parse(markup.slice(start + marker.length, end)) as BreadcrumbJson;
+    if (parsed["@type"] === "BreadcrumbList") return parsed;
+    cursor = end + "</script>".length;
+  }
+  throw new Error("missing breadcrumb JSON-LD");
+}
+
+function breadcrumbLabels(markup: string): string[] {
+  const document = new DOMParser().parseFromString(markup, "text/html");
+  const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
+  if (!nav) throw new Error("missing breadcrumb nav");
+  return [...nav.querySelectorAll('a, [aria-current="page"]')].map(
+    (element) => element.textContent?.trim() ?? "",
+  );
+}
+
+describe("SSR breadcrumbs (#208)", () => {
+  it("keeps the visible trail and JSON-LD in the same order at every required depth", () => {
+    const pages = [
+      {
+        markup: renderToStaticMarkup(
+          <ArchivePage index={index} baseUrl={DEFAULT_BASE_URL} />,
+        ),
+        names: ["Offers", "Archive"],
+        href: "./index.html",
+        urls: [`${DEFAULT_BASE_URL}/`, `${DEFAULT_BASE_URL}/archive.html`],
+      },
+      {
+        markup: renderToStaticMarkup(<PrivacyPage baseUrl={DEFAULT_BASE_URL} />),
+        names: ["Offers", "Privacy"],
+        href: "./index.html",
+        urls: [`${DEFAULT_BASE_URL}/`, `${DEFAULT_BASE_URL}/privacy.html`],
+      },
+      {
+        markup: renderToStaticMarkup(
+          <OfferDetailPage
+            index={index}
+            slug={index.offers[0].slug}
+            baseUrl={DEFAULT_BASE_URL}
+          />,
+        ),
+        names: ["Offers", index.offers[0].title],
+        href: "../index.html",
+        urls: [
+          `${DEFAULT_BASE_URL}/`,
+          `${DEFAULT_BASE_URL}/offers/${index.offers[0].slug}.html`,
+        ],
+      },
+    ];
+
+    for (const page of pages) {
+      const document = new DOMParser().parseFromString(page.markup, "text/html");
+      const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
+      expect(nav).not.toBeNull();
+      expect(breadcrumbLabels(page.markup)).toEqual(page.names);
+      expect(nav?.querySelector(`a[href="${page.href}"]`)).not.toBeNull();
+      expect(nav?.querySelectorAll('[aria-current="page"]')).toHaveLength(1);
+      expect(nav?.querySelector('[aria-current="page"]')?.tagName).toBe("SPAN");
+
+      const data = breadcrumbJson(page.markup);
+      expect(data["@type"]).toBe("BreadcrumbList");
+      expect(data.itemListElement.map((item) => item.name)).toEqual(page.names);
+      expect(data.itemListElement.map((item) => item.position)).toEqual([1, 2]);
+      expect(data.itemListElement.map((item) => item.item)).toEqual(page.urls);
+    }
+  });
+
+  it("keeps home free of a self-link breadcrumb", () => {
+    const markup = renderToStaticMarkup(<HomePage index={index} />);
+    const document = new DOMParser().parseFromString(markup, "text/html");
+    expect(document.querySelector('nav[aria-label="Breadcrumb"]')).toBeNull();
+    expect(markup).not.toContain('"@type":"BreadcrumbList"');
+  });
+
+  it("serializes offer titles safely while keeping the JSON-LD parseable", () => {
+    const title = 'Quote " & </script><script>alert(1)</script>';
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer({ slug: "special-offer", title })] }}
+        slug="special-offer"
+        details={{}}
+        baseUrl="https://example.test/freetokens/"
+      />,
+    );
+    const marker = '<script type="application/ld+json">';
+    const scriptStart = markup.indexOf(marker);
+    const scriptEnd = markup.indexOf("</script>", scriptStart);
+    expect(markup.split(marker)).toHaveLength(2);
+    expect(scriptStart).toBeGreaterThan(-1);
+    expect(scriptEnd).toBeGreaterThan(scriptStart);
+    expect(markup.slice(scriptStart + marker.length, scriptEnd)).not.toContain("</script>");
+    expect(breadcrumbJson(markup).itemListElement[1]).toEqual({
+      "@type": "ListItem",
+      position: 2,
+      name: title,
+      item: "https://example.test/freetokens/offers/special-offer.html",
+    });
+    expect(breadcrumbLabels(markup)).toEqual(["Offers", title]);
+  });
+
+  it("renders a deterministic breadcrumb for an unknown detail slug", () => {
+    const markup = renderToStaticMarkup(
+      <OfferDetailPage
+        index={index}
+        slug="no-such-offer"
+        baseUrl={DEFAULT_BASE_URL}
+      />,
+    );
+    expect(breadcrumbLabels(markup)).toEqual(["Offers", "Offer not found"]);
+    expect(breadcrumbJson(markup).itemListElement[1].item).toBe(
+      `${DEFAULT_BASE_URL}/offers/no-such-offer.html`,
+    );
+  });
+});
 
 describe("ArchivePage (#26 parity)", () => {
   it("orders expired offers newest-expiration-first with slug tiebreak", () => {
@@ -126,6 +255,8 @@ describe("archive layout at 320 px (#129)", () => {
     expect(css).toMatch(/\.card-top \{[^}]*flex-wrap:\s*wrap/s);
     expect(css).toMatch(/\.wrap \{[^}]*padding:\s*clamp\(1\.25rem/s);
     expect(css).toMatch(/\[data-page="archive"\] \.empty \{\s*animation:\s*none/s);
+    expect(css).toMatch(/\.breadcrumbs-list \{[^}]*flex-wrap:\s*wrap/s);
+    expect(css).toMatch(/\.breadcrumbs-list li \{[^}]*overflow-wrap:\s*anywhere/s);
   });
 
   it("styles the archive View-details control as a real tap target", () => {

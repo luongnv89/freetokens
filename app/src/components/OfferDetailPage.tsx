@@ -21,6 +21,7 @@ import { IconSprite } from "./OfferRow"
 import { SocialProofList } from "./SocialProofList"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
+import { Breadcrumbs } from "./Breadcrumbs"
 
 const catalog = detailsCatalog as DetailsMap
 
@@ -37,10 +38,12 @@ export default function OfferDetailPage({
   index,
   slug,
   details,
+  baseUrl,
 }: {
   index: OffersIndex
   slug: string
   details?: DetailsMap
+  baseUrl?: string
 }) {
   const offer = index.offers.find((o) => o.slug === slug)
   const map = details ?? catalog
@@ -54,6 +57,12 @@ export default function OfferDetailPage({
       <div className="wrap">
         <main>
         <SiteHeader depth={1} />
+        <Breadcrumbs
+          page="detail"
+          slug={offer?.slug ?? slug}
+          title={offer?.title ?? "Offer not found"}
+          baseUrl={baseUrl}
+        />
         {offer ? (
           <article className="offer-detail">
             <p className="od-back">

@@ -241,7 +241,7 @@ try {
   await writeFile(
     indexPath,
     fillPage({
-      markup: await renderRoute({ page: "home" }),
+      markup: await renderRoute({ page: "home" }, origin),
       title: "Free AI Credits",
       description:
         "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
@@ -255,7 +255,7 @@ try {
   await writeFile(
     path.join(distDir, "archive.html"),
     fillPage({
-      markup: await renderRoute({ page: "archive" }),
+      markup: await renderRoute({ page: "archive" }, origin),
       title: "Offer Archive · Free AI Credits",
       description:
         "Reference archive of expired free AI credit offers, kept newest-first with their original terms.",
@@ -269,7 +269,7 @@ try {
   await writeFile(
     path.join(distDir, "privacy.html"),
     fillPage({
-      markup: await renderRoute({ page: "privacy" }),
+      markup: await renderRoute({ page: "privacy" }, origin),
       title: "Privacy Policy · Free AI Credits",
       description:
         "How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage.",
@@ -297,7 +297,7 @@ try {
     await writeFile(
       path.join(offersDir, `${offer.slug}.html`),
       fillPage({
-        markup: await renderRoute({ page: "detail", slug: offer.slug }),
+        markup: await renderRoute({ page: "detail", slug: offer.slug }, origin),
         title: `${offer.title} · Free AI Credits`,
         description: offerMetaDescription(offer, details[offer.slug]),
         canonical,
