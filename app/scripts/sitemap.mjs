@@ -26,9 +26,14 @@ function toUtcDate(value) {
     return Number.isNaN(date.getTime()) ? null : date.toISOString().slice(0, 10)
   }
   if (typeof value !== "string") return null
-  if (/^\d{4}-\d{2}-\d{2}(?:$|T)/.test(value)) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return isCalendarDate(value) ? value : null
+  }
+  if (/^\d{4}-\d{2}-\d{2}T/.test(value)) {
     const calendarDate = value.slice(0, 10)
-    return isCalendarDate(calendarDate) ? calendarDate : null
+    if (!isCalendarDate(calendarDate)) return null
+    const date = new Date(value)
+    return Number.isNaN(date.getTime()) ? null : date.toISOString().slice(0, 10)
   }
   const date = new Date(value)
   return Number.isNaN(date.getTime()) ? null : date.toISOString().slice(0, 10)

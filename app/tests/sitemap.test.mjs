@@ -62,6 +62,26 @@ describe("sitemap generation", () => {
     expect(xml).not.toMatch(/priority|changefreq/)
   })
 
+  it("normalizes timezone offsets to the UTC calendar date", () => {
+    const xml = buildSitemap(
+      indexFor([offer("offset", { verified_date: "2026-08-20T23:30:00-05:00" })]),
+      BASE,
+      { now: new Date("2026-08-22T00:00:00Z") },
+    )
+
+    expect(sitemapEntries(xml).at(-1).lastmod).toBe("2026-08-21")
+  })
+
+  it("falls back when a timestamp has a malformed time", () => {
+    const xml = buildSitemap(
+      indexFor([offer("malformed", { verified_date: "2026-08-20T25:00:00Z" })]),
+      BASE,
+      { now: new Date("2026-08-22T00:00:00Z") },
+    )
+
+    expect(sitemapEntries(xml).at(-1).lastmod).toBe("2026-08-21")
+  })
+
   it("clamps future dates and falls back to a page mtime", () => {
     const xml = buildSitemap(
       indexFor([
