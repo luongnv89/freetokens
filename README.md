@@ -1,5 +1,7 @@
 # Free AI Credits
 
+[![SEO runbook](https://img.shields.io/badge/SEO-runbook-blue)](docs/seo-runbook.md) [![SEO baseline](https://img.shields.io/badge/SEO-baseline%202026--08--29-lightgrey)](docs/seo-baseline-2026-08-29.md)
+
 A dead-simple, static website that aggregates currently-claimable free AI token/credit offers — hand-picked and self-verified by a single trusted curator. Visitors find relevant offers in seconds via filtering, search, and task categories. Content is managed entirely through git: updating the site is a commit, not an ops task.
 
 ## Purpose
@@ -259,6 +261,10 @@ behavior in `app/src/lib/analytics.ts` — consent-gated GA4, anonymized IPs,
 length-only search metadata, the single `localStorage` consent key, no
 forms, no PII storage — and is pinned by tests (`ConsentBanner.test.tsx`,
 `analytics.test.ts`).
+
+### SEO & discoverability
+
+Every page ships a single canonical, full Open Graph + Twitter Card set, and JSON-LD `BreadcrumbList` (see `app/scripts/prerender.mjs`, `app/src/components/Breadcrumbs.tsx`), and `app/scripts/sitemap.mjs` generates [`sitemap.xml`](https://luongnv89.github.io/freetokens/sitemap.xml) on every build — including expired offers — advertised from [`robots.txt`](https://luongnv89.github.io/freetokens/robots.txt) (Policy A in [`docs/seo-baseline-2026-08-29.md`](docs/seo-baseline-2026-08-29.md)). AI-bot text lives at [`llms.txt`](https://luongnv89.github.io/freetokens/llms.txt). The maintainer playbook for verifying all of this — add-offer smoke test, local `robots.txt`/`llms.txt` checks, GSC sitemap submission, audit-noise triage, and why the sitemap is Vite-custom instead of `next-sitemap` — is [`docs/seo-runbook.md`](docs/seo-runbook.md).
 
 ## Deployment
 
