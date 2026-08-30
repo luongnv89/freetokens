@@ -663,6 +663,14 @@ a:focus-visible {
   color: var(--ink);
 }
 
+@media (pointer: coarse) {
+  .breadcrumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
 .breadcrumbs [aria-current="page"] {
   color: var(--gray);
 }

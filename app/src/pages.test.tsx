@@ -257,6 +257,9 @@ describe("archive layout at 320 px (#129)", () => {
     expect(css).toMatch(/\[data-page="archive"\] \.empty \{\s*animation:\s*none/s);
     expect(css).toMatch(/\.breadcrumbs-list \{[^}]*flex-wrap:\s*wrap/s);
     expect(css).toMatch(/\.breadcrumbs-list li \{[^}]*overflow-wrap:\s*anywhere/s);
+    expect(css).toMatch(
+      /@media \(pointer: coarse\) \{\s*\.breadcrumbs a \{[^}]*display:\s*inline-flex[^}]*align-items:\s*center[^}]*min-height:\s*44px/s,
+    );
   });
 
   it("styles the archive View-details control as a real tap target", () => {
