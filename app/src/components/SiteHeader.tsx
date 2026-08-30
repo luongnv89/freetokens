@@ -24,7 +24,7 @@ export function SiteHeader({
     : undefined)
   const SloganTag = current === "home" ? "h1" : "p"
   return (
-    <header className="site-header">
+    <div className="site-header">
       <div className="site-bar">
         <a className="site-brand" href={homeHref} aria-label="Free AI Credits — home">
           <BrandMark depth={depth} size={28} alt="" priority />
@@ -69,6 +69,6 @@ export function SiteHeader({
         </nav>
       </div>
       {showSlogan ? <SloganTag className="site-slogan">{showSlogan}</SloganTag> : null}
-    </header>
+    </div>
   )
 }
