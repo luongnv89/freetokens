@@ -5,12 +5,29 @@ import {
   type SocialProof,
 } from "../lib/offerDetails"
 
-function ProofCard({ entry, relPrefix }: { entry: SocialProof; relPrefix: string }) {
+function ProofCard({
+  entry,
+  relPrefix,
+  eager = false,
+}: {
+  entry: SocialProof
+  relPrefix: string
+  eager?: boolean
+}) {
   if (entry.type === "screenshot") {
     const src = resolveAsset(entry.image, relPrefix)
     return (
       <figure className="proof-card proof-screenshot">
-        <img src={src} alt={entry.caption} loading="lazy" />
+        <img
+          src={src}
+          alt={entry.caption}
+          width={640}
+          height={360}
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : "auto"}
+          decoding="async"
+          style={{ aspectRatio: "16 / 9" }}
+        />
         <figcaption>{entry.caption}</figcaption>
       </figure>
     )
@@ -66,11 +83,17 @@ export function SocialProofList({
 }) {
   const entries = renderableProofs(proofs)
   if (entries.length === 0) return null
+  const firstScreenshotIndex = entries.findIndex((e) => e.type === "screenshot")
   return (
     <section className="od-proof">
       <h2>Social proof</h2>
       {entries.map((entry, i) => (
-        <ProofCard key={i} entry={entry} relPrefix={relPrefix} />
+        <ProofCard
+          key={i}
+          entry={entry}
+          relPrefix={relPrefix}
+          eager={entry.type === "screenshot" && i === firstScreenshotIndex}
+        />
       ))}
     </section>
   )

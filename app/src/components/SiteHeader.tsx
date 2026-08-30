@@ -20,7 +20,7 @@ export function SiteHeader({
   return (
     <div className="site-bar">
       <a className="site-brand" href={homeHref}>
-        <BrandMark depth={depth} size={32} alt="" />
+        <BrandMark depth={depth} size={32} alt="" priority />
         <p className="site-wordmark">Free AI Credits</p>
       </a>
       <nav className="site-nav" aria-label="Primary">
