@@ -672,7 +672,7 @@ a:focus-visible {
 }
 
 .breadcrumbs [aria-current="page"] {
-  color: var(--gray);
+  color: var(--ink);
 }
 
 .masthead-home > h1.kicker { font-weight: 400; }
