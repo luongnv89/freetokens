@@ -11,6 +11,7 @@ import path from "node:path";
 // adding an offer to offers.json (regenerated from YAML by load:data)
 // produces its page on the next build with no source edit.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
+const ROBOTS_SITEMAP = "Sitemap: https://luongnv89.github.io/freetokens/sitemap.xml";
 
 function prerender(distDir, dataFile) {
   const args = ["scripts/prerender.mjs", "--dist", distDir];
@@ -100,6 +101,33 @@ describe("static route coverage (#123)", () => {
     const emitted = readdirSync(path.join(outDir, "offers")).sort();
     const expected = index.offers.map((o) => `${o.slug}.html`).sort();
     expect(emitted).toEqual(expected);
+  });
+
+  it("copies the robots policy and keeps it stable across builds", () => {
+    const readRobots = () => readFileSync(path.join(outDir, "robots.txt"), "utf8");
+    const first = readRobots();
+    expect(first).toContain("User-agent: *\nAllow: /\n");
+    expect(first.split("\n").filter((line) => line === ROBOTS_SITEMAP)).toHaveLength(1);
+    expect(first).not.toContain("\0");
+
+    for (const bot of ["GPTBot", "ClaudeBot", "Google-Extended", "CCBot", "Bytespider"]) {
+      expect(first).toContain(`User-agent: ${bot}\nDisallow: /\n`);
+    }
+    for (const bot of [
+      "Googlebot",
+      "Bingbot",
+      "DuckDuckBot",
+      "OAI-SearchBot",
+      "PerplexityBot",
+      "ChatGPT-User",
+      "Claude-User",
+    ]) {
+      expect(first).toContain(`User-agent: ${bot}\nAllow: /\n`);
+    }
+
+    viteBuild(outDir);
+    prerender(outDir);
+    expect(readRobots()).toBe(first);
   });
 
   it("stamps each document so hydration lands on the right page", () => {
