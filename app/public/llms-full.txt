@@ -1,0 +1,433 @@
+# Free AI Credits — Full Content
+
+> Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
+
+Source: https://luongnv89.github.io/freetokens/ — generated 2026-08-30T07:42:06Z — 38 active offers.
+
+## Offers (full)
+
+### WorkBuddy Hy4 Preview Free
+- Provider: WorkBuddy
+- Category: coding
+- Amount: Free access to Hy4 preview (2 weeks)
+- Status: active — expiry 2026-09-11
+- Verified: 2026-08-29 (social_proof / verified, signup required)
+- Source: https://x.com/WorkBuddy_AI/status/2093282334896431224
+- Page: https://luongnv89.github.io/freetokens/offers/workbuddy-hy4-preview-free.html
+- Summary: WorkBuddy (Tencent) offers free access to the Hy4 preview model for 2 weeks. Hy3 remains free through end of September. Hy4 preview is an AI model for end-to-end agent workflows including research, Office tasks, frontend development, and game development.
+- Claim steps: Go to workbuddy.ai and create a free account. | Access the Hy4 preview model directly in the WorkBuddy interface.
+
+### Notion Education Plus — Free Plus Plan
+- Provider: Notion
+- Category: student
+- Amount: Plus features free (unlimited blocks/files, 30-day history) while enrolled via school email
+- Status: active — expiry ongoing
+- Verified: 2026-08-29 (social_proof / unverified, signup required)
+- Source: https://www.notion.com/help/notion-for-education
+- Page: https://luongnv89.github.io/freetokens/offers/notion-education-plus.html
+- Summary: Notion gives verified college/university students a free Education Plus plan (same as paid Plus: unlimited blocks and file uploads, 30-day version history, up to 10 guests) while enrolled via a school email recognised in the WHED. Stays active as long as the school email remains valid.
+- Claim steps: Sign up to Notion with your school email address. | Go to Settings → Upgrade plan → Get free Education plan. | If your school is recognised, you are upgraded to Plus automatically; otherwise email team@makenotion.com to allowlist your domain.
+
+### JetBrains Student Pack — All IDEs Free
+- Provider: JetBrains
+- Category: student
+- Amount: All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount)
+- Status: active — expiry ongoing
+- Verified: 2026-08-29 (social_proof / unverified, signup required)
+- Source: https://www.jetbrains.com/academy/student-pack/
+- Page: https://luongnv89.github.io/freetokens/offers/jetbrains-student-pack.html
+- Summary: JetBrains gives verified students free access to the entire All Products Pack (IntelliJ IDEA Ultimate, PyCharm Professional, WebStorm, CLion, Rider, PhpStorm, GoLand, DataGrip, etc.) while enrolled. Licenses renew annually with fresh proof and include a 40% graduation discount for two years after expiry.
+- Claim steps: Go to https://www.jetbrains.com/academy/student-pack/ and click Apply. | Verify via school email, ISIC/ITIC, GitHub Student Pack, or uploaded enrollment proof. | Confirm the verification email link to activate approval. | Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled.
+
+### Google Gemini Student Free Year
+- Provider: Google
+- Category: student
+- Amount: 1 year of Google AI Pro (US) or Google AI Plus (140+ countries) free
+- Status: active — expiry 2026-09-30
+- Verified: 2026-08-29 (social_proof / verified, signup required)
+- Source: https://x.com/GeminiApp/status/2090165248196252003
+- Page: https://luongnv89.github.io/freetokens/offers/google-gemini-student-free-year.html
+- Summary: Google offers eligible college students 1 year of Gemini subscription free. US students get Google AI Pro; students in 140+ countries get Google AI Plus. This is a back-to-school promotion announced by the official Gemini App account.
+- Claim steps: Verify your student status through your school's email or enrollment system. | Visit gemini.google.com and sign in with your verified student account. | The free 1-year subscription applies automatically to your account.
+
+### GitHub Copilot Student Pack — 2 Years Free
+- Provider: GitHub
+- Category: student
+- Amount: 2 years of Copilot Pro + 100+ dev tools ($240 value)
+- Status: active — expiry 2026-09-01
+- Verified: 2026-08-29 (social_proof / verified, signup required)
+- Source: https://x.com/alannnfx/status/2093574538923823345
+- Page: https://luongnv89.github.io/freetokens/offers/github-copilot-student-pack-2yr.html
+- Summary: GitHub is giving away 2 years of Copilot Pro (worth $240) plus 100+ dev tools in the student pack. Students can verify their status through GitHub Education to unlock Copilot Pro, free domains, and free cloud credits.
+- Claim steps: Get a student email via UMGC application (fee waived until Sept 1). | Register a class so the @student.umgc.edu email activates. | Go to github.com/education/students and sign in. | Verify your .edu email and claim the student pack.
+
+### GenSpark Free Trial — 1 Month + 10K Credits
+- Provider: GenSpark
+- Category: api_provider
+- Amount: 1 month free subscription + 10,000 credits (code: WELCOME25)
+- Status: active — expiry ongoing
+- Verified: 2026-08-29 (social_proof / verified, signup required)
+- Source: https://x.com/ariskaa_ai/status/2093696041417846888
+- Page: https://luongnv89.github.io/freetokens/offers/genspark-free-trial-10k-credits.html
+- Summary: GenSpark offers a free trial with 1 month subscription and 10,000 credits using promo code WELCOME25. Includes access to multiple AI models: Claude 5, GPT-5.6, GPT Image 2, Gemini Veo 3.1, Seedance 2.5, ElevenLabs, MiniMax, plus AI slides, GenSpark Code, 50GB storage, and commercial use rights.
+- Claim steps: Go to genspark.ai and create a new account. | Navigate to Pricing / Plans. | Select the $25 free trial plan. | Enter promo code: WELCOME25. | You get 10,000 credits instantly. Cancel before renewal to avoid charges.
+
+### Figma Education — Professional Plan Free
+- Provider: Figma
+- Category: student
+- Amount: Professional plan free (1 year students / 2 years educators) + 3,000 AI credits/month, Figma Make & Sites
+- Status: active — expiry ongoing
+- Verified: 2026-08-29 (social_proof / unverified, signup required)
+- Source: https://www.figma.com/education/
+- Page: https://luongnv89.github.io/freetokens/offers/figma-education-professional.html
+- Summary: Figma Education gives verified higher-education students the Professional plan free for one year (educators two years), including Figma Make, Figma Sites (one publishable site), and 3,000 AI credits per month. Access renews with re-verification via SheerID.
+- Claim steps: Create a Figma account using your school email. | Go to https://www.figma.com/education/apply, select Higher ed, and complete SheerID verification. | Once approved, create an Education team to start building with Professional features and AI credits.
+
+### Azure for Students — $100 Credit + Free Services
+- Provider: Microsoft Azure
+- Category: student
+- Amount: $100 Azure credits for 12 months + 25+ free services (no credit card required)
+- Status: active — expiry ongoing
+- Verified: 2026-08-29 (social_proof / unverified, signup required)
+- Source: https://azure.microsoft.com/en-us/free/students
+- Page: https://luongnv89.github.io/freetokens/offers/azure-for-students.html
+- Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
+- Claim steps: Go to https://azure.microsoft.com/en-us/free/students and click Activate. | Sign in with your school email and complete student verification via the Azure Education Hub. | Once approved, start building with $100 credit and free-tier services for 12 months.
+
+### Merge Gateway — $10 in Free LLM Credits Every Month
+- Provider: Merge
+- Category: api_provider
+- Amount: $10 in free LLM credits every month (Pro plan)
+- Status: active — expiry ongoing
+- Verified: 2026-08-27 (social_proof / verified, signup required)
+- Source: https://www.merge.dev/pricing/gateway
+- Page: https://luongnv89.github.io/freetokens/offers/merge-gateway-10-monthly-credits.html
+- Summary: Merge Gateway routes every major LLM through one API with built-in routing, spend caps, and security. The Pro plan grants $10 in complimentary LLM credits every month (issued on the 1st of each month), with unused credits expiring at month end. A credit card is required.
+- Claim steps: Sign up at https://gateway.merge.dev/signup | Choose the Pro plan (requires a credit card). | Receive $10 in complimentary credits each month; use them against any supported model via the gateway.merge.dev/v1 endpoint.
+
+### GLM-5.3 Flash (Ox Alpha) Free in Cline
+- Provider: Cline
+- Category: coding
+- Amount: Free GLM-5.3 Flash (Ox Alpha) model access, rate limited
+- Status: active — expiry ongoing
+- Verified: 2026-08-26 (social_proof / verified, signup required)
+- Source: https://x.com/cline/status/2092666316125864191
+- Page: https://luongnv89.github.io/freetokens/offers/cline-ox-alpha-free.html
+- Summary: Cline's August 26, 2026 announcement says GLM-5.3 Flash (formerly Ox Alpha) is free in Cline. The current Cline documentation says free model promotions are available to any user with a Cline account, provide a limited usage quota, rotate over time, and work in the Cline IDE extension and CLI—not the Cline API. No fixed end date is published, so this listing uses a null expiry date to mean no announced end date, not permanent availability.
+- Claim steps: Install the Cline CLI if needed: npm i -g cline. | Open the model picker with /models; in the current CLI, go to /settings, select Cline as the provider, and browse available free models. | Select GLM-5.3 Flash (Ox Alpha) under the free options while it is listed. | Use it in the Cline CLI or IDE extension within the limited free quota; Cline's free models are not available through the Cline API.
+
+### ChatGPT Student — 4 Months of Plus Free
+- Provider: OpenAI
+- Category: student
+- Amount: 4 months of ChatGPT Plus (up to $80 value)
+- Status: active — expiry 2026-10-31
+- Verified: 2026-08-26 (social_proof / unverified, signup required)
+- Source: https://chatgpt.com/students/2026
+- Page: https://luongnv89.github.io/freetokens/offers/chatgpt-student-4mo-plus.html
+- Summary: OpenAI's student offer grants eligible U.S. college students four free months of ChatGPT Plus (an $80 value, including ChatGPT Work and premium features). Student status is verified through SheerID, and the offer must be claimed by October 31.
+- Claim steps: Visit the student offer page: https://chatgpt.com/students/2026 | Verify your student status through SheerID (school SSO or supporting documentation). | Once approved, activate your 4-month free ChatGPT Plus.
+
+### Devin for Startups — $65K Credits and Grants
+- Provider: Cognition (Devin)
+- Category: startup_program
+- Amount: $15K in Devin credits on approval + up to $50K in matching grants ($65K total)
+- Status: active — expiry ongoing
+- Verified: 2026-08-25 (social_proof / verified, signup required)
+- Source: https://devin.ai/startups
+- Page: https://luongnv89.github.io/freetokens/offers/devin-startups-program.html
+- Summary: Devin for Startups gives early-stage teams $65K to build with the AI software engineer: $15K in Devin credits loaded into the account the day the startup is approved, plus a dollar-for-dollar match of up to $50K in grants on the next $100K of usage. Accepted startups also get unlimited Team-plan seats, invitations to founder meetups and early-access previews with the Cognition team, and a Devin swag pack. Applications are reviewed on a rolling basis.
+- Claim steps: Create a Devin account at devin.ai. | Subscribe to the Team plan — no seat limits. | Apply at devin.ai/startups and tell Cognition about your startup. | Once approved, $15K in free credits hits your account immediately.
+
+### Z AI Free Model APIs
+- Provider: Z AI (Zhipu AI)
+- Category: api_provider
+- Amount: Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash
+- Status: active — expiry ongoing
+- Verified: 2026-08-24 (social_proof / unverified, signup required)
+- Source: https://docs.z.ai/guides/overview/pricing.md
+- Page: https://luongnv89.github.io/freetokens/offers/z-ai-free-models.html
+- Summary: Z.AI's pricing table lists GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash with Free input, cached input, cached input storage, and output prices.
+- Claim steps: Register or sign in to the Z.AI Open Platform. | Create an API key in the API Keys management page. | Call one of the free models through Z.AI's API.
+
+### SiliconFlow Free Models
+- Provider: SiliconFlow
+- Category: api_provider
+- Amount: Selected API models are free for input and output, including GLM-Z1-9B-0414
+- Status: active — expiry ongoing
+- Verified: 2026-08-24 (social_proof / unverified, signup required)
+- Source: https://siliconflow.cn/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/siliconflow-free-models.html
+- Summary: SiliconFlow's current API pricing page marks selected models free, including THUDM/GLM-Z1-9B-0414, PaddlePaddle/PaddleOCR-VL-1.5, and tencent/Hunyuan-MT-7B.
+- Claim steps: Sign in to SiliconFlow Cloud. | Choose a model marked 免费/free in the API pricing catalog. | Use the selected model through SiliconFlow's API.
+
+### Ollama Cloud Free Tier
+- Provider: Ollama
+- Category: api_provider
+- Amount: Light cloud usage on the $0 Free plan, with limits resetting every 5 hours and 7 days
+- Status: active — expiry ongoing
+- Verified: 2026-08-24 (social_proof / verified, signup required)
+- Source: https://ollama.com/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/ollama-cloud-free-tier.html
+- Summary: Ollama's $0 Free plan includes access to cloud models. Cloud usage is light on Free, with session limits resetting every 5 hours and weekly limits resetting every 7 days.
+- Claim steps: Create or sign in to an Ollama account. | Use a cloud model through Ollama, or create an API key for direct cloud API access. | Stay within the Free plan's session, weekly, and one-concurrent-model limits.
+
+### LLM7.io Free API Tier
+- Provider: LLM7.io
+- Category: api_provider
+- Amount: Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day
+- Status: active — expiry ongoing
+- Verified: 2026-08-24 (social_proof / unverified, signup required)
+- Source: https://docs.llm7.io/limits
+- Page: https://luongnv89.github.io/freetokens/offers/llm7-free-tier.html
+- Summary: LLM7 provides anonymous text generation with limits of 1 request per second, 10 per minute, 60 per hour, and 500,000 tokens per 24 hours. A free token raises the request and token limits.
+- Claim steps: Send an OpenAI-compatible request without a key using a currently available turbo model. | Stay within the anonymous limits of 10 requests per minute, 60 per hour, and 500,000 tokens per 24 hours. | Optionally get a free token from the LLM7 dashboard for higher limits.
+
+### Kilo Code Free Models
+- Provider: Kilo Code
+- Category: api_provider
+- Amount: Free :free models without an API key, limited to 200 requests/hour per IP
+- Status: active — expiry ongoing
+- Verified: 2026-08-24 (social_proof / unverified, signup required)
+- Source: https://kilo.ai/docs/gateway/authentication
+- Page: https://luongnv89.github.io/freetokens/offers/kilo-code-free-models.html
+- Summary: Kilo's AI Gateway allows unauthenticated access to models tagged :free, with anonymous requests limited to 200 requests per hour per IP.
+- Claim steps: Choose a Kilo Gateway model tagged :free. | Call the gateway without an Authorization header, or use a Kilo API key if preferred. | Stay within the 200 requests per hour per IP anonymous limit.
+
+### Google Gemini API Free Tier
+- Provider: Google Gemini
+- Category: api_provider
+- Amount: Free input and output tokens on supported Gemini API models (quotas vary by model)
+- Status: active — expiry ongoing
+- Verified: 2026-08-24 (social_proof / verified, signup required)
+- Source: https://ai.google.dev/gemini-api/docs/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/google-gemini-free-api-tier.html
+- Summary: Google's Gemini Developer API pricing page lists a Free Tier with free input and output tokens for supported models; quotas and model availability vary.
+- Claim steps: Open Google AI Studio's API key page. | Create an API key and call a model with a published Free Tier. | Check the current quota shown for your account because Google does not publish one fixed quota for every model.
+
+### GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free
+- Provider: GMI Cloud
+- Category: api_provider
+- Amount: MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter
+- Status: active — expiry 2026-09-06
+- Verified: 2026-08-24 (social_proof / verified, signup required)
+- Source: https://www.gmicloud.ai/minimax-week
+- Page: https://luongnv89.github.io/freetokens/offers/gmi-cloud-minimax-week.html
+- Summary: GMI Cloud's MiniMax Week (Aug 24 – Sep 6, 2026) makes the MiniMax lineup free for fourteen days: M3 (frontier reasoning), M2.7 (fast agent/coding reasoning), Speech 2.8 (TTS and voice cloning), and Music 3.0 (full generated tracks). Access via a GMI API key or OpenRouter's :free variants, with native integrations in Pi, Oh My Pi, Hermes Agent, Trae, and OpenCode, and BYOK support for Claude Code, Codex, and Cursor. Account creation is free; H3 generative video is not included and stays at standard pricing. A concurrent MiniMaxathon challenge awards $200 in GMI credits plus a 3-month MiniMax token plan per track winner.
+- Claim steps: Create a free GMI Cloud account at https://console.gmicloud.ai. | Use MiniMax models via the GMI Model Hub API key, or through OpenRouter using the :free variants (e.g. openrouter.ai/minimax/minimax-m3:free). | Optionally integrate natively in Pi, Oh My Pi, Hermes Agent, Trae, or OpenCode — or BYOK into Claude Code, Codex, or Cursor. | Use the models free until September 6, 2026; standard pricing applies afterward.
+
+### Vidu AI Video Free Credits
+- Provider: Vidu
+- Category: video
+- Amount: Trial credits for new users on signup, topped up with daily login bonus credits
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://www.vidu.com/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/vidu-free-credits.html
+- Summary: Vidu's AI video platform hands new users trial credits at registration and keeps topping them up through daily login bonuses, letting you generate text-to-video and image-to-video clips without paying. Credits can also be earned through official events.
+- Claim steps: Register a free account at vidu.com. | Receive the sign-up trial credits automatically. | Log in daily to collect bonus credits. | Spend credits on text-to-video or image-to-video generations.
+
+### Runway Free Plan
+- Provider: Runway
+- Category: video
+- Amount: 125 one-time credits for AI video and image generation
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://runwayml.com/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/runway-free-plan.html
+- Summary: Runway grants every new account 125 one-time credits for AI video and image generation (Gen-4 and friends). The credits do not renew; upgrade or wait for promotional refreshes for more.
+- Claim steps: Create a free account at runwayml.com. | Receive the one-time 125-credit grant on signup. | Generate video or images from the dashboard, spending credits per run. | Upgrade to Standard when the one-time credits run out.
+
+### Pika Free Plan
+- Provider: Pika
+- Category: video
+- Amount: 80 monthly video credits
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://pika.art/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/pika-free-plan.html
+- Summary: Pika's free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and credits refresh monthly.
+- Claim steps: Sign up at pika.art with Google or Discord. | Open the generator from your workspace. | Create videos from text or image prompts; each generation spends credits. | Wait for the monthly reset to get your next 80 credits.
+
+### OpenRouter Free Models
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / verified, signup required)
+- Source: https://openrouter.ai/docs/api-reference/limits
+- Page: https://luongnv89.github.io/freetokens/offers/openrouter-free-models.html
+- Summary: OpenRouter routes many popular models with ':free' variants that cost nothing: 50 requests per day at up to 20 requests per minute on accounts holding under $10 in credits, rising to 1,000 requests per day once you have bought at least $10 of credits. One API key reaches dozens of free model endpoints.
+- Claim steps: Create a free account at openrouter.ai and open the Keys page. | Create an API key. | Browse models filtered to the :free variants at openrouter.ai/models. | Call the OpenAI-compatible endpoint with your key, staying within the free rate limits.
+
+### OpenAI Codex Free Tier
+- Provider: OpenAI
+- Category: coding
+- Amount: Limited free Codex access on the ChatGPT Free plan, incl. GPT-5.6 Luna (no credit card)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / verified, signup required)
+- Source: https://openai.com/chatgpt/pricing/
+- Page: https://luongnv89.github.io/freetokens/offers/openai-codex-free-tier.html
+- Summary: Every ChatGPT Free account ($0, no credit card) includes limited access to Codex, OpenAI's coding agent, across its clients (desktop app Codex mode, CLI, IDE extension, web). The free tier runs GPT-5.6 Luna (OpenAI's cheapest model) and gives limited access to GPT-5.6 Terra in Work and Codex on desktop; the flagship GPT-5.6 Sol is not available on Free. OpenAI does not publish numeric free quotas - usage draws from a shared allowance with rolling reset windows, visible in the usage dashboard. Note 'Luna Max' is not a separate model: it means GPT-5.6 Luna running at the 'max' reasoning-effort setting, which ships disabled by default in Codex settings.
+- Claim steps: Create or sign in to a free ChatGPT account at chatgpt.com - no credit card needed. | Launch any Codex client (ChatGPT desktop app Codex mode, Codex CLI, IDE extension, or chatgpt.com/codex) and sign in with your ChatGPT account. | Select GPT-5.6 Luna as the model - it is available on the Free plan (Terra is limited to Work/Codex-on-desktop; Sol requires a paid plan). | Optional: enable the hidden 'max' reasoning effort under Settings > Configuration > Available reasoning efforts (it is off by default, per community guides - not documented on OpenAI's help pages). | Track consumption with /status in the CLI or the usage dashboard at chatgpt.com/codex/settings/usage; Free accounts cannot buy credit top-ups, so wait for the window reset.
+
+### Mistral AI Studio Free Mode — Free API Tier
+- Provider: Mistral AI
+- Category: api_provider
+- Amount: Free rate-limited API access (no credit card required)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / verified, signup required)
+- Source: https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key
+- Page: https://luongnv89.github.io/freetokens/offers/mistral-experiment-free-tier.html
+- Summary: Mistral's La Plateforme 'Experiment' plan provides free, rate-limited API access to Mistral models with no credit card required. Activating it opts your data into training in exchange for the free tier.
+- Claim steps: Create a free account at console.mistral.ai. | Activate the free 'Experiment' plan from the subscription page (data-training opt-in applies). | Generate an API key from the API Keys page. | Call api.mistral.ai within the published rate limits.
+
+### Leonardo.Ai Free Plan
+- Provider: Leonardo.Ai
+- Category: image
+- Amount: 150 fast tokens per day (resets daily)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://leonardo.ai/pricing/
+- Page: https://luongnv89.github.io/freetokens/offers/leonardo-ai-free-plan.html
+- Summary: The Leonardo.Ai free plan grants 150 fast tokens every day (resetting daily) for image generation on the app's core models. Slow-generation modes can stretch usage further at zero cost.
+- Claim steps: Create a free Leonardo.Ai account at leonardo.ai. | Confirm your email to activate the free plan. | Generate images from the app dashboard using your daily fast tokens. | Return daily — the 150 fast-token allowance resets every day.
+
+### Hailuo AI Video Free Tier
+- Provider: Hailuo AI
+- Category: video
+- Amount: One-time welcome credit package (expires 3 days after grant) + limited free generation (watermarked)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://hailuoai.video/doc/payment-policy.html
+- Page: https://luongnv89.github.io/freetokens/offers/hailuo-free-tier.html
+- Summary: New Hailuo AI Video accounts receive a one-time welcome package of credits plus limited free video generation. Free-tier outputs are watermarked, and paid plans remove the limits.
+- Claim steps: Create a free account at hailuoai.video. | Receive the welcome credit package on signup. | Generate videos from prompts or images within the free allowance. | Note that free-tier generations are watermarked.
+
+### Google Cloud Free Trial — $300 Credit
+- Provider: Google Cloud
+- Category: api_provider
+- Amount: $300 in credits (90 days from signup)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / verified, signup required)
+- Source: https://cloud.google.com/free/docs/free-cloud-features
+- Page: https://luongnv89.github.io/freetokens/offers/google-cloud-300-free-trial.html
+- Summary: New Google Cloud customers get $300 in free credits to spend on any Cloud Platform service during a 90-day trial window counted from signup. A billing account is created, but you are not charged until you manually upgrade.
+- Claim steps: Open cloud.google.com/free and click 'Start free'. | Sign in with or create a Google account. | Complete the signup steps and create a billing account (no automatic charges). | Use the $300 credits on eligible services within the 90-day window.
+
+### Google AI Studio — Free Image Generation
+- Provider: Google
+- Category: image
+- Amount: Free image generation in the AI Studio web app (rate-limited; not available via API free tier)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / verified, signup required)
+- Source: https://aistudio.google.com/
+- Page: https://luongnv89.github.io/freetokens/offers/google-ai-studio-image.html
+- Summary: Google AI Studio offers free, rate-limited image generation directly in the browser using Gemini image models — no billing account required for the free tier.
+- Claim steps: Open aistudio.google.com in your browser. | Sign in with a Google account. | Choose an image-capable Gemini model and start generating. | Stay within the per-minute/per-day free rate limits.
+
+### ElevenLabs Free Plan
+- Provider: ElevenLabs
+- Category: voice
+- Amount: 10k credits/month (~10 min of audio)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / verified, signup required)
+- Source: https://elevenlabs.io/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/elevenlabs-free-plan.html
+- Summary: The ElevenLabs free plan includes 10,000 credits per month, roughly 10 minutes of audio, with access to the core text-to-speech voices. Credits reset monthly and no credit card is required.
+- Claim steps: Open elevenlabs.io/pricing and choose the Free plan. | Sign up for a free ElevenLabs account. | Confirm your email to unlock the 10k monthly credits. | Generate speech from the Playground or API within the free quota.
+
+### Devin Free Plan
+- Provider: Cognition (Devin)
+- Category: coding
+- Amount: Light coding-agent quota + unlimited Tab completions ($0 plan)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / verified, signup required)
+- Source: https://devin.ai/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/devin-free-plan.html
+- Summary: Devin's $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.
+- Claim steps: Open devin.ai/pricing and pick the Free $0 plan. | Sign up with your email or a Google/GitHub account. | Start a Devin session from the dashboard within your free quota. | Install the IDE extension for unlimited Tab completions.
+
+### Deepgram $200 Free Credit
+- Provider: Deepgram
+- Category: voice
+- Amount: $200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://deepgram.com/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/deepgram-free-credit.html
+- Summary: Deepgram gives every new Pay As You Go account $200 in free credits for its speech APIs - Nova speech-to-text, Aura text-to-speech, and the Voice Agent API - with no credit card required and no expiration on the credits.
+- Claim steps: Click 'Sign Up Free' at deepgram.com/pricing. | Create a console account (no credit card needed). | Create an API key in console.deepgram.com. | Call the Speech-to-Text or Text-to-Speech APIs; usage draws down the $200 credit.
+
+### Cursor Hobby Plan
+- Provider: Cursor (Anysphere)
+- Category: coding
+- Amount: Free Hobby plan - limited Agent requests plus Composer access, no credit card required
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / verified, signup required)
+- Source: https://cursor.com/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/cursor-hobby-plan.html
+- Summary: Cursor's Hobby plan is a genuinely free tier of the AI code editor: no credit card required, with limited Agent requests and access to the Composer model. Pro tiers only extend limits, so everyday autocomplete and agent use stay free.
+- Claim steps: Go to cursor.com/pricing and pick the Hobby (Free) plan. | Download and install the Cursor editor. | Sign in with a free account - no credit card needed. | Use Agent within the limited free quota; upgrade only if you need more.
+
+### Cloudflare Workers AI Free Tier
+- Provider: Cloudflare
+- Category: api_provider
+- Amount: 10,000 Neurons per day at no charge (resets daily at 00:00 UTC)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://developers.cloudflare.com/workers-ai/platform/pricing/
+- Page: https://luongnv89.github.io/freetokens/offers/cloudflare-workers-ai-free-tier.html
+- Summary: Cloudflare's Workers AI includes a free allocation of 10,000 Neurons per day for anyone - enough for thousands of small LLM or image generations. It runs on Cloudflare's edge network with an OpenAI-compatible REST interface and resets daily at 00:00 UTC.
+- Claim steps: Create a free Cloudflare account and open the dashboard. | Navigate to the Workers AI section and accept the terms. | Create a Workers AI API token, or add the AI binding inside any Worker. | Run models via REST or Worker bindings within the daily 10,000-Neuron free allowance.
+
+### Cartesia Free Plan
+- Provider: Cartesia
+- Category: voice
+- Amount: 20K credits/month for text-to-speech and speech-to-text on the $0 plan
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://cartesia.ai/pricing
+- Page: https://luongnv89.github.io/freetokens/offers/cartesia-free-plan.html
+- Summary: Cartesia's $0 Free plan includes 20,000 credits per month covering Sonic text-to-speech (about 27 minutes) and Ink speech-to-text (about 1h51m), plus one voice agent slot and unlimited workspace seats - no card required to start.
+- Claim steps: Open cartesia.ai/pricing and choose the Free plan ('Start free'). | Sign up at play.cartesia.ai - no credit card required. | Generate speech with Sonic or transcribe with Ink from the playground or API. | Stay within the 20K monthly credits; they reset each month.
+
+### Bing Image Creator
+- Provider: Microsoft Bing
+- Category: image
+- Amount: Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h)
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://www.microsoft.com/en-us/bing/features/bing-image-creator
+- Page: https://luongnv89.github.io/freetokens/offers/bing-image-creator.html
+- Summary: Bing Image Creator is free for everyone with a personal Microsoft account, offering image generation with Microsoft MAI-Image, GPT-Image, and DALL-E-class models. You get 15 fast creations per day plus slower standard-speed generations (up to 200 prompts per 24 hours).
+- Claim steps: Visit bing.com/create or the Bing Image Creator feature page. | Sign in with a personal Microsoft account (work/school Entra accounts are not supported). | Enter a prompt and press Create; each generation uses one of your daily creations. | Return daily - the 15 fast creations replenish every day.
+
+### Amazon Polly Free Tier
+- Provider: AWS
+- Category: voice
+- Amount: Legacy accounts (created before July 15, 2025): 5M chars/month Standard + 1M chars/month Neural voices for first 12 months. New accounts get up to $200 in AWS Free Tier credits on a 6-month free plan.
+- Status: active — expiry ongoing
+- Verified: 2026-08-23 (social_proof / unverified, signup required)
+- Source: https://aws.amazon.com/polly/pricing/
+- Page: https://luongnv89.github.io/freetokens/offers/amazon-polly-free-tier.html
+- Summary: Amazon Polly's free tier gives new AWS accounts 5 million characters per month on Standard voices and 1 million characters per month on Neural voices for the first 12 months after signup - roughly thousands of minutes of narration at zero cost.
+- Claim steps: Create an AWS account at aws.amazon.com (free tier applies automatically). | Open the Amazon Polly console. | Convert text to speech using Standard or Neural voices within the monthly free character allowance. | Note the free window runs for the first 12 months from account creation.
+
+### [UNVERIFIED] ChatGPT Business — Free Second Seat via TalentGenius
+- Provider: TalentGenius (OpenAI SMB Channel Partner)
+- Category: coding
+- Amount: 1 extra ChatGPT Business seat free for 4 years (with a paid $25/mo seat) — UNVERIFIED, claimed only in an X post
+- Status: active — expiry ongoing
+- Verified: 2026-08-22 (social_proof / unverified, signup required)
+- Source: https://talentgenius.io/chatgpt/request
+- Page: https://luongnv89.github.io/freetokens/offers/chatgpt-business-second-seat.html
+- Summary: TalentGenius, an OpenAI SMB Channel Partner, distributes ChatGPT Business signup links via a request form. An X post by @Rakib_Web3 (2026-08-22) claims that paying $25/mo for one seat gets a second seat completely free for 4 years through this partner program. The claim terms are not stated on TalentGenius's public pages and remain unverified.
+- Claim steps: Fill out the form at https://talentgenius.io/chatgpt/request (name, work email, company, region, team size). | Receive your unique ChatGPT Business signup link from TalentGenius. | Subscribe to ChatGPT Business ($25/mo per seat) using the link. | Add the second seat to the workspace at no extra cost, per the claimed partner promotion.
+
+## Pages
+
+- [Home](https://luongnv89.github.io/freetokens/): Main listing of active offers.
+- [Archive](https://luongnv89.github.io/freetokens/archive.html): Expired offers archive.
+- [Privacy Policy](https://luongnv89.github.io/freetokens/privacy.html): Privacy policy.
+- [RSS Feed](https://luongnv89.github.io/freetokens/feed.xml): RSS feed of active offers.
+- [Sitemap](https://luongnv89.github.io/freetokens/sitemap.xml): XML sitemap.

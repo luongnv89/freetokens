@@ -3,6 +3,7 @@
 User-agent: *
 Allow: /
 
+# llms.txt: https://luongnv89.github.io/freetokens/llms.txt
 Sitemap: https://luongnv89.github.io/freetokens/sitemap.xml
 
 # AI training / dataset crawlers — block.

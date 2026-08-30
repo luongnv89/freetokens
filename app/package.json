@@ -8,10 +8,11 @@
   },
   "scripts": {
     "load:data": "node scripts/load-offers.mjs",
+    "gen:llms": "node scripts/generate-llms.mjs",
     "dev": "vite",
-    "prebuild": "npm run load:data",
+    "prebuild": "npm run load:data && npm run gen:llms",
     "build": "tsc -b && vite build",
-    "postbuild": "node scripts/prerender.mjs",
+    "postbuild": "node scripts/prerender.mjs && node scripts/generate-llms.mjs",
     "prerender": "node scripts/prerender.mjs",
     "pretest": "npm run load:data",
     "test": "vitest run",
