@@ -2,6 +2,7 @@ import { expiredOffers, type OffersIndex } from "../lib/offers"
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
+import { Breadcrumbs } from "./Breadcrumbs"
 
 function ArchiveEmptyGlyph() {
   return (
@@ -30,7 +31,13 @@ function ArchiveEmptyGlyph() {
  * but with a muted background tint to signal expired status. Newest
  * expirations first, plain crawlable markup.
  */
-export default function ArchivePage({ index }: { index: OffersIndex }) {
+export default function ArchivePage({
+  index,
+  baseUrl,
+}: {
+  index: OffersIndex
+  baseUrl?: string
+}) {
   const archived = expiredOffers(index)
   const buildDay = index.generated_at.slice(0, 10)
   return (
@@ -40,6 +47,7 @@ export default function ArchivePage({ index }: { index: OffersIndex }) {
         <main>
         <header className="masthead masthead-home">
           <SiteHeader current="archive" />
+          <Breadcrumbs page="archive" baseUrl={baseUrl} />
           <p className="kicker">free ai credits &middot; archive</p>
           <h1>Expired offer archive</h1>
           <p className="tagline">

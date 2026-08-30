@@ -2,6 +2,7 @@ import { useRef, useState, type ChangeEvent } from "react"
 import { IconSprite } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
+import { Breadcrumbs } from "./Breadcrumbs"
 import {
   IMPORT_MAX_LENGTH,
   clearAllPersonalState,
@@ -122,7 +123,7 @@ function LocalDataControls() {
     </div>
   )
 }
-export default function PrivacyPage() {
+export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
   return (
     <>
       <IconSprite />
@@ -130,6 +131,7 @@ export default function PrivacyPage() {
         <main>
           <header className="masthead">
             <SiteHeader current="privacy" />
+            <Breadcrumbs page="privacy" baseUrl={baseUrl} />
             <p className="kicker">free ai credits</p>
             <h1>Privacy Policy</h1>
             <p className="tagline">

@@ -631,6 +631,50 @@ a:focus-visible {
   text-underline-offset: 3px;
 }
 
+.breadcrumbs {
+  margin: 1.1rem 0 1.6rem;
+  color: var(--gray);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+}
+
+.breadcrumbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs-list li {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.breadcrumbs-separator {
+  color: var(--hairline);
+  margin-right: 0.55rem;
+}
+
+.breadcrumbs a {
+  color: var(--ink);
+}
+
+@media (pointer: coarse) {
+  .breadcrumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+.breadcrumbs [aria-current="page"] {
+  color: var(--ink);
+}
+
 .masthead-home > h1.kicker { font-weight: 400; }
 
 .masthead-home .tagline {
