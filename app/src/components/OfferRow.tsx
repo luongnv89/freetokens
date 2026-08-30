@@ -194,8 +194,12 @@ export function OfferRow({
           <span className="sep" aria-hidden="true">
             &middot;
           </span>
-          <a className="r-details" href={detailHref}>
-            details
+          <a
+            className="r-details"
+            href={detailHref}
+            aria-label={`View details for ${offer.title}`}
+          >
+            View details
           </a>
           {typeof views === "number" && (
             <>

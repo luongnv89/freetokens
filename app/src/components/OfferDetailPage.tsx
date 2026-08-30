@@ -9,6 +9,7 @@ import {
 } from "../lib/offerDetails"
 import { offerAbsoluteUrl } from "../lib/site"
 import detailsCatalog from "../data/details.json"
+import type { Offer } from "../lib/offers"
 import {
   CategoryBadge,
   ReviewStatusBadge,
@@ -24,6 +25,46 @@ import { SiteHeader } from "./SiteHeader"
 import { Breadcrumbs } from "./Breadcrumbs"
 
 const catalog = detailsCatalog as DetailsMap
+
+function relatedOffers(index: OffersIndex, current: Offer, limit = 4): Offer[] {
+  const sameCategory = index.offers.filter(
+    (o) => o.category === current.category && o.slug !== current.slug,
+  )
+  const active = sameCategory.filter((o) => o.status !== "expired")
+  const expired = sameCategory.filter((o) => o.status === "expired")
+  active.sort((a, b) => b.verified_date.localeCompare(a.verified_date))
+  expired.sort((a, b) => b.verified_date.localeCompare(a.verified_date))
+  return [...active, ...expired].slice(0, limit)
+}
+
+function RelatedOffers({ current, index }: { current: Offer; index: OffersIndex }) {
+  const related = relatedOffers(index, current)
+  if (related.length === 0) return null
+  return (
+    <nav className="od-related" aria-label="Related offers">
+      <h2>Related offers</h2>
+      <p className="od-related-kicker">More in {current.category.replace(/_/g, " ")}</p>
+      <ul className="od-related-list">
+        {related.map((offer) => (
+          <li key={offer.slug}>
+            <a href={`${offer.slug}.html`} aria-label={`View details for ${offer.title}`}>
+              {offer.title}
+            </a>
+            <span className="od-related-meta">
+              {" "}
+              — {offer.provider} · {offer.amount}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p className="od-related-more">
+        <a href="../index.html">Browse all offers</a>
+        {" · "}
+        <a href="../archive.html">Browse the archive</a>
+      </p>
+    </nav>
+  )
+}
 
 /**
  * Offer detail page (F2 / #60, full content port #128). Everything the
@@ -189,6 +230,7 @@ export default function OfferDetailPage({
             )}
             <SocialProofList proofs={detail?.social_proof} relPrefix="../" />
             <CopyLinkButton url={offerAbsoluteUrl(offer.slug)} />
+            <RelatedOffers current={offer} index={index} />
           </article>
         ) : (
           <section className="empty" style={{ "--i": 0 } as React.CSSProperties}>
