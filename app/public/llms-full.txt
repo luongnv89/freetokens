@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://luongnv89.github.io/freetokens/ — generated 2026-08-30T21:03:34Z — 38 active offers.
+Source: https://luongnv89.github.io/freetokens/ — generated 2026-08-30T21:54:45Z — 38 active offers.
 
 ## Offers (full)
 

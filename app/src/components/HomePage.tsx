@@ -526,9 +526,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
       <IconSprite />
       <div className="wrap">
         <main>
-        <header className="masthead masthead-home">
-          <SiteHeader current="home" />
-        </header>
+        <SiteHeader current="home" />
         <Breadcrumbs page="home" />
 
         {offers.length > 0 ? (
