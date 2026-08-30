@@ -74,6 +74,14 @@ function resolveStatsSite(raw) {
   }
 }
 
+export function resolveSearchConsoleToken(raw) {
+  const value = (raw ?? "").trim()
+  if (!value) return ""
+  if (/["'<>\s]/.test(value)) return ""
+  if (!/^[A-Za-z0-9_-]+$/.test(value)) return ""
+  return value
+}
+
 const outfile = path.join(distDir, ".prerender", "entry.cjs");
 await mkdir(path.dirname(outfile), { recursive: true });
 await build({
@@ -127,6 +135,7 @@ try {
   }
   const template = await readFile(indexPath, "utf8");
   const origin = (baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
+  const searchConsoleToken = resolveSearchConsoleToken(process.env.SEARCH_CONSOLE_TOKEN)
 
   // React SSR emits camelCase `dateTime`; normalize to the lowercase spelling
   // build.py ships for byte parity (HTML attribute names are case-insensitive,
@@ -167,9 +176,11 @@ try {
     /[ \t]*<meta\s+name="description"\s+content="[^"]*"\s*\/?>(?:[ \t]*(?:\r?\n))?/gi;
   const CANONICAL_LINK_RE =
     /[ \t]*<link\b(?=[^>]*\brel="[^"]*\bcanonical\b[^"]*")[^>]*>(?:[ \t]*(?:\r?\n))?/gi;
+  const VERIFICATION_META_RE =
+    /[ \t]*<meta\s+name="google-site-verification"[^>]*>(?:[ \t]*(?:\r?\n))?/gi;
 
   function renderSocialMetadata({ title, description, canonical, type }) {
-    const image = `${origin}/og.png`;
+    const image = `${origin}/logo-mark.svg`;
     return [
       `    ${SOCIAL_META_START}`,
       `    <link rel="canonical" href="${htmlAttr(canonical)}" />`,
@@ -179,9 +190,6 @@ try {
       `    <meta property="og:type" content="${type}" />`,
       `    <meta property="og:site_name" content="Free AI Credits" />`,
       `    <meta property="og:image" content="${htmlAttr(image)}" />`,
-      `    <meta property="og:image:width" content="1200" />`,
-      `    <meta property="og:image:height" content="630" />`,
-      `    <meta property="og:image:type" content="image/png" />`,
       `    <meta name="twitter:card" content="summary_large_image" />`,
       `    <meta name="twitter:title" content="${htmlAttr(title)}" />`,
       `    <meta name="twitter:description" content="${htmlAttr(description)}" />`,
@@ -190,35 +198,11 @@ try {
     ].join("\n");
   }
 
-  function renderHeadJsonLd({ page, canonical }) {
-    // Task 3.6: satisfy audit_seo's head-or-body JSON-LD requirement without
-    // duplicating the body BreadcrumbList that archive/privacy/detail already
-    // emit via <Breadcrumbs>. Home has no breadcrumbs, so it needs a WebSite
-    // block in <head> to reach 0 criticals on a filtered dist audit.
-    if (page === "home") {
-      const data = {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: "Free AI Credits",
-        url: canonical,
-      };
-      return `    <script type="application/ld+json">${JSON.stringify(data)}</script>`;
-    }
-    return "";
-  }
-
   function fillPage({ markup, title, description, canonical, depth = 0, page, slug }) {
     // All dynamic replacements go through replacer FUNCTIONS: offer copy
     // routinely contains "$15K"-style amounts, and a string replacement
     // would treat "$1" as a regex backreference and corrupt the text.
     let doc = template;
-    // Strip any prior head WebSite JSON-LD so re-running prerender over an
-    // already-prerendered dist is idempotent (matches routes.test.mjs
-    // "does not duplicate metadata" expectation).
-    doc = doc.replace(
-      /\s*<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite".*?<\/script>\s*/g,
-      "\n",
-    );
     doc = doc.replace(/<title>.*?<\/title>/s, () => `<title>${htmlAttr(title)}</title>`);
     // Vite pretty-prints the shell meta tag across lines; match either form
     // so archive/privacy/detail get their own description (#132).
@@ -234,6 +218,7 @@ try {
       process.exit(1);
     }
     doc = doc.replace(CANONICAL_LINK_RE, "");
+    doc = doc.replace(VERIFICATION_META_RE, "");
     const socialBlocks = doc.match(SOCIAL_META_RE) ?? [];
     if (socialBlocks.length !== 1) {
       console.error(
@@ -241,16 +226,18 @@ try {
       );
       process.exit(1);
     }
-    doc = doc.replace(SOCIAL_META_RE, () => {
-      const social = renderSocialMetadata({
+    doc = doc.replace(SOCIAL_META_RE, () =>
+      renderSocialMetadata({
         title,
         description,
         canonical,
         type: page === "detail" ? "article" : "website",
-      });
-      const jsonLd = renderHeadJsonLd({ page, canonical });
-      return jsonLd ? `${social}\n${jsonLd}` : social;
-    });
+      }),
+    );
+    if (searchConsoleToken) {
+      const tag = `    <meta name="google-site-verification" content="${htmlAttr(searchConsoleToken)}" />`
+      doc = doc.replace(SOCIAL_META_END, `${SOCIAL_META_END}\n${tag}`)
+    }
     // Depth-1 documents must climb out of offers/: every root-relative asset
     // reference emitted by Vite gets one ../ prefix.
     if (depth > 0) doc = doc.replaceAll(/((?:src|href)=")\.\//g, `$1${"../".repeat(depth)}`);

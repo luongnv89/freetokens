@@ -72,6 +72,7 @@ jobs:
           # output; #139 retired the legacy Python builder and site/ output.
           GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
           GOATCOUNTER_SITE_URL: ${{ secrets.GOATCOUNTER_SITE_URL }}
+          SEARCH_CONSOLE_TOKEN: ${{ secrets.SEARCH_CONSOLE_TOKEN }}
         run: npm run build
 
       - name: Check SEO heads
