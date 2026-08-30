@@ -51,6 +51,26 @@ export default defineConfig({
       "@": fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  // Perf budget (Task 3.5): keep the bundle tight for CWV. cssMinify + esbuild
+  // minify are Vite defaults but spelled out so the perf contract is visible;
+  // chunkSizeWarningLimit surfaces regressions before they reach Lighthouse.
+  // Manual chunks are NOT split — single JS keeps the critical graph at one
+  // request (cssBeforeModuleScripts already puts CSS first for FCP).
+  build: {
+    cssMinify: true,
+    minify: "esbuild",
+    sourcemap: false,
+    chunkSizeWarningLimit: 400,
+    assetsInlineLimit: 4096,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
+  esbuild: {
+    drop: runningVitest ? [] : ["console", "debugger"],
+  },
   test: {
     environment: 'jsdom',
     globals: true,
