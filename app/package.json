@@ -20,7 +20,8 @@
     "test:e2e:install": "playwright install --with-deps",
     "lint": "eslint .",
     "gen:types": "node scripts/generate-types.mjs",
-    "gen:tag-icons": "node scripts/gen-tag-icons.mjs"
+    "gen:tag-icons": "node scripts/gen-tag-icons.mjs",
+    "audit:seo": "python3 ../scripts/audit_seo.py dist --max-files 300"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.3.3",

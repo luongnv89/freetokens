@@ -142,7 +142,11 @@ class AuditSeoTests(unittest.TestCase):
 
         self.assertIn("index.html: Canonical tag has empty href", result["critical"])
         self.assertIn("index.html: Missing OG tags: og:title, og:description, og:url, og:type, og:image, og:site_name", result["critical"])
-        self.assertIn("index.html: Invalid JSON-LD structured data", result["critical"])
+        # Task 3.6: JSON-LD is now counted head-or-body so a valid body block
+        # satisfies the requirement even when the head block is invalid;
+        # the invalid head block surfaces as a warning, not a critical missing.
+        self.assertIn("index.html: Invalid JSON-LD blocks (1)", result["warning"])
+        self.assertNotIn("index.html: Invalid JSON-LD structured data", result["critical"])
         self.assertIn("index.html: Missing Twitter tags: twitter:card, twitter:title, twitter:description, twitter:image", result["warning"])
         self.assertIn("index.html: Missing viewport meta tag", result["warning"])
         self.assertNotIn("index.html: Missing canonical tag", result["critical"])

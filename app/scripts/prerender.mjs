@@ -187,11 +187,35 @@ try {
     ].join("\n");
   }
 
+  function renderHeadJsonLd({ page, canonical }) {
+    // Task 3.6: satisfy audit_seo's head-or-body JSON-LD requirement without
+    // duplicating the body BreadcrumbList that archive/privacy/detail already
+    // emit via <Breadcrumbs>. Home has no breadcrumbs, so it needs a WebSite
+    // block in <head> to reach 0 criticals on a filtered dist audit.
+    if (page === "home") {
+      const data = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Free AI Credits",
+        url: canonical,
+      };
+      return `    <script type="application/ld+json">${JSON.stringify(data)}</script>`;
+    }
+    return "";
+  }
+
   function fillPage({ markup, title, description, canonical, depth = 0, page, slug }) {
     // All dynamic replacements go through replacer FUNCTIONS: offer copy
     // routinely contains "$15K"-style amounts, and a string replacement
     // would treat "$1" as a regex backreference and corrupt the text.
     let doc = template;
+    // Strip any prior head WebSite JSON-LD so re-running prerender over an
+    // already-prerendered dist is idempotent (matches routes.test.mjs
+    // "does not duplicate metadata" expectation).
+    doc = doc.replace(
+      /\s*<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite".*?<\/script>\s*/g,
+      "\n",
+    );
     doc = doc.replace(/<title>.*?<\/title>/s, () => `<title>${htmlAttr(title)}</title>`);
     // Vite pretty-prints the shell meta tag across lines; match either form
     // so archive/privacy/detail get their own description (#132).
@@ -214,14 +238,16 @@ try {
       );
       process.exit(1);
     }
-    doc = doc.replace(SOCIAL_META_RE, () =>
-      renderSocialMetadata({
+    doc = doc.replace(SOCIAL_META_RE, () => {
+      const social = renderSocialMetadata({
         title,
         description,
         canonical,
         type: page === "detail" ? "article" : "website",
-      }),
-    );
+      });
+      const jsonLd = renderHeadJsonLd({ page, canonical });
+      return jsonLd ? `${social}\n${jsonLd}` : social;
+    });
     // Depth-1 documents must climb out of offers/: every root-relative asset
     // reference emitted by Vite gets one ../ prefix.
     if (depth > 0) doc = doc.replaceAll(/((?:src|href)=")\.\//g, `$1${"../".repeat(depth)}`);

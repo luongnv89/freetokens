@@ -5,13 +5,24 @@ The command intentionally audits only ``<dist>/*.html``. Offer detail pages
 live below ``<dist>/offers/`` and are outside the baseline scope; later SEO
 work can audit those pages separately.
 
+Source-file noise filtering:
+    The audit enumerates only ``dist/*.html`` via ``Path.glob("*.html")``.
+    Repository sources (``*.tsx``, ``*.ts``, ``.lighthouseci/``, etc.) are
+    never inspected. Historical 121/171 finding counts that included ``.tsx``
+    sources were false positives; the correct signal is ``npm run audit:seo``
+    which runs strictly against ``app/dist`` (see docs/seo-baseline-...).
+
 Usage:
     python3 scripts/audit_seo.py app/dist
     python3 scripts/audit_seo.py --json app/dist
     python3 scripts/audit_seo.py --fail-on-critical app/dist
+    python3 scripts/audit_seo.py --max-files 300 app/dist
 
 A readable audit with findings exits zero. Use ``--fail-on-critical`` when the
 report is being used as a gate. An unreadable or invalid audit target exits 1.
+``--max-files`` is an ergonomic cap for contributors/CI (Task 3.6); it limits
+the number of top-level HTML files inspected and is ignored when the directory
+contains fewer files.
 """
 
 from __future__ import annotations
@@ -84,6 +95,16 @@ class MetadataParser(HTMLParser):
         if tag == "h1":
             self.h1_count += 1
             return
+        if tag == "script":
+            script_type = attributes.get("type", "").lower().split(";", 1)[0].strip()
+            if script_type == "application/ld+json":
+                self._finish_json_ld()
+                self._json_ld_buffer = []
+            # JSON-LD is valid in head or body per schema.org; count it
+            # regardless of head scope so breadcrumb JSON-LD in <main>
+            # satisfies the audit without duplicating it into <head>.
+            if self._json_ld_buffer is not None:
+                return
         if not self.in_head:
             return
 
@@ -100,11 +121,6 @@ class MetadataParser(HTMLParser):
                     self.meta_names.add(name)
                 if property_name:
                     self.meta_properties.add(property_name)
-        elif tag == "script":
-            script_type = attributes.get("type", "").lower().split(";", 1)[0].strip()
-            if script_type == "application/ld+json":
-                self._finish_json_ld()
-                self._json_ld_buffer = []
 
     def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         """Handle self-closing tags, including an empty JSON-LD script."""
@@ -165,12 +181,19 @@ def _is_absolute_http_url(value: str) -> bool:
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
-def audit_directory(dist_dir: Path) -> dict[str, object]:
-    """Return severity buckets and file metadata for ``dist_dir/*.html``."""
+def audit_directory(dist_dir: Path, max_files: int | None = None) -> dict[str, object]:
+    """Return severity buckets and file metadata for ``dist_dir/*.html``.
+
+    ``max_files`` caps the number of top-level HTML files inspected (Task 3.6
+    ergonomics); ``None`` means no cap. The glob itself already filters to
+    ``dist/*.html``, excluding ``*.tsx`` and ``.lighthouseci/`` noise.
+    """
     try:
         if not dist_dir.is_dir():
             raise AuditError(f"directory not found: {dist_dir}")
         html_files = sorted(dist_dir.glob("*.html"))
+        if max_files is not None and len(html_files) > max_files:
+            html_files = html_files[:max_files]
     except AuditError:
         raise
     except OSError as exc:
@@ -277,11 +300,21 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="return 1 when the audit contains critical findings",
     )
+    parser.add_argument(
+        "--max-files",
+        type=int,
+        default=None,
+        help="cap top-level HTML files inspected (default: all dist/*.html)",
+    )
     parser.add_argument("dist_dir", type=Path, help="built output directory to audit")
     args = parser.parse_args(argv)
 
+    if args.max_files is not None and args.max_files <= 0:
+        print("Error: --max-files must be > 0", file=sys.stderr)
+        return 1
+
     try:
-        results = audit_directory(args.dist_dir)
+        results = audit_directory(args.dist_dir, max_files=args.max_files)
     except AuditError as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
