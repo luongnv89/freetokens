@@ -53,6 +53,10 @@ jobs:
         working-directory: app
         run: npm run build
 
+      - name: Check SEO heads
+        working-directory: app
+        run: node scripts/check-seo.mjs
+
       # Performance budgets (#142): Lighthouse asserts Performance >= 0.95 and
       # Accessibility >= 0.90 on the home listing, the archive, and an offer
       # detail page (assertions in app/lighthouserc.json) against the built
