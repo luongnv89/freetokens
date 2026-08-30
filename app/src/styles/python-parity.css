@@ -68,7 +68,7 @@ body {
   overflow-wrap: break-word;
 }
 
-.wrap { max-width: 75rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem); }
+.wrap { max-width: 75rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem); min-width: 0; }
 
 .mono {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -679,6 +679,21 @@ a:focus-visible {
   }
 }
 
+/* 320 px: squeeze header chrome so nothing overflows */
+@media (max-width: 340px) {
+  .site-bar {
+    gap: 0.5rem 0.5rem;
+  }
+  .site-nav {
+    gap: 0.5rem;
+    font-size: 0.72rem;
+  }
+  .site-slogan {
+    width: 100%;
+    max-width: none;
+  }
+}
+
 @media (pointer: coarse) {
   .site-nav a {
     min-height: 44px;
@@ -749,6 +764,7 @@ a:focus-visible {
   counter-reset: ftrank;
   border-top: 1px solid var(--ink);
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  min-width: 0;
 }
 
 /* The shared card stagger (_CSS `rise`) is right for a handful of cards and
