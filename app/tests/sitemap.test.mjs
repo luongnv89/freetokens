@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import {
   buildSitemap,
+  MAX_SITEMAP_LOC_LENGTH,
   MAX_SITEMAP_URLS,
   SITEMAP_NAMESPACE,
 } from "../scripts/sitemap.mjs"
@@ -116,6 +117,42 @@ describe("sitemap generation", () => {
         now: new Date("2026-08-22T00:00:00Z"),
       }),
     ).toThrow("without query, fragment, or userinfo")
+  })
+
+  it("rejects locations at the sitemap URL length limit", () => {
+    const pathPrefix = `${BASE}/offers/`
+    const pathSuffix = ".html"
+    const boundarySlug = "a".repeat(
+      MAX_SITEMAP_LOC_LENGTH - pathPrefix.length - pathSuffix.length,
+    )
+    const acceptedSlug = boundarySlug.slice(0, -1)
+
+    expect(() =>
+      buildSitemap(indexFor([offer(acceptedSlug)]), BASE, {
+        now: new Date("2026-08-22T00:00:00Z"),
+      }),
+    ).not.toThrow()
+    expect(() =>
+      buildSitemap(indexFor([offer(boundarySlug)]), BASE, {
+        now: new Date("2026-08-22T00:00:00Z"),
+      }),
+    ).toThrow(`${MAX_SITEMAP_LOC_LENGTH} characters`)
+  })
+
+  it("rejects serialized XML over the byte limit", () => {
+    const index = indexFor([offer("café")])
+    const buildOptions = { now: new Date("2026-08-22T00:00:00Z") }
+    const sitemap = buildSitemap(index, BASE, buildOptions)
+    const characterLength = sitemap.length
+    const byteLength = Buffer.byteLength(sitemap, "utf8")
+
+    expect(byteLength).toBeGreaterThan(characterLength)
+    expect(() =>
+      buildSitemap(index, BASE, { ...buildOptions, maxXmlBytes: characterLength }),
+    ).toThrow(`${byteLength} bytes`)
+    expect(
+      buildSitemap(index, BASE, { ...buildOptions, maxXmlBytes: byteLength }),
+    ).toBe(sitemap)
   })
 
   it("rejects a URL set above the sitemap protocol limit", () => {

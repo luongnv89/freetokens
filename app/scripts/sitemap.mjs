@@ -7,6 +7,8 @@ import { DEFAULT_BASE_URL } from "./feed.mjs"
 
 export const SITEMAP_NAMESPACE = "http://www.sitemaps.org/schemas/sitemap/0.9"
 export const MAX_SITEMAP_URLS = 50_000
+export const MAX_SITEMAP_LOC_LENGTH = 2_048
+export const MAX_SITEMAP_XML_BYTES = 50 * 1024 * 1024
 
 function isCalendarDate(value) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
@@ -91,7 +93,7 @@ function normalizeBaseUrl(baseUrl) {
  *
  * @param {object} index generated offers.json data
  * @param {string} baseUrl absolute site URL
- * @param {object} options optional { now, fileMtimes } test/build fallbacks
+ * @param {object} options optional { now, fileMtimes, maxXmlBytes } test/build fallbacks
  */
 export function buildSitemap(index, baseUrl = DEFAULT_BASE_URL, options = {}) {
   if (!Array.isArray(index?.offers)) {
@@ -130,16 +132,29 @@ export function buildSitemap(index, baseUrl = DEFAULT_BASE_URL, options = {}) {
     }),
   ]
   const body = entries
-    .map(
-      ({ path, lastmod }) =>
-        `  <url>\n    <loc>${xml(`${base}${path}`)}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`,
-    )
+    .map(({ path, lastmod }) => {
+      const loc = `${base}${path}`
+      if (loc.length >= MAX_SITEMAP_LOC_LENGTH) {
+        throw new Error(
+          `sitemap location is ${loc.length} characters; ` +
+            `maximum is ${MAX_SITEMAP_LOC_LENGTH - 1}`,
+        )
+      }
+      return `  <url>\n    <loc>${xml(loc)}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`
+    })
     .join("\n")
 
-  return (
+  const sitemap =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     `<urlset xmlns="${SITEMAP_NAMESPACE}">\n` +
     `${body}\n` +
     "</urlset>\n"
-  )
+  const xmlBytes = Buffer.byteLength(sitemap, "utf8")
+  const maxXmlBytes = options.maxXmlBytes ?? MAX_SITEMAP_XML_BYTES
+  if (xmlBytes > maxXmlBytes) {
+    throw new Error(
+      `sitemap XML is ${xmlBytes} bytes; maximum is ${maxXmlBytes}`,
+    )
+  }
+  return sitemap
 }
