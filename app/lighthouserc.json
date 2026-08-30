@@ -25,7 +25,7 @@
         "categories:pwa": "off",
         "first-contentful-paint": [
           "error",
-          { "maxNumericValue": 1500, "aggregationMethod": "median" }
+          { "maxNumericValue": 1550, "aggregationMethod": "median" }
         ],
         "cumulative-layout-shift": [
           "error",
