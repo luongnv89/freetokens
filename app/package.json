@@ -22,7 +22,8 @@
     "lint": "eslint .",
     "gen:types": "node scripts/generate-types.mjs",
     "gen:tag-icons": "node scripts/gen-tag-icons.mjs",
-    "gen:og-image": "node scripts/gen-og-image.mjs"
+"gen:og-image": "node scripts/gen-og-image.mjs",
+    "audit:seo": "python3 ../scripts/audit_seo.py dist --max-files 300"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.3.3",
