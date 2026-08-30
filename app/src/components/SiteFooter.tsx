@@ -15,24 +15,22 @@ const CONTACT_LINKS = [
  * `depth` is the page's directory distance from site root (0 for
  * index/archive/privacy, 1 for offers/<slug>.html) and prefixes every href
  * so links stay relative and deploy-base safe (#60).
- * `showTrafficStrip` is home-only — Python only emits #ft-traffic next to
- * the filter runtime (app_js).
+ * TrafficStrip mounts on every page; it renders nothing when GoatCounter
+ * is unconfigured and stays hidden until the all-time total arrives.
  */
 export function SiteFooter({
   depth = 0,
   current,
-  showTrafficStrip = false,
 }: {
   depth?: number
   current?: "home" | "archive" | "privacy" | "about"
-  showTrafficStrip?: boolean
 }) {
   const up = "../".repeat(depth)
   const homeHref = `${up || "./"}index.html`
   const trackingOn = isTrackingConfigured()
   return (
     <footer className="foot" id="site-footer">
-      {showTrafficStrip ? <TrafficStrip /> : null}
+      <TrafficStrip />
       <p className="foot-brand">
         <a href={homeHref}>
           <BrandMark depth={depth} size={24} />

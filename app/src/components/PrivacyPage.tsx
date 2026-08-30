@@ -155,8 +155,8 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
                   <a href="https://www.goatcounter.com" rel="noopener noreferrer">
                     GoatCounter
                   </a>{" "}
-                  after you allow counting, shown as anonymous running totals on the home page and as
-                  anonymous per-offer view counts next to each offer.
+                  after you allow counting, shown as anonymous running totals in the footer of every
+                  page and as anonymous per-offer view counts next to each offer.
                 </li>
                 <li>
                   Your raw search text is <strong>never</strong> collected &mdash; only how many
@@ -232,13 +232,14 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
             <section aria-labelledby="privacy-live-traffic">
               <h2 id="privacy-live-traffic">What the site traffic counter measures</h2>
               <p>
-                Separately from GA4, the site can show running totals on the home page &mdash; the
-                numbers you may see next to &ldquo;site traffic&rdquo;. They are not shown in the
-                footer of every page. They are a rough popularity signal rather than a live readout:
+                Separately from GA4, the site can show running totals in the footer of every page
+                &mdash; the all-time visit count, and today / 90-day windows when those fetches
+                succeed. They are a rough popularity signal rather than a live readout:
                 GoatCounter serves each total through a CDN that caches the response for around four
-                hours, so the figures can lag by a few hours. The published today and 90-day totals
-                use an exclusive-end calendar window (the range ends on tomorrow&apos;s date so today
-                is included). Counting is done by <strong>GoatCounter</strong>, open-source software
+                hours, so the figures can lag by a few hours. The all-time total uses the public
+                counter route with no date window; today and 90-day totals use an exclusive-end
+                calendar window (the range ends on tomorrow&apos;s date so today is included).
+                Counting is done by <strong>GoatCounter</strong>, open-source software
                 provided as a hosted service (goatcounter.com) under the EU&apos;s strict GDPR rules.
                 Like GA4 above, it is off entirely unless configured at build time &mdash; and its
                 counting script is not loaded until you allow tracking.
@@ -254,7 +255,7 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
               </p>
               <p>
                 Blocking the counter with an ad blocker changes nothing else: pages, filters, and
-                links all keep working exactly the same, and the home-page totals simply stay hidden.
+                links all keep working exactly the same, and the footer totals simply stay hidden.
               </p>
               <p>
                 The same anonymous totals are also shown per offer: each listing can display how many

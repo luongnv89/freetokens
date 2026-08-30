@@ -916,10 +916,50 @@ a:focus-visible {
   text-underline-offset: 3px;
 }
 
-/* Live per-offer view counts (#101): one unbreakable token so the number and
-   its unit never split across wrapped lines at 320 px. */
-.r-views,
-.od-views { white-space: nowrap; }
+/* Visit/view chips (#250): number first, short label, green accent rail —
+   never a green fill. Ink number meets AA on paper; green is the 3px edge. */
+.ft-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.32em;
+  white-space: nowrap;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  padding: 0.16rem 0.5rem 0.16rem 0.42rem;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--green);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.ft-stat strong {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 1.08em;
+}
+
+.ft-stat-label {
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.r-views {
+  flex: 0 0 auto;
+}
+
+.od-views {
+  font-size: 0.95rem;
+  padding: 0.32rem 0.7rem 0.32rem 0.55rem;
+  margin: 0;
+  align-self: center;
+}
+
+.od-views strong {
+  font-size: 1.35em;
+}
 
 .r-details:hover,
 .r-details:focus-visible {
@@ -1283,13 +1323,13 @@ button:focus-visible {
   color: var(--ink);
 }
 
-/* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131) ------------ */
+/* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131 / #250) ---- */
 
 .foot-traffic {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.15rem 0.4rem;
+  gap: 0.35rem 0.5rem;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.75rem;
   color: var(--gray);
@@ -1298,9 +1338,29 @@ button:focus-visible {
 
 .foot-traffic[hidden] { display: none; }
 
-.foot-traffic strong { color: var(--ink); }
+.foot-traffic .ft-stat[hidden] { display: none; }
 
-.foot-traffic .dot { flex: 0 0 auto; }
+.ft-traffic-total {
+  font-size: 0.84rem;
+  padding: 0.22rem 0.58rem 0.22rem 0.48rem;
+}
+
+.ft-traffic-total strong {
+  font-size: 1.2em;
+}
+
+.foot-traffic a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.foot-traffic a:hover,
+.foot-traffic a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+}
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------
    Card-actions / .detail-btn already live above (archive #129). The rest
@@ -1340,6 +1400,13 @@ button:focus-visible {
   line-height: 1.12;
   margin: 0;
   overflow-wrap: anywhere;
+}
+
+.od-hero-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem 1rem;
 }
 
 .od-statusline {
