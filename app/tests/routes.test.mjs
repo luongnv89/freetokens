@@ -322,7 +322,7 @@ describe("static route coverage (#123)", () => {
       '<h1 class="site-slogan">Every claimable free AI credit offer — verified, tagged, and on one fast page.</h1>',
     );
     expect(home).toMatch(
-      /<header class="site-header">[\s\S]*<h1 class="site-slogan">Every claimable free AI credit/,
+      /<div class="site-header">[\s\S]*<h1 class="site-slogan">Every claimable free AI credit/,
     );
 
     for (const file of ["archive.html", "privacy.html", "about.html"]) {
