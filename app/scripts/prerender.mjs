@@ -169,7 +169,7 @@ try {
     /[ \t]*<link\b(?=[^>]*\brel="[^"]*\bcanonical\b[^"]*")[^>]*>(?:[ \t]*(?:\r?\n))?/gi;
 
   function renderSocialMetadata({ title, description, canonical, type }) {
-    const image = `${origin}/logo-mark.svg`;
+    const image = `${origin}/og.png`;
     return [
       `    ${SOCIAL_META_START}`,
       `    <link rel="canonical" href="${htmlAttr(canonical)}" />`,
@@ -179,6 +179,9 @@ try {
       `    <meta property="og:type" content="${type}" />`,
       `    <meta property="og:site_name" content="Free AI Credits" />`,
       `    <meta property="og:image" content="${htmlAttr(image)}" />`,
+      `    <meta property="og:image:width" content="1200" />`,
+      `    <meta property="og:image:height" content="630" />`,
+      `    <meta property="og:image:type" content="image/png" />`,
       `    <meta name="twitter:card" content="summary_large_image" />`,
       `    <meta name="twitter:title" content="${htmlAttr(title)}" />`,
       `    <meta name="twitter:description" content="${htmlAttr(description)}" />`,

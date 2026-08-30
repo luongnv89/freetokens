@@ -21,7 +21,8 @@
     "test:e2e:install": "playwright install --with-deps",
     "lint": "eslint .",
     "gen:types": "node scripts/generate-types.mjs",
-    "gen:tag-icons": "node scripts/gen-tag-icons.mjs"
+    "gen:tag-icons": "node scripts/gen-tag-icons.mjs",
+    "gen:og-image": "node scripts/gen-og-image.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.3.3",
@@ -50,6 +51,7 @@
     "globals": "^16.3.0",
     "jsdom": "^26.1.0",
     "json-schema-to-typescript": "^15.0.4",
+    "sharp": "0.34.2",
     "tailwindcss": "^4.1.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.0",
