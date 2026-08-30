@@ -60,11 +60,30 @@ function xml(text) {
 }
 
 function normalizeBaseUrl(baseUrl) {
-  const base = String(baseUrl || DEFAULT_BASE_URL).trim().replace(/\/+$/, "")
-  if (!/^https?:\/\/[^\s"'<>]+$/i.test(base)) {
-    throw new Error(`sitemap base URL must be an absolute HTTP(S) URL, got ${JSON.stringify(base)}`)
+  const rawBaseUrl = String(baseUrl || DEFAULT_BASE_URL).trim()
+  let base
+  try {
+    base = new URL(rawBaseUrl)
+  } catch {
+    throw new Error(
+      `sitemap base URL must be an absolute HTTP(S) URL, got ${JSON.stringify(rawBaseUrl)}`,
+    )
   }
-  return base
+  if (
+    !["http:", "https:"].includes(base.protocol) ||
+    !base.hostname ||
+    base.search ||
+    base.hash ||
+    base.username ||
+    base.password ||
+    base.href.includes("?") ||
+    base.href.includes("#")
+  ) {
+    throw new Error(
+      `sitemap base URL must be an absolute HTTP(S) URL without query, fragment, or userinfo, got ${JSON.stringify(rawBaseUrl)}`,
+    )
+  }
+  return base.href.replace(/\/+$/, "")
 }
 
 /**

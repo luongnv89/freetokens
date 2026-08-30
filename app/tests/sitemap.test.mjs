@@ -102,6 +102,22 @@ describe("sitemap generation", () => {
     expect(sitemapEntries(xml)[0].loc).toBe("https://example.com/free&open/")
   })
 
+  it("rejects base URLs with query strings", () => {
+    expect(() =>
+      buildSitemap(indexFor([]), `${BASE}?utm_source=build`, {
+        now: new Date("2026-08-22T00:00:00Z"),
+      }),
+    ).toThrow("without query, fragment, or userinfo")
+  })
+
+  it("rejects base URLs with fragments", () => {
+    expect(() =>
+      buildSitemap(indexFor([]), `${BASE}#archive`, {
+        now: new Date("2026-08-22T00:00:00Z"),
+      }),
+    ).toThrow("without query, fragment, or userinfo")
+  })
+
   it("rejects a URL set above the sitemap protocol limit", () => {
     const offers = Array.from({ length: MAX_SITEMAP_URLS - 4 }, (_, index) =>
       offer(`offer-${index}`),
