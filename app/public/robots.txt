@@ -1,0 +1,45 @@
+# Free AI Credits crawl policy — Policy A from docs/seo-baseline-2026-08-29.md.
+# Search and user-requested retrieval stay discoverable; training crawlers are blocked.
+User-agent: *
+Allow: /
+
+Sitemap: https://luongnv89.github.io/freetokens/sitemap.xml
+
+# AI training / dataset crawlers — block.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Search / indexing bots — allow.
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# On-demand / user-triggered retrieval bots — allow.
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
