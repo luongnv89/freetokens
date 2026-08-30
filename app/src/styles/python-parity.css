@@ -475,6 +475,8 @@ a.badge:focus-visible {
 .brand-mark {
   display: block;
   flex: 0 0 auto;
+  aspect-ratio: 1 / 1;
+  height: auto;
 }
 
 /* ---- Policy prose ------------------------------------------------------ */
@@ -1545,6 +1547,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   height: auto;
   border-radius: 8px;
   border: 1px solid var(--hairline);
+  aspect-ratio: 16 / 9;
 }
 
 .proof-screenshot figcaption {

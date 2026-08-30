@@ -7,10 +7,12 @@ export function BrandMark({
   depth = 0,
   size = 24,
   alt = "Free AI Credits",
+  priority = false,
 }: {
   depth?: number
   size?: number
   alt?: string
+  priority?: boolean
 }) {
   const prefix = "../".repeat(depth) || "./"
   return (
@@ -21,6 +23,9 @@ export function BrandMark({
       height={size}
       alt={alt}
       decoding="async"
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
+      style={{ aspectRatio: "1 / 1" }}
     />
   )
 }
