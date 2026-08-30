@@ -1,11 +1,26 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import { readFileSync, mkdtempSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
+import { readFileSync, mkdtempSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { collectIssues, checkDist, OG_PROPERTIES, DEFAULT_BASE_URL } from "../scripts/check-seo.mjs";
 
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
+
+function viteBuild(outDir) {
+  execFileSync(
+    process.execPath,
+    ["node_modules/vite/bin/vite.js", "build", "--outDir", outDir, "--emptyOutDir"],
+    { cwd: APP_ROOT, stdio: "pipe" },
+  );
+}
+
+function prerender(distDir, dataFile, baseUrl) {
+  const args = ["scripts/prerender.mjs", "--dist", distDir];
+  if (dataFile) args.push("--data", dataFile);
+  if (baseUrl) args.push("--base-url", baseUrl);
+  execFileSync(process.execPath, args, { cwd: APP_ROOT, stdio: "pipe" });
+}
 
 function buildHead({ title, description, canonical, type = "website", withJsonLd = false, breadcrumbName = "Archive" }) {
   const image = `${DEFAULT_BASE_URL}/logo-mark.svg`;
@@ -29,6 +44,19 @@ ${jsonLd}
 }
 
 describe("check-seo guard (#209)", () => {
+  beforeAll(() => {
+    const dist = path.join(APP_ROOT, "dist");
+    // node-tests job runs `npm test` without a prior `npm run build`, so
+    // `app/dist` may not exist yet. Build it once for the dist-dependent
+    // assertion below, mirroring the viteBuild+prerender pattern in
+    // routes.test.mjs. Reuse an existing dist when present to keep local
+    // runs fast.
+    if (!existsSync(path.join(dist, "index.html")) || !existsSync(path.join(dist, "offers"))) {
+      viteBuild(dist);
+      prerender(dist);
+    }
+  }, 240_000);
+
   it("passes on a well-formed document with all SEO heads", () => {
     const html = buildHead({
       title: "Archive · Free AI Credits",
