@@ -433,6 +433,7 @@ describe("static route coverage (#123)", () => {
     expect(existsSync(path.join(outDir, "logo-icon.svg"))).toBe(true);
     expect(existsSync(path.join(outDir, "logo-full.svg"))).toBe(true);
     expect(existsSync(path.join(outDir, "logo-wordmark.svg"))).toBe(true);
+    expect(existsSync(path.join(outDir, "og.png"))).toBe(true);
   });
 
   it("ships RSS autodiscovery in <head> and keeps the footer RSS link", async () => {
@@ -546,7 +547,7 @@ describe("static route coverage (#123)", () => {
         type: "article",
       })),
     ];
-    const image = `${DEFAULT_BASE_URL}/logo-mark.svg`;
+    const image = `${DEFAULT_BASE_URL}/og.png`;
     for (const page of pages) {
       const html = readFileSync(path.join(outDir, page.file), "utf8");
       expect(html).toContain(`<title>${htmlAttr(page.title)}</title>`);
@@ -562,6 +563,9 @@ describe("static route coverage (#123)", () => {
       for (const property of OG_PROPERTIES) {
         expect(metaContents(html, "property", property)).toEqual([htmlAttr(expected[property])]);
       }
+      expect(metaContents(html, "property", "og:image:width")).toEqual(["1200"]);
+      expect(metaContents(html, "property", "og:image:height")).toEqual(["630"]);
+      expect(metaContents(html, "property", "og:image:type")).toEqual(["image/png"]);
       const expectedTwitter = {
         "twitter:card": "summary_large_image",
         "twitter:title": page.title,
@@ -579,7 +583,7 @@ describe("static route coverage (#123)", () => {
     const canonical = "https://luongnv89.github.io/freetokens/";
     const description =
       "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
-    const image = "https://luongnv89.github.io/freetokens/logo-mark.svg";
+    const image = "https://luongnv89.github.io/freetokens/og.png";
     const expectedProperties = {
       "og:title": "Free AI Credits",
       "og:description": description,
@@ -591,6 +595,9 @@ describe("static route coverage (#123)", () => {
     for (const [property, value] of Object.entries(expectedProperties)) {
       expect(metaContents(shell, "property", property)).toEqual([htmlAttr(value)]);
     }
+    expect(metaContents(shell, "property", "og:image:width")).toEqual(["1200"]);
+    expect(metaContents(shell, "property", "og:image:height")).toEqual(["630"]);
+    expect(metaContents(shell, "property", "og:image:type")).toEqual(["image/png"]);
     const expectedTwitter = {
       "twitter:card": "summary_large_image",
       "twitter:title": "Free AI Credits",
