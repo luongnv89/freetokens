@@ -3,6 +3,7 @@ import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync, rmSync, existsSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { SITEMAP_NAMESPACE } from "../scripts/sitemap.mjs";
 
 // Routing + prerender contract (issue #123): the built output must contain
 // one HTML file per live route — /, /archive, /privacy, offers/<slug>.html
@@ -100,6 +101,31 @@ describe("static route coverage (#123)", () => {
     const emitted = readdirSync(path.join(outDir, "offers")).sort();
     const expected = index.offers.map((o) => `${o.slug}.html`).sort();
     expect(emitted).toEqual(expected);
+  });
+
+  it("emits an absolute sitemap for fixed and offer routes", () => {
+    const sitemap = readFileSync(path.join(outDir, "sitemap.xml"), "utf8");
+    const document = new DOMParser().parseFromString(sitemap, "application/xml");
+    expect(document.querySelector("parsererror")).toBeNull();
+    expect(document.documentElement.localName).toBe("urlset");
+    expect(document.documentElement.namespaceURI).toBe(SITEMAP_NAMESPACE);
+
+    const urls = [...document.getElementsByTagNameNS(SITEMAP_NAMESPACE, "url")];
+    expect(urls).toHaveLength(index.offers.length + 4);
+    expect(urls.map((url) => url.getElementsByTagNameNS(SITEMAP_NAMESPACE, "loc")[0].textContent)).toEqual([
+      "https://luongnv89.github.io/freetokens/",
+      "https://luongnv89.github.io/freetokens/archive.html",
+      "https://luongnv89.github.io/freetokens/privacy.html",
+      "https://luongnv89.github.io/freetokens/feed.xml",
+      ...index.offers.map((offer) => `https://luongnv89.github.io/freetokens/offers/${offer.slug}.html`),
+    ]);
+
+    const today = new Date().toISOString().slice(0, 10);
+    for (const url of urls) {
+      const lastmod = url.getElementsByTagNameNS(SITEMAP_NAMESPACE, "lastmod")[0].textContent;
+      expect(lastmod).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(lastmod <= today).toBe(true);
+    }
   });
 
   it("stamps each document so hydration lands on the right page", () => {
