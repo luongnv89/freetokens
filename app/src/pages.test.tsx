@@ -129,11 +129,14 @@ describe("SSR breadcrumbs (#208)", () => {
     }
   });
 
-  it("keeps home free of a self-link breadcrumb", () => {
+  it("renders empty breadcrumbs on home (JSON-LD only, no self-link)", () => {
     const markup = renderToStaticMarkup(<HomePage index={index} />);
     const document = new DOMParser().parseFromString(markup, "text/html");
-    expect(document.querySelector('nav[aria-label="Breadcrumb"]')).toBeNull();
-    expect(markup).not.toContain('"@type":"BreadcrumbList"');
+    // Breadcrumbs component renders for JSON-LD but with zero items (no self-link)
+    const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
+    expect(nav).not.toBeNull();
+    expect(nav!.querySelectorAll('li').length).toBe(0);
+    expect(markup).toContain('"@type":"BreadcrumbList"');
   });
 
   it("serializes offer titles safely while keeping the JSON-LD parseable", () => {

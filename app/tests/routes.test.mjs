@@ -282,8 +282,11 @@ describe("static route coverage (#123)", () => {
 
     const home = readFileSync(path.join(outDir, "index.html"), "utf8");
     const homeDocument = new DOMParser().parseFromString(home, "text/html");
-    expect(homeDocument.querySelector('nav[aria-label="Breadcrumb"]')).toBeNull();
-    expect(home).not.toContain("BreadcrumbList");
+    // Home renders empty breadcrumbs (JSON-LD present, no self-link items)
+    const homeNav = homeDocument.querySelector('nav[aria-label="Breadcrumb"]');
+    expect(homeNav).not.toBeNull();
+    expect(homeNav?.querySelectorAll('li').length).toBe(0);
+    expect(home).toContain("BreadcrumbList");
   });
 
   it(

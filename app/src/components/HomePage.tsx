@@ -40,6 +40,7 @@ import {
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
+import { Breadcrumbs } from "./Breadcrumbs"
 import { Button } from "./ui/button"
 
 const FILTER_LABELS: Record<FilterDimension, Record<string, string>> = {
@@ -528,6 +529,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
         <header className="masthead masthead-home">
           <SiteHeader current="home" />
         </header>
+        <Breadcrumbs page="home" />
 
         {offers.length > 0 ? (
           <>
