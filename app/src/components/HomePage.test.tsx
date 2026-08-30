@@ -176,7 +176,7 @@ describe("HomePage masthead counters (#49 port)", () => {
       name: "Every claimable free AI credit offer — verified, tagged, and on one fast page.",
     })
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1)
-    expect(heading.closest("header")).not.toBeNull()
+    expect(heading.closest(".site-header")).not.toBeNull()
     expect(heading).toHaveClass("site-slogan")
 
     // Counts moved to About — home header is now minimal (logo+name+slogan+list)
