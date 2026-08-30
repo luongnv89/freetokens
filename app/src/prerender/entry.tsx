@@ -5,6 +5,6 @@ import { renderToStaticMarkup } from "react-dom/server"
 import App from "../App"
 import type { Route } from "../routes"
 
-export async function renderRoute(route: Route): Promise<string> {
-  return renderToStaticMarkup(<App route={route} />)
+export async function renderRoute(route: Route, baseUrl?: string): Promise<string> {
+  return renderToStaticMarkup(<App route={route} baseUrl={baseUrl} />)
 }

@@ -9,18 +9,24 @@ import { ConsentBanner } from "./components/ConsentBanner"
 
 const index = indexData as OffersIndex
 
-export default function App({ route }: { route?: Route }) {
+export default function App({
+  route,
+  baseUrl,
+}: {
+  route?: Route
+  baseUrl?: string
+}) {
   const r = route ?? resolveRoute()
   let page
   switch (r.page) {
     case "archive":
-      page = <ArchivePage index={index} />
+      page = <ArchivePage index={index} baseUrl={baseUrl} />
       break
     case "privacy":
-      page = <PrivacyPage />
+      page = <PrivacyPage baseUrl={baseUrl} />
       break
     case "detail":
-      page = <OfferDetailPage index={index} slug={r.slug} />
+      page = <OfferDetailPage index={index} slug={r.slug} baseUrl={baseUrl} />
       break
     default:
       page = <HomePage index={index} />

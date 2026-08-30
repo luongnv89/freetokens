@@ -273,7 +273,7 @@ push built output by hand:
 2. **Build** — the workflow checks out the repo, runs
    `python3 scripts/validate_offers.py` to validate all offers, then
    `npm test` and `npm run build` in `app/` to prerender `index.html`,
-   `archive.html`, `privacy.html`, `feed.xml`, and every offer detail page.
+   `archive.html`, `privacy.html`, `feed.xml`, `sitemap.xml`, and every offer detail page.
    Any validation or test failure aborts the deploy.
 3. **Publish** — the built `app/dist` directory is uploaded as a Pages
    artifact and deployed with the official Actions toolchain

@@ -4,7 +4,8 @@
 // EVERY static route the live site serves with react-dom/server, and injects
 // each document's markup into a copy of the `vite build` shell so dist/
 // carries one full HTML file per route — /, /archive, /privacy, and
-// offers/<slug>.html per entry in src/data/offers.json — plus feed.xml.
+// offers/<slug>.html per entry in src/data/offers.json — plus feed.xml and
+// sitemap.xml.
 //
 // Route generation is data-driven: adding an offer YAML regenerates
 // offers.json (prebuild load:data) and the next build emits its detail page
@@ -19,11 +20,12 @@
 //        [--data src/data/offers.json] [--base-url https://...]
 
 import { build } from "esbuild";
-import { readFile, writeFile, rm, mkdir } from "node:fs/promises";
+import { readFile, writeFile, rm, mkdir, stat } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { buildFeed, DEFAULT_BASE_URL } from "./feed.mjs";
+import { buildSitemap } from "./sitemap.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 let distDir = path.join(here, "..", "dist");
@@ -241,7 +243,7 @@ try {
   await writeFile(
     indexPath,
     fillPage({
-      markup: await renderRoute({ page: "home" }),
+      markup: await renderRoute({ page: "home" }, origin),
       title: "Free AI Credits",
       description:
         "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
@@ -255,7 +257,7 @@ try {
   await writeFile(
     path.join(distDir, "archive.html"),
     fillPage({
-      markup: await renderRoute({ page: "archive" }),
+      markup: await renderRoute({ page: "archive" }, origin),
       title: "Offer Archive · Free AI Credits",
       description:
         "Reference archive of expired free AI credit offers, kept newest-first with their original terms.",
@@ -269,7 +271,7 @@ try {
   await writeFile(
     path.join(distDir, "privacy.html"),
     fillPage({
-      markup: await renderRoute({ page: "privacy" }),
+      markup: await renderRoute({ page: "privacy" }, origin),
       title: "Privacy Policy · Free AI Credits",
       description:
         "How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage.",
@@ -292,12 +294,14 @@ try {
     : {};
   const offersDir = path.join(distDir, "offers");
   await mkdir(offersDir, { recursive: true });
+  const offerFileMtimes = new Map();
   for (const offer of index.offers) {
     const canonical = `${origin}/offers/${offer.slug}.html`;
+    const offerPath = path.join(offersDir, `${offer.slug}.html`);
     await writeFile(
-      path.join(offersDir, `${offer.slug}.html`),
+      offerPath,
       fillPage({
-        markup: await renderRoute({ page: "detail", slug: offer.slug }),
+        markup: await renderRoute({ page: "detail", slug: offer.slug }, origin),
         title: `${offer.title} · Free AI Credits`,
         description: offerMetaDescription(offer, details[offer.slug]),
         canonical,
@@ -306,12 +310,20 @@ try {
         slug: offer.slug,
       }),
     );
+    offerFileMtimes.set(offer.slug, (await stat(offerPath)).mtime);
   }
   written.push(`offers/*.html (${index.offers.length})`);
 
   // RSS at the previous URL, absolute links off DEFAULT_BASE_URL (#27).
   await writeFile(path.join(distDir, "feed.xml"), buildFeed(index, baseUrl));
   written.push("feed.xml");
+
+  // Sitemap covers every prerendered route, including expired offers (#205).
+  await writeFile(
+    path.join(distDir, "sitemap.xml"),
+    buildSitemap(index, baseUrl, { fileMtimes: offerFileMtimes }),
+  );
+  written.push("sitemap.xml");
 
   const kb = (n) => (n / 1024).toFixed(1);
   console.log(
