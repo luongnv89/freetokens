@@ -11,55 +11,64 @@ import { BrandMark } from "./BrandMark"
 export function SiteHeader({
   depth = 0,
   current,
+  slogan,
 }: {
   depth?: number
-  current?: "home" | "archive" | "privacy"
+  current?: "home" | "archive" | "privacy" | "about"
+  slogan?: string
 }) {
   const up = "../".repeat(depth)
   const homeHref = `${up || "./"}index.html`
+  const showSlogan = slogan ?? (current === "home"
+    ? "Every claimable free AI credit offer — verified, tagged, and on one fast page."
+    : undefined)
+  const SloganTag = current === "home" ? "h1" : "p"
   return (
-    <div className="site-bar">
-      <a className="site-brand" href={homeHref}>
-        <BrandMark depth={depth} size={32} alt="" priority />
-        <p className="site-wordmark">Free AI Credits</p>
-      </a>
-      <nav className="site-nav" aria-label="Primary">
-        <a href={homeHref} aria-current={current === "home" ? "page" : undefined}>
-          Offers
+    <header className="site-header">
+      <div className="site-bar">
+        <a className="site-brand" href={homeHref} aria-label="Free AI Credits — home">
+          <BrandMark depth={depth} size={28} alt="" priority />
+          <span className="site-wordmark">Free AI Credits</span>
         </a>
-        <span aria-hidden="true">&middot;</span>
-        <a
-          className="nav-archive"
-          href={`${up}archive.html`}
-          title="All deals"
-          aria-label="Archive: all deals"
-          aria-current={current === "archive" ? "page" : undefined}
-        >
-          {/* lucide "archive" glyph (#113): inline SVG, no extra request */}
-          <svg
-            className="nav-i"
-            viewBox="0 0 24 24"
-            width="14"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            focusable="false"
+        <nav className="site-nav" aria-label="Primary">
+          <a href={homeHref} aria-current={current === "home" ? "page" : undefined}>
+            Offers
+          </a>
+          <a
+            className="nav-archive"
+            href={`${up}archive.html`}
+            title="All deals"
+            aria-label="Archive: all deals"
+            aria-current={current === "archive" ? "page" : undefined}
           >
-            <rect width="20" height="5" x="2" y="3" rx="1" />
-            <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
-            <path d="M10 12h4" />
-          </svg>
-          Archive
-        </a>
-        <span aria-hidden="true">&middot;</span>
-        <a href={`${up}privacy.html`} aria-current={current === "privacy" ? "page" : undefined}>
-          Privacy
-        </a>
-      </nav>
-    </div>
+            <svg
+              className="nav-i"
+              viewBox="0 0 24 24"
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <rect width="20" height="5" x="2" y="3" rx="1" />
+              <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8" />
+              <path d="M10 12h4" />
+            </svg>
+            Archive
+          </a>
+          <a href={`${up}about.html`} aria-current={current === "about" ? "page" : undefined}>
+            About
+          </a>
+          <a href={`${up}privacy.html`} aria-current={current === "privacy" ? "page" : undefined}>
+            Privacy
+          </a>
+        </nav>
+      </div>
+      {showSlogan ? <SloganTag className="site-slogan">{showSlogan}</SloganTag> : null}
+    </header>
   )
 }

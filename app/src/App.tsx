@@ -4,6 +4,7 @@ import { type Route, resolveRoute } from "./routes"
 import HomePage from "./components/HomePage"
 import ArchivePage from "./components/ArchivePage"
 import PrivacyPage from "./components/PrivacyPage"
+import AboutPage from "./components/AboutPage"
 import OfferDetailPage from "./components/OfferDetailPage"
 import { ConsentBanner } from "./components/ConsentBanner"
 
@@ -24,6 +25,9 @@ export default function App({
       break
     case "privacy":
       page = <PrivacyPage baseUrl={baseUrl} />
+      break
+    case "about":
+      page = <AboutPage index={index} baseUrl={baseUrl} />
       break
     case "detail":
       page = <OfferDetailPage index={index} slug={r.slug} baseUrl={baseUrl} />

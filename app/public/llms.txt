@@ -31,6 +31,7 @@ Top 20 currently active offers (newest verified first) from 38 active listings. 
 
 - [Home](https://luongnv89.github.io/freetokens/): Browse all currently active free AI credit offers, filterable by category and searchable — the site's main listing.
 - [Archive](https://luongnv89.github.io/freetokens/archive.html): Reference archive of expired free AI credit offers, newest-expired first with original terms.
+- [About](https://luongnv89.github.io/freetokens/about.html): What the site is, how listings are verified, and what the numbers mean.
 - [Privacy Policy](https://luongnv89.github.io/freetokens/privacy.html): How the site handles data — consent-gated anonymized analytics, no forms, no personal data storage.
 
 ## Feed

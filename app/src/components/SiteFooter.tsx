@@ -24,7 +24,7 @@ export function SiteFooter({
   showTrafficStrip = false,
 }: {
   depth?: number
-  current?: "home" | "archive" | "privacy"
+  current?: "home" | "archive" | "privacy" | "about"
   showTrafficStrip?: boolean
 }) {
   const up = "../".repeat(depth)
@@ -45,6 +45,10 @@ export function SiteFooter({
         <span aria-hidden="true">&middot;</span>
         <a href={`${up}archive.html`} aria-current={current === "archive" ? "page" : undefined}>
           Archive
+        </a>
+        <span aria-hidden="true">&middot;</span>
+        <a href={`${up}about.html`} aria-current={current === "about" ? "page" : undefined}>
+          About
         </a>
         <span aria-hidden="true">&middot;</span>
         <a href={`${up}privacy.html`} aria-current={current === "privacy" ? "page" : undefined}>

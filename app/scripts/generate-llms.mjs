@@ -81,6 +81,7 @@ function buildLlmsTxt() {
   lines.push("");
   lines.push(`- [Home](${baseUrl}/): Browse all currently active free AI credit offers, filterable by category and searchable — the site's main listing.`);
   lines.push(`- [Archive](${baseUrl}/archive.html): Reference archive of expired free AI credit offers, newest-expired first with original terms.`);
+  lines.push(`- [About](${baseUrl}/about.html): What the site is, how listings are verified, and what the numbers mean.`);
   lines.push(`- [Privacy Policy](${baseUrl}/privacy.html): How the site handles data — consent-gated anonymized analytics, no forms, no personal data storage.`);
   lines.push("");
   lines.push("## Feed");
@@ -125,6 +126,7 @@ function buildLlmsFullTxt() {
   lines.push("");
   lines.push(`- [Home](${baseUrl}/): Main listing of active offers.`);
   lines.push(`- [Archive](${baseUrl}/archive.html): Expired offers archive.`);
+  lines.push(`- [About](${baseUrl}/about.html): About the site — methodology and verification.`);
   lines.push(`- [Privacy Policy](${baseUrl}/privacy.html): Privacy policy.`);
   lines.push(`- [RSS Feed](${baseUrl}/feed.xml): RSS feed of active offers.`);
   lines.push(`- [Sitemap](${baseUrl}/sitemap.xml): XML sitemap.`);

@@ -573,49 +573,87 @@ a:focus-visible {
 }
 
 /* ---- Shared site header (#112): identical chrome on every page -------- */
+/* Clean editorial masthead: Logo + Name · Nav · Slogan, then hairline */
+
+.site-header {
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.35rem;
+}
 
 .site-bar {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.35rem 1.1rem;
-  border-bottom: 2px solid var(--ink);
-  padding-bottom: 0.55rem;
+  align-items: center;
+  gap: 0.6rem 1.25rem;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .site-bar .site-brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.6rem;
   color: inherit;
   text-decoration: none;
 }
 
 .site-bar :is(h1, .site-wordmark) {
-  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-size: clamp(1.35rem, 3.2vw, 1.65rem);
   font-weight: 800;
-  letter-spacing: -0.015em;
-  line-height: 1.02;
+  letter-spacing: -0.025em;
+  line-height: 1;
   margin: 0;
 }
 
-.site-bar .brand-mark { align-self: center; }
+.site-bar .brand-mark { align-self: center; display: block; }
+
+.site-slogan {
+  margin: 0.7rem 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--gray);
+  max-width: 44rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.site-slogan::before {
+  content: "";
+  display: inline-block;
+  width: 1.4rem;
+  height: 2px;
+  background: var(--green);
+  margin-right: 0.55rem;
+  vertical-align: middle;
+}
 
 .site-nav {
   display: inline-flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.45rem;
+  align-items: center;
+  gap: 1.1rem;
   margin-left: auto;
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
 }
 
-.site-nav a { color: var(--gray); }
+.site-nav a {
+  color: var(--gray);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
 
-/* All-deals icon link (#113): the archive anchor carries an inline lucide
-   "archive" glyph; inline-flex keeps it on the text baseline so hover,
-   focus, and aria-current styling stay identical to the other nav items. */
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--ink);
+}
+
+/* All-deals icon link (#113): inline SVG stays on baseline */
 .site-nav .nav-archive {
   display: inline-flex;
   align-items: center;
@@ -626,11 +664,27 @@ a:focus-visible {
 
 .site-nav a[aria-current="page"] {
   color: var(--ink);
-  font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  font-weight: 600;
+  border-bottom-color: var(--green);
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .site-bar {
+    gap: 0.6rem 1rem;
+  }
+  .site-nav {
+    gap: 0.75rem 1rem;
+    font-size: 0.76rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .site-nav a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 .breadcrumbs {

@@ -16,6 +16,10 @@ type BreadcrumbsProps =
       baseUrl?: string
     }
   | {
+      page: "about"
+      baseUrl?: string
+    }
+  | {
       page: "detail"
       slug: string
       title: string
@@ -41,6 +45,13 @@ function buildBreadcrumbItems(props: BreadcrumbsProps): BreadcrumbItem[] {
     return [
       { name: "Offers", href: "./index.html", item: `${baseUrl}/` },
       { name: "Privacy", item: `${baseUrl}/privacy.html` },
+    ]
+  }
+
+  if (props.page === "about") {
+    return [
+      { name: "Offers", href: "./index.html", item: `${baseUrl}/` },
+      { name: "About", item: `${baseUrl}/about.html` },
     ]
   }
 

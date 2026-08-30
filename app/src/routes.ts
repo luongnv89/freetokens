@@ -6,6 +6,7 @@ export type Route =
   | { page: "home" }
   | { page: "archive" }
   | { page: "privacy" }
+  | { page: "about" }
   | { page: "detail"; slug: string }
 
 /**
@@ -26,6 +27,8 @@ export function resolveRoute(
       return { page: "archive" }
     case "privacy":
       return { page: "privacy" }
+    case "about":
+      return { page: "about" }
     case "detail":
       return { page: "detail", slug: root?.dataset.slug ?? "" }
     default:

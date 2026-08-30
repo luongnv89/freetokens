@@ -115,6 +115,7 @@ export function buildSitemap(index, baseUrl = DEFAULT_BASE_URL, options = {}) {
     { path: "/", lastmod: generatedDate },
     { path: "/archive.html", lastmod: generatedDate },
     { path: "/privacy.html", lastmod: generatedDate },
+    { path: "/about.html", lastmod: generatedDate },
     { path: "/feed.xml", lastmod: generatedDate },
   ]
   if (fixedEntries.length + index.offers.length > MAX_SITEMAP_URLS) {
