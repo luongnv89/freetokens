@@ -39,11 +39,11 @@ A Cloudflare-fronted setup (either proxying `luongnv89.github.io` behind Cloudfl
 
 ```
 default-src 'self';
-script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.goatcounter.com;
+script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.goatcounter.com https://gc.zgo.at;
 style-src 'self' 'unsafe-inline';
 img-src 'self' data: https:;
 font-src 'self' data:;
-connect-src 'self' https://www.google-analytics.com https://*.goatcounter.com https://www.googletagmanager.com;
+connect-src 'self' https://www.google-analytics.com https://*.goatcounter.com https://www.googletagmanager.com https://gc.zgo.at;
 base-uri 'self'; form-action 'self'; object-src 'none';
 frame-ancestors 'none'; upgrade-insecure-requests
 ```
@@ -51,6 +51,7 @@ frame-ancestors 'none'; upgrade-insecure-requests
 Rationale:
 
 - `script-src` allows self + the two analytics origins that `vite.config.ts` / `prerender.mjs` may inject when `GA_MEASUREMENT_ID` / `GOATCOUNTER_SITE_URL` are set; when unset no external script is loaded, so the allowlist is harmless.
+- **GoatCounter `count.js` lives at `https://gc.zgo.at`, not `*.goatcounter.com`.** `https://*.goatcounter.com` matches the site origin used for `/count` hits and `/counter/*.json`; it does not match `gc.zgo.at`. After the #227 head/CSP hardening, that gap blocked `loadGoatCounter` and any script-initiated fetches to the CDN. Issue #250 adds `https://gc.zgo.at` to both `script-src` and `connect-src`. Counter JSON stays on `https://*.goatcounter.com`.
 - `style-src 'unsafe-inline'` is required for React inline `style` attributes and Tailwind's runtime; external styles remain `'self'`-only.
 - `img-src https: data: 'self'` covers self-hosted SVGs and any `https:` offer image or social-proof screenshot while still blocking `http:` images (upgraded by `upgrade-insecure-requests`).
 - `frame-ancestors 'none'` is enforced via the header variant; via `<meta>` it is intentionally left in the value but the browser correctly ignores it — the equivalent meta-only protection is `X-Frame-Options: DENY` via header on hosts that support it, and the site serves no framing use-case.
