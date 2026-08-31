@@ -12,7 +12,7 @@ import { SITEMAP_NAMESPACE } from "../scripts/sitemap.mjs";
 // adding an offer to offers.json (regenerated from YAML by load:data)
 // produces its page on the next build with no source edit.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
-const ROBOTS_SITEMAP = "Sitemap: https://luongnv89.github.io/freetokens/sitemap.xml";
+const ROBOTS_SITEMAP = "Sitemap: https://freetokens.custats.info/sitemap.xml";
 
 function prerender(distDir, dataFile, baseUrl) {
   const args = ["scripts/prerender.mjs", "--dist", distDir];
@@ -167,12 +167,12 @@ describe("static route coverage (#123)", () => {
     const urls = [...document.getElementsByTagNameNS(SITEMAP_NAMESPACE, "url")];
     expect(urls).toHaveLength(index.offers.length + 5);
     expect(urls.map((url) => url.getElementsByTagNameNS(SITEMAP_NAMESPACE, "loc")[0].textContent)).toEqual([
-      "https://luongnv89.github.io/freetokens/",
-      "https://luongnv89.github.io/freetokens/archive.html",
-      "https://luongnv89.github.io/freetokens/privacy.html",
-      "https://luongnv89.github.io/freetokens/about.html",
-      "https://luongnv89.github.io/freetokens/feed.xml",
-      ...index.offers.map((offer) => `https://luongnv89.github.io/freetokens/offers/${offer.slug}.html`),
+      "https://freetokens.custats.info/",
+      "https://freetokens.custats.info/archive.html",
+      "https://freetokens.custats.info/privacy.html",
+      "https://freetokens.custats.info/about.html",
+      "https://freetokens.custats.info/feed.xml",
+      ...index.offers.map((offer) => `https://freetokens.custats.info/offers/${offer.slug}.html`),
     ]);
 
     const today = new Date().toISOString().slice(0, 10);
@@ -216,24 +216,24 @@ describe("static route coverage (#123)", () => {
         file: "archive.html",
         names: ["Offers", "Archive"],
         urls: [
-          "https://luongnv89.github.io/freetokens/",
-          "https://luongnv89.github.io/freetokens/archive.html",
+          "https://freetokens.custats.info/",
+          "https://freetokens.custats.info/archive.html",
         ],
       },
       {
         file: "privacy.html",
         names: ["Offers", "Privacy"],
         urls: [
-          "https://luongnv89.github.io/freetokens/",
-          "https://luongnv89.github.io/freetokens/privacy.html",
+          "https://freetokens.custats.info/",
+          "https://freetokens.custats.info/privacy.html",
         ],
       },
       {
         file: "about.html",
         names: ["Offers", "About"],
         urls: [
-          "https://luongnv89.github.io/freetokens/",
-          "https://luongnv89.github.io/freetokens/about.html",
+          "https://freetokens.custats.info/",
+          "https://freetokens.custats.info/about.html",
         ],
       },
     ];
@@ -275,8 +275,8 @@ describe("static route coverage (#123)", () => {
       ]);
       expect(data.itemListElement.map((item) => item.position)).toEqual([1, 2]);
       expect(data.itemListElement.map((item) => item.item)).toEqual([
-        "https://luongnv89.github.io/freetokens/",
-        `https://luongnv89.github.io/freetokens/offers/${offer.slug}.html`,
+        "https://freetokens.custats.info/",
+        `https://freetokens.custats.info/offers/${offer.slug}.html`,
       ]);
     }
 
@@ -604,10 +604,10 @@ describe("static route coverage (#123)", () => {
 
   it("keeps the complete production fallback metadata in the Vite shell", () => {
     const shell = readFileSync(path.join(APP_ROOT, "index.html"), "utf8");
-    const canonical = "https://luongnv89.github.io/freetokens/";
+    const canonical = "https://freetokens.custats.info/";
     const description =
       "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
-    const image = "https://luongnv89.github.io/freetokens/og.png";
+    const image = "https://freetokens.custats.info/og.png";
     const expectedProperties = {
       "og:title": "Free AI Credits",
       "og:description": description,
@@ -668,7 +668,7 @@ describe("static route coverage (#123)", () => {
     const description =
       "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
     expect(metaContents(home, "name", "description")).toEqual([htmlAttr(description)]);
-    expect(canonicalValues(home)).toEqual(["https://luongnv89.github.io/freetokens/"]);
+    expect(canonicalValues(home)).toEqual(["https://freetokens.custats.info/"]);
   });
 
   it("does not duplicate metadata when prerender runs again", { timeout: 15_000 }, () => {

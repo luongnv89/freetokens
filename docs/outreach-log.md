@@ -2,7 +2,7 @@
 
 Marks the official start of the v2-gate measurement window (`v1.1` tag).
 Owner-facing checklist plus the committed log of every share action.
-Site: https://luongnv89.github.io/freetokens/
+Site: https://freetokens.custats.info/
 
 ## Open Question #2 — RESOLVED: initial 5 distribution targets
 

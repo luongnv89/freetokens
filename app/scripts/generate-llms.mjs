@@ -19,7 +19,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens";
+const DEFAULT_BASE_URL = "https://freetokens.custats.info";
 
 let baseUrl = DEFAULT_BASE_URL;
 let dataFile = path.join(here, "..", "src", "data", "offers.json");

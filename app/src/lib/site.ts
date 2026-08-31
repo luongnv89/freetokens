@@ -2,7 +2,7 @@
 // e.g. for canonical tags and prerendered share markup. In the browser,
 // share URLs must instead come from the live location so they always
 // match the URL displayed in the address bar (#108).
-export const DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens"
+export const DEFAULT_BASE_URL = "https://freetokens.custats.info"
 
 /**
  * Base URL of the site as seen by the current visitor: derived from

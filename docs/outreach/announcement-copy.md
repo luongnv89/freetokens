@@ -9,7 +9,7 @@ being shown.
 > I built Free AI Credits — every currently-claimable free AI credit offer
 > (API credits, coding agents, image/video/voice tiers), with curator review
 > status and expiry dates front and center.
-> https://luongnv89.github.io/freetokens/
+> https://freetokens.custats.info/
 
 ## Short blurb (Reddit r/SideProject, Indie Hackers)
 
@@ -20,7 +20,7 @@ being shown.
 > wastes your time. Filter by category, search instantly, sort by newest /
 > expiring-soon / biggest amount, and click through straight to the offer.
 > Built as a static site: no accounts, no tracking of what you search.
-> Feedback very welcome: https://luongnv89.github.io/freetokens/
+> Feedback very welcome: https://freetokens.custats.info/
 
 ## Show HN text
 
