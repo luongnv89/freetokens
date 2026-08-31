@@ -327,6 +327,50 @@ describe("consent decisions", () => {
     expect(ric.mock.calls[0][1]).toEqual({ timeout: 2000 });
     expect(document.getElementById(GA_SCRIPT_ID)).toBeNull();
   });
+
+  it("pairs requestIdleCallback with setTimeout so init still runs when idle never fires", () => {
+    configureAnalytics({ measurementId: MID });
+    vi.useFakeTimers();
+    const ric = vi.fn();
+    vi.stubGlobal("requestIdleCallback", ric);
+    const shown = vi.fn();
+    subscribeConsentBanner(shown);
+    scheduleAnalyticsInit();
+    expect(ric).toHaveBeenCalledTimes(1);
+    expect(shown).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(shown).toHaveBeenCalledTimes(1);
+    expect(shown).toHaveBeenCalledWith(true);
+  });
+
+  it("does not double-init when both idle and timeout fire", () => {
+    configureAnalytics({ measurementId: MID });
+    vi.useFakeTimers();
+    const ric = vi.fn();
+    vi.stubGlobal("requestIdleCallback", ric);
+    const shown = vi.fn();
+    subscribeConsentBanner(shown);
+    scheduleAnalyticsInit();
+    vi.advanceTimersByTime(1);
+    expect(shown).toHaveBeenCalledTimes(1);
+    const idleCb = ric.mock.calls[0][0] as () => void;
+    idleCb();
+    expect(shown).toHaveBeenCalledTimes(1);
+    initAnalytics();
+    expect(shown).toHaveBeenCalledTimes(1);
+  });
+
+  it("falls back to setTimeout when requestIdleCallback is missing", () => {
+    configureAnalytics({ measurementId: MID });
+    vi.useFakeTimers();
+    vi.stubGlobal("requestIdleCallback", undefined);
+    const shown = vi.fn();
+    subscribeConsentBanner(shown);
+    scheduleAnalyticsInit();
+    expect(shown).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(shown).toHaveBeenCalledWith(true);
+  });
 });
 
 describe("five events with correct properties", () => {

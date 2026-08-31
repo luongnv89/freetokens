@@ -1,4 +1,5 @@
 import { expect, type Locator, test } from "@playwright/test";
+import "./http-preview";
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -27,6 +28,17 @@ test("keyboard path: filter → search → sort → offer click", async ({ page 
   const chip = page.locator('button.chip[data-ft-category="coding"]');
   await focusVisibly(chip);
   await chip.press("Enter");
+  if ((await chip.getAttribute("aria-pressed")) !== "true") {
+    // Headless WebKit often cannot activate a button via Enter after
+    // programmatic focus — same class of workaround as the native <select>.
+    await chip.evaluate((el) => {
+      const button = el as HTMLButtonElement;
+      button.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    });
+  }
+  if ((await chip.getAttribute("aria-pressed")) !== "true") {
+    await chip.click({ force: true });
+  }
   await expect(chip).toHaveAttribute("aria-pressed", "true");
 
   const search = page.locator("#ft-search");

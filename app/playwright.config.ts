@@ -20,7 +20,16 @@ export default defineConfig({
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     { name: "firefox", use: { ...devices["Desktop Firefox"] } },
-    { name: "webkit", use: { ...devices["Desktop Safari"] } },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
+        // WebKit honours CSP upgrade-insecure-requests on http://127.0.0.1 and
+        // then TLS-fails CSS/JS. Production is HTTPS; this only unblocks local
+        // preview so overflow/consent/keyboard actually exercise the app (#254).
+        bypassCSP: true,
+      },
+    },
   ],
   webServer: {
     command:

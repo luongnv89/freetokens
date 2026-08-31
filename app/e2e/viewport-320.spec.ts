@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import "./http-preview";
 
 test.use({ viewport: { width: 320, height: 690 } });
 
