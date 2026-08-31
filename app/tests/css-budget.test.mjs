@@ -14,9 +14,9 @@ import path from "node:path";
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
 // Frozen Python-builder baseline was 36200 (#121/#139). Highlighted visit
-// chips (#250) still add ~479 B after compacting .ft-stat in python-parity.css;
-// shrinking further would drop the green-rail chip treatment the AC requires.
-const PYTHON_INLINE_CSS_BYTES = 36679;
+// chips (#250) added ~479 B. 320px WebKit overflow containment (#254) adds
+// chip/badge min-width, a visually-hidden file input, and table-layout:fixed.
+const PYTHON_INLINE_CSS_BYTES = 36930;
 
 function cssBytesIn(dir) {
   let total = 0;

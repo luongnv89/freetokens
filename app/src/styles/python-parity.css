@@ -185,6 +185,9 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 0.34em;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.7rem;
   font-weight: 600;
@@ -254,6 +257,8 @@ h1 {
 .tag-i {
   width: 1.05em;
   height: 1.05em;
+  max-width: 1.05em;
+  overflow: hidden;
   flex: 0 0 auto;
 }
 
@@ -703,6 +708,7 @@ a:focus-visible {
     width: 100%;
     max-width: none;
   }
+  .od-table th[scope="row"] { white-space: normal; }
 }
 
 @media (pointer: coarse) {
@@ -1022,6 +1028,9 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 0.34em;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.74rem;
   padding: 0.32rem 0.7rem;
@@ -1233,6 +1242,7 @@ button:focus-visible {
 }
 
 .local-data-actions {
+  position: relative;
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
@@ -1264,14 +1274,19 @@ button:focus-visible {
   color: var(--paper);
 }
 
-/* The import file input is triggered by the styled button above. */
+/* Visually hidden but kept in-tree so the Import button can click() it.
+   clip:rect alone leaves WebKit's native file control on the scroll width. */
 .local-data-file {
   position: absolute;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
+  border: 0;
 }
 
 .local-data-status {
@@ -1412,6 +1427,7 @@ button:focus-visible {
 .od-table {
   width: 100%;
   max-width: 42rem;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.9rem;
 }
