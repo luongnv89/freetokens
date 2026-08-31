@@ -1766,6 +1766,86 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   color: var(--gray);
 }
 
+/* ---- Custats sibling-product banner (issue #257) -------------------- */
+/* Muted mono strip — reads as a sibling pointer, not an ad. Small,
+   centered, hairline border, never competes with the offer list. Full
+   width outside .wrap so it spans viewport, wraps at 320px. */
+
+.custats-banner {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: var(--gray);
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+
+.custats-banner__inner {
+  max-width: 75rem;
+  margin: 0 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.custats-banner__kicker {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+
+.custats-banner__sep {
+  color: var(--hairline);
+}
+
+.custats-banner strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.custats-banner a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  overflow-wrap: anywhere;
+}
+
+.custats-banner a:hover,
+.custats-banner a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+}
+
+.custats-banner a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (pointer: coarse) {
+  .custats-banner a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 340px) {
+  .custats-banner {
+    font-size: 0.7rem;
+    padding-inline: 0.75rem;
+  }
+}
+
 @media (pointer: coarse) {
   .share-copy { min-height: 44px; }
 }
