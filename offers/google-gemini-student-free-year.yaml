@@ -1,4 +1,5 @@
-# Verified 2026-08-29 against https://x.com/GeminiApp/status/2090165248196252003
+# Verified 2026-08-31 against https://x.com/GeminiApp/status/2090165248196252003
+# ("eligible college students can get a full year of Gemini on us: US students: 1 year of Google AI Pro at no cost, 140+ countries: 1 year of Google AI Plus at no cost")
 # "eligible college students can get a full year of Gemini on us"
 title: Google Gemini Student Free Year
 provider: Google
@@ -6,7 +7,7 @@ category: student
 amount: 1 year of Google AI Pro (US) or Google AI Plus (140+ countries) free
 expiry_date: 2026-09-30
 source_url: https://x.com/GeminiApp/status/2090165248196252003
-verified_date: 2026-08-29
+verified_date: 2026-08-31
 verification: social_proof
 review_status: verified
 signup: required

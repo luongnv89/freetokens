@@ -1,5 +1,5 @@
-# Verified 2026-08-23 against https://www.microsoft.com/en-us/bing/features/bing-image-creator
-# ("Bing Image Creator is a fantastic tool that's free for everyone with a Microsoft
+# Verified 2026-08-31 against https://www.microsoft.com/en-us/bing/features/bing-image-creator
+# ("Our free allocation... you've used up your 15 free fast creations per day on Bing Image Creator, you'll be switched to Bing Image Creator's standard creation speed")
 #  Account (MSA)! ... Every day, you'll get a total of 15 free fast image creations.")
 title: Bing Image Creator
 provider: Microsoft Bing
@@ -7,7 +7,7 @@ category: image
 amount: Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h)
 expiry_date: null
 source_url: https://www.microsoft.com/en-us/bing/features/bing-image-creator
-verified_date: 2026-08-23
+verified_date: 2026-08-31
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified

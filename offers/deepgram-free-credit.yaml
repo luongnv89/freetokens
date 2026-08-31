@@ -1,5 +1,5 @@
-# Verified 2026-08-23 against https://deepgram.com/pricing
-# ("Pay As You Go - No minimums. No expiration. No credit card required.
+# Verified 2026-08-31 against https://deepgram.com/pricing
+# ("$200 credit. ... no credit card required.")
 #  Price: Free $200 Credit")
 title: Deepgram $200 Free Credit
 provider: Deepgram
@@ -7,7 +7,7 @@ category: voice
 amount: $200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)
 expiry_date: null
 source_url: https://deepgram.com/pricing
-verified_date: 2026-08-23
+verified_date: 2026-08-31
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified
