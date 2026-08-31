@@ -75,6 +75,7 @@ let lastOfferAt = 0;
 let listenerAbort: AbortController | null = null;
 const bannerListeners = new Set<BannerListener>();
 let bannerOpen = false;
+let analyticsInitStarted = false;
 
 function gtagWindow(): Window & { dataLayer?: unknown[]; gtag?: GtagFn } {
   return window;
@@ -475,6 +476,8 @@ export async function initTrafficStrip(
  */
 export function initAnalytics(): void {
   if (!isBrowser() || !isTrackingConfigured()) return;
+  if (analyticsInitStarted) return;
+  analyticsInitStarted = true;
   bindAnalyticsListeners();
   const stored = readGaConsent();
   if (stored === "granted") {
@@ -490,20 +493,23 @@ export function initAnalytics(): void {
   void initTrafficStrip();
 }
 
-/** Off the critical load path: requestIdleCallback({ timeout: 2000 }). */
+/**
+ * Off the critical load path. Always pair requestIdleCallback with setTimeout:
+ * Playwright WebKit exposes ric but does not fire it (or its timeout), so the
+ * consent banner never mounts if we wait on idle alone.
+ */
 export function scheduleAnalyticsInit(): void {
   if (!isBrowser() || !isTrackingConfigured()) return;
   const run = () => {
     initAnalytics();
   };
+  window.setTimeout(run, 1);
   try {
     if (typeof window.requestIdleCallback === "function") {
       window.requestIdleCallback(run, { timeout: 2000 });
-    } else {
-      window.setTimeout(run, 1);
     }
   } catch {
-    window.setTimeout(run, 1);
+    /* setTimeout already queued */
   }
 }
 
@@ -516,6 +522,7 @@ export function resetAnalyticsForTests(): void {
   listenerAbort = null;
   bannerListeners.clear();
   bannerOpen = false;
+  analyticsInitStarted = false;
   config = {
     measurementId: resolveMeasurementId(readGaDefine()),
     statsSite: resolveStatsSite(readGcDefine()),
