@@ -95,7 +95,7 @@ Address DevRel / growth / partnerships contacts. Subject options:
 ```text
 Hi {{FIRST_NAME}},
 
-I run freetokens (https://luongnv89.github.io/freetokens/) — a curator-reviewed
+I run freetokens (https://freetokens.custats.info/) — a curator-reviewed
 directory of free AI credit offers. Every listing is checked against your own
 pricing/docs pages, and every outbound link is click-attributed.
 

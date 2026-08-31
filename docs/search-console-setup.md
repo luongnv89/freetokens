@@ -8,11 +8,11 @@ Verify the live GitHub Pages site in Google Search Console (GSC), submit `sitema
 
 ## Pre-requisites
 
-- Site deployed to `https://luongnv89.github.io/freetokens/` via `.github/workflows/deploy.yml` (validate → build → deploy).
+- Site deployed to `https://freetokens.custats.info/` via `.github/workflows/deploy.yml` (validate → build → deploy).
 - `app/public/robots.txt` references the sitemap:
 
   ```
-  Sitemap: https://luongnv89.github.io/freetokens/sitemap.xml
+  Sitemap: https://freetokens.custats.info/sitemap.xml
   ```
 
   copied verbatim to `app/dist/robots.txt` by `vite build`.
@@ -22,7 +22,7 @@ Verify the live GitHub Pages site in Google Search Console (GSC), submit `sitema
 ## 1. Create the GSC property
 
 1. Open https://search.google.com/search-console/welcome
-2. Choose **URL prefix** and enter `https://luongnv89.github.io/freetokens/` (trailing slash required for project Pages).
+2. Choose **URL prefix** and enter `https://freetokens.custats.info/` (trailing slash required).
 3. Select **HTML tag** as the verification method and copy the token value from:
 
    ```html
@@ -65,16 +65,16 @@ grep 'google-site-verification' app/dist/index.html
 
 ## 3. Verify in GSC
 
-1. Push to `main` (or re-run the deploy workflow) so the live `https://luongnv89.github.io/freetokens/` serves the meta.
+1. Push to `main` (or re-run the deploy workflow) so the live `https://freetokens.custats.info/` serves the meta.
 2. Return to GSC and click **Verify**. Google fetches `/` and checks the meta.
-3. On success GSC shows **Ownership verified**. If it fails, re-check that `view-source:https://luongnv89.github.io/freetokens/` contains the meta and that `robots.txt` does not block `Googlebot` (it does not — see `app/public/robots.txt`).
+3. On success GSC shows **Ownership verified**. If it fails, re-check that `view-source:https://freetokens.custats.info/` contains the meta and that `robots.txt` does not block `Googlebot` (it does not — see `app/public/robots.txt`).
 
 Alternative if HTML-tag verification is blocked: add a DNS TXT record at the apex (`google-site-verification=TOKEN`) and choose **Domain** verification in GSC. The HTML tag can then be removed.
 
 ## 4. Submit the sitemap
 
 1. In GSC, open the verified property → **Sitemaps** (left nav).
-2. Enter `sitemap.xml` (resolved against the property prefix to `https://luongnv89.github.io/freetokens/sitemap.xml`) and submit.
+2. Enter `sitemap.xml` (resolved against the property prefix to `https://freetokens.custats.info/sitemap.xml`) and submit.
 3. GSC should report **Success** with `Discovered URLs = (# fixed routes + # offers)` matching the last prerender log line.
 4. The sitemap is also discoverable without submission via `robots.txt` `Sitemap:` directive — submission only accelerates crawling.
 
@@ -82,9 +82,9 @@ Alternative if HTML-tag verification is blocked: add a DNS TXT record at the ape
 
 Run **URL Inspection** on the canonical samples (must report **URL is on Google** with *User-declared canonical* = *Google-selected canonical*):
 
-- `https://luongnv89.github.io/freetokens/` (home)
-- `https://luongnv89.github.io/freetokens/archive.html`
-- `https://luongnv89.github.io/freetokens/privacy.html`
+- `https://freetokens.custats.info/` (home)
+- `https://freetokens.custats.info/archive.html`
+- `https://freetokens.custats.info/privacy.html`
 - 3 offer details, e.g. the newest and two random slugs from `sitemap.xml`.
 
 For each inspected URL confirm:

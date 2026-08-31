@@ -30,7 +30,7 @@ CATEGORY_LABELS = {
 # item/channel links must be absolute per the RSS 2.0 spec (and the W3C feed
 # validator enforces it). Page-internal hrefs stay relative so they resolve
 # under any deploy base.
-DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens"
+DEFAULT_BASE_URL = "https://freetokens.custats.info"
 FEED_TITLE = "Free AI Credits — free AI credit offers, tagged by verification"
 FEED_DESCRIPTION = (
     "Newly published free AI credit offers from the freetokens directory, "

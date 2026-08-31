@@ -4,11 +4,11 @@
 
 - **Baseline snapshot:** [`docs/seo-baseline-2026-08-29.md`](seo-baseline-2026-08-29.md) — audited `app/dist/*.html` at `d7bd97bd` / `94b5aec` against `python3 scripts/audit_seo.py app/dist`.
 - **Live URLs:**
-  - Site: <https://luongnv89.github.io/freetokens/>
-  - Sitemap: <https://luongnv89.github.io/freetokens/sitemap.xml>
-  - Robots: <https://luongnv89.github.io/freetokens/robots.txt>
-  - llms.txt: <https://luongnv89.github.io/freetokens/llms.txt> (and `llms-full.txt` when task #210 is on `main`)
-  - RSS: <https://luongnv89.github.io/freetokens/feed.xml>
+  - Site: <https://freetokens.custats.info/>
+  - Sitemap: <https://freetokens.custats.info/sitemap.xml>
+  - Robots: <https://freetokens.custats.info/robots.txt>
+  - llms.txt: <https://freetokens.custats.info/llms.txt> (and `llms-full.txt` when task #210 is on `main`)
+  - RSS: <https://freetokens.custats.info/feed.xml>
 - **Code owners:** `app/scripts/prerender.mjs`, `app/scripts/sitemap.mjs`, `app/scripts/feed.mjs`, `app/scripts/generate-llms.mjs` (when present), `app/src/components/Breadcrumbs.tsx`, `app/public/robots.txt`.
 
 ---
@@ -56,11 +56,11 @@ Pushing the YAML to `main` is the deploy — `deploy.yml` runs `validate_offers.
 
 | Signal | Where it comes from | How it is rendered |
 |--------|---------------------|-------------------|
-| `<link rel="canonical">` | `app/scripts/prerender.mjs` → `DEFAULT_BASE_URL` (`https://luongnv89.github.io/freetokens`) unless `--base-url` overrides | One tag per document, `website` on `index/archive/privacy`, `article` on offer detail. Duplicate tags stripped via `CANONICAL_LINK_RE`. Missing canonical fails the build (`descriptionCount === 0` guard analogy). |
+| `<link rel="canonical">` | `app/scripts/prerender.mjs` → `DEFAULT_BASE_URL` (`https://freetokens.custats.info`) unless `--base-url` overrides | One tag per document, `website` on `index/archive/privacy`, `article` on offer detail. Duplicate tags stripped via `CANONICAL_LINK_RE`. Missing canonical fails the build (`descriptionCount === 0` guard analogy). |
 | `og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`, `og:image` + `twitter:card/title/description/image` | Same prerender step — `renderSocialMetadata()` in `prerender.mjs` between `<!-- free-ai-credits:social-meta:start -->` markers | `og:image` → `logo-mark.svg` (absolute). Verified by `app/tests/routes.test.mjs` expecting exactly one social block. |
 | `<meta name="description">` | `offerMetaDescription()` — detail `summary` truncated at 160 chars, else `"<amount> from <provider> — free AI credits, tagged by verification level and sign-up need."` | One tag per document; home/archive/privacy have hand-written descriptions. |
 | JSON-LD `BreadcrumbList` | `app/src/components/Breadcrumbs.tsx` (`safeJsonLd()` escapes `&<>`) — visible trail and JSON-LD share `buildBreadcrumbItems()` | Home has no breadcrumbs (and no JSON-LD); `archive`/`privacy` render `Offers → Archive/Privacy`; `offers/<slug>.html` renders `Offers → <title>`. `pages.test.tsx` asserts trail and JSON-LD stay in same order and that titles are escaped parseably. |
-| `sitemap.xml` | `app/scripts/sitemap.mjs:buildSitemap()` called from `prerender.mjs` | Covers every prerendered route including expired offers + `feed.xml`. `lastmod` = `verified_date` (clamped to today UTC) → file mtime fallback → `generated_at`. Validated against namespace `http://www.sitemaps.org/schemas/sitemap/0.9`, 50k URL / 50 MB / 2048-char loc limits. `robots.txt` advertises it with `Sitemap: https://luongnv89.github.io/freetokens/sitemap.xml`. |
+| `sitemap.xml` | `app/scripts/sitemap.mjs:buildSitemap()` called from `prerender.mjs` | Covers every prerendered route including expired offers + `feed.xml`. `lastmod` = `verified_date` (clamped to today UTC) → file mtime fallback → `generated_at`. Validated against namespace `http://www.sitemaps.org/schemas/sitemap/0.9`, 50k URL / 50 MB / 2048-char loc limits. `robots.txt` advertises it with `Sitemap: https://freetokens.custats.info/sitemap.xml`. |
 | `feed.xml`, `llms.txt` / `llms-full.txt` | `feed.mjs` / `generate-llms.mjs` invoked in the same `postbuild` | Not SEO-indexed, but they share the same `offers.json` source of truth so sitemap and feed never diverge. |
 
 ### 1.3 5-minute smoke test (the acceptance gate)
@@ -86,7 +86,7 @@ PY
 python3 scripts/validate_offers.py
 cd app && npm run build
 # Assertions a future contributor can run without asking the author:
-grep -q 'rel="canonical" href="https://luongnv89.github.io/freetokens/offers/smoke-fixture-test-offer.html"' app/dist/offers/smoke-fixture-test-offer.html
+grep -q 'rel="canonical" href="https://freetokens.custats.info/offers/smoke-fixture-test-offer.html"' app/dist/offers/smoke-fixture-test-offer.html
 grep -q 'property="og:title"' app/dist/offers/smoke-fixture-test-offer.html
 grep -q 'application/ld+json' app/dist/offers/smoke-fixture-test-offer.html
 grep -q 'smoke-fixture-test-offer.html' app/dist/sitemap.xml
@@ -115,7 +115,7 @@ ls -l app/dist/robots.txt app/dist/sitemap.xml app/dist/feed.xml
 ls -l app/public/llms.txt app/dist/llms.txt 2>&1 | head
 
 # Content checks
-grep -q "Sitemap: https://luongnv89.github.io/freetokens/sitemap.xml" app/dist/robots.txt && echo "robots sitemap ok"
+grep -q "Sitemap: https://freetokens.custats.info/sitemap.xml" app/dist/robots.txt && echo "robots sitemap ok"
 grep -q "User-agent: GPTBot" app/dist/robots.txt && echo "training crawler block present"
 grep -q "User-agent: Googlebot" app/dist/robots.txt && echo "search allow present"
 
@@ -140,10 +140,10 @@ Common fixes:
 
 One-time setup, then every deploy is automatic via the sitemap.
 
-1. **Verify ownership** of `https://luongnv89.github.io/freetokens/` in [Search Console](https://search.google.com/search-console) (URL-prefix property). The HTML-file or DNS methods both work; this site uses the GitHub Pages URL-prefix path.
-2. **Submit the sitemap:** left nav → **Sitemaps** → paste `https://luongnv89.github.io/freetokens/sitemap.xml` → **Submit**. GSC will show discovered URLs count matching `grep -c "<url>" app/dist/sitemap.xml`.
-3. **Request indexing for a new offer:** **URL Inspection** → paste `https://luongnv89.github.io/freetokens/offers/<slug>.html` → **Test live URL** → **Request indexing**. No extra step for home/archive — they are already in the sitemap.
-4. **Verify after deploy:** in GSC, **Pages** → indexed vs not indexed should converge within hours. `robots.txt` at `https://luongnv89.github.io/freetokens/robots.txt` must show the `Sitemap:` line and the per-agent blocks from §2; fetch it as Googlebot in GSC's robots tester if the policy was just changed.
+1. **Verify ownership** of `https://freetokens.custats.info/` in [Search Console](https://search.google.com/search-console) (URL-prefix property). The HTML-file or DNS methods both work; this site uses the GitHub Pages URL-prefix path.
+2. **Submit the sitemap:** left nav → **Sitemaps** → paste `https://freetokens.custats.info/sitemap.xml` → **Submit**. GSC will show discovered URLs count matching `grep -c "<url>" app/dist/sitemap.xml`.
+3. **Request indexing for a new offer:** **URL Inspection** → paste `https://freetokens.custats.info/offers/<slug>.html` → **Test live URL** → **Request indexing**. No extra step for home/archive — they are already in the sitemap.
+4. **Verify after deploy:** in GSC, **Pages** → indexed vs not indexed should converge within hours. `robots.txt` at `https://freetokens.custats.info/robots.txt` must show the `Sitemap:` line and the per-agent blocks from §2; fetch it as Googlebot in GSC's robots tester if the policy was just changed.
 5. **Bing / others:** paste the same sitemap URL in Bing Webmaster Tools; `robots.txt` already advertises it via the `Sitemap:` directive so crawlers that respect it need no manual step.
 
 No sitemap resubmit is needed per offer — the file is regenerated on every build and Pages serves the fresh copy.

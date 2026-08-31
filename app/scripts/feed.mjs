@@ -3,7 +3,7 @@
 // absolute channel/item links off --base-url (DEFAULT_BASE_URL by default)
 // while every in-page href elsewhere stays relative.
 // Mirrors scripts/build.py DEFAULT_BASE_URL / src/lib/site.ts.
-export const DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens"
+export const DEFAULT_BASE_URL = "https://freetokens.custats.info"
 
 export const FEED_TITLE = "Free AI Credits — free AI credit offers, tagged by verification"
 export const FEED_DESCRIPTION =

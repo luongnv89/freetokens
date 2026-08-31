@@ -257,7 +257,7 @@ Full operator instructions live in
 
 ### Privacy policy page
 
-The app also serves [`/privacy.html`](https://luongnv89.github.io/freetokens/privacy.html)
+The app also serves [`/privacy.html`](https://freetokens.custats.info/privacy.html)
 (Task 3.5, PRD §5.2): a plain-language policy rendered from the same
 components and design tokens as the home page, so it always matches the site
 design. The footer on every page links to it with relative hrefs, so the
@@ -270,7 +270,7 @@ forms, no PII storage — and is pinned by tests (`ConsentBanner.test.tsx`,
 
 ### SEO & discoverability
 
-Every page ships a single canonical, full Open Graph + Twitter Card set, and JSON-LD `BreadcrumbList` (see `app/scripts/prerender.mjs`, `app/src/components/Breadcrumbs.tsx`), and `app/scripts/sitemap.mjs` generates [`sitemap.xml`](https://luongnv89.github.io/freetokens/sitemap.xml) on every build — including expired offers — advertised from [`robots.txt`](https://luongnv89.github.io/freetokens/robots.txt) (Policy A in [`docs/seo-baseline-2026-08-29.md`](docs/seo-baseline-2026-08-29.md)). AI-bot text lives at [`llms.txt`](https://luongnv89.github.io/freetokens/llms.txt). The maintainer playbook for verifying all of this — add-offer smoke test, local `robots.txt`/`llms.txt` checks, GSC sitemap submission, audit-noise triage, and why the sitemap is Vite-custom instead of `next-sitemap` — is [`docs/seo-runbook.md`](docs/seo-runbook.md).
+Every page ships a single canonical, full Open Graph + Twitter Card set, and JSON-LD `BreadcrumbList` (see `app/scripts/prerender.mjs`, `app/src/components/Breadcrumbs.tsx`), and `app/scripts/sitemap.mjs` generates [`sitemap.xml`](https://freetokens.custats.info/sitemap.xml) on every build — including expired offers — advertised from [`robots.txt`](https://freetokens.custats.info/robots.txt) (Policy A in [`docs/seo-baseline-2026-08-29.md`](docs/seo-baseline-2026-08-29.md)). AI-bot text lives at [`llms.txt`](https://freetokens.custats.info/llms.txt). The maintainer playbook for verifying all of this — add-offer smoke test, local `robots.txt`/`llms.txt` checks, GSC sitemap submission, audit-noise triage, and why the sitemap is Vite-custom instead of `next-sitemap` — is [`docs/seo-runbook.md`](docs/seo-runbook.md).
 
 ## Deployment
 
@@ -293,7 +293,7 @@ push built output by hand:
    `actions/upload-pages-artifact`, `actions/deploy-pages`), using Pages'
    build type `workflow` (source = GitHub Actions).
 
-The live site is served at `https://luongnv89.github.io/freetokens/` — an
+The live site is served at `https://freetokens.custats.info/` — an
 offer edit merged to `main` is typically live within 1–2 minutes.
 
 To re-run a deploy manually: **Actions → Deploy to GitHub Pages → Run
