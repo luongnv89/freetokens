@@ -5,6 +5,12 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Visit counts highlighted, dual tracking unblocked (#250):** GoatCounter
+  `count.js` is allowed via `gc.zgo.at` in CSP (alongside GA4). The footer
+  on every page shows an all-time visit total as a number-first chip, with
+  today / 90-day chips when those windows parse. Each offer list row and
+  detail page shows that path's GoatCounter view count the same way.
+
 - **Personal-state export/import (#141):** `/privacy` now names every
   localStorage key the app owns (`ft_ga_consent`, `ft-saved`, `ft-dismissed`,
   `ft-prefs`, `ft-claim-<slug>`) and hosts client-side controls to download
