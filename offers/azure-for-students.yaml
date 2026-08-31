@@ -1,11 +1,12 @@
-# Verified 2026-08-29 against https://azure.microsoft.com/en-us/free/students
+# Verified 2026-08-31 against https://azure.microsoft.com/en-us/free/students
+# ("Get started with Microsoft Azure for Students and enjoy access to cloud services, developer tools, and $100 credits to build apps, explore AI and data science.")
 title: Azure for Students — $100 Credit + Free Services
 provider: Microsoft Azure
 category: student
 amount: $100 Azure credits for 12 months + 25+ free services (no credit card required)
 expiry_date: null
 source_url: https://azure.microsoft.com/en-us/free/students
-verified_date: 2026-08-29
+verified_date: 2026-08-31
 verification: social_proof
 review_status: unverified
 signup: required

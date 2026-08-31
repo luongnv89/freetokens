@@ -1,12 +1,12 @@
-# Verified 2026-08-24 against https://docs.llm7.io/limits
-# (Anonymous access is limited to 1 request/second, 10/minute, 60/hour, and 500,000 tokens per 24 hours.)
+# Verified 2026-08-31 against https://docs.llm7.io/limits
+# ("Anonymous 1 10 60 ... Anonymous 500,000 tokens per 24 hours")
 title: LLM7.io Free API Tier
 provider: LLM7.io
 category: api_provider
 amount: Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day
 expiry_date: null
 source_url: https://docs.llm7.io/limits
-verified_date: 2026-08-24
+verified_date: 2026-08-31
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified

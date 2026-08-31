@@ -1,4 +1,5 @@
-# Verified 2026-08-27 against https://www.merge.dev/pricing/gateway
+# Verified 2026-08-31 against https://www.merge.dev/pricing/gateway
+# ("Receive $10/month in free credits* ... Pay LLM cost plus a 5% fee. Get $10 in free credits every month.")
 # Pro plan: "Receive $10/month in free credits* ... * Pro members receive
 # $10 in complimentary Credits monthly, issued on the 1st of each month."
 title: Merge Gateway — $10 in Free LLM Credits Every Month
@@ -7,7 +8,7 @@ category: api_provider
 amount: $10 in free LLM credits every month (Pro plan)
 expiry_date: null
 source_url: https://www.merge.dev/pricing/gateway
-verified_date: 2026-08-27
+verified_date: 2026-08-31
 # Verification & sign-up tags (#97): checked against the official Merge pricing page.
 verification: social_proof
 review_status: verified
