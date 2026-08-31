@@ -5,6 +5,12 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **320px WebKit layout and keyboard filters (#254):** At 320px, category
+  chips, offer badges, the privacy file-input control, and the offer-detail
+  facts table no longer force horizontal scroll (Safari/WebKit). Category
+  chips activate on Enter/Space so the filter toolbar is keyboard-usable.
+  Consent still waits until the banner is actually shown before decline.
+
 - **Visit counts highlighted, dual tracking unblocked (#250):** GoatCounter
   `count.js` is allowed via `gc.zgo.at` in CSP (alongside GA4). The footer
   on every page shows an all-time visit total as a number-first chip, with
