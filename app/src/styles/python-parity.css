@@ -184,10 +184,12 @@ h1 {
   --tag-hue: var(--ink);
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.34em;
   max-width: 100%;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
+  overflow-wrap: anywhere;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.7rem;
   font-weight: 600;
@@ -708,7 +710,7 @@ a:focus-visible {
     width: 100%;
     max-width: none;
   }
-  .od-table th[scope="row"] { white-space: normal; }
+  .od-table th[scope="row"] { white-space: normal; width: auto; }
 }
 
 @media (pointer: coarse) {
@@ -1027,10 +1029,12 @@ a:focus-visible {
   --tag-hue: var(--ink);
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.34em;
   max-width: 100%;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
+  overflow-wrap: anywhere;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.74rem;
   padding: 0.32rem 0.7rem;

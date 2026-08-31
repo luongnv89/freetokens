@@ -396,6 +396,16 @@ describe("HomePage three-dimension filters (#126)", () => {
     })
   })
 
+  it("chip Enter SETs category and sets aria-pressed true (#254)", () => {
+    render(<HomePage index={index} />)
+    const chip = categoryChip("coding")
+    chip.focus()
+    fireEvent.keyDown(chip, { key: "Enter" })
+    expect(chip).toHaveAttribute("aria-pressed", "true")
+    expect(new URLSearchParams(window.location.search).get("category")).toBe("coding")
+    expect(categoryChip("")).toHaveAttribute("aria-pressed", "false")
+  })
+
   it("row tag click applies that dimension and clicking again clears it", () => {
     const gtag = grantedGtag()
     render(<HomePage index={index} />)

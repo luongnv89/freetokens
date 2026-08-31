@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
 import {
   SEARCH_DEBOUNCE_MS,
   trackFilterUse,
@@ -153,6 +153,11 @@ function Toolbar({
 }) {
   const countText =
     shown === total ? `Showing all ${total} offers` : `Showing ${shown} of ${total} offers`
+  function onChipKeyDown(event: KeyboardEvent<HTMLButtonElement>, next: string) {
+    if (event.key !== "Enter" && event.key !== " ") return
+    event.preventDefault()
+    onCategorySet(next)
+  }
   return (
     <section className="toolbar" aria-label="Search and filter offers">
       <div className="field">
@@ -190,6 +195,7 @@ function Toolbar({
           data-ft-category=""
           aria-pressed={category === "" ? "true" : "false"}
           onClick={() => onCategorySet("")}
+          onKeyDown={(e) => onChipKeyDown(e, "")}
         >
           <span>All</span>
         </Button>
@@ -202,6 +208,7 @@ function Toolbar({
             data-ft-category={cat}
             aria-pressed={category === cat ? "true" : "false"}
             onClick={() => onCategorySet(cat)}
+            onKeyDown={(e) => onChipKeyDown(e, cat)}
           >
             <ChipGlyph value={cat} />
             <span>{CATEGORY_LABELS[cat] ?? cat}</span>

@@ -16,7 +16,8 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // Frozen Python-builder baseline was 36200 (#121/#139). Highlighted visit
 // chips (#250) added ~479 B. 320px WebKit overflow containment (#254) adds
 // chip/badge min-width, a visually-hidden file input, and table-layout:fixed.
-const PYTHON_INLINE_CSS_BYTES = 36930;
+// Badge/chip wrap (overflow:visible + overflow-wrap) adds 89 B.
+const PYTHON_INLINE_CSS_BYTES = 37019;
 
 function cssBytesIn(dir) {
   let total = 0;
