@@ -450,7 +450,8 @@ a.badge:focus-visible {
   margin: 0.5rem 0 0;
 }
 
-.foot-nav a {
+.foot-nav a,
+.foot-traffic a {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
@@ -458,7 +459,9 @@ a.badge:focus-visible {
 }
 
 .foot-nav a:hover,
-.foot-nav a:focus-visible {
+.foot-nav a:focus-visible,
+.foot-traffic a:hover,
+.foot-traffic a:focus-visible {
   text-decoration-color: var(--green);
   text-decoration-thickness: 3px;
 }
@@ -916,50 +919,24 @@ a:focus-visible {
   text-underline-offset: 3px;
 }
 
-/* Visit/view chips (#250): number first, short label, green accent rail —
-   never a green fill. Ink number meets AA on paper; green is the 3px edge. */
+/* Visit/view chips (#250): number-first, green 3px rail (not a fill). */
 .ft-stat {
   display: inline-flex;
   align-items: baseline;
+  flex: 0 0 auto;
   gap: 0.32em;
   white-space: nowrap;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.72rem;
-  line-height: 1.2;
+  font: 0.72rem/1.2 "IBM Plex Mono", ui-monospace, monospace;
   padding: 0.16rem 0.5rem 0.16rem 0.42rem;
   border: 1px solid var(--hairline);
   border-left: 3px solid var(--green);
   border-radius: 4px;
-  background: var(--paper);
-  color: var(--ink);
 }
-
-.ft-stat strong {
-  font-weight: 700;
-  color: var(--ink);
-  font-size: 1.08em;
-}
-
-.ft-stat-label {
-  color: var(--gray);
-  font-weight: 500;
-}
-
-.r-views {
-  flex: 0 0 auto;
-}
-
-.od-views {
-  font-size: 0.95rem;
-  padding: 0.32rem 0.7rem 0.32rem 0.55rem;
-  margin: 0;
-  align-self: center;
-}
-
-.od-views strong {
-  font-size: 1.35em;
-}
+.ft-stat[hidden] { display: none; }
+.ft-stat strong { font-size: 1.08em; }
+.ft-stat-label { color: var(--gray); }
+.od-views { font-size: 0.95rem; padding: 0.32rem 0.7rem 0.32rem 0.55rem; margin: 0; }
+.od-views strong { font-size: 1.35em; }
 
 .r-details:hover,
 .r-details:focus-visible {
@@ -1338,29 +1315,8 @@ button:focus-visible {
 
 .foot-traffic[hidden] { display: none; }
 
-.foot-traffic .ft-stat[hidden] { display: none; }
-
-.ft-traffic-total {
-  font-size: 0.84rem;
-  padding: 0.22rem 0.58rem 0.22rem 0.48rem;
-}
-
-.ft-traffic-total strong {
-  font-size: 1.2em;
-}
-
-.foot-traffic a {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--hairline);
-  text-underline-offset: 3px;
-}
-
-.foot-traffic a:hover,
-.foot-traffic a:focus-visible {
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 2px;
-}
+.ft-traffic-total { font-size: 0.84rem; }
+.ft-traffic-total strong { font-size: 1.2em; }
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------
    Card-actions / .detail-btn already live above (archive #129). The rest
