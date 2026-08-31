@@ -1,4 +1,5 @@
 import { expect, type Locator, test } from "@playwright/test";
+import "./http-preview";
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {

@@ -13,7 +13,7 @@ import {
 function tagIcon(value: string) {
   if (!(value in TAG_ICONS)) return null
   return (
-    <svg className="tag-i" aria-hidden="true" focusable="false">
+    <svg className="tag-i" width="12" height="12" aria-hidden="true" focusable="false">
       <use href={`#ti-${value}`} />
     </svg>
   )
