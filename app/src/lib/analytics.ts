@@ -154,15 +154,21 @@ export function ftIsoDate(d: Date): string {
 
 /**
  * GoatCounter public counter URL.
- * `days` counts calendar days INCLUDING today: 1 is today alone, 90 is the
- * trailing 90 days. `end` is exclusive midnight (#102), so the window ends
- * on tomorrow. NEVER pass 0 — that collapsed start onto end.
+ * Omit `days` (or pass null) for the all-time site total — no start/end,
+ * same unwindowed route per-offer views already use. When `days` is set it
+ * counts calendar days INCLUDING today: 1 is today alone, 90 is the trailing
+ * 90 days. `end` is exclusive midnight (#102), so the window ends on
+ * tomorrow. NEVER pass 0 — that collapsed start onto end. Never add a
+ * cache-buster; GoatCounter keys the CDN on (path, start, end) only.
  */
 export function ftCounterUrl(
-  days: number,
+  days?: number | null,
   site: string = config.statsSite,
   now: Date = new Date(),
 ): string {
+  if (days == null) {
+    return `${site}/counter/TOTAL.json`;
+  }
   const span = Math.max(1, Math.floor(days));
   const end = new Date(now.getTime() + 86_400_000);
   const start = new Date(now.getTime() - (span - 1) * 86_400_000);
@@ -417,6 +423,29 @@ export function bindAnalyticsListeners(): void {
   bindConsentChrome(signal);
 }
 
+async function fetchCounterCount(url: string): Promise<number | null> {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return ftStatNumber(await res.json());
+  } catch {
+    return null;
+  }
+}
+
+function revealTrafficWindow(
+  box: Element,
+  count: number | null,
+  numberId: string,
+  wrapSelector: string,
+): void {
+  if (count === null) return;
+  const numberEl = box.querySelector(numberId);
+  const wrap = box.querySelector(wrapSelector);
+  if (numberEl) numberEl.textContent = ftFormatCount(count);
+  if (wrap instanceof HTMLElement) wrap.hidden = false;
+}
+
 export async function initTrafficStrip(
   site: string = config.statsSite,
 ): Promise<void> {
@@ -424,19 +453,16 @@ export async function initTrafficStrip(
   const box = document.getElementById(TRAFFIC_STRIP_ID);
   if (!box || typeof fetch !== "function") return;
   try {
-    const responses = await Promise.all([
-      fetch(ftCounterUrl(1, site)),
-      fetch(ftCounterUrl(90, site)),
+    const [total, today, period] = await Promise.all([
+      fetchCounterCount(ftCounterUrl(null, site)),
+      fetchCounterCount(ftCounterUrl(1, site)),
+      fetchCounterCount(ftCounterUrl(90, site)),
     ]);
-    if (!responses[0].ok || !responses[1].ok) return;
-    const payloads = await Promise.all([responses[0].json(), responses[1].json()]);
-    const today = ftStatNumber(payloads[0]);
-    const period = ftStatNumber(payloads[1]);
-    if (today === null || period === null) return;
-    const todayEl = box.querySelector("#ft-traffic-today");
-    const periodEl = box.querySelector("#ft-traffic-period");
-    if (todayEl) todayEl.textContent = ftFormatCount(today);
-    if (periodEl) periodEl.textContent = ftFormatCount(period);
+    if (total === null) return;
+    const totalEl = box.querySelector("#ft-traffic-total");
+    if (totalEl) totalEl.textContent = ftFormatCount(total);
+    revealTrafficWindow(box, today, "#ft-traffic-today", ".ft-traffic-today");
+    revealTrafficWindow(box, period, "#ft-traffic-period", ".ft-traffic-period");
     box.hidden = false;
   } catch {
     /* silent hide — ad block, offline, malformed payload */

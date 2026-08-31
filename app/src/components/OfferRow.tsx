@@ -138,6 +138,13 @@ export function OfferRow({
             </a>
           </h2>
           <span className="r-amount">{offer.amount}</span>
+          {typeof views === "number" && (
+            <span className="ft-stat r-views">
+              <strong>{ftFormatCount(views)}</strong>
+              {" "}
+              <span className="ft-stat-label">views</span>
+            </span>
+          )}
         </div>
         <p className="row-meta">
           <TagButton
@@ -201,14 +208,6 @@ export function OfferRow({
           >
             View details
           </a>
-          {typeof views === "number" && (
-            <>
-              <span className="sep" aria-hidden="true">
-                &middot;
-              </span>
-              <span className="r-views">{ftFormatCount(views)} views</span>
-            </>
-          )}
           {(onToggleSave || onDismiss) && (
             <span className="r-actions">
               {onToggleSave && (

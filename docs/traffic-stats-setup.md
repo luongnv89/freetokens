@@ -1,7 +1,8 @@
 # Live traffic stats setup (GoatCounter)
 
-Issue #62 adds a live traffic view to the site: a footer strip showing
-visitors today and over the trailing 90 days, refreshed on every page
+Issue #62 adds a live traffic view to the site; #250 extends it to an
+all-time visit total on every page, with today and trailing-90-day
+windows kept when those fetches succeed. Counts refresh on every page
 load — never baked in at build time. Counting is done by
 [GoatCounter](https://www.goatcounter.com), open-source (EUPL), cookieless
 web analytics whose hosted service is **free for non-commercial sites**
@@ -109,21 +110,37 @@ npm run build
 ```
 
 The React counter helper (`ftCounterUrl` in `app/src/lib/analytics.ts`)
-sends only `start` and `end`. Do not add a cache-buster query param —
-it is inert (see *Freshness* above). Every window still ends on tomorrow
-so today is included (`end` is exclusive; that was the #102 bug).
+has two shapes:
+
+| Call | URL | Window |
+| --- | --- | --- |
+| `ftCounterUrl()` / `ftCounterUrl(null)` | `/counter/TOTAL.json` | **All-time** — no `start`/`end`. Same unwindowed route per-offer views already use (`/counter/%2Foffers%2F<slug>.html.json`). |
+| `ftCounterUrl(1)` | `/counter/TOTAL.json?start=&end=` | **Today** — `end` is exclusive midnight tomorrow so today is included. |
+| `ftCounterUrl(90)` | same, 90-day span | **Trailing 90 days** including today. |
+
+Do not add a cache-buster query param — it is inert (see *Freshness*
+above). Never pass `0` for `days` (`ftCounterUrl` clamps it to 1); a
+window with `start == end` returns 0 forever (#102). The footer strip
+reveals itself once the all-time total arrives and fills today / 90-day
+chips only when those responses parse; a blocked or empty all-time
+payload keeps the whole strip hidden.
 
 ## Verification
 
 1. Load the built site with the secret exported and confirm:
    - `<head>` contains `<script async src="https://gc.zgo.at/count.js"
      data-goatcounter="…">`.
-   - The home page footer contains the hidden strip
-     (`<p class="foot-traffic" id="ft-traffic" … hidden>`).
-2. Visit the live site, open devtools, and confirm two requests to
-   `…/counter/TOTAL.json` return `200` with `{"count": "…"}`; the strip
-   reveals itself with those numbers. (If they return `403`, re-check
-   Step 1.3 — the visitor counter must be allowed.)
+   - Every page footer contains the hidden strip
+     (`<p class="foot-traffic" id="ft-traffic" … hidden>`), including the
+     all-time chip (`#ft-traffic-total`).
+2. Visit the live site, open devtools, and confirm three requests:
+   `…/counter/TOTAL.json` (all-time, no query), plus today and 90-day
+   windowed URLs. Each returns `200` with `{"count": "…"}`; the strip
+   reveals itself with the all-time number (today / 90-day chips appear
+   when those succeed). (If they return `403`, re-check Step 1.3 — the
+   visitor counter must be allowed.) `count.js` must load from
+   `https://gc.zgo.at/count.js` — the CSP allowlists that origin in
+   `script-src` and `connect-src` (#250 / the #227 regression).
 3. Block the request (devtools) and reload: everything else must work
    identically and the strip must remain invisible.
 4. Run `python3 -m unittest discover -s tests` — the Python suite covers

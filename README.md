@@ -216,13 +216,14 @@ When enabled, the page ships a small progressive-enhancement layer:
   blocked or broken tracker can never delay or break navigation; accidental
   rapid double-clicks on the same offer are deduplicated to one event.
 
-### Live traffic stats (#62)
+### Live traffic stats (#62, #250)
 
 Alongside GA4 the site can display **live visitor traffic** — a footer strip
-showing visitors today and over the trailing 90 days, refreshed on every
-page load, plus a link to the full public dashboard. This is deliberately
-different from the masthead's build-time offer counters: these numbers move
-without a rebuild.
+on every page with the all-time visit total (plus today and trailing 90 days
+when those windows parse), and per-offer view counts on the home list and
+each offer detail page. Numbers refresh on page load from GoatCounter's
+public JSON. This is deliberately different from the masthead's build-time
+offer counters: these numbers move without a rebuild.
 
 The provider is [GoatCounter](https://www.goatcounter.com) — open-source,
 cookieless analytics whose hosted service is free for non-commercial sites.
@@ -235,12 +236,17 @@ secret:
 Unset keeps zero stats markup in the output; malformed values disable
 traffic counting with a build warning. When enabled:
 
-- Every page ships the GoatCounter tracker beacon so all traffic counts.
-- Pages that run the site script also emit the hidden footer strip; a small
-  client-side module fetches today + 90-day totals from GoatCounter's public
-  JSON counter route (`/counter/TOTAL.json`) and reveals the numbers.
+- Every page ships the GoatCounter tracker beacon so all traffic counts
+  (CSP also allows `https://gc.zgo.at` for `count.js`).
+- Every page that runs the site script emits the footer strip; a small
+  client-side module fetches the all-time total from `/counter/TOTAL.json`
+  (no `start`/`end`) and reveals a highlighted visits chip. Today and
+  90-day chips appear only when those exclusive-end window fetches parse.
+- Home rows and offer detail pages fetch that path's all-time count
+  (`/counter/%2Foffers%2F<slug>.html.json`) and show it as a highlighted
+  views chip.
 - **Silent degradation** — offline, ad-blocked, erroring, or malformed
-  responses leave the strip hidden forever and nothing else changes.
+  responses leave the strip and chips hidden and nothing else changes.
 
 > Requires enabling **"Allow adding visitor counts on your website"**
 > (Settings → Visitor counter) in the GoatCounter dashboard; otherwise the

@@ -117,7 +117,16 @@ export default function OfferDetailPage({
               <p className="count">{offer.provider}</p>
             </header>
             <div className="od-hero">
-              <p className="amount">{offer.amount}</p>
+              <div className="od-hero-metrics">
+                <p className="amount">{offer.amount}</p>
+                {typeof viewCount === "number" && (
+                  <p className="ft-stat od-views">
+                    <strong>{ftFormatCount(viewCount)}</strong>
+                    {" "}
+                    <span className="ft-stat-label">views</span>
+                  </p>
+                )}
+              </div>
               <p className="od-statusline mono">
                 {offer.status === "expired" ? (
                   <span className="status">ended</span>
@@ -140,12 +149,6 @@ export default function OfferDetailPage({
                 <span className="sep" aria-hidden="true">&middot;</span>
                 checked{" "}
                 <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
-                {typeof viewCount === "number" && (
-                  <>
-                    <span className="sep" aria-hidden="true">&middot;</span>
-                    <span className="od-views">{ftFormatCount(viewCount)} views</span>
-                  </>
-                )}
               </p>
             </div>
             <section className="od-facts" aria-label="Key offer details">

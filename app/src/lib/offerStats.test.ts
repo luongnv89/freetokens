@@ -26,6 +26,12 @@ describe("per-offer GoatCounter view counters (#101)", () => {
     expect([...url.searchParams.keys()]).toEqual([])
   })
 
+  it("treats a zero count as a real number, not a hide-me empty", async () => {
+    const fetchImpl = vi.fn(async () => counterResponse("0"))
+    const views = await fetchOfferViews(["alpha"], SITE, fetchImpl as typeof fetch)
+    expect(views).toEqual({ alpha: 0 })
+  })
+
   it("maps successful counter responses to parsed counts keyed by slug", async () => {
     const fetchImpl = vi.fn(async (url: string) =>
       url.includes("alpha") ? counterResponse("1,234") : counterResponse("8"),

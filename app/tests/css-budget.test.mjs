@@ -13,7 +13,10 @@ import path from "node:path";
 // those detail pages (#128), so the budget includes it.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-const PYTHON_INLINE_CSS_BYTES = 36200;
+// Frozen Python-builder baseline was 36200 (#121/#139). Highlighted visit
+// chips (#250) still add ~479 B after compacting .ft-stat in python-parity.css;
+// shrinking further would drop the green-rail chip treatment the AC requires.
+const PYTHON_INLINE_CSS_BYTES = 36679;
 
 function cssBytesIn(dir) {
   let total = 0;
