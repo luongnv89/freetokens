@@ -7,6 +7,7 @@ import PrivacyPage from "./components/PrivacyPage"
 import AboutPage from "./components/AboutPage"
 import OfferDetailPage from "./components/OfferDetailPage"
 import { ConsentBanner } from "./components/ConsentBanner"
+import { CustatsBanner } from "./components/CustatsBanner"
 
 const index = indexData as OffersIndex
 
@@ -37,6 +38,7 @@ export default function App({
   }
   return (
     <>
+      <CustatsBanner />
       {page}
       <ConsentBanner />
     </>

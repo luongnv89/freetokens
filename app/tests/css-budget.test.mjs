@@ -17,7 +17,9 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // chips (#250) added ~479 B. 320px WebKit overflow containment (#254) adds
 // chip/badge min-width, a visually-hidden file input, and table-layout:fixed.
 // Badge/chip wrap (overflow:visible + overflow-wrap) adds 89 B.
-const PYTHON_INLINE_CSS_BYTES = 37019;
+// Custats sibling banner (#257) adds 1270 B muted mono strip (full-width,
+// hairline border, responsive at 320px).
+const PYTHON_INLINE_CSS_BYTES = 38289;
 
 function cssBytesIn(dir) {
   let total = 0;
