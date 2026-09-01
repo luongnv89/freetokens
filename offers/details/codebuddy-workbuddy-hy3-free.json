@@ -1,0 +1,16 @@
+{
+  "summary": "Tencent's WorkBuddy offers a $0/month free tier that includes Hy3 coding models, with 100 credits/month plus a 30 credits/day active reward and 5,000 code completions. The free tier appears ongoing, but the Hy3 free offer is flagged as available through 30 Sep 2026.",
+  "claim_steps": [
+    "Sign up for WorkBuddy at workbuddy.ai.",
+    "Start the Free $0/mo plan.",
+    "Use Hy3 coding models — 100 credits/month plus 30 daily active reward credits, with 5,000 code completions included."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://workbuddy.ai/pricing",
+      "title": "WorkBuddy Pricing - AI Agent for Everyday Office Work",
+      "text": "Free $0/mo plan: 100 credits/month, daily active reward 30 credits/day, auto model routing, 5,000 code completions. By Tencent."
+    }
+  ]
+}

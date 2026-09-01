@@ -1,0 +1,16 @@
+# Verified 2026-09-01 against https://openrouter.ai/models
+# (API: thinkingmachines/inkling:free prompt:0 completion:0 ctx:1048576;
+# thinkingmachines/inkling-small:free prompt:0 completion:0 ctx:1048576 —
+# both $0, no listed end date.)
+# NOTE: user flagged "meant for coding agents (Claude Code, Hermes, OpenClaw)" —
+# these are OpenRouter-hosted free models, no hard end date seen on page.
+title: Inkling + Inkling Small Free (OpenRouter)
+provider: Thinking Machines
+category: coding
+amount: Inkling and Inkling Small at $0 via OpenRouter, 1M-token context
+expiry_date: null
+source_url: https://openrouter.ai/models/inkling-small
+verified_date: 2026-09-01
+verification: social_proof
+review_status: under-review
+signup: required

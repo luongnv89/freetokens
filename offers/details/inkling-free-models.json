@@ -1,0 +1,22 @@
+{
+  "summary": "Thinking Machines offers both Inkling and Inkling Small as free models on OpenRouter at $0 prompt and completion, with a 1M-token context window. No hard end date is listed on the OpenRouter models page.",
+  "claim_steps": [
+    "Sign in to OpenRouter at openrouter.ai.",
+    "Select the thinkingmachines/inkling:free or thinkingmachines/inkling-small:free model.",
+    "Send requests — both prompt and completion are priced at $0."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/models/inkling-small",
+      "title": "Inkling Small — OpenRouter",
+      "text": "OpenRouter model page for Inkling Small (Thinking Machines)."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "API confirms thinkingmachines/inkling:free and thinkingmachines/inkling-small:free at prompt:0, completion:0, context_length:1048576."
+    }
+  ]
+}

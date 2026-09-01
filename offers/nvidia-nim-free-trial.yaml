@@ -1,0 +1,13 @@
+# Verified 2026-09-01 against https://developer.nvidia.com/nim
+# (NVIDIA NIM Developer Program — $0 hosted trial for prototyping, including
+# coding models, rate-limited. No card, ongoing developer program.)
+title: NVIDIA NIM Free Trial (Developer Program)
+provider: NVIDIA
+category: api_provider
+amount: $0 hosted trial for prototyping with NVIDIA NIM, rate-limited
+expiry_date: null
+source_url: https://developer.nvidia.com/nim
+verified_date: 2026-09-01
+verification: social_proof
+review_status: under-review
+signup: required

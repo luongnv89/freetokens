@@ -1,0 +1,16 @@
+{
+  "summary": "NVIDIA NIM Developer Program offers a $0 hosted trial for prototyping, including coding models, rate-limited. No credit card required.",
+  "claim_steps": [
+    "Sign up for the NVIDIA Developer Program at developer.nvidia.com/nim.",
+    "Access the NIM hosted trial for prototyping.",
+    "Use coding models via the hosted API — rate-limited, $0 for the trial period."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://developer.nvidia.com/nim",
+      "title": "NIM for Developers | NVIDIA Developer",
+      "text": "NVIDIA NIM Developer Program — $0 hosted trial for prototyping, including coding models, rate-limited."
+    }
+  ]
+}

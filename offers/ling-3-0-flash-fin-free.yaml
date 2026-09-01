@@ -1,0 +1,14 @@
+# Verified 2026-09-01 against https://openrouter.ai/models
+# (API: inclusionai/ling-3.0-flash-fin:free prompt:0 completion:0 ctx:262144 —
+# $0, 256K context, finance-tuned function-calling model. User flagged free
+# "through 25 Sep 2026"; no end date visible on OpenRouter page, so flagging.)
+title: Ling 3.0 Flash Fin Free (InclusionAI)
+provider: InclusionAI
+category: api_provider
+amount: Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling
+expiry_date: 2026-09-25
+source_url: https://openrouter.ai/models
+verified_date: 2026-09-01
+verification: social_proof
+review_status: under-review
+signup: required
