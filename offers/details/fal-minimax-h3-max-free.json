@@ -1,0 +1,18 @@
+{
+  "summary": "fal offers free generations with MiniMax H3 Max, a model that turns a prompt or an image into a 768p clip in as little as 3 seconds, supporting both text-to-video (T2V) and image-to-video (I2V). The tool runs in the browser with no sign-up required for the no-account path, and a free fal account raises the limit to 15 free videos per day. Announced by fal's Blendi (@blendibyl) on X.",
+  "claim_steps": [
+    "Open https://fal.ai/tools/minimax-h3-max in a browser.",
+    "Type a prompt (T2V) or add an image (I2V); pick aspect ratio (16:9, 9:16, 1:1) and length (5s/10s).",
+    "Hit Generate — no account needed for the no-signup path.",
+    "Optional: sign up for a free fal account to get up to 15 free videos per day."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/blendibyl/status/2093484900775317763",
+      "author": "Blendi",
+      "handle": "@blendibyl",
+      "text": "we're offering FREE MiniMax H3 Max generations on fal, both T2V and I2V! Try it out: https://fal.ai/tools/minimax-h3-max"
+    }
+  ]
+}

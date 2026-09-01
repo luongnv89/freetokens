@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-31T21:44:49Z",
-  "count": 53,
-  "active_count": 38,
+  "generated_at": "2026-09-01T00:04:27Z",
+  "count": 54,
+  "active_count": 39,
   "expired_count": 15,
   "offers": [
     {
@@ -408,6 +408,20 @@
       "verification": "social_proof",
       "review_status": "unverified",
       "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "fal-minimax-h3-max-free",
+      "title": "fal — MiniMax H3 Max Free Generations (T2V + I2V)",
+      "provider": "fal",
+      "category": "video",
+      "amount": "MiniMax H3 Max free — text-to-video and image-to-video, up to 15 free videos/day (no sign-up needed for the no-account path)",
+      "expiry_date": null,
+      "source_url": "https://fal.ai/tools/minimax-h3-max",
+      "verified_date": "2026-08-28",
+      "verification": "social_proof",
+      "review_status": "verified",
+      "signup": "none",
       "status": "active"
     },
     {
