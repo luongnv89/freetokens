@@ -64,10 +64,24 @@ function installGtag() {
 function mountTrafficStrip(): HTMLElement {
   document.body.innerHTML = `
     <p class="foot-traffic" id="${TRAFFIC_STRIP_ID}" role="status" hidden>
-      <strong id="ft-traffic-today">&mdash;</strong>
-      <strong id="ft-traffic-period">&mdash;</strong>
+      <span class="ft-stat ft-traffic-total">
+        <strong id="ft-traffic-total">&mdash;</strong>
+        <span class="ft-stat-label">visits</span>
+      </span>
+      <span class="ft-stat ft-traffic-today" hidden>
+        <strong id="ft-traffic-today">&mdash;</strong>
+        <span class="ft-stat-label">today</span>
+      </span>
+      <span class="ft-stat ft-traffic-period" hidden>
+        <strong id="ft-traffic-period">&mdash;</strong>
+        <span class="ft-stat-label">90 days</span>
+      </span>
     </p>`;
   return document.getElementById(TRAFFIC_STRIP_ID)!;
+}
+
+function counterOk(count: string): Response {
+  return { ok: true, json: async () => ({ count }) } as Response;
 }
 
 function mountOfferLink(attrs?: {
@@ -313,6 +327,50 @@ describe("consent decisions", () => {
     expect(ric.mock.calls[0][1]).toEqual({ timeout: 2000 });
     expect(document.getElementById(GA_SCRIPT_ID)).toBeNull();
   });
+
+  it("pairs requestIdleCallback with setTimeout so init still runs when idle never fires", () => {
+    configureAnalytics({ measurementId: MID });
+    vi.useFakeTimers();
+    const ric = vi.fn();
+    vi.stubGlobal("requestIdleCallback", ric);
+    const shown = vi.fn();
+    subscribeConsentBanner(shown);
+    scheduleAnalyticsInit();
+    expect(ric).toHaveBeenCalledTimes(1);
+    expect(shown).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(shown).toHaveBeenCalledTimes(1);
+    expect(shown).toHaveBeenCalledWith(true);
+  });
+
+  it("does not double-init when both idle and timeout fire", () => {
+    configureAnalytics({ measurementId: MID });
+    vi.useFakeTimers();
+    const ric = vi.fn();
+    vi.stubGlobal("requestIdleCallback", ric);
+    const shown = vi.fn();
+    subscribeConsentBanner(shown);
+    scheduleAnalyticsInit();
+    vi.advanceTimersByTime(1);
+    expect(shown).toHaveBeenCalledTimes(1);
+    const idleCb = ric.mock.calls[0][0] as () => void;
+    idleCb();
+    expect(shown).toHaveBeenCalledTimes(1);
+    initAnalytics();
+    expect(shown).toHaveBeenCalledTimes(1);
+  });
+
+  it("falls back to setTimeout when requestIdleCallback is missing", () => {
+    configureAnalytics({ measurementId: MID });
+    vi.useFakeTimers();
+    vi.stubGlobal("requestIdleCallback", undefined);
+    const shown = vi.fn();
+    subscribeConsentBanner(shown);
+    scheduleAnalyticsInit();
+    expect(shown).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(shown).toHaveBeenCalledWith(true);
+  });
 });
 
 describe("five events with correct properties", () => {
@@ -505,6 +563,7 @@ describe("GoatCounter exclusive-end window (#102)", () => {
   it("sends no cache-buster query param to the counter route", () => {
     const today = ftCounterUrl(1, SITE, now);
     const period = ftCounterUrl(90, SITE, now);
+    const total = ftCounterUrl(null, SITE, now);
     for (const url of [today, period]) {
       expect(url).toContain("/counter/TOTAL.json?start=");
       expect(url).toContain("&end=");
@@ -512,6 +571,15 @@ describe("GoatCounter exclusive-end window (#102)", () => {
       expect(params).toEqual(["end", "start"]);
       expect(url).not.toMatch(/[?&](_cb|_=|cb|nocache|cacheBust|t)=/i);
     }
+    expect(total).toBe(`${SITE}/counter/TOTAL.json`);
+    expect([...new URL(total).searchParams.keys()]).toEqual([]);
+    expect(total).not.toMatch(/[?&](_cb|_=|cb|nocache|cacheBust|t)=/i);
+  });
+
+  it("omits start/end for the all-time total (null or omitted days)", () => {
+    expect(ftCounterUrl(null, SITE, now)).toBe(`${SITE}/counter/TOTAL.json`);
+    expect(ftCounterUrl(undefined, SITE, now)).toBe(`${SITE}/counter/TOTAL.json`);
+    expect(ftCounterUrl(undefined, SITE, now)).not.toContain("?");
   });
 
   it("only trusts digits-derived non-negative counts", () => {
@@ -531,6 +599,7 @@ describe("traffic strip silent hide", () => {
     vi.mocked(fetch).mockRejectedValue(new Error("blocked"));
     await initTrafficStrip(SITE);
     expect(box.hidden).toBe(true);
+    expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("—");
     expect(box.querySelector("#ft-traffic-today")?.textContent).toBe("—");
   });
 
@@ -545,26 +614,83 @@ describe("traffic strip silent hide", () => {
     expect(box.hidden).toBe(true);
   });
 
-  it("reveals a non-zero today count for a non-empty window", async () => {
+  it("stays hidden when GoatCounter is unconfigured", async () => {
+    configureAnalytics({ statsSite: "" });
+    const box = mountTrafficStrip();
+    await initTrafficStrip("");
+    expect(box.hidden).toBe(true);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("stays hidden when the all-time payload is missing JSON count", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const box = mountTrafficStrip();
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => ({}),
+    } as Response);
+    await initTrafficStrip(SITE);
+    expect(box.hidden).toBe(true);
+    expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("—");
+  });
+
+  it("reveals a zero all-time total and keeps the strip visible", async () => {
     configureAnalytics({ statsSite: SITE });
     const box = mountTrafficStrip();
     vi.mocked(fetch)
+      .mockResolvedValueOnce(counterOk("0"))
+      .mockResolvedValueOnce(counterOk("0"))
+      .mockResolvedValueOnce(counterOk("0"));
+    await initTrafficStrip(SITE);
+    expect(box.hidden).toBe(false);
+    expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("0");
+  });
+
+  it("reveals the all-time total even when today and 90-day fetches fail", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const box = mountTrafficStrip();
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(counterOk("9,001"))
+      .mockRejectedValueOnce(new Error("blocked"))
       .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ count: "8" }),
-      } as Response)
-      .mockResolvedValueOnce({
-        ok: true,
+        ok: false,
         json: async () => ({ count: "321" }),
       } as Response);
     await initTrafficStrip(SITE);
     expect(box.hidden).toBe(false);
+    expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("9,001");
+    expect(
+      (box.querySelector(".ft-traffic-today") as HTMLElement).hidden,
+    ).toBe(true);
+    expect(
+      (box.querySelector(".ft-traffic-period") as HTMLElement).hidden,
+    ).toBe(true);
+  });
+
+  it("reveals all-time plus today/90-day windows when every fetch succeeds", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const box = mountTrafficStrip();
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(counterOk("12,345"))
+      .mockResolvedValueOnce(counterOk("8"))
+      .mockResolvedValueOnce(counterOk("321"));
+    await initTrafficStrip(SITE);
+    expect(box.hidden).toBe(false);
+    expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("12,345");
     expect(box.querySelector("#ft-traffic-today")?.textContent).toBe("8");
     expect(box.querySelector("#ft-traffic-period")?.textContent).toBe("321");
+    expect(
+      (box.querySelector(".ft-traffic-today") as HTMLElement).hidden,
+    ).toBe(false);
+    expect(
+      (box.querySelector(".ft-traffic-period") as HTMLElement).hidden,
+    ).toBe(false);
     const urls = vi.mocked(fetch).mock.calls.map((c) => String(c[0]));
-    expect(urls).toHaveLength(2);
+    expect(urls).toHaveLength(3);
+    expect(urls[0]).toBe(`${SITE}/counter/TOTAL.json`);
+    expect([...new URL(urls[0]).searchParams.keys()]).toEqual([]);
     expect(urls.some((u) => u.includes("ftCounterUrl(0)"))).toBe(false);
-    for (const url of urls) {
+    for (const url of urls.slice(1)) {
       const start = new URL(url).searchParams.get("start");
       const end = new URL(url).searchParams.get("end");
       expect(start).not.toBe(end);

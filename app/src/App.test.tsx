@@ -121,7 +121,7 @@ describe("App tag icon sprite (lucide mapping)", () => {
     // Category, review status, and sign-up are visible on every row.
     const grid = markup.match(/<ol class="grid" id="ft-grid"[\s\S]*?<\/ol>/)?.[0] ?? "";
     const visibleVerificationTags = offers.length;
-    expect(grid.match(/<svg class="tag-i" aria-hidden="true"/g)?.length).toBe(
+    expect(grid.match(/<svg class="tag-i"[^>]*aria-hidden="true"/g)?.length).toBe(
       offers.length * 3 + visibleVerificationTags,
     );
     expect(grid.match(/data-ft-tag="/g)?.length).toBe(

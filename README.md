@@ -216,13 +216,14 @@ When enabled, the page ships a small progressive-enhancement layer:
   blocked or broken tracker can never delay or break navigation; accidental
   rapid double-clicks on the same offer are deduplicated to one event.
 
-### Live traffic stats (#62)
+### Live traffic stats (#62, #250)
 
 Alongside GA4 the site can display **live visitor traffic** — a footer strip
-showing visitors today and over the trailing 90 days, refreshed on every
-page load, plus a link to the full public dashboard. This is deliberately
-different from the masthead's build-time offer counters: these numbers move
-without a rebuild.
+on every page with the all-time visit total (plus today and trailing 90 days
+when those windows parse), and per-offer view counts on the home list and
+each offer detail page. Numbers refresh on page load from GoatCounter's
+public JSON. This is deliberately different from the masthead's build-time
+offer counters: these numbers move without a rebuild.
 
 The provider is [GoatCounter](https://www.goatcounter.com) — open-source,
 cookieless analytics whose hosted service is free for non-commercial sites.
@@ -235,12 +236,17 @@ secret:
 Unset keeps zero stats markup in the output; malformed values disable
 traffic counting with a build warning. When enabled:
 
-- Every page ships the GoatCounter tracker beacon so all traffic counts.
-- Pages that run the site script also emit the hidden footer strip; a small
-  client-side module fetches today + 90-day totals from GoatCounter's public
-  JSON counter route (`/counter/TOTAL.json`) and reveals the numbers.
+- Every page ships the GoatCounter tracker beacon so all traffic counts
+  (CSP also allows `https://gc.zgo.at` for `count.js`).
+- Every page that runs the site script emits the footer strip; a small
+  client-side module fetches the all-time total from `/counter/TOTAL.json`
+  (no `start`/`end`) and reveals a highlighted visits chip. Today and
+  90-day chips appear only when those exclusive-end window fetches parse.
+- Home rows and offer detail pages fetch that path's all-time count
+  (`/counter/%2Foffers%2F<slug>.html.json`) and show it as a highlighted
+  views chip.
 - **Silent degradation** — offline, ad-blocked, erroring, or malformed
-  responses leave the strip hidden forever and nothing else changes.
+  responses leave the strip and chips hidden and nothing else changes.
 
 > Requires enabling **"Allow adding visitor counts on your website"**
 > (Settings → Visitor counter) in the GoatCounter dashboard; otherwise the
@@ -251,7 +257,7 @@ Full operator instructions live in
 
 ### Privacy policy page
 
-The app also serves [`/privacy.html`](https://luongnv89.github.io/freetokens/privacy.html)
+The app also serves [`/privacy.html`](https://freetokens.custats.info/privacy.html)
 (Task 3.5, PRD §5.2): a plain-language policy rendered from the same
 components and design tokens as the home page, so it always matches the site
 design. The footer on every page links to it with relative hrefs, so the
@@ -264,7 +270,7 @@ forms, no PII storage — and is pinned by tests (`ConsentBanner.test.tsx`,
 
 ### SEO & discoverability
 
-Every page ships a single canonical, full Open Graph + Twitter Card set, and JSON-LD `BreadcrumbList` (see `app/scripts/prerender.mjs`, `app/src/components/Breadcrumbs.tsx`), and `app/scripts/sitemap.mjs` generates [`sitemap.xml`](https://luongnv89.github.io/freetokens/sitemap.xml) on every build — including expired offers — advertised from [`robots.txt`](https://luongnv89.github.io/freetokens/robots.txt) (Policy A in [`docs/seo-baseline-2026-08-29.md`](docs/seo-baseline-2026-08-29.md)). AI-bot text lives at [`llms.txt`](https://luongnv89.github.io/freetokens/llms.txt). The maintainer playbook for verifying all of this — add-offer smoke test, local `robots.txt`/`llms.txt` checks, GSC sitemap submission, audit-noise triage, and why the sitemap is Vite-custom instead of `next-sitemap` — is [`docs/seo-runbook.md`](docs/seo-runbook.md).
+Every page ships a single canonical, full Open Graph + Twitter Card set, and JSON-LD `BreadcrumbList` (see `app/scripts/prerender.mjs`, `app/src/components/Breadcrumbs.tsx`), and `app/scripts/sitemap.mjs` generates [`sitemap.xml`](https://freetokens.custats.info/sitemap.xml) on every build — including expired offers — advertised from [`robots.txt`](https://freetokens.custats.info/robots.txt) (Policy A in [`docs/seo-baseline-2026-08-29.md`](docs/seo-baseline-2026-08-29.md)). AI-bot text lives at [`llms.txt`](https://freetokens.custats.info/llms.txt). The maintainer playbook for verifying all of this — add-offer smoke test, local `robots.txt`/`llms.txt` checks, GSC sitemap submission, audit-noise triage, and why the sitemap is Vite-custom instead of `next-sitemap` — is [`docs/seo-runbook.md`](docs/seo-runbook.md).
 
 ## Deployment
 
@@ -287,7 +293,7 @@ push built output by hand:
    `actions/upload-pages-artifact`, `actions/deploy-pages`), using Pages'
    build type `workflow` (source = GitHub Actions).
 
-The live site is served at `https://luongnv89.github.io/freetokens/` — an
+The live site is served at `https://freetokens.custats.info/` — an
 offer edit merged to `main` is typically live within 1–2 minutes.
 
 To re-run a deploy manually: **Actions → Deploy to GitHub Pages → Run

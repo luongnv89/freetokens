@@ -484,6 +484,24 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
     expect(cta).toContain('data-ft-outbound="true"');
   });
 
+  it("mounts the hidden traffic strip on every page when GoatCounter is configured (#250)", () => {
+    configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
+    const pages = [
+      renderToStaticMarkup(<HomePage index={index} />),
+      renderToStaticMarkup(<ArchivePage index={index} />),
+      renderToStaticMarkup(<PrivacyPage />),
+      renderToStaticMarkup(<AboutPage index={index} />),
+      renderToStaticMarkup(
+        <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
+      ),
+    ];
+    for (const markup of pages) {
+      expect(markup).toContain('id="ft-traffic"');
+      expect(markup).toContain('id="ft-traffic-total"');
+      expect(markup).toContain("visits");
+    }
+  });
+
   it("shows no view count in prerendered markup — it is fetched live (#101)", () => {
     const markup = renderToStaticMarkup(
       <OfferDetailPage
@@ -517,11 +535,21 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
         />,
       );
       await waitFor(() => {
-        expect(document.querySelector(".od-views")?.textContent).toBe("42 views");
+        expect(
+          document.querySelector(".od-views")?.textContent?.replace(/\s+/g, " ").trim(),
+        ).toBe("42 views");
       });
+      const views = document.querySelector(".od-views");
+      expect(views?.classList.contains("ft-stat")).toBe(true);
+      expect(views?.querySelector("strong")?.textContent).toBe("42");
+      expect(views?.querySelector(".ft-stat-label")?.textContent).toBe("views");
+      expect(views?.closest(".od-hero-metrics")).not.toBeNull();
+      expect(document.querySelector(".od-statusline .od-views")).toBeNull();
       expect(calls[0]).toBe(
         "https://luongnv89.goatcounter.com/counter/%2Foffers%2Fexample-offer.html.json",
       );
+      expect(document.getElementById("ft-traffic")).not.toBeNull();
+      expect(document.getElementById("ft-traffic-total")).not.toBeNull();
     } finally {
       vi.unstubAllGlobals();
     }
@@ -656,8 +684,8 @@ describe("PrivacyPage (#132 shipped-analytics claims)", () => {
       "ft_ga_consent",
       "exclusive-end",
       "four hours",
-      "home page",
-      "not shown in the footer of every page",
+      "footer of every page",
+      "all-time",
       "never</strong> collected",
       "zero tracking requests",
     ]) {

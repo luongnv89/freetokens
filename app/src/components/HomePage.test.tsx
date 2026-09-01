@@ -396,6 +396,16 @@ describe("HomePage three-dimension filters (#126)", () => {
     })
   })
 
+  it("chip Enter SETs category and sets aria-pressed true (#254)", () => {
+    render(<HomePage index={index} />)
+    const chip = categoryChip("coding")
+    chip.focus()
+    fireEvent.keyDown(chip, { key: "Enter" })
+    expect(chip).toHaveAttribute("aria-pressed", "true")
+    expect(new URLSearchParams(window.location.search).get("category")).toBe("coding")
+    expect(categoryChip("")).toHaveAttribute("aria-pressed", "false")
+  })
+
   it("row tag click applies that dimension and clicking again clears it", () => {
     const gtag = grantedGtag()
     render(<HomePage index={index} />)
@@ -756,6 +766,10 @@ describe("HomePage per-offer live view counts (#101)", () => {
     } as unknown as Response
   }
 
+  function statText(el: Element | null) {
+    return el?.textContent?.replace(/\s+/g, " ").trim() ?? ""
+  }
+
   afterEach(() => {
     vi.unstubAllGlobals()
   })
@@ -773,11 +787,11 @@ describe("HomePage per-offer live view counts (#101)", () => {
     )
     render(<HomePage index={index} />)
     await waitFor(() => {
-      expect(
-        document.querySelector("#offer-alpha-copilot .r-views")?.textContent,
-      ).toBe("1,234 views")
+      expect(statText(document.querySelector("#offer-alpha-copilot .r-views"))).toBe(
+        "1,234 views",
+      )
     })
-    expect(document.querySelector("#offer-alpha-image .r-views")?.textContent).toBe("8 views")
+    expect(statText(document.querySelector("#offer-alpha-image .r-views"))).toBe("8 views")
     expect(calls[0]).toBe(`${SITE}/counter/%2Foffers%2Falpha-copilot.html.json`)
     expect(calls.every((u) => u.startsWith(`${SITE}/counter/%2Foffers%2F`))).toBe(true)
   })
@@ -794,7 +808,7 @@ describe("HomePage per-offer live view counts (#101)", () => {
     )
     render(<HomePage index={index} />)
     await waitFor(() => {
-      expect(document.querySelector("#offer-alpha-free .r-views")?.textContent).toBe("12 views")
+      expect(statText(document.querySelector("#offer-alpha-free .r-views"))).toBe("12 views")
     })
     expect(document.querySelector("#offer-beta-copilot .r-views")).toBeNull()
   })
@@ -816,9 +830,31 @@ describe("HomePage per-offer live view counts (#101)", () => {
     )
     render(<HomePage index={index} />)
     await waitFor(() => {
-      expect(screen.getAllByText(/ views$/).length).toBeGreaterThan(0)
+      expect(screen.getAllByText(/^views$/).length).toBeGreaterThan(0)
     })
     const el = document.querySelector("#offer-alpha-copilot .r-views")
-    expect(el?.textContent).toMatch(/^\d[\d,]* views$/)
+    expect(statText(el)).toMatch(/^\d[\d,]* views$/)
+  })
+
+  it("renders list visit counts as a highlighted number-first chip (#250)", async () => {
+    configureAnalytics({ statsSite: SITE })
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: RequestInfo | URL) =>
+        String(url).includes("alpha-copilot")
+          ? counterResponse("1,234")
+          : counterResponse("8"),
+      ),
+    )
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(document.querySelector("#offer-alpha-copilot .r-views")).not.toBeNull()
+    })
+    const el = document.querySelector("#offer-alpha-copilot .r-views")
+    expect(el?.classList.contains("ft-stat")).toBe(true)
+    expect(el?.querySelector("strong")?.textContent).toBe("1,234")
+    expect(el?.querySelector(".ft-stat-label")?.textContent).toBe("views")
+    expect(el?.closest(".row-head")).not.toBeNull()
+    expect(el?.closest(".row-meta")).toBeNull()
   })
 })

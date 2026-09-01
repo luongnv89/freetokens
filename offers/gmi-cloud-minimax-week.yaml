@@ -1,5 +1,5 @@
-# Verified 2026-08-24 against https://www.gmicloud.ai/minimax-week
-# ("MiniMax M3, M2.7, Speech 2.8, and Music 3.0 are free for fourteen
+# Verified 2026-08-31 against https://www.gmicloud.ai/minimax-week
+# ("MiniMax M3, M2.7, Speech 2.8, and Music 3.0 are free for fourteen days. ... 2026.08.24 – 2026.09.06")
 # days." — campaign window 2026.08.24 – 2026.09.06)
 # ("Do I need to pay for a GMI account? No. Creating a GMI Cloud account is
 # free, and M3, M2.7, Speech 2.8 and Music 3.0 are free during the
@@ -12,7 +12,7 @@ category: api_provider
 amount: MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter
 expiry_date: 2026-09-06
 source_url: https://www.gmicloud.ai/minimax-week
-verified_date: 2026-08-24
+verified_date: 2026-08-31
 verification: social_proof
 review_status: verified
 signup: required

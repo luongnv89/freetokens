@@ -1,12 +1,12 @@
-# Verified 2026-08-23 against https://cloud.google.com/free/docs/free-cloud-features
-# ("New customers get $300 in free credit ... No automatic charges, no commitment.")
+# Verified 2026-08-31 against https://cloud.google.com/free/docs/free-cloud-features
+# ("The Free Trial gets you a $300 Welcome credit to spend over 90 days on various Google Cloud products")
 title: Google Cloud Free Trial — $300 Credit
 provider: Google Cloud
 category: api_provider
 amount: $300 in credits (90 days from signup)
 expiry_date: null
 source_url: https://cloud.google.com/free/docs/free-cloud-features
-verified_date: 2026-08-23
+verified_date: 2026-08-31
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: verified

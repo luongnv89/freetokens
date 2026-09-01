@@ -71,7 +71,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
     <text x="386" y="20" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" letter-spacing="0.4" fill="${white}">ZERO RUNTIME</text>
   </g>
   <!-- URL footer -->
-  <text x="64" y="520" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="500" letter-spacing="0.3" fill="${muted}">luongnv89.github.io/freetokens</text>
+  <text x="64" y="520" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="500" letter-spacing="0.3" fill="${muted}">freetokens.custats.info</text>
   <text x="64" y="544" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="${muted}" opacity="0.7">Curated &amp; rebuilt from verified provider sources.</text>
   <!-- bottom accent -->
   <rect x="64" y="564" width="48" height="3" rx="1.5" fill="${green}" opacity="0.85"/>

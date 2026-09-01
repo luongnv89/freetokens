@@ -1,12 +1,12 @@
-# Verified 2026-08-23 against https://cursor.com/pricing
-# ("Hobby - Free ... No credit card required / Limited Agent requests / Access to Composer")
+# Verified 2026-08-31 against https://cursor.com/pricing
+# ("Hobby','price':'0','priceCurrency':'USD' ... credit card required")
 title: Cursor Hobby Plan
 provider: Cursor (Anysphere)
 category: coding
 amount: Free Hobby plan - limited Agent requests plus Composer access, no credit card required
 expiry_date: null
 source_url: https://cursor.com/pricing
-verified_date: 2026-08-23
+verified_date: 2026-08-31
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: verified

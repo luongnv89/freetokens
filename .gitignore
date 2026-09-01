@@ -33,6 +33,7 @@ app/src/data/
 # Env & secrets
 .env
 .env.*
+!app/.env.example
 
 # Playwright (issue #134)
 playwright-report/

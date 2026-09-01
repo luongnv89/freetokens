@@ -1,12 +1,12 @@
-# Verified 2026-08-24 against https://siliconflow.cn/pricing
-# (The current API pricing table marks selected models, including THUDM/GLM-Z1-9B-0414, as "免费" for input and output.)
+# Verified 2026-08-31 against https://siliconflow.cn/pricing
+# ("GLM-Z1-9B-0414 THUDM/GLM-Z1-9B-0414 免费 免费")
 title: SiliconFlow Free Models
 provider: SiliconFlow
 category: api_provider
 amount: Selected API models are free for input and output, including GLM-Z1-9B-0414
 expiry_date: null
 source_url: https://siliconflow.cn/pricing
-verified_date: 2026-08-24
+verified_date: 2026-08-31
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified

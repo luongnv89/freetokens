@@ -44,7 +44,7 @@ export function IconSprite() {
 function tagIcon(value: string) {
   if (!(value in TAG_ICONS)) return null
   return (
-    <svg className="tag-i" aria-hidden="true" focusable="false">
+    <svg className="tag-i" width="12" height="12" aria-hidden="true" focusable="false">
       <use href={`#ti-${value}`} />
     </svg>
   )
@@ -138,6 +138,13 @@ export function OfferRow({
             </a>
           </h2>
           <span className="r-amount">{offer.amount}</span>
+          {typeof views === "number" && (
+            <span className="ft-stat r-views">
+              <strong>{ftFormatCount(views)}</strong>
+              {" "}
+              <span className="ft-stat-label">views</span>
+            </span>
+          )}
         </div>
         <p className="row-meta">
           <TagButton
@@ -201,14 +208,6 @@ export function OfferRow({
           >
             View details
           </a>
-          {typeof views === "number" && (
-            <>
-              <span className="sep" aria-hidden="true">
-                &middot;
-              </span>
-              <span className="r-views">{ftFormatCount(views)} views</span>
-            </>
-          )}
           {(onToggleSave || onDismiss) && (
             <span className="r-actions">
               {onToggleSave && (

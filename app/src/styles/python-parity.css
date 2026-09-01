@@ -184,7 +184,12 @@ h1 {
   --tag-hue: var(--ink);
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.34em;
+  max-width: 100%;
+  min-width: 0;
+  overflow: visible;
+  overflow-wrap: anywhere;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.7rem;
   font-weight: 600;
@@ -254,6 +259,8 @@ h1 {
 .tag-i {
   width: 1.05em;
   height: 1.05em;
+  max-width: 1.05em;
+  overflow: hidden;
   flex: 0 0 auto;
 }
 
@@ -450,7 +457,8 @@ a.badge:focus-visible {
   margin: 0.5rem 0 0;
 }
 
-.foot-nav a {
+.foot-nav a,
+.foot-traffic a {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
@@ -458,7 +466,9 @@ a.badge:focus-visible {
 }
 
 .foot-nav a:hover,
-.foot-nav a:focus-visible {
+.foot-nav a:focus-visible,
+.foot-traffic a:hover,
+.foot-traffic a:focus-visible {
   text-decoration-color: var(--green);
   text-decoration-thickness: 3px;
 }
@@ -700,6 +710,7 @@ a:focus-visible {
     width: 100%;
     max-width: none;
   }
+  .od-table th[scope="row"] { white-space: normal; width: auto; }
 }
 
 @media (pointer: coarse) {
@@ -916,10 +927,24 @@ a:focus-visible {
   text-underline-offset: 3px;
 }
 
-/* Live per-offer view counts (#101): one unbreakable token so the number and
-   its unit never split across wrapped lines at 320 px. */
-.r-views,
-.od-views { white-space: nowrap; }
+/* Visit/view chips (#250): number-first, green 3px rail (not a fill). */
+.ft-stat {
+  display: inline-flex;
+  align-items: baseline;
+  flex: 0 0 auto;
+  gap: 0.32em;
+  white-space: nowrap;
+  font: 0.72rem/1.2 "IBM Plex Mono", ui-monospace, monospace;
+  padding: 0.16rem 0.5rem 0.16rem 0.42rem;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--green);
+  border-radius: 4px;
+}
+.ft-stat[hidden] { display: none; }
+.ft-stat strong { font-size: 1.08em; }
+.ft-stat-label { color: var(--gray); }
+.od-views { font-size: 0.95rem; padding: 0.32rem 0.7rem 0.32rem 0.55rem; margin: 0; }
+.od-views strong { font-size: 1.35em; }
 
 .r-details:hover,
 .r-details:focus-visible {
@@ -1004,7 +1029,12 @@ a:focus-visible {
   --tag-hue: var(--ink);
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.34em;
+  max-width: 100%;
+  min-width: 0;
+  overflow: visible;
+  overflow-wrap: anywhere;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.74rem;
   padding: 0.32rem 0.7rem;
@@ -1216,6 +1246,7 @@ button:focus-visible {
 }
 
 .local-data-actions {
+  position: relative;
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
@@ -1247,14 +1278,19 @@ button:focus-visible {
   color: var(--paper);
 }
 
-/* The import file input is triggered by the styled button above. */
+/* Visually hidden but kept in-tree so the Import button can click() it.
+   clip:rect alone leaves WebKit's native file control on the scroll width. */
 .local-data-file {
   position: absolute;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
+  border: 0;
 }
 
 .local-data-status {
@@ -1283,13 +1319,13 @@ button:focus-visible {
   color: var(--ink);
 }
 
-/* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131) ------------ */
+/* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131 / #250) ---- */
 
 .foot-traffic {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.15rem 0.4rem;
+  gap: 0.35rem 0.5rem;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.75rem;
   color: var(--gray);
@@ -1298,9 +1334,8 @@ button:focus-visible {
 
 .foot-traffic[hidden] { display: none; }
 
-.foot-traffic strong { color: var(--ink); }
-
-.foot-traffic .dot { flex: 0 0 auto; }
+.ft-traffic-total { font-size: 0.84rem; }
+.ft-traffic-total strong { font-size: 1.2em; }
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------
    Card-actions / .detail-btn already live above (archive #129). The rest
@@ -1340,6 +1375,13 @@ button:focus-visible {
   line-height: 1.12;
   margin: 0;
   overflow-wrap: anywhere;
+}
+
+.od-hero-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem 1rem;
 }
 
 .od-statusline {
@@ -1389,6 +1431,7 @@ button:focus-visible {
 .od-table {
   width: 100%;
   max-width: 42rem;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.9rem;
 }
@@ -1721,6 +1764,86 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.74rem;
   color: var(--gray);
+}
+
+/* ---- Custats sibling-product banner (issue #257) -------------------- */
+/* Muted mono strip — reads as a sibling pointer, not an ad. Small,
+   centered, hairline border, never competes with the offer list. Full
+   width outside .wrap so it spans viewport, wraps at 320px. */
+
+.custats-banner {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: var(--gray);
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+
+.custats-banner__inner {
+  max-width: 75rem;
+  margin: 0 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.custats-banner__kicker {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+
+.custats-banner__sep {
+  color: var(--hairline);
+}
+
+.custats-banner strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.custats-banner a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  overflow-wrap: anywhere;
+}
+
+.custats-banner a:hover,
+.custats-banner a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+}
+
+.custats-banner a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (pointer: coarse) {
+  .custats-banner a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 340px) {
+  .custats-banner {
+    font-size: 0.7rem;
+    padding-inline: 0.75rem;
+  }
 }
 
 @media (pointer: coarse) {

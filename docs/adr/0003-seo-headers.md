@@ -18,7 +18,7 @@ new runtime dependency.
 
 | Header | Can Pages set it? | Evidence / posture |
 |---|---|---|
-| `Strict-Transport-Security` / HTTPS enforcement | **Yes, platform-provided.** Pages forces HTTPS and serves `Strict-Transport-Security` (HSTS) at the edge for `*.github.io`. It cannot be customized per-site but is always on. No action needed besides keeping all resource URLs `https://` or relative. | GitHub Docs: "GitHub Pages sites with custom domains enforce HTTPS when enabled; `*.github.io` is on the HSTS preload list." Verified via `curl -I https://luongnv89.github.io/freetokens/` (returns `strict-transport-security: max-age=31536000`). |
+| `Strict-Transport-Security` / HTTPS enforcement | **Yes, platform-provided.** Pages forces HTTPS and serves `Strict-Transport-Security` (HSTS) at the edge for `*.github.io`. It cannot be customized per-site but is always on. No action needed besides keeping all resource URLs `https://` or relative. | GitHub Docs: "GitHub Pages sites with custom domains enforce HTTPS when enabled; `*.github.io` is on the HSTS preload list." Verified via `curl -I https://luongnv89.github.io/freetokens/` (returns `strict-transport-security: max-age=31536000`) while the site was served from `*.github.io`. **Amended 2026-08-31:** the site now serves from the custom domain `freetokens.custats.info`, which is **not** on the `github.io` HSTS preload list. HSTS now depends on the repo's Pages `https_enforced` setting — enabled once the Let's Encrypt certificate was approved — rather than being inherited from the platform apex. |
 | Custom response headers (`Content-Security-Policy`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, etc.) | **No.** GitHub Pages has no `_headers`, `_config`, or header-rule mechanism. The origin serves a fixed set of headers; per-path custom headers are not supported. | GitHub Docs / Community: Pages does not honour `_headers` or `netlify.toml`-style header rules; request for custom headers is a long-standing open issue. `_headers` is a Cloudflare Pages / Netlify feature. |
 | `<meta http-equiv>` fallbacks | **Yes, for a subset.** The browser honours `http-equiv="Content-Security-Policy"` and `<meta name="referrer">` inside HTML. Other headers (`X-Content-Type-Options`, `X-Frame-Options`, `Strict-Transport-Security`, `Permissions-Policy`, `Cross-Origin-*`) are **header-only** and are ignored when set via `http-equiv`. | MDN / HTML spec: only `content-security-policy`, `content-type`, `default-style`, `x-ua-compatible`, and `refresh` are defined as `http-equiv` values; security headers outside that set have no meta equivalent. |
 
@@ -39,11 +39,11 @@ A Cloudflare-fronted setup (either proxying `luongnv89.github.io` behind Cloudfl
 
 ```
 default-src 'self';
-script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.goatcounter.com;
+script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.goatcounter.com https://gc.zgo.at;
 style-src 'self' 'unsafe-inline';
 img-src 'self' data: https:;
 font-src 'self' data:;
-connect-src 'self' https://www.google-analytics.com https://*.goatcounter.com https://www.googletagmanager.com;
+connect-src 'self' https://www.google-analytics.com https://*.goatcounter.com https://www.googletagmanager.com https://gc.zgo.at;
 base-uri 'self'; form-action 'self'; object-src 'none';
 frame-ancestors 'none'; upgrade-insecure-requests
 ```
@@ -51,6 +51,7 @@ frame-ancestors 'none'; upgrade-insecure-requests
 Rationale:
 
 - `script-src` allows self + the two analytics origins that `vite.config.ts` / `prerender.mjs` may inject when `GA_MEASUREMENT_ID` / `GOATCOUNTER_SITE_URL` are set; when unset no external script is loaded, so the allowlist is harmless.
+- **GoatCounter `count.js` lives at `https://gc.zgo.at`, not `*.goatcounter.com`.** `https://*.goatcounter.com` matches the site origin used for `/count` hits and `/counter/*.json`; it does not match `gc.zgo.at`. After the #227 head/CSP hardening, that gap blocked `loadGoatCounter` and any script-initiated fetches to the CDN. Issue #250 adds `https://gc.zgo.at` to both `script-src` and `connect-src`. Counter JSON stays on `https://*.goatcounter.com`.
 - `style-src 'unsafe-inline'` is required for React inline `style` attributes and Tailwind's runtime; external styles remain `'self'`-only.
 - `img-src https: data: 'self'` covers self-hosted SVGs and any `https:` offer image or social-proof screenshot while still blocking `http:` images (upgraded by `upgrade-insecure-requests`).
 - `frame-ancestors 'none'` is enforced via the header variant; via `<meta>` it is intentionally left in the value but the browser correctly ignores it — the equivalent meta-only protection is `X-Frame-Options: DENY` via header on hosts that support it, and the site serves no framing use-case.

@@ -13,7 +13,7 @@ import { readdirSync, readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-export const DEFAULT_BASE_URL = "https://luongnv89.github.io/freetokens";
+export const DEFAULT_BASE_URL = "https://freetokens.custats.info";
 export const OG_PROPERTIES = ["og:title", "og:description", "og:url", "og:type", "og:site_name", "og:image"];
 
 function headOf(html) {

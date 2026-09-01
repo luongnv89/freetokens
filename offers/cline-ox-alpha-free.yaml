@@ -1,4 +1,4 @@
-# Verified 2026-08-26 against https://x.com/cline/status/2092666316125864191
+# Verified 2026-08-31 against https://x.com/cline/status/2092666316125864191
 # ("GLM-5.3 Flash (Ox Alpha) is free in Cline.")
 # Cline's current free-model documentation confirms limited usage quotas for
 # account holders and says promotions rotate; no fixed end date is published.
@@ -10,7 +10,7 @@ category: coding
 amount: Free GLM-5.3 Flash (Ox Alpha) model access, rate limited
 expiry_date: null
 source_url: https://x.com/cline/status/2092666316125864191
-verified_date: 2026-08-26
+verified_date: 2026-08-31
 verification: social_proof
 review_status: verified
 signup: required
