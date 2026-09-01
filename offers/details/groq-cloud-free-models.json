@@ -1,0 +1,16 @@
+{
+  "summary": "Groq Cloud offers a free tier (no credit card required) with access to gpt-oss-120b and Qwen 3.6/3.8 27B models via API, rate-limited. Ongoing developer program, not a time-limited promo.",
+  "claim_steps": [
+    "Sign up for Groq Cloud at console.groq.com.",
+    "Create an API key under the free tier.",
+    "Call gpt-oss-120b or Qwen 3.6/3.8 27B via the Groq API — rate-limited, no card required."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://groq.com/pricing/",
+      "title": "Groq is the premier neocloud for fast inference",
+      "text": "Groq Cloud free tier includes gpt-oss-120b and Qwen 3.6/3.8 27B, rate-limited, no credit card."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "summary": "InclusionAI's Ling 3.0 Flash Fin is available at $0 via OpenRouter, a finance-tuned function-calling model with a 256K context window. The user flagged it as free through 25 Sep 2026.",
+  "claim_steps": [
+    "Sign in to OpenRouter at openrouter.ai.",
+    "Select the inclusionai/ling-3.0-flash-fin:free model.",
+    "Send requests — prompt and completion are $0, with a 256K context window."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/models",
+      "title": "OpenRouter Models",
+      "text": "API confirms inclusionai/ling-3.0-flash-fin:free at prompt:0, completion:0, context_length:262144."
+    }
+  ]
+}
