@@ -41,6 +41,7 @@ import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
 import { Breadcrumbs } from "./Breadcrumbs"
+import { StructuredData } from "./StructuredData"
 import { Button } from "./ui/button"
 
 const FILTER_LABELS: Record<FilterDimension, Record<string, string>> = {
@@ -307,7 +308,7 @@ function visibleOffers(
  * First render (SSR/prerender) shows every active offer so static markup
  * tests stay matching. After mount, URL state is applied without events.
  */
-export default function HomePage({ index }: { index: OffersIndex }) {
+export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseUrl?: string }) {
   const offers = activeOffers(index)
   const buildDay = buildDate(index.generated_at)
 
@@ -531,6 +532,7 @@ export default function HomePage({ index }: { index: OffersIndex }) {
   return (
     <>
       <IconSprite />
+      <StructuredData page="home" index={index} baseUrl={baseUrl} />
       <div className="wrap">
         <main>
         <SiteHeader current="home" />

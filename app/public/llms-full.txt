@@ -2,108 +2,9 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-03T08:37:33Z — 47 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-01T12:24:14Z — 39 active offers.
 
 ## Offers (full)
-
-### ZCode 100M Free GLM-5.3-Flash Tokens
-- Provider: ZCode
-- Category: coding
-- Amount: 100M free GLM-5.3-Flash tokens (Round 3; 10,000 packs; expires Sep 3, 9PM ET)
-- Status: active — expiry 2026-09-03
-- Verified: 2026-09-02 (social_proof / under-review, signup required)
-- Source: https://zcode.z.ai/
-- Page: https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html
-- Summary: ZCode Global Build Round 3 is offering 100 million free GLM-5.3-Flash tokens to new users. This is a recurring promotional event: Round 1 ran on August 16 and was paused after about one hour due to demand; Round 2 ran August 21-23. Tokens are locked to the ZCode desktop app, do not roll over, and expire when the event ends.
-- Claim steps: Be a new ZCode user without an active paid coding plan. | Log into the ZCode desktop app during the promotional window. | The 100M token grant is credited automatically — no separate claim form or promo code. | Use the tokens inside ZCode before the event ends; unused tokens expire.
-
-### Muse Spark 1.3 Contributor Free on OpenCode Zen
-- Provider: Meta (via OpenCode Zen)
-- Category: coding
-- Amount: Free Muse Spark 1.3 Contributor tier on OpenCode Zen for a limited time (Meta may use your prompts and completions to train future models)
-- Status: active — expiry ongoing
-- Verified: 2026-09-02 (social_proof / verified, signup required)
-- Source: https://opencode.ai/docs/zen/
-- Page: https://freetokens.custats.info/offers/muse-spark-1-3-contributor-free.html
-- Summary: Muse Spark 1.3 Contributor Free is available on OpenCode Zen for a limited time. This is Meta's Contributor tier: free access in exchange for permission to use your prompts and completions to train future Meta models. The standard Muse Spark 1.3 remains paid on other platforms. Confirmed via user screenshot showing Muse Spark 1.3 Free running on OpenCode Zen at 206.3 tok/s with high quality setting.
-- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen. | Select the Muse Spark 1.3 Contributor Free model. | Start building — no payment info required for the Contributor tier. | Note: Meta may use your prompts and completions to train future models.
-
-### Inception Mercury 2 — 100M Free API Tokens
-- Provider: Inception
-- Category: api_provider
-- Amount: 100 million API tokens (one-time credit, no payment details required)
-- Status: active — expiry ongoing
-- Verified: 2026-09-02 (social_proof / under-review, signup required)
-- Source: https://www.inceptionlabs.ai/blog/mercury-2-10x-free-tokens
-- Page: https://freetokens.custats.info/offers/inception-mercury-2-100m-free-tokens.html
-- Summary: New Inception accounts receive a one-time credit of 100 million API tokens shared across Mercury 2 and Mercury Edit 2, with no payment details required. Mercury 2 supports reasoning, tool calling and structured outputs through an OpenAI-compatible API.
-- Claim steps: Create a new account or sign in at platform.inceptionlabs.ai. | Open API Keys and create an Inception API key. | Use the key with the OpenAI-compatible base URL https://api.inceptionlabs.ai/v1 and model mercury-2. | Monitor the shared one-time token balance; add billing details only if you want paid usage after the free credit.
-
-### AMD Radeon Cloud Token Factory — Free Model APIs
-- Provider: AMD Radeon Cloud
-- Category: api_provider
-- Amount: 3 free online text APIs plus 1 limited-free vision API (beta; quotas unpublished)
-- Status: active — expiry ongoing
-- Verified: 2026-09-02 (social_proof / under-review, signup required)
-- Source: https://developer.amd.com.cn/radeon/tokenfactory
-- Page: https://freetokens.custats.info/offers/amd-radeon-cloud-free-model-apis.html
-- Summary: AMD Radeon Cloud Token Factory provides free shared OpenAI- and Anthropic-compatible model APIs. At verification time, DeepSeek-V4-Flash, Qwen3.8-Flash-Next and MiniCPM5-1B were free and online; DeepSeek-V4-Flash-Vision-Exp was limited-free and experimental; MiniCPM-V46 was listed but temporarily offline. AMD says displayed points represent relative usage, not a charge, but does not publish account quotas or reset rules.
-- Claim steps: Open the AMD Radeon Cloud Token Factory at developer.amd.com.cn/radeon/tokenfactory. | Sign in with an AMDAI account and obtain an API key. | Use the OpenAI-compatible base URL https://developer.amd.com.cn/radeon/api/v1 with a currently online model ID. | Check the live Token Factory before relying on a model because the catalog is beta and availability is dynamic.
-
-### NVIDIA NIM Free Trial (Developer Program)
-- Provider: NVIDIA
-- Category: api_provider
-- Amount: $0 hosted trial for prototyping with NVIDIA NIM, rate-limited
-- Status: active — expiry ongoing
-- Verified: 2026-09-01 (social_proof / under-review, signup required)
-- Source: https://developer.nvidia.com/nim
-- Page: https://freetokens.custats.info/offers/nvidia-nim-free-trial.html
-- Summary: NVIDIA NIM Developer Program offers a $0 hosted trial for prototyping, including coding models, rate-limited. No credit card required.
-- Claim steps: Sign up for the NVIDIA Developer Program at developer.nvidia.com/nim. | Access the NIM hosted trial for prototyping. | Use coding models via the hosted API — rate-limited, $0 for the trial period.
-
-### Ling 3.0 Flash Fin Free (InclusionAI)
-- Provider: InclusionAI
-- Category: api_provider
-- Amount: Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling
-- Status: active — expiry 2026-09-25
-- Verified: 2026-09-01 (social_proof / under-review, signup required)
-- Source: https://openrouter.ai/models
-- Page: https://freetokens.custats.info/offers/ling-3-0-flash-fin-free.html
-- Summary: InclusionAI's Ling 3.0 Flash Fin is available at $0 via OpenRouter, a finance-tuned function-calling model with a 256K context window. The user flagged it as free through 25 Sep 2026.
-- Claim steps: Sign in to OpenRouter at openrouter.ai. | Select the inclusionai/ling-3.0-flash-fin:free model. | Send requests — prompt and completion are $0, with a 256K context window.
-
-### Inkling + Inkling Small Free (OpenRouter)
-- Provider: Thinking Machines
-- Category: coding
-- Amount: Inkling and Inkling Small at $0 via OpenRouter, 1M-token context
-- Status: active — expiry ongoing
-- Verified: 2026-09-01 (social_proof / under-review, signup required)
-- Source: https://openrouter.ai/models/inkling-small
-- Page: https://freetokens.custats.info/offers/inkling-free-models.html
-- Summary: Thinking Machines offers both Inkling and Inkling Small as free models on OpenRouter at $0 prompt and completion, with a 1M-token context window. No hard end date is listed on the OpenRouter models page.
-- Claim steps: Sign in to OpenRouter at openrouter.ai. | Select the thinkingmachines/inkling:free or thinkingmachines/inkling-small:free model. | Send requests — both prompt and completion are priced at $0.
-
-### Groq Cloud Free (gpt-oss-120b, Qwen 3.6/3.8)
-- Provider: Groq
-- Category: api_provider
-- Amount: Free tier with gpt-oss-120b and Qwen 3.6/3.8 27B, rate-limited, no credit card
-- Status: active — expiry ongoing
-- Verified: 2026-09-01 (social_proof / under-review, signup required)
-- Source: https://groq.com/pricing/
-- Page: https://freetokens.custats.info/offers/groq-cloud-free-models.html
-- Summary: Groq Cloud offers a free tier (no credit card required) with access to gpt-oss-120b and Qwen 3.6/3.8 27B models via API, rate-limited. Ongoing developer program, not a time-limited promo.
-- Claim steps: Sign up for Groq Cloud at console.groq.com. | Create an API key under the free tier. | Call gpt-oss-120b or Qwen 3.6/3.8 27B via the Groq API — rate-limited, no card required.
-
-### CodeBuddy / WorkBuddy Hy3 Free (Tencent)
-- Provider: Tencent
-- Category: coding
-- Amount: Hy3 coding models free on the $0/mo WorkBuddy plan (100 credits/month + 30/day reward, 5,000 code completions)
-- Status: active — expiry 2026-09-30
-- Verified: 2026-09-01 (social_proof / under-review, signup required)
-- Source: https://workbuddy.ai/pricing
-- Page: https://freetokens.custats.info/offers/codebuddy-workbuddy-hy3-free.html
-- Summary: Tencent's WorkBuddy offers a $0/month free tier that includes Hy3 coding models, with 100 credits/month plus a 30 credits/day active reward and 5,000 code completions. The free tier appears ongoing, but the Hy3 free offer is flagged as available through 30 Sep 2026.
-- Claim steps: Sign up for WorkBuddy at workbuddy.ai. | Start the Free $0/mo plan. | Use Hy3 coding models — 100 credits/month plus 30 daily active reward credits, with 5,000 code completions included.
 
 ### Z AI Free Model APIs
 - Provider: Z AI (Zhipu AI)
@@ -302,6 +203,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-03T08:37:33Z — 
 - Page: https://freetokens.custats.info/offers/gmi-cloud-minimax-week.html
 - Summary: GMI Cloud's MiniMax Week (Aug 24 – Sep 6, 2026) makes the MiniMax lineup free for fourteen days: M3 (frontier reasoning), M2.7 (fast agent/coding reasoning), Speech 2.8 (TTS and voice cloning), and Music 3.0 (full generated tracks). Access via a GMI API key or OpenRouter's :free variants, with native integrations in Pi, Oh My Pi, Hermes Agent, Trae, and OpenCode, and BYOK support for Claude Code, Codex, and Cursor. Account creation is free; H3 generative video is not included and stays at standard pricing. A concurrent MiniMaxathon challenge awards $200 in GMI credits plus a 3-month MiniMax token plan per track winner.
 - Claim steps: Create a free GMI Cloud account at https://console.gmicloud.ai. | Use MiniMax models via the GMI Model Hub API key, or through OpenRouter using the :free variants (e.g. openrouter.ai/minimax/minimax-m3:free). | Optionally integrate natively in Pi, Oh My Pi, Hermes Agent, Trae, or OpenCode — or BYOK into Claude Code, Codex, or Cursor. | Use the models free until September 6, 2026; standard pricing applies afterward.
+
+### GitHub Copilot Student Pack — 2 Years Free
+- Provider: GitHub
+- Category: student
+- Amount: 2 years of Copilot Pro + 100+ dev tools ($240 value)
+- Status: active — expiry 2026-09-01
+- Verified: 2026-08-31 (social_proof / verified, signup required)
+- Source: https://x.com/alannnfx/status/2093574538923823345
+- Page: https://freetokens.custats.info/offers/github-copilot-student-pack-2yr.html
+- Summary: GitHub is giving away 2 years of Copilot Pro (worth $240) plus 100+ dev tools in the student pack. Students can verify their status through GitHub Education to unlock Copilot Pro, free domains, and free cloud credits.
+- Claim steps: Get a student email via UMGC application (fee waived until Sept 1). | Register a class so the @student.umgc.edu email activates. | Go to github.com/education/students and sign in. | Verify your .edu email and claim the student pack.
 
 ### GenSpark Free Trial — 1 Month + 10K Credits
 - Provider: GenSpark

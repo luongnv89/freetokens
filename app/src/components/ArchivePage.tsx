@@ -3,6 +3,7 @@ import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
 import { Breadcrumbs } from "./Breadcrumbs"
+import { StructuredData } from "./StructuredData"
 
 function ArchiveEmptyGlyph() {
   return (
@@ -43,6 +44,7 @@ export default function ArchivePage({
   return (
     <>
       <IconSprite />
+      <StructuredData page="archive" index={index} baseUrl={baseUrl} />
       <div className="wrap">
         <main>
         <header className="masthead masthead-home">

@@ -4,17 +4,8 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 47 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 39 active listings. Full directory at https://freetokens.custats.info/.
 
-- [ZCode 100M Free GLM-5.3-Flash Tokens](https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html): ZCode — 100M free GLM-5.3-Flash tokens (Round 3; 10,000 packs; expires Sep 3, 9PM ET) (coding)
-- [Muse Spark 1.3 Contributor Free on OpenCode Zen](https://freetokens.custats.info/offers/muse-spark-1-3-contributor-free.html): Meta (via OpenCode Zen) — Free Muse Spark 1.3 Contributor tier on OpenCode Zen for a limited time (Meta may use your prompts and completions to train future models) (coding)
-- [Inception Mercury 2 — 100M Free API Tokens](https://freetokens.custats.info/offers/inception-mercury-2-100m-free-tokens.html): Inception — 100 million API tokens (one-time credit, no payment details required) (api_provider)
-- [AMD Radeon Cloud Token Factory — Free Model APIs](https://freetokens.custats.info/offers/amd-radeon-cloud-free-model-apis.html): AMD Radeon Cloud — 3 free online text APIs plus 1 limited-free vision API (beta; quotas unpublished) (api_provider)
-- [NVIDIA NIM Free Trial (Developer Program)](https://freetokens.custats.info/offers/nvidia-nim-free-trial.html): NVIDIA — $0 hosted trial for prototyping with NVIDIA NIM, rate-limited (api_provider)
-- [Ling 3.0 Flash Fin Free (InclusionAI)](https://freetokens.custats.info/offers/ling-3-0-flash-fin-free.html): InclusionAI — Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling (api_provider)
-- [Inkling + Inkling Small Free (OpenRouter)](https://freetokens.custats.info/offers/inkling-free-models.html): Thinking Machines — Inkling and Inkling Small at $0 via OpenRouter, 1M-token context (coding)
-- [Groq Cloud Free (gpt-oss-120b, Qwen 3.6/3.8)](https://freetokens.custats.info/offers/groq-cloud-free-models.html): Groq — Free tier with gpt-oss-120b and Qwen 3.6/3.8 27B, rate-limited, no credit card (api_provider)
-- [CodeBuddy / WorkBuddy Hy3 Free (Tencent)](https://freetokens.custats.info/offers/codebuddy-workbuddy-hy3-free.html): Tencent — Hy3 coding models free on the $0/mo WorkBuddy plan (100 credits/month + 30/day reward, 5,000 code completions) (coding)
 - [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
 - [WorkBuddy Hy4 Preview Free](https://freetokens.custats.info/offers/workbuddy-hy4-preview-free.html): WorkBuddy — Free access to Hy4 preview (2 weeks) (coding)
 - [Vidu AI Video Free Credits](https://freetokens.custats.info/offers/vidu-free-credits.html): Vidu — Trial credits for new users on signup, topped up with daily login bonus credits (video)
@@ -26,6 +17,15 @@ Top 20 currently active offers (newest verified first) from 47 active listings. 
 - [Mistral AI Studio Free Mode — Free API Tier](https://freetokens.custats.info/offers/mistral-experiment-free-tier.html): Mistral AI — Free rate-limited API access (no credit card required) (api_provider)
 - [Merge Gateway — $10 in Free LLM Credits Every Month](https://freetokens.custats.info/offers/merge-gateway-10-monthly-credits.html): Merge — $10 in free LLM credits every month (Pro plan) (api_provider)
 - [LLM7.io Free API Tier](https://freetokens.custats.info/offers/llm7-free-tier.html): LLM7.io — Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day (api_provider)
+- [Kilo Code Free Models](https://freetokens.custats.info/offers/kilo-code-free-models.html): Kilo Code — Free :free models without an API key, limited to 200 requests/hour per IP (api_provider)
+- [JetBrains Student Pack — All IDEs Free](https://freetokens.custats.info/offers/jetbrains-student-pack.html): JetBrains — All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount) (student)
+- [Hailuo AI Video Free Tier](https://freetokens.custats.info/offers/hailuo-free-tier.html): Hailuo AI — One-time welcome credit package (expires 3 days after grant) + limited free generation (watermarked) (video)
+- [Google Gemini Student Free Year](https://freetokens.custats.info/offers/google-gemini-student-free-year.html): Google — 1 year of Google AI Pro (US) or Google AI Plus (140+ countries) free (student)
+- [Google Gemini API Free Tier](https://freetokens.custats.info/offers/google-gemini-free-api-tier.html): Google Gemini — Free input and output tokens on supported Gemini API models (quotas vary by model) (api_provider)
+- [Google Cloud Free Trial — $300 Credit](https://freetokens.custats.info/offers/google-cloud-300-free-trial.html): Google Cloud — $300 in credits (90 days from signup) (api_provider)
+- [GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free](https://freetokens.custats.info/offers/gmi-cloud-minimax-week.html): GMI Cloud — MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter (api_provider)
+- [GitHub Copilot Student Pack — 2 Years Free](https://freetokens.custats.info/offers/github-copilot-student-pack-2yr.html): GitHub — 2 years of Copilot Pro + 100+ dev tools ($240 value) (student)
+- [GenSpark Free Trial — 1 Month + 10K Credits](https://freetokens.custats.info/offers/genspark-free-trial-10k-credits.html): GenSpark — 1 month free subscription + 10,000 credits (code: WELCOME25) (api_provider)
 
 ## Pages
 

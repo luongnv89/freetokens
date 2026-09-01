@@ -23,6 +23,7 @@ import { SocialProofList } from "./SocialProofList"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
 import { Breadcrumbs } from "./Breadcrumbs"
+import { StructuredData } from "./StructuredData"
 
 const catalog = detailsCatalog as DetailsMap
 
@@ -95,6 +96,7 @@ export default function OfferDetailPage({
   return (
     <>
       <IconSprite />
+      <StructuredData page="detail" index={index} slug={slug} detail={detail ?? null} baseUrl={baseUrl} />
       <div className="wrap">
         <main>
         <SiteHeader depth={1} />

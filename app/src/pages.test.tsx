@@ -152,7 +152,8 @@ describe("SSR breadcrumbs (#208)", () => {
     const marker = '<script type="application/ld+json">';
     const scriptStart = markup.indexOf(marker);
     const scriptEnd = markup.indexOf("</script>", scriptStart);
-    expect(markup.split(marker)).toHaveLength(2);
+    // OfferDetail now emits breadcrumb + site structured data (Organization/WebSite/TechArticle/Offer)
+    expect(markup.split(marker)).toHaveLength(3);
     expect(scriptStart).toBeGreaterThan(-1);
     expect(scriptEnd).toBeGreaterThan(scriptStart);
     expect(markup.slice(scriptStart + marker.length, scriptEnd)).not.toContain("</script>");
@@ -464,7 +465,9 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
       />,
     );
     const tableAt = markup.indexOf('class="od-table"');
-    const proseAt = markup.indexOf("Prose lives under the table.");
+    // Visible prose lives in .od-summary; JSON-LD description also contains the text
+    // so search for the visible element to avoid matching the head <script> block.
+    const proseAt = markup.indexOf('<p class="od-summary">Prose lives under the table.');
     expect(tableAt).toBeGreaterThan(-1);
     expect(proseAt).toBeGreaterThan(tableAt);
   });
