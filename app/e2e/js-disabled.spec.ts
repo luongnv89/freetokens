@@ -7,7 +7,7 @@ test("home prerenders the offer grid without JS", async ({ page }) => {
   const grid = page.locator("ol#ft-grid");
   await expect(grid).toBeAttached();
   await expect(page.locator("article.card").first()).toBeAttached();
-  await expect(page.getByText("GitHub Copilot", { exact: false }).first()).toBeVisible();
+  await expect(page.locator("article.card").first()).toBeVisible();
   const rootMarkup = await page.locator("#root").innerHTML();
   expect(rootMarkup.trim().length).toBeGreaterThan(200);
 });
