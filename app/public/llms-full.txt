@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-02T19:21:43Z — 46 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-02T22:46:02Z — 47 active offers.
 
 ## Offers (full)
 
@@ -16,6 +16,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-02T19:21:43Z — 
 - Page: https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html
 - Summary: ZCode Global Build Round 3 is offering 100 million free GLM-5.3-Flash tokens to new users. This is a recurring promotional event: Round 1 ran on August 16 and was paused after about one hour due to demand; Round 2 ran August 21-23. Tokens are locked to the ZCode desktop app, do not roll over, and expire when the event ends.
 - Claim steps: Be a new ZCode user without an active paid coding plan. | Log into the ZCode desktop app during the promotional window. | The 100M token grant is credited automatically — no separate claim form or promo code. | Use the tokens inside ZCode before the event ends; unused tokens expire.
+
+### Muse Spark 1.3 Contributor Free on OpenCode Zen
+- Provider: Meta (via OpenCode Zen)
+- Category: coding
+- Amount: Free Muse Spark 1.3 Contributor tier on OpenCode Zen for a limited time (Meta may use your prompts and completions to train future models)
+- Status: active — expiry ongoing
+- Verified: 2026-09-02 (social_proof / under-review, signup required)
+- Source: https://opencode.ai/docs/zen/
+- Page: https://freetokens.custats.info/offers/muse-spark-1-3-contributor-free.html
+- Summary: Muse Spark 1.3 Contributor Free is available on OpenCode Zen for a limited time. This is Meta's Contributor tier: free access in exchange for permission to use your prompts and completions to train future Meta models. The standard Muse Spark 1.3 remains paid on other platforms.
+- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen. | Select the Muse Spark 1.3 Contributor Free model. | Start building — no payment info required for the Contributor tier. | Note: Meta may use your prompts and completions to train future models.
 
 ### Inception Mercury 2 — 100M Free API Tokens
 - Provider: Inception
