@@ -1,16 +1,15 @@
-# Verified 2026-09-01 against https://zcode.z.ai/
-# ("ZCode | GLM-5.3 官方 Harness" — official page confirms GLM-5.3-Flash.)
-# Source input: X post @zcode_ai/status/2094785889578746015,
-# "SURPRISE DROP — LIVE NOW — 100M free GLM-5.3-Flash tokens just landed in ZCode.
-# Sign in, tap the card, start building. 5,000 packs · first come, first served.
-# All of it burns at 10 PM ET / 7 PM PT tonight."
+# Verified 2026-09-02 against https://zcode.z.ai/
+# ZCode Global Build Round 3 — 100M free GLM-5.3-Flash tokens.
+# Previous rounds: Round 1 (Aug 16, paused after ~1 hour);
+# Round 2 (Aug 21-23). Tokens are new-user-only, ZCode-app-only,
+# and expire when the event ends.
 title: ZCode 100M Free GLM-5.3-Flash Tokens
 provider: ZCode
 category: coding
-amount: 100M free GLM-5.3-Flash tokens
-expiry_date: 2026-09-01
+amount: 100M free GLM-5.3-Flash tokens (Round 3; 10,000 packs; expires Sep 3, 9PM ET)
+expiry_date: 2026-09-03
 source_url: https://zcode.z.ai/
-verified_date: 2026-09-01
+verified_date: 2026-09-02
 verification: social_proof
 review_status: under-review
 signup: required
