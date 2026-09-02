@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-09-01T18:59:09Z",
-  "count": 60,
-  "active_count": 45,
-  "expired_count": 15,
+  "generated_at": "2026-09-02T05:50:16Z",
+  "count": 61,
+  "active_count": 44,
+  "expired_count": 17,
   "offers": [
+    {
+      "slug": "inception-mercury-2-100m-free-tokens",
+      "title": "Inception Mercury 2 — 100M Free API Tokens",
+      "provider": "Inception",
+      "category": "api_provider",
+      "amount": "100 million API tokens (one-time credit, no payment details required)",
+      "expiry_date": null,
+      "source_url": "https://www.inceptionlabs.ai/blog/mercury-2-10x-free-tokens",
+      "verified_date": "2026-09-02",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "codebuddy-workbuddy-hy3-free",
       "title": "CodeBuddy / WorkBuddy Hy3 Free (Tencent)",
@@ -86,7 +100,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "amazon-polly-free-tier",
@@ -240,7 +254,7 @@
       "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "gmi-cloud-minimax-week",
