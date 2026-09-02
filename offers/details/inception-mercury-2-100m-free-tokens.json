@@ -1,0 +1,42 @@
+{
+  "summary": "New Inception accounts receive a one-time credit of 100 million API tokens shared across Mercury 2 and Mercury Edit 2, with no payment details required. Mercury 2 supports reasoning, tool calling and structured outputs through an OpenAI-compatible API.",
+  "claim_steps": [
+    "Create a new account or sign in at platform.inceptionlabs.ai.",
+    "Open API Keys and create an Inception API key.",
+    "Use the key with the OpenAI-compatible base URL https://api.inceptionlabs.ai/v1 and model mercury-2.",
+    "Monitor the shared one-time token balance; add billing details only if you want paid usage after the free credit."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.inceptionlabs.ai/blog/mercury-2-10x-free-tokens",
+      "title": "More builders. More throughput. Better Mercury 2.",
+      "text": "Every new Inception API key now includes 100 million free tokens. Enough headroom to benchmark Mercury against your current stack on production workloads."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.inceptionlabs.ai/resources/faq",
+      "title": "Inception API Frequently Asked Questions",
+      "text": "Every new account includes a one-time credit of 100 million free tokens. The credit is shared across all models rather than granted per model."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.inceptionlabs.ai/get-started/models",
+      "title": "Models, Endpoints, and Pricing",
+      "text": "Every new account includes 100 million free tokens. Mercury 2 pricing after the credit is $0.25 per 1M input tokens, $0.025 cached input, and $0.75 output."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.inceptionlabs.ai/get-started/rate-limits",
+      "title": "Inception API Rate Limits",
+      "text": "Free Tier limits per minute: 1,000 API requests, 1,000,000 input tokens, and 100,000 output tokens."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/punchw45k/status/2094870184217530502",
+      "author": "Punch AI",
+      "handle": "@punchw45k",
+      "text": "100M free API tokens, no card 😳 Inception's Mercury 2. Reasoning model, 10x rate limits, built for voice/coding agents."
+    }
+  ]
+}
