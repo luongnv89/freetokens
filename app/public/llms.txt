@@ -4,8 +4,9 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 45 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 46 active listings. Full directory at https://freetokens.custats.info/.
 
+- [ZCode 100M Free GLM-5.3-Flash Tokens](https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html): ZCode — 100M free GLM-5.3-Flash tokens (Round 3; 10,000 packs; expires Sep 3, 9PM ET) (coding)
 - [Inception Mercury 2 — 100M Free API Tokens](https://freetokens.custats.info/offers/inception-mercury-2-100m-free-tokens.html): Inception — 100 million API tokens (one-time credit, no payment details required) (api_provider)
 - [AMD Radeon Cloud Token Factory — Free Model APIs](https://freetokens.custats.info/offers/amd-radeon-cloud-free-model-apis.html): AMD Radeon Cloud — 3 free online text APIs plus 1 limited-free vision API (beta; quotas unpublished) (api_provider)
 - [NVIDIA NIM Free Trial (Developer Program)](https://freetokens.custats.info/offers/nvidia-nim-free-trial.html): NVIDIA — $0 hosted trial for prototyping with NVIDIA NIM, rate-limited (api_provider)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 45 active listings. 
 - [Merge Gateway — $10 in Free LLM Credits Every Month](https://freetokens.custats.info/offers/merge-gateway-10-monthly-credits.html): Merge — $10 in free LLM credits every month (Pro plan) (api_provider)
 - [LLM7.io Free API Tier](https://freetokens.custats.info/offers/llm7-free-tier.html): LLM7.io — Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day (api_provider)
 - [Kilo Code Free Models](https://freetokens.custats.info/offers/kilo-code-free-models.html): Kilo Code — Free :free models without an API key, limited to 200 requests/hour per IP (api_provider)
-- [JetBrains Student Pack — All IDEs Free](https://freetokens.custats.info/offers/jetbrains-student-pack.html): JetBrains — All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount) (student)
 
 ## Pages
 

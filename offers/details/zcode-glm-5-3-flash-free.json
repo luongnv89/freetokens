@@ -1,24 +1,36 @@
 {
-  "summary": "ZCode is offering 100M free GLM-5.3-Flash tokens in a surprise drop. Sign in, tap the card, and start building. 5,000 packs are available first come, first served, and all tokens expire at 10 PM ET / 7 PM PT tonight (September 1, 2026).",
+  "summary": "ZCode Global Build Round 3 is offering 100 million free GLM-5.3-Flash tokens to new users. This is a recurring promotional event: Round 1 ran on August 16 and was paused after about one hour due to demand; Round 2 ran August 21-23. Tokens are locked to the ZCode desktop app, do not roll over, and expire when the event ends.",
   "claim_steps": [
-    "Sign in to your ZCode account at zcode.z.ai.",
-    "Tap the 100M free GLM-5.3-Flash token card to claim your pack.",
-    "Start building — 5,000 packs total, first come, first served.",
-    "All tokens must be used by 10 PM ET / 7 PM PT tonight (September 1, 2026)."
+    "Be a new ZCode user without an active paid coding plan.",
+    "Log into the ZCode desktop app during the promotional window.",
+    "The 100M token grant is credited automatically — no separate claim form or promo code.",
+    "Use the tokens inside ZCode before the event ends; unused tokens expire."
   ],
   "social_proof": [
     {
       "type": "x",
-      "url": "https://x.com/zcode_ai/status/2094785889578746015",
-      "author": "ZCode",
-      "handle": "@zcode_ai",
-      "text": "🚨 SURPRISE DROP — LIVE NOW 🚨\n\n100M free GLM-5.3-Flash tokens just landed in ZCode. Sign in, tap the card, start building.\n\n5,000 packs · first come, first served.\nAll of it burns at 10 PM ET / 7 PM PT tonight.\n\nThe day is yours. ✨"
+      "url": "https://x.com/zixuanli_/status/2095176617958011090",
+      "author": "Zixuan Li",
+      "handle": "@zixuanli_",
+      "text": "100M free GLM-5.3-Flash tokens on ZCode. This is the new normal."
     },
     {
       "type": "link",
       "url": "https://zcode.z.ai/",
-      "title": "ZCode | GLM-5.3 官方 Harness",
-      "text": "Official ZCode page confirming GLM-5.3-Flash as the harness model."
+      "title": "ZCode | Official Harness for GLM-5.3",
+      "text": "ZCode is Zhipu AI's agentic coding environment built around the GLM model family, including GLM-5.3-Flash."
+    },
+    {
+      "type": "link",
+      "url": "https://testingcatalog.net/zcodes-100m-glm-5-3-token-giveaway-was-so-popular-it-paused-in-an-hour/",
+      "title": "ZCode's 100M GLM-5.3 Token Giveaway Was So Popular It Paused in an Hour",
+      "text": "Round 1 of the giveaway was paused roughly one hour after launch on August 16 because demand exceeded expectations; the standard 3M newcomer bonus remained available."
+    },
+    {
+      "type": "link",
+      "url": "https://www.mindstudio.ai/blog/glm-5-3-free-tokens-zcode-weekend",
+      "title": "GLM 5.3 Free Tokens on Zcode: How to Claim 100 Million Tokens",
+      "text": "The giveaway is capped at 50,000 packs on a first-come, first-served basis; tokens are Zcode-app-only and expire when the event window closes."
     }
   ]
 }

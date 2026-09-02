@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-02T06:51:27Z",
+  "generated_at": "2026-09-02T19:21:06Z",
   "count": 62,
-  "active_count": 45,
-  "expired_count": 17,
+  "active_count": 46,
+  "expired_count": 16,
   "offers": [
     {
       "slug": "amd-radeon-cloud-free-model-apis",
@@ -26,6 +26,20 @@
       "amount": "100 million API tokens (one-time credit, no payment details required)",
       "expiry_date": null,
       "source_url": "https://www.inceptionlabs.ai/blog/mercury-2-10x-free-tokens",
+      "verified_date": "2026-09-02",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "zcode-glm-5-3-flash-free",
+      "title": "ZCode 100M Free GLM-5.3-Flash Tokens",
+      "provider": "ZCode",
+      "category": "coding",
+      "amount": "100M free GLM-5.3-Flash tokens (Round 3; 10,000 packs; expires Sep 3, 9PM ET)",
+      "expiry_date": "2026-09-03",
+      "source_url": "https://zcode.z.ai/",
       "verified_date": "2026-09-02",
       "verification": "social_proof",
       "review_status": "under-review",
@@ -101,20 +115,6 @@
       "review_status": "under-review",
       "signup": "required",
       "status": "active"
-    },
-    {
-      "slug": "zcode-glm-5-3-flash-free",
-      "title": "ZCode 100M Free GLM-5.3-Flash Tokens",
-      "provider": "ZCode",
-      "category": "coding",
-      "amount": "100M free GLM-5.3-Flash tokens",
-      "expiry_date": "2026-09-01",
-      "source_url": "https://zcode.z.ai/",
-      "verified_date": "2026-09-01",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "expired"
     },
     {
       "slug": "amazon-polly-free-tier",
