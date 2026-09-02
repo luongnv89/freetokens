@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-02T22:32:46Z — 47 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-02T22:46:02Z — 47 active offers.
 
 ## Offers (full)
 
@@ -20,13 +20,13 @@ Source: https://freetokens.custats.info/ — generated 2026-09-02T22:32:46Z — 
 ### Muse Spark 1.3 Contributor Free on OpenCode Zen
 - Provider: Meta (via OpenCode Zen)
 - Category: coding
-- Amount: Free Muse Spark 1.3 Contributor tier on OpenCode Zen for a limited time
+- Amount: Free Muse Spark 1.3 Contributor tier on OpenCode Zen for a limited time (Meta may use your prompts and completions to train future models)
 - Status: active — expiry ongoing
 - Verified: 2026-09-02 (social_proof / under-review, signup required)
 - Source: https://opencode.ai/docs/zen/
 - Page: https://freetokens.custats.info/offers/muse-spark-1-3-contributor-free.html
 - Summary: Muse Spark 1.3 Contributor Free is available on OpenCode Zen for a limited time. This is Meta's Contributor tier: free access in exchange for permission to use your prompts and completions to train future Meta models. The standard Muse Spark 1.3 remains paid on other platforms.
-- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen. | Select the Muse Spark 1.3 Contributor Free model. | Start building — no payment info required for the Contributor tier.
+- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen. | Select the Muse Spark 1.3 Contributor Free model. | Start building — no payment info required for the Contributor tier. | Note: Meta may use your prompts and completions to train future models.
 
 ### Inception Mercury 2 — 100M Free API Tokens
 - Provider: Inception
