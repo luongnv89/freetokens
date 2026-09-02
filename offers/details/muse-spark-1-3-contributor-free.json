@@ -1,0 +1,22 @@
+{
+  "summary": "Muse Spark 1.3 Contributor Free is available on OpenCode Zen for a limited time. This is Meta's Contributor tier: free access in exchange for permission to use your prompts and completions to train future Meta models. The standard Muse Spark 1.3 remains paid on other platforms.",
+  "claim_steps": [
+    "Sign in to OpenCode Zen at opencode.ai/zen.",
+    "Select the Muse Spark 1.3 Contributor Free model.",
+    "Start building — no payment info required for the Contributor tier."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/docs/zen/",
+      "title": "OpenCode Zen — Free Models",
+      "text": "Muse Spark 1.3 Contributor Free is listed among the free models on OpenCode Zen. The team is using this time to collect feedback and improve the model."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/meta/muse-spark-1.3",
+      "title": "Muse Spark 1.3 pricing on OpenRouter",
+      "text": "Standard Muse Spark 1.3 is $1.25 input / $4.25 output per 1M tokens, confirming the OpenCode Zen free tier is a special Contributor arrangement."
+    }
+  ]
+}
