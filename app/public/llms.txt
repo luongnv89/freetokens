@@ -4,9 +4,10 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 44 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 45 active listings. Full directory at https://freetokens.custats.info/.
 
 - [Inception Mercury 2 — 100M Free API Tokens](https://freetokens.custats.info/offers/inception-mercury-2-100m-free-tokens.html): Inception — 100 million API tokens (one-time credit, no payment details required) (api_provider)
+- [AMD Radeon Cloud Token Factory — Free Model APIs](https://freetokens.custats.info/offers/amd-radeon-cloud-free-model-apis.html): AMD Radeon Cloud — 3 free online text APIs plus 1 limited-free vision API (beta; quotas unpublished) (api_provider)
 - [NVIDIA NIM Free Trial (Developer Program)](https://freetokens.custats.info/offers/nvidia-nim-free-trial.html): NVIDIA — $0 hosted trial for prototyping with NVIDIA NIM, rate-limited (api_provider)
 - [Ling 3.0 Flash Fin Free (InclusionAI)](https://freetokens.custats.info/offers/ling-3-0-flash-fin-free.html): InclusionAI — Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling (api_provider)
 - [Inkling + Inkling Small Free (OpenRouter)](https://freetokens.custats.info/offers/inkling-free-models.html): Thinking Machines — Inkling and Inkling Small at $0 via OpenRouter, 1M-token context (coding)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 44 active listings. 
 - [LLM7.io Free API Tier](https://freetokens.custats.info/offers/llm7-free-tier.html): LLM7.io — Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day (api_provider)
 - [Kilo Code Free Models](https://freetokens.custats.info/offers/kilo-code-free-models.html): Kilo Code — Free :free models without an API key, limited to 200 requests/hour per IP (api_provider)
 - [JetBrains Student Pack — All IDEs Free](https://freetokens.custats.info/offers/jetbrains-student-pack.html): JetBrains — All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount) (student)
-- [Hailuo AI Video Free Tier](https://freetokens.custats.info/offers/hailuo-free-tier.html): Hailuo AI — One-time welcome credit package (expires 3 days after grant) + limited free generation (watermarked) (video)
 
 ## Pages
 

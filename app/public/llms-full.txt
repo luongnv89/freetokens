@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-02T05:50:16Z — 44 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-02T06:52:03Z — 45 active offers.
 
 ## Offers (full)
 
@@ -16,6 +16,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-02T05:50:16Z — 
 - Page: https://freetokens.custats.info/offers/inception-mercury-2-100m-free-tokens.html
 - Summary: New Inception accounts receive a one-time credit of 100 million API tokens shared across Mercury 2 and Mercury Edit 2, with no payment details required. Mercury 2 supports reasoning, tool calling and structured outputs through an OpenAI-compatible API.
 - Claim steps: Create a new account or sign in at platform.inceptionlabs.ai. | Open API Keys and create an Inception API key. | Use the key with the OpenAI-compatible base URL https://api.inceptionlabs.ai/v1 and model mercury-2. | Monitor the shared one-time token balance; add billing details only if you want paid usage after the free credit.
+
+### AMD Radeon Cloud Token Factory — Free Model APIs
+- Provider: AMD Radeon Cloud
+- Category: api_provider
+- Amount: 3 free online text APIs plus 1 limited-free vision API (beta; quotas unpublished)
+- Status: active — expiry ongoing
+- Verified: 2026-09-02 (social_proof / under-review, signup required)
+- Source: https://developer.amd.com.cn/radeon/tokenfactory
+- Page: https://freetokens.custats.info/offers/amd-radeon-cloud-free-model-apis.html
+- Summary: AMD Radeon Cloud Token Factory provides free shared OpenAI- and Anthropic-compatible model APIs. At verification time, DeepSeek-V4-Flash, Qwen3.8-Flash-Next and MiniCPM5-1B were free and online; DeepSeek-V4-Flash-Vision-Exp was limited-free and experimental; MiniCPM-V46 was listed but temporarily offline. AMD says displayed points represent relative usage, not a charge, but does not publish account quotas or reset rules.
+- Claim steps: Open the AMD Radeon Cloud Token Factory at developer.amd.com.cn/radeon/tokenfactory. | Sign in with an AMDAI account and obtain an API key. | Use the OpenAI-compatible base URL https://developer.amd.com.cn/radeon/api/v1 with a currently online model ID. | Check the live Token Factory before relying on a model because the catalog is beta and availability is dynamic.
 
 ### NVIDIA NIM Free Trial (Developer Program)
 - Provider: NVIDIA

@@ -1,0 +1,61 @@
+{
+  "summary": "AMD Radeon Cloud Token Factory provides free shared OpenAI- and Anthropic-compatible model APIs. At verification time, DeepSeek-V4-Flash, Qwen3.8-Flash-Next and MiniCPM5-1B were free and online; DeepSeek-V4-Flash-Vision-Exp was limited-free and experimental; MiniCPM-V46 was listed but temporarily offline. AMD says displayed points represent relative usage, not a charge, but does not publish account quotas or reset rules.",
+  "claim_steps": [
+    "Open the AMD Radeon Cloud Token Factory at developer.amd.com.cn/radeon/tokenfactory.",
+    "Sign in with an AMDAI account and obtain an API key.",
+    "Use the OpenAI-compatible base URL https://developer.amd.com.cn/radeon/api/v1 with a currently online model ID.",
+    "Check the live Token Factory before relying on a model because the catalog is beta and availability is dynamic."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://developer.amd.com.cn/radeon/tokenfactory",
+      "title": "AMD Radeon Cloud Token Factory",
+      "text": "Public Free Model APIs — Ready-to-use free API endpoints. The portal labels Token Factory as BETA and requires sign-in to obtain an API key."
+    },
+    {
+      "type": "link",
+      "url": "https://developer.amd.com.cn/radeon/api/tokenfactory/bootstrap?directory=true",
+      "title": "AMD Token Factory public model directory",
+      "text": "The live official directory returned five public model cards: DeepSeek V4 Flash text and vision, Qwen3.8 Flash Next, MiniCPM-V46, and MiniCPM5-1B."
+    },
+    {
+      "type": "link",
+      "url": "https://developer.amd.com.cn/radeon/api/tokenfactory/model?id=model_gateway%3ADeepSeek-V4-Flash",
+      "title": "DeepSeek-V4-Flash-0731 on Radeon Cloud",
+      "text": "AMD marks this online text and reasoning endpoint Free and OpenAI compatible. Usage points are relative usage, not a charge."
+    },
+    {
+      "type": "link",
+      "url": "https://developer.amd.com.cn/radeon/api/tokenfactory/model?id=model_gateway%3AQwen3.8-Flash-Next",
+      "title": "Qwen3.8-Flash-Next on Radeon Cloud",
+      "text": "AMD marks this online text and reasoning endpoint Free and OpenAI compatible; account quotas are not published."
+    },
+    {
+      "type": "link",
+      "url": "https://developer.amd.com.cn/radeon/api/tokenfactory/model?id=model_gateway%3AMiniCPM5-1B",
+      "title": "MiniCPM5-1B on Radeon Cloud",
+      "text": "AMD marks this online text and reasoning endpoint Free and OpenAI compatible."
+    },
+    {
+      "type": "link",
+      "url": "https://developer.amd.com.cn/radeon/api/tokenfactory/model?id=model_gateway%3ADeepSeek-V4-Flash-Vision-Exp",
+      "title": "DeepSeek-V4-Flash-Vision-Exp on Radeon Cloud",
+      "text": "AMD marks this experimental vision and reasoning endpoint Limited Free and OpenAI compatible."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/biggor888/status/2094834230639448437",
+      "author": "Samgor",
+      "handle": "@biggor888",
+      "text": "AMD 免费的 API 是好东西啊，速度快，比英伟达免费的好多了。"
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/biggor888/status/2094833164111781929",
+      "author": "Samgor",
+      "handle": "@biggor888",
+      "text": "AMD 免费的 API 在这里：https://developer.amd.com.cn/radeon/tokenfactory"
+    }
+  ]
+}

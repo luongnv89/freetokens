@@ -1,0 +1,12 @@
+# Verified 2026-09-02 against https://developer.amd.com.cn/radeon/tokenfactory
+# ("Public Free Model APIs" — "Ready-to-use free API endpoints")
+title: AMD Radeon Cloud Token Factory — Free Model APIs
+provider: AMD Radeon Cloud
+category: api_provider
+amount: 3 free online text APIs plus 1 limited-free vision API (beta; quotas unpublished)
+expiry_date: null
+source_url: https://developer.amd.com.cn/radeon/tokenfactory
+verified_date: 2026-09-02
+verification: social_proof
+review_status: under-review
+signup: required
