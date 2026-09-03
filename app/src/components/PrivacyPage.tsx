@@ -3,6 +3,7 @@ import { IconSprite } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
 import { Breadcrumbs } from "./Breadcrumbs"
+import { StructuredData } from "./StructuredData"
 import {
   IMPORT_MAX_LENGTH,
   clearAllPersonalState,
@@ -412,6 +413,8 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
 
         <SiteFooter current="privacy" />
       </div>
+      {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
+      <StructuredData page="privacy" baseUrl={baseUrl} />
     </>
   )
 }

@@ -34,7 +34,7 @@ export default function App({
       page = <OfferDetailPage index={index} slug={r.slug} baseUrl={baseUrl} />
       break
     default:
-      page = <HomePage index={index} />
+      page = <HomePage index={index} baseUrl={baseUrl} />
   }
   return (
     <>

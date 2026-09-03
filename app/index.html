@@ -9,6 +9,12 @@
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <!-- dns-prefetch only: analytics scripts load after explicit consent
+         (see lib/analytics.ts), so no preconnect — an unused preconnect burns
+         a TLS handshake on the critical path and hurts FCP. -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://gc.zgo.at" />
     <meta
       name="description"
       content="Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page."
@@ -22,6 +28,9 @@
       title="Free AI Credits — free AI credit offers, tagged by verification"
       href="./feed.xml"
     />
+    <link rel="alternate" type="text/markdown" title="LLM summary" href="./llms.txt" />
+    <link rel="alternate" type="text/markdown" title="Full content for LLMs" href="./llms-full.txt" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="./sitemap.xml" />
     <title>Free AI Credits</title>
     <!-- Search Console verification injected at build when SEARCH_CONSOLE_TOKEN is set — see docs/search-console-setup.md -->
     <!-- free-ai-credits:social-meta:start -->

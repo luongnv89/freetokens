@@ -3,6 +3,7 @@ import { IconSprite } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
 import { Breadcrumbs } from "./Breadcrumbs"
+import { StructuredData } from "./StructuredData"
 
 export default function AboutPage({
   index,
@@ -75,6 +76,8 @@ export default function AboutPage({
         </main>
         <SiteFooter current="about" />
       </div>
+      {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
+      <StructuredData page="about" baseUrl={baseUrl} />
     </>
   )
 }

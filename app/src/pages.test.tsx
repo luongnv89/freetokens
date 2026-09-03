@@ -63,6 +63,36 @@ function breadcrumbJson(markup: string): BreadcrumbJson {
   throw new Error("missing breadcrumb JSON-LD");
 }
 
+function allJsonLd(markup: string): Record<string, unknown>[] {
+  const marker = '<script type="application/ld+json">';
+  const blocks: Record<string, unknown>[] = [];
+  let cursor = 0;
+  while (true) {
+    const start = markup.indexOf(marker, cursor);
+    if (start < 0) break;
+    const end = markup.indexOf("</script>", start);
+    if (end < 0) break;
+    const raw = markup.slice(start + marker.length, end);
+    // Attacker-influenced strings must never break out of the script element.
+    expect(raw).not.toContain("</script>");
+    blocks.push(JSON.parse(raw) as Record<string, unknown>);
+    cursor = end + "</script>".length;
+  }
+  return blocks;
+}
+
+function graphNodeTypes(markup: string): unknown[] {
+  const types: unknown[] = [];
+  for (const block of allJsonLd(markup)) {
+    if (Array.isArray(block["@graph"])) {
+      for (const node of block["@graph"] as Record<string, unknown>[]) types.push(node["@type"]);
+    } else {
+      types.push(block["@type"]);
+    }
+  }
+  return types;
+}
+
 function breadcrumbLabels(markup: string): string[] {
   const document = new DOMParser().parseFromString(markup, "text/html");
   const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
@@ -150,12 +180,17 @@ describe("SSR breadcrumbs (#208)", () => {
       />,
     );
     const marker = '<script type="application/ld+json">';
-    const scriptStart = markup.indexOf(marker);
-    const scriptEnd = markup.indexOf("</script>", scriptStart);
-    expect(markup.split(marker)).toHaveLength(2);
-    expect(scriptStart).toBeGreaterThan(-1);
-    expect(scriptEnd).toBeGreaterThan(scriptStart);
-    expect(markup.slice(scriptStart + marker.length, scriptEnd)).not.toContain("</script>");
+    // OfferDetail now emits breadcrumb + site structured data (Organization/WebSite/TechArticle/Offer)
+    expect(markup.split(marker)).toHaveLength(3);
+    // Every block must parse and stay inside its script element — including the
+    // @graph block carrying the attacker-influenced title/summary.
+    const blocks = allJsonLd(markup);
+    expect(blocks).toHaveLength(2);
+    const graph = blocks.map((b) => b["@graph"]).find(Array.isArray) as Record<string, unknown>[];
+    const article = graph.find((n) => n["@type"] === "TechArticle");
+    expect(article?.headline).toBe(title);
+    const offerNode = graph.find((n) => n["@type"] === "Offer");
+    expect(offerNode?.name).toBe(title);
     expect(breadcrumbJson(markup).itemListElement[1]).toEqual({
       "@type": "ListItem",
       position: 2,
@@ -177,6 +212,8 @@ describe("SSR breadcrumbs (#208)", () => {
     expect(breadcrumbJson(markup).itemListElement[1].item).toBe(
       `${DEFAULT_BASE_URL}/offers/no-such-offer.html`,
     );
+    // Soft-404 state carries no Article markup — org+site graph only.
+    expect(graphNodeTypes(markup)).not.toContain("TechArticle");
   });
 });
 
@@ -464,7 +501,9 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
       />,
     );
     const tableAt = markup.indexOf('class="od-table"');
-    const proseAt = markup.indexOf("Prose lives under the table.");
+    // Visible prose lives in .od-summary; JSON-LD description also contains the text
+    // so search for the visible element to avoid matching the head <script> block.
+    const proseAt = markup.indexOf('<p class="od-summary">Prose lives under the table.');
     expect(tableAt).toBeGreaterThan(-1);
     expect(proseAt).toBeGreaterThan(tableAt);
   });

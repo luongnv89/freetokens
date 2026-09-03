@@ -22,6 +22,24 @@ Disallow: /
 User-agent: Bytespider
 Disallow: /
 
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+User-agent: DeepSeekBot
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
 # Search / indexing bots — allow.
 User-agent: Googlebot
 Allow: /
@@ -38,9 +56,24 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
 # On-demand / user-triggered retrieval bots — allow.
 User-agent: ChatGPT-User
 Allow: /
 
 User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: MistralAI-User
 Allow: /
