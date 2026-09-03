@@ -6,7 +6,7 @@ category: voice
 amount: 10k credits/month (~10 min of audio)
 expiry_date: null
 source_url: https://elevenlabs.io/pricing
-verified_date: 2026-08-31
+verified_date: 2026-09-03
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: verified

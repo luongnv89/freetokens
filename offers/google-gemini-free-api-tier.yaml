@@ -6,7 +6,7 @@ category: api_provider
 amount: Free input and output tokens on supported Gemini API models (quotas vary by model)
 expiry_date: null
 source_url: https://ai.google.dev/gemini-api/docs/pricing
-verified_date: 2026-08-31
+verified_date: 2026-09-03
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: verified

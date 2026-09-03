@@ -7,7 +7,7 @@ category: image
 amount: Free image generation in the AI Studio web app (rate-limited; not available via API free tier)
 expiry_date: null
 source_url: https://aistudio.google.com/
-verified_date: 2026-08-23
+verified_date: 2026-09-03
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: verified

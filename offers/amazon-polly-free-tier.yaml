@@ -9,7 +9,7 @@ category: voice
 amount: Legacy accounts (created before July 15, 2025): 5M chars/month Standard + 1M chars/month Neural voices for first 12 months. New accounts get up to $200 in AWS Free Tier credits on a 6-month free plan.
 expiry_date: null
 source_url: https://aws.amazon.com/polly/pricing/
-verified_date: 2026-08-31
+verified_date: 2026-09-03
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified
