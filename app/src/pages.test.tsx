@@ -1008,6 +1008,22 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     expect(markup).not.toContain("ft-traffic");
   });
 
+  it("keeps rail layout CSS off the shared sheet and off detail HTML", () => {
+    const css = readFileSync(
+      path.resolve(import.meta.dirname, "styles/python-parity.css"),
+      "utf8",
+    );
+    expect(css).not.toMatch(/\.site-stats\s*\{/);
+    const homeMarkup = home();
+    expect(homeMarkup).toContain(".site-stats{display:flex");
+    expect(homeMarkup).toContain('data-traffic="off"');
+    const detail = renderToStaticMarkup(
+      <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
+    );
+    expect(detail).not.toContain(".site-stats{");
+    expect(detail).not.toContain('class="site-stats"');
+  });
+
   it("keeps the total fixed while the toolbar counter follows the filter (#281)", async () => {
     render(<HomePage index={index} />);
     const total = activeOffers(index).length;

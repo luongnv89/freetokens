@@ -1321,7 +1321,9 @@ button:focus-visible {
 
 /* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131 / #250) ----
    Renamed .foot-traffic -> .stat-strip in #279: the same strip now renders
-   at the top of the home page as well as in the footer of every other. */
+   at the top of the home page as well as in the footer of every other.
+   Home-only .site-stats layout lives in SiteStats.tsx so detail pages do
+   not pay for unused rail CSS. */
 
 .stat-strip {
   display: flex;
@@ -1338,27 +1340,6 @@ button:focus-visible {
 
 .ft-traffic-total { font-size: 0.84rem; }
 .ft-traffic-total strong { font-size: 1.2em; }
-
-/* ---- Masthead stats rail (#279 / #280 / #281) --------------------------
-   Build-time catalog metrics + the live visitor strip on one mono row,
-   tucked under the header hairline. Async chips are reserved with
-   visibility (never display) so revealing them shifts no layout. */
-
-.site-stats {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem 0.5rem;
-  margin: -0.6rem 0 1.35rem;
-}
-
-.site-stats .stat-strip { margin: 0; }
-.site-stats [hidden] { display: inline-flex; visibility: hidden; }
-/* ...but a window GoatCounter never answers collapses, so a blocked or
-   offline visitor is not left staring at an invisible gap. */
-.site-stats [data-traffic="off"] { display: none; }
-.site-stats .stat-strip strong { display: inline-block; min-width: 4ch; }
-.site-stats .stat-deals strong { font-size: 1.3em; }
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------
    Card-actions / .detail-btn already live above (archive #129). The rest

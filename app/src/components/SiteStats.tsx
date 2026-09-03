@@ -2,6 +2,21 @@ import { TrafficStrip } from "./TrafficStrip"
 import { buildDate, humanDate } from "../lib/offers"
 
 /**
+ * Home-only rail layout. Kept out of python-parity.css so offer-detail
+ * pages do not download or parse unused rules (Lighthouse unused-css /
+ * render-blocking on /offers/*.html). CSP already allows style-src
+ * 'unsafe-inline'. Compact on purpose: this string is in the shared JS
+ * bundle, but it is not in the shared stylesheet.
+ */
+const RAIL_CSS =
+  ".site-stats{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem;margin:-.6rem 0 1.35rem}" +
+  ".site-stats .stat-strip{margin:0}" +
+  ".site-stats [hidden]{display:inline-flex;visibility:hidden}" +
+  '.site-stats [data-traffic="off"]{display:none}' +
+  ".site-stats .stat-strip strong{display:inline-block;min-width:4ch}" +
+  ".site-stats .stat-deals strong{font-size:1.3em}"
+
+/**
  * Masthead stats rail (#279 / #280 / #281). One mono strip sits directly
  * under the site header on the home page and carries, left to right:
  *
@@ -31,6 +46,7 @@ export function SiteStats({
   const updated = day ? humanDate(day) : ""
   return (
     <div className="site-stats">
+      <style>{RAIL_CSS}</style>
       <span className="ft-stat stat-deals">
         <strong>{activeCount}</strong>{" "}
         <span className="ft-stat-label">{activeCount === 1 ? "active deal" : "active deals"}</span>
