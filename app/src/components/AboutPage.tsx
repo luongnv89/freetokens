@@ -19,7 +19,6 @@ export default function AboutPage({
   return (
     <>
       <IconSprite />
-      <StructuredData page="about" baseUrl={baseUrl} />
       <div className="wrap">
         <main>
           <header className="masthead masthead-home">
@@ -77,6 +76,8 @@ export default function AboutPage({
         </main>
         <SiteFooter current="about" />
       </div>
+      {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
+      <StructuredData page="about" baseUrl={baseUrl} />
     </>
   )
 }

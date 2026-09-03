@@ -128,7 +128,6 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
   return (
     <>
       <IconSprite />
-      <StructuredData page="privacy" baseUrl={baseUrl} />
       <div className="wrap">
         <main>
           <header className="masthead">
@@ -414,6 +413,8 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
 
         <SiteFooter current="privacy" />
       </div>
+      {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
+      <StructuredData page="privacy" baseUrl={baseUrl} />
     </>
   )
 }

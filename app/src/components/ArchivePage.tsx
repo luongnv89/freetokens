@@ -44,7 +44,6 @@ export default function ArchivePage({
   return (
     <>
       <IconSprite />
-      <StructuredData page="archive" index={index} baseUrl={baseUrl} />
       <div className="wrap">
         <main>
         <header className="masthead masthead-home">
@@ -96,6 +95,8 @@ export default function ArchivePage({
         </main>
         <SiteFooter current="archive" />
       </div>
+      {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
+      <StructuredData page="archive" index={index} baseUrl={baseUrl} />
     </>
   )
 }

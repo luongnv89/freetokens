@@ -532,7 +532,6 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
   return (
     <>
       <IconSprite />
-      <StructuredData page="home" index={index} baseUrl={baseUrl} />
       <div className="wrap">
         <main>
         <SiteHeader current="home" />
@@ -621,6 +620,8 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
         </main>
         <SiteFooter current="home" />
       </div>
+      {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
+      <StructuredData page="home" index={index} baseUrl={baseUrl} />
     </>
   )
 }

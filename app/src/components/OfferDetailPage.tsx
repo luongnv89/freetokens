@@ -96,7 +96,6 @@ export default function OfferDetailPage({
   return (
     <>
       <IconSprite />
-      <StructuredData page="detail" index={index} slug={slug} detail={detail ?? null} baseUrl={baseUrl} />
       <div className="wrap">
         <main>
         <SiteHeader depth={1} />
@@ -252,6 +251,8 @@ export default function OfferDetailPage({
         </main>
         <SiteFooter depth={1} />
       </div>
+      {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
+      <StructuredData page="detail" index={index} slug={slug} detail={detail ?? null} baseUrl={baseUrl} />
     </>
   )
 }
