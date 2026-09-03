@@ -19,7 +19,11 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // Badge/chip wrap (overflow:visible + overflow-wrap) adds 89 B.
 // Custats sibling banner (#257) adds 1270 B muted mono strip (full-width,
 // hairline border, responsive at 320px).
-const PYTHON_INLINE_CSS_BYTES = 38289;
+// Masthead stats rail (#279/#280/#281) layout is inlined from SiteStats.tsx
+// onto the home document only, so the shared sheet does not carry .site-stats
+// rules. Production `vite build` measures 38327 B (38 B over the pre-rail
+// 38289 freeze) from Tailwind picking up tokens in that inlined string.
+const PYTHON_INLINE_CSS_BYTES = 38327;
 
 function cssBytesIn(dir) {
   let total = 0;
@@ -47,7 +51,13 @@ describe("rendered CSS payload budget (#121)", () => {
             outDir,
             "--emptyOutDir",
           ],
-          { cwd: APP_ROOT, stdio: "pipe" },
+          {
+            cwd: APP_ROOT,
+            stdio: "pipe",
+            // Vitest inherits NODE_ENV=test, which can skip minify and
+            // wobble the byte count; pin production like bundle-budget.
+            env: { ...process.env, NODE_ENV: "production" },
+          },
         );
         const rendered = cssBytesIn(outDir);
         const baseline = PYTHON_INLINE_CSS_BYTES;

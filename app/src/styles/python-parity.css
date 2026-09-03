@@ -458,7 +458,7 @@ a.badge:focus-visible {
 }
 
 .foot-nav a,
-.foot-traffic a {
+.stat-strip a {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
@@ -467,8 +467,8 @@ a.badge:focus-visible {
 
 .foot-nav a:hover,
 .foot-nav a:focus-visible,
-.foot-traffic a:hover,
-.foot-traffic a:focus-visible {
+.stat-strip a:hover,
+.stat-strip a:focus-visible {
   text-decoration-color: var(--green);
   text-decoration-thickness: 3px;
 }
@@ -1319,9 +1319,13 @@ button:focus-visible {
   color: var(--ink);
 }
 
-/* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131 / #250) ---- */
+/* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131 / #250) ----
+   Renamed .foot-traffic -> .stat-strip in #279: the same strip now renders
+   at the top of the home page as well as in the footer of every other.
+   Home-only .site-stats layout lives in SiteStats.tsx so detail pages do
+   not pay for unused rail CSS. */
 
-.foot-traffic {
+.stat-strip {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1332,7 +1336,7 @@ button:focus-visible {
   margin: 0.75rem 0 0;
 }
 
-.foot-traffic[hidden] { display: none; }
+.stat-strip[hidden] { display: none; }
 
 .ft-traffic-total { font-size: 0.84rem; }
 .ft-traffic-total strong { font-size: 1.2em; }

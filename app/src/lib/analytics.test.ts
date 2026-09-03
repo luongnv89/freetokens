@@ -63,7 +63,7 @@ function installGtag() {
 
 function mountTrafficStrip(): HTMLElement {
   document.body.innerHTML = `
-    <p class="foot-traffic" id="${TRAFFIC_STRIP_ID}" role="status" hidden>
+    <p class="stat-strip" id="${TRAFFIC_STRIP_ID}" role="status" hidden>
       <span class="ft-stat ft-traffic-total">
         <strong id="ft-traffic-total">&mdash;</strong>
         <span class="ft-stat-label">visits</span>
@@ -601,6 +601,9 @@ describe("traffic strip silent hide", () => {
     expect(box.hidden).toBe(true);
     expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("—");
     expect(box.querySelector("#ft-traffic-today")?.textContent).toBe("—");
+    // The masthead rail reserves the strip's box; marking it off collapses
+    // that reservation so a blocked visitor sees no empty slot (#279).
+    expect(box.dataset.traffic).toBe("off");
   });
 
   it("stays hidden when the counter route returns a non-OK status", async () => {
@@ -612,6 +615,7 @@ describe("traffic strip silent hide", () => {
     } as Response);
     await initTrafficStrip(SITE);
     expect(box.hidden).toBe(true);
+    expect(box.dataset.traffic).toBe("off");
   });
 
   it("stays hidden when GoatCounter is unconfigured", async () => {
@@ -632,6 +636,7 @@ describe("traffic strip silent hide", () => {
     await initTrafficStrip(SITE);
     expect(box.hidden).toBe(true);
     expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("—");
+    expect(box.dataset.traffic).toBe("off");
   });
 
   it("reveals a zero all-time total and keeps the strip visible", async () => {
@@ -665,6 +670,15 @@ describe("traffic strip silent hide", () => {
     expect(
       (box.querySelector(".ft-traffic-period") as HTMLElement).hidden,
     ).toBe(true);
+    // A window that never answers collapses its reserved box; the strip
+    // itself stays on because the all-time total did arrive (#279).
+    expect(box.dataset.traffic).toBeUndefined();
+    expect(
+      (box.querySelector(".ft-traffic-today") as HTMLElement).dataset.traffic,
+    ).toBe("off");
+    expect(
+      (box.querySelector(".ft-traffic-period") as HTMLElement).dataset.traffic,
+    ).toBe("off");
   });
 
   it("reveals all-time plus today/90-day windows when every fetch succeeds", async () => {
@@ -685,6 +699,7 @@ describe("traffic strip silent hide", () => {
     expect(
       (box.querySelector(".ft-traffic-period") as HTMLElement).hidden,
     ).toBe(false);
+    expect(box.dataset.traffic).toBeUndefined();
     const urls = vi.mocked(fetch).mock.calls.map((c) => String(c[0]));
     expect(urls).toHaveLength(3);
     expect(urls[0]).toBe(`${SITE}/counter/TOTAL.json`);

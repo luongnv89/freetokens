@@ -434,15 +434,24 @@ async function fetchCounterCount(url: string): Promise<number | null> {
   }
 }
 
+/**
+ * A window that never answers is marked `data-traffic="off"` so the masthead
+ * rail (#279) collapses its reserved box instead of leaving an invisible gap
+ * above the fold. In the footer the `hidden` attribute already collapses it,
+ * so the marker is inert there.
+ */
 function revealTrafficWindow(
   box: Element,
   count: number | null,
   numberId: string,
   wrapSelector: string,
 ): void {
-  if (count === null) return;
-  const numberEl = box.querySelector(numberId);
   const wrap = box.querySelector(wrapSelector);
+  if (count === null) {
+    if (wrap instanceof HTMLElement) wrap.dataset.traffic = "off";
+    return;
+  }
+  const numberEl = box.querySelector(numberId);
   if (numberEl) numberEl.textContent = ftFormatCount(count);
   if (wrap instanceof HTMLElement) wrap.hidden = false;
 }
@@ -459,14 +468,18 @@ export async function initTrafficStrip(
       fetchCounterCount(ftCounterUrl(1, site)),
       fetchCounterCount(ftCounterUrl(90, site)),
     ]);
-    if (total === null) return;
+    if (total === null) {
+      box.dataset.traffic = "off";
+      return;
+    }
     const totalEl = box.querySelector("#ft-traffic-total");
     if (totalEl) totalEl.textContent = ftFormatCount(total);
     revealTrafficWindow(box, today, "#ft-traffic-today", ".ft-traffic-today");
     revealTrafficWindow(box, period, "#ft-traffic-period", ".ft-traffic-period");
     box.hidden = false;
   } catch {
-    /* silent hide — ad block, offline, malformed payload */
+    /* silent collapse — ad block, offline, malformed payload */
+    box.dataset.traffic = "off";
   }
 }
 

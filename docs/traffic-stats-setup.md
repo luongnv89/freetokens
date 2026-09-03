@@ -131,7 +131,7 @@ payload keeps the whole strip hidden.
    - `<head>` contains `<script async src="https://gc.zgo.at/count.js"
      data-goatcounter="…">`.
    - Every page footer contains the hidden strip
-     (`<p class="foot-traffic" id="ft-traffic" … hidden>`), including the
+     (`<p class="stat-strip" id="ft-traffic" … hidden>`), including the
      all-time chip (`#ft-traffic-total`).
 2. Visit the live site, open devtools, and confirm three requests:
    `…/counter/TOTAL.json` (all-time, no query), plus today and 90-day
