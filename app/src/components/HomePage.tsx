@@ -301,6 +301,27 @@ function visibleOffers(
     .filter((offer) => !personal.dismissed.has(offer.slug))
 }
 
+// "Hot today" ranking (#282). Deliberately conservative, because the input is
+// weak: only consenting visitors are counted, the counter route sits behind a
+// ~4h CDN cache, and blocked requests read as null. So a count must clear a
+// floor of 3 before it can crown anything, and a tie wider than 3 offers is
+// dropped entirely — a badge on half the list stops meaning "hot".
+const HOT_MIN_VIEWS = 3
+const HOT_MAX_TIED = 3
+
+export function hottestSlugs(views: Record<string, number | null>): ReadonlySet<string> {
+  const empty: ReadonlySet<string> = new Set<string>()
+  const counted = Object.entries(views).filter(
+    (entry): entry is [string, number] => typeof entry[1] === "number",
+  )
+  if (counted.length === 0) return empty
+  const max = Math.max(...counted.map(([, n]) => n))
+  if (max < HOT_MIN_VIEWS) return empty
+  const top = counted.filter(([, n]) => n === max).map(([slug]) => slug)
+  if (top.length > HOT_MAX_TIED) return empty
+  return new Set(top)
+}
+
 /**
  * The full home page (F1): masthead, toolbar, ranked mono rows. Rendered both
  * by the prerender script (react-dom/server) and hydrated client-side —
@@ -329,6 +350,14 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
 
   const offerSlugs = useMemo(() => activeOffers(index).map((o) => o.slug), [index])
   const views = useOfferViews(offerSlugs)
+  // Second, windowed read of the same public counters. GoatCounter windows by
+  // calendar DATE, so `days: 1` is "today so far" — the honest approximation
+  // of "last 24h" this stack can express. Ranked over the FULL slug list, never
+  // over what is currently on screen, so filtering or searching can never crown
+  // a different offer. Placed after the all-time hook on purpose: effect order
+  // keeps the unwindowed request first.
+  const todayViews = useOfferViews(offerSlugs, 1)
+  const hotSlugs = useMemo(() => hottestSlugs(todayViews), [todayViews])
 
   function commit(patch: Partial<UrlState>, source: "search" | "sort" | "filter") {
     const next: UrlState = { ...stateRef.current, ...patch }
@@ -580,6 +609,7 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
                   onToggleSave={onToggleSave}
                   onDismiss={onDismiss}
                   views={views[offer.slug] ?? null}
+                  hot={hotSlugs.has(offer.slug)}
                 />
               ))}
             </ol>
