@@ -1354,6 +1354,10 @@ button:focus-visible {
 
 .site-stats .stat-strip { margin: 0; }
 .site-stats [hidden] { display: inline-flex; visibility: hidden; }
+/* ...but a window GoatCounter never answers collapses, so a blocked or
+   offline visitor is not left staring at an invisible gap. */
+.site-stats [data-traffic="off"] { display: none; }
+.site-stats .stat-strip strong { display: inline-block; min-width: 4ch; }
 .site-stats .stat-deals strong { font-size: 1.3em; }
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------

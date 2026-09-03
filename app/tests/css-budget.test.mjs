@@ -19,10 +19,11 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // Badge/chip wrap (overflow:visible + overflow-wrap) adds 89 B.
 // Custats sibling banner (#257) adds 1270 B muted mono strip (full-width,
 // hairline border, responsive at 320px).
-// Masthead stats rail (#279/#280/#281) adds 247 B: one flex row under the
-// header plus the visibility reservation that keeps the async traffic
-// reveal free of layout shift.
-const PYTHON_INLINE_CSS_BYTES = 38536;
+// Masthead stats rail (#279/#280/#281) adds 386 B: one flex row under the
+// header, the visibility reservation that keeps the async traffic reveal
+// free of layout shift, the mono character reservation on its counters, and
+// the data-traffic="off" collapse for windows GoatCounter never answers.
+const PYTHON_INLINE_CSS_BYTES = 38675;
 
 function cssBytesIn(dir) {
   let total = 0;

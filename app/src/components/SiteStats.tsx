@@ -13,8 +13,11 @@ import { buildDate, humanDate } from "../lib/offers"
  *
  * (1) and (2) are prerendered, so they are correct with JavaScript off and
  * are indexable. TrafficStrip arrives asynchronously, so `.site-stats`
- * reserves its box with `visibility` rather than `display` — the reveal
- * costs zero layout shift above the fold.
+ * reserves its box with `visibility` rather than `display` and the counters
+ * reserve a mono character width — the reveal fills a box that is already
+ * there instead of pushing the offer list down. A window GoatCounter never
+ * answers is marked `data-traffic="off"` and collapses, so a blocked or
+ * offline visitor never sees an empty slot.
  */
 export function SiteStats({
   activeCount,
@@ -24,21 +27,23 @@ export function SiteStats({
   generatedAt: string
 }) {
   const day = buildDate(generatedAt || "")
+  // humanDate echoes its input verbatim on a malformed date; never print that.
+  const updated = day ? humanDate(day) : ""
   return (
-    <aside className="site-stats" aria-label="Catalog and visitor stats">
+    <div className="site-stats">
       <span className="ft-stat stat-deals">
         <strong>{activeCount}</strong>{" "}
         <span className="ft-stat-label">{activeCount === 1 ? "active deal" : "active deals"}</span>
       </span>
-      {day ? (
+      {updated && updated !== day ? (
         <span className="ft-stat stat-updated">
           <span className="ft-stat-label">updated</span>{" "}
           <strong>
-            <time dateTime={generatedAt}>{humanDate(day)}</time>
+            <time dateTime={generatedAt}>{updated}</time>
           </strong>
         </span>
       ) : null}
       <TrafficStrip />
-    </aside>
+    </div>
   )
 }

@@ -916,7 +916,6 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
   it("renders the rail once, above the offer list (#279)", () => {
     const markup = home();
     expect(markup.match(/class="site-stats"/g)?.length).toBe(1);
-    expect(markup).toContain('aria-label="Catalog and visitor stats"');
     const railAt = markup.indexOf('class="site-stats"');
     const headerAt = markup.indexOf('class="site-bar"');
     const gridAt = markup.indexOf('id="ft-grid"');
@@ -957,17 +956,18 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     expect(markup).toMatch(
       new RegExp(`<time date[Tt]ime="${index.generated_at}">${expected}</time>`),
     );
-    expect(markup).toContain('<span class="ft-stat-label">updated</span>');
     // Labelled in words, never by colour alone (WCAG 1.4.1).
-    expect(markup).toMatch(/class="ft-stat stat-updated"[\s\S]*?updated/);
+    expect(markup).toContain(
+      '<span class="ft-stat stat-updated"><span class="ft-stat-label">updated</span> ',
+    );
   });
 
-  it("drops the updated chip rather than printing an empty date (#280)", () => {
-    const markup = renderToStaticMarkup(
-      <HomePage index={{ ...index, generated_at: "" }} />,
-    );
-    expect(markup).toContain('class="site-stats"');
-    expect(markup).not.toContain("stat-updated");
+  it("drops the updated chip rather than printing an unparseable date (#280)", () => {
+    for (const generated_at of ["", "not-a-date-at-all"]) {
+      const markup = renderToStaticMarkup(<HomePage index={{ ...index, generated_at }} />);
+      expect(markup).toContain('class="site-stats"');
+      expect(markup).not.toContain("stat-updated");
+    }
   });
 
   it("mounts the traffic strip in the rail on home, not in the home footer (#279)", () => {
