@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
-import HomePage from "./HomePage"
+import HomePage, { hottestSlugs } from "./HomePage"
 import {
   SEARCH_DEBOUNCE_MS,
   bindAnalyticsListeners,
@@ -974,5 +974,26 @@ describe("HomePage hot-today badge (#282)", () => {
       expect(listedSlugs()).not.toContain("alpha-image")
     })
     expect(hotSlugs()).toEqual([])
+  })
+})
+
+describe("hottestSlugs ranking boundaries (#282)", () => {
+  it("crowns a count sitting exactly on the minimum floor", () => {
+    // The floor is >=, not >: 3 views is hot, 2 is not. Pins the boundary an
+    // off-by-one would otherwise slide past.
+    expect([...hottestSlugs({ a: 3, b: 1 })]).toEqual(["a"])
+    expect([...hottestSlugs({ a: 2, b: 1 })]).toEqual([])
+  })
+
+  it("badges a tie sitting exactly on the width limit, and drops the one past it", () => {
+    // Three tied offers still mean something; four stop meaning anything.
+    expect([...hottestSlugs({ a: 5, b: 5, c: 5 })].sort()).toEqual(["a", "b", "c"])
+    expect([...hottestSlugs({ a: 5, b: 5, c: 5, d: 5 })]).toEqual([])
+  })
+
+  it("ignores nulls and never treats a zero count as absent", () => {
+    expect([...hottestSlugs({ a: 4, b: null })]).toEqual(["a"])
+    expect([...hottestSlugs({ a: 0, b: null })]).toEqual([])
+    expect([...hottestSlugs({})]).toEqual([])
   })
 })

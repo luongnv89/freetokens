@@ -129,7 +129,7 @@ export function HotBadge() {
   return (
     <span
       className="badge badge-hot"
-      title="Most-viewed offer so far today; updates a few times a day"
+      title="Among today's most-viewed offers; updates a few times a day"
     >
       <svg
         className="tag-i"
