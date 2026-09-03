@@ -126,50 +126,52 @@ export function StructuredData(props: StructuredDataProps) {
     }
   } else if (props.page === "detail") {
     const offer = props.index.offers.find((o) => o.slug === props.slug) ?? null
+    // Unknown slug: soft-404 state, not an article — skip all page markup
+    // (marking it up as TechArticle triggers irrelevant-markup warnings).
+    if (!offer) {
+      const payload = { "@context": "https://schema.org", "@graph": [org, site] }
+      return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(payload) }} />
+    }
     const detail = props.detail ?? null
     const summary = detail?.summary
       ? String(detail.summary).trim().replace(/\s+/g, " ")
-      : offer
-        ? `${offer.amount} from ${offer.provider} — free AI credits, tagged by verification level and sign-up need.`
-        : ""
-    const canonical = offer ? `${base}/offers/${offer.slug}.html` : `${base}/offers/${props.slug}.html`
+      : `${offer.amount} from ${offer.provider} — free AI credits, tagged by verification level and sign-up need.`
+    const canonical = `${base}/offers/${offer.slug}.html`
     pageNode = {
       "@type": "TechArticle",
       "@id": `${canonical}#article`,
-      headline: offer?.title ?? "Offer not found",
+      headline: offer.title,
       description: summary.slice(0, 160),
       url: canonical,
       mainEntityOfPage: { "@id": canonical },
       author: { "@id": `${base}/#organization` },
       publisher: { "@id": `${base}/#organization` },
-      datePublished: offer?.verified_date ?? undefined,
-      dateModified: offer?.verified_date ?? undefined,
+      datePublished: offer.verified_date ?? undefined,
+      dateModified: offer.verified_date ?? undefined,
       isPartOf: { "@id": `${base}/#website` },
       inLanguage: "en",
     }
-    if (offer) {
-      const availability =
-        offer.status === "expired"
-          ? "https://schema.org/OutOfStock"
-          : offer.expiry_date
-            ? "https://schema.org/LimitedAvailability"
-            : "https://schema.org/InStock"
-      const offerNode: Record<string, unknown> = {
-        "@type": "Offer",
-        "@id": `${canonical}#offer`,
-        name: offer.title,
-        description: summary.slice(0, 300),
-        url: canonical,
-        price: "0",
-        priceCurrency: "USD",
-        availability,
-        seller: { "@type": "Organization", name: offer.provider },
-        category: offer.category,
-      }
-      if (offer.expiry_date) offerNode.validThrough = offer.expiry_date
-      // Expose Offer alongside article via @graph — crawler matches both to visible page content (price 0 = free).
-      listingNode = offerNode
+    // Expose Offer alongside article via @graph — crawler matches both to visible page content (price 0 = free).
+    const availability =
+      offer.status === "expired"
+        ? "https://schema.org/OutOfStock"
+        : offer.expiry_date
+          ? "https://schema.org/LimitedAvailability"
+          : "https://schema.org/InStock"
+    const offerNode: Record<string, unknown> = {
+      "@type": "Offer",
+      "@id": `${canonical}#offer`,
+      name: offer.title,
+      description: summary.slice(0, 300),
+      url: canonical,
+      price: "0",
+      priceCurrency: "USD",
+      availability,
+      seller: { "@type": "Organization", name: offer.provider },
+      category: offer.category,
     }
+    if (offer.expiry_date) offerNode.validThrough = offer.expiry_date
+    listingNode = offerNode
   }
 
   const graph: unknown[] = [org, site]
