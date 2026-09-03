@@ -13,6 +13,9 @@ function normalizeBaseUrl(baseUrl?: string): string {
   return (baseUrl?.trim() || currentBaseUrl() || DEFAULT_BASE_URL).replace(/\/+$/, "")
 }
 
+const SITE_DESCRIPTION =
+  "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page."
+
 function safeJsonLd(value: unknown): string {
   return (JSON.stringify(value) ?? "").replace(/[&<>\u2028\u2029]/g, (ch) => {
     const e: Record<string, string> = { "&": "\\u0026", "<": "\\u003C", ">": "\\u003E", "\u2028": "\\u2028", "\u2029": "\\u2029" }
@@ -37,7 +40,7 @@ function websiteNode(base: string) {
     "@id": `${base}/#website`,
     url: base + "/",
     name: "Free AI Credits",
-    description: "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
+    description: SITE_DESCRIPTION,
     publisher: { "@id": `${base}/#organization` },
     inLanguage: "en",
     potentialAction: {
@@ -64,7 +67,7 @@ export function StructuredData(props: StructuredDataProps) {
       "@id": `${base}/#webpage`,
       url: `${base}/`,
       name: "Free AI Credits — verified free AI credit offers",
-      description: "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
+      description: SITE_DESCRIPTION,
       isPartOf: { "@id": `${base}/#website` },
       about: { "@id": `${base}/#organization` },
       inLanguage: "en",

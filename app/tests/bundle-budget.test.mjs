@@ -14,9 +14,11 @@ import { gzipSync } from "node:zlib";
 //   CSS raw  32,204 B -> gzip   6,639 B   (ceiling ~20% headroom)
 // Raw-byte CSS is additionally capped against the retired Python builder's
 // inline sheet in css-budget.test.mjs; this suite guards what the wire sees.
+// 2026-09-03: JS ceiling 120_000 -> 122_000 for the site-wide JSON-LD
+// structured-data graph (#263, closes #276) — deliberate feature weight.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-export const JS_GZIP_CEILING_BYTES = 120_000;
+export const JS_GZIP_CEILING_BYTES = 122_000;
 export const CSS_GZIP_CEILING_BYTES = 8_000;
 
 function collectGzipped(dir, ext) {
