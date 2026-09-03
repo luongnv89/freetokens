@@ -80,3 +80,24 @@ export function useOfferViews(
   }, [site, key, days])
   return views
 }
+
+// "Hot today" ranking (#282). Deliberately conservative, because the input is
+// weak: only consenting visitors are counted, the counter route sits behind a
+// ~4h CDN cache, and blocked requests read as null. So a count must clear a
+// floor of 3 before it can crown anything, and a tie wider than 3 offers is
+// dropped entirely — a badge on half the list stops meaning "hot".
+const HOT_MIN_VIEWS = 3
+const HOT_MAX_TIED = 3
+
+export function hottestSlugs(views: Record<string, number | null>): ReadonlySet<string> {
+  const empty: ReadonlySet<string> = new Set<string>()
+  const counted = Object.entries(views).filter(
+    (entry): entry is [string, number] => typeof entry[1] === "number",
+  )
+  if (counted.length === 0) return empty
+  const max = Math.max(...counted.map(([, n]) => n))
+  if (max < HOT_MIN_VIEWS) return empty
+  const top = counted.filter(([, n]) => n === max).map(([slug]) => slug)
+  if (top.length > HOT_MAX_TIED) return empty
+  return new Set(top)
+}

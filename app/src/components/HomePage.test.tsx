@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
-import HomePage, { hottestSlugs } from "./HomePage"
+import HomePage from "./HomePage"
+import { hottestSlugs } from "../lib/offerStats"
 import {
   SEARCH_DEBOUNCE_MS,
   bindAnalyticsListeners,
