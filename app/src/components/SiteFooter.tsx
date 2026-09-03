@@ -15,8 +15,9 @@ const CONTACT_LINKS = [
  * `depth` is the page's directory distance from site root (0 for
  * index/archive/privacy, 1 for offers/<slug>.html) and prefixes every href
  * so links stay relative and deploy-base safe (#60).
- * TrafficStrip mounts on every page; it renders nothing when GoatCounter
- * is unconfigured and stays hidden until the all-time total arrives.
+ * TrafficStrip mounts in the footer on every page EXCEPT home, where the
+ * masthead stats rail carries it instead (#279); it renders nothing when
+ * GoatCounter is unconfigured and stays hidden until the total arrives.
  */
 export function SiteFooter({
   depth = 0,
@@ -30,7 +31,7 @@ export function SiteFooter({
   const trackingOn = isTrackingConfigured()
   return (
     <footer className="foot" id="site-footer">
-      <TrafficStrip />
+      {current === "home" ? null : <TrafficStrip />}
       <p className="foot-brand">
         <a href={homeHref}>
           <BrandMark depth={depth} size={24} />

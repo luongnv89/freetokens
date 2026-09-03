@@ -63,7 +63,7 @@ function installGtag() {
 
 function mountTrafficStrip(): HTMLElement {
   document.body.innerHTML = `
-    <p class="foot-traffic" id="${TRAFFIC_STRIP_ID}" role="status" hidden>
+    <p class="stat-strip" id="${TRAFFIC_STRIP_ID}" role="status" hidden>
       <span class="ft-stat ft-traffic-total">
         <strong id="ft-traffic-total">&mdash;</strong>
         <span class="ft-stat-label">visits</span>

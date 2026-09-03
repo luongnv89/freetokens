@@ -2,7 +2,7 @@ import { afterEach, describe, it, expect, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
-import { render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import ArchivePage from "./components/ArchivePage";
 import HomePage from "./components/HomePage";
 import PrivacyPage from "./components/PrivacyPage";
@@ -10,6 +10,9 @@ import AboutPage from "./components/AboutPage";
 import OfferDetailPage from "./components/OfferDetailPage";
 import { FILTER_DIMENSIONS, configureAnalytics, resetAnalyticsForTests } from "./lib/analytics";
 import {
+  activeOffers,
+  buildDate,
+  humanDate,
   SIGNUP_LABELS,
   VERIFICATION_LABELS,
   REVIEW_STATUS_LABELS,
@@ -896,5 +899,129 @@ describe("brand assets (#106 / #132)", () => {
       expect(svg).toContain(w);
       expect(svg).toContain(h);
     }
+  });
+});
+
+// Masthead stats rail (#279 move visitor stats to the top, #280 highlight the
+// data's last-updated time, #281 surface the total active-deal count). One
+// strip under the header carries all three.
+describe("masthead stats rail (#279 / #280 / #281)", () => {
+  afterEach(() => {
+    resetAnalyticsForTests();
+    configureAnalytics({ statsSite: "" });
+  });
+
+  const home = () => renderToStaticMarkup(<HomePage index={index} />);
+
+  it("renders the rail once, above the offer list (#279)", () => {
+    const markup = home();
+    expect(markup.match(/class="site-stats"/g)?.length).toBe(1);
+    expect(markup).toContain('aria-label="Catalog and visitor stats"');
+    const railAt = markup.indexOf('class="site-stats"');
+    const headerAt = markup.indexOf('class="site-bar"');
+    const gridAt = markup.indexOf('id="ft-grid"');
+    expect(headerAt).toBeGreaterThan(-1);
+    expect(railAt).toBeGreaterThan(headerAt);
+    expect(gridAt).toBeGreaterThan(railAt);
+  });
+
+  it("prerenders the total active-deal count, unfiltered (#281)", () => {
+    const markup = home();
+    const total = activeOffers(index).length;
+    expect(total).toBeGreaterThan(0);
+    expect(markup).toContain(
+      `<span class="ft-stat stat-deals"><strong>${total}</strong> <span class="ft-stat-label">active deals</span></span>`,
+    );
+  });
+
+  it("uses a singular label for a single active deal (#281)", () => {
+    const one: OffersIndex = { ...index, offers: [offer()] };
+    const markup = renderToStaticMarkup(<HomePage index={one} />);
+    expect(markup).toContain('<strong>1</strong> <span class="ft-stat-label">active deal</span>');
+  });
+
+  it("counts only active offers — expired entries never inflate it (#281)", () => {
+    const mixed: OffersIndex = {
+      ...index,
+      offers: [offer(), offer({ slug: "gone", status: "expired" })],
+    };
+    const markup = renderToStaticMarkup(<HomePage index={mixed} />);
+    expect(markup).toContain('<strong>1</strong> <span class="ft-stat-label">active deal</span>');
+  });
+
+  it("shows the build's last-updated date as machine-readable <time> (#280)", () => {
+    const markup = home();
+    const expected = humanDate(buildDate(index.generated_at));
+    // HTML attribute names are ASCII case-insensitive; React 19 emits the
+    // JSX spelling verbatim, so match either casing.
+    expect(markup).toMatch(
+      new RegExp(`<time date[Tt]ime="${index.generated_at}">${expected}</time>`),
+    );
+    expect(markup).toContain('<span class="ft-stat-label">updated</span>');
+    // Labelled in words, never by colour alone (WCAG 1.4.1).
+    expect(markup).toMatch(/class="ft-stat stat-updated"[\s\S]*?updated/);
+  });
+
+  it("drops the updated chip rather than printing an empty date (#280)", () => {
+    const markup = renderToStaticMarkup(
+      <HomePage index={{ ...index, generated_at: "" }} />,
+    );
+    expect(markup).toContain('class="site-stats"');
+    expect(markup).not.toContain("stat-updated");
+  });
+
+  it("mounts the traffic strip in the rail on home, not in the home footer (#279)", () => {
+    configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
+    const markup = home();
+    expect(markup.match(/id="ft-traffic"/g)?.length).toBe(1);
+    const railAt = markup.indexOf('class="site-stats"');
+    const stripAt = markup.indexOf('id="ft-traffic"');
+    const footerAt = markup.indexOf('id="site-footer"');
+    expect(stripAt).toBeGreaterThan(railAt);
+    expect(stripAt).toBeLessThan(footerAt);
+    expect(markup).toContain('class="stat-strip"');
+    expect(markup).not.toContain('class="foot-traffic"');
+  });
+
+  it("keeps the traffic strip in the footer on every other page (#279)", () => {
+    configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
+    const others = [
+      renderToStaticMarkup(<ArchivePage index={index} />),
+      renderToStaticMarkup(<PrivacyPage />),
+      renderToStaticMarkup(<AboutPage index={index} />),
+      renderToStaticMarkup(
+        <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
+      ),
+    ];
+    for (const markup of others) {
+      expect(markup.match(/id="ft-traffic"/g)?.length).toBe(1);
+      expect(markup).not.toContain('class="site-stats"');
+      expect(markup.indexOf('id="ft-traffic"')).toBeGreaterThan(
+        markup.indexOf('id="site-footer"'),
+      );
+    }
+  });
+
+  it("renders no traffic markup in the rail when GoatCounter is unset (#279)", () => {
+    const markup = home();
+    expect(markup).toContain('class="site-stats"');
+    expect(markup).not.toContain("ft-traffic");
+  });
+
+  it("keeps the total fixed while the toolbar counter follows the filter (#281)", async () => {
+    render(<HomePage index={index} />);
+    const total = activeOffers(index).length;
+    const deals = () =>
+      document.querySelector(".stat-deals strong")?.textContent ?? "";
+    expect(deals()).toBe(String(total));
+    const search = document.getElementById("ft-search") as HTMLInputElement;
+    fireEvent.change(search, { target: { value: "zzzznomatchzzzz" } });
+    await waitFor(() => {
+      expect(document.getElementById("ft-results-status")?.textContent).toContain(
+        `of ${total} offers`,
+      );
+    });
+    // The rail is the catalog total; only the toolbar line narrows.
+    expect(deals()).toBe(String(total));
   });
 });

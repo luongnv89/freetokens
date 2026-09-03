@@ -19,7 +19,10 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // Badge/chip wrap (overflow:visible + overflow-wrap) adds 89 B.
 // Custats sibling banner (#257) adds 1270 B muted mono strip (full-width,
 // hairline border, responsive at 320px).
-const PYTHON_INLINE_CSS_BYTES = 38289;
+// Masthead stats rail (#279/#280/#281) adds 247 B: one flex row under the
+// header plus the visibility reservation that keeps the async traffic
+// reveal free of layout shift.
+const PYTHON_INLINE_CSS_BYTES = 38536;
 
 function cssBytesIn(dir) {
   let total = 0;

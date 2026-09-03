@@ -40,6 +40,7 @@ import {
 import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
+import { SiteStats } from "./SiteStats"
 import { Breadcrumbs } from "./Breadcrumbs"
 import { StructuredData } from "./StructuredData"
 import { Button } from "./ui/button"
@@ -535,6 +536,7 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
       <div className="wrap">
         <main>
         <SiteHeader current="home" />
+        <SiteStats activeCount={offers.length} generatedAt={index.generated_at} />
         <Breadcrumbs page="home" />
 
         {offers.length > 0 ? (
