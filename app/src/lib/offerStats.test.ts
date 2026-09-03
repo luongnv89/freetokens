@@ -86,3 +86,67 @@ describe("per-offer GoatCounter view counters (#101)", () => {
     expect(fetchImpl).not.toHaveBeenCalled()
   })
 })
+
+describe("windowed per-offer counters for the hot ranking (#282)", () => {
+  // Local-time noon so no timezone or DST edge can shift a calendar day.
+  const NOW = new Date(2026, 8, 3, 12, 0, 0)
+
+  function params(url: string) {
+    const q = new URL(url).searchParams
+    return { start: q.get("start"), end: q.get("end") }
+  }
+
+  it("stays byte-identical to the legacy unwindowed URL when days is omitted", () => {
+    const legacy = `${SITE}/counter/%2Foffers%2Fgmi-free-tier.html.json`
+    expect(ftOfferViewsUrl("gmi-free-tier", SITE)).toBe(legacy)
+    expect(ftOfferViewsUrl("gmi-free-tier", SITE, null)).toBe(legacy)
+    expect(ftOfferViewsUrl("gmi-free-tier", SITE, undefined, NOW)).toBe(legacy)
+  })
+
+  it("windows days=1 on today with an exclusive tomorrow end (#102)", () => {
+    const url = ftOfferViewsUrl("gmi-free-tier", SITE, 1, NOW)
+    expect(url.startsWith(`${SITE}/counter/%2Foffers%2Fgmi-free-tier.html.json?`)).toBe(true)
+    const { start, end } = params(url)
+    expect(start).toBe("2026-09-03")
+    expect(end).toBe("2026-09-04")
+    expect(start).not.toBe(end)
+  })
+
+  it("counts calendar days inclusive of today for a wider span", () => {
+    expect(params(ftOfferViewsUrl("a", SITE, 2, NOW))).toEqual({
+      start: "2026-09-02",
+      end: "2026-09-04",
+    })
+  })
+
+  it("clamps zero and negative spans to a single day rather than collapsing the window", () => {
+    for (const days of [0, -1, -30]) {
+      const { start, end } = params(ftOfferViewsUrl("a", SITE, days, NOW))
+      expect(start).toBe("2026-09-03")
+      expect(end).toBe("2026-09-04")
+      expect(start).not.toBe(end)
+    }
+  })
+
+  it("never emits a cache-buster — GoatCounter keys its CDN on start/end only", () => {
+    const url = new URL(ftOfferViewsUrl("a", SITE, 1, NOW))
+    expect([...url.searchParams.keys()].sort()).toEqual(["end", "start"])
+  })
+
+  it("forwards the window into every fetch while keeping null seeding and silent failure", async () => {
+    const seen: string[] = []
+    const fetchImpl = vi.fn(async (url: string) => {
+      seen.push(url)
+      if (url.includes("blocked")) throw new Error("network blocked")
+      return counterResponse("4")
+    })
+    const views = await fetchOfferViews(
+      ["alpha", "blocked"],
+      SITE,
+      fetchImpl as unknown as typeof fetch,
+      1,
+    )
+    expect(views).toEqual({ alpha: 4, blocked: null })
+    expect(seen.every((u) => u.includes("start=") && u.includes("end="))).toBe(true)
+  })
+})
