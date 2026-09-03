@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T22:46:02Z",
+  "generated_at": "2026-09-03T08:37:33Z",
   "count": 63,
   "active_count": 47,
   "expired_count": 16,
@@ -42,7 +42,7 @@
       "source_url": "https://opencode.ai/docs/zen/",
       "verified_date": "2026-09-02",
       "verification": "social_proof",
-      "review_status": "under-review",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },

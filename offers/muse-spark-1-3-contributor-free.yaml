@@ -1,4 +1,6 @@
 # Verified 2026-09-02 against https://opencode.ai/docs/zen/
+# Confirmed via user screenshot: Muse Spark 1.3 Free running on OpenCode Zen
+# at 206.3 tok/s with "high" quality setting.
 # Muse Spark 1.3 Contributor Free is available on OpenCode Zen for a limited time.
 # It is the Contributor tier: free in exchange for permission to use your prompts
 # and completions to train future Meta models. The standard Muse Spark 1.3 remains
@@ -11,5 +13,5 @@ expiry_date: null
 source_url: https://opencode.ai/docs/zen/
 verified_date: 2026-09-02
 verification: social_proof
-review_status: under-review
+review_status: verified
 signup: required

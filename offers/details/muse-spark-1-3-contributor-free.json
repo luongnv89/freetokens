@@ -1,5 +1,5 @@
 {
-  "summary": "Muse Spark 1.3 Contributor Free is available on OpenCode Zen for a limited time. This is Meta's Contributor tier: free access in exchange for permission to use your prompts and completions to train future Meta models. The standard Muse Spark 1.3 remains paid on other platforms.",
+  "summary": "Muse Spark 1.3 Contributor Free is available on OpenCode Zen for a limited time. This is Meta's Contributor tier: free access in exchange for permission to use your prompts and completions to train future Meta models. The standard Muse Spark 1.3 remains paid on other platforms. Confirmed via user screenshot showing Muse Spark 1.3 Free running on OpenCode Zen at 206.3 tok/s with high quality setting.",
   "claim_steps": [
     "Sign in to OpenCode Zen at opencode.ai/zen.",
     "Select the Muse Spark 1.3 Contributor Free model.",
@@ -7,6 +7,11 @@
     "Note: Meta may use your prompts and completions to train future models."
   ],
   "social_proof": [
+    {
+      "type": "screenshot",
+      "image": "assets/shots/muse-spark-1-3-opencode.jpg",
+      "caption": "Muse Spark 1.3 Free running on OpenCode Zen at 206.3 tok/s with high quality setting"
+    },
     {
       "type": "link",
       "url": "https://opencode.ai/docs/zen/",
