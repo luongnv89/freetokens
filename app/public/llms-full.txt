@@ -2,20 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-03T15:12:45Z — 47 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-03T19:01:24Z — 47 active offers.
 
 ## Offers (full)
 
-### ZCode 100M Free GLM-5.3-Flash Tokens
+### ZCode Global Build — Free GLM-5.3-Flash (Round 4)
 - Provider: ZCode
 - Category: coding
-- Amount: 100M free GLM-5.3-Flash tokens (Round 3; 10,000 packs; expires Sep 3, 9PM ET)
-- Status: active — expiry 2026-09-03
+- Amount: Free GLM-5.3-Flash in ZCode — 10h/day, Sep 3–18; 100M tokens for new users
+- Status: active — expiry 2026-09-18
 - Verified: 2026-09-03 (social_proof / under-review, signup required)
 - Source: https://zcode.z.ai/
 - Page: https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html
-- Summary: ZCode Global Build Round 3 is offering 100 million free GLM-5.3-Flash tokens to new users. This is a recurring promotional event: Round 1 ran on August 16 and was paused after about one hour due to demand; Round 2 ran August 21-23. Tokens are locked to the ZCode desktop app, do not roll over, and expire when the event ends.
-- Claim steps: Be a new ZCode user without an active paid coding plan. | Log into the ZCode desktop app during the promotional window. | The 100M token grant is credited automatically — no separate claim form or promo code. | Use the tokens inside ZCode before the event ends; unused tokens expire.
+- Summary: ZCode Global Build Round 4 is live — GLM-5.3-Flash is free in ZCode from Sep 3–18 with 10 hours/day. Coding Plan members get it every day; new users get 100M free tokens on sign-up (one-time, valid until the window closes). This is a recurring promotional event: Round 1 (Aug 16, paused after ~1 hour), Round 2 (Aug 21-23), Round 3 (Sep 3, 1 day). Round 4 runs for 15 days.
+- Claim steps: Be a new ZCode user without an active paid coding plan. | Log into the ZCode desktop app during the promotional window. | Tap the card in the bottom-left corner to claim. | If the card is not visible, restart the app. | Use the tokens inside ZCode before Sep 18; unused tokens expire.
 
 ### Z AI Free Model APIs
 - Provider: Z AI (Zhipu AI)
