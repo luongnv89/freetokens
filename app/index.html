@@ -10,9 +10,9 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-    <link rel="preconnect" href="https://gc.zgo.at" crossorigin />
+    <!-- dns-prefetch only: analytics scripts load after explicit consent
+         (see lib/analytics.ts), so no preconnect — an unused preconnect burns
+         a TLS handshake on the critical path and hurts FCP. -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://gc.zgo.at" />
     <meta
