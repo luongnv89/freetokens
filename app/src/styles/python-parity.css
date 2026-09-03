@@ -53,6 +53,7 @@
   --t-none: var(--color-tag-none);
   --t-required: var(--color-tag-required);
   --t-expired: var(--color-tag-expired);
+  --t-hot: var(--color-hot);
 }
 
 * { box-sizing: border-box; }
@@ -293,6 +294,12 @@ h1 {
    the muted styling is decoration only, never the sole signal. */
 .badge-expired {
   --tag-hue: var(--t-expired);
+}
+
+/* "Hot today" badge (#282): same deal — the words carry the meaning, the
+   flame repeats it, and the hue is decoration only. */
+.badge-hot {
+  --tag-hue: var(--t-hot);
 }
 
 /* Link-form tags (/archive, offer detail) navigate to the home listing with
