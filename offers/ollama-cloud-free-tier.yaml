@@ -1,12 +1,17 @@
-# Verified 2026-08-31 against https://ollama.com/pricing
-# ("Free Get started with Ollama $0 ... Each plan has session limits that reset every 5 hours and weekly limits that reset every 7 days.")
+# Verified 2026-09-03 against https://ollama.com/pricing
+# ("Free accounts include a starter amount of usage for a smaller set of
+# starter models. Adding extra credits unlocks all models." / "On the Free
+# plan, usage resets monthly from the date you signed up." / "Running models
+# on your own hardware is always unlimited.") The old 5-hour session / 7-day
+# weekly reset wording is gone ("session and weekly limits of the old plans
+# no longer apply").
 title: Ollama Cloud Free Tier
 provider: Ollama
 category: api_provider
-amount: Light cloud usage on the $0 Free plan, with limits resetting every 5 hours and 7 days
+amount: Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited
 expiry_date: null
 source_url: https://ollama.com/pricing
-verified_date: 2026-08-31
+verified_date: 2026-09-03
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: verified

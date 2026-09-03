@@ -1,14 +1,17 @@
-# Verified 2026-08-28 against https://fal.ai/tools/minimax-h3-max
-# ("Video in seconds, free." / "Try it with no sign-up. Up to 15 free
-# videos a day with an account.")
-# T2V + I2V: the tool turns "a prompt or an image into a 768p clip".
+# Verified 2026-09-03 against https://fal.ai/minimax-h3-max
+# ("How to get five free H3 Max videos a day" / "five free generations
+# a day at up to 15 seconds each, with synchronized audio" /
+# "the first five generations a day are free" / "Sign in and run it in
+# the fal sandbox"). Previous "up to 15 free videos/day" figure no longer
+# on page; allowance resets on a rolling 24-hour window, sign-in required.
+# T2V + I2V: "text-to-video and image-to-video" endpoints on the same model.
 title: fal — MiniMax H3 Max Free Generations (T2V + I2V)
 provider: fal
 category: video
-amount: MiniMax H3 Max free — text-to-video and image-to-video, up to 15 free videos/day (no sign-up needed for the no-account path)
+amount: MiniMax H3 Max free — text-to-video and image-to-video, 5 free videos/day up to 15s each (account required, resets every 24h)
 expiry_date: null
-source_url: https://fal.ai/tools/minimax-h3-max
-verified_date: 2026-08-28
+source_url: https://fal.ai/minimax-h3-max
+verified_date: 2026-09-03
 verification: social_proof
-signup: none
+signup: required
 review_status: verified
