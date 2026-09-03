@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import HomePage from "./HomePage"
+import { hottestSlugs } from "../lib/offerStats"
 import {
   SEARCH_DEBOUNCE_MS,
   bindAnalyticsListeners,
@@ -856,5 +857,144 @@ describe("HomePage per-offer live view counts (#101)", () => {
     expect(el?.querySelector(".ft-stat-label")?.textContent).toBe("views")
     expect(el?.closest(".row-head")).not.toBeNull()
     expect(el?.closest(".row-meta")).toBeNull()
+  })
+})
+
+describe("HomePage hot-today badge (#282)", () => {
+  function counterResponse(count: unknown, ok = true) {
+    return {
+      ok,
+      json: async () => ({ count }),
+    } as unknown as Response
+  }
+
+  // GoatCounter is asked twice per slug: once unwindowed (the "N views" chip)
+  // and once with ?start=/&end= (today, the hot ranking). The stub answers each
+  // from its own table so a test can prove which map decides the badge.
+  function stubCounters(
+    today: Record<string, number | null>,
+    // Defaults to the same table so a test that only cares about the ranking
+    // still renders the "N views" chip it waits on.
+    allTime: Record<string, number | null> = today,
+  ) {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: RequestInfo | URL) => {
+        const href = String(url)
+        const slug = decodeURIComponent(href).match(/\/offers\/([^.]+)\.html/)?.[1] ?? ""
+        const table = href.includes("start=") ? today : allTime
+        const value = table[slug]
+        if (typeof value !== "number") throw new Error("no count")
+        return counterResponse(String(value))
+      }),
+    )
+  }
+
+  function hotSlugs() {
+    return [...document.querySelectorAll("#ft-grid .badge-hot")].map(
+      (el) => el.closest("article")?.id.replace(/^offer-/, "") ?? "",
+    )
+  }
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it("badges the offer with the most views today, not the all-time leader", async () => {
+    configureAnalytics({ statsSite: SITE })
+    stubCounters(
+      { "alpha-copilot": 4, "alpha-image": 40, "alpha-social": 1 },
+      { "alpha-copilot": 9000, "alpha-image": 3, "alpha-social": 12 },
+    )
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(document.querySelector(".badge-hot")).not.toBeNull()
+    })
+    expect(hotSlugs()).toEqual(["alpha-image"])
+    expect(screen.getAllByText("Hot today")).toHaveLength(1)
+  })
+
+  it("badges nothing when every windowed counter is blocked or unconfigured", async () => {
+    configureAnalytics({ statsSite: SITE })
+    stubCounters({}, { "alpha-copilot": 500 })
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(document.querySelector("#offer-alpha-copilot .r-views")).not.toBeNull()
+    })
+    await act(async () => {})
+    expect(hotSlugs()).toEqual([])
+  })
+
+  it("holds a floor: two views today is not hot", async () => {
+    configureAnalytics({ statsSite: SITE })
+    stubCounters({ "alpha-copilot": 2, "alpha-image": 1 })
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(document.querySelector("#offer-alpha-copilot .r-views")).not.toBeNull()
+    })
+    await act(async () => {})
+    expect(hotSlugs()).toEqual([])
+  })
+
+  it("badges every offer in a narrow tie at the top", async () => {
+    configureAnalytics({ statsSite: SITE })
+    stubCounters({ "alpha-copilot": 7, "alpha-image": 7, "alpha-social": 2 })
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(document.querySelectorAll(".badge-hot").length).toBe(2)
+    })
+    expect(hotSlugs().sort()).toEqual(["alpha-copilot", "alpha-image"])
+  })
+
+  it("suppresses the badge when the tie is wide enough to stop meaning anything", async () => {
+    configureAnalytics({ statsSite: SITE })
+    stubCounters({
+      "alpha-copilot": 7,
+      "alpha-image": 7,
+      "alpha-social": 7,
+      "alpha-free": 7,
+    })
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(document.querySelector("#offer-alpha-copilot .r-views")).not.toBeNull()
+    })
+    await act(async () => {})
+    expect(hotSlugs()).toEqual([])
+  })
+
+  it("ranks over the whole catalogue, so filtering never crowns a different offer", async () => {
+    configureAnalytics({ statsSite: SITE })
+    stubCounters({ "alpha-copilot": 4, "alpha-image": 40 })
+    render(<HomePage index={index} />)
+    await waitFor(() => {
+      expect(hotSlugs()).toEqual(["alpha-image"])
+    })
+    // "coding" excludes alpha-image, the hot offer — no survivor is promoted.
+    fireEvent.click(categoryChip("coding"))
+    await waitFor(() => {
+      expect(listedSlugs()).not.toContain("alpha-image")
+    })
+    expect(hotSlugs()).toEqual([])
+  })
+})
+
+describe("hottestSlugs ranking boundaries (#282)", () => {
+  it("crowns a count sitting exactly on the minimum floor", () => {
+    // The floor is >=, not >: 3 views is hot, 2 is not. Pins the boundary an
+    // off-by-one would otherwise slide past.
+    expect([...hottestSlugs({ a: 3, b: 1 })]).toEqual(["a"])
+    expect([...hottestSlugs({ a: 2, b: 1 })]).toEqual([])
+  })
+
+  it("badges a tie sitting exactly on the width limit, and drops the one past it", () => {
+    // Three tied offers still mean something; four stop meaning anything.
+    expect([...hottestSlugs({ a: 5, b: 5, c: 5 })].sort()).toEqual(["a", "b", "c"])
+    expect([...hottestSlugs({ a: 5, b: 5, c: 5, d: 5 })]).toEqual([])
+  })
+
+  it("ignores nulls and never treats a zero count as absent", () => {
+    expect([...hottestSlugs({ a: 4, b: null })]).toEqual(["a"])
+    expect([...hottestSlugs({ a: 0, b: null })]).toEqual([])
+    expect([...hottestSlugs({})]).toEqual([])
   })
 })

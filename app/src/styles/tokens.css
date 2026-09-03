@@ -50,6 +50,11 @@
   --color-tag-none: #15803d;
   --color-tag-required: #5f6673;
   --color-tag-expired: #5f6673;
+
+  /* Ranking accent — deliberately NOT a --color-tag-* token: "Hot today"
+     (#282) is a computed ranking, not a filterable tag family, and the tag
+     token count is asserted in design-tokens.test.mjs. 6.57:1 on paper. */
+  --color-hot: #b42318;
 }
 
 /*

@@ -33,6 +33,17 @@ window) and show `<count> views` next to the offer. Same rules apply: it
 needs *Allow adding visitor counts on your website* enabled, degrades to
 nothing when unreachable, and is subject to the same CDN cache lag.
 
+The home page reads the same per-offer route a **second** time with a
+`?start=&end=` day window (`ftOfferViewsUrl(slug, site, 1)`) to rank the
+"Hot today" badge (#282). The window arithmetic is the one `ftCounterUrl`
+uses — `end` is exclusive midnight, so a one-day window ends tomorrow and
+`start` never equals `end` (#102). GoatCounter windows by calendar **date**,
+not by timestamp, so a rolling last-24h figure is not expressible on this
+route; the badge says "today" because that is what the data can honestly
+mean. It costs one extra counter request per offer, all of them CDN-cached
+on (path, start, end), and it inherits every caveat above: up to ~4h stale,
+consent-gated, and silently absent when GoatCounter is blocked.
+
 When a visitor allows counting and follows an offer's "Claim" link, the
 delegated outbound-click handler additionally reports a GoatCounter
 **event** (`offer_click:<slug>`) via the already-loaded count.js — no new

@@ -23,7 +23,10 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // onto the home document only, so the shared sheet does not carry .site-stats
 // rules. Production `vite build` measures 38327 B (38 B over the pre-rail
 // 38289 freeze) from Tailwind picking up tokens in that inlined string.
-const PYTHON_INLINE_CSS_BYTES = 38327;
+// "Hot today" badge (#282) adds the ranking hue token, its --t-* alias, and
+// the single .badge-hot rule that binds them. Production `vite build`
+// measures 38387 B (60 B over the post-rail 38327 freeze).
+const PYTHON_INLINE_CSS_BYTES = 38387;
 
 function cssBytesIn(dir) {
   let total = 0;

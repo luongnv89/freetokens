@@ -14,7 +14,7 @@ import { TAG_ICONS } from "../lib/tagIcons"
 import { ftFormatCount } from "../lib/analytics"
 import type { FilterDimension } from "../lib/urlState"
 import { Badge } from "./ui/badge"
-import { ReviewStatusBadge } from "./Badge"
+import { HotBadge, ReviewStatusBadge } from "./Badge"
 
 // Tag glyphs ship as ONE inline <symbol> sprite per page, referenced by
 // <use> — mirrors build.py _icon_sprite/_SYMBOL so rows keep the same
@@ -101,6 +101,7 @@ export function OfferRow({
   onToggleSave,
   onDismiss,
   views = null,
+  hot = false,
 }: {
   offer: Offer
   index: number
@@ -111,6 +112,7 @@ export function OfferRow({
   onToggleSave?: (slug: string) => void
   onDismiss?: (slug: string) => void
   views?: number | null
+  hot?: boolean
 }) {
   const detailHref = `offers/${offer.slug}.html`
   return (
@@ -147,6 +149,7 @@ export function OfferRow({
           )}
         </div>
         <p className="row-meta">
+          {hot ? <HotBadge /> : null}
           <TagButton
             dimension="category"
             value={offer.category}

@@ -26,7 +26,7 @@ import {
   writeSavedSlugs,
 } from "../lib/personalState"
 import { TAG_ICONS } from "../lib/tagIcons"
-import { useOfferViews } from "../lib/offerStats"
+import { hottestSlugs, useOfferViews } from "../lib/offerStats"
 import {
   DIMENSIONS,
   emptyState,
@@ -329,6 +329,14 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
 
   const offerSlugs = useMemo(() => activeOffers(index).map((o) => o.slug), [index])
   const views = useOfferViews(offerSlugs)
+  // Second, windowed read of the same public counters. GoatCounter windows by
+  // calendar DATE, so `days: 1` is "today so far" — the honest approximation
+  // of "last 24h" this stack can express. Ranked over the FULL slug list, never
+  // over what is currently on screen, so filtering or searching can never crown
+  // a different offer. Placed after the all-time hook on purpose: effect order
+  // keeps the unwindowed request first.
+  const todayViews = useOfferViews(offerSlugs, 1)
+  const hotSlugs = useMemo(() => hottestSlugs(todayViews), [todayViews])
 
   function commit(patch: Partial<UrlState>, source: "search" | "sort" | "filter") {
     const next: UrlState = { ...stateRef.current, ...patch }
@@ -580,6 +588,7 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
                   onToggleSave={onToggleSave}
                   onDismiss={onDismiss}
                   views={views[offer.slug] ?? null}
+                  hot={hotSlugs.has(offer.slug)}
                 />
               ))}
             </ol>
