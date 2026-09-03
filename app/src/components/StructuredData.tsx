@@ -61,7 +61,9 @@ export function StructuredData(props: StructuredDataProps) {
 
   if (props.page === "home") {
     const offers = activeOffers(props.index)
-    const top = offers.slice(0, 20)
+    // Top 10 only: the full directory is one click away, and every extra
+    // kilobyte in <head>-adjacent markup costs FCP milliseconds (LH budget #209).
+    const top = offers.slice(0, 10)
     pageNode = {
       "@type": "CollectionPage",
       "@id": `${base}/#webpage`,
@@ -74,7 +76,7 @@ export function StructuredData(props: StructuredDataProps) {
     }
     listingNode = {
       "@type": "ItemList",
-      name: "Active free AI credit offers",
+      name: "Top 10 active free AI credit offers",
       numberOfItems: offers.length,
       itemListElement: top.map((o, i) => ({
         "@type": "ListItem",
