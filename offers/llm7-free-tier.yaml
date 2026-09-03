@@ -6,7 +6,7 @@ category: api_provider
 amount: Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day
 expiry_date: null
 source_url: https://docs.llm7.io/limits
-verified_date: 2026-08-31
+verified_date: 2026-09-03
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified

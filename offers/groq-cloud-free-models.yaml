@@ -7,7 +7,7 @@ category: api_provider
 amount: Free tier with gpt-oss-120b and Qwen 3.6/3.8 27B, rate-limited, no credit card
 expiry_date: null
 source_url: https://groq.com/pricing/
-verified_date: 2026-09-01
+verified_date: 2026-09-03
 verification: social_proof
 review_status: under-review
 signup: required

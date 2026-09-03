@@ -6,7 +6,7 @@ category: api_provider
 amount: Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash
 expiry_date: null
 source_url: https://docs.z.ai/guides/overview/pricing.md
-verified_date: 2026-08-31
+verified_date: 2026-09-03
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified
