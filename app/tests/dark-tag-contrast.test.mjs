@@ -21,7 +21,10 @@ import path from "node:path";
  */
 
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
-const tokens = readFileSync(path.join(APP_ROOT, "src/styles/tokens.css"), "utf8");
+const tokens = readFileSync(
+  path.join(APP_ROOT, "src/styles/tokens.css"),
+  "utf8",
+);
 const parity = readFileSync(
   path.join(APP_ROOT, "src/styles/python-parity.css"),
   "utf8",
@@ -29,7 +32,9 @@ const parity = readFileSync(
 
 /** Read a hex-valued @theme token straight out of tokens.css. */
 function token(name) {
-  const m = tokens.match(new RegExp(`(?<![\\w-])${name}: (#[0-9a-fA-F]{6})\\b`));
+  const m = tokens.match(
+    new RegExp(`(?<![\\w-])${name}: (#[0-9a-fA-F]{6})\\b`),
+  );
   if (!m) throw new Error(`token ${name} missing from tokens.css`);
   return m[1].toLowerCase();
 }
@@ -102,7 +107,10 @@ describe("dark listing tag contrast", () => {
         [SURFACE, "row surface"],
         [SURFACE_2, "row hover surface"],
       ]) {
-        expect(contrast(text, ground), `${name} on ${label}`).toBeGreaterThanOrEqual(4.5);
+        expect(
+          contrast(text, ground),
+          `${name} on ${label}`,
+        ).toBeGreaterThanOrEqual(4.5);
       }
     }
   });
@@ -111,7 +119,9 @@ describe("dark listing tag contrast", () => {
     // Active fills with the same 60% mix and writes in --paper.
     for (const name of HUE_TOKENS) {
       const lifted = mix(token(name), TEXT_MIX, "#ffffff");
-      expect(contrast(PAPER, lifted), `${name} active`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(PAPER, lifted), `${name} active`).toBeGreaterThanOrEqual(
+        4.5,
+      );
     }
   });
 
@@ -120,9 +130,17 @@ describe("dark listing tag contrast", () => {
     const muted = token("--color-muted");
     const green = token("--color-accent");
     for (const ground of [PAPER, SURFACE, SURFACE_2]) {
-      expect(contrast(ink, ground), `ink on ${ground}`).toBeGreaterThanOrEqual(4.5);
-      expect(contrast(muted, ground), `muted on ${ground}`).toBeGreaterThanOrEqual(4.5);
-      expect(contrast(green, ground), `accent on ${ground}`).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(ink, ground), `ink on ${ground}`).toBeGreaterThanOrEqual(
+        4.5,
+      );
+      expect(
+        contrast(muted, ground),
+        `muted on ${ground}`,
+      ).toBeGreaterThanOrEqual(4.5);
+      expect(
+        contrast(green, ground),
+        `accent on ${ground}`,
+      ).toBeGreaterThanOrEqual(4.5);
     }
   });
 

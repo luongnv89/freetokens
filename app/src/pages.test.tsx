@@ -8,7 +8,11 @@ import HomePage from "./components/HomePage";
 import PrivacyPage from "./components/PrivacyPage";
 import AboutPage from "./components/AboutPage";
 import OfferDetailPage from "./components/OfferDetailPage";
-import { FILTER_DIMENSIONS, configureAnalytics, resetAnalyticsForTests } from "./lib/analytics";
+import {
+  FILTER_DIMENSIONS,
+  configureAnalytics,
+  resetAnalyticsForTests,
+} from "./lib/analytics";
 import {
   activeOffers,
   buildDate,
@@ -59,7 +63,9 @@ function breadcrumbJson(markup: string): BreadcrumbJson {
     if (start < 0) break;
     const end = markup.indexOf("</script>", start);
     if (end < 0) break;
-    const parsed = JSON.parse(markup.slice(start + marker.length, end)) as BreadcrumbJson;
+    const parsed = JSON.parse(
+      markup.slice(start + marker.length, end),
+    ) as BreadcrumbJson;
     if (parsed["@type"] === "BreadcrumbList") return parsed;
     cursor = end + "</script>".length;
   }
@@ -88,7 +94,8 @@ function graphNodeTypes(markup: string): unknown[] {
   const types: unknown[] = [];
   for (const block of allJsonLd(markup)) {
     if (Array.isArray(block["@graph"])) {
-      for (const node of block["@graph"] as Record<string, unknown>[]) types.push(node["@type"]);
+      for (const node of block["@graph"] as Record<string, unknown>[])
+        types.push(node["@type"]);
     } else {
       types.push(block["@type"]);
     }
@@ -117,13 +124,17 @@ describe("SSR breadcrumbs (#208)", () => {
         urls: [`${DEFAULT_BASE_URL}/`, `${DEFAULT_BASE_URL}/archive.html`],
       },
       {
-        markup: renderToStaticMarkup(<PrivacyPage baseUrl={DEFAULT_BASE_URL} />),
+        markup: renderToStaticMarkup(
+          <PrivacyPage baseUrl={DEFAULT_BASE_URL} />,
+        ),
         names: ["Offers", "Privacy"],
         href: "./index.html",
         urls: [`${DEFAULT_BASE_URL}/`, `${DEFAULT_BASE_URL}/privacy.html`],
       },
       {
-        markup: renderToStaticMarkup(<AboutPage index={index} baseUrl={DEFAULT_BASE_URL} />),
+        markup: renderToStaticMarkup(
+          <AboutPage index={index} baseUrl={DEFAULT_BASE_URL} />,
+        ),
         names: ["Offers", "About"],
         href: "./index.html",
         urls: [`${DEFAULT_BASE_URL}/`, `${DEFAULT_BASE_URL}/about.html`],
@@ -146,7 +157,10 @@ describe("SSR breadcrumbs (#208)", () => {
     ];
 
     for (const page of pages) {
-      const document = new DOMParser().parseFromString(page.markup, "text/html");
+      const document = new DOMParser().parseFromString(
+        page.markup,
+        "text/html",
+      );
       const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
       expect(nav).not.toBeNull();
       expect(breadcrumbLabels(page.markup)).toEqual(page.names);
@@ -168,7 +182,7 @@ describe("SSR breadcrumbs (#208)", () => {
     // Breadcrumbs component renders for JSON-LD but with zero items (no self-link)
     const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
     expect(nav).not.toBeNull();
-    expect(nav!.querySelectorAll('li').length).toBe(0);
+    expect(nav!.querySelectorAll("li").length).toBe(0);
     expect(markup).toContain('"@type":"BreadcrumbList"');
   });
 
@@ -189,7 +203,10 @@ describe("SSR breadcrumbs (#208)", () => {
     // @graph block carrying the attacker-influenced title/summary.
     const blocks = allJsonLd(markup);
     expect(blocks).toHaveLength(2);
-    const graph = blocks.map((b) => b["@graph"]).find(Array.isArray) as Record<string, unknown>[];
+    const graph = blocks.map((b) => b["@graph"]).find(Array.isArray) as Record<
+      string,
+      unknown
+    >[];
     const article = graph.find((n) => n["@type"] === "TechArticle");
     expect(article?.headline).toBe(title);
     const offerNode = graph.find((n) => n["@type"] === "Offer");
@@ -225,14 +242,30 @@ describe("ArchivePage (#26 parity)", () => {
     const fixture = {
       ...index,
       offers: [
-        offer({ slug: "b-old", expiry_date: "2026-01-01", status: "expired" as const }),
-        offer({ slug: "a-tie", expiry_date: "2026-06-01", status: "expired" as const }),
-        offer({ slug: "z-tie", expiry_date: "2026-06-01", status: "expired" as const }),
+        offer({
+          slug: "b-old",
+          expiry_date: "2026-01-01",
+          status: "expired" as const,
+        }),
+        offer({
+          slug: "a-tie",
+          expiry_date: "2026-06-01",
+          status: "expired" as const,
+        }),
+        offer({
+          slug: "z-tie",
+          expiry_date: "2026-06-01",
+          status: "expired" as const,
+        }),
         offer({ slug: "live", status: "active" as const }),
       ],
     };
     // reverse=True in build.py sorts slugs DESCENDING within one expiry date.
-    expect(expiredOffers(fixture).map((o) => o.slug)).toEqual(["z-tie", "a-tie", "b-old"]);
+    expect(expiredOffers(fixture).map((o) => o.slug)).toEqual([
+      "z-tie",
+      "a-tie",
+      "b-old",
+    ]);
   });
 
   it("renders the empty state when nothing has expired", () => {
@@ -253,7 +286,13 @@ describe("ArchivePage (#26 parity)", () => {
   it("renders archived cards with the Expired badge and a retained detail link", () => {
     const fixture = {
       ...index,
-      offers: [offer({ slug: "gone", expiry_date: "2026-01-15", status: "expired" as const })],
+      offers: [
+        offer({
+          slug: "gone",
+          expiry_date: "2026-01-15",
+          status: "expired" as const,
+        }),
+      ],
     };
     const markup = renderToStaticMarkup(<ArchivePage index={fixture} />);
     expect(markup).toContain('id="ft-archive-grid"');
@@ -269,13 +308,23 @@ describe("ArchivePage (#26 parity)", () => {
   it("archive tags are interactive buttons, not inert links", () => {
     const fixture = {
       ...index,
-      offers: [offer({ slug: "gone", expiry_date: "2026-01-15", status: "expired" as const })],
+      offers: [
+        offer({
+          slug: "gone",
+          expiry_date: "2026-01-15",
+          status: "expired" as const,
+        }),
+      ],
     };
     const markup = renderToStaticMarkup(<ArchivePage index={fixture} />);
     // Archive now uses OfferRow: tags are buttons, not links
     expect(markup).toContain('type="button"');
-    expect(markup).toContain('class="badge badge-category badge-category-coding"');
-    expect(markup).toContain('class="badge badge-verification badge-verification-social_proof"');
+    expect(markup).toContain(
+      'class="badge badge-category badge-category-coding"',
+    );
+    expect(markup).toContain(
+      'class="badge badge-verification badge-verification-social_proof"',
+    );
     expect(markup).toContain('class="badge badge-signup badge-signup-none"');
     expect(markup).toContain('data-ft-tag="category"');
     expect(markup).toContain('data-ft-tag="verification"');
@@ -309,9 +358,13 @@ describe("archive layout at 320 px (#129)", () => {
     expect(css).toMatch(/\.r-amount \{[^}]*overflow-wrap:\s*anywhere/s);
     expect(css).toMatch(/\.row-eyebrow \{[^}]*flex-wrap:\s*wrap/s);
     expect(css).toMatch(/\.wrap \{[^}]*padding:\s*clamp\(1\.25rem/s);
-    expect(css).toMatch(/\[data-page="archive"\] \.empty \{\s*animation:\s*none/s);
+    expect(css).toMatch(
+      /\[data-page="archive"\] \.empty \{\s*animation:\s*none/s,
+    );
     expect(css).toMatch(/\.breadcrumbs-list \{[^}]*flex-wrap:\s*wrap/s);
-    expect(css).toMatch(/\.breadcrumbs-list li \{[^}]*overflow-wrap:\s*anywhere/s);
+    expect(css).toMatch(
+      /\.breadcrumbs-list li \{[^}]*overflow-wrap:\s*anywhere/s,
+    );
     expect(css).toMatch(
       /@media \(pointer: coarse\) \{\s*\.breadcrumbs a \{[^}]*display:\s*inline-flex[^}]*align-items:\s*center[^}]*min-height:\s*44px/s,
     );
@@ -361,7 +414,9 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
     expect(markup).toContain('href="../index.html?verification=social_proof"');
     expect(markup).toContain('href="../index.html?signup=none"');
     expect(markup).toContain('aria-label="See offers tagged Coding"');
-    expect(markup).not.toContain('aria-label="See offers tagged hand-verified"');
+    expect(markup).not.toContain(
+      'aria-label="See offers tagged hand-verified"',
+    );
     expect(markup).toContain('aria-label="See offers tagged social proof"');
     expect(markup).toContain('aria-label="See offers tagged no sign-up"');
     expect(markup).not.toMatch(/<button[^>]*data-ft-tag/);
@@ -481,7 +536,9 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
       expect(markup).toContain(`<th scope="row">${label}</th>`);
     }
     // Values are scannable without reading prose.
-    expect(markup).toMatch(/<th scope="row">Provider<\/th><td>Example Co<\/td>/);
+    expect(markup).toMatch(
+      /<th scope="row">Provider<\/th><td>Example Co<\/td>/,
+    );
     expect(markup).toContain('<time dateTime="2026-12-31">');
     // No information is lost: the hero and status line stay intact.
     expect(markup).toContain('class="od-hero"');
@@ -512,7 +569,9 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
     const tableAt = markup.indexOf('class="od-table"');
     // Visible prose lives in .od-summary; JSON-LD description also contains the text
     // so search for the visible element to avoid matching the head <script> block.
-    const proseAt = markup.indexOf('<p class="od-summary">Prose lives under the table.');
+    const proseAt = markup.indexOf(
+      '<p class="od-summary">Prose lives under the table.',
+    );
     expect(tableAt).toBeGreaterThan(-1);
     expect(proseAt).toBeGreaterThan(tableAt);
   });
@@ -540,7 +599,10 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
       renderToStaticMarkup(<PrivacyPage />),
       renderToStaticMarkup(<AboutPage index={index} />),
       renderToStaticMarkup(
-        <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
+        <OfferDetailPage
+          index={{ ...index, offers: [offer()] }}
+          slug="example-offer"
+        />,
       ),
     ];
     for (const markup of pages) {
@@ -584,7 +646,10 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
       );
       await waitFor(() => {
         expect(
-          document.querySelector(".od-views")?.textContent?.replace(/\s+/g, " ").trim(),
+          document
+            .querySelector(".od-views")
+            ?.textContent?.replace(/\s+/g, " ")
+            .trim(),
         ).toBe("42 views");
       });
       const views = document.querySelector(".od-views");
@@ -651,8 +716,12 @@ describe("no-signup and verification honesty badges (#111)", () => {
     );
     // The verification tag is now shown on both detail surfaces.
     expect((markup.match(/badge-signup-none\b/g) ?? []).length).toBe(2);
-    expect((markup.match(/badge-verification-social_proof\b/g) ?? []).length).toBe(2);
-    expect((markup.match(/badge-review-status-unverified\b/g) ?? []).length).toBe(2);
+    expect(
+      (markup.match(/badge-verification-social_proof\b/g) ?? []).length,
+    ).toBe(2);
+    expect(
+      (markup.match(/badge-review-status-unverified\b/g) ?? []).length,
+    ).toBe(2);
     expect(markup).toContain(">no sign-up</span>");
     expect(markup).toContain(">social proof</span>");
     expect(markup).toContain('<th scope="row">Verification</th>');
@@ -713,14 +782,18 @@ describe("PrivacyPage (#132 shipped-analytics claims)", () => {
   });
 
   it("marks the privacy footer link active", () => {
-    expect(markup).toContain('<a href="privacy.html" aria-current="page">Privacy policy</a>');
+    expect(markup).toContain(
+      '<a href="privacy.html" aria-current="page">Privacy policy</a>',
+    );
   });
 
   it("wraps the policy in a main landmark with one h1", () => {
     expect(markup.match(/<main>/g)?.length).toBe(1);
     expect(markup.match(/<h1>/g)?.length).toBe(1);
     expect(markup).toContain("<h1>Privacy Policy</h1>");
-    expect(markup.match(/<h2 /g)?.length).toBe(markup.match(/<section/g)?.length);
+    expect(markup.match(/<h2 /g)?.length).toBe(
+      markup.match(/<section/g)?.length,
+    );
   });
 
   it("states shipped claims and omits unshipped ones", () => {
@@ -789,7 +862,9 @@ describe("page chrome landmarks and footer (#132)", () => {
   it("links privacy from the footer on every route type", () => {
     expect(home).toContain('<a href="privacy.html">Privacy policy</a>');
     expect(archive).toContain('<a href="privacy.html">Privacy policy</a>');
-    expect(privacy).toContain('<a href="privacy.html" aria-current="page">Privacy policy</a>');
+    expect(privacy).toContain(
+      '<a href="privacy.html" aria-current="page">Privacy policy</a>',
+    );
     expect(detail).toContain('<a href="../privacy.html">Privacy policy</a>');
   });
 
@@ -852,10 +927,16 @@ describe("shared header chrome (#112)", () => {
   });
 
   it("marks the active route in the primary nav without losing the footer state", () => {
-    expect(home).toContain('<a href="./index.html" aria-current="page">Offers</a>');
+    expect(home).toContain(
+      '<a href="./index.html" aria-current="page">Offers</a>',
+    );
     expect(archive).toContain('href="archive.html" aria-current="page"');
-    expect(privacy).toContain('<a href="privacy.html" aria-current="page">Privacy</a>');
-    expect(detail).not.toMatch(/<a href="\.\.\/index\.html" aria-current="page">Offers<\/a>/);
+    expect(privacy).toContain(
+      '<a href="privacy.html" aria-current="page">Privacy</a>',
+    );
+    expect(detail).not.toMatch(
+      /<a href="\.\.\/index\.html" aria-current="page">Offers<\/a>/,
+    );
     // Footer active state is untouched by #112.
     expect(privacy).toContain(
       '<a href="privacy.html" aria-current="page">Privacy policy</a>',
@@ -864,7 +945,8 @@ describe("shared header chrome (#112)", () => {
 
   it("renders a clickable all-deals icon in the primary nav (#113)", () => {
     for (const [, markup] of routes) {
-      const nav = markup.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? "";
+      const nav =
+        markup.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? "";
       expect(nav).toContain('class="nav-archive"');
       // The icon lives inside the archive anchor, so clicking it navigates
       // to the all-deals page and inherits the same hover/focus styles.
@@ -940,7 +1022,7 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
   it("uses a singular label for a single live offer (#281)", () => {
     const one: OffersIndex = { ...index, offers: [offer()] };
     const markup = renderToStaticMarkup(<HomePage index={one} />);
-    expect(markup).toContain('<strong>1</strong> live offer</span>');
+    expect(markup).toContain("<strong>1</strong> live offer</span>");
   });
 
   it("counts only active offers — expired entries never inflate it (#281)", () => {
@@ -949,9 +1031,9 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       offers: [offer(), offer({ slug: "gone", status: "expired" })],
     };
     const markup = renderToStaticMarkup(<HomePage index={mixed} />);
-    expect(markup).toContain('<strong>1</strong> live offer</span>');
+    expect(markup).toContain("<strong>1</strong> live offer</span>");
     // …and the expired one is counted as evidence the list is pruned.
-    expect(markup).toContain('<strong>1</strong> expired ');
+    expect(markup).toContain("<strong>1</strong> expired ");
   });
 
   it("shows the build's last-updated date as machine-readable <time> (#280)", () => {
@@ -960,7 +1042,9 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     // HTML attribute names are ASCII case-insensitive; React 19 emits the
     // JSX spelling verbatim, so match either casing.
     expect(markup).toMatch(
-      new RegExp(`<time date[Tt]ime="${index.generated_at}">${expected}</time>`),
+      new RegExp(
+        `<time date[Tt]ime="${index.generated_at}">${expected}</time>`,
+      ),
     );
     // Labelled in words, never by colour alone (WCAG 1.4.1).
     expect(markup).toContain('<span class="stat-updated">list built ');
@@ -968,7 +1052,9 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
 
   it("drops the updated chip rather than printing an unparseable date (#280)", () => {
     for (const generated_at of ["", "not-a-date-at-all"]) {
-      const markup = renderToStaticMarkup(<HomePage index={{ ...index, generated_at }} />);
+      const markup = renderToStaticMarkup(
+        <HomePage index={{ ...index, generated_at }} />,
+      );
       expect(markup).toContain('class="site-stats"');
       expect(markup).not.toContain("stat-updated");
     }
@@ -978,8 +1064,13 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
   // the day-granular data can take. `verified_date` is a calendar day, never a
   // timestamp, so an N-day gap only bounds the real elapsed time by N + 1 days
   // — the rendered window is that bound, and must never round it down.
-  const railFor = (offers: OfferEntry[], generated_at = "2026-09-04T06:00:00Z") =>
-    renderToStaticMarkup(<HomePage index={{ ...index, offers, generated_at }} />);
+  const railFor = (
+    offers: OfferEntry[],
+    generated_at = "2026-09-04T06:00:00Z",
+  ) =>
+    renderToStaticMarkup(
+      <HomePage index={{ ...index, offers, generated_at }} />,
+    );
 
   it("bounds the window at one day when every offer was checked on build day (#281)", () => {
     const markup = railFor([
@@ -1023,7 +1114,10 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       expect(markup).not.toContain("NaN");
     }
     // …and likewise when the build's own date is the unparseable one.
-    const badBuild = railFor([offer({ verified_date: "2026-09-03" })], "not-a-date-at-all");
+    const badBuild = railFor(
+      [offer({ verified_date: "2026-09-03" })],
+      "not-a-date-at-all",
+    );
     expect(badBuild).not.toContain("stat-checked");
   });
 
@@ -1035,7 +1129,10 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       renderToStaticMarkup(<PrivacyPage />),
       renderToStaticMarkup(<AboutPage index={index} />),
       renderToStaticMarkup(
-        <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
+        <OfferDetailPage
+          index={{ ...index, offers: [offer()] }}
+          slug="example-offer"
+        />,
       ),
     ];
     for (const markup of pages) {
@@ -1068,7 +1165,10 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
   it("drops the header this-page count where the hero already shows it", () => {
     configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
     const detail = renderToStaticMarkup(
-      <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+      />,
     );
     // The offer hero carries its own view count. Printing it again in the
     // header would duplicate the number and re-fetch the same counter,
@@ -1096,7 +1196,10 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     expect(homeMarkup).not.toContain('.site-stats [data-traffic="off"]');
     expect(homeMarkup).not.toContain(".site-stats :is(.stat-strip");
     const detail = renderToStaticMarkup(
-      <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+      />,
     );
     expect(detail).not.toContain(".site-stats{");
     expect(detail).not.toContain('class="site-stats"');
@@ -1111,9 +1214,9 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     const search = document.getElementById("ft-search") as HTMLInputElement;
     fireEvent.change(search, { target: { value: "zzzznomatchzzzz" } });
     await waitFor(() => {
-      expect(document.getElementById("ft-results-status")?.textContent).toContain(
-        `of ${total} offers`,
-      );
+      expect(
+        document.getElementById("ft-results-status")?.textContent,
+      ).toContain(`of ${total} offers`);
     });
     // The rail is the catalog total; only the toolbar line narrows.
     expect(deals()).toBe(String(total));

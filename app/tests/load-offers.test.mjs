@@ -51,23 +51,34 @@ describe("expiry boundaries (build-time status, ADR 0001)", () => {
     expect(isExpired({ ...base, expiry_date: TODAY }, TODAY)).toBe(false);
   });
   it("offer expired yesterday is expired", () => {
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const yesterday = new Date(Date.now() - 86400000)
+      .toISOString()
+      .slice(0, 10);
     expect(isExpired({ ...base, expiry_date: yesterday }, TODAY)).toBe(true);
   });
   it("null expiry never expires", () => {
     expect(isExpired({ ...base, expiry_date: null }, TODAY)).toBe(false);
   });
   it("buildIndex stamps status for all three cases", () => {
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const yesterday = new Date(Date.now() - 86400000)
+      .toISOString()
+      .slice(0, 10);
     const index = buildIndex(
       [
         { ...base, slug: "a", verified_date: "2026-01-01", expiry_date: TODAY },
-        { ...base, slug: "b", verified_date: "2026-01-02", expiry_date: yesterday },
+        {
+          ...base,
+          slug: "b",
+          verified_date: "2026-01-02",
+          expiry_date: yesterday,
+        },
         { ...base, slug: "c", verified_date: "2026-01-03", expiry_date: null },
       ],
       new Date(`${TODAY}T00:00:00Z`),
     );
-    const byStatus = Object.fromEntries(index.offers.map((o) => [o.slug, o.status]));
+    const byStatus = Object.fromEntries(
+      index.offers.map((o) => [o.slug, o.status]),
+    );
     expect(byStatus).toEqual({ a: "active", b: "expired", c: "active" });
     expect(index.count).toBe(3);
     expect(index.active_count).toBe(2);
@@ -77,13 +88,38 @@ describe("expiry boundaries (build-time status, ADR 0001)", () => {
 
 describe("malformed input fails naming file and field", () => {
   it.each([
-    ["missing required field", { signup: undefined }, /missing required fields: .*signup/],
-    ["invalid date format", { expiry_date: "01/02/2026" }, /expiry_date must be a YYYY-MM-DD date/],
+    [
+      "missing required field",
+      { signup: undefined },
+      /missing required fields: .*signup/,
+    ],
+    [
+      "invalid date format",
+      { expiry_date: "01/02/2026" },
+      /expiry_date must be a YYYY-MM-DD date/,
+    ],
     ["out-of-enum category", { category: "crypto" }, /category must be one of/],
-    ["out-of-enum review_status", { review_status: "pending" }, /review_status must be one of/],
-    ["future verified_date", { verified_date: "2099-01-01" }, /verified_date is in the future/],
-    ["bad source_url", { source_url: "ftp://example.com" }, /source_url must be an http\(s\) URL/],
-    ["indented line", {}, /nested\/indented lines are not allowed/, "  oops: yes\n"],
+    [
+      "out-of-enum review_status",
+      { review_status: "pending" },
+      /review_status must be one of/,
+    ],
+    [
+      "future verified_date",
+      { verified_date: "2099-01-01" },
+      /verified_date is in the future/,
+    ],
+    [
+      "bad source_url",
+      { source_url: "ftp://example.com" },
+      /source_url must be an http\(s\) URL/,
+    ],
+    [
+      "indented line",
+      {},
+      /nested\/indented lines are not allowed/,
+      "  oops: yes\n",
+    ],
   ])("%s", async (_label, overrides, pattern, extra = "") => {
     const root = await mkdtemp(path.join(tmpdir(), "ft-bad-"));
     const dir = path.join(root, "offers");
@@ -131,7 +167,10 @@ describe("generated artifacts vs committed index.json", () => {
   });
 
   it("offers.jsonl has one valid object per line and line count equals count", async () => {
-    const text = await readFile(path.join(globalThis.__ftOut, "offers.jsonl"), "utf8");
+    const text = await readFile(
+      path.join(globalThis.__ftOut, "offers.jsonl"),
+      "utf8",
+    );
     const lines = text.trimEnd().split("\n");
     expect(lines.length).toBe(index.count);
     const parsed = lines.map((l) => JSON.parse(l));
@@ -148,13 +187,21 @@ describe("generated artifacts vs committed index.json", () => {
       // Find source: try root details/ first, then subdirectories
       let srcPath = path.join(OFFERS_DIR, "details", f);
       let srcExists = false;
-      try { await fs.access(srcPath); srcExists = true; } catch {}
+      try {
+        await fs.access(srcPath);
+        srcExists = true;
+      } catch {}
       if (!srcExists) {
         const subEntries = await fs.readdir(path.join(OFFERS_DIR, "details"));
         for (const subdir of subEntries) {
           if (subdir === "." || subdir === "..") continue;
           const candidate = path.join(OFFERS_DIR, "details", subdir, f);
-          try { await fs.access(candidate); srcPath = candidate; srcExists = true; break; } catch {}
+          try {
+            await fs.access(candidate);
+            srcPath = candidate;
+            srcExists = true;
+            break;
+          } catch {}
         }
       }
       expect(srcExists).toBe(true);
@@ -265,11 +312,14 @@ describe("data contract: schemas/offers-index.schema.json (#120)", () => {
       },
       /\/offers\/0\/status must be equal to one of/,
     ],
-  ])("fixture violation fails naming the field: %s", (_label, mutate, pattern) => {
-    const index = validIndex();
-    mutate(index);
-    expect(() => validateIndexData(index)).toThrow(pattern);
-  });
+  ])(
+    "fixture violation fails naming the field: %s",
+    (_label, mutate, pattern) => {
+      const index = validIndex();
+      mutate(index);
+      expect(() => validateIndexData(index)).toThrow(pattern);
+    },
+  );
 
   it("a corrupted artifact fails validateWrittenArtifacts with an OfferError", async () => {
     const root = await mkdtemp(path.join(tmpdir(), "ft-contract-"));
@@ -293,10 +343,7 @@ describe("data contract: schemas/offers-index.schema.json (#120)", () => {
 
   it("every JSONL line validates and line count equals count", () => {
     expect(() =>
-      validateJsonlText(
-        `${JSON.stringify(validOffer())}\n`,
-        "offers.jsonl",
-      ),
+      validateJsonlText(`${JSON.stringify(validOffer())}\n`, "offers.jsonl"),
     ).not.toThrow();
     expect(() =>
       validateJsonlText(
@@ -325,7 +372,10 @@ describe("performance", () => {
       ),
     );
     const started = performance.now();
-    const index = await runPipeline({ offersDir: dir, outDir: path.join(root, "out") });
+    const index = await runPipeline({
+      offersDir: dir,
+      outDir: path.join(root, "out"),
+    });
     const elapsed = performance.now() - started;
     expect(index.count).toBe(500);
     expect(elapsed).toBeLessThan(1000);
@@ -381,8 +431,14 @@ describe("newest-added default ordering", () => {
     ];
     const withNone = buildIndex(offers, new Date("2026-09-04T00:00:00Z"), {});
     const legacy = buildIndex(offers, new Date("2026-09-04T00:00:00Z"));
-    expect(withNone.offers.map((o) => o.slug)).toEqual(["a-newer", "b-newer", "a-older"]);
-    expect(legacy.offers.map((o) => o.slug)).toEqual(withNone.offers.map((o) => o.slug));
+    expect(withNone.offers.map((o) => o.slug)).toEqual([
+      "a-newer",
+      "b-newer",
+      "a-older",
+    ]);
+    expect(legacy.offers.map((o) => o.slug)).toEqual(
+      withNone.offers.map((o) => o.slug),
+    );
   });
 
   it("reads real first-commit dates out of this repository's git history", () => {

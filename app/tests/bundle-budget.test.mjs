@@ -49,10 +49,7 @@ function collectGzipped(dir, ext) {
 
 // Pure decision core so the deliberate-regression case below can prove the
 // gate bites without bloating the real bundle.
-export function checkBudgets(
-  measured,
-  ceilings,
-) {
+export function checkBudgets(measured, ceilings) {
   const violations = [];
   for (const key of Object.keys(ceilings)) {
     if ((measured[key] ?? 0) > ceilings[key]) {
@@ -79,8 +76,18 @@ describe("transferred-byte bundle budgets (#142)", () => {
       // the budget measures the real shipped artifact.
       execFileSync(
         process.execPath,
-        ["node_modules/vite/bin/vite.js", "build", "--outDir", outDir, "--emptyOutDir"],
-        { cwd: APP_ROOT, stdio: "pipe", env: { ...process.env, NODE_ENV: "production" } },
+        [
+          "node_modules/vite/bin/vite.js",
+          "build",
+          "--outDir",
+          outDir,
+          "--emptyOutDir",
+        ],
+        {
+          cwd: APP_ROOT,
+          stdio: "pipe",
+          env: { ...process.env, NODE_ENV: "production" },
+        },
       );
       const measured = {
         js: collectGzipped(outDir, ".js"),
@@ -101,6 +108,8 @@ describe("transferred-byte bundle budgets (#142)", () => {
     };
     const violations = checkBudgets(regressed, ceilings);
     expect(violations).toHaveLength(1);
-    expect(violations[0]).toContain(`exceeds ceiling ${JS_GZIP_CEILING_BYTES} B`);
+    expect(violations[0]).toContain(
+      `exceeds ceiling ${JS_GZIP_CEILING_BYTES} B`,
+    );
   });
 });

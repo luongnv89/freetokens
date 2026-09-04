@@ -6,31 +6,31 @@
 // Re-run: `node scripts/gen-og-image.mjs` -> writes app/public/og.png
 // Output is exactly 1200×630, <300 KB.
 
-import { writeFile, mkdir } from "node:fs/promises"
-import path from "node:path"
-import { fileURLToPath } from "node:url"
-import sharp from "sharp"
+import { writeFile, mkdir } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 
-const here = path.dirname(fileURLToPath(import.meta.url))
-const outPath = path.join(here, "..", "public", "og.png")
+const here = path.dirname(fileURLToPath(import.meta.url));
+const outPath = path.join(here, "..", "public", "og.png");
 
-const W = 1200
-const H = 630
+const W = 1200;
+const H = 630;
 
 // Colors from site design — dark slate + green accent
-const bg = "#0f172a"
-const bg2 = "#1e293b"
-const green = "#22c55e"
-const greenDark = "#15803d"
-const muted = "#94a3b8"
-const white = "#f8fafc"
+const bg = "#0f172a";
+const bg2 = "#1e293b";
+const green = "#22c55e";
+const greenDark = "#15803d";
+const muted = "#94a3b8";
+const white = "#f8fafc";
 
 function esc(s) {
   return String(s)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
+    .replaceAll('"', "&quot;");
 }
 
 // SVG OG image — brand wordmark + tagline + curator signal
@@ -75,23 +75,27 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <text x="64" y="544" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="${muted}" opacity="0.7">Curated &amp; rebuilt from verified provider sources.</text>
   <!-- bottom accent -->
   <rect x="64" y="564" width="48" height="3" rx="1.5" fill="${green}" opacity="0.85"/>
-</svg>`
+</svg>`;
 
-await mkdir(path.dirname(outPath), { recursive: true })
+await mkdir(path.dirname(outPath), { recursive: true });
 const png = await sharp(Buffer.from(svg), { density: 72 })
   .resize(W, H, { fit: "fill" })
   .png({ compressionLevel: 9, palette: false })
-  .toBuffer()
+  .toBuffer();
 
 // Ensure size is valid 1200x630 by re-reading metadata
-const meta = await sharp(png).metadata()
+const meta = await sharp(png).metadata();
 if (meta.width !== W || meta.height !== H) {
-  console.error(`error: expected ${W}x${H}, got ${meta.width}x${meta.height}`)
-  process.exit(1)
+  console.error(`error: expected ${W}x${H}, got ${meta.width}x${meta.height}`);
+  process.exit(1);
 }
 if (png.length > 300 * 1024) {
-  console.warn(`warning: og.png is ${(png.length / 1024).toFixed(1)} KB (>300 KB)`)
+  console.warn(
+    `warning: og.png is ${(png.length / 1024).toFixed(1)} KB (>300 KB)`,
+  );
 }
 
-await writeFile(outPath, png)
-console.log(`og.png ${W}x${H} ${ (png.length/1024).toFixed(1)} KB -> ${path.relative(process.cwd(), outPath)}`)
+await writeFile(outPath, png);
+console.log(
+  `og.png ${W}x${H} ${(png.length / 1024).toFixed(1)} KB -> ${path.relative(process.cwd(), outPath)}`,
+);

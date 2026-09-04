@@ -32,8 +32,10 @@ describe("App home listing prerender", () => {
     expect(markup.match(/<article class="card" /g)?.length).toBe(offers.length);
   });
 
-  it('marks expired entries out of the default list (#25)', () => {
-    const expired = index.offers.filter((o) => o.status === "expired").map((o) => o.slug);
+  it("marks expired entries out of the default list (#25)", () => {
+    const expired = index.offers
+      .filter((o) => o.status === "expired")
+      .map((o) => o.slug);
     for (const slug of expired) {
       expect(markup.includes(`id="offer-${slug}"`)).toBe(false);
     }
@@ -57,7 +59,9 @@ describe("App home listing prerender", () => {
   it("renders the visible tag families as buttons with labels", () => {
     const visibleVerificationTags = offers.length;
     expect(markup.match(/data-ft-tag="category"/g)?.length).toBe(offers.length);
-    expect(markup.match(/data-ft-tag="verification"/g)?.length).toBe(visibleVerificationTags);
+    expect(markup.match(/data-ft-tag="verification"/g)?.length).toBe(
+      visibleVerificationTags,
+    );
     expect(markup.match(/data-ft-tag="signup"/g)?.length).toBe(offers.length);
   });
 
@@ -81,27 +85,33 @@ describe("App home listing prerender", () => {
 
   it("states truthful counts in the masthead", async () => {
     // Counts moved to About — verify About page carries them
-    const { default: AboutPage } = await import("./components/AboutPage")
-    const aboutMarkup = renderToStaticMarkup(<AboutPage index={index} />)
-    const corroborated = offers.filter((o) => o.verification === "social_proof").length
-    const ongoingCount = offers.filter((o) => !o.expiry_date).length
-    expect(aboutMarkup).toContain(`<strong>${offers.length}</strong> live offers`)
-    expect(aboutMarkup).toContain(`<strong>${ongoingCount}</strong> ongoing`)
-    expect(aboutMarkup).toContain(`<strong>${corroborated}</strong> corroborated by official source`)
+    const { default: AboutPage } = await import("./components/AboutPage");
+    const aboutMarkup = renderToStaticMarkup(<AboutPage index={index} />);
+    const corroborated = offers.filter(
+      (o) => o.verification === "social_proof",
+    ).length;
+    const ongoingCount = offers.filter((o) => !o.expiry_date).length;
+    expect(aboutMarkup).toContain(
+      `<strong>${offers.length}</strong> live offers`,
+    );
+    expect(aboutMarkup).toContain(`<strong>${ongoingCount}</strong> ongoing`);
+    expect(aboutMarkup).toContain(
+      `<strong>${corroborated}</strong> corroborated by official source`,
+    );
     // The home proof line carries its own live count, in its own wording.
-    expect(markup).toContain(`<strong>${offers.length}</strong> live offers`)
+    expect(markup).toContain(`<strong>${offers.length}</strong> live offers`);
   });
 
   it("keeps semantic list markup — no div-based rows", () => {
     // Every row is li > article; the only divs are the sanctioned row-head.
-    expect(markup).not.toContain("<div class=\"card\"");
+    expect(markup).not.toContain('<div class="card"');
     expect(markup.match(/<li style/g)?.length).toBe(offers.length);
   });
 
   it("emits no tracker markup when analytics env is unset (#131)", () => {
     expect(markup).not.toContain("googletagmanager");
     expect(markup).not.toContain("ft-consent-banner");
-    expect(markup).not.toContain("id=\"ft-traffic\"");
+    expect(markup).not.toContain('id="ft-traffic"');
     expect(markup).not.toContain("gc.zgo.at");
     expect(markup).not.toContain("ft-consent-settings");
   });
@@ -119,11 +129,12 @@ describe("App tag icon sprite (lucide mapping)", () => {
 
   it("renders one aria-hidden glyph per visible tag", () => {
     // Category, review status, and sign-up are visible on every row.
-    const grid = markup.match(/<ol class="grid" id="ft-grid"[\s\S]*?<\/ol>/)?.[0] ?? "";
+    const grid =
+      markup.match(/<ol class="grid" id="ft-grid"[\s\S]*?<\/ol>/)?.[0] ?? "";
     const visibleVerificationTags = offers.length;
-    expect(grid.match(/<svg class="tag-i"[^>]*aria-hidden="true"/g)?.length).toBe(
-      offers.length * 3 + visibleVerificationTags,
-    );
+    expect(
+      grid.match(/<svg class="tag-i"[^>]*aria-hidden="true"/g)?.length,
+    ).toBe(offers.length * 3 + visibleVerificationTags);
     expect(grid.match(/data-ft-tag="/g)?.length).toBe(
       offers.length * 2 + visibleVerificationTags,
     );
@@ -175,7 +186,15 @@ describe("App empty state", () => {
       count: 1,
       active_count: 0,
       expired_count: 1,
-      offers: [offerEntry({ slug: "old", title: "Old", provider: "P", amount: "$5", status: "expired" })],
+      offers: [
+        offerEntry({
+          slug: "old",
+          title: "Old",
+          provider: "P",
+          amount: "$5",
+          status: "expired",
+        }),
+      ],
     } satisfies OffersIndex;
     const markup = renderToStaticMarkup(<HomePage index={empty} />);
     expect(markup).toContain("No live offers right now");
@@ -206,18 +225,26 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
         expect(row).toContain("ends");
         expect(row).toContain(`dateTime="${offer.expiry_date}"`);
       } else {
-        expect(row).toMatch(/<span class="dot" aria-hidden="true"><\/span>ongoing/);
+        expect(row).toMatch(
+          /<span class="dot" aria-hidden="true"><\/span>ongoing/,
+        );
       }
       expect(row).toContain(`href="offers/${offer.slug}.html"`);
-      expect(row).toContain(`aria-label="View details for ${escapeHtml(offer.title)}"`);
+      expect(row).toContain(
+        `aria-label="View details for ${escapeHtml(offer.title)}"`,
+      );
       expect(row).toContain('class="r-details"');
     }
   });
 
   it("lists articles newest-verified-first, matching activeOffers order", () => {
-    const grid = markup.match(/<ol class="grid" id="ft-grid" role="list">([\s\S]*?)<\/ol>/);
+    const grid = markup.match(
+      /<ol class="grid" id="ft-grid" role="list">([\s\S]*?)<\/ol>/,
+    );
     expect(grid).not.toBeNull();
-    const ids = [...(grid?.[1].matchAll(/id="offer-([^"]+)"/g) ?? [])].map((m) => m[1]);
+    const ids = [...(grid?.[1].matchAll(/id="offer-([^"]+)"/g) ?? [])].map(
+      (m) => m[1],
+    );
     expect(ids).toEqual(offers.map((o) => o.slug));
   });
 
@@ -229,15 +256,37 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
       active_count: 2,
       expired_count: 2,
       offers: [
-        offerEntry({ slug: "expired-first", title: "Expired First", status: "expired", expiry_date: "2026-01-01" }),
-        offerEntry({ slug: "live-a", title: "Live A", verified_date: "2026-08-24" }),
-        offerEntry({ slug: "expired-mid", title: "Expired Mid", status: "expired", expiry_date: "2026-02-01" }),
-        offerEntry({ slug: "live-b", title: "Live B", verified_date: "2026-08-20" }),
+        offerEntry({
+          slug: "expired-first",
+          title: "Expired First",
+          status: "expired",
+          expiry_date: "2026-01-01",
+        }),
+        offerEntry({
+          slug: "live-a",
+          title: "Live A",
+          verified_date: "2026-08-24",
+        }),
+        offerEntry({
+          slug: "expired-mid",
+          title: "Expired Mid",
+          status: "expired",
+          expiry_date: "2026-02-01",
+        }),
+        offerEntry({
+          slug: "live-b",
+          title: "Live B",
+          verified_date: "2026-08-20",
+        }),
       ],
     } satisfies OffersIndex;
     const mixedMarkup = renderToStaticMarkup(<HomePage index={mixed} />);
-    const grid = mixedMarkup.match(/<ol class="grid" id="ft-grid" role="list">([\s\S]*?)<\/ol>/);
-    const ids = [...(grid?.[1].matchAll(/id="offer-([^"]+)"/g) ?? [])].map((m) => m[1]);
+    const grid = mixedMarkup.match(
+      /<ol class="grid" id="ft-grid" role="list">([\s\S]*?)<\/ol>/,
+    );
+    const ids = [...(grid?.[1].matchAll(/id="offer-([^"]+)"/g) ?? [])].map(
+      (m) => m[1],
+    );
     expect(ids).toEqual(activeOffers(mixed).map((o) => o.slug));
     expect(ids).toEqual(["live-a", "live-b"]);
     expect(mixedMarkup).not.toContain('id="offer-expired-first"');
@@ -262,9 +311,13 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
   });
 
   it("composes toolbar chips and reset through shadcn Button (data-slot)", () => {
-    expect(markup).toMatch(/data-ft-category=""[\s\S]*?data-slot="button"|data-slot="button"[\s\S]*?data-ft-category=""/);
+    expect(markup).toMatch(
+      /data-ft-category=""[\s\S]*?data-slot="button"|data-slot="button"[\s\S]*?data-ft-category=""/,
+    );
     expect(markup).toContain('id="ft-clear-filters"');
-    expect(markup).toMatch(/id="ft-reset-filters"[^>]*data-slot="button"|data-slot="button"[^>]*id="ft-reset-filters"/);
+    expect(markup).toMatch(
+      /id="ft-reset-filters"[^>]*data-slot="button"|data-slot="button"[^>]*id="ft-reset-filters"/,
+    );
   });
 
   it("keeps semantic ol#ft-grid > li > article.card nesting", () => {
@@ -284,7 +337,9 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
 describe("unstyled shadcn variants (#124)", () => {
   it("emits no visual utilities so python-parity.css can paint listing rows", () => {
     expect(badgeVariants({ variant: "unstyled" }).trim()).toBe("");
-    expect(buttonVariants({ variant: "unstyled", size: "unstyled" }).trim()).toBe("");
+    expect(
+      buttonVariants({ variant: "unstyled", size: "unstyled" }).trim(),
+    ).toBe("");
   });
 
   it("keeps default variants for future surfaces", () => {

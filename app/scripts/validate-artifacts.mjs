@@ -47,9 +47,7 @@ function offerValidator() {
 }
 
 export function formatSchemaErrors(errors) {
-  return errors
-    .map((e) => `${e.instancePath || "/"} ${e.message}`)
-    .join("; ");
+  return errors.map((e) => `${e.instancePath || "/"} ${e.message}`).join("; ");
 }
 
 /** Validate one parsed offers.json document against the index schema. */
@@ -73,7 +71,9 @@ export function validateJsonlText(text, label = "offers.jsonl") {
     try {
       data = JSON.parse(line);
     } catch (exc) {
-      throw new ArtifactSchemaError(`${label}:${i + 1}: invalid JSON (${exc.message})`);
+      throw new ArtifactSchemaError(
+        `${label}:${i + 1}: invalid JSON (${exc.message})`,
+      );
     }
     if (!validate(data)) {
       throw new ArtifactSchemaError(

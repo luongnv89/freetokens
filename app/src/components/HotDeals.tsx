@@ -1,5 +1,5 @@
-import { CATEGORY_LABELS, type Offer } from "../lib/offers"
-import { ftFormatCount } from "../lib/analytics"
+import { CATEGORY_LABELS, type Offer } from "../lib/offers";
+import { ftFormatCount } from "../lib/analytics";
 
 /**
  * The "Hot today" shelf: the three most-viewed offers, above the toolbar.
@@ -23,15 +23,16 @@ export function HotDeals({
   ranked,
   bySlug,
 }: {
-  ranked: { slug: string; views: number }[]
-  bySlug: Map<string, Offer>
+  ranked: { slug: string; views: number }[];
+  bySlug: Map<string, Offer>;
 }) {
   const rows = ranked
     .map((entry) => ({ entry, offer: bySlug.get(entry.slug) }))
-    .filter((row): row is { entry: { slug: string; views: number }; offer: Offer } =>
-      Boolean(row.offer),
-    )
-  if (rows.length === 0) return null
+    .filter(
+      (row): row is { entry: { slug: string; views: number }; offer: Offer } =>
+        Boolean(row.offer),
+    );
+  if (rows.length === 0) return null;
   return (
     <section className="hot-deals" aria-labelledby="ft-hot-heading">
       <h2 className="hot-deals-head" id="ft-hot-heading">
@@ -43,7 +44,11 @@ export function HotDeals({
       </h2>
       <ol className="hot-deals-list">
         {rows.map(({ entry, offer }, i) => (
-          <li key={offer.slug} className="hot-deal" data-category={offer.category}>
+          <li
+            key={offer.slug}
+            className="hot-deal"
+            data-category={offer.category}
+          >
             <span className="hot-rank" aria-hidden="true">
               {i + 1}
             </span>
@@ -72,5 +77,5 @@ export function HotDeals({
         ))}
       </ol>
     </section>
-  )
+  );
 }

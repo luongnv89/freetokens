@@ -492,9 +492,15 @@ describe("offer_click delegation", () => {
     vi.setSystemTime(new Date("2026-08-25T12:00:00Z"));
     const link = mountOfferLink();
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(eventCalls(gtag, "offer_click")).toHaveLength(1);
     expect(eventCalls(gtag, "offer_click")[0][2]).toEqual({
       offer_id: "copilot",
@@ -513,7 +519,9 @@ describe("offer_click delegation", () => {
     const link = mountOfferLink();
     bindAnalyticsListeners();
     link.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    vi.setSystemTime(new Date("2026-08-25T12:00:00Z").getTime() + OFFER_CLICK_DEDUPE_MS + 1);
+    vi.setSystemTime(
+      new Date("2026-08-25T12:00:00Z").getTime() + OFFER_CLICK_DEDUPE_MS + 1,
+    );
     link.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     expect(eventCalls(gtag, "offer_click")).toHaveLength(2);
   });
@@ -526,7 +534,9 @@ describe("offer_click delegation", () => {
     const link = mountOfferLink();
     bindAnalyticsListeners();
     const prevent = vi.spyOn(Event.prototype, "preventDefault");
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(prevent).not.toHaveBeenCalled();
     expect(eventCalls(gtag, "offer_click")).toHaveLength(1);
   });
@@ -542,7 +552,9 @@ describe("offer_click delegation", () => {
     bindAnalyticsListeners();
     const prevent = vi.spyOn(Event.prototype, "preventDefault");
     expect(() =>
-      link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true })),
+      link.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      ),
     ).not.toThrow();
     expect(prevent).not.toHaveBeenCalled();
   });
@@ -603,7 +615,9 @@ describe("GoatCounter exclusive-end window (#102)", () => {
 
   it("omits start/end for the all-time total (null or omitted days)", () => {
     expect(ftCounterUrl(null, SITE, now)).toBe(`${SITE}/counter/TOTAL.json`);
-    expect(ftCounterUrl(undefined, SITE, now)).toBe(`${SITE}/counter/TOTAL.json`);
+    expect(ftCounterUrl(undefined, SITE, now)).toBe(
+      `${SITE}/counter/TOTAL.json`,
+    );
     expect(ftCounterUrl(undefined, SITE, now)).not.toContain("?");
   });
 
@@ -689,9 +703,9 @@ describe("traffic strip silent hide", () => {
     await initTrafficStrip(SITE);
     expect(box.hidden).toBe(false);
     expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("9,001");
-    expect(
-      (box.querySelector(".ft-traffic-today") as HTMLElement).hidden,
-    ).toBe(true);
+    expect((box.querySelector(".ft-traffic-today") as HTMLElement).hidden).toBe(
+      true,
+    );
     expect(
       (box.querySelector(".ft-traffic-period") as HTMLElement).hidden,
     ).toBe(true);
@@ -718,9 +732,9 @@ describe("traffic strip silent hide", () => {
     expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("12,345");
     expect(box.querySelector("#ft-traffic-today")?.textContent).toBe("8");
     expect(box.querySelector("#ft-traffic-period")?.textContent).toBe("321");
-    expect(
-      (box.querySelector(".ft-traffic-today") as HTMLElement).hidden,
-    ).toBe(false);
+    expect((box.querySelector(".ft-traffic-today") as HTMLElement).hidden).toBe(
+      false,
+    );
     expect(
       (box.querySelector(".ft-traffic-period") as HTMLElement).hidden,
     ).toBe(false);
@@ -769,7 +783,9 @@ describe("bindToolbarListeners leaves search/sort/chips to React", () => {
     sort.dispatchEvent(new Event("change", { bubbles: true }));
     expect(eventCalls(gtag, "sort_use")).toHaveLength(0);
 
-    const chip = document.querySelector("[data-ft-category]") as HTMLButtonElement;
+    const chip = document.querySelector(
+      "[data-ft-category]",
+    ) as HTMLButtonElement;
     chip.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     expect(eventCalls(gtag, "filter_use")).toHaveLength(0);
   });
@@ -784,7 +800,9 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     gtag.mockClear();
     const link = mountOfferLink({ id: "copilot", outbound: true });
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(gc.count).toHaveBeenCalledTimes(1);
     expect(gc.count).toHaveBeenCalledWith({
       path: "offer_click:copilot",
@@ -799,7 +817,9 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     grantConsent();
     const link = mountOfferLink({ id: "copilot" });
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(gc.count).not.toHaveBeenCalled();
   });
 
@@ -810,7 +830,9 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     declineConsent();
     const link = mountOfferLink({ id: "copilot", outbound: true });
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(gc.count).not.toHaveBeenCalled();
   });
 
@@ -834,7 +856,9 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     bindAnalyticsListeners();
     const prevent = vi.spyOn(Event.prototype, "preventDefault");
     expect(() =>
-      link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true })),
+      link.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      ),
     ).not.toThrow();
     expect(prevent).not.toHaveBeenCalled();
   });
@@ -848,8 +872,12 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     vi.setSystemTime(new Date("2026-08-25T12:00:00Z"));
     const link = mountOfferLink({ id: "copilot", outbound: true });
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(gc.count).toHaveBeenCalledTimes(1);
   });
 });
@@ -909,7 +937,10 @@ describe("per-page traffic (#285 follow-up)", () => {
     const box = mountHeaderStrip();
     vi.mocked(fetch).mockImplementation((url) => {
       if (String(url).includes("%2F")) {
-        return Promise.resolve({ ok: false, json: async () => ({}) } as Response);
+        return Promise.resolve({
+          ok: false,
+          json: async () => ({}),
+        } as Response);
       }
       return Promise.resolve(counterOk("7"));
     });

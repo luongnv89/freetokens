@@ -1,4 +1,4 @@
-import { getStatsSite } from "../lib/analytics"
+import { getStatsSite } from "../lib/analytics";
 
 /**
  * Live-traffic line (#ft-traffic). Starts hidden; initTrafficStrip reveals
@@ -25,10 +25,16 @@ import { getStatsSite } from "../lib/analytics"
  * because initTrafficStrip only fetches a window whose element is mounted.
  */
 export function TrafficStrip({ pageViews = true }: { pageViews?: boolean }) {
-  const site = getStatsSite()
-  if (!site) return null
+  const site = getStatsSite();
+  if (!site) return null;
   return (
-    <p className="stat-strip" id="ft-traffic" role="status" aria-live="polite" hidden>
+    <p
+      className="stat-strip"
+      id="ft-traffic"
+      role="status"
+      aria-live="polite"
+      hidden
+    >
       <span className="ft-stat ft-traffic-total">
         <strong id="ft-traffic-total">&mdash;</strong>{" "}
         <span className="ft-stat-label">visits</span>
@@ -44,5 +50,5 @@ export function TrafficStrip({ pageViews = true }: { pageViews?: boolean }) {
         </span>
       ) : null}
     </p>
-  )
+  );
 }

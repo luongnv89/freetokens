@@ -11,7 +11,14 @@
 //
 // Usage: node scripts/load-offers.mjs [--offers-dir ../offers] [--out src/data]
 
-import { readdir, readFile, writeFile, mkdir, rm, lstat } from "node:fs/promises";
+import {
+  readdir,
+  readFile,
+  writeFile,
+  mkdir,
+  rm,
+  lstat,
+} from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
@@ -34,7 +41,15 @@ const REQUIRED_FIELDS = [
   "review_status",
   "signup",
 ];
-const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program", "student"];
+const CATEGORIES = [
+  "api_provider",
+  "coding",
+  "image",
+  "voice",
+  "video",
+  "startup_program",
+  "student",
+];
 const VERIFICATION_LEVELS = ["social_proof", "unverified"];
 const REVIEW_STATUSES = ["verified", "unverified", "under-review"];
 const SIGNUP_MODES = ["none", "required"];
@@ -45,7 +60,11 @@ export class OfferError extends Error {}
 
 function parseScalar(raw) {
   const value = raw.trim();
-  if (value.length >= 2 && value[0] === value[value.length - 1] && (value[0] === '"' || value[0] === "'")) {
+  if (
+    value.length >= 2 &&
+    value[0] === value[value.length - 1] &&
+    (value[0] === '"' || value[0] === "'")
+  ) {
     return value.slice(1, -1);
   }
   if (NULL_TOKENS.has(value.toLowerCase())) return null;
@@ -70,10 +89,14 @@ export function parseOfferText(text, filename) {
     }
     const key = line.slice(0, sep).trim();
     if (!key || key.includes(" ")) {
-      throw new OfferError(`${filename}:${lineno}: invalid field name ${JSON.stringify(key)}`);
+      throw new OfferError(
+        `${filename}:${lineno}: invalid field name ${JSON.stringify(key)}`,
+      );
     }
     if (key in data) {
-      throw new OfferError(`${filename}:${lineno}: duplicate field ${JSON.stringify(key)}`);
+      throw new OfferError(
+        `${filename}:${lineno}: duplicate field ${JSON.stringify(key)}`,
+      );
     }
     data[key] = parseScalar(line.slice(sep + 1));
   });
@@ -104,11 +127,15 @@ function parseDate(value, field, filename) {
 export function validateOffer(data, filename, today) {
   const missing = REQUIRED_FIELDS.filter((f) => !(f in data));
   if (missing.length) {
-    throw new OfferError(`${filename}: missing required fields: ${missing.join(", ")}`);
+    throw new OfferError(
+      `${filename}: missing required fields: ${missing.join(", ")}`,
+    );
   }
   const unknown = Object.keys(data).filter((k) => !REQUIRED_FIELDS.includes(k));
   if (unknown.length) {
-    throw new OfferError(`${filename}: unknown fields: ${unknown.sort().join(", ")}`);
+    throw new OfferError(
+      `${filename}: unknown fields: ${unknown.sort().join(", ")}`,
+    );
   }
 
   for (const field of ["title", "provider", "amount"]) {
@@ -149,7 +176,10 @@ export function validateOffer(data, filename, today) {
   }
 
   const url = data.source_url;
-  if (typeof url !== "string" || !(url.startsWith("http://") || url.startsWith("https://"))) {
+  if (
+    typeof url !== "string" ||
+    !(url.startsWith("http://") || url.startsWith("https://"))
+  ) {
     throw new OfferError(
       `${filename}: source_url must be an http(s) URL, got ${JSON.stringify(url)}`,
     );
@@ -181,14 +211,16 @@ export async function loadOffers(offersDir, today = todayISO()) {
     ...entries
       .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
       .map((f) => ({ dir: offersDir, name: f })),
-    ...(await Promise.all(
-      subdirs.map(async (subdir) => {
-        const subEntries = await readdir(path.join(offersDir, subdir));
-        return subEntries
-          .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
-          .map((f) => ({ dir: path.join(offersDir, subdir), name: f }));
-      }),
-    )).flat(),
+    ...(
+      await Promise.all(
+        subdirs.map(async (subdir) => {
+          const subEntries = await readdir(path.join(offersDir, subdir));
+          return subEntries
+            .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
+            .map((f) => ({ dir: path.join(offersDir, subdir), name: f }));
+        }),
+      )
+    ).flat(),
   ];
   const offers = [];
   for (const { dir, name } of candidates) {
@@ -227,14 +259,16 @@ export async function loadDetails(offersDir, validSlugs) {
     ...entries
       .filter((f) => f.endsWith(".json") && !subdirs.includes(f))
       .map((f) => ({ dir: detailsDir, name: f })),
-    ...(await Promise.all(
-      subdirs.map(async (subdir) => {
-        const subEntries = await readdir(path.join(detailsDir, subdir));
-        return subEntries
-          .filter((f) => f.endsWith(".json"))
-          .map((f) => ({ dir: path.join(detailsDir, subdir), name: f }));
-      }),
-    )).flat(),
+    ...(
+      await Promise.all(
+        subdirs.map(async (subdir) => {
+          const subEntries = await readdir(path.join(detailsDir, subdir));
+          return subEntries
+            .filter((f) => f.endsWith(".json"))
+            .map((f) => ({ dir: path.join(detailsDir, subdir), name: f }));
+        }),
+      )
+    ).flat(),
   ];
   for (const { dir, name } of paths) {
     const full = path.join(dir, name);
@@ -311,7 +345,13 @@ export function buildIndex(offers, now = new Date(), addedDates = {}) {
   const addedOf = (o) => addedDates[o.slug] ?? "";
   const stamped = [...offers]
     .sort((a, b) => (a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0))
-    .sort((a, b) => (a.verified_date < b.verified_date ? 1 : a.verified_date > b.verified_date ? -1 : 0))
+    .sort((a, b) =>
+      a.verified_date < b.verified_date
+        ? 1
+        : a.verified_date > b.verified_date
+          ? -1
+          : 0,
+    )
     .sort((a, b) => {
       const [ka, kb] = [addedOf(a), addedOf(b)];
       if (ka === kb) return 0;
@@ -357,19 +397,28 @@ export async function runPipeline({ offersDir, outDir, now = new Date() }) {
   await rm(outDir, { recursive: true, force: true });
   const detailsOut = path.join(outDir, DETAILS_DIRNAME);
   await mkdir(detailsOut, { recursive: true });
-  await writeFile(path.join(outDir, "offers.json"), `${JSON.stringify(index, null, 2)}\n`);
+  await writeFile(
+    path.join(outDir, "offers.json"),
+    `${JSON.stringify(index, null, 2)}\n`,
+  );
   await writeFile(
     path.join(outDir, "offers.jsonl"),
     index.offers.map((o) => JSON.stringify(o)).join("\n") + "\n",
   );
   for (const [slug, detail] of Object.entries(details)) {
     // Detail JSON passes through unchanged — it is already validated content.
-    await writeFile(path.join(detailsOut, `${slug}.json`), `${JSON.stringify(detail, null, 2)}\n`);
+    await writeFile(
+      path.join(detailsOut, `${slug}.json`),
+      `${JSON.stringify(detail, null, 2)}\n`,
+    );
   }
   // Single slug-keyed map so Vite and prerender's esbuild can both import
   // one JSON module (issue #128). import.meta.glob is Vite-only and would
   // fail the prerender bundle.
-  await writeFile(path.join(outDir, "details.json"), `${JSON.stringify(details, null, 2)}\n`);
+  await writeFile(
+    path.join(outDir, "details.json"),
+    `${JSON.stringify(details, null, 2)}\n`,
+  );
 
   await validateWrittenArtifacts(outDir);
   return index;
@@ -381,7 +430,9 @@ export async function runPipeline({ offersDir, outDir, now = new Date() }) {
 // silently shipping a malformed index.
 export async function validateWrittenArtifacts(outDir) {
   try {
-    const written = JSON.parse(await readFile(path.join(outDir, "offers.json"), "utf8"));
+    const written = JSON.parse(
+      await readFile(path.join(outDir, "offers.json"), "utf8"),
+    );
     validateIndexData(written, path.join(outDir, "offers.json"));
     const jsonl = await readFile(path.join(outDir, "offers.jsonl"), "utf8");
     const lines = validateJsonlText(jsonl, path.join(outDir, "offers.jsonl"));
@@ -413,7 +464,10 @@ async function main(argv) {
   );
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+if (
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1])
+) {
   main(process.argv.slice(2)).catch((err) => {
     console.error(`error: ${err.message}`);
     process.exit(1);

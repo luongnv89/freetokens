@@ -15,7 +15,13 @@ import { fileURLToPath } from "node:url";
 import { compileFromFile } from "json-schema-to-typescript";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const schemaPath = path.resolve(here, "..", "..", "schemas", "offers-index.schema.json");
+const schemaPath = path.resolve(
+  here,
+  "..",
+  "..",
+  "schemas",
+  "offers-index.schema.json",
+);
 const outPath = path.join(here, "..", "src", "types", "offers-index.d.ts");
 
 const banner =
@@ -24,7 +30,8 @@ const banner =
   "// Regenerate with `npm run gen:types` in app/.\n\n";
 
 const check = process.argv.includes("--check");
-const generated = banner + (await compileFromFile(schemaPath, { bannerComment: "" }));
+const generated =
+  banner + (await compileFromFile(schemaPath, { bannerComment: "" }));
 
 if (check) {
   const committed = await readFile(outPath, "utf8");
@@ -34,7 +41,9 @@ if (check) {
     );
     process.exit(1);
   }
-  console.log(`ok: ${path.relative(process.cwd(), outPath)} matches the schema`);
+  console.log(
+    `ok: ${path.relative(process.cwd(), outPath)} matches the schema`,
+  );
 } else {
   await writeFile(outPath, generated);
   console.log(`wrote ${path.relative(process.cwd(), outPath)}`);

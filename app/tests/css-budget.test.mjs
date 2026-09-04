@@ -92,38 +92,34 @@ function cssBytesIn(dir) {
 }
 
 describe("rendered CSS payload budget (#121)", () => {
-  it(
-    "vite build output stays within the Python builder's inline CSS",
-    () => {
-      const outDir = path.join(tmpdir(), `ft-budget-${process.pid}`);
+  it("vite build output stays within the Python builder's inline CSS", () => {
+    const outDir = path.join(tmpdir(), `ft-budget-${process.pid}`);
+    rmSync(outDir, { recursive: true, force: true });
+    try {
+      execFileSync(
+        process.execPath,
+        [
+          "node_modules/vite/bin/vite.js",
+          "build",
+          "--outDir",
+          outDir,
+          "--emptyOutDir",
+        ],
+        {
+          cwd: APP_ROOT,
+          stdio: "pipe",
+          // Vitest inherits NODE_ENV=test, which can skip minify and
+          // wobble the byte count; pin production like bundle-budget.
+          env: { ...process.env, NODE_ENV: "production" },
+        },
+      );
+      const rendered = cssBytesIn(outDir);
+      const baseline = PYTHON_INLINE_CSS_BYTES;
+      expect(rendered).toBeGreaterThan(0);
+      // Purge must be on: an unpurged utility sheet would blow the budget.
+      expect(rendered).toBeLessThanOrEqual(baseline);
+    } finally {
       rmSync(outDir, { recursive: true, force: true });
-      try {
-        execFileSync(
-          process.execPath,
-          [
-            "node_modules/vite/bin/vite.js",
-            "build",
-            "--outDir",
-            outDir,
-            "--emptyOutDir",
-          ],
-          {
-            cwd: APP_ROOT,
-            stdio: "pipe",
-            // Vitest inherits NODE_ENV=test, which can skip minify and
-            // wobble the byte count; pin production like bundle-budget.
-            env: { ...process.env, NODE_ENV: "production" },
-          },
-        );
-        const rendered = cssBytesIn(outDir);
-        const baseline = PYTHON_INLINE_CSS_BYTES;
-        expect(rendered).toBeGreaterThan(0);
-        // Purge must be on: an unpurged utility sheet would blow the budget.
-        expect(rendered).toBeLessThanOrEqual(baseline);
-      } finally {
-        rmSync(outDir, { recursive: true, force: true });
-      }
-    },
-    240_000,
-  );
+    }
+  }, 240_000);
 });

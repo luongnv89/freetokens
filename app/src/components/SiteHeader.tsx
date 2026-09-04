@@ -1,5 +1,5 @@
-import { BrandMark } from "./BrandMark"
-import { TrafficStrip } from "./TrafficStrip"
+import { BrandMark } from "./BrandMark";
+import { TrafficStrip } from "./TrafficStrip";
 
 /**
  * Shared header chrome for every page (#112): the same brand bar and
@@ -28,22 +28,29 @@ export function SiteHeader({
   current,
   pageViews = true,
 }: {
-  depth?: number
-  current?: "home" | "archive" | "privacy" | "about"
-  pageViews?: boolean
+  depth?: number;
+  current?: "home" | "archive" | "privacy" | "about";
+  pageViews?: boolean;
 }) {
-  const up = "../".repeat(depth)
-  const homeHref = `${up || "./"}index.html`
-  const Wordmark = current === "home" ? "h1" : "span"
+  const up = "../".repeat(depth);
+  const homeHref = `${up || "./"}index.html`;
+  const Wordmark = current === "home" ? "h1" : "span";
   return (
     <div className="site-header">
       <div className="site-bar">
-        <a className="site-brand" href={homeHref} aria-label="Free AI Credits — home">
+        <a
+          className="site-brand"
+          href={homeHref}
+          aria-label="Free AI Credits — home"
+        >
           <BrandMark depth={depth} size={28} alt="" priority />
           <Wordmark className="site-wordmark">Free AI Credits</Wordmark>
         </a>
         <nav className="site-nav" aria-label="Primary">
-          <a href={homeHref} aria-current={current === "home" ? "page" : undefined}>
+          <a
+            href={homeHref}
+            aria-current={current === "home" ? "page" : undefined}
+          >
             Offers
           </a>
           <a
@@ -72,15 +79,21 @@ export function SiteHeader({
             </svg>
             Archive
           </a>
-          <a href={`${up}about.html`} aria-current={current === "about" ? "page" : undefined}>
+          <a
+            href={`${up}about.html`}
+            aria-current={current === "about" ? "page" : undefined}
+          >
             About
           </a>
-          <a href={`${up}privacy.html`} aria-current={current === "privacy" ? "page" : undefined}>
+          <a
+            href={`${up}privacy.html`}
+            aria-current={current === "privacy" ? "page" : undefined}
+          >
             Privacy
           </a>
         </nav>
       </div>
       <TrafficStrip pageViews={pageViews} />
     </div>
-  )
+  );
 }

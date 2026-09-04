@@ -43,10 +43,7 @@ function makeLocalStorage(opts?: {
   const impl = {
     getItem: vi.fn((key: string) => {
       if (opts?.throwOnAccess) {
-        throw new DOMException(
-          "Access denied",
-          "SecurityError",
-        );
+        throw new DOMException("Access denied", "SecurityError");
       }
       return key in store ? store[key] : null;
     }),
@@ -131,9 +128,7 @@ describe("claim progress (legacy ft-claim-<slug> compatibility)", () => {
 
   it("round-trips through the versioned envelope", () => {
     expect(writeClaimProgress(SLUG, [3, 1])).toBe(true);
-    const raw: unknown = JSON.parse(
-      window.localStorage.getItem(KEY) as string,
-    );
+    const raw: unknown = JSON.parse(window.localStorage.getItem(KEY) as string);
     expect(raw).toEqual({ v: SCHEMA_VERSION, done: [1, 3] });
     expect(readClaimProgress(SLUG)).toEqual([1, 3]);
   });
@@ -224,7 +219,7 @@ describe("failure mode 4: corrupted JSON", () => {
     "null",
     '{"v": 1}', // envelope missing done
     '{"v": 999, "done": [1]}', // unknown future schema version
-    "[\"zero\", {}]", // array with non-number entries
+    '["zero", {}]', // array with non-number entries
   ])("corrupt payload %j degrades to defaults without throwing", (bad) => {
     window.localStorage.setItem(KEY, bad);
     expect(readClaimProgress(SLUG)).toEqual([]);
@@ -262,7 +257,13 @@ describe("saved shortlist (issue #140)", () => {
   });
 
   it("normalizes duplicates, blanks, and oversized entries", () => {
-    writeSavedSlugs(["alpha", "  ", "alpha", "  beta  ".trim(), "x".repeat(500)]);
+    writeSavedSlugs([
+      "alpha",
+      "  ",
+      "alpha",
+      "  beta  ".trim(),
+      "x".repeat(500),
+    ]);
     const saved = readSavedSlugs();
     expect(saved).toContain("alpha");
     expect(saved.every((s) => s.length <= 128)).toBe(true);
@@ -275,7 +276,7 @@ describe("saved shortlist (issue #140)", () => {
       '"just a string"',
       "42",
       "null",
-      "[\"bare-legacy-array\"]", // no envelope: not a saved record
+      '["bare-legacy-array"]', // no envelope: not a saved record
       '{"v": 1}', // missing slugs
       '{"v": 999, "slugs": ["a"]}', // unknown future schema
       '{"v": 1, "slugs": ["a", 42, null]}', // non-string entries filtered
@@ -315,10 +316,21 @@ describe("last-used prefs (issue #140)", () => {
   it("round-trips through the versioned envelope", () => {
     expect(readPrefs()).toBeNull();
     expect(
-      writePrefs({ category: "coding", sort: "amount", verification: "", signup: "none" }),
+      writePrefs({
+        category: "coding",
+        sort: "amount",
+        verification: "",
+        signup: "none",
+      }),
     ).toBe(true);
-    const raw: unknown = JSON.parse(window.localStorage.getItem(PREFS_KEY) as string);
-    expect(raw).toMatchObject({ v: SCHEMA_VERSION, category: "coding", sort: "amount" });
+    const raw: unknown = JSON.parse(
+      window.localStorage.getItem(PREFS_KEY) as string,
+    );
+    expect(raw).toMatchObject({
+      v: SCHEMA_VERSION,
+      category: "coding",
+      sort: "amount",
+    });
     expect(readPrefs()).toEqual({
       v: SCHEMA_VERSION,
       category: "coding",
@@ -337,7 +349,13 @@ describe("last-used prefs (issue #140)", () => {
       signup: "",
       sort: "expiring",
     });
-    for (const bad of ["{broken", '"s"', "42", "null", '{"v": 2, "sort": "x"}']) {
+    for (const bad of [
+      "{broken",
+      '"s"',
+      "42",
+      "null",
+      '{"v": 2, "sort": "x"}',
+    ]) {
       window.localStorage.setItem(PREFS_KEY, bad);
       expect(readPrefs()).toBeNull();
     }
@@ -435,7 +453,10 @@ describe("exportPersonalState / importPersonalState (issue #141)", () => {
     ["a bare string", '"just a string"'],
     ["a bare number", "42"],
     ["foreign JSON object", '{"hello": "world"}'],
-    ["wrong format marker", JSON.stringify({ format: "other-app", version: 1 })],
+    [
+      "wrong format marker",
+      JSON.stringify({ format: "other-app", version: 1 }),
+    ],
     [
       "unknown future export version",
       JSON.stringify({ format: EXPORT_FORMAT, version: 99 }),
@@ -544,9 +565,10 @@ describe("exportPersonalState / importPersonalState (issue #141)", () => {
       },
       configurable: true,
     });
-    expect(importPersonalState('{"format":"freetokens-personal-state","version":1}').ok).toBe(
-      false,
-    );
+    expect(
+      importPersonalState('{"format":"freetokens-personal-state","version":1}')
+        .ok,
+    ).toBe(false);
     expect(() => exportPersonalState()).not.toThrow();
   });
 
@@ -560,11 +582,9 @@ describe("exportPersonalState / importPersonalState (issue #141)", () => {
   });
 
   it("no network request is made during export or import", () => {
-    const fetchSpy = vi
-      .spyOn(globalThis, "fetch")
-      .mockImplementation(() => {
-        throw new Error("network use forbidden");
-      });
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(() => {
+      throw new Error("network use forbidden");
+    });
     seedAll();
     exportPersonalState();
     importPersonalState(JSON.stringify(exportPersonalState()));
@@ -583,7 +603,8 @@ describe("exportPersonalState / importPersonalState (issue #141)", () => {
   });
 });
 
-describe("privacy: personal state never leaves the browser", () => {  it("no network request of any kind is made during reads or writes", () => {
+describe("privacy: personal state never leaves the browser", () => {
+  it("no network request of any kind is made during reads or writes", () => {
     const networkSpies = [
       vi.spyOn(globalThis, "fetch").mockImplementation(() => {
         throw new Error("network use forbidden");

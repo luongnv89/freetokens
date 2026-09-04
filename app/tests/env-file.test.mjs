@@ -54,11 +54,15 @@ describe("build-time .env loading", () => {
   });
 
   it("returns an empty record when there is no .env — the CI case", () => {
-    expect(readEnvFile(mkdtempSync(path.join(tmpdir(), "ft-noenv-")))).toEqual({});
+    expect(readEnvFile(mkdtempSync(path.join(tmpdir(), "ft-noenv-")))).toEqual(
+      {},
+    );
   });
 
   it("lets the real environment win over the file", () => {
-    const dir = withEnvFile("GOATCOUNTER_SITE_URL=https://stale.goatcounter.com");
+    const dir = withEnvFile(
+      "GOATCOUNTER_SITE_URL=https://stale.goatcounter.com",
+    );
     // deploy.yml injects the production secret as a real env var; a stale
     // checked-out .env must never shadow it.
     expect(
@@ -69,13 +73,15 @@ describe("build-time .env loading", () => {
   });
 
   it("falls back to the file when the variable is unset or empty", () => {
-    const dir = withEnvFile("GOATCOUNTER_SITE_URL=https://example.goatcounter.com");
+    const dir = withEnvFile(
+      "GOATCOUNTER_SITE_URL=https://example.goatcounter.com",
+    );
     expect(envValue("GOATCOUNTER_SITE_URL", dir, {})).toBe(
       "https://example.goatcounter.com",
     );
-    expect(envValue("GOATCOUNTER_SITE_URL", dir, { GOATCOUNTER_SITE_URL: "" })).toBe(
-      "https://example.goatcounter.com",
-    );
+    expect(
+      envValue("GOATCOUNTER_SITE_URL", dir, { GOATCOUNTER_SITE_URL: "" }),
+    ).toBe("https://example.goatcounter.com");
   });
 
   it("returns undefined when neither source has the key", () => {

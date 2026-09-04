@@ -35,13 +35,17 @@ let dataFile = path.join(here, "..", "src", "data", "offers.json");
 let baseUrl;
 for (let i = 0; i < process.argv.length; i++) {
   if (process.argv[i] === "--dist") distDir = path.resolve(process.argv[++i]);
-  else if (process.argv[i] === "--entry") entry = path.resolve(process.argv[++i]);
-  else if (process.argv[i] === "--data") dataFile = path.resolve(process.argv[++i]);
+  else if (process.argv[i] === "--entry")
+    entry = path.resolve(process.argv[++i]);
+  else if (process.argv[i] === "--data")
+    dataFile = path.resolve(process.argv[++i]);
   else if (process.argv[i] === "--base-url") baseUrl = process.argv[++i];
 }
 
 if (!existsSync(dataFile)) {
-  console.error(`error: ${dataFile} not found; run \`npm run load:data\` first`);
+  console.error(
+    `error: ${dataFile} not found; run \`npm run load:data\` first`,
+  );
   process.exit(1);
 }
 const index = JSON.parse(await readFile(dataFile, "utf8"));
@@ -76,11 +80,11 @@ function resolveStatsSite(raw) {
 }
 
 export function resolveSearchConsoleToken(raw) {
-  const value = (raw ?? "").trim()
-  if (!value) return ""
-  if (/["'<>\s]/.test(value)) return ""
-  if (!/^[A-Za-z0-9_-]+$/.test(value)) return ""
-  return value
+  const value = (raw ?? "").trim();
+  if (!value) return "";
+  if (/["'<>\s]/.test(value)) return "";
+  if (!/^[A-Za-z0-9_-]+$/.test(value)) return "";
+  return value;
 }
 
 const outfile = path.join(distDir, ".prerender", "entry.cjs");
@@ -98,7 +102,9 @@ await build({
   // prerendered HTML never leaks tracker ids or loader markup.
   define: {
     __FT_GA_ID__: JSON.stringify(
-      resolveMeasurementId(envValue("GA_MEASUREMENT_ID", path.join(here, ".."))),
+      resolveMeasurementId(
+        envValue("GA_MEASUREMENT_ID", path.join(here, "..")),
+      ),
     ),
     __FT_GC_SITE__: JSON.stringify(
       resolveStatsSite(envValue("GOATCOUNTER_SITE_URL", path.join(here, ".."))),
@@ -140,18 +146,22 @@ try {
   }
   const template = await readFile(indexPath, "utf8");
   const origin = (baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
-  const searchConsoleToken = resolveSearchConsoleToken(process.env.SEARCH_CONSOLE_TOKEN)
+  const searchConsoleToken = resolveSearchConsoleToken(
+    process.env.SEARCH_CONSOLE_TOKEN,
+  );
 
   // React SSR emits camelCase `dateTime`; normalize to the lowercase spelling
   // build.py ships for byte parity (HTML attribute names are case-insensitive,
   // but a rendered-HTML diff should not show phantom differences).
-  const normalize = (html) => html.replace(/<time dateTime=/g, "<time datetime=");
+  const normalize = (html) =>
+    html.replace(/<time dateTime=/g, "<time datetime=");
 
   // Matches both a fresh vite shell (<div id="root"></div>) and an already
   // prerendered document, so re-running the script over the same dist is
   // idempotent. The mount sits immediately before </body>; the injected
   // markup's own divs close inside it.
-  const MOUNT_RE = /<div id="root"( data-page="[^"]*")?( data-slug="[^"]*")?>[\s\S]*<\/div>(?=\s*<\/body>)/;
+  const MOUNT_RE =
+    /<div id="root"( data-page="[^"]*")?( data-slug="[^"]*")?>[\s\S]*<\/div>(?=\s*<\/body>)/;
 
   function htmlAttr(text) {
     return String(text)
@@ -165,7 +175,9 @@ try {
   function offerMetaDescription(offer, detail) {
     const summary = detail?.summary ?? "";
     if (summary) {
-      return summary.length > 160 ? summary.slice(0, 157).trimEnd() + "..." : summary;
+      return summary.length > 160
+        ? summary.slice(0, 157).trimEnd() + "..."
+        : summary;
     }
     return (
       `${offer.amount} from ${offer.provider} — free AI credits, ` +
@@ -206,12 +218,23 @@ try {
     ].join("\n");
   }
 
-  function fillPage({ markup, title, description, canonical, depth = 0, page, slug }) {
+  function fillPage({
+    markup,
+    title,
+    description,
+    canonical,
+    depth = 0,
+    page,
+    slug,
+  }) {
     // All dynamic replacements go through replacer FUNCTIONS: offer copy
     // routinely contains "$15K"-style amounts, and a string replacement
     // would treat "$1" as a regex backreference and corrupt the text.
     let doc = template;
-    doc = doc.replace(/<title>.*?<\/title>/s, () => `<title>${htmlAttr(title)}</title>`);
+    doc = doc.replace(
+      /<title>.*?<\/title>/s,
+      () => `<title>${htmlAttr(title)}</title>`,
+    );
     // Vite pretty-prints the shell meta tag across lines; match either form
     // so archive/privacy/detail get their own description (#132).
     let descriptionCount = 0;
@@ -243,16 +266,20 @@ try {
       }),
     );
     if (searchConsoleToken) {
-      const tag = `    <meta name="google-site-verification" content="${htmlAttr(searchConsoleToken)}" />`
-      doc = doc.replace(SOCIAL_META_END, `${SOCIAL_META_END}\n${tag}`)
+      const tag = `    <meta name="google-site-verification" content="${htmlAttr(searchConsoleToken)}" />`;
+      doc = doc.replace(SOCIAL_META_END, `${SOCIAL_META_END}\n${tag}`);
     }
     // Depth-1 documents must climb out of offers/: every root-relative asset
     // reference emitted by Vite gets one ../ prefix.
-    if (depth > 0) doc = doc.replaceAll(/((?:src|href)=")\.\//g, `$1${"../".repeat(depth)}`);
+    if (depth > 0)
+      doc = doc.replaceAll(/((?:src|href)=")\.\//g, `$1${"../".repeat(depth)}`);
     const attrs =
-      (page ? ` data-page="${page}"` : "") + (slug ? ` data-slug="${slug}"` : "");
+      (page ? ` data-page="${page}"` : "") +
+      (slug ? ` data-slug="${slug}"` : "");
     if (!MOUNT_RE.test(doc)) {
-      console.error(`error: dist/index.html has no <div id="root"></div> mount point`);
+      console.error(
+        `error: dist/index.html has no <div id="root"></div> mount point`,
+      );
       process.exit(1);
     }
     return doc.replace(
@@ -326,7 +353,9 @@ try {
   // inside the app for hydration safety.
   const detailsSibling = path.join(path.dirname(dataFile), "details.json");
   const detailsFallback = path.join(here, "..", "src", "data", "details.json");
-  const detailsPath = existsSync(detailsSibling) ? detailsSibling : detailsFallback;
+  const detailsPath = existsSync(detailsSibling)
+    ? detailsSibling
+    : detailsFallback;
   const details = existsSync(detailsPath)
     ? JSON.parse(await readFile(detailsPath, "utf8"))
     : {};

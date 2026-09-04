@@ -12,7 +12,11 @@
   /* The stock CSS curves are too weak to read as intentional at the 140 ms
      these interactions run at; this one starts fast and settles. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --archive-bg-soft: color-mix(in srgb, var(--color-muted) 12%, var(--color-paper));
+  --archive-bg-soft: color-mix(
+    in srgb,
+    var(--color-muted) 12%,
+    var(--color-paper)
+  );
   /* Dark redesign additions. `--wash` supersedes every rgba(0,0,0,x) the
      light sheet used for hover and inset states — a black wash on a #0e1013
      ground is not a state change, it is nothing. */
@@ -65,7 +69,9 @@
   --t-hot: var(--color-hot);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 /* `clip`, not `hidden`. Both stop sideways scrolling, but `overflow-x: hidden`
    silently makes the element a scroll container, and a scroll container
@@ -123,7 +129,13 @@ main {
    distance between an offer title and its own status: at 75rem that gap ran
    to roughly 1000 px of empty ground on a desktop and the row stopped
    reading as one object. */
-.wrap { width: 100%; min-width: 0; max-width: 68rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem); }
+.wrap {
+  width: 100%;
+  min-width: 0;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
 
 .mono {
   font-family: var(--font-mono);
@@ -160,7 +172,11 @@ h1 {
   color: var(--ink);
 }
 
-.tagline { max-width: 42rem; margin: 0 0 0.5rem; font-size: 1.05rem; }
+.tagline {
+  max-width: 42rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
 
 .count {
   font-family: var(--font-mono);
@@ -169,7 +185,9 @@ h1 {
   margin: 0 0 2.5rem;
 }
 
-.count strong { color: var(--ink); }
+.count strong {
+  color: var(--ink);
+}
 
 /* ---- Card grid ------------------------------------------------------- */
 
@@ -201,11 +219,21 @@ h1 {
   min-width: 0;
 }
 
-.row-eyebrow { grid-area: eyebrow; }
-.card-title { grid-area: title; }
-.r-amount { grid-area: amount; }
-.row-meta { grid-area: meta; }
-.row-rail { grid-area: rail; }
+.row-eyebrow {
+  grid-area: eyebrow;
+}
+.card-title {
+  grid-area: title;
+}
+.r-amount {
+  grid-area: amount;
+}
+.row-meta {
+  grid-area: meta;
+}
+.row-rail {
+  grid-area: rail;
+}
 
 /* ---- Tags ------------------------------------------------------------- */
 /* One rule set serves all three families and all three element types a tag
@@ -277,7 +305,9 @@ h1 {
 
 /* The bypass target must not draw a focus ring when it is reached by the
    skip link — it is a landmark, not a control. */
-#site-footer:focus { outline: none; }
+#site-footer:focus {
+  outline: none;
+}
 
 /* Tags render as <button> on the listing but as <a> on /archive and every
    offer page, which ship no filter runtime. Both forms are real targets, so
@@ -313,20 +343,48 @@ h1 {
   pointer-events: none;
 }
 
-.badge-category-api_provider { --tag-hue: var(--t-api_provider); }
-.badge-category-coding { --tag-hue: var(--t-coding); }
-.badge-category-image { --tag-hue: var(--t-image); }
-.badge-category-voice { --tag-hue: var(--t-voice); }
-.badge-category-video { --tag-hue: var(--t-video); }
-.badge-category-startup_program { --tag-hue: var(--t-startup_program); }
-.badge-category-student { --tag-hue: var(--t-student); }
-.badge-verification-social_proof { --tag-hue: var(--t-social_proof); }
-.badge-verification-unverified { --tag-hue: var(--t-unverified); }
-.badge-review-status-verified { --tag-hue: var(--t-review-verified); }
-.badge-review-status-unverified { --tag-hue: var(--t-unverified); }
-.badge-review-status-under-review { --tag-hue: var(--t-social_proof); }
-.badge-signup-none { --tag-hue: var(--t-none); }
-.badge-signup-required { --tag-hue: var(--t-required); }
+.badge-category-api_provider {
+  --tag-hue: var(--t-api_provider);
+}
+.badge-category-coding {
+  --tag-hue: var(--t-coding);
+}
+.badge-category-image {
+  --tag-hue: var(--t-image);
+}
+.badge-category-voice {
+  --tag-hue: var(--t-voice);
+}
+.badge-category-video {
+  --tag-hue: var(--t-video);
+}
+.badge-category-startup_program {
+  --tag-hue: var(--t-startup_program);
+}
+.badge-category-student {
+  --tag-hue: var(--t-student);
+}
+.badge-verification-social_proof {
+  --tag-hue: var(--t-social_proof);
+}
+.badge-verification-unverified {
+  --tag-hue: var(--t-unverified);
+}
+.badge-review-status-verified {
+  --tag-hue: var(--t-review-verified);
+}
+.badge-review-status-unverified {
+  --tag-hue: var(--t-unverified);
+}
+.badge-review-status-under-review {
+  --tag-hue: var(--t-social_proof);
+}
+.badge-signup-none {
+  --tag-hue: var(--t-none);
+}
+.badge-signup-required {
+  --tag-hue: var(--t-required);
+}
 
 /* Archive "Expired" badge (#26): the word itself carries the meaning —
    the muted styling is decoration only, never the sole signal. */
@@ -345,7 +403,9 @@ h1 {
    treatment, but must still announce themselves as operable. */
 a.badge {
   text-decoration: none;
-  transition: background-color 0.14s ease, color 0.14s ease;
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease;
 }
 
 a.badge:hover,
@@ -408,11 +468,19 @@ a.badge:focus-visible {
   margin: 1rem auto;
 }
 
-.empty h2 { margin: 0.75rem 0 0.5rem; font-size: 1.4rem; }
+.empty h2 {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1.4rem;
+}
 
-.empty p { color: var(--gray); margin: 0.35rem 0; }
+.empty p {
+  color: var(--gray);
+  margin: 0.35rem 0;
+}
 
-.empty .glyph { color: var(--green); }
+.empty .glyph {
+  color: var(--green);
+}
 
 .empty a {
   color: var(--ink);
@@ -423,7 +491,9 @@ a.badge:focus-visible {
 }
 
 .empty a:hover,
-.empty a:focus-visible { text-decoration-thickness: 3px; }
+.empty a:focus-visible {
+  text-decoration-thickness: 3px;
+}
 
 /* ---- Footer ------------------------------------------------------------ */
 
@@ -501,11 +571,13 @@ a.badge:focus-visible {
   margin: 0 0 0.5rem;
 }
 
-.policy section p, .policy section li {
+.policy section p,
+.policy section li {
   margin: 0.35rem 0;
 }
 
-.policy section ul, .policy section ol {
+.policy section ul,
+.policy section ol {
   margin: 0.35rem 0;
   padding-left: 1.25rem;
 }
@@ -603,7 +675,10 @@ a:focus-visible {
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(10px); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
 
 /* ---- Shared site header (#112): identical chrome on every page -------- */
@@ -651,15 +726,26 @@ a:focus-visible {
   color: var(--ink);
 }
 
-.site-bar .brand-mark { align-self: center; display: block; }
+.site-bar .brand-mark {
+  align-self: center;
+  display: block;
+}
 
 /* The strip arrives after mount, above the fold, on every route. Reserve its
    line with visibility so the reveal fills a box that is already there rather
    than pushing the whole page down; a site GoatCounter never answers is
    marked data-traffic="off" and collapses the box for good. */
-.site-header .stat-strip[hidden] { display: flex; visibility: hidden; }
-.site-header .stat-strip[data-traffic="off"] { display: none; }
-.site-header .stat-strip strong { display: inline-block; min-width: 3ch; }
+.site-header .stat-strip[hidden] {
+  display: flex;
+  visibility: hidden;
+}
+.site-header .stat-strip[data-traffic="off"] {
+  display: none;
+}
+.site-header .stat-strip strong {
+  display: inline-block;
+  min-width: 3ch;
+}
 
 .site-nav {
   display: inline-flex;
@@ -677,7 +763,9 @@ a:focus-visible {
   text-decoration: none;
   padding-bottom: 2px;
   border-bottom: 2px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .site-nav a:hover,
@@ -692,7 +780,9 @@ a:focus-visible {
   gap: 0.3rem;
 }
 
-.site-nav .nav-archive .nav-i { flex-shrink: 0; }
+.site-nav .nav-archive .nav-i {
+  flex-shrink: 0;
+}
 
 .site-nav a[aria-current="page"] {
   color: var(--ink);
@@ -713,11 +803,22 @@ a:focus-visible {
   /* Phone density. Every one of these reclaims vertical space above the
      first offer, which is the only thing on this page a visitor came for and
      which the chrome had pushed off a 390 x 844 screen entirely. */
-  .site-header { padding-bottom: 0.7rem; margin-bottom: 0.8rem; }
-  .toolbar { padding: 0.8rem 0.85rem; gap: 0.55rem 0.6rem; margin-bottom: 0.8rem; }
+  .site-header {
+    padding-bottom: 0.7rem;
+    margin-bottom: 0.8rem;
+  }
+  .toolbar {
+    padding: 0.8rem 0.85rem;
+    gap: 0.55rem 0.6rem;
+    margin-bottom: 0.8rem;
+  }
 
-  .grid > li { padding: 0.75rem 0.85rem 0.75rem 0.3rem; }
-  .card-title { font-size: 1.02rem; }
+  .grid > li {
+    padding: 0.75rem 0.85rem 0.75rem 0.3rem;
+  }
+  .card-title {
+    font-size: 1.02rem;
+  }
 }
 
 /* 320 px: squeeze header chrome so nothing overflows */
@@ -729,7 +830,10 @@ a:focus-visible {
     gap: 0.5rem;
     font-size: 0.72rem;
   }
-  .od-table th[scope="row"] { white-space: normal; width: auto; }
+  .od-table th[scope="row"] {
+    white-space: normal;
+    width: auto;
+  }
 }
 
 @media (pointer: coarse) {
@@ -744,7 +848,9 @@ a:focus-visible {
    labelled <nav> around an empty <ol> — zero height, full margin, 26 px of
    nothing directly above the toolbar on every phone. Matched via :has on the
    empty list rather than :empty, which the wrapper element never satisfies. */
-.breadcrumbs:has(> .breadcrumbs-list:empty) { display: none; }
+.breadcrumbs:has(> .breadcrumbs-list:empty) {
+  display: none;
+}
 
 .breadcrumbs {
   margin: 1.1rem 0 1.6rem;
@@ -790,7 +896,9 @@ a:focus-visible {
   color: var(--ink);
 }
 
-.masthead-home > h1.kicker { font-weight: 400; }
+.masthead-home > h1.kicker {
+  font-weight: 400;
+}
 
 .masthead-home .tagline {
   font-size: 0.92rem;
@@ -799,7 +907,9 @@ a:focus-visible {
   max-width: 46rem;
 }
 
-.masthead-home .count { margin: 0 0 1.1rem; }
+.masthead-home .count {
+  margin: 0 0 1.1rem;
+}
 
 /* ---- Ranked listing rows ---------------------------------------------- */
 
@@ -807,7 +917,9 @@ a:focus-visible {
    listing fades in once, as one object. The archive opts out entirely: its
    LCP is the first row and `backwards` fill would hold it at opacity 0. */
 @media (prefers-reduced-motion: no-preference) {
-  #ft-grid { animation: rise 0.3s ease backwards; }
+  #ft-grid {
+    animation: rise 0.3s ease backwards;
+  }
 }
 
 /* Rows are planes now, not ruled lines. A hairline-separated list on a dark
@@ -825,7 +937,8 @@ a:focus-visible {
   margin-bottom: 0.4rem;
   position: relative;
   overflow: hidden;
-  transition: background-color 0.16s var(--ease-out),
+  transition:
+    background-color 0.16s var(--ease-out),
     border-color 0.16s var(--ease-out);
 }
 
@@ -841,13 +954,27 @@ a:focus-visible {
   opacity: 0.75;
 }
 
-.grid > li[data-category="api_provider"] { --row-hue: var(--t-api_provider); }
-.grid > li[data-category="coding"] { --row-hue: var(--t-coding); }
-.grid > li[data-category="image"] { --row-hue: var(--t-image); }
-.grid > li[data-category="voice"] { --row-hue: var(--t-voice); }
-.grid > li[data-category="video"] { --row-hue: var(--t-video); }
-.grid > li[data-category="startup_program"] { --row-hue: var(--t-startup_program); }
-.grid > li[data-category="student"] { --row-hue: var(--t-student); }
+.grid > li[data-category="api_provider"] {
+  --row-hue: var(--t-api_provider);
+}
+.grid > li[data-category="coding"] {
+  --row-hue: var(--t-coding);
+}
+.grid > li[data-category="image"] {
+  --row-hue: var(--t-image);
+}
+.grid > li[data-category="voice"] {
+  --row-hue: var(--t-voice);
+}
+.grid > li[data-category="video"] {
+  --row-hue: var(--t-video);
+}
+.grid > li[data-category="startup_program"] {
+  --row-hue: var(--t-startup_program);
+}
+.grid > li[data-category="student"] {
+  --row-hue: var(--t-student);
+}
 
 /* Rank is drawn, not stored. A CSS counter skips `display: none` rows, so a
    filtered list renumbers 1..n on its own, and re-sorting (which moves the
@@ -873,14 +1000,22 @@ a:focus-visible {
   border-color: color-mix(in srgb, var(--row-hue, var(--ink)) 30%, transparent);
 }
 
-.grid > li:focus-within::after { opacity: 1; }
+.grid > li:focus-within::after {
+  opacity: 1;
+}
 
 @media (hover: hover) {
   .grid > li:hover {
     background: var(--surface-2);
-    border-color: color-mix(in srgb, var(--row-hue, var(--ink)) 30%, transparent);
+    border-color: color-mix(
+      in srgb,
+      var(--row-hue, var(--ink)) 30%,
+      transparent
+    );
   }
-  .grid > li:hover::after { opacity: 1; }
+  .grid > li:hover::after {
+    opacity: 1;
+  }
 }
 
 /* Provider first, category and review status beside it: the eyebrow answers
@@ -920,7 +1055,10 @@ a:focus-visible {
   color: var(--ink);
 }
 
-.card-title a { color: var(--ink); text-decoration: none; }
+.card-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
 
 .card-title a:hover,
 .card-title a:focus-visible {
@@ -970,7 +1108,9 @@ a:focus-visible {
   color: var(--gray);
 }
 
-.row-meta .sep { color: var(--hairline); }
+.row-meta .sep {
+  color: var(--hairline);
+}
 
 /* Listing density: tags shrink, but keep their own hue (set in _CSS) —
    this rule must never re-assert a colour or it would flatten them again. */
@@ -994,7 +1134,9 @@ a:focus-visible {
   letter-spacing: 0.05em;
 }
 
-.row-quiet .tag-i { display: none; }
+.row-quiet .tag-i {
+  display: none;
+}
 
 .row-quiet button.badge:hover,
 .row-quiet button.badge:focus-visible,
@@ -1020,11 +1162,19 @@ a:focus-visible {
   text-align: right;
 }
 
-.grid .status { font-size: inherit; }
+.grid .status {
+  font-size: inherit;
+}
 
-.grid .dot { width: 0.42rem; height: 0.42rem; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22); }
+.grid .dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22);
+}
 
-.r-vfd { overflow-wrap: anywhere; }
+.r-vfd {
+  overflow-wrap: anywhere;
+}
 
 .row-rail .chip {
   border-color: transparent;
@@ -1069,17 +1219,32 @@ a:focus-visible {
   flex: 0 0 auto;
   gap: 0.32em;
   white-space: nowrap;
-  font: 0.72rem/1.2 "IBM Plex Mono", ui-monospace, monospace;
+  font:
+    0.72rem/1.2 "IBM Plex Mono",
+    ui-monospace,
+    monospace;
   padding: 0.16rem 0.5rem 0.16rem 0.42rem;
   border: 1px solid var(--hairline);
   border-left: 3px solid var(--green);
   border-radius: 4px;
 }
-.ft-stat[hidden] { display: none; }
-.ft-stat strong { font-size: 1.08em; }
-.ft-stat-label { color: var(--gray); }
-.od-views { font-size: 0.95rem; padding: 0.32rem 0.7rem 0.32rem 0.55rem; margin: 0; }
-.od-views strong { font-size: 1.35em; }
+.ft-stat[hidden] {
+  display: none;
+}
+.ft-stat strong {
+  font-size: 1.08em;
+}
+.ft-stat-label {
+  color: var(--gray);
+}
+.od-views {
+  font-size: 0.95rem;
+  padding: 0.32rem 0.7rem 0.32rem 0.55rem;
+  margin: 0;
+}
+.od-views strong {
+  font-size: 1.35em;
+}
 
 .r-details:hover,
 .r-details:focus-visible {
@@ -1104,12 +1269,16 @@ a:focus-visible {
     gap: 0.3rem 0.75rem;
     margin-top: 0.4rem;
   }
-  .r-actions { margin-top: 0; }
+  .r-actions {
+    margin-top: 0;
+  }
 }
 
 /* Touch: the secondary controls need their own comfortable target. */
 @media (pointer: coarse) {
-  .grid > li { padding-block: 0.85rem; }
+  .grid > li {
+    padding-block: 0.85rem;
+  }
   .r-details {
     display: inline-flex;
     align-items: center;
@@ -1119,8 +1288,12 @@ a:focus-visible {
 
 /* Narrow viewports: reclaim the rank gutter rather than squeezing the row. */
 @media (max-width: 24rem) {
-  .grid > li { grid-template-columns: 1.9rem minmax(0, 1fr); }
-  .grid > li::before { padding-right: 0.5rem; }
+  .grid > li {
+    grid-template-columns: 1.9rem minmax(0, 1fr);
+  }
+  .grid > li::before {
+    padding-right: 0.5rem;
+  }
 }
 
 /* ---- Hot-today shelf --------------------------------------------------
@@ -1194,7 +1367,8 @@ a:focus-visible {
   border-radius: 8px;
   background: var(--surface);
   overflow: hidden;
-  transition: background-color 0.16s var(--ease-out),
+  transition:
+    background-color 0.16s var(--ease-out),
     border-color 0.16s var(--ease-out);
 }
 
@@ -1207,19 +1381,37 @@ a:focus-visible {
   opacity: 0.8;
 }
 
-.hot-deal[data-category="api_provider"] { --row-hue: var(--t-api_provider); }
-.hot-deal[data-category="coding"] { --row-hue: var(--t-coding); }
-.hot-deal[data-category="image"] { --row-hue: var(--t-image); }
-.hot-deal[data-category="voice"] { --row-hue: var(--t-voice); }
-.hot-deal[data-category="video"] { --row-hue: var(--t-video); }
-.hot-deal[data-category="startup_program"] { --row-hue: var(--t-startup_program); }
-.hot-deal[data-category="student"] { --row-hue: var(--t-student); }
+.hot-deal[data-category="api_provider"] {
+  --row-hue: var(--t-api_provider);
+}
+.hot-deal[data-category="coding"] {
+  --row-hue: var(--t-coding);
+}
+.hot-deal[data-category="image"] {
+  --row-hue: var(--t-image);
+}
+.hot-deal[data-category="voice"] {
+  --row-hue: var(--t-voice);
+}
+.hot-deal[data-category="video"] {
+  --row-hue: var(--t-video);
+}
+.hot-deal[data-category="startup_program"] {
+  --row-hue: var(--t-startup_program);
+}
+.hot-deal[data-category="student"] {
+  --row-hue: var(--t-student);
+}
 
 @media (hover: hover) {
   .hot-deal:hover,
   .hot-deal:focus-within {
     background: var(--surface-2);
-    border-color: color-mix(in srgb, var(--row-hue, var(--ink)) 30%, transparent);
+    border-color: color-mix(
+      in srgb,
+      var(--row-hue, var(--ink)) 30%,
+      transparent
+    );
   }
 }
 
@@ -1296,9 +1488,18 @@ a:focus-visible {
 }
 
 @media (max-width: 48rem) {
-  .hot-deals-list { grid-template-columns: minmax(0, 1fr); gap: 0.45rem; }
-  .hot-deals { margin-bottom: 0.8rem; }
-  .hot-title { font-size: 0.92rem; -webkit-line-clamp: 3; line-clamp: 3; }
+  .hot-deals-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+  .hot-deals {
+    margin-bottom: 0.8rem;
+  }
+  .hot-title {
+    font-size: 0.92rem;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
 }
 
 /* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
@@ -1319,7 +1520,13 @@ a:focus-visible {
   border-radius: 10px;
 }
 
-.field { display: flex; flex-direction: column; gap: 0.28rem; flex: 1 1 15rem; min-width: 0; }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  flex: 1 1 15rem;
+  min-width: 0;
+}
 
 .tool-label {
   font-family: var(--font-mono);
@@ -1347,11 +1554,18 @@ a:focus-visible {
   transition: border-color 0.15s ease;
 }
 
-#ft-search::placeholder { color: var(--gray); opacity: 1; }
+#ft-search::placeholder {
+  color: var(--gray);
+  opacity: 1;
+}
 
-#ft-search:hover { border-color: color-mix(in srgb, var(--ink) 28%, transparent); }
+#ft-search:hover {
+  border-color: color-mix(in srgb, var(--ink) 28%, transparent);
+}
 
-.field-sort { flex: 0 1 auto; }
+.field-sort {
+  flex: 0 1 auto;
+}
 
 #ft-sort {
   font-family: var(--font-mono);
@@ -1372,9 +1586,15 @@ a:focus-visible {
 }
 
 @media (max-width: 48rem) {
-  .site-header { padding-bottom: 0.85rem; margin-bottom: 0.9rem; }
+  .site-header {
+    padding-bottom: 0.85rem;
+    margin-bottom: 0.9rem;
+  }
 
-  .toolbar { gap: 0.6rem 0.7rem; margin-bottom: 0.7rem; }
+  .toolbar {
+    gap: 0.6rem 0.7rem;
+    margin-bottom: 0.7rem;
+  }
 
   /* The search and sort fields share one row. They did not before: the sort
      field kept `flex-basis: auto`, so it claimed the select's natural 189 px
@@ -1382,13 +1602,21 @@ a:focus-visible {
      whole extra row of toolbar on every phone. Giving it a shrinkable basis
      is the entire fix; both are still `min-width: 0`, so the select truncates
      rather than pushing the search box off the line. */
-  .toolbar .field { flex: 1 1 58%; }
+  .toolbar .field {
+    flex: 1 1 58%;
+  }
 
-  .toolbar .field-sort { flex: 1 1 34%; }
+  .toolbar .field-sort {
+    flex: 1 1 34%;
+  }
 
-  .toolbar #ft-search { max-width: none; }
+  .toolbar #ft-search {
+    max-width: none;
+  }
 
-  .toolbar #ft-sort { width: 100%; }
+  .toolbar #ft-sort {
+    width: 100%;
+  }
 
   .toolbar > .chips {
     width: 100%;
@@ -1400,17 +1628,29 @@ a:focus-visible {
     padding: 0.1rem 0.15rem 0.2rem;
   }
 
-  .toolbar > .chips::-webkit-scrollbar { display: none; }
+  .toolbar > .chips::-webkit-scrollbar {
+    display: none;
+  }
 
-  .toolbar > .chips > * { flex: 0 0 auto; }
+  .toolbar > .chips > * {
+    flex: 0 0 auto;
+  }
 
   /* The row already scrolled; nothing said so. A chip clipped flat by the
      viewport edge reads as a layout bug, so the right edge fades out to
      announce there is more, and the fade is removed once the rail is
      scrolled to its end. Mask only — no extra element, no scrollbar. */
   .toolbar > .chips {
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.2rem), transparent);
-    mask-image: linear-gradient(to right, #000 calc(100% - 2.2rem), transparent);
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 calc(100% - 2.2rem),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 calc(100% - 2.2rem),
+      transparent
+    );
   }
 
   .toolbar > .chips:has(> :last-child:focus-visible) {
@@ -1440,7 +1680,9 @@ a:focus-visible {
   border-color: color-mix(in srgb, var(--tag-hue) 30%, var(--surface-2));
   background: color-mix(in srgb, var(--tag-hue) 15%, var(--surface));
   color: color-mix(in srgb, var(--tag-hue) 60%, white);
-  transition: background-color 0.14s ease, color 0.14s ease,
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease,
     border-color 0.14s ease;
 }
 
@@ -1458,13 +1700,27 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
-.chip-category-api_provider { --tag-hue: var(--t-api_provider); }
-.chip-category-coding { --tag-hue: var(--t-coding); }
-.chip-category-image { --tag-hue: var(--t-image); }
-.chip-category-voice { --tag-hue: var(--t-voice); }
-.chip-category-video { --tag-hue: var(--t-video); }
-.chip-category-startup_program { --tag-hue: var(--t-startup_program); }
-.chip-category-student { --tag-hue: var(--t-student); }
+.chip-category-api_provider {
+  --tag-hue: var(--t-api_provider);
+}
+.chip-category-coding {
+  --tag-hue: var(--t-coding);
+}
+.chip-category-image {
+  --tag-hue: var(--t-image);
+}
+.chip-category-voice {
+  --tag-hue: var(--t-voice);
+}
+.chip-category-video {
+  --tag-hue: var(--t-video);
+}
+.chip-category-startup_program {
+  --tag-hue: var(--t-startup_program);
+}
+.chip-category-student {
+  --tag-hue: var(--t-student);
+}
 
 .results-status {
   flex-basis: 100%;
@@ -1478,7 +1734,9 @@ a:focus-visible {
 button.badge {
   font-family: var(--font-mono);
   cursor: pointer;
-  transition: background-color 0.14s ease, color 0.14s ease,
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease,
     border-color 0.14s ease;
 }
 
@@ -1510,7 +1768,10 @@ button.badge:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  a.badge, button.badge { transition: none; }
+  a.badge,
+  button.badge {
+    transition: none;
+  }
 }
 
 /* ---- Interaction polish (CSS-only, motion-safe) ----------------------- */
@@ -1522,18 +1783,27 @@ button.badge:focus-visible {
      enough to read as a bounce. */
   .chip,
   .od-cta {
-    transition: transform 0.14s var(--ease-out), background-color 0.14s ease,
-      color 0.14s ease, border-color 0.14s ease;
+    transition:
+      transform 0.14s var(--ease-out),
+      background-color 0.14s ease,
+      color 0.14s ease,
+      border-color 0.14s ease;
   }
 
   .chip:active,
   button.badge:active,
-  .od-cta:active { transform: scale(0.97); }
+  .od-cta:active {
+    transform: scale(0.97);
+  }
 
   /* The row tint is the only motion in a 47-row list, so it fades rather than
      snaps. Colour only — no transform, nothing that moves the baseline the
      whole list is being scanned against. */
-  .grid > li { transition: background-color 0.16s ease, color 0.16s ease; }
+  .grid > li {
+    transition:
+      background-color 0.16s ease,
+      color 0.16s ease;
+  }
 }
 
 .filter-pill {
@@ -1571,9 +1841,13 @@ button.badge:focus-visible {
   gap: 0.5rem 0.8rem;
 }
 
-.results-line .results-status { flex: 0 1 auto; }
+.results-line .results-status {
+  flex: 0 1 auto;
+}
 
-.chip.clear[hidden] { display: none; }
+.chip.clear[hidden] {
+  display: none;
+}
 
 .chip.clear {
   font-size: 0.7rem;
@@ -1590,21 +1864,30 @@ button.badge:focus-visible {
   color: var(--paper);
 }
 
-.grid li[hidden] { display: none; }
+.grid li[hidden] {
+  display: none;
+}
 
-.empty .chip.reset { margin-top: 0.75rem; }
+.empty .chip.reset {
+  margin-top: 0.75rem;
+}
 
 @media (pointer: coarse) {
   .chip,
   #ft-search,
-  #ft-sort { min-height: 44px; }
+  #ft-sort {
+    min-height: 44px;
+  }
 
   button.badge {
     min-height: 32px;
     padding-inline: 0.6rem;
   }
 
-  .filter-pill { min-height: 32px; padding-inline: 0.6rem; }
+  .filter-pill {
+    min-height: 32px;
+    padding-inline: 0.6rem;
+  }
 }
 
 /* ---- Consent banner (build.py _BANNER_CSS, issue #131) ----------------- */
@@ -1622,12 +1905,15 @@ button.badge:focus-visible {
   background: var(--surface-2);
   /* Shadow alone is invisible on near-black, so the lift is carried by a
      bright top edge plus a shadow deep enough to darken the ground under it. */
-  box-shadow: 0 -1px 0 0 color-mix(in srgb, var(--ink) 12%, transparent) inset,
+  box-shadow:
+    0 -1px 0 0 color-mix(in srgb, var(--ink) 12%, transparent) inset,
     0 18px 44px rgba(0, 0, 0, 0.55);
   padding: 1rem 1.25rem;
 }
 
-.consent[hidden] { display: none; }
+.consent[hidden] {
+  display: none;
+}
 
 /* The banner is the first thing a phone visitor sees and it was burying the
    list under a nine-line paragraph. The copy is unchanged — it describes what
@@ -1646,8 +1932,14 @@ button.badge:focus-visible {
     max-height: 52vh;
     overflow-y: auto;
   }
-  .consent-text { font-size: 0.8rem; line-height: 1.45; margin-bottom: 0.6rem; }
-  .consent-actions button { padding: 0.4rem 0.9rem; }
+  .consent-text {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    margin-bottom: 0.6rem;
+  }
+  .consent-actions button {
+    padding: 0.4rem 0.9rem;
+  }
 }
 
 .consent-text {
@@ -1683,7 +1975,9 @@ button:focus-visible {
 }
 
 @media (pointer: coarse) {
-  .consent-actions button { min-height: 44px; }
+  .consent-actions button {
+    min-height: 44px;
+  }
 }
 
 .foot-consent {
@@ -1751,9 +2045,10 @@ button:focus-visible {
 }
 
 @media (pointer: coarse) {
-  .local-data-actions button { min-height: 44px; }
+  .local-data-actions button {
+    min-height: 44px;
+  }
 }
-
 
 .consent-settings {
   font-family: var(--font-mono);
@@ -1787,10 +2082,16 @@ button:focus-visible {
   margin: 0.75rem 0 0;
 }
 
-.stat-strip[hidden] { display: none; }
+.stat-strip[hidden] {
+  display: none;
+}
 
-.ft-traffic-total { font-size: 0.84rem; }
-.ft-traffic-total strong { font-size: 1.2em; }
+.ft-traffic-total {
+  font-size: 0.84rem;
+}
+.ft-traffic-total strong {
+  font-size: 1.2em;
+}
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------
    _DETAIL_CSS — hero, checklist, proofs, CTA, copy-only share — ports here
@@ -1813,12 +2114,25 @@ button:focus-visible {
   column-gap: 2.25rem;
 }
 
-.od-back { grid-area: back; }
-.offer-detail > .masthead-offer { grid-area: head; }
-.od-hero { grid-area: hero; }
-.od-rail { grid-area: rail; }
-.od-body { grid-area: body; min-width: 0; }
-.od-related { grid-area: related; }
+.od-back {
+  grid-area: back;
+}
+.offer-detail > .masthead-offer {
+  grid-area: head;
+}
+.od-hero {
+  grid-area: hero;
+}
+.od-rail {
+  grid-area: rail;
+}
+.od-body {
+  grid-area: body;
+  min-width: 0;
+}
+.od-related {
+  grid-area: related;
+}
 
 @media (min-width: 64rem) {
   .offer-detail {
@@ -1841,7 +2155,9 @@ button:focus-visible {
 
 /* Prose measure is set here rather than on .offer-detail, so the rail is not
    dragged in with it. */
-.od-body { max-width: 46rem; }
+.od-body {
+  max-width: 46rem;
+}
 
 /* ---- Offer summary rail ----------------------------------------------- */
 
@@ -1929,7 +2245,8 @@ button:focus-visible {
   border-radius: 8px;
   background: var(--surface);
   overflow: hidden;
-  transition: background-color 0.16s var(--ease-out),
+  transition:
+    background-color 0.16s var(--ease-out),
     border-color 0.16s var(--ease-out);
 }
 
@@ -1942,19 +2259,37 @@ button:focus-visible {
   opacity: 0.75;
 }
 
-.od-related-card[data-category="api_provider"] { --row-hue: var(--t-api_provider); }
-.od-related-card[data-category="coding"] { --row-hue: var(--t-coding); }
-.od-related-card[data-category="image"] { --row-hue: var(--t-image); }
-.od-related-card[data-category="voice"] { --row-hue: var(--t-voice); }
-.od-related-card[data-category="video"] { --row-hue: var(--t-video); }
-.od-related-card[data-category="startup_program"] { --row-hue: var(--t-startup_program); }
-.od-related-card[data-category="student"] { --row-hue: var(--t-student); }
+.od-related-card[data-category="api_provider"] {
+  --row-hue: var(--t-api_provider);
+}
+.od-related-card[data-category="coding"] {
+  --row-hue: var(--t-coding);
+}
+.od-related-card[data-category="image"] {
+  --row-hue: var(--t-image);
+}
+.od-related-card[data-category="voice"] {
+  --row-hue: var(--t-voice);
+}
+.od-related-card[data-category="video"] {
+  --row-hue: var(--t-video);
+}
+.od-related-card[data-category="startup_program"] {
+  --row-hue: var(--t-startup_program);
+}
+.od-related-card[data-category="student"] {
+  --row-hue: var(--t-student);
+}
 
 @media (hover: hover) {
   .od-related-card:hover,
   .od-related-card:focus-within {
     background: var(--surface-2);
-    border-color: color-mix(in srgb, var(--row-hue, var(--ink)) 30%, transparent);
+    border-color: color-mix(
+      in srgb,
+      var(--row-hue, var(--ink)) 30%,
+      transparent
+    );
   }
 }
 
@@ -2084,14 +2419,20 @@ button:focus-visible {
   gap: 0.55rem 1rem;
 }
 
-.od-hero-metrics:empty { display: none; }
+.od-hero-metrics:empty {
+  display: none;
+}
 
 /* .count is the home masthead's offer counter and carries its 2.5rem bottom
    margin. Here it is the provider name sitting directly under the title, and
    that margin opened a hole between it and the status line. */
-.masthead-offer .count { margin: 0.15rem 0 0; }
+.masthead-offer .count {
+  margin: 0.15rem 0 0;
+}
 
-.od-hero { margin-top: 1.15rem; }
+.od-hero {
+  margin-top: 1.15rem;
+}
 
 .od-statusline {
   display: flex;
@@ -2105,7 +2446,9 @@ button:focus-visible {
   border-bottom: 1px solid var(--hairline);
 }
 
-.od-statusline .sep { color: var(--hairline); }
+.od-statusline .sep {
+  color: var(--hairline);
+}
 
 /* Section labels: small mono furniture with the home-page green dash. */
 
@@ -2168,7 +2511,9 @@ button:focus-visible {
 }
 
 .od-table tr:last-child th,
-.od-table tr:last-child td { border-bottom: none; }
+.od-table tr:last-child td {
+  border-bottom: none;
+}
 
 /* In the rail the table has ~20rem, not 42, so an 8.5rem label column would
    leave under 10rem for values like the amount sentence. The row becomes two
@@ -2195,7 +2540,9 @@ button:focus-visible {
   border-bottom: 1px solid var(--hairline);
 }
 
-.od-rail .od-table tr:last-child { border-bottom: none; }
+.od-rail .od-table tr:last-child {
+  border-bottom: none;
+}
 
 .od-rail .od-table th,
 .od-rail .od-table td {
@@ -2209,7 +2556,9 @@ button:focus-visible {
   margin-bottom: 0.18rem;
 }
 
-.od-rail .od-table td { color: var(--ink); }
+.od-rail .od-table td {
+  color: var(--ink);
+}
 
 /* Steps head: label left, live progress readout right. */
 
@@ -2221,7 +2570,9 @@ button:focus-visible {
   gap: 0.25rem 1rem;
 }
 
-.od-steps-head h2 { margin: 2rem 0 0.6rem; }
+.od-steps-head h2 {
+  margin: 2rem 0 0.6rem;
+}
 
 .steps-progress {
   display: inline-flex;
@@ -2329,7 +2680,9 @@ button:focus-visible {
   transform: scale(0.4);
 }
 
-.claim-step label:hover .step-num { background: var(--wash); }
+.claim-step label:hover .step-num {
+  background: var(--wash);
+}
 
 .claim-step input:focus-visible + label .step-num {
   outline: 3px solid var(--ink);
@@ -2341,7 +2694,9 @@ button:focus-visible {
   border-color: var(--ink);
 }
 
-.claim-step input:checked + label .num { opacity: 0; }
+.claim-step input:checked + label .num {
+  opacity: 0;
+}
 
 .claim-step input:checked + label .tick {
   opacity: 1;
@@ -2369,21 +2724,29 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .progress-fill { transition: transform 0.25s ease; }
+  .progress-fill {
+    transition: transform 0.25s ease;
+  }
 
   .step-num,
   .step-num > span {
-    transition: background-color 0.15s ease, opacity 0.15s ease,
+    transition:
+      background-color 0.15s ease,
+      opacity 0.15s ease,
       transform 0.18s ease;
   }
 }
 
 @media (pointer: coarse) {
-  .claim-step { padding-block: 0.7rem; }
+  .claim-step {
+    padding-block: 0.7rem;
+  }
 
   /* li padding is not part of the hit area; pad the label itself so the
      clickable row reaches the 44px touch minimum on single-line steps. */
-  .claim-step label { padding-block: 0.35rem; }
+  .claim-step label {
+    padding-block: 0.35rem;
+  }
 }
 
 .proof-card {
@@ -2394,9 +2757,13 @@ button:focus-visible {
   margin: 0.6rem 0;
 }
 
-.proof-card p { margin: 0.15rem 0; }
+.proof-card p {
+  margin: 0.15rem 0;
+}
 
-.proof-text { overflow-wrap: anywhere; }
+.proof-text {
+  overflow-wrap: anywhere;
+}
 
 .proof-card footer,
 .proof-meta {
@@ -2405,7 +2772,9 @@ button:focus-visible {
   color: var(--gray);
 }
 
-.proof-card footer { margin-top: 0.35rem; }
+.proof-card footer {
+  margin-top: 0.35rem;
+}
 
 .proof-card footer a {
   color: var(--ink);
@@ -2415,7 +2784,9 @@ button:focus-visible {
   text-underline-offset: 3px;
 }
 
-figure.proof-screenshot { margin: 0.6rem 0; }
+figure.proof-screenshot {
+  margin: 0.6rem 0;
+}
 
 .proof-screenshot img {
   display: block;
@@ -2446,14 +2817,23 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   font-weight: 600;
 }
 
-.od-cta:hover { text-decoration: underline; text-underline-offset: 4px; }
+.od-cta:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 
-.od-cta span[aria-hidden] { display: inline-block; }
+.od-cta span[aria-hidden] {
+  display: inline-block;
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  .od-cta span[aria-hidden] { transition: transform 0.15s ease; }
+  .od-cta span[aria-hidden] {
+    transition: transform 0.15s ease;
+  }
 
-  .od-cta:hover span[aria-hidden] { transform: translate(2px, -2px); }
+  .od-cta:hover span[aria-hidden] {
+    transform: translate(2px, -2px);
+  }
 }
 
 .od-cta:focus-visible {
@@ -2476,7 +2856,9 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 
 /* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
 @media (pointer: coarse) {
-  .od-cta { min-height: 44px; }
+  .od-cta {
+    min-height: 44px;
+  }
 }
 
 /* ---- Offer copy bar (#128; copy-only subset of build.py share bar) ---- */
@@ -2599,5 +2981,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 }
 
 @media (pointer: coarse) {
-  .share-copy { min-height: 44px; }
+  .share-copy {
+    min-height: 44px;
+  }
 }

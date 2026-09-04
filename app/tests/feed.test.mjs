@@ -57,7 +57,9 @@ describe("RSS 2.0 feed (#130 / #27)", () => {
     const channel = root.querySelector("channel");
     expect(channel.querySelector("title").textContent).toBe(FEED_TITLE);
     expect(channel.querySelector("link").textContent).toBe(`${BASE}/`);
-    expect(channel.querySelector("description").textContent).toBe(FEED_DESCRIPTION);
+    expect(channel.querySelector("description").textContent).toBe(
+      FEED_DESCRIPTION,
+    );
     expect(channel.querySelector("language").textContent).toBe("en");
     expect(channel.querySelector("lastBuildDate").textContent).toBeTruthy();
     expect(channel.querySelector("generator").textContent).toBe(
@@ -156,7 +158,10 @@ describe("RSS 2.0 feed (#130 / #27)", () => {
       indexFor([offer("evil", { title: "Bad \"&'<title>" })]),
     );
     expect(
-      xmlText.replaceAll("&quot;", '"').replaceAll("&apos;", "'").replaceAll("&#x27;", "'"),
+      xmlText
+        .replaceAll("&quot;", '"')
+        .replaceAll("&apos;", "'")
+        .replaceAll("&#x27;", "'"),
     ).not.toContain("Bad \"&'<title>");
     expect(xmlText).toContain("&lt;title&gt;");
     expect(xmlText).toContain("&quot;");
@@ -165,7 +170,10 @@ describe("RSS 2.0 feed (#130 / #27)", () => {
   });
 
   it("strips a trailing slash from the base URL override", () => {
-    const xmlText = buildFeed(indexFor([offer("a")]), "https://example.com/site/");
+    const xmlText = buildFeed(
+      indexFor([offer("a")]),
+      "https://example.com/site/",
+    );
     expect(xmlText).toContain("<link>https://example.com/site/</link>");
   });
 
@@ -195,16 +203,14 @@ describe("RSS 2.0 feed (#130 / #27)", () => {
 
   it("escapes XML metacharacters in titles and amounts", () => {
     const fixture = indexFor([
-      offer("legacy", { status: undefined, title: "O'Reilly \"&\" <AI>" }),
+      offer("legacy", { status: undefined, title: 'O\'Reilly "&" <AI>' }),
       offer("amp", {
         amount: "10k tokens & extra",
         verified_date: "2026-08-01",
       }),
     ]);
     const xml = buildFeed(fixture);
-    expect(xml).toContain(
-      "O&#x27;Reilly &quot;&amp;&quot; &lt;AI&gt;",
-    );
+    expect(xml).toContain("O&#x27;Reilly &quot;&amp;&quot; &lt;AI&gt;");
     expect(xml).toContain("10k tokens &amp; extra");
   });
 });

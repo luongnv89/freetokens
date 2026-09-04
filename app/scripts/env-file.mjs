@@ -35,7 +35,11 @@ export function readEnvFile(dir) {
     if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(key)) continue;
     let value = trimmed.slice(eq + 1).trim();
     const quote = value[0];
-    if ((quote === '"' || quote === "'") && value.endsWith(quote) && value.length > 1) {
+    if (
+      (quote === '"' || quote === "'") &&
+      value.endsWith(quote) &&
+      value.length > 1
+    ) {
       value = value.slice(1, -1);
     }
     out[key] = value;

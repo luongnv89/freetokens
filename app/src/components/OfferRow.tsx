@@ -9,19 +9,25 @@ import {
   humanDate,
   relativeDate,
   type Offer,
-} from "../lib/offers"
-import { TAG_ICONS } from "../lib/tagIcons"
-import { ftFormatCount } from "../lib/analytics"
-import type { FilterDimension } from "../lib/urlState"
-import { Badge } from "./ui/badge"
-import { HotBadge, ReviewStatusBadge } from "./Badge"
+} from "../lib/offers";
+import { TAG_ICONS } from "../lib/tagIcons";
+import { ftFormatCount } from "../lib/analytics";
+import type { FilterDimension } from "../lib/urlState";
+import { Badge } from "./ui/badge";
+import { HotBadge, ReviewStatusBadge } from "./Badge";
 
 // Tag glyphs ship as ONE inline <symbol> sprite per page, referenced by
 // <use> — mirrors build.py _icon_sprite/_SYMBOL so rows keep the same
 // same-document, zero-request icon mechanism.
 export function IconSprite() {
   return (
-    <svg className="tag-sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <svg
+      className="tag-sprite"
+      width="0"
+      height="0"
+      aria-hidden="true"
+      focusable="false"
+    >
       <defs>
         {Object.entries(TAG_ICONS).map(([name, paths]) => (
           <symbol
@@ -38,16 +44,22 @@ export function IconSprite() {
         ))}
       </defs>
     </svg>
-  )
+  );
 }
 
 function tagIcon(value: string) {
-  if (!(value in TAG_ICONS)) return null
+  if (!(value in TAG_ICONS)) return null;
   return (
-    <svg className="tag-i" width="12" height="12" aria-hidden="true" focusable="false">
+    <svg
+      className="tag-i"
+      width="12"
+      height="12"
+      aria-hidden="true"
+      focusable="false"
+    >
       <use href={`#ti-${value}`} />
     </svg>
-  )
+  );
 }
 
 // Interactive affordance on the home listing (build.py _tag interactive=True):
@@ -62,12 +74,12 @@ function TagButton({
   pressed,
   onToggle,
 }: {
-  dimension: FilterDimension
-  value: string
-  label: string
-  title: string
-  pressed: boolean
-  onToggle: (dim: FilterDimension, value: string) => void
+  dimension: FilterDimension;
+  value: string;
+  label: string;
+  title: string;
+  pressed: boolean;
+  onToggle: (dim: FilterDimension, value: string) => void;
 }) {
   return (
     <Badge asChild variant="unstyled">
@@ -85,7 +97,7 @@ function TagButton({
         <span>{label}</span>
       </button>
     </Badge>
-  )
+  );
 }
 
 /**
@@ -114,18 +126,18 @@ export function OfferRow({
   views = null,
   hot = false,
 }: {
-  offer: Offer
-  index: number
-  buildDay: string
-  pressed: { category: string; verification: string; signup: string }
-  onToggleTag: (dim: FilterDimension, value: string) => void
-  saved?: boolean
-  onToggleSave?: (slug: string) => void
-  onDismiss?: (slug: string) => void
-  views?: number | null
-  hot?: boolean
+  offer: Offer;
+  index: number;
+  buildDay: string;
+  pressed: { category: string; verification: string; signup: string };
+  onToggleTag: (dim: FilterDimension, value: string) => void;
+  saved?: boolean;
+  onToggleSave?: (slug: string) => void;
+  onDismiss?: (slug: string) => void;
+  views?: number | null;
+  hot?: boolean;
 }) {
-  const detailHref = `offers/${offer.slug}.html`
+  const detailHref = `offers/${offer.slug}.html`;
   return (
     // `data-category` is mirrored onto the <li> as well as the <article>: the
     // row's left hue spine is drawn as an ::after on the list item, which is
@@ -134,7 +146,10 @@ export function OfferRow({
     // read the category from there.
     // `style` stays the FIRST attribute: App.test.tsx counts rows by matching
     // the literal `<li style`, and React emits attributes in prop order.
-    <li style={{ "--i": index } as React.CSSProperties} data-category={offer.category}>
+    <li
+      style={{ "--i": index } as React.CSSProperties}
+      data-category={offer.category}
+    >
       <article
         className="card"
         id={`offer-${offer.slug}`}
@@ -194,14 +209,20 @@ export function OfferRow({
         <div className="row-rail">
           {offer.expiry_date ? (
             <span className="status">
-              ends <time dateTime={offer.expiry_date}>{humanDate(offer.expiry_date)}</time>
+              ends{" "}
+              <time dateTime={offer.expiry_date}>
+                {humanDate(offer.expiry_date)}
+              </time>
             </span>
           ) : (
             <span className="status">
               <span className="dot" aria-hidden="true"></span>ongoing
             </span>
           )}
-          <span className="r-vfd" title={`checked ${humanDate(offer.verified_date)}`}>
+          <span
+            className="r-vfd"
+            title={`checked ${humanDate(offer.verified_date)}`}
+          >
             checked{" "}
             <time dateTime={offer.verified_date}>
               {relativeDate(offer.verified_date, buildDay)}
@@ -220,7 +241,11 @@ export function OfferRow({
                 className="chip r-save"
                 data-ft-save={offer.slug}
                 aria-pressed={saved ? "true" : "false"}
-                aria-label={saved ? `Remove ${offer.title} from saved` : `Save ${offer.title}`}
+                aria-label={
+                  saved
+                    ? `Remove ${offer.title} from saved`
+                    : `Save ${offer.title}`
+                }
                 onClick={() => onToggleSave(offer.slug)}
               >
                 {saved ? "Saved" : "Save"}
@@ -248,5 +273,5 @@ export function OfferRow({
         </div>
       </article>
     </li>
-  )
+  );
 }

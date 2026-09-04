@@ -1,41 +1,41 @@
-import { useMemo } from "react"
-import { CATEGORY_LABELS, humanDate, type OffersIndex } from "../lib/offers"
-import { ftFormatCount } from "../lib/analytics"
-import { useOfferViews } from "../lib/offerStats"
+import { useMemo } from "react";
+import { CATEGORY_LABELS, humanDate, type OffersIndex } from "../lib/offers";
+import { ftFormatCount } from "../lib/analytics";
+import { useOfferViews } from "../lib/offerStats";
 import {
   claimSteps,
   type DetailsMap,
   type OfferDetail,
-} from "../lib/offerDetails"
-import { offerAbsoluteUrl } from "../lib/site"
-import detailsCatalog from "../data/details.json"
-import type { Offer } from "../lib/offers"
+} from "../lib/offerDetails";
+import { offerAbsoluteUrl } from "../lib/site";
+import detailsCatalog from "../data/details.json";
+import type { Offer } from "../lib/offers";
 import {
   CategoryBadge,
   ReviewStatusBadge,
   SignupBadge,
   VerificationBadge,
-} from "./Badge"
-import { ClaimChecklist } from "./ClaimChecklist"
-import { CopyLinkButton } from "./CopyLinkButton"
-import { IconSprite } from "./OfferRow"
-import { SocialProofList } from "./SocialProofList"
-import { SiteFooter } from "./SiteFooter"
-import { SiteHeader } from "./SiteHeader"
-import { Breadcrumbs } from "./Breadcrumbs"
-import { StructuredData } from "./StructuredData"
+} from "./Badge";
+import { ClaimChecklist } from "./ClaimChecklist";
+import { CopyLinkButton } from "./CopyLinkButton";
+import { IconSprite } from "./OfferRow";
+import { SocialProofList } from "./SocialProofList";
+import { SiteFooter } from "./SiteFooter";
+import { SiteHeader } from "./SiteHeader";
+import { Breadcrumbs } from "./Breadcrumbs";
+import { StructuredData } from "./StructuredData";
 
-const catalog = detailsCatalog as DetailsMap
+const catalog = detailsCatalog as DetailsMap;
 
 function relatedOffers(index: OffersIndex, current: Offer, limit = 4): Offer[] {
   const sameCategory = index.offers.filter(
     (o) => o.category === current.category && o.slug !== current.slug,
-  )
-  const active = sameCategory.filter((o) => o.status !== "expired")
-  const expired = sameCategory.filter((o) => o.status === "expired")
-  active.sort((a, b) => b.verified_date.localeCompare(a.verified_date))
-  expired.sort((a, b) => b.verified_date.localeCompare(a.verified_date))
-  return [...active, ...expired].slice(0, limit)
+  );
+  const active = sameCategory.filter((o) => o.status !== "expired");
+  const expired = sameCategory.filter((o) => o.status === "expired");
+  active.sort((a, b) => b.verified_date.localeCompare(a.verified_date));
+  expired.sort((a, b) => b.verified_date.localeCompare(a.verified_date));
+  return [...active, ...expired].slice(0, limit);
 }
 
 /**
@@ -58,7 +58,7 @@ function ClaimCta({ offer }: { offer: Offer }) {
     >
       Claim at {offer.provider} <span aria-hidden="true">&#8599;</span>
     </a>
-  )
+  );
 }
 
 /**
@@ -75,10 +75,17 @@ function ClaimCta({ offer }: { offer: Offer }) {
  * BECAUSE they share a category — so the spine reads as a group marker here
  * rather than as a per-item label.
  */
-function RelatedOffers({ current, index }: { current: Offer; index: OffersIndex }) {
-  const related = relatedOffers(index, current)
-  if (related.length === 0) return null
-  const label = CATEGORY_LABELS[current.category] ?? current.category.replace(/_/g, " ")
+function RelatedOffers({
+  current,
+  index,
+}: {
+  current: Offer;
+  index: OffersIndex;
+}) {
+  const related = relatedOffers(index, current);
+  if (related.length === 0) return null;
+  const label =
+    CATEGORY_LABELS[current.category] ?? current.category.replace(/_/g, " ");
   return (
     <nav className="od-related" aria-labelledby="od-related-head">
       <h2 id="od-related-head">More in {label}</h2>
@@ -110,7 +117,7 @@ function RelatedOffers({ current, index }: { current: Offer; index: OffersIndex 
         <a href="../archive.html">Browse the archive</a>
       </p>
     </nav>
-  )
+  );
 }
 
 /**
@@ -128,82 +135,93 @@ export default function OfferDetailPage({
   details,
   baseUrl,
 }: {
-  index: OffersIndex
-  slug: string
-  details?: DetailsMap
-  baseUrl?: string
+  index: OffersIndex;
+  slug: string;
+  details?: DetailsMap;
+  baseUrl?: string;
 }) {
-  const offer = index.offers.find((o) => o.slug === slug)
-  const map = details ?? catalog
-  const detail: OfferDetail | undefined = offer ? map[offer.slug] : undefined
-  const viewSlug = useMemo(() => [slug], [slug])
-  const views = useOfferViews(viewSlug)
-  const viewCount = offer ? views[offer.slug] : null
+  const offer = index.offers.find((o) => o.slug === slug);
+  const map = details ?? catalog;
+  const detail: OfferDetail | undefined = offer ? map[offer.slug] : undefined;
+  const viewSlug = useMemo(() => [slug], [slug]);
+  const views = useOfferViews(viewSlug);
+  const viewCount = offer ? views[offer.slug] : null;
   return (
     <>
       <IconSprite />
       <div className="wrap">
         <main>
-        <SiteHeader depth={1} pageViews={false} />
-        <Breadcrumbs
-          page="detail"
-          slug={offer?.slug ?? slug}
-          title={offer?.title ?? "Offer not found"}
-          baseUrl={baseUrl}
-        />
-        {offer ? (
-          <article className="offer-detail">
-            <p className="od-back">
-              <a href="../index.html">&larr; All offers</a>
-            </p>
-            <header className="masthead masthead-offer">
-              <p className="kicker">
-                <CategoryBadge offer={offer} hrefPrefix="../" />
+          <SiteHeader depth={1} pageViews={false} />
+          <Breadcrumbs
+            page="detail"
+            slug={offer?.slug ?? slug}
+            title={offer?.title ?? "Offer not found"}
+            baseUrl={baseUrl}
+          />
+          {offer ? (
+            <article className="offer-detail">
+              <p className="od-back">
+                <a href="../index.html">&larr; All offers</a>
               </p>
-              <h1>{offer.title}</h1>
-              <p className="count">{offer.provider}</p>
-            </header>
-            {/* The hero states WHICH offer this is and how trustworthy it is;
+              <header className="masthead masthead-offer">
+                <p className="kicker">
+                  <CategoryBadge offer={offer} hrefPrefix="../" />
+                </p>
+                <h1>{offer.title}</h1>
+                <p className="count">{offer.provider}</p>
+              </header>
+              {/* The hero states WHICH offer this is and how trustworthy it is;
                 what it gives you now lives once, in the facts rail, instead of
                 twice. The amount used to run here as a second headline at
                 nearly the title's weight and then repeat verbatim as a table
                 row directly beneath — two competing first lines saying the
                 same thing. */}
-            <div className="od-hero">
-              <div className="od-hero-metrics">
-                {typeof viewCount === "number" && (
-                  <p className="ft-stat od-views">
-                    <strong>{ftFormatCount(viewCount)}</strong>
-                    {" "}
-                    <span className="ft-stat-label">views</span>
-                  </p>
-                )}
+              <div className="od-hero">
+                <div className="od-hero-metrics">
+                  {typeof viewCount === "number" && (
+                    <p className="ft-stat od-views">
+                      <strong>{ftFormatCount(viewCount)}</strong>{" "}
+                      <span className="ft-stat-label">views</span>
+                    </p>
+                  )}
+                </div>
+                <p className="od-statusline mono">
+                  {offer.status === "expired" ? (
+                    <span className="status">ended</span>
+                  ) : offer.expiry_date ? (
+                    <span className="status">
+                      expires{" "}
+                      <time dateTime={offer.expiry_date}>
+                        {humanDate(offer.expiry_date)}
+                      </time>
+                    </span>
+                  ) : (
+                    <span className="status">
+                      <span className="dot" aria-hidden="true"></span>ongoing
+                    </span>
+                  )}
+                  <span className="sep" aria-hidden="true">
+                    &middot;
+                  </span>
+                  <SignupBadge offer={offer} hrefPrefix="../" />
+                  <span className="sep" aria-hidden="true">
+                    &middot;
+                  </span>
+                  <VerificationBadge offer={offer} hrefPrefix="../" />
+                  <span className="sep" aria-hidden="true">
+                    &middot;
+                  </span>
+                  <ReviewStatusBadge offer={offer} />
+                  <span className="sep" aria-hidden="true">
+                    &middot;
+                  </span>
+                  checked{" "}
+                  <time dateTime={offer.verified_date}>
+                    {humanDate(offer.verified_date)}
+                  </time>
+                </p>
               </div>
-              <p className="od-statusline mono">
-                {offer.status === "expired" ? (
-                  <span className="status">ended</span>
-                ) : offer.expiry_date ? (
-                  <span className="status">
-                    expires{" "}
-                    <time dateTime={offer.expiry_date}>{humanDate(offer.expiry_date)}</time>
-                  </span>
-                ) : (
-                  <span className="status">
-                    <span className="dot" aria-hidden="true"></span>ongoing
-                  </span>
-                )}
-                <span className="sep" aria-hidden="true">&middot;</span>
-                <SignupBadge offer={offer} hrefPrefix="../" />
-                <span className="sep" aria-hidden="true">&middot;</span>
-                <VerificationBadge offer={offer} hrefPrefix="../" />
-                <span className="sep" aria-hidden="true">&middot;</span>
-                <ReviewStatusBadge offer={offer} />
-                <span className="sep" aria-hidden="true">&middot;</span>
-                checked{" "}
-                <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
-              </p>
-            </div>
-            {/* The rail. On a wide screen it sits beside the prose and sticks
+              {/* The rail. On a wide screen it sits beside the prose and sticks
                 to the viewport, so the facts and the claim button are readable
                 from anywhere on the page instead of only where they happen to
                 fall. On a phone it is just the next block after the hero,
@@ -211,112 +229,128 @@ export default function OfferDetailPage({
                 BEFORE .od-body in the DOM on purpose: the table has to precede
                 the prose for reading order, and grid placement handles the
                 visual column without reordering the document. */}
-            <aside className="od-rail" aria-label="Offer summary">
-              {offer.status !== "expired" ? (
-                <p className="od-hero-cta">
-                  <ClaimCta offer={offer} />
-                  <span className="od-cta-note">
-                    Opens {offer.provider}. This site takes no cut.
-                  </span>
-                </p>
-              ) : (
-                <p className="od-ended od-ended-rail">
-                  This offer ended &mdash; nothing here is claimable anymore.
-                </p>
-              )}
-              <section className="od-facts" aria-label="Key offer details">
-              <h2>Details</h2>
-              <table className="od-table">
-                <tbody>
-                  <tr>
-                    <th scope="row">Provider</th>
-                    <td>{offer.provider}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Amount</th>
-                    <td className="mono od-amount">{offer.amount}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Category</th>
-                    <td>
-                      <CategoryBadge offer={offer} hrefPrefix="../" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Sign-up</th>
-                    <td>
-                      <SignupBadge offer={offer} hrefPrefix="../" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Ends</th>
-                    <td>
-                      {offer.status === "expired" ? (
-                        <>ended</>
-                      ) : offer.expiry_date ? (
-                        <time dateTime={offer.expiry_date}>{humanDate(offer.expiry_date)}</time>
-                      ) : (
-                        <>ongoing &mdash; no fixed end date</>
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Verification</th>
-                    <td>
-                      <VerificationBadge offer={offer} hrefPrefix="../" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Review status</th>
-                    <td>
-                      <ReviewStatusBadge offer={offer} />
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Last checked</th>
-                    <td>
-                      <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              </section>
-            </aside>
-            <div className="od-body">
-            {detail?.summary ? (
-              <section className="od-brief">
-                <h2>The offer</h2>
-                <p className="od-summary">{detail.summary}</p>
-              </section>
-            ) : null}
-            <ClaimChecklist slug={offer.slug} steps={claimSteps(detail)} />
-            {/* Second CTA, at the end of the steps. Redundant on a desktop
+              <aside className="od-rail" aria-label="Offer summary">
+                {offer.status !== "expired" ? (
+                  <p className="od-hero-cta">
+                    <ClaimCta offer={offer} />
+                    <span className="od-cta-note">
+                      Opens {offer.provider}. This site takes no cut.
+                    </span>
+                  </p>
+                ) : (
+                  <p className="od-ended od-ended-rail">
+                    This offer ended &mdash; nothing here is claimable anymore.
+                  </p>
+                )}
+                <section className="od-facts" aria-label="Key offer details">
+                  <h2>Details</h2>
+                  <table className="od-table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Provider</th>
+                        <td>{offer.provider}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Amount</th>
+                        <td className="mono od-amount">{offer.amount}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Category</th>
+                        <td>
+                          <CategoryBadge offer={offer} hrefPrefix="../" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Sign-up</th>
+                        <td>
+                          <SignupBadge offer={offer} hrefPrefix="../" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Ends</th>
+                        <td>
+                          {offer.status === "expired" ? (
+                            <>ended</>
+                          ) : offer.expiry_date ? (
+                            <time dateTime={offer.expiry_date}>
+                              {humanDate(offer.expiry_date)}
+                            </time>
+                          ) : (
+                            <>ongoing &mdash; no fixed end date</>
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Verification</th>
+                        <td>
+                          <VerificationBadge offer={offer} hrefPrefix="../" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Review status</th>
+                        <td>
+                          <ReviewStatusBadge offer={offer} />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Last checked</th>
+                        <td>
+                          <time dateTime={offer.verified_date}>
+                            {humanDate(offer.verified_date)}
+                          </time>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </aside>
+              <div className="od-body">
+                {detail?.summary ? (
+                  <section className="od-brief">
+                    <h2>The offer</h2>
+                    <p className="od-summary">{detail.summary}</p>
+                  </section>
+                ) : null}
+                <ClaimChecklist slug={offer.slug} steps={claimSteps(detail)} />
+                {/* Second CTA, at the end of the steps. Redundant on a desktop
                 where the rail is stuck to the viewport, but on a phone the
                 rail has long since scrolled away and this is the button that
                 catches someone who just finished reading how to claim. */}
-            {offer.status !== "expired" ? <ClaimCta offer={offer} /> : null}
-            <SocialProofList proofs={detail?.social_proof} relPrefix="../" />
-            <CopyLinkButton url={offerAbsoluteUrl(offer.slug)} />
-            </div>
-            <RelatedOffers current={offer} index={index} />
-          </article>
-        ) : (
-          <section className="empty" style={{ "--i": 0 } as React.CSSProperties}>
-            <h2>Offer not found</h2>
-            <p>
-              No offer lives at this address. It may have been renamed or removed from the
-              directory.
-            </p>
-            <p>
-              <a href="../index.html">Browse all live offers</a> instead.
-            </p>
-          </section>
-        )}
+                {offer.status !== "expired" ? <ClaimCta offer={offer} /> : null}
+                <SocialProofList
+                  proofs={detail?.social_proof}
+                  relPrefix="../"
+                />
+                <CopyLinkButton url={offerAbsoluteUrl(offer.slug)} />
+              </div>
+              <RelatedOffers current={offer} index={index} />
+            </article>
+          ) : (
+            <section
+              className="empty"
+              style={{ "--i": 0 } as React.CSSProperties}
+            >
+              <h2>Offer not found</h2>
+              <p>
+                No offer lives at this address. It may have been renamed or
+                removed from the directory.
+              </p>
+              <p>
+                <a href="../index.html">Browse all live offers</a> instead.
+              </p>
+            </section>
+          )}
         </main>
         <SiteFooter depth={1} />
       </div>
       {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
-      <StructuredData page="detail" index={index} slug={slug} detail={detail ?? null} baseUrl={baseUrl} />
+      <StructuredData
+        page="detail"
+        index={index}
+        slug={slug}
+        detail={detail ?? null}
+        baseUrl={baseUrl}
+      />
     </>
-  )
+  );
 }

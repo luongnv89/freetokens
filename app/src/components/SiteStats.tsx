@@ -1,4 +1,4 @@
-import { buildDate, humanDate } from "../lib/offers"
+import { buildDate, humanDate } from "../lib/offers";
 
 /**
  * Home-only proof-line layout. Kept out of python-parity.css so offer-detail
@@ -24,14 +24,14 @@ const RAIL_CSS =
   ".site-stats a{color:inherit;text-decoration:underline;" +
   "text-decoration-color:var(--hairline);text-underline-offset:3px}" +
   ".site-stats a:hover,.site-stats a:focus-visible{color:var(--ink);" +
-  "text-decoration-color:var(--green);text-decoration-thickness:2px}"
+  "text-decoration-color:var(--green);text-decoration-thickness:2px}";
 
 /** Days between two YYYY-MM-DD days; -1 when either is unparseable. */
 function daysBetween(from: string, to: string): number {
-  const a = Date.parse(`${from}T00:00:00Z`)
-  const b = Date.parse(`${to}T00:00:00Z`)
-  if (Number.isNaN(a) || Number.isNaN(b)) return -1
-  return Math.max(0, Math.round((b - a) / 86_400_000))
+  const a = Date.parse(`${from}T00:00:00Z`);
+  const b = Date.parse(`${to}T00:00:00Z`);
+  if (Number.isNaN(a) || Number.isNaN(b)) return -1;
+  return Math.max(0, Math.round((b - a) / 86_400_000));
 }
 
 /**
@@ -44,8 +44,8 @@ function daysBetween(from: string, to: string): number {
  * Returns "" when the age is unknown, so the caller drops the clause.
  */
 function checkWindowFor(age: number): string {
-  if (age < 0) return ""
-  return age === 0 ? "1 day" : `${age + 1} days`
+  if (age < 0) return "";
+  return age === 0 ? "1 day" : `${age + 1} days`;
 }
 
 /**
@@ -73,21 +73,22 @@ export function SiteStats({
   oldestVerified = "",
   generatedAt,
 }: {
-  activeCount: number
-  archivedCount?: number
-  oldestVerified?: string
-  generatedAt: string
+  activeCount: number;
+  archivedCount?: number;
+  oldestVerified?: string;
+  generatedAt: string;
 }) {
-  const day = buildDate(generatedAt || "")
+  const day = buildDate(generatedAt || "");
   // humanDate echoes its input verbatim on a malformed date; never print that.
-  const updated = day ? humanDate(day) : ""
-  const age = oldestVerified && day ? daysBetween(oldestVerified, day) : -1
-  const checkWindow = checkWindowFor(age)
+  const updated = day ? humanDate(day) : "";
+  const age = oldestVerified && day ? daysBetween(oldestVerified, day) : -1;
+  const checkWindow = checkWindowFor(age);
   return (
     <div className="site-stats">
       <style>{RAIL_CSS}</style>
       <span className="stat-deals">
-        <strong>{activeCount}</strong> {activeCount === 1 ? "live offer" : "live offers"}
+        <strong>{activeCount}</strong>{" "}
+        {activeCount === 1 ? "live offer" : "live offers"}
       </span>
       {checkWindow ? (
         <>
@@ -124,5 +125,5 @@ export function SiteStats({
         </>
       ) : null}
     </div>
-  )
+  );
 }
