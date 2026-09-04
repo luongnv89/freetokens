@@ -67,7 +67,19 @@
 
 * { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; width: 100%; overflow-x: hidden; }
+/* `clip`, not `hidden`. Both stop sideways scrolling, but `overflow-x: hidden`
+   silently makes the element a scroll container, and a scroll container
+   between the viewport and a `position: sticky` element cancels the sticky —
+   which is exactly what happened to the offer rail: it computed as sticky and
+   still scrolled straight off the top. `clip` does not create one.
+   `hidden` stays first as the fallback for engines without `clip`; they lose
+   the sticky rail and keep the overflow guard, which is the right trade. */
+html {
+  -webkit-text-size-adjust: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
 
 body {
   margin: 0;
@@ -77,6 +89,7 @@ body {
   line-height: 1.5;
   overflow-wrap: break-word;
   overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   /* Atmosphere, not decoration. A flat near-black page reads as an unstyled
      document; one very wide, very low-opacity green wash behind the masthead
@@ -1783,17 +1796,99 @@ button:focus-visible {
    _DETAIL_CSS — hero, checklist, proofs, CTA, copy-only share — ports here
    so detail pages match the live site without a Tailwind rewrite. */
 
+/* Two columns: prose on the left, a sticky facts-and-claim rail on the right.
+   The page used to be a 46rem column pinned to the left edge of a 68rem wrap,
+   so roughly half the desktop width was empty and the facts table read as a
+   repeat of the hero it sat directly beneath. Beside the prose it reads as a
+   spec panel instead.
+
+   Placement is by grid area, so the DOM order (hero, rail, body, related) is
+   free to stay the reading order the tests and screen readers depend on —
+   the facts table has to precede the prose in the document either way. */
 .offer-detail {
-  max-width: 46rem;
   margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "back" "head" "hero" "rail" "body" "related";
+  column-gap: 2.25rem;
 }
 
+.od-back { grid-area: back; }
+.offer-detail > .masthead-offer { grid-area: head; }
+.od-hero { grid-area: hero; }
+.od-rail { grid-area: rail; }
+.od-body { grid-area: body; min-width: 0; }
+.od-related { grid-area: related; }
+
+@media (min-width: 64rem) {
+  .offer-detail {
+    grid-template-columns: minmax(0, 1fr) 20.5rem;
+    grid-template-areas:
+      "back    back"
+      "head    head"
+      "hero    hero"
+      "body    rail"
+      "related related";
+  }
+  /* Sticky, not fixed: it scrolls with the page until it reaches the top and
+     then holds, so it never covers the footer or outruns its own column. */
+  .od-rail {
+    position: sticky;
+    top: 1.25rem;
+    align-self: start;
+  }
+}
+
+/* Prose measure is set here rather than on .offer-detail, so the rail is not
+   dragged in with it. */
+.od-body { max-width: 46rem; }
+
+/* ---- Offer summary rail ----------------------------------------------- */
+
+.od-rail {
+  min-width: 0;
+  margin: 1.5rem 0 0;
+}
+
+/* The claim button is the page's whole purpose, so in the rail it stops being
+   a pill sitting in a line of text and becomes a block that fills its column.
+   The note underneath is the honest part: it says where the link goes and
+   that nothing is taken from it, which is the reason a visitor should trust
+   the button at all. */
 .od-hero-cta {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.9rem;
-  margin: 1.15rem 0 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.45rem;
+  margin: 0 0 1.1rem;
+}
+
+.od-rail .od-cta {
+  justify-content: center;
+  width: 100%;
+  font-size: 0.86rem;
+}
+
+.od-rail .od-cta-note {
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* The facts panel: same surface, hairline and radius as a listing row, so the
+   two pages read as one system rather than two. */
+.od-rail .od-facts {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 0.5rem 0.95rem 0.85rem;
+}
+
+.od-rail .od-facts h2 {
+  margin-top: 0.85rem;
+}
+
+.od-ended-rail {
+  margin: 0 0 1.1rem;
 }
 
 .od-cta-note {
@@ -1802,17 +1897,152 @@ button:focus-visible {
   color: var(--gray);
 }
 
-/* Related offers were the one place browser-default blue links leaked into
-   the ink-and-hairline system. */
-.od-related a {
+/* ---- Related offers ---------------------------------------------------
+   Cards, sharing the shelf's shape and the listing row's category spine, so
+   the same object looks like the same object on all three pages. It was a
+   bullet list of underlined titles, which is what made the bottom of this
+   page read as a different site from the top. */
+
+.od-related {
+  margin-top: 2.5rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.od-related-list {
+  list-style: none;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.6rem;
+}
+
+.od-related-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  padding: 0.7rem 0.85rem 0.75rem 1rem;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow: hidden;
+  transition: background-color 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out);
+}
+
+.od-related-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--row-hue, var(--hairline));
+  opacity: 0.75;
+}
+
+.od-related-card[data-category="api_provider"] { --row-hue: var(--t-api_provider); }
+.od-related-card[data-category="coding"] { --row-hue: var(--t-coding); }
+.od-related-card[data-category="image"] { --row-hue: var(--t-image); }
+.od-related-card[data-category="voice"] { --row-hue: var(--t-voice); }
+.od-related-card[data-category="video"] { --row-hue: var(--t-video); }
+.od-related-card[data-category="startup_program"] { --row-hue: var(--t-startup_program); }
+.od-related-card[data-category="student"] { --row-hue: var(--t-student); }
+
+@media (hover: hover) {
+  .od-related-card:hover,
+  .od-related-card:focus-within {
+    background: var(--surface-2);
+    border-color: color-mix(in srgb, var(--row-hue, var(--ink)) 30%, transparent);
+  }
+}
+
+.od-related-prov {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray);
+  overflow-wrap: anywhere;
+}
+
+.od-related-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Whole card is the hit area. */
+.od-related-title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.od-related-title:hover,
+.od-related-title:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.od-related-amount {
+  margin-top: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--gray);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* The archive already says "Expired" in words; so does this. Never colour
+   alone — the card's own hue is the category, not its status. */
+.od-related-flag {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray);
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+  padding: 0.06rem 0.34rem;
+}
+
+.od-related-more {
+  margin: 1rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+.od-related-more a {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
   text-underline-offset: 3px;
 }
 
-.od-related a:hover,
-.od-related a:focus-visible {
+.od-related-more a:hover,
+.od-related-more a:focus-visible {
   text-decoration-color: var(--green);
   text-decoration-thickness: 2px;
 }
@@ -1836,15 +2066,15 @@ button:focus-visible {
   text-decoration-thickness: 3px;
 }
 
-/* The amount is the one thing a visitor came for — give it hero weight. */
-
-.offer-detail .amount {
-  font-size: clamp(1.7rem, 5vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
-  margin: 0;
-  overflow-wrap: anywhere;
+/* The amount reads as prose, not as a figure — "Free tier with gpt-oss-120b
+   and Qwen 3.6/3.8 27B, rate-limited, no credit card" is a sentence. It used
+   to run at 2.6rem/800 directly under the title, which set two headlines
+   against each other and then repeated itself as a table row. It now appears
+   once, as the first and heaviest row of the facts rail. */
+.od-table .od-amount {
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.45;
 }
 
 .od-hero-metrics {
@@ -1853,6 +2083,15 @@ button:focus-visible {
   align-items: baseline;
   gap: 0.55rem 1rem;
 }
+
+.od-hero-metrics:empty { display: none; }
+
+/* .count is the home masthead's offer counter and carries its 2.5rem bottom
+   margin. Here it is the provider name sitting directly under the title, and
+   that margin opened a hole between it and the status line. */
+.masthead-offer .count { margin: 0.15rem 0 0; }
+
+.od-hero { margin-top: 1.15rem; }
 
 .od-statusline {
   display: flex;
@@ -1870,7 +2109,8 @@ button:focus-visible {
 
 /* Section labels: small mono furniture with the home-page green dash. */
 
-.offer-detail section h2 {
+.offer-detail :is(section, nav) > h2,
+.offer-detail .od-steps-head > h2 {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 600;
@@ -1880,7 +2120,8 @@ button:focus-visible {
   margin: 2rem 0 0.6rem;
 }
 
-.offer-detail section h2::before {
+.offer-detail :is(section, nav) > h2::before,
+.offer-detail .od-steps-head > h2::before {
   content: "";
   display: inline-block;
   width: 1.5rem;
@@ -1928,6 +2169,47 @@ button:focus-visible {
 
 .od-table tr:last-child th,
 .od-table tr:last-child td { border-bottom: none; }
+
+/* In the rail the table has ~20rem, not 42, so an 8.5rem label column would
+   leave under 10rem for values like the amount sentence. The row becomes two
+   stacked blocks instead: label over value, one fact per band. `display:
+   block` on table parts is safe here because the table is a genuine
+   two-column key/value grid — the <th scope="row"> association that carries
+   it to a screen reader is in the markup, not the layout. */
+.od-rail .od-table {
+  max-width: none;
+  table-layout: auto;
+  font-size: 0.82rem;
+}
+
+.od-rail .od-table tbody,
+.od-rail .od-table tr,
+.od-rail .od-table th,
+.od-rail .od-table td {
+  display: block;
+  width: auto;
+}
+
+.od-rail .od-table tr {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.od-rail .od-table tr:last-child { border-bottom: none; }
+
+.od-rail .od-table th,
+.od-rail .od-table td {
+  padding: 0;
+  border-bottom: none;
+  white-space: normal;
+}
+
+.od-rail .od-table th[scope="row"] {
+  font-size: 0.65rem;
+  margin-bottom: 0.18rem;
+}
+
+.od-rail .od-table td { color: var(--ink); }
 
 /* Steps head: label left, live progress readout right. */
 

@@ -66,10 +66,20 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // listing row, the rank watermark, and the two-line title clamp that keeps
 // three cards the same height whatever the titles do.
 //
+// The offer-detail rebuild then took it to 51884. Detail pages carry the
+// whole sheet, so this is bytes they now use rather than dead weight:
+//   ~1.1 kB  the two-column grid and the sticky facts-and-claim rail, plus
+//            the stacked-row variant the table needs at 20rem instead of 42
+//   ~2.2 kB  related offers as cards — the shelf's shape and the listing
+//            row's seven category-spine selectors, replacing a bullet list
+//   ~0.3 kB  the rail panel, the full-width CTA, and the heading fix that
+//            put "How to claim" back in the same system as every other
+//            section label on the page
+//
 // The ceiling is a budget, not a checksum, and giving bytes back does not
 // spend them. Raise this deliberately, in the same style, when a change is
 // worth the bytes.
-const PYTHON_INLINE_CSS_BYTES = 47_583;
+const PYTHON_INLINE_CSS_BYTES = 51_884;
 
 function cssBytesIn(dir) {
   let total = 0;

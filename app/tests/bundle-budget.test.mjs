@@ -30,8 +30,9 @@ export const JS_GZIP_CEILING_BYTES = 123_000;
 // slim, deliberate headroom the JS ceiling above carries — enough that a
 // one-rule fix does not fail the build, not enough to absorb another feature
 // unnoticed. Raised again to 9_400 for the "most viewed today" shelf, which
-// measured 9301 gzipped.
-export const CSS_GZIP_CEILING_BYTES = 9_400;
+// measured 9301 gzipped, then to 10_000 for the offer-detail rebuild, which
+// measured 9833.
+export const CSS_GZIP_CEILING_BYTES = 10_000;
 
 function collectGzipped(dir, ext) {
   let total = 0;
