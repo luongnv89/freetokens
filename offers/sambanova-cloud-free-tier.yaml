@@ -1,0 +1,13 @@
+# Verified 2026-09-04 against https://docs.sambanova.ai/docs/en/models/rate-limits
+# ("Free Tier: Applied when there is no payment method linked with your
+# account." Per-model limits: 20 RPM / 20 RPD / 200,000 tokens/day.)
+title: SambaNova Cloud Free Tier
+provider: SambaNova
+category: api_provider
+amount: free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required
+expiry_date: null
+source_url: https://docs.sambanova.ai/docs/en/models/rate-limits
+verified_date: 2026-09-04
+verification: social_proof
+review_status: under-review
+signup: required

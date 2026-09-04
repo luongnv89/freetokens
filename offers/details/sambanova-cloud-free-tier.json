@@ -1,0 +1,23 @@
+{
+  "summary": "SambaNova's official rate limits policy confirms a Free Tier that is applied automatically to any account without a linked payment method, alongside a Developer Tier for accounts with a payment method. Free Tier access is rate-limited per model: production models (DeepSeek-V3.1, Meta-Llama-3.3-70B-Instruct, gpt-oss-120b) and preview models (DeepSeek-V3.2, gemma-4-31B-it) each get 20 requests/minute, 20 requests/day, and 200,000 tokens/day. The cloud dashboard shows the claim path: sign up, create an API key, and call the OpenAI-compatible API. No fixed end date is stated anywhere, so the offer is ongoing.",
+  "claim_steps": [
+    "Go to https://cloud.sambanova.ai/ and create an account via Login/Signup.",
+    "Do not link a payment method — per the rate limits policy, the Free Tier is applied when there is no payment method linked with your account.",
+    "From the dashboard, open API Keys and create an API key.",
+    "Call the OpenAI-compatible API with your bearer key (https://api.sambanova.ai/v1/chat/completions). Free Tier limits: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
+      "title": "Rate Limits Policy - SambaNova Documentation",
+      "text": "SambaNova provides a few different rate limit tier offerings: Free Tier: Applied when there is no payment method linked with your account. Developer Tier: Applied when a payment method is linked with your account."
+    },
+    {
+      "type": "link",
+      "url": "https://cloud.sambanova.ai/",
+      "title": "Dashboard",
+      "text": "Start building AI powered applications in minutes with our OpenAI compatible API. 1 Create an API key Requests authenticate with a bearer key. Create and manage keys from your dashboard."
+    }
+  ]
+}
