@@ -12,9 +12,13 @@ import { buildDate, humanDate } from "../lib/offers"
  * present in the prerendered HTML, so nothing needs a reserved box.
  */
 const RAIL_CSS =
-  ".site-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem .5rem;" +
-  "margin:0 0 clamp(.9rem,3vw,1.3rem);font:.74rem/1.6 var(--font-mono,monospace);" +
+  ".site-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .5rem;" +
+  "margin:0 0 clamp(.7rem,2.5vw,1.1rem);font:.74rem/1.45 var(--font-mono,monospace);" +
   "color:var(--gray)}" +
+  // Four wrapped lines at 1.6 made this derived sentence the second-tallest
+  // block on a phone. Tighter leading and a smaller size give the space back
+  // to the offers without dropping a single fact from the claim.
+  "@media(max-width:640px){.site-stats{font-size:.7rem;line-height:1.4;gap:.1rem .45rem}}" +
   ".site-stats strong{color:var(--ink);font-weight:600}" +
   ".site-stats .stat-sep{color:var(--hairline)}" +
   ".site-stats a{color:inherit;text-decoration:underline;" +

@@ -37,11 +37,33 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // at the close of that pass. The ledger rank counter's WCAG contrast fix has
 // since reclaimed 218 B of it — a color-mix() collapsed to var(--gray), which
 // in turn made two hover/focus colour rules exact duplicates of the resting
-// value — so the build now measures 39381. The ceiling stays where it is: it
-// is a budget, not a checksum, and giving bytes back does not spend them.
-// Raise this deliberately, in the same style, when a change is worth the
-// bytes.
-const PYTHON_INLINE_CSS_BYTES = 39599;
+// value — so the build measured 39381 going into the dark redesign.
+//
+// The dark redesign raises it to 44412. This is the largest single raise the
+// budget has taken, so what the 5031 B bought, measured:
+//
+//   462 B  three @font-face blocks. Measured by building with and without
+//          fonts.css: 43950 -> 44412 raw. The previous sheet NAMED Bricolage
+//          Grotesque and IBM Plex Mono and shipped neither, and index.html's
+//          CSP is `font-src 'self' data:`, so every visitor was reading the
+//          page in system-ui. These bytes are what makes the type real.
+//  ~4570 B the redesign proper, in four groups: the two derived colours per
+//          tag hue that let the thirteen locked hexes survive a #0e1013
+//          ground (see dark-tag-contrast.test.mjs); the row treatment — a
+//          surface plane, a per-category hue spine and its hover/focus lift,
+//          which is seven selectors on their own; the toolbar and control
+//          planes; and the phone work — the chip-rail scroll mask, the
+//          consent bar, and the toolbar reflow that moved the first offer
+//          from 561 px down the page to 422 px on a 390 px screen.
+//
+// Nothing was reclaimed in the reverse direction beyond a redundant
+// `unicode-range` on the font faces (~450 B): there is one subset file per
+// family, so it gated a download that always happens.
+//
+// The ceiling is a budget, not a checksum, and giving bytes back does not
+// spend them. Raise this deliberately, in the same style, when a change is
+// worth the bytes.
+const PYTHON_INLINE_CSS_BYTES = 44_412;
 
 function cssBytesIn(dir) {
   let total = 0;

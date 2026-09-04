@@ -24,7 +24,13 @@ import { gzipSync } from "node:zlib";
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
 export const JS_GZIP_CEILING_BYTES = 123_000;
-export const CSS_GZIP_CEILING_BYTES = 8_000;
+// Raised from 8_000 by the dark redesign, which took the sheet from 39381 to
+// 44412 raw (accounted line by line in css-budget.test.mjs) and 8813 -> 8919
+// gzipped once the self-hosted @font-face blocks landed. 9_000 keeps the same
+// slim, deliberate headroom the JS ceiling above carries — enough that a
+// one-rule fix does not fail the build, not enough to absorb another feature
+// unnoticed.
+export const CSS_GZIP_CEILING_BYTES = 9_000;
 
 function collectGzipped(dir, ext) {
   let total = 0;
