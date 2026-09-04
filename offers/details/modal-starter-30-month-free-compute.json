@@ -1,0 +1,23 @@
+{
+  "summary": "Modal's Starter plan costs $0/month plus metered compute and includes $30/month in free credits, with up to 3 workspace seats, 100 containers, and 10 GPU concurrency. The credit recurs monthly as included compute rather than a one-time grant, and no expiry date or fixed end for the offer is stated on the pricing page. Claiming requires creating a Modal account via the Get Started flow. The docs billing guide corroborates that credits are deducted from monthly usage charges.",
+  "claim_steps": [
+    "Go to https://modal.com/pricing and review the Starter plan ($0 + compute / month).",
+    "Click \"Get Started\" on the Starter plan to create a Modal account.",
+    "Create a workspace — the Starter plan includes up to 3 workspace seats.",
+    "Deploy functions; the Starter plan's $30/month in free credits counts against your compute usage, which is auto-charged only beyond the credit."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://modal.com/pricing",
+      "title": "Plan Pricing | Modal",
+      "text": "Starter | $0 + compute / month — \"Get started with $30 / month free credit\"; features list \"$30 / month free credits, 3 workspace seats included\"."
+    },
+    {
+      "type": "link",
+      "url": "https://modal.com/docs/guide/billing",
+      "title": "Billing | Modal Docs",
+      "text": "At the end of each billing cycle, you are auto-charged for the Modal usage incurred during that cycle (less any credits and incremental usage charges)."
+    }
+  ]
+}
