@@ -976,6 +976,59 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     }
   });
 
+  // The freshness window is a trust claim, so it is asserted at every shape
+  // the day-granular data can take. `verified_date` is a calendar day, never a
+  // timestamp, so an N-day gap only bounds the real elapsed time by N + 1 days
+  // — the rendered window is that bound, and must never round it down.
+  const railFor = (offers: OfferEntry[], generated_at = "2026-09-04T06:00:00Z") =>
+    renderToStaticMarkup(<HomePage index={{ ...index, offers, generated_at }} />);
+
+  it("bounds the window at one day when every offer was checked on build day (#281)", () => {
+    const markup = railFor([
+      offer({ verified_date: "2026-09-04" }),
+      offer({ slug: "second", verified_date: "2026-09-04" }),
+    ]);
+    expect(markup).toContain(
+      '<span class="stat-checked">every one re-checked within <strong>1 day</strong></span>',
+    );
+  });
+
+  it("widens the window to two days for a check one day before the build (#281)", () => {
+    // Never "24 hours" / "1 day": a one-day date gap is anywhere in 0-48h.
+    const markup = railFor([
+      offer({ verified_date: "2026-09-04" }),
+      offer({ slug: "older", verified_date: "2026-09-03" }),
+    ]);
+    expect(markup).toContain("within <strong>2 days</strong>");
+    expect(markup).not.toContain("24 hours");
+  });
+
+  it("takes the window from the oldest live offer, not the newest (#281)", () => {
+    const markup = railFor([
+      offer({ verified_date: "2026-09-04" }),
+      offer({ slug: "stale", verified_date: "2026-08-30" }),
+    ]);
+    expect(markup).toContain("within <strong>6 days</strong>");
+  });
+
+  it("drops the window clause when there are no live offers (#281)", () => {
+    const markup = railFor([offer({ slug: "gone", status: "expired" })]);
+    expect(markup).toContain('class="site-stats"');
+    expect(markup).not.toContain("stat-checked");
+  });
+
+  it("drops the window clause rather than deriving one from a bad date (#281)", () => {
+    for (const verified_date of ["", "not-a-date-at-all"]) {
+      const markup = railFor([offer({ verified_date })]);
+      expect(markup).toContain('class="site-stats"');
+      expect(markup).not.toContain("stat-checked");
+      expect(markup).not.toContain("NaN");
+    }
+    // …and likewise when the build's own date is the unparseable one.
+    const badBuild = railFor([offer({ verified_date: "2026-09-03" })], "not-a-date-at-all");
+    expect(badBuild).not.toContain("stat-checked");
+  });
+
   it("mounts the traffic strip in the rail on home, not in the home footer (#279)", () => {
     configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
     const markup = home();

@@ -746,7 +746,10 @@ a:focus-visible {
   counter-increment: ftrank;
   content: counter(ftrank, decimal-leading-zero);
   font-size: 0.72rem;
-  color: color-mix(in srgb, var(--gray) 55%, var(--paper));
+  /* Full --gray, not a tint of it: the counter is readable content (the
+     hover/focus rules below restore it for a reason), and #6b7280 on #ffffff
+     is 4.83:1 — a 55% mix lands near #aeb1b9 at ~2.1:1, under WCAG 1.4.3 AA. */
+  color: var(--gray);
   text-align: right;
   padding: 0.2rem 0.9rem 0 0;
   font-variant-numeric: tabular-nums;
@@ -755,11 +758,8 @@ a:focus-visible {
 
 .grid > li:focus-within { background: rgba(0, 0, 0, 0.028); }
 
-.grid > li:focus-within::before { color: var(--gray); }
-
 @media (hover: hover) {
   .grid > li:hover { background: rgba(0, 0, 0, 0.028); }
-  .grid > li:hover::before { color: var(--gray); }
 }
 
 /* Provider first, category and review status beside it: the eyebrow answers

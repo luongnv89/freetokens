@@ -33,7 +33,12 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 //              fold, the detail-page hero CTA and link treatment, and the
 //              press/hover interaction polish  (+2123 B)
 //
-// 38387 - 911 + 2123 = 39599, which is what production `vite build` measures.
+// 38387 - 911 + 2123 = 39599, which is what production `vite build` measured
+// at the close of that pass. The ledger rank counter's WCAG contrast fix has
+// since reclaimed 218 B of it — a color-mix() collapsed to var(--gray), which
+// in turn made two hover/focus colour rules exact duplicates of the resting
+// value — so the build now measures 39381. The ceiling stays where it is: it
+// is a budget, not a checksum, and giving bytes back does not spend them.
 // Raise this deliberately, in the same style, when a change is worth the
 // bytes.
 const PYTHON_INLINE_CSS_BYTES = 39599;
