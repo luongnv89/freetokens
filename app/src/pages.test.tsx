@@ -1043,7 +1043,6 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       // getElementById, so a second mount would never be populated.
       expect(markup.match(/id="ft-traffic"/g)?.length).toBe(1);
       expect(markup.match(/id="ft-traffic-total"/g)?.length).toBe(1);
-      expect(markup.match(/id="ft-traffic-page"/g)?.length).toBe(1);
       expect(markup).toContain('class="stat-strip"');
       expect(markup).not.toContain('class="foot-traffic"');
       // In the header, above the footer, on every route.
@@ -1059,10 +1058,24 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     expect(markup).toContain('class="ft-stat-label">visits<');
     expect(markup).toContain('class="ft-stat-label">today<');
     expect(markup).toContain('class="ft-stat-label">this page<');
+    expect(markup.match(/id="ft-traffic-page"/g)?.length).toBe(1);
     // The GoatCounter dashboard is readable only by the site owner, so the
     // strip must not link visitors at a login wall.
     expect(markup).not.toContain("full stats");
-    expect(markup).not.toContain("goatcounter.com\"");
+    expect(markup).not.toContain('goatcounter.com"');
+  });
+
+  it("drops the header this-page count where the hero already shows it", () => {
+    configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
+    const detail = renderToStaticMarkup(
+      <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
+    );
+    // The offer hero carries its own view count. Printing it again in the
+    // header would duplicate the number and re-fetch the same counter,
+    // since initTrafficStrip only fetches a window that is mounted.
+    expect(detail).toContain('id="ft-traffic-total"');
+    expect(detail).not.toContain('id="ft-traffic-page"');
+    expect(detail).not.toContain("this page");
   });
 
   it("renders no traffic markup in the rail when GoatCounter is unset (#279)", () => {

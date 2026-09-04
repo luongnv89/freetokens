@@ -121,7 +121,7 @@ export default function OfferDetailPage({
       <IconSprite />
       <div className="wrap">
         <main>
-        <SiteHeader depth={1} />
+        <SiteHeader depth={1} pageViews={false} />
         <Breadcrumbs
           page="detail"
           slug={offer?.slug ?? slug}

@@ -20,14 +20,17 @@ import { TrafficStrip } from "./TrafficStrip"
  *
  * TrafficStrip mounts here and ONLY here. Its element ids are looked up with
  * getElementById, so a second mount elsewhere on the page would never be
- * populated.
+ * populated. `pageViews` is false where the page already shows its own view
+ * count — offer detail pages — so the number is not printed twice.
  */
 export function SiteHeader({
   depth = 0,
   current,
+  pageViews = true,
 }: {
   depth?: number
   current?: "home" | "archive" | "privacy" | "about"
+  pageViews?: boolean
 }) {
   const up = "../".repeat(depth)
   const homeHref = `${up || "./"}index.html`
@@ -77,7 +80,7 @@ export function SiteHeader({
           </a>
         </nav>
       </div>
-      <TrafficStrip />
+      <TrafficStrip pageViews={pageViews} />
     </div>
   )
 }

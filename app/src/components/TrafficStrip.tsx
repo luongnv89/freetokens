@@ -18,8 +18,13 @@ import { getStatsSite } from "../lib/analytics"
  * the site owner, so for every visitor it was a link to a login wall. The
  * numbers stand on their own. `site` is still what gates the whole strip —
  * unconfigured GoatCounter renders nothing at all.
+ *
+ * `pageViews` is false on offer detail pages, which already show that exact
+ * count in the hero. Dropping the span there removes both the duplicated
+ * number and a second request for a counter the page has already fetched,
+ * because initTrafficStrip only fetches a window whose element is mounted.
  */
-export function TrafficStrip() {
+export function TrafficStrip({ pageViews = true }: { pageViews?: boolean }) {
   const site = getStatsSite()
   if (!site) return null
   return (
@@ -32,10 +37,12 @@ export function TrafficStrip() {
         <strong id="ft-traffic-today">&mdash;</strong>{" "}
         <span className="ft-stat-label">today</span>
       </span>
-      <span className="ft-stat ft-traffic-page" hidden>
-        <strong id="ft-traffic-page">&mdash;</strong>{" "}
-        <span className="ft-stat-label">this page</span>
-      </span>
+      {pageViews ? (
+        <span className="ft-stat ft-traffic-page" hidden>
+          <strong id="ft-traffic-page">&mdash;</strong>{" "}
+          <span className="ft-stat-label">this page</span>
+        </span>
+      ) : null}
     </p>
   )
 }
