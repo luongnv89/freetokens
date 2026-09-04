@@ -127,7 +127,14 @@ export function OfferRow({
 }) {
   const detailHref = `offers/${offer.slug}.html`
   return (
-    <li style={{ "--i": index } as React.CSSProperties}>
+    // `data-category` is mirrored onto the <li> as well as the <article>: the
+    // row's left hue spine is drawn as an ::after on the list item, which is
+    // the article's PARENT, and a custom property set on the article could
+    // never reach it. The article keeps its own copy — tests and the archive
+    // read the category from there.
+    // `style` stays the FIRST attribute: App.test.tsx counts rows by matching
+    // the literal `<li style`, and React emits attributes in prop order.
+    <li style={{ "--i": index } as React.CSSProperties} data-category={offer.category}>
       <article
         className="card"
         id={`offer-${offer.slug}`}

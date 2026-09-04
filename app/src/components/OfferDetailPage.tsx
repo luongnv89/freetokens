@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { humanDate, type OffersIndex } from "../lib/offers"
+import { CATEGORY_LABELS, humanDate, type OffersIndex } from "../lib/offers"
 import { ftFormatCount } from "../lib/analytics"
 import { useOfferViews } from "../lib/offerStats"
 import {
@@ -61,23 +61,46 @@ function ClaimCta({ offer }: { offer: Offer }) {
   )
 }
 
+/**
+ * Related offers, as cards rather than a bullet list.
+ *
+ * This was the one block on the page still rendering as an unstyled document:
+ * a <ul> of underlined titles with the provider and the whole amount string
+ * trailing after an em dash. It listed the same objects the home page renders
+ * as rows and the shelf renders as cards, in a third shape that matched
+ * neither, so arriving here from the listing felt like leaving the site.
+ *
+ * The category spine is the same one the ledger row and the hot shelf use.
+ * Every card in this block shares one hue by construction — they are related
+ * BECAUSE they share a category — so the spine reads as a group marker here
+ * rather than as a per-item label.
+ */
 function RelatedOffers({ current, index }: { current: Offer; index: OffersIndex }) {
   const related = relatedOffers(index, current)
   if (related.length === 0) return null
+  const label = CATEGORY_LABELS[current.category] ?? current.category.replace(/_/g, " ")
   return (
-    <nav className="od-related" aria-label="Related offers">
-      <h2>Related offers</h2>
-      <p className="od-related-kicker">More in {current.category.replace(/_/g, " ")}</p>
+    <nav className="od-related" aria-labelledby="od-related-head">
+      <h2 id="od-related-head">More in {label}</h2>
       <ul className="od-related-list">
         {related.map((offer) => (
-          <li key={offer.slug}>
-            <a href={`${offer.slug}.html`} aria-label={`View details for ${offer.title}`}>
+          <li
+            key={offer.slug}
+            className="od-related-card"
+            data-category={offer.category}
+          >
+            <span className="od-related-prov">{offer.provider}</span>
+            <a
+              className="od-related-title"
+              href={`${offer.slug}.html`}
+              aria-label={`View details for ${offer.title}`}
+            >
               {offer.title}
             </a>
-            <span className="od-related-meta">
-              {" "}
-              — {offer.provider} · {offer.amount}
-            </span>
+            <span className="od-related-amount">{offer.amount}</span>
+            {offer.status === "expired" ? (
+              <span className="od-related-flag">Expired</span>
+            ) : null}
           </li>
         ))}
       </ul>
@@ -140,9 +163,14 @@ export default function OfferDetailPage({
               <h1>{offer.title}</h1>
               <p className="count">{offer.provider}</p>
             </header>
+            {/* The hero states WHICH offer this is and how trustworthy it is;
+                what it gives you now lives once, in the facts rail, instead of
+                twice. The amount used to run here as a second headline at
+                nearly the title's weight and then repeat verbatim as a table
+                row directly beneath — two competing first lines saying the
+                same thing. */}
             <div className="od-hero">
               <div className="od-hero-metrics">
-                <p className="amount">{offer.amount}</p>
                 {typeof viewCount === "number" && (
                   <p className="ft-stat od-views">
                     <strong>{ftFormatCount(viewCount)}</strong>
@@ -174,6 +202,16 @@ export default function OfferDetailPage({
                 checked{" "}
                 <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
               </p>
+            </div>
+            {/* The rail. On a wide screen it sits beside the prose and sticks
+                to the viewport, so the facts and the claim button are readable
+                from anywhere on the page instead of only where they happen to
+                fall. On a phone it is just the next block after the hero,
+                which puts the amount and the button above the fold. It stays
+                BEFORE .od-body in the DOM on purpose: the table has to precede
+                the prose for reading order, and grid placement handles the
+                visual column without reordering the document. */}
+            <aside className="od-rail" aria-label="Offer summary">
               {offer.status !== "expired" ? (
                 <p className="od-hero-cta">
                   <ClaimCta offer={offer} />
@@ -181,9 +219,12 @@ export default function OfferDetailPage({
                     Opens {offer.provider}. This site takes no cut.
                   </span>
                 </p>
-              ) : null}
-            </div>
-            <section className="od-facts" aria-label="Key offer details">
+              ) : (
+                <p className="od-ended od-ended-rail">
+                  This offer ended &mdash; nothing here is claimable anymore.
+                </p>
+              )}
+              <section className="od-facts" aria-label="Key offer details">
               <h2>Details</h2>
               <table className="od-table">
                 <tbody>
@@ -193,7 +234,7 @@ export default function OfferDetailPage({
                   </tr>
                   <tr>
                     <th scope="row">Amount</th>
-                    <td className="mono">{offer.amount}</td>
+                    <td className="mono od-amount">{offer.amount}</td>
                   </tr>
                   <tr>
                     <th scope="row">Category</th>
@@ -239,7 +280,9 @@ export default function OfferDetailPage({
                   </tr>
                 </tbody>
               </table>
-            </section>
+              </section>
+            </aside>
+            <div className="od-body">
             {detail?.summary ? (
               <section className="od-brief">
                 <h2>The offer</h2>
@@ -247,13 +290,14 @@ export default function OfferDetailPage({
               </section>
             ) : null}
             <ClaimChecklist slug={offer.slug} steps={claimSteps(detail)} />
-            {offer.status === "expired" ? (
-              <p className="od-ended">This offer ended &mdash; nothing here is claimable anymore.</p>
-            ) : (
-              <ClaimCta offer={offer} />
-            )}
+            {/* Second CTA, at the end of the steps. Redundant on a desktop
+                where the rail is stuck to the viewport, but on a phone the
+                rail has long since scrolled away and this is the button that
+                catches someone who just finished reading how to claim. */}
+            {offer.status !== "expired" ? <ClaimCta offer={offer} /> : null}
             <SocialProofList proofs={detail?.social_proof} relPrefix="../" />
             <CopyLinkButton url={offerAbsoluteUrl(offer.slug)} />
+            </div>
             <RelatedOffers current={offer} index={index} />
           </article>
         ) : (

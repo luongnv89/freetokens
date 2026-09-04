@@ -149,8 +149,10 @@ export function offerMatches(offer: Offer, state: UrlState): boolean {
 /**
  * Client listing order (build.py ftApplySort). Stable: ties fall back to
  * the offer's index in `offers` (the activeOffers order). Empty / invalid
- * mode restores that original index order. Null expiry sorts last under
- * expiring.
+ * mode restores that original index order — which is the build's newest-ADDED
+ * ordering (see readAddedDates in scripts/load-offers.mjs), and is therefore
+ * the "Latest added" option in the sort control, not an unsorted fallback.
+ * Null expiry sorts last under expiring.
  */
 export function applySort(offers: Offer[], mode: string): Offer[] {
   const indexed = offers.map((offer, index) => ({ offer, index }))

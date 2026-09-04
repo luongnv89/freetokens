@@ -19,6 +19,16 @@
       name="description"
       content="Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page."
     />
+    <!-- Archivo paints the wordmark and every offer title, so it sits on the
+         LCP path and is the one face worth preloading. The mono is not: it
+         renders body text that swaps in without moving the layout. -->
+    <link
+      rel="preload"
+      href="./fonts/archivo-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" sizes="16x16" />
     <link rel="icon" href="./logo-mark.svg" type="image/svg+xml" sizes="64x64" />
     <link rel="apple-touch-icon" href="./logo-icon.svg" sizes="512x512" />
