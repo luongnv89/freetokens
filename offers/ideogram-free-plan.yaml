@@ -1,0 +1,14 @@
+# Verified 2026-09-04 against https://ideogram.ai/pricing/
+# ("Free plan $0" with "Slow credits: Weekly for eligible accounts"; FAQ:
+# "Eligible free accounts receive weekly credits when signing in with Google,
+# Apple, or Microsoft; the amount may vary.")
+title: Ideogram Free Plan — Weekly Slow Credits
+provider: Ideogram
+category: image
+amount: Free plan ($0) with weekly slow credits for eligible accounts; amount may vary
+expiry_date: null
+source_url: https://ideogram.ai/pricing/
+verified_date: 2026-09-04
+verification: social_proof
+review_status: under-review
+signup: required

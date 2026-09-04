@@ -1,0 +1,13 @@
+# Verified 2026-09-04 against https://docs.tokenfactory.nebius.com/other-capabilities/billing-new
+# ("Upon first sign-up, you receive $1 in trial credit, valid for 30 days."
+# Billing setup with a bank card is mandatory during onboarding.)
+title: Nebius Token Factory $1 trial credit
+provider: Nebius Token Factory
+category: api_provider
+amount: $1 credit for 30 days (bank card required to onboard)
+expiry_date: null
+source_url: https://docs.tokenfactory.nebius.com/other-capabilities/billing-new
+verified_date: 2026-09-04
+verification: social_proof
+review_status: under-review
+signup: required

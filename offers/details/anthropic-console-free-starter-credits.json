@@ -1,0 +1,24 @@
+{
+  "summary": "Anthropic's official Claude Platform pricing documentation states under the FAQ 'Are there free tiers or trials?' that new users receive a small amount of free credits to test the API, matching the offer. The exact credit amount is deliberately not published on the page, so no number can be stated; extended trials for enterprise evaluation are available via sales. The get-started docs confirm claiming requires a Claude Console account and an API key. No expiry date or fixed end date for the starter credits is stated, so the offer is treated as ongoing.",
+  "claim_steps": [
+    "Create a Claude Console account.",
+    "New accounts receive a small amount of free credits to test the API (credited to the account; amount not published by Anthropic).",
+    "Create an API key in the Console (listed as a prerequisite in the official get-started docs).",
+    "Use the API key to make API calls against the free starter credits.",
+    "Enterprises needing larger/extended trials for evaluation can contact sales@anthropic.com."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "title": "Pricing - Claude Platform Docs",
+      "text": "New users receive a small amount of free credits to test the API. Contact sales for information about extended trials for enterprise evaluation."
+    },
+    {
+      "type": "link",
+      "url": "https://platform.claude.com/docs/en/get-started",
+      "title": "Get started with Claude - Claude Platform Docs",
+      "text": "Prerequisites: A Claude Console account; An API key."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "summary": "Replicate's official 'Try for Free' collection page is live and states you can run the listed models without purchasing credit once you have a Replicate account. The FAQ clarifies the free usage is a limited number of runs per model; once the limit is hit, billing/credit purchase is required to continue. No fixed end date is published, so the offer appears ongoing. Terms match the offer claim exactly.",
+  "claim_steps": [
+    "Create a Replicate account (free runs require being signed in).",
+    "Go to the Try for Free collection page at replicate.com/collections/try-for-free.",
+    "Select a model that matches your task (e.g. google/imagen-4 for images, minimax/video-01 for video).",
+    "Upload your input (text, image, or video) or provide a URL if required.",
+    "Run the model and review the output.",
+    "If it works for your needs, add a credit card and purchase credit to continue using the model beyond the free limit."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://replicate.com/collections/try-for-free",
+      "title": "Try free AI models to generate images, videos, and more - Replicate",
+      "text": "The Try for Free collection is our list of models that you can run without purchasing credit after creating a Replicate account. This is great to see if Replicate will work for your use case before spending money."
+    }
+  ]
+}

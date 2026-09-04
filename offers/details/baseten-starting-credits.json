@@ -1,0 +1,24 @@
+{
+  "summary": "Baseten's official billing documentation states that every new workspace automatically receives starting credits for testing and deployment, applied to invoices before any payment method is charged — no redemption step. The docs explicitly note there is no separate free tier or perpetual free plan, and usage beyond the starting credits is billed at standard per-minute instance pricing. The credit balance is visible on the billing dashboard. Neither the docs nor the pricing FAQ publishes the exact credit amount, so it is reported as unpublished. The offer is ongoing with no stated end date.",
+  "claim_steps": [
+    "Sign up for a new Baseten workspace at app.baseten.co (account required).",
+    "Credits are applied automatically — per the docs, 'you do not need to redeem them.'",
+    "Use credits for testing and deployment; usage is billed per-minute and deducted from credits first.",
+    "Check your current credit balance and remaining amount on the billing dashboard.",
+    "If credits don't appear after signup, or you need more for a proof of concept, contact Baseten via the link in the billing docs."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.baseten.co/organization/billing",
+      "title": "Billing and usage | Baseten Documentation",
+      "text": "New workspaces receive credits for testing and deployment. Baseten applies credits to the current invoice before charging a payment method; you do not need to redeem them."
+    },
+    {
+      "type": "link",
+      "url": "https://www.baseten.co/pricing/",
+      "title": "Pricing | Baseten",
+      "text": "Do you offer free credits to get started? Yes, new Baseten accounts come with credits so you can get to know the UI and experiment with deployments for free."
+    }
+  ]
+}

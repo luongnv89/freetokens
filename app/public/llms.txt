@@ -4,8 +4,18 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 47 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 57 active listings. Full directory at https://freetokens.custats.info/.
 
+- [ZCode Weekend Build IV — 300M Free GLM-5.3-Flash Tokens](https://freetokens.custats.info/offers/zcode-weekend-build-4-300m-tokens.html): ZCode — 300M GLM-5.3-Flash tokens per person (coding)
+- [Suno Free Plan — 50 credits per day](https://freetokens.custats.info/offers/suno-free-plan.html): Suno — Free plan, 50 credits/day (~10 songs) (voice)
+- [SambaNova Cloud Free Tier](https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html): SambaNova — free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required (api_provider)
+- [Try for Free: run featured Replicate models at no cost](https://freetokens.custats.info/offers/replicate-try-for-free.html): Replicate — limited free runs of featured models (image, video, upscaling) — no credit purchase needed until the free limit is hit (api_provider)
+- [Nebius Token Factory $1 trial credit](https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html): Nebius Token Factory — $1 credit for 30 days (bank card required to onboard) (api_provider)
+- [Modal Starter Plan — $30/month free compute credits](https://freetokens.custats.info/offers/modal-starter-30-month-free-compute.html): Modal — $30/month in compute credits (api_provider)
+- [Ideogram Free Plan — Weekly Slow Credits](https://freetokens.custats.info/offers/ideogram-free-plan.html): Ideogram — Free plan ($0) with weekly slow credits for eligible accounts; amount may vary (image)
+- [$1 in free credits for new Fireworks AI accounts](https://freetokens.custats.info/offers/fireworks-ai-1-dollar-free-credits.html): Fireworks AI — $1 in free credits (api_provider)
+- [Baseten starting credits for new workspaces](https://freetokens.custats.info/offers/baseten-starting-credits.html): Baseten — Starting credits for new workspaces (amount not published) (api_provider)
+- [Free starter credits for new Claude Console accounts](https://freetokens.custats.info/offers/anthropic-console-free-starter-credits.html): Anthropic — small free starter credits (exact amount not published) (api_provider)
 - [ZCode Global Build — Free GLM-5.3-Flash (Round 4)](https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html): ZCode — Free GLM-5.3-Flash in ZCode — 10h/day, Sep 3–18; 100M tokens for new users (coding)
 - [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
 - [WorkBuddy Hy4 Preview Free](https://freetokens.custats.info/offers/workbuddy-hy4-preview-free.html): WorkBuddy — Free access to Hy4 preview (2 weeks) (coding)
@@ -16,16 +26,6 @@ Top 20 currently active offers (newest verified first) from 47 active listings. 
 - [OpenRouter Free Models](https://freetokens.custats.info/offers/openrouter-free-models.html): OpenRouter — Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time) (api_provider)
 - [OpenAI Codex Free Tier](https://freetokens.custats.info/offers/openai-codex-free-tier.html): OpenAI — Limited free Codex access on the ChatGPT Free plan, incl. GPT-5.6 Luna (no credit card) (coding)
 - [Ollama Cloud Free Tier](https://freetokens.custats.info/offers/ollama-cloud-free-tier.html): Ollama — Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited (api_provider)
-- [NVIDIA NIM Free Trial (Developer Program)](https://freetokens.custats.info/offers/nvidia-nim-free-trial.html): NVIDIA — $0 hosted trial for prototyping with NVIDIA NIM, rate-limited (api_provider)
-- [Notion Education Plus — Free Plus Plan](https://freetokens.custats.info/offers/notion-education-plus.html): Notion — Plus features free (unlimited blocks/files, 30-day history) while enrolled via school email (student)
-- [Muse Spark 1.3 Contributor Free on OpenCode Zen](https://freetokens.custats.info/offers/muse-spark-1-3-contributor-free.html): Meta (via OpenCode Zen) — Free Muse Spark 1.3 Contributor tier on OpenCode Zen for a limited time (Meta may use your prompts and completions to train future models) (coding)
-- [Mistral AI Studio Free Mode — Free API Tier](https://freetokens.custats.info/offers/mistral-experiment-free-tier.html): Mistral AI — Free rate-limited API access (no credit card required) (api_provider)
-- [Merge Gateway — $10 in Free LLM Credits Every Month](https://freetokens.custats.info/offers/merge-gateway-10-monthly-credits.html): Merge — $10 in free LLM credits every month (Pro plan) (api_provider)
-- [LLM7.io Free API Tier](https://freetokens.custats.info/offers/llm7-free-tier.html): LLM7.io — Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day (api_provider)
-- [Ling 3.0 Flash Fin Free (InclusionAI)](https://freetokens.custats.info/offers/ling-3-0-flash-fin-free.html): InclusionAI — Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling (api_provider)
-- [Leonardo.Ai Free Plan](https://freetokens.custats.info/offers/leonardo-ai-free-plan.html): Leonardo.Ai — 150 fast tokens per day (resets daily) (image)
-- [Kilo Code Free Models](https://freetokens.custats.info/offers/kilo-code-free-models.html): Kilo Code — Free :free models without an API key, limited to 200 requests/hour per IP (api_provider)
-- [JetBrains Student Pack — All IDEs Free](https://freetokens.custats.info/offers/jetbrains-student-pack.html): JetBrains — All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount) (student)
 
 ## Pages
 

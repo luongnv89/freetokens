@@ -1,0 +1,13 @@
+# Verified 2026-09-04 against https://platform.claude.com/docs/en/about-claude/pricing
+# (FAQ "Are there free tiers or trials?": "New users receive a small amount
+# of free credits to test the API." Exact amount not published.)
+title: Free starter credits for new Claude Console accounts
+provider: Anthropic
+category: api_provider
+amount: small free starter credits (exact amount not published)
+expiry_date: null
+source_url: https://platform.claude.com/docs/en/about-claude/pricing
+verified_date: 2026-09-04
+verification: social_proof
+review_status: under-review
+signup: required

@@ -2,9 +2,119 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-03T19:01:24Z — 47 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-04T13:57:37Z — 57 active offers.
 
 ## Offers (full)
+
+### ZCode Weekend Build IV — 300M Free GLM-5.3-Flash Tokens
+- Provider: ZCode
+- Category: coding
+- Amount: 300M GLM-5.3-Flash tokens per person
+- Status: active — expiry 2026-09-06
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://x.com/zcode_ai/status/2095847518194307434
+- Page: https://freetokens.custats.info/offers/zcode-weekend-build-4-300m-tokens.html
+- Summary: ZCode's official verified X account (@zcode_ai) announced Weekend Build IV on Sep 4, 2026: 300M free GLM-5.3-Flash tokens per person, claimable in the ZCode desktop app via the bottom-left event card. The event opens Sat Sep 5, 09:00 Beijing time (Fri 6 PM PT / 9 PM ET) and — per the official poster attached to the post — the window runs SAT 09:00 – SUN 23:00 UTC+8, i.e. through Sunday Sep 6, 2026. Claims are instant and first come, first served, so the pool can exhaust before the window closes; restart the app if the card is missing. This is a separate event from the ongoing ZCode Global Build (nightly till Sep 20, +100M for new users) already listed as zcode-glm-5-3-flash-free; the official site's changelog independently corroborates the in-app Weekend/Global Plan claim-card feature.
+- Claim steps: Install and open the ZCode desktop app from https://zcode.z.ai (macOS, Windows, and Linux builds available), or update/restart your existing install. | Sign in with your Z.ai account in ZCode. | After the event opens — Sat Sep 5, 09:00 Beijing time (Fri 6 PM PT / 9 PM ET) — look for the Weekend Build IV card in the bottom-left of the app. | If the card is not visible, restart the app. | Tap the card and claim instantly: 300M GLM-5.3-Flash tokens per person. | Claim early — tokens are first come, first served, and the window runs to Sun 23:00 UTC+8 (Sep 6, 2026).
+
+### Suno Free Plan — 50 credits per day
+- Provider: Suno
+- Category: voice
+- Amount: Free plan, 50 credits/day (~10 songs)
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://suno.com/pricing
+- Page: https://freetokens.custats.info/offers/suno-free-plan.html
+- Summary: Suno's official pricing page lists a Free Plan at $0 that includes 50 credits renewing daily (about 10 songs), with up to 4 songs generated at once, no commercial use, no credit top-ups, and a shared generation queue. The page was fetched live on 2026-09-04 and the terms match the claim exactly. No end date is stated, so the offer appears ongoing.
+- Claim steps: Go to https://suno.com/pricing. | Click Sign Up and create a free Suno account. | Use the Free Plan (no payment needed) — 50 credits renew daily (10 songs).
+
+### SambaNova Cloud Free Tier
+- Provider: SambaNova
+- Category: api_provider
+- Amount: free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://docs.sambanova.ai/docs/en/models/rate-limits
+- Page: https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html
+- Summary: SambaNova's official rate limits policy confirms a Free Tier that is applied automatically to any account without a linked payment method, alongside a Developer Tier for accounts with a payment method. Free Tier access is rate-limited per model: production models (DeepSeek-V3.1, Meta-Llama-3.3-70B-Instruct, gpt-oss-120b) and preview models (DeepSeek-V3.2, gemma-4-31B-it) each get 20 requests/minute, 20 requests/day, and 200,000 tokens/day. The cloud dashboard shows the claim path: sign up, create an API key, and call the OpenAI-compatible API. No fixed end date is stated anywhere, so the offer is ongoing.
+- Claim steps: Go to https://cloud.sambanova.ai/ and create an account via Login/Signup. | Do not link a payment method — per the rate limits policy, the Free Tier is applied when there is no payment method linked with your account. | From the dashboard, open API Keys and create an API key. | Call the OpenAI-compatible API with your bearer key (https://api.sambanova.ai/v1/chat/completions). Free Tier limits: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model.
+
+### Try for Free: run featured Replicate models at no cost
+- Provider: Replicate
+- Category: api_provider
+- Amount: limited free runs of featured models (image, video, upscaling) — no credit purchase needed until the free limit is hit
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://replicate.com/collections/try-for-free
+- Page: https://freetokens.custats.info/offers/replicate-try-for-free.html
+- Summary: Replicate's official 'Try for Free' collection page is live and states you can run the listed models without purchasing credit once you have a Replicate account. The FAQ clarifies the free usage is a limited number of runs per model; once the limit is hit, billing/credit purchase is required to continue. No fixed end date is published, so the offer appears ongoing. Terms match the offer claim exactly.
+- Claim steps: Create a Replicate account (free runs require being signed in). | Go to the Try for Free collection page at replicate.com/collections/try-for-free. | Select a model that matches your task (e.g. google/imagen-4 for images, minimax/video-01 for video). | Upload your input (text, image, or video) or provide a URL if required. | Run the model and review the output. | If it works for your needs, add a credit card and purchase credit to continue using the model beyond the free limit.
+
+### Nebius Token Factory $1 trial credit
+- Provider: Nebius Token Factory
+- Category: api_provider
+- Amount: $1 credit for 30 days (bank card required to onboard)
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://docs.tokenfactory.nebius.com/other-capabilities/billing-new
+- Page: https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html
+- Summary: Nebius Token Factory's official billing documentation states that every new account automatically receives $1 in trial credit upon first sign-up, valid for 30 days. Onboarding requires creating a billing account with a bank card — the docs explicitly say billing setup is mandatory and cannot be skipped, matching the claimed card-required onboarding. The credit is an ongoing signup bonus with no fixed end date, so the offer is treated as ongoing. Terms on the live page match the claimed offer exactly.
+- Claim steps: Sign up for a Nebius Token Factory account. | During onboarding, create a billing account — billing setup is mandatory and you cannot complete onboarding without it. | Set up the billing account with a bank card, which is required. | The $1 trial credit is applied automatically upon first sign-up and is valid for 30 days.
+
+### Modal Starter Plan — $30/month free compute credits
+- Provider: Modal
+- Category: api_provider
+- Amount: $30/month in compute credits
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://modal.com/pricing
+- Page: https://freetokens.custats.info/offers/modal-starter-30-month-free-compute.html
+- Summary: Modal's Starter plan costs $0/month plus metered compute and includes $30/month in free credits, with up to 3 workspace seats, 100 containers, and 10 GPU concurrency. The credit recurs monthly as included compute rather than a one-time grant, and no expiry date or fixed end for the offer is stated on the pricing page. Claiming requires creating a Modal account via the Get Started flow. The docs billing guide corroborates that credits are deducted from monthly usage charges.
+- Claim steps: Go to https://modal.com/pricing and review the Starter plan ($0 + compute / month). | Click "Get Started" on the Starter plan to create a Modal account. | Create a workspace — the Starter plan includes up to 3 workspace seats. | Deploy functions; the Starter plan's $30/month in free credits counts against your compute usage, which is auto-charged only beyond the credit.
+
+### Ideogram Free Plan — Weekly Slow Credits
+- Provider: Ideogram
+- Category: image
+- Amount: Free plan ($0) with weekly slow credits for eligible accounts; amount may vary
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://ideogram.ai/pricing/
+- Page: https://freetokens.custats.info/offers/ideogram-free-plan.html
+- Summary: Ideogram's official pricing page confirms a Free plan at $0 whose credit row reads "Slow credits — Weekly for eligible accounts", while paid tiers get "Unlimited". The page FAQ states eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft, and that the amount may vary — no fixed credit number is published. Free-tier limits also include 1 running + queued generation, and AI-powered editing features are unavailable in the slow queue. No end date for the free plan is stated, so the offer is ongoing.
+- Claim steps: Go to https://ideogram.ai/pricing/ and select the "Free plan" ($0), then click "Start for free". | Sign in or create an Ideogram account — sign in with Google, Apple, or Microsoft to be eligible for weekly credits (per the page FAQ). | Generate images in the slow queue using the weekly slow credits (free tier allows 1 running + queued generation). | Wait for the weekly credit refresh to continue generating; note AI-powered editing features require priority credits and are not available in the slow queue.
+
+### $1 in free credits for new Fireworks AI accounts
+- Provider: Fireworks AI
+- Category: api_provider
+- Amount: $1 in free credits
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://fireworks.ai/pricing
+- Page: https://freetokens.custats.info/offers/fireworks-ai-1-dollar-free-credits.html
+- Summary: Fireworks AI's official pricing page states: "Pay per token, with high rate limits and postpaid billing. Get started with $1 in free credits." This matches the claimed $1 starter credit for new accounts. The page's "Get Started" button links to /signup, so claiming requires creating an account. No expiry or limited-time language appears near the offer, so it is treated as ongoing with no fixed end date. The offer was not personally redeemed; the verdict is based on the official page.
+- Claim steps: Go to https://fireworks.ai/pricing, which states: "Get started with $1 in free credits." | Click the "Get Started" button, which links to https://fireworks.ai/signup. | Create a new Fireworks AI account. | Use the $1 in free credits with pay-per-token serverless inference (Standard, Priority, or Fast tiers).
+
+### Baseten starting credits for new workspaces
+- Provider: Baseten
+- Category: api_provider
+- Amount: Starting credits for new workspaces (amount not published)
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://docs.baseten.co/organization/billing
+- Page: https://freetokens.custats.info/offers/baseten-starting-credits.html
+- Summary: Baseten's official billing documentation states that every new workspace automatically receives starting credits for testing and deployment, applied to invoices before any payment method is charged — no redemption step. The docs explicitly note there is no separate free tier or perpetual free plan, and usage beyond the starting credits is billed at standard per-minute instance pricing. The credit balance is visible on the billing dashboard. Neither the docs nor the pricing FAQ publishes the exact credit amount, so it is reported as unpublished. The offer is ongoing with no stated end date.
+- Claim steps: Sign up for a new Baseten workspace at app.baseten.co (account required). | Credits are applied automatically — per the docs, 'you do not need to redeem them.' | Use credits for testing and deployment; usage is billed per-minute and deducted from credits first. | Check your current credit balance and remaining amount on the billing dashboard. | If credits don't appear after signup, or you need more for a proof of concept, contact Baseten via the link in the billing docs.
+
+### Free starter credits for new Claude Console accounts
+- Provider: Anthropic
+- Category: api_provider
+- Amount: small free starter credits (exact amount not published)
+- Status: active — expiry ongoing
+- Verified: 2026-09-04 (social_proof / under-review, signup required)
+- Source: https://platform.claude.com/docs/en/about-claude/pricing
+- Page: https://freetokens.custats.info/offers/anthropic-console-free-starter-credits.html
+- Summary: Anthropic's official Claude Platform pricing documentation states under the FAQ 'Are there free tiers or trials?' that new users receive a small amount of free credits to test the API, matching the offer. The exact credit amount is deliberately not published on the page, so no number can be stated; extended trials for enterprise evaluation are available via sales. The get-started docs confirm claiming requires a Claude Console account and an API key. No expiry date or fixed end date for the starter credits is stated, so the offer is treated as ongoing.
+- Claim steps: Create a Claude Console account. | New accounts receive a small amount of free credits to test the API (credited to the account; amount not published by Anthropic). | Create an API key in the Console (listed as a prerequisite in the official get-started docs). | Use the API key to make API calls against the free starter credits. | Enterprises needing larger/extended trials for evaluation can contact sales@anthropic.com.
 
 ### ZCode Global Build — Free GLM-5.3-Flash (Round 4)
 - Provider: ZCode

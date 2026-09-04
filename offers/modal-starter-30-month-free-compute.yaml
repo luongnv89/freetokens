@@ -1,0 +1,13 @@
+# Verified 2026-09-04 against https://modal.com/pricing
+# ("Starter | $0 + compute / month — Get started with $30 / month free
+# credit"; feature table shows "Included compute: $30 / month" under Starter)
+title: Modal Starter Plan — $30/month free compute credits
+provider: Modal
+category: api_provider
+amount: $30/month in compute credits
+expiry_date: null
+source_url: https://modal.com/pricing
+verified_date: 2026-09-04
+verification: social_proof
+review_status: under-review
+signup: required

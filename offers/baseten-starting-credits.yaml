@@ -1,0 +1,13 @@
+# Verified 2026-09-04 against https://docs.baseten.co/organization/billing
+# ("New workspaces receive credits for testing and deployment. ... you do
+# not need to redeem them." Exact amount not published.)
+title: Baseten starting credits for new workspaces
+provider: Baseten
+category: api_provider
+amount: Starting credits for new workspaces (amount not published)
+expiry_date: null
+source_url: https://docs.baseten.co/organization/billing
+verified_date: 2026-09-04
+verification: social_proof
+review_status: under-review
+signup: required

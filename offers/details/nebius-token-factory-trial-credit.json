@@ -1,0 +1,17 @@
+{
+  "summary": "Nebius Token Factory's official billing documentation states that every new account automatically receives $1 in trial credit upon first sign-up, valid for 30 days. Onboarding requires creating a billing account with a bank card — the docs explicitly say billing setup is mandatory and cannot be skipped, matching the claimed card-required onboarding. The credit is an ongoing signup bonus with no fixed end date, so the offer is treated as ongoing. Terms on the live page match the claimed offer exactly.",
+  "claim_steps": [
+    "Sign up for a Nebius Token Factory account.",
+    "During onboarding, create a billing account — billing setup is mandatory and you cannot complete onboarding without it.",
+    "Set up the billing account with a bank card, which is required.",
+    "The $1 trial credit is applied automatically upon first sign-up and is valid for 30 days."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.tokenfactory.nebius.com/other-capabilities/billing-new",
+      "title": "Billing & Consumption - Nebius Token Factory documentation",
+      "text": "When you sign up for Nebius Token Factory, you are prompted to create a billing account during onboarding. Billing setup is mandatory—you cannot complete onboarding without it. Setting up a billing account requires a bank card. Upon first sign-up, you receive $1 in trial credit, valid for 30 days."
+    }
+  ]
+}

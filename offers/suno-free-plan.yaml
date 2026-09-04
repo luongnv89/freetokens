@@ -1,0 +1,12 @@
+# Verified 2026-09-04 against https://suno.com/pricing
+# ("Free Plan — 50 credits renew daily (10 songs)", $0/month, Sign Up CTA)
+title: Suno Free Plan — 50 credits per day
+provider: Suno
+category: voice
+amount: Free plan, 50 credits/day (~10 songs)
+expiry_date: null
+source_url: https://suno.com/pricing
+verified_date: 2026-09-04
+verification: social_proof
+review_status: under-review
+signup: required

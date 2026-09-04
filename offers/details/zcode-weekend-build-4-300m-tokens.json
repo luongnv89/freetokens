@@ -1,0 +1,32 @@
+{
+  "summary": "ZCode's official verified X account (@zcode_ai) announced Weekend Build IV on Sep 4, 2026: 300M free GLM-5.3-Flash tokens per person, claimable in the ZCode desktop app via the bottom-left event card. The event opens Sat Sep 5, 09:00 Beijing time (Fri 6 PM PT / 9 PM ET) and — per the official poster attached to the post — the window runs SAT 09:00 – SUN 23:00 UTC+8, i.e. through Sunday Sep 6, 2026. Claims are instant and first come, first served, so the pool can exhaust before the window closes; restart the app if the card is missing. This is a separate event from the ongoing ZCode Global Build (nightly till Sep 20, +100M for new users) already listed as zcode-glm-5-3-flash-free; the official site's changelog independently corroborates the in-app Weekend/Global Plan claim-card feature.",
+  "claim_steps": [
+    "Install and open the ZCode desktop app from https://zcode.z.ai (macOS, Windows, and Linux builds available), or update/restart your existing install.",
+    "Sign in with your Z.ai account in ZCode.",
+    "After the event opens — Sat Sep 5, 09:00 Beijing time (Fri 6 PM PT / 9 PM ET) — look for the Weekend Build IV card in the bottom-left of the app.",
+    "If the card is not visible, restart the app.",
+    "Tap the card and claim instantly: 300M GLM-5.3-Flash tokens per person.",
+    "Claim early — tokens are first come, first served, and the window runs to Sun 23:00 UTC+8 (Sep 6, 2026)."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/zcode_ai/status/2095847518194307434",
+      "author": "ZCode",
+      "handle": "@zcode_ai",
+      "text": "WEEKEND BUILD IV is back 🚀\n300M GLM-5.3-Flash tokens per person, free.\n\nOpens Sat 9 AM Beijing · Fri 6 PM PT · 9 PM ET\nFirst come, first served.\n\nOpen ZCode → tap the card, bottom-left. Not there? Restart the app 😉\n\nGlobal Build: nightly till Sep 20.\nhttps://zcode.z.ai"
+    },
+    {
+      "type": "link",
+      "url": "https://zcode.z.ai/en",
+      "title": "ZCode | Official Harness for GLM-5.3",
+      "text": "Official ZCode site hosting the desktop app downloads (v3.11.2, macOS/Windows/Linux) required for in-app claiming of the Weekend Build IV card."
+    },
+    {
+      "type": "link",
+      "url": "https://zcode.z.ai/en/changelog",
+      "title": "ZCode Releases & Updates | GLM-5.3 Coding Agent",
+      "text": "\"Added free early claiming of Weekend Plan — invite friends to claim it together\" and \"Improved Weekend/Global Plan claim reminders, with clearer display of status and expiration details\"."
+    }
+  ]
+}

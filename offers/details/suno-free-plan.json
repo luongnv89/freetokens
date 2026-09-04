@@ -1,0 +1,16 @@
+{
+  "summary": "Suno's official pricing page lists a Free Plan at $0 that includes 50 credits renewing daily (about 10 songs), with up to 4 songs generated at once, no commercial use, no credit top-ups, and a shared generation queue. The page was fetched live on 2026-09-04 and the terms match the claim exactly. No end date is stated, so the offer appears ongoing.",
+  "claim_steps": [
+    "Go to https://suno.com/pricing.",
+    "Click Sign Up and create a free Suno account.",
+    "Use the Free Plan (no payment needed) — 50 credits renew daily (10 songs)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://suno.com/pricing",
+      "title": "Suno | Pricing",
+      "text": "Free Plan — features: 50 credits renew daily (10 songs); Create up to 4 songs at once; No commercial use; No credit top ups; Shared generation queue"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "summary": "Fireworks AI's official pricing page states: \"Pay per token, with high rate limits and postpaid billing. Get started with $1 in free credits.\" This matches the claimed $1 starter credit for new accounts. The page's \"Get Started\" button links to /signup, so claiming requires creating an account. No expiry or limited-time language appears near the offer, so it is treated as ongoing with no fixed end date. The offer was not personally redeemed; the verdict is based on the official page.",
+  "claim_steps": [
+    "Go to https://fireworks.ai/pricing, which states: \"Get started with $1 in free credits.\"",
+    "Click the \"Get Started\" button, which links to https://fireworks.ai/signup.",
+    "Create a new Fireworks AI account.",
+    "Use the $1 in free credits with pay-per-token serverless inference (Standard, Priority, or Fast tiers)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://fireworks.ai/pricing",
+      "title": "Fireworks - Pricing",
+      "text": "Pay per token, with high rate limits and postpaid billing. Get started with $1 in free credits."
+    }
+  ]
+}
