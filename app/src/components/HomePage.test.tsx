@@ -174,14 +174,17 @@ describe("HomePage masthead counters (#49 port)", () => {
     render(<HomePage index={index} />)
     const heading = screen.getByRole("heading", {
       level: 1,
-      name: "Free AI credits, checked one by one",
+      name: "Free AI Credits",
     })
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1)
     expect(heading.closest(".site-header")).not.toBeNull()
-    expect(heading).toHaveClass("site-slogan")
+    expect(heading).toHaveClass("site-wordmark")
 
-    // The supporting sentence and the build-derived proof line sit with it.
-    expect(screen.getByText(/One person opens every provider/)).toBeInTheDocument()
+    // The slogan and its supporting sentence are gone; the build-derived
+    // proof line is what states how the list is maintained.
+    expect(screen.queryByText(/One person opens every provider/)).toBeNull()
+    expect(document.querySelector(".site-slogan")).toBeNull()
+    expect(document.querySelector(".site-sub")).toBeNull()
     expect(screen.getByText(/live offers/)).toBeInTheDocument()
   })
 })

@@ -397,8 +397,7 @@ a.badge:focus-visible {
   margin: 0.5rem 0 0;
 }
 
-.foot-nav a,
-.stat-strip a {
+.foot-nav a {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
@@ -406,9 +405,7 @@ a.badge:focus-visible {
 }
 
 .foot-nav a:hover,
-.foot-nav a:focus-visible,
-.stat-strip a:hover,
-.stat-strip a:focus-visible {
+.foot-nav a:focus-visible {
   text-decoration-color: var(--green);
   text-decoration-thickness: 3px;
 }
@@ -527,7 +524,9 @@ a:focus-visible {
 }
 
 /* ---- Shared site header (#112): identical chrome on every page -------- */
-/* Clean editorial masthead: Logo + Name · Nav · Slogan, then hairline */
+/* Clean editorial masthead: Logo + Name · Nav · live traffic, then hairline.
+   The slogan and its sub-paragraph were removed: the derived proof line
+   below the bar makes the same claim in numbers that cannot rot. */
 
 .site-header {
   width: 100%;
@@ -563,35 +562,13 @@ a:focus-visible {
 
 .site-bar .brand-mark { align-self: center; display: block; }
 
-.site-slogan {
-  margin: 0.95rem 0 0;
-  width: 100%;
-  max-width: 22ch;
-  font-size: clamp(1.45rem, 4.4vw, 2.1rem);
-  font-weight: 800;
-  letter-spacing: -0.032em;
-  line-height: 1.08;
-  color: var(--ink);
-}
-
-.site-slogan::before {
-  content: "";
-  display: block;
-  width: 2.2rem;
-  height: 2px;
-  background: var(--green);
-  margin-bottom: 0.85rem;
-}
-
-.site-sub {
-  margin: 0.7rem 0 0;
-  width: 100%;
-  max-width: 62ch;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.78rem;
-  line-height: 1.65;
-  color: var(--gray);
-}
+/* The strip arrives after mount, above the fold, on every route. Reserve its
+   line with visibility so the reveal fills a box that is already there rather
+   than pushing the whole page down; a site GoatCounter never answers is
+   marked data-traffic="off" and collapses the box for good. */
+.site-header .stat-strip[hidden] { display: flex; visibility: hidden; }
+.site-header .stat-strip[data-traffic="off"] { display: none; }
+.site-header .stat-strip strong { display: inline-block; min-width: 3ch; }
 
 .site-nav {
   display: inline-flex;
@@ -651,10 +628,6 @@ a:focus-visible {
   .site-nav {
     gap: 0.5rem;
     font-size: 0.72rem;
-  }
-  .site-slogan {
-    width: 100%;
-    max-width: none;
   }
   .od-table th[scope="row"] { white-space: normal; width: auto; }
 }
@@ -1038,14 +1011,6 @@ a:focus-visible {
 @media (max-width: 48rem) {
   .site-header { padding-bottom: 0.85rem; margin-bottom: 0.9rem; }
 
-  .site-slogan { margin-top: 0.75rem; }
-
-  .site-sub {
-    margin-top: 0.6rem;
-    font-size: 0.75rem;
-    line-height: 1.55;
-  }
-
   .toolbar { gap: 0.6rem 0.7rem; margin-bottom: 0.7rem; }
 
   .toolbar .field { flex: 1 1 9rem; }
@@ -1383,10 +1348,10 @@ button:focus-visible {
 }
 
 /* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131 / #250) ----
-   Renamed .foot-traffic -> .stat-strip in #279: the same strip now renders
-   at the top of the home page as well as in the footer of every other.
-   Home-only .site-stats layout lives in SiteStats.tsx so detail pages do
-   not pay for unused rail CSS. */
+   Renamed .foot-traffic -> .stat-strip in #279. It now mounts once, in the
+   shared header, so the same numbers render on every route; the home-only
+   proof-line layout lives in SiteStats.tsx so detail pages do not pay for
+   unused rail CSS. */
 
 .stat-strip {
   display: flex;

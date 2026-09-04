@@ -1,12 +1,15 @@
-import { TrafficStrip } from "./TrafficStrip"
 import { buildDate, humanDate } from "../lib/offers"
 
 /**
- * Home-only rail layout. Kept out of python-parity.css so offer-detail
+ * Home-only proof-line layout. Kept out of python-parity.css so offer-detail
  * pages do not download or parse unused rules (Lighthouse unused-css /
  * render-blocking on /offers/*.html). CSP already allows style-src
  * 'unsafe-inline'. Compact on purpose: this string is in the shared JS
  * bundle, but it is not in the shared stylesheet.
+ *
+ * The traffic-strip overrides are gone with the strip itself, which now
+ * mounts in the shared header; everything left here is build-derived and
+ * present in the prerendered HTML, so nothing needs a reserved box.
  */
 const RAIL_CSS =
   ".site-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem .5rem;" +
@@ -17,12 +20,7 @@ const RAIL_CSS =
   ".site-stats a{color:inherit;text-decoration:underline;" +
   "text-decoration-color:var(--hairline);text-underline-offset:3px}" +
   ".site-stats a:hover,.site-stats a:focus-visible{color:var(--ink);" +
-  "text-decoration-color:var(--green);text-decoration-thickness:2px}" +
-  ".site-stats :is(.stat-strip,.ft-stat){margin:0;border:0;padding:0;" +
-  "font:inherit;gap:.3rem .5rem}" +
-  ".site-stats [hidden]{display:inline-flex;visibility:hidden}" +
-  '.site-stats [data-traffic="off"]{display:none}' +
-  ".site-stats .ft-stat strong{display:inline-block;min-width:4ch;font-size:inherit}"
+  "text-decoration-color:var(--green);text-decoration-thickness:2px}"
 
 /** Days between two YYYY-MM-DD days; -1 when either is unparseable. */
 function daysBetween(from: string, to: string): number {
@@ -61,12 +59,9 @@ function checkWindowFor(age: number): string {
  *      maintained rather than accumulated.
  *
  * All three are prerendered, so they are correct with JavaScript off and are
- * indexable. TrafficStrip arrives asynchronously, so `.site-stats` reserves
- * its box with `visibility` rather than `display` and the counters reserve a
- * mono character width — the reveal fills a box that is already there instead
- * of pushing the offer list down. A window GoatCounter never answers is
- * marked `data-traffic="off"` and collapses, so a blocked or offline visitor
- * never sees an empty slot.
+ * indexable. The live traffic numbers moved to the header, where they render
+ * on every route; this line is now purely build-derived and needs no
+ * reserved box, because nothing in it arrives late.
  */
 export function SiteStats({
   activeCount,
@@ -124,7 +119,6 @@ export function SiteStats({
           </span>
         </>
       ) : null}
-      <TrafficStrip />
     </div>
   )
 }

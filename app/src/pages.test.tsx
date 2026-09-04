@@ -881,9 +881,7 @@ describe("shared header chrome (#112)", () => {
       expect(markup.match(/<main>/g)?.length).toBe(1);
       expect(markup.match(/<h1\b/g)?.length).toBe(1);
     }
-    expect(home).toContain(
-      '<h1 class="site-slogan">Free AI credits, checked one by one</h1>',
-    );
+    expect(home).toContain('<h1 class="site-wordmark">Free AI Credits</h1>');
     expect(archive).toContain("<h1>Expired offer archive</h1>");
     expect(privacy).toContain("<h1>Privacy Policy</h1>");
   });
@@ -1029,22 +1027,10 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     expect(badBuild).not.toContain("stat-checked");
   });
 
-  it("mounts the traffic strip in the rail on home, not in the home footer (#279)", () => {
+  it("mounts the traffic strip in the header, exactly once, on every route", () => {
     configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
-    const markup = home();
-    expect(markup.match(/id="ft-traffic"/g)?.length).toBe(1);
-    const railAt = markup.indexOf('class="site-stats"');
-    const stripAt = markup.indexOf('id="ft-traffic"');
-    const footerAt = markup.indexOf('id="site-footer"');
-    expect(stripAt).toBeGreaterThan(railAt);
-    expect(stripAt).toBeLessThan(footerAt);
-    expect(markup).toContain('class="stat-strip"');
-    expect(markup).not.toContain('class="foot-traffic"');
-  });
-
-  it("keeps the traffic strip in the footer on every other page (#279)", () => {
-    configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
-    const others = [
+    const pages = [
+      home(),
       renderToStaticMarkup(<ArchivePage index={index} />),
       renderToStaticMarkup(<PrivacyPage />),
       renderToStaticMarkup(<AboutPage index={index} />),
@@ -1052,13 +1038,31 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
         <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
       ),
     ];
-    for (const markup of others) {
+    for (const markup of pages) {
+      // Exactly one: initTrafficStrip resolves these ids with
+      // getElementById, so a second mount would never be populated.
       expect(markup.match(/id="ft-traffic"/g)?.length).toBe(1);
-      expect(markup).not.toContain('class="site-stats"');
-      expect(markup.indexOf('id="ft-traffic"')).toBeGreaterThan(
-        markup.indexOf('id="site-footer"'),
-      );
+      expect(markup.match(/id="ft-traffic-total"/g)?.length).toBe(1);
+      expect(markup.match(/id="ft-traffic-page"/g)?.length).toBe(1);
+      expect(markup).toContain('class="stat-strip"');
+      expect(markup).not.toContain('class="foot-traffic"');
+      // In the header, above the footer, on every route.
+      const stripAt = markup.indexOf('id="ft-traffic"');
+      expect(stripAt).toBeGreaterThan(markup.indexOf('class="site-header"'));
+      expect(stripAt).toBeLessThan(markup.indexOf('id="site-footer"'));
     }
+  });
+
+  it("carries site total, today and this page, and no owner-only link", () => {
+    configureAnalytics({ statsSite: "https://luongnv89.goatcounter.com" });
+    const markup = home();
+    expect(markup).toContain('class="ft-stat-label">visits<');
+    expect(markup).toContain('class="ft-stat-label">today<');
+    expect(markup).toContain('class="ft-stat-label">this page<');
+    // The GoatCounter dashboard is readable only by the site owner, so the
+    // strip must not link visitors at a login wall.
+    expect(markup).not.toContain("full stats");
+    expect(markup).not.toContain("goatcounter.com\"");
   });
 
   it("renders no traffic markup in the rail when GoatCounter is unset (#279)", () => {
@@ -1075,7 +1079,9 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     expect(css).not.toMatch(/\.site-stats\s*\{/);
     const homeMarkup = home();
     expect(homeMarkup).toContain(".site-stats{display:flex");
-    expect(homeMarkup).toContain('data-traffic="off"');
+    // The traffic strip left the rail, so its overrides left the rail CSS.
+    expect(homeMarkup).not.toContain('.site-stats [data-traffic="off"]');
+    expect(homeMarkup).not.toContain(".site-stats :is(.stat-strip");
     const detail = renderToStaticMarkup(
       <OfferDetailPage index={{ ...index, offers: [offer()] }} slug="example-offer" />,
     );

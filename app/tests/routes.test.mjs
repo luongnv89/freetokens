@@ -318,12 +318,15 @@ describe("static route coverage (#123)", () => {
   it("emits exactly one primary h1 on every prerendered page", () => {
     const home = readFileSync(path.join(outDir, "index.html"), "utf8");
     expect(headings(home)).toHaveLength(1);
-    expect(home).toContain(
-      '<h1 class="site-slogan">Free AI credits, checked one by one</h1>',
-    );
+    // Home's h1 is the wordmark inside the brand bar. The slogan that used
+    // to carry it is gone, and every other route has its own page heading,
+    // so promoting the wordmark on home alone keeps exactly one h1 per page.
+    expect(home).toContain('<h1 class="site-wordmark">Free AI Credits</h1>');
     expect(home).toMatch(
-      /<div class="site-header">[\s\S]*<h1 class="site-slogan">Free AI credits, checked one by one/,
+      /<div class="site-header">[\s\S]*<h1 class="site-wordmark">Free AI Credits/,
     );
+    expect(home).not.toContain("site-slogan");
+    expect(home).not.toContain("site-sub");
 
     for (const file of ["archive.html", "privacy.html", "about.html"]) {
       expect(headings(readFileSync(path.join(outDir, file), "utf8"))).toHaveLength(1);

@@ -26,6 +26,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { buildFeed, DEFAULT_BASE_URL } from "./feed.mjs";
 import { buildSitemap } from "./sitemap.mjs";
+import { envValue } from "./env-file.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 let distDir = path.join(here, "..", "dist");
@@ -96,8 +97,12 @@ await build({
   // Same env names as vite.config.ts / deploy.yml. Empty when unset so
   // prerendered HTML never leaks tracker ids or loader markup.
   define: {
-    __FT_GA_ID__: JSON.stringify(resolveMeasurementId(process.env.GA_MEASUREMENT_ID)),
-    __FT_GC_SITE__: JSON.stringify(resolveStatsSite(process.env.GOATCOUNTER_SITE_URL)),
+    __FT_GA_ID__: JSON.stringify(
+      resolveMeasurementId(envValue("GA_MEASUREMENT_ID", path.join(here, ".."))),
+    ),
+    __FT_GC_SITE__: JSON.stringify(
+      resolveStatsSite(envValue("GOATCOUNTER_SITE_URL", path.join(here, ".."))),
+    ),
   },
   // Render from the SAME dataset that drives route emission (--data), not
   // whatever was frozen into the bundle at build time.

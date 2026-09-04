@@ -3,18 +3,25 @@ import { configDefaults, defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { resolveMeasurementId, resolveStatsSite } from './src/lib/analyticsEnv.ts'
+import { envValue } from './scripts/env-file.mjs'
 
 // Same secret names as scripts/build.py / deploy.yml. Unset or malformed
 // values compile to empty strings so no tracker id reaches the bundle.
 // Vitest always sees empty defines so unit tests cannot leak a real id
 // from the developer environment; tests opt in via configureAnalytics().
+//
+// envValue falls back to app/.env when the var is not in the real
+// environment: Vite never loads a dotenv file into process.env, so before
+// this a filled-in app/.env produced a local build with no traffic markup
+// at all while CI, which injects the secrets directly, looked fine.
+const appDir = fileURLToPath(new URL('.', import.meta.url))
 const runningVitest = Boolean(process.env.VITEST)
 const ftGaId = runningVitest
   ? ""
-  : resolveMeasurementId(process.env.GA_MEASUREMENT_ID, true)
+  : resolveMeasurementId(envValue('GA_MEASUREMENT_ID', appDir), true)
 const ftGcSite = runningVitest
   ? ""
-  : resolveStatsSite(process.env.GOATCOUNTER_SITE_URL, true)
+  : resolveStatsSite(envValue('GOATCOUNTER_SITE_URL', appDir), true)
 
 /** Discover CSS before the module graph so FCP is not queued behind 280 kB of JS. */
 function cssBeforeModuleScripts() {

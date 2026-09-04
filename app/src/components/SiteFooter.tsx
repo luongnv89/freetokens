@@ -1,7 +1,6 @@
 import { Fragment } from "react"
 import { BrandMark } from "./BrandMark"
 import { Button } from "./ui/button"
-import { TrafficStrip } from "./TrafficStrip"
 import { isTrackingConfigured, showConsentBanner } from "../lib/analytics"
 
 const CONTACT_LINKS = [
@@ -15,9 +14,8 @@ const CONTACT_LINKS = [
  * `depth` is the page's directory distance from site root (0 for
  * index/archive/privacy, 1 for offers/<slug>.html) and prefixes every href
  * so links stay relative and deploy-base safe (#60).
- * TrafficStrip mounts in the footer on every page EXCEPT home, where the
- * masthead stats rail carries it instead (#279); it renders nothing when
- * GoatCounter is unconfigured and stays hidden until the total arrives.
+ * TrafficStrip no longer mounts here: the header carries it on every route,
+ * and its ids must resolve to exactly one element per page.
  */
 export function SiteFooter({
   depth = 0,
@@ -31,7 +29,6 @@ export function SiteFooter({
   const trackingOn = isTrackingConfigured()
   return (
     <footer className="foot" id="site-footer">
-      {current === "home" ? null : <TrafficStrip />}
       <p className="foot-brand">
         <a href={homeHref}>
           <BrandMark depth={depth} size={24} />
