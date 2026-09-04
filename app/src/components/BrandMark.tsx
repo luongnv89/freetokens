@@ -9,12 +9,12 @@ export function BrandMark({
   alt = "Free AI Credits",
   priority = false,
 }: {
-  depth?: number
-  size?: number
-  alt?: string
-  priority?: boolean
+  depth?: number;
+  size?: number;
+  alt?: string;
+  priority?: boolean;
 }) {
-  const prefix = "../".repeat(depth) || "./"
+  const prefix = "../".repeat(depth) || "./";
   return (
     <img
       className="brand-mark"
@@ -27,5 +27,5 @@ export function BrandMark({
       fetchPriority={priority ? "high" : "auto"}
       style={{ aspectRatio: "1 / 1" }}
     />
-  )
+  );
 }

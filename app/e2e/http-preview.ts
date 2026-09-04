@@ -8,7 +8,10 @@ import { test } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
   await page.route("https://127.0.0.1:4173/**", async (route) => {
     const response = await route.fetch({
-      url: route.request().url().replace("https://127.0.0.1:4173", "http://127.0.0.1:4173"),
+      url: route
+        .request()
+        .url()
+        .replace("https://127.0.0.1:4173", "http://127.0.0.1:4173"),
     });
     await route.fulfill({ response });
   });

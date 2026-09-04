@@ -9,7 +9,20 @@
   --green: var(--color-accent);
   --hairline: var(--color-hairline);
   --archive-bg: var(--color-muted);
-  --archive-bg-soft: color-mix(in srgb, var(--color-muted) 12%, var(--color-paper));
+  /* The stock CSS curves are too weak to read as intentional at the 140 ms
+     these interactions run at; this one starts fast and settles. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --archive-bg-soft: color-mix(
+    in srgb,
+    var(--color-muted) 12%,
+    var(--color-paper)
+  );
+  /* Dark redesign additions. `--wash` supersedes every rgba(0,0,0,x) the
+     light sheet used for hover and inset states — a black wash on a #0e1013
+     ground is not a state change, it is nothing. */
+  --surface: var(--color-surface);
+  --surface-2: var(--color-surface-2);
+  --wash: var(--color-wash);
 
   /* Tag hues. Each clears WCAG AA in BOTH painted states a tag has: as text
      over the 7% tint it sits on at rest, and under white text when filled on
@@ -56,35 +69,82 @@
   --t-hot: var(--color-hot);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html { -webkit-text-size-adjust: 100%; width: 100%; overflow-x: hidden; }
+/* `clip`, not `hidden`. Both stop sideways scrolling, but `overflow-x: hidden`
+   silently makes the element a scroll container, and a scroll container
+   between the viewport and a `position: sticky` element cancels the sticky —
+   which is exactly what happened to the offer rail: it computed as sticky and
+   still scrolled straight off the top. `clip` does not create one.
+   `hidden` stays first as the fallback for engines without `clip`; they lose
+   the sticky rail and keep the overflow guard, which is the right trade. */
+html {
+  -webkit-text-size-adjust: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
 
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   overflow-wrap: break-word;
   overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
+  /* Atmosphere, not decoration. A flat near-black page reads as an unstyled
+     document; one very wide, very low-opacity green wash behind the masthead
+     gives the ground a light source and ties the accent to the top of the
+     page where the brand is. Fixed so it does not travel with the scroll,
+     and on the body rather than a pseudo-element so it costs no extra box. */
+  background-image: radial-gradient(
+    120rem 44rem at 50% -22rem,
+    color-mix(in srgb, var(--green) 9%, transparent),
+    transparent 70%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark type needs a hair more tracking than light type at the same size:
+   light glyphs on a dark ground bloom optically and run together. */
+.mono,
+code,
+kbd {
+  letter-spacing: 0.005em;
 }
 
 main {
   width: 100%;
 }
 
-.wrap { width: 100%; min-width: 0; max-width: 75rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 3rem); }
+/* 68rem, not 75rem. The rail is right-aligned, so the page width IS the
+   distance between an offer title and its own status: at 75rem that gap ran
+   to roughly 1000 px of empty ground on a desktop and the row stopped
+   reading as one object. */
+.wrap {
+  width: 100%;
+  min-width: 0;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
 
 .mono {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-mono);
 }
 
 /* ---- Masthead -------------------------------------------------------- */
 
 .kicker {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -103,23 +163,31 @@ main {
 }
 
 h1 {
-  font-size: clamp(2.4rem, 7vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.02;
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 5.5vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.04;
   margin: 0 0 0.75rem;
+  color: var(--ink);
 }
 
-.tagline { max-width: 42rem; margin: 0 0 0.5rem; font-size: 1.05rem; }
+.tagline {
+  max-width: 42rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
 
 .count {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   color: var(--gray);
   margin: 0 0 2.5rem;
 }
 
-.count strong { color: var(--ink); }
+.count strong {
+  color: var(--ink);
+}
 
 /* ---- Card grid ------------------------------------------------------- */
 
@@ -127,52 +195,44 @@ h1 {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: 1.1rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  display: block;
+  counter-reset: ftrank;
+  /* Rows carry their own edges now, so the list needs no rule above it. */
+  font-family: var(--font-mono);
+  min-width: 0;
 }
 
+/* Four content areas beside one fixed rail. The rail is the whole point:
+   status, freshness and the row controls used to flow inside the meta
+   paragraph and wrapped at a different point on every row, so no two rows
+   were the same height and the list had no baseline to scan down. */
 .card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  height: 100%;
-  border: 1px solid var(--hairline);
-  border-radius: 12px;
-  padding: 1.25rem;
-  background: var(--paper);
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    border-color 0.15s ease;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 10.5rem;
+  grid-template-areas:
+    "eyebrow rail"
+    "title   rail"
+    "amount  rail"
+    "meta    rail";
+  column-gap: 1.5rem;
+  align-items: start;
+  min-width: 0;
 }
 
-/* Decorative green accent line — meaning never depends on it alone. */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  border-radius: 12px 12px 0 0;
-  background: var(--green);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.18s ease;
+.row-eyebrow {
+  grid-area: eyebrow;
 }
-
-.card:hover, .card:focus-within {
-  transform: translateY(-2px);
-  border-color: var(--ink);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+.card-title {
+  grid-area: title;
 }
-
-.card:hover::before, .card:focus-within::before { transform: scaleX(1); }
-
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+.r-amount {
+  grid-area: amount;
+}
+.row-meta {
+  grid-area: meta;
+}
+.row-rail {
+  grid-area: rail;
 }
 
 /* ---- Tags ------------------------------------------------------------- */
@@ -191,20 +251,26 @@ h1 {
   min-width: 0;
   overflow: visible;
   overflow-wrap: anywhere;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border: 1px solid var(--tag-hue);
-  border-radius: 999px;
-  padding: 0.14rem 0.6rem;
-  color: var(--tag-hue);
-  background: var(--paper);
-  /* 7% of the hue: enough to separate three adjacent tags at a glance, far
-     too little to be mistaken for the solid fill that means "active".
-     Browsers without color-mix keep the flat paper background above. */
-  background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
+  letter-spacing: 0.07em;
+  border-radius: 3px;
+  padding: 0.16rem 0.5rem;
+  /* Two colours derived from the one hue, because the raw hue cannot be used
+     on this ground: these hexes were chosen to clear AA as ink-side colours
+     on white, and navy #1e3a5f is literally darker than the page. The 60/18
+     pair is the widest that keeps all thirteen hues (and --t-hot) above
+     4.5:1 against the fill, the ground and the row hover surface at once —
+     see the derivation note in tokens.css and dark-tag-contrast.test.mjs.
+     Fallbacks first for browsers without color-mix. */
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  color: color-mix(in srgb, var(--tag-hue) 60%, white);
+  background: color-mix(in srgb, var(--tag-hue) 18%, var(--paper));
+  border-color: color-mix(in srgb, var(--tag-hue) 34%, var(--paper));
 }
 
 /* Bypass block (WCAG 2.4.1). Three tag controls per row turned a listing of
@@ -231,7 +297,7 @@ h1 {
   border-radius: 4px;
   background: var(--paper);
   color: var(--ink);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
   outline: 3px solid var(--ink);
   outline-offset: 3px;
@@ -239,7 +305,9 @@ h1 {
 
 /* The bypass target must not draw a focus ring when it is reached by the
    skip link — it is a landmark, not a control. */
-#site-footer:focus { outline: none; }
+#site-footer:focus {
+  outline: none;
+}
 
 /* Tags render as <button> on the listing but as <a> on /archive and every
    offer page, which ship no filter runtime. Both forms are real targets, so
@@ -275,20 +343,48 @@ h1 {
   pointer-events: none;
 }
 
-.badge-category-api_provider { --tag-hue: var(--t-api_provider); }
-.badge-category-coding { --tag-hue: var(--t-coding); }
-.badge-category-image { --tag-hue: var(--t-image); }
-.badge-category-voice { --tag-hue: var(--t-voice); }
-.badge-category-video { --tag-hue: var(--t-video); }
-.badge-category-startup_program { --tag-hue: var(--t-startup_program); }
-.badge-category-student { --tag-hue: var(--t-student); }
-.badge-verification-social_proof { --tag-hue: var(--t-social_proof); }
-.badge-verification-unverified { --tag-hue: var(--t-unverified); }
-.badge-review-status-verified { --tag-hue: var(--t-review-verified); }
-.badge-review-status-unverified { --tag-hue: var(--t-unverified); }
-.badge-review-status-under-review { --tag-hue: var(--t-social_proof); }
-.badge-signup-none { --tag-hue: var(--t-none); }
-.badge-signup-required { --tag-hue: var(--t-required); }
+.badge-category-api_provider {
+  --tag-hue: var(--t-api_provider);
+}
+.badge-category-coding {
+  --tag-hue: var(--t-coding);
+}
+.badge-category-image {
+  --tag-hue: var(--t-image);
+}
+.badge-category-voice {
+  --tag-hue: var(--t-voice);
+}
+.badge-category-video {
+  --tag-hue: var(--t-video);
+}
+.badge-category-startup_program {
+  --tag-hue: var(--t-startup_program);
+}
+.badge-category-student {
+  --tag-hue: var(--t-student);
+}
+.badge-verification-social_proof {
+  --tag-hue: var(--t-social_proof);
+}
+.badge-verification-unverified {
+  --tag-hue: var(--t-unverified);
+}
+.badge-review-status-verified {
+  --tag-hue: var(--t-review-verified);
+}
+.badge-review-status-unverified {
+  --tag-hue: var(--t-unverified);
+}
+.badge-review-status-under-review {
+  --tag-hue: var(--t-social_proof);
+}
+.badge-signup-none {
+  --tag-hue: var(--t-none);
+}
+.badge-signup-required {
+  --tag-hue: var(--t-required);
+}
 
 /* Archive "Expired" badge (#26): the word itself carries the meaning —
    the muted styling is decoration only, never the sole signal. */
@@ -307,7 +403,9 @@ h1 {
    treatment, but must still announce themselves as operable. */
 a.badge {
   text-decoration: none;
-  transition: background-color 0.14s ease, color 0.14s ease;
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease;
 }
 
 a.badge:hover,
@@ -322,7 +420,7 @@ a.badge:focus-visible {
 }
 
 .status {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.76rem;
   color: var(--gray);
   display: inline-flex;
@@ -359,58 +457,6 @@ a.badge:focus-visible {
   text-underline-offset: 4px;
 }
 
-.ext { font-size: 0.85em; }
-
-.amount {
-  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
-  font-weight: 700;
-  margin: 0;
-  overflow-wrap: anywhere;
-}
-
-.prov {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.76rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--gray);
-  margin: auto 0 0;
-  padding-top: 0.75rem;
-}
-
-/* Archive card actions (#129): View-details control from build.py _DETAIL_CSS. */
-.card-actions { margin-top: 0.75rem; }
-
-.detail-btn {
-  display: block;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.78rem;
-  padding: 0.42rem 0.95rem;
-  border-radius: 999px;
-  border: 1px solid var(--ink);
-  background: var(--paper);
-  color: var(--ink);
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-}
-
-.detail-btn:hover { background: var(--ink); color: var(--paper); }
-
-.detail-btn:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
-}
-
-@media (pointer: coarse) {
-  .detail-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-  }
-}
-
 /* ---- Empty state ----------------------------------------------------- */
 
 .empty {
@@ -422,11 +468,19 @@ a.badge:focus-visible {
   margin: 1rem auto;
 }
 
-.empty h2 { margin: 0.75rem 0 0.5rem; font-size: 1.4rem; }
+.empty h2 {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1.4rem;
+}
 
-.empty p { color: var(--gray); margin: 0.35rem 0; }
+.empty p {
+  color: var(--gray);
+  margin: 0.35rem 0;
+}
 
-.empty .glyph { color: var(--green); }
+.empty .glyph {
+  color: var(--green);
+}
 
 .empty a {
   color: var(--ink);
@@ -437,7 +491,9 @@ a.badge:focus-visible {
 }
 
 .empty a:hover,
-.empty a:focus-visible { text-decoration-thickness: 3px; }
+.empty a:focus-visible {
+  text-decoration-thickness: 3px;
+}
 
 /* ---- Footer ------------------------------------------------------------ */
 
@@ -448,7 +504,7 @@ a.badge:focus-visible {
 }
 
 .foot p {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--gray);
   margin: 0;
@@ -459,13 +515,12 @@ a.badge:focus-visible {
   flex-wrap: wrap;
   gap: 0.15rem 0.75rem;
   align-items: baseline;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   margin: 0.5rem 0 0;
 }
 
-.foot-nav a,
-.stat-strip a {
+.foot-nav a {
   color: var(--ink);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
@@ -473,9 +528,7 @@ a.badge:focus-visible {
 }
 
 .foot-nav a:hover,
-.foot-nav a:focus-visible,
-.stat-strip a:hover,
-.stat-strip a:focus-visible {
+.foot-nav a:focus-visible {
   text-decoration-color: var(--green);
   text-decoration-thickness: 3px;
 }
@@ -518,19 +571,21 @@ a.badge:focus-visible {
   margin: 0 0 0.5rem;
 }
 
-.policy section p, .policy section li {
+.policy section p,
+.policy section li {
   margin: 0.35rem 0;
 }
 
-.policy section ul, .policy section ol {
+.policy section ul,
+.policy section ol {
   margin: 0.35rem 0;
   padding-left: 1.25rem;
 }
 
 .policy code {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.85em;
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--wash);
   border-radius: 4px;
   padding: 0.08rem 0.35rem;
 }
@@ -555,6 +610,36 @@ a.badge:focus-visible {
   padding-left: 1.1rem;
 }
 
+/* Separator glyphs. Every one is aria-hidden and therefore exempt from WCAG
+   1.4.3 as decoration, but painting them with --hairline (a 12% alpha meant
+   for BORDERS) put them at 1.33:1 — a separator nobody can see separates
+   nothing. A flat 32% ink lands near 3:1: clearly present, clearly
+   subordinate to the text on either side. */
+.sep,
+.stat-sep,
+.breadcrumbs-separator,
+.custats-banner__sep {
+  color: color-mix(in srgb, var(--ink) 32%, var(--paper));
+}
+
+/* No <a> may fall back to the user agent's #0000EE. On white that default is
+   merely ugly; on a #0e1013 ground it is 1.4:1 and effectively invisible,
+   which is exactly what happened to the claim-step source links. This is the
+   floor, at the lowest possible specificity, so every one of the nav, footer,
+   badge and prose link rules still overrides it. */
+a {
+  color: var(--ink);
+}
+
+/* Prose links inside the claim steps and offer brief: same treatment as
+   .policy a, which is the site's established "link inside a paragraph" look. */
+.step-text a {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
 /* ---- Focus visibility (keyboard) -------------------------------------- */
 
 a:focus-visible {
@@ -566,17 +651,15 @@ a:focus-visible {
 /* ---- Load reveal (CSS-only, motion-safe) ------------------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  .card, .empty {
+  .empty {
     animation: rise 0.45s ease backwards;
     animation-delay: calc(min(var(--i, 0), 10) * 45ms);
   }
-  .card::before { transition-duration: 0.18s; }
 }
 
-/* Archive LCP is the empty state or the first card; the rise animation
+/* Archive LCP is the empty state or the first row; the rise animation
    holds opacity:0 (fill-mode backwards) and tanks mobile Lighthouse
-   performance below the #129 ≥95 gate. Home listing already opts out. */
-[data-page="archive"] .card,
+   performance below the #129 ≥95 gate. */
 [data-page="archive"] .empty {
   animation: none;
 }
@@ -586,23 +669,28 @@ a:focus-visible {
   background: var(--archive-bg-soft);
 }
 
-/* Archive cards get a slightly muted paper background. */
-[data-page="archive"] .card {
+/* Archive rows get a slightly muted paper background. */
+[data-page="archive"] .grid > li {
   background: color-mix(in srgb, var(--archive-bg) 15%, var(--paper));
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(10px); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
 
 /* ---- Shared site header (#112): identical chrome on every page -------- */
-/* Clean editorial masthead: Logo + Name · Nav · Slogan, then hairline */
+/* Clean editorial masthead: Logo + Name · Nav · live traffic, then hairline.
+   The slogan and its sub-paragraph were removed: the derived proof line
+   below the bar makes the same claim in numbers that cannot rot. */
 
 .site-header {
   width: 100%;
   border-bottom: 1px solid var(--hairline);
-  padding-bottom: 0.9rem;
-  margin-bottom: 1.35rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 
 .site-bar {
@@ -622,36 +710,41 @@ a:focus-visible {
   text-decoration: none;
 }
 
+/* The wordmark is the one place the width axis earns its 90 KB: Archivo
+   runs expanded and heavy here and nowhere else, so the brand reads as a
+   different object from the nav rather than as bolder nav. Tracking goes
+   POSITIVE, against the usual instinct to tighten a heavy wordmark —
+   expanded letterforms on a dark ground need air or they weld together. */
 .site-bar :is(h1, .site-wordmark) {
-  font-size: clamp(1.35rem, 3.2vw, 1.65rem);
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-family: var(--font-sans);
+  font-size: clamp(1.2rem, 3vw, 1.45rem);
+  font-weight: 700;
+  font-stretch: 118%;
+  letter-spacing: 0.005em;
   line-height: 1;
   margin: 0;
+  color: var(--ink);
 }
 
-.site-bar .brand-mark { align-self: center; display: block; }
-
-.site-slogan {
-  margin: 0.7rem 0 0;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.78rem;
-  line-height: 1.6;
-  color: var(--gray);
-  width: 100%;
-  max-width: 44rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+.site-bar .brand-mark {
+  align-self: center;
+  display: block;
 }
 
-.site-slogan::before {
-  content: "";
+/* The strip arrives after mount, above the fold, on every route. Reserve its
+   line with visibility so the reveal fills a box that is already there rather
+   than pushing the whole page down; a site GoatCounter never answers is
+   marked data-traffic="off" and collapses the box for good. */
+.site-header .stat-strip[hidden] {
+  display: flex;
+  visibility: hidden;
+}
+.site-header .stat-strip[data-traffic="off"] {
+  display: none;
+}
+.site-header .stat-strip strong {
   display: inline-block;
-  width: 1.4rem;
-  height: 2px;
-  background: var(--green);
-  margin-right: 0.55rem;
-  vertical-align: middle;
+  min-width: 3ch;
 }
 
 .site-nav {
@@ -660,7 +753,7 @@ a:focus-visible {
   align-items: center;
   gap: 1.1rem;
   margin-left: auto;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.02em;
 }
@@ -670,7 +763,9 @@ a:focus-visible {
   text-decoration: none;
   padding-bottom: 2px;
   border-bottom: 2px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .site-nav a:hover,
@@ -685,7 +780,9 @@ a:focus-visible {
   gap: 0.3rem;
 }
 
-.site-nav .nav-archive .nav-i { flex-shrink: 0; }
+.site-nav .nav-archive .nav-i {
+  flex-shrink: 0;
+}
 
 .site-nav a[aria-current="page"] {
   color: var(--ink);
@@ -702,6 +799,26 @@ a:focus-visible {
     gap: 0.75rem 1rem;
     font-size: 0.76rem;
   }
+
+  /* Phone density. Every one of these reclaims vertical space above the
+     first offer, which is the only thing on this page a visitor came for and
+     which the chrome had pushed off a 390 x 844 screen entirely. */
+  .site-header {
+    padding-bottom: 0.7rem;
+    margin-bottom: 0.8rem;
+  }
+  .toolbar {
+    padding: 0.8rem 0.85rem;
+    gap: 0.55rem 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .grid > li {
+    padding: 0.75rem 0.85rem 0.75rem 0.3rem;
+  }
+  .card-title {
+    font-size: 1.02rem;
+  }
 }
 
 /* 320 px: squeeze header chrome so nothing overflows */
@@ -713,11 +830,10 @@ a:focus-visible {
     gap: 0.5rem;
     font-size: 0.72rem;
   }
-  .site-slogan {
-    width: 100%;
-    max-width: none;
+  .od-table th[scope="row"] {
+    white-space: normal;
+    width: auto;
   }
-  .od-table th[scope="row"] { white-space: normal; width: auto; }
 }
 
 @media (pointer: coarse) {
@@ -728,10 +844,18 @@ a:focus-visible {
   }
 }
 
+/* Home's trail is empty (it IS the root), but the component still renders the
+   labelled <nav> around an empty <ol> — zero height, full margin, 26 px of
+   nothing directly above the toolbar on every phone. Matched via :has on the
+   empty list rather than :empty, which the wrapper element never satisfies. */
+.breadcrumbs:has(> .breadcrumbs-list:empty) {
+  display: none;
+}
+
 .breadcrumbs {
   margin: 1.1rem 0 1.6rem;
   color: var(--gray);
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
 }
 
@@ -772,7 +896,9 @@ a:focus-visible {
   color: var(--ink);
 }
 
-.masthead-home > h1.kicker { font-weight: 400; }
+.masthead-home > h1.kicker {
+  font-weight: 400;
+}
 
 .masthead-home .tagline {
   font-size: 0.92rem;
@@ -781,117 +907,195 @@ a:focus-visible {
   max-width: 46rem;
 }
 
-.masthead-home .count { margin: 0 0 1.1rem; }
+.masthead-home .count {
+  margin: 0 0 1.1rem;
+}
 
 /* ---- Ranked listing rows ---------------------------------------------- */
 
-#ft-grid {
-  display: block;
-  counter-reset: ftrank;
-  border-top: 1px solid var(--ink);
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  min-width: 0;
-}
-
-/* The shared card stagger (_CSS `rise`) is right for a handful of cards and
-   wrong for 32 dense rows, where it reads as the list twitching into place.
-   The listing fades in once, as one object; the archive keeps the stagger. */
+/* A per-row stagger reads as the list twitching into place at 47 rows. The
+   listing fades in once, as one object. The archive opts out entirely: its
+   LCP is the first row and `backwards` fill would hold it at opacity 0. */
 @media (prefers-reduced-motion: no-preference) {
-  #ft-grid .card { animation: none; }
-  #ft-grid { animation: rise 0.3s ease backwards; }
+  #ft-grid {
+    animation: rise 0.3s ease backwards;
+  }
 }
 
-#ft-grid > li {
+/* Rows are planes now, not ruled lines. A hairline-separated list on a dark
+   ground reads as a log dump; giving each row its own surface with a left
+   hue spine turns the same data into a stack of objects, and gives the
+   category hue a second, quieter place to speak besides the badge. */
+.grid > li {
   display: grid;
   grid-template-columns: 2.6rem minmax(0, 1fr);
-  align-items: baseline;
-  padding: 0.62rem 0.4rem;
-  border-bottom: 1px solid var(--hairline);
+  align-items: start;
+  padding: 0.85rem 1rem 0.85rem 0.4rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--surface);
+  margin-bottom: 0.4rem;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background-color 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out);
 }
 
-/* Must out-specify `.grid li[hidden]` from _APP_CSS: the row above is an
-   id-scoped `display: grid`, so the plain-class hide rule alone would lose. */
-#ft-grid > li[hidden] { display: none; }
+/* The spine. `--row-hue` is set per category below; it falls back to the
+   hairline so a row with an unknown category still gets an edge rather than
+   a missing one. */
+.grid > li::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--row-hue, var(--hairline));
+  opacity: 0.75;
+}
+
+.grid > li[data-category="api_provider"] {
+  --row-hue: var(--t-api_provider);
+}
+.grid > li[data-category="coding"] {
+  --row-hue: var(--t-coding);
+}
+.grid > li[data-category="image"] {
+  --row-hue: var(--t-image);
+}
+.grid > li[data-category="voice"] {
+  --row-hue: var(--t-voice);
+}
+.grid > li[data-category="video"] {
+  --row-hue: var(--t-video);
+}
+.grid > li[data-category="startup_program"] {
+  --row-hue: var(--t-startup_program);
+}
+.grid > li[data-category="student"] {
+  --row-hue: var(--t-student);
+}
 
 /* Rank is drawn, not stored. A CSS counter skips `display: none` rows, so a
    filtered list renumbers 1..n on its own, and re-sorting (which moves the
    nodes) renumbers with it — no JS involvement, nothing to keep in sync. */
-#ft-grid > li::before {
+.grid > li::before {
   counter-increment: ftrank;
-  content: counter(ftrank) ".";
-  font-size: 0.8rem;
+  content: counter(ftrank, decimal-leading-zero);
+  font-size: 0.7rem;
+  /* Full --gray, not a tint of it: the counter is readable content, and
+     #98a2ae on #16191f is 6.74:1 — a 55% mix toward the surface lands near
+     #575d68 at ~2.2:1, under WCAG 1.4.3 AA. */
   color: var(--gray);
   text-align: right;
-  padding-right: 0.7rem;
+  padding: 0.34rem 0.85rem 0 0;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
 }
 
-#ft-grid > li:hover,
-#ft-grid > li:focus-within { background: rgba(0, 0, 0, 0.035); }
-
-#ft-grid > li:hover::before,
-#ft-grid > li:focus-within::before { color: var(--gray); }
-
-/* Strip the card chrome: on the home listing the row IS the container. */
-#ft-grid .card {
-  display: block;
-  height: auto;
-  gap: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
+/* Hover and focus lift the plane and let the row's own hue bleed into its
+   edge — the state change is the surface getting closer, not a grey wash. */
+.grid > li:focus-within {
+  background: var(--surface-2);
+  border-color: color-mix(in srgb, var(--row-hue, var(--ink)) 30%, transparent);
 }
 
-#ft-grid .card::before { content: none; }
-
-#ft-grid .card:hover,
-#ft-grid .card:focus-within {
-  transform: none;
-  box-shadow: none;
-  border-color: transparent;
+.grid > li:focus-within::after {
+  opacity: 1;
 }
 
-.row-head {
+@media (hover: hover) {
+  .grid > li:hover {
+    background: var(--surface-2);
+    border-color: color-mix(
+      in srgb,
+      var(--row-hue, var(--ink)) 30%,
+      transparent
+    );
+  }
+  .grid > li:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Provider first, category and review status beside it: the eyebrow answers
+   "whose offer is this, and how well checked" before the eye reaches the
+   title. */
+.row-eyebrow {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0 0.7rem;
+  align-items: center;
+  gap: 0.28rem 0.5rem;
+  margin: 0 0 0.15rem;
 }
 
-.row-head > * { min-width: 0; }
+.r-prov {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 
-#ft-grid .card-title {
-  font-family: inherit;
-  font-size: 0.95rem;
+/* The title is the scan anchor, and it is now the only thing in the row set
+   in the display face. That single switch is what creates hierarchy: the
+   whole listing used to be one monospace texture where the title differed
+   from its own description by a weight step, so nothing led. Archivo at 600
+   against Plex Mono at 400 reads as a headline against its caption. */
+.card-title {
+  font-family: var(--font-sans);
+  font-size: 1.09rem;
   font-weight: 600;
-  line-height: 1.35;
-  margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.014em;
+  margin: 0.04rem 0 0.16rem;
   overflow-wrap: anywhere;
   min-width: 0;
+  color: var(--ink);
 }
 
-#ft-grid .card-title a { color: var(--ink); text-decoration: none; }
+.card-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
 
-#ft-grid .card-title a:hover,
-#ft-grid .card-title a:focus-visible {
+.card-title a:hover,
+.card-title a:focus-visible {
   text-decoration: underline;
   text-decoration-color: var(--green);
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
 
-/* The credit amount is the one thing a visitor is scanning for, so it keeps
-   ink-black weight while everything else on the row recedes to gray. It must
-   still wrap: the field ranges from "$5" to a full eligibility sentence, and
-   any nowrap here pushes the whole page into horizontal scroll. */
+/* The amount field is a sentence, not a number — "$200 in AWS Free Tier
+   credits on a 6-month free plan". It reads as the row's description and is
+   set as one, so the title above it can carry the weight. */
 .r-amount {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--gray);
+  margin: 0.1rem 0 0;
+  /* No character cap: the grid column already sets the measure, and capping
+     it again made the description stop short of its own row, leaving a band
+     of empty ground between the text and the status rail describing it. */
   min-width: 0;
   overflow-wrap: anywhere;
+  /* Clamped to two lines, with the full text on the offer's own page. The
+     field is prose of wildly uneven length (median 78 chars, longest 200),
+     and letting the longest run free was what made rows three different
+     heights and destroyed the scan line. Two lines fits the 75th percentile
+     whole, so clamping bites on a handful of rows rather than most.
+     Deliberately NOT solved by extracting a headline figure at build time:
+     "up to $200" appears inside an amount whose real offer is 5M characters,
+     so any extractor would confidently print the wrong number, and inventing
+     offer data is the one thing this repo forbids outright. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
 .row-meta {
@@ -899,33 +1103,107 @@ a:focus-visible {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.1rem 0.42rem;
-  margin: 0.18rem 0 0;
-  font-size: 0.74rem;
+  margin: 0.24rem 0 0;
+  font-size: 0.72rem;
   color: var(--gray);
 }
 
-.row-meta .sep { color: var(--hairline); }
-
-.r-prov {
-  min-width: 0;
-  overflow-wrap: anywhere;
+.row-meta .sep {
+  color: var(--hairline);
 }
 
 /* Listing density: tags shrink, but keep their own hue (set in _CSS) —
    this rule must never re-assert a colour or it would flatten them again. */
-#ft-grid .badge {
+.grid .badge {
   font-size: 0.63rem;
   padding: 0.08rem 0.45rem;
 }
 
-/* The three tag families sit side by side on one meta line, so they need a
-   little more air between them than the 0.42rem the rest of the line uses,
-   or the pills collide into a single bar of colour. */
-.row-meta .badge + .badge { margin-left: 0.1rem; }
+/* Quiet filters. `verification` is social_proof on 47 of 47 live offers and
+   `signup` is required on 47 of 47, so painting them as coloured pills spent
+   two thirds of the row's colour budget on values that never vary. They stay
+   real buttons — same markup, same aria-pressed, same data-ft-tag — and lose
+   only the paint. Category and review status are the two that discriminate,
+   and they keep their hue. */
+.row-quiet .badge {
+  border-color: transparent;
+  background: none;
+  color: var(--gray);
+  font-weight: 400;
+  padding: 0;
+  letter-spacing: 0.05em;
+}
 
-#ft-grid .status { font-size: inherit; }
+.row-quiet .tag-i {
+  display: none;
+}
 
-#ft-grid .dot { width: 0.42rem; height: 0.42rem; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22); }
+.row-quiet button.badge:hover,
+.row-quiet button.badge:focus-visible,
+.row-quiet button.badge[aria-pressed="true"] {
+  background: none;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* The rail: one fixed column, right-aligned, carrying the two facts that are
+   always present (is it live, when was it checked) and the row's controls. */
+.row-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.24rem;
+  min-width: 0;
+  font-size: 0.72rem;
+  color: var(--gray);
+  text-align: right;
+}
+
+.grid .status {
+  font-size: inherit;
+}
+
+.grid .dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22);
+}
+
+.r-vfd {
+  overflow-wrap: anywhere;
+}
+
+.row-rail .chip {
+  border-color: transparent;
+  background: none;
+  color: var(--gray);
+  font-weight: 400;
+  padding: 0.08rem 0.1rem;
+}
+
+.row-rail .chip:hover,
+.row-rail .chip:focus-visible,
+.row-rail .chip[aria-pressed="true"] {
+  background: none;
+  border-color: transparent;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.r-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+}
 
 .r-details {
   color: var(--ink);
@@ -941,17 +1219,32 @@ a:focus-visible {
   flex: 0 0 auto;
   gap: 0.32em;
   white-space: nowrap;
-  font: 0.72rem/1.2 "IBM Plex Mono", ui-monospace, monospace;
+  font:
+    0.72rem/1.2 "IBM Plex Mono",
+    ui-monospace,
+    monospace;
   padding: 0.16rem 0.5rem 0.16rem 0.42rem;
   border: 1px solid var(--hairline);
   border-left: 3px solid var(--green);
   border-radius: 4px;
 }
-.ft-stat[hidden] { display: none; }
-.ft-stat strong { font-size: 1.08em; }
-.ft-stat-label { color: var(--gray); }
-.od-views { font-size: 0.95rem; padding: 0.32rem 0.7rem 0.32rem 0.55rem; margin: 0; }
-.od-views strong { font-size: 1.35em; }
+.ft-stat[hidden] {
+  display: none;
+}
+.ft-stat strong {
+  font-size: 1.08em;
+}
+.ft-stat-label {
+  color: var(--gray);
+}
+.od-views {
+  font-size: 0.95rem;
+  padding: 0.32rem 0.7rem 0.32rem 0.55rem;
+  margin: 0;
+}
+.od-views strong {
+  font-size: 1.35em;
+}
 
 .r-details:hover,
 .r-details:focus-visible {
@@ -959,10 +1252,33 @@ a:focus-visible {
   text-decoration-thickness: 2px;
 }
 
-/* Touch: the title link already spans the row, but the secondary "details"
-   link needs its own comfortable target on coarse pointers. */
+/* Below the fold-point the rail cannot hold a fixed column: 10.5rem of it
+   would leave under 8rem for the title at 320 px. It becomes a single row
+   under the content, left-aligned like everything above it. */
+@media (max-width: 48rem) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "eyebrow" "title" "amount" "meta" "rail";
+  }
+  .row-rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 0.3rem 0.75rem;
+    margin-top: 0.4rem;
+  }
+  .r-actions {
+    margin-top: 0;
+  }
+}
+
+/* Touch: the secondary controls need their own comfortable target. */
 @media (pointer: coarse) {
-  #ft-grid > li { padding-block: 0.75rem; }
+  .grid > li {
+    padding-block: 0.85rem;
+  }
   .r-details {
     display: inline-flex;
     align-items: center;
@@ -970,58 +1286,303 @@ a:focus-visible {
   }
 }
 
-/* Narrow viewports: reclaim the rank gutter rather than squeezing the row.
-   Archive cards sit in the same wrap; min-width:0 lets the 19rem grid floor
-   collapse to 100% at 320 px instead of overflowing. */
+/* Narrow viewports: reclaim the rank gutter rather than squeezing the row. */
 @media (max-width: 24rem) {
-  #ft-grid > li { grid-template-columns: 1.9rem minmax(0, 1fr); }
-  #ft-grid > li::before { padding-right: 0.45rem; }
-  #ft-archive-grid { min-width: 0; }
-  #ft-archive-grid .card { min-width: 0; }
+  .grid > li {
+    grid-template-columns: 1.9rem minmax(0, 1fr);
+  }
+  .grid > li::before {
+    padding-right: 0.5rem;
+  }
+}
+
+/* ---- Hot-today shelf --------------------------------------------------
+   Three most-viewed offers, above the toolbar. It is a shelf, not a list:
+   the three sit side by side on a wide screen and stack on a phone, and the
+   whole block is absent rather than empty when there is nothing to show, so
+   it never renders as a hole where data failed to arrive.
+
+   It borrows the row's category spine so a hot card and its own row further
+   down the page read as the same object, but it is deliberately NOT a copy of
+   the ledger row: no rank counter, no save/hide, no filters. It answers one
+   question — what is everyone looking at right now — and then gets out of the
+   way of the list that does the real work. */
+
+.hot-deals {
+  margin: 0 0 1.1rem;
+}
+
+/* While the windowed counters load, the shelf's own skeleton sits on the page
+   with the `hidden` attribute; this flips it to visibility so the box is
+   reserved and the reveal fills space instead of pushing the toolbar down —
+   same trick as .site-header .stat-strip[hidden]. */
+.hot-deals[hidden] {
+  display: block;
+  visibility: hidden;
+}
+
+.hot-deals-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+  margin: 0 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* The one place the accent is allowed to name a section. */
+.hot-deals-title {
+  color: var(--green);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.hot-deals-title::before {
+  content: "";
+  width: 1.1rem;
+  height: 2px;
+  background: var(--green);
+}
+
+.hot-deals-sub {
+  color: var(--gray);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+.hot-deals-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.hot-deal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  min-width: 0;
+  padding: 0.7rem 0.85rem 0.75rem 1rem;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow: hidden;
+  transition:
+    background-color 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out);
+}
+
+.hot-deal::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--row-hue, var(--green));
+  opacity: 0.8;
+}
+
+.hot-deal[data-category="api_provider"] {
+  --row-hue: var(--t-api_provider);
+}
+.hot-deal[data-category="coding"] {
+  --row-hue: var(--t-coding);
+}
+.hot-deal[data-category="image"] {
+  --row-hue: var(--t-image);
+}
+.hot-deal[data-category="voice"] {
+  --row-hue: var(--t-voice);
+}
+.hot-deal[data-category="video"] {
+  --row-hue: var(--t-video);
+}
+.hot-deal[data-category="startup_program"] {
+  --row-hue: var(--t-startup_program);
+}
+.hot-deal[data-category="student"] {
+  --row-hue: var(--t-student);
+}
+
+@media (hover: hover) {
+  .hot-deal:hover,
+  .hot-deal:focus-within {
+    background: var(--surface-2);
+    border-color: color-mix(
+      in srgb,
+      var(--row-hue, var(--ink)) 30%,
+      transparent
+    );
+  }
+}
+
+/* The rank sits in the corner as a watermark rather than in the reading
+   order: which of the three is first matters far less than what they are. */
+.hot-rank {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: color-mix(in srgb, var(--ink) 12%, var(--surface));
+}
+
+.hot-prov {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray);
+  overflow-wrap: anywhere;
+  padding-right: 1.4rem;
+}
+
+.hot-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  /* Two lines keeps the three cards the same height whatever the titles do. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* The whole card is the target, so the pointer means it everywhere. */
+.hot-title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.hot-title:hover,
+.hot-title:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.hot-meta {
+  margin-top: 0.22rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gray);
+}
+
+.hot-meta strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.hot-sep {
+  color: color-mix(in srgb, var(--ink) 32%, var(--paper));
+  margin: 0 0.4em;
+}
+
+@media (max-width: 48rem) {
+  .hot-deals-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+  .hot-deals {
+    margin-bottom: 0.8rem;
+  }
+  .hot-title {
+    font-size: 0.92rem;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
 }
 
 /* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
 
+/* The toolbar becomes a panel. On the light design it was four loose control
+   groups floating on the page with nothing binding them, which is why the
+   category chips read as debris rather than as one filter. */
 .toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 0.7rem 1.1rem;
-  margin: 0 0 0.9rem;
+  margin: 0 0 1.1rem;
+  min-width: 0;
+  padding: 0.95rem 1.05rem;
+  background: var(--surface);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  flex: 1 1 15rem;
   min-width: 0;
 }
 
-.field { display: flex; flex-direction: column; gap: 0.28rem; flex: 1 1 15rem; min-width: 0; }
-
 .tool-label {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--gray);
 }
 
+/* Controls sit on the control plane, above the toolbar panel, so an input
+   reads as a well rather than as a hole cut in the page. The 1px ink border
+   the light design used is far too loud inverted: a full-strength ink stroke
+   on near-black is the brightest thing on screen, and the field would
+   out-shout the offer titles. */
 #ft-search {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.84rem;
   color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--ink);
-  border-radius: 4px;
-  padding: 0.42rem 0.7rem;
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
   max-width: 24rem;
   width: 100%;
+  transition: border-color 0.15s ease;
 }
 
-.field-sort { flex: 0 1 auto; }
+#ft-search::placeholder {
+  color: var(--gray);
+  opacity: 1;
+}
+
+#ft-search:hover {
+  border-color: var(--ink);
+}
+
+.field-sort {
+  flex: 0 1 auto;
+}
 
 #ft-sort {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.84rem;
   color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--ink);
-  border-radius: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 6px;
   padding: 0.42rem 1.9rem 0.42rem 0.7rem;
   cursor: pointer;
 }
@@ -1030,6 +1591,81 @@ a:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+  min-width: 0;
+}
+
+@media (max-width: 48rem) {
+  .site-header {
+    padding-bottom: 0.85rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .toolbar {
+    gap: 0.6rem 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+
+  /* The search and sort fields share one row. They did not before: the sort
+     field kept `flex-basis: auto`, so it claimed the select's natural 189 px
+     and the pair overflowed the 314 px line by 30 px and wrapped — costing a
+     whole extra row of toolbar on every phone. Giving it a shrinkable basis
+     is the entire fix; both are still `min-width: 0`, so the select truncates
+     rather than pushing the search box off the line. */
+  .toolbar .field {
+    flex: 1 1 58%;
+  }
+
+  .toolbar .field-sort {
+    flex: 1 1 34%;
+  }
+
+  .toolbar #ft-search {
+    max-width: none;
+  }
+
+  .toolbar #ft-sort {
+    width: 100%;
+  }
+
+  .toolbar > .chips {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    margin-inline: -0.15rem;
+    padding: 0.1rem 0.15rem 0.2rem;
+  }
+
+  .toolbar > .chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .toolbar > .chips > * {
+    flex: 0 0 auto;
+  }
+
+  /* The row already scrolled; nothing said so. A chip clipped flat by the
+     viewport edge reads as a layout bug, so the right edge fades out to
+     announce there is more, and the fade is removed once the rail is
+     scrolled to its end. Mask only — no extra element, no scrollbar. */
+  .toolbar > .chips {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 calc(100% - 2.2rem),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 calc(100% - 2.2rem),
+      transparent
+    );
+  }
+
+  .toolbar > .chips:has(> :last-child:focus-visible) {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }
 
 .chip {
@@ -1042,20 +1678,27 @@ a:focus-visible {
   min-width: 0;
   overflow: visible;
   overflow-wrap: anywhere;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
-  padding: 0.32rem 0.7rem;
+  padding: 0.34rem 0.72rem;
   border-radius: 4px;
-  border: 1px solid var(--tag-hue);
-  background: color-mix(in srgb, var(--tag-hue) 7%, var(--paper));
-  color: var(--tag-hue);
+  border: 1px solid var(--hairline);
+  background: var(--surface-2);
+  color: var(--ink);
   cursor: pointer;
+  border-color: color-mix(in srgb, var(--tag-hue) 30%, var(--surface-2));
+  background: color-mix(in srgb, var(--tag-hue) 15%, var(--surface));
+  color: color-mix(in srgb, var(--tag-hue) 60%, white);
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease,
+    border-color 0.14s ease;
 }
 
 .chip:hover,
 .chip[aria-pressed="true"] {
-  background: var(--tag-hue);
-  border-color: var(--tag-hue);
+  background: color-mix(in srgb, var(--tag-hue) 60%, white);
+  border-color: color-mix(in srgb, var(--tag-hue) 60%, white);
   color: var(--paper);
 }
 
@@ -1066,33 +1709,56 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
-.chip-category-api_provider { --tag-hue: var(--t-api_provider); }
-.chip-category-coding { --tag-hue: var(--t-coding); }
-.chip-category-image { --tag-hue: var(--t-image); }
-.chip-category-voice { --tag-hue: var(--t-voice); }
-.chip-category-video { --tag-hue: var(--t-video); }
-.chip-category-startup_program { --tag-hue: var(--t-startup_program); }
-.chip-category-student { --tag-hue: var(--t-student); }
+.chip-category-api_provider {
+  --tag-hue: var(--t-api_provider);
+}
+.chip-category-coding {
+  --tag-hue: var(--t-coding);
+}
+.chip-category-image {
+  --tag-hue: var(--t-image);
+}
+.chip-category-voice {
+  --tag-hue: var(--t-voice);
+}
+.chip-category-video {
+  --tag-hue: var(--t-video);
+}
+.chip-category-startup_program {
+  --tag-hue: var(--t-startup_program);
+}
+.chip-category-student {
+  --tag-hue: var(--t-student);
+}
 
 .results-status {
   flex-basis: 100%;
   min-width: 0;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
   color: var(--gray);
   margin: 0;
 }
 
 button.badge {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   cursor: pointer;
-  transition: background-color 0.14s ease, color 0.14s ease;
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease,
+    border-color 0.14s ease;
 }
 
+/* Active inverts rather than darkens. The light sheet filled with the raw
+   hue and wrote in paper — on this ground that is dark-on-dark, so the fill
+   is the LIFTED hue and the text is the page ground. Same 60% mix as the
+   rest state's text colour, which is what makes the transition read as the
+   label growing into its own plane; >= 5.33:1 for every hue. */
 button.badge:hover,
 button.badge:focus-visible,
 button.badge[aria-pressed="true"] {
-  background: var(--tag-hue);
+  background: color-mix(in srgb, var(--tag-hue) 60%, white);
+  border-color: color-mix(in srgb, var(--tag-hue) 60%, white);
   color: var(--paper);
 }
 
@@ -1111,14 +1777,49 @@ button.badge:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  a.badge, button.badge { transition: none; }
+  a.badge,
+  button.badge {
+    transition: none;
+  }
+}
+
+/* ---- Interaction polish (CSS-only, motion-safe) ----------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Press feedback. Every control here is a real button or link, so one rule
+     covers the category chips, the row controls and the claim CTA. 0.97 is
+     deliberate: enough to register as the interface hearing the click, not
+     enough to read as a bounce. */
+  .chip,
+  .od-cta {
+    transition:
+      transform 0.14s var(--ease-out),
+      background-color 0.14s ease,
+      color 0.14s ease,
+      border-color 0.14s ease;
+  }
+
+  .chip:active,
+  button.badge:active,
+  .od-cta:active {
+    transform: scale(0.97);
+  }
+
+  /* The row tint is the only motion in a 47-row list, so it fades rather than
+     snaps. Colour only — no transform, nothing that moves the baseline the
+     whole list is being scanned against. */
+  .grid > li {
+    transition:
+      background-color 0.16s ease,
+      color 0.16s ease;
+  }
 }
 
 .filter-pill {
   --tag-hue: var(--ink);
   display: inline-flex;
   align-items: center;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   line-height: 1.5;
   padding: 0 0.45rem;
@@ -1149,9 +1850,13 @@ button.badge:focus-visible {
   gap: 0.5rem 0.8rem;
 }
 
-.results-line .results-status { flex: 0 1 auto; }
+.results-line .results-status {
+  flex: 0 1 auto;
+}
 
-.chip.clear[hidden] { display: none; }
+.chip.clear[hidden] {
+  display: none;
+}
 
 .chip.clear {
   font-size: 0.7rem;
@@ -1168,23 +1873,30 @@ button.badge:focus-visible {
   color: var(--paper);
 }
 
-.grid li[hidden] { display: none; }
+.grid li[hidden] {
+  display: none;
+}
 
-.empty .chip.reset { margin-top: 0.75rem; }
+.empty .chip.reset {
+  margin-top: 0.75rem;
+}
 
 @media (pointer: coarse) {
   .chip,
   #ft-search,
-  #ft-sort { min-height: 44px; }
+  #ft-sort {
+    min-height: 44px;
+  }
 
   button.badge {
     min-height: 32px;
     padding-inline: 0.6rem;
   }
 
-  #ft-grid button.badge { padding-inline: 0.6rem; }
-
-  .filter-pill { min-height: 32px; padding-inline: 0.6rem; }
+  .filter-pill {
+    min-height: 32px;
+    padding-inline: 0.6rem;
+  }
 }
 
 /* ---- Consent banner (build.py _BANNER_CSS, issue #131) ----------------- */
@@ -1197,14 +1909,47 @@ button.badge:focus-visible {
   z-index: 50;
   max-width: 34rem;
   margin: 0 auto;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--hairline);
   border-radius: 12px;
-  background: var(--paper);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  background: var(--surface-2);
+  /* Shadow alone is invisible on near-black, so the lift is carried by a
+     bright top edge plus a shadow deep enough to darken the ground under it. */
+  box-shadow:
+    0 -1px 0 0 color-mix(in srgb, var(--ink) 12%, transparent) inset,
+    0 18px 44px rgba(0, 0, 0, 0.55);
   padding: 1rem 1.25rem;
 }
 
-.consent[hidden] { display: none; }
+.consent[hidden] {
+  display: none;
+}
+
+/* The banner is the first thing a phone visitor sees and it was burying the
+   list under a nine-line paragraph. The copy is unchanged — it describes what
+   is actually collected and is not ours to trim — so the fix is typographic:
+   set it smaller, let it sit flush to the bottom edge, and cap its height so
+   the offers behind it stay visible and scrollable no matter how the text
+   reflows. */
+@media (max-width: 640px) {
+  .consent {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 12px 12px 0 0;
+    border-width: 1px 0 0;
+    padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom, 0px));
+    max-height: 52vh;
+    overflow-y: auto;
+  }
+  .consent-text {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    margin-bottom: 0.6rem;
+  }
+  .consent-actions button {
+    padding: 0.4rem 0.9rem;
+  }
+}
 
 .consent-text {
   margin: 0 0 0.75rem;
@@ -1218,12 +1963,12 @@ button.badge:focus-visible {
 }
 
 .consent-actions button {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   padding: 0.45rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--ink);
-  background: var(--paper);
+  border-radius: 6px;
+  border: 1px solid var(--hairline-strong);
+  background: var(--surface);
   color: var(--ink);
   cursor: pointer;
 }
@@ -1239,7 +1984,9 @@ button:focus-visible {
 }
 
 @media (pointer: coarse) {
-  .consent-actions button { min-height: 44px; }
+  .consent-actions button {
+    min-height: 44px;
+  }
 }
 
 .foot-consent {
@@ -1260,7 +2007,7 @@ button:focus-visible {
 }
 
 .local-data-actions button {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   padding: 0.45rem 1rem;
   border-radius: 999px;
@@ -1276,12 +2023,12 @@ button:focus-visible {
 }
 
 .local-data-actions .local-data-danger {
-  border-color: #b3261e;
-  color: #b3261e;
+  border-color: #f2837a;
+  color: #f2837a;
 }
 
 .local-data-actions .local-data-danger:hover {
-  background: #b3261e;
+  background: #f2837a;
   color: var(--paper);
 }
 
@@ -1307,12 +2054,13 @@ button:focus-visible {
 }
 
 @media (pointer: coarse) {
-  .local-data-actions button { min-height: 44px; }
+  .local-data-actions button {
+    min-height: 44px;
+  }
 }
 
-
 .consent-settings {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
   padding: 0;
   border: none;
@@ -1327,39 +2075,324 @@ button:focus-visible {
 }
 
 /* ---- Live traffic strip (build.py _TRAFFIC_CSS, issue #131 / #250) ----
-   Renamed .foot-traffic -> .stat-strip in #279: the same strip now renders
-   at the top of the home page as well as in the footer of every other.
-   Home-only .site-stats layout lives in SiteStats.tsx so detail pages do
-   not pay for unused rail CSS. */
+   Renamed .foot-traffic -> .stat-strip in #279. It now mounts once, in the
+   shared header, so the same numbers render on every route; the home-only
+   proof-line layout lives in SiteStats.tsx so detail pages do not pay for
+   unused rail CSS. */
 
 .stat-strip {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.35rem 0.5rem;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--gray);
   margin: 0.75rem 0 0;
 }
 
-.stat-strip[hidden] { display: none; }
+.stat-strip[hidden] {
+  display: none;
+}
 
-.ft-traffic-total { font-size: 0.84rem; }
-.ft-traffic-total strong { font-size: 1.2em; }
+.ft-traffic-total {
+  font-size: 0.84rem;
+}
+.ft-traffic-total strong {
+  font-size: 1.2em;
+}
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------
-   Card-actions / .detail-btn already live above (archive #129). The rest
-   of _DETAIL_CSS — hero, checklist, proofs, CTA, copy-only share — ports
-   here so detail pages match the live site without a Tailwind rewrite. */
+   _DETAIL_CSS — hero, checklist, proofs, CTA, copy-only share — ports here
+   so detail pages match the live site without a Tailwind rewrite. */
 
+/* Two columns: prose on the left, a sticky facts-and-claim rail on the right.
+   The page used to be a 46rem column pinned to the left edge of a 68rem wrap,
+   so roughly half the desktop width was empty and the facts table read as a
+   repeat of the hero it sat directly beneath. Beside the prose it reads as a
+   spec panel instead.
+
+   Placement is by grid area, so the DOM order (hero, rail, body, related) is
+   free to stay the reading order the tests and screen readers depend on —
+   the facts table has to precede the prose in the document either way. */
 .offer-detail {
-  max-width: 46rem;
-  margin: 0 auto;
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "back" "head" "hero" "rail" "body" "related";
+  column-gap: 2.25rem;
 }
 
 .od-back {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  grid-area: back;
+}
+.offer-detail > .masthead-offer {
+  grid-area: head;
+}
+.od-hero {
+  grid-area: hero;
+}
+.od-rail {
+  grid-area: rail;
+}
+.od-body {
+  grid-area: body;
+  min-width: 0;
+}
+.od-related {
+  grid-area: related;
+}
+
+@media (min-width: 64rem) {
+  .offer-detail {
+    grid-template-columns: minmax(0, 1fr) 20.5rem;
+    grid-template-areas:
+      "back    back"
+      "head    head"
+      "hero    hero"
+      "body    rail"
+      "related related";
+  }
+  /* Sticky, not fixed: it scrolls with the page until it reaches the top and
+     then holds, so it never covers the footer or outruns its own column. */
+  .od-rail {
+    position: sticky;
+    top: 1.25rem;
+    align-self: start;
+  }
+}
+
+/* Prose measure is set here rather than on .offer-detail, so the rail is not
+   dragged in with it. */
+.od-body {
+  max-width: 46rem;
+}
+
+/* ---- Offer summary rail ----------------------------------------------- */
+
+.od-rail {
+  min-width: 0;
+  margin: 1.5rem 0 0;
+}
+
+/* The claim button is the page's whole purpose, so in the rail it stops being
+   a pill sitting in a line of text and becomes a block that fills its column.
+   The note underneath is the honest part: it says where the link goes and
+   that nothing is taken from it, which is the reason a visitor should trust
+   the button at all. */
+.od-hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.45rem;
+  margin: 0 0 1.1rem;
+}
+
+.od-rail .od-cta {
+  justify-content: center;
+  width: 100%;
+  font-size: 0.86rem;
+}
+
+.od-rail .od-cta-note {
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* The facts panel: same surface, hairline and radius as a listing row, so the
+   two pages read as one system rather than two. */
+.od-rail .od-facts {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 0.5rem 0.95rem 0.85rem;
+}
+
+.od-rail .od-facts h2 {
+  margin-top: 0.85rem;
+}
+
+.od-ended-rail {
+  margin: 0 0 1.1rem;
+}
+
+.od-cta-note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--gray);
+}
+
+/* ---- Related offers ---------------------------------------------------
+   Cards, sharing the shelf's shape and the listing row's category spine, so
+   the same object looks like the same object on all three pages. It was a
+   bullet list of underlined titles, which is what made the bottom of this
+   page read as a different site from the top. */
+
+.od-related {
+  margin-top: 2.5rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.od-related-list {
+  list-style: none;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.6rem;
+}
+
+.od-related-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  padding: 0.7rem 0.85rem 0.75rem 1rem;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow: hidden;
+  transition:
+    background-color 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out);
+}
+
+.od-related-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--row-hue, var(--hairline));
+  opacity: 0.75;
+}
+
+.od-related-card[data-category="api_provider"] {
+  --row-hue: var(--t-api_provider);
+}
+.od-related-card[data-category="coding"] {
+  --row-hue: var(--t-coding);
+}
+.od-related-card[data-category="image"] {
+  --row-hue: var(--t-image);
+}
+.od-related-card[data-category="voice"] {
+  --row-hue: var(--t-voice);
+}
+.od-related-card[data-category="video"] {
+  --row-hue: var(--t-video);
+}
+.od-related-card[data-category="startup_program"] {
+  --row-hue: var(--t-startup_program);
+}
+.od-related-card[data-category="student"] {
+  --row-hue: var(--t-student);
+}
+
+@media (hover: hover) {
+  .od-related-card:hover,
+  .od-related-card:focus-within {
+    background: var(--surface-2);
+    border-color: color-mix(
+      in srgb,
+      var(--row-hue, var(--ink)) 30%,
+      transparent
+    );
+  }
+}
+
+.od-related-prov {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray);
+  overflow-wrap: anywhere;
+}
+
+.od-related-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Whole card is the hit area. */
+.od-related-title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.od-related-title:hover,
+.od-related-title:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.od-related-amount {
+  margin-top: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--gray);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* The archive already says "Expired" in words; so does this. Never colour
+   alone — the card's own hue is the category, not its status. */
+.od-related-flag {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray);
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+  padding: 0.06rem 0.34rem;
+}
+
+.od-related-more {
+  margin: 1rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--gray);
+}
+
+.od-related-more a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.od-related-more a:hover,
+.od-related-more a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+}
+
+.od-back {
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   margin: 0 0 1.75rem;
 }
@@ -1377,15 +2410,15 @@ button:focus-visible {
   text-decoration-thickness: 3px;
 }
 
-/* The amount is the one thing a visitor came for — give it hero weight. */
-
-.offer-detail .amount {
-  font-size: clamp(1.7rem, 5vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
-  margin: 0;
-  overflow-wrap: anywhere;
+/* The amount reads as prose, not as a figure — "Free tier with gpt-oss-120b
+   and Qwen 3.6/3.8 27B, rate-limited, no credit card" is a sentence. It used
+   to run at 2.6rem/800 directly under the title, which set two headlines
+   against each other and then repeated itself as a table row. It now appears
+   once, as the first and heaviest row of the facts rail. */
+.od-table .od-amount {
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.45;
 }
 
 .od-hero-metrics {
@@ -1393,6 +2426,21 @@ button:focus-visible {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.55rem 1rem;
+}
+
+.od-hero-metrics:empty {
+  display: none;
+}
+
+/* .count is the home masthead's offer counter and carries its 2.5rem bottom
+   margin. Here it is the provider name sitting directly under the title, and
+   that margin opened a hole between it and the status line. */
+.masthead-offer .count {
+  margin: 0.15rem 0 0;
+}
+
+.od-hero {
+  margin-top: 1.15rem;
 }
 
 .od-statusline {
@@ -1407,12 +2455,15 @@ button:focus-visible {
   border-bottom: 1px solid var(--hairline);
 }
 
-.od-statusline .sep { color: var(--hairline); }
+.od-statusline .sep {
+  color: var(--hairline);
+}
 
 /* Section labels: small mono furniture with the home-page green dash. */
 
-.offer-detail section h2 {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+.offer-detail :is(section, nav) > h2,
+.offer-detail .od-steps-head > h2 {
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1421,7 +2472,8 @@ button:focus-visible {
   margin: 2rem 0 0.6rem;
 }
 
-.offer-detail section h2::before {
+.offer-detail :is(section, nav) > h2::before,
+.offer-detail .od-steps-head > h2::before {
   content: "";
   display: inline-block;
   width: 1.5rem;
@@ -1457,7 +2509,7 @@ button:focus-visible {
 }
 
 .od-table th[scope="row"] {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1468,7 +2520,54 @@ button:focus-visible {
 }
 
 .od-table tr:last-child th,
-.od-table tr:last-child td { border-bottom: none; }
+.od-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* In the rail the table has ~20rem, not 42, so an 8.5rem label column would
+   leave under 10rem for values like the amount sentence. The row becomes two
+   stacked blocks instead: label over value, one fact per band. `display:
+   block` on table parts is safe here because the table is a genuine
+   two-column key/value grid — the <th scope="row"> association that carries
+   it to a screen reader is in the markup, not the layout. */
+.od-rail .od-table {
+  max-width: none;
+  table-layout: auto;
+  font-size: 0.82rem;
+}
+
+.od-rail .od-table tbody,
+.od-rail .od-table tr,
+.od-rail .od-table th,
+.od-rail .od-table td {
+  display: block;
+  width: auto;
+}
+
+.od-rail .od-table tr {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.od-rail .od-table tr:last-child {
+  border-bottom: none;
+}
+
+.od-rail .od-table th,
+.od-rail .od-table td {
+  padding: 0;
+  border-bottom: none;
+  white-space: normal;
+}
+
+.od-rail .od-table th[scope="row"] {
+  font-size: 0.65rem;
+  margin-bottom: 0.18rem;
+}
+
+.od-rail .od-table td {
+  color: var(--ink);
+}
 
 /* Steps head: label left, live progress readout right. */
 
@@ -1480,14 +2579,16 @@ button:focus-visible {
   gap: 0.25rem 1rem;
 }
 
-.od-steps-head h2 { margin: 2rem 0 0.6rem; }
+.od-steps-head h2 {
+  margin: 2rem 0 0.6rem;
+}
 
 .steps-progress {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
   margin: 2rem 0 0.6rem;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   color: var(--gray);
@@ -1498,7 +2599,7 @@ button:focus-visible {
   width: clamp(3.5rem, 12vw, 6rem);
   height: 4px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--wash);
   overflow: hidden;
 }
 
@@ -1508,7 +2609,7 @@ button:focus-visible {
   width: 100%;
   /* Darker than --green on purpose: keeps >=3:1 against the track
      (#ebebeb) and page white; the global token stays for dashes/ticks. */
-  background: #15803d;
+  background: var(--green);
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -1571,7 +2672,7 @@ button:focus-visible {
   border: 1.5px solid var(--ink);
   border-radius: 8px;
   background: var(--paper);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 600;
   user-select: none;
@@ -1588,7 +2689,9 @@ button:focus-visible {
   transform: scale(0.4);
 }
 
-.claim-step label:hover .step-num { background: rgba(0, 0, 0, 0.05); }
+.claim-step label:hover .step-num {
+  background: var(--wash);
+}
 
 .claim-step input:focus-visible + label .step-num {
   outline: 3px solid var(--ink);
@@ -1600,7 +2703,9 @@ button:focus-visible {
   border-color: var(--ink);
 }
 
-.claim-step input:checked + label .num { opacity: 0; }
+.claim-step input:checked + label .num {
+  opacity: 0;
+}
 
 .claim-step input:checked + label .tick {
   opacity: 1;
@@ -1624,25 +2729,33 @@ button:focus-visible {
   color: var(--gray);
   text-decoration: line-through;
   text-decoration-thickness: 1.5px;
-  text-decoration-color: rgba(0, 0, 0, 0.35);
+  text-decoration-color: color-mix(in srgb, var(--ink) 35%, transparent);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .progress-fill { transition: transform 0.25s ease; }
+  .progress-fill {
+    transition: transform 0.25s ease;
+  }
 
   .step-num,
   .step-num > span {
-    transition: background-color 0.15s ease, opacity 0.15s ease,
+    transition:
+      background-color 0.15s ease,
+      opacity 0.15s ease,
       transform 0.18s ease;
   }
 }
 
 @media (pointer: coarse) {
-  .claim-step { padding-block: 0.7rem; }
+  .claim-step {
+    padding-block: 0.7rem;
+  }
 
   /* li padding is not part of the hit area; pad the label itself so the
      clickable row reaches the 44px touch minimum on single-line steps. */
-  .claim-step label { padding-block: 0.35rem; }
+  .claim-step label {
+    padding-block: 0.35rem;
+  }
 }
 
 .proof-card {
@@ -1653,18 +2766,24 @@ button:focus-visible {
   margin: 0.6rem 0;
 }
 
-.proof-card p { margin: 0.15rem 0; }
+.proof-card p {
+  margin: 0.15rem 0;
+}
 
-.proof-text { overflow-wrap: anywhere; }
+.proof-text {
+  overflow-wrap: anywhere;
+}
 
 .proof-card footer,
 .proof-meta {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
   color: var(--gray);
 }
 
-.proof-card footer { margin-top: 0.35rem; }
+.proof-card footer {
+  margin-top: 0.35rem;
+}
 
 .proof-card footer a {
   color: var(--ink);
@@ -1674,7 +2793,9 @@ button:focus-visible {
   text-underline-offset: 3px;
 }
 
-figure.proof-screenshot { margin: 0.6rem 0; }
+figure.proof-screenshot {
+  margin: 0.6rem 0;
+}
 
 .proof-screenshot img {
   display: block;
@@ -1686,7 +2807,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 }
 
 .proof-screenshot figcaption {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
   color: var(--gray);
   margin-top: 0.4rem;
@@ -1700,19 +2821,28 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   background: var(--ink);
   color: var(--paper);
   text-decoration: none;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.86rem;
   font-weight: 600;
 }
 
-.od-cta:hover { text-decoration: underline; text-underline-offset: 4px; }
+.od-cta:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 
-.od-cta span[aria-hidden] { display: inline-block; }
+.od-cta span[aria-hidden] {
+  display: inline-block;
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  .od-cta span[aria-hidden] { transition: transform 0.15s ease; }
+  .od-cta span[aria-hidden] {
+    transition: transform 0.15s ease;
+  }
 
-  .od-cta:hover span[aria-hidden] { transform: translate(2px, -2px); }
+  .od-cta:hover span[aria-hidden] {
+    transform: translate(2px, -2px);
+  }
 }
 
 .od-cta:focus-visible {
@@ -1729,13 +2859,15 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   border-radius: 999px;
   border: 1px solid var(--gray);
   color: var(--gray);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
 }
 
 /* Touch targets: same 44 px coarse-pointer floor as the toolbar. */
 @media (pointer: coarse) {
-  .od-cta { min-height: 44px; }
+  .od-cta {
+    min-height: 44px;
+  }
 }
 
 /* ---- Offer copy bar (#128; copy-only subset of build.py share bar) ---- */
@@ -1755,7 +2887,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   background: var(--paper);
   color: var(--ink);
   text-decoration: none;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
   cursor: pointer;
 }
@@ -1772,7 +2904,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 
 .share-status {
   margin: 0.5rem 0 0;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
   color: var(--gray);
 }
@@ -1789,7 +2921,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
   overflow: hidden;
   background: var(--paper);
   border-bottom: 1px solid var(--hairline);
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-mono);
   font-size: 0.74rem;
   line-height: 1.5;
   color: var(--gray);
@@ -1858,5 +2990,7 @@ figure.proof-screenshot { margin: 0.6rem 0; }
 }
 
 @media (pointer: coarse) {
-  .share-copy { min-height: 44px; }
+  .share-copy {
+    min-height: 44px;
+  }
 }

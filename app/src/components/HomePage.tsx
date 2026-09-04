@@ -1,10 +1,18 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from "react";
 import {
   SEARCH_DEBOUNCE_MS,
+  isGoatCounterConfigured,
   trackFilterUse,
   trackSearch,
   trackSortUse,
-} from "../lib/analytics"
+} from "../lib/analytics";
 import {
   CATEGORIES,
   CATEGORY_LABELS,
@@ -12,10 +20,11 @@ import {
   VERIFICATION_LABELS,
   activeOffers,
   applySort,
+  expiredOffers,
   offerMatches,
   buildDate,
   type OffersIndex,
-} from "../lib/offers"
+} from "../lib/offers";
 import {
   clearDismissedSlugs,
   readDismissedSlugs,
@@ -24,9 +33,9 @@ import {
   writeDismissedSlugs,
   writePrefs,
   writeSavedSlugs,
-} from "../lib/personalState"
-import { TAG_ICONS } from "../lib/tagIcons"
-import { hottestSlugs, useOfferViews } from "../lib/offerStats"
+} from "../lib/personalState";
+import { TAG_ICONS } from "../lib/tagIcons";
+import { hottestSlugs, topViewedSlugs, useOfferViews } from "../lib/offerStats";
 import {
   DIMENSIONS,
   emptyState,
@@ -36,38 +45,45 @@ import {
   serializeState,
   type FilterDimension,
   type UrlState,
-} from "../lib/urlState"
-import { IconSprite, OfferRow } from "./OfferRow"
-import { SiteFooter } from "./SiteFooter"
-import { SiteHeader } from "./SiteHeader"
-import { SiteStats } from "./SiteStats"
-import { Breadcrumbs } from "./Breadcrumbs"
-import { StructuredData } from "./StructuredData"
-import { Button } from "./ui/button"
+} from "../lib/urlState";
+import { IconSprite, OfferRow } from "./OfferRow";
+import { SiteFooter } from "./SiteFooter";
+import { SiteHeader } from "./SiteHeader";
+import { SiteStats } from "./SiteStats";
+import { HotDeals } from "./HotDeals";
+import { Breadcrumbs } from "./Breadcrumbs";
+import { StructuredData } from "./StructuredData";
+import { Button } from "./ui/button";
 
 const FILTER_LABELS: Record<FilterDimension, Record<string, string>> = {
   category: CATEGORY_LABELS,
   verification: VERIFICATION_LABELS,
   signup: SIGNUP_LABELS,
-}
+};
 
 function namedFilters(state: UrlState) {
-  const out: { dim: FilterDimension; value: string; label: string }[] = []
+  const out: { dim: FilterDimension; value: string; label: string }[] = [];
   for (const dim of DIMENSIONS) {
-    const value = state[dim]
-    if (!value) continue
-    out.push({ dim, value, label: FILTER_LABELS[dim][value] || value })
+    const value = state[dim];
+    if (!value) continue;
+    out.push({ dim, value, label: FILTER_LABELS[dim][value] || value });
   }
-  return out
+  return out;
 }
 
 function ChipGlyph({ value }: { value: string }) {
-  if (!(value in TAG_ICONS)) return null
+  if (!(value in TAG_ICONS)) return null;
   return (
-    <svg className="tag-i" width="12" height="12" aria-hidden="true" focusable="false">
+    <svg
+      className="tag-i"
+      width="12"
+      height="12"
+      aria-hidden="true"
+      focusable="false"
+    >
       <use href={`#ti-${value}`} />
     </svg>
-  )
+  );
 }
 
 function GiftGlyph() {
@@ -91,7 +107,7 @@ function GiftGlyph() {
         <path d="M16.5 8a2.5 2.5 0 0 0 0-5C13 3 12 8 12 8" />
       </svg>
     </p>
-  )
+  );
 }
 
 function SearchGlyph() {
@@ -113,7 +129,7 @@ function SearchGlyph() {
         <path d="M8.5 11h5" />
       </svg>
     </p>
-  )
+  );
 }
 
 function Toolbar({
@@ -135,30 +151,35 @@ function Toolbar({
   onToggleSavedOnly,
   onRestoreDismissed,
 }: {
-  total: number
-  shown: number
-  searchValue: string
-  sortValue: string
-  category: string
-  active: { dim: FilterDimension; value: string; label: string }[]
-  clearHidden: boolean
-  savedCount: number
-  savedOnly: boolean
-  dismissedCount: number
-  onSearchChange: (value: string) => void
-  onSortChange: (value: string) => void
-  onCategorySet: (category: string) => void
-  onRemoveFilter: (dim: FilterDimension) => void
-  onClear: () => void
-  onToggleSavedOnly: () => void
-  onRestoreDismissed: () => void
+  total: number;
+  shown: number;
+  searchValue: string;
+  sortValue: string;
+  category: string;
+  active: { dim: FilterDimension; value: string; label: string }[];
+  clearHidden: boolean;
+  savedCount: number;
+  savedOnly: boolean;
+  dismissedCount: number;
+  onSearchChange: (value: string) => void;
+  onSortChange: (value: string) => void;
+  onCategorySet: (category: string) => void;
+  onRemoveFilter: (dim: FilterDimension) => void;
+  onClear: () => void;
+  onToggleSavedOnly: () => void;
+  onRestoreDismissed: () => void;
 }) {
   const countText =
-    shown === total ? `Showing all ${total} offers` : `Showing ${shown} of ${total} offers`
-  function onChipKeyDown(event: KeyboardEvent<HTMLButtonElement>, next: string) {
-    if (event.key !== "Enter" && event.key !== " ") return
-    event.preventDefault()
-    onCategorySet(next)
+    shown === total
+      ? `Showing all ${total} offers`
+      : `Showing ${shown} of ${total} offers`;
+  function onChipKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    next: string,
+  ) {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    onCategorySet(next);
   }
   return (
     <section className="toolbar" aria-label="Search and filter offers">
@@ -170,7 +191,7 @@ function Toolbar({
           type="search"
           id="ft-search"
           name="q"
-          placeholder="Search title, provider, or amount&hellip;"
+          placeholder="Search offers, providers, or amounts&hellip;"
           autoComplete="off"
           spellCheck={false}
           maxLength={200}
@@ -182,9 +203,17 @@ function Toolbar({
         <label className="tool-label" htmlFor="ft-sort">
           Sort
         </label>
-        <select id="ft-sort" value={sortValue} onChange={(e) => onSortChange(e.target.value)}>
-          <option value="">Default</option>
-          <option value="newest">Newest verified</option>
+        <select
+          id="ft-sort"
+          value={sortValue}
+          onChange={(e) => onSortChange(e.target.value)}
+        >
+          {/* The empty value means "index order", and the build now emits that
+              index newest-added first, so this label follows the data. It read
+              "Alphabetical" because that is what the order degenerated to when
+              every offer shared one verified_date. */}
+          <option value="">Latest added</option>
+          <option value="newest">Recently checked</option>
           <option value="expiring">Expiring soon</option>
           <option value="amount">Largest amount</option>
         </select>
@@ -231,7 +260,12 @@ function Toolbar({
         </Button>
       </div>
       <div className="results-line">
-        <p className="results-status" id="ft-results-status" role="status" aria-live="polite">
+        <p
+          className="results-status"
+          id="ft-results-status"
+          role="status"
+          aria-live="polite"
+        >
           {countText}
           {dismissedCount > 0 && !savedOnly && (
             <span>
@@ -277,28 +311,32 @@ function Toolbar({
         </Button>
       </div>
     </section>
-  )
+  );
 }
 
 function visibleOffers(
   offers: ReturnType<typeof activeOffers>,
   state: UrlState,
-  personal?: { savedOnly: boolean; saved: ReadonlySet<string>; dismissed: ReadonlySet<string> },
+  personal?: {
+    savedOnly: boolean;
+    saved: ReadonlySet<string>;
+    dismissed: ReadonlySet<string>;
+  },
 ) {
-  const base = applySort(offers, state.sort)
+  const base = applySort(offers, state.sort);
   if (!personal) {
-    return base.filter((offer) => offerMatches(offer, state))
+    return base.filter((offer) => offerMatches(offer, state));
   }
   if (personal.savedOnly) {
     // Saved-only view lists exactly the saved offers — query and filter
     // dimensions are ignored here so an active filter can never hide part
     // of the shortlist.
-    return base.filter((offer) => personal.saved.has(offer.slug))
+    return base.filter((offer) => personal.saved.has(offer.slug));
   }
   // Default view hides dismissed offers.
   return base
     .filter((offer) => offerMatches(offer, state))
-    .filter((offer) => !personal.dismissed.has(offer.slug))
+    .filter((offer) => !personal.dismissed.has(offer.slug));
 }
 
 /**
@@ -309,60 +347,105 @@ function visibleOffers(
  * First render (SSR/prerender) shows every active offer so static markup
  * tests stay matching. After mount, URL state is applied without events.
  */
-export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseUrl?: string }) {
-  const offers = activeOffers(index)
-  const buildDay = buildDate(index.generated_at)
+export default function HomePage({
+  index,
+  baseUrl,
+}: {
+  index: OffersIndex;
+  baseUrl?: string;
+}) {
+  const offers = activeOffers(index);
+  const buildDay = buildDate(index.generated_at);
+  // Proof-line inputs, both build-time: the oldest live verification date
+  // becomes the "re-checked within N" window, and the archive count is the
+  // evidence that expired offers actually leave the list.
+  const archivedCount = expiredOffers(index).length;
+  const oldestVerified = offers.reduce(
+    (oldest, offer) =>
+      !oldest || offer.verified_date < oldest ? offer.verified_date : oldest,
+    "",
+  );
 
-  const [state, setState] = useState(emptyState)
-  const [searchInput, setSearchInput] = useState("")
+  const [state, setState] = useState(emptyState);
+  const [searchInput, setSearchInput] = useState("");
   // Personal state hydrates after mount (ClaimChecklist pattern): the
   // prerendered first paint always shows every active offer.
-  const [saved, setSaved] = useState<ReadonlySet<string>>(new Set())
-  const [dismissed, setDismissed] = useState<ReadonlySet<string>>(new Set())
-  const [savedOnly, setSavedOnly] = useState(false)
-  const stateRef = useRef(state)
-  stateRef.current = state
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const pendingFocusRef = useRef<"search" | "next-pill" | null>(null)
+  const [saved, setSaved] = useState<ReadonlySet<string>>(new Set());
+  const [dismissed, setDismissed] = useState<ReadonlySet<string>>(new Set());
+  const [savedOnly, setSavedOnly] = useState(false);
+  const stateRef = useRef(state);
+  stateRef.current = state;
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingFocusRef = useRef<"search" | "next-pill" | null>(null);
 
-  const shownList = visibleOffers(offers, state, { savedOnly, saved, dismissed })
+  const shownList = visibleOffers(offers, state, {
+    savedOnly,
+    saved,
+    dismissed,
+  });
 
-  const offerSlugs = useMemo(() => activeOffers(index).map((o) => o.slug), [index])
-  const views = useOfferViews(offerSlugs)
+  const offerSlugs = useMemo(
+    () => activeOffers(index).map((o) => o.slug),
+    [index],
+  );
+  const views = useOfferViews(offerSlugs);
   // Second, windowed read of the same public counters. GoatCounter windows by
   // calendar DATE, so `days: 1` is "today so far" — the honest approximation
   // of "last 24h" this stack can express. Ranked over the FULL slug list, never
   // over what is currently on screen, so filtering or searching can never crown
   // a different offer. Placed after the all-time hook on purpose: effect order
   // keeps the unwindowed request first.
-  const todayViews = useOfferViews(offerSlugs, 1)
-  const hotSlugs = useMemo(() => hottestSlugs(todayViews), [todayViews])
+  const todayViews = useOfferViews(offerSlugs, 1);
+  const hotSlugs = useMemo(() => hottestSlugs(todayViews), [todayViews]);
+  // The highlight shelf ranks the same windowed counters the badge uses, over
+  // the FULL slug list rather than what is on screen, so filtering or
+  // searching never changes which offers are "hot" — only the list below.
+  const topToday = useMemo(() => topViewedSlugs(todayViews, 3), [todayViews]);
+  // The shelf reserves its box until the windowed counters settle, but only
+  // where counters can ever arrive: unconfigured or JS-off visitors get no
+  // hole above the toolbar.
+  const hotPending =
+    isGoatCounterConfigured() && Object.keys(todayViews).length === 0;
+  const offersBySlug = useMemo(
+    () => new Map(offers.map((offer) => [offer.slug, offer])),
+    [offers],
+  );
 
-  function commit(patch: Partial<UrlState>, source: "search" | "sort" | "filter") {
-    const next: UrlState = { ...stateRef.current, ...patch }
-    if (source === "sort" && next.sort === stateRef.current.sort) return
-    if (source === "search" && next.q === stateRef.current.q) return
-    stateRef.current = next
-    setState(next)
-    const query = serializeState(next)
-    const nextSearch = query ? `?${query}` : ""
-    if (typeof window !== "undefined" && nextSearch !== window.location.search) {
+  function commit(
+    patch: Partial<UrlState>,
+    source: "search" | "sort" | "filter",
+  ) {
+    const next: UrlState = { ...stateRef.current, ...patch };
+    if (source === "sort" && next.sort === stateRef.current.sort) return;
+    if (source === "search" && next.q === stateRef.current.q) return;
+    stateRef.current = next;
+    setState(next);
+    const query = serializeState(next);
+    const nextSearch = query ? `?${query}` : "";
+    if (
+      typeof window !== "undefined" &&
+      nextSearch !== window.location.search
+    ) {
       try {
-        window.history.pushState({}, "", nextSearch || window.location.pathname)
+        window.history.pushState(
+          {},
+          "",
+          nextSearch || window.location.pathname,
+        );
       } catch {
         /* ignore */
       }
     }
     if (source === "search" && next.q) {
-      trackSearch(next.q.length)
+      trackSearch(next.q.length);
     } else if (source === "sort") {
-      trackSortUse(next.sort || "default")
+      trackSortUse(next.sort || "default");
     } else if (source === "filter") {
       trackFilterUse({
         category: next.category,
         verification: next.verification,
         signup: next.signup,
-      })
+      });
     }
     // Remember the last filter/sort locally (issue #140). Never serialized
     // into the URL by this layer — the URL keeps reflecting only
@@ -372,52 +455,51 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
       verification: next.verification,
       signup: next.signup,
       sort: next.sort,
-    })
+    });
   }
 
   useEffect(() => {
     const applyFromLocation = () => {
       if (debounceRef.current !== null) {
-        clearTimeout(debounceRef.current)
-        debounceRef.current = null
+        clearTimeout(debounceRef.current);
+        debounceRef.current = null;
       }
-      const parsed = parseState(window.location.search)
-      stateRef.current = parsed
-      setState(parsed)
-      setSearchInput(parsed.q)
-    }
-    applyFromLocation()
+      const parsed = parseState(window.location.search);
+      stateRef.current = parsed;
+      setState(parsed);
+      setSearchInput(parsed.q);
+    };
+    applyFromLocation();
     // Hydrate personal shortlists from localStorage.
-    setSaved(new Set(readSavedSlugs()))
-    setDismissed(new Set(readDismissedSlugs()))
+    setSaved(new Set(readSavedSlugs()));
+    setDismissed(new Set(readDismissedSlugs()));
     // Restore last-used preferences only when the URL carries no explicit
     // view state; a shared link must always win over stored prefs.
     if (!window.location.search) {
-      const prefs = readPrefs()
+      const prefs = readPrefs();
       if (prefs) {
-        const current = stateRef.current
+        const current = stateRef.current;
         const validCategory = CATEGORIES.includes(
           prefs.category as (typeof CATEGORIES)[number],
         )
           ? prefs.category
-          : ""
-        const validVerification = prefs.verification in VERIFICATION_LABELS
-          ? prefs.verification
-          : ""
-        const validSignup = prefs.signup in SIGNUP_LABELS ? prefs.signup : ""
-        const sort = normalizeSort(prefs.sort)
-        const patch: Partial<UrlState> = {}
-        if (current.category !== validCategory) patch.category = validCategory
+          : "";
+        const validVerification =
+          prefs.verification in VERIFICATION_LABELS ? prefs.verification : "";
+        const validSignup = prefs.signup in SIGNUP_LABELS ? prefs.signup : "";
+        const sort = normalizeSort(prefs.sort);
+        const patch: Partial<UrlState> = {};
+        if (current.category !== validCategory) patch.category = validCategory;
         if (current.verification !== validVerification) {
-          patch.verification = validVerification
+          patch.verification = validVerification;
         }
-        if (current.signup !== validSignup) patch.signup = validSignup
-        if (current.sort !== sort) patch.sort = sort
+        if (current.signup !== validSignup) patch.signup = validSignup;
+        if (current.sort !== sort) patch.sort = sort;
         if (Object.keys(patch).length > 0) {
-          const next = { ...current, ...patch }
-          stateRef.current = next
-          setState(next)
-          const query = serializeState(next)
+          const next = { ...current, ...patch };
+          stateRef.current = next;
+          setState(next);
+          const query = serializeState(next);
           try {
             window.history.replaceState(
               {},
@@ -425,214 +507,230 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
               query
                 ? `${window.location.pathname}?${query}`
                 : window.location.pathname,
-            )
+            );
           } catch {
             /* ignore */
           }
         }
       }
     }
-    window.addEventListener("popstate", applyFromLocation)
+    window.addEventListener("popstate", applyFromLocation);
     return () => {
-      window.removeEventListener("popstate", applyFromLocation)
-      if (debounceRef.current !== null) clearTimeout(debounceRef.current)
-    }
-  }, [])
+      window.removeEventListener("popstate", applyFromLocation);
+      if (debounceRef.current !== null) clearTimeout(debounceRef.current);
+    };
+  }, []);
 
   function onToggleSave(slug: string) {
     setSaved((prev) => {
-      const next = new Set(prev)
-      if (next.has(slug)) next.delete(slug)
-      else next.add(slug)
-      writeSavedSlugs([...next])
-      return next
-    })
+      const next = new Set(prev);
+      if (next.has(slug)) next.delete(slug);
+      else next.add(slug);
+      writeSavedSlugs([...next]);
+      return next;
+    });
     // Dismissing and saving are exclusive: saving unhides, dismissing unsaves.
     setDismissed((prev) => {
-      if (!prev.has(slug)) return prev
-      const next = new Set(prev)
-      next.delete(slug)
-      writeDismissedSlugs([...next])
-      return next
-    })
+      if (!prev.has(slug)) return prev;
+      const next = new Set(prev);
+      next.delete(slug);
+      writeDismissedSlugs([...next]);
+      return next;
+    });
   }
 
   function onDismiss(slug: string) {
     setDismissed((prev) => {
-      if (prev.has(slug)) return prev
-      const next = new Set(prev)
-      next.add(slug)
-      writeDismissedSlugs([...next])
-      return next
-    })
+      if (prev.has(slug)) return prev;
+      const next = new Set(prev);
+      next.add(slug);
+      writeDismissedSlugs([...next]);
+      return next;
+    });
     setSaved((prev) => {
-      if (!prev.has(slug)) return prev
-      const next = new Set(prev)
-      next.delete(slug)
-      writeSavedSlugs([...next])
-      return next
-    })
+      if (!prev.has(slug)) return prev;
+      const next = new Set(prev);
+      next.delete(slug);
+      writeSavedSlugs([...next]);
+      return next;
+    });
   }
 
   function onRestoreDismissed() {
-    clearDismissedSlugs()
-    setDismissed(new Set())
+    clearDismissedSlugs();
+    setDismissed(new Set());
   }
 
   function onToggleSavedOnly() {
-    setSavedOnly((prev) => !prev)
+    setSavedOnly((prev) => !prev);
   }
 
   function onSearchChange(value: string) {
-    setSearchInput(value)
-    if (debounceRef.current !== null) clearTimeout(debounceRef.current)
+    setSearchInput(value);
+    if (debounceRef.current !== null) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
-      debounceRef.current = null
-      const q = value.trim().toLowerCase()
-      if (q === stateRef.current.q) return
-      commit({ q }, "search")
-    }, SEARCH_DEBOUNCE_MS)
+      debounceRef.current = null;
+      const q = value.trim().toLowerCase();
+      if (q === stateRef.current.q) return;
+      commit({ q }, "search");
+    }, SEARCH_DEBOUNCE_MS);
   }
 
   function onSortChange(value: string) {
-    const sort = normalizeSort(value)
-    if (sort === stateRef.current.sort) return
-    commit({ sort }, "sort")
+    const sort = normalizeSort(value);
+    if (sort === stateRef.current.sort) return;
+    commit({ sort }, "sort");
   }
 
   function onCategorySet(category: string) {
-    commit({ category }, "filter")
+    commit({ category }, "filter");
   }
 
   function onTagToggle(dim: FilterDimension, value: string) {
-    const current = stateRef.current[dim]
-    commit({ [dim]: current === value ? "" : value }, "filter")
+    const current = stateRef.current[dim];
+    commit({ [dim]: current === value ? "" : value }, "filter");
   }
 
   function onRemoveFilter(dim: FilterDimension) {
-    commit({ [dim]: "" }, "filter")
-    pendingFocusRef.current = "next-pill"
+    commit({ [dim]: "" }, "filter");
+    pendingFocusRef.current = "next-pill";
   }
 
   function onClear() {
     if (debounceRef.current !== null) {
-      clearTimeout(debounceRef.current)
-      debounceRef.current = null
+      clearTimeout(debounceRef.current);
+      debounceRef.current = null;
     }
-    commit({ q: "", category: "", verification: "", signup: "" }, "filter")
-    setSearchInput("")
-    pendingFocusRef.current = "search"
-    document.getElementById("ft-search")?.focus()
+    commit({ q: "", category: "", verification: "", signup: "" }, "filter");
+    setSearchInput("");
+    pendingFocusRef.current = "search";
+    document.getElementById("ft-search")?.focus();
   }
 
   useLayoutEffect(() => {
-    const pending = pendingFocusRef.current
-    if (!pending) return
-    pendingFocusRef.current = null
+    const pending = pendingFocusRef.current;
+    if (!pending) return;
+    pendingFocusRef.current = null;
     if (pending === "next-pill") {
-      const next = document.querySelector("#ft-results-status [data-ft-remove]")
-      if (next instanceof HTMLElement) next.focus()
-      else document.getElementById("ft-search")?.focus()
-      return
+      const next = document.querySelector(
+        "#ft-results-status [data-ft-remove]",
+      );
+      if (next instanceof HTMLElement) next.focus();
+      else document.getElementById("ft-search")?.focus();
+      return;
     }
-    document.getElementById("ft-search")?.focus()
-  })
+    document.getElementById("ft-search")?.focus();
+  });
 
   return (
     <>
       <IconSprite />
       <div className="wrap">
         <main>
-        <SiteHeader current="home" />
-        <SiteStats activeCount={offers.length} generatedAt={index.generated_at} />
-        <Breadcrumbs page="home" />
+          <SiteHeader current="home" />
+          <SiteStats
+            activeCount={offers.length}
+            archivedCount={archivedCount}
+            oldestVerified={oldestVerified}
+            generatedAt={index.generated_at}
+          />
+          <Breadcrumbs page="home" />
 
-        {offers.length > 0 ? (
-          <>
-            <Toolbar
-              total={offers.length}
-              shown={shownList.length}
-              searchValue={searchInput}
-              sortValue={state.sort}
-              category={state.category}
-              active={namedFilters(state)}
-              clearHidden={!hasQueryOrFilters(state)}
-              savedCount={saved.size}
-              savedOnly={savedOnly}
-              dismissedCount={dismissed.size}
-              onSearchChange={onSearchChange}
-              onSortChange={onSortChange}
-              onCategorySet={onCategorySet}
-              onRemoveFilter={onRemoveFilter}
-              onClear={onClear}
-              onToggleSavedOnly={onToggleSavedOnly}
-              onRestoreDismissed={onRestoreDismissed}
-            />
-            <a className="skip-list" href="#site-footer">
-              Skip the offer list
-            </a>
-            <ol className="grid" id="ft-grid" role="list">
-              {shownList.map((offer, i) => (
-                <OfferRow
-                  key={offer.slug}
-                  offer={offer}
-                  index={i}
-                  buildDay={buildDay}
-                  pressed={{
-                    category: state.category,
-                    verification: state.verification,
-                    signup: state.signup,
-                  }}
-                  onToggleTag={onTagToggle}
-                  saved={saved.has(offer.slug)}
-                  onToggleSave={onToggleSave}
-                  onDismiss={onDismiss}
-                  views={views[offer.slug] ?? null}
-                  hot={hotSlugs.has(offer.slug)}
-                />
-              ))}
-            </ol>
-            <section className="empty" id="ft-no-results" hidden={shownList.length !== 0}>
-              <SearchGlyph />
-              <h2>No matching offers</h2>
-              <p>
-                Nothing matches every filter you have applied at once. The status line above lists
-                them; clearing one usually brings offers back.
-              </p>
-              <Button
-                type="button"
-                variant="unstyled"
-                className="chip reset"
-                id="ft-reset-filters"
-                onClick={onClear}
+          {offers.length > 0 ? (
+            <>
+              <HotDeals ranked={topToday} bySlug={offersBySlug} pending={hotPending} />
+              <Toolbar
+                total={offers.length}
+                shown={shownList.length}
+                searchValue={searchInput}
+                sortValue={state.sort}
+                category={state.category}
+                active={namedFilters(state)}
+                clearHidden={!hasQueryOrFilters(state)}
+                savedCount={saved.size}
+                savedOnly={savedOnly}
+                dismissedCount={dismissed.size}
+                onSearchChange={onSearchChange}
+                onSortChange={onSortChange}
+                onCategorySet={onCategorySet}
+                onRemoveFilter={onRemoveFilter}
+                onClear={onClear}
+                onToggleSavedOnly={onToggleSavedOnly}
+                onRestoreDismissed={onRestoreDismissed}
+              />
+              <a className="skip-list" href="#site-footer">
+                Skip the offer list
+              </a>
+              <ol className="grid" id="ft-grid" role="list">
+                {shownList.map((offer, i) => (
+                  <OfferRow
+                    key={offer.slug}
+                    offer={offer}
+                    index={i}
+                    buildDay={buildDay}
+                    pressed={{
+                      category: state.category,
+                      verification: state.verification,
+                      signup: state.signup,
+                    }}
+                    onToggleTag={onTagToggle}
+                    saved={saved.has(offer.slug)}
+                    onToggleSave={onToggleSave}
+                    onDismiss={onDismiss}
+                    views={views[offer.slug] ?? null}
+                    hot={hotSlugs.has(offer.slug)}
+                  />
+                ))}
+              </ol>
+              <section
+                className="empty"
+                id="ft-no-results"
+                hidden={shownList.length !== 0}
               >
-                Clear search & filters
-              </Button>
+                <SearchGlyph />
+                <h2>No matching offers</h2>
+                <p>
+                  Nothing matches every filter you have applied at once. The
+                  status line above lists them; clearing one usually brings
+                  offers back.
+                </p>
+                <Button
+                  type="button"
+                  variant="unstyled"
+                  className="chip reset"
+                  id="ft-reset-filters"
+                  onClick={onClear}
+                >
+                  Clear search & filters
+                </Button>
+              </section>
+            </>
+          ) : (
+            <section
+              className="empty"
+              style={{ "--i": 0 } as React.CSSProperties}
+            >
+              <GiftGlyph />
+              <h2>No live offers right now</h2>
+              <p>
+                Every listing here is screened against the provider, and none
+                have passed the check at the moment.
+              </p>
+              <p>
+                New and renewed offers appear automatically after the next
+                rebuild &mdash; check back soon.
+              </p>
+              <p className="empty-archive">
+                In the meantime, <a href="archive.html">browse the archive</a>{" "}
+                of expired offers.
+              </p>
             </section>
-          </>
-        ) : (
-          <section className="empty" style={{ "--i": 0 } as React.CSSProperties}>
-            <GiftGlyph />
-            <h2>No live offers right now</h2>
-            <p>
-              Every listing here is screened against the provider, and none have passed the check
-              at the moment.
-            </p>
-            <p>
-              New and renewed offers appear automatically after the next rebuild &mdash; check back
-              soon.
-            </p>
-            <p className="empty-archive">
-              In the meantime, <a href="archive.html">browse the archive</a> of expired offers.
-            </p>
-          </section>
-        )}
-
+          )}
         </main>
         <SiteFooter current="home" />
       </div>
       {/* JSON-LD last: crawlers read the whole document, but FCP content parses first. */}
       <StructuredData page="home" index={index} baseUrl={baseUrl} />
     </>
-  )
+  );
 }

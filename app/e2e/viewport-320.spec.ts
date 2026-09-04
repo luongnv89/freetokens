@@ -10,7 +10,9 @@ const ROUTES = [
   "/offers/cursor-hobby-plan.html",
 ] as const;
 
-async function assertNoHorizontalOverflow(page: import("@playwright/test").Page) {
+async function assertNoHorizontalOverflow(
+  page: import("@playwright/test").Page,
+) {
   const overflow = await page.evaluate(() => {
     const html = document.documentElement;
     const body = document.body;
@@ -19,7 +21,10 @@ async function assertNoHorizontalOverflow(page: import("@playwright/test").Page)
       body: body.scrollWidth - body.clientWidth,
     };
   });
-  expect(overflow.html, "documentElement horizontal overflow").toBeLessThanOrEqual(0);
+  expect(
+    overflow.html,
+    "documentElement horizontal overflow",
+  ).toBeLessThanOrEqual(0);
   expect(overflow.body, "body horizontal overflow").toBeLessThanOrEqual(0);
 }
 
@@ -29,7 +34,9 @@ for (const route of ROUTES) {
     if (route === "/index.html") {
       await expect(page.locator("ol#ft-grid")).toBeVisible();
     } else if (route === "/archive.html") {
-      await expect(page.locator("h1")).toHaveText(/Expired offer archive|The archive is empty/);
+      await expect(page.locator("h1")).toHaveText(
+        /Expired offer archive|The archive is empty/,
+      );
     } else if (route === "/privacy.html") {
       await expect(page.locator("h1")).toHaveText("Privacy Policy");
     } else {

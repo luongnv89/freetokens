@@ -161,10 +161,7 @@ export function readClaimProgress(slug: string): number[] {
  * current versioned envelope. Returns false when persistence was not
  * possible (progress stays session-only, mirroring the legacy script).
  */
-export function writeClaimProgress(
-  slug: string,
-  done: number[],
-): boolean {
+export function writeClaimProgress(slug: string, done: number[]): boolean {
   const unique = [...new Set(done)].filter(
     (n) => typeof n === "number" && Number.isInteger(n) && n >= 0,
   );
@@ -466,15 +463,13 @@ function reject(reason: string): ImportResult {
  * Validate an untrusted import payload against the exact export schema.
  * Returns the normalized records or null — never writes anything.
  */
-function validateImport(parsed: unknown):
-  | {
-      consent: GaConsent | null;
-      saved: string[];
-      dismissed: string[];
-      prefs: PrefsRecordV1 | null;
-      claims: [string, number[]][];
-    }
-  | null {
+function validateImport(parsed: unknown): {
+  consent: GaConsent | null;
+  saved: string[];
+  dismissed: string[];
+  prefs: PrefsRecordV1 | null;
+  claims: [string, number[]][];
+} | null {
   if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
     return null;
   }
@@ -489,11 +484,7 @@ function validateImport(parsed: unknown):
       : doc.consent === "granted" || doc.consent === "denied"
         ? doc.consent
         : null;
-  if (
-    doc.consent !== undefined &&
-    doc.consent !== null &&
-    consent === null
-  ) {
+  if (doc.consent !== undefined && doc.consent !== null && consent === null) {
     return null;
   }
 
@@ -551,7 +542,11 @@ function validateImport(parsed: unknown):
       if (typeof slug !== "string" || !slug.trim()) return null;
       if (slug.length > MAX_SLUG_LENGTH) return null;
       if (!Array.isArray(done)) return null;
-      if (!done.every((n) => typeof n === "number" && Number.isInteger(n) && n >= 0)) {
+      if (
+        !done.every(
+          (n) => typeof n === "number" && Number.isInteger(n) && n >= 0,
+        )
+      ) {
         return null;
       }
       claims.push([slug.trim().slice(0, MAX_SLUG_LENGTH), done]);

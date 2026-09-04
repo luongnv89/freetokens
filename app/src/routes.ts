@@ -7,7 +7,7 @@ export type Route =
   | { page: "archive" }
   | { page: "privacy" }
   | { page: "about" }
-  | { page: "detail"; slug: string }
+  | { page: "detail"; slug: string };
 
 /**
  * Client-side route resolution: the prerenderer stamps data-page / data-slug
@@ -16,22 +16,19 @@ export type Route =
  * missing attribute) — an unknown slug resolves INSIDE OfferDetailPage as a
  * graceful not-found state, never a blank hydration error.
  */
-export function resolveRoute(
-  doc?: Document,
-): Route {
-  const scope =
-    doc ?? (typeof document !== "undefined" ? document : undefined)
-  const root = scope?.getElementById("root")
+export function resolveRoute(doc?: Document): Route {
+  const scope = doc ?? (typeof document !== "undefined" ? document : undefined);
+  const root = scope?.getElementById("root");
   switch (root?.dataset.page) {
     case "archive":
-      return { page: "archive" }
+      return { page: "archive" };
     case "privacy":
-      return { page: "privacy" }
+      return { page: "privacy" };
     case "about":
-      return { page: "about" }
+      return { page: "about" };
     case "detail":
-      return { page: "detail", slug: root?.dataset.slug ?? "" }
+      return { page: "detail", slug: root?.dataset.slug ?? "" };
     default:
-      return { page: "home" }
+      return { page: "home" };
   }
 }

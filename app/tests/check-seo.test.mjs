@@ -1,16 +1,34 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import { readFileSync, mkdtempSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
+import {
+  readFileSync,
+  mkdtempSync,
+  writeFileSync,
+  mkdirSync,
+  rmSync,
+  existsSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { collectIssues, checkDist, OG_PROPERTIES, DEFAULT_BASE_URL } from "../scripts/check-seo.mjs";
+import {
+  collectIssues,
+  checkDist,
+  OG_PROPERTIES,
+  DEFAULT_BASE_URL,
+} from "../scripts/check-seo.mjs";
 
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
 function viteBuild(outDir) {
   execFileSync(
     process.execPath,
-    ["node_modules/vite/bin/vite.js", "build", "--outDir", outDir, "--emptyOutDir"],
+    [
+      "node_modules/vite/bin/vite.js",
+      "build",
+      "--outDir",
+      outDir,
+      "--emptyOutDir",
+    ],
     { cwd: APP_ROOT, stdio: "pipe" },
   );
 }
@@ -22,7 +40,14 @@ function prerender(distDir, dataFile, baseUrl) {
   execFileSync(process.execPath, args, { cwd: APP_ROOT, stdio: "pipe" });
 }
 
-function buildHead({ title, description, canonical, type = "website", withJsonLd = false, breadcrumbName = "Archive" }) {
+function buildHead({
+  title,
+  description,
+  canonical,
+  type = "website",
+  withJsonLd = false,
+  breadcrumbName = "Archive",
+}) {
   const image = `${DEFAULT_BASE_URL}/logo-mark.svg`;
   const jsonLd = withJsonLd
     ? `<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Offers","item":"${DEFAULT_BASE_URL}/"},{"@type":"ListItem","position":2,"name":"${breadcrumbName}","item":"${canonical}"}]}</script>`
@@ -51,7 +76,10 @@ describe("check-seo guard (#209)", () => {
     // assertion below, mirroring the viteBuild+prerender pattern in
     // routes.test.mjs. Reuse an existing dist when present to keep local
     // runs fast.
-    if (!existsSync(path.join(dist, "index.html")) || !existsSync(path.join(dist, "offers"))) {
+    if (
+      !existsSync(path.join(dist, "index.html")) ||
+      !existsSync(path.join(dist, "offers"))
+    ) {
       viteBuild(dist);
       prerender(dist);
     }
@@ -77,12 +105,21 @@ describe("check-seo guard (#209)", () => {
     // Missing canonical — strip the tag
     const missing = valid.replace(/<link rel="canonical"[^>]*>\n?/, "");
     expect(collectIssues(missing, "archive.html")).toEqual(
-      expect.arrayContaining([expect.stringContaining("archive.html: missing canonical")]),
+      expect.arrayContaining([
+        expect.stringContaining("archive.html: missing canonical"),
+      ]),
     );
-    expect(collectIssues(missing, "archive.html").some((m) => m.includes("canonical"))).toBe(true);
+    expect(
+      collectIssues(missing, "archive.html").some((m) =>
+        m.includes("canonical"),
+      ),
+    ).toBe(true);
 
     // Canonical mismatch — points to wrong path
-    const mismatch = valid.replace(`${DEFAULT_BASE_URL}/archive.html`, `${DEFAULT_BASE_URL}/privacy.html`);
+    const mismatch = valid.replace(
+      `${DEFAULT_BASE_URL}/archive.html`,
+      `${DEFAULT_BASE_URL}/privacy.html`,
+    );
     expect(collectIssues(mismatch, "archive.html")).toEqual(
       expect.arrayContaining([expect.stringContaining("canonical mismatch")]),
     );
@@ -101,9 +138,16 @@ describe("check-seo guard (#209)", () => {
         canonical: `${DEFAULT_BASE_URL}/privacy.html`,
         withJsonLd: true,
       });
-      const stripped = html.replace(new RegExp(`<meta property="${prop}"[^>]*>\\n?`), "");
+      const stripped = html.replace(
+        new RegExp(`<meta property="${prop}"[^>]*>\\n?`),
+        "",
+      );
       const issues = collectIssues(stripped, "privacy.html");
-      expect(issues).toEqual(expect.arrayContaining([expect.stringContaining(`privacy.html: missing ${prop}`)]));
+      expect(issues).toEqual(
+        expect.arrayContaining([
+          expect.stringContaining(`privacy.html: missing ${prop}`),
+        ]),
+      );
     }
   });
 
@@ -115,7 +159,9 @@ describe("check-seo guard (#209)", () => {
       withJsonLd: false,
     });
     expect(collectIssues(archiveHtml, "archive.html")).toEqual(
-      expect.arrayContaining([expect.stringContaining("archive.html: missing JSON-LD")]),
+      expect.arrayContaining([
+        expect.stringContaining("archive.html: missing JSON-LD"),
+      ]),
     );
 
     const offerHtml = buildHead({
@@ -126,7 +172,9 @@ describe("check-seo guard (#209)", () => {
       withJsonLd: false,
     });
     expect(collectIssues(offerHtml, "offers/demo.html")).toEqual(
-      expect.arrayContaining([expect.stringContaining("offers/demo.html: missing JSON-LD")]),
+      expect.arrayContaining([
+        expect.stringContaining("offers/demo.html: missing JSON-LD"),
+      ]),
     );
 
     const homeHtml = buildHead({
@@ -161,9 +209,15 @@ describe("check-seo guard (#209)", () => {
         writeFileSync(path.join(tmp, file), html);
       }
       // Copy one offer file intact so the temp dist has at least one offer
-      const offers = readFileSync(path.join(APP_ROOT, "src/data/offers.json"), "utf8");
+      const offers = readFileSync(
+        path.join(APP_ROOT, "src/data/offers.json"),
+        "utf8",
+      );
       const slug = JSON.parse(offers).offers[0].slug;
-      const offerHtml = readFileSync(path.join(dist, "offers", `${slug}.html`), "utf8");
+      const offerHtml = readFileSync(
+        path.join(dist, "offers", `${slug}.html`),
+        "utf8",
+      );
       writeFileSync(path.join(tmp, "offers", `${slug}.html`), offerHtml);
 
       const broken = checkDist(tmp);
@@ -195,16 +249,25 @@ describe("check-seo guard (#209)", () => {
         }),
       );
       expect(() =>
-        execFileSync(process.execPath, [path.join(APP_ROOT, "scripts/check-seo.mjs"), "--dist", tmp], {
-          stdio: "pipe",
-        }),
+        execFileSync(
+          process.execPath,
+          [path.join(APP_ROOT, "scripts/check-seo.mjs"), "--dist", tmp],
+          {
+            stdio: "pipe",
+          },
+        ),
       ).toThrow();
       try {
-        execFileSync(process.execPath, [path.join(APP_ROOT, "scripts/check-seo.mjs"), "--dist", tmp], {
-          stdio: "pipe",
-        });
+        execFileSync(
+          process.execPath,
+          [path.join(APP_ROOT, "scripts/check-seo.mjs"), "--dist", tmp],
+          {
+            stdio: "pipe",
+          },
+        );
       } catch (e) {
-        const output = (e.stderr?.toString() ?? "") + (e.stdout?.toString() ?? "");
+        const output =
+          (e.stderr?.toString() ?? "") + (e.stdout?.toString() ?? "");
         expect(output).toMatch(/archive\.html:.*canonical/);
       }
     } finally {

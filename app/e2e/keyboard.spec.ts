@@ -17,11 +17,15 @@ async function focusVisibly(locator: Locator) {
     }
   });
   await expect(locator).toBeFocused();
-  const width = await locator.evaluate((el) => getComputedStyle(el).outlineWidth);
+  const width = await locator.evaluate(
+    (el) => getComputedStyle(el).outlineWidth,
+  );
   expect(width).toBe("3px");
 }
 
-test("keyboard path: filter → search → sort → offer click", async ({ page }) => {
+test("keyboard path: filter → search → sort → offer click", async ({
+  page,
+}) => {
   await page.goto("/index.html");
   await expect(page.locator("ol#ft-grid[role='list']")).toBeVisible();
 
@@ -61,7 +65,9 @@ test("keyboard path: filter → search → sort → offer click", async ({ page 
   }
   expect(["newest", "expiring"]).toContain(sortValue);
   await expect(sort).toBeFocused();
-  const sortOutline = await sort.evaluate((el) => getComputedStyle(el).outlineWidth);
+  const sortOutline = await sort.evaluate(
+    (el) => getComputedStyle(el).outlineWidth,
+  );
   expect(sortOutline).toBe("3px");
 
   const offerLink = page.locator("a[data-ft-offer-id]").first();

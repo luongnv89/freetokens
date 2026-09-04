@@ -1,6 +1,12 @@
 import { describe, it, expect, beforeAll } from "vitest";
 import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync, rmSync, existsSync, writeFileSync } from "node:fs";
+import {
+  readdirSync,
+  readFileSync,
+  rmSync,
+  existsSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { SITEMAP_NAMESPACE } from "../scripts/sitemap.mjs";
@@ -24,7 +30,13 @@ function prerender(distDir, dataFile, baseUrl) {
 function viteBuild(outDir) {
   execFileSync(
     process.execPath,
-    ["node_modules/vite/bin/vite.js", "build", "--outDir", outDir, "--emptyOutDir"],
+    [
+      "node_modules/vite/bin/vite.js",
+      "build",
+      "--outDir",
+      outDir,
+      "--emptyOutDir",
+    ],
     { cwd: APP_ROOT, stdio: "pipe" },
   );
 }
@@ -57,24 +69,44 @@ function metaContents(html, attribute, name) {
 
 function canonicalValues(html) {
   return [
-    ...headOf(html).matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?>(?:\s*)/g),
+    ...headOf(html).matchAll(
+      /<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?>(?:\s*)/g,
+    ),
   ].map((match) => match[1]);
 }
 
-const OG_PROPERTIES = ["og:title", "og:description", "og:url", "og:type", "og:site_name", "og:image"];
-const TWITTER_PROPERTIES = ["twitter:card", "twitter:title", "twitter:description", "twitter:image"];
+const OG_PROPERTIES = [
+  "og:title",
+  "og:description",
+  "og:url",
+  "og:type",
+  "og:site_name",
+  "og:image",
+];
+const TWITTER_PROPERTIES = [
+  "twitter:card",
+  "twitter:title",
+  "twitter:description",
+  "twitter:image",
+];
 
 function headShape(html) {
   const head = headOf(html);
   const count = (pattern) => head.match(pattern)?.length ?? 0;
   return {
-    lang: [...html.matchAll(/<html\s+lang="([^"]+)"/g)].map((match) => match[1]),
+    lang: [...html.matchAll(/<html\s+lang="([^"]+)"/g)].map(
+      (match) => match[1],
+    ),
     charset: count(/<meta\s+charset="[^"]+"\s*\/?\s*>/g),
     viewport: metaContents(html, "name", "viewport").length,
     description: metaContents(html, "name", "description").length,
     canonical: canonicalValues(html).length,
-    og: OG_PROPERTIES.map((property) => metaContents(html, "property", property).length),
-    twitter: TWITTER_PROPERTIES.map((name) => metaContents(html, "name", name).length),
+    og: OG_PROPERTIES.map(
+      (property) => metaContents(html, "property", property).length,
+    ),
+    twitter: TWITTER_PROPERTIES.map(
+      (name) => metaContents(html, "name", name).length,
+    ),
   };
 }
 
@@ -101,8 +133,8 @@ function breadcrumbNames(html) {
   const document = new DOMParser().parseFromString(html, "text/html");
   const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
   if (!nav) throw new Error("document has no breadcrumb nav");
-  return [...nav.querySelectorAll('a, [aria-current="page"]')].map((element) =>
-    element.textContent?.trim() ?? "",
+  return [...nav.querySelectorAll('a, [aria-current="page"]')].map(
+    (element) => element.textContent?.trim() ?? "",
   );
 }
 
@@ -131,13 +163,22 @@ describe("static route coverage (#123)", () => {
   });
 
   it("copies the robots policy and keeps it stable across builds", () => {
-    const readRobots = () => readFileSync(path.join(outDir, "robots.txt"), "utf8");
+    const readRobots = () =>
+      readFileSync(path.join(outDir, "robots.txt"), "utf8");
     const first = readRobots();
     expect(first).toContain("User-agent: *\nAllow: /\n");
-    expect(first.split("\n").filter((line) => line === ROBOTS_SITEMAP)).toHaveLength(1);
+    expect(
+      first.split("\n").filter((line) => line === ROBOTS_SITEMAP),
+    ).toHaveLength(1);
     expect(first).not.toContain("\0");
 
-    for (const bot of ["GPTBot", "ClaudeBot", "Google-Extended", "CCBot", "Bytespider"]) {
+    for (const bot of [
+      "GPTBot",
+      "ClaudeBot",
+      "Google-Extended",
+      "CCBot",
+      "Bytespider",
+    ]) {
       expect(first).toContain(`User-agent: ${bot}\nDisallow: /\n`);
     }
     for (const bot of [
@@ -159,45 +200,72 @@ describe("static route coverage (#123)", () => {
 
   it("emits an absolute sitemap for fixed and offer routes", () => {
     const sitemap = readFileSync(path.join(outDir, "sitemap.xml"), "utf8");
-    const document = new DOMParser().parseFromString(sitemap, "application/xml");
+    const document = new DOMParser().parseFromString(
+      sitemap,
+      "application/xml",
+    );
     expect(document.querySelector("parsererror")).toBeNull();
     expect(document.documentElement.localName).toBe("urlset");
     expect(document.documentElement.namespaceURI).toBe(SITEMAP_NAMESPACE);
 
     const urls = [...document.getElementsByTagNameNS(SITEMAP_NAMESPACE, "url")];
     expect(urls).toHaveLength(index.offers.length + 5);
-    expect(urls.map((url) => url.getElementsByTagNameNS(SITEMAP_NAMESPACE, "loc")[0].textContent)).toEqual([
+    expect(
+      urls.map(
+        (url) =>
+          url.getElementsByTagNameNS(SITEMAP_NAMESPACE, "loc")[0].textContent,
+      ),
+    ).toEqual([
       "https://freetokens.custats.info/",
       "https://freetokens.custats.info/archive.html",
       "https://freetokens.custats.info/privacy.html",
       "https://freetokens.custats.info/about.html",
       "https://freetokens.custats.info/feed.xml",
-      ...index.offers.map((offer) => `https://freetokens.custats.info/offers/${offer.slug}.html`),
+      ...index.offers.map(
+        (offer) => `https://freetokens.custats.info/offers/${offer.slug}.html`,
+      ),
     ]);
 
     const today = new Date().toISOString().slice(0, 10);
     for (const url of urls) {
-      const lastmod = url.getElementsByTagNameNS(SITEMAP_NAMESPACE, "lastmod")[0].textContent;
+      const lastmod = url.getElementsByTagNameNS(
+        SITEMAP_NAMESPACE,
+        "lastmod",
+      )[0].textContent;
       expect(lastmod).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(lastmod <= today).toBe(true);
     }
   });
 
   it("stamps each document so hydration lands on the right page", () => {
-    expect(readFileSync(path.join(outDir, "index.html"), "utf8")).toContain('data-page="home"');
-    expect(readFileSync(path.join(outDir, "archive.html"), "utf8")).toContain('data-page="archive"');
-    expect(readFileSync(path.join(outDir, "privacy.html"), "utf8")).toContain('data-page="privacy"');
-    expect(readFileSync(path.join(outDir, "about.html"), "utf8")).toContain('data-page="about"');
+    expect(readFileSync(path.join(outDir, "index.html"), "utf8")).toContain(
+      'data-page="home"',
+    );
+    expect(readFileSync(path.join(outDir, "archive.html"), "utf8")).toContain(
+      'data-page="archive"',
+    );
+    expect(readFileSync(path.join(outDir, "privacy.html"), "utf8")).toContain(
+      'data-page="privacy"',
+    );
+    expect(readFileSync(path.join(outDir, "about.html"), "utf8")).toContain(
+      'data-page="about"',
+    );
 
     const slug = index.offers[0].slug;
-    const detail = readFileSync(path.join(outDir, "offers", `${slug}.html`), "utf8");
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${slug}.html`),
+      "utf8",
+    );
     expect(detail).toContain(`data-page="detail"`);
     expect(detail).toContain(`data-slug="${slug}"`);
   });
 
   it("deep-links render full server-side content with JS disabled", () => {
     const offer = index.offers[0];
-    const detail = readFileSync(path.join(outDir, "offers", `${offer.slug}.html`), "utf8");
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${offer.slug}.html`),
+      "utf8",
+    );
     expect(detail).toContain(`<h1>${offer.title}</h1>`);
     expect(detail).toContain(offer.amount);
     // The claim CTA is real prerendered markup, not something JS injects.
@@ -285,48 +353,53 @@ describe("static route coverage (#123)", () => {
     // Home renders empty breadcrumbs (JSON-LD present, no self-link items)
     const homeNav = homeDocument.querySelector('nav[aria-label="Breadcrumb"]');
     expect(homeNav).not.toBeNull();
-    expect(homeNav?.querySelectorAll('li').length).toBe(0);
+    expect(homeNav?.querySelectorAll("li").length).toBe(0);
     expect(home).toContain("BreadcrumbList");
   });
 
-  it(
-    "uses the configured prerender base URL in breadcrumb JSON-LD",
-    () => {
-      const customDir = path.join(tmpdir(), `ft-routes-base-${process.pid}`);
-      viteBuild(customDir);
-      prerender(customDir, undefined, "https://example.test/subpath/");
+  it("uses the configured prerender base URL in breadcrumb JSON-LD", () => {
+    const customDir = path.join(tmpdir(), `ft-routes-base-${process.pid}`);
+    viteBuild(customDir);
+    prerender(customDir, undefined, "https://example.test/subpath/");
 
-      const archive = readFileSync(path.join(customDir, "archive.html"), "utf8");
-      expect(breadcrumbData(archive).itemListElement.map((item) => item.item)).toEqual([
-        "https://example.test/subpath/",
-        "https://example.test/subpath/archive.html",
-      ]);
+    const archive = readFileSync(path.join(customDir, "archive.html"), "utf8");
+    expect(
+      breadcrumbData(archive).itemListElement.map((item) => item.item),
+    ).toEqual([
+      "https://example.test/subpath/",
+      "https://example.test/subpath/archive.html",
+    ]);
 
-      const offer = index.offers[0];
-      const detail = readFileSync(
-        path.join(customDir, "offers", `${offer.slug}.html`),
-        "utf8",
-      );
-      expect(breadcrumbData(detail).itemListElement.map((item) => item.item)).toEqual([
-        "https://example.test/subpath/",
-        `https://example.test/subpath/offers/${offer.slug}.html`,
-      ]);
-    },
-    240_000,
-  );
+    const offer = index.offers[0];
+    const detail = readFileSync(
+      path.join(customDir, "offers", `${offer.slug}.html`),
+      "utf8",
+    );
+    expect(
+      breadcrumbData(detail).itemListElement.map((item) => item.item),
+    ).toEqual([
+      "https://example.test/subpath/",
+      `https://example.test/subpath/offers/${offer.slug}.html`,
+    ]);
+  }, 240_000);
 
   it("emits exactly one primary h1 on every prerendered page", () => {
     const home = readFileSync(path.join(outDir, "index.html"), "utf8");
     expect(headings(home)).toHaveLength(1);
-    expect(home).toContain(
-      '<h1 class="site-slogan">Every claimable free AI credit offer — verified, tagged, and on one fast page.</h1>',
-    );
+    // Home's h1 is the wordmark inside the brand bar. The slogan that used
+    // to carry it is gone, and every other route has its own page heading,
+    // so promoting the wordmark on home alone keeps exactly one h1 per page.
+    expect(home).toContain('<h1 class="site-wordmark">Free AI Credits</h1>');
     expect(home).toMatch(
-      /<div class="site-header">[\s\S]*<h1 class="site-slogan">Every claimable free AI credit/,
+      /<div class="site-header">[\s\S]*<h1 class="site-wordmark">Free AI Credits/,
     );
+    expect(home).not.toContain("site-slogan");
+    expect(home).not.toContain("site-sub");
 
     for (const file of ["archive.html", "privacy.html", "about.html"]) {
-      expect(headings(readFileSync(path.join(outDir, file), "utf8"))).toHaveLength(1);
+      expect(
+        headings(readFileSync(path.join(outDir, file), "utf8")),
+      ).toHaveLength(1);
     }
     for (const offer of index.offers) {
       const detail = readFileSync(
@@ -339,7 +412,10 @@ describe("static route coverage (#123)", () => {
 
   it("keeps depth-1 asset references climbing back to site root", () => {
     const slug = index.offers[0].slug;
-    const detail = readFileSync(path.join(outDir, "offers", `${slug}.html`), "utf8");
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${slug}.html`),
+      "utf8",
+    );
     for (const m of detail.matchAll(/(?:src|href)="(\.[^"]*)"/g)) {
       expect(m[1].startsWith("../")).toBe(true);
     }
@@ -400,8 +476,12 @@ describe("static route coverage (#123)", () => {
     prerender(outDir, dataCopy);
     const page = path.join(outDir, "offers", "zz-synthetic-new-offer.html");
     expect(existsSync(page)).toBe(true);
-    expect(readFileSync(page, "utf8")).toContain("<h1>Synthetic New Offer</h1>");
-    expect(readFileSync(page, "utf8")).toContain("Open the official offer page.");
+    expect(readFileSync(page, "utf8")).toContain(
+      "<h1>Synthetic New Offer</h1>",
+    );
+    expect(readFileSync(page, "utf8")).toContain(
+      "Open the official offer page.",
+    );
     expect(readFileSync(page, "utf8")).not.toContain('class="od-brief"');
     const feed = readFileSync(path.join(outDir, "feed.xml"), "utf8");
     expect(feed).toContain("<title>Synthetic New Offer</title>");
@@ -410,7 +490,9 @@ describe("static route coverage (#123)", () => {
 
   it("stamps /privacy.html with its own title and meta description", () => {
     const privacy = readFileSync(path.join(outDir, "privacy.html"), "utf8");
-    expect(privacy).toContain("<title>Privacy Policy · Free AI Credits</title>");
+    expect(privacy).toContain(
+      "<title>Privacy Policy · Free AI Credits</title>",
+    );
     expect(privacy).toContain(
       'content="How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage."',
     );
@@ -430,8 +512,13 @@ describe("static route coverage (#123)", () => {
       expect(html).toMatch(/<meta name="description" content="[^"]+"/);
     }
     const slug = index.offers[0].slug;
-    const detail = readFileSync(path.join(outDir, "offers", `${slug}.html`), "utf8");
-    expect(detail).toContain(`<title>${index.offers[0].title} · Free AI Credits</title>`);
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${slug}.html`),
+      "utf8",
+    );
+    expect(detail).toContain(
+      `<title>${index.offers[0].title} · Free AI Credits</title>`,
+    );
     expect(detail).toMatch(/<meta name="description" content="[^"]+"/);
   });
 
@@ -466,21 +553,28 @@ describe("static route coverage (#123)", () => {
     );
 
     const slug = index.offers[0].slug;
-    const detail = readFileSync(path.join(outDir, "offers", `${slug}.html`), "utf8");
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${slug}.html`),
+      "utf8",
+    );
     expect(detail.slice(0, detail.indexOf("</head>"))).toMatch(
       /<link[^>]*rel="alternate"[^>]*type="application\/rss\+xml"[^>]*href="\.\.\/feed\.xml"/,
     );
     // Internal page hrefs stay relative; only the feed uses the absolute origin.
     // Canonical metadata is absolute; internal anchor hrefs remain relative.
-    expect(home).not.toMatch(/<a[^>]+href="https:\/\/luongnv89\.github\.io\/freetokens\//);
+    expect(home).not.toMatch(
+      /<a[^>]+href="https:\/\/luongnv89\.github\.io\/freetokens\//,
+    );
   });
 
   it("stamps every prerendered page with one route-matching canonical", async () => {
     const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
     const canonicalLinks = (html) =>
-      [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?>(?:\s*)/g)].map(
-        (match) => match[1],
-      );
+      [
+        ...html.matchAll(
+          /<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?>(?:\s*)/g,
+        ),
+      ].map((match) => match[1]);
     const pages = [
       ["index.html", `${DEFAULT_BASE_URL}/`],
       ["archive.html", `${DEFAULT_BASE_URL}/archive.html`],
@@ -489,9 +583,9 @@ describe("static route coverage (#123)", () => {
     ];
 
     for (const [file, expected] of pages) {
-      expect(canonicalLinks(readFileSync(path.join(outDir, file), "utf8"))).toEqual([
-        expected,
-      ]);
+      expect(
+        canonicalLinks(readFileSync(path.join(outDir, file), "utf8")),
+      ).toEqual([expected]);
     }
     for (const offer of index.offers) {
       const detail = readFileSync(
@@ -510,15 +604,21 @@ describe("static route coverage (#123)", () => {
     const details = JSON.parse(
       readFileSync(path.join(APP_ROOT, "src/data/details.json"), "utf8"),
     );
-    const offer = index.offers.find((o) => details[o.slug]?.summary) ?? index.offers[0];
-    const detail = readFileSync(path.join(outDir, "offers", `${offer.slug}.html`), "utf8");
+    const offer =
+      index.offers.find((o) => details[o.slug]?.summary) ?? index.offers[0];
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${offer.slug}.html`),
+      "utf8",
+    );
     const expected = offerMetaDescription(offer, details[offer.slug]);
     expect(detail).toContain(`<title>${offer.title} · Free AI Credits</title>`);
     expect(detail).toContain(`content="${expected}"`);
     expect(detail).toContain(
       `<link rel="canonical" href="${DEFAULT_BASE_URL}/offers/${offer.slug}.html" />`,
     );
-    const shot = details[offer.slug]?.social_proof?.find((p) => p.type === "screenshot");
+    const shot = details[offer.slug]?.social_proof?.find(
+      (p) => p.type === "screenshot",
+    );
     if (shot) {
       expect(detail).toContain(`src="../${shot.image}"`);
     }
@@ -585,11 +685,19 @@ describe("static route coverage (#123)", () => {
         "og:image": image,
       };
       for (const property of OG_PROPERTIES) {
-        expect(metaContents(html, "property", property)).toEqual([htmlAttr(expected[property])]);
+        expect(metaContents(html, "property", property)).toEqual([
+          htmlAttr(expected[property]),
+        ]);
       }
-      expect(metaContents(html, "property", "og:image:width")).toEqual(["1200"]);
-      expect(metaContents(html, "property", "og:image:height")).toEqual(["630"]);
-      expect(metaContents(html, "property", "og:image:type")).toEqual(["image/png"]);
+      expect(metaContents(html, "property", "og:image:width")).toEqual([
+        "1200",
+      ]);
+      expect(metaContents(html, "property", "og:image:height")).toEqual([
+        "630",
+      ]);
+      expect(metaContents(html, "property", "og:image:type")).toEqual([
+        "image/png",
+      ]);
       const expectedTwitter = {
         "twitter:card": "summary_large_image",
         "twitter:title": page.title,
@@ -597,7 +705,9 @@ describe("static route coverage (#123)", () => {
         "twitter:image": image,
       };
       for (const name of TWITTER_PROPERTIES) {
-        expect(metaContents(html, "name", name)).toEqual([htmlAttr(expectedTwitter[name])]);
+        expect(metaContents(html, "name", name)).toEqual([
+          htmlAttr(expectedTwitter[name]),
+        ]);
       }
     }
   });
@@ -617,11 +727,15 @@ describe("static route coverage (#123)", () => {
       "og:image": image,
     };
     for (const [property, value] of Object.entries(expectedProperties)) {
-      expect(metaContents(shell, "property", property)).toEqual([htmlAttr(value)]);
+      expect(metaContents(shell, "property", property)).toEqual([
+        htmlAttr(value),
+      ]);
     }
     expect(metaContents(shell, "property", "og:image:width")).toEqual(["1200"]);
     expect(metaContents(shell, "property", "og:image:height")).toEqual(["630"]);
-    expect(metaContents(shell, "property", "og:image:type")).toEqual(["image/png"]);
+    expect(metaContents(shell, "property", "og:image:type")).toEqual([
+      "image/png",
+    ]);
     const expectedTwitter = {
       "twitter:card": "summary_large_image",
       "twitter:title": "Free AI Credits",
@@ -667,30 +781,44 @@ describe("static route coverage (#123)", () => {
     const home = readFileSync(indexPath, "utf8");
     const description =
       "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
-    expect(metaContents(home, "name", "description")).toEqual([htmlAttr(description)]);
+    expect(metaContents(home, "name", "description")).toEqual([
+      htmlAttr(description),
+    ]);
     expect(canonicalValues(home)).toEqual(["https://freetokens.custats.info/"]);
   });
 
-  it("does not duplicate metadata when prerender runs again", { timeout: 15_000 }, () => {
-    const files = [
-      "index.html",
-      "archive.html",
-      "privacy.html",
-      "about.html",
-      ...index.offers.map((offer) => path.join("offers", `${offer.slug}.html`)),
-    ];
-    // The synthetic-data test above intentionally changes this shared output;
-    // reset it to the default dataset before comparing two real prerenders.
-    prerender(outDir);
-    const before = files.map((file) => readFileSync(path.join(outDir, file), "utf8"));
-    prerender(outDir);
-    const after = files.map((file) => readFileSync(path.join(outDir, file), "utf8"));
-    expect(after).toEqual(before);
-    for (const html of after) {
-      expect(metaContents(html, "property", "og:title")).toHaveLength(1);
-      expect(metaContents(html, "property", "og:description")).toHaveLength(1);
-      expect(metaContents(html, "property", "og:url")).toHaveLength(1);
-      expect(metaContents(html, "name", "twitter:card")).toHaveLength(1);
-    }
-  });
+  it(
+    "does not duplicate metadata when prerender runs again",
+    { timeout: 15_000 },
+    () => {
+      const files = [
+        "index.html",
+        "archive.html",
+        "privacy.html",
+        "about.html",
+        ...index.offers.map((offer) =>
+          path.join("offers", `${offer.slug}.html`),
+        ),
+      ];
+      // The synthetic-data test above intentionally changes this shared output;
+      // reset it to the default dataset before comparing two real prerenders.
+      prerender(outDir);
+      const before = files.map((file) =>
+        readFileSync(path.join(outDir, file), "utf8"),
+      );
+      prerender(outDir);
+      const after = files.map((file) =>
+        readFileSync(path.join(outDir, file), "utf8"),
+      );
+      expect(after).toEqual(before);
+      for (const html of after) {
+        expect(metaContents(html, "property", "og:title")).toHaveLength(1);
+        expect(metaContents(html, "property", "og:description")).toHaveLength(
+          1,
+        );
+        expect(metaContents(html, "property", "og:url")).toHaveLength(1);
+        expect(metaContents(html, "name", "twitter:card")).toHaveLength(1);
+      }
+    },
+  );
 });

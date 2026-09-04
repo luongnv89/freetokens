@@ -54,45 +54,43 @@ describe("lucide-react stays out of the runtime bundle (#122)", () => {
     expect(mapped).toHaveLength(13);
     expect(new Set(mapped).size).toBe(13);
 
-    const lucideImports = [...src.matchAll(/import\(([^)]*lucide-react[^)]*)\)/g)];
+    const lucideImports = [
+      ...src.matchAll(/import\(([^)]*lucide-react[^)]*)\)/g),
+    ];
     expect(lucideImports).toHaveLength(1);
     expect(lucideImports[0][0]).toBe(PER_ICON_IMPORT);
   });
 
-  it(
-    "vite JS chunks contain no lucide-react package code",
-    () => {
-      const outDir = path.join(tmpdir(), `ft-lucide-${process.pid}`);
-      rmSync(outDir, { recursive: true, force: true });
-      try {
-        execFileSync(
-          process.execPath,
-          [
-            "node_modules/vite/bin/vite.js",
-            "build",
-            "--outDir",
-            outDir,
-            "--emptyOutDir",
-          ],
-          { cwd: APP_ROOT, stdio: "pipe" },
-        );
-        const chunks = jsChunksIn(outDir);
-        expect(chunks.length).toBeGreaterThan(0);
-        for (const file of chunks) {
-          const src = readFileSync(file, "utf8");
-          const rel = path.relative(outDir, file);
-          // Module id / license banner of the package itself.
-          expect(src, rel).not.toMatch(/lucide-react/);
-          // Per-icon factory used by every lucide-react component module.
-          expect(src, rel).not.toMatch(/createLucideIcon/);
-          // Barrel re-export: `export { index as icons }` plus alias names
-          // like FingerprintPattern only exist on the full package entry.
-          expect(src, rel).not.toMatch(/FingerprintPattern/);
-        }
-      } finally {
-        rmSync(outDir, { recursive: true, force: true });
+  it("vite JS chunks contain no lucide-react package code", () => {
+    const outDir = path.join(tmpdir(), `ft-lucide-${process.pid}`);
+    rmSync(outDir, { recursive: true, force: true });
+    try {
+      execFileSync(
+        process.execPath,
+        [
+          "node_modules/vite/bin/vite.js",
+          "build",
+          "--outDir",
+          outDir,
+          "--emptyOutDir",
+        ],
+        { cwd: APP_ROOT, stdio: "pipe" },
+      );
+      const chunks = jsChunksIn(outDir);
+      expect(chunks.length).toBeGreaterThan(0);
+      for (const file of chunks) {
+        const src = readFileSync(file, "utf8");
+        const rel = path.relative(outDir, file);
+        // Module id / license banner of the package itself.
+        expect(src, rel).not.toMatch(/lucide-react/);
+        // Per-icon factory used by every lucide-react component module.
+        expect(src, rel).not.toMatch(/createLucideIcon/);
+        // Barrel re-export: `export { index as icons }` plus alias names
+        // like FingerprintPattern only exist on the full package entry.
+        expect(src, rel).not.toMatch(/FingerprintPattern/);
       }
-    },
-    240_000,
-  );
+    } finally {
+      rmSync(outDir, { recursive: true, force: true });
+    }
+  }, 240_000);
 });

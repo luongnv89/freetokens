@@ -30,7 +30,9 @@ function tokensCss() {
 }
 
 function themeToken(name) {
-  const m = tokensCss().match(new RegExp(`(?<![\\w-])${name}: (#[0-9a-fA-F]{6})\\b`));
+  const m = tokensCss().match(
+    new RegExp(`(?<![\\w-])${name}: (#[0-9a-fA-F]{6})\\b`),
+  );
   if (!m) throw new Error(`@theme token ${name} missing from tokens.css`);
   return m[1].toLowerCase();
 }
@@ -57,8 +59,8 @@ function pythonTagTokens() {
 }
 
 function luminance(hex) {
-  const channels = [1, 3, 5].map((i) =>
-    parseInt(hex.slice(i, i + 2), 16) / 255,
+  const channels = [1, 3, 5].map(
+    (i) => parseInt(hex.slice(i, i + 2), 16) / 255,
   );
   const [r, g, b] = channels.map((c) =>
     c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4,
@@ -75,7 +77,10 @@ function contrast(a, b) {
 function tint(hex) {
   const mix = (i) =>
     Math.round(parseInt(hex.slice(i, i + 2), 16) * 0.07 + 255 * 0.93);
-  return `#${[1, 3, 5].map(mix).map((c) => c.toString(16).padStart(2, "0")).join("")}`;
+  return `#${[1, 3, 5]
+    .map(mix)
+    .map((c) => c.toString(16).padStart(2, "0"))
+    .join("")}`;
 }
 
 describe("Tailwind tag-hue tokens (#121)", () => {
@@ -124,7 +129,15 @@ describe("Tag hue distinctness rules (port of TagHueDistinctnessTests)", () => {
   // Twelve tag values share hues on purpose: hue encodes the strength of the
   // claim, not the value — but within a family the hue IS the identifier.
   const hex = (value) => EXPECTED[value][1];
-  const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program", "student"];
+  const CATEGORIES = [
+    "api_provider",
+    "coding",
+    "image",
+    "voice",
+    "video",
+    "startup_program",
+    "student",
+  ];
   const VERIFICATION_LEVELS = ["review_verified", "social_proof", "unverified"];
   const SIGNUP_MODES = ["none", "required"]; // build.py SIGNUP_MODES — expired is a status, not a mode
 
@@ -159,8 +172,9 @@ describe("Clear-all-filters chip rest-state contrast (#126)", () => {
     expect(rest[1]).toMatch(/color:\s*var\(--gray\)/);
     // --gray → --color-muted #6b7280 on --paper #ffffff is ~4.83:1.
     // The inherited 7% ink wash (~#ededed) drops that to ~4.1:1.
-    expect(contrast(themeToken("--color-muted"), themeToken("--color-paper")))
-      .toBeGreaterThanOrEqual(4.5);
+    expect(
+      contrast(themeToken("--color-muted"), themeToken("--color-paper")),
+    ).toBeGreaterThanOrEqual(4.5);
   });
 
   it("keeps the ink fill on hover and focus-visible", () => {

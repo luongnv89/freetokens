@@ -23,6 +23,7 @@ import {
   grantConsent,
   initAnalytics,
   initTrafficStrip,
+  ftPageCounterUrl,
   isGaConfigured,
   isGoatCounterConfigured,
   isTrackingActive,
@@ -75,6 +76,30 @@ function mountTrafficStrip(): HTMLElement {
       <span class="ft-stat ft-traffic-period" hidden>
         <strong id="ft-traffic-period">&mdash;</strong>
         <span class="ft-stat-label">90 days</span>
+      </span>
+    </p>`;
+  return document.getElementById(TRAFFIC_STRIP_ID)!;
+}
+
+/**
+ * The strip as SiteHeader actually ships it: total, today, this page, and no
+ * 90-day span. mountTrafficStrip keeps the period element so the conditional
+ * fetch has a case that exercises both branches.
+ */
+function mountHeaderStrip(): HTMLElement {
+  document.body.innerHTML = `
+    <p class="stat-strip" id="${TRAFFIC_STRIP_ID}" role="status" hidden>
+      <span class="ft-stat ft-traffic-total">
+        <strong id="ft-traffic-total">&mdash;</strong>
+        <span class="ft-stat-label">visits</span>
+      </span>
+      <span class="ft-stat ft-traffic-today" hidden>
+        <strong id="ft-traffic-today">&mdash;</strong>
+        <span class="ft-stat-label">today</span>
+      </span>
+      <span class="ft-stat ft-traffic-page" hidden>
+        <strong id="ft-traffic-page">&mdash;</strong>
+        <span class="ft-stat-label">this page</span>
       </span>
     </p>`;
   return document.getElementById(TRAFFIC_STRIP_ID)!;
@@ -467,9 +492,15 @@ describe("offer_click delegation", () => {
     vi.setSystemTime(new Date("2026-08-25T12:00:00Z"));
     const link = mountOfferLink();
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(eventCalls(gtag, "offer_click")).toHaveLength(1);
     expect(eventCalls(gtag, "offer_click")[0][2]).toEqual({
       offer_id: "copilot",
@@ -488,7 +519,9 @@ describe("offer_click delegation", () => {
     const link = mountOfferLink();
     bindAnalyticsListeners();
     link.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    vi.setSystemTime(new Date("2026-08-25T12:00:00Z").getTime() + OFFER_CLICK_DEDUPE_MS + 1);
+    vi.setSystemTime(
+      new Date("2026-08-25T12:00:00Z").getTime() + OFFER_CLICK_DEDUPE_MS + 1,
+    );
     link.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     expect(eventCalls(gtag, "offer_click")).toHaveLength(2);
   });
@@ -501,7 +534,9 @@ describe("offer_click delegation", () => {
     const link = mountOfferLink();
     bindAnalyticsListeners();
     const prevent = vi.spyOn(Event.prototype, "preventDefault");
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(prevent).not.toHaveBeenCalled();
     expect(eventCalls(gtag, "offer_click")).toHaveLength(1);
   });
@@ -517,7 +552,9 @@ describe("offer_click delegation", () => {
     bindAnalyticsListeners();
     const prevent = vi.spyOn(Event.prototype, "preventDefault");
     expect(() =>
-      link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true })),
+      link.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      ),
     ).not.toThrow();
     expect(prevent).not.toHaveBeenCalled();
   });
@@ -578,7 +615,9 @@ describe("GoatCounter exclusive-end window (#102)", () => {
 
   it("omits start/end for the all-time total (null or omitted days)", () => {
     expect(ftCounterUrl(null, SITE, now)).toBe(`${SITE}/counter/TOTAL.json`);
-    expect(ftCounterUrl(undefined, SITE, now)).toBe(`${SITE}/counter/TOTAL.json`);
+    expect(ftCounterUrl(undefined, SITE, now)).toBe(
+      `${SITE}/counter/TOTAL.json`,
+    );
     expect(ftCounterUrl(undefined, SITE, now)).not.toContain("?");
   });
 
@@ -664,9 +703,9 @@ describe("traffic strip silent hide", () => {
     await initTrafficStrip(SITE);
     expect(box.hidden).toBe(false);
     expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("9,001");
-    expect(
-      (box.querySelector(".ft-traffic-today") as HTMLElement).hidden,
-    ).toBe(true);
+    expect((box.querySelector(".ft-traffic-today") as HTMLElement).hidden).toBe(
+      true,
+    );
     expect(
       (box.querySelector(".ft-traffic-period") as HTMLElement).hidden,
     ).toBe(true);
@@ -693,9 +732,9 @@ describe("traffic strip silent hide", () => {
     expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("12,345");
     expect(box.querySelector("#ft-traffic-today")?.textContent).toBe("8");
     expect(box.querySelector("#ft-traffic-period")?.textContent).toBe("321");
-    expect(
-      (box.querySelector(".ft-traffic-today") as HTMLElement).hidden,
-    ).toBe(false);
+    expect((box.querySelector(".ft-traffic-today") as HTMLElement).hidden).toBe(
+      false,
+    );
     expect(
       (box.querySelector(".ft-traffic-period") as HTMLElement).hidden,
     ).toBe(false);
@@ -744,7 +783,9 @@ describe("bindToolbarListeners leaves search/sort/chips to React", () => {
     sort.dispatchEvent(new Event("change", { bubbles: true }));
     expect(eventCalls(gtag, "sort_use")).toHaveLength(0);
 
-    const chip = document.querySelector("[data-ft-category]") as HTMLButtonElement;
+    const chip = document.querySelector(
+      "[data-ft-category]",
+    ) as HTMLButtonElement;
     chip.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     expect(eventCalls(gtag, "filter_use")).toHaveLength(0);
   });
@@ -759,7 +800,9 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     gtag.mockClear();
     const link = mountOfferLink({ id: "copilot", outbound: true });
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(gc.count).toHaveBeenCalledTimes(1);
     expect(gc.count).toHaveBeenCalledWith({
       path: "offer_click:copilot",
@@ -774,7 +817,9 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     grantConsent();
     const link = mountOfferLink({ id: "copilot" });
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(gc.count).not.toHaveBeenCalled();
   });
 
@@ -785,7 +830,9 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     declineConsent();
     const link = mountOfferLink({ id: "copilot", outbound: true });
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(gc.count).not.toHaveBeenCalled();
   });
 
@@ -809,7 +856,9 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     bindAnalyticsListeners();
     const prevent = vi.spyOn(Event.prototype, "preventDefault");
     expect(() =>
-      link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true })),
+      link.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      ),
     ).not.toThrow();
     expect(prevent).not.toHaveBeenCalled();
   });
@@ -823,8 +872,85 @@ describe("GoatCounter outbound claim-click events (#101)", () => {
     vi.setSystemTime(new Date("2026-08-25T12:00:00Z"));
     const link = mountOfferLink({ id: "copilot", outbound: true });
     bindAnalyticsListeners();
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
-    link.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
+    link.dispatchEvent(
+      new MouseEvent("click", { bubbles: true, cancelable: true }),
+    );
     expect(gc.count).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("per-page traffic (#285 follow-up)", () => {
+  it("builds the page counter URL from the pathname GoatCounter recorded", () => {
+    // count.js reports location.pathname verbatim, so anything normalized
+    // here would query a counter no visit was ever recorded against.
+    expect(ftPageCounterUrl("/about.html", SITE)).toBe(
+      `${SITE}/counter/%2Fabout.html.json`,
+    );
+    expect(ftPageCounterUrl("/", SITE)).toBe(`${SITE}/counter/%2F.json`);
+    // Byte-identical to the route per-offer views have always used.
+    expect(ftPageCounterUrl("/offers/example-offer.html", SITE)).toBe(
+      `${SITE}/counter/%2Foffers%2Fexample-offer.html.json`,
+    );
+  });
+
+  it("fills the this-page count alongside the site total", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const box = mountHeaderStrip();
+    const seen: string[] = [];
+    vi.mocked(fetch).mockImplementation((url) => {
+      const href = String(url);
+      seen.push(href);
+      if (href.includes("%2F")) return Promise.resolve(counterOk("512"));
+      if (href.includes("start=")) return Promise.resolve(counterOk("143"));
+      return Promise.resolve(counterOk("12480"));
+    });
+    await initTrafficStrip(SITE);
+    expect(box.hidden).toBe(false);
+    expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("12,480");
+    expect(box.querySelector("#ft-traffic-today")?.textContent).toBe("143");
+    expect(box.querySelector("#ft-traffic-page")?.textContent).toBe("512");
+    expect((box.querySelector(".ft-traffic-page") as HTMLElement).hidden).toBe(
+      false,
+    );
+  });
+
+  it("fetches a window only when its element is mounted", async () => {
+    configureAnalytics({ statsSite: SITE });
+    mountHeaderStrip();
+    const seen: string[] = [];
+    vi.mocked(fetch).mockImplementation((url) => {
+      seen.push(String(url));
+      return Promise.resolve(counterOk("1"));
+    });
+    await initTrafficStrip(SITE);
+    // The header strip has no 90-day span, so that request is never made.
+    expect(seen.some((u) => u.includes("%2F"))).toBe(true);
+    expect(seen.filter((u) => u.includes("start=")).length).toBe(1);
+    expect(seen.length).toBe(3);
+  });
+
+  it("collapses only the this-page window when its counter has no data", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const box = mountHeaderStrip();
+    vi.mocked(fetch).mockImplementation((url) => {
+      if (String(url).includes("%2F")) {
+        return Promise.resolve({
+          ok: false,
+          json: async () => ({}),
+        } as Response);
+      }
+      return Promise.resolve(counterOk("7"));
+    });
+    await initTrafficStrip(SITE);
+    // The strip still reveals; a page nobody has visited yet must not take
+    // the site total down with it.
+    expect(box.hidden).toBe(false);
+    expect(box.querySelector("#ft-traffic-total")?.textContent).toBe("7");
+    expect(
+      (box.querySelector(".ft-traffic-page") as HTMLElement).dataset.traffic,
+    ).toBe("off");
   });
 });

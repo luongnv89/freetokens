@@ -21,8 +21,7 @@ const buttonVariants = cva("", {
   variants: {
     variant: {
       default: `${buttonChrome} bg-primary text-primary-foreground hover:bg-primary/90`,
-      destructive:
-        `${buttonChrome} bg-destructive text-primary-foreground hover:bg-destructive/90`,
+      destructive: `${buttonChrome} bg-destructive text-primary-foreground hover:bg-destructive/90`,
       outline: `${buttonChrome} border border-border bg-background hover:bg-secondary`,
       secondary: `${buttonChrome} bg-secondary text-secondary-foreground hover:bg-secondary/80`,
       ghost: `${buttonChrome} hover:bg-secondary`,

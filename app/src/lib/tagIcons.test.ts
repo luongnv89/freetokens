@@ -25,7 +25,9 @@ const EXPECTED_TAGS = [
 describe("lucide tag-icon mapping (#122)", () => {
   it("maps exactly the thirteen tag values", () => {
     expect(Object.keys(TAG_ICONS).sort()).toEqual([...EXPECTED_TAGS].sort());
-    expect(Object.keys(TAG_LUCIDE_MAP).sort()).toEqual([...EXPECTED_TAGS].sort());
+    expect(Object.keys(TAG_LUCIDE_MAP).sort()).toEqual(
+      [...EXPECTED_TAGS].sort(),
+    );
   });
 
   it("records a lucide icon name and shape note for every value", () => {

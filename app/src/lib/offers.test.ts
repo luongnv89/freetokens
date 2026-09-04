@@ -137,7 +137,11 @@ describe("offerMatches", () => {
   const base = emptyState();
 
   it("matches a lowercase substring on title, provider, or amount", () => {
-    const row = offer({ title: "Copilot Pro", provider: "GitHub", amount: "$10 credits" });
+    const row = offer({
+      title: "Copilot Pro",
+      provider: "GitHub",
+      amount: "$10 credits",
+    });
     expect(offerMatches(row, { ...base, q: "copilot" })).toBe(true);
     expect(offerMatches(row, { ...base, q: "GITHUB" })).toBe(true);
     expect(offerMatches(row, { ...base, q: "credits" })).toBe(true);
@@ -160,7 +164,9 @@ describe("offerMatches", () => {
     };
     expect(offerMatches(row, state)).toBe(true);
     expect(offerMatches(row, { ...state, category: "image" })).toBe(false);
-    expect(offerMatches(row, { ...state, verification: "unverified" })).toBe(false);
+    expect(offerMatches(row, { ...state, verification: "unverified" })).toBe(
+      false,
+    );
     expect(offerMatches(row, { ...state, signup: "none" })).toBe(false);
     expect(offerMatches(row, { ...state, q: "beta" })).toBe(false);
   });
@@ -192,20 +198,36 @@ describe("applySort", () => {
   ];
 
   it("puts dated expiries first (ascending) and null expiry last", () => {
-    expect(applySort(rows, "expiring").map((o) => o.slug)).toEqual(["c", "a", "b"]);
+    expect(applySort(rows, "expiring").map((o) => o.slug)).toEqual([
+      "c",
+      "a",
+      "b",
+    ]);
   });
 
   it("orders newest by verified_date descending", () => {
-    expect(applySort(rows, "newest").map((o) => o.slug)).toEqual(["b", "c", "a"]);
+    expect(applySort(rows, "newest").map((o) => o.slug)).toEqual([
+      "b",
+      "c",
+      "a",
+    ]);
   });
 
   it("orders amount descending by amountSortValue", () => {
-    expect(applySort(rows, "amount").map((o) => o.slug)).toEqual(["b", "c", "a"]);
+    expect(applySort(rows, "amount").map((o) => o.slug)).toEqual([
+      "b",
+      "c",
+      "a",
+    ]);
   });
 
   it("keeps original index order for empty or invalid sort", () => {
     expect(applySort(rows, "").map((o) => o.slug)).toEqual(["a", "b", "c"]);
-    expect(applySort(rows, "bogus").map((o) => o.slug)).toEqual(["a", "b", "c"]);
+    expect(applySort(rows, "bogus").map((o) => o.slug)).toEqual([
+      "a",
+      "b",
+      "c",
+    ]);
   });
 });
 
@@ -217,14 +239,26 @@ describe("match+sort performance", () => {
         title: i % 2 === 0 ? `Alpha ${i}` : `Beta ${i}`,
         provider: `Provider ${i}`,
         amount: `$${i} credits`,
-        expiry_date: i % 5 === 0 ? null : `2026-${String((i % 12) + 1).padStart(2, "0")}-15`,
+        expiry_date:
+          i % 5 === 0
+            ? null
+            : `2026-${String((i % 12) + 1).padStart(2, "0")}-15`,
         verified_date: `2026-01-01`,
-        category: (["coding", "image", "voice", "video", "api_provider"] as const)[i % 5],
+        category: (
+          ["coding", "image", "voice", "video", "api_provider"] as const
+        )[i % 5],
       }),
     );
-    const state = { ...emptyState(), q: "alpha", sort: "expiring", category: "coding" };
+    const state = {
+      ...emptyState(),
+      q: "alpha",
+      sort: "expiring",
+      category: "coding",
+    };
     const t0 = performance.now();
-    const matched = applySort(rows, state.sort).filter((row) => offerMatches(row, state));
+    const matched = applySort(rows, state.sort).filter((row) =>
+      offerMatches(row, state),
+    );
     const elapsed = performance.now() - t0;
     expect(matched.length).toBeGreaterThan(0);
     expect(elapsed).toBeLessThan(100);

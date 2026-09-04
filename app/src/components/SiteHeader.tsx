@@ -1,37 +1,56 @@
-import { BrandMark } from "./BrandMark"
+import { BrandMark } from "./BrandMark";
+import { TrafficStrip } from "./TrafficStrip";
 
 /**
  * Shared header chrome for every page (#112): the same brand bar and
  * primary nav render on every route, so navigating between pages shows
  * no jump in layout or branding. `depth` mirrors SiteFooter (0 for root
  * pages, 1 for offers/<slug>.html) and prefixes every href; `current`
- * drives the active nav state. The shared bar renders a wordmark; each route
- * renders its own page heading below this bar.
+ * drives the active nav state.
+ *
+ * The bar carries brand, nav and the live traffic strip, and nothing else.
+ * The editorial slogan and its sub-paragraph are gone: the masthead proof
+ * line below already states what the list is and how it is maintained, in
+ * numbers that are derived rather than asserted.
+ *
+ * The wordmark is the home page's `h1`. That is not cosmetic — dropping the
+ * slogan removed the only `h1` home had, and every other route carries its
+ * own page heading, so the wordmark is promoted on home and stays a span
+ * everywhere else rather than competing with those headings.
+ *
+ * TrafficStrip mounts here and ONLY here. Its element ids are looked up with
+ * getElementById, so a second mount elsewhere on the page would never be
+ * populated. `pageViews` is false where the page already shows its own view
+ * count — offer detail pages — so the number is not printed twice.
  */
 export function SiteHeader({
   depth = 0,
   current,
-  slogan,
+  pageViews = true,
 }: {
-  depth?: number
-  current?: "home" | "archive" | "privacy" | "about"
-  slogan?: string
+  depth?: number;
+  current?: "home" | "archive" | "privacy" | "about";
+  pageViews?: boolean;
 }) {
-  const up = "../".repeat(depth)
-  const homeHref = `${up || "./"}index.html`
-  const showSlogan = slogan ?? (current === "home"
-    ? "Every claimable free AI credit offer — verified, tagged, and on one fast page."
-    : undefined)
-  const SloganTag = current === "home" ? "h1" : "p"
+  const up = "../".repeat(depth);
+  const homeHref = `${up || "./"}index.html`;
+  const Wordmark = current === "home" ? "h1" : "span";
   return (
     <div className="site-header">
       <div className="site-bar">
-        <a className="site-brand" href={homeHref} aria-label="Free AI Credits — home">
+        <a
+          className="site-brand"
+          href={homeHref}
+          aria-label="Free AI Credits — home"
+        >
           <BrandMark depth={depth} size={28} alt="" priority />
-          <span className="site-wordmark">Free AI Credits</span>
+          <Wordmark className="site-wordmark">Free AI Credits</Wordmark>
         </a>
         <nav className="site-nav" aria-label="Primary">
-          <a href={homeHref} aria-current={current === "home" ? "page" : undefined}>
+          <a
+            href={homeHref}
+            aria-current={current === "home" ? "page" : undefined}
+          >
             Offers
           </a>
           <a
@@ -60,15 +79,21 @@ export function SiteHeader({
             </svg>
             Archive
           </a>
-          <a href={`${up}about.html`} aria-current={current === "about" ? "page" : undefined}>
+          <a
+            href={`${up}about.html`}
+            aria-current={current === "about" ? "page" : undefined}
+          >
             About
           </a>
-          <a href={`${up}privacy.html`} aria-current={current === "privacy" ? "page" : undefined}>
+          <a
+            href={`${up}privacy.html`}
+            aria-current={current === "privacy" ? "page" : undefined}
+          >
             Privacy
           </a>
         </nav>
       </div>
-      {showSlogan ? <SloganTag className="site-slogan">{showSlogan}</SloganTag> : null}
+      <TrafficStrip pageViews={pageViews} />
     </div>
-  )
+  );
 }

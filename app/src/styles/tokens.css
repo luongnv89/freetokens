@@ -19,19 +19,73 @@
    text over its 7% tint at rest, and under white text when filled on
    hover/active — asserted per token in tests/design-tokens.test.mjs.
 
+   The thirteen values below are unchanged by the dark redesign, and must
+   stay unchanged: they are the porting baseline from the decommissioned
+   Python builder and design-tokens.test.mjs pins every one to its hex.
+   What changed is how they are PAINTED. These hexes were picked to clear AA
+   as ink-side colours on white; on a #0e1013 ground several of them (navy
+   #1e3a5f, indigo #3538cd) are darker than the page itself, so painting them
+   raw would be unreadable. The dark listing therefore derives two colours
+   per hue at use time, in .badge:
+
+     text  color-mix(in srgb, <hue> 60%, white)      — lifted off the ground
+     fill  color-mix(in srgb, <hue> 18%, var(--paper)) — the hue as a plane
+
+   Those two ratios are not taste. They are the widest pair for which all
+   thirteen hues (plus --color-hot) clear AA against the pill fill, the page
+   ground AND the row hover surface simultaneously; the binding case is
+   social_proof navy at 4.88:1, and 65%/22% drops it to 4.26:1. Held by
+   tests/dark-tag-contrast.test.mjs, which recomputes the mix rather than
+   trusting the ratios written here.
+
    Spacing stays on Tailwind's default scale: the design speaks in plain rem
    values that the scale already expresses, so no custom spacing tokens.
 */
 @theme {
-  /* Base palette */
-  --color-ink: #000000;
-  --color-paper: #ffffff;
-  --color-muted: #6b7280;
-  --color-accent: #22c55e;
-  --color-hairline: rgba(0, 0, 0, 0.16);
+  /* Base palette — inverted for the dark listing.
 
-  /* Typography */
-  --font-sans: "Bricolage Grotesque", system-ui, sans-serif;
+     `ink` and `paper` are ROLES, not literals: ink is whatever the page
+     writes with, paper is whatever it writes on. Flipping the two values
+     here is what turns the whole site dark without touching the ~1900 rules
+     that reference them, and it is why `.chip.clear` (asserted verbatim in
+     design-tokens.test.mjs as gray-on-paper inverting to an ink fill) still
+     describes exactly the right interaction after the flip.
+
+     The three values are chosen against the ground, not by eye:
+       ink    #e9edf2 on #0e1013 = 16.20:1
+       muted  #98a2ae on #0e1013 =  7.36:1  (the .chip.clear AA gate)
+       accent #22c55e on #0e1013 =  8.36:1  (unchanged — the brand green
+              needed no adjustment to survive the inversion)
+     Ink is deliberately not #ffffff: pure white on near-black haloes at
+     small sizes, and the whole listing is small text. */
+  --color-ink: #e9edf2;
+  --color-paper: #0e1013;
+  --color-muted: #98a2ae;
+  --color-accent: #22c55e;
+  --color-hairline: rgba(233, 237, 242, 0.12);
+  /* Control borders must clear the WCAG 1.4.11 3:1 floor against both
+     planes; 0.4 ink alpha is the minimum that does (surface 3.43, surface-2
+     3.37). Decorative separators stay on --color-hairline. */
+  --hairline-strong: rgba(233, 237, 242, 0.4);
+
+  /* Two raised planes above the ground. `surface` is the row/panel plane,
+     `surface-2` the control plane (inputs, chips) that must read as sitting
+     on top of a panel. Dark UI cannot lean on shadow the way light UI does —
+     a shadow on near-black is invisible — so depth here is carried by these
+     steps plus a top hairline, never by shadow alone. */
+  --color-surface: #16191f;
+  --color-surface-2: #1d2129;
+  /* A white wash replaces every rgba(0,0,0,x) the light design used for
+     hover and inset states; black-on-black is not a state change. */
+  --color-wash: rgba(233, 237, 242, 0.045);
+
+  /* Typography — both faces are self-hosted under /fonts (CSP is
+     `font-src 'self' data:`, so a Google Fonts link would be blocked and
+     silently fall back, which is exactly what the previous stack did: it
+     named Bricolage Grotesque and IBM Plex Mono while shipping neither).
+     Archivo is variable on BOTH weight and width, which is what lets the
+     wordmark run expanded and heavy while the titles stay normal width. */
+  --font-sans: Archivo, ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Tag hues — category family (what the credits BUY) */
@@ -71,15 +125,15 @@
 :root {
   --background: var(--color-paper);
   --foreground: var(--color-ink);
-  --card: var(--color-paper);
+  --card: var(--color-surface);
   --card-foreground: var(--color-ink);
-  --popover: var(--color-paper);
+  --popover: var(--color-surface);
   --popover-foreground: var(--color-ink);
   --primary: var(--color-ink);
   --primary-foreground: var(--color-paper);
-  --secondary: var(--color-paper);
+  --secondary: var(--color-surface-2);
   --secondary-foreground: var(--color-ink);
-  --muted: var(--color-paper);
+  --muted: var(--color-surface);
   --muted-foreground: var(--color-muted);
   --accent: var(--color-accent);
   --accent-foreground: var(--color-ink);

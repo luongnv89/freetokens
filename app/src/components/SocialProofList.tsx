@@ -3,19 +3,19 @@ import {
   renderableProofs,
   resolveAsset,
   type SocialProof,
-} from "../lib/offerDetails"
+} from "../lib/offerDetails";
 
 function ProofCard({
   entry,
   relPrefix,
   eager = false,
 }: {
-  entry: SocialProof
-  relPrefix: string
-  eager?: boolean
+  entry: SocialProof;
+  relPrefix: string;
+  eager?: boolean;
 }) {
   if (entry.type === "screenshot") {
-    const src = resolveAsset(entry.image, relPrefix)
+    const src = resolveAsset(entry.image, relPrefix);
     return (
       <figure className="proof-card proof-screenshot">
         <img
@@ -30,19 +30,19 @@ function ProofCard({
         />
         <figcaption>{entry.caption}</figcaption>
       </figure>
-    )
+    );
   }
   const head =
     entry.type === "link" ? (
       <p className="proof-text">
         <strong>{entry.title}</strong>
       </p>
-    ) : null
-  const meta = "author" in entry ? entry.author : ""
-  const handle = entry.type === "x" ? entry.handle : undefined
-  const community = entry.type === "reddit" ? entry.community : undefined
-  const text = "text" in entry ? entry.text : undefined
-  const label = PROOF_LINK_LABELS[entry.type]
+    ) : null;
+  const meta = "author" in entry ? entry.author : "";
+  const handle = entry.type === "x" ? entry.handle : undefined;
+  const community = entry.type === "reddit" ? entry.community : undefined;
+  const text = "text" in entry ? entry.text : undefined;
+  const label = PROOF_LINK_LABELS[entry.type];
   return (
     <blockquote className={`proof-card proof-${entry.type}`}>
       {head}
@@ -66,7 +66,7 @@ function ProofCard({
         </a>
       </footer>
     </blockquote>
-  )
+  );
 }
 
 /**
@@ -78,12 +78,14 @@ export function SocialProofList({
   proofs,
   relPrefix = "../",
 }: {
-  proofs?: unknown
-  relPrefix?: string
+  proofs?: unknown;
+  relPrefix?: string;
 }) {
-  const entries = renderableProofs(proofs)
-  if (entries.length === 0) return null
-  const firstScreenshotIndex = entries.findIndex((e) => e.type === "screenshot")
+  const entries = renderableProofs(proofs);
+  if (entries.length === 0) return null;
+  const firstScreenshotIndex = entries.findIndex(
+    (e) => e.type === "screenshot",
+  );
   return (
     <section className="od-proof">
       <h2>Social proof</h2>
@@ -96,5 +98,5 @@ export function SocialProofList({
         />
       ))}
     </section>
-  )
+  );
 }

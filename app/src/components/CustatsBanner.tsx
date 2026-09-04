@@ -28,5 +28,5 @@ export function CustatsBanner() {
         </a>
       </p>
     </aside>
-  )
+  );
 }

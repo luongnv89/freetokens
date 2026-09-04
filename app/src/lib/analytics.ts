@@ -23,7 +23,11 @@ export const GC_SCRIPT_ID = "ft-gc-script";
 export const CONSENT_GRANTED_EVENT = "ft-consent-granted";
 export const TRAFFIC_STRIP_ID = "ft-traffic";
 
-export const FILTER_DIMENSIONS = ["category", "verification", "signup"] as const;
+export const FILTER_DIMENSIONS = [
+  "category",
+  "verification",
+  "signup",
+] as const;
 export type FilterDimension = (typeof FILTER_DIMENSIONS)[number];
 
 export type FilterUseParams = Record<FilterDimension, string>;
@@ -45,7 +49,9 @@ type AnalyticsConfig = {
 };
 
 type GtagFn = (...args: unknown[]) => void;
-type GoatCounterApi = { count?: (hit: { path: string; event?: boolean }) => void };
+type GoatCounterApi = {
+  count?: (hit: { path: string; event?: boolean }) => void;
+};
 type BannerListener = (visible: boolean) => void;
 
 function readGaDefine(): string {
@@ -199,7 +205,9 @@ export function buildPageViewParams(
   };
 }
 
-export function buildOfferClickParams(input: OfferClickParams): OfferClickParams {
+export function buildOfferClickParams(
+  input: OfferClickParams,
+): OfferClickParams {
   return {
     offer_id: input.offer_id,
     provider: input.provider,
@@ -219,7 +227,9 @@ export function buildFilterUseParams(
 
 /** Privacy: length only — never a raw query string. */
 export function buildSearchParams(queryLength: number): SearchParams {
-  const n = Number.isFinite(queryLength) ? Math.max(0, Math.floor(queryLength)) : 0;
+  const n = Number.isFinite(queryLength)
+    ? Math.max(0, Math.floor(queryLength))
+    : 0;
   return { query_length: n };
 }
 
@@ -270,7 +280,10 @@ export function loadGoatCounter(site: string = config.statsSite): void {
   document.head.appendChild(s);
 }
 
-export function trackEvent(name: string, params: Record<string, unknown>): void {
+export function trackEvent(
+  name: string,
+  params: Record<string, unknown>,
+): void {
   if (!trackingActive) return;
   if (!config.measurementId) return;
   const gtag = gtagWindow().gtag;
@@ -456,17 +469,44 @@ function revealTrafficWindow(
   if (wrap instanceof HTMLElement) wrap.hidden = false;
 }
 
+/**
+ * Counter URL for one page's own all-time views.
+ *
+ * The path is `location.pathname` verbatim, because that is exactly what
+ * GoatCounter's count.js reports as the page path — anything normalized here
+ * would query a counter no visit was ever recorded against. It is the same
+ * unwindowed route per-offer views already use, so an offer detail page and
+ * `ftOfferViewsUrl` agree on the byte.
+ */
+export function ftPageCounterUrl(
+  path: string,
+  site: string = config.statsSite,
+): string {
+  return `${site}/counter/${encodeURIComponent(path)}.json`;
+}
+
 export async function initTrafficStrip(
   site: string = config.statsSite,
 ): Promise<void> {
   if (!isBrowser() || !site) return;
   const box = document.getElementById(TRAFFIC_STRIP_ID);
   if (!box || typeof fetch !== "function") return;
+  // Fetch a window only when its element is mounted. The header strip omits
+  // the 90-day span, so this is one fewer request on every page load rather
+  // than a number nothing displays.
+  const wanted = (selector: string, url: string) =>
+    box.querySelector(selector)
+      ? fetchCounterCount(url)
+      : Promise.resolve(null);
+  const pagePath = window.location?.pathname ?? "";
   try {
-    const [total, today, period] = await Promise.all([
+    const [total, today, period, page] = await Promise.all([
       fetchCounterCount(ftCounterUrl(null, site)),
-      fetchCounterCount(ftCounterUrl(1, site)),
-      fetchCounterCount(ftCounterUrl(90, site)),
+      wanted(".ft-traffic-today", ftCounterUrl(1, site)),
+      wanted(".ft-traffic-period", ftCounterUrl(90, site)),
+      pagePath
+        ? wanted(".ft-traffic-page", ftPageCounterUrl(pagePath, site))
+        : Promise.resolve(null),
     ]);
     if (total === null) {
       box.dataset.traffic = "off";
@@ -475,7 +515,13 @@ export async function initTrafficStrip(
     const totalEl = box.querySelector("#ft-traffic-total");
     if (totalEl) totalEl.textContent = ftFormatCount(total);
     revealTrafficWindow(box, today, "#ft-traffic-today", ".ft-traffic-today");
-    revealTrafficWindow(box, period, "#ft-traffic-period", ".ft-traffic-period");
+    revealTrafficWindow(
+      box,
+      period,
+      "#ft-traffic-period",
+      ".ft-traffic-period",
+    );
+    revealTrafficWindow(box, page, "#ft-traffic-page", ".ft-traffic-page");
     box.hidden = false;
   } catch {
     /* silent collapse — ad block, offline, malformed payload */

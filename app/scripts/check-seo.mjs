@@ -14,7 +14,14 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const DEFAULT_BASE_URL = "https://freetokens.custats.info";
-export const OG_PROPERTIES = ["og:title", "og:description", "og:url", "og:type", "og:site_name", "og:image"];
+export const OG_PROPERTIES = [
+  "og:title",
+  "og:description",
+  "og:url",
+  "og:type",
+  "og:site_name",
+  "og:image",
+];
 
 function headOf(html) {
   const end = html.indexOf("</head>");
@@ -34,13 +41,20 @@ function metaContents(html, attribute, name) {
   const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return [
     ...headOf(html).matchAll(
-      new RegExp(`<meta\\s+${attribute}="${escapedName}"\\s+content="([^"]*)"\\s*/?>`, "g"),
+      new RegExp(
+        `<meta\\s+${attribute}="${escapedName}"\\s+content="([^"]*)"\\s*/?>`,
+        "g",
+      ),
     ),
   ].map((m) => m[1]);
 }
 
 function canonicalValues(html) {
-  return [...headOf(html).matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?>(?:\s*)/g)].map((m) => m[1]);
+  return [
+    ...headOf(html).matchAll(
+      /<link\s+rel="canonical"\s+href="([^"]+)"\s*\/?>(?:\s*)/g,
+    ),
+  ].map((m) => m[1]);
 }
 
 function hasBreadcrumbJsonLd(html) {
@@ -55,7 +69,11 @@ function hasBreadcrumbJsonLd(html) {
       const parsed = JSON.parse(html.slice(start + marker.length, end));
       if (parsed["@type"] === "BreadcrumbList") return true;
       // Also handle array of blocks
-      if (Array.isArray(parsed) && parsed.some((p) => p["@type"] === "BreadcrumbList")) return true;
+      if (
+        Array.isArray(parsed) &&
+        parsed.some((p) => p["@type"] === "BreadcrumbList")
+      )
+        return true;
     } catch {
       // invalid JSON-LD counts as present but broken — caller will treat as missing
     }
@@ -80,15 +98,21 @@ export function collectIssues(html, relativePath, baseUrl = DEFAULT_BASE_URL) {
   } else {
     const expected = expectedCanonical(relativePath, baseUrl);
     if (canon[0] !== expected) {
-      issues.push(`${relativePath}: canonical mismatch (expected ${expected} got ${canon[0]})`);
+      issues.push(
+        `${relativePath}: canonical mismatch (expected ${expected} got ${canon[0]})`,
+      );
     }
     try {
       const url = new URL(canon[0]);
       if (!["http:", "https:"].includes(url.protocol) || !url.host) {
-        issues.push(`${relativePath}: canonical href is not absolute: ${canon[0]}`);
+        issues.push(
+          `${relativePath}: canonical href is not absolute: ${canon[0]}`,
+        );
       }
     } catch {
-      issues.push(`${relativePath}: canonical href is not a valid URL: ${canon[0]}`);
+      issues.push(
+        `${relativePath}: canonical href is not a valid URL: ${canon[0]}`,
+      );
     }
   }
 
@@ -135,11 +159,19 @@ function collectHtmlFiles(distDir) {
 
 export function checkDist(distDir, baseUrl = DEFAULT_BASE_URL) {
   if (!existsSync(distDir)) {
-    return { ok: false, issues: [`dist directory not found: ${distDir}`], filesChecked: 0 };
+    return {
+      ok: false,
+      issues: [`dist directory not found: ${distDir}`],
+      filesChecked: 0,
+    };
   }
   const htmlFiles = collectHtmlFiles(distDir);
   if (htmlFiles.length === 0) {
-    return { ok: false, issues: [`no HTML files found in: ${distDir}`], filesChecked: 0 };
+    return {
+      ok: false,
+      issues: [`no HTML files found in: ${distDir}`],
+      filesChecked: 0,
+    };
   }
   const allIssues = [];
   for (const filePath of htmlFiles) {
@@ -157,17 +189,29 @@ export function checkDist(distDir, baseUrl = DEFAULT_BASE_URL) {
       allIssues.push(`${relative}: cannot parse head (${e.message})`);
     }
   }
-  return { ok: allIssues.length === 0, issues: allIssues, filesChecked: htmlFiles.length };
+  return {
+    ok: allIssues.length === 0,
+    issues: allIssues,
+    filesChecked: htmlFiles.length,
+  };
 }
 
 // CLI entry
-const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+const isMain =
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
 if (isMain) {
-  let distDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "dist");
+  let distDir = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "..",
+    "dist",
+  );
   let baseUrl = DEFAULT_BASE_URL;
   for (let i = 2; i < process.argv.length; i++) {
-    if (process.argv[i] === "--dist" && process.argv[i + 1]) distDir = path.resolve(process.argv[++i]);
-    else if (process.argv[i] === "--base-url" && process.argv[i + 1]) baseUrl = process.argv[++i];
+    if (process.argv[i] === "--dist" && process.argv[i + 1])
+      distDir = path.resolve(process.argv[++i]);
+    else if (process.argv[i] === "--base-url" && process.argv[i + 1])
+      baseUrl = process.argv[++i];
   }
   // Allow env override consistent with prerender
   if (process.env.CHECK_SEO_BASE_URL) baseUrl = process.env.CHECK_SEO_BASE_URL;
@@ -179,7 +223,9 @@ if (isMain) {
     for (const issue of result.issues) {
       console.error(issue);
     }
-    console.error(`SEO heads failed — ${result.issues.length} issue(s) in ${result.filesChecked} files`);
+    console.error(
+      `SEO heads failed — ${result.issues.length} issue(s) in ${result.filesChecked} files`,
+    );
     process.exit(1);
   }
 }

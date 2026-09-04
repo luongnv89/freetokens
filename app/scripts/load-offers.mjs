@@ -5,13 +5,22 @@
 //
 // Semantics mirror scripts/build.py exactly: same flat-YAML subset, same
 // validation error messages, same build-time `status` computation (ADR 0001 —
-// expiry is evaluated against the BUILD clock, never a client clock), same
-// newest-verified-first order, same index.json wrapper shape.
+// expiry is evaluated against the BUILD clock, never a client clock) and the
+// same index.json wrapper shape. Order differs deliberately: newest-ADDED
+// first (see readAddedDates), which the Python builder had no way to express.
 //
 // Usage: node scripts/load-offers.mjs [--offers-dir ../offers] [--out src/data]
 
-import { readdir, readFile, writeFile, mkdir, rm, lstat } from "node:fs/promises";
+import {
+  readdir,
+  readFile,
+  writeFile,
+  mkdir,
+  rm,
+  lstat,
+} from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -32,7 +41,15 @@ const REQUIRED_FIELDS = [
   "review_status",
   "signup",
 ];
-const CATEGORIES = ["api_provider", "coding", "image", "voice", "video", "startup_program", "student"];
+const CATEGORIES = [
+  "api_provider",
+  "coding",
+  "image",
+  "voice",
+  "video",
+  "startup_program",
+  "student",
+];
 const VERIFICATION_LEVELS = ["social_proof", "unverified"];
 const REVIEW_STATUSES = ["verified", "unverified", "under-review"];
 const SIGNUP_MODES = ["none", "required"];
@@ -43,7 +60,11 @@ export class OfferError extends Error {}
 
 function parseScalar(raw) {
   const value = raw.trim();
-  if (value.length >= 2 && value[0] === value[value.length - 1] && (value[0] === '"' || value[0] === "'")) {
+  if (
+    value.length >= 2 &&
+    value[0] === value[value.length - 1] &&
+    (value[0] === '"' || value[0] === "'")
+  ) {
     return value.slice(1, -1);
   }
   if (NULL_TOKENS.has(value.toLowerCase())) return null;
@@ -68,10 +89,14 @@ export function parseOfferText(text, filename) {
     }
     const key = line.slice(0, sep).trim();
     if (!key || key.includes(" ")) {
-      throw new OfferError(`${filename}:${lineno}: invalid field name ${JSON.stringify(key)}`);
+      throw new OfferError(
+        `${filename}:${lineno}: invalid field name ${JSON.stringify(key)}`,
+      );
     }
     if (key in data) {
-      throw new OfferError(`${filename}:${lineno}: duplicate field ${JSON.stringify(key)}`);
+      throw new OfferError(
+        `${filename}:${lineno}: duplicate field ${JSON.stringify(key)}`,
+      );
     }
     data[key] = parseScalar(line.slice(sep + 1));
   });
@@ -102,11 +127,15 @@ function parseDate(value, field, filename) {
 export function validateOffer(data, filename, today) {
   const missing = REQUIRED_FIELDS.filter((f) => !(f in data));
   if (missing.length) {
-    throw new OfferError(`${filename}: missing required fields: ${missing.join(", ")}`);
+    throw new OfferError(
+      `${filename}: missing required fields: ${missing.join(", ")}`,
+    );
   }
   const unknown = Object.keys(data).filter((k) => !REQUIRED_FIELDS.includes(k));
   if (unknown.length) {
-    throw new OfferError(`${filename}: unknown fields: ${unknown.sort().join(", ")}`);
+    throw new OfferError(
+      `${filename}: unknown fields: ${unknown.sort().join(", ")}`,
+    );
   }
 
   for (const field of ["title", "provider", "amount"]) {
@@ -147,7 +176,10 @@ export function validateOffer(data, filename, today) {
   }
 
   const url = data.source_url;
-  if (typeof url !== "string" || !(url.startsWith("http://") || url.startsWith("https://"))) {
+  if (
+    typeof url !== "string" ||
+    !(url.startsWith("http://") || url.startsWith("https://"))
+  ) {
     throw new OfferError(
       `${filename}: source_url must be an http(s) URL, got ${JSON.stringify(url)}`,
     );
@@ -179,14 +211,16 @@ export async function loadOffers(offersDir, today = todayISO()) {
     ...entries
       .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
       .map((f) => ({ dir: offersDir, name: f })),
-    ...(await Promise.all(
-      subdirs.map(async (subdir) => {
-        const subEntries = await readdir(path.join(offersDir, subdir));
-        return subEntries
-          .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
-          .map((f) => ({ dir: path.join(offersDir, subdir), name: f }));
-      }),
-    )).flat(),
+    ...(
+      await Promise.all(
+        subdirs.map(async (subdir) => {
+          const subEntries = await readdir(path.join(offersDir, subdir));
+          return subEntries
+            .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
+            .map((f) => ({ dir: path.join(offersDir, subdir), name: f }));
+        }),
+      )
+    ).flat(),
   ];
   const offers = [];
   for (const { dir, name } of candidates) {
@@ -225,14 +259,16 @@ export async function loadDetails(offersDir, validSlugs) {
     ...entries
       .filter((f) => f.endsWith(".json") && !subdirs.includes(f))
       .map((f) => ({ dir: detailsDir, name: f })),
-    ...(await Promise.all(
-      subdirs.map(async (subdir) => {
-        const subEntries = await readdir(path.join(detailsDir, subdir));
-        return subEntries
-          .filter((f) => f.endsWith(".json"))
-          .map((f) => ({ dir: path.join(detailsDir, subdir), name: f }));
-      }),
-    )).flat(),
+    ...(
+      await Promise.all(
+        subdirs.map(async (subdir) => {
+          const subEntries = await readdir(path.join(detailsDir, subdir));
+          return subEntries
+            .filter((f) => f.endsWith(".json"))
+            .map((f) => ({ dir: path.join(detailsDir, subdir), name: f }));
+        }),
+      )
+    ).flat(),
   ];
   for (const { dir, name } of paths) {
     const full = path.join(dir, name);
@@ -251,11 +287,78 @@ export async function loadDetails(offersDir, validSlugs) {
   return details;
 }
 
-export function buildIndex(offers, now = new Date()) {
-  // Default order (#70): newest-verified first, ties by slug ascending.
+/**
+ * When each offer file was FIRST committed, read from git history.
+ *
+ * The schema has no "added" date and is not ours to extend, but the listing
+ * needs one: `verified_date` is when an offer was last CHECKED, and a
+ * re-verification sweep sets it to the same day for every file at once — all
+ * 47 live offers currently share one verified_date, which is why sorting by
+ * it is a no-op and why the default order was really alphabetical. The first
+ * commit that added a file is the one honest record of when the offer showed
+ * up, it costs the curator nothing to maintain, and a new offer gets the
+ * right date automatically.
+ *
+ * One `git log` for the whole directory rather than one per file. Walking
+ * newest-first and overwriting means the value left behind is the OLDEST add
+ * for each path, which is what "when did this first appear" means for a file
+ * that was removed and later restored.
+ *
+ * Returns {} on any failure — no git binary, no repository, or a shallow
+ * clone with no history (CI checkouts default to depth 1, which is why
+ * deploy.yml and validate.yml now ask for the full history). Callers must
+ * treat an empty map as "unknown" and fall back, never as "all equal".
+ */
+export function readAddedDates(offersDir) {
+  let out = "";
+  try {
+    out = execFileSync(
+      "git",
+      ["log", "--diff-filter=A", "--name-only", "--format=%as", "--", "."],
+      { cwd: offersDir, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    );
+  } catch {
+    return {};
+  }
+  const added = {};
+  let date = "";
+  for (const raw of out.split("\n")) {
+    const line = raw.trim();
+    if (!line) continue;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(line)) {
+      date = line;
+      continue;
+    }
+    if (!line.endsWith(".yaml") || !date) continue;
+    added[path.basename(line, ".yaml")] = date;
+  }
+  return added;
+}
+
+export function buildIndex(offers, now = new Date(), addedDates = {}) {
+  // Default order: newest-ADDED first, then newest-verified, ties by slug
+  // ascending. The three keys are applied as successive stable sorts, last
+  // key first. An offer with no known add date sorts after every offer that
+  // has one and keeps the previous newest-verified-then-slug order among its
+  // peers, so an empty `addedDates` (shallow clone, synthetic test fixtures)
+  // degrades to exactly the behaviour this function had before.
+  const addedOf = (o) => addedDates[o.slug] ?? "";
   const stamped = [...offers]
     .sort((a, b) => (a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0))
-    .sort((a, b) => (a.verified_date < b.verified_date ? 1 : a.verified_date > b.verified_date ? -1 : 0))
+    .sort((a, b) =>
+      a.verified_date < b.verified_date
+        ? 1
+        : a.verified_date > b.verified_date
+          ? -1
+          : 0,
+    )
+    .sort((a, b) => {
+      const [ka, kb] = [addedOf(a), addedOf(b)];
+      if (ka === kb) return 0;
+      if (!ka) return 1;
+      if (!kb) return -1;
+      return ka < kb ? 1 : -1;
+    })
     .map((offer) => ({
       ...offer,
       status: isExpired(offer, todayISO(now)) ? "expired" : "active",
@@ -285,7 +388,7 @@ export function buildIndex(offers, now = new Date()) {
 export async function runPipeline({ offersDir, outDir, now = new Date() }) {
   const today = todayISO(now);
   const offers = await loadOffers(offersDir, today);
-  const index = buildIndex(offers, now);
+  const index = buildIndex(offers, now, readAddedDates(offersDir));
   const details = await loadDetails(
     offersDir,
     offers.map((o) => o.slug),
@@ -294,19 +397,28 @@ export async function runPipeline({ offersDir, outDir, now = new Date() }) {
   await rm(outDir, { recursive: true, force: true });
   const detailsOut = path.join(outDir, DETAILS_DIRNAME);
   await mkdir(detailsOut, { recursive: true });
-  await writeFile(path.join(outDir, "offers.json"), `${JSON.stringify(index, null, 2)}\n`);
+  await writeFile(
+    path.join(outDir, "offers.json"),
+    `${JSON.stringify(index, null, 2)}\n`,
+  );
   await writeFile(
     path.join(outDir, "offers.jsonl"),
     index.offers.map((o) => JSON.stringify(o)).join("\n") + "\n",
   );
   for (const [slug, detail] of Object.entries(details)) {
     // Detail JSON passes through unchanged — it is already validated content.
-    await writeFile(path.join(detailsOut, `${slug}.json`), `${JSON.stringify(detail, null, 2)}\n`);
+    await writeFile(
+      path.join(detailsOut, `${slug}.json`),
+      `${JSON.stringify(detail, null, 2)}\n`,
+    );
   }
   // Single slug-keyed map so Vite and prerender's esbuild can both import
   // one JSON module (issue #128). import.meta.glob is Vite-only and would
   // fail the prerender bundle.
-  await writeFile(path.join(outDir, "details.json"), `${JSON.stringify(details, null, 2)}\n`);
+  await writeFile(
+    path.join(outDir, "details.json"),
+    `${JSON.stringify(details, null, 2)}\n`,
+  );
 
   await validateWrittenArtifacts(outDir);
   return index;
@@ -318,7 +430,9 @@ export async function runPipeline({ offersDir, outDir, now = new Date() }) {
 // silently shipping a malformed index.
 export async function validateWrittenArtifacts(outDir) {
   try {
-    const written = JSON.parse(await readFile(path.join(outDir, "offers.json"), "utf8"));
+    const written = JSON.parse(
+      await readFile(path.join(outDir, "offers.json"), "utf8"),
+    );
     validateIndexData(written, path.join(outDir, "offers.json"));
     const jsonl = await readFile(path.join(outDir, "offers.jsonl"), "utf8");
     const lines = validateJsonlText(jsonl, path.join(outDir, "offers.jsonl"));
@@ -350,7 +464,10 @@ async function main(argv) {
   );
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+if (
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1])
+) {
   main(process.argv.slice(2)).catch((err) => {
     console.error(`error: ${err.message}`);
     process.exit(1);

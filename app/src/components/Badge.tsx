@@ -1,4 +1,4 @@
-import { TAG_ICONS } from "../lib/tagIcons"
+import { TAG_ICONS } from "../lib/tagIcons";
 import {
   CATEGORY_LABELS,
   SIGNUP_LABELS,
@@ -8,15 +8,21 @@ import {
   REVIEW_STATUS_LABELS,
   REVIEW_STATUS_TITLES,
   type Offer,
-} from "../lib/offers"
+} from "../lib/offers";
 
 function tagIcon(value: string) {
-  if (!(value in TAG_ICONS)) return null
+  if (!(value in TAG_ICONS)) return null;
   return (
-    <svg className="tag-i" width="12" height="12" aria-hidden="true" focusable="false">
+    <svg
+      className="tag-i"
+      width="12"
+      height="12"
+      aria-hidden="true"
+      focusable="false"
+    >
       <use href={`#ti-${value}`} />
     </svg>
-  )
+  );
 }
 
 /**
@@ -32,11 +38,11 @@ export function TagLinkBadge({
   title,
   hrefPrefix = "",
 }: {
-  dimension: "category" | "verification" | "signup"
-  value: string
-  label: string
-  title?: string
-  hrefPrefix?: string
+  dimension: "category" | "verification" | "signup";
+  value: string;
+  label: string;
+  title?: string;
+  hrefPrefix?: string;
 }) {
   return (
     <a
@@ -48,11 +54,17 @@ export function TagLinkBadge({
       {tagIcon(value)}
       <span>{label}</span>
     </a>
-  )
+  );
 }
 
-export function CategoryBadge({ offer, hrefPrefix }: { offer: Offer; hrefPrefix?: string }) {
-  const label = CATEGORY_LABELS[offer.category] ?? offer.category
+export function CategoryBadge({
+  offer,
+  hrefPrefix,
+}: {
+  offer: Offer;
+  hrefPrefix?: string;
+}) {
+  const label = CATEGORY_LABELS[offer.category] ?? offer.category;
   return (
     <TagLinkBadge
       dimension="category"
@@ -61,10 +73,16 @@ export function CategoryBadge({ offer, hrefPrefix }: { offer: Offer; hrefPrefix?
       title={`Free AI credits in the ${label} category`}
       hrefPrefix={hrefPrefix}
     />
-  )
+  );
 }
 
-export function VerificationBadge({ offer, hrefPrefix }: { offer: Offer; hrefPrefix?: string }) {
+export function VerificationBadge({
+  offer,
+  hrefPrefix,
+}: {
+  offer: Offer;
+  hrefPrefix?: string;
+}) {
   return (
     <TagLinkBadge
       dimension="verification"
@@ -73,17 +91,17 @@ export function VerificationBadge({ offer, hrefPrefix }: { offer: Offer; hrefPre
       title={VERIFICATION_TITLES[offer.verification]}
       hrefPrefix={hrefPrefix}
     />
-  )
+  );
 }
 
 const REVIEW_STATUS_ICONS: Record<string, string> = {
   verified: "review_verified",
   unverified: "unverified",
   "under-review": "expired",
-}
+};
 
 export function ReviewStatusBadge({ offer }: { offer: Offer }) {
-  const status = offer.review_status
+  const status = offer.review_status;
   return (
     <span
       className={`badge badge-review-status badge-review-status-${status}`}
@@ -92,10 +110,16 @@ export function ReviewStatusBadge({ offer }: { offer: Offer }) {
       {tagIcon(REVIEW_STATUS_ICONS[status] ?? "unverified")}
       <span>{REVIEW_STATUS_LABELS[status] ?? status}</span>
     </span>
-  )
+  );
 }
 
-export function SignupBadge({ offer, hrefPrefix }: { offer: Offer; hrefPrefix?: string }) {
+export function SignupBadge({
+  offer,
+  hrefPrefix,
+}: {
+  offer: Offer;
+  hrefPrefix?: string;
+}) {
   return (
     <TagLinkBadge
       dimension="signup"
@@ -104,7 +128,7 @@ export function SignupBadge({ offer, hrefPrefix }: { offer: Offer; hrefPrefix?: 
       title={SIGNUP_TITLES[offer.signup]}
       hrefPrefix={hrefPrefix}
     />
-  )
+  );
 }
 
 export function ExpiredBadge() {
@@ -113,7 +137,7 @@ export function ExpiredBadge() {
       {tagIcon("expired")}
       <span>Expired</span>
     </span>
-  )
+  );
 }
 
 /**
@@ -144,5 +168,5 @@ export function HotBadge() {
       </svg>
       <span>Hot today</span>
     </span>
-  )
+  );
 }
