@@ -746,9 +746,9 @@ a:focus-visible {
   counter-increment: ftrank;
   content: counter(ftrank, decimal-leading-zero);
   font-size: 0.72rem;
-  /* Full --gray, not a tint of it: the counter is readable content (the
-     hover/focus rules below restore it for a reason), and #6b7280 on #ffffff
-     is 4.83:1 — a 55% mix lands near #aeb1b9 at ~2.1:1, under WCAG 1.4.3 AA. */
+  /* Full --gray, not a tint of it: the counter is readable content, and
+     #6b7280 on #ffffff is 4.83:1 — a 55% mix lands near #aeb1b9 at ~2.1:1,
+     under WCAG 1.4.3 AA. */
   color: var(--gray);
   text-align: right;
   padding: 0.2rem 0.9rem 0 0;
@@ -1169,8 +1169,7 @@ button.badge:focus-visible {
   /* The row tint is the only motion in a 47-row list, so it fades rather than
      snaps. Colour only — no transform, nothing that moves the baseline the
      whole list is being scanned against. */
-  .grid > li,
-  .grid > li::before { transition: background-color 0.16s ease, color 0.16s ease; }
+  .grid > li { transition: background-color 0.16s ease, color 0.16s ease; }
 }
 
 .filter-pill {
