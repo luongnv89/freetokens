@@ -46,14 +46,7 @@ export interface Offer {
   /**
    * Offer category badge.
    */
-  category:
-    | "api_provider"
-    | "coding"
-    | "image"
-    | "voice"
-    | "video"
-    | "startup_program"
-    | "student";
+  category: "api_provider" | "coding" | "image" | "voice" | "video" | "startup_program" | "student";
   /**
    * Free value in human terms, e.g. '$300 in credits'.
    */

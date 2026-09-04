@@ -18,13 +18,23 @@ import { ftFormatCount } from "../lib/analytics";
  * unconfigured, or simply a quiet morning all end the same way: no section,
  * and the listing below is untouched. That also keeps it out of the
  * prerendered HTML, so nothing here can go stale in a cached page.
+ *
+ * Layout shift is handled the way TrafficStrip reserves its masthead rail:
+ * while the windowed counters are still loading (`pending`, only ever true
+ * when GoatCounter is configured), the shelf mounts its own skeleton with the
+ * `hidden` attribute and CSS turns that into visibility-hidden, so the box is
+ * already on the page when the real cards arrive. When the counters answer
+ * but nothing clears the evidence floor, `pending` drops and the box
+ * collapses — the one late shift, and it matches the data: there is no shelf.
  */
 export function HotDeals({
   ranked,
   bySlug,
+  pending = false,
 }: {
   ranked: { slug: string; views: number }[];
   bySlug: Map<string, Offer>;
+  pending?: boolean;
 }) {
   const rows = ranked
     .map((entry) => ({ entry, offer: bySlug.get(entry.slug) }))
@@ -32,7 +42,29 @@ export function HotDeals({
       (row): row is { entry: { slug: string; views: number }; offer: Offer } =>
         Boolean(row.offer),
     );
-  if (rows.length === 0) return null;
+  if (rows.length === 0) {
+    if (!pending) return null;
+    return (
+      <section className="hot-deals" hidden>
+        <h2 className="hot-deals-head">
+          <span className="hot-deals-title">&mdash;</span>
+          <span className="hot-deals-sub">&mdash;</span>
+        </h2>
+        <ol className="hot-deals-list">
+          {[0, 1, 2].map((i) => (
+            <li className="hot-deal" key={i}>
+              <span className="hot-rank" aria-hidden="true">
+                {i + 1}
+              </span>
+              <span className="hot-prov">&mdash;</span>
+              <span className="hot-title">&mdash;</span>
+              <span className="hot-meta">&mdash;</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    );
+  }
   return (
     <section className="hot-deals" aria-labelledby="ft-hot-heading">
       <h2 className="hot-deals-head" id="ft-hot-heading">

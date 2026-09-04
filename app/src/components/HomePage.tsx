@@ -8,6 +8,7 @@ import {
 } from "react";
 import {
   SEARCH_DEBOUNCE_MS,
+  isGoatCounterConfigured,
   trackFilterUse,
   trackSearch,
   trackSortUse,
@@ -400,6 +401,11 @@ export default function HomePage({
   // the FULL slug list rather than what is on screen, so filtering or
   // searching never changes which offers are "hot" — only the list below.
   const topToday = useMemo(() => topViewedSlugs(todayViews, 3), [todayViews]);
+  // The shelf reserves its box until the windowed counters settle, but only
+  // where counters can ever arrive: unconfigured or JS-off visitors get no
+  // hole above the toolbar.
+  const hotPending =
+    isGoatCounterConfigured() && Object.keys(todayViews).length === 0;
   const offersBySlug = useMemo(
     () => new Map(offers.map((offer) => [offer.slug, offer])),
     [offers],
@@ -632,7 +638,7 @@ export default function HomePage({
 
           {offers.length > 0 ? (
             <>
-              <HotDeals ranked={topToday} bySlug={offersBySlug} />
+              <HotDeals ranked={topToday} bySlug={offersBySlug} pending={hotPending} />
               <Toolbar
                 total={offers.length}
                 shown={shownList.length}

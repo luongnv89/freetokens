@@ -98,6 +98,20 @@ describe("HotDeals section", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
+  it("reserves its box while counters load, invisible and without links", () => {
+    // Mirrors TrafficStrip: hidden attribute + CSS visibility keeps the space
+    // the shelf will occupy, so its arrival cannot push the toolbar down.
+    const { container } = render(
+      <HotDeals ranked={[]} bySlug={bySlug("a")} pending />,
+    );
+    const section = container.querySelector(".hot-deals");
+    expect(section).not.toBeNull();
+    expect(section).toHaveAttribute("hidden");
+    expect(container.querySelectorAll(".hot-deal")).toHaveLength(3);
+    expect(container.querySelector("a")).toBeNull();
+    expect(screen.queryByText(/most viewed today/i)).toBeNull();
+  });
+
   it("skips a ranked slug that is not a live offer instead of rendering a blank card", () => {
     // The ranking is computed over the full slug list; an offer can expire out
     // of the listing between the counter fetch and the render.

@@ -1312,6 +1312,15 @@ a:focus-visible {
   margin: 0 0 1.1rem;
 }
 
+/* While the windowed counters load, the shelf's own skeleton sits on the page
+   with the `hidden` attribute; this flips it to visibility so the box is
+   reserved and the reveal fills space instead of pushing the toolbar down —
+   same trick as .site-header .stat-strip[hidden]. */
+.hot-deals[hidden] {
+  display: block;
+  visibility: hidden;
+}
+
 .hot-deals-head {
   display: flex;
   flex-wrap: wrap;
@@ -1516,7 +1525,7 @@ a:focus-visible {
   min-width: 0;
   padding: 0.95rem 1.05rem;
   background: var(--surface);
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--hairline-strong);
   border-radius: 10px;
 }
 
@@ -1546,7 +1555,7 @@ a:focus-visible {
   font-size: 0.84rem;
   color: var(--ink);
   background: var(--surface-2);
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--hairline-strong);
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
   max-width: 24rem;
@@ -1560,7 +1569,7 @@ a:focus-visible {
 }
 
 #ft-search:hover {
-  border-color: color-mix(in srgb, var(--ink) 28%, transparent);
+  border-color: var(--ink);
 }
 
 .field-sort {
@@ -1572,7 +1581,7 @@ a:focus-visible {
   font-size: 0.84rem;
   color: var(--ink);
   background: var(--surface-2);
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--hairline-strong);
   border-radius: 6px;
   padding: 0.42rem 1.9rem 0.42rem 0.7rem;
   cursor: pointer;
@@ -1958,7 +1967,7 @@ button.badge:focus-visible {
   font-size: 0.8rem;
   padding: 0.45rem 1rem;
   border-radius: 6px;
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--hairline-strong);
   background: var(--surface);
   color: var(--ink);
   cursor: pointer;

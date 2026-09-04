@@ -63,6 +63,10 @@
   --color-muted: #98a2ae;
   --color-accent: #22c55e;
   --color-hairline: rgba(233, 237, 242, 0.12);
+  /* Control borders must clear the WCAG 1.4.11 3:1 floor against both
+     planes; 0.4 ink alpha is the minimum that does (surface 3.43, surface-2
+     3.37). Decorative separators stay on --color-hairline. */
+  --hairline-strong: rgba(233, 237, 242, 0.4);
 
   /* Two raised planes above the ground. `surface` is the row/panel plane,
      `surface-2` the control plane (inputs, chips) that must read as sitting

@@ -733,15 +733,15 @@ describe("no-signup and verification honesty badges (#111)", () => {
     expect(new Set(labels).size).toBe(labels.length);
     for (const value of Object.keys(VERIFICATION_LABELS)) {
       expect(css).toMatch(
-        new RegExp(`\\.badge-verification-${value} \\{ --tag-hue:`),
+        new RegExp(`\\.badge-verification-${value}\\s*\\{[^}]*--tag-hue:`),
       );
     }
   });
 
   it("marks no-sign-up distinctly from sign-up-required", () => {
     expect(SIGNUP_LABELS.none).not.toBe(SIGNUP_LABELS.required);
-    expect(css).toMatch(/\.badge-signup-none \{ --tag-hue:/);
-    expect(css).toMatch(/\.badge-signup-required \{ --tag-hue:/);
+    expect(css).toMatch(/\.badge-signup-none\s*\{[^}]*--tag-hue:/);
+    expect(css).toMatch(/\.badge-signup-required\s*\{[^}]*--tag-hue:/);
   });
 });
 
