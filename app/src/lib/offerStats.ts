@@ -89,6 +89,40 @@ export function useOfferViews(
 const HOT_MIN_VIEWS = 3
 const HOT_MAX_TIED = 3
 
+/**
+ * The highlight section's ranking: the `limit` most-viewed offers, ordered,
+ * highest first.
+ *
+ * Separate from `hottestSlugs` on purpose, and not a generalisation of it.
+ * That function answers "which offers are tied at the top", and deliberately
+ * returns NOTHING when the answer would be a wide tie, because it decides
+ * whether a row gets a badge and a badge on half the list means nothing. This
+ * one fills a fixed three-slot shelf, so it must rank rather than crown, and
+ * a partial shelf is a fine outcome.
+ *
+ * What the two share is the floor: a count below HOT_MIN_VIEWS is not
+ * evidence of anything. The input is weak — only consenting visitors are
+ * counted, the counter route sits behind a multi-hour CDN cache, and blocked
+ * requests read as null — so an offer with one view is noise, and promoting
+ * it to the top of the page would be inventing a signal.
+ *
+ * Ties break on slug so the order is deterministic: without it two offers on
+ * the same count could swap places between renders on the same data.
+ */
+export function topViewedSlugs(
+  views: Record<string, number | null>,
+  limit = 3,
+): { slug: string; views: number }[] {
+  return Object.entries(views)
+    .filter(
+      (entry): entry is [string, number] =>
+        typeof entry[1] === "number" && entry[1] >= HOT_MIN_VIEWS,
+    )
+    .sort(([slugA, a], [slugB, b]) => b - a || slugA.localeCompare(slugB))
+    .slice(0, Math.max(0, limit))
+    .map(([slug, count]) => ({ slug, views: count }))
+}
+
 export function hottestSlugs(views: Record<string, number | null>): ReadonlySet<string> {
   const empty: ReadonlySet<string> = new Set<string>()
   const counted = Object.entries(views).filter(

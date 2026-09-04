@@ -27,7 +27,7 @@ import {
   writeSavedSlugs,
 } from "../lib/personalState"
 import { TAG_ICONS } from "../lib/tagIcons"
-import { hottestSlugs, useOfferViews } from "../lib/offerStats"
+import { hottestSlugs, topViewedSlugs, useOfferViews } from "../lib/offerStats"
 import {
   DIMENSIONS,
   emptyState,
@@ -42,6 +42,7 @@ import { IconSprite, OfferRow } from "./OfferRow"
 import { SiteFooter } from "./SiteFooter"
 import { SiteHeader } from "./SiteHeader"
 import { SiteStats } from "./SiteStats"
+import { HotDeals } from "./HotDeals"
 import { Breadcrumbs } from "./Breadcrumbs"
 import { StructuredData } from "./StructuredData"
 import { Button } from "./ui/button"
@@ -184,7 +185,11 @@ function Toolbar({
           Sort
         </label>
         <select id="ft-sort" value={sortValue} onChange={(e) => onSortChange(e.target.value)}>
-          <option value="">Alphabetical</option>
+          {/* The empty value means "index order", and the build now emits that
+              index newest-added first, so this label follows the data. It read
+              "Alphabetical" because that is what the order degenerated to when
+              every offer shared one verified_date. */}
+          <option value="">Latest added</option>
           <option value="newest">Recently checked</option>
           <option value="expiring">Expiring soon</option>
           <option value="amount">Largest amount</option>
@@ -347,6 +352,14 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
   // keeps the unwindowed request first.
   const todayViews = useOfferViews(offerSlugs, 1)
   const hotSlugs = useMemo(() => hottestSlugs(todayViews), [todayViews])
+  // The highlight shelf ranks the same windowed counters the badge uses, over
+  // the FULL slug list rather than what is on screen, so filtering or
+  // searching never changes which offers are "hot" — only the list below.
+  const topToday = useMemo(() => topViewedSlugs(todayViews, 3), [todayViews])
+  const offersBySlug = useMemo(
+    () => new Map(offers.map((offer) => [offer.slug, offer])),
+    [offers],
+  )
 
   function commit(patch: Partial<UrlState>, source: "search" | "sort" | "filter") {
     const next: UrlState = { ...stateRef.current, ...patch }
@@ -564,6 +577,7 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
 
         {offers.length > 0 ? (
           <>
+            <HotDeals ranked={topToday} bySlug={offersBySlug} />
             <Toolbar
               total={offers.length}
               shown={shownList.length}

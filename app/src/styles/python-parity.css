@@ -1110,6 +1110,184 @@ a:focus-visible {
   .grid > li::before { padding-right: 0.5rem; }
 }
 
+/* ---- Hot-today shelf --------------------------------------------------
+   Three most-viewed offers, above the toolbar. It is a shelf, not a list:
+   the three sit side by side on a wide screen and stack on a phone, and the
+   whole block is absent rather than empty when there is nothing to show, so
+   it never renders as a hole where data failed to arrive.
+
+   It borrows the row's category spine so a hot card and its own row further
+   down the page read as the same object, but it is deliberately NOT a copy of
+   the ledger row: no rank counter, no save/hide, no filters. It answers one
+   question — what is everyone looking at right now — and then gets out of the
+   way of the list that does the real work. */
+
+.hot-deals {
+  margin: 0 0 1.1rem;
+}
+
+.hot-deals-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+  margin: 0 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* The one place the accent is allowed to name a section. */
+.hot-deals-title {
+  color: var(--green);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.hot-deals-title::before {
+  content: "";
+  width: 1.1rem;
+  height: 2px;
+  background: var(--green);
+}
+
+.hot-deals-sub {
+  color: var(--gray);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+.hot-deals-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.hot-deal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  min-width: 0;
+  padding: 0.7rem 0.85rem 0.75rem 1rem;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow: hidden;
+  transition: background-color 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out);
+}
+
+.hot-deal::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--row-hue, var(--green));
+  opacity: 0.8;
+}
+
+.hot-deal[data-category="api_provider"] { --row-hue: var(--t-api_provider); }
+.hot-deal[data-category="coding"] { --row-hue: var(--t-coding); }
+.hot-deal[data-category="image"] { --row-hue: var(--t-image); }
+.hot-deal[data-category="voice"] { --row-hue: var(--t-voice); }
+.hot-deal[data-category="video"] { --row-hue: var(--t-video); }
+.hot-deal[data-category="startup_program"] { --row-hue: var(--t-startup_program); }
+.hot-deal[data-category="student"] { --row-hue: var(--t-student); }
+
+@media (hover: hover) {
+  .hot-deal:hover,
+  .hot-deal:focus-within {
+    background: var(--surface-2);
+    border-color: color-mix(in srgb, var(--row-hue, var(--ink)) 30%, transparent);
+  }
+}
+
+/* The rank sits in the corner as a watermark rather than in the reading
+   order: which of the three is first matters far less than what they are. */
+.hot-rank {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: color-mix(in srgb, var(--ink) 12%, var(--surface));
+}
+
+.hot-prov {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray);
+  overflow-wrap: anywhere;
+  padding-right: 1.4rem;
+}
+
+.hot-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  /* Two lines keeps the three cards the same height whatever the titles do. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* The whole card is the target, so the pointer means it everywhere. */
+.hot-title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.hot-title:hover,
+.hot-title:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.hot-meta {
+  margin-top: 0.22rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gray);
+}
+
+.hot-meta strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.hot-sep {
+  color: color-mix(in srgb, var(--ink) 32%, var(--paper));
+  margin: 0 0.4em;
+}
+
+@media (max-width: 48rem) {
+  .hot-deals-list { grid-template-columns: minmax(0, 1fr); gap: 0.45rem; }
+  .hot-deals { margin-bottom: 0.8rem; }
+  .hot-title { font-size: 0.92rem; -webkit-line-clamp: 3; line-clamp: 3; }
+}
+
 /* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
 
 /* The toolbar becomes a panel. On the light design it was four loose control

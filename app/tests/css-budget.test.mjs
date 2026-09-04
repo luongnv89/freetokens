@@ -60,10 +60,16 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // `unicode-range` on the font faces (~450 B): there is one subset file per
 // family, so it gated a download that always happens.
 //
+// The "most viewed today" shelf then took it to 47583. That block is a
+// self-contained ~3.2 kB: a three-up grid that stacks on a phone, the card
+// plane and its hover, the seven category-spine selectors it shares with the
+// listing row, the rank watermark, and the two-line title clamp that keeps
+// three cards the same height whatever the titles do.
+//
 // The ceiling is a budget, not a checksum, and giving bytes back does not
 // spend them. Raise this deliberately, in the same style, when a change is
 // worth the bytes.
-const PYTHON_INLINE_CSS_BYTES = 44_412;
+const PYTHON_INLINE_CSS_BYTES = 47_583;
 
 function cssBytesIn(dir) {
   let total = 0;

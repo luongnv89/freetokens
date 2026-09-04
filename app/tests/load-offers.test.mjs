@@ -5,6 +5,7 @@ import path from "node:path";
 import {
   OfferError,
   buildIndex,
+  readAddedDates,
   isExpired,
   loadOffers,
   runPipeline,
@@ -331,4 +332,72 @@ describe("performance", () => {
     console.log(`500-offer fixture pipeline: ${elapsed.toFixed(0)}ms`);
     await rm(root, { recursive: true, force: true });
   }, 10000);
+});
+
+describe("newest-added default ordering", () => {
+  const mk = (slug, verified) => ({
+    slug,
+    title: slug,
+    provider: "p",
+    category: "coding",
+    amount: "free",
+    expiry_date: null,
+    source_url: "https://example.com",
+    verified_date: verified,
+    verification: "social_proof",
+    review_status: "unverified",
+    signup: "required",
+  });
+
+  it("puts the most recently added offer first, ahead of an older one checked the same day", () => {
+    // The case the whole change exists for: a re-verification sweep gives
+    // every offer the same verified_date, so only the add date can separate
+    // them. Without it these two would fall back to the slug tiebreak and
+    // "aaa" would lead purely because of its name.
+    const index = buildIndex(
+      [mk("aaa-old", "2026-09-03"), mk("zzz-new", "2026-09-03")],
+      new Date("2026-09-04T00:00:00Z"),
+      { "aaa-old": "2026-08-30", "zzz-new": "2026-09-02" },
+    );
+    expect(index.offers.map((o) => o.slug)).toEqual(["zzz-new", "aaa-old"]);
+  });
+
+  it("sorts an offer with no known add date after every offer that has one", () => {
+    const index = buildIndex(
+      [mk("unknown", "2026-09-03"), mk("known", "2026-09-03")],
+      new Date("2026-09-04T00:00:00Z"),
+      { known: "2026-08-01" },
+    );
+    expect(index.offers.map((o) => o.slug)).toEqual(["known", "unknown"]);
+  });
+
+  it("degrades to the previous newest-verified-then-slug order when no dates are known", () => {
+    // This is the shallow-clone / no-git path. It must not reorder anything,
+    // which is also what keeps the feed's ordering test honest.
+    const offers = [
+      mk("b-newer", "2026-09-03"),
+      mk("a-older", "2026-09-01"),
+      mk("a-newer", "2026-09-03"),
+    ];
+    const withNone = buildIndex(offers, new Date("2026-09-04T00:00:00Z"), {});
+    const legacy = buildIndex(offers, new Date("2026-09-04T00:00:00Z"));
+    expect(withNone.offers.map((o) => o.slug)).toEqual(["a-newer", "b-newer", "a-older"]);
+    expect(legacy.offers.map((o) => o.slug)).toEqual(withNone.offers.map((o) => o.slug));
+  });
+
+  it("reads real first-commit dates out of this repository's git history", () => {
+    // Guards the parser and the CI checkout depth together: if the shipped
+    // site ever loses its history, this is the test that says so rather than
+    // the listing quietly going alphabetical.
+    const added = readAddedDates(OFFERS_DIR);
+    const dates = Object.values(added);
+    expect(dates.length).toBeGreaterThan(0);
+    for (const d of dates) expect(d).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    // More than one distinct day, or the ordering it feeds is meaningless.
+    expect(new Set(dates).size).toBeGreaterThan(1);
+  });
+
+  it("returns an empty map outside a git repository instead of throwing", () => {
+    expect(readAddedDates(tmpdir())).toEqual({});
+  });
 });
