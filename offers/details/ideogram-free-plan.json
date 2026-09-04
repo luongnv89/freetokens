@@ -1,0 +1,17 @@
+{
+  "summary": "Ideogram's official pricing page confirms a Free plan at $0 whose credit row reads \"Slow credits — Weekly for eligible accounts\", while paid tiers get \"Unlimited\". The page FAQ states eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft, and that the amount may vary — no fixed credit number is published. Free-tier limits also include 1 running + queued generation, and AI-powered editing features are unavailable in the slow queue. No end date for the free plan is stated, so the offer is ongoing.",
+  "claim_steps": [
+    "Go to https://ideogram.ai/pricing/ and select the \"Free plan\" ($0), then click \"Start for free\".",
+    "Sign in or create an Ideogram account — sign in with Google, Apple, or Microsoft to be eligible for weekly credits (per the page FAQ).",
+    "Generate images in the slow queue using the weekly slow credits (free tier allows 1 running + queued generation).",
+    "Wait for the weekly credit refresh to continue generating; note AI-powered editing features require priority credits and are not available in the slow queue."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://ideogram.ai/pricing/",
+      "title": "Pricing — Ideogram",
+      "text": "Eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft; the amount may vary. Pricing table: \"Slow credits: Weekly for eligible accounts\" on the Free plan."
+    }
+  ]
+}
