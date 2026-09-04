@@ -12,6 +12,7 @@ import {
   VERIFICATION_LABELS,
   activeOffers,
   applySort,
+  expiredOffers,
   offerMatches,
   buildDate,
   type OffersIndex,
@@ -170,7 +171,7 @@ function Toolbar({
           type="search"
           id="ft-search"
           name="q"
-          placeholder="Search title, provider, or amount&hellip;"
+          placeholder="Search offers, providers, or amounts&hellip;"
           autoComplete="off"
           spellCheck={false}
           maxLength={200}
@@ -183,8 +184,8 @@ function Toolbar({
           Sort
         </label>
         <select id="ft-sort" value={sortValue} onChange={(e) => onSortChange(e.target.value)}>
-          <option value="">Default</option>
-          <option value="newest">Newest verified</option>
+          <option value="">Alphabetical</option>
+          <option value="newest">Recently checked</option>
           <option value="expiring">Expiring soon</option>
           <option value="amount">Largest amount</option>
         </select>
@@ -312,6 +313,15 @@ function visibleOffers(
 export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseUrl?: string }) {
   const offers = activeOffers(index)
   const buildDay = buildDate(index.generated_at)
+  // Proof-line inputs, both build-time: the oldest live verification date
+  // becomes the "re-checked within N" window, and the archive count is the
+  // evidence that expired offers actually leave the list.
+  const archivedCount = expiredOffers(index).length
+  const oldestVerified = offers.reduce(
+    (oldest, offer) =>
+      !oldest || offer.verified_date < oldest ? offer.verified_date : oldest,
+    "",
+  )
 
   const [state, setState] = useState(emptyState)
   const [searchInput, setSearchInput] = useState("")
@@ -544,7 +554,12 @@ export default function HomePage({ index, baseUrl }: { index: OffersIndex; baseU
       <div className="wrap">
         <main>
         <SiteHeader current="home" />
-        <SiteStats activeCount={offers.length} generatedAt={index.generated_at} />
+        <SiteStats
+          activeCount={offers.length}
+          archivedCount={archivedCount}
+          oldestVerified={oldestVerified}
+          generatedAt={index.generated_at}
+        />
         <Breadcrumbs page="home" />
 
         {offers.length > 0 ? (

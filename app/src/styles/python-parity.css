@@ -9,6 +9,9 @@
   --green: var(--color-accent);
   --hairline: var(--color-hairline);
   --archive-bg: var(--color-muted);
+  /* The stock CSS curves are too weak to read as intentional at the 140 ms
+     these interactions run at; this one starts fast and settles. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --archive-bg-soft: color-mix(in srgb, var(--color-muted) 12%, var(--color-paper));
 
   /* Tag hues. Each clears WCAG AA in BOTH painted states a tag has: as text
@@ -127,53 +130,35 @@ h1 {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: 1.1rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  display: block;
+  counter-reset: ftrank;
+  border-top: 1px solid var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  min-width: 0;
 }
 
+/* Four content areas beside one fixed rail. The rail is the whole point:
+   status, freshness and the row controls used to flow inside the meta
+   paragraph and wrapped at a different point on every row, so no two rows
+   were the same height and the list had no baseline to scan down. */
 .card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  height: 100%;
-  border: 1px solid var(--hairline);
-  border-radius: 12px;
-  padding: 1.25rem;
-  background: var(--paper);
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    border-color 0.15s ease;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 10.5rem;
+  grid-template-areas:
+    "eyebrow rail"
+    "title   rail"
+    "amount  rail"
+    "meta    rail";
+  column-gap: 1.5rem;
+  align-items: start;
+  min-width: 0;
 }
 
-/* Decorative green accent line — meaning never depends on it alone. */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  border-radius: 12px 12px 0 0;
-  background: var(--green);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.18s ease;
-}
-
-.card:hover, .card:focus-within {
-  transform: translateY(-2px);
-  border-color: var(--ink);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
-}
-
-.card:hover::before, .card:focus-within::before { transform: scaleX(1); }
-
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
+.row-eyebrow { grid-area: eyebrow; }
+.card-title { grid-area: title; }
+.r-amount { grid-area: amount; }
+.row-meta { grid-area: meta; }
+.row-rail { grid-area: rail; }
 
 /* ---- Tags ------------------------------------------------------------- */
 /* One rule set serves all three families and all three element types a tag
@@ -359,58 +344,6 @@ a.badge:focus-visible {
   text-underline-offset: 4px;
 }
 
-.ext { font-size: 0.85em; }
-
-.amount {
-  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
-  font-weight: 700;
-  margin: 0;
-  overflow-wrap: anywhere;
-}
-
-.prov {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.76rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--gray);
-  margin: auto 0 0;
-  padding-top: 0.75rem;
-}
-
-/* Archive card actions (#129): View-details control from build.py _DETAIL_CSS. */
-.card-actions { margin-top: 0.75rem; }
-
-.detail-btn {
-  display: block;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.78rem;
-  padding: 0.42rem 0.95rem;
-  border-radius: 999px;
-  border: 1px solid var(--ink);
-  background: var(--paper);
-  color: var(--ink);
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-}
-
-.detail-btn:hover { background: var(--ink); color: var(--paper); }
-
-.detail-btn:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
-}
-
-@media (pointer: coarse) {
-  .detail-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-  }
-}
-
 /* ---- Empty state ----------------------------------------------------- */
 
 .empty {
@@ -566,17 +499,15 @@ a:focus-visible {
 /* ---- Load reveal (CSS-only, motion-safe) ------------------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  .card, .empty {
+  .empty {
     animation: rise 0.45s ease backwards;
     animation-delay: calc(min(var(--i, 0), 10) * 45ms);
   }
-  .card::before { transition-duration: 0.18s; }
 }
 
-/* Archive LCP is the empty state or the first card; the rise animation
+/* Archive LCP is the empty state or the first row; the rise animation
    holds opacity:0 (fill-mode backwards) and tanks mobile Lighthouse
-   performance below the #129 ≥95 gate. Home listing already opts out. */
-[data-page="archive"] .card,
+   performance below the #129 ≥95 gate. */
 [data-page="archive"] .empty {
   animation: none;
 }
@@ -586,8 +517,8 @@ a:focus-visible {
   background: var(--archive-bg-soft);
 }
 
-/* Archive cards get a slightly muted paper background. */
-[data-page="archive"] .card {
+/* Archive rows get a slightly muted paper background. */
+[data-page="archive"] .grid > li {
   background: color-mix(in srgb, var(--archive-bg) 15%, var(--paper));
 }
 
@@ -601,8 +532,8 @@ a:focus-visible {
 .site-header {
   width: 100%;
   border-bottom: 1px solid var(--hairline);
-  padding-bottom: 0.9rem;
-  margin-bottom: 1.35rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 
 .site-bar {
@@ -633,25 +564,33 @@ a:focus-visible {
 .site-bar .brand-mark { align-self: center; display: block; }
 
 .site-slogan {
-  margin: 0.7rem 0 0;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.78rem;
-  line-height: 1.6;
-  color: var(--gray);
+  margin: 0.95rem 0 0;
   width: 100%;
-  max-width: 44rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  max-width: 22ch;
+  font-size: clamp(1.45rem, 4.4vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.032em;
+  line-height: 1.08;
+  color: var(--ink);
 }
 
 .site-slogan::before {
   content: "";
-  display: inline-block;
-  width: 1.4rem;
+  display: block;
+  width: 2.2rem;
   height: 2px;
   background: var(--green);
-  margin-right: 0.55rem;
-  vertical-align: middle;
+  margin-bottom: 0.85rem;
+}
+
+.site-sub {
+  margin: 0.7rem 0 0;
+  width: 100%;
+  max-width: 62ch;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: var(--gray);
 }
 
 .site-nav {
@@ -785,111 +724,97 @@ a:focus-visible {
 
 /* ---- Ranked listing rows ---------------------------------------------- */
 
-#ft-grid {
-  display: block;
-  counter-reset: ftrank;
-  border-top: 1px solid var(--ink);
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  min-width: 0;
-}
-
-/* The shared card stagger (_CSS `rise`) is right for a handful of cards and
-   wrong for 32 dense rows, where it reads as the list twitching into place.
-   The listing fades in once, as one object; the archive keeps the stagger. */
+/* A per-row stagger reads as the list twitching into place at 47 rows. The
+   listing fades in once, as one object. The archive opts out entirely: its
+   LCP is the first row and `backwards` fill would hold it at opacity 0. */
 @media (prefers-reduced-motion: no-preference) {
-  #ft-grid .card { animation: none; }
   #ft-grid { animation: rise 0.3s ease backwards; }
 }
 
-#ft-grid > li {
+.grid > li {
   display: grid;
   grid-template-columns: 2.6rem minmax(0, 1fr);
-  align-items: baseline;
-  padding: 0.62rem 0.4rem;
+  align-items: start;
+  padding: 0.72rem 0.4rem;
   border-bottom: 1px solid var(--hairline);
 }
-
-/* Must out-specify `.grid li[hidden]` from _APP_CSS: the row above is an
-   id-scoped `display: grid`, so the plain-class hide rule alone would lose. */
-#ft-grid > li[hidden] { display: none; }
 
 /* Rank is drawn, not stored. A CSS counter skips `display: none` rows, so a
    filtered list renumbers 1..n on its own, and re-sorting (which moves the
    nodes) renumbers with it — no JS involvement, nothing to keep in sync. */
-#ft-grid > li::before {
+.grid > li::before {
   counter-increment: ftrank;
-  content: counter(ftrank) ".";
-  font-size: 0.8rem;
-  color: var(--gray);
+  content: counter(ftrank, decimal-leading-zero);
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--gray) 55%, var(--paper));
   text-align: right;
-  padding-right: 0.7rem;
+  padding: 0.2rem 0.9rem 0 0;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
 }
 
-#ft-grid > li:hover,
-#ft-grid > li:focus-within { background: rgba(0, 0, 0, 0.035); }
+.grid > li:focus-within { background: rgba(0, 0, 0, 0.028); }
 
-#ft-grid > li:hover::before,
-#ft-grid > li:focus-within::before { color: var(--gray); }
+.grid > li:focus-within::before { color: var(--gray); }
 
-/* Strip the card chrome: on the home listing the row IS the container. */
-#ft-grid .card {
-  display: block;
-  height: auto;
-  gap: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
+@media (hover: hover) {
+  .grid > li:hover { background: rgba(0, 0, 0, 0.028); }
+  .grid > li:hover::before { color: var(--gray); }
 }
 
-#ft-grid .card::before { content: none; }
-
-#ft-grid .card:hover,
-#ft-grid .card:focus-within {
-  transform: none;
-  box-shadow: none;
-  border-color: transparent;
-}
-
-.row-head {
+/* Provider first, category and review status beside it: the eyebrow answers
+   "whose offer is this, and how well checked" before the eye reaches the
+   title. */
+.row-eyebrow {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0 0.7rem;
+  align-items: center;
+  gap: 0.28rem 0.5rem;
+  margin: 0 0 0.15rem;
 }
 
-.row-head > * { min-width: 0; }
+.r-prov {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--gray);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 
-#ft-grid .card-title {
+/* The title is the scan anchor. It used to share both weight and size with
+   the amount below it, which left the row with two competing first lines. */
+.card-title {
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.28;
+  letter-spacing: -0.012em;
   margin: 0;
   overflow-wrap: anywhere;
   min-width: 0;
 }
 
-#ft-grid .card-title a { color: var(--ink); text-decoration: none; }
+.card-title a { color: var(--ink); text-decoration: none; }
 
-#ft-grid .card-title a:hover,
-#ft-grid .card-title a:focus-visible {
+.card-title a:hover,
+.card-title a:focus-visible {
   text-decoration: underline;
   text-decoration-color: var(--green);
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
 
-/* The credit amount is the one thing a visitor is scanning for, so it keeps
-   ink-black weight while everything else on the row recedes to gray. It must
-   still wrap: the field ranges from "$5" to a full eligibility sentence, and
-   any nowrap here pushes the whole page into horizontal scroll. */
+/* The amount field is a sentence, not a number — "$200 in AWS Free Tier
+   credits on a 6-month free plan". It reads as the row's description and is
+   set as one, so the title above it can carry the weight. */
 .r-amount {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gray);
+  margin: 0.1rem 0 0;
+  max-width: 72ch;
   min-width: 0;
   overflow-wrap: anywhere;
 }
@@ -899,33 +824,95 @@ a:focus-visible {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.1rem 0.42rem;
-  margin: 0.18rem 0 0;
-  font-size: 0.74rem;
+  margin: 0.24rem 0 0;
+  font-size: 0.72rem;
   color: var(--gray);
 }
 
 .row-meta .sep { color: var(--hairline); }
 
-.r-prov {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
 /* Listing density: tags shrink, but keep their own hue (set in _CSS) —
    this rule must never re-assert a colour or it would flatten them again. */
-#ft-grid .badge {
+.grid .badge {
   font-size: 0.63rem;
   padding: 0.08rem 0.45rem;
 }
 
-/* The three tag families sit side by side on one meta line, so they need a
-   little more air between them than the 0.42rem the rest of the line uses,
-   or the pills collide into a single bar of colour. */
-.row-meta .badge + .badge { margin-left: 0.1rem; }
+/* Quiet filters. `verification` is social_proof on 47 of 47 live offers and
+   `signup` is required on 47 of 47, so painting them as coloured pills spent
+   two thirds of the row's colour budget on values that never vary. They stay
+   real buttons — same markup, same aria-pressed, same data-ft-tag — and lose
+   only the paint. Category and review status are the two that discriminate,
+   and they keep their hue. */
+.row-quiet .badge {
+  border-color: transparent;
+  background: none;
+  color: var(--gray);
+  font-weight: 400;
+  padding: 0;
+  letter-spacing: 0.05em;
+}
 
-#ft-grid .status { font-size: inherit; }
+.row-quiet .tag-i { display: none; }
 
-#ft-grid .dot { width: 0.42rem; height: 0.42rem; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22); }
+.row-quiet button.badge:hover,
+.row-quiet button.badge:focus-visible,
+.row-quiet button.badge[aria-pressed="true"] {
+  background: none;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* The rail: one fixed column, right-aligned, carrying the two facts that are
+   always present (is it live, when was it checked) and the row's controls. */
+.row-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.24rem;
+  min-width: 0;
+  font-size: 0.72rem;
+  color: var(--gray);
+  text-align: right;
+}
+
+.grid .status { font-size: inherit; }
+
+.grid .dot { width: 0.42rem; height: 0.42rem; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22); }
+
+.r-vfd { overflow-wrap: anywhere; }
+
+.row-rail .chip {
+  border-color: transparent;
+  background: none;
+  color: var(--gray);
+  font-weight: 400;
+  padding: 0.08rem 0.1rem;
+}
+
+.row-rail .chip:hover,
+.row-rail .chip:focus-visible,
+.row-rail .chip[aria-pressed="true"] {
+  background: none;
+  border-color: transparent;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.r-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+}
 
 .r-details {
   color: var(--ink);
@@ -959,10 +946,29 @@ a:focus-visible {
   text-decoration-thickness: 2px;
 }
 
-/* Touch: the title link already spans the row, but the secondary "details"
-   link needs its own comfortable target on coarse pointers. */
+/* Below the fold-point the rail cannot hold a fixed column: 10.5rem of it
+   would leave under 8rem for the title at 320 px. It becomes a single row
+   under the content, left-aligned like everything above it. */
+@media (max-width: 48rem) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "eyebrow" "title" "amount" "meta" "rail";
+  }
+  .row-rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 0.3rem 0.75rem;
+    margin-top: 0.4rem;
+  }
+  .r-actions { margin-top: 0; }
+}
+
+/* Touch: the secondary controls need their own comfortable target. */
 @media (pointer: coarse) {
-  #ft-grid > li { padding-block: 0.75rem; }
+  .grid > li { padding-block: 0.85rem; }
   .r-details {
     display: inline-flex;
     align-items: center;
@@ -970,14 +976,10 @@ a:focus-visible {
   }
 }
 
-/* Narrow viewports: reclaim the rank gutter rather than squeezing the row.
-   Archive cards sit in the same wrap; min-width:0 lets the 19rem grid floor
-   collapse to 100% at 320 px instead of overflowing. */
+/* Narrow viewports: reclaim the rank gutter rather than squeezing the row. */
 @media (max-width: 24rem) {
-  #ft-grid > li { grid-template-columns: 1.9rem minmax(0, 1fr); }
-  #ft-grid > li::before { padding-right: 0.45rem; }
-  #ft-archive-grid { min-width: 0; }
-  #ft-archive-grid .card { min-width: 0; }
+  .grid > li { grid-template-columns: 1.9rem minmax(0, 1fr); }
+  .grid > li::before { padding-right: 0.5rem; }
 }
 
 /* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
@@ -1030,6 +1032,39 @@ a:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+  min-width: 0;
+}
+
+@media (max-width: 48rem) {
+  .site-header { padding-bottom: 0.85rem; margin-bottom: 0.9rem; }
+
+  .site-slogan { margin-top: 0.75rem; }
+
+  .site-sub {
+    margin-top: 0.6rem;
+    font-size: 0.75rem;
+    line-height: 1.55;
+  }
+
+  .toolbar { gap: 0.6rem 0.7rem; margin-bottom: 0.7rem; }
+
+  .toolbar .field { flex: 1 1 9rem; }
+
+  .toolbar .field-sort { flex: 0 1 auto; }
+
+  .toolbar > .chips {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    margin-inline: -0.15rem;
+    padding: 0.1rem 0.15rem 0.2rem;
+  }
+
+  .toolbar > .chips::-webkit-scrollbar { display: none; }
+
+  .toolbar > .chips > * { flex: 0 0 auto; }
 }
 
 .chip {
@@ -1114,6 +1149,30 @@ button.badge:focus-visible {
   a.badge, button.badge { transition: none; }
 }
 
+/* ---- Interaction polish (CSS-only, motion-safe) ----------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Press feedback. Every control here is a real button or link, so one rule
+     covers the category chips, the row controls and the claim CTA. 0.97 is
+     deliberate: enough to register as the interface hearing the click, not
+     enough to read as a bounce. */
+  .chip,
+  .od-cta {
+    transition: transform 0.14s var(--ease-out), background-color 0.14s ease,
+      color 0.14s ease, border-color 0.14s ease;
+  }
+
+  .chip:active,
+  button.badge:active,
+  .od-cta:active { transform: scale(0.97); }
+
+  /* The row tint is the only motion in a 47-row list, so it fades rather than
+     snaps. Colour only — no transform, nothing that moves the baseline the
+     whole list is being scanned against. */
+  .grid > li,
+  .grid > li::before { transition: background-color 0.16s ease, color 0.16s ease; }
+}
+
 .filter-pill {
   --tag-hue: var(--ink);
   display: inline-flex;
@@ -1181,8 +1240,6 @@ button.badge:focus-visible {
     min-height: 32px;
     padding-inline: 0.6rem;
   }
-
-  #ft-grid button.badge { padding-inline: 0.6rem; }
 
   .filter-pill { min-height: 32px; padding-inline: 0.6rem; }
 }
@@ -1349,13 +1406,41 @@ button:focus-visible {
 .ft-traffic-total strong { font-size: 1.2em; }
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------
-   Card-actions / .detail-btn already live above (archive #129). The rest
-   of _DETAIL_CSS — hero, checklist, proofs, CTA, copy-only share — ports
-   here so detail pages match the live site without a Tailwind rewrite. */
+   _DETAIL_CSS — hero, checklist, proofs, CTA, copy-only share — ports here
+   so detail pages match the live site without a Tailwind rewrite. */
 
 .offer-detail {
   max-width: 46rem;
-  margin: 0 auto;
+  margin: 0;
+}
+
+.od-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  margin: 1.15rem 0 0;
+}
+
+.od-cta-note {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--gray);
+}
+
+/* Related offers were the one place browser-default blue links leaked into
+   the ink-and-hairline system. */
+.od-related a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.od-related a:hover,
+.od-related a:focus-visible {
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
 }
 
 .od-back {

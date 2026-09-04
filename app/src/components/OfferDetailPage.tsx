@@ -38,6 +38,29 @@ function relatedOffers(index: OffersIndex, current: Offer, limit = 4): Offer[] {
   return [...active, ...expired].slice(0, limit)
 }
 
+/**
+ * The outbound claim link. Rendered twice per offer — once in the hero beside
+ * the amount, once after the claim steps — so the conversion action is
+ * reachable without scrolling past the facts table. Both copies carry the
+ * same data-ft-* hooks, which is what attributes the GA4 offer_click event.
+ */
+function ClaimCta({ offer }: { offer: Offer }) {
+  return (
+    <a
+      className="od-cta"
+      href={offer.source_url}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-ft-offer-id={offer.slug}
+      data-ft-provider={offer.provider}
+      data-ft-offer-category={offer.category}
+      data-ft-outbound="true"
+    >
+      Claim at {offer.provider} <span aria-hidden="true">&#8599;</span>
+    </a>
+  )
+}
+
 function RelatedOffers({ current, index }: { current: Offer; index: OffersIndex }) {
   const related = relatedOffers(index, current)
   if (related.length === 0) return null
@@ -151,6 +174,14 @@ export default function OfferDetailPage({
                 checked{" "}
                 <time dateTime={offer.verified_date}>{humanDate(offer.verified_date)}</time>
               </p>
+              {offer.status !== "expired" ? (
+                <p className="od-hero-cta">
+                  <ClaimCta offer={offer} />
+                  <span className="od-cta-note">
+                    Opens {offer.provider}. This site takes no cut.
+                  </span>
+                </p>
+              ) : null}
             </div>
             <section className="od-facts" aria-label="Key offer details">
               <h2>Details</h2>
@@ -219,18 +250,7 @@ export default function OfferDetailPage({
             {offer.status === "expired" ? (
               <p className="od-ended">This offer ended &mdash; nothing here is claimable anymore.</p>
             ) : (
-              <a
-                className="od-cta"
-                href={offer.source_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-ft-offer-id={offer.slug}
-                data-ft-provider={offer.provider}
-                data-ft-offer-category={offer.category}
-                data-ft-outbound="true"
-              >
-                Claim at {offer.provider} <span aria-hidden="true">&#8599;</span>
-              </a>
+              <ClaimCta offer={offer} />
             )}
             <SocialProofList proofs={detail?.social_proof} relPrefix="../" />
             <CopyLinkButton url={offerAbsoluteUrl(offer.slug)} />

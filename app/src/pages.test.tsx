@@ -260,7 +260,7 @@ describe("ArchivePage (#26 parity)", () => {
     // Archive uses OfferRow: data-expiry attribute + status span with expiry
     expect(markup).toContain('data-expiry="2026-01-15"');
     expect(markup).toContain('href="offers/gone.html"');
-    expect(markup).toMatch(/expires <time [Dd]ate[Tt]ime="2026-01-15">/);
+    expect(markup).toMatch(/ends <time [Dd]ate[Tt]ime="2026-01-15">/);
     expect(markup).toContain("Skip the offer list");
     // OfferRow uses .r-details link instead of .detail-btn
     expect(markup).toContain('class="r-details"');
@@ -294,15 +294,20 @@ describe("archive layout at 320 px (#129)", () => {
     "utf8",
   );
 
-  it("lets the archive grid collapse to the wrap width instead of overflowing", () => {
+  it("lets the ledger rows collapse to the wrap width instead of overflowing", () => {
+    // The row's fixed rail folds back inline before it can squeeze the title,
+    // and the rank gutter narrows below that.
+    expect(css).toMatch(/\.grid \{[^}]*display:\s*block/s);
+    expect(css).toMatch(/\.grid \{[^}]*min-width:\s*0/s);
     expect(css).toMatch(
-      /\.grid \{[^}]*grid-template-columns:\s*repeat\(auto-fill,\s*minmax\(min\(100%,\s*19rem\),\s*1fr\)\)/s,
+      /@media \(max-width: 48rem\) \{\s*\.card \{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s,
     );
-    expect(css).toMatch(/#ft-archive-grid \{ min-width: 0; \}/);
-    expect(css).toMatch(/#ft-archive-grid \.card \{ min-width: 0; \}/);
+    expect(css).toMatch(
+      /@media \(max-width: 24rem\) \{\s*\.grid > li \{[^}]*grid-template-columns:\s*1\.9rem/s,
+    );
     expect(css).toMatch(/\.card-title \{[^}]*overflow-wrap:\s*anywhere/s);
-    expect(css).toMatch(/\.amount \{[^}]*overflow-wrap:\s*anywhere/s);
-    expect(css).toMatch(/\.card-top \{[^}]*flex-wrap:\s*wrap/s);
+    expect(css).toMatch(/\.r-amount \{[^}]*overflow-wrap:\s*anywhere/s);
+    expect(css).toMatch(/\.row-eyebrow \{[^}]*flex-wrap:\s*wrap/s);
     expect(css).toMatch(/\.wrap \{[^}]*padding:\s*clamp\(1\.25rem/s);
     expect(css).toMatch(/\[data-page="archive"\] \.empty \{\s*animation:\s*none/s);
     expect(css).toMatch(/\.breadcrumbs-list \{[^}]*flex-wrap:\s*wrap/s);
@@ -312,9 +317,10 @@ describe("archive layout at 320 px (#129)", () => {
     );
   });
 
-  it("styles the archive View-details control as a real tap target", () => {
-    expect(css).toMatch(/\.detail-btn \{/);
-    expect(css).toMatch(/\.detail-btn \{[^}]*min-height:\s*44px/s);
+  it("styles the row detail link as a real tap target on coarse pointers", () => {
+    expect(css).toMatch(
+      /@media \(pointer: coarse\) \{[\s\S]*?\.r-details \{[^}]*min-height:\s*44px/,
+    );
   });
 });
 
@@ -876,7 +882,7 @@ describe("shared header chrome (#112)", () => {
       expect(markup.match(/<h1\b/g)?.length).toBe(1);
     }
     expect(home).toContain(
-      '<h1 class="site-slogan">Every claimable free AI credit offer — verified, tagged, and on one fast page.</h1>',
+      '<h1 class="site-slogan">Free AI credits, checked one by one</h1>',
     );
     expect(archive).toContain("<h1>Expired offer archive</h1>");
     expect(privacy).toContain("<h1>Privacy Policy</h1>");
@@ -929,14 +935,14 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     const total = activeOffers(index).length;
     expect(total).toBeGreaterThan(0);
     expect(markup).toContain(
-      `<span class="ft-stat stat-deals"><strong>${total}</strong> <span class="ft-stat-label">active deals</span></span>`,
+      `<span class="stat-deals"><strong>${total}</strong> live offers</span>`,
     );
   });
 
-  it("uses a singular label for a single active deal (#281)", () => {
+  it("uses a singular label for a single live offer (#281)", () => {
     const one: OffersIndex = { ...index, offers: [offer()] };
     const markup = renderToStaticMarkup(<HomePage index={one} />);
-    expect(markup).toContain('<strong>1</strong> <span class="ft-stat-label">active deal</span>');
+    expect(markup).toContain('<strong>1</strong> live offer</span>');
   });
 
   it("counts only active offers — expired entries never inflate it (#281)", () => {
@@ -945,7 +951,9 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       offers: [offer(), offer({ slug: "gone", status: "expired" })],
     };
     const markup = renderToStaticMarkup(<HomePage index={mixed} />);
-    expect(markup).toContain('<strong>1</strong> <span class="ft-stat-label">active deal</span>');
+    expect(markup).toContain('<strong>1</strong> live offer</span>');
+    // …and the expired one is counted as evidence the list is pruned.
+    expect(markup).toContain('<strong>1</strong> expired ');
   });
 
   it("shows the build's last-updated date as machine-readable <time> (#280)", () => {
@@ -957,9 +965,7 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       new RegExp(`<time date[Tt]ime="${index.generated_at}">${expected}</time>`),
     );
     // Labelled in words, never by colour alone (WCAG 1.4.1).
-    expect(markup).toContain(
-      '<span class="ft-stat stat-updated"><span class="ft-stat-label">updated</span> ',
-    );
+    expect(markup).toContain('<span class="stat-updated">list built ');
   });
 
   it("drops the updated chip rather than printing an unparseable date (#280)", () => {

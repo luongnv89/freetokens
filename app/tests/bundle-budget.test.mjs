@@ -16,9 +16,14 @@ import { gzipSync } from "node:zlib";
 // inline sheet in css-budget.test.mjs; this suite guards what the wire sees.
 // 2026-09-03: JS ceiling 120_000 -> 122_000 for the site-wide JSON-LD
 // structured-data graph (#263, closes #276) — deliberate feature weight.
+// 2026-09-04: JS ceiling 122_000 -> 123_000 for the elegant-redesign pass —
+// the build-derived proof line, the ledger row's rail markup and the repeated
+// detail-page claim CTA. Measured 122,025 B gzipped; the extra ~1 kB of
+// headroom is deliberate, not a measurement. CSS gzip was left at 8_000: the
+// redesign measures 7,9xx B and still fits.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-export const JS_GZIP_CEILING_BYTES = 122_000;
+export const JS_GZIP_CEILING_BYTES = 123_000;
 export const CSS_GZIP_CEILING_BYTES = 8_000;
 
 function collectGzipped(dir, ext) {

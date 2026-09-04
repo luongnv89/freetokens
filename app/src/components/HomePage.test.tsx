@@ -174,14 +174,15 @@ describe("HomePage masthead counters (#49 port)", () => {
     render(<HomePage index={index} />)
     const heading = screen.getByRole("heading", {
       level: 1,
-      name: "Every claimable free AI credit offer — verified, tagged, and on one fast page.",
+      name: "Free AI credits, checked one by one",
     })
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1)
     expect(heading.closest(".site-header")).not.toBeNull()
     expect(heading).toHaveClass("site-slogan")
 
-    // Counts moved to About — home header is now minimal (logo+name+slogan+list)
-    expect(screen.queryByText(/live offers/)).toBeNull()
+    // The supporting sentence and the build-derived proof line sit with it.
+    expect(screen.getByText(/One person opens every provider/)).toBeInTheDocument()
+    expect(screen.getByText(/live offers/)).toBeInTheDocument()
   })
 })
 
@@ -855,7 +856,7 @@ describe("HomePage per-offer live view counts (#101)", () => {
     expect(el?.classList.contains("ft-stat")).toBe(true)
     expect(el?.querySelector("strong")?.textContent).toBe("1,234")
     expect(el?.querySelector(".ft-stat-label")?.textContent).toBe("views")
-    expect(el?.closest(".row-head")).not.toBeNull()
+    expect(el?.closest(".row-rail")).not.toBeNull()
     expect(el?.closest(".row-meta")).toBeNull()
   })
 })

@@ -20,7 +20,7 @@ export function SiteHeader({
   const up = "../".repeat(depth)
   const homeHref = `${up || "./"}index.html`
   const showSlogan = slogan ?? (current === "home"
-    ? "Every claimable free AI credit offer — verified, tagged, and on one fast page."
+    ? "Free AI credits, checked one by one"
     : undefined)
   const SloganTag = current === "home" ? "h1" : "p"
   return (
@@ -69,6 +69,12 @@ export function SiteHeader({
         </nav>
       </div>
       {showSlogan ? <SloganTag className="site-slogan">{showSlogan}</SloganTag> : null}
+      {current === "home" && !slogan ? (
+        <p className="site-sub">
+          One person opens every provider&rsquo;s own page before an offer goes on this list.
+          Offers that expire come off it without anyone asking.
+        </p>
+      ) : null}
     </div>
   )
 }

@@ -319,10 +319,10 @@ describe("static route coverage (#123)", () => {
     const home = readFileSync(path.join(outDir, "index.html"), "utf8");
     expect(headings(home)).toHaveLength(1);
     expect(home).toContain(
-      '<h1 class="site-slogan">Every claimable free AI credit offer — verified, tagged, and on one fast page.</h1>',
+      '<h1 class="site-slogan">Free AI credits, checked one by one</h1>',
     );
     expect(home).toMatch(
-      /<div class="site-header">[\s\S]*<h1 class="site-slogan">Every claimable free AI credit/,
+      /<div class="site-header">[\s\S]*<h1 class="site-slogan">Free AI credits, checked one by one/,
     );
 
     for (const file of ["archive.html", "privacy.html", "about.html"]) {

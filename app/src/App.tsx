@@ -38,8 +38,8 @@ export default function App({
   }
   return (
     <>
-      <CustatsBanner />
       {page}
+      <CustatsBanner />
       <ConsentBanner />
     </>
   )

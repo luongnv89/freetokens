@@ -88,8 +88,8 @@ describe("App home listing prerender", () => {
     expect(aboutMarkup).toContain(`<strong>${offers.length}</strong> live offers`)
     expect(aboutMarkup).toContain(`<strong>${ongoingCount}</strong> ongoing`)
     expect(aboutMarkup).toContain(`<strong>${corroborated}</strong> corroborated by official source`)
-    // Home is now minimal header only
-    expect(markup).not.toContain("live offers")
+    // The home proof line carries its own live count, in its own wording.
+    expect(markup).toContain(`<strong>${offers.length}</strong> live offers`)
   });
 
   it("keeps semantic list markup — no div-based rows", () => {
@@ -203,7 +203,7 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
       expect(row).toContain(`badge-signup-${offer.signup}`);
       expect(row).toContain(`>${SIGNUP_LABELS[offer.signup]}<`);
       if (offer.expiry_date) {
-        expect(row).toContain("expires");
+        expect(row).toContain("ends");
         expect(row).toContain(`dateTime="${offer.expiry_date}"`);
       } else {
         expect(row).toMatch(/<span class="dot" aria-hidden="true"><\/span>ongoing/);

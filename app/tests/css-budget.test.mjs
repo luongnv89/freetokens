@@ -13,20 +13,30 @@ import path from "node:path";
 // those detail pages (#128), so the budget includes it.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-// Frozen Python-builder baseline was 36200 (#121/#139). Highlighted visit
-// chips (#250) added ~479 B. 320px WebKit overflow containment (#254) adds
-// chip/badge min-width, a visually-hidden file input, and table-layout:fixed.
-// Badge/chip wrap (overflow:visible + overflow-wrap) adds 89 B.
-// Custats sibling banner (#257) adds 1270 B muted mono strip (full-width,
-// hairline border, responsive at 320px).
-// Masthead stats rail (#279/#280/#281) layout is inlined from SiteStats.tsx
-// onto the home document only, so the shared sheet does not carry .site-stats
-// rules. Production `vite build` measures 38327 B (38 B over the pre-rail
-// 38289 freeze) from Tailwind picking up tokens in that inlined string.
-// "Hot today" badge (#282) adds the ranking hue token, its --t-* alias, and
-// the single .badge-hot rule that binds them. Production `vite build`
-// measures 38387 B (60 B over the post-rail 38327 freeze).
-const PYTHON_INLINE_CSS_BYTES = 38387;
+// Frozen Python-builder baseline was 36200 (#121/#139), then raised once per
+// shipped feature up to 38387 (highlighted visit chips, 320px WebKit overflow
+// containment, badge/chip wrap, the custats sibling banner, the masthead stats
+// rail, the "Hot today" badge).
+//
+// The elegant-redesign pass supersedes that run of per-feature freezes rather
+// than adding to it, because it rewrote the listing rather than extending it.
+// What the extra bytes bought, net of what came back:
+//
+//   reclaimed  the dead .card-top / .card-actions / .detail-btn / .ext /
+//              .amount / .prov rules the row layout had already orphaned, and
+//              the card chrome the archive no longer needs now that home and
+//              archive share one ledger row  (-911 B)
+//   spent      the row's four-area grid and its fixed rail, the quiet-filter
+//              treatment, the masthead headline and supporting sentence, the
+//              scrollable mobile chip row, the phone-width masthead and
+//              toolbar tightening that puts the first offer back above the
+//              fold, the detail-page hero CTA and link treatment, and the
+//              press/hover interaction polish  (+2123 B)
+//
+// 38387 - 911 + 2123 = 39599, which is what production `vite build` measures.
+// Raise this deliberately, in the same style, when a change is worth the
+// bytes.
+const PYTHON_INLINE_CSS_BYTES = 39599;
 
 function cssBytesIn(dir) {
   let total = 0;
