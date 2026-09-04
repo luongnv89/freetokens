@@ -21,9 +21,13 @@ import { gzipSync } from "node:zlib";
 // detail-page claim CTA. Measured 122,025 B gzipped; the extra ~1 kB of
 // headroom is deliberate, not a measurement. CSS gzip was left at 8_000: the
 // redesign measures 7,9xx B and still fits.
+// 2026-09-04 (#304): JS ceiling 123_000 -> 128_500 — catalog growth, not
+// feature weight: 10 new offers joined src/data/offers.json (epic #287 batch),
+// which App.tsx embeds wholesale. Measured 127,571 B gzipped (main baseline
+// 122,258 B, ~530 B/offer); ~1 kB headroom kept for one-off copy tweaks.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-export const JS_GZIP_CEILING_BYTES = 123_000;
+export const JS_GZIP_CEILING_BYTES = 128_500;
 // Raised from 8_000 by the dark redesign, which took the sheet from 39381 to
 // 44412 raw (accounted line by line in css-budget.test.mjs) and 8813 -> 8919
 // gzipped once the self-hosted @font-face blocks landed. 9_000 keeps the same
