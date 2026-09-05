@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-05T07:24:01Z — 59 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-05T07:26:21Z — 60 active offers.
 
 ## Offers (full)
 
@@ -27,6 +27,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-05T07:24:01Z — 
 - Page: https://freetokens.custats.info/offers/mistral-experiment-free-tier.html
 - Summary: Mistral's Free plan includes $10 per month in API credits and access to Mistral Studio, with no credit card required. The pricing page lists Studio plus $10/mo credits on the Free card. Studio docs still describe Free mode as rate-limited API access with no card — they do not mention the $10 monthly credit.
 - Claim steps: Create a free account at console.mistral.ai (no credit card required). | Use the Free plan — Studio access and $10/mo API credits apply. | Generate an API key and call api.mistral.ai within published limits.
+
+### Embercloud for Startups — $100 Credits
+- Provider: Embercloud
+- Category: startup_program
+- Amount: $100 free API credits on approval (GLM-5, GLM-4.7, etc.; OpenAI-compatible); add $5 to verify company after approval
+- Status: active — expiry ongoing
+- Verified: 2026-09-05 (social_proof / under-review, signup required)
+- Source: https://www.embercloud.ai/startups
+- Page: https://freetokens.custats.info/offers/embercloud-startups-100-credits.html
+- Summary: Embercloud for Startups grants $100 in free API credits after application approval. Credits cover EmberCloud models including GLM-5 and GLM-4.7 via an OpenAI-compatible API. No credit card is required to apply. After approval, add $5 to verify the company and start building.
+- Claim steps: Apply at embercloud.ai/startups (no credit card required). | Wait for review (the page says a few business days). | After approval, add $5 to verify your company. | Use the OpenAI-compatible API with GLM-5, GLM-4.7, and other EmberCloud models.
 
 ### AssemblyAI $50 Free Credits
 - Provider: AssemblyAI
