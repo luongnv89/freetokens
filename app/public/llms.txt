@@ -4,9 +4,10 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 60 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 61 active listings. Full directory at https://freetokens.custats.info/.
 
 - [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
+- [Together AI Startup Accelerator](https://freetokens.custats.info/offers/together-ai-startup-accelerator.html): Together AI — Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant) (startup_program)
 - [Mistral Free Plan — $10/mo API Credits](https://freetokens.custats.info/offers/mistral-experiment-free-tier.html): Mistral AI — $10/mo in API credits plus Studio access (no credit card for Free) (api_provider)
 - [Embercloud for Startups — $100 Credits](https://freetokens.custats.info/offers/embercloud-startups-100-credits.html): Embercloud — $100 free API credits on approval (GLM-5, GLM-4.7, etc.; OpenAI-compatible); add $5 to verify company after approval (startup_program)
 - [AssemblyAI $50 Free Credits](https://freetokens.custats.info/offers/assemblyai-50-free-credits.html): AssemblyAI — $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire (voice)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 60 active listings. 
 - [WorkBuddy Hy4 Preview Free](https://freetokens.custats.info/offers/workbuddy-hy4-preview-free.html): WorkBuddy — Free access to Hy4 preview (2 weeks) (coding)
 - [Vidu AI Video Free Credits](https://freetokens.custats.info/offers/vidu-free-credits.html): Vidu — Trial credits for new users on signup, topped up with daily login bonus credits (video)
 - [SiliconFlow Free Models](https://freetokens.custats.info/offers/siliconflow-free-models.html): SiliconFlow — Selected API models are free for input and output, including GLM-Z1-9B-0414 (api_provider)
-- [Runway Free Plan](https://freetokens.custats.info/offers/runway-free-plan.html): Runway — 125 one-time credits for AI video and image generation (video)
 
 ## Pages
 

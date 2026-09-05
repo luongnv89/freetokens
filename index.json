@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-05T07:26:21Z",
-  "count": 76,
-  "active_count": 60,
+  "generated_at": "2026-09-05T07:34:27Z",
+  "count": 77,
+  "active_count": 61,
   "expired_count": 16,
   "offers": [
     {
@@ -26,6 +26,20 @@
       "amount": "$100 free API credits on approval (GLM-5, GLM-4.7, etc.; OpenAI-compatible); add $5 to verify company after approval",
       "expiry_date": null,
       "source_url": "https://www.embercloud.ai/startups",
+      "verified_date": "2026-09-05",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "together-ai-startup-accelerator",
+      "title": "Together AI Startup Accelerator",
+      "provider": "Together AI",
+      "category": "startup_program",
+      "amount": "Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant)",
+      "expiry_date": null,
+      "source_url": "https://www.together.ai/startup-accelerator",
       "verified_date": "2026-09-05",
       "verification": "social_proof",
       "review_status": "under-review",
