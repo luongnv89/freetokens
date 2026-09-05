@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-05T07:22:12Z — 58 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-05T07:24:01Z — 59 active offers.
 
 ## Offers (full)
+
+### YepAPI $5 Signup Credit
+- Provider: YepAPI
+- Category: api_provider
+- Amount: $5 free credit on signup for 60+ models via OpenAI-compatible gateway
+- Status: active — expiry ongoing
+- Verified: 2026-09-05 (social_proof / under-review, signup required)
+- Source: https://www.yepapi.com/ai-api
+- Page: https://freetokens.custats.info/offers/yepapi-5-signup-credit.html
+- Summary: YepAPI grants $5 free credit on signup with no credit card. One API key accesses 60+ models (GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and more) through a single OpenAI-compatible endpoint. After the credit, usage is pay-per-token with no subscription.
+- Claim steps: Sign up at yepapi.com (no credit card required). | Copy your API key — $5 credit is applied automatically. | Point an OpenAI-compatible client at YepAPI and use any listed model.
 
 ### Mistral Free Plan — $10/mo API Credits
 - Provider: Mistral AI

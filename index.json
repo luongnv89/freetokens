@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-05T07:22:12Z",
-  "count": 74,
-  "active_count": 58,
+  "generated_at": "2026-09-05T07:24:01Z",
+  "count": 75,
+  "active_count": 59,
   "expired_count": 16,
   "offers": [
     {
@@ -12,6 +12,20 @@
       "amount": "$50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire",
       "expiry_date": null,
       "source_url": "https://www.assemblyai.com/docs/billing-and-pricing",
+      "verified_date": "2026-09-05",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "yepapi-5-signup-credit",
+      "title": "YepAPI $5 Signup Credit",
+      "provider": "YepAPI",
+      "category": "api_provider",
+      "amount": "$5 free credit on signup for 60+ models via OpenAI-compatible gateway",
+      "expiry_date": null,
+      "source_url": "https://www.yepapi.com/ai-api",
       "verified_date": "2026-09-05",
       "verification": "social_proof",
       "review_status": "under-review",

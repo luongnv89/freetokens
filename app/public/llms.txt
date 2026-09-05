@@ -4,8 +4,9 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 58 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 59 active listings. Full directory at https://freetokens.custats.info/.
 
+- [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
 - [Mistral Free Plan — $10/mo API Credits](https://freetokens.custats.info/offers/mistral-experiment-free-tier.html): Mistral AI — $10/mo in API credits plus Studio access (no credit card for Free) (api_provider)
 - [AssemblyAI $50 Free Credits](https://freetokens.custats.info/offers/assemblyai-50-free-credits.html): AssemblyAI — $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire (voice)
 - [ZCode Weekend Build IV — 300M Free GLM-5.3-Flash Tokens](https://freetokens.custats.info/offers/zcode-weekend-build-4-300m-tokens.html): ZCode — 300M GLM-5.3-Flash tokens per person (coding)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 58 active listings. 
 - [SiliconFlow Free Models](https://freetokens.custats.info/offers/siliconflow-free-models.html): SiliconFlow — Selected API models are free for input and output, including GLM-Z1-9B-0414 (api_provider)
 - [Runway Free Plan](https://freetokens.custats.info/offers/runway-free-plan.html): Runway — 125 one-time credits for AI video and image generation (video)
 - [Pika Free Plan](https://freetokens.custats.info/offers/pika-free-plan.html): Pika — 80 monthly video credits (video)
-- [OpenRouter Free Models](https://freetokens.custats.info/offers/openrouter-free-models.html): OpenRouter — Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time) (api_provider)
 
 ## Pages
 
