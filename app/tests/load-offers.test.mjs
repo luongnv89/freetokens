@@ -163,7 +163,17 @@ describe("generated artifacts vs committed index.json", () => {
     delete committed.generated_at;
     const generated = structuredClone(index);
     delete generated.generated_at;
-    expect(generated).toEqual(committed);
+    // Listing order is newest-git-add first and differs between local and
+    // GitHub Actions checkouts (same files, different first-commit dates).
+    // Compare the catalog as a slug-keyed set so CI cannot block Pages on
+    // sort drift. Display order is still computed at build time from git.
+    const bySlug = (idx) => ({
+      ...idx,
+      offers: [...idx.offers].sort((a, b) =>
+        a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0,
+      ),
+    });
+    expect(bySlug(generated)).toEqual(bySlug(committed));
   });
 
   it("offers.jsonl has one valid object per line and line count equals count", async () => {
