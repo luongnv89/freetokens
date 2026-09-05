@@ -1,0 +1,15 @@
+# Verified 2026-09-05 against https://www.together.ai/startup-accelerator
+# ("A targeted selection-based program for startups.")
+# ("Up to $15K in free platform credits*" / "$30K" / "$50K" by funding tier)
+# Credits apply to serverless inference, dedicated endpoints, fine-tuning
+# and instant clusters. Not a general signup grant.
+title: Together AI Startup Accelerator
+provider: Together AI
+category: startup_program
+amount: Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant)
+expiry_date: null
+source_url: https://www.together.ai/startup-accelerator
+verified_date: 2026-09-05
+verification: social_proof
+review_status: under-review
+signup: required

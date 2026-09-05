@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-05T07:26:21Z — 60 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-05T07:34:27Z — 61 active offers.
 
 ## Offers (full)
 
@@ -16,6 +16,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-05T07:26:21Z — 
 - Page: https://freetokens.custats.info/offers/yepapi-5-signup-credit.html
 - Summary: YepAPI grants $5 free credit on signup with no credit card. One API key accesses 60+ models (GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and more) through a single OpenAI-compatible endpoint. After the credit, usage is pay-per-token with no subscription.
 - Claim steps: Sign up at yepapi.com (no credit card required). | Copy your API key — $5 credit is applied automatically. | Point an OpenAI-compatible client at YepAPI and use any listed model.
+
+### Together AI Startup Accelerator
+- Provider: Together AI
+- Category: startup_program
+- Amount: Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant)
+- Status: active — expiry ongoing
+- Verified: 2026-09-05 (social_proof / under-review, signup required)
+- Source: https://www.together.ai/startup-accelerator
+- Page: https://freetokens.custats.info/offers/together-ai-startup-accelerator.html
+- Summary: Together AI Startup Accelerator is a selection-based program, not a general signup grant. Approved startups receive up to $15K, $30K, or $50K in free platform credits depending on funding stage (under $5M / $5–10M / over $10M). Credits can be used for serverless inference, dedicated endpoints, fine-tuning, and instant clusters.
+- Claim steps: Confirm your startup is building an AI-native application. | Apply at together.ai/startup-accelerator (no card required to apply). | If selected, credits are granted according to funding tier: up to $15K / $30K / $50K.
 
 ### Mistral Free Plan — $10/mo API Credits
 - Provider: Mistral AI
