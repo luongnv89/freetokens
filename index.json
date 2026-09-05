@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T07:34:27Z",
+  "generated_at": "2026-09-05T07:35:14Z",
   "count": 77,
   "active_count": 61,
   "expired_count": 16,
@@ -495,6 +495,20 @@
       "status": "active"
     },
     {
+      "slug": "gmi-cloud-minimax-week",
+      "title": "GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free",
+      "provider": "GMI Cloud",
+      "category": "api_provider",
+      "amount": "MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter — expires 2026-09-06",
+      "expiry_date": "2026-09-06",
+      "source_url": "https://www.gmicloud.ai/minimax-week",
+      "verified_date": "2026-09-05",
+      "verification": "social_proof",
+      "review_status": "verified",
+      "signup": "required",
+      "status": "active"
+    },
+    {
       "slug": "mistral-experiment-free-tier",
       "title": "Mistral Free Plan — $10/mo API Credits",
       "provider": "Mistral AI",
@@ -642,20 +656,6 @@
       "amount": "10k credits/month (~10 min of audio)",
       "expiry_date": null,
       "source_url": "https://elevenlabs.io/pricing",
-      "verified_date": "2026-09-03",
-      "verification": "social_proof",
-      "review_status": "verified",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "gmi-cloud-minimax-week",
-      "title": "GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free",
-      "provider": "GMI Cloud",
-      "category": "api_provider",
-      "amount": "MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter",
-      "expiry_date": "2026-09-06",
-      "source_url": "https://www.gmicloud.ai/minimax-week",
       "verified_date": "2026-09-03",
       "verification": "social_proof",
       "review_status": "verified",
