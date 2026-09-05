@@ -1,0 +1,22 @@
+{
+  "summary": "Together AI Startup Accelerator is a selection-based program, not a general signup grant. Approved startups receive up to $15K, $30K, or $50K in free platform credits depending on funding stage (under $5M / $5–10M / over $10M). Credits can be used for serverless inference, dedicated endpoints, fine-tuning, and instant clusters.",
+  "claim_steps": [
+    "Confirm your startup is building an AI-native application.",
+    "Apply at together.ai/startup-accelerator (no card required to apply).",
+    "If selected, credits are granted according to funding tier: up to $15K / $30K / $50K."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.together.ai/startup-accelerator",
+      "title": "Startup Accelerator | Together AI",
+      "text": "A targeted selection-based program for startups. Build: up to $15K in free platform credits. Scale: up to $30K. Grow: up to $50K."
+    },
+    {
+      "type": "link",
+      "url": "https://www.together.ai/blog/announcing-together-ai-startup-accelerator",
+      "title": "Announcing the Together AI Startup Accelerator",
+      "text": "Startups receive up to 50K USD free credits to use on the Together AI platform. Selection-based program with platform credits, engineering expertise and GTM support."
+    }
+  ]
+}
