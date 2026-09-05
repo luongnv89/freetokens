@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T07:18:35Z",
+  "generated_at": "2026-09-05T07:22:12Z",
   "count": 74,
   "active_count": 58,
   "expired_count": 16,
@@ -453,6 +453,20 @@
       "status": "active"
     },
     {
+      "slug": "mistral-experiment-free-tier",
+      "title": "Mistral Free Plan — $10/mo API Credits",
+      "provider": "Mistral AI",
+      "category": "api_provider",
+      "amount": "$10/mo in API credits plus Studio access (no credit card for Free)",
+      "expiry_date": null,
+      "source_url": "https://mistral.ai/pricing",
+      "verified_date": "2026-09-05",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
       "slug": "amazon-polly-free-tier",
       "title": "Amazon Polly Free Tier",
       "provider": "AWS",
@@ -701,20 +715,6 @@
       "verified_date": "2026-09-03",
       "verification": "social_proof",
       "review_status": "unverified",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "mistral-experiment-free-tier",
-      "title": "Mistral AI Studio Free Mode — Free API Tier",
-      "provider": "Mistral AI",
-      "category": "api_provider",
-      "amount": "Free rate-limited API access (no credit card required)",
-      "expiry_date": null,
-      "source_url": "https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key",
-      "verified_date": "2026-09-03",
-      "verification": "social_proof",
-      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },

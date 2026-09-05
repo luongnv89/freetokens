@@ -1,17 +1,22 @@
 {
-  "summary": "Mistral's La Plateforme 'Experiment' plan provides free, rate-limited API access to Mistral models with no credit card required. Activating it opts your data into training in exchange for the free tier.",
+  "summary": "Mistral's Free plan includes $10 per month in API credits and access to Mistral Studio, with no credit card required. The pricing page lists Studio plus $10/mo credits on the Free card. Studio docs still describe Free mode as rate-limited API access with no card — they do not mention the $10 monthly credit.",
   "claim_steps": [
-    "Create a free account at console.mistral.ai.",
-    "Activate the free 'Experiment' plan from the subscription page (data-training opt-in applies).",
-    "Generate an API key from the API Keys page.",
-    "Call api.mistral.ai within the published rate limits."
+    "Create a free account at console.mistral.ai (no credit card required).",
+    "Use the Free plan — Studio access and $10/mo API credits apply.",
+    "Generate an API key and call api.mistral.ai within published limits."
   ],
   "social_proof": [
     {
       "type": "link",
+      "url": "https://mistral.ai/pricing",
+      "title": "Pricing | Mistral",
+      "text": "Free plan card lists: Test Mistral models in Studio. $10 /mo in API credits. FAQ: On the Free plan, you also get access to Mistral Studio."
+    },
+    {
+      "type": "link",
       "url": "https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key",
       "title": "Activate Studio and generate an API key | Mistral Docs",
-      "text": "Generate your first API key in Studio in ~5 minutes."
+      "text": "Free mode: API access is enabled by default with no credit card required. Usage and rate limits apply."
     }
   ]
 }
