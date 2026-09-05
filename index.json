@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-09-05T05:45:19Z",
+  "generated_at": "2026-09-05T07:18:35Z",
   "count": 74,
   "active_count": 58,
   "expired_count": 16,
   "offers": [
+    {
+      "slug": "assemblyai-50-free-credits",
+      "title": "AssemblyAI $50 Free Credits",
+      "provider": "AssemblyAI",
+      "category": "voice",
+      "amount": "$50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire",
+      "expiry_date": null,
+      "source_url": "https://www.assemblyai.com/docs/billing-and-pricing",
+      "verified_date": "2026-09-05",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "anthropic-console-free-starter-credits",
       "title": "Free starter credits for new Claude Console accounts",
@@ -1025,20 +1039,6 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "assemblyai-50-free-credits",
-      "title": "AssemblyAI $50 Free Credits",
-      "provider": "AssemblyAI",
-      "category": "voice",
-      "amount": "$50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire",
-      "expiry_date": null,
-      "source_url": "https://www.assemblyai.com/docs/billing-and-pricing",
-      "verified_date": "2026-09-05",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
     }
   ]
 }
