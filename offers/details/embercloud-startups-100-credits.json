@@ -1,0 +1,17 @@
+{
+  "summary": "Embercloud for Startups grants $100 in free API credits after application approval. Credits cover EmberCloud models including GLM-5 and GLM-4.7 via an OpenAI-compatible API. No credit card is required to apply. After approval, add $5 to verify the company and start building.",
+  "claim_steps": [
+    "Apply at embercloud.ai/startups (no credit card required).",
+    "Wait for review (the page says a few business days).",
+    "After approval, add $5 to verify your company.",
+    "Use the OpenAI-compatible API with GLM-5, GLM-4.7, and other EmberCloud models."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.embercloud.ai/startups",
+      "title": "Embercloud for Startups | $100 in Free API Credits",
+      "text": "Get $100 in free API credits upon approval. Add $5 to verify your company and start building. No credit card required to apply."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-05T07:24:01Z",
-  "count": 75,
-  "active_count": 59,
+  "generated_at": "2026-09-05T07:26:21Z",
+  "count": 76,
+  "active_count": 60,
   "expired_count": 16,
   "offers": [
     {
@@ -12,6 +12,20 @@
       "amount": "$50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire",
       "expiry_date": null,
       "source_url": "https://www.assemblyai.com/docs/billing-and-pricing",
+      "verified_date": "2026-09-05",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "embercloud-startups-100-credits",
+      "title": "Embercloud for Startups — $100 Credits",
+      "provider": "Embercloud",
+      "category": "startup_program",
+      "amount": "$100 free API credits on approval (GLM-5, GLM-4.7, etc.; OpenAI-compatible); add $5 to verify company after approval",
+      "expiry_date": null,
+      "source_url": "https://www.embercloud.ai/startups",
       "verified_date": "2026-09-05",
       "verification": "social_proof",
       "review_status": "under-review",
