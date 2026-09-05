@@ -4,8 +4,9 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 57 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 58 active listings. Full directory at https://freetokens.custats.info/.
 
+- [AssemblyAI $50 Free Credits](https://freetokens.custats.info/offers/assemblyai-50-free-credits.html): AssemblyAI — $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire (voice)
 - [ZCode Weekend Build IV — 300M Free GLM-5.3-Flash Tokens](https://freetokens.custats.info/offers/zcode-weekend-build-4-300m-tokens.html): ZCode — 300M GLM-5.3-Flash tokens per person (coding)
 - [Suno Free Plan — 50 credits per day](https://freetokens.custats.info/offers/suno-free-plan.html): Suno — Free plan, 50 credits/day (~10 songs) (voice)
 - [SambaNova Cloud Free Tier](https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html): SambaNova — free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required (api_provider)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 57 active listings. 
 - [Pika Free Plan](https://freetokens.custats.info/offers/pika-free-plan.html): Pika — 80 monthly video credits (video)
 - [OpenRouter Free Models](https://freetokens.custats.info/offers/openrouter-free-models.html): OpenRouter — Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time) (api_provider)
 - [OpenAI Codex Free Tier](https://freetokens.custats.info/offers/openai-codex-free-tier.html): OpenAI — Limited free Codex access on the ChatGPT Free plan, incl. GPT-5.6 Luna (no credit card) (coding)
-- [Ollama Cloud Free Tier](https://freetokens.custats.info/offers/ollama-cloud-free-tier.html): Ollama — Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited (api_provider)
 
 ## Pages
 

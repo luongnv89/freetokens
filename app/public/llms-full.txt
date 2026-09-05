@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-04T13:57:37Z — 57 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-05T05:45:59Z — 58 active offers.
 
 ## Offers (full)
+
+### AssemblyAI $50 Free Credits
+- Provider: AssemblyAI
+- Category: voice
+- Amount: $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire
+- Status: active — expiry ongoing
+- Verified: 2026-09-05 (social_proof / under-review, signup required)
+- Source: https://www.assemblyai.com/docs/billing-and-pricing
+- Page: https://freetokens.custats.info/offers/assemblyai-50-free-credits.html
+- Summary: New AssemblyAI accounts receive $50 in free credits that do not expire. Credits apply to Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, and Guardrails. LLM Gateway is billed from the account balance from the first request and is not covered by the free tier. No credit card is required to start; add a card after credits are used up to keep using the API.
+- Claim steps: Create a free AssemblyAI account at assemblyai.com (no credit card required). | Open the dashboard and copy an API key. | Use Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, or Guardrails — $50 in credits apply automatically. | Do not expect LLM Gateway usage to be covered by the free credits.
 
 ### ZCode Weekend Build IV — 300M Free GLM-5.3-Flash Tokens
 - Provider: ZCode

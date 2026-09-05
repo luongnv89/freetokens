@@ -1,0 +1,29 @@
+{
+  "summary": "New AssemblyAI accounts receive $50 in free credits that do not expire. Credits apply to Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, and Guardrails. LLM Gateway is billed from the account balance from the first request and is not covered by the free tier. No credit card is required to start; add a card after credits are used up to keep using the API.",
+  "claim_steps": [
+    "Create a free AssemblyAI account at assemblyai.com (no credit card required).",
+    "Open the dashboard and copy an API key.",
+    "Use Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, or Guardrails — $50 in credits apply automatically.",
+    "Do not expect LLM Gateway usage to be covered by the free credits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.assemblyai.com/docs/billing-and-pricing",
+      "title": "Billing and Pricing - AssemblyAI",
+      "text": "New accounts receive $50 in free credits for Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, and Guardrails. Credits do not expire."
+    },
+    {
+      "type": "link",
+      "url": "https://www.assemblyai.com/pricing",
+      "title": "AssemblyAI | Pricing | Production-ready AI Models",
+      "text": "You can create an account and start transcribing immediately with no credit card required."
+    },
+    {
+      "type": "link",
+      "url": "https://support.assemblyai.com/articles/5370767329-can-i-sign-up-for-free",
+      "title": "Can I sign up for free? | AssemblyAI Frequently Asked Questions",
+      "text": "An account on the free tier can process up to $50 in audio. LLM Gateway is not available to accounts on the free tier."
+    }
+  ]
+}
