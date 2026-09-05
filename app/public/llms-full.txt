@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-05T07:34:27Z — 61 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-05T07:35:14Z — 61 active offers.
 
 ## Offers (full)
 
@@ -38,6 +38,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-05T07:34:27Z — 
 - Page: https://freetokens.custats.info/offers/mistral-experiment-free-tier.html
 - Summary: Mistral's Free plan includes $10 per month in API credits and access to Mistral Studio, with no credit card required. The pricing page lists Studio plus $10/mo credits on the Free card. Studio docs still describe Free mode as rate-limited API access with no card — they do not mention the $10 monthly credit.
 - Claim steps: Create a free account at console.mistral.ai (no credit card required). | Use the Free plan — Studio access and $10/mo API credits apply. | Generate an API key and call api.mistral.ai within published limits.
+
+### GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free
+- Provider: GMI Cloud
+- Category: api_provider
+- Amount: MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter — expires 2026-09-06
+- Status: active — expiry 2026-09-06
+- Verified: 2026-09-05 (social_proof / verified, signup required)
+- Source: https://www.gmicloud.ai/minimax-week
+- Page: https://freetokens.custats.info/offers/gmi-cloud-minimax-week.html
+- Summary: GMI Cloud's MiniMax Week (Aug 24 – Sep 6, 2026) makes the MiniMax lineup free for fourteen days: M3 (frontier reasoning), M2.7 (fast agent/coding reasoning), Speech 2.8 (TTS and voice cloning), and Music 3.0 (full generated tracks). Access via a GMI API key or OpenRouter's :free variants, with native integrations in Pi, Oh My Pi, Hermes Agent, Trae, and OpenCode, and BYOK support for Claude Code, Codex, and Cursor. Account creation is free; H3 generative video is not included and stays at standard pricing. A concurrent MiniMaxathon challenge awards $200 in GMI credits plus a 3-month MiniMax token plan per track winner.
+- Claim steps: Create a free GMI Cloud account at https://console.gmicloud.ai. | Use MiniMax models via the GMI Model Hub API key, or through OpenRouter using the :free variants (e.g. openrouter.ai/minimax/minimax-m3:free). | Optionally integrate natively in Pi, Oh My Pi, Hermes Agent, Trae, or OpenCode — or BYOK into Claude Code, Codex, or Cursor. | Use the models free until September 6, 2026; standard pricing applies afterward.
 
 ### Embercloud for Startups — $100 Credits
 - Provider: Embercloud
@@ -467,17 +478,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-05T07:34:27Z — 
 - Page: https://freetokens.custats.info/offers/google-ai-studio-image.html
 - Summary: Google AI Studio offers free, rate-limited image generation directly in the browser using Gemini image models — no billing account required for the free tier.
 - Claim steps: Open aistudio.google.com in your browser. | Sign in with a Google account. | Choose an image-capable Gemini model and start generating. | Stay within the per-minute/per-day free rate limits.
-
-### GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free
-- Provider: GMI Cloud
-- Category: api_provider
-- Amount: MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter
-- Status: active — expiry 2026-09-06
-- Verified: 2026-09-03 (social_proof / verified, signup required)
-- Source: https://www.gmicloud.ai/minimax-week
-- Page: https://freetokens.custats.info/offers/gmi-cloud-minimax-week.html
-- Summary: GMI Cloud's MiniMax Week (Aug 24 – Sep 6, 2026) makes the MiniMax lineup free for fourteen days: M3 (frontier reasoning), M2.7 (fast agent/coding reasoning), Speech 2.8 (TTS and voice cloning), and Music 3.0 (full generated tracks). Access via a GMI API key or OpenRouter's :free variants, with native integrations in Pi, Oh My Pi, Hermes Agent, Trae, and OpenCode, and BYOK support for Claude Code, Codex, and Cursor. Account creation is free; H3 generative video is not included and stays at standard pricing. A concurrent MiniMaxathon challenge awards $200 in GMI credits plus a 3-month MiniMax token plan per track winner.
-- Claim steps: Create a free GMI Cloud account at https://console.gmicloud.ai. | Use MiniMax models via the GMI Model Hub API key, or through OpenRouter using the :free variants (e.g. openrouter.ai/minimax/minimax-m3:free). | Optionally integrate natively in Pi, Oh My Pi, Hermes Agent, Trae, or OpenCode — or BYOK into Claude Code, Codex, or Cursor. | Use the models free until September 6, 2026; standard pricing applies afterward.
 
 ### GenSpark Free Trial — 1 Month + 10K Credits
 - Provider: GenSpark
