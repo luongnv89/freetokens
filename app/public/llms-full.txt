@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:06Z — 66 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:25Z — 67 active offers.
 
 ## Offers (full)
 
@@ -49,6 +49,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:06Z — 
 - Page: https://freetokens.custats.info/offers/google-cloud-ai-startup-program.html
 - Summary: Google Cloud's AI startup program grants up to $350,000 in Google Cloud credits over two years for eligible AI-first, VC-funded startups (Grow/Scale tier). Year 1 is 100% up to $100,000 generally, or 100% up to $250,000 for AI-first startups; Year 2 is 20% up to an additional $100,000. Credits cover Google models such as Gemini and Gemma; third-party models are billed directly and are not covered. Eligibility is selection-based: Pre-Seed/Seed within the last five years or Series A within the last 12 months, founded within five years, not yet received more than $5,000 in Google Cloud credits, and at Google Cloud's discretion. This is distinct from the $300 Free Trial listing.
 - Claim steps: Confirm eligibility: VC-funded AI-first startup (Pre-Seed/Seed in last 5 years or Series A in last 12 months), founded within 5 years, under $5,000 prior Google Cloud credits. | Apply at cloud.google.com/startup/ai (selection-based; acceptance is at Google Cloud's discretion). | If accepted, use program credits on Google Cloud services and Google models (Gemini/Gemma). Third-party models are not covered. | Do not confuse this with the separate $300 Google Cloud Free Trial.
+
+### Cohere Trial API Key
+- Provider: Cohere
+- Category: api_provider
+- Amount: Free evaluation/trial keys — 1,000 API calls/month; Chat ~20 RPM
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://docs.cohere.com/docs/rate-limits
+- Page: https://freetokens.custats.info/offers/cohere-trial-key.html
+- Summary: Cohere evaluation/trial API keys are free but limited: 1,000 API calls per month, and Chat models at 20 requests per minute. Production keys are paid with higher limits. Create a trial or production key on the API keys page. This reactivates the previously archived cohere-trial-key listing. The rate-limits page does not state a non-commercial restriction.
+- Claim steps: Sign up at dashboard.cohere.com (no card mentioned for trial keys). | Open the API keys page and create a Trial (evaluation) key. | Stay within 1,000 API calls/month and Chat 20 req/min trial limits.
 
 ### Claude for Startups
 - Provider: Anthropic

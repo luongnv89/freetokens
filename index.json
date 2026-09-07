@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-09-07T07:12:06Z",
+  "generated_at": "2026-09-07T07:12:25Z",
   "count": 83,
-  "active_count": 66,
-  "expired_count": 17,
+  "active_count": 67,
+  "expired_count": 16,
   "offers": [
+    {
+      "slug": "ai21-studio-10-credits",
+      "title": "AI21 Studio Free Trial — $10 Credits",
+      "provider": "AI21",
+      "category": "api_provider",
+      "amount": "$10 credit for new accounts, good for 3 months on platform APIs/SDK/playground (no card to start)",
+      "expiry_date": null,
+      "source_url": "https://docs.ai21.com/docs/usage-cost",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "claude-for-startups",
       "title": "Claude for Startups",
@@ -579,6 +593,20 @@
       "status": "active"
     },
     {
+      "slug": "cohere-trial-key",
+      "title": "Cohere Trial API Key",
+      "provider": "Cohere",
+      "category": "api_provider",
+      "amount": "Free evaluation/trial keys — 1,000 API calls/month; Chat ~20 RPM",
+      "expiry_date": null,
+      "source_url": "https://docs.cohere.com/docs/rate-limits",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
       "slug": "gmi-cloud-minimax-week",
       "title": "GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free",
       "provider": "GMI Cloud",
@@ -1013,20 +1041,6 @@
       "status": "expired"
     },
     {
-      "slug": "cohere-trial-key",
-      "title": "Cohere Trial API Key",
-      "provider": "Cohere",
-      "category": "api_provider",
-      "amount": "Free trial key - 1,000 API calls/month across Chat, Embed, and Rerank endpoints",
-      "expiry_date": "2026-08-25",
-      "source_url": "https://docs.cohere.com/docs/rate-limits",
-      "verified_date": "2026-08-23",
-      "verification": "social_proof",
-      "review_status": "verified",
-      "signup": "required",
-      "status": "expired"
-    },
-    {
       "slug": "commandcode-ox-alpha-free",
       "title": "Ox Alpha Free on Command Code",
       "provider": "Command Code",
@@ -1151,20 +1165,6 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "ai21-studio-10-credits",
-      "title": "AI21 Studio Free Trial — $10 Credits",
-      "provider": "AI21",
-      "category": "api_provider",
-      "amount": "$10 credit for new accounts, good for 3 months on platform APIs/SDK/playground (no card to start)",
-      "expiry_date": null,
-      "source_url": "https://docs.ai21.com/docs/usage-cost",
-      "verified_date": "2026-09-07",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
     }
   ]
 }

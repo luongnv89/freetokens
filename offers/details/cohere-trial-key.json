@@ -1,0 +1,16 @@
+{
+  "summary": "Cohere evaluation/trial API keys are free but limited: 1,000 API calls per month, and Chat models at 20 requests per minute. Production keys are paid with higher limits. Create a trial or production key on the API keys page. This reactivates the previously archived cohere-trial-key listing. The rate-limits page does not state a non-commercial restriction.",
+  "claim_steps": [
+    "Sign up at dashboard.cohere.com (no card mentioned for trial keys).",
+    "Open the API keys page and create a Trial (evaluation) key.",
+    "Stay within 1,000 API calls/month and Chat 20 req/min trial limits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.cohere.com/docs/rate-limits",
+      "title": "Different Types of API Keys and Rate Limits | Cohere",
+      "text": "Cohere offers two kinds of API keys: evaluation keys (free but limited in usage), and production keys. Trial keys are limited to 1,000 API calls a month. Chat API trial rate limit: 20 req / min."
+    }
+  ]
+}
