@@ -1,0 +1,16 @@
+{
+  "summary": "New AI21 Studio accounts receive a $10 credit good for three months on the AI21 platform (REST APIs, SDK, and playground). After the credit is used or expires, valid billing information is required to continue. Cloud-hosted AI21 models (Bedrock, SageMaker, Azure) are billed by those providers, not this credit. A marketing-page claim of a 7-day window was not independently verified (pricing site 403); this listing follows the official docs.",
+  "claim_steps": [
+    "Create an AI21 Studio account (no credit card required to start).",
+    "Use the $10 credit on APIs, SDK, and playground for up to three months.",
+    "Add billing information after the credit is used or expires to continue."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.ai21.com/docs/usage-cost",
+      "title": "Pricing - AI21 Labs",
+      "text": "New accounts are given a $10 credit good for three months on the AI21 platform. You can use your credit for all usage of the APIs, the SDK, and the playground."
+    }
+  ]
+}
