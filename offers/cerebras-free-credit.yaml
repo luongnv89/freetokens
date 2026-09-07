@@ -1,0 +1,18 @@
+# Re-verified 2026-09-07 against https://inference-docs.cerebras.ai/support/rate-limits
+# FAQ: "New accounts receive $5 in free credits after adding a verified payment
+# method. These credits expire 30 days after they're granted and can be used
+# across all public models. There is no charge until you choose to purchase
+# additional credits. If you skip adding a payment method at sign-up,
+# Playground and API access remain inactive until you do."
+# "Is there a permanently free tier? No."
+# Reactivate from offers/archive/cerebras-free-credit.yaml (archived 2026-08-26).
+title: Cerebras Inference Free Trial — $5
+provider: Cerebras
+category: api_provider
+amount: $5 free credits after adding a verified payment method; expire in 30 days; no permanent free tier; API inactive until payment method added (no charge until purchase)
+expiry_date: null
+source_url: https://inference-docs.cerebras.ai/support/rate-limits
+verified_date: 2026-09-07
+verification: social_proof
+review_status: under-review
+signup: required
