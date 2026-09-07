@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:04:48Z — 61 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T07:08:51Z — 62 active offers.
 
 ## Offers (full)
 
@@ -27,6 +27,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-07T07:04:48Z — 
 - Page: https://freetokens.custats.info/offers/google-cloud-ai-startup-program.html
 - Summary: Google Cloud's AI startup program grants up to $350,000 in Google Cloud credits over two years for eligible AI-first, VC-funded startups (Grow/Scale tier). Year 1 is 100% up to $100,000 generally, or 100% up to $250,000 for AI-first startups; Year 2 is 20% up to an additional $100,000. Credits cover Google models such as Gemini and Gemma; third-party models are billed directly and are not covered. Eligibility is selection-based: Pre-Seed/Seed within the last five years or Series A within the last 12 months, founded within five years, not yet received more than $5,000 in Google Cloud credits, and at Google Cloud's discretion. This is distinct from the $300 Free Trial listing.
 - Claim steps: Confirm eligibility: VC-funded AI-first startup (Pre-Seed/Seed in last 5 years or Series A in last 12 months), founded within 5 years, under $5,000 prior Google Cloud credits. | Apply at cloud.google.com/startup/ai (selection-based; acceptance is at Google Cloud's discretion). | If accepted, use program credits on Google Cloud services and Google models (Gemini/Gemma). Third-party models are not covered. | Do not confuse this with the separate $300 Google Cloud Free Trial.
+
+### Claude for Startups
+- Provider: Anthropic
+- Category: startup_program
+- Amount: Apply for free Claude API credits + priority rate limits (credits mainly for equity-funded startups founded within 4 years; no published dollar amount)
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://claude.com/programs/startups
+- Page: https://freetokens.custats.info/offers/claude-for-startups.html
+- Summary: Claude for Startups lets founders apply for free Claude API credits and priority rate limits. The program is open to early-stage founders with or without VC backing, but credits require equity funding from an institutional investor, a company founded within the last four years, and no prior Anthropic startup credits. You need a Claude Console account (API console, not the Claude app) and a company email. Credits apply only to the first-party Claude API, not AWS Bedrock or Google Vertex AI. Anthropic does not publish a dollar amount for the credit grant.
+- Claim steps: Create a Claude Console account (API console, not claude.ai) with a company email. | Apply at claude.com/programs/startups (about two minutes). | To qualify for credits: institutional equity funding, founded within 4 years, no prior Anthropic startup credits. Mention a partner VC if you have one. | If accepted, credits and highest rate limits apply to the first-party Claude API only (not Bedrock or Vertex AI).
 
 ### YepAPI $5 Signup Credit
 - Provider: YepAPI
