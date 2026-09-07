@@ -1,0 +1,23 @@
+{
+  "summary": "Scaleway Generative APIs (serverless, Europe-hosted, OpenAI-compatible) include a free tier of the first 1,000,000 tokens plus 60 minutes of audio transcription. Usage is billed from token 1,000,001. A credit card and KYC are required to get official rate limits (tokens per minute and queries per minute). Distinct from the separate €100 Business-account credit on the signup page.",
+  "claim_steps": [
+    "Create a Scaleway account and sign up for Generative APIs.",
+    "Use the first 1,000,000 tokens and 60 minutes of audio transcription free.",
+    "Add a credit card and complete KYC to get official rate limits.",
+    "Pay-as-you-go applies from token 1,000,001."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.scaleway.com/en/pricing/model-as-a-service/",
+      "title": "Model-as-a-service Solutions Pricing | Scaleway",
+      "text": "Try out new models with our free tier : 1 million tokens and 60 minutes of audio transcription. You benefit from a free tier on the first 1,000,000 tokens. You'll be charged from token number 1,000,001."
+    },
+    {
+      "type": "link",
+      "url": "https://www.scaleway.com/en/generative-apis-signup/",
+      "title": "Generative APIs | Scaleway",
+      "text": "Every new customer gets 1,000,000 free tokens—start paying only from the 1,000,001st token. Set up your credit card and pass the KYC process to benefit from the official rate limits."
+    }
+  ]
+}
