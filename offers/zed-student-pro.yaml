@@ -1,0 +1,14 @@
+# Verified 2026-09-07 against https://zed.dev/education
+# ("For verified university students, Zed Pro is free for one year. All Zed Pro
+# features for 12 months, $10/month in token credits for AI assistance, unlimited
+# edit predictions, real-time multiplayer collaboration.")
+title: Zed Pro for Students
+provider: Zed
+category: student
+amount: Zed Pro free for 1 year + $10/month in AI token credits
+expiry_date: null
+source_url: https://zed.dev/education
+verified_date: 2026-09-07
+verification: social_proof
+review_status: verified
+signup: required
