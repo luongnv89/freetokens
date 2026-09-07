@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T07:12:25Z",
+  "generated_at": "2026-09-07T07:12:41Z",
   "count": 83,
   "active_count": 67,
   "expired_count": 16,
@@ -607,6 +607,20 @@
       "status": "active"
     },
     {
+      "slug": "deepgram-free-credit",
+      "title": "Deepgram $200 Free Credit + Flux TTS (through Sep 12)",
+      "provider": "Deepgram",
+      "category": "voice",
+      "amount": "$200 signup credit (no card, no expiration) plus Flux TTS free through 2026-09-12 (then paid; up to 45 concurrent streams globally, 5 in EU/AU)",
+      "expiry_date": null,
+      "source_url": "https://deepgram.com/pricing",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
       "slug": "gmi-cloud-minimax-week",
       "title": "GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free",
       "provider": "GMI Cloud",
@@ -729,20 +743,6 @@
       "verified_date": "2026-09-03",
       "verification": "social_proof",
       "review_status": "verified",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "deepgram-free-credit",
-      "title": "Deepgram $200 Free Credit",
-      "provider": "Deepgram",
-      "category": "voice",
-      "amount": "$200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)",
-      "expiry_date": null,
-      "source_url": "https://deepgram.com/pricing",
-      "verified_date": "2026-09-03",
-      "verification": "social_proof",
-      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },
