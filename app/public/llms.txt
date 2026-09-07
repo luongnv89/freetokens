@@ -4,9 +4,10 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 63 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 64 active listings. Full directory at https://freetokens.custats.info/.
 
 - [Scaleway Generative APIs Free Tier](https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html): Scaleway — First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits) (api_provider)
+- [Scaleway Business Account — €100 Credit](https://freetokens.custats.info/offers/scaleway-business-100-credit.html): Scaleway — €100 free credit when creating a Business account (pairs with Generative APIs) (api_provider)
 - [Novita Sandbox — $100 Credits](https://freetokens.custats.info/offers/novita-sandbox-100-credits.html): Novita AI — $100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply (api_provider)
 - [Google Cloud AI Startup Program — up to $350K](https://freetokens.custats.info/offers/google-cloud-ai-startup-program.html): Google Cloud — Up to $350K Google Cloud credits over 2 years for AI-first VC-funded startups (selection-based; Pre-Seed/Seed/Series A rules; distinct from the $300 free trial) (startup_program)
 - [Claude for Startups](https://freetokens.custats.info/offers/claude-for-startups.html): Anthropic — Apply for free Claude API credits + priority rate limits (credits mainly for equity-funded startups founded within 4 years; no published dollar amount) (startup_program)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 63 active listings. 
 - [Baseten starting credits for new workspaces](https://freetokens.custats.info/offers/baseten-starting-credits.html): Baseten — Starting credits for new workspaces (amount not published) (api_provider)
 - [Free starter credits for new Claude Console accounts](https://freetokens.custats.info/offers/anthropic-console-free-starter-credits.html): Anthropic — small free starter credits (exact amount not published) (api_provider)
 - [ZCode Global Build — Free GLM-5.3-Flash (Round 4)](https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html): ZCode — Free GLM-5.3-Flash in ZCode — 10h/day, Sep 3–18; 100M tokens for new users (coding)
-- [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
 
 ## Pages
 
