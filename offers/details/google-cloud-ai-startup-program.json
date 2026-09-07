@@ -1,0 +1,23 @@
+{
+  "summary": "Google Cloud's AI startup program grants up to $350,000 in Google Cloud credits over two years for eligible AI-first, VC-funded startups (Grow/Scale tier). Year 1 is 100% up to $100,000 generally, or 100% up to $250,000 for AI-first startups; Year 2 is 20% up to an additional $100,000. Credits cover Google models such as Gemini and Gemma; third-party models are billed directly and are not covered. Eligibility is selection-based: Pre-Seed/Seed within the last five years or Series A within the last 12 months, founded within five years, not yet received more than $5,000 in Google Cloud credits, and at Google Cloud's discretion. This is distinct from the $300 Free Trial listing.",
+  "claim_steps": [
+    "Confirm eligibility: VC-funded AI-first startup (Pre-Seed/Seed in last 5 years or Series A in last 12 months), founded within 5 years, under $5,000 prior Google Cloud credits.",
+    "Apply at cloud.google.com/startup/ai (selection-based; acceptance is at Google Cloud's discretion).",
+    "If accepted, use program credits on Google Cloud services and Google models (Gemini/Gemma). Third-party models are not covered.",
+    "Do not confuse this with the separate $300 Google Cloud Free Trial."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cloud.google.com/startup/ai",
+      "title": "AI startup program | Google Cloud",
+      "text": "Receive up to $350,000 Google Cloud Credits to support your development costs over 2 years. Up to $200,000 USD in Google Cloud (up to $350,000 USD for AI startups)."
+    },
+    {
+      "type": "link",
+      "url": "https://cloud.google.com/startup",
+      "title": "Google Cloud for Startups",
+      "text": "Build and grow with $200,000 in cloud credits (or up to $350,000 for AI-first startups) through the Google for Startups Cloud Program."
+    }
+  ]
+}

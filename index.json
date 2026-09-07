@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-09-07T05:22:20Z",
-  "count": 78,
-  "active_count": 60,
+  "generated_at": "2026-09-07T07:04:48Z",
+  "count": 79,
+  "active_count": 61,
   "expired_count": 18,
   "offers": [
+    {
+      "slug": "novita-sandbox-100-credits",
+      "title": "Novita Sandbox — $100 Credits",
+      "provider": "Novita AI",
+      "category": "api_provider",
+      "amount": "$100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply",
+      "expiry_date": null,
+      "source_url": "https://novita.ai/docs/guides/sandbox-pricing",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "assemblyai-50-free-credits",
       "title": "AssemblyAI $50 Free Credits",
@@ -1083,13 +1097,13 @@
       "status": "expired"
     },
     {
-      "slug": "novita-sandbox-100-credits",
-      "title": "Novita Sandbox — $100 Credits",
-      "provider": "Novita AI",
-      "category": "api_provider",
-      "amount": "$100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply",
+      "slug": "google-cloud-ai-startup-program",
+      "title": "Google Cloud AI Startup Program — up to $350K",
+      "provider": "Google Cloud",
+      "category": "startup_program",
+      "amount": "Up to $350K Google Cloud credits over 2 years for AI-first VC-funded startups (selection-based; Pre-Seed/Seed/Series A rules; distinct from the $300 free trial)",
       "expiry_date": null,
-      "source_url": "https://novita.ai/docs/guides/sandbox-pricing",
+      "source_url": "https://cloud.google.com/startup/ai",
       "verified_date": "2026-09-07",
       "verification": "social_proof",
       "review_status": "under-review",

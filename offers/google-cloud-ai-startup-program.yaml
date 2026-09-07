@@ -1,0 +1,18 @@
+# Verified 2026-09-07 against https://cloud.google.com/startup/ai
+# ("Receive up to $350,000 in Cloud credits")
+# ("Receive up to $350,000 Google Cloud Credits to support your development
+# costs over 2 years")
+# ("Up to $200,000 USD in Google Cloud (up to $350,000 USD for AI startups)")
+# Year 1: 100% up to $100,000; AI-first: 100% up to $250,000
+# Year 2: 20% up to an additional $100,000
+# Distinct from the existing $300 Free Trial listing.
+title: Google Cloud AI Startup Program — up to $350K
+provider: Google Cloud
+category: startup_program
+amount: Up to $350K Google Cloud credits over 2 years for AI-first VC-funded startups (selection-based; Pre-Seed/Seed/Series A rules; distinct from the $300 free trial)
+expiry_date: null
+source_url: https://cloud.google.com/startup/ai
+verified_date: 2026-09-07
+verification: social_proof
+review_status: under-review
+signup: required
