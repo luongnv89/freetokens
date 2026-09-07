@@ -1,0 +1,17 @@
+{
+  "summary": "Claude for Startups lets founders apply for free Claude API credits and priority rate limits. The program is open to early-stage founders with or without VC backing, but credits require equity funding from an institutional investor, a company founded within the last four years, and no prior Anthropic startup credits. You need a Claude Console account (API console, not the Claude app) and a company email. Credits apply only to the first-party Claude API, not AWS Bedrock or Google Vertex AI. Anthropic does not publish a dollar amount for the credit grant.",
+  "claim_steps": [
+    "Create a Claude Console account (API console, not claude.ai) with a company email.",
+    "Apply at claude.com/programs/startups (about two minutes).",
+    "To qualify for credits: institutional equity funding, founded within 4 years, no prior Anthropic startup credits. Mention a partner VC if you have one.",
+    "If accepted, credits and highest rate limits apply to the first-party Claude API only (not Bedrock or Vertex AI)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://claude.com/programs/startups",
+      "title": "Claude for startups | Claude by Anthropic",
+      "text": "Apply to be considered for credits and priority rate limits. To qualify for Claude credits: equity funding from an institutional investor, founded within the last four years, and not previously received Anthropic startup credits."
+    }
+  ]
+}

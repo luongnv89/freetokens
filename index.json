@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-09-07T07:04:48Z",
-  "count": 79,
-  "active_count": 61,
+  "generated_at": "2026-09-07T07:08:51Z",
+  "count": 80,
+  "active_count": 62,
   "expired_count": 18,
   "offers": [
+    {
+      "slug": "google-cloud-ai-startup-program",
+      "title": "Google Cloud AI Startup Program — up to $350K",
+      "provider": "Google Cloud",
+      "category": "startup_program",
+      "amount": "Up to $350K Google Cloud credits over 2 years for AI-first VC-funded startups (selection-based; Pre-Seed/Seed/Series A rules; distinct from the $300 free trial)",
+      "expiry_date": null,
+      "source_url": "https://cloud.google.com/startup/ai",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "novita-sandbox-100-credits",
       "title": "Novita Sandbox — $100 Credits",
@@ -1097,13 +1111,13 @@
       "status": "expired"
     },
     {
-      "slug": "google-cloud-ai-startup-program",
-      "title": "Google Cloud AI Startup Program — up to $350K",
-      "provider": "Google Cloud",
+      "slug": "claude-for-startups",
+      "title": "Claude for Startups",
+      "provider": "Anthropic",
       "category": "startup_program",
-      "amount": "Up to $350K Google Cloud credits over 2 years for AI-first VC-funded startups (selection-based; Pre-Seed/Seed/Series A rules; distinct from the $300 free trial)",
+      "amount": "Apply for free Claude API credits + priority rate limits (credits mainly for equity-funded startups founded within 4 years; no published dollar amount)",
       "expiry_date": null,
-      "source_url": "https://cloud.google.com/startup/ai",
+      "source_url": "https://claude.com/programs/startups",
       "verified_date": "2026-09-07",
       "verification": "social_proof",
       "review_status": "under-review",
