@@ -28,9 +28,12 @@ import { gzipSync } from "node:zlib";
 // 2026-09-05 (#317): JS ceiling 128_500 -> 130_500 — temporary catalog-growth
 // bump so Pages can ship. CI measured 129,308 B gzipped. Real work is #317
 // (stop embedding the whole catalog in the JS bundle).
+// 2026-09-07 (#317): JS ceiling 130_500 -> 134_500 — another catalog batch
+// (Novita, GCP AI Startup, Claude Startups, Scaleway x2, Cerebras, AI21,
+// Cohere, Deepgram Flux, HF). Local gzip 132,718 B. Still does not close #317.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-export const JS_GZIP_CEILING_BYTES = 130_500;
+export const JS_GZIP_CEILING_BYTES = 134_500;
 // Raised from 8_000 by the dark redesign, which took the sheet from 39381 to
 // 44412 raw (accounted line by line in css-budget.test.mjs) and 8813 -> 8919
 // gzipped once the self-hosted @font-face blocks landed. 9_000 keeps the same
