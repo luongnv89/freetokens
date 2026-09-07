@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-07T07:12:41Z",
+  "generated_at": "2026-09-07T07:12:56Z",
   "count": 83,
-  "active_count": 67,
-  "expired_count": 16,
+  "active_count": 68,
+  "expired_count": 15,
   "offers": [
     {
       "slug": "ai21-studio-10-credits",
@@ -621,6 +621,20 @@
       "status": "active"
     },
     {
+      "slug": "hugging-face-inference-credits",
+      "title": "Hugging Face Inference Providers Credits",
+      "provider": "Hugging Face",
+      "category": "api_provider",
+      "amount": "Free users get $0.10/mo Inference Providers credits (subject to change); PRO $2/mo",
+      "expiry_date": null,
+      "source_url": "https://huggingface.co/docs/inference-providers/en/pricing",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
       "slug": "gmi-cloud-minimax-week",
       "title": "GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free",
       "provider": "GMI Cloud",
@@ -992,20 +1006,6 @@
       "amount": "20,000 tokens/day and 15 requests/minute",
       "expiry_date": "2026-08-25",
       "source_url": "https://www.aionlabs.ai/docs/rate-limits/",
-      "verified_date": "2026-08-24",
-      "verification": "social_proof",
-      "review_status": "verified",
-      "signup": "required",
-      "status": "expired"
-    },
-    {
-      "slug": "hugging-face-inference-credits",
-      "title": "Hugging Face Inference Provider Credits",
-      "provider": "Hugging Face",
-      "category": "api_provider",
-      "amount": "$0.10/month in Inference Provider credits for free users (subject to change)",
-      "expiry_date": "2026-08-25",
-      "source_url": "https://huggingface.co/docs/inference-providers/pricing",
       "verified_date": "2026-08-24",
       "verification": "social_proof",
       "review_status": "verified",

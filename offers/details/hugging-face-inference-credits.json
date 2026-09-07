@@ -1,0 +1,17 @@
+{
+  "summary": "Every Hugging Face user receives monthly credits for Inference Providers. Free users get $0.10 per month (subject to change) for Inference Providers only; extra usage requires purchasing credits. PRO users get $2.00 per month in general-purpose compute credits (Inference Providers, Endpoints, Spaces hardware, Jobs). Credits apply when requests are routed by Hugging Face, not when using a custom provider key. This reactivates the previously archived hugging-face-inference-credits listing.",
+  "claim_steps": [
+    "Create a Hugging Face account (no card required for the free tier).",
+    "Call Inference Providers routed by Hugging Face so monthly credits apply.",
+    "Free accounts: $0.10/month (subject to change). PRO: $2/month.",
+    "After credits are exhausted, purchase additional credits for pay-as-you-go."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://huggingface.co/docs/inference-providers/en/pricing",
+      "title": "Pricing and Billing · Hugging Face",
+      "text": "Free Users $0.10, subject to change, Inference Providers. PRO Users $2.00 All Hugging Face compute services. Credits included with PRO/Team/Enterprise are general-purpose compute credits."
+    }
+  ]
+}
