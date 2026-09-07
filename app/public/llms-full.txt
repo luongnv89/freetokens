@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:25Z — 67 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:41Z — 67 active offers.
 
 ## Offers (full)
 
@@ -49,6 +49,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:25Z — 
 - Page: https://freetokens.custats.info/offers/google-cloud-ai-startup-program.html
 - Summary: Google Cloud's AI startup program grants up to $350,000 in Google Cloud credits over two years for eligible AI-first, VC-funded startups (Grow/Scale tier). Year 1 is 100% up to $100,000 generally, or 100% up to $250,000 for AI-first startups; Year 2 is 20% up to an additional $100,000. Credits cover Google models such as Gemini and Gemma; third-party models are billed directly and are not covered. Eligibility is selection-based: Pre-Seed/Seed within the last five years or Series A within the last 12 months, founded within five years, not yet received more than $5,000 in Google Cloud credits, and at Google Cloud's discretion. This is distinct from the $300 Free Trial listing.
 - Claim steps: Confirm eligibility: VC-funded AI-first startup (Pre-Seed/Seed in last 5 years or Series A in last 12 months), founded within 5 years, under $5,000 prior Google Cloud credits. | Apply at cloud.google.com/startup/ai (selection-based; acceptance is at Google Cloud's discretion). | If accepted, use program credits on Google Cloud services and Google models (Gemini/Gemma). Third-party models are not covered. | Do not confuse this with the separate $300 Google Cloud Free Trial.
+
+### Deepgram $200 Free Credit + Flux TTS (through Sep 12)
+- Provider: Deepgram
+- Category: voice
+- Amount: $200 signup credit (no card, no expiration) plus Flux TTS free through 2026-09-12 (then paid; up to 45 concurrent streams globally, 5 in EU/AU)
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://deepgram.com/pricing
+- Page: https://freetokens.custats.info/offers/deepgram-free-credit.html
+- Summary: Deepgram Pay As You Go still grants $200 in signup credits with no credit card and no expiration. Separately, Flux TTS is free through September 12, 2026 (up to 45 concurrent streaming connections globally, 5 in EU/AU); standard pricing starts September 13, 2026. Flux TTS in Voice Agent is also free through that date. This updates the existing deepgram-free-credit listing; expiry_date stays null so the $200 credit is not archived when the Flux promo ends.
+- Claim steps: Click Sign Up Free at deepgram.com/pricing (no credit card required). | Create a console account and an API key. | Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire). | Use Flux TTS free through 2026-09-12 (45 concurrent streams globally, 5 in EU/AU).
 
 ### Cohere Trial API Key
 - Provider: Cohere
@@ -610,17 +621,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:25Z — 
 - Page: https://freetokens.custats.info/offers/devin-free-plan.html
 - Summary: Devin's $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.
 - Claim steps: Open devin.ai/pricing and pick the Free $0 plan. | Sign up with your email or a Google/GitHub account. | Start a Devin session from the dashboard within your free quota. | Install the IDE extension for unlimited Tab completions.
-
-### Deepgram $200 Free Credit
-- Provider: Deepgram
-- Category: voice
-- Amount: $200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)
-- Status: active — expiry ongoing
-- Verified: 2026-09-03 (social_proof / unverified, signup required)
-- Source: https://deepgram.com/pricing
-- Page: https://freetokens.custats.info/offers/deepgram-free-credit.html
-- Summary: Deepgram gives every new Pay As You Go account $200 in free credits for its speech APIs - Nova speech-to-text, Aura text-to-speech, and the Voice Agent API - with no credit card required and no expiration on the credits.
-- Claim steps: Click 'Sign Up Free' at deepgram.com/pricing. | Create a console account (no credit card needed). | Create an API key in console.deepgram.com. | Call the Speech-to-Text or Text-to-Speech APIs; usage draws down the $200 credit.
 
 ### Cursor Hobby Plan
 - Provider: Cursor (Anysphere)

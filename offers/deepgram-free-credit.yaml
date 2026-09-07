@@ -1,14 +1,18 @@
-# Verified 2026-08-31 against https://deepgram.com/pricing
-# ("$200 credit. ... no credit card required.")
-#  Price: Free $200 Credit")
-title: Deepgram $200 Free Credit
+# Re-verified 2026-09-07 against https://deepgram.com/pricing
+# ("Pay As You Go ... No credit card required." / "Free $200 Credit then
+# pay-as-you-go")
+# ("Through September 12, 2026, developers can build with Flux TTS free with
+# up to 45 concurrent streaming connections globally (5 in EU/AU). Standard
+# pricing applies beginning September 13, 2026.")
+# ("Flux TTS in Voice Agent is free through September 12, 2026.")
+# Keep expiry_date null so the $200 credit is not archived on 2026-09-13.
+title: Deepgram $200 Free Credit + Flux TTS (through Sep 12)
 provider: Deepgram
 category: voice
-amount: $200 in free credits for speech-to-text, text-to-speech, and voice agent APIs (no credit card required)
+amount: $200 signup credit (no card, no expiration) plus Flux TTS free through 2026-09-12 (then paid; up to 45 concurrent streams globally, 5 in EU/AU)
 expiry_date: null
 source_url: https://deepgram.com/pricing
-verified_date: 2026-09-03
-# Verification & sign-up tags (#97): conservative defaults.
+verified_date: 2026-09-07
 verification: social_proof
-review_status: unverified
+review_status: under-review
 signup: required
