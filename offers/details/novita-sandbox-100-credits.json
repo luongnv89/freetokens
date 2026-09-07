@@ -1,0 +1,24 @@
+{
+  "summary": "New Novita AI users can complete a quick account setup survey and receive $100 in promotional credits for eligible Novita Sandbox (Agent Sandbox) usage. No credit card is required. Credits apply first to CPU, RAM, and billable storage. The same pricing page also grants 20 GB of ephemeral storage per running sandbox and 60 GB of free persistent storage per account. Credits may be subject to availability, validity period, usage scope, and quota limits; check balance on the Payments page. After credits are used up or expired, usage is pay-as-you-go.",
+  "claim_steps": [
+    "Create a Novita AI account (no credit card required).",
+    "Complete the quick account setup survey.",
+    "Receive $100 in promotional credits for eligible Novita Sandbox CPU, RAM, and billable storage.",
+    "Check balance and voucher status on the Payments page.",
+    "Free-tier quotas still apply: 20 GB ephemeral storage per running sandbox and 60 GB persistent storage per account."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://novita.ai/docs/guides/sandbox-pricing",
+      "title": "Novita Sandbox Pricing",
+      "text": "New users can complete a quick account setup survey to receive $100 in promotional credits for eligible Novita Sandbox usage. No credit card is required."
+    },
+    {
+      "type": "link",
+      "url": "https://novita.ai/docs/guides/sandbox-overview",
+      "title": "Novita Sandbox Overview",
+      "text": "Novita Sandbox offers isolated, stateful execution environments designed for AI agents. Billing is per-second for CPU and RAM."
+    }
+  ]
+}

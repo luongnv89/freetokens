@@ -1,0 +1,18 @@
+# Verified 2026-09-07 against https://novita.ai/docs/guides/sandbox-pricing
+# ("New users can complete a quick account setup survey to receive $100 in
+# promotional credits for eligible Novita Sandbox usage. No credit card is
+# required.")
+# ("Promotional credits are applied to eligible Novita Sandbox usage first,
+# including CPU, RAM, and billable storage usage where applicable.")
+# Free-tier quotas on the same page: 20 GB ephemeral storage per running
+# sandbox; 60 GB free persistent storage per account.
+title: Novita Sandbox — $100 Credits
+provider: Novita AI
+category: api_provider
+amount: $100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply
+expiry_date: null
+source_url: https://novita.ai/docs/guides/sandbox-pricing
+verified_date: 2026-09-07
+verification: social_proof
+review_status: under-review
+signup: required

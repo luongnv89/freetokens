@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-05T07:51:54Z — 61 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T05:22:26Z — 60 active offers.
 
 ## Offers (full)
+
+### Novita Sandbox — $100 Credits
+- Provider: Novita AI
+- Category: api_provider
+- Amount: $100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://novita.ai/docs/guides/sandbox-pricing
+- Page: https://freetokens.custats.info/offers/novita-sandbox-100-credits.html
+- Summary: New Novita AI users can complete a quick account setup survey and receive $100 in promotional credits for eligible Novita Sandbox (Agent Sandbox) usage. No credit card is required. Credits apply first to CPU, RAM, and billable storage. The same pricing page also grants 20 GB of ephemeral storage per running sandbox and 60 GB of free persistent storage per account. Credits may be subject to availability, validity period, usage scope, and quota limits; check balance on the Payments page. After credits are used up or expired, usage is pay-as-you-go.
+- Claim steps: Create a Novita AI account (no credit card required). | Complete the quick account setup survey. | Receive $100 in promotional credits for eligible Novita Sandbox CPU, RAM, and billable storage. | Check balance and voucher status on the Payments page. | Free-tier quotas still apply: 20 GB ephemeral storage per running sandbox and 60 GB persistent storage per account.
 
 ### YepAPI $5 Signup Credit
 - Provider: YepAPI
@@ -39,17 +50,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-05T07:51:54Z — 
 - Summary: Mistral's Free plan includes $10 per month in API credits and access to Mistral Studio, with no credit card required. The pricing page lists Studio plus $10/mo credits on the Free card. Studio docs still describe Free mode as rate-limited API access with no card — they do not mention the $10 monthly credit.
 - Claim steps: Create a free account at console.mistral.ai (no credit card required). | Use the Free plan — Studio access and $10/mo API credits apply. | Generate an API key and call api.mistral.ai within published limits.
 
-### GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free
-- Provider: GMI Cloud
-- Category: api_provider
-- Amount: MiniMax M3, M2.7, Speech 2.8 & Music 3.0 free for 14 days (Aug 24 - Sep 6, 2026), via GMI API or OpenRouter — expires 2026-09-06
-- Status: active — expiry 2026-09-06
-- Verified: 2026-09-05 (social_proof / verified, signup required)
-- Source: https://www.gmicloud.ai/minimax-week
-- Page: https://freetokens.custats.info/offers/gmi-cloud-minimax-week.html
-- Summary: GMI Cloud's MiniMax Week (Aug 24 – Sep 6, 2026) makes the MiniMax lineup free for fourteen days: M3 (frontier reasoning), M2.7 (fast agent/coding reasoning), Speech 2.8 (TTS and voice cloning), and Music 3.0 (full generated tracks). Access via a GMI API key or OpenRouter's :free variants, with native integrations in Pi, Oh My Pi, Hermes Agent, Trae, and OpenCode, and BYOK support for Claude Code, Codex, and Cursor. Account creation is free; H3 generative video is not included and stays at standard pricing. A concurrent MiniMaxathon challenge awards $200 in GMI credits plus a 3-month MiniMax token plan per track winner.
-- Claim steps: Create a free GMI Cloud account at https://console.gmicloud.ai. | Use MiniMax models via the GMI Model Hub API key, or through OpenRouter using the :free variants (e.g. openrouter.ai/minimax/minimax-m3:free). | Optionally integrate natively in Pi, Oh My Pi, Hermes Agent, Trae, or OpenCode — or BYOK into Claude Code, Codex, or Cursor. | Use the models free until September 6, 2026; standard pricing applies afterward.
-
 ### Embercloud for Startups — $100 Credits
 - Provider: Embercloud
 - Category: startup_program
@@ -71,17 +71,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-05T07:51:54Z — 
 - Page: https://freetokens.custats.info/offers/assemblyai-50-free-credits.html
 - Summary: New AssemblyAI accounts receive $50 in free credits that do not expire. Credits apply to Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, and Guardrails. LLM Gateway is billed from the account balance from the first request and is not covered by the free tier. No credit card is required to start; add a card after credits are used up to keep using the API.
 - Claim steps: Create a free AssemblyAI account at assemblyai.com (no credit card required). | Open the dashboard and copy an API key. | Use Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, or Guardrails — $50 in credits apply automatically. | Do not expect LLM Gateway usage to be covered by the free credits.
-
-### ZCode Weekend Build IV — 300M Free GLM-5.3-Flash Tokens
-- Provider: ZCode
-- Category: coding
-- Amount: 300M GLM-5.3-Flash tokens per person
-- Status: active — expiry 2026-09-06
-- Verified: 2026-09-04 (social_proof / under-review, signup required)
-- Source: https://x.com/zcode_ai/status/2095847518194307434
-- Page: https://freetokens.custats.info/offers/zcode-weekend-build-4-300m-tokens.html
-- Summary: ZCode's official verified X account (@zcode_ai) announced Weekend Build IV on Sep 4, 2026: 300M free GLM-5.3-Flash tokens per person, claimable in the ZCode desktop app via the bottom-left event card. The event opens Sat Sep 5, 09:00 Beijing time (Fri 6 PM PT / 9 PM ET) and — per the official poster attached to the post — the window runs SAT 09:00 – SUN 23:00 UTC+8, i.e. through Sunday Sep 6, 2026. Claims are instant and first come, first served, so the pool can exhaust before the window closes; restart the app if the card is missing. This is a separate event from the ongoing ZCode Global Build (nightly till Sep 20, +100M for new users) already listed as zcode-glm-5-3-flash-free; the official site's changelog independently corroborates the in-app Weekend/Global Plan claim-card feature.
-- Claim steps: Install and open the ZCode desktop app from https://zcode.z.ai (macOS, Windows, and Linux builds available), or update/restart your existing install. | Sign in with your Z.ai account in ZCode. | After the event opens — Sat Sep 5, 09:00 Beijing time (Fri 6 PM PT / 9 PM ET) — look for the Weekend Build IV card in the bottom-left of the app. | If the card is not visible, restart the app. | Tap the card and claim instantly: 300M GLM-5.3-Flash tokens per person. | Claim early — tokens are first come, first served, and the window runs to Sun 23:00 UTC+8 (Sep 6, 2026).
 
 ### Suno Free Plan — 50 credits per day
 - Provider: Suno
