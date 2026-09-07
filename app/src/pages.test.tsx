@@ -15,7 +15,6 @@ import {
 } from "./lib/analytics";
 import {
   activeOffers,
-  buildDate,
   humanDate,
   SIGNUP_LABELS,
   VERIFICATION_LABELS,
@@ -1036,9 +1035,10 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     expect(markup).toContain("<strong>1</strong> expired ");
   });
 
-  it("shows the build's last-updated date as machine-readable <time> (#280)", () => {
+  it("shows the build's exact last-updated time as machine-readable <time> (#280)", () => {
     const markup = home();
-    const expected = humanDate(buildDate(index.generated_at));
+    const m = /^([\d-]+)T(\d{2}):(\d{2})/.exec(index.generated_at);
+    const expected = `${humanDate(m![1])} ${m![2]}:${m![3]} UTC`;
     // HTML attribute names are ASCII case-insensitive; React 19 emits the
     // JSX spelling verbatim, so match either casing.
     expect(markup).toMatch(
@@ -1047,11 +1047,11 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       ),
     );
     // Labelled in words, never by colour alone (WCAG 1.4.1).
-    expect(markup).toContain('<span class="stat-updated">list built ');
+    expect(markup).toContain('<span class="stat-updated">last updated at ');
   });
 
   it("drops the updated chip rather than printing an unparseable date (#280)", () => {
-    for (const generated_at of ["", "not-a-date-at-all"]) {
+    for (const generated_at of ["", "not-a-date-at-all", "2026-09-07"]) {
       const markup = renderToStaticMarkup(
         <HomePage index={{ ...index, generated_at }} />,
       );
@@ -1060,10 +1060,8 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     }
   });
 
-  // The freshness window is a trust claim, so it is asserted at every shape
-  // the day-granular data can take. `verified_date` is a calendar day, never a
-  // timestamp, so an N-day gap only bounds the real elapsed time by N + 1 days
-  // — the rendered window is that bound, and must never round it down.
+  // The freshness-window clause was removed from the proof line (#281); the
+  // rail must never mention re-check windows.
   const railFor = (
     offers: OfferEntry[],
     generated_at = "2026-09-04T06:00:00Z",
@@ -1072,53 +1070,13 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       <HomePage index={{ ...index, offers, generated_at }} />,
     );
 
-  it("bounds the window at one day when every offer was checked on build day (#281)", () => {
-    const markup = railFor([
-      offer({ verified_date: "2026-09-04" }),
-      offer({ slug: "second", verified_date: "2026-09-04" }),
-    ]);
-    expect(markup).toContain(
-      '<span class="stat-checked">every one re-checked within <strong>1 day</strong></span>',
-    );
-  });
-
-  it("widens the window to two days for a check one day before the build (#281)", () => {
-    // Never "24 hours" / "1 day": a one-day date gap is anywhere in 0-48h.
+  it("no longer renders a re-check window clause (#281)", () => {
     const markup = railFor([
       offer({ verified_date: "2026-09-04" }),
       offer({ slug: "older", verified_date: "2026-09-03" }),
     ]);
-    expect(markup).toContain("within <strong>2 days</strong>");
-    expect(markup).not.toContain("24 hours");
-  });
-
-  it("takes the window from the oldest live offer, not the newest (#281)", () => {
-    const markup = railFor([
-      offer({ verified_date: "2026-09-04" }),
-      offer({ slug: "stale", verified_date: "2026-08-30" }),
-    ]);
-    expect(markup).toContain("within <strong>6 days</strong>");
-  });
-
-  it("drops the window clause when there are no live offers (#281)", () => {
-    const markup = railFor([offer({ slug: "gone", status: "expired" })]);
-    expect(markup).toContain('class="site-stats"');
     expect(markup).not.toContain("stat-checked");
-  });
-
-  it("drops the window clause rather than deriving one from a bad date (#281)", () => {
-    for (const verified_date of ["", "not-a-date-at-all"]) {
-      const markup = railFor([offer({ verified_date })]);
-      expect(markup).toContain('class="site-stats"');
-      expect(markup).not.toContain("stat-checked");
-      expect(markup).not.toContain("NaN");
-    }
-    // …and likewise when the build's own date is the unparseable one.
-    const badBuild = railFor(
-      [offer({ verified_date: "2026-09-03" })],
-      "not-a-date-at-all",
-    );
-    expect(badBuild).not.toContain("stat-checked");
+    expect(markup).not.toContain("re-checked within");
   });
 
   it("mounts the traffic strip in the header, exactly once, on every route", () => {

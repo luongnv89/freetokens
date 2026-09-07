@@ -1,4 +1,4 @@
-import { buildDate, humanDate } from "../lib/offers";
+import { humanDate } from "../lib/offers";
 
 /**
  * Home-only proof-line layout. Kept out of python-parity.css so offer-detail
@@ -26,63 +26,44 @@ const RAIL_CSS =
   ".site-stats a:hover,.site-stats a:focus-visible{color:var(--ink);" +
   "text-decoration-color:var(--green);text-decoration-thickness:2px}";
 
-/** Days between two YYYY-MM-DD days; -1 when either is unparseable. */
-function daysBetween(from: string, to: string): number {
-  const a = Date.parse(`${from}T00:00:00Z`);
-  const b = Date.parse(`${to}T00:00:00Z`);
-  if (Number.isNaN(a) || Number.isNaN(b)) return -1;
-  return Math.max(0, Math.round((b - a) / 86_400_000));
-}
-
 /**
- * The widest window the day-granular data actually proves. `verified_date` is
- * a calendar day, not a timestamp, so a gap of N days between the check and
- * the build bounds the real elapsed time only by (N + 1) * 24h: a check on the
- * build's own day is at most a day old, yesterday's check at most two days
- * old. Rounding that down — "24 hours" for a one-day gap — invents precision
- * the schema cannot carry and makes the proof line a claim we cannot stand on.
- * Returns "" when the age is unknown, so the caller drops the clause.
- */
-function checkWindowFor(age: number): string {
-  if (age < 0) return "";
-  return age === 0 ? "1 day" : `${age + 1} days`;
-}
-
-/**
- * The proof line (#279 / #280 / #281, reworked). One mono sentence under the
- * masthead carrying the three facts that back the curator claim:
+ * Home-only proof line. One mono sentence under the masthead carrying the
+ * facts that back the curator claim:
  *
  *   1. how many offers are live right now — build-time and unfiltered, so it
  *      never competes with the toolbar's "Showing N of M" filtered counter;
- *   2. how stale the *oldest* live offer is, phrased as the widest window the
- *      day-granular `verified_date` actually proves (see `checkWindowFor`)
- *      rather than a date, so the claim is derived and can never rot into a
- *      lie;
- *   3. how many expired offers were taken off the list and moved to the
+ *   2. how many expired offers were taken off the list and moved to the
  *      archive — the strongest single piece of evidence that the list is
  *      maintained rather than accumulated.
  *
- * All three are prerendered, so they are correct with JavaScript off and are
+ * Both are prerendered, so they are correct with JavaScript off and are
  * indexable. The live traffic numbers moved to the header, where they render
  * on every route; this line is now purely build-derived and needs no
  * reserved box, because nothing in it arrives late.
  */
+
+/**
+ * Exact build timestamp when `generated_at` carries one (e.g. 06:00 UTC),
+ * else "" so the caller drops the clause. `generated_at` is emitted by
+ * load-offers.mjs as full ISO, so the time is normally present.
+ */
+function timestampLabel(generatedAt: string): string {
+  const m = /^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2})/.exec(generatedAt);
+  if (!m) return "";
+  const day = humanDate(m[1]);
+  return day ? `${day} ${m[2]}:${m[3]} UTC` : "";
+}
+
 export function SiteStats({
   activeCount,
   archivedCount = 0,
-  oldestVerified = "",
   generatedAt,
 }: {
   activeCount: number;
   archivedCount?: number;
-  oldestVerified?: string;
   generatedAt: string;
 }) {
-  const day = buildDate(generatedAt || "");
-  // humanDate echoes its input verbatim on a malformed date; never print that.
-  const updated = day ? humanDate(day) : "";
-  const age = oldestVerified && day ? daysBetween(oldestVerified, day) : -1;
-  const checkWindow = checkWindowFor(age);
+  const timestamp = timestampLabel(generatedAt);
   return (
     <div className="site-stats">
       <style>{RAIL_CSS}</style>
@@ -90,16 +71,6 @@ export function SiteStats({
         <strong>{activeCount}</strong>{" "}
         {activeCount === 1 ? "live offer" : "live offers"}
       </span>
-      {checkWindow ? (
-        <>
-          <span className="stat-sep" aria-hidden="true">
-            &middot;
-          </span>
-          <span className="stat-checked">
-            every one re-checked within <strong>{checkWindow}</strong>
-          </span>
-        </>
-      ) : null}
       {archivedCount > 0 ? (
         <>
           <span className="stat-sep" aria-hidden="true">
@@ -111,15 +82,15 @@ export function SiteStats({
           </span>
         </>
       ) : null}
-      {updated && updated !== day ? (
+      {timestamp ? (
         <>
           <span className="stat-sep" aria-hidden="true">
             &middot;
           </span>
           <span className="stat-updated">
-            list built{" "}
+            last updated at{" "}
             <strong>
-              <time dateTime={generatedAt}>{updated}</time>
+              <time dateTime={generatedAt}>{timestamp}</time>
             </strong>
           </span>
         </>

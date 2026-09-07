@@ -356,15 +356,9 @@ export default function HomePage({
 }) {
   const offers = activeOffers(index);
   const buildDay = buildDate(index.generated_at);
-  // Proof-line inputs, both build-time: the oldest live verification date
-  // becomes the "re-checked within N" window, and the archive count is the
+  // Proof-line inputs, both build-time: the live count and the archive count as
   // evidence that expired offers actually leave the list.
   const archivedCount = expiredOffers(index).length;
-  const oldestVerified = offers.reduce(
-    (oldest, offer) =>
-      !oldest || offer.verified_date < oldest ? offer.verified_date : oldest,
-    "",
-  );
 
   const [state, setState] = useState(emptyState);
   const [searchInput, setSearchInput] = useState("");
@@ -631,7 +625,6 @@ export default function HomePage({
           <SiteStats
             activeCount={offers.length}
             archivedCount={archivedCount}
-            oldestVerified={oldestVerified}
             generatedAt={index.generated_at}
           />
           <Breadcrumbs page="home" />
