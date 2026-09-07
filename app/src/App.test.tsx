@@ -69,7 +69,9 @@ describe("App home listing prerender", () => {
     const ongoing = offers.find((o) => o.expiry_date === null);
     if (!ongoing) return; // catalog-dependent; covered by fixture test below
     const rowStart = markup.indexOf(`id="offer-${ongoing.slug}"`);
-    expect(markup.slice(rowStart, rowStart + 2500)).toMatch(
+    const nextId = markup.indexOf('id="offer-', rowStart + 1);
+    const row = markup.slice(rowStart, nextId === -1 ? rowStart + 8000 : nextId);
+    expect(row).toMatch(
       /<span class="dot" aria-hidden="true"><\/span>ongoing/,
     );
   });
@@ -78,7 +80,9 @@ describe("App home listing prerender", () => {
     const expiring = offers.find((o) => o.expiry_date !== null);
     if (!expiring) return;
     const rowStart = markup.indexOf(`id="offer-${expiring.slug}"`);
-    expect(markup.slice(rowStart, rowStart + 2500)).toContain(
+    const nextId = markup.indexOf('id="offer-', rowStart + 1);
+    const row = markup.slice(rowStart, nextId === -1 ? rowStart + 8000 : nextId);
+    expect(row).toContain(
       `<time dateTime="${expiring.expiry_date}">`,
     );
   });
