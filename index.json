@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-07T07:11:02Z",
+  "generated_at": "2026-09-07T07:11:18Z",
   "count": 82,
-  "active_count": 64,
-  "expired_count": 18,
+  "active_count": 65,
+  "expired_count": 17,
   "offers": [
     {
       "slug": "claude-for-startups",
@@ -40,6 +40,20 @@
       "amount": "$100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply",
       "expiry_date": null,
       "source_url": "https://novita.ai/docs/guides/sandbox-pricing",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "scaleway-business-100-credit",
+      "title": "Scaleway Business Account — €100 Credit",
+      "provider": "Scaleway",
+      "category": "api_provider",
+      "amount": "€100 free credit when creating a Business account (pairs with Generative APIs)",
+      "expiry_date": null,
+      "source_url": "https://www.scaleway.com/en/generative-apis-signup/",
       "verified_date": "2026-09-07",
       "verification": "social_proof",
       "review_status": "under-review",
@@ -551,6 +565,20 @@
       "status": "active"
     },
     {
+      "slug": "cerebras-free-credit",
+      "title": "Cerebras Inference Free Trial — $5",
+      "provider": "Cerebras",
+      "category": "api_provider",
+      "amount": "$5 free credits after adding a verified payment method; expire in 30 days; no permanent free tier; API inactive until payment method added (no charge until purchase)",
+      "expiry_date": null,
+      "source_url": "https://inference-docs.cerebras.ai/support/rate-limits",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
       "slug": "gmi-cloud-minimax-week",
       "title": "GMI Cloud MiniMax Week — M3, M2.7, Speech 2.8, Music 3.0 Free",
       "provider": "GMI Cloud",
@@ -985,20 +1013,6 @@
       "status": "expired"
     },
     {
-      "slug": "cerebras-free-credit",
-      "title": "Cerebras Inference Free Trial",
-      "provider": "Cerebras",
-      "category": "api_provider",
-      "amount": "$5 in free API credit after creating an account",
-      "expiry_date": "2026-08-25",
-      "source_url": "https://www.cerebras.ai/inference",
-      "verified_date": "2026-08-23",
-      "verification": "social_proof",
-      "review_status": "verified",
-      "signup": "required",
-      "status": "expired"
-    },
-    {
       "slug": "cohere-trial-key",
       "title": "Cohere Trial API Key",
       "provider": "Cohere",
@@ -1137,20 +1151,6 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "scaleway-business-100-credit",
-      "title": "Scaleway Business Account — €100 Credit",
-      "provider": "Scaleway",
-      "category": "api_provider",
-      "amount": "€100 free credit when creating a Business account (pairs with Generative APIs)",
-      "expiry_date": null,
-      "source_url": "https://www.scaleway.com/en/generative-apis-signup/",
-      "verified_date": "2026-09-07",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
     }
   ]
 }

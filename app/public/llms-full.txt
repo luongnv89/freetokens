@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:11:02Z — 64 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T07:11:18Z — 65 active offers.
 
 ## Offers (full)
 
@@ -60,6 +60,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-07T07:11:02Z — 
 - Page: https://freetokens.custats.info/offers/claude-for-startups.html
 - Summary: Claude for Startups lets founders apply for free Claude API credits and priority rate limits. The program is open to early-stage founders with or without VC backing, but credits require equity funding from an institutional investor, a company founded within the last four years, and no prior Anthropic startup credits. You need a Claude Console account (API console, not the Claude app) and a company email. Credits apply only to the first-party Claude API, not AWS Bedrock or Google Vertex AI. Anthropic does not publish a dollar amount for the credit grant.
 - Claim steps: Create a Claude Console account (API console, not claude.ai) with a company email. | Apply at claude.com/programs/startups (about two minutes). | To qualify for credits: institutional equity funding, founded within 4 years, no prior Anthropic startup credits. Mention a partner VC if you have one. | If accepted, credits and highest rate limits apply to the first-party Claude API only (not Bedrock or Vertex AI).
+
+### Cerebras Inference Free Trial — $5
+- Provider: Cerebras
+- Category: api_provider
+- Amount: $5 free credits after adding a verified payment method; expire in 30 days; no permanent free tier; API inactive until payment method added (no charge until purchase)
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://inference-docs.cerebras.ai/support/rate-limits
+- Page: https://freetokens.custats.info/offers/cerebras-free-credit.html
+- Summary: Cerebras Inference Free Trial grants new accounts $5 in credits after adding a verified payment method. Credits expire 30 days after they are granted and work across all public catalog models. There is no charge until you purchase more credits. Skipping the payment method leaves Playground and API access inactive. There is no permanently free or auto-renewing free tier. This reactivates the previously archived cerebras-free-credit listing with the official rate-limits FAQ as source.
+- Claim steps: Create a Cerebras Cloud account. | Add a verified payment method (no charge until you purchase additional credits). | Receive $5 in Free Trial credits (expire 30 days after grant). | Use public catalog models in Playground or API; purchase credits to continue after trial.
 
 ### YepAPI $5 Signup Credit
 - Provider: YepAPI
