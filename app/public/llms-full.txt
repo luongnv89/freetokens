@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:11:18Z — 65 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:06Z — 66 active offers.
 
 ## Offers (full)
 
@@ -71,6 +71,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-07T07:11:18Z — 
 - Page: https://freetokens.custats.info/offers/cerebras-free-credit.html
 - Summary: Cerebras Inference Free Trial grants new accounts $5 in credits after adding a verified payment method. Credits expire 30 days after they are granted and work across all public catalog models. There is no charge until you purchase more credits. Skipping the payment method leaves Playground and API access inactive. There is no permanently free or auto-renewing free tier. This reactivates the previously archived cerebras-free-credit listing with the official rate-limits FAQ as source.
 - Claim steps: Create a Cerebras Cloud account. | Add a verified payment method (no charge until you purchase additional credits). | Receive $5 in Free Trial credits (expire 30 days after grant). | Use public catalog models in Playground or API; purchase credits to continue after trial.
+
+### AI21 Studio Free Trial — $10 Credits
+- Provider: AI21
+- Category: api_provider
+- Amount: $10 credit for new accounts, good for 3 months on platform APIs/SDK/playground (no card to start)
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://docs.ai21.com/docs/usage-cost
+- Page: https://freetokens.custats.info/offers/ai21-studio-10-credits.html
+- Summary: New AI21 Studio accounts receive a $10 credit good for three months on the AI21 platform (REST APIs, SDK, and playground). After the credit is used or expires, valid billing information is required to continue. Cloud-hosted AI21 models (Bedrock, SageMaker, Azure) are billed by those providers, not this credit. A marketing-page claim of a 7-day window was not independently verified (pricing site 403); this listing follows the official docs.
+- Claim steps: Create an AI21 Studio account (no credit card required to start). | Use the $10 credit on APIs, SDK, and playground for up to three months. | Add billing information after the credit is used or expires to continue.
 
 ### YepAPI $5 Signup Credit
 - Provider: YepAPI

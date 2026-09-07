@@ -4,7 +4,7 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 65 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 66 active listings. Full directory at https://freetokens.custats.info/.
 
 - [Scaleway Generative APIs Free Tier](https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html): Scaleway — First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits) (api_provider)
 - [Scaleway Business Account — €100 Credit](https://freetokens.custats.info/offers/scaleway-business-100-credit.html): Scaleway — €100 free credit when creating a Business account (pairs with Generative APIs) (api_provider)
@@ -12,6 +12,7 @@ Top 20 currently active offers (newest verified first) from 65 active listings. 
 - [Google Cloud AI Startup Program — up to $350K](https://freetokens.custats.info/offers/google-cloud-ai-startup-program.html): Google Cloud — Up to $350K Google Cloud credits over 2 years for AI-first VC-funded startups (selection-based; Pre-Seed/Seed/Series A rules; distinct from the $300 free trial) (startup_program)
 - [Claude for Startups](https://freetokens.custats.info/offers/claude-for-startups.html): Anthropic — Apply for free Claude API credits + priority rate limits (credits mainly for equity-funded startups founded within 4 years; no published dollar amount) (startup_program)
 - [Cerebras Inference Free Trial — $5](https://freetokens.custats.info/offers/cerebras-free-credit.html): Cerebras — $5 free credits after adding a verified payment method; expire in 30 days; no permanent free tier; API inactive until payment method added (no charge until purchase) (api_provider)
+- [AI21 Studio Free Trial — $10 Credits](https://freetokens.custats.info/offers/ai21-studio-10-credits.html): AI21 — $10 credit for new accounts, good for 3 months on platform APIs/SDK/playground (no card to start) (api_provider)
 - [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
 - [Together AI Startup Accelerator](https://freetokens.custats.info/offers/together-ai-startup-accelerator.html): Together AI — Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant) (startup_program)
 - [Mistral Free Plan — $10/mo API Credits](https://freetokens.custats.info/offers/mistral-experiment-free-tier.html): Mistral AI — $10/mo in API credits plus Studio access (no credit card for Free) (api_provider)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 65 active listings. 
 - [Ideogram Free Plan — Weekly Slow Credits](https://freetokens.custats.info/offers/ideogram-free-plan.html): Ideogram — Free plan ($0) with weekly slow credits for eligible accounts; amount may vary (image)
 - [$1 in free credits for new Fireworks AI accounts](https://freetokens.custats.info/offers/fireworks-ai-1-dollar-free-credits.html): Fireworks AI — $1 in free credits (api_provider)
 - [Baseten starting credits for new workspaces](https://freetokens.custats.info/offers/baseten-starting-credits.html): Baseten — Starting credits for new workspaces (amount not published) (api_provider)
-- [Free starter credits for new Claude Console accounts](https://freetokens.custats.info/offers/anthropic-console-free-starter-credits.html): Anthropic — small free starter credits (exact amount not published) (api_provider)
 
 ## Pages
 
