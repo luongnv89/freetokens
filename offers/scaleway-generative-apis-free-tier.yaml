@@ -1,0 +1,19 @@
+# Verified 2026-09-07 against https://www.scaleway.com/en/pricing/model-as-a-service/
+# ("Try out new models with our free tier : 1 million tokens and 60 minutes of
+# audio transcription.")
+# ("You benefit from a free tier on the first 1,000,000 tokens. You'll be
+# charged from token number 1,000,001.")
+# Signup page also: "Every new customer gets 1,000,000 free tokens—start paying
+# only from the 1,000,001st token."
+# ("Set up your credit card and pass the KYC process to benefit from the
+# official rate limits.")
+title: Scaleway Generative APIs Free Tier
+provider: Scaleway
+category: api_provider
+amount: First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits)
+expiry_date: null
+source_url: https://www.scaleway.com/en/pricing/model-as-a-service/
+verified_date: 2026-09-07
+verification: social_proof
+review_status: under-review
+signup: required

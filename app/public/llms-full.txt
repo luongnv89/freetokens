@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:08:51Z — 62 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T07:09:58Z — 63 active offers.
 
 ## Offers (full)
+
+### Scaleway Generative APIs Free Tier
+- Provider: Scaleway
+- Category: api_provider
+- Amount: First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits)
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://www.scaleway.com/en/pricing/model-as-a-service/
+- Page: https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html
+- Summary: Scaleway Generative APIs (serverless, Europe-hosted, OpenAI-compatible) include a free tier of the first 1,000,000 tokens plus 60 minutes of audio transcription. Usage is billed from token 1,000,001. A credit card and KYC are required to get official rate limits (tokens per minute and queries per minute). Distinct from the separate €100 Business-account credit on the signup page.
+- Claim steps: Create a Scaleway account and sign up for Generative APIs. | Use the first 1,000,000 tokens and 60 minutes of audio transcription free. | Add a credit card and complete KYC to get official rate limits. | Pay-as-you-go applies from token 1,000,001.
 
 ### Novita Sandbox — $100 Credits
 - Provider: Novita AI
