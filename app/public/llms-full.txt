@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:41Z — 67 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:56Z — 68 active offers.
 
 ## Offers (full)
 
@@ -38,6 +38,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:41Z — 
 - Page: https://freetokens.custats.info/offers/novita-sandbox-100-credits.html
 - Summary: New Novita AI users can complete a quick account setup survey and receive $100 in promotional credits for eligible Novita Sandbox (Agent Sandbox) usage. No credit card is required. Credits apply first to CPU, RAM, and billable storage. The same pricing page also grants 20 GB of ephemeral storage per running sandbox and 60 GB of free persistent storage per account. Credits may be subject to availability, validity period, usage scope, and quota limits; check balance on the Payments page. After credits are used up or expired, usage is pay-as-you-go.
 - Claim steps: Create a Novita AI account (no credit card required). | Complete the quick account setup survey. | Receive $100 in promotional credits for eligible Novita Sandbox CPU, RAM, and billable storage. | Check balance and voucher status on the Payments page. | Free-tier quotas still apply: 20 GB ephemeral storage per running sandbox and 60 GB persistent storage per account.
+
+### Hugging Face Inference Providers Credits
+- Provider: Hugging Face
+- Category: api_provider
+- Amount: Free users get $0.10/mo Inference Providers credits (subject to change); PRO $2/mo
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://huggingface.co/docs/inference-providers/en/pricing
+- Page: https://freetokens.custats.info/offers/hugging-face-inference-credits.html
+- Summary: Every Hugging Face user receives monthly credits for Inference Providers. Free users get $0.10 per month (subject to change) for Inference Providers only; extra usage requires purchasing credits. PRO users get $2.00 per month in general-purpose compute credits (Inference Providers, Endpoints, Spaces hardware, Jobs). Credits apply when requests are routed by Hugging Face, not when using a custom provider key. This reactivates the previously archived hugging-face-inference-credits listing.
+- Claim steps: Create a Hugging Face account (no card required for the free tier). | Call Inference Providers routed by Hugging Face so monthly credits apply. | Free accounts: $0.10/month (subject to change). PRO: $2/month. | After credits are exhausted, purchase additional credits for pay-as-you-go.
 
 ### Google Cloud AI Startup Program — up to $350K
 - Provider: Google Cloud
