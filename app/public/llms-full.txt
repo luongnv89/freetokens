@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:09:58Z — 63 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-07T07:11:02Z — 64 active offers.
 
 ## Offers (full)
 
@@ -16,6 +16,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-07T07:09:58Z — 
 - Page: https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html
 - Summary: Scaleway Generative APIs (serverless, Europe-hosted, OpenAI-compatible) include a free tier of the first 1,000,000 tokens plus 60 minutes of audio transcription. Usage is billed from token 1,000,001. A credit card and KYC are required to get official rate limits (tokens per minute and queries per minute). Distinct from the separate €100 Business-account credit on the signup page.
 - Claim steps: Create a Scaleway account and sign up for Generative APIs. | Use the first 1,000,000 tokens and 60 minutes of audio transcription free. | Add a credit card and complete KYC to get official rate limits. | Pay-as-you-go applies from token 1,000,001.
+
+### Scaleway Business Account — €100 Credit
+- Provider: Scaleway
+- Category: api_provider
+- Amount: €100 free credit when creating a Business account (pairs with Generative APIs)
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / under-review, signup required)
+- Source: https://www.scaleway.com/en/generative-apis-signup/
+- Page: https://freetokens.custats.info/offers/scaleway-business-100-credit.html
+- Summary: Scaleway offers €100 free credit when you create a Business account, promoted on the Generative APIs signup page as a way to get started with their Europe-hosted OpenAI-compatible APIs. This is separate from the Generative APIs free tier of 1,000,000 tokens + 60 minutes of transcription.
+- Claim steps: Go to scaleway.com/en/generative-apis-signup/ | Create a Business account to receive €100 free credit. | Use the credit with Generative APIs and other Scaleway services as billed.
 
 ### Novita Sandbox — $100 Credits
 - Provider: Novita AI

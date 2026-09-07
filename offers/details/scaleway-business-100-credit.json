@@ -1,0 +1,16 @@
+{
+  "summary": "Scaleway offers €100 free credit when you create a Business account, promoted on the Generative APIs signup page as a way to get started with their Europe-hosted OpenAI-compatible APIs. This is separate from the Generative APIs free tier of 1,000,000 tokens + 60 minutes of transcription.",
+  "claim_steps": [
+    "Go to scaleway.com/en/generative-apis-signup/",
+    "Create a Business account to receive €100 free credit.",
+    "Use the credit with Generative APIs and other Scaleway services as billed."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.scaleway.com/en/generative-apis-signup/",
+      "title": "Generative APIs | Scaleway",
+      "text": "Get started with €100 free credit when you create a Business account. Unlock €100 free credit with a Business account."
+    }
+  ]
+}
