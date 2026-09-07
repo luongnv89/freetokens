@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-05T07:51:54Z",
-  "count": 77,
-  "active_count": 61,
-  "expired_count": 16,
+  "generated_at": "2026-09-07T05:22:20Z",
+  "count": 78,
+  "active_count": 60,
+  "expired_count": 18,
   "offers": [
     {
       "slug": "assemblyai-50-free-credits",
@@ -198,7 +198,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "muse-spark-1-3-contributor-free",
@@ -506,7 +506,7 @@
       "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "mistral-experiment-free-tier",
@@ -1081,6 +1081,20 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "novita-sandbox-100-credits",
+      "title": "Novita Sandbox — $100 Credits",
+      "provider": "Novita AI",
+      "category": "api_provider",
+      "amount": "$100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply",
+      "expiry_date": null,
+      "source_url": "https://novita.ai/docs/guides/sandbox-pricing",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ]
 }
