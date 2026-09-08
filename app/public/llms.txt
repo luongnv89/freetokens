@@ -4,8 +4,9 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 69 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 70 active listings. Full directory at https://freetokens.custats.info/.
 
+- [Daytona — $200 Free Compute](https://freetokens.custats.info/offers/daytona-200-free-compute.html): Daytona — $200 in free compute at signup; free credits cannot be used for GPU sandboxes (coding)
 - [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
 - [Scaleway Generative APIs Free Tier](https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html): Scaleway — First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits) (api_provider)
 - [Scaleway Business Account — €100 Credit](https://freetokens.custats.info/offers/scaleway-business-100-credit.html): Scaleway — €100 free credit when creating a Business account (pairs with Generative APIs) (api_provider)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 69 active listings. 
 - [Suno Free Plan — 50 credits per day](https://freetokens.custats.info/offers/suno-free-plan.html): Suno — Free plan, 50 credits/day (~10 songs) (voice)
 - [SambaNova Cloud Free Tier](https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html): SambaNova — free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required (api_provider)
 - [Try for Free: run featured Replicate models at no cost](https://freetokens.custats.info/offers/replicate-try-for-free.html): Replicate — limited free runs of featured models (image, video, upscaling) — no credit purchase needed until the free limit is hit (api_provider)
-- [Nebius Token Factory $1 trial credit](https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html): Nebius Token Factory — $1 credit for 30 days (bank card required to onboard) (api_provider)
 
 ## Pages
 

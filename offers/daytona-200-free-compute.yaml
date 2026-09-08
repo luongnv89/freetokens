@@ -1,0 +1,14 @@
+# Verified 2026-09-08 against https://www.daytona.io/pricing and https://www.daytona.io/docs/billing
+# ("$200 in free compute included.")
+# ("Sign up for a free trial - no credit card required")
+# Free credits are not available for GPU sandboxes.
+title: Daytona — $200 Free Compute
+provider: Daytona
+category: coding
+amount: $200 in free compute at signup; free credits cannot be used for GPU sandboxes
+expiry_date: null
+source_url: https://www.daytona.io/pricing
+verified_date: 2026-09-08
+verification: social_proof
+review_status: under-review
+signup: required

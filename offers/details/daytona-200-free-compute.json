@@ -1,0 +1,22 @@
+{
+  "summary": "Daytona includes $200 in free compute with its free trial, with no credit card required. Daytona's billing documentation says free-credit balances are not available for GPU sandboxes. The submitted 5 GiB free-storage claim was omitted because neither official source currently states it.",
+  "claim_steps": [
+    "Open Daytona pricing and choose the free trial.",
+    "Create a Daytona account; the official page says no credit card is required.",
+    "Use the $200 free compute balance on eligible non-GPU sandboxes."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.daytona.io/pricing",
+      "title": "Daytona Pricing",
+      "text": "Use what you need, when you need it. $200 in free compute included. Sign up for a free trial — no credit card required."
+    },
+    {
+      "type": "link",
+      "url": "https://www.daytona.io/docs/billing",
+      "title": "Billing | Daytona",
+      "text": "Free credit balance: the amount of free credits; not available for GPU sandboxes. Daytona consumes free credits before paid credits."
+    }
+  ]
+}
