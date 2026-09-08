@@ -1,0 +1,16 @@
+{
+  "summary": "Daytona's Startup Grid offers startups up to $50,000 in Daytona credits. The official page says startups receive $10,000 straight away on their account and can reach up to $50,000. Applicants submit the startup form for review.",
+  "claim_steps": [
+    "Open the Daytona Startup Grid page.",
+    "Complete and submit the startup application form.",
+    "Wait for Daytona to review the application and respond."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.daytona.io/startups",
+      "title": "Daytona Startup Grid",
+      "text": "Get up to $50k in Daytona credits for your startup. Daytona says it gives startups $10K straight away on their account and easily up to $50K."
+    }
+  ]
+}

@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-08T09:03:53Z — 70 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-08T09:15:16Z — 71 active offers.
 
 ## Offers (full)
+
+### Daytona Startup Program — up to $50K
+- Provider: Daytona
+- Category: startup_program
+- Amount: Up to $50K in Daytona credits for startups; program page says $10K straight away on the account and easily up to $50K
+- Status: active — expiry ongoing
+- Verified: 2026-09-08 (social_proof / under-review, signup required)
+- Source: https://www.daytona.io/startups
+- Page: https://freetokens.custats.info/offers/daytona-startup-program.html
+- Summary: Daytona's Startup Grid offers startups up to $50,000 in Daytona credits. The official page says startups receive $10,000 straight away on their account and can reach up to $50,000. Applicants submit the startup form for review.
+- Claim steps: Open the Daytona Startup Grid page. | Complete and submit the startup application form. | Wait for Daytona to review the application and respond.
 
 ### Daytona — $200 Free Compute
 - Provider: Daytona
