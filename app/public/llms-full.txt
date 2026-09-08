@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-08T08:54:06Z — 69 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-08T09:03:53Z — 70 active offers.
 
 ## Offers (full)
+
+### Daytona — $200 Free Compute
+- Provider: Daytona
+- Category: coding
+- Amount: $200 in free compute at signup; free credits cannot be used for GPU sandboxes
+- Status: active — expiry ongoing
+- Verified: 2026-09-08 (social_proof / under-review, signup required)
+- Source: https://www.daytona.io/pricing
+- Page: https://freetokens.custats.info/offers/daytona-200-free-compute.html
+- Summary: Daytona includes $200 in free compute with its free trial, with no credit card required. Daytona's billing documentation says free-credit balances are not available for GPU sandboxes. The submitted 5 GiB free-storage claim was omitted because neither official source currently states it.
+- Claim steps: Open Daytona pricing and choose the free trial. | Create a Daytona account; the official page says no credit card is required. | Use the $200 free compute balance on eligible non-GPU sandboxes.
 
 ### Zed Pro for Students
 - Provider: Zed
