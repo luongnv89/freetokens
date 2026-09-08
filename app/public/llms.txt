@@ -4,8 +4,9 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 68 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 69 active listings. Full directory at https://freetokens.custats.info/.
 
+- [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
 - [Scaleway Generative APIs Free Tier](https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html): Scaleway — First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits) (api_provider)
 - [Scaleway Business Account — €100 Credit](https://freetokens.custats.info/offers/scaleway-business-100-credit.html): Scaleway — €100 free credit when creating a Business account (pairs with Generative APIs) (api_provider)
 - [Novita Sandbox — $100 Credits](https://freetokens.custats.info/offers/novita-sandbox-100-credits.html): Novita AI — $100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply (api_provider)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 68 active listings. 
 - [SambaNova Cloud Free Tier](https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html): SambaNova — free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required (api_provider)
 - [Try for Free: run featured Replicate models at no cost](https://freetokens.custats.info/offers/replicate-try-for-free.html): Replicate — limited free runs of featured models (image, video, upscaling) — no credit purchase needed until the free limit is hit (api_provider)
 - [Nebius Token Factory $1 trial credit](https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html): Nebius Token Factory — $1 credit for 30 days (bank card required to onboard) (api_provider)
-- [Modal Starter Plan — $30/month free compute credits](https://freetokens.custats.info/offers/modal-starter-30-month-free-compute.html): Modal — $30/month in compute credits (api_provider)
 
 ## Pages
 
