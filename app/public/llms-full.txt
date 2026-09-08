@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:56Z — 68 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-08T08:54:06Z — 69 active offers.
 
 ## Offers (full)
+
+### Zed Pro for Students
+- Provider: Zed
+- Category: student
+- Amount: Zed Pro free for 1 year + $10/month in AI token credits
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / verified, signup required)
+- Source: https://zed.dev/education
+- Page: https://freetokens.custats.info/offers/zed-student-pro.html
+- Summary: Zed Pro free for 1 year + $10/month in AI token credits for verified university students. Includes unlimited edit predictions, real-time multiplayer collaboration, and all Zed Pro features.
+- Claim steps: Sign in with a GitHub account older than 30 days on the Zed education dashboard. | Share your valid and current university (.edu) email address for verification. | Once verified, Zed Pro is free for 12 months and $10/month in AI token credits are applied.
 
 ### Scaleway Generative APIs Free Tier
 - Provider: Scaleway
