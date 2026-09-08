@@ -1,0 +1,16 @@
+{
+  "summary": "SmarToken gives each existing user and eligible low-risk new Google signup a one-time $5 promotional balance for OpenAI-compatible API usage. It supports configured DeepSeek, Kimi, Qwen, GLM and other routes. Existing accounts are credited automatically; new users receive it after signup risk checks. No credit card is required. The campaign closes December 31, 2026 at 23:59:59 UTC+8.",
+  "claim_steps": [
+    "Existing users: open SmarToken and check wallet history; the campaign migration adds the credit automatically.",
+    "New users: continue with Google and create an account before December 31, 2026 at 23:59:59 UTC+8.",
+    "Pass SmarToken's signup risk checks, then use the one-time $5 balance in Playground or through a console API key."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://thesmartoken.com/campaign/free-credit",
+      "title": "$5 Free API Credit for Existing Users and New Sign-ups | SmarToken",
+      "text": "Every existing SmarToken user and every new sign-up gets $5 in free credit for OpenAI-compatible model calls. The deadline is December 31, 2026 at 23:59:59 UTC+8; no credit card is required."
+    }
+  ]
+}

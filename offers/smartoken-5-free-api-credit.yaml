@@ -1,0 +1,13 @@
+# Verified 2026-09-08 against https://thesmartoken.com/campaign/free-credit
+# ("every existing SmarToken user and every new sign-up $5 in free credit")
+# ("deadline is December 31, 2026 at 23:59:59 (UTC+8)")
+title: SmarToken — $5 Free API Credit Campaign
+provider: SmarToken
+category: api_provider
+amount: One-time $5 promotional API credit for existing users and low-risk new Google sign-ups; usable on configured DeepSeek, Kimi, Qwen, GLM and other routes
+expiry_date: 2026-12-31
+source_url: https://thesmartoken.com/campaign/free-credit
+verified_date: 2026-09-08
+verification: social_proof
+review_status: under-review
+signup: required
