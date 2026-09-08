@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-07T07:12:56Z",
-  "count": 83,
-  "active_count": 68,
+  "generated_at": "2026-09-08T08:45:44Z",
+  "count": 85,
+  "active_count": 70,
   "expired_count": 15,
   "offers": [
     {
@@ -85,6 +85,20 @@
       "verified_date": "2026-09-07",
       "verification": "social_proof",
       "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "zed-student-pro",
+      "title": "Zed Pro for Students",
+      "provider": "Zed",
+      "category": "student",
+      "amount": "Zed Pro free for 1 year + $10/month in AI token credits",
+      "expiry_date": null,
+      "source_url": "https://zed.dev/education",
+      "verified_date": "2026-09-07",
+      "verification": "social_proof",
+      "review_status": "verified",
       "signup": "required",
       "status": "active"
     },
@@ -1165,6 +1179,20 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "e2b-hobby-100-credits",
+      "title": "E2B Hobby — $100 Free Credits",
+      "provider": "E2B",
+      "category": "coding",
+      "amount": "One-time $100 usage credits for new users on the free Hobby tier; up to 1-hour sessions, 20 concurrent sandboxes and 10 GiB disk",
+      "expiry_date": null,
+      "source_url": "https://e2b.dev/pricing",
+      "verified_date": "2026-09-08",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ]
 }

@@ -1,0 +1,13 @@
+# Verified 2026-09-08 against https://e2b.dev/pricing and https://e2b.dev/docs/billing
+# ("One-time $100 of usage in credits")
+# ("New users receive $100 in free credits to get started.")
+title: E2B Hobby — $100 Free Credits
+provider: E2B
+category: coding
+amount: One-time $100 usage credits for new users on the free Hobby tier; up to 1-hour sessions, 20 concurrent sandboxes and 10 GiB disk
+expiry_date: null
+source_url: https://e2b.dev/pricing
+verified_date: 2026-09-08
+verification: social_proof
+review_status: under-review
+signup: required

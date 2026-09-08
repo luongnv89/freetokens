@@ -1,0 +1,22 @@
+{
+  "summary": "E2B's free Hobby tier gives new users a one-time $100 in usage credits. Official limits include up to 1-hour continuous sandbox runtime, 20 concurrently running sandboxes, 10 GiB disk, 8 vCPUs, and 8 GiB memory. Compute is billed per second against the credits.",
+  "claim_steps": [
+    "Open E2B pricing and choose Start for Free under Hobby.",
+    "Create an E2B account to receive the one-time $100 usage credits.",
+    "Use the credits for per-second sandbox compute within Hobby-tier limits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://e2b.dev/pricing",
+      "title": "Pricing — E2B",
+      "text": "The Free Hobby tier includes one-time $100 of usage in credits, up to 1-hour sandbox sessions, and up to 20 concurrently running sandboxes."
+    },
+    {
+      "type": "link",
+      "url": "https://e2b.dev/docs/billing",
+      "title": "Billing & limits — E2B Docs",
+      "text": "New users receive $100 in free credits. Hobby limits include 10 GiB disk, 1-hour maximum continuous runtime, and 20 concurrent sandboxes."
+    }
+  ]
+}

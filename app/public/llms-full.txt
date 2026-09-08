@@ -2,9 +2,31 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-07T07:12:56Z — 68 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-08T08:45:45Z — 70 active offers.
 
 ## Offers (full)
+
+### E2B Hobby — $100 Free Credits
+- Provider: E2B
+- Category: coding
+- Amount: One-time $100 usage credits for new users on the free Hobby tier; up to 1-hour sessions, 20 concurrent sandboxes and 10 GiB disk
+- Status: active — expiry ongoing
+- Verified: 2026-09-08 (social_proof / under-review, signup required)
+- Source: https://e2b.dev/pricing
+- Page: https://freetokens.custats.info/offers/e2b-hobby-100-credits.html
+- Summary: E2B's free Hobby tier gives new users a one-time $100 in usage credits. Official limits include up to 1-hour continuous sandbox runtime, 20 concurrently running sandboxes, 10 GiB disk, 8 vCPUs, and 8 GiB memory. Compute is billed per second against the credits.
+- Claim steps: Open E2B pricing and choose Start for Free under Hobby. | Create an E2B account to receive the one-time $100 usage credits. | Use the credits for per-second sandbox compute within Hobby-tier limits.
+
+### Zed Pro for Students
+- Provider: Zed
+- Category: student
+- Amount: Zed Pro free for 1 year + $10/month in AI token credits
+- Status: active — expiry ongoing
+- Verified: 2026-09-07 (social_proof / verified, signup required)
+- Source: https://zed.dev/education
+- Page: https://freetokens.custats.info/offers/zed-student-pro.html
+- Summary: Zed Pro free for 1 year + $10/month in AI token credits for verified university students. Includes unlimited edit predictions, real-time multiplayer collaboration, and all Zed Pro features.
+- Claim steps: Sign in with a GitHub account older than 30 days on the Zed education dashboard. | Share your valid and current university (.edu) email address for verification. | Once verified, Zed Pro is free for 12 months and $10/month in AI token credits are applied.
 
 ### Scaleway Generative APIs Free Tier
 - Provider: Scaleway
