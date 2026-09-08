@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-09-08T09:03:53Z",
-  "count": 85,
-  "active_count": 70,
+  "generated_at": "2026-09-08T09:15:16Z",
+  "count": 86,
+  "active_count": 71,
   "expired_count": 15,
   "offers": [
+    {
+      "slug": "daytona-200-free-compute",
+      "title": "Daytona — $200 Free Compute",
+      "provider": "Daytona",
+      "category": "coding",
+      "amount": "$200 in free compute at signup; free credits cannot be used for GPU sandboxes",
+      "expiry_date": null,
+      "source_url": "https://www.daytona.io/pricing",
+      "verified_date": "2026-09-08",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "ai21-studio-10-credits",
       "title": "AI21 Studio Free Trial — $10 Credits",
@@ -1181,13 +1195,13 @@
       "status": "expired"
     },
     {
-      "slug": "daytona-200-free-compute",
-      "title": "Daytona — $200 Free Compute",
+      "slug": "daytona-startup-program",
+      "title": "Daytona Startup Program — up to $50K",
       "provider": "Daytona",
-      "category": "coding",
-      "amount": "$200 in free compute at signup; free credits cannot be used for GPU sandboxes",
+      "category": "startup_program",
+      "amount": "Up to $50K in Daytona credits for startups; program page says $10K straight away on the account and easily up to $50K",
       "expiry_date": null,
-      "source_url": "https://www.daytona.io/pricing",
+      "source_url": "https://www.daytona.io/startups",
       "verified_date": "2026-09-08",
       "verification": "social_proof",
       "review_status": "under-review",
