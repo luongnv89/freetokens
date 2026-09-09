@@ -4,8 +4,9 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 72 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 73 active listings. Full directory at https://freetokens.custats.info/.
 
+- [CodeRabbit OSS — Free AI Code Reviews](https://freetokens.custats.info/offers/coderabbit-oss-free-reviews.html): CodeRabbit — Free Team features for public repositories: AI reviews, slop detection, triage, Change Stack, and Security; no card or application; rate limits apply (coding)
 - [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
 - [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
 - [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 72 active listings. 
 - [NVIDIA NIM Free Trial (Developer Program)](https://freetokens.custats.info/offers/nvidia-nim-free-trial.html): NVIDIA — $0 hosted trial for prototyping with NVIDIA NIM, rate-limited (api_provider)
 - [Novita Sandbox — $100 Credits](https://freetokens.custats.info/offers/novita-sandbox-100-credits.html): Novita AI — $100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply (api_provider)
 - [Notion Education Plus — Free Plus Plan](https://freetokens.custats.info/offers/notion-education-plus.html): Notion — Plus features free (unlimited blocks/files, 30-day history) while enrolled via school email (student)
-- [Nebius Token Factory $1 trial credit](https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html): Nebius Token Factory — $1 credit for 30 days (bank card required to onboard) (api_provider)
 
 ## Pages
 

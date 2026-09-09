@@ -2,9 +2,19 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-08T22:09:33Z — 72 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-09T06:08:44Z — 73 active offers.
 
 ## Offers (full)
+
+### CodeRabbit OSS — Free AI Code Reviews
+- Provider: CodeRabbit
+- Category: coding
+- Amount: Free Team features for public repositories: AI reviews, slop detection, triage, Change Stack, and Security; no card or application; rate limits apply
+- Status: active — expiry ongoing
+- Verified: 2026-09-09 (social_proof / under-review, signup required)
+- Source: https://www.coderabbit.ai/oss
+- Page: https://freetokens.custats.info/offers/coderabbit-oss-free-reviews.html
+- Summary: Free Team features for public repositories: AI reviews, slop detection, triage, Change Stack, and Security; no card or application; rate limits apply from CodeRabbit.
 
 ### Zed Pro for Students
 - Provider: Zed
