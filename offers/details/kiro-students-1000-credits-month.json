@@ -1,0 +1,36 @@
+{
+  "summary": "Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including paid features such as premium models and Kiro Web. The 2026 expansion covers 121 new universities across 16 countries. Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period.",
+  "claim_steps": [
+    "Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email.",
+    "Open the account page and select the “You are eligible for Kiro Students” verification banner.",
+    "Verify student status through SheerID; proof such as a student ID or enrollment letter may be requested.",
+    "After approval, use 1,000 credits per month for 12 months. Unused credits do not roll over."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://kiro.dev/students/",
+      "title": "Students - Kiro",
+      "text": "Eligible university students get 1,000 credits per month free for one year. Once verified, students receive access for one full year with no credit card required."
+    },
+    {
+      "type": "link",
+      "url": "https://kiro.dev/blog/students-2026/",
+      "title": "A free year of Kiro, now for students around the world - Kiro",
+      "text": "Kiro expanded the program to 121 new universities across 16 countries. Eligible students get one full year free with 1,000 credits per month, premium models, and Kiro Web."
+    },
+    {
+      "type": "link",
+      "url": "https://kiro.dev/students/terms/",
+      "title": "Kiro for students: Terms & Conditions - Kiro",
+      "text": "Participants must be at least 18, enrolled at a participating university, use a valid participating-university email, and provide enrollment proof on request. Benefits are 1,000 credits monthly for 12 months."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/kirodotdev/status/2097370589270798584",
+      "author": "Kiro",
+      "handle": "@kirodotdev",
+      "text": "Kiro students just went global 🌎\n\nExpanding to 121 new universities across 16 countries.\nSame deal for everyone: a full year free, 1,000 credits/month, premium models + Kiro Web included.\n\nSign up and learn more here 👉 https://spr.ly/6018BGHxls"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 71 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 72 active listings. Full directory at https://freetokens.custats.info/.
 
 - [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
 - [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
