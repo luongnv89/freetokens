@@ -1,14 +1,14 @@
-# Verified 2026-09-08 against https://kiro.dev/students/
+# Verified 2026-09-09 against https://kiro.dev/students/
 # ("Eligible university students get 1,000 credits per month free for one year.")
-# ("Once verified, you will have access to 1,000 credits per month for one full year. No credit card required.")
+# ("You can opt out of having your content used for model training at any time.")
 # Program has no published end date; each participant receives 12 months.
 title: Kiro Students — 1,000 Credits/Month for 1 Year
 provider: Kiro
 category: student
-amount: 1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over
+amount: 1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over; content collection for service improvement and model training is enabled by default, with opt-out
 expiry_date: null
 source_url: https://kiro.dev/students/
-verified_date: 2026-09-08
+verified_date: 2026-09-09
 verification: social_proof
 review_status: under-review
 signup: required

@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-09T06:11:50Z — 73 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-09T06:19:55Z — 73 active offers.
 
 ## Offers (full)
+
+### Kiro Students — 1,000 Credits/Month for 1 Year
+- Provider: Kiro
+- Category: student
+- Amount: 1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over; content collection for service improvement and model training is enabled by default, with opt-out
+- Status: active — expiry ongoing
+- Verified: 2026-09-09 (social_proof / under-review, signup required)
+- Source: https://kiro.dev/students/
+- Page: https://freetokens.custats.info/offers/kiro-students-1000-credits-month.html
+- Summary: Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. The 2026 expansion covers 121 new universities across 16 countries. Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.
+- Claim steps: Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email. | Open the account page and select the “You are eligible for Kiro Students” verification banner. | Verify student status through SheerID; proof such as a student ID or enrollment letter may be requested. | After approval, use 1,000 credits per month for 12 months. Unused credits do not roll over. | To opt out of content use, open Settings → User → Application → Telemetry and Content, then disable Content Collection for Service Improvement.
 
 ### CodeRabbit OSS — Free AI Code Reviews
 - Provider: CodeRabbit
@@ -312,17 +323,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-09T06:11:50Z — 
 - Page: https://freetokens.custats.info/offers/leonardo-ai-free-plan.html
 - Summary: The Leonardo.Ai free plan grants 150 fast tokens every day (resetting daily) for image generation on the app's core models. Slow-generation modes can stretch usage further at zero cost.
 - Claim steps: Create a free Leonardo.Ai account at leonardo.ai. | Confirm your email to activate the free plan. | Generate images from the app dashboard using your daily fast tokens. | Return daily — the 150 fast-token allowance resets every day.
-
-### Kiro Students — 1,000 Credits/Month for 1 Year
-- Provider: Kiro
-- Category: student
-- Amount: 1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over
-- Status: active — expiry ongoing
-- Verified: 2026-09-08 (social_proof / under-review, signup required)
-- Source: https://kiro.dev/students/
-- Page: https://freetokens.custats.info/offers/kiro-students-1000-credits-month.html
-- Summary: Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including paid features such as premium models and Kiro Web. The 2026 expansion covers 121 new universities across 16 countries. Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period.
-- Claim steps: Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email. | Open the account page and select the “You are eligible for Kiro Students” verification banner. | Verify student status through SheerID; proof such as a student ID or enrollment letter may be requested. | After approval, use 1,000 credits per month for 12 months. Unused credits do not roll over.
 
 ### Kilo Code Free Models
 - Provider: Kilo Code
