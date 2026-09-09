@@ -1,4 +1,3 @@
-import indexData from "./data/offers.json";
 import type { OffersIndex } from "./lib/offers";
 import { type Route, resolveRoute } from "./routes";
 import HomePage from "./components/HomePage";
@@ -9,12 +8,12 @@ import OfferDetailPage from "./components/OfferDetailPage";
 import { ConsentBanner } from "./components/ConsentBanner";
 import { CustatsBanner } from "./components/CustatsBanner";
 
-const index = indexData as OffersIndex;
-
 export default function App({
+  index,
   route,
   baseUrl,
 }: {
+  index: OffersIndex;
   route?: Route;
   baseUrl?: string;
 }) {
