@@ -18,7 +18,7 @@ const index = indexData as OffersIndex;
 const offers = activeOffers(index);
 
 function html() {
-  return renderToStaticMarkup(<App />);
+  return renderToStaticMarkup(<App index={index} />);
 }
 
 // Prerender-parity contract for the home listing (issue #119): every active
