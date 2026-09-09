@@ -1,9 +1,37 @@
 {
-  "generated_at": "2026-09-08T22:09:32Z",
-  "count": 87,
-  "active_count": 72,
+  "generated_at": "2026-09-09T06:11:50Z",
+  "count": 88,
+  "active_count": 73,
   "expired_count": 15,
   "offers": [
+    {
+      "slug": "coderabbit-oss-free-reviews",
+      "title": "CodeRabbit OSS — Free AI Code Reviews",
+      "provider": "CodeRabbit",
+      "category": "coding",
+      "amount": "Free Team features for public repositories: AI reviews, slop detection, triage, Change Stack, and Security; no card or application; rate limits apply",
+      "expiry_date": null,
+      "source_url": "https://www.coderabbit.ai/oss",
+      "verified_date": "2026-09-09",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "kiro-students-1000-credits-month",
+      "title": "Kiro Students — 1,000 Credits/Month for 1 Year",
+      "provider": "Kiro",
+      "category": "student",
+      "amount": "1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over",
+      "expiry_date": null,
+      "source_url": "https://kiro.dev/students/",
+      "verified_date": "2026-09-08",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "daytona-200-free-compute",
       "title": "Daytona — $200 Free Compute",
@@ -1207,20 +1235,6 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "kiro-students-1000-credits-month",
-      "title": "Kiro Students — 1,000 Credits/Month for 1 Year",
-      "provider": "Kiro",
-      "category": "student",
-      "amount": "1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over",
-      "expiry_date": null,
-      "source_url": "https://kiro.dev/students/",
-      "verified_date": "2026-09-08",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
     }
   ]
 }

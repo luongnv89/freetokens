@@ -1,0 +1,24 @@
+{
+  "summary": "CodeRabbit reviews public repositories for free, including AI reviews, slop detection, triage, Change Stack, and Security. No card or application. The $10M figure is CodeRabbit’s overall OSS commitment, not a per-project grant.",
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.coderabbit.ai/oss",
+      "title": "CodeRabbit for Open Source",
+      "text": "Install it for a public repository; reviews start on the next PR. No application, card, or sales call."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.coderabbit.ai/management/plans",
+      "title": "CodeRabbit plans",
+      "text": "OSS gives public repositories Team features; limits apply, and repositories under 10 stars trigger reviews manually."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/coderabbitai/status/2092866022521110752",
+      "author": "CodeRabbit",
+      "handle": "@coderabbitai",
+      "text": "langflow. bun. ant-design. nuxt. vue. mermaid. pnpm. trpc.\n\nOver 600,000 GitHub stars between them, and CodeRabbit reviews it all, for free.\n\nNext stop: more than $10M into OSS over the next year, counted at what it costs us.\n\nHeres how and why 👇"
+    }
+  ]
+}

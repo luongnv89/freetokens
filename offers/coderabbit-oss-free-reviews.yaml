@@ -1,0 +1,13 @@
+# Verified 2026-09-09 against https://www.coderabbit.ai/oss
+# ("The repo is public. That’s the whole bar CodeRabbit uses ... triage, reviews, change stack, and security are all free.")
+# ("Reviews start on the next pull request — two clicks, no credit card, no sales call.")
+title: CodeRabbit OSS — Free AI Code Reviews
+provider: CodeRabbit
+category: coding
+amount: "Free Team features for public repositories: AI reviews, slop detection, triage, Change Stack, and Security; no card or application; rate limits apply"
+expiry_date: null
+source_url: https://www.coderabbit.ai/oss
+verified_date: 2026-09-09
+verification: social_proof
+review_status: under-review
+signup: required
