@@ -7,7 +7,7 @@ category: api_provider
 amount: Starting credits for new workspaces (amount not published)
 expiry_date: null
 source_url: https://docs.baseten.co/organization/billing
-verified_date: 2026-09-08
+verified_date: 2026-09-10
 verification: social_proof
 review_status: under-review
 signup: required
