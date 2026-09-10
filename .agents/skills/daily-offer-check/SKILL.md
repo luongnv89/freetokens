@@ -5,7 +5,7 @@ license: MIT
 effort: high
 compatibility: "Requires git, GitHub CLI (gh), and python3. Run gh auth status to verify."
 metadata:
-  version: 1.0.0
+  version: 1.0.1
   author: Luong NGUYEN <luongnv89@gmail.com>
   epic: "#31"
 ---
@@ -39,15 +39,23 @@ cd "$(git rev-parse --show-toplevel)"
 today="$(date +%F)"
 # If the user named a YYYY-MM-DD, use that string instead of date +%F.
 branch="$(git rev-parse --abbrev-ref HEAD)"
-git fetch origin && git pull --rebase origin "$branch"
+stashed=0
+if [ -n "$(git status --porcelain)" ]; then
+  git stash push -u -m "daily-offer-check pre-sync" || exit 1
+  stashed=1
+fi
+git fetch origin && git pull --rebase origin "$branch" || exit 1
+if [ "$stashed" = 1 ]; then
+  git stash pop || exit 1
+fi
 ```
 
 Use that same `$today` for the branch name, `--today` flags, issue title, and PR title.
 
-- If `git status --porcelain` is non-empty: `git stash push -m "daily-offer-check pre-sync"`, sync, then `git stash pop`. If pop conflicts, stop and ask.
+- Stash tracked and untracked work **before** sync as above. On sync failure retain the stash; on pop conflicts stop and ask. Never drop a stash to get a clean tree.
 - If `origin` is missing or the rebase conflicts: stop, report the error verbatim, and ask. Never force-push.
 - **Report-only:** stop after fetch/rebase on the current branch. Do **not** create or check out `chore/daily-offer-check-$today`.
-- **Apply+PR:** if `chore/daily-offer-check-$today` already exists, check it out and continue (idempotent). Otherwise `git checkout -b "chore/daily-offer-check-$today" origin/main` (never `-B`). If the restored stash still dirties the tree, stop — do not mix WIP into the sweep branch. `gh auth status` must succeed before Step 4; if it fails, stop — do not apply writes you cannot ship.
+- **Apply+PR:** require `git status --porcelain` empty **before** any checkout; restored WIP stops the run. If `chore/daily-offer-check-$today` exists, check it out only after confirming it contains solely prior sweep changes against `origin/main`; otherwise stop. Otherwise `git checkout -b "chore/daily-offer-check-$today" origin/main` (never `-B`). Require a clean tree again after checkout. `gh auth status` must succeed before Step 4; if it fails, stop — do not apply writes you cannot ship.
 
 ## Leading words
 
@@ -55,6 +63,19 @@ Use that same `$today` for the branch name, `--today` flags, issue title, and PR
 - **safe write** — bump `verified_date` on **live**, or set `expiry_date` + `verified_date` to today on **expired**. Never resolve a **conflict**.
 - **empty-diff exception** — zero YAML writes ⇒ no PR. Report instead; optionally comment on an open issue whose title contains `stale content`.
 - **fail-soft** — one dead URL or crashed worker does not abort the catalog. Mark that slug **unverifiable** and continue.
+
+## Step Completion Reports
+
+After each major step, print `◆ <name> (step N of 7)`, its gate checks with
+`√` / `×`, and `Result: PASS | FAIL | PARTIAL`. Steps 3–6 respectively check
+coverage N/N, writes against applied length, validator exit 0, and PR URL or
+empty-diff exception. On failure print stderr and stop; do not report success
+for skipped gates. The final report includes all skipped steps.
+
+Before inventory, require all three scripts below, `agents/verifier.md`,
+`references/trust-policy.md`, `references/apply-and-pr.md`, and root
+`scripts/offer_model.py` to exist. Missing dependency: stop and name the file.
+These are bundled files, not dependencies on other skills.
 
 ## Step 1 — Inventory (you)
 
@@ -98,7 +119,7 @@ Put these paths in each worker prompt as files to Read (you do not Read them):
 - `.agents/skills/daily-offer-check/references/trust-policy.md`
 
 Plus the batch objects with every inventory field: slug, path, title,
-provider, amount, expiry_date, source_url, verified_date.
+provider, amount, expiry_date, source_url, verified_date, sha256; also pass today.
 
 Each worker's Output: a JSON array, one object per input slug — never a
 silent drop. Shape is pinned in `agents/verifier.md`.
@@ -122,9 +143,8 @@ Still missing → synthesize `unverifiable` / `reason: worker dropped slug`.
 
 Concatenate worker arrays into `/tmp/daily-offer-check-$today-verdicts.json`.
 If a worker wrapped JSON in markdown fences, strip the fences once so the
-file is a JSON array — that is repair, not rewriting verdicts. Extra slugs
-not in inventory may be dropped; never change a verdict for an inventory
-slug. Then:
+file is a JSON array — that is repair, not rewriting verdicts. Extra slugs, duplicates, and malformed records must fail coverage; request
+corrected worker output rather than silently dropping or rewriting verdicts. Then:
 
 ```bash
 python3 .agents/skills/daily-offer-check/scripts/check_coverage.py \
@@ -147,7 +167,11 @@ python3 .agents/skills/daily-offer-check/scripts/apply_verdicts.py \
   --verdicts /tmp/daily-offer-check-$today-verdicts.json
 ```
 
-The script is the only writer. You do not hand-edit YAML. Done when exit 0
+The script is the only writer. You do not hand-edit YAML. Its default trusted
+write root is repository `offers/`; inventory cannot redirect it. Fixture
+orchestration never reaches this step. Only offline helper tests explicitly
+pass a temporary `--offers-dir`. Stale inventory fails: regenerate and
+re-verify. Fresh same-day reruns are idempotent; old snapshots are not reusable. Done when exit 0
 and `writes` equals the number of files whose `action` is `bumped` or
 `expired` (not `unchanged`, not skipped).
 
@@ -158,7 +182,7 @@ python3 scripts/validate_offers.py
 ```
 
 Exit 0 required. If it fails, undo only paths in `applied[]`
-(`git checkout -- path …`) and stop — do not open a PR on an invalid catalog.
+(prefix each relative path with `offers/`, then `git checkout -- <literal paths>`) and stop — do not open a PR on an invalid catalog.
 
 ## Step 6 — Issue + PR (you)
 
