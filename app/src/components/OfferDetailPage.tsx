@@ -8,7 +8,6 @@ import {
   type OfferDetail,
 } from "../lib/offerDetails";
 import { offerAbsoluteUrl } from "../lib/site";
-import detailsCatalog from "../data/details.json";
 import type { Offer } from "../lib/offers";
 import {
   CategoryBadge,
@@ -24,8 +23,6 @@ import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { StructuredData } from "./StructuredData";
-
-const catalog = detailsCatalog as DetailsMap;
 
 function relatedOffers(index: OffersIndex, current: Offer, limit = 4): Offer[] {
   const sameCategory = index.offers.filter(
@@ -141,8 +138,9 @@ export default function OfferDetailPage({
   baseUrl?: string;
 }) {
   const offer = index.offers.find((o) => o.slug === slug);
-  const map = details ?? catalog;
-  const detail: OfferDetail | undefined = offer ? map[offer.slug] : undefined;
+  const detail: OfferDetail | undefined = offer
+    ? details?.[offer.slug]
+    : undefined;
   const viewSlug = useMemo(() => [slug], [slug]);
   const views = useOfferViews(viewSlug);
   const viewCount = offer ? views[offer.slug] : null;
@@ -321,7 +319,7 @@ export default function OfferDetailPage({
                   proofs={detail?.social_proof}
                   relPrefix="../"
                 />
-                <CopyLinkButton url={offerAbsoluteUrl(offer.slug)} />
+                <CopyLinkButton url={offerAbsoluteUrl(offer.slug, baseUrl)} />
               </div>
               <RelatedOffers current={offer} index={index} />
             </article>
