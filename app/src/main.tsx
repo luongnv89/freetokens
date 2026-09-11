@@ -3,6 +3,8 @@ import { hydrateRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import type { OffersIndex } from "./lib/offers.ts";
+import type { DetailsMap } from "./lib/offerDetails.ts";
+import { resolveRoute } from "./routes.ts";
 import { scheduleAnalyticsInit } from "./lib/analytics.ts";
 
 // Keep the catalog out of the executable bundle: it changes with every offer
@@ -18,12 +20,46 @@ async function boot() {
       throw new Error(`catalog request failed: ${response.status}`);
     }
     const index = (await response.json()) as OffersIndex;
-    hydrateRoot(
-      document.getElementById("root")!,
-      <StrictMode>
-        <App index={index} />
-      </StrictMode>,
-    );
+    const root = document.getElementById("root")!;
+    const route = resolveRoute();
+    // The aggregate details map (~129 KB gzip) ships only with detail routes
+    // via a route-guarded dynamic import, so home/archive never request it
+    // (#369). On failure skip hydration entirely: hydrating without details
+    // would mismatch the prerendered document, while the prerendered page
+    // itself stays fully readable.
+    let skipHydration = false;
+    let details: DetailsMap | undefined;
+    if (route.page === "detail") {
+      try {
+        details = (await import("./data/details.json"))
+          .default as DetailsMap;
+      } catch (error) {
+        // Optional data only: keep the prerendered page visible (no
+        // hydration, which would mismatch), but never let details.json
+        // block consent/analytics scheduling below.
+        console.error(
+          "Unable to load offer details; prerendered content remains available.",
+          error,
+        );
+        skipHydration = true;
+      }
+    }
+    if (!skipHydration) {
+      // The prerenderer stamps the production base URL on #root; reading it
+      // keeps StructuredData's JSON-LD byte-identical across prerender and
+      // hydration instead of recomputing it from window.location — the root
+      // cause of React hydration error #418 and the TBT bloat it caused (#369).
+      hydrateRoot(
+        root,
+        <StrictMode>
+          <App
+            index={index}
+            details={details}
+            baseUrl={root.dataset.baseUrl}
+          />
+        </StrictMode>,
+      );
+    }
   } catch (error) {
     console.error(
       "Unable to hydrate FreeTokens; prerendered content remains available.",

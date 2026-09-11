@@ -161,7 +161,7 @@ try {
   // idempotent. The mount sits immediately before </body>; the injected
   // markup's own divs close inside it.
   const MOUNT_RE =
-    /<div id="root"( data-page="[^"]*")?( data-slug="[^"]*")?>[\s\S]*<\/div>(?=\s*<\/body>)/;
+    /<div id="root"( data-page="[^"]*")?( data-slug="[^"]*")?( data-base-url="[^"]*")?>[\s\S]*<\/div>(?=\s*<\/body>)/;
 
   function htmlAttr(text) {
     return String(text)
@@ -226,6 +226,7 @@ try {
     depth = 0,
     page,
     slug,
+    baseUrl,
   }) {
     // All dynamic replacements go through replacer FUNCTIONS: offer copy
     // routinely contains "$15K"-style amounts, and a string replacement
@@ -275,7 +276,10 @@ try {
       doc = doc.replaceAll(/((?:src|href)=")\.\//g, `$1${"../".repeat(depth)}`);
     const attrs =
       (page ? ` data-page="${page}"` : "") +
-      (slug ? ` data-slug="${slug}"` : "");
+      (slug ? ` data-slug="${slug}"` : "") +
+      // Production base URL for hydration parity: the client reads it back
+      // so StructuredData renders byte-identical JSON-LD at any origin (#369).
+      (baseUrl ? ` data-base-url="${htmlAttr(baseUrl)}"` : "");
     if (!MOUNT_RE.test(doc)) {
       console.error(
         `error: dist/index.html has no <div id="root"></div> mount point`,
@@ -300,6 +304,7 @@ try {
         "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
       canonical: `${origin}/`,
       page: "home",
+      baseUrl: origin,
     }),
   );
   written.push("index.html");
@@ -314,6 +319,7 @@ try {
         "Reference archive of expired free AI credit offers, kept newest-first with their original terms.",
       canonical: `${origin}/archive.html`,
       page: "archive",
+      baseUrl: origin,
     }),
   );
   written.push("archive.html");
@@ -328,6 +334,7 @@ try {
         "How the Free AI Credits site handles data: consent-gated anonymized analytics, no forms, no personal data storage.",
       canonical: `${origin}/privacy.html`,
       page: "privacy",
+      baseUrl: origin,
     }),
   );
   written.push("privacy.html");
@@ -342,6 +349,7 @@ try {
         "What Free AI Credits is, how the listings are verified, and what the numbers mean.",
       canonical: `${origin}/about.html`,
       page: "about",
+      baseUrl: origin,
     }),
   );
   written.push("about.html");
@@ -375,6 +383,7 @@ try {
         depth: 1,
         page: "detail",
         slug: offer.slug,
+        baseUrl: origin,
       }),
     );
     offerFileMtimes.set(offer.slug, (await stat(offerPath)).mtime);

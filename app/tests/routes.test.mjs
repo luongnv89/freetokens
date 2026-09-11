@@ -260,6 +260,27 @@ describe("static route coverage (#123)", () => {
     expect(detail).toContain(`data-slug="${slug}"`);
   });
 
+  // Hydration parity (#369): the prerenderer stamps the production base URL
+  // on #root so StructuredData renders byte-identical JSON-LD on the client
+  // instead of recomputing it from window.location (React error #418).
+  it("stamps the production base URL on every mount point for hydration parity", async () => {
+    const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
+    const attr = `data-base-url="${DEFAULT_BASE_URL}"`;
+    for (const file of [
+      "index.html",
+      "archive.html",
+      "privacy.html",
+      "about.html",
+    ]) {
+      expect(readFileSync(path.join(outDir, file), "utf8")).toContain(attr);
+    }
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${index.offers[0].slug}.html`),
+      "utf8",
+    );
+    expect(detail).toContain(attr);
+  });
+
   it("deep-links render full server-side content with JS disabled", () => {
     const offer = index.offers[0];
     const detail = readFileSync(
