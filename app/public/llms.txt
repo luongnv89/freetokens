@@ -4,9 +4,10 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 83 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 84 active listings. Full directory at https://freetokens.custats.info/.
 
 - [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
+- [ZCode Weekend Build — 300M Free GLM-5.3-Flash Tokens](https://freetokens.custats.info/offers/zcode-weekend-build-4-300m-tokens.html): ZCode — 300M GLM-5.3-Flash tokens per person — Fri 8AM to Sun 6PM PT, two batches, first come first served (coding)
 - [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
 - [WorkBuddy Hy4 Preview Free](https://freetokens.custats.info/offers/workbuddy-hy4-preview-free.html): WorkBuddy — Free access to Hy4 preview (2 weeks) (coding)
 - [Vidu AI Video Free Credits](https://freetokens.custats.info/offers/vidu-free-credits.html): Vidu — Trial credits for new users on signup, topped up with daily login bonus credits (video)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 83 active listings. 
 - [OpenRouter Free Models](https://freetokens.custats.info/offers/openrouter-free-models.html): OpenRouter — Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time) (api_provider)
 - [OpenAI Codex Free Tier](https://freetokens.custats.info/offers/openai-codex-free-tier.html): OpenAI — Limited free Codex access on the ChatGPT Free plan, incl. GPT-5.6 Luna (no credit card) (coding)
 - [Ollama Cloud Free Tier](https://freetokens.custats.info/offers/ollama-cloud-free-tier.html): Ollama — Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited (api_provider)
-- [NVIDIA NIM Free Trial (Developer Program)](https://freetokens.custats.info/offers/nvidia-nim-free-trial.html): NVIDIA — $0 hosted trial for prototyping with NVIDIA NIM, rate-limited (api_provider)
 
 ## Pages
 

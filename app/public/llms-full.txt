@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-11T12:20:53Z — 83 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-11T13:06:04Z — 84 active offers.
 
 ## Offers (full)
 
@@ -16,6 +16,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-11T12:20:53Z — 
 - Page: https://freetokens.custats.info/offers/zed-student-pro.html
 - Summary: Zed Pro free for 1 year + $10/month in AI token credits for verified university students. Includes unlimited edit predictions, real-time multiplayer collaboration, and all Zed Pro features.
 - Claim steps: Sign in with a GitHub account older than 30 days on the Zed education dashboard. | Share your valid and current university (.edu) email address for verification. | Once verified, Zed Pro is free for 12 months and $10/month in AI token credits are applied.
+
+### ZCode Weekend Build — 300M Free GLM-5.3-Flash Tokens
+- Provider: ZCode
+- Category: coding
+- Amount: 300M GLM-5.3-Flash tokens per person — Fri 8AM to Sun 6PM PT, two batches, first come first served
+- Status: active — expiry 2026-09-13
+- Verified: 2026-09-11 (social_proof / under-review, signup required)
+- Source: https://x.com/zixuanli_/status/2098390028787339666
+- Page: https://freetokens.custats.info/offers/zcode-weekend-build-4-300m-tokens.html
+- Summary: ZCode Weekend Build continues (announced Sep 11, 2026 by Zixuan Li): 300M free GLM-5.3-Flash tokens per person, claimable in the ZCode desktop app via the bottom-left event card. Window is Fri 8AM to Sun 6PM PT (Sep 11-13, 2026), released in two batches (Fri and Sat), first come, first served. Coding Plan users can use Flash on ZCode with no quota cost from 8AM to 6PM PT every day. Follows the expired Weekend Build IV round (Sep 5-6, 300M per person).
+- Claim steps: Install and open the ZCode desktop app from https://zcode.z.ai (macOS, Windows, and Linux builds available), or update/restart your existing install. | Sign in with your Z.ai account in ZCode. | After the window opens — Fri 8AM PT — look for the Weekend Build card in the bottom-left of the app. | If the card is not visible, restart the app. | Tap the card and claim: 300M GLM-5.3-Flash tokens per person; released in two batches (Fri and Sat), first come, first served. | Coding Plan users can use Flash on ZCode with no quota cost from 8AM to 6PM PT every day during the window.
 
 ### YepAPI $5 Signup Credit
 - Provider: YepAPI
