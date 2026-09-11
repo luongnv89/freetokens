@@ -1,14 +1,21 @@
 {
-  "summary": "ZCode's official verified X account (@zcode_ai) announced Weekend Build IV on Sep 4, 2026: 300M free GLM-5.3-Flash tokens per person, claimable in the ZCode desktop app via the bottom-left event card. The event opens Sat Sep 5, 09:00 Beijing time (Fri 6 PM PT / 9 PM ET) and — per the official poster attached to the post — the window runs SAT 09:00 – SUN 23:00 UTC+8, i.e. through Sunday Sep 6, 2026. Claims are instant and first come, first served, so the pool can exhaust before the window closes; restart the app if the card is missing. This is a separate event from the ongoing ZCode Global Build (nightly till Sep 20, +100M for new users) already listed as zcode-glm-5-3-flash-free; the official site's changelog independently corroborates the in-app Weekend/Global Plan claim-card feature.",
+  "summary": "ZCode Weekend Build continues (announced Sep 11, 2026 by Zixuan Li): 300M free GLM-5.3-Flash tokens per person, claimable in the ZCode desktop app via the bottom-left event card. Window is Fri 8AM to Sun 6PM PT (Sep 11-13, 2026), released in two batches (Fri and Sat), first come, first served. Coding Plan users can use Flash on ZCode with no quota cost from 8AM to 6PM PT every day. Follows the expired Weekend Build IV round (Sep 5-6, 300M per person).",
   "claim_steps": [
     "Install and open the ZCode desktop app from https://zcode.z.ai (macOS, Windows, and Linux builds available), or update/restart your existing install.",
     "Sign in with your Z.ai account in ZCode.",
-    "After the event opens — Sat Sep 5, 09:00 Beijing time (Fri 6 PM PT / 9 PM ET) — look for the Weekend Build IV card in the bottom-left of the app.",
+    "After the window opens — Fri 8AM PT — look for the Weekend Build card in the bottom-left of the app.",
     "If the card is not visible, restart the app.",
-    "Tap the card and claim instantly: 300M GLM-5.3-Flash tokens per person.",
-    "Claim early — tokens are first come, first served, and the window runs to Sun 23:00 UTC+8 (Sep 6, 2026)."
+    "Tap the card and claim: 300M GLM-5.3-Flash tokens per person; released in two batches (Fri and Sat), first come, first served.",
+    "Coding Plan users can use Flash on ZCode with no quota cost from 8AM to 6PM PT every day during the window."
   ],
   "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/zixuanli_/status/2098390028787339666",
+      "author": "Zixuan Li",
+      "handle": "@ZixuanLi_",
+      "text": "ZCode Weekend Build continues: GLM-5.3-Flash, 300M tokens. - Use window: Friday 8AM to Sunday 6PM PT - Released in two batches, today and tomorrow. First come, first served. From 8AM to 6PM PT every day, Coding Plan users can still use Flash on ZCode with no quota cost."
+    },
     {
       "type": "x",
       "url": "https://x.com/zcode_ai/status/2095847518194307434",
@@ -20,7 +27,7 @@
       "type": "link",
       "url": "https://zcode.z.ai/en",
       "title": "ZCode | Official Harness for GLM-5.3",
-      "text": "Official ZCode site hosting the desktop app downloads (v3.11.2, macOS/Windows/Linux) required for in-app claiming of the Weekend Build IV card."
+      "text": "Official ZCode site hosting the desktop app downloads (v3.11.2, macOS/Windows/Linux) required for in-app claiming of the Weekend Build card."
     },
     {
       "type": "link",

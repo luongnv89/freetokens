@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-11T12:20:53Z",
+  "generated_at": "2026-09-11T13:07:43Z",
   "count": 98,
-  "active_count": 83,
-  "expired_count": 15,
+  "active_count": 84,
+  "expired_count": 14,
   "offers": [
     {
       "slug": "coderabbit-oss-free-reviews",
@@ -342,17 +342,17 @@
     },
     {
       "slug": "zcode-weekend-build-4-300m-tokens",
-      "title": "ZCode Weekend Build IV — 300M Free GLM-5.3-Flash Tokens",
+      "title": "ZCode Weekend Build — 300M Free GLM-5.3-Flash Tokens",
       "provider": "ZCode",
       "category": "coding",
-      "amount": "300M GLM-5.3-Flash tokens per person",
-      "expiry_date": "2026-09-06",
-      "source_url": "https://x.com/zcode_ai/status/2095847518194307434",
-      "verified_date": "2026-09-04",
+      "amount": "300M GLM-5.3-Flash tokens per person — Fri 8AM to Sun 6PM PT, two batches, first come first served",
+      "expiry_date": "2026-09-13",
+      "source_url": "https://x.com/zixuanli_/status/2098390028787339666",
+      "verified_date": "2026-09-11",
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "expired"
+      "status": "active"
     },
     {
       "slug": "muse-spark-1-3-contributor-free",
