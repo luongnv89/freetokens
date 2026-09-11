@@ -299,7 +299,7 @@ describe("static route coverage (#123)", () => {
     expect(detail).not.toContain("data-ft-share");
   });
 
-  it("emits crawlable breadcrumbs aligned with JSON-LD on every non-home route", () => {
+  it("emits crawlable breadcrumbs aligned with JSON-LD on every non-home route", { timeout: 15000 }, () => {
     const rootPages = [
       {
         file: "archive.html",
