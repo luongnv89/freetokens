@@ -27,33 +27,39 @@ async function boot() {
     // (#369). On failure skip hydration entirely: hydrating without details
     // would mismatch the prerendered document, while the prerendered page
     // itself stays fully readable.
+    let skipHydration = false;
     let details: DetailsMap | undefined;
     if (route.page === "detail") {
       try {
         details = (await import("./data/details.json"))
           .default as DetailsMap;
       } catch (error) {
+        // Optional data only: keep the prerendered page visible (no
+        // hydration, which would mismatch), but never let details.json
+        // block consent/analytics scheduling below.
         console.error(
           "Unable to load offer details; prerendered content remains available.",
           error,
         );
-        return;
+        skipHydration = true;
       }
     }
-    // The prerenderer stamps the production base URL on #root; reading it
-    // keeps StructuredData's JSON-LD byte-identical across prerender and
-    // hydration instead of recomputing it from window.location — the root
-    // cause of React hydration error #418 and the TBT bloat it caused (#369).
-    hydrateRoot(
-      root,
-      <StrictMode>
-        <App
-          index={index}
-          details={details}
-          baseUrl={root.dataset.baseUrl}
-        />
-      </StrictMode>,
-    );
+    if (!skipHydration) {
+      // The prerenderer stamps the production base URL on #root; reading it
+      // keeps StructuredData's JSON-LD byte-identical across prerender and
+      // hydration instead of recomputing it from window.location — the root
+      // cause of React hydration error #418 and the TBT bloat it caused (#369).
+      hydrateRoot(
+        root,
+        <StrictMode>
+          <App
+            index={index}
+            details={details}
+            baseUrl={root.dataset.baseUrl}
+          />
+        </StrictMode>,
+      );
+    }
   } catch (error) {
     console.error(
       "Unable to hydrate FreeTokens; prerendered content remains available.",

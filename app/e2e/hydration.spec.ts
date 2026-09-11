@@ -94,3 +94,26 @@ test("detail page JSON-LD keeps the production base URL after hydration", async 
   expect(jsonLd).toContain("https://freetokens.custats.info");
   expect(jsonLd).not.toContain("http://127.0.0.1:4173");
 });
+
+// Review fix (#369): a failed details.json import must skip hydration but
+// still schedule analytics — the consent banner must not depend on the
+// optional details map.
+test("consent banner initializes even when the details chunk fails to load", async ({
+  page,
+}) => {
+  const withDetails =
+    index.offers.find(
+      (offer) => offer.status !== "expired" && offer.expiry_date,
+    ) ?? index.offers[0];
+  await page.route(/details-[A-Za-z0-9_-]+\.js/, (route) => route.abort());
+  const errors = collectHydrationErrors(page);
+  await page.goto(`/offers/${withDetails.slug}.html`);
+  await page.waitForLoadState("networkidle");
+  // Prerendered content stays visible (no hydration = no mismatch errors).
+  expect(errors, `hydration errors: ${errors.join(" | ")}`).toEqual([]);
+  expect(await page.locator("h1").textContent()).toContain(withDetails.title);
+  // scheduleAnalyticsInit still ran despite the failed import.
+  await expect(page.locator("#ft-consent-banner")).toBeVisible({
+    timeout: 5_000,
+  });
+});
