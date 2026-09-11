@@ -1,0 +1,12 @@
+# Verified 2026-09-11 against https://www.firecrawl.dev/pricing
+# ("Free tier 1,000 credits every month, refreshed monthly, no credit card required.")
+title: Firecrawl Free Plan — 1,000 Credits/Month
+provider: Firecrawl
+category: api_provider
+amount: 1,000 free credits every month (about 1,000 pages or 500 searches)
+expiry_date: null
+source_url: https://www.firecrawl.dev/pricing
+verified_date: 2026-09-11
+verification: social_proof
+review_status: unverified
+signup: required

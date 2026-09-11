@@ -1,0 +1,22 @@
+{
+  "summary": "Baseten's AI Startup Program offers accepted, net-new AI-first early-stage startups up to $25,000 in credits for Dedicated Inference or Training and up to $2,500 for Model APIs. Eligibility is selective: the program targets Seed-to-Series-A startups operating for less than five years, and applicants must not have previously received Baseten credits.",
+  "claim_steps": [
+    "Confirm that the startup is AI-first, at Seed to Series A, and has operated for less than five years.",
+    "Confirm that the company is a net-new Baseten customer and has not previously received Baseten credits.",
+    "Apply through Baseten's AI Startup Program page and wait for acceptance."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.baseten.co/startup-program/",
+      "title": "AI Startup Program | Baseten",
+      "text": "Up to $25,000 in credits for Dedicated Inference or Training; up to $2,500 in credits for Model APIs."
+    },
+    {
+      "type": "link",
+      "url": "https://www.baseten.co/talk-to-us/startup-program/",
+      "title": "Startup program",
+      "text": "If you are accepted into the program, you will get direct access to Baseten's platform and free credits."
+    }
+  ]
+}

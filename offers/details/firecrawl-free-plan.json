@@ -1,0 +1,22 @@
+{
+  "summary": "Firecrawl's Free tier provides 1,000 credits every month, refreshed monthly, with no credit card required. The pricing page describes that allowance as roughly 1,000 pages scraped or 500 searches, with two concurrent requests and low rate limits. Search, crawl, scrape, and interaction operations can consume credits at different rates.",
+  "claim_steps": [
+    "Open Firecrawl's pricing page and choose the Free tier.",
+    "Create a Firecrawl account; no credit card is required.",
+    "Use the monthly 1,000-credit allowance within the Free tier's concurrency and rate limits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.firecrawl.dev/pricing",
+      "title": "Pricing | Firecrawl",
+      "text": "Free tier 1,000 credits every month, refreshed monthly, no credit card required; 500 searches or 1,000 pages scraped."
+    },
+    {
+      "type": "link",
+      "url": "https://www.firecrawl.dev/signin?view=signup",
+      "title": "Firecrawl - The context API to search, scrape, and interact with the web at scale. 🔥",
+      "text": "Email Password Create Account Continue with GitHub Continue with Google"
+    }
+  ]
+}

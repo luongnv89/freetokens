@@ -1,0 +1,16 @@
+{
+  "summary": "SmarToken's campaign grants a one-time $5 promotional credit for OpenAI-compatible model calls to existing users and eligible new Google users. The campaign ends on December 31, 2026 at 23:59:59 UTC+8. New users must be low-risk Google users, pass the stated signup checks, and receive the credit once per account; no credit card is required.",
+  "claim_steps": [
+    "Create or use a SmarToken account before December 31, 2026 at 23:59:59 UTC+8.",
+    "If you are a new user, sign in with Google and pass SmarToken's low-risk signup checks.",
+    "Use the one-time $5 promotional balance for OpenAI-compatible model calls; no credit card is required."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://thesmartoken.com/campaign/free-credit",
+      "title": "$5 Free API Credit for Existing Users and New Sign-ups | SmarToken",
+      "text": "Every existing SmarToken user and every new sign-up gets $5 in free credit for OpenAI-compatible model calls; the campaign deadline is December 31, 2026 at 23:59:59 (UTC+8). No credit card is required."
+    }
+  ]
+}

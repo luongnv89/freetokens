@@ -1,0 +1,12 @@
+# Verified 2026-09-11 against https://thesmartoken.com/campaign/free-credit
+# ("every existing SmarToken user and every new sign-up $5 in free credit"; "The campaign deadline is December 31, 2026 at 23:59:59 (UTC+8).")
+title: SmarToken $5 Free API Credit Campaign
+provider: SmarToken
+category: api_provider
+amount: $5 one-time promotional API credit for eligible accounts
+expiry_date: 2026-12-31
+source_url: https://thesmartoken.com/campaign/free-credit
+verified_date: 2026-09-11
+verification: social_proof
+review_status: unverified
+signup: required

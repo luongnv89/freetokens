@@ -1,0 +1,28 @@
+{
+  "summary": "AMD's free AI Developer Program includes $100 in AMD Developer Cloud credits. The credit-request flow asks for affiliation, job function, intended use, and a public profile for verification; AMD says approval takes 2–3 business days and the credits expire 30 days after activation. This is separate from AMD Radeon Cloud's free model API endpoints.",
+  "claim_steps": [
+    "Create a free AMD account and complete the AI Developer Program sign-up form.",
+    "Verify your email and request AMD Developer Cloud credits with your affiliation, job function, intended use, and a public profile.",
+    "Wait for AMD's approval email; issued credits expire 30 days after activation."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://developer.amd.com/ai-developer-program/",
+      "title": "AMD AI Developer Program - AMD Developer Portal",
+      "text": "Receive $100 in AMD Developer Cloud credits."
+    },
+    {
+      "type": "link",
+      "url": "https://www.amd.com/en/developer/resources/technical-articles/2026/how-to-claim-amd-cloud-credits.html",
+      "title": "How to Claim AMD Cloud Credits",
+      "text": "Complete the cloud credit request form with your affiliation, job function, intended use, and a public profile ... Credits expire 30 days after activation."
+    },
+    {
+      "type": "link",
+      "url": "https://www.amd.com/en/registration/ai-dev-program-sign-up-form.html",
+      "title": "AI Developer Program Sign Up Form",
+      "text": "Create your free AMD account and complete the AI Developer Program Sign Up Form, then verify your email."
+    }
+  ]
+}
