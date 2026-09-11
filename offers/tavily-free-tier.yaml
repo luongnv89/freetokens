@@ -1,0 +1,12 @@
+# Verified 2026-09-11 against https://www.tavily.com/pricing
+# ("Researcher Free … 1,000 API credits / month … No credit card required"; "Your API credits reset on the first day of each month")
+title: Tavily Researcher Free — 1,000 API Credits/Month
+provider: Tavily
+category: api_provider
+amount: 1,000 free API credits every month
+expiry_date: null
+source_url: https://www.tavily.com/pricing
+verified_date: 2026-09-11
+verification: social_proof
+review_status: unverified
+signup: required

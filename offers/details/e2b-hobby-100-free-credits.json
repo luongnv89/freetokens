@@ -1,0 +1,16 @@
+{
+  "summary": "E2B's pricing page lists the Hobby plan at $0 with a $100 one-time usage credit. It includes sessions up to 1 hour, up to 20 concurrent sandboxes, and free 10 GiB storage. The page says no credit card is required; usage costs are separate after the included credit.",
+  "claim_steps": [
+    "Open the E2B pricing page and choose the free Hobby plan.",
+    "Create or sign in to an E2B account; no credit card is required.",
+    "Use the included one-time $100 usage credit within the Hobby plan limits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://e2b.dev/pricing",
+      "title": "Pricing | E2B — The AI Agent Cloud",
+      "text": "Hobby FREE; $100 one-time usage credit; sessions up to 1 hour; 20 concurrent sandboxes; no credit card required."
+    }
+  ]
+}

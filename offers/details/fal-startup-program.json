@@ -1,0 +1,28 @@
+{
+  "summary": "fal's Startup Program starts approved teams at $1,000 in credits and can grow to $5,000 as usage scales. It is for companies that can show traction, revenue, real users, or institutional funding, and is open to teams based in Europe and Asia. A short intro call is usually part of approval; promotional credits expire after 90 days under fal's terms.",
+  "claim_steps": [
+    "Confirm that the company is based in Europe or Asia and can show real users, meaningful traction, revenue, or institutional funding.",
+    "Apply through fal's Startup Program and describe the company's traction or funding and intended fal usage.",
+    "Complete the usual approval call and create or sign in to a fal account for the credits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://fal.ai/startups",
+      "title": "fal for Startups & Builders | fal",
+      "text": "Apply for the Startup Program · $1,000–$5,000."
+    },
+    {
+      "type": "link",
+      "url": "https://fal.ai/startup-program",
+      "title": "fal Startup Program | fal",
+      "text": "Start with $1,000 in credits and grow to $5,000 as your usage scales; the program is open to teams based in Europe & Asia."
+    },
+    {
+      "type": "link",
+      "url": "https://fal.ai/legal/terms-of-service",
+      "title": "Terms of Service | fal",
+      "text": "If you receive free or other promotional credits, they expire in 90 days."
+    }
+  ]
+}

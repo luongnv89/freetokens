@@ -1,0 +1,12 @@
+# Verified 2026-09-11 against https://exa.ai/docs/reference/billing
+# ("New accounts receive $20 in free credits on signup. Free Tier accounts receive $10 in free credits each month. No payment method is required.")
+title: Exa Free Tier — $20 Signup + $10/Month
+provider: Exa
+category: api_provider
+amount: $20 free credits on signup plus $10 free credits every month
+expiry_date: null
+source_url: https://exa.ai/docs/reference/billing
+verified_date: 2026-09-11
+verification: social_proof
+review_status: unverified
+signup: required

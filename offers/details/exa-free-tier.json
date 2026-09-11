@@ -1,0 +1,28 @@
+{
+  "summary": "Exa's billing documentation says new accounts receive $20 in free credits on signup, while Free Tier accounts receive $10 in free credits each month. No payment method is required. The free tier covers all endpoints, with published rate limits including 10 Search QPS and 50 Agent concurrency; requests stop when the balance reaches zero.",
+  "claim_steps": [
+    "Create an Exa account to receive the $20 signup credits.",
+    "Use the Free Tier, which adds $10 in credits each month without requiring a payment method.",
+    "Use the credits before the balance reaches zero or add credits separately to continue making requests."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://exa.ai/docs/reference/billing",
+      "title": "Billing - Exa",
+      "text": "New accounts receive $20 in free credits on signup. Free Tier accounts receive $10 in free credits each month. No payment method is required."
+    },
+    {
+      "type": "link",
+      "url": "https://exa.ai/pricing",
+      "title": "Exa API Pricing | Pay-as-You-Go Plans for AI Search",
+      "text": "$20 credits on sign-up with $10 credits every month. No payment method required."
+    },
+    {
+      "type": "link",
+      "url": "https://exa.ai/docs/reference/rate-limits.md",
+      "title": "Rate Limits",
+      "text": "/search is limited to 10 QPS; /answer is limited to 10 QPS."
+    }
+  ]
+}

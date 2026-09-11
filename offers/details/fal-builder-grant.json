@@ -1,0 +1,28 @@
+{
+  "summary": "fal's Builder Grant offers $25, $100, or $250 credit packs for direct generative-media apps. It is aimed at pre-revenue, bootstrapped, or self-funded teams in Europe and Asia; no funding is required. Applications currently run through approved fal partners, approval is not guaranteed, and promotional credits expire after 90 days under fal's terms.",
+  "claim_steps": [
+    "Confirm that the product is a direct generative-media app and the team is based in Europe or Asia.",
+    "Apply through an approved fal partner; the grant page says applications are currently partner-mediated.",
+    "Create or sign in to a free fal account so approved credits can be applied to it."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://fal.ai/startups",
+      "title": "fal for Startups & Builders | fal",
+      "text": "Apply for the Builder Grant · $25–$250."
+    },
+    {
+      "type": "link",
+      "url": "https://fal.ai/builder-grant",
+      "title": "Builder Grant Program | fal",
+      "text": "The product is a direct generative media app; the program is open to teams based in Europe & Asia, and applications are currently available through approved fal partners only."
+    },
+    {
+      "type": "link",
+      "url": "https://fal.ai/legal/terms-of-service",
+      "title": "Terms of Service | fal",
+      "text": "If you receive free or other promotional credits, they expire in 90 days."
+    }
+  ]
+}

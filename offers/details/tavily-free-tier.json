@@ -1,0 +1,28 @@
+{
+  "summary": "Tavily's Researcher Free plan provides 1,000 free API credits every month. Credits reset on the first day of each month, requests stop after the monthly balance is exhausted, and no credit card is required. Tavily separately advertises a student path with four months of Project Plan access and 4,000 API credits per month.",
+  "claim_steps": [
+    "Create a Tavily account and select the Researcher Free plan.",
+    "Use the 1,000 monthly API credits; they reset on the first day of each month.",
+    "Students can check Tavily's separate student account path for the advertised Project Plan benefit."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.tavily.com/pricing",
+      "title": "Tavily",
+      "text": "Researcher Free provides 1,000 API credits per month with no credit card required; credits reset on the first day of each month."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.tavily.com/documentation/api-credits",
+      "title": "Credits & Pricing - Tavily Docs",
+      "text": "You get 1,000 free API Credits every month. No credit card required."
+    },
+    {
+      "type": "link",
+      "url": "https://help.tavily.com/articles/6606514713-student-account",
+      "title": "Student Account | Tavily Help Center",
+      "text": "Students can receive 4 months of free access to the Project Plan, which includes 4,000 API credits per month."
+    }
+  ]
+}

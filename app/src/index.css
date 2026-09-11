@@ -2,6 +2,8 @@
    body, lists (.grid), and form chrome. Shipping both blew the #121 budget
    once _APP_CSS (toolbar/chips/filter-pill) landed in the sheet. */
 @layer theme, base, components, utilities;
+/* Generated public/llms*.txt is content, not a Tailwind source. */
+@source not "../public";
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 @import "./styles/fonts.css";

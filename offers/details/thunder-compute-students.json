@@ -1,0 +1,22 @@
+{
+  "summary": "Thunder Compute's Student Program gives students enrolled at a US university $20 of free credit when they sign up with their university email. The credit can be used on A6000 and L40 GPUs. When the credit runs out, normal pay-as-you-go billing applies; the student page does not state a fixed expiration date.",
+  "claim_steps": [
+    "Confirm that you are enrolled at a US university and have a university email address.",
+    "Sign up for Thunder Compute with your student email.",
+    "Use the automatic $20 credit on supported A6000 or L40 GPUs; normal pay-as-you-go billing applies after it is exhausted."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.thundercompute.com/students",
+      "title": "Student Program | Thunder Compute",
+      "text": "Sign up with your student email to get $20 of free Thunder Compute credit. Students enrolled at a US university who sign up with their university email qualify for automatic credit."
+    },
+    {
+      "type": "link",
+      "url": "https://www.thundercompute.com/pricing",
+      "title": "Pricing | Thunder Compute",
+      "text": "Per minute billing. Pay only for what you actually use."
+    }
+  ]
+}
