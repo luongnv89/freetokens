@@ -46,8 +46,8 @@ export default function App({
   }
   return (
     <>
-      {page}
       <CustatsBanner />
+      {page}
       <ConsentBanner />
     </>
   );
