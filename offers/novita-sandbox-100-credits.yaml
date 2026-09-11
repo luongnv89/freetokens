@@ -12,7 +12,7 @@ category: api_provider
 amount: $100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply
 expiry_date: null
 source_url: https://novita.ai/docs/guides/sandbox-pricing
-verified_date: 2026-09-10
+verified_date: 2026-09-11
 verification: social_proof
 review_status: under-review
 signup: required
