@@ -13,13 +13,15 @@ import { humanDate } from "../lib/offers";
  */
 const RAIL_CSS =
   ".site-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .5rem;" +
-  "margin:0 0 clamp(.7rem,2.5vw,1.1rem);font:.74rem/1.45 var(--font-mono,monospace);" +
+  "margin:0 0 .6rem;font:.78rem/1.5 var(--font-sans,sans-serif);" +
   "color:var(--gray)}" +
-  // Four wrapped lines at 1.6 made this derived sentence the second-tallest
-  // block on a phone. Tighter leading and a smaller size give the space back
-  // to the offers without dropping a single fact from the claim.
-  "@media(max-width:640px){.site-stats{font-size:.7rem;line-height:1.4;gap:.1rem .45rem}}" +
+  // Tighter leading on a phone keeps this derived sentence a single quiet
+  // line without dropping a single fact from the claim.
+  "@media(max-width:640px){.site-stats{line-height:1.45;gap:.1rem .45rem}}" +
   ".site-stats strong{color:var(--ink);font-weight:600}" +
+  // Only the timestamp runs mono — it is the one datum on the line; the rest
+  // of the sentence stays in the interface face.
+  ".site-stats time{font-family:var(--font-mono,monospace);font-size:.95em}" +
   ".site-stats .stat-sep{color:var(--hairline)}" +
   ".site-stats a{color:inherit;text-decoration:underline;" +
   "text-decoration-color:var(--hairline);text-underline-offset:3px}" +
@@ -27,7 +29,7 @@ const RAIL_CSS =
   "text-decoration-color:var(--green);text-decoration-thickness:2px}";
 
 /**
- * Home-only proof line. One mono sentence under the masthead carrying the
+ * Home-only proof line. One quiet sentence under the header carrying the
  * facts that back the curator claim:
  *
  *   1. how many offers are live right now — build-time and unfiltered, so it

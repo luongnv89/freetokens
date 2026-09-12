@@ -1,6 +1,6 @@
-/* Design-system tokens (issue #121, Sprint 2 Task 2.2).
+/* Design-system tokens (issue #121, Sprint 2 Task 2.2; warm-linen redesign).
    The Python builder's hand-rolled palette ported to Tailwind v4 CSS-first
-   tokens (@theme). Every value below is load-bearing and transferred
+   tokens (@theme). Every hue value below is load-bearing and transferred
    numerically unchanged from scripts/build.py `_CSS` — the WCAG contrast
    notes there were measured against exactly these hexes.
 
@@ -16,76 +16,83 @@
    line on the Python side; design-tokens.test.mjs mirrors it here).
 
    Each hue clears WCAG AA (>= 4.5:1) in BOTH painted states a tag has: as
-   text over its 7% tint at rest, and under white text when filled on
-   hover/active — asserted per token in tests/design-tokens.test.mjs.
+   text over its tint at rest, and under paper-coloured text when filled on
+   hover/active — asserted per token in tests/design-tokens.test.mjs and
+   recomputed per scheme in tests/theme-contrast.test.mjs.
 
-   The thirteen values below are unchanged by the dark redesign, and must
-   stay unchanged: they are the porting baseline from the decommissioned
-   Python builder and design-tokens.test.mjs pins every one to its hex.
-   What changed is how they are PAINTED. These hexes were picked to clear AA
-   as ink-side colours on white; on a #0e1013 ground several of them (navy
-   #1e3a5f, indigo #3538cd) are darker than the page itself, so painting them
-   raw would be unreadable. The dark listing therefore derives two colours
-   per hue at use time, in .badge:
+   The thirteen hue values are frozen: they are the porting baseline from the
+   decommissioned Python builder and design-tokens.test.mjs pins every one to
+   its hex. What is NOT frozen is how they are painted, because the site now
+   ships two schemes — a warm light "linen" default and a warm-charcoal dark
+   under prefers-color-scheme: dark. Raw hues cannot serve both grounds:
+   several (navy #1e3a5f, indigo #3538cd) are too dark to read as text on the
+   dark page, and all of them are too loud as fills on the light one. So
+   .badge derives its colours at use time through three scheme-swapped
+   ratios:
 
-     text  color-mix(in srgb, <hue> 60%, white)      — lifted off the ground
-     fill  color-mix(in srgb, <hue> 18%, var(--paper)) — the hue as a plane
+     text  color-mix(in srgb, <hue> var(--tag-text-mix), var(--tag-text-base))
+     fill  color-mix(in srgb, <hue> var(--tag-fill-mix), var(--paper))
+     edge  color-mix(in srgb, <hue> var(--tag-border-mix), var(--paper))
 
-   Those two ratios are not taste. They are the widest pair for which all
-   thirteen hues (plus --color-hot) clear AA against the pill fill, the page
-   ground AND the row hover surface simultaneously; the binding case is
-   social_proof navy at 4.88:1, and 65%/22% drops it to 4.26:1. Held by
-   tests/dark-tag-contrast.test.mjs, which recomputes the mix rather than
-   trusting the ratios written here.
+   Light darkens the hue 14% toward black for text and rests it on an 8%
+   tint; dark lifts the hue 40% toward white for text on an 18% fill. The
+   pairs are the widest for which all thirteen hues (plus --color-hot) clear
+   AA against the pill fill, the page ground AND both surfaces in their own
+   scheme; theme-contrast.test.mjs recomputes the mix rather than trusting
+   the ratios written here.
 
    Spacing stays on Tailwind's default scale: the design speaks in plain rem
    values that the scale already expresses, so no custom spacing tokens.
 */
 @theme {
-  /* Base palette — inverted for the dark listing.
+  /* Base palette — the LIGHT "linen" ground. `ink` and `paper` are ROLES,
+     not literals: ink is whatever the page writes with, paper is whatever it
+     writes on. The dark scheme at the bottom of this file reassigns the same
+     roles under prefers-color-scheme: dark, which is what flips the whole
+     site without touching the rules that reference them — and why
+     `.chip.clear` (asserted verbatim in design-tokens.test.mjs as
+     gray-on-paper inverting to an ink fill) describes the right interaction
+     in both schemes.
 
-     `ink` and `paper` are ROLES, not literals: ink is whatever the page
-     writes with, paper is whatever it writes on. Flipping the two values
-     here is what turns the whole site dark without touching the ~1900 rules
-     that reference them, and it is why `.chip.clear` (asserted verbatim in
-     design-tokens.test.mjs as gray-on-paper inverting to an ink fill) still
-     describes exactly the right interaction after the flip.
-
-     The three values are chosen against the ground, not by eye:
-       ink    #e9edf2 on #0e1013 = 16.20:1
-       muted  #98a2ae on #0e1013 =  7.36:1  (the .chip.clear AA gate)
-       accent #22c55e on #0e1013 =  8.36:1  (unchanged — the brand green
-              needed no adjustment to survive the inversion)
-     Ink is deliberately not #ffffff: pure white on near-black haloes at
+     The values are chosen against the ground, not by eye:
+       ink    #1f1b16 on #faf7f2 = 14.9:1
+       muted  #6a635a on #faf7f2 =  5.6:1  (the .chip.clear AA gate)
+       accent #137236 on #faf7f2 =  5.4:1  (the brand green, darkened one
+              step so it clears AA on a warm white)
+     Ink is deliberately not #000000: pure black on warm white is harsh at
      small sizes, and the whole listing is small text. */
-  --color-ink: #e9edf2;
-  --color-paper: #0e1013;
-  --color-muted: #98a2ae;
-  --color-accent: #22c55e;
-  --color-hairline: rgba(233, 237, 242, 0.12);
+  --color-ink: #1f1b16;
+  --color-paper: #faf7f2;
+  --color-muted: #6a635a;
+  --color-accent: #137236;
+  --color-hairline: rgba(31, 27, 22, 0.1);
   /* Control borders must clear the WCAG 1.4.11 3:1 floor against both
-     planes; 0.4 ink alpha is the minimum that does (surface 3.43, surface-2
-     3.37). Decorative separators stay on --color-hairline. */
-  --hairline-strong: rgba(233, 237, 242, 0.4);
+     planes; 0.5 ink alpha does (3.3+ on each). Decorative separators stay on
+     --color-hairline. */
+  --hairline-strong: rgba(31, 27, 22, 0.5);
 
   /* Two raised planes above the ground. `surface` is the row/panel plane,
      `surface-2` the control plane (inputs, chips) that must read as sitting
-     on top of a panel. Dark UI cannot lean on shadow the way light UI does —
-     a shadow on near-black is invisible — so depth here is carried by these
-     steps plus a top hairline, never by shadow alone. */
-  --color-surface: #16191f;
-  --color-surface-2: #1d2129;
-  /* A white wash replaces every rgba(0,0,0,x) the light design used for
-     hover and inset states; black-on-black is not a state change. */
-  --color-wash: rgba(233, 237, 242, 0.045);
+     on top of a panel. On the light ground, depth is carried by these steps
+     plus hairlines and a soft shadow; the dark scheme leans on the steps
+     alone — a shadow on near-black is invisible. */
+  --color-surface: #ffffff;
+  --color-surface-2: #f1ece3;
+  /* A faint ink wash for hover and inset states; a hue-free warm tint that
+     reads as "closer" without repainting the element. */
+  --color-wash: rgba(31, 27, 22, 0.04);
 
-  /* Typography — both faces are self-hosted under /fonts (CSP is
+  /* Typography — all faces are self-hosted under /fonts (CSP is
      `font-src 'self' data:`, so a Google Fonts link would be blocked and
      silently fall back, which is exactly what the previous stack did: it
      named Bricolage Grotesque and IBM Plex Mono while shipping neither).
-     Archivo is variable on BOTH weight and width, which is what lets the
-     wordmark run expanded and heavy while the titles stay normal width. */
+     Archivo is variable on BOTH weight and width and carries the interface;
+     Lora is the display face — page headings and offer titles —
+     variable wght 400..700 plus a matching italic, so serif styles take a
+     real weight instead of faking hierarchy with size; Plex Mono is
+     reserved for DATA — dates, counts, status — never labels. */
   --font-sans: Archivo, ui-sans-serif, system-ui, sans-serif;
+  --font-serif: Lora, Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Tag hues — category family (what the credits BUY) */
@@ -109,6 +116,65 @@
      (#282) is a computed ranking, not a filterable tag family, and the tag
      token count is asserted in design-tokens.test.mjs. 6.57:1 on paper. */
   --color-hot: #b42318;
+
+  /* Destructive actions (the local-data erase control). Same red as the
+     ranking accent in light — 6.57:1 on paper clears AA for the text and
+     the border alike; the dark scheme lifts it. */
+  --color-danger: #b42318;
+}
+
+/* Light-scheme paint ratios and shadows — the :root half of the two-scheme
+   system (the dark half is the @media block at the bottom of this file).
+
+   The tag ratios drive .badge's derived colours: text is the hue darkened
+   14% toward black, the fill an 8% tint of it over paper, the edge a 22%
+   tint. On the warm-white ground that reads as a coloured word on a faint
+   wash of the same hue — a label, not a pill.
+
+   `color-scheme: light dark` tells the UA both schemes are real so form
+   controls (the sort <select>, checkboxes) and scrollbars repaint instead of
+   staying light inside the dark page. */
+:root {
+  --tag-text-mix: 86%;
+  --tag-text-base: #000000;
+  --tag-fill-mix: 8%;
+  --tag-border-mix: 22%;
+  color-scheme: light dark;
+
+  /* Lift shadows exist only where a shadow can be seen. The dark scheme
+     zeroes both — a shadow on near-black is invisible, so depth there is
+     carried by the surface steps and hairlines instead. */
+  --shadow-row-hover: 0 10px 30px -18px rgba(31, 27, 22, 0.28);
+  --shadow-pop: 0 12px 40px -16px rgba(31, 27, 22, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ink: #efe9df;
+    --color-paper: #15130f;
+    --color-muted: #a59d91;
+    --color-accent: #22c55e;
+    --color-hairline: rgba(239, 233, 223, 0.12);
+    --hairline-strong: rgba(239, 233, 223, 0.4);
+    --color-surface: #1d1a15;
+    --color-surface-2: #221e18;
+    --color-wash: rgba(239, 233, 223, 0.045);
+
+    /* Same derivation, opposite direction: the hue is lifted 40% toward
+       white for text, rests on an 18% fill over the dark paper, and keeps a
+       34% edge so the pill stays visible against its own surface. */
+    --tag-text-mix: 60%;
+    --tag-text-base: #ffffff;
+    --tag-fill-mix: 18%;
+    --tag-border-mix: 34%;
+
+    /* #b42318 on #15130f is ~3:1 — a paint, not text. The lifted red keeps
+       the erase control legible at 0.82rem. */
+    --color-danger: #f2837a;
+
+    --shadow-row-hover: none;
+    --shadow-pop: 0 18px 44px rgba(0, 0, 0, 0.55);
+  }
 }
 
 /*

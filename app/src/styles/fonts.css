@@ -1,26 +1,30 @@
-/* Self-hosted webfonts (dark redesign).
+/* Self-hosted webfonts (warm-linen redesign).
 
    The previous stack NAMED "Bricolage Grotesque" and "IBM Plex Mono" but
    shipped no @font-face and no font files, and index.html's CSP is
    `font-src 'self' data:` — so a Google Fonts <link> would have been blocked
    too. Every visitor was silently reading the page in system-ui and whatever
    the platform calls monospace, which is why the same page looked like Menlo
-   on macOS and Courier-ish elsewhere. These three files make the intent real.
+   on macOS and Courier-ish elsewhere. These files make the intent real.
 
    Latin subsets only (the site is English; llms.txt and every offer title are
-   ASCII), so 110 KB buys the whole type system:
-     archivo-var   90 KB  variable on wght 400..700 AND wdth 75..125
-     plex-mono     20 KB  two static weights, 400 and 600
+   ASCII), so ~189 KB buys the whole type system:
+     archivo-var       90 KB  variable on wght 400..700 AND wdth 75..125
+     plex-mono         20 KB  two static weights, 400 and 600
+     lora-var          78 KB  the display face, variable wght 400..700
+                              upright + italic — serif styles pick a real
+                              weight instead of faking hierarchy with size
 
    No `unicode-range`: it exists to let a browser skip one subset file in
    favour of another, and there is only one file per family here, so it would
    cost bytes in the sheet to gate a download that always happens anyway.
 
-   `font-display: swap` on both: the fallback metrics are close enough that
-   the reflow is not a layout jolt, and blocking first paint on a webfont
-   would put the #129 Lighthouse >= 95 gate at risk. Only Archivo is
-   preloaded (index.html) — it paints the masthead and every offer title,
-   so it is on the LCP path; the mono is not. */
+   `font-display: swap` on all of them: the fallback metrics are close enough
+   that the reflow is not a layout jolt, and blocking first paint on a webfont
+   would put the #129 Lighthouse >= 95 gate at risk. Archivo and the serif
+   upright are preloaded (index.html) — Archivo paints the whole interface and
+   the serif paints every offer title and page heading, so both are on the
+   LCP path; the mono and the serif italic are not. */
 
 @font-face {
   font-family: Archivo;
@@ -45,4 +49,20 @@
   font-weight: 600;
   font-display: swap;
   src: url("/fonts/plex-mono-600-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Lora;
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/lora-var-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Lora;
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/lora-var-italic-latin.woff2") format("woff2");
 }
