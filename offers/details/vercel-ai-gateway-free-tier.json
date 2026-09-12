@@ -1,0 +1,22 @@
+{
+  "summary": "Every Vercel team account gets a monthly free AI Gateway credit covering a free-tier subset of the model catalog, at lower per-model rate limits than the paid tier. Free credits start on your first AI Gateway request and are a recurring monthly inclusion, not an expiring trial. Buying AI Gateway Credits moves the team to the paid tier and permanently ends the monthly free credit. Vercel's docs and FAQ confirm the monthly credit but do not publish a dollar amount; the ~$5/month figure in circulation is unverified against official pages.",
+  "claim_steps": [
+    "Create or sign in to a Vercel team account — no card needed for the free tier.",
+    "Get an AI Gateway API key and make a first request; the monthly free credit applies to free-tier models only.",
+    "Do not purchase AI Gateway Credits if you want to keep the monthly free credit — purchasing switches you to the paid tier permanently."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/docs/ai-gateway/pricing",
+      "title": "AI Gateway Pricing — Vercel Docs",
+      "text": "Every Vercel team account gets access to both a free tier and a paid tier for AI Gateway Credits. The free tier includes a subset of models, not the full catalog. Once you purchase credits, your account transitions to the paid tier and the monthly free credit no longer applies."
+    },
+    {
+      "type": "link",
+      "url": "https://vercel.com/docs/ai-gateway/faq",
+      "title": "AI Gateway FAQ — Vercel Docs",
+      "text": "The free tier is a monthly included credit, not an expiring trial. It covers a subset of models with lower per-model rate limits."
+    }
+  ]
+}

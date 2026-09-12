@@ -1,0 +1,15 @@
+# Verified 2026-09-12 against https://docs.byteplus.com/en/docs/legal/termsandconditions_modelark_free-token_campaign
+# ("a free-token resource package ... with a value of 500,000 (Five Hundred
+# Thousand) tokens per Model or such other amount of tokens as BytePlus may
+# provide" / eligibility requires "completion of BytePlus account registration
+# and enterprise information submission")
+title: BytePlus ModelArk — Free-Token Campaign
+provider: BytePlus
+category: api_provider
+amount: Free-token package per eligible model (e.g. 500,000 tokens/model; actual amount shown on the Model Activation page); requires BytePlus account + enterprise info submission
+expiry_date: null
+source_url: https://docs.byteplus.com/en/docs/legal/termsandconditions_modelark_free-token_campaign
+verified_date: 2026-09-12
+verification: social_proof
+review_status: under-review
+signup: required

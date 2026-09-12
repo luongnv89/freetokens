@@ -1,0 +1,16 @@
+# Verified 2026-09-12 against https://platform.stability.ai/docs/getting-started
+# ("Creating your account with Google's social login will grant you 25 free
+# credits!"; pricing page corroborates "Get started with 25 free credits.")
+# NOTE: platform.stability.ai pages are JS-only and returned an empty shell to
+# the fetcher; quotes were captured from search-index snippets of these exact
+# URLs — re-verify in a browser if possible.
+title: Stability AI — 25 Free API Credits
+provider: Stability AI
+category: image
+amount: 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter)
+expiry_date: null
+source_url: https://platform.stability.ai/docs/getting-started
+verified_date: 2026-09-12
+verification: social_proof
+review_status: under-review
+signup: required

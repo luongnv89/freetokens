@@ -2,9 +2,141 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-11T13:06:04Z — 84 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-12T12:07:24Z — 93 active offers.
 
 ## Offers (full)
+
+### Voyage AI — First 200M Tokens Free
+- Provider: Voyage AI
+- Category: api_provider
+- Amount: First 200M tokens free per account on current embedding/rerank models (50M on specialized -2 models; multimodal: 200M text tokens + 150B pixels); Batch API excluded
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://docs.voyageai.com/docs/pricing
+- Page: https://freetokens.custats.info/offers/voyage-ai-200m-free-tokens.html
+- Summary: Voyage AI (MongoDB) gives every account its first 200 million tokens free on current text-embedding models (voyage-4-large, voyage-4, voyage-4-lite, voyage-context-4) and rerankers (rerank-3, rerank-3-lite), and 50 million tokens on specialized -2 models (voyage-finance-2, voyage-law-2, voyage-code-2). Multimodal models get 200M text tokens plus 150B pixels free. Free token credits do not apply to Batch API usage, which bills at the discounted batch rate.
+- Claim steps: Sign up for a Voyage AI account — no credit card required to start. | Create an API key in the dashboard. | Call the embeddings or rerank endpoints; the free token allowance applies automatically per account.
+
+### Vercel AI Gateway — Monthly Free Credit
+- Provider: Vercel
+- Category: api_provider
+- Amount: Monthly free AI Gateway credit covering a free-tier subset of models (lower per-model rate limits); buying credits permanently ends the monthly free credit
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://vercel.com/docs/ai-gateway/pricing
+- Page: https://freetokens.custats.info/offers/vercel-ai-gateway-free-tier.html
+- Summary: Every Vercel team account gets a monthly free AI Gateway credit covering a free-tier subset of the model catalog, at lower per-model rate limits than the paid tier. Free credits start on your first AI Gateway request and are a recurring monthly inclusion, not an expiring trial. Buying AI Gateway Credits moves the team to the paid tier and permanently ends the monthly free credit. Vercel's docs and FAQ confirm the monthly credit but do not publish a dollar amount; the ~$5/month figure in circulation is unverified against official pages.
+- Claim steps: Create or sign in to a Vercel team account — no card needed for the free tier. | Get an AI Gateway API key and make a first request; the monthly free credit applies to free-tier models only. | Do not purchase AI Gateway Credits if you want to keep the monthly free credit — purchasing switches you to the paid tier permanently.
+
+### Upstage Studio Agents — 10 Free Runs
+- Provider: Upstage
+- Category: api_provider
+- Amount: 10 free runs per Studio agent for document workflows (no credit card required)
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://www.upstage.ai/pricing
+- Page: https://freetokens.custats.info/offers/upstage-studio-agents-10-free-runs.html
+- Summary: Upstage Studio lets you build and deploy document AI agents (Parse, Extract, Classify, Instruct steps). Every agent includes 10 free runs to test with real documents — no credit card required. Each agent run is billed as the sum of the steps it executes once the free runs are used.
+- Claim steps: Sign up at Upstage Studio — no credit card required. | Build a document agent by combining steps (Parse, Extract, Classify, Instruct). | Run the agent with real documents; each agent includes 10 free runs.
+
+### Upstage Free Access for Education & Public Interest
+- Provider: Upstage
+- Category: student
+- Amount: Free access to Solar Pro LLM + Document Parse for up to 1 year for eligible schools, hospitals, and nonprofits (Upstage x AWS AI Initiative)
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://www.upstage.ai/pricing
+- Page: https://freetokens.custats.info/offers/upstage-education-public-interest-free.html
+- Summary: The Upstage x AWS AI Initiative provides eligible educational and public-interest organizations — schools, hospitals, and nonprofits — with free access to Solar Pro (LLM) and Document Parse for up to one year. Applications go through the 'Get free access' link on the Upstage pricing page.
+- Claim steps: Open the Upstage pricing page and find the 'AI support program for educational and public interest organizations' section. | Click 'Get free access' and submit the application for your school, hospital, or nonprofit. | On approval, use Solar Pro (LLM) and Document Parse free for up to one year.
+
+### Stability AI — 25 Free API Credits
+- Provider: Stability AI
+- Category: image
+- Amount: 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter)
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://platform.stability.ai/docs/getting-started
+- Page: https://freetokens.custats.info/offers/stability-ai-25-free-credits.html
+- Summary: Stability AI's developer platform grants 25 free API credits to new accounts created via Google social login (the grant does not apply to username/password or Discord signups per the getting-started guide). API usage is billed in credits at 1 credit = $0.01. NOTE: platform.stability.ai pages render only with JavaScript and returned an empty shell to the fetcher; the quoted terms come from search-index snippets of these exact URLs and should be re-verified in a browser.
+- Claim steps: Open platform.stability.ai and click Login. | Choose the Google social login option — creating the account this way grants 25 free credits. | Create an API key on your account page and check the credit balance under billing.
+
+### Ocean Network Inference — First 6 H200 Hours Free
+- Provider: Ocean Network
+- Category: api_provider
+- Amount: 6 complimentary hours of H200 inference (launch promo; OpenAI-compatible endpoints, curated models, templates)
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://oncompute.ai/blog/ocean-network-inference-is-on-your-first-6-hours-are-on-us
+- Page: https://freetokens.custats.info/offers/ocean-network-inference-6-free-h200-hours.html
+- Summary: Ocean Network (oncompute.ai) launched its Inference product on September 10, 2026 and is giving away 6 hours of H200 inference in complimentary tokens to mark the launch. Inference runs OpenAI-compatible models from Hugging Face Hub on dedicated node-operator GPUs with per-hour pricing shown before launch (H200 listed at $2.16/hr). Requires a funded wallet on Base — either an external wallet or the built-in Smart Wallet with email/social login and fiat on-ramp.
+- Claim steps: Open the Ocean Network Inference tab at dashboard.oncompute.ai/inference. | Sign in with an external wallet or the Smart Wallet (email/social login, fiat on-ramp available) on Base. | Claim the launch promo for 6 complimentary H200 hours and run a curated model, custom model, service, or template.
+
+### Nebius AI Builder Program — $25 Token Factory + $25 Tavily Credits
+- Provider: Nebius
+- Category: startup_program
+- Amount: $25 Nebius Token Factory + $25 Tavily promo credits after registration and email verification (expire 90 days after issuance); marketing cites $400+ total in partner credits/discounts
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://nebius.com/builders-terms-and-conditions
+- Page: https://freetokens.custats.info/offers/nebius-ai-builder-program.html
+- Summary: The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.
+- Claim steps: Complete the Builder Program registration form (name, email, company or university, role, country, what you are building) and accept the program terms. | Verify your email via the double opt-in message — membership activates only after verification. | Redeem the issued promo codes: $25 for Nebius Token Factory and $25 for Tavily. Credits expire 90 days from issuance.
+
+### Kiro Students — 1,000 Credits/Month for 1 Year
+- Provider: Kiro
+- Category: student
+- Amount: 1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over; content collection for service improvement and model training is enabled by default, with opt-out
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://kiro.dev/students/
+- Page: https://freetokens.custats.info/offers/kiro-students-1000-credits-month.html
+- Summary: Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. Amazon's September 2026 announcement expands the program to 132 universities across 18 countries (a 12x scale-up from the 11-university pilot). Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.
+- Claim steps: Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email. | Open the account page and select the “You are eligible for Kiro Students” verification banner. | Verify student status through SheerID; proof such as a student ID or enrollment letter may be requested. | After approval, use 1,000 credits per month for 12 months. Unused credits do not roll over. | To opt out of content use, open Settings → User → Application → Telemetry and Content, then disable Content Collection for Service Improvement.
+
+### Firecrawl Student Program — 10,000 Free Credits
+- Provider: Firecrawl
+- Category: student
+- Amount: 10,000 free credits for verified students (academic email; coupon code redeemed in Settings → Billing)
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://www.firecrawl.dev/student-program
+- Page: https://freetokens.custats.info/offers/firecrawl-student-program-10k-credits.html
+- Summary: Firecrawl's Student Program gives verified students 10,000 free credits for educational or personal projects. Eligibility requires a valid academic email address and enrollment in a college, university, or accredited program. Credits are added instantly after redeeming the student coupon code in Settings → Billing. Distinct from the ongoing Firecrawl Free Plan.
+- Claim steps: Sign up for Firecrawl with your educational email address. | Go to Settings → Billing and enter the student coupon code shown on the program page. | 10,000 credits are added to your account instantly — no credit card required.
+
+### Deepgram $200 Free Credit + Flux TTS (through Sep 14)
+- Provider: Deepgram
+- Category: voice
+- Amount: $200 signup credit (no card, no expiration) plus Flux TTS free through 2026-09-14 (then paid; up to 45 concurrent streams globally, 5 in EU/AU)
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://deepgram.com/pricing
+- Page: https://freetokens.custats.info/offers/deepgram-free-credit.html
+- Summary: Deepgram Pay As You Go still grants $200 in signup credits with no credit card and no expiration. Separately, Flux TTS is free through September 14, 2026 (up to 45 concurrent streaming connections globally, 5 in EU/AU); standard pricing starts September 15, 2026. Flux TTS in Voice Agent is also free through that date. This updates the existing deepgram-free-credit listing; expiry_date stays null so the $200 credit is not archived when the Flux promo ends.
+- Claim steps: Click Sign Up Free at deepgram.com/pricing (no credit card required). | Create a console account and an API key. | Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire). | Use Flux TTS free through 2026-09-14 (45 concurrent streams globally, 5 in EU/AU).
+
+### BytePlus ModelArk — Free-Token Campaign
+- Provider: BytePlus
+- Category: api_provider
+- Amount: Free-token package per eligible model (e.g. 500,000 tokens/model; actual amount shown on the Model Activation page); requires BytePlus account + enterprise info submission
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://docs.byteplus.com/en/docs/legal/termsandconditions_modelark_free-token_campaign
+- Page: https://freetokens.custats.info/offers/byteplus-modelark-free-tokens.html
+- Summary: BytePlus's ModelArk Free-Token Campaign grants a free-token resource package per eligible model — the terms cite 500,000 tokens per model as an example, with the actual amount shown on the Model Activation page. Eligibility requires completing BytePlus account registration and submitting enterprise information; the package is redeemable once per account and may carry a validity period visible in the Billing Center. Packages offset post-paid token consumption in the ModelArk Playground or after model-service activation.
+- Claim steps: Register a BytePlus account and submit the required enterprise information. | Open the ModelArk Model Activation page to see the free-token package granted per eligible model. | Consume the package in the ModelArk Playground or activate the model service; once a model's package is exhausted, continued use is billed post-paid.
+
+### Alibaba Cloud Model Studio — Free Quota for New Users
+- Provider: Alibaba Cloud
+- Category: api_provider
+- Amount: ~1,000,000 free tokens per eligible model, valid 90 days from activation (real-time inference only; Singapore region, International scope)
+- Status: active — expiry ongoing
+- Verified: 2026-09-12 (social_proof / under-review, signup required)
+- Source: https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota
+- Page: https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html
+- Summary: Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation (or model release/approval, whichever is later). Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry.
+- Claim steps: Create an Alibaba Cloud account and open Alibaba Cloud Model Studio (Singapore region). | Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed. | Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page. | Call eligible models in real time; enable 'Free Quota Only' mode to avoid pay-as-you-go charges after the quota runs out.
 
 ### Zed Pro for Students
 - Provider: Zed
@@ -38,17 +170,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-11T13:06:04Z — 
 - Page: https://freetokens.custats.info/offers/yepapi-5-signup-credit.html
 - Summary: YepAPI grants $5 free credit on signup with no credit card. One API key accesses 60+ models (GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and more) through a single OpenAI-compatible endpoint. After the credit, usage is pay-per-token with no subscription.
 - Claim steps: Sign up at yepapi.com (no credit card required). | Copy your API key — $5 credit is applied automatically. | Point an OpenAI-compatible client at YepAPI and use any listed model.
-
-### WorkBuddy Hy4 Preview Free
-- Provider: WorkBuddy
-- Category: coding
-- Amount: Free access to Hy4 preview (2 weeks)
-- Status: active — expiry 2026-09-11
-- Verified: 2026-09-11 (social_proof / verified, signup required)
-- Source: https://x.com/WorkBuddy_AI/status/2093282334896431224
-- Page: https://freetokens.custats.info/offers/workbuddy-hy4-preview-free.html
-- Summary: WorkBuddy (Tencent) offers free access to the Hy4 preview model for 2 weeks. Hy3 remains free through end of September. Hy4 preview is an AI model for end-to-end agent workflows including research, Office tasks, frontend development, and game development.
-- Claim steps: Go to workbuddy.ai and create a free account. | Access the Hy4 preview model directly in the WorkBuddy interface.
 
 ### Vidu AI Video Free Credits
 - Provider: Vidu
@@ -347,17 +468,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-11T13:06:04Z — 
 - Summary: The Leonardo.Ai free plan grants 150 fast tokens every day (resetting daily) for image generation on the app's core models. Slow-generation modes can stretch usage further at zero cost.
 - Claim steps: Create a free Leonardo.Ai account at leonardo.ai. | Confirm your email to activate the free plan. | Generate images from the app dashboard using your daily fast tokens. | Return daily — the 150 fast-token allowance resets every day.
 
-### Kiro Students — 1,000 Credits/Month for 1 Year
-- Provider: Kiro
-- Category: student
-- Amount: 1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over; content collection for service improvement and model training is enabled by default, with opt-out
-- Status: active — expiry ongoing
-- Verified: 2026-09-11 (social_proof / under-review, signup required)
-- Source: https://kiro.dev/students/
-- Page: https://freetokens.custats.info/offers/kiro-students-1000-credits-month.html
-- Summary: Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. The 2026 expansion covers 121 new universities across 16 countries. Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.
-- Claim steps: Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email. | Open the account page and select the “You are eligible for Kiro Students” verification banner. | Verify student status through SheerID; proof such as a student ID or enrollment letter may be requested. | After approval, use 1,000 credits per month for 12 months. Unused credits do not roll over. | To opt out of content use, open Settings → User → Application → Telemetry and Content, then disable Content Collection for Service Improvement.
-
 ### Kilo Code Free Models
 - Provider: Kilo Code
 - Category: api_provider
@@ -610,17 +720,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-11T13:06:04Z — 
 - Page: https://freetokens.custats.info/offers/devin-free-plan.html
 - Summary: Devin's $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.
 - Claim steps: Open devin.ai/pricing and pick the Free $0 plan. | Sign up with your email or a Google/GitHub account. | Start a Devin session from the dashboard within your free quota. | Install the IDE extension for unlimited Tab completions.
-
-### Deepgram $200 Free Credit + Flux TTS (through Sep 12)
-- Provider: Deepgram
-- Category: voice
-- Amount: $200 signup credit (no card, no expiration) plus Flux TTS free through 2026-09-12 (then paid; up to 45 concurrent streams globally, 5 in EU/AU)
-- Status: active — expiry ongoing
-- Verified: 2026-09-11 (social_proof / under-review, signup required)
-- Source: https://deepgram.com/pricing
-- Page: https://freetokens.custats.info/offers/deepgram-free-credit.html
-- Summary: Deepgram Pay As You Go still grants $200 in signup credits with no credit card and no expiration. Separately, Flux TTS is free through September 12, 2026 (up to 45 concurrent streaming connections globally, 5 in EU/AU); standard pricing starts September 13, 2026. Flux TTS in Voice Agent is also free through that date. This updates the existing deepgram-free-credit listing; expiry_date stays null so the $200 credit is not archived when the Flux promo ends.
-- Claim steps: Click Sign Up Free at deepgram.com/pricing (no credit card required). | Create a console account and an API key. | Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire). | Use Flux TTS free through 2026-09-12 (45 concurrent streams globally, 5 in EU/AU).
 
 ### Daytona — $200 Free Compute
 - Provider: Daytona

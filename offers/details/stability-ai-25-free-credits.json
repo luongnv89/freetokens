@@ -1,0 +1,22 @@
+{
+  "summary": "Stability AI's developer platform grants 25 free API credits to new accounts created via Google social login (the grant does not apply to username/password or Discord signups per the getting-started guide). API usage is billed in credits at 1 credit = $0.01. NOTE: platform.stability.ai pages render only with JavaScript and returned an empty shell to the fetcher; the quoted terms come from search-index snippets of these exact URLs and should be re-verified in a browser.",
+  "claim_steps": [
+    "Open platform.stability.ai and click Login.",
+    "Choose the Google social login option — creating the account this way grants 25 free credits.",
+    "Create an API key on your account page and check the credit balance under billing."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://platform.stability.ai/docs/getting-started",
+      "title": "Getting Started — Stability AI Developer Platform",
+      "text": "Creating your account with Google's social login will grant you 25 free credits! (Captured via search-index snippet; the page requires JavaScript.)"
+    },
+    {
+      "type": "link",
+      "url": "https://platform.stability.ai/pricing",
+      "title": "Pricing — Stability AI Developer Platform",
+      "text": "API usage is based on credits. 1 credit = $0.01. Get started with 25 free credits. (Captured via search-index snippet; the page requires JavaScript.)"
+    }
+  ]
+}

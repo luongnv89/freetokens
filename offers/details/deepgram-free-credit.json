@@ -1,17 +1,17 @@
 {
-  "summary": "Deepgram Pay As You Go still grants $200 in signup credits with no credit card and no expiration. Separately, Flux TTS is free through September 12, 2026 (up to 45 concurrent streaming connections globally, 5 in EU/AU); standard pricing starts September 13, 2026. Flux TTS in Voice Agent is also free through that date. This updates the existing deepgram-free-credit listing; expiry_date stays null so the $200 credit is not archived when the Flux promo ends.",
+  "summary": "Deepgram Pay As You Go still grants $200 in signup credits with no credit card and no expiration. Separately, Flux TTS is free through September 14, 2026 (up to 45 concurrent streaming connections globally, 5 in EU/AU); standard pricing starts September 15, 2026. Flux TTS in Voice Agent is also free through that date. This updates the existing deepgram-free-credit listing; expiry_date stays null so the $200 credit is not archived when the Flux promo ends.",
   "claim_steps": [
     "Click Sign Up Free at deepgram.com/pricing (no credit card required).",
     "Create a console account and an API key.",
     "Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire).",
-    "Use Flux TTS free through 2026-09-12 (45 concurrent streams globally, 5 in EU/AU)."
+    "Use Flux TTS free through 2026-09-14 (45 concurrent streams globally, 5 in EU/AU)."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://deepgram.com/pricing",
       "title": "Deepgram Pricing | Scalable Speech-to-Text, Text-to-Speech & Voice Agent APIs",
-      "text": "Pay As You Go: No credit card required. Free $200 Credit then pay-as-you-go. Through September 12, 2026, developers can build with Flux TTS free with up to 45 concurrent streaming connections globally (5 in EU/AU). Standard pricing applies beginning September 13, 2026."
+      "text": "Pay As You Go: No credit card required. Free $200 Credit then pay-as-you-go. Through September 14, 2026, developers can build with Flux TTS free with up to 45 concurrent streaming connections globally (5 in EU/AU). Standard pricing applies beginning September 15, 2026."
     }
   ]
 }

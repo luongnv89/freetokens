@@ -1,0 +1,16 @@
+{
+  "summary": "The Upstage x AWS AI Initiative provides eligible educational and public-interest organizations — schools, hospitals, and nonprofits — with free access to Solar Pro (LLM) and Document Parse for up to one year. Applications go through the 'Get free access' link on the Upstage pricing page.",
+  "claim_steps": [
+    "Open the Upstage pricing page and find the 'AI support program for educational and public interest organizations' section.",
+    "Click 'Get free access' and submit the application for your school, hospital, or nonprofit.",
+    "On approval, use Solar Pro (LLM) and Document Parse free for up to one year."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/pricing",
+      "title": "Pricing — Upstage",
+      "text": "AI support program for educational and public interest organizations: We provide eligible institutions with free access to Solar Pro (LLM) and Document Parse for up to one year."
+    }
+  ]
+}

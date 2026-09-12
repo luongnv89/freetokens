@@ -1,0 +1,22 @@
+{
+  "summary": "The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.",
+  "claim_steps": [
+    "Complete the Builder Program registration form (name, email, company or university, role, country, what you are building) and accept the program terms.",
+    "Verify your email via the double opt-in message — membership activates only after verification.",
+    "Redeem the issued promo codes: $25 for Nebius Token Factory and $25 for Tavily. Credits expire 90 days from issuance."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://nebius.com/builders-terms-and-conditions",
+      "title": "Service-Specific Terms for Nebius Builder Program",
+      "text": "Upon successful registration and verification, Customer will receive promotional credit codes for: (i) USD $25 in Nebius Token Factory credits; and (ii) USD $25 in Tavily partner credits. All promotional credits ... expire 90 days from the date of issuance."
+    },
+    {
+      "type": "link",
+      "url": "https://nebius.com/blog/posts/introducing-the-nebius-ai-builder-program",
+      "title": "Introducing the Nebius AI Builder Program",
+      "text": "The program is free. Here's what members get: Credits across the stack. $400+ in credits and discounts from Nebius Token Factory, LangChain, Toloka, Tavily, and more."
+    }
+  ]
+}
