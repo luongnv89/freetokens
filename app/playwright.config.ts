@@ -24,16 +24,16 @@ export default defineConfig({
       name: "webkit",
       use: {
         ...devices["Desktop Safari"],
-        // WebKit honours CSP upgrade-insecure-requests on http://127.0.0.1 and
-        // then TLS-fails CSS/JS. Production is HTTPS; this only unblocks local
-        // preview so overflow/consent/keyboard actually exercise the app (#254).
+        // http-preview.ts already strips upgrade-insecure-requests from the
+        // served HTML; bypassCSP is belt-and-braces so a future CSP addition
+        // cannot silently break local preview again (#254).
         bypassCSP: true,
       },
     },
   ],
   webServer: {
     command:
-      "npm run build && npx vite preview --host 127.0.0.1 --port 4173 --strictPort",
+      "npm run build && node e2e/strip-preview-csp.mjs && npx vite preview --host 127.0.0.1 --port 4173 --strictPort",
     url: "http://127.0.0.1:4173",
     reuseExistingServer: !ci,
     timeout: 120000,

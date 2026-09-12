@@ -1,7 +1,8 @@
-/* Legacy variable names kept so every rule below stays byte-identical to
-   build.py `_CSS` (issue #119 parity contract). The values are no longer
-   defined here — they resolve against the Tailwind @theme tokens in
-   tokens.css (issue #121), which are the single source of truth. */
+/* Legacy variable names kept so the rules below keep reading the way
+   build.py `_CSS` wrote them (issue #119 parity contract). The values are
+   not defined here — they resolve against the Tailwind @theme tokens in
+   tokens.css (issue #121), which are the single source of truth and swap
+   under prefers-color-scheme: dark (warm-linen redesign). */
 :root {
   --ink: var(--color-ink);
   --paper: var(--color-paper);
@@ -9,30 +10,33 @@
   --green: var(--color-accent);
   --hairline: var(--color-hairline);
   --archive-bg: var(--color-muted);
-  /* The stock CSS curves are too weak to read as intentional at the 140 ms
-     these interactions run at; this one starts fast and settles. */
+  /* The stock CSS curves are too weak to read as intentional at the 140–200
+     ms these interactions run at; ease-out starts fast and settles for
+     hovers and presses, ease-in-out is for anything that visibly travels. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --archive-bg-soft: color-mix(
     in srgb,
     var(--color-muted) 12%,
     var(--color-paper)
   );
-  /* Dark redesign additions. `--wash` supersedes every rgba(0,0,0,x) the
-     light sheet used for hover and inset states — a black wash on a #0e1013
-     ground is not a state change, it is nothing. */
+  /* Two-scheme additions. `--wash` supersedes every rgba(0,0,0,x) the
+     light sheet used for hover and inset states — it resolves to an ink
+     wash in light and a paper wash in dark, so the same rule reads as
+     "closer" in both. */
   --surface: var(--color-surface);
   --surface-2: var(--color-surface-2);
   --wash: var(--color-wash);
 
-  /* Tag hues. Each clears WCAG AA in BOTH painted states a tag has: as text
-     over the 7% tint it sits on at rest, and under white text when filled on
-     hover/active. Measured minimums across the two: indigo 7.20, teal 4.86,
-     ochre 5.13, violet 6.25, crimson 5.56, green 4.57, muted 5.26.
+  /* Tag hues. Each clears WCAG AA in BOTH painted states a tag has — as
+     derived text over its tint at rest, and under paper text when filled on
+     hover/active — in BOTH schemes; theme-contrast.test.mjs recomputes the
+     derivation per scheme.
 
      Ochre and the muted gray are darker than the obvious #a16207 / #6b7280
-     for exactly that reason -- both land at ~4.45:1 once the tint is behind
-     them, and contrast is owed against the background actually painted, not
-     against the white the tag is not sitting on.
+     for exactly that reason -- once the tint is behind them they still clear
+     AA, and contrast is owed against the background actually painted, not
+     against a ground the tag is not sitting on.
 
      Green is deliberately absent from the category set: it is spoken for by
      "strongest claim" on the verification and sign-up tags next door, and a
@@ -97,14 +101,16 @@ body {
   overflow-x: hidden;
   overflow-x: clip;
   width: 100%;
-  /* Atmosphere, not decoration. A flat near-black page reads as an unstyled
-     document; one very wide, very low-opacity green wash behind the masthead
-     gives the ground a light source and ties the accent to the top of the
-     page where the brand is. Fixed so it does not travel with the scroll,
-     and on the body rather than a pseudo-element so it costs no extra box. */
+  /* Atmosphere, not decoration. A flat page reads as an unstyled document;
+     one very wide, very low-opacity wash of the accent behind the masthead
+     gives the ground a light source and ties the brand to the top of the
+     page. Fixed so it does not travel with the scroll, and on the body
+     rather than a pseudo-element so it costs no extra box. --green is a
+     role token, so the same rule warms the linen ground and glows faintly
+     on the charcoal one. */
   background-image: radial-gradient(
-    120rem 44rem at 50% -22rem,
-    color-mix(in srgb, var(--green) 9%, transparent),
+    90rem 40rem at 50% -18rem,
+    color-mix(in srgb, var(--green) 7%, transparent),
     transparent 70%
   );
   background-attachment: fixed;
@@ -113,8 +119,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark type needs a hair more tracking than light type at the same size:
-   light glyphs on a dark ground bloom optically and run together. */
+/* Mono data runs a hair of tracking: tabular glyphs at 0.72rem tighten up
+   without it, in both schemes. */
 .mono,
 code,
 kbd {
@@ -132,9 +138,9 @@ main {
 .wrap {
   width: 100%;
   min-width: 0;
-  max-width: 68rem;
+  max-width: 74rem;
   margin: 0 auto;
-  padding: clamp(1.25rem, 4vw, 3rem);
+  padding: clamp(0.9rem, 2.5vw, 1.6rem);
 }
 
 .mono {
@@ -143,30 +149,40 @@ main {
 
 /* ---- Masthead -------------------------------------------------------- */
 
-.kicker {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+/* The one eyebrow style, used sparingly: the page kicker and the hot shelf
+   title share it. Small sans caps over a green tick — a section marker,
+   never a headline. */
+.kicker,
+.hot-deals-title {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gray);
+}
+
+.kicker {
   margin: 0 0 0.75rem;
 }
 
-.kicker::before {
+.kicker::before,
+.hot-deals-title::before {
   content: "";
   display: inline-block;
   width: 1.5rem;
-  height: 3px;
+  height: 2px;
   background: var(--green);
   margin-right: 0.6rem;
   vertical-align: middle;
 }
 
 h1 {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: clamp(2rem, 5.5vw, 3.1rem);
-  font-weight: 700;
-  letter-spacing: -0.028em;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  font-optical-sizing: auto;
   line-height: 1.04;
   margin: 0 0 0.75rem;
   color: var(--ink);
@@ -196,9 +212,9 @@ h1 {
   margin: 0;
   padding: 0;
   display: block;
-  counter-reset: ftrank;
-  /* Rows carry their own edges now, so the list needs no rule above it. */
-  font-family: var(--font-mono);
+  /* Rows carry their own edges now, so the list needs no rule above it.
+     Body face, not mono: the listing is prose plus data; only the rail's
+     dates and counts run in Plex Mono. */
   min-width: 0;
 }
 
@@ -208,13 +224,14 @@ h1 {
    were the same height and the list had no baseline to scan down. */
 .card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 10.5rem;
+  grid-template-columns: minmax(0, 1fr) 11.5rem;
   grid-template-areas:
     "eyebrow rail"
     "title   rail"
     "amount  rail"
     "meta    rail";
-  column-gap: 1.5rem;
+  column-gap: 1rem;
+  row-gap: 0.05rem;
   align-items: start;
   min-width: 0;
 }
@@ -251,26 +268,23 @@ h1 {
   min-width: 0;
   overflow: visible;
   overflow-wrap: anywhere;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  border-radius: 3px;
-  padding: 0.16rem 0.5rem;
-  /* Two colours derived from the one hue, because the raw hue cannot be used
-     on this ground: these hexes were chosen to clear AA as ink-side colours
-     on white, and navy #1e3a5f is literally darker than the page. The 60/18
-     pair is the widest that keeps all thirteen hues (and --t-hot) above
-     4.5:1 against the fill, the ground and the row hover surface at once —
-     see the derivation note in tokens.css and dark-tag-contrast.test.mjs.
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 0.16rem 0.55rem;
+  /* Three colours derived from the one hue through the scheme's mix tokens:
+     light darkens the hue toward black and rests it on a faint tint, dark
+     lifts it toward white — the raw hue itself never paints, because the
+     frozen hexes cannot clear AA on both grounds at once. See the
+     derivation note in tokens.css and theme-contrast.test.mjs.
      Fallbacks first for browsers without color-mix. */
   color: var(--ink);
   background: var(--surface-2);
   border: 1px solid var(--hairline);
-  color: color-mix(in srgb, var(--tag-hue) 60%, white);
-  background: color-mix(in srgb, var(--tag-hue) 18%, var(--paper));
-  border-color: color-mix(in srgb, var(--tag-hue) 34%, var(--paper));
+  color: color-mix(in srgb, var(--tag-hue) var(--tag-text-mix), var(--tag-text-base));
+  background: color-mix(in srgb, var(--tag-hue) var(--tag-fill-mix), var(--paper));
+  border-color: color-mix(in srgb, var(--tag-hue) var(--tag-border-mix), var(--paper));
 }
 
 /* Bypass block (WCAG 2.4.1). Three tag controls per row turned a listing of
@@ -294,13 +308,13 @@ h1 {
   margin: 0 0 0.6rem;
   padding: 0.4rem 0.7rem;
   border: 1px solid var(--ink);
-  border-radius: 4px;
+  border-radius: 999px;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 /* The bypass target must not draw a focus ring when it is reached by the
@@ -404,19 +418,25 @@ h1 {
 a.badge {
   text-decoration: none;
   transition:
-    background-color 0.14s ease,
-    color 0.14s ease;
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.16s var(--ease-out);
 }
 
+/* Filled on hover with the scheme's derived text colour — the darkened hue
+   in light, the lifted one in dark — and writes in paper either way, which
+   is the same inversion the button-form tags use. */
 a.badge:hover,
 a.badge:focus-visible {
-  background: var(--tag-hue);
+  background: color-mix(in srgb, var(--tag-hue) var(--tag-text-mix), var(--tag-text-base));
+  border-color: color-mix(in srgb, var(--tag-hue) var(--tag-text-mix), var(--tag-text-base));
   color: var(--paper);
 }
 
 a.badge:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .status {
@@ -433,35 +453,19 @@ a.badge:focus-visible {
   height: 0.5rem;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.22);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 22%, transparent);
 }
 
 .card-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.25;
   margin: 0.25rem 0 0;
   overflow-wrap: anywhere;
-}
-
-.card-title a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.card-title a:hover,
-.card-title a:focus-visible {
-  text-decoration: underline;
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 3px;
-  text-underline-offset: 4px;
 }
 
 /* ---- Empty state ----------------------------------------------------- */
 
 .empty {
   border: 1.5px dashed var(--hairline);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: clamp(2rem, 6vw, 3.5rem);
   text-align: center;
   max-width: 34rem;
@@ -469,8 +473,11 @@ a.badge:focus-visible {
 }
 
 .empty h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.012em;
   margin: 0.75rem 0 0.5rem;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 .empty p {
@@ -504,8 +511,7 @@ a.badge:focus-visible {
 }
 
 .foot p {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: var(--gray);
   margin: 0;
 }
@@ -515,13 +521,12 @@ a.badge:focus-visible {
   flex-wrap: wrap;
   gap: 0.15rem 0.75rem;
   align-items: baseline;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   margin: 0.5rem 0 0;
 }
 
 .foot-nav a {
-  color: var(--ink);
+  color: var(--gray);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
   text-underline-offset: 3px;
@@ -529,8 +534,9 @@ a.badge:focus-visible {
 
 .foot-nav a:hover,
 .foot-nav a:focus-visible {
+  color: var(--ink);
   text-decoration-color: var(--green);
-  text-decoration-thickness: 3px;
+  text-decoration-thickness: 2px;
 }
 
 .foot-nav [aria-current="page"] {
@@ -564,10 +570,17 @@ a.badge:focus-visible {
   gap: 1.5rem;
 }
 
+.policy .muted {
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
 .policy section h2 {
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  font-optical-sizing: auto;
   margin: 0 0 0.5rem;
 }
 
@@ -622,11 +635,11 @@ a.badge:focus-visible {
   color: color-mix(in srgb, var(--ink) 32%, var(--paper));
 }
 
-/* No <a> may fall back to the user agent's #0000EE. On white that default is
-   merely ugly; on a #0e1013 ground it is 1.4:1 and effectively invisible,
-   which is exactly what happened to the claim-step source links. This is the
-   floor, at the lowest possible specificity, so every one of the nav, footer,
-   badge and prose link rules still overrides it. */
+/* No <a> may fall back to the user agent's #0000EE. On the linen ground that
+   default is merely ugly; on the charcoal one it is ~1.4:1 and effectively
+   invisible, which is exactly what happened to the claim-step source links.
+   This is the floor, at the lowest possible specificity, so every one of the
+   nav, footer, badge and prose link rules still overrides it. */
 a {
   color: var(--ink);
 }
@@ -643,24 +656,39 @@ a {
 /* ---- Focus visibility (keyboard) -------------------------------------- */
 
 a:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
   border-radius: 2px;
 }
 
-/* ---- Load reveal (CSS-only, motion-safe) ------------------------------- */
+/* ---- Load reveal (CSS-only, motion-safe) -------------------------------
+   One shared rise: the shelf and toolbar land on fixed delays and the rows
+   stagger in on their --i index (capped at 8 so a long list never waits
+   more than 320 ms). */
 
 @media (prefers-reduced-motion: no-preference) {
+  .toolbar,
+  .hot-deals,
+  .grid > li,
   .empty {
-    animation: rise 0.45s ease backwards;
-    animation-delay: calc(min(var(--i, 0), 10) * 45ms);
+    animation: rise 0.5s var(--ease-out) backwards;
+    animation-delay: calc(min(var(--i, 0), 8) * 40ms);
+  }
+  .toolbar {
+    animation-delay: 60ms;
+  }
+  .hot-deals {
+    animation-delay: 120ms;
   }
 }
 
-/* Archive LCP is the empty state or the first row; the rise animation
+/* Archive LCP is the first row or the empty state; the rise animation
    holds opacity:0 (fill-mode backwards) and tanks mobile Lighthouse
-   performance below the #129 ≥95 gate. */
+   performance below the #129 ≥95 gate, so the archive opts out entirely. */
 [data-page="archive"] .empty {
+  animation: none;
+}
+[data-page="archive"] .grid > li {
   animation: none;
 }
 
@@ -677,20 +705,38 @@ a:focus-visible {
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
 }
 
 /* ---- Shared site header (#112): identical chrome on every page -------- */
-/* Clean editorial masthead: Logo + Name · Nav · live traffic, then hairline.
-   The slogan and its sub-paragraph were removed: the derived proof line
-   below the bar makes the same claim in numbers that cannot rot. */
+/* Clean editorial masthead: logo + serif wordmark + nav, then the quiet
+   live-traffic line. No rule under it — the page's own rhythm separates the
+   chrome from the list. */
 
 .site-header {
   width: 100%;
-  border-bottom: 1px solid var(--hairline);
-  padding-bottom: 1rem;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Wide enough that nav and the traffic line share one row: the bar keeps
+   brand left + nav right, the strip trails it. Narrow: the strip drops
+   under the bar, left-aligned like everything else. */
+@media (min-width: 48rem) {
+  .site-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .site-header .site-bar {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .site-header .stat-strip {
+    flex: 0 0 auto;
+    margin: 0;
+  }
 }
 
 .site-bar {
@@ -710,17 +756,15 @@ a:focus-visible {
   text-decoration: none;
 }
 
-/* The wordmark is the one place the width axis earns its 90 KB: Archivo
-   runs expanded and heavy here and nowhere else, so the brand reads as a
-   different object from the nav rather than as bolder nav. Tracking goes
-   POSITIVE, against the usual instinct to tighten a heavy wordmark —
-   expanded letterforms on a dark ground need air or they weld together. */
+/* The wordmark is set in the display face: the brand is the one heading
+   that appears on every page, and the serif is what makes it read as a
+   nameplate rather than as louder nav. */
 .site-bar :is(h1, .site-wordmark) {
-  font-family: var(--font-sans);
-  font-size: clamp(1.2rem, 3vw, 1.45rem);
-  font-weight: 700;
-  font-stretch: 118%;
-  letter-spacing: 0.005em;
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 3vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  font-optical-sizing: auto;
   line-height: 1;
   margin: 0;
   color: var(--ink);
@@ -745,6 +789,7 @@ a:focus-visible {
 .site-header .stat-strip strong {
   display: inline-block;
   min-width: 3ch;
+  color: var(--ink);
 }
 
 .site-nav {
@@ -753,9 +798,7 @@ a:focus-visible {
   align-items: center;
   gap: 1.1rem;
   margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
+  font-size: 0.9rem;
 }
 
 .site-nav a {
@@ -765,7 +808,8 @@ a:focus-visible {
   border-bottom: 2px solid transparent;
   transition:
     color 0.15s ease,
-    border-color 0.15s ease;
+    border-color 0.15s ease,
+    transform 0.16s var(--ease-out);
 }
 
 .site-nav a:hover,
@@ -804,20 +848,18 @@ a:focus-visible {
      first offer, which is the only thing on this page a visitor came for and
      which the chrome had pushed off a 390 x 844 screen entirely. */
   .site-header {
-    padding-bottom: 0.7rem;
     margin-bottom: 0.8rem;
   }
   .toolbar {
-    padding: 0.8rem 0.85rem;
     gap: 0.55rem 0.6rem;
     margin-bottom: 0.8rem;
   }
 
   .grid > li {
-    padding: 0.75rem 0.85rem 0.75rem 0.3rem;
+    padding: 0.85rem 0.95rem;
   }
   .card-title {
-    font-size: 1.02rem;
+    font-size: 1.15rem;
   }
 }
 
@@ -855,7 +897,6 @@ a:focus-visible {
 .breadcrumbs {
   margin: 1.1rem 0 1.6rem;
   color: var(--gray);
-  font-family: var(--font-mono);
   font-size: 0.78rem;
 }
 
@@ -896,7 +937,11 @@ a:focus-visible {
   color: var(--ink);
 }
 
-.masthead-home > h1.kicker {
+.masthead-home {
+  margin-bottom: 1.4rem;
+}
+
+.masthead-home > .kicker {
   font-weight: 400;
 }
 
@@ -913,43 +958,40 @@ a:focus-visible {
 
 /* ---- Ranked listing rows ---------------------------------------------- */
 
-/* A per-row stagger reads as the list twitching into place at 47 rows. The
-   listing fades in once, as one object. The archive opts out entirely: its
-   LCP is the first row and `backwards` fill would hold it at opacity 0. */
-@media (prefers-reduced-motion: no-preference) {
-  #ft-grid {
-    animation: rise 0.3s ease backwards;
-  }
-}
-
-/* Rows are planes now, not ruled lines. A hairline-separated list on a dark
-   ground reads as a log dump; giving each row its own surface with a left
-   hue spine turns the same data into a stack of objects, and gives the
-   category hue a second, quieter place to speak besides the badge. */
+/* Rows are planes, not ruled lines. A hairline-separated list reads as a
+   log dump; giving each row its own surface with a left hue spine turns the
+   same data into a stack of objects, and gives the category hue a second,
+   quieter place to speak besides the badge. */
 .grid > li {
   display: grid;
-  grid-template-columns: 2.6rem minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  padding: 0.85rem 1rem 0.85rem 0.4rem;
-  border: 1px solid transparent;
-  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
   background: var(--surface);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   position: relative;
   overflow: hidden;
   transition:
-    background-color 0.16s var(--ease-out),
-    border-color 0.16s var(--ease-out);
+    transform 0.2s var(--ease-out),
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 /* The spine. `--row-hue` is set per category below; it falls back to the
    hairline so a row with an unknown category still gets an edge rather than
-   a missing one. */
+   a missing one. Inset off the top and bottom so it reads as an accent bar,
+   not a border. */
 .grid > li::after {
   content: "";
   position: absolute;
-  inset: 0 auto 0 0;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  left: 0;
   width: 3px;
+  border-radius: 999px;
   background: var(--row-hue, var(--hairline));
   opacity: 0.75;
 }
@@ -976,27 +1018,15 @@ a:focus-visible {
   --row-hue: var(--t-student);
 }
 
-/* Rank is drawn, not stored. A CSS counter skips `display: none` rows, so a
-   filtered list renumbers 1..n on its own, and re-sorting (which moves the
-   nodes) renumbers with it — no JS involvement, nothing to keep in sync. */
+/* The rank counter is hidden, not removed: a CSS counter skips
+   `display: none` rows, so keeping the node keeps the machinery intact for
+   any future design that wants the numbers back, at the cost of one line. */
 .grid > li::before {
-  counter-increment: ftrank;
-  content: counter(ftrank, decimal-leading-zero);
-  font-size: 0.7rem;
-  /* Full --gray, not a tint of it: the counter is readable content, and
-     #98a2ae on #16191f is 6.74:1 — a 55% mix toward the surface lands near
-     #575d68 at ~2.2:1, under WCAG 1.4.3 AA. */
-  color: var(--gray);
-  text-align: right;
-  padding: 0.34rem 0.85rem 0 0;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.06em;
+  display: none;
 }
 
-/* Hover and focus lift the plane and let the row's own hue bleed into its
-   edge — the state change is the surface getting closer, not a grey wash. */
+/* Focus lifts the plane and lets the row's own hue bleed into its edge. */
 .grid > li:focus-within {
-  background: var(--surface-2);
   border-color: color-mix(in srgb, var(--row-hue, var(--ink)) 30%, transparent);
 }
 
@@ -1004,17 +1034,28 @@ a:focus-visible {
   opacity: 1;
 }
 
-@media (hover: hover) {
+/* Hover: a one-pixel lift and a soft shadow on the light ground; on the
+   dark ground --shadow-row-hover is `none` (a shadow on near-black is
+   invisible) and the lift is carried by the brighter surface instead. */
+@media (hover: hover) and (pointer: fine) {
   .grid > li:hover {
-    background: var(--surface-2);
-    border-color: color-mix(
-      in srgb,
-      var(--row-hue, var(--ink)) 30%,
-      transparent
-    );
+    border-color: var(--hairline-strong);
+    box-shadow: var(--shadow-row-hover);
   }
   .grid > li:hover::after {
     opacity: 1;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .grid > li:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (prefers-color-scheme: dark) and (hover: hover) and (pointer: fine) {
+  .grid > li:hover {
+    background: var(--surface-2);
   }
 }
 
@@ -1026,30 +1067,31 @@ a:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.28rem 0.5rem;
-  margin: 0 0 0.15rem;
+  margin: 0;
+  font-size: 0.72rem;
 }
 
 .r-prov {
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  font-size: 0.72rem;
+  font-weight: 500;
   color: var(--gray);
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
-/* The title is the scan anchor, and it is now the only thing in the row set
-   in the display face. That single switch is what creates hierarchy: the
-   whole listing used to be one monospace texture where the title differed
-   from its own description by a weight step, so nothing led. Archivo at 600
-   against Plex Mono at 400 reads as a headline against its caption. */
+/* The title is the scan anchor, and it is the only thing in the row set in
+   the display face. That single switch is what creates hierarchy: a serif
+   headline against sans metadata leads the eye the way a weight step alone
+   never could. Lora is variable, so the title takes a real 600 rather than
+   asking size to do the talking. */
 .card-title {
-  font-family: var(--font-sans);
-  font-size: 1.09rem;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
   font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.014em;
-  margin: 0.04rem 0 0.16rem;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  font-optical-sizing: auto;
+  margin: 0;
   overflow-wrap: anywhere;
   min-width: 0;
   color: var(--ink);
@@ -1069,14 +1111,14 @@ a:focus-visible {
 }
 
 /* The amount field is a sentence, not a number — "$200 in AWS Free Tier
-   credits on a 6-month free plan". It reads as the row's description and is
-   set as one, so the title above it can carry the weight. */
+   credits on a 6-month free plan" — but it is still the row's value, so it
+   carries the second-loudest voice after the title: sans, semibold, ink. */
 .r-amount {
-  font-size: 0.78rem;
-  font-weight: 400;
-  line-height: 1.55;
-  color: var(--gray);
-  margin: 0.1rem 0 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.32;
+  color: var(--ink);
+  margin: 0;
   /* No character cap: the grid column already sets the measure, and capping
      it again made the description stop short of its own row, leaving a band
      of empty ground between the text and the status rail describing it. */
@@ -1103,8 +1145,8 @@ a:focus-visible {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.1rem 0.42rem;
-  margin: 0.24rem 0 0;
-  font-size: 0.72rem;
+  margin: 0;
+  font-size: 0.68rem;
   color: var(--gray);
 }
 
@@ -1112,11 +1154,11 @@ a:focus-visible {
   color: var(--hairline);
 }
 
-/* Listing density: tags shrink, but keep their own hue (set in _CSS) —
-   this rule must never re-assert a colour or it would flatten them again. */
+/* Listing density: tags shrink a step, but keep their own hue — this rule
+   must never re-assert a colour or it would flatten them again. */
 .grid .badge {
-  font-size: 0.63rem;
-  padding: 0.08rem 0.45rem;
+  font-size: 0.68rem;
+  padding: 0.1rem 0.45rem;
 }
 
 /* Quiet filters. `verification` is social_proof on 47 of 47 live offers and
@@ -1131,7 +1173,6 @@ a:focus-visible {
   color: var(--gray);
   font-weight: 400;
   padding: 0;
-  letter-spacing: 0.05em;
 }
 
 .row-quiet .tag-i {
@@ -1149,15 +1190,17 @@ a:focus-visible {
   text-underline-offset: 3px;
 }
 
-/* The rail: one fixed column, right-aligned, carrying the two facts that are
-   always present (is it live, when was it checked) and the row's controls. */
+/* The rail: one fixed column, right-aligned, exactly two lines — the two
+   facts that are always present (is it live, when was it checked) on one
+   inline line, the row's controls on the next. The facts are DATA, so the
+   rail runs mono; the controls are actions and keep the interface face via
+   their own .chip rules. */
 .row-rail {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.24rem;
+  display: block;
   min-width: 0;
-  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.35;
   color: var(--gray);
   text-align: right;
 }
@@ -1169,116 +1212,137 @@ a:focus-visible {
 .grid .dot {
   width: 0.42rem;
   height: 0.42rem;
-  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--green) 22%, transparent);
 }
 
 .r-vfd {
   overflow-wrap: anywhere;
 }
 
-.row-rail .chip {
-  border-color: transparent;
-  background: none;
-  color: var(--gray);
-  font-weight: 400;
-  padding: 0.08rem 0.1rem;
+.r-vfd::before {
+  content: " · ";
 }
 
-.row-rail .chip:hover,
-.row-rail .chip:focus-visible,
+/* The hot strip already carries the view signal; repeating the count on
+   every row just spent a line. Markup stays — detail pages still show it. */
+.grid .r-views {
+  display: none;
+}
+
+/* The rail's Save/Hide are the same neutral pill as the toolbar chips,
+   one step smaller; the saved state answers in the accent, not in ink. */
+.row-rail .chip {
+  font-size: 0.72rem;
+  padding: 0.22rem 0.55rem;
+}
+
 .row-rail .chip[aria-pressed="true"] {
-  background: none;
-  border-color: transparent;
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  background: var(--surface-2);
+  border-color: var(--green);
+  color: var(--green);
 }
 
 .r-actions {
-  display: inline-flex;
-  flex-wrap: wrap;
+  display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-end;
   gap: 0.3rem;
-  margin-top: 0.15rem;
+  margin-top: 0.12rem;
 }
 
+/* "Details" is the row's one outbound action, so it is the primary pill:
+   ink edge and ink text, filling with ink on hover. */
 .r-details {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
   color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--hairline);
-  text-underline-offset: 3px;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.16s var(--ease-out);
 }
 
-/* Visit/view chips (#250): number-first, green 3px rail (not a fill). */
+.r-details:hover,
+.r-details:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+}
+
+/* Visit/view counts (#250): quiet inline mono — a number, not a chip. */
 .ft-stat {
   display: inline-flex;
   align-items: baseline;
   flex: 0 0 auto;
   gap: 0.32em;
   white-space: nowrap;
-  font:
-    0.72rem/1.2 "IBM Plex Mono",
-    ui-monospace,
-    monospace;
-  padding: 0.16rem 0.5rem 0.16rem 0.42rem;
-  border: 1px solid var(--hairline);
-  border-left: 3px solid var(--green);
-  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  color: var(--gray);
 }
 .ft-stat[hidden] {
   display: none;
 }
 .ft-stat strong {
-  font-size: 1.08em;
+  color: var(--ink);
+  font-weight: 600;
 }
 .ft-stat-label {
   color: var(--gray);
 }
 .od-views {
   font-size: 0.95rem;
-  padding: 0.32rem 0.7rem 0.32rem 0.55rem;
   margin: 0;
 }
 .od-views strong {
-  font-size: 1.35em;
+  font-size: 1.15em;
 }
 
-.r-details:hover,
-.r-details:focus-visible {
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 2px;
-}
-
-/* Below the fold-point the rail cannot hold a fixed column: 10.5rem of it
-   would leave under 8rem for the title at 320 px. It becomes a single row
-   under the content, left-aligned like everything above it. */
+/* Below the fold-point the rail cannot hold a fixed column: 11.5rem of it
+   would leave under 8rem for the title at 320 px. It becomes a single
+   inline line under the content — status · checked · Save · Hide ·
+   Details — left-aligned like everything above it. */
 @media (max-width: 48rem) {
   .card {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "eyebrow" "title" "amount" "meta" "rail";
   }
   .row-rail {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
     text-align: left;
-    gap: 0.3rem 0.75rem;
-    margin-top: 0.4rem;
+    margin-top: 0.2rem;
   }
   .r-actions {
-    margin-top: 0;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    margin: 0 0 0 0.5rem;
+  }
+  .r-actions::before {
+    content: "·";
+    align-self: center;
+    margin-right: 0.15rem;
+  }
+  /* The five-part line still wrapped at 375 px, so the tertiary action
+     steps out on phones — the title itself is the link to the detail
+     page, and Details stays in the rail again at 48rem and up. */
+  .r-details {
+    display: none;
   }
 }
 
-/* Touch: the secondary controls need their own comfortable target. */
-@media (pointer: coarse) {
-  .grid > li {
-    padding-block: 0.85rem;
-  }
+/* Touch: the secondary controls need their own comfortable target. Scoped
+   above the fold-point — under it the pill is not rendered at all. */
+@media (pointer: coarse) and (min-width: 48rem) {
   .r-details {
     display: inline-flex;
     align-items: center;
@@ -1286,108 +1350,107 @@ a:focus-visible {
   }
 }
 
-/* Narrow viewports: reclaim the rank gutter rather than squeezing the row. */
-@media (max-width: 24rem) {
-  .grid > li {
-    grid-template-columns: 1.9rem minmax(0, 1fr);
-  }
-  .grid > li::before {
-    padding-right: 0.5rem;
-  }
-}
+/* ---- Hot-today strip ---------------------------------------------------
+   Three most-viewed offers, above the toolbar. It is a strip, not a list:
+   one compact row — eyebrow, cadence note, then one pill per offer in the
+   feed's order — and the whole block is absent rather than empty when
+   there is nothing to show, so it never renders as a hole where data
+   failed to arrive.
 
-/* ---- Hot-today shelf --------------------------------------------------
-   Three most-viewed offers, above the toolbar. It is a shelf, not a list:
-   the three sit side by side on a wide screen and stack on a phone, and the
-   whole block is absent rather than empty when there is nothing to show, so
-   it never renders as a hole where data failed to arrive.
-
-   It borrows the row's category spine so a hot card and its own row further
-   down the page read as the same object, but it is deliberately NOT a copy of
-   the ledger row: no rank counter, no save/hide, no filters. It answers one
-   question — what is everyone looking at right now — and then gets out of the
-   way of the list that does the real work. */
+   It deliberately is NOT a copy of the ledger row: no spine, no save/hide,
+   no filters. It answers one question — what is everyone looking at right
+   now — and then gets out of the way of the list that does the real work. */
 
 .hot-deals {
-  margin: 0 0 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.9rem;
+  margin: 0 0 0.45rem;
+  min-width: 0;
 }
 
-/* While the windowed counters load, the shelf's own skeleton sits on the page
-   with the `hidden` attribute; this flips it to visibility so the box is
-   reserved and the reveal fills space instead of pushing the toolbar down —
-   same trick as .site-header .stat-strip[hidden]. */
+/* While the windowed counters load, the strip's own skeleton sits on the
+   page with the `hidden` attribute; this flips it to visibility so the box
+   is reserved and the reveal fills space instead of pushing the toolbar
+   down — same trick as .site-header .stat-strip[hidden]. */
 .hot-deals[hidden] {
-  display: block;
+  display: flex;
   visibility: hidden;
 }
 
 .hot-deals-head {
   display: flex;
-  flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.2rem 0.6rem;
-  margin: 0 0 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  gap: 0.5rem;
+  margin: 0;
+  flex: 0 0 auto;
+  min-width: 0;
 }
 
-/* The one place the accent is allowed to name a section. */
+/* The one place the accent is allowed to name a section; the eyebrow style
+   itself is shared with .kicker up in the masthead block. */
 .hot-deals-title {
   color: var(--green);
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-}
-
-.hot-deals-title::before {
-  content: "";
-  width: 1.1rem;
-  height: 2px;
-  background: var(--green);
+  white-space: nowrap;
 }
 
 .hot-deals-sub {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
   color: var(--gray);
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-transform: none;
+  white-space: nowrap;
 }
 
 .hot-deals-list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.6rem;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.45rem;
+  flex: 1 1 14rem;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - 2.2rem),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - 2.2rem),
+    transparent
+  );
+}
+
+.hot-deals-list::-webkit-scrollbar {
+  display: none;
 }
 
 .hot-deal {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.12rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex: 0 0 auto;
   min-width: 0;
-  padding: 0.7rem 0.85rem 0.75rem 1rem;
+  max-width: 22rem;
+  padding: 0.25rem 0.7rem;
   border: 1px solid var(--hairline);
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--surface);
+  font-size: 0.78rem;
+  white-space: nowrap;
   overflow: hidden;
   transition:
     background-color 0.16s var(--ease-out),
     border-color 0.16s var(--ease-out);
-}
-
-.hot-deal::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 3px;
-  background: var(--row-hue, var(--green));
-  opacity: 0.8;
 }
 
 .hot-deal[data-category="api_provider"] {
@@ -1424,47 +1487,40 @@ a:focus-visible {
   }
 }
 
-/* The rank sits in the corner as a watermark rather than in the reading
-   order: which of the three is first matters far less than what they are. */
+/* The rank is a quiet mono numeral in the reading order now — a pill has no
+   corner to park it in, and the pill's order already says who leads. */
 .hot-rank {
-  position: absolute;
-  top: 0.35rem;
-  right: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1;
-  color: color-mix(in srgb, var(--ink) 12%, var(--surface));
+  font-size: 0.72rem;
+  color: var(--gray);
 }
 
 .hot-prov {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  font-weight: 500;
   color: var(--gray);
-  overflow-wrap: anywhere;
-  padding-right: 1.4rem;
+}
+
+.hot-prov::after {
+  content: "—";
+  margin-left: 0.4rem;
+  color: var(--hairline-strong);
 }
 
 .hot-title {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
   font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.012em;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  font-optical-sizing: auto;
   color: var(--ink);
   text-decoration: none;
-  overflow-wrap: anywhere;
-  /* Two lines keeps the three cards the same height whatever the titles do. */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  min-width: 0;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* The whole card is the target, so the pointer means it everywhere. */
+/* The whole pill is the target, so the pointer means it everywhere. */
 .hot-title::after {
   content: "";
   position: absolute;
@@ -1480,87 +1536,94 @@ a:focus-visible {
 }
 
 .hot-meta {
-  margin-top: 0.22rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
   color: var(--gray);
+  white-space: nowrap;
 }
 
 .hot-meta strong {
+  font-family: var(--font-mono);
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 500;
+}
+
+.hot-cat {
+  display: none;
 }
 
 .hot-sep {
   color: color-mix(in srgb, var(--ink) 32%, var(--paper));
-  margin: 0 0.4em;
-}
-
-@media (max-width: 48rem) {
-  .hot-deals-list {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.45rem;
-  }
-  .hot-deals {
-    margin-bottom: 0.8rem;
-  }
-  .hot-title {
-    font-size: 0.92rem;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-  }
+  margin: 0 0.25em;
 }
 
 /* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
 
-/* The toolbar becomes a panel. On the light design it was four loose control
-   groups floating on the page with nothing binding them, which is why the
-   category chips read as debris rather than as one filter. */
+/* No panel: the controls float on the page. The search field is the primary
+   object — a full-height rounded well with its own affordance icon — and
+   the chips and status line read as what they are: refinement and result. */
 .toolbar {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 0.7rem 1.1rem;
-  margin: 0 0 1.1rem;
+  align-items: center;
+  gap: 0.4rem 0.5rem;
+  margin: 0 0 0.4rem;
   min-width: 0;
-  padding: 0.95rem 1.05rem;
-  background: var(--surface);
-  border: 1px solid var(--hairline-strong);
-  border-radius: 10px;
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.28rem;
-  flex: 1 1 15rem;
+/* Visually hidden but still announced: the search field's label carries no
+   visible text because the placeholder and the magnifier are the
+   affordance. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.field-search {
+  position: relative;
+  flex: 1 1 20rem;
+  width: 100%;
   min-width: 0;
+}
+
+.field-search .search-i {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--gray);
+  pointer-events: none;
 }
 
 .tool-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--gray);
 }
 
-/* Controls sit on the control plane, above the toolbar panel, so an input
-   reads as a well rather than as a hole cut in the page. The 1px ink border
-   the light design used is far too loud inverted: a full-strength ink stroke
-   on near-black is the brightest thing on screen, and the field would
-   out-shout the offer titles. */
 #ft-search {
-  font-family: var(--font-mono);
-  font-size: 0.84rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
   color: var(--ink);
-  background: var(--surface-2);
-  border: 1px solid var(--hairline-strong);
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
-  max-width: 24rem;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  height: 2.5rem;
+  padding: 0 1rem 0 2.5rem;
   width: 100%;
-  transition: border-color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 #ft-search::placeholder {
@@ -1569,22 +1632,40 @@ a:focus-visible {
 }
 
 #ft-search:hover {
-  border-color: var(--ink);
+  border-color: var(--hairline-strong);
+}
+
+#ft-search:focus,
+#ft-search:focus-visible {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 16%, transparent);
 }
 
 .field-sort {
-  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.55rem;
+  flex: 0 0 auto;
+  min-width: 0;
 }
 
 #ft-sort {
-  font-family: var(--font-mono);
-  font-size: 0.84rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
   color: var(--ink);
-  background: var(--surface-2);
-  border: 1px solid var(--hairline-strong);
-  border-radius: 6px;
-  padding: 0.42rem 1.9rem 0.42rem 0.7rem;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  height: 2.5rem;
+  padding: 0 1.8rem 0 0.8rem;
   cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+#ft-sort:hover {
+  border-color: var(--hairline-strong);
 }
 
 .chips {
@@ -1594,47 +1675,59 @@ a:focus-visible {
   min-width: 0;
 }
 
+/* Wide: the chip groups dissolve into the toolbar's own flex row so search,
+   sort, categories and Saved share one line. Narrow: each group keeps its
+   box so the chips row can scroll. */
+@media (min-width: 64rem) {
+  .toolbar > .chips {
+    display: contents;
+  }
+}
+
+/* Below one-row width the search gets the whole line and the sort pill
+   and chip groups share the row under it. */
+@media (max-width: 64rem) {
+  .toolbar .field-search {
+    flex: 1 1 100%;
+  }
+}
+
 @media (max-width: 48rem) {
-  .site-header {
-    padding-bottom: 0.85rem;
-    margin-bottom: 0.9rem;
-  }
-
   .toolbar {
-    gap: 0.6rem 0.7rem;
-    margin-bottom: 0.7rem;
-  }
-
-  /* The search and sort fields share one row. They did not before: the sort
-     field kept `flex-basis: auto`, so it claimed the select's natural 189 px
-     and the pair overflowed the 314 px line by 30 px and wrapped — costing a
-     whole extra row of toolbar on every phone. Giving it a shrinkable basis
-     is the entire fix; both are still `min-width: 0`, so the select truncates
-     rather than pushing the search box off the line. */
-  .toolbar .field {
-    flex: 1 1 58%;
+    gap: 0.4rem 0.5rem;
+    margin-bottom: 0.55rem;
   }
 
   .toolbar .field-sort {
-    flex: 1 1 34%;
+    flex: 0 1 auto;
   }
 
   .toolbar #ft-search {
     max-width: none;
   }
 
-  .toolbar #ft-sort {
-    width: 100%;
-  }
-
+  /* Category chips share the sort pill's row and scroll inside what is
+     left of it; the Saved chip is one small pill, so it sits at its own
+     width on the same row rather than paying for a scroll lane of its
+     own. */
   .toolbar > .chips {
-    width: 100%;
+    flex: 1 1 6rem;
+    width: auto;
     flex-wrap: nowrap;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
     margin-inline: -0.15rem;
     padding: 0.1rem 0.15rem 0.2rem;
+  }
+
+  .toolbar > .chips + .chips {
+    flex: 0 0 auto;
+    overflow: visible;
+    margin-inline: 0;
+    padding: 0;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .toolbar > .chips::-webkit-scrollbar {
@@ -1668,8 +1761,12 @@ a:focus-visible {
   }
 }
 
+/* Neutral pills: every chip shares one quiet style — control-plane fill,
+   hairline edge, ink text — and only the PRESSED state speaks in ink. The
+   category hue is deliberately absent here: the rainbow on the filter row
+   spent the page's whole colour budget on controls, when the hue belongs to
+   the offers (the badge in each row, the spine on its left edge). */
 .chip {
-  --tag-hue: var(--ink);
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
@@ -1678,35 +1775,46 @@ a:focus-visible {
   min-width: 0;
   overflow: visible;
   overflow-wrap: anywhere;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  padding: 0.34rem 0.72rem;
-  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
   border: 1px solid var(--hairline);
   background: var(--surface-2);
   color: var(--ink);
   cursor: pointer;
-  border-color: color-mix(in srgb, var(--tag-hue) 30%, var(--surface-2));
-  background: color-mix(in srgb, var(--tag-hue) 15%, var(--surface));
-  color: color-mix(in srgb, var(--tag-hue) 60%, white);
   transition:
-    background-color 0.14s ease,
-    color 0.14s ease,
-    border-color 0.14s ease;
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.16s var(--ease-out);
 }
 
-.chip:hover,
-.chip[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--tag-hue) 60%, white);
-  border-color: color-mix(in srgb, var(--tag-hue) 60%, white);
+.chip .tag-i {
+  color: var(--gray);
+}
+
+.chip:hover {
+  background: var(--surface);
+  border-color: var(--hairline-strong);
+}
+
+.chip[aria-pressed="true"],
+.chip[aria-pressed="true"]:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.chip[aria-pressed="true"] .tag-i {
   color: var(--paper);
 }
 
 .chip:focus-visible,
-#ft-search:focus-visible,
 #ft-sort:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .chip-category-api_provider {
@@ -1734,31 +1842,30 @@ a:focus-visible {
 .results-status {
   flex-basis: 100%;
   min-width: 0;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   color: var(--gray);
   margin: 0;
 }
 
 button.badge {
-  font-family: var(--font-mono);
   cursor: pointer;
   transition:
-    background-color 0.14s ease,
-    color 0.14s ease,
-    border-color 0.14s ease;
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.16s var(--ease-out);
 }
 
-/* Active inverts rather than darkens. The light sheet filled with the raw
-   hue and wrote in paper — on this ground that is dark-on-dark, so the fill
-   is the LIFTED hue and the text is the page ground. Same 60% mix as the
-   rest state's text colour, which is what makes the transition read as the
-   label growing into its own plane; >= 5.33:1 for every hue. */
+/* Active inverts: the tag fills with its own derived text colour — the
+   darkened hue in light, the lifted one in dark — and writes in paper.
+   The same mix as the rest state's text is what makes the transition read
+   as the label growing into its own plane; >= 4.5:1 for every hue in both
+   schemes (theme-contrast.test.mjs recomputes it). */
 button.badge:hover,
 button.badge:focus-visible,
 button.badge[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--tag-hue) 60%, white);
-  border-color: color-mix(in srgb, var(--tag-hue) 60%, white);
+  background: color-mix(in srgb, var(--tag-hue) var(--tag-text-mix), var(--tag-text-base));
+  border-color: color-mix(in srgb, var(--tag-hue) var(--tag-text-mix), var(--tag-text-base));
   color: var(--paper);
 }
 
@@ -1772,13 +1879,43 @@ button.badge[aria-pressed="true"]::after {
 }
 
 button.badge:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
+/* Reduced motion keeps the colour and opacity transitions — a state change
+   still deserves feedback — and strips everything that moves or presses:
+   the transform transitions go, so :active scales and hover lifts land
+   instantly instead of travelling. */
 @media (prefers-reduced-motion: reduce) {
   a.badge,
-  button.badge {
+  button.badge,
+  .chip,
+  .r-details,
+  .od-cta,
+  .site-nav a,
+  .share-copy,
+  .filter-pill,
+  .consent-actions button,
+  .local-data-actions button {
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .grid > li,
+  .hot-deal,
+  .od-related-card {
+    transition:
+      background-color 0.16s ease,
+      border-color 0.16s ease;
+  }
+
+  .progress-fill,
+  .step-num,
+  .step-num > span,
+  .od-cta span[aria-hidden] {
     transition: none;
   }
 }
@@ -1786,48 +1923,56 @@ button.badge:focus-visible {
 /* ---- Interaction polish (CSS-only, motion-safe) ----------------------- */
 
 @media (prefers-reduced-motion: no-preference) {
+  /* The buttons that carry no base transition get the transform half here,
+     inside the gate, so reduced-motion users never see it. */
+  .od-cta,
+  .share-copy,
+  .consent-actions button,
+  .local-data-actions button {
+    transition:
+      transform 0.16s var(--ease-out),
+      background-color 0.15s ease,
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
   /* Press feedback. Every control here is a real button or link, so one rule
-     covers the category chips, the row controls and the claim CTA. 0.97 is
+     covers the chips, the row controls and the claim CTA. 0.97 is
      deliberate: enough to register as the interface hearing the click, not
      enough to read as a bounce. */
-  .chip,
-  .od-cta {
-    transition:
-      transform 0.14s var(--ease-out),
-      background-color 0.14s ease,
-      color 0.14s ease,
-      border-color 0.14s ease;
-  }
-
   .chip:active,
   button.badge:active,
-  .od-cta:active {
+  .r-details:active,
+  .od-cta:active,
+  .share-copy:active,
+  .filter-pill:active,
+  .consent-actions button:active,
+  .local-data-actions button:active {
     transform: scale(0.97);
-  }
-
-  /* The row tint is the only motion in a 47-row list, so it fades rather than
-     snaps. Colour only — no transform, nothing that moves the baseline the
-     whole list is being scanned against. */
-  .grid > li {
-    transition:
-      background-color 0.16s ease,
-      color 0.16s ease;
   }
 }
 
+/* The "remove this filter" pill paints the hue it removes — filled, because
+   it is the current state rather than an offer to change it. */
 .filter-pill {
   --tag-hue: var(--ink);
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
   line-height: 1.5;
-  padding: 0 0.45rem;
+  padding: 0.1rem 0.6rem;
   border: 1px solid var(--tag-hue);
   border-radius: 999px;
   background: var(--tag-hue);
   color: var(--paper);
   cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.16s var(--ease-out);
 }
 
 .filter-pill::after {
@@ -1838,8 +1983,8 @@ button.badge:focus-visible {
 }
 
 .filter-pill:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .results-line {
@@ -1848,10 +1993,23 @@ button.badge:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem 0.8rem;
+  margin: 0.2rem 0 0.3rem;
 }
 
 .results-line .results-status {
   flex: 0 1 auto;
+}
+
+/* Wide: the status line joins the toolbar's own flex flow — it lands on
+   whichever row the chips wrapped onto instead of paying for a whole line
+   of its own. Narrow: it keeps its own full-width line under the chips. */
+@media (min-width: 64rem) {
+  .toolbar > .results-line {
+    display: contents;
+  }
+  .toolbar > .results-line > .results-status {
+    flex: 0 1 auto;
+  }
 }
 
 .chip.clear[hidden] {
@@ -1910,13 +2068,12 @@ button.badge:focus-visible {
   max-width: 34rem;
   margin: 0 auto;
   border: 1px solid var(--hairline);
-  border-radius: 12px;
-  background: var(--surface-2);
-  /* Shadow alone is invisible on near-black, so the lift is carried by a
-     bright top edge plus a shadow deep enough to darken the ground under it. */
-  box-shadow:
-    0 -1px 0 0 color-mix(in srgb, var(--ink) 12%, transparent) inset,
-    0 18px 44px rgba(0, 0, 0, 0.55);
+  border-radius: 16px;
+  background: var(--surface);
+  /* The shadow is a token: soft and real on the linen ground, deepened on
+     the charcoal one where a faint umbra has to darken the page under the
+     card to read as lift at all. */
+  box-shadow: var(--shadow-pop);
   padding: 1rem 1.25rem;
 }
 
@@ -1935,7 +2092,7 @@ button.badge:focus-visible {
     right: 0;
     bottom: 0;
     left: 0;
-    border-radius: 12px 12px 0 0;
+    border-radius: 16px 16px 0 0;
     border-width: 1px 0 0;
     padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom, 0px));
     max-height: 52vh;
@@ -1962,25 +2119,34 @@ button.badge:focus-visible {
   flex-wrap: wrap;
 }
 
+/* Two buttons, two voices: Allow is the commitment and gets the ink fill;
+   Decline is the polite refusal and stays an outline. */
 .consent-actions button {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  padding: 0.45rem 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--hairline-strong);
-  background: var(--surface);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: transparent;
   color: var(--ink);
   cursor: pointer;
 }
 
+.consent-actions button:first-child {
+  background: var(--ink);
+  color: var(--paper);
+}
+
 .consent-actions button:hover {
+  border-color: var(--ink);
   background: var(--ink);
   color: var(--paper);
 }
 
 button:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 @media (pointer: coarse) {
@@ -2007,8 +2173,9 @@ button:focus-visible {
 }
 
 .local-data-actions button {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
   padding: 0.45rem 1rem;
   border-radius: 999px;
   border: 1px solid var(--ink);
@@ -2022,13 +2189,16 @@ button:focus-visible {
   color: var(--paper);
 }
 
+/* The erase control is the one dangerous action on the page, so it speaks
+   in the danger token — dark enough to carry text on the linen ground,
+   lifted in dark by the same token swap as the rest of the palette. */
 .local-data-actions .local-data-danger {
-  border-color: #f2837a;
-  color: #f2837a;
+  border-color: var(--color-danger);
+  color: var(--color-danger);
 }
 
 .local-data-actions .local-data-danger:hover {
-  background: #f2837a;
+  background: var(--color-danger);
   color: var(--paper);
 }
 
@@ -2060,14 +2230,17 @@ button:focus-visible {
 }
 
 .consent-settings {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
   padding: 0;
   border: none;
   background: none;
   color: var(--gray);
   text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
   cursor: pointer;
+  transition: color 0.15s ease;
 }
 
 .consent-settings:hover {
@@ -2080,26 +2253,38 @@ button:focus-visible {
    proof-line layout lives in SiteStats.tsx so detail pages do not pay for
    unused rail CSS. */
 
+/* One quiet inline line under the bar: the numbers are data, so the whole
+   strip stays mono — but it is a line of text now, not a row of pills.
+   Right-aligned on a wide screen where it trails the nav, left on a phone
+   where everything stacks under the brand. */
 .stat-strip {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.35rem 0.5rem;
+  gap: 0.35rem 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: var(--gray);
-  margin: 0.75rem 0 0;
+  margin: 0.35rem 0 0;
+}
+
+@media (min-width: 48rem) {
+  .stat-strip {
+    justify-content: flex-end;
+  }
 }
 
 .stat-strip[hidden] {
   display: none;
 }
 
-.ft-traffic-total {
-  font-size: 0.84rem;
+.stat-strip .ft-stat {
+  font-size: inherit;
 }
+
+.stat-strip .ft-stat strong,
 .ft-traffic-total strong {
-  font-size: 1.2em;
+  color: var(--ink);
 }
 
 /* ---- Offer detail page (build.py _DETAIL_CSS, issue #128) --------------
@@ -2204,7 +2389,7 @@ button:focus-visible {
 .od-rail .od-facts {
   background: var(--surface);
   border: 1px solid var(--hairline);
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 0.5rem 0.95rem 0.85rem;
 }
 
@@ -2217,8 +2402,7 @@ button:focus-visible {
 }
 
 .od-cta-note {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   color: var(--gray);
 }
 
@@ -2251,7 +2435,7 @@ button:focus-visible {
   min-width: 0;
   padding: 0.7rem 0.85rem 0.75rem 1rem;
   border: 1px solid var(--hairline);
-  border-radius: 8px;
+  border-radius: 14px;
   background: var(--surface);
   overflow: hidden;
   transition:
@@ -2262,8 +2446,11 @@ button:focus-visible {
 .od-related-card::after {
   content: "";
   position: absolute;
-  inset: 0 auto 0 0;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  left: 0;
   width: 3px;
+  border-radius: 999px;
   background: var(--row-hue, var(--hairline));
   opacity: 0.75;
 }
@@ -2290,7 +2477,7 @@ button:focus-visible {
   --row-hue: var(--t-student);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .od-related-card:hover,
   .od-related-card:focus-within {
     background: var(--surface-2);
@@ -2303,20 +2490,19 @@ button:focus-visible {
 }
 
 .od-related-prov {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--gray);
   overflow-wrap: anywhere;
 }
 
 .od-related-title {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-family: var(--font-serif);
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.012em;
+  font-optical-sizing: auto;
   color: var(--ink);
   text-decoration: none;
   overflow-wrap: anywhere;
@@ -2344,8 +2530,7 @@ button:focus-visible {
 
 .od-related-amount {
   margin-top: 0.2rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   line-height: 1.45;
   color: var(--gray);
   display: -webkit-box;
@@ -2360,21 +2545,17 @@ button:focus-visible {
 .od-related-flag {
   align-self: flex-start;
   margin-top: 0.35rem;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  font-size: 0.72rem;
+  font-weight: 500;
   color: var(--gray);
   border: 1px solid var(--hairline);
-  border-radius: 3px;
-  padding: 0.06rem 0.34rem;
+  border-radius: 999px;
+  padding: 0.08rem 0.5rem;
 }
 
 .od-related-more {
   margin: 1rem 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.82rem;
   color: var(--gray);
 }
 
@@ -2392,8 +2573,7 @@ button:focus-visible {
 }
 
 .od-back {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   margin: 0 0 1.75rem;
 }
 
@@ -2433,9 +2613,12 @@ button:focus-visible {
 }
 
 /* .count is the home masthead's offer counter and carries its 2.5rem bottom
-   margin. Here it is the provider name sitting directly under the title, and
-   that margin opened a hole between it and the status line. */
+   margin. Here it is the provider name sitting directly under the title —
+   a name, not a figure, so it leaves the mono face — and that margin opened
+   a hole between it and the status line. */
 .masthead-offer .count {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
   margin: 0.15rem 0 0;
 }
 
@@ -2459,15 +2642,17 @@ button:focus-visible {
   color: var(--hairline);
 }
 
-/* Section labels: small mono furniture with the home-page green dash. */
+/* Section labels: the shared eyebrow style — small sans caps over the
+   green dash, the same marker the home page uses. */
 
 .offer-detail :is(section, nav) > h2,
 .offer-detail .od-steps-head > h2 {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  font-optical-sizing: auto;
   color: var(--gray);
   margin: 2rem 0 0.6rem;
 }
@@ -2509,11 +2694,8 @@ button:focus-visible {
 }
 
 .od-table th[scope="row"] {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--gray);
   white-space: nowrap;
   width: 8.5rem;
@@ -2694,8 +2876,8 @@ button:focus-visible {
 }
 
 .claim-step input:focus-visible + label .step-num {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .claim-step input:checked + label .step-num {
@@ -2821,8 +3003,8 @@ figure.proof-screenshot {
   background: var(--ink);
   color: var(--paper);
   text-decoration: none;
-  font-family: var(--font-mono);
-  font-size: 0.86rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
@@ -2846,8 +3028,8 @@ figure.proof-screenshot {
 }
 
 .od-cta:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 /* Ended offers (#25): muted, non-interactive notice in place of the CTA —
@@ -2859,7 +3041,6 @@ figure.proof-screenshot {
   border-radius: 999px;
   border: 1px solid var(--gray);
   color: var(--gray);
-  font-family: var(--font-mono);
   font-size: 0.82rem;
 }
 
@@ -2881,14 +3062,14 @@ figure.proof-screenshot {
 
 .share-copy {
   display: inline-block;
-  padding: 0.35rem 0.85rem;
+  padding: 0.4rem 0.9rem;
   border-radius: 999px;
   border: 1px solid var(--ink);
   background: var(--paper);
   color: var(--ink);
   text-decoration: none;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -2898,8 +3079,8 @@ figure.proof-screenshot {
 }
 
 .share-copy:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .share-status {
@@ -2910,9 +3091,9 @@ figure.proof-screenshot {
 }
 
 /* ---- Custats sibling-product banner (issue #257) -------------------- */
-/* Muted mono strip — reads as a sibling pointer, not an ad. Small,
-   centered, hairline border, never competes with the offer list. Full
-   width outside .wrap so it spans viewport, wraps at 320px. */
+/* One quiet line — reads as a sibling pointer, not an ad. Small, muted,
+   hairline under it, never competes with the offer list. Full width outside
+   .wrap so it spans the viewport, wraps at 320px. */
 
 .custats-banner {
   width: 100%;
@@ -2921,12 +3102,12 @@ figure.proof-screenshot {
   overflow: hidden;
   background: var(--paper);
   border-bottom: 1px solid var(--hairline);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.74rem;
   line-height: 1.5;
   color: var(--gray);
   text-align: center;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
 }
 
 .custats-banner__inner {
@@ -2938,9 +3119,6 @@ figure.proof-screenshot {
 }
 
 .custats-banner__kicker {
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: var(--gray);
 }
 
@@ -2954,23 +3132,23 @@ figure.proof-screenshot {
 }
 
 .custats-banner a {
-  color: var(--ink);
+  color: var(--gray);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
   text-underline-offset: 3px;
-  text-decoration-thickness: 1.5px;
   overflow-wrap: anywhere;
+  transition: color 0.15s ease;
 }
 
 .custats-banner a:hover,
 .custats-banner a:focus-visible {
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 2px;
+  color: var(--ink);
+  text-decoration-color: var(--ink);
 }
 
 .custats-banner a:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
   border-radius: 2px;
 }
 

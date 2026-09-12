@@ -183,10 +183,26 @@ function Toolbar({
   }
   return (
     <section className="toolbar" aria-label="Search and filter offers">
-      <div className="field">
-        <label className="tool-label" htmlFor="ft-search">
+      <div className="field field-search">
+        <label className="tool-label sr-only" htmlFor="ft-search">
           Search
         </label>
+        <svg
+          className="search-i"
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
         <input
           type="search"
           id="ft-search"

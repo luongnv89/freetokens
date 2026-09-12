@@ -343,20 +343,21 @@ describe("archive layout at 320 px (#129)", () => {
   );
 
   it("lets the ledger rows collapse to the wrap width instead of overflowing", () => {
-    // The row's fixed rail folds back inline before it can squeeze the title,
-    // and the rank gutter narrows below that.
+    // The row's fixed rail folds back inline before it can squeeze the
+    // title. The 24rem rank-gutter rule is gone with the rank counter — the
+    // row is a single-column card now, so there is no gutter left to narrow.
     expect(css).toMatch(/\.grid \{[^}]*display:\s*block/s);
     expect(css).toMatch(/\.grid \{[^}]*min-width:\s*0/s);
     expect(css).toMatch(
       /@media \(max-width: 48rem\) \{\s*\.card \{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s,
     );
     expect(css).toMatch(
-      /@media \(max-width: 24rem\) \{\s*\.grid > li \{[^}]*grid-template-columns:\s*1\.9rem/s,
+      /\.grid > li \{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s,
     );
     expect(css).toMatch(/\.card-title \{[^}]*overflow-wrap:\s*anywhere/s);
     expect(css).toMatch(/\.r-amount \{[^}]*overflow-wrap:\s*anywhere/s);
     expect(css).toMatch(/\.row-eyebrow \{[^}]*flex-wrap:\s*wrap/s);
-    expect(css).toMatch(/\.wrap \{[^}]*padding:\s*clamp\(1\.25rem/s);
+    expect(css).toMatch(/\.wrap \{[^}]*padding:\s*clamp\(0\.9rem/s);
     expect(css).toMatch(
       /\[data-page="archive"\] \.empty \{\s*animation:\s*none/s,
     );
@@ -370,8 +371,10 @@ describe("archive layout at 320 px (#129)", () => {
   });
 
   it("styles the row detail link as a real tap target on coarse pointers", () => {
+    // Scoped above the 48rem fold-point: under it the pill is hidden so the
+    // inline rail stays one line (the title is the detail link there).
     expect(css).toMatch(
-      /@media \(pointer: coarse\) \{[\s\S]*?\.r-details \{[^}]*min-height:\s*44px/,
+      /@media \(pointer: coarse\) and \(min-width: 48rem\) \{[\s\S]*?\.r-details \{[^}]*min-height:\s*44px/,
     );
   });
 });
