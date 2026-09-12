@@ -1,0 +1,16 @@
+{
+  "summary": "BytePlus's ModelArk Free-Token Campaign grants a free-token resource package per eligible model — the terms cite 500,000 tokens per model as an example, with the actual amount shown on the Model Activation page. Eligibility requires completing BytePlus account registration and submitting enterprise information; the package is redeemable once per account and may carry a validity period visible in the Billing Center. Packages offset post-paid token consumption in the ModelArk Playground or after model-service activation.",
+  "claim_steps": [
+    "Register a BytePlus account and submit the required enterprise information.",
+    "Open the ModelArk Model Activation page to see the free-token package granted per eligible model.",
+    "Consume the package in the ModelArk Playground or activate the model service; once a model's package is exhausted, continued use is billed post-paid."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.byteplus.com/en/docs/legal/termsandconditions_modelark_free-token_campaign",
+      "title": "Terms and Conditions for Free-Token Campaign — BytePlus ModelArk",
+      "text": "Participants ... may be eligible to receive a free-token resource package ... for each eligible model ... with a value of 500,000 (Five Hundred Thousand) tokens per Model or such other amount of tokens as BytePlus may provide. Eligibility requires the completion of BytePlus account registration and enterprise information submission."
+    }
+  ]
+}

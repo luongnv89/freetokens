@@ -1,0 +1,13 @@
+# Verified 2026-09-12 against https://www.upstage.ai/pricing
+# ("Every agent includes 10 free runs — test with real documents, no credit
+# card required.")
+title: Upstage Studio Agents — 10 Free Runs
+provider: Upstage
+category: api_provider
+amount: 10 free runs per Studio agent for document workflows (no credit card required)
+expiry_date: null
+source_url: https://www.upstage.ai/pricing
+verified_date: 2026-09-12
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,16 @@
+{
+  "summary": "Upstage Studio lets you build and deploy document AI agents (Parse, Extract, Classify, Instruct steps). Every agent includes 10 free runs to test with real documents — no credit card required. Each agent run is billed as the sum of the steps it executes once the free runs are used.",
+  "claim_steps": [
+    "Sign up at Upstage Studio — no credit card required.",
+    "Build a document agent by combining steps (Parse, Extract, Classify, Instruct).",
+    "Run the agent with real documents; each agent includes 10 free runs."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/pricing",
+      "title": "Pricing — Upstage",
+      "text": "Every agent includes 10 free runs — test with real documents, no credit card required."
+    }
+  ]
+}

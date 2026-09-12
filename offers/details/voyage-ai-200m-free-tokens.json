@@ -1,0 +1,16 @@
+{
+  "summary": "Voyage AI (MongoDB) gives every account its first 200 million tokens free on current text-embedding models (voyage-4-large, voyage-4, voyage-4-lite, voyage-context-4) and rerankers (rerank-3, rerank-3-lite), and 50 million tokens on specialized -2 models (voyage-finance-2, voyage-law-2, voyage-code-2). Multimodal models get 200M text tokens plus 150B pixels free. Free token credits do not apply to Batch API usage, which bills at the discounted batch rate.",
+  "claim_steps": [
+    "Sign up for a Voyage AI account — no credit card required to start.",
+    "Create an API key in the dashboard.",
+    "Call the embeddings or rerank endpoints; the free token allowance applies automatically per account."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.voyageai.com/docs/pricing",
+      "title": "Pricing — Voyage AI documentation",
+      "text": "The first 200 million tokens for voyage-4-large, voyage-4, voyage-4-lite, voyage-context-4 ... are free for every account. Free token credits do not apply to Batch API usage."
+    }
+  ]
+}

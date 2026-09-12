@@ -1,0 +1,16 @@
+{
+  "summary": "Firecrawl's Student Program gives verified students 10,000 free credits for educational or personal projects. Eligibility requires a valid academic email address and enrollment in a college, university, or accredited program. Credits are added instantly after redeeming the student coupon code in Settings → Billing. Distinct from the ongoing Firecrawl Free Plan.",
+  "claim_steps": [
+    "Sign up for Firecrawl with your educational email address.",
+    "Go to Settings → Billing and enter the student coupon code shown on the program page.",
+    "10,000 credits are added to your account instantly — no credit card required."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.firecrawl.dev/student-program",
+      "title": "Firecrawl Student Program",
+      "text": "Verified students get 10,000 free credits. Build real projects with the same API trusted by Apple, Canva, and Lovable."
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "summary": "Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. The 2026 expansion covers 121 new universities across 16 countries. Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.",
+  "summary": "Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. Amazon's September 2026 announcement expands the program to 132 universities across 18 countries (a 12x scale-up from the 11-university pilot). Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.",
   "claim_steps": [
     "Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email.",
     "Open the account page and select the “You are eligible for Kiro Students” verification banner.",
@@ -13,6 +13,12 @@
       "url": "https://kiro.dev/students/",
       "title": "Students - Kiro",
       "text": "Eligible university students get 1,000 credits per month free for one year. The page states that users can opt out of content use for model training."
+    },
+    {
+      "type": "link",
+      "url": "https://www.aboutamazon.com/news/aws/amazon-expands-free-kiro-access-students-universities",
+      "title": "Millions of students can now get access to a free year of Kiro from AWS",
+      "text": "AWS is giving students at 132 universities across 18 countries a full year of free access to Kiro, with 1,000 credits a month — no credit card required."
     },
     {
       "type": "link",

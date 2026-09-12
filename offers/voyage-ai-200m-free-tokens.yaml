@@ -1,0 +1,15 @@
+# Verified 2026-09-12 against https://docs.voyageai.com/docs/pricing
+# ("The first 200 million tokens for voyage-4-large, voyage-4, voyage-4-lite,
+# voyage-context-4 ... are free for every account." / "the first 50 million
+# tokens for voyage-multilingual-2, voyage-finance-2, voyage-law-2, and
+# voyage-code-2" / "Free token credits do not apply to Batch API usage.")
+title: Voyage AI — First 200M Tokens Free
+provider: Voyage AI
+category: api_provider
+amount: First 200M tokens free per account on current embedding/rerank models (50M on specialized -2 models; multimodal: 200M text tokens + 150B pixels); Batch API excluded
+expiry_date: null
+source_url: https://docs.voyageai.com/docs/pricing
+verified_date: 2026-09-12
+verification: social_proof
+review_status: under-review
+signup: required

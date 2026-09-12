@@ -1,0 +1,16 @@
+{
+  "summary": "Ocean Network (oncompute.ai) launched its Inference product on September 10, 2026 and is giving away 6 hours of H200 inference in complimentary tokens to mark the launch. Inference runs OpenAI-compatible models from Hugging Face Hub on dedicated node-operator GPUs with per-hour pricing shown before launch (H200 listed at $2.16/hr). Requires a funded wallet on Base — either an external wallet or the built-in Smart Wallet with email/social login and fiat on-ramp.",
+  "claim_steps": [
+    "Open the Ocean Network Inference tab at dashboard.oncompute.ai/inference.",
+    "Sign in with an external wallet or the Smart Wallet (email/social login, fiat on-ramp available) on Base.",
+    "Claim the launch promo for 6 complimentary H200 hours and run a curated model, custom model, service, or template."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://oncompute.ai/blog/ocean-network-inference-is-on-your-first-6-hours-are-on-us",
+      "title": "Ocean Network Inference Is ON. Your First 6 Hours Are On Us.",
+      "text": "To mark the launch, we are giving away 6 hours of H200 inference in complimentary tokens. Claim yours and start generating."
+    }
+  ]
+}
