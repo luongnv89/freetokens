@@ -209,7 +209,7 @@ describe("static route coverage (#123)", () => {
     expect(document.documentElement.namespaceURI).toBe(SITEMAP_NAMESPACE);
 
     const urls = [...document.getElementsByTagNameNS(SITEMAP_NAMESPACE, "url")];
-    expect(urls).toHaveLength(index.offers.length + 5);
+    expect(urls).toHaveLength(index.offers.length + 6);
     expect(
       urls.map(
         (url) =>
@@ -220,6 +220,7 @@ describe("static route coverage (#123)", () => {
       "https://freetokens.custats.info/archive.html",
       "https://freetokens.custats.info/privacy.html",
       "https://freetokens.custats.info/about.html",
+      "https://freetokens.custats.info/brand-showcase.html",
       "https://freetokens.custats.info/feed.xml",
       ...index.offers.map(
         (offer) => `https://freetokens.custats.info/offers/${offer.slug}.html`,

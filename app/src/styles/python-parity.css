@@ -525,7 +525,8 @@ a.badge:focus-visible {
   margin: 0.5rem 0 0;
 }
 
-.foot-nav a {
+.foot-nav a,
+.foot-credit a {
   color: var(--gray);
   text-decoration: underline;
   text-decoration-color: var(--hairline);
@@ -533,7 +534,9 @@ a.badge:focus-visible {
 }
 
 .foot-nav a:hover,
-.foot-nav a:focus-visible {
+.foot-nav a:focus-visible,
+.foot-credit a:hover,
+.foot-credit a:focus-visible {
   color: var(--ink);
   text-decoration-color: var(--green);
   text-decoration-thickness: 2px;
@@ -552,6 +555,10 @@ a.badge:focus-visible {
   display: inline-flex;
   align-items: center;
   border-radius: 2px;
+}
+
+.foot-credit {
+  margin-top: 0.75rem;
 }
 
 .brand-mark {

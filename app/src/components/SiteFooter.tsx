@@ -75,6 +75,18 @@ export function SiteFooter({
           </Fragment>
         ))}
       </nav>
+      <p className="foot-credit">
+        Logo designed with the{" "}
+        <a
+          href="https://github.com/luongnv89/skills/tree/main/skills/logo-designer"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          logo-designer skill
+        </a>
+        {" "}&middot;{" "}
+        <a href={`${up}brand-showcase.html`}>Brand showcase</a>
+      </p>
       {trackingOn ? (
         <p className="foot-consent">
           <Button
