@@ -1,5 +1,5 @@
 /**
- * Compact #106 hex mark for public chrome. Source of truth is
+ * Compact bracket-F monogram for public chrome. Source of truth is
  * assets/logo/logo-mark.svg (64×64); copies live in app/public/.
  * Below 180 px lockup width the brand guide uses the mark alone.
  */

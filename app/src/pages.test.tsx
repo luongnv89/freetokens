@@ -888,6 +888,17 @@ describe("page chrome landmarks and footer (#132)", () => {
     expect(home).not.toContain("Built ");
     expect(privacy).not.toContain("Built ");
   });
+
+  it("credits the logo-designer skill and links the brand showcase from every route", () => {
+    for (const markup of [home, archive, privacy]) {
+      expect(markup).toContain('class="foot-credit"');
+      expect(markup).toContain(
+        'href="https://github.com/luongnv89/skills/tree/main/skills/logo-designer"',
+      );
+      expect(markup).toContain('href="brand-showcase.html"');
+    }
+    expect(detail).toContain('href="../brand-showcase.html"');
+  });
 });
 
 describe("shared header chrome (#112)", () => {

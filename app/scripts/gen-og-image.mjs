@@ -46,13 +46,10 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
   <!-- accent bar -->
   <rect x="0" y="0" width="${W}" height="6" fill="${green}"/>
-  <!-- logo hexagon (same geometry as logo-mark.svg, scaled) -->
+  <!-- logo monogram (same geometry as logo-mark.svg) -->
   <g transform="translate(64,84)">
-    <g fill="none" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M32 10 L51 21 L51 43 L32 54 L13 43 L13 21 Z" stroke="${green}" stroke-width="5"/>
-      <path d="M32 17 L45 25 L45 39 L32 47 L19 39 L19 25 Z" stroke="${greenDark}" stroke-width="2.5"/>
-    </g>
-    <path d="M34 23 L26 33 h6 l-2 8 8-11 h-6 Z" fill="${green}"/>
+    <path d="M14 10 H47 Q50 10 50 13 V16 Q50 19 47 19 H23 V28 H39 Q42 28 42 31 V34 Q42 37 39 37 H23 V54 H14 Z" fill="${green}"/>
+    <path d="M43 47 H49 V24 H52 V50 H43 Z" fill="${green}" opacity="0.55"/>
   </g>
   <!-- wordmark -->
   <text x="152" y="134" font-family="Inter, Helvetica, Arial, sans-serif" font-size="22" font-weight="600" letter-spacing="2.5" fill="${green}">FREE AI CREDITS</text>
