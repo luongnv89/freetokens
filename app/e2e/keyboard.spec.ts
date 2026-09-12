@@ -20,7 +20,10 @@ async function focusVisibly(locator: Locator) {
   const width = await locator.evaluate(
     (el) => getComputedStyle(el).outlineWidth,
   );
-  expect(width).toBe("3px");
+  // 2px is the design's own :focus-visible ring; WebKit's native ring
+  // computes 3px when focus() does not trigger :focus-visible. Either way a
+  // ring must be there — 0px/none is the only failure.
+  expect(["2px", "3px"]).toContain(width);
 }
 
 test("keyboard path: filter → search → sort → offer click", async ({
@@ -28,6 +31,15 @@ test("keyboard path: filter → search → sort → offer click", async ({
 }) => {
   await page.goto("/index.html");
   await expect(page.locator("ol#ft-grid[role='list']")).toBeVisible();
+  // The grid is prerendered and visible before hydration finishes — boot()
+  // fetches the offers catalog first. Gate on the hydration marker (React
+  // stamps __reactContainer$* on #root) so the keypresses below always
+  // reach live listeners.
+  await page.waitForFunction(() =>
+    Object.keys(document.getElementById("root") ?? {}).some((k) =>
+      k.startsWith("__reactContainer"),
+    ),
+  );
 
   const chip = page.locator('button.chip[data-ft-category="coding"]');
   await focusVisibly(chip);
@@ -35,7 +47,14 @@ test("keyboard path: filter → search → sort → offer click", async ({
   await expect(chip).toHaveAttribute("aria-pressed", "true");
 
   const search = page.locator("#ft-search");
-  await focusVisibly(search);
+  await search.evaluate((el) => (el as HTMLElement).focus());
+  await expect(search).toBeFocused();
+  // The search field carries no outline: its focus ring is a 4px accent
+  // box-shadow — a ring is still owed, so check for the shadow itself.
+  const ring = await search.evaluate(
+    (el) => getComputedStyle(el).boxShadow,
+  );
+  expect(ring).not.toBe("none");
   await page.keyboard.type("Cursor");
   await expect
     .poll(() => new URL(page.url()).searchParams.get("q"), { timeout: 3000 })
@@ -68,7 +87,9 @@ test("keyboard path: filter → search → sort → offer click", async ({
   const sortOutline = await sort.evaluate(
     (el) => getComputedStyle(el).outlineWidth,
   );
-  expect(sortOutline).toBe("3px");
+  // Same tolerance as focusVisibly: WebKit may paint its own 3px ring on the
+  // native <select> instead of the stylesheet's 2px :focus-visible one.
+  expect(["2px", "3px"]).toContain(sortOutline);
 
   const offerLink = page.locator("a[data-ft-offer-id]").first();
   await expect(offerLink).toBeVisible();
