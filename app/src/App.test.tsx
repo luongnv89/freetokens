@@ -52,7 +52,7 @@ describe("App home listing prerender", () => {
 
   it("uses descriptive link text on every title link (a11y)", () => {
     for (const offer of offers) {
-      expect(markup).toContain(`aria-label="View details for ${offer.title}"`);
+      expect(markup).toContain(`aria-label="View details for ${escapeHtml(offer.title)}"`);
     }
   });
 
