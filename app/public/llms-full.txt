@@ -2,9 +2,97 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-12T12:07:24Z — 93 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-13T06:54:38Z — 101 active offers.
 
 ## Offers (full)
+
+### RunPod Startup Program — Starter Tier
+- Provider: RunPod
+- Category: startup_program
+- Amount: $1,000 free credits across Pods, Serverless, Clusters, Endpoints, and Storage (Growth tier is $25K bonus only with a $50K commit — not free)
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://www.runpod.io/startup-program
+- Page: https://freetokens.custats.info/offers/runpod-startup-starter-tier.html
+- Summary: RunPod's Startup Program Starter Tier gives accepted earlier-stage startups $1,000 in credits usable across Pods, Serverless, Clusters, Public Endpoints, and Storage, with self-serve onboarding. The program is selective; venture backing is strongly preferred; it is primarily for new customers. The separate Growth Tier is not a free grant: you deposit $50,000 and receive $25,000 in bonus credits.
+- Claim steps: Confirm fit: earlier-stage startup with real AI workloads (venture-backed preferred; new RunPod customers primarily). | Apply via the Startup Program page (selective; not every applicant is accepted). | If accepted into Starter Tier, use the $1,000 credits across Pods, Serverless, Clusters, Endpoints, or Storage. | Do not treat Growth Tier as free credits — that tier requires a $50,000 upfront commit.
+
+### OpenRouter for Startups
+- Provider: OpenRouter
+- Category: startup_program
+- Amount: Up to $5,000 promotional inference credits (most expire 6 months after issuance) plus 0% processing fees for 12 months if approved; amount/duration at OpenRouter discretion
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/startup-program
+- Page: https://freetokens.custats.info/offers/openrouter-for-startups.html
+- Summary: OpenRouter for Startups grants approved pre-Series B AI-native startups up to $5,000 in universal inference credits across 500+ models, plus waived processing fees (platform and BYOK) for 12 months. Marketing and FAQ state those figures; program terms say amounts and duration are at OpenRouter's discretion, with a ceiling of $5,000 and/or fee waivers up to 12 months. Most credits expire 6 months after issuance. Applications require an approved-partner referral, a public company website, a professional company-domain email, a valid OpenRouter account with under $500 lifetime spend, and no prior startup-program credits.
+- Claim steps: Confirm eligibility: pre-Series B, AI-native product, public website, company-domain professional email, OpenRouter account with under $500 lifetime spend, no prior startup credits, and a referral from an approved OpenRouter partner. | Submit the application on openrouter.ai/startup-program (rolling review). | If approved, credits and fee waivers are applied to the OpenRouter account tied to the applicant email. | Use credits across OpenRouter models; BYOK processing fees are also waived for 12 months if approved. Most credits expire 6 months after issuance.
+
+### Lambda Research Grant
+- Provider: Lambda
+- Category: api_provider
+- Amount: Up to $5,000 Lambda Cloud GPU (on-demand Instance) credits; research-and-mentorship framing on the grant hub
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://lambda.ai/research
+- Page: https://freetokens.custats.info/offers/lambda-research-grant.html
+- Summary: Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement.
+- Claim steps: Review the grant CTA on lambda.ai/research. | Apply for the Lambda Research Grant (competitive; qualifying researchers). | If awarded, use credits on Lambda on-demand GPU Instances.
+
+### CometAPI Signup Credit
+- Provider: CometAPI
+- Category: api_provider
+- Amount: $0.1 USD free credit in Wallet after register/login
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://apidoc.cometapi.com/overview/important-guidelines
+- Page: https://freetokens.custats.info/offers/cometapi-signup-credit.html
+- Summary: CometAPI (an OpenAI-compatible multi-model API gateway) credits new accounts $0.1 USD in the Wallet after register and login, with no extra claim step. Docs describe pay-as-you-go top-ups via Stripe with a $10 minimum; they do not require a card to receive the signup credit.
+- Claim steps: Register and log in to CometAPI. | Open the Wallet page; the $0.1 USD credit is applied automatically. | Create an API token under Tokens to call supported models via api.cometapi.com.
+
+### Claude Team plan for scientists
+- Provider: Anthropic
+- Category: coding
+- Amount: 10,000 seats; Standard seats $0/mo for 12 months; Premium $15/mo (5x usage); Claude Science, Code, and Cowork; limited availability
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://claude.com/programs/team-plan-for-scientists
+- Page: https://freetokens.custats.info/offers/claude-team-plan-for-scientists.html
+- Summary: Anthropic's Claude Team plan for scientists offers promotional Team seating to verified principal investigators (or equivalent) at academic or nonprofit research institutions. Standard seats are free; Premium seats are $15/month (regularly $100) with 5x usage. The promotion covers 12 months from signup, is limited to about 10,000 seats, and is not guaranteed. Includes Claude Science, Code, and Cowork. Verification typically takes 5–7 business days. 1–25 seats per group; larger groups contact Anthropic. This is a Claude.ai Team subscription, distinct from API credit grants in AI for Science.
+- Claim steps: Confirm you are a PI or equivalent at an accredited university or nonprofit research institute (natural sciences, math, CS, engineering, related fields). | Complete the verification form on claude.com/programs/team-plan-for-scientists. | Wait for review (most applications 5–7 business days) and the approval email. | Add lab members as Standard (free) or Premium ($15/mo) seats. Final pricing is confirmed after verification.
+
+### Azure Free Account
+- Provider: Microsoft Azure
+- Category: api_provider
+- Amount: $200 credit for 30 days plus always-free and 12-month free-service amounts for new customers
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://azure.microsoft.com/en-us/free/
+- Page: https://freetokens.custats.info/offers/azure-free-account.html
+- Summary: New Azure customers can create a free account with a $200 credit to use on Azure services within 30 days, plus monthly free amounts of popular services for 12 months and always-free services. Microsoft states the credit card is used for verification and will not be charged for the trial (a temporary authorization may apply). After 30 days or when the credit is exhausted, you must move to pay-as-you-go to keep using services. Distinct from Azure for Students.
+- Claim steps: Sign up at azure.microsoft.com/en-us/free/ as a new Azure customer. | Complete identity verification (phone and typically a credit/debit card; Microsoft says the card is not charged for the trial aside from a possible temporary authorization). | Use the $200 credit within 30 days, plus listed free-service amounts. | Upgrade to pay-as-you-go before the credit or 30-day window ends if you need to keep running workloads.
+
+### Anthropic AI for Science
+- Provider: Anthropic
+- Category: api_provider
+- Amount: Free Claude API credits for high-impact research; Help Center cites up to $20,000 for 6 months; Aug 2026 news cites up to $50,000 per project
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program
+- Page: https://freetokens.custats.info/offers/anthropic-ai-for-science.html
+- Summary: Anthropic's AI for Science program grants free Claude API credits to researchers at research institutions working on high-impact scientific projects (biology/life sciences emphasized, other fields eligible). The Help Center (updated Mar 16, 2026) says successful applicants receive up to $20,000 in API credits for 6 months. Anthropic's Aug 27, 2026 news post says groups can apply for up to $50,000 in credits per project for more ambitious work. Credits are API-only (not Claude.ai). Applications are reviewed on the first Monday of each month. Distinct from the Claude Team plan for scientists seating promotion.
+- Claim steps: Create a Claude Console account if you do not already have one (API access; credits do not apply to Claude.ai). | Complete the AI for Science application form with team and project details (research-institution affiliation). | Wait for the monthly review (first Monday of each month). Unapproved submissions do not receive individual replies. | If approved, API credits are applied to the organization ID for the stated period. Multi-lab programs should apply on one account.
+
+### 1min.AI Daily Free Credits
+- Provider: 1min.AI
+- Category: api_provider
+- Amount: 15,000 free credits per day via daily app login (~450,000/month); credits never expire per site
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://1min.ai/free-credits
+- Page: https://freetokens.custats.info/offers/1min-ai-daily-free-credits.html
+- Summary: 1min.AI grants free credits without purchase; the marketing page says those credits never expire and lists Daily Visit, reviews, and referrals. The Help Center article titled for this grant (and linking back to 1min.ai/free-credits) states 15,000 credits per day (~450,000/month) requiring daily login to app.1min.ai. The $0 pricing tier lists no credit card required. The 15,000 number is not in the static HTML of /free-credits (client-rendered), so the Help Center quote is the numeric evidence.
+- Claim steps: Create a free 1min.AI account (pricing page: no credit card required on the $0 plan). | Log in to app.1min.ai each day to receive the daily free-credit grant. | Optional: reviews and referrals can add more credits per the free-credits page headings.
 
 ### Voyage AI — First 200M Tokens Free
 - Provider: Voyage AI
