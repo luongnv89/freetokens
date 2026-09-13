@@ -1,0 +1,14 @@
+# Verified 2026-09-13 against CometAPI important-guidelines docs
+# ("How to claim the $0.1 USD credit? No special operation required. After
+# registering and logging in, you can see the $0.1 USD credit in your Wallet
+# page.")
+title: CometAPI Signup Credit
+provider: CometAPI
+category: api_provider
+amount: $0.1 USD free credit in Wallet after register/login
+expiry_date: null
+source_url: https://apidoc.cometapi.com/overview/important-guidelines
+verified_date: 2026-09-13
+verification: social_proof
+review_status: under-review
+signup: required

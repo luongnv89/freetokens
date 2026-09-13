@@ -1,0 +1,23 @@
+{
+  "summary": "OpenRouter for Startups grants approved pre-Series B AI-native startups up to $5,000 in universal inference credits across 500+ models, plus waived processing fees (platform and BYOK) for 12 months. Marketing and FAQ state those figures; program terms say amounts and duration are at OpenRouter's discretion, with a ceiling of $5,000 and/or fee waivers up to 12 months. Most credits expire 6 months after issuance. Applications require an approved-partner referral, a public company website, a professional company-domain email, a valid OpenRouter account with under $500 lifetime spend, and no prior startup-program credits.",
+  "claim_steps": [
+    "Confirm eligibility: pre-Series B, AI-native product, public website, company-domain professional email, OpenRouter account with under $500 lifetime spend, no prior startup credits, and a referral from an approved OpenRouter partner.",
+    "Submit the application on openrouter.ai/startup-program (rolling review).",
+    "If approved, credits and fee waivers are applied to the OpenRouter account tied to the applicant email.",
+    "Use credits across OpenRouter models; BYOK processing fees are also waived for 12 months if approved. Most credits expire 6 months after issuance."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/startup-program",
+      "title": "Startup Program | OpenRouter",
+      "text": "Eligible startups get up to $5,000 in universal inference credits usable across leading frontier and open models with 0% processing fees. FAQ: up to $5,000 in universal inference credits ... along with 0% processing fees for 12 months. Most credits expire 6 months after issuance."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/startup-program-terms",
+      "title": "OpenRouter for Startups Terms & Conditions | OpenRouter",
+      "text": "If approved, Participants may receive promotional credits and/or waived or discounted platform fees. OpenRouter determines the availability, amounts, and duration of any Program benefits in its discretion. Program benefits may include credits in an amount up to $5,000 USD and/or waived platform fees for a period of up to twelve (12) months."
+    }
+  ]
+}

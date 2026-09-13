@@ -31,9 +31,12 @@ import { gzipSync } from "node:zlib";
 // 2026-09-07 (#317): JS ceiling 130_500 -> 134_500 — another catalog batch
 // (Novita, GCP AI Startup, Claude Startups, Scaleway x2, Cerebras, AI21,
 // Cohere, Deepgram Flux, HF). Local gzip 132,718 B. Still does not close #317.
+// 2026-09-13 (#383–#390): JS ceiling 134_500 -> 139_000 — catalog growth
+// (OpenRouter Startups, Claude scientists, AI for Science, RunPod Starter,
+// Lambda grant, Azure free, CometAPI, 1min.AI). Local gzip 137,922 B.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-export const JS_GZIP_CEILING_BYTES = 134_500;
+export const JS_GZIP_CEILING_BYTES = 139_000;
 // CSS gzip history: 8_000 through the dark redesign (9,301 gzipped after the
 // hot-today shelf), then 10_000 for the offer-detail rebuild (9,833). The
 // warm-linen redesign — two-scheme tokens, serif @font-face blocks, the

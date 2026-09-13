@@ -1,0 +1,17 @@
+{
+  "summary": "New Azure customers can create a free account with a $200 credit to use on Azure services within 30 days, plus monthly free amounts of popular services for 12 months and always-free services. Microsoft states the credit card is used for verification and will not be charged for the trial (a temporary authorization may apply). After 30 days or when the credit is exhausted, you must move to pay-as-you-go to keep using services. Distinct from Azure for Students.",
+  "claim_steps": [
+    "Sign up at azure.microsoft.com/en-us/free/ as a new Azure customer.",
+    "Complete identity verification (phone and typically a credit/debit card; Microsoft says the card is not charged for the trial aside from a possible temporary authorization).",
+    "Use the $200 credit within 30 days, plus listed free-service amounts.",
+    "Upgrade to pay-as-you-go before the credit or 30-day window ends if you need to keep running workloads."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://azure.microsoft.com/en-us/free/",
+      "title": "Create Your Azure Free Account Or Pay As You Go | Microsoft Azure",
+      "text": "Access to full catalog of services up to free amounts and $200 credit. $200 credit to use on Azure services within 30 days. Spending protection—credit card won’t be charged. Move to pay-as-you-go pricing to continue beyond 30 days or after credit is used up."
+    }
+  ]
+}
