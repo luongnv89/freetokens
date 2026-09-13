@@ -1,0 +1,23 @@
+{
+  "summary": "Anthropic's AI for Science program grants free Claude API credits to researchers at research institutions working on high-impact scientific projects (biology/life sciences emphasized, other fields eligible). The Help Center (updated Mar 16, 2026) says successful applicants receive up to $20,000 in API credits for 6 months. Anthropic's Aug 27, 2026 news post says groups can apply for up to $50,000 in credits per project for more ambitious work. Credits are API-only (not Claude.ai). Applications are reviewed on the first Monday of each month. Distinct from the Claude Team plan for scientists seating promotion.",
+  "claim_steps": [
+    "Create a Claude Console account if you do not already have one (API access; credits do not apply to Claude.ai).",
+    "Complete the AI for Science application form with team and project details (research-institution affiliation).",
+    "Wait for the monthly review (first Monday of each month). Unapproved submissions do not receive individual replies.",
+    "If approved, API credits are applied to the organization ID for the stated period. Multi-lab programs should apply on one account."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program",
+      "title": "Anthropic's AI for Science Program | Claude Help Center",
+      "text": "If successful, we will apply up to $20,000 in API credits to your account for a 6-month period. Note that these credits are for API use and do not apply to the Claude web app. We evaluate submissions on the first Monday of each month."
+    },
+    {
+      "type": "link",
+      "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
+      "title": "Expanding our support for scientists",
+      "text": "As your lab makes use of your allotted credits and requires more usage than standard or premium plans provide, you can apply to our AI for Science program for up to $50,000 in credits per project. Any researcher is eligible to apply."
+    }
+  ]
+}

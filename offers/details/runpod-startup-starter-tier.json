@@ -1,0 +1,17 @@
+{
+  "summary": "RunPod's Startup Program Starter Tier gives accepted earlier-stage startups $1,000 in credits usable across Pods, Serverless, Clusters, Public Endpoints, and Storage, with self-serve onboarding. The program is selective; venture backing is strongly preferred; it is primarily for new customers. The separate Growth Tier is not a free grant: you deposit $50,000 and receive $25,000 in bonus credits.",
+  "claim_steps": [
+    "Confirm fit: earlier-stage startup with real AI workloads (venture-backed preferred; new RunPod customers primarily).",
+    "Apply via the Startup Program page (selective; not every applicant is accepted).",
+    "If accepted into Starter Tier, use the $1,000 credits across Pods, Serverless, Clusters, Endpoints, or Storage.",
+    "Do not treat Growth Tier as free credits — that tier requires a $50,000 upfront commit."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.runpod.io/startup-program",
+      "title": "Startup Program | Runpod",
+      "text": "Starter Tier: Get $1,000 in credits to get started on Runpod with full platform access and self-serve onboarding. Flexible: use credits however fits your workload. Growth Tier: Load $50,000 and get $25,000 in bonus credits."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+# Verified 2026-09-13 against lambda.ai/research plus Lambda CVPR/ICLR pages
+# Research hub: "Apply for a grant" / "Building the future of AI through
+# research and mentorship"
+# CVPR: "offering qualifying researchers up to $5,000 in cloud credits ...
+# using Lambda's Instances"
+# ICLR blog: "the Lambda Research Grant also offers up to $5,000 in credits
+# for Lambda's on-demand Instances. Apply ... at lambda.ai/research."
+# ICLR page describes "independent researchers who need compute"; institutional
+# affiliation is not stated as a hard requirement on the pages checked.
+title: Lambda Research Grant
+provider: Lambda
+category: api_provider
+amount: Up to $5,000 Lambda Cloud GPU (on-demand Instance) credits; research-and-mentorship framing on the grant hub
+expiry_date: null
+source_url: https://lambda.ai/research
+verified_date: 2026-09-13
+verification: social_proof
+review_status: under-review
+signup: required

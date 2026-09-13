@@ -1,0 +1,17 @@
+# Verified 2026-09-13 against Anthropic Help Center AI for Science article
+# ("If successful, we will apply up to $20,000 in API credits to your account
+# for a 6-month period.")
+# ("these credits are for API use and do not apply to the Claude web app")
+# Aug 2026 news also: "you can apply to our AI for Science program for up to
+# $50,000 in credits per project"
+# Monthly review: first Monday of each month.
+title: Anthropic AI for Science
+provider: Anthropic
+category: api_provider
+amount: Free Claude API credits for high-impact research; Help Center cites up to $20,000 for 6 months; Aug 2026 news cites up to $50,000 per project
+expiry_date: null
+source_url: https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program
+verified_date: 2026-09-13
+verification: social_proof
+review_status: under-review
+signup: required

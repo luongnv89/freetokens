@@ -1,0 +1,20 @@
+# Verified 2026-09-13 against https://claude.com/programs/team-plan-for-scientists
+# ("10,000 scientists around the world can now get Claude at no cost to start.
+# Verified principal investigators qualify for a Claude Team subscription plan
+# and then add their research team to Standard Seats for free, or Premium seats
+# for $15 per month.")
+# ("Standard seats are free. Premium seats are $15 per month. This is
+# promotional pricing for verified research groups, available for 12 months")
+# ("Access to Claude Science, Code, & Cowork")
+# ("Most applications are reviewed within 5-7 business days.")
+# ("Limited availability, final pricing confirmed after verification at sign up")
+title: Claude Team plan for scientists
+provider: Anthropic
+category: coding
+amount: 10,000 seats; Standard seats $0/mo for 12 months; Premium $15/mo (5x usage); Claude Science, Code, and Cowork; limited availability
+expiry_date: null
+source_url: https://claude.com/programs/team-plan-for-scientists
+verified_date: 2026-09-13
+verification: social_proof
+review_status: under-review
+signup: required

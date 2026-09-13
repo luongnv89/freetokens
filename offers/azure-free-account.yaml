@@ -1,0 +1,17 @@
+# Verified 2026-09-13 against https://azure.microsoft.com/en-us/free/
+# ("Access to full catalog of services up to free amounts and $200 credit")
+# ("$200 credit to use on Azure services within 30 days")
+# ("Spending protection—credit card won’t be charged")
+# ("Move to pay-as-you-go pricing to continue beyond 30 days or after credit
+# is used up")
+# Distinct from the existing Azure for Students listing.
+title: Azure Free Account
+provider: Microsoft Azure
+category: api_provider
+amount: $200 credit for 30 days plus always-free and 12-month free-service amounts for new customers
+expiry_date: null
+source_url: https://azure.microsoft.com/en-us/free/
+verified_date: 2026-09-13
+verification: social_proof
+review_status: under-review
+signup: required

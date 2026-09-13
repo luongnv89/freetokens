@@ -1,0 +1,28 @@
+{
+  "summary": "Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement.",
+  "claim_steps": [
+    "Review the grant CTA on lambda.ai/research.",
+    "Apply for the Lambda Research Grant (competitive; qualifying researchers).",
+    "If awarded, use credits on Lambda on-demand GPU Instances."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://lambda.ai/research",
+      "title": "AI Research & Publications on AI Computing Platform | Lambda",
+      "text": "Apply for a grant. Building the future of AI through research and mentorship. Breakthroughs backed by Lambda: Bold ideas, funded and refined through the Lambda Research Grant."
+    },
+    {
+      "type": "link",
+      "url": "https://lambda.ai/cvpr",
+      "title": "Lambda at CVPR 2026",
+      "text": "We're committed to supporting groundbreaking research by offering qualifying researchers up to $5,000 in cloud credits to develop and showcase their work using Lambda's Instances, with select research to be featured on our website."
+    },
+    {
+      "type": "link",
+      "url": "https://lambda.ai/blog/iclr-2026-12-papers",
+      "title": "ICLR 2026: 12 papers on making AI systems reliable, efficient, and secure",
+      "text": "For independent researchers who need compute, the Lambda Research Grant also offers up to $5,000 in credits for Lambda's on-demand Instances. Apply for the Lambda Research Grant at lambda.ai/research."
+    }
+  ]
+}

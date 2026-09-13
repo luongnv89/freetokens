@@ -1,0 +1,23 @@
+{
+  "summary": "Anthropic's Claude Team plan for scientists offers promotional Team seating to verified principal investigators (or equivalent) at academic or nonprofit research institutions. Standard seats are free; Premium seats are $15/month (regularly $100) with 5x usage. The promotion covers 12 months from signup, is limited to about 10,000 seats, and is not guaranteed. Includes Claude Science, Code, and Cowork. Verification typically takes 5–7 business days. 1–25 seats per group; larger groups contact Anthropic. This is a Claude.ai Team subscription, distinct from API credit grants in AI for Science.",
+  "claim_steps": [
+    "Confirm you are a PI or equivalent at an accredited university or nonprofit research institute (natural sciences, math, CS, engineering, related fields).",
+    "Complete the verification form on claude.com/programs/team-plan-for-scientists.",
+    "Wait for review (most applications 5–7 business days) and the approval email.",
+    "Add lab members as Standard (free) or Premium ($15/mo) seats. Final pricing is confirmed after verification."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://claude.com/programs/team-plan-for-scientists",
+      "title": "Claude Team plan for scientists | Claude by Anthropic",
+      "text": "10,000 scientists around the world can now get Claude at no cost to start. Verified principal investigators qualify for a Claude Team subscription plan and then add their research team to Standard Seats for free, or Premium seats for $15 per month. Promotional pricing for 12 months."
+    },
+    {
+      "type": "link",
+      "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
+      "title": "Expanding our support for scientists",
+      "text": "We are opening 10,000 seats for scientists around the world to access Claude subscriptions for free and at discounted rates for one year through our new Claude team plan for scientists. Standard seats will be free and premium seats with 5x usage limits will be available for $15 per month."
+    }
+  ]
+}
