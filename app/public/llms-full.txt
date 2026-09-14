@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-13T06:54:38Z — 101 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-14T05:44:47Z — 101 active offers.
 
 ## Offers (full)
 
@@ -27,6 +27,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-13T06:54:38Z — 
 - Page: https://freetokens.custats.info/offers/openrouter-for-startups.html
 - Summary: OpenRouter for Startups grants approved pre-Series B AI-native startups up to $5,000 in universal inference credits across 500+ models, plus waived processing fees (platform and BYOK) for 12 months. Marketing and FAQ state those figures; program terms say amounts and duration are at OpenRouter's discretion, with a ceiling of $5,000 and/or fee waivers up to 12 months. Most credits expire 6 months after issuance. Applications require an approved-partner referral, a public company website, a professional company-domain email, a valid OpenRouter account with under $500 lifetime spend, and no prior startup-program credits.
 - Claim steps: Confirm eligibility: pre-Series B, AI-native product, public website, company-domain professional email, OpenRouter account with under $500 lifetime spend, no prior startup credits, and a referral from an approved OpenRouter partner. | Submit the application on openrouter.ai/startup-program (rolling review). | If approved, credits and fee waivers are applied to the OpenRouter account tied to the applicant email. | Use credits across OpenRouter models; BYOK processing fees are also waived for 12 months if approved. Most credits expire 6 months after issuance.
+
+### NVIDIA Inception Startup Program
+- Provider: NVIDIA
+- Category: startup_program
+- Amount: Free program with cloud credits from NVIDIA and partners, free technical training, SDKs and model libraries, preferred hardware pricing, and investor exposure via Capital Connect; amounts at NVIDIA discretion, rolling applications with no fees or deadlines
+- Status: active — expiry ongoing
+- Verified: 2026-09-13 (social_proof / under-review, signup required)
+- Source: https://www.nvidia.com/en-us/startups/
+- Page: https://freetokens.custats.info/offers/nvidia-inception-startup-program.html
+- Summary: NVIDIA Inception is a free, rolling startup program (verified Sep 13, 2026): free cloud credits from NVIDIA and partners, free technical courses and workshops, latest SDKs and model libraries, preferred pricing on NVIDIA hardware/software, investor exposure via Capital Connect, and go-to-market support. No application fees, deadlines, or cohorts; applications are reviewed by NVIDIA. Distinct from the NVIDIA NIM free trial and Inception Labs listings.
+- Claim steps: Confirm fit: AI startup, application reviewed by NVIDIA after submission. | Apply at nvidia.com/en-us/startups with business and product details; no fees, deadlines, or cohorts. | If accepted, access free cloud credits from NVIDIA and partners, training, SDKs, preferred hardware pricing, and Capital Connect investor exposure.
 
 ### Lambda Research Grant
 - Provider: Lambda
@@ -236,17 +247,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-13T06:54:38Z — 
 - Page: https://freetokens.custats.info/offers/zed-student-pro.html
 - Summary: Zed Pro free for 1 year + $10/month in AI token credits for verified university students. Includes unlimited edit predictions, real-time multiplayer collaboration, and all Zed Pro features.
 - Claim steps: Sign in with a GitHub account older than 30 days on the Zed education dashboard. | Share your valid and current university (.edu) email address for verification. | Once verified, Zed Pro is free for 12 months and $10/month in AI token credits are applied.
-
-### ZCode Weekend Build — 300M Free GLM-5.3-Flash Tokens
-- Provider: ZCode
-- Category: coding
-- Amount: 300M GLM-5.3-Flash tokens per person — Fri 8AM to Sun 6PM PT, two batches, first come first served
-- Status: active — expiry 2026-09-13
-- Verified: 2026-09-11 (social_proof / under-review, signup required)
-- Source: https://x.com/zixuanli_/status/2098390028787339666
-- Page: https://freetokens.custats.info/offers/zcode-weekend-build-4-300m-tokens.html
-- Summary: ZCode Weekend Build continues (announced Sep 11, 2026 by Zixuan Li): 300M free GLM-5.3-Flash tokens per person, claimable in the ZCode desktop app via the bottom-left event card. Window is Fri 8AM to Sun 6PM PT (Sep 11-13, 2026), released in two batches (Fri and Sat), first come, first served. Coding Plan users can use Flash on ZCode with no quota cost from 8AM to 6PM PT every day. Follows the expired Weekend Build IV round (Sep 5-6, 300M per person).
-- Claim steps: Install and open the ZCode desktop app from https://zcode.z.ai (macOS, Windows, and Linux builds available), or update/restart your existing install. | Sign in with your Z.ai account in ZCode. | After the window opens — Fri 8AM PT — look for the Weekend Build card in the bottom-left of the app. | If the card is not visible, restart the app. | Tap the card and claim: 300M GLM-5.3-Flash tokens per person; released in two batches (Fri and Sat), first come, first served. | Coding Plan users can use Flash on ZCode with no quota cost from 8AM to 6PM PT every day during the window.
 
 ### YepAPI $5 Signup Credit
 - Provider: YepAPI
