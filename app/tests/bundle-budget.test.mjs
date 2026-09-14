@@ -34,9 +34,12 @@ import { gzipSync } from "node:zlib";
 // 2026-09-13 (#383–#390): JS ceiling 134_500 -> 139_000 — catalog growth
 // (OpenRouter Startups, Claude scientists, AI for Science, RunPod Starter,
 // Lambda grant, Azure free, CometAPI, 1min.AI). Local gzip 137,922 B.
+// 2026-09-14 (#397–#402): JS ceiling 139_000 -> 142_500 — catalog growth
+// (Requesty startup + free models, TinyFish student, Liner grant, Free.ai,
+// OrcaRouter). Local gzip 141,362 B.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-export const JS_GZIP_CEILING_BYTES = 139_000;
+export const JS_GZIP_CEILING_BYTES = 142_500;
 // CSS gzip history: 8_000 through the dark redesign (9,301 gzipped after the
 // hot-today shelf), then 10_000 for the offer-detail rebuild (9,833). The
 // warm-linen redesign — two-scheme tokens, serif @font-face blocks, the

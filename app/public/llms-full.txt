@@ -2,9 +2,86 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-14T05:44:47Z — 101 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-14T07:36:58Z — 107 active offers.
 
 ## Offers (full)
+
+### TinyFish Student Program — $35 Credits
+- Provider: TinyFish
+- Category: student
+- Amount: $35 wallet credit automatic on .edu signup plus bounty-board gift cards for approved builds ($50 agentic apps, $20 Skills, $10 prompts)
+- Status: active — expiry ongoing
+- Verified: 2026-09-14 (social_proof / under-review, signup required)
+- Source: https://www.tinyfish.ai/students
+- Page: https://freetokens.custats.info/offers/tinyfish-student-program-35-credits.html
+- Summary: Currently enrolled students who sign up with a .edu address receive $35 wallet credit automatically — a .edu address is the only check and there is nothing else to claim. The program also runs a monthly Bounty Board: approved agentic apps earn a $50 gift card, Skills $20, and prompts $10. Gift cards go to every student from day one. If the student email is not .edu, the page says to email community@tinyfish.ai. Sign up at agent.tinyfish.ai; bounty submissions are at tinybounties.com.
+- Claim steps: Sign up at agent.tinyfish.ai with a currently enrolled student .edu address — $35 wallet credit is added automatically. | If your student email is not .edu, email community@tinyfish.ai as the program page instructs. | Sign in at tinybounties.com to claim a monthly bounty, build it, and submit repo/social links for gift-card review.
+
+### Requesty Startup Program — $1,000 Credits
+- Provider: Requesty
+- Category: startup_program
+- Amount: $1,000 in AI credits across 600+ models + 6 months with no gateway fee (then 5% on model cost, or 0% with own keys); VC/accelerator-backed (YC, 20VC, Tapestry, TinyVC, or comparable)
+- Status: active — expiry ongoing
+- Verified: 2026-09-14 (social_proof / under-review, signup required)
+- Source: https://www.requesty.ai/startup
+- Page: https://freetokens.custats.info/offers/requesty-startup-program-1000-credits.html
+- Summary: Requesty grants approved early-stage startups $1,000 in credits spendable on any of 600+ models across 30+ providers, plus six months with no gateway fee (pay model cost only). After those six months the markup is 5% on model cost, or 0% with your own keys. Eligibility is VC or accelerator backing: YC, 20VC, Tapestry, TinyVC, or a comparable fund. Apply with a work email; Requesty says review is within 48 hours and credits are applied to the organization.
+- Claim steps: Confirm the company is backed by YC, 20VC, Tapestry, TinyVC, or a comparable accelerator or VC. | Apply at requesty.ai/startup with a work email, company name, affiliation, and optional raise details. | Wait for review (the page says within 48 hours); credits are applied to the organization.
+
+### Requesty Free Tier — Free Models
+- Provider: Requesty
+- Category: api_provider
+- Amount: Free Nemotron/Laguna/Gemma/Leanstral models; 200 req/day + 20 RPM for new orgs (1,000/day + 60 RPM if paying); no credit card
+- Status: active — expiry ongoing
+- Verified: 2026-09-14 (social_proof / under-review, signup required)
+- Source: https://www.requesty.ai/pricing
+- Page: https://freetokens.custats.info/offers/requesty-free-models.html
+- Summary: Requesty's Free tier gives access to listed models at $0 through the same OpenAI-compatible gateway (NVIDIA Nemotron 3 Ultra/Super/Nano, Poolside Laguna, Google Gemma 4, Mistral Leanstral, and a Nemotron content-safety model). New organizations get 200 requests per day and 20 RPM across all free models combined; paying organizations get 1,000/day and 60 RPM. No credit card. Docs say these models are free for now and any pricing change will be announced in the changelog.
+- Claim steps: Create a Requesty account at requesty.ai/pricing (no credit card required). | Create an API key and call router.requesty.ai/v1 with a listed free model id (for example nvidia/nemotron-3-super-120b-a12b). | Stay within the org-wide free-model limits: 200 requests/day and 20 RPM until the org is paying.
+
+### OrcaRouter Free Credits & $0 Models
+- Provider: OrcaRouter
+- Category: api_provider
+- Amount: Live voucher/student/hackathon API credits (amounts on each offer card) plus rotating $0 models; most open claims need no card
+- Status: active — expiry ongoing
+- Verified: 2026-09-14 (social_proof / under-review, signup required)
+- Source: https://www.orcarouter.ai/offers
+- Page: https://freetokens.custats.info/offers/orcarouter-free-credits.html
+- Summary: OrcaRouter's offers page lets you claim live voucher, student, and hackathon API credits (dollar amounts, scope, and expiry are printed on each card at claim time) and call a rotating set of $0 models. Create an account and claim an open offer with no payment method; a few partner offers are labelled card-required. Always-free $0 models are for established accounts (GitHub with some history, or any paid purchase). Promo credit expiry is shown before confirm; $0 models stay free while they remain in the lineup. Docs currently list DeepSeek V4 -free ids and the orcarouter/free router.
+- Claim steps: Create an account at orcarouter.ai (the offers page says an API key takes 30 seconds; no card, no sales call). | Open orcarouter.ai/offers and claim a live open offer; student/community offers unlock with an eligible email or invite code. | Call rotating $0 models (for example orcarouter/free or a -free catalog id) on the OpenAI-compatible endpoint; link GitHub with history if a free-model request is declined.
+
+### Liner Startup Grant — up to $1,000 API Credits
+- Provider: Liner
+- Category: startup_program
+- Amount: Up to $1,000 in Liner Search/Search Agent API credits; no equity
+- Status: active — expiry ongoing
+- Verified: 2026-09-14 (social_proof / under-review, signup required)
+- Source: https://build.liner.com/blog/liner-startup-grant-program
+- Page: https://freetokens.custats.info/offers/liner-startup-grant.html
+- Summary: The Liner Startup Grant Program gives eligible early-stage startups up to $1,000 in Liner API credits, including Search API and Search Agent API, with no equity taken and nothing to repay. The application asks for company email, company name, company website, and which product you will build on; Liner confirms by email. Current eligibility terms are listed on the application itself. The 2026-07-30 blog (last updated 2026-07-28) is the official program write-up.
+- Claim steps: Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes). | Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on. | Watch email for Liner's confirmation; the post says self-serve credit programs like this move in days.
+
+### Free.ai — 30,000 Tokens/Day + API
+- Provider: Free.ai
+- Category: api_provider
+- Amount: 30,000 tokens/day on signup (6,000 anonymous); OpenAI-compatible API to 400+ tools; no credit card
+- Status: active — expiry ongoing
+- Verified: 2026-09-14 (social_proof / under-review, signup required)
+- Source: https://free.ai/
+- Page: https://freetokens.custats.info/offers/free-ai-30000-tokens-day.html
+- Summary: Free.ai grants 30,000 tokens/day after a free email signup (6,000/day if you stay anonymous). No credit card. Tokens reset every 24 hours and can be spent across 400+ tools; free accounts also cap heavy tools at 1 video, 2 music tracks, 5 images, and 5 image edits per day. A free account unlocks the OpenAI-compatible developer API at api.free.ai, which shares the same daily pool. The API docs How-it-works line says "Purchase tokens, then generate your key," but the same page's FAQ and rate table list a Free plan at 30K tokens/day and $0.
+- Claim steps: Sign up at free.ai/signup with an email (no password or credit card; they send a link to set a password later). | Use the 30,000 daily tokens on the site, or open free.ai/api/ to generate an sk-free- API key. | Call https://api.free.ai with the OpenAI-compatible /v1/chat/ endpoint (and other tool endpoints) until the daily pool resets.
+
+### AssemblyAI $50 Free Credits
+- Provider: AssemblyAI
+- Category: voice
+- Amount: $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire
+- Status: active — expiry ongoing
+- Verified: 2026-09-14 (social_proof / under-review, signup required)
+- Source: https://www.assemblyai.com/docs/billing-and-pricing
+- Page: https://freetokens.custats.info/offers/assemblyai-50-free-credits.html
+- Summary: New AssemblyAI accounts receive $50 in free credits that do not expire. Credits apply to Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, and Guardrails. LLM Gateway is billed from the account balance from the first request and is not covered by the free tier. No credit card is required to start; add a card after credits are used up to keep using the API.
+- Claim steps: Create a free AssemblyAI account at assemblyai.com (no credit card required). | Open the dashboard and copy an API key. | Use Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, or Guardrails — $50 in credits apply automatically. | Do not expect LLM Gateway usage to be covered by the free credits.
 
 ### RunPod Startup Program — Starter Tier
 - Provider: RunPod
@@ -972,17 +1049,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-14T05:44:47Z — 
 - Page: https://freetokens.custats.info/offers/azure-for-students.html
 - Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
 - Claim steps: Go to https://azure.microsoft.com/en-us/free/students and click Activate. | Sign in with your school email and complete student verification via the Azure Education Hub. | Once approved, start building with $100 credit and free-tier services for 12 months.
-
-### AssemblyAI $50 Free Credits
-- Provider: AssemblyAI
-- Category: voice
-- Amount: $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire
-- Status: active — expiry ongoing
-- Verified: 2026-09-11 (social_proof / under-review, signup required)
-- Source: https://www.assemblyai.com/docs/billing-and-pricing
-- Page: https://freetokens.custats.info/offers/assemblyai-50-free-credits.html
-- Summary: New AssemblyAI accounts receive $50 in free credits that do not expire. Credits apply to Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, and Guardrails. LLM Gateway is billed from the account balance from the first request and is not covered by the free tier. No credit card is required to start; add a card after credits are used up to keep using the API.
-- Claim steps: Create a free AssemblyAI account at assemblyai.com (no credit card required). | Open the dashboard and copy an API key. | Use Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, or Guardrails — $50 in credits apply automatically. | Do not expect LLM Gateway usage to be covered by the free credits.
 
 ### Free starter credits for new Claude Console accounts
 - Provider: Anthropic

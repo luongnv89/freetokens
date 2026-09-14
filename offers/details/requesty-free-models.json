@@ -1,0 +1,22 @@
+{
+  "summary": "Requesty's Free tier gives access to listed models at $0 through the same OpenAI-compatible gateway (NVIDIA Nemotron 3 Ultra/Super/Nano, Poolside Laguna, Google Gemma 4, Mistral Leanstral, and a Nemotron content-safety model). New organizations get 200 requests per day and 20 RPM across all free models combined; paying organizations get 1,000/day and 60 RPM. No credit card. Docs say these models are free for now and any pricing change will be announced in the changelog.",
+  "claim_steps": [
+    "Create a Requesty account at requesty.ai/pricing (no credit card required).",
+    "Create an API key and call router.requesty.ai/v1 with a listed free model id (for example nvidia/nemotron-3-super-120b-a12b).",
+    "Stay within the org-wide free-model limits: 200 requests/day and 20 RPM until the org is paying."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.requesty.ai/pricing",
+      "title": "Pricing: Free Tier & Pay-As-You-Go LLM Gateway | Requesty",
+      "text": "The full platform, on free models. Access to all free models. 200 requests per day. No credit card required. Start free with 200 requests a day, or pay as you go for 5% on model cost."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.requesty.ai/features/free-models",
+      "title": "Free Models",
+      "text": "Requesty offers a selection of models that are free to use. New organizations: 200 requests per day, 20 per minute. Paying organizations: 1,000 requests per day, 60 per minute. The limits apply across all free models combined."
+    }
+  ]
+}

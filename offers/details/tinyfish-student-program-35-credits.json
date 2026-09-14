@@ -1,0 +1,16 @@
+{
+  "summary": "Currently enrolled students who sign up with a .edu address receive $35 wallet credit automatically — a .edu address is the only check and there is nothing else to claim. The program also runs a monthly Bounty Board: approved agentic apps earn a $50 gift card, Skills $20, and prompts $10. Gift cards go to every student from day one. If the student email is not .edu, the page says to email community@tinyfish.ai. Sign up at agent.tinyfish.ai; bounty submissions are at tinybounties.com.",
+  "claim_steps": [
+    "Sign up at agent.tinyfish.ai with a currently enrolled student .edu address — $35 wallet credit is added automatically.",
+    "If your student email is not .edu, email community@tinyfish.ai as the program page instructs.",
+    "Sign in at tinybounties.com to claim a monthly bounty, build it, and submit repo/social links for gift-card review."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.tinyfish.ai/students",
+      "title": "TinyFish Student Program. Free credits, real bounties, and proof of work.",
+      "text": "$35 in your wallet at signup, on a .edu address. Sign up with it and the credit is automatic — a .edu address is the only check, and there is nothing to claim. Agentic apps earn 50 points and a $50 gift card, Skills earn 20 and $20, and prompts earn 10 and $10."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "summary": "The Liner Startup Grant Program gives eligible early-stage startups up to $1,000 in Liner API credits, including Search API and Search Agent API, with no equity taken and nothing to repay. The application asks for company email, company name, company website, and which product you will build on; Liner confirms by email. Current eligibility terms are listed on the application itself. The 2026-07-30 blog (last updated 2026-07-28) is the official program write-up.",
+  "claim_steps": [
+    "Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes).",
+    "Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on.",
+    "Watch email for Liner's confirmation; the post says self-serve credit programs like this move in days."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://build.liner.com/blog/liner-startup-grant-program",
+      "title": "Liner Startup Grant Program: $1,000 in API Credits",
+      "text": "The Liner Startup Grant Program gives eligible startups up to $1,000 in Liner API credits. The grant is up to $1,000 in credits across the Liner API, including the Liner Search API and the Search Agent API. You keep 100 percent of your equity, and there is nothing to pay back."
+    },
+    {
+      "type": "link",
+      "url": "https://liner.com/developers/docs/pricing",
+      "title": "Pricing | Liner Developers",
+      "text": "Credits are a prepaid balance used to pay for API use. Search Agent is $20 per 1,000 requests; Quick Answer Agent is $3 per 1,000 requests; Deep Research Agent is $200 per 1,000 requests."
+    }
+  ]
+}

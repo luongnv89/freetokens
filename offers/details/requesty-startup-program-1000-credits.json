@@ -1,0 +1,16 @@
+{
+  "summary": "Requesty grants approved early-stage startups $1,000 in credits spendable on any of 600+ models across 30+ providers, plus six months with no gateway fee (pay model cost only). After those six months the markup is 5% on model cost, or 0% with your own keys. Eligibility is VC or accelerator backing: YC, 20VC, Tapestry, TinyVC, or a comparable fund. Apply with a work email; Requesty says review is within 48 hours and credits are applied to the organization.",
+  "claim_steps": [
+    "Confirm the company is backed by YC, 20VC, Tapestry, TinyVC, or a comparable accelerator or VC.",
+    "Apply at requesty.ai/startup with a work email, company name, affiliation, and optional raise details.",
+    "Wait for review (the page says within 48 hours); credits are applied to the organization."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.requesty.ai/startup",
+      "title": "Startup Program | Requesty",
+      "text": "$1,000 in AI credits for early teams. Enough credit to build a real product on frontier models, and six months with no gateway fee while you do it. After the six months: 5% on model cost, or 0% with your own keys."
+    }
+  ]
+}
