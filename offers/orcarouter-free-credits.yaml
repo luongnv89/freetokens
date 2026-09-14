@@ -1,0 +1,16 @@
+# Verified 2026-09-14 against https://www.orcarouter.ai/offers
+# ("Claim free AI API credits from live voucher drops, student programs and
+# partner hackathons — then call a rotating set of free AI models at $0.")
+# ("Creating an account and claiming an open offer requires no payment method.")
+# Individual voucher dollar amounts are shown on JS offer cards at claim time
+# and were not readable from the static HTML; amount stays qualitative.
+title: OrcaRouter Free Credits & $0 Models
+provider: OrcaRouter
+category: api_provider
+amount: Live voucher/student/hackathon API credits (amounts on each offer card) plus rotating $0 models; most open claims need no card
+expiry_date: null
+source_url: https://www.orcarouter.ai/offers
+verified_date: 2026-09-14
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,28 @@
+{
+  "summary": "Free.ai grants 30,000 tokens/day after a free email signup (6,000/day if you stay anonymous). No credit card. Tokens reset every 24 hours and can be spent across 400+ tools; free accounts also cap heavy tools at 1 video, 2 music tracks, 5 images, and 5 image edits per day. A free account unlocks the OpenAI-compatible developer API at api.free.ai, which shares the same daily pool. The API docs How-it-works line says \"Purchase tokens, then generate your key,\" but the same page's FAQ and rate table list a Free plan at 30K tokens/day and $0.",
+  "claim_steps": [
+    "Sign up at free.ai/signup with an email (no password or credit card; they send a link to set a password later).",
+    "Use the 30,000 daily tokens on the site, or open free.ai/api/ to generate an sk-free- API key.",
+    "Call https://api.free.ai with the OpenAI-compatible /v1/chat/ endpoint (and other tool endpoints) until the daily pool resets."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://free.ai/",
+      "title": "Free AI Tools - Chat, Image, Video, Code | Free.ai",
+      "text": "Anonymous users get 6,000 tokens/day. Sign up free for 30,000 tokens/day. No credit card required. Developers can access all tools via our REST API. Sign up for a free account to get an API key."
+    },
+    {
+      "type": "link",
+      "url": "https://free.ai/signup/",
+      "title": "Sign Up Free | Free.ai",
+      "text": "Get 30,000 free tokens/day. No credit card required. No credit card required 30,000 free tokens/day."
+    },
+    {
+      "type": "link",
+      "url": "https://free.ai/api/",
+      "title": "Free.ai API - Access 400+ AI Tools",
+      "text": "Is the API free? Yes! Free accounts get 30K tokens/day. Free plan: 30K/day (pool), 10 API requests/min, $0. The /v1/chat/ endpoint follows the OpenAI chat completions format."
+    }
+  ]
+}

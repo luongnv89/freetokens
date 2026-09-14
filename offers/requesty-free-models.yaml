@@ -1,0 +1,15 @@
+# Verified 2026-09-14 against https://docs.requesty.ai/features/free-models
+# ("Requesty offers a selection of models that are free to use.")
+# ("New organizations | 200 | 20" / "Paying organizations | 1,000 | 60")
+# Pricing page: "Access to all free models 200 requests per day ... No credit
+# card required" / "Start free with 200 requests a day"
+title: Requesty Free Tier — Free Models
+provider: Requesty
+category: api_provider
+amount: Free Nemotron/Laguna/Gemma/Leanstral models; 200 req/day + 20 RPM for new orgs (1,000/day + 60 RPM if paying); no credit card
+expiry_date: null
+source_url: https://www.requesty.ai/pricing
+verified_date: 2026-09-14
+verification: social_proof
+review_status: under-review
+signup: required

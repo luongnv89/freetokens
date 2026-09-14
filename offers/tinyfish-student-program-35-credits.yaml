@@ -1,0 +1,15 @@
+# Verified 2026-09-14 against https://www.tinyfish.ai/students
+# ("$35 in your wallet at signup, on a .edu address" / "Sign up with it and
+# the credit is automatic — a .edu address is the only check, and there is
+# nothing to claim.")
+# ("Approved work earns a gift card, points, and publication with your name.")
+title: TinyFish Student Program — $35 Credits
+provider: TinyFish
+category: student
+amount: $35 wallet credit automatic on .edu signup plus bounty-board gift cards for approved builds ($50 agentic apps, $20 Skills, $10 prompts)
+expiry_date: null
+source_url: https://www.tinyfish.ai/students
+verified_date: 2026-09-14
+verification: social_proof
+review_status: under-review
+signup: required

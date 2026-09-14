@@ -1,0 +1,15 @@
+# Verified 2026-09-14 against https://free.ai/
+# ("Anonymous users get 6,000 tokens/day. Sign up free for 30,000 tokens/day")
+# ("No credit card required. Sign up free for 3x more usage.")
+# Signup page: "Get 30,000 free tokens/day. No credit card required."
+# API FAQ: "Free accounts get 30K tokens/day"
+title: Free.ai — 30,000 Tokens/Day + API
+provider: Free.ai
+category: api_provider
+amount: 30,000 tokens/day on signup (6,000 anonymous); OpenAI-compatible API to 400+ tools; no credit card
+expiry_date: null
+source_url: https://free.ai/
+verified_date: 2026-09-14
+verification: social_proof
+review_status: under-review
+signup: required

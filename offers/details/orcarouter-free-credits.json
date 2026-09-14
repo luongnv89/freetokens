@@ -1,0 +1,34 @@
+{
+  "summary": "OrcaRouter's offers page lets you claim live voucher, student, and hackathon API credits (dollar amounts, scope, and expiry are printed on each card at claim time) and call a rotating set of $0 models. Create an account and claim an open offer with no payment method; a few partner offers are labelled card-required. Always-free $0 models are for established accounts (GitHub with some history, or any paid purchase). Promo credit expiry is shown before confirm; $0 models stay free while they remain in the lineup. Docs currently list DeepSeek V4 -free ids and the orcarouter/free router.",
+  "claim_steps": [
+    "Create an account at orcarouter.ai (the offers page says an API key takes 30 seconds; no card, no sales call).",
+    "Open orcarouter.ai/offers and claim a live open offer; student/community offers unlock with an eligible email or invite code.",
+    "Call rotating $0 models (for example orcarouter/free or a -free catalog id) on the OpenAI-compatible endpoint; link GitHub with history if a free-model request is declined."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.orcarouter.ai/offers",
+      "title": "Free AI API Credits & Free AI Models — OrcaRouter Offers",
+      "text": "Claim free AI API credits from live voucher drops, student programs and partner hackathons — then call a rotating set of free AI models at $0. Creating an account and claiming an open offer requires no payment method."
+    },
+    {
+      "type": "link",
+      "url": "https://www.orcarouter.ai/blog/free-llm-api-what-it-costs",
+      "title": "Free LLM API in 2026: What's Free, What It Costs You",
+      "text": "OrcaRouter runs a rotating set of free AI models callable at $0 per token, alongside free API credits from open voucher drops, student programs and partner hackathons. Creating an account and claiming an open offer requires no payment method."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.orcarouter.ai/routing/free-models",
+      "title": "Free Models",
+      "text": "Some models are served at no charge under a model id ending in -free. They are ordinary catalog models priced at $0. Today that is the DeepSeek V4 line: deepseek/deepseek-v4-flash-free and deepseek/deepseek-v4-pro-free."
+    },
+    {
+      "type": "link",
+      "url": "https://www.orcarouter.ai/models/orcarouter/free",
+      "title": "OrcaRouter Free — difficulty-routed free models",
+      "text": "Call orcarouter/free and it routes each request by difficulty across your workspace's free models — never touching your wallet, with free use capped by request rate rather than a fixed number of calls."
+    }
+  ]
+}

@@ -1,14 +1,16 @@
-# Verified 2026-09-05 against https://www.assemblyai.com/docs/billing-and-pricing
+# Verified 2026-09-14 against https://www.assemblyai.com/docs/billing-and-pricing
 # ("New accounts receive $50 in free credits for Pre-recorded STT, Real-time STT,
-# Voice Agent API, Speech Understanding, and Guardrails. Credits do not expire...")
-# ("LLM Gateway is not included in the free tier.")
+# Voice Agent API, Speech Understanding, and Guardrails. Credits do not expire,
+# and any unused credits are retained on your account when you upgrade by adding
+# a credit card. LLM Gateway is not included in the free tier.")
+# Pricing page: "$50 in free credits at signup, no credit card required."
 title: AssemblyAI $50 Free Credits
 provider: AssemblyAI
 category: voice
 amount: $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire
 expiry_date: null
 source_url: https://www.assemblyai.com/docs/billing-and-pricing
-verified_date: 2026-09-11
+verified_date: 2026-09-14
 verification: social_proof
 review_status: under-review
 signup: required
