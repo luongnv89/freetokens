@@ -8,6 +8,7 @@ Top 20 currently active offers (newest verified first) from 101 active listings.
 
 - [RunPod Startup Program — Starter Tier](https://freetokens.custats.info/offers/runpod-startup-starter-tier.html): RunPod — $1,000 free credits across Pods, Serverless, Clusters, Endpoints, and Storage (Growth tier is $25K bonus only with a $50K commit — not free) (startup_program)
 - [OpenRouter for Startups](https://freetokens.custats.info/offers/openrouter-for-startups.html): OpenRouter — Up to $5,000 promotional inference credits (most expire 6 months after issuance) plus 0% processing fees for 12 months if approved; amount/duration at OpenRouter discretion (startup_program)
+- [NVIDIA Inception Startup Program](https://freetokens.custats.info/offers/nvidia-inception-startup-program.html): NVIDIA — Free program with cloud credits from NVIDIA and partners, free technical training, SDKs and model libraries, preferred hardware pricing, and investor exposure via Capital Connect; amounts at NVIDIA discretion, rolling applications with no fees or deadlines (startup_program)
 - [Lambda Research Grant](https://freetokens.custats.info/offers/lambda-research-grant.html): Lambda — Up to $5,000 Lambda Cloud GPU (on-demand Instance) credits; research-and-mentorship framing on the grant hub (api_provider)
 - [CometAPI Signup Credit](https://freetokens.custats.info/offers/cometapi-signup-credit.html): CometAPI — $0.1 USD free credit in Wallet after register/login (api_provider)
 - [Claude Team plan for scientists](https://freetokens.custats.info/offers/claude-team-plan-for-scientists.html): Anthropic — 10,000 seats; Standard seats $0/mo for 12 months; Premium $15/mo (5x usage); Claude Science, Code, and Cowork; limited availability (coding)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 101 active listings.
 - [Firecrawl Student Program — 10,000 Free Credits](https://freetokens.custats.info/offers/firecrawl-student-program-10k-credits.html): Firecrawl — 10,000 free credits for verified students (academic email; coupon code redeemed in Settings → Billing) (student)
 - [Deepgram $200 Free Credit + Flux TTS (through Sep 14)](https://freetokens.custats.info/offers/deepgram-free-credit.html): Deepgram — $200 signup credit (no card, no expiration) plus Flux TTS free through 2026-09-14 (then paid; up to 45 concurrent streams globally, 5 in EU/AU) (voice)
 - [BytePlus ModelArk — Free-Token Campaign](https://freetokens.custats.info/offers/byteplus-modelark-free-tokens.html): BytePlus — Free-token package per eligible model (e.g. 500,000 tokens/model; actual amount shown on the Model Activation page); requires BytePlus account + enterprise info submission (api_provider)
-- [Alibaba Cloud Model Studio — Free Quota for New Users](https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html): Alibaba Cloud — ~1,000,000 free tokens per eligible model, valid 90 days from activation (real-time inference only; Singapore region, International scope) (api_provider)
 
 ## Pages
 

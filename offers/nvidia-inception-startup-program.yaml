@@ -1,0 +1,18 @@
+# Verified 2026-09-13 against https://www.nvidia.com/en-us/startups/
+# ("Inception is a free program that guides AI startups through the NVIDIA
+# platform and ecosystem." / "Access free cloud credits from NVIDIA and
+# partners" / "You can apply ... regardless of your company's current funding
+# stage. There are no application fees, deadlines, or cohorts.")
+# Social: https://x.com/kseniam0s/status/2099194454758523021 (Sep 13, 2026)
+# Eligibility per social post (developer on team, working website, incorporated,
+# under 10 years old) not restated verbatim on the page; application is reviewed.
+title: NVIDIA Inception Startup Program
+provider: NVIDIA
+category: startup_program
+amount: Free program with cloud credits from NVIDIA and partners, free technical training, SDKs and model libraries, preferred hardware pricing, and investor exposure via Capital Connect; amounts at NVIDIA discretion, rolling applications with no fees or deadlines
+expiry_date: null
+source_url: https://www.nvidia.com/en-us/startups/
+verified_date: 2026-09-13
+verification: social_proof
+review_status: under-review
+signup: required
