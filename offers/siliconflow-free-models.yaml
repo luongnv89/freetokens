@@ -1,12 +1,15 @@
-# Verified 2026-08-31 against https://siliconflow.cn/pricing
-# ("GLM-Z1-9B-0414 THUDM/GLM-Z1-9B-0414 免费 免费")
+# Re-verified 2026-09-15 against https://siliconflow.cn/pricing
+# ("Hunyuan-MT-7B tencent/Hunyuan-MT-7B 免费 免费" /
+# "PaddleOCR-VL-1.5 PaddlePaddle/PaddleOCR-VL-1.5 免费 免费")
+# GLM-Z1-9B-0414 is no longer free (now $0.086/M tokens on siliconflow.com);
+# current free list updated to match the official pricing page.
 title: SiliconFlow Free Models
 provider: SiliconFlow
 category: api_provider
-amount: Selected API models are free for input and output, including GLM-Z1-9B-0414
+amount: Selected API models are free for input and output, incl. Hunyuan-MT-7B and PaddleOCR-VL-1.5 (chat), BGE embedding/reranker models, Kolors (image), and XingChen/Qwen3-ASR/SenseVoiceSmall (speech)
 expiry_date: null
 source_url: https://siliconflow.cn/pricing
-verified_date: 2026-09-11
+verified_date: 2026-09-15
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified

@@ -1,5 +1,5 @@
 {
-  "summary": "SiliconFlow's current API pricing page marks selected models free, including THUDM/GLM-Z1-9B-0414, PaddlePaddle/PaddleOCR-VL-1.5, and tencent/Hunyuan-MT-7B.",
+  "summary": "SiliconFlow's API pricing page marks selected models free for input and output. Currently free: tencent/Hunyuan-MT-7B and PaddlePaddle/PaddleOCR-VL-1.5 (chat), BAAI bge-m3 / bge-reranker-v2-m3 / bge-large-zh-v1.5 / bge-large-en-v1.5 (embeddings), Kwai-Kolors/Kolors (image), and XingChenAGI XingChenGSR-V1.0 / XingChenASR V3.2 / V3.2-Ultra / ASR-Diarize-V3.0, Qwen/Qwen3-ASR-1.7B and FunAudioLLM/SenseVoiceSmall (speech). GLM-Z1-9B-0414 was removed from the free tier and is now paid ($0.086/M tokens).",
   "claim_steps": [
     "Sign in to SiliconFlow Cloud.",
     "Choose a model marked 免费/free in the API pricing catalog.",
@@ -10,7 +10,7 @@
       "type": "link",
       "url": "https://siliconflow.cn/pricing",
       "title": "SiliconFlow API Pricing",
-      "text": "THUDM/GLM-Z1-9B-0414, PaddlePaddle/PaddleOCR-VL-1.5, and tencent/Hunyuan-MT-7B are listed with 免费 input/output prices."
+      "text": "tencent/Hunyuan-MT-7B and PaddlePaddle/PaddleOCR-VL-1.5 are listed with 免费 input/output prices; BAAI bge-* embeddings, Kwai-Kolors/Kolors, and XingChen/Qwen3-ASR/SenseVoiceSmall speech models are marked 免费."
     }
   ]
 }
