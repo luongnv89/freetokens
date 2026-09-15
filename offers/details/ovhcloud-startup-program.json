@@ -1,0 +1,15 @@
+{
+  "summary": "OVHcloud Startup Program: the 12-month Start level gives €10,000 of free cloud credits + 6 hours of 1-on-1 engineer time + visibility; the 12-month Scale level gives up to €100,000 of free cloud credits + up to 20 hours of engineer time. For early-stage startups and scaleups by application.",
+  "claim_steps": [
+    "Apply at startup.ovhcloud.com for the Start or Scale level.",
+    "On acceptance, receive 12 months of credits (€10,000 Start / up to €100,000 Scale) plus engineer 1-on-1 time."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://startup.ovhcloud.com/en/",
+      "title": "OVHcloud Startup Program",
+      "text": "Our 12-month Start level offers you: €10,000 of free cloud credits, 6 hours of 1-on-1 time with an engineer (free). Our 12-month Scale level offers you: Up to €100,000 of free cloud credits, up to 20 hours of 1-on-1 time with an engineer (free)."
+    }
+  ]
+}

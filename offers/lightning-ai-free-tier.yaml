@@ -1,0 +1,16 @@
+# Verified 2026-09-15 against https://lightning.ai/pricing (+ official docs;
+# pricing page is JS-walled to fetch, terms corroborated via official
+# lightning.ai pages in search index)
+# ("You get 5 free Lightning credits upon registration. Add a card for 25
+# more." / "Get up to 80 free GPU hours to start" / "Run 1 Studio free 24/7.
+# No credit card." / "first 10 GB of storage in the Drive for free")
+title: Lightning AI Free Tier
+provider: Lightning AI
+category: api_provider
+amount: 5 free Lightning credits (~$5) on registration, +25 more with a card; up to ~80 free GPU hours after phone verification; 1 free 4-CPU Studio + 10 GB storage free
+expiry_date: null
+source_url: https://lightning.ai/pricing
+verified_date: 2026-09-15
+verification: social_proof
+review_status: under-review
+signup: required

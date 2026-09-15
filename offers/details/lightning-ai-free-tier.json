@@ -1,0 +1,23 @@
+{
+  "summary": "Lightning AI's free tier: 5 free Lightning credits (~$5) on registration, plus 25 more when you add a card; marketing cites up to ~80 free GPU hours after phone verification; every account gets 1 free 4-CPU Studio and the first 10 GB of Drive storage free. Free credits are promotional, non-transferable, and expire 12 months after purchase/grant. (Pricing page is JS-rendered; terms corroborated via official lightning.ai pricing/docs pages in the search index.)",
+  "claim_steps": [
+    "Create a free account at lightning.ai — no credit card required.",
+    "Verify your phone number to receive up to ~80 free GPU hours.",
+    "Get 5 free Lightning credits on registration; add a card for 25 more.",
+    "Start on the free 4-CPU Studio; switch to GPU when ready to run."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://lightning.ai/pricing",
+      "title": "Lightning AI — Pricing",
+      "text": "Get up to 80 free GPU hours to start. Then pay-as-you-go. Run 1 Studio free 24/7. No credit card. No commitments. You get 5 free Lightning credits upon registration. Add a card for 25 more."
+    },
+    {
+      "type": "link",
+      "url": "https://lightning.ai/docs/platform/build/ai-studio",
+      "title": "AI Studio (workspace) — Lightning AI Docs",
+      "text": "Create a free account - no credit card required. Verify your phone number to receive up to 80 free GPU hours to start. All users receive 5 free credits (1 credit equals $1 USD). Add a card for 25 more."
+    }
+  ]
+}

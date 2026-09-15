@@ -1,0 +1,16 @@
+{
+  "summary": "DigitalOcean Startups (Hatch) gives approved startups 12 months of DigitalOcean credits (amount varies by partner award level), 15 months of free Standard-tier support, and select startups are invited to apply for GPU credit packages. Eligibility: raised $10M or less, company website with matching email domain, registered DigitalOcean team account with a business/company email; AI-native startups are prioritized and service-based businesses are ineligible. Core credits exclude some GPU/dedicated inference products.",
+  "claim_steps": [
+    "Create a registered DigitalOcean team account with a business/company email (not personal).",
+    "Apply via digitalocean.com/hatch — directly or through a DigitalOcean Startups partner.",
+    "Eligibility: raised ≤$10M, company website + matching email; AI-native prioritized; service businesses ineligible."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.digitalocean.com/hatch",
+      "title": "DigitalOcean Startups (Hatch)",
+      "text": "12 months to scale: Get the cloud infrastructure you need with DigitalOcean credits (amount varies). Select startups will be invited to apply for GPU credit packages. Must have raised $10m or less. Must have a company website, and an email address associated with the company website. Must create a registered DigitalOcean team account with a business/company email."
+    }
+  ]
+}
