@@ -1,5 +1,5 @@
 {
-  "summary": "Kiro for Startups gives early-stage to Series A VC-backed startups up to one year's worth of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center.",
+  "summary": "Kiro for Startups gives early-stage to Series A VC-backed startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center.",
   "claim_steps": [
     "Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain.",
     "Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30).",

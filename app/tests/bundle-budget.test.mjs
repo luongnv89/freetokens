@@ -39,7 +39,11 @@ import { gzipSync } from "node:zlib";
 // OrcaRouter). Local gzip 141,362 B.
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 
-export const JS_GZIP_CEILING_BYTES = 142_500;
+// 2026-09-15 (#406): JS ceiling 142_500 -> 147_500 — catalog growth (12 new
+// offers: Kiro, AWS Activate, Perplexity, OpenAI, Microsoft, Lightning,
+// Copilot Student, Fireworks, Modal, OVHcloud, DigitalOcean, Tencent).
+// Local gzip 145,951 B.
+export const JS_GZIP_CEILING_BYTES = 147_500;
 // CSS gzip history: 8_000 through the dark redesign (9,301 gzipped after the
 // hot-today shelf), then 10_000 for the offer-detail rebuild (9,833). The
 // warm-linen redesign — two-scheme tokens, serif @font-face blocks, the

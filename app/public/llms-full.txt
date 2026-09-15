@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 107 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-15T08:44:55Z — 119 active offers.
 
 ## Offers (full)
 
@@ -126,6 +126,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Page: https://freetokens.custats.info/offers/thunder-compute-students.html
 - Summary: Thunder Compute's Student Program gives students enrolled at a US university $20 of free credit when they sign up with their university email. The credit can be used on A6000 and L40 GPUs. When the credit runs out, normal pay-as-you-go billing applies; the student page does not state a fixed expiration date.
 - Claim steps: Confirm that you are enrolled at a US university and have a university email address. | Sign up for Thunder Compute with your student email. | Use the automatic $20 credit on supported A6000 or L40 GPUs; normal pay-as-you-go billing applies after it is exhausted.
+
+### Tencent Cloud TokenHub — New User Free Trial
+- Provider: Tencent Cloud
+- Category: api_provider
+- Amount: 1,000,000 free tokens per eligible language model, valid 90 days from claim (one claim per model per root account; USD 1 balance frozen per claim/enable)
+- Status: active — expiry 2026-12-31
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://intl.cloud.tencent.com/document/product/1300/80423
+- Page: https://freetokens.custats.info/offers/tencent-cloud-tokenhub-free-trial.html
+- Summary: Tencent Cloud TokenHub gives each root account a one-time free trial quota covering multiple model types. Each eligible language model gets 1,000,000 free tokens valid 90 days from claim; the campaign runs through December 31, 2026. TokenHub is an OpenAI-compatible gateway serving DeepSeek, GLM, Kimi, MiniMax and other models. Claiming or enabling a model freezes USD 1 of account balance (returned when endpoints are deleted).
+- Claim steps: Log in to the TokenHub console and activate the platform. | On the Model Gallery page, click 'New User Free Trial', select models, then 'Claim Now'. Free trial can also be auto-claimed on first invocation of a supported model. | Keep a positive balance: USD 1 is frozen per model claim/enablement (released when endpoints are terminated). | Use the quota within 90 days of claiming; unused quota expires.
 
 ### Tavily Researcher Free — 1,000 API Credits/Month
 - Provider: Tavily
@@ -281,6 +292,28 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Summary: Pika's free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and credits refresh monthly.
 - Claim steps: Sign up at pika.art with Google or Discord. | Open the generator from your workspace. | Create videos from text or image prompts; each generation spends credits. | Wait for the monthly reset to get your next 80 credits.
 
+### Perplexity for Startups — $5K API Credits
+- Provider: Perplexity
+- Category: startup_program
+- Amount: $5,000 in API credits plus 3 months free Perplexity Enterprise Pro (up to 50 seats)
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://www.perplexity.ai/startups/
+- Page: https://freetokens.custats.info/offers/perplexity-for-startups.html
+- Summary: Perplexity for Startups gives eligible startups $5,000 in Sonar API credits plus 3 months of free Perplexity Enterprise Pro for up to 50 seats. Eligibility: raised up to $20M in equity funding, less than 5 years old, and associated with an approved Startup Partner; existing Enterprise Pro customers are not eligible. (Program page returned HTTP 403 to automated fetch; terms corroborated from the official page's own copy via search index.)
+- Claim steps: Confirm eligibility: <5 years old, ≤$20M raised, linked to an approved Perplexity Startup Partner, not an existing Enterprise Pro subscriber. | Apply via perplexity.ai/startups or through your Startup Partner. | On approval, activate Enterprise Pro seats and redeem the $5,000 API credits.
+
+### OVHcloud Startup Program
+- Provider: OVHcloud
+- Category: startup_program
+- Amount: Start tier: €10,000 free cloud credits over 12 months + 6h engineer time; Scale tier: up to €100,000 + 20h engineer time
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://startup.ovhcloud.com/en/
+- Page: https://freetokens.custats.info/offers/ovhcloud-startup-program.html
+- Summary: OVHcloud Startup Program: the 12-month Start level gives €10,000 of free cloud credits + 6 hours of 1-on-1 engineer time + visibility; the 12-month Scale level gives up to €100,000 of free cloud credits + up to 20 hours of engineer time. For early-stage startups and scaleups by application.
+- Claim steps: Apply at startup.ovhcloud.com for the Start or Scale level. | On acceptance, receive 12 months of credits (€10,000 Start / up to €100,000 Scale) plus engineer 1-on-1 time.
+
 ### OrcaRouter Free Credits & $0 Models
 - Provider: OrcaRouter
 - Category: api_provider
@@ -313,6 +346,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Page: https://freetokens.custats.info/offers/openrouter-for-startups.html
 - Summary: OpenRouter for Startups grants approved pre-Series B AI-native startups up to $5,000 in universal inference credits across 500+ models, plus waived processing fees (platform and BYOK) for 12 months. Marketing and FAQ state those figures; program terms say amounts and duration are at OpenRouter's discretion, with a ceiling of $5,000 and/or fee waivers up to 12 months. Most credits expire 6 months after issuance. Applications require an approved-partner referral, a public company website, a professional company-domain email, a valid OpenRouter account with under $500 lifetime spend, and no prior startup-program credits.
 - Claim steps: Confirm eligibility: pre-Series B, AI-native product, public website, company-domain professional email, OpenRouter account with under $500 lifetime spend, no prior startup credits, and a referral from an approved OpenRouter partner. | Submit the application on openrouter.ai/startup-program (rolling review). | If approved, credits and fee waivers are applied to the OpenRouter account tied to the applicant email. | Use credits across OpenRouter models; BYOK processing fees are also waived for 12 months if approved. Most credits expire 6 months after issuance.
+
+### OpenAI Startup Program
+- Provider: OpenAI
+- Category: startup_program
+- Amount: Free OpenAI API credits + rate-limit upgrades + solutions-engineer support (dollar amount not published; requires referral code from an eligible VC partner)
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://openai.com/startups/
+- Page: https://freetokens.custats.info/offers/openai-startup-program.html
+- Summary: OpenAI's startup program gives portfolio companies of eligible VC partners (e.g. Thrive Capital, Sequoia, a16z, Kleiner Perkins, Conviction) free API credits, rate-limit upgrades, time with solutions engineers, and event access. The dollar amount is not published; applying requires a unique referral code from the VC, a product description, company contacts and basic funding details.
+- Claim steps: Confirm your VC is in OpenAI's partner network and obtain your unique referral code. | Create an OpenAI account and find your Organization ID (Settings → Organization settings). | Apply for credits via openai.com/startups with the referral code, product description, business email and funding details.
 
 ### OpenAI Codex Free Tier
 - Provider: OpenAI
@@ -435,6 +479,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Summary: Modal's Starter plan costs $0/month plus metered compute and includes $30/month in free credits, with up to 3 workspace seats, 100 containers, and 10 GPU concurrency. The credit recurs monthly as included compute rather than a one-time grant, and no expiry date or fixed end for the offer is stated on the pricing page. Claiming requires creating a Modal account via the Get Started flow. The docs billing guide corroborates that credits are deducted from monthly usage charges.
 - Claim steps: Go to https://modal.com/pricing and review the Starter plan ($0 + compute / month). | Click "Get Started" on the Starter plan to create a Modal account. | Create a workspace — the Starter plan includes up to 3 workspace seats. | Deploy functions; the Starter plan's $30/month in free credits counts against your compute usage, which is auto-charged only beyond the credit.
 
+### Modal for Startups
+- Provider: Modal
+- Category: startup_program
+- Amount: One-time free GPU/platform credits ("thousands" per program page, not itemized) + technical and GTM support
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://modal.com/startups
+- Page: https://freetokens.custats.info/offers/modal-for-startups.html
+- Summary: Modal for Startups grants a one-time award of free GPU/platform credits ('thousands' per the program page, not itemized) plus engineering/GTM support and a founder community. Eligibility: new Modal customers; Seed–Series A tier requires VC funding from Modal's partner network or >$1M raised from any fund; a Scaling/Series B+ tier exists for >$30M raised / post-Series B with a partner-network VC. A payment method is required; credits are a one-time grant per tier.
+- Claim steps: Apply at modal.com/startups (new Modal customers only). | Seed–Series A: VC funding from Modal's partner network, or >$1M raised from any fund. | On acceptance, the one-time credit grant lands on your account; add a payment method as required.
+
 ### Mistral Free Plan — $10/mo API Credits
 - Provider: Mistral AI
 - Category: api_provider
@@ -445,6 +500,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Page: https://freetokens.custats.info/offers/mistral-experiment-free-tier.html
 - Summary: Mistral's Free plan includes $10 per month in API credits and access to Mistral Studio, with no credit card required. The pricing page lists Studio plus $10/mo credits on the Free card. Studio docs still describe Free mode as rate-limited API access with no card — they do not mention the $10 monthly credit.
 - Claim steps: Create a free account at console.mistral.ai (no credit card required). | Use the Free plan — Studio access and $10/mo API credits apply. | Generate an API key and call api.mistral.ai within published limits.
+
+### Microsoft for Startups — up to $150K Azure
+- Provider: Microsoft
+- Category: startup_program
+- Amount: Up to $150,000 in Azure credits usable across eligible Azure services incl. Azure AI / OpenAI services, plus free dev tools
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://www.microsoft.com/en-us/startups
+- Page: https://freetokens.custats.info/offers/microsoft-for-startups.html
+- Summary: Microsoft for Startups offers up to $150,000 in Azure credits usable across eligible Azure services including Azure AI and Azure OpenAI services, plus free access to dev tools, expert guidance and go-to-market support through Microsoft's customer network.
+- Claim steps: Sign in / apply via the Microsoft for Startups portal (microsoft.com/en-us/startups). | Unlock startup benefits and claim Azure credits through the portal. | Apply credits to eligible Azure services as the startup scales.
 
 ### Merge Gateway — $10 in Free LLM Credits Every Month
 - Provider: Merge
@@ -490,6 +556,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Summary: The Liner Startup Grant Program gives eligible early-stage startups up to $1,000 in Liner API credits, including Search API and Search Agent API, with no equity taken and nothing to repay. The application asks for company email, company name, company website, and which product you will build on; Liner confirms by email. Current eligibility terms are listed on the application itself. The 2026-07-30 blog (last updated 2026-07-28) is the official program write-up.
 - Claim steps: Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes). | Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on. | Watch email for Liner's confirmation; the post says self-serve credit programs like this move in days.
 
+### Lightning AI Free Tier
+- Provider: Lightning AI
+- Category: api_provider
+- Amount: 5 free Lightning credits (~$5) on registration, +25 more with a card; up to ~80 free GPU hours after phone verification; 1 free 4-CPU Studio + 10 GB storage free
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://lightning.ai/pricing
+- Page: https://freetokens.custats.info/offers/lightning-ai-free-tier.html
+- Summary: Lightning AI's free tier: 5 free Lightning credits (~$5) on registration, plus 25 more when you add a card; marketing cites up to ~80 free GPU hours after phone verification; every account gets 1 free 4-CPU Studio and the first 10 GB of Drive storage free. Free credits are promotional, non-transferable, and expire 12 months after purchase/grant. (Pricing page is JS-rendered; terms corroborated via official lightning.ai pricing/docs pages in the search index.)
+- Claim steps: Create a free account at lightning.ai — no credit card required. | Verify your phone number to receive up to ~80 free GPU hours. | Get 5 free Lightning credits on registration; add a card for 25 more. | Start on the free 4-CPU Studio; switch to GPU when ready to run.
+
 ### Leonardo.Ai Free Plan
 - Provider: Leonardo.Ai
 - Category: image
@@ -522,6 +599,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Page: https://freetokens.custats.info/offers/kiro-students-1000-credits-month.html
 - Summary: Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. Amazon's September 2026 announcement expands the program to 132 universities across 18 countries (a 12x scale-up from the 11-university pilot). Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.
 - Claim steps: Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email. | Open the account page and select the “You are eligible for Kiro Students” verification banner. | Verify student status through SheerID; proof such as a student ID or enrollment letter may be requested. | After approval, use 1,000 credits per month for 12 months. Unused credits do not roll over. | To opt out of content use, open Settings → User → Application → Telemetry and Content, then disable Content Collection for Service Improvement.
+
+### Kiro Startup Credits — up to 1 year Pro+
+- Provider: Kiro
+- Category: startup_program
+- Amount: Up to 1 year of Kiro Pro+ credits (Starter ≤2 users / Growth ≤10 / Scale ≤30); credits expire 1 year after issuance; AWS Activate credit holders not eligible
+- Status: active — expiry 2026-12-31
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://kiro.dev/startups/
+- Page: https://freetokens.custats.info/offers/kiro-startup-credits.html
+- Summary: Kiro for Startups gives early-stage to Series A VC-backed startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center.
+- Claim steps: Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain. | Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30). | On approval, credits are deposited to the AWS account and activate on provisioning. | Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits.
 
 ### Kilo Code Free Models
 - Provider: Kilo Code
@@ -666,6 +754,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Summary: Google AI Studio offers free, rate-limited image generation directly in the browser using Gemini image models — no billing account required for the free tier.
 - Claim steps: Open aistudio.google.com in your browser. | Sign in with a Google account. | Choose an image-capable Gemini model and start generating. | Stay within the per-minute/per-day free rate limits.
 
+### GitHub Copilot Student
+- Provider: GitHub
+- Category: student
+- Amount: Free Copilot Student plan for verified students: Copilot features incl. agents (excludes third-party agents) + GitHub AI Credits allowance; auto model selection only
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-students
+- Page: https://freetokens.custats.info/offers/github-copilot-student.html
+- Summary: GitHub Copilot Student gives GitHub Education-verified students free access to Copilot's features: inline suggestions/chat with agents included (excluding third-party agents) and an allowance of GitHub AI Credits, with auto model selection only. GitHub re-evaluates eligibility monthly. This is distinct from the expired 'Student Pack 2 years' promo.
+- Claim steps: Get verified as a student via GitHub Education (apply to GitHub Education as a student). | Go to github.com/settings/education/benefits → 'Free GitHub developer resources for students and teachers' → Learn more. | Follow the prompts to activate Copilot Student. Approval and activation can take several days.
+
 ### Free.ai — 30,000 Tokens/Day + API
 - Provider: Free.ai
 - Category: api_provider
@@ -676,6 +775,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Page: https://freetokens.custats.info/offers/free-ai-30000-tokens-day.html
 - Summary: Free.ai grants 30,000 tokens/day after a free email signup (6,000/day if you stay anonymous). No credit card. Tokens reset every 24 hours and can be spent across 400+ tools; free accounts also cap heavy tools at 1 video, 2 music tracks, 5 images, and 5 image edits per day. A free account unlocks the OpenAI-compatible developer API at api.free.ai, which shares the same daily pool. The API docs How-it-works line says "Purchase tokens, then generate your key," but the same page's FAQ and rate table list a Free plan at 30K tokens/day and $0.
 - Claim steps: Sign up at free.ai/signup with an email (no password or credit card; they send a link to set a password later). | Use the 30,000 daily tokens on the site, or open free.ai/api/ to generate an sk-free- API key. | Call https://api.free.ai with the OpenAI-compatible /v1/chat/ endpoint (and other tool endpoints) until the daily pool resets.
+
+### Fireworks for Startups — Build Credits
+- Provider: Fireworks AI
+- Category: startup_program
+- Amount: Build credits for inference, fine-tuning and on-demand GPUs (amount unpublished; credits expire 1 year after grant) + higher rate-limit options
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://fireworks.ai/startups
+- Page: https://freetokens.custats.info/offers/fireworks-for-startups.html
+- Summary: Fireworks for Startups gives eligible startups build credits (amount unpublished) usable for serverless text/vision inference, image generation, STT, embeddings, fine-tuning and on-demand GPU deployments — credits expire 1 year after grant — plus higher rate-limit options, applied-AI expert access and community. Eligibility: registered privately-held for-profit company founded within the last 5 years, venture backed with >$500k funding, pre-Series D.
+- Claim steps: Fill out the Fireworks for Startups application form (fireworks.ai/startup-program). | Eligibility: registered company <5 years old, VC-backed >$500k, not Series D or later. | On acceptance, credits apply automatically to usage charges; PAYG billing resumes after exhaustion if a payment method is added.
 
 ### $1 in free credits for new Fireworks AI accounts
 - Provider: Fireworks AI
@@ -798,6 +908,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Summary: E2B's pricing page lists the Hobby plan at $0 with a $100 one-time usage credit. It includes sessions up to 1 hour, up to 20 concurrent sandboxes, and free 10 GiB storage. The page says no credit card is required; usage costs are separate after the included credit.
 - Claim steps: Open the E2B pricing page and choose the free Hobby plan. | Create or sign in to an E2B account; no credit card is required. | Use the included one-time $100 usage credit within the Hobby plan limits.
 
+### DigitalOcean Startups (Hatch)
+- Provider: DigitalOcean
+- Category: startup_program
+- Amount: 12 months of DigitalOcean credits (amount varies by partner award level); select startups invited to GPU credit packages; 15 months free Standard-tier support
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://www.digitalocean.com/hatch
+- Page: https://freetokens.custats.info/offers/digitalocean-startups.html
+- Summary: DigitalOcean Startups (Hatch) gives approved startups 12 months of DigitalOcean credits (amount varies by partner award level), 15 months of free Standard-tier support, and select startups are invited to apply for GPU credit packages. Eligibility: raised $10M or less, company website with matching email domain, registered DigitalOcean team account with a business/company email; AI-native startups are prioritized and service-based businesses are ineligible. Core credits exclude some GPU/dedicated inference products.
+- Claim steps: Create a registered DigitalOcean team account with a business/company email (not personal). | Apply via digitalocean.com/hatch — directly or through a DigitalOcean Startups partner. | Eligibility: raised ≤$10M, company website + matching email; AI-native prioritized; service businesses ineligible.
+
 ### Devin Free Plan
 - Provider: Cognition (Devin)
 - Category: coding
@@ -809,16 +930,16 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Summary: Devin's $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.
 - Claim steps: Open devin.ai/pricing and pick the Free $0 plan. | Sign up with your email or a Google/GitHub account. | Start a Devin session from the dashboard within your free quota. | Install the IDE extension for unlimited Tab completions.
 
-### Deepgram $200 Free Credit + Flux TTS (through Sep 14)
+### Deepgram $200 Free Credit
 - Provider: Deepgram
 - Category: voice
-- Amount: $200 signup credit (no card, no expiration) plus Flux TTS free through 2026-09-14 (then paid; up to 45 concurrent streams globally, 5 in EU/AU)
+- Amount: $200 signup credit (no card, no expiration)
 - Status: active — expiry ongoing
 - Verified: 2026-09-15 (social_proof / under-review, signup required)
 - Source: https://deepgram.com/pricing
 - Page: https://freetokens.custats.info/offers/deepgram-free-credit.html
-- Summary: Deepgram Pay As You Go still grants $200 in signup credits with no credit card and no expiration. Separately, Flux TTS is free through September 14, 2026 (up to 45 concurrent streaming connections globally, 5 in EU/AU); standard pricing starts September 15, 2026. Flux TTS in Voice Agent is also free through that date. This updates the existing deepgram-free-credit listing; expiry_date stays null so the $200 credit is not archived when the Flux promo ends.
-- Claim steps: Click Sign Up Free at deepgram.com/pricing (no credit card required). | Create a console account and an API key. | Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire). | Use Flux TTS free through 2026-09-14 (45 concurrent streams globally, 5 in EU/AU).
+- Summary: Deepgram Pay As You Go grants $200 in signup credits with no credit card and no expiration. The earlier Flux TTS free promo (through September 14, 2026) has ended: Flux TTS is now billed at $0.0450/1k characters pay-as-you-go, with a 'Buy Flux TTS, get matching credits' promo adding $1 in credits per $1 spent, up to $500.
+- Claim steps: Click Sign Up Free at deepgram.com/pricing (no credit card required). | Create a console account and an API key. | Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire).
 
 ### Daytona Startup Program — up to $100K
 - Provider: Daytona
@@ -1038,6 +1159,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 
 - Page: https://freetokens.custats.info/offers/azure-for-students.html
 - Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
 - Claim steps: Go to https://azure.microsoft.com/en-us/free/students and click Activate. | Sign in with your school email and complete student verification via the Azure Education Hub. | Once approved, start building with $100 credit and free-tier services for 12 months.
+
+### AWS Activate Credits
+- Provider: Amazon Web Services
+- Category: startup_program
+- Amount: Activate Founders (self-funded): start with $1,000, up to $5,000; Activate Portfolio (pre-Series B): up to $200,000; usable across AWS incl. Amazon Bedrock; extra AI-startup credits invite-only
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://aws.amazon.com/startups/credits/
+- Page: https://freetokens.custats.info/offers/aws-activate-credits.html
+- Summary: AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.
+- Claim steps: Create/confirm an AWS account on the Paid Tier plan. | Founders (self-funded): apply directly at aws.amazon.com/startups/credits. Portfolio: apply with your Activate Provider's Org ID. | After approval, apply credits to eligible AWS usage including Amazon Bedrock.
 
 ### AssemblyAI $50 Free Credits
 - Provider: AssemblyAI
