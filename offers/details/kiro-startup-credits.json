@@ -1,0 +1,23 @@
+{
+  "summary": "Kiro for Startups gives early-stage to Series A VC-backed startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center.",
+  "claim_steps": [
+    "Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain.",
+    "Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30).",
+    "On approval, credits are deposited to the AWS account and activate on provisioning.",
+    "Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://kiro.dev/startups/",
+      "title": "Kiro for startups",
+      "text": "For a limited time only, early stage to Series A VC-backed startups globally can apply for up to 1-year's worth of free Kiro Pro+ at three-tiered options. Startups with active AWS Activate Credits are not eligible for this promotion."
+    },
+    {
+      "type": "link",
+      "url": "https://kiro.dev/startups/terms/",
+      "title": "Kiro Pro+ promotional offer terms and conditions",
+      "text": "From April 7, 2026 to December 31, 2026, apply at https://aws.amazon.com/startups/credits/kiro to receive complimentary access to Kiro Pro+, and one year of Kiro Promotion Credits. Offer is limited to companies ranging from early stage to Series A startups who have created an AWS Account."
+    }
+  ]
+}

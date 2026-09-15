@@ -1,0 +1,15 @@
+# Verified 2026-09-15 against https://kiro.dev/startups/ (+ /startups/terms/)
+# ("early stage to Series A VC-backed startups globally can apply for up to
+# 1-year's worth of free Kiro Pro+ at three-tiered options" /
+# "From April 7, 2026 to December 31, 2026, apply ... to receive complimentary
+# access to Kiro Pro+, and one year of Kiro Promotion Credits")
+title: Kiro Startup Credits — up to 1 year Pro+
+provider: Kiro
+category: startup_program
+amount: Up to 1 year of Kiro Pro+ credits (Starter ≤2 users / Growth ≤10 / Scale ≤30); credits expire 1 year after issuance; AWS Activate credit holders not eligible
+expiry_date: 2026-12-31
+source_url: https://kiro.dev/startups/
+verified_date: 2026-09-15
+verification: social_proof
+review_status: under-review
+signup: required

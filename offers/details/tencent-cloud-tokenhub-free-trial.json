@@ -1,0 +1,17 @@
+{
+  "summary": "Tencent Cloud TokenHub gives each root account a one-time free trial quota covering multiple model types. Each eligible language model gets 1,000,000 free tokens valid 90 days from claim; the campaign runs through December 31, 2026. TokenHub is an OpenAI-compatible gateway serving DeepSeek, GLM, Kimi, MiniMax and other models. Claiming or enabling a model freezes USD 1 of account balance (returned when endpoints are deleted).",
+  "claim_steps": [
+    "Log in to the TokenHub console and activate the platform.",
+    "On the Model Gallery page, click 'New User Free Trial', select models, then 'Claim Now'. Free trial can also be auto-claimed on first invocation of a supported model.",
+    "Keep a positive balance: USD 1 is frozen per model claim/enablement (released when endpoints are terminated).",
+    "Use the quota within 90 days of claiming; unused quota expires."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://intl.cloud.tencent.com/document/product/1300/80423",
+      "title": "New User Free Trial Package — LLM Service TokenHub",
+      "text": "Each language model comes with a free trial quota of 1 million tokens, valid for 90 days. This campaign is valid until December 31, 2026. Each time you claim a free resource package for a model or enable postpaid service for a model, USD 1 will be automatically frozen in your account."
+    }
+  ]
+}

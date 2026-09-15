@@ -1,0 +1,22 @@
+{
+  "summary": "GitHub Copilot Student gives GitHub Education-verified students free access to Copilot's features: inline suggestions/chat with agents included (excluding third-party agents) and an allowance of GitHub AI Credits, with auto model selection only. GitHub re-evaluates eligibility monthly. This is distinct from the expired 'Student Pack 2 years' promo.",
+  "claim_steps": [
+    "Get verified as a student via GitHub Education (apply to GitHub Education as a student).",
+    "Go to github.com/settings/education/benefits → 'Free GitHub developer resources for students and teachers' → Learn more.",
+    "Follow the prompts to activate Copilot Student. Approval and activation can take several days."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-students",
+      "title": "Access GitHub Copilot for free as a student",
+      "text": "Verified students on GitHub Education get free access to Copilot's features. GitHub reevaluates your eligibility every month."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.github.com/en/copilot/get-started/plans",
+      "title": "Plans for GitHub Copilot",
+      "text": "Copilot Student: Free. An allowance of GitHub AI Credits. Agents included (excludes third-party agents). Auto model selection only."
+    }
+  ]
+}

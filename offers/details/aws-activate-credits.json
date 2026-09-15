@@ -1,0 +1,16 @@
+{
+  "summary": "AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.",
+  "claim_steps": [
+    "Create/confirm an AWS account on the Paid Tier plan.",
+    "Founders (self-funded): apply directly at aws.amazon.com/startups/credits. Portfolio: apply with your Activate Provider's Org ID.",
+    "After approval, apply credits to eligible AWS usage including Amazon Bedrock."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://aws.amazon.com/startups/credits/",
+      "title": "AWS Activate Credits",
+      "text": "Apply for up to $200,000 in AWS Activate Credits, with additional credits available for AI startups ready to scale. Activate Founders: Up to $5,000 USD — start with $1,000 USD. Activate Portfolio: Up to $200,000 USD — you must have an Organization ID (Org ID) from your Activate Provider."
+    }
+  ]
+}

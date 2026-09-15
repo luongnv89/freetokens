@@ -1,0 +1,16 @@
+{
+  "summary": "OpenAI's startup program gives portfolio companies of eligible VC partners (e.g. Thrive Capital, Sequoia, a16z, Kleiner Perkins, Conviction) free API credits, rate-limit upgrades, time with solutions engineers, and event access. The dollar amount is not published; applying requires a unique referral code from the VC, a product description, company contacts and basic funding details.",
+  "claim_steps": [
+    "Confirm your VC is in OpenAI's partner network and obtain your unique referral code.",
+    "Create an OpenAI account and find your Organization ID (Settings → Organization settings).",
+    "Apply for credits via openai.com/startups with the referral code, product description, business email and funding details."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openai.com/startups/",
+      "title": "OpenAI for Startups",
+      "text": "If they are, your startup may be eligible for benefits like free API credits, rate limit upgrades, and time with our solutions engineers or other technical team members. ... we will ask for: A unique referral code from your VC, a description of your product and how you plan to use the API, company name and key team contacts, including a valid business email, basic funding details."
+    }
+  ]
+}

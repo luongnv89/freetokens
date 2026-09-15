@@ -1,0 +1,14 @@
+# Verified 2026-09-15 against https://openai.com/startups/
+# ("your startup may be eligible for benefits like free API credits, rate
+# limit upgrades, and time with our solutions engineers" / application asks
+# for "A unique referral code from your VC"; dollar amount not published)
+title: OpenAI Startup Program
+provider: OpenAI
+category: startup_program
+amount: Free OpenAI API credits + rate-limit upgrades + solutions-engineer support (dollar amount not published; requires referral code from an eligible VC partner)
+expiry_date: null
+source_url: https://openai.com/startups/
+verified_date: 2026-09-15
+verification: social_proof
+review_status: under-review
+signup: required

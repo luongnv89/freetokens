@@ -1,0 +1,16 @@
+{
+  "summary": "Microsoft for Startups offers up to $150,000 in Azure credits usable across eligible Azure services including Azure AI and Azure OpenAI services, plus free access to dev tools, expert guidance and go-to-market support through Microsoft's customer network.",
+  "claim_steps": [
+    "Sign in / apply via the Microsoft for Startups portal (microsoft.com/en-us/startups).",
+    "Unlock startup benefits and claim Azure credits through the portal.",
+    "Apply credits to eligible Azure services as the startup scales."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.microsoft.com/en-us/startups",
+      "title": "Microsoft for Startups",
+      "text": "Access cutting-edge AI models, developer tools, and up to $150,000 in credits, backed by Microsoft's global customer network, enterprise-grade security, and privacy you can trust. Startup credits: Credits can be applied across eligible Azure services to support your startup from early development through production workloads."
+    }
+  ]
+}

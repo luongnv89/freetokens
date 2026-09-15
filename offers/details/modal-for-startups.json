@@ -1,0 +1,16 @@
+{
+  "summary": "Modal for Startups grants a one-time award of free GPU/platform credits ('thousands' per the program page, not itemized) plus engineering/GTM support and a founder community. Eligibility: new Modal customers; Seed–Series A tier requires VC funding from Modal's partner network or >$1M raised from any fund; a Scaling/Series B+ tier exists for >$30M raised / post-Series B with a partner-network VC. A payment method is required; credits are a one-time grant per tier.",
+  "claim_steps": [
+    "Apply at modal.com/startups (new Modal customers only).",
+    "Seed–Series A: VC funding from Modal's partner network, or >$1M raised from any fund.",
+    "On acceptance, the one-time credit grant lands on your account; add a payment method as required."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://modal.com/startups",
+      "title": "Modal for Startups",
+      "text": "Apply to get free credits, technical support, and join a growing community. Unlock thousands of free GPU credits to supercharge your startup. Credits are a one-time grant and you may not reapply once you have received credits in a given tier."
+    }
+  ]
+}
