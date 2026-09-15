@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-15T08:21:58Z — 107 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-15T08:31:28Z — 107 active offers.
 
 ## Offers (full)
 
@@ -170,6 +170,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:21:58Z — 
 - Page: https://freetokens.custats.info/offers/smartoken-5-free-api-credit.html
 - Summary: SmarToken's campaign grants a one-time $5 promotional credit for OpenAI-compatible model calls to existing users and eligible new Google users. The campaign ends on December 31, 2026 at 23:59:59 UTC+8. New users must be low-risk Google users, pass the stated signup checks, and receive the credit once per account; no credit card is required.
 - Claim steps: Create or use a SmarToken account before December 31, 2026 at 23:59:59 UTC+8. | If you are a new user, sign in with Google and pass SmarToken's low-risk signup checks. | Use the one-time $5 promotional balance for OpenAI-compatible model calls; no credit card is required.
+
+### SiliconFlow Free Models
+- Provider: SiliconFlow
+- Category: api_provider
+- Amount: Selected API models are free for input and output, incl. Hunyuan-MT-7B and PaddleOCR-VL-1.5 (chat), BGE embedding/reranker models, Kolors (image), and XingChen/Qwen3-ASR/SenseVoiceSmall (speech)
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / unverified, signup required)
+- Source: https://siliconflow.cn/pricing
+- Page: https://freetokens.custats.info/offers/siliconflow-free-models.html
+- Summary: SiliconFlow's API pricing page marks selected models free for input and output. Currently free: tencent/Hunyuan-MT-7B and PaddlePaddle/PaddleOCR-VL-1.5 (chat), BAAI bge-m3 / bge-reranker-v2-m3 / bge-large-zh-v1.5 / bge-large-en-v1.5 (embeddings), Kwai-Kolors/Kolors (image), and XingChenAGI XingChenGSR-V1.0 / XingChenASR V3.2 / V3.2-Ultra / ASR-Diarize-V3.0, Qwen/Qwen3-ASR-1.7B and FunAudioLLM/SenseVoiceSmall (speech). GLM-Z1-9B-0414 was removed from the free tier and is now paid ($0.086/M tokens).
+- Claim steps: Sign in to SiliconFlow Cloud. | Choose a model marked 免费/free in the API pricing catalog. | Use the selected model through SiliconFlow's API.
 
 ### Scaleway Generative APIs Free Tier
 - Provider: Scaleway
@@ -809,6 +820,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:21:58Z — 
 - Summary: Deepgram Pay As You Go still grants $200 in signup credits with no credit card and no expiration. Separately, Flux TTS is free through September 14, 2026 (up to 45 concurrent streaming connections globally, 5 in EU/AU); standard pricing starts September 15, 2026. Flux TTS in Voice Agent is also free through that date. This updates the existing deepgram-free-credit listing; expiry_date stays null so the $200 credit is not archived when the Flux promo ends.
 - Claim steps: Click Sign Up Free at deepgram.com/pricing (no credit card required). | Create a console account and an API key. | Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire). | Use Flux TTS free through 2026-09-14 (45 concurrent streams globally, 5 in EU/AU).
 
+### Daytona Startup Program — up to $100K
+- Provider: Daytona
+- Category: startup_program
+- Amount: Up to $100K in Daytona credits for startups; program page says $10K straight away on the account and easily up to $100K
+- Status: active — expiry ongoing
+- Verified: 2026-09-15 (social_proof / under-review, signup required)
+- Source: https://www.daytona.io/startups
+- Page: https://freetokens.custats.info/offers/daytona-startup-program.html
+- Summary: Daytona's Startup Grid offers startups up to $100,000 in Daytona credits. The official page says startups receive $10,000 straight away on their account and can reach up to $100,000. Applicants submit the startup form for review.
+- Claim steps: Open the Daytona Startup Grid page. | Complete and submit the startup application form. | Wait for Daytona to review the application and respond.
+
 ### Daytona — $200 Free Compute
 - Provider: Daytona
 - Category: coding
@@ -1116,17 +1138,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:21:58Z — 
 - Summary: 1min.AI grants free credits without purchase; the marketing page says those credits never expire and lists Daily Visit, reviews, and referrals. The Help Center article titled for this grant (and linking back to 1min.ai/free-credits) states 15,000 credits per day (~450,000/month) requiring daily login to app.1min.ai. The $0 pricing tier lists no credit card required. The 15,000 number is not in the static HTML of /free-credits (client-rendered), so the Help Center quote is the numeric evidence.
 - Claim steps: Create a free 1min.AI account (pricing page: no credit card required on the $0 plan). | Log in to app.1min.ai each day to receive the daily free-credit grant. | Optional: reviews and referrals can add more credits per the free-credits page headings.
 
-### SiliconFlow Free Models
-- Provider: SiliconFlow
-- Category: api_provider
-- Amount: Selected API models are free for input and output, including GLM-Z1-9B-0414
-- Status: active — expiry ongoing
-- Verified: 2026-09-11 (social_proof / unverified, signup required)
-- Source: https://siliconflow.cn/pricing
-- Page: https://freetokens.custats.info/offers/siliconflow-free-models.html
-- Summary: SiliconFlow's current API pricing page marks selected models free, including THUDM/GLM-Z1-9B-0414, PaddlePaddle/PaddleOCR-VL-1.5, and tencent/Hunyuan-MT-7B.
-- Claim steps: Sign in to SiliconFlow Cloud. | Choose a model marked 免费/free in the API pricing catalog. | Use the selected model through SiliconFlow's API.
-
 ### Devin for Startups — $65K Credits and Grants
 - Provider: Cognition (Devin)
 - Category: startup_program
@@ -1137,17 +1148,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-15T08:21:58Z — 
 - Page: https://freetokens.custats.info/offers/devin-startups-program.html
 - Summary: Devin for Startups gives early-stage teams $65K to build with the AI software engineer: $15K in Devin credits loaded into the account the day the startup is approved, plus a dollar-for-dollar match of up to $50K in grants on the next $100K of usage. Accepted startups also get unlimited Team-plan seats, invitations to founder meetups and early-access previews with the Cognition team, and a Devin swag pack. Applications are reviewed on a rolling basis.
 - Claim steps: Create a Devin account at devin.ai. | Subscribe to the Team plan — no seat limits. | Apply at devin.ai/startups and tell Cognition about your startup. | Once approved, $15K in free credits hits your account immediately.
-
-### Daytona Startup Program — up to $50K
-- Provider: Daytona
-- Category: startup_program
-- Amount: Up to $50K in Daytona credits for startups; program page says $10K straight away on the account and easily up to $50K
-- Status: active — expiry ongoing
-- Verified: 2026-09-08 (social_proof / under-review, signup required)
-- Source: https://www.daytona.io/startups
-- Page: https://freetokens.custats.info/offers/daytona-startup-program.html
-- Summary: Daytona's Startup Grid offers startups up to $50,000 in Daytona credits. The official page says startups receive $10,000 straight away on their account and can reach up to $50,000. Applicants submit the startup form for review.
-- Claim steps: Open the Daytona Startup Grid page. | Complete and submit the startup application form. | Wait for Daytona to review the application and respond.
 
 ### ZCode Global Build — Free GLM-5.3-Flash (Round 4)
 - Provider: ZCode

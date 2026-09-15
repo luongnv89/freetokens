@@ -21,11 +21,11 @@ Top 20 currently active offers (newest verified first) from 107 active listings.
 - [Suno Free Plan — 50 credits per day](https://freetokens.custats.info/offers/suno-free-plan.html): Suno — Free plan, 50 credits/day (~10 songs) (voice)
 - [Stability AI — 25 Free API Credits](https://freetokens.custats.info/offers/stability-ai-25-free-credits.html): Stability AI — 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter) (image)
 - [SmarToken $5 Free API Credit Campaign](https://freetokens.custats.info/offers/smartoken-5-free-api-credit.html): SmarToken — $5 one-time promotional API credit for eligible accounts (api_provider)
+- [SiliconFlow Free Models](https://freetokens.custats.info/offers/siliconflow-free-models.html): SiliconFlow — Selected API models are free for input and output, incl. Hunyuan-MT-7B and PaddleOCR-VL-1.5 (chat), BGE embedding/reranker models, Kolors (image), and XingChen/Qwen3-ASR/SenseVoiceSmall (speech) (api_provider)
 - [Scaleway Generative APIs Free Tier](https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html): Scaleway — First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits) (api_provider)
 - [Scaleway Business Account — €100 Credit](https://freetokens.custats.info/offers/scaleway-business-100-credit.html): Scaleway — €100 free credit when creating a Business account (pairs with Generative APIs) (api_provider)
 - [SambaNova Cloud Free Tier](https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html): SambaNova — free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required (api_provider)
 - [Runway Free Plan](https://freetokens.custats.info/offers/runway-free-plan.html): Runway — 125 one-time credits for AI video and image generation (video)
-- [RunPod Startup Program — Starter Tier](https://freetokens.custats.info/offers/runpod-startup-starter-tier.html): RunPod — $1,000 free credits across Pods, Serverless, Clusters, Endpoints, and Storage (Growth tier is $25K bonus only with a $50K commit — not free) (startup_program)
 
 ## Pages
 
