@@ -1,0 +1,30 @@
+{
+  "summary": "Union Alpha is a stealth model that is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-09-16 as \"free for the next week\" (through ~2026-09-23). OpenCode's docs state its provider follows a zero-retention policy and does not use your data for model training. The model is built for agentic coding and supports image inputs; models.dev lists it as union-alpha at $0 input / $0 output with a 262K context window.",
+  "claim_steps": [
+    "Sign in to OpenCode Zen at opencode.ai/zen and copy your API key.",
+    "In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key.",
+    "Run /models and select Union Alpha (model id: opencode/union-alpha).",
+    "Alternatively, call the Zen API directly at https://opencode.ai/zen/v1/messages with model union-alpha."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2100236430890991782",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "Union Alpha (stealth model) is free for the next week\n\n- no data training\n- built for agentic coding\n- supports images\n\nlet's see what you can do"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/docs/zen/",
+      "title": "Zen — OpenCode Docs",
+      "text": "Union Alpha is a stealth model that's free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training."
+    },
+    {
+      "type": "link",
+      "url": "https://models.dev/api.json",
+      "title": "models.dev API — opencode provider",
+      "text": "\"union-alpha\": \"Union Alpha Free\" — \"Stealth model built for agentic coding\"; cost input 0, output 0; release_date 2026-09-16; modalities: text + image input."
+    }
+  ]
+}
