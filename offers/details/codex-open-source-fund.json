@@ -1,0 +1,22 @@
+{
+  "summary": "OpenAI's Codex Open Source Fund is a $1 million initiative awarding grants of up to $25,000 in API credits to open-source projects that use Codex CLI and other OpenAI models. Applications are reviewed on a rolling basis via the official form; the fund also underpins the separate Codex for Open Source program for maintainers.",
+  "claim_steps": [
+    "Confirm your project is open source and uses (or will use) Codex CLI / OpenAI models.",
+    "Fill out the application form at openai.com/form/codex-open-source-fund/ — name, email, LinkedIn, GitHub, the project you represent, and how you'd use API credits.",
+    "Applications are reviewed on a rolling basis; grants are up to $25,000 in API credits at OpenAI's discretion."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openai.com/form/codex-open-source-fund/",
+      "title": "Codex open source fund | OpenAI",
+      "text": "We're excited to launch a $1 million initiative supporting open source projects to use Codex CLI and OpenAI models. Applications will be reviewed on an ongoing basis, with projects receiving grants up to $25,000 in API credits."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/openai/codex/blob/main/docs/open-source-fund.md",
+      "title": "codex/docs/open-source-fund.md — openai/codex",
+      "text": "We're excited to launch a $1 million initiative supporting open source projects that use Codex CLI and other OpenAI models. Grants are awarded up to $25,000 API credits. Applications are reviewed on a rolling basis."
+    }
+  ]
+}

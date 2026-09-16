@@ -1,0 +1,16 @@
+# Verified 2026-09-16 against https://nlpcloud.com/pricing.html (page bot-walls
+# direct fetches; content confirmed via text proxy). ("Pay-As-You-Go $0 / month
+# + usage — Automatically get a $15 FREE credit.") Site FAQ caveat: "A credit
+# card is needed for this plan, but you automatically get an initial $15 credit"
+# — the card-free option is the separate $0 Free plan (pretrained models, 2
+# parallel requests, limited throughput, dev/testing only).
+title: NLP Cloud — $15 Free Credit
+provider: NLP Cloud
+category: api_provider
+amount: Automatic $15 free credit on pay-as-you-go signup (credit card required per site FAQ); separate $0 Free plan for pretrained models, 2 parallel requests, no card
+expiry_date: null
+source_url: https://nlpcloud.com/pricing.html
+verified_date: 2026-09-16
+verification: social_proof
+review_status: under-review
+signup: required

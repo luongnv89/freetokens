@@ -1,0 +1,16 @@
+{
+  "summary": "Hyperbolic's Basic pricing tier requires no minimum deposit ($0) and gives API access to all models on its serverless OpenAI-compatible inference platform (base URL https://api.hyperbolic.xyz/v1) at 60 requests/minute with community support. The Pro tier (600 RPM, priority queue, email support) requires a >=$5 deposit; Enterprise is custom. Note the free element is the $0 barrier to start — usage itself is pay-per-token (text from $0.10/M input tokens); no free-credit grant is advertised on this page.",
+  "claim_steps": [
+    "Sign up at app.hyperbolic.ai and generate an API key.",
+    "Point any OpenAI-compatible client at https://api.hyperbolic.xyz/v1 with your key.",
+    "Stay on the Basic tier: $0 minimum deposit, 60 RPM. Upgrading to Pro requires a >=$5 deposit."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.hyperbolic.ai/docs/inference/overview",
+      "title": "Serverless Inference Overview | Hyperbolic Docs",
+      "text": "Pricing Tiers — Basic: 60 RPM, 100 IP limit, $0 minimum deposit, API access, All models, Community support. Pro: 600 RPM, >=$5 deposit. Enterprise: custom."
+    }
+  ]
+}

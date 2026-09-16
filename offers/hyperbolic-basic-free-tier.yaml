@@ -1,0 +1,14 @@
+# Verified 2026-09-16 against https://www.hyperbolic.ai/docs/inference/overview
+# (Pricing tiers table: "Basic — 60 RPM — $0 minimum deposit — API access, All
+# models, Community support"; Pro tier requires a >=$5 deposit.) Note: usage is
+# pay-per-token; the free element is $0 barrier to start, not a credit grant.
+title: Hyperbolic Basic Free Tier
+provider: Hyperbolic
+category: api_provider
+amount: Basic tier with $0 minimum deposit — serverless OpenAI-compatible inference on 25+ open models at 60 RPM (Pro needs a >=$5 deposit)
+expiry_date: null
+source_url: https://www.hyperbolic.ai/docs/inference/overview
+verified_date: 2026-09-16
+verification: social_proof
+review_status: under-review
+signup: required

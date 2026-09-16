@@ -1,0 +1,23 @@
+{
+  "summary": "Claude for Open Source grants eligible maintainers and contributors a complimentary Claude Max 20x subscription for six months — a subscription grant, not API credits. Capped at 10,000 approved recipients, rolling review until the cap is reached or the application period closes. Eligibility tracks: maintainers (500+ dependent repos, 100+ dependent packages, or 200k+ monthly downloads), core contributors on recognized foundation/language projects, active contributors (100+ merged PRs on others' repos in 12 months), community builders (20+ unique external merged-PR contributors in 12 months), critical infrastructure (OpenSSF criticality score >=0.4), plus a discretionary ecosystem-impact track. General requirements: natural person, GitHub account at least two years old, public OSS activity in the last 90 days, and at least one OSI-approved-licensed project.",
+  "claim_steps": [
+    "Check the eligibility tracks on claude.com/contact-sales/claude-for-oss.",
+    "Apply at claude.com/open-source-max — sign in with your GitHub account, add email, planned usage, and a <=500-word qualification statement.",
+    "If approved, an activation link is emailed to your GitHub account email; activate within 90 days.",
+    "Subscription runs 6 consecutive months; an existing paid plan pauses and resumes afterward unless cancelled."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://claude.com/contact-sales/claude-for-oss",
+      "title": "Claude for Open Source | Claude",
+      "text": "Thank you for everything you ship. 6 months of Claude Max on us. Open-source contributors keep the ecosystem running. The Claude for Open Source Program is our way of saying thank you for all your hard work, with 6 months of free Claude Max 20x."
+    },
+    {
+      "type": "link",
+      "url": "https://www.anthropic.com/claude-for-oss-terms",
+      "title": "Claude for Open Source Terms and Conditions | Anthropic",
+      "text": "The Program provides eligible open-source software maintainers and contributors with a complimentary subscription to Claude Max 20x for a period of six months ... The Program is limited to 10,000 approved recipients unless this cap is increased by Anthropic."
+    }
+  ]
+}
