@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-16T11:23:32Z",
-  "count": 142,
-  "active_count": 126,
+  "generated_at": "2026-09-16T15:28:25Z",
+  "count": 143,
+  "active_count": 127,
   "expired_count": 16,
   "offers": [
     {
@@ -96,6 +96,20 @@
       "amount": "Automatic $15 free credit on pay-as-you-go signup (credit card required per site FAQ); separate $0 Free plan for pretrained models, 2 parallel requests, no card",
       "expiry_date": null,
       "source_url": "https://nlpcloud.com/pricing.html",
+      "verified_date": "2026-09-16",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-union-alpha-free",
+      "title": "Union Alpha Free on OpenCode Zen",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free Union Alpha model access on OpenCode Zen for one week",
+      "expiry_date": "2026-09-23",
+      "source_url": "https://x.com/opencode/status/2100236430890991782",
       "verified_date": "2026-09-16",
       "verification": "social_proof",
       "review_status": "under-review",

@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-16T11:19:31Z — 126 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-16T15:28:25Z — 127 active offers.
 
 ## Offers (full)
 
@@ -27,6 +27,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-16T11:19:31Z — 
 - Page: https://freetokens.custats.info/offers/openrouter-for-startups.html
 - Summary: OpenRouter for Startups grants approved pre-Series B AI-native startups up to $5,000 in universal inference credits across 500+ models, plus waived processing fees (platform and BYOK) for 12 months. Marketing and FAQ state those figures; program terms say amounts and duration are at OpenRouter's discretion, with a ceiling of $5,000 and/or fee waivers up to 12 months. Most credits expire 6 months after issuance. Applications require an approved-partner referral, a public company website, a professional company-domain email, a valid OpenRouter account with under $500 lifetime spend, and no prior startup-program credits.
 - Claim steps: Confirm eligibility: pre-Series B, AI-native product, public website, company-domain professional email, OpenRouter account with under $500 lifetime spend, no prior startup credits, and a referral from an approved OpenRouter partner. | Submit the application on openrouter.ai/startup-program (rolling review). | If approved, credits and fee waivers are applied to the OpenRouter account tied to the applicant email. | Use credits across OpenRouter models; BYOK processing fees are also waived for 12 months if approved. Most credits expire 6 months after issuance.
+
+### Union Alpha Free on OpenCode Zen
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Union Alpha model access on OpenCode Zen for one week
+- Status: active — expiry 2026-09-23
+- Verified: 2026-09-16 (social_proof / under-review, signup required)
+- Source: https://x.com/opencode/status/2100236430890991782
+- Page: https://freetokens.custats.info/offers/opencode-union-alpha-free.html
+- Summary: Union Alpha is a stealth model that is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-09-16 as "free for the next week" (through ~2026-09-23). OpenCode's docs state its provider follows a zero-retention policy and does not use your data for model training. The model is built for agentic coding and supports image inputs; models.dev lists it as union-alpha at $0 input / $0 output with a 262K context window.
+- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen and copy your API key. | In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key. | Run /models and select Union Alpha (model id: opencode/union-alpha). | Alternatively, call the Zen API directly at https://opencode.ai/zen/v1/messages with model union-alpha.
 
 ### NLP Cloud — $15 Free Credit
 - Provider: NLP Cloud
