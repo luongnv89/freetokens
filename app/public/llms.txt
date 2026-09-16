@@ -4,8 +4,18 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 119 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 126 active listings. Full directory at https://freetokens.custats.info/.
 
+- [ZCode Global Build — Free GLM-5.3-Flash (Round 4)](https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html): ZCode — Free GLM-5.3-Flash in ZCode — 10h/day, Sep 3–18; 100M tokens for new users (coding)
+- [OpenRouter for Startups](https://freetokens.custats.info/offers/openrouter-for-startups.html): OpenRouter — Up to $5,000 promotional inference credits (most expire 6 months after issuance) plus 0% processing fees for 12 months if approved; amount/duration at OpenRouter discretion (startup_program)
+- [NLP Cloud — $15 Free Credit](https://freetokens.custats.info/offers/nlp-cloud-15-free-credit.html): NLP Cloud — Automatic $15 free credit on pay-as-you-go signup (credit card required per site FAQ); separate $0 Free plan for pretrained models, 2 parallel requests, no card (api_provider)
+- [Ling 3.0 Flash Fin Free (InclusionAI)](https://freetokens.custats.info/offers/ling-3-0-flash-fin-free.html): InclusionAI — Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling (api_provider)
+- [Jina AI — 10M Free Tokens](https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html): Jina AI — 10M free tokens for new users across embeddings, rerank, reader and classifier APIs; Free tier 500 RPM / 1M TPM / concurrency 5 (api_provider)
+- [Hyperbolic Basic Free Tier](https://freetokens.custats.info/offers/hyperbolic-basic-free-tier.html): Hyperbolic — Basic tier with $0 minimum deposit — serverless OpenAI-compatible inference on 25+ open models at 60 RPM (Pro needs a >=$5 deposit) (api_provider)
+- [Hetzner Experiments Inference API](https://freetokens.custats.info/offers/hetzner-experiments-inference-api.html): Hetzner — Free OpenAI-compatible inference while in experimental status (Qwen3.6-35B-A3B-FP8, Qwen3.8-27B); 4M input / 100k output tokens per 60s, 10 req/60s (api_provider)
+- [Codex Open Source Fund](https://freetokens.custats.info/offers/codex-open-source-fund.html): OpenAI — Up to $25,000 in OpenAI API credits per project ($1M fund; applications reviewed on a rolling basis) (startup_program)
+- [Codex for Open Source](https://freetokens.custats.info/offers/codex-for-open-source.html): OpenAI — Six months of ChatGPT Pro with Codex + conditional Codex Security + API credits via the Codex Open Source Fund, for eligible OSS maintainers (coding)
+- [Claude for Open Source](https://freetokens.custats.info/offers/claude-for-open-source.html): Anthropic — 6 months of free Claude Max 20x (~$1,200 value at $200/mo list); subscription grant, not API credits; capped at 10,000 recipients (coding)
 - [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
 - [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
 - [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
@@ -16,16 +26,6 @@ Top 20 currently active offers (newest verified first) from 119 active listings.
 - [Upstage Free Access for Education & Public Interest](https://freetokens.custats.info/offers/upstage-education-public-interest-free.html): Upstage — Free access to Solar Pro LLM + Document Parse for up to 1 year for eligible schools, hospitals, and nonprofits (Upstage x AWS AI Initiative) (student)
 - [Together AI Startup Accelerator](https://freetokens.custats.info/offers/together-ai-startup-accelerator.html): Together AI — Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant) (startup_program)
 - [TinyFish Student Program — $35 Credits](https://freetokens.custats.info/offers/tinyfish-student-program-35-credits.html): TinyFish — $35 wallet credit automatic on .edu signup plus bounty-board gift cards for approved builds ($50 agentic apps, $20 Skills, $10 prompts) (student)
-- [Thunder Compute Student Program — $20 Credit](https://freetokens.custats.info/offers/thunder-compute-students.html): Thunder Compute — $20 free Thunder Compute credit for students at US universities (student)
-- [Tencent Cloud TokenHub — New User Free Trial](https://freetokens.custats.info/offers/tencent-cloud-tokenhub-free-trial.html): Tencent Cloud — 1,000,000 free tokens per eligible language model, valid 90 days from claim (one claim per model per root account; USD 1 balance frozen per claim/enable) (api_provider)
-- [Tavily Researcher Free — 1,000 API Credits/Month](https://freetokens.custats.info/offers/tavily-free-tier.html): Tavily — 1,000 free API credits every month (api_provider)
-- [Suno Free Plan — 50 credits per day](https://freetokens.custats.info/offers/suno-free-plan.html): Suno — Free plan, 50 credits/day (~10 songs) (voice)
-- [Stability AI — 25 Free API Credits](https://freetokens.custats.info/offers/stability-ai-25-free-credits.html): Stability AI — 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter) (image)
-- [SmarToken $5 Free API Credit Campaign](https://freetokens.custats.info/offers/smartoken-5-free-api-credit.html): SmarToken — $5 one-time promotional API credit for eligible accounts (api_provider)
-- [SiliconFlow Free Models](https://freetokens.custats.info/offers/siliconflow-free-models.html): SiliconFlow — Selected API models are free for input and output, incl. Hunyuan-MT-7B and PaddleOCR-VL-1.5 (chat), BGE embedding/reranker models, Kolors (image), and XingChen/Qwen3-ASR/SenseVoiceSmall (speech) (api_provider)
-- [Scaleway Generative APIs Free Tier](https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html): Scaleway — First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits) (api_provider)
-- [Scaleway Business Account — €100 Credit](https://freetokens.custats.info/offers/scaleway-business-100-credit.html): Scaleway — €100 free credit when creating a Business account (pairs with Generative APIs) (api_provider)
-- [SambaNova Cloud Free Tier](https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html): SambaNova — free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required (api_provider)
 
 ## Pages
 
