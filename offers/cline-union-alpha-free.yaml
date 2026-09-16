@@ -1,0 +1,16 @@
+# Verified 2026-09-16 against https://x.com/cline/status/2100265266026590322
+# ("Union Alpha (stealth model) is now free in Cline.")
+# Corroborated by https://docs.cline.bot/getting-started/free-models:
+# "Cline periodically offers free model promotions that let you try select models
+# at no cost, up to a limited usage quota." No fixed end date published, so
+# expiry_date is null (rotating promotion, not permanent).
+title: Union Alpha Free in Cline
+provider: Cline
+category: coding
+amount: Free Union Alpha model access (256k context, multimodal), rate limited
+expiry_date: null
+source_url: https://x.com/cline/status/2100265266026590322
+verified_date: 2026-09-16
+verification: social_proof
+review_status: unverified
+signup: required
