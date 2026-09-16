@@ -1,22 +1,19 @@
-# Verified 2026-09-13 against https://openrouter.ai/startup-program
-# ("Eligible startups get up to $5,000 in universal inference credits usable
-# across leading frontier and open models with 0% processing fees.")
-# ("Eligible startups can receive up to $5,000 in universal inference credits
-# ... along with 0% processing fees for 12 months")
+# Verified 2026-09-16 against https://openrouter.ai/startup-program
+# (re-verified — "Eligible startups get up to $5,000 in universal inference
+# credits usable across leading frontier and open models with 0% processing
+# fees." Eligibility: pre-Series B AI-native startup, approved-partner
+# referral, public website, company-domain professional email, <$500 lifetime
+# OpenRouter spend, no prior startup credits.)
 # Terms: "Program benefits may include credits in an amount up to $5,000 USD
 # and/or waived platform fees for a period of up to twelve (12) months."
-# ("OpenRouter determines the availability, amounts, and duration of any
-# Program benefits in its discretion")
 # Credits: "If approved, most credits expire 6 months after issuance."
-# Eligibility includes partner referral, public website, company-domain email,
-# pre-Series B, <$500 lifetime OpenRouter spend.
 title: OpenRouter for Startups
 provider: OpenRouter
 category: startup_program
 amount: Up to $5,000 promotional inference credits (most expire 6 months after issuance) plus 0% processing fees for 12 months if approved; amount/duration at OpenRouter discretion
 expiry_date: null
 source_url: https://openrouter.ai/startup-program
-verified_date: 2026-09-15
+verified_date: 2026-09-16
 verification: social_proof
 review_status: under-review
 signup: required

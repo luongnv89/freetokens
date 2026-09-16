@@ -43,7 +43,11 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // offers: Kiro, AWS Activate, Perplexity, OpenAI, Microsoft, Lightning,
 // Copilot Student, Fireworks, Modal, OVHcloud, DigitalOcean, Tencent).
 // Local gzip 145,951 B.
-export const JS_GZIP_CEILING_BYTES = 147_500;
+// 2026-09-16 (#410): JS ceiling 147_500 -> 150_500 — catalog growth (7 new
+// offers + detail JSONs: Codex Open Source Fund, Codex for OSS, Claude for
+// OSS, Hetzner Inference, Jina 10M, NLP Cloud, Hyperbolic). Local gzip
+// 148,520 B.
+export const JS_GZIP_CEILING_BYTES = 150_500;
 // CSS gzip history: 8_000 through the dark redesign (9,301 gzipped after the
 // hot-today shelf), then 10_000 for the offer-detail rebuild (9,833). The
 // warm-linen redesign — two-scheme tokens, serif @font-face blocks, the

@@ -1,0 +1,22 @@
+{
+  "summary": "Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Free-tier rate limits are 500 RPM, 1M TPM, and 5 concurrent requests; once the token grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.",
+  "claim_steps": [
+    "Sign up at jina.ai and get your API key from jina.ai/api-dashboard/key-manager — new keys auto-receive 10M free tokens.",
+    "Authenticate with 'Authorization: Bearer jina_<key>' against api.jina.ai endpoints (embeddings, rerank, reader via r.jina.ai, etc.).",
+    "When free tokens run out, buy more on the key's 'Buy tokens' tab — the free grant is one-time."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://jina.ai/en-US/reader/",
+      "title": "Reader | Jina AI",
+      "text": "Don't panic! Every new API key comes with 10M free tokens! ... New users get an auto-generated API key with free tokens usable across any of our models."
+    },
+    {
+      "type": "link",
+      "url": "https://api.jina.ai/openapi.json",
+      "title": "Jina Search Foundation API (OpenAPI spec)",
+      "text": "Get your API key at jina.ai/api-dashboard/key-manager. New users receive 10M free tokens. ... Rate Limits — Free tier: 500 RPM / 1M TPM / concurrency 5."
+    }
+  ]
+}

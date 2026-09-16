@@ -1,0 +1,16 @@
+{
+  "summary": "Hetzner's experimental Inference API exposes open-weight LLMs through an OpenAI-compatible REST API (base URL https://inference.hetzner.com/api/v1 exposing /v1/models, /v1/completions and /v1/chat/completions) and is free of charge while in experimental status — performance and availability are not guaranteed and it is not intended for production. Current models: Qwen/Qwen3.6-35B-A3B-FP8 (MoE, 35B total / 3B active, vision) and Qwen3.8-27B (dense), both with 262,144-token context and text+image input. Rate limits per API key: 4M input and 100k output tokens per 60 seconds, plus 10 requests per 60 seconds; the /v1/models response is the definitive live model list.",
+  "claim_steps": [
+    "Create a Hetzner account and API token at experiments.hetzner.com (per curator input; docs confirm Bearer-token auth; no card mentioned).",
+    "Call https://inference.hetzner.com/api/v1 with any OpenAI-compatible SDK or curl using 'Authorization: Bearer <token>'.",
+    "List live models via GET /v1/models — the response is the definitive model list during the experiment."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.hetzner.com/general/company-and-policy/experiments/inference/",
+      "title": "Inference API | Hetzner Docs",
+      "text": "As long as the Inference API remains in experimental status, it is free of charge. Should this status change, we will notify you in advance via email ... Current limits ... 60s: 4M input tokens / 100k output tokens ... 10 requests per 60s."
+    }
+  ]
+}
