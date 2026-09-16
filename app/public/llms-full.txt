@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-16T15:28:25Z — 127 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-16T18:18:24Z — 128 active offers.
 
 ## Offers (full)
 
@@ -115,6 +115,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-16T15:28:25Z — 
 - Page: https://freetokens.custats.info/offers/codex-for-open-source.html
 - Summary: Codex for Open Source gives eligible open-source maintainers six months of ChatGPT Pro with Codex for day-to-day coding, triage, review, and maintainer workflows, conditional access to Codex Security for repositories needing deeper coverage (reviewed case by case), and API credits through the Codex Open Source Fund for projects using Codex in PR review or maintainer automation. Core maintainers and widely used public projects should apply; edge cases can explain their ecosystem role.
 - Claim steps: Confirm you're a core maintainer or run a widely used public open-source project. | Apply via the form linked on developers.openai.com/community/codex-for-oss (rolling review; submitting agrees to the Codex for Open Source Program Terms). | If selected: six months of ChatGPT Pro with Codex, conditional Codex Security access (case-by-case), and API credits via the Codex Open Source Fund for Codex-in-OSS workflows.
+
+### Union Alpha Free in Cline
+- Provider: Cline
+- Category: coding
+- Amount: Free Union Alpha model access (256k context, multimodal), rate limited
+- Status: active — expiry ongoing
+- Verified: 2026-09-16 (social_proof / unverified, signup required)
+- Source: https://x.com/cline/status/2100265266026590322
+- Page: https://freetokens.custats.info/offers/cline-union-alpha-free.html
+- Summary: Cline announced on 2026-09-16 that Union Alpha (stealth model) is now free in Cline, with 256k context, multimodal support, built for agentic coding. Cline's free-models docs confirm free model promotions are available to any user with a Cline account, carry a limited usage quota, rotate over time, and work only in the Cline IDE extension and CLI (not the Cline API). No fixed end date is published, so this listing uses null expiry to mean no announced end date, not permanent availability.
+- Claim steps: Install the Cline CLI if needed: npm i -g cline. | Open the model picker (/model); select Cline as the provider. | Under 'Free', choose 'Union Alpha' while it is listed. | Use it in the Cline CLI or IDE extension within the limited free quota; free models are not available through the Cline API.
 
 ### Claude for Open Source
 - Provider: Anthropic

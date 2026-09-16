@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-16T15:28:25Z",
-  "count": 143,
-  "active_count": 127,
+  "generated_at": "2026-09-16T18:18:24Z",
+  "count": 144,
+  "active_count": 128,
   "expired_count": 16,
   "offers": [
     {
@@ -15,6 +15,20 @@
       "verified_date": "2026-09-16",
       "verification": "social_proof",
       "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "cline-union-alpha-free",
+      "title": "Union Alpha Free in Cline",
+      "provider": "Cline",
+      "category": "coding",
+      "amount": "Free Union Alpha model access (256k context, multimodal), rate limited",
+      "expiry_date": null,
+      "source_url": "https://x.com/cline/status/2100265266026590322",
+      "verified_date": "2026-09-16",
+      "verification": "social_proof",
+      "review_status": "unverified",
       "signup": "required",
       "status": "active"
     },

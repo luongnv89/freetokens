@@ -1,0 +1,31 @@
+{
+  "summary": "Cline announced on 2026-09-16 that Union Alpha (stealth model) is now free in Cline, with 256k context, multimodal support, built for agentic coding. Cline's free-models docs confirm free model promotions are available to any user with a Cline account, carry a limited usage quota, rotate over time, and work only in the Cline IDE extension and CLI (not the Cline API). No fixed end date is published, so this listing uses null expiry to mean no announced end date, not permanent availability.",
+  "claim_steps": [
+    "Install the Cline CLI if needed: npm i -g cline.",
+    "Open the model picker (/model); select Cline as the provider.",
+    "Under 'Free', choose 'Union Alpha' while it is listed.",
+    "Use it in the Cline CLI or IDE extension within the limited free quota; free models are not available through the Cline API."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/cline/status/2100265266026590322",
+      "author": "Cline",
+      "handle": "@cline",
+      "text": "Union Alpha (stealth model) is now free in Cline. 256k context, multimodal, built for agentic coding. It is near GPT-6 Astra and Opus 5 performance for ~18x lower expected cost."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/cline/status/2100265267481968822",
+      "author": "Cline",
+      "handle": "@cline",
+      "text": "Use in Cline with: npm i -g cline /model Under 'Free', choose 'Union Alpha'"
+    },
+    {
+      "type": "link",
+      "url": "https://docs.cline.bot/getting-started/free-models",
+      "title": "Cline Free Models - Cline",
+      "text": "Cline periodically offers free model promotions that let you try select models at no cost, up to a limited usage quota. Free model promotions are offered on a rotating, limited-time basis. Free models are available to any user with a Cline account. Free models are only available in the Cline IDE Extension and CLI."
+    }
+  ]
+}
