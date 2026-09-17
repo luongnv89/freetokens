@@ -47,11 +47,13 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // offers + detail JSONs: Codex Open Source Fund, Codex for OSS, Claude for
 // OSS, Hetzner Inference, Jina 10M, NLP Cloud, Hyperbolic). Local gzip
 // 148,520 B.
-// 2026-09-17 (#416): JS ceiling 150_500 -> 155_000 — catalog growth (13 new
-// offers + detail JSONs: Union Alpha, Ling 3.0 Flash Sante/VL/Fin across
-// Vercel/Novita/OpenRouter, Deepgram ×2, ElectronHub, Kimi, Context.dev).
-// Local gzip 153,030 B. Still does not close #317.
-export const JS_GZIP_CEILING_BYTES = 155_000;
+// 2026-09-17 (#317): details.json switched from dynamic import to a static
+// asset fetch (same pattern #358 used for offers.json), so the aggregate
+// details map no longer compiles into a JS chunk — catalog/detail growth
+// stops counting against this ceiling entirely. Ceiling unchanged; measured
+// JS gzip dropped to 95,429 B. This ceiling remains a gate for application
+// code growth, not a catalog-growth ratchet.
+export const JS_GZIP_CEILING_BYTES = 150_500;
 // CSS gzip history: 8_000 through the dark redesign (9,301 gzipped after the
 // hot-today shelf), then 10_000 for the offer-detail rebuild (9,833). The
 // warm-linen redesign — two-scheme tokens, serif @font-face blocks, the
