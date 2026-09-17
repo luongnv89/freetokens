@@ -1,0 +1,14 @@
+# Verified 2026-09-17 against https://deepgram.com/startup-program
+# ("Apply to Deepgram for Startups and get up to $100,000 in credits over 12
+# months." / "Up to $100k Deepgram credits to build with Deepgram's powerful
+# STT, TTS, Voice Agent capabilities. Credits must be used within 12 months.")
+title: Deepgram for Startups
+provider: Deepgram
+category: startup_program
+amount: Up to $100,000 in API credits over 12 months (STT, TTS, Voice Agent)
+expiry_date: null
+source_url: https://deepgram.com/startup-program
+verified_date: 2026-09-17
+verification: social_proof
+review_status: under-review
+signup: required

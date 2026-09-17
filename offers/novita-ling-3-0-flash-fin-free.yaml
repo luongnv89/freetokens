@@ -1,0 +1,14 @@
+# Verified 2026-09-17 against https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-fin
+# ("Entrée $0 / M Tokens / Sortie $0 / M Tokens" — Input $0/M, Output $0/M on
+# inclusionai/ling-3.0-flash-fin; 256K context, 32K max output, serverless.)
+# No published end date for the $0 pricing.
+title: Ling 3.0 Flash Fin Free (Novita)
+provider: Novita AI
+category: api_provider
+amount: Ling 3.0 Flash Fin at $0 input / $0 output per M tokens (256K context)
+expiry_date: null
+source_url: https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-fin
+verified_date: 2026-09-17
+verification: social_proof
+review_status: under-review
+signup: required

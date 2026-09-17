@@ -1,0 +1,21 @@
+{
+  "summary": "InclusionAI's healthcare-focused Ling 3.0 Flash Sante is free via OpenRouter's :free endpoint (inclusionai/ling-3.0-flash-sante:free), served by Novita at $0 prompt / $0 completion with a 262K context window. Released 2026-09-04; no published end date.",
+  "claim_steps": [
+    "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
+    "Call the chat completions API with model id inclusionai/ling-3.0-flash-sante:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/inclusionai/ling-3.0-flash-sante:free",
+      "title": "OpenRouter APIs — inclusionAI: Ling 3.0 Flash Sante (free)",
+      "text": "Model page confirms inclusionai/ling-3.0-flash-sante:free is served through OpenRouter's chat completions API."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "inclusionai/ling-3.0-flash-sante:free listed at prompt:0, completion:0, context_length 262144, created 2026-09-04; endpoint served by Novita at $0/$0."
+    }
+  ]
+}

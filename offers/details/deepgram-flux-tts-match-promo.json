@@ -1,0 +1,22 @@
+{
+  "summary": "Limited-time Deepgram promotion: every $1 of paid Flux TTS usage earns $1 in bonus credits, up to $500 per eligible project. Open to new and existing Pay-As-You-Go and Growth projects (Enterprise excluded); a valid payment method is required. Runs Sep 15 – Dec 31, 2026; bonus credits never expire and stack with the standard $200 signup credit.",
+  "claim_steps": [
+    "Use a Deepgram Pay-As-You-Go or Growth project with a valid payment method on file.",
+    "Spend paid credits on Flux TTS between Sep 15 and Dec 31, 2026 (usage paid with promotional credits does not qualify).",
+    "Bonus credits are granted to the project, typically within 1 week."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://deepgram.com/pricing",
+      "title": "Deepgram Pricing",
+      "text": "Buy Flux TTS, get matching credits. For every $1 you spend on Flux TTS, we'll add $1 in credits — up to $500. Available on Pay As You Go and Growth plans. Offer ends December 31, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://deepgram.com/promotions/2026-09/flux-tts-promo-terms-and-conditions",
+      "title": "Deepgram — Flux TTS Credit Bonus Promotion Terms",
+      "text": "The Promotion begins at 12:00 a.m. Pacific Time on September 15, 2026 and ends at 11:59 p.m. Pacific Time on December 31, 2026. Up to $500 in Bonus Credits per Eligible Project."
+    }
+  ]
+}

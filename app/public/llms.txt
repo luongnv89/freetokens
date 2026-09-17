@@ -4,8 +4,21 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 128 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 141 active listings. Full directory at https://freetokens.custats.info/.
 
+- [Ling 3.0 Flash Sante Free (Vercel AI Gateway)](https://freetokens.custats.info/offers/vercel-ling-3-0-flash-sante-free.html): Vercel — Ling 3.0 Flash Sante at $0 on AI Gateway (256K context, function calling) (api_provider)
+- [Ling 3.0 Flash Fin Free (Vercel AI Gateway)](https://freetokens.custats.info/offers/vercel-ling-3-0-flash-fin-free.html): Vercel — Ling 3.0 Flash Fin at $0 on AI Gateway (256K context, function calling) (api_provider)
+- [Union Alpha Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-union-alpha-free.html): OpenRouter — Free Union Alpha stealth model API access (262K context, tools/JSON, image input) (api_provider)
+- [Ling 3.0 Flash VL Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-ling-3-0-flash-vl-free.html): OpenRouter — Free inclusionai/ling-3.0-flash-vl:free endpoint at $0 (262K context, multimodal) (api_provider)
+- [Ling 3.0 Flash Sante Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-ling-3-0-flash-sante-free.html): OpenRouter — Free inclusionai/ling-3.0-flash-sante:free endpoint at $0 (262K context, healthcare MoE) (api_provider)
+- [Ling 3.0 Flash VL Free (Novita)](https://freetokens.custats.info/offers/novita-ling-3-0-flash-vl-free.html): Novita AI — Ling 3.0 Flash VL free input + output tokens (262K context, text/image/video input) (api_provider)
+- [Ling 3.0 Flash Sante Free (Novita)](https://freetokens.custats.info/offers/novita-ling-3-0-flash-sante-free.html): Novita AI — Ling 3.0 Flash Sante at $0 input / $0 output per M tokens (256K context) (api_provider)
+- [Ling 3.0 Flash Fin Free (Novita)](https://freetokens.custats.info/offers/novita-ling-3-0-flash-fin-free.html): Novita AI — Ling 3.0 Flash Fin at $0 input / $0 output per M tokens (256K context) (api_provider)
+- [Kimi API Free Trial (RMB 15)](https://freetokens.custats.info/offers/kimi-api-free-trial.html): Moonshot AI — RMB 15 API voucher on registration, valid 3 months (api_provider)
+- [Electron Hub Free Tier](https://freetokens.custats.info/offers/electronhub-free-tier.html): Electron Hub — $0.25 weekly credits (refills Sun 21:00 UTC) + 10 Neutrinos/day for :free models (up to 200/day via ads) (api_provider)
+- [Deepgram for Startups](https://freetokens.custats.info/offers/deepgram-for-startups.html): Deepgram — Up to $100,000 in API credits over 12 months (STT, TTS, Voice Agent) (startup_program)
+- [Deepgram Flux TTS Credit Match](https://freetokens.custats.info/offers/deepgram-flux-tts-match-promo.html): Deepgram — $1 bonus credit per $1 spent on Flux TTS, up to $500 per project (voice)
+- [Context.dev Free Tier](https://freetokens.custats.info/offers/context-dev-free-tier.html): Context.dev — 1,000 API credits/month + 10K one-time Logo Link requests (30 RPM work email / 10 RPM personal) (api_provider)
 - [ZCode Global Build — Free GLM-5.3-Flash (Round 4)](https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html): ZCode — Free GLM-5.3-Flash in ZCode — 10h/day, Sep 3–18; 100M tokens for new users (coding)
 - [OpenRouter for Startups](https://freetokens.custats.info/offers/openrouter-for-startups.html): OpenRouter — Up to $5,000 promotional inference credits (most expire 6 months after issuance) plus 0% processing fees for 12 months if approved; amount/duration at OpenRouter discretion (startup_program)
 - [Union Alpha Free on OpenCode Zen](https://freetokens.custats.info/offers/opencode-union-alpha-free.html): OpenCode — Free Union Alpha model access on OpenCode Zen for one week (coding)
@@ -13,19 +26,6 @@ Top 20 currently active offers (newest verified first) from 128 active listings.
 - [Ling 3.0 Flash Fin Free (InclusionAI)](https://freetokens.custats.info/offers/ling-3-0-flash-fin-free.html): InclusionAI — Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling (api_provider)
 - [Jina AI — 10M Free Tokens](https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html): Jina AI — 10M free tokens for new users across embeddings, rerank, reader and classifier APIs; Free tier 500 RPM / 1M TPM / concurrency 5 (api_provider)
 - [Hyperbolic Basic Free Tier](https://freetokens.custats.info/offers/hyperbolic-basic-free-tier.html): Hyperbolic — Basic tier with $0 minimum deposit — serverless OpenAI-compatible inference on 25+ open models at 60 RPM (Pro needs a >=$5 deposit) (api_provider)
-- [Hetzner Experiments Inference API](https://freetokens.custats.info/offers/hetzner-experiments-inference-api.html): Hetzner — Free OpenAI-compatible inference while in experimental status (Qwen3.6-35B-A3B-FP8, Qwen3.8-27B); 4M input / 100k output tokens per 60s, 10 req/60s (api_provider)
-- [Codex Open Source Fund](https://freetokens.custats.info/offers/codex-open-source-fund.html): OpenAI — Up to $25,000 in OpenAI API credits per project ($1M fund; applications reviewed on a rolling basis) (startup_program)
-- [Codex for Open Source](https://freetokens.custats.info/offers/codex-for-open-source.html): OpenAI — Six months of ChatGPT Pro with Codex + conditional Codex Security + API credits via the Codex Open Source Fund, for eligible OSS maintainers (coding)
-- [Union Alpha Free in Cline](https://freetokens.custats.info/offers/cline-union-alpha-free.html): Cline — Free Union Alpha model access (256k context, multimodal), rate limited (coding)
-- [Claude for Open Source](https://freetokens.custats.info/offers/claude-for-open-source.html): Anthropic — 6 months of free Claude Max 20x (~$1,200 value at $200/mo list); subscription grant, not API credits; capped at 10,000 recipients (coding)
-- [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
-- [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
-- [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
-- [Voyage AI — First 200M Tokens Free](https://freetokens.custats.info/offers/voyage-ai-200m-free-tokens.html): Voyage AI — First 200M tokens free per account on current embedding/rerank models (50M on specialized -2 models; multimodal: 200M text tokens + 150B pixels); Batch API excluded (api_provider)
-- [Vidu AI Video Free Credits](https://freetokens.custats.info/offers/vidu-free-credits.html): Vidu — Trial credits for new users on signup, topped up with daily login bonus credits (video)
-- [Vercel AI Gateway — Monthly Free Credit](https://freetokens.custats.info/offers/vercel-ai-gateway-free-tier.html): Vercel — Monthly free AI Gateway credit covering a free-tier subset of models (lower per-model rate limits); buying credits permanently ends the monthly free credit (api_provider)
-- [Upstage Studio Agents — 10 Free Runs](https://freetokens.custats.info/offers/upstage-studio-agents-10-free-runs.html): Upstage — 10 free runs per Studio agent for document workflows (no credit card required) (api_provider)
-- [Upstage Free Access for Education & Public Interest](https://freetokens.custats.info/offers/upstage-education-public-interest-free.html): Upstage — Free access to Solar Pro LLM + Document Parse for up to 1 year for eligible schools, hospitals, and nonprofits (Upstage x AWS AI Initiative) (student)
 
 ## Pages
 

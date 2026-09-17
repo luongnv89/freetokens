@@ -1,0 +1,15 @@
+# Verified 2026-09-17 against https://www.context.dev/pricing
+# ("Start with 1,000 free credits/mo, no credit card required." /
+# "The free tier includes 1,000 API credits per month plus 10K one-time Logo
+# Link requests" / "Free is 30 calls/minute with a work email or 10 with a
+# personal email.")
+title: Context.dev Free Tier
+provider: Context.dev
+category: api_provider
+amount: 1,000 API credits/month + 10K one-time Logo Link requests (30 RPM work email / 10 RPM personal)
+expiry_date: null
+source_url: https://www.context.dev/pricing
+verified_date: 2026-09-17
+verification: social_proof
+review_status: under-review
+signup: required

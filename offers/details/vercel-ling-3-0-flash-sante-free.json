@@ -1,0 +1,15 @@
+{
+  "summary": "InclusionAI's healthcare-focused Ling 3.0 Flash Sante (256K context, function calling, medical reasoning) is free on Vercel AI Gateway through October 4, 2026. Model id inclusionai/ling-3.0-flash-sante-free stops serving requests after the free period; the non-free id continues at standard rates.",
+  "claim_steps": [
+    "Create a Vercel account and provision an AI Gateway API key (npx vercel ai-gateway setup).",
+    "Call model inclusionai/ling-3.0-flash-sante-free for a guaranteed hard stop after Oct 4, or inclusionai/ling-3.0-flash-sante (bills at standard rates afterward)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/changelog/ling-3-0-flash-sante-is-now-available-on-ai-gateway-for-free",
+      "title": "Ling 3.0 Flash Sante is now available on AI Gateway for free — Vercel Changelog",
+      "text": "Ling 3.0 Flash Sante from inclusionAI is now available on AI Gateway, and free through October 4. inclusionai/ling-3.0-flash-sante-free stops serving requests after October 4."
+    }
+  ]
+}
