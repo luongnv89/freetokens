@@ -12,6 +12,13 @@
       "url": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota",
       "title": "Free quota for new users — Alibaba Cloud Model Studio",
       "text": "When you first activate Alibaba Cloud Model Studio (Singapore region), the platform automatically grants you a free quota for various models. The free quota is valid for 90 days. Each model has its own independent free quota (typically 1,000,000 tokens). The free quota only covers charges for real-time inference."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/ah4alt/status/2100516869010833520",
+      "author": "AH",
+      "handle": "@ah4alt",
+      "text": "Alibaba Cloud is giving new users free AI model quotas for 90 days.\n\nYou can access eligible models from:\n\n→ Qwen\n→ DeepSeek\n→ GLM\n→ Kimi\n→ Wan\n\nUse them for coding, chat, image generation and video generation.\n\nThe quota is model-specific, but you can claim free quota"
     }
   ]
 }
