@@ -23,16 +23,24 @@ async function boot() {
     const root = document.getElementById("root")!;
     const route = resolveRoute();
     // The aggregate details map (~129 KB gzip) ships only with detail routes
-    // via a route-guarded dynamic import, so home/archive never request it
-    // (#369). On failure skip hydration entirely: hydrating without details
+    // via a route-guarded fetch, so home/archive never request it (#369).
+    // On failure skip hydration entirely: hydrating without details
     // would mismatch the prerendered document, while the prerendered page
     // itself stays fully readable.
     let skipHydration = false;
     let details: DetailsMap | undefined;
     if (route.page === "detail") {
       try {
-        details = (await import("./data/details.json"))
-          .default as DetailsMap;
+        // Static-asset fetch, same pattern as offers.json above: emitted as
+        // hashed JSON, never compiled into a JS chunk — so detail-file growth
+        // no longer counts against the transferred-JS ceiling (#317).
+        const detailsUrl = new URL("./data/details.json", import.meta.url)
+          .href;
+        const dres = await fetch(detailsUrl, { credentials: "same-origin" });
+        if (!dres.ok) {
+          throw new Error(`details request failed: ${dres.status}`);
+        }
+        details = (await dres.json()) as DetailsMap;
       } catch (error) {
         // Optional data only: keep the prerendered page visible (no
         // hydration, which would mismatch), but never let details.json
