@@ -1,0 +1,15 @@
+{
+  "summary": "InclusionAI's finance-focused Ling 3.0 Flash Fin (256K context, 32K output, reasoning and function calling) is free on Vercel AI Gateway through September 25, 2026. Model id inclusionai/ling-3.0-flash-fin-free returns an error after the offer ends; the non-free id bills at standard rates afterward.",
+  "claim_steps": [
+    "Create a Vercel account and provision an AI Gateway API key (npx vercel ai-gateway setup, or vercel ai-gateway coding-agents setup for coding agents).",
+    "Call model inclusionai/ling-3.0-flash-fin-free for a guaranteed hard stop after Sep 25, or inclusionai/ling-3.0-flash-fin (bills at standard rates afterward)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/changelog/ling-3-0-flash-fin-now-available-on-ai-gateway-for-free",
+      "title": "Ling 3.0 Flash Fin now available on AI Gateway for free — Vercel Changelog",
+      "text": "Ling 3.0 Flash Fin from Inclusion AI is now available on AI Gateway and free to use through September 25. inclusionai/ling-3.0-flash-fin-free returns an error after the offer ends, preventing future charges."
+    }
+  ]
+}

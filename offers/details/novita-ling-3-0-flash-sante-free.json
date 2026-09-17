@@ -1,0 +1,15 @@
+{
+  "summary": "InclusionAI's Ling 3.0 Flash Sante (healthcare/medicine MoE, 124B total / ~5.1B active parameters) is listed on Novita AI's serverless API at $0/M input and $0/M output tokens, with 256K context and 32K max output. No published end date for the $0 pricing.",
+  "claim_steps": [
+    "Sign up at novita.ai and create an API key.",
+    "Call model id inclusionai/ling-3.0-flash-sante via the OpenAI-compatible endpoint — input and output are $0/M tokens."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-sante",
+      "title": "Ling 3.0 Flash Sante — Novita AI Model Library",
+      "text": "Entrée $0 / M Tokens, Sortie $0 / M Tokens (input $0/M, output $0/M) on inclusionai/ling-3.0-flash-sante; context length 256K, max output 32K, serverless supported."
+    }
+  ]
+}

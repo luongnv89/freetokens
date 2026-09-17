@@ -1,0 +1,14 @@
+# Verified 2026-09-17 against https://www.kimi.com/en/help/kimi-api/api-free-trial
+# ("Eligible users: New users who register with a mainland China mobile
+# number." / "An RMB 15 voucher is granted upon registration." / "The voucher
+# is valid for 3 months from the date it is issued.")
+title: Kimi API Free Trial (RMB 15)
+provider: Moonshot AI
+category: api_provider
+amount: RMB 15 API voucher on registration, valid 3 months
+expiry_date: null
+source_url: https://www.kimi.com/en/help/kimi-api/api-free-trial
+verified_date: 2026-09-17
+verification: social_proof
+review_status: under-review
+signup: required

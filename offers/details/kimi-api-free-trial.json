@@ -1,0 +1,16 @@
+{
+  "summary": "Kimi API grants newly registered users an RMB 15 voucher, valid for 3 months from issue and applied automatically to API usage before any top-up balance. Eligibility requires registering with a mainland China mobile number.",
+  "claim_steps": [
+    "Register on the Kimi platform with a mainland China mobile number.",
+    "The RMB 15 voucher is granted automatically — no manual activation; it deducts before your top-up balance.",
+    "Track remaining voucher credit on the Cost Details page in the console."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.kimi.com/en/help/kimi-api/api-free-trial",
+      "title": "Free Trial Benefits — Kimi Help",
+      "text": "Eligible users: New users who register with a mainland China mobile number. Voucher amount: An RMB 15 voucher is granted upon registration. Validity period: The voucher is valid for 3 months from the date it is issued."
+    }
+  ]
+}

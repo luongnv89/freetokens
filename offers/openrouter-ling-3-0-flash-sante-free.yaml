@@ -1,0 +1,15 @@
+# Verified 2026-09-17 against https://openrouter.ai/inclusionai/ling-3.0-flash-sante:free
+# and https://openrouter.ai/api/v1/models
+# (Models API lists inclusionai/ling-3.0-flash-sante:free at prompt:0 /
+# completion:0, context_length 262144, created 2026-09-04; endpoint served by
+# Novita at $0/$0. No published end date on OpenRouter or Novita.)
+title: Ling 3.0 Flash Sante Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free inclusionai/ling-3.0-flash-sante:free endpoint at $0 (262K context, healthcare MoE)
+expiry_date: null
+source_url: https://openrouter.ai/inclusionai/ling-3.0-flash-sante:free
+verified_date: 2026-09-17
+verification: social_proof
+review_status: under-review
+signup: required

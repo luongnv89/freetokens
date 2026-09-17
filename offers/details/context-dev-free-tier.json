@@ -1,0 +1,16 @@
+{
+  "summary": "Context.dev's free tier includes 1,000 API credits per month (1 credit = 1 page scrape; extraction/brand calls cost more) plus a one-time 10K Logo Link quota — no credit card required. Rate limit is 30 calls/minute with a work email or 10/minute with a personal email.",
+  "claim_steps": [
+    "Sign up at context.dev/signup — no credit card required.",
+    "1,000 API credits renew monthly; the 10K Logo Link quota is one-time.",
+    "Register with a work email for 30 calls/minute; personal emails get 10/minute."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.context.dev/pricing",
+      "title": "Pricing - Simple & Scalable Plans | Context.dev",
+      "text": "Start with 1,000 free credits/mo, no credit card required. The free tier includes 1,000 API credits per month plus 10K one-time Logo Link requests. Free is 30 calls/minute with a work email or 10 with a personal email."
+    }
+  ]
+}

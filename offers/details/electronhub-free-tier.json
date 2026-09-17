@@ -1,0 +1,16 @@
+{
+  "summary": "Electron Hub's free tier grants $0.25 in weekly API credits, refilled every Sunday at 21:00 UTC (unused weekly credit does not carry over), plus 10 Neutrinos per day for :free-suffixed models — expandable to 200 Neutrinos/day by watching up to 3 ads.",
+  "claim_steps": [
+    "Sign up at app.electronhub.ai (no card required for the free tier).",
+    "Weekly credits land automatically every Sunday 21:00 UTC; Neutrinos reset daily at 21:00 UTC.",
+    "Call models ending in :free to spend Neutrinos instead of credits; watch ads in the dashboard to raise the daily Neutrino cap to 200."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.electronhub.ai/billing/credits",
+      "title": "Understanding Credits — Electron Hub Docs",
+      "text": "Weekly Credits are automatically added to your account every Sunday at 21:00 UTC; Free tier receives $0.25. All users get 10 Neutrinos per day (resets 21:00 UTC); earn more by watching ads, up to 200 daily."
+    }
+  ]
+}

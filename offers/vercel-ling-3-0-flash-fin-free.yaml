@@ -1,0 +1,15 @@
+# Verified 2026-09-17 against https://vercel.com/changelog/ling-3-0-flash-fin-now-available-on-ai-gateway-for-free
+# ("Ling 3.0 Flash Fin from Inclusion AI is now available on AI Gateway and
+# free to use through September 25." / "inclusionai/ling-3.0-flash-fin-free
+# returns an error after the offer ends" — use the -free model ID to
+# hard-stop.)
+title: Ling 3.0 Flash Fin Free (Vercel AI Gateway)
+provider: Vercel
+category: api_provider
+amount: Ling 3.0 Flash Fin at $0 on AI Gateway (256K context, function calling)
+expiry_date: 2026-09-25
+source_url: https://vercel.com/changelog/ling-3-0-flash-fin-now-available-on-ai-gateway-for-free
+verified_date: 2026-09-17
+verification: social_proof
+review_status: under-review
+signup: required

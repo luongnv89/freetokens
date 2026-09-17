@@ -1,0 +1,21 @@
+{
+  "summary": "Union Alpha is a free stealth model served through OpenRouter (model id stealth/union-alpha): multimodal with image input, a 262K context window, tool calling and JSON output. Released 2026-09-16 and listed at $0 prompt / $0 completion in the OpenRouter models API.",
+  "claim_steps": [
+    "Sign up at openrouter.ai and create an API key (no card needed for $0 models).",
+    "Call the chat completions API with model id stealth/union-alpha."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/stealth/union-alpha",
+      "title": "OpenRouter APIs — Union Alpha (stealth/union-alpha)",
+      "text": "Model page confirms stealth/union-alpha is served through OpenRouter's chat completions API."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "stealth/union-alpha listed at prompt:0, completion:0, context_length 262144, created 2026-09-16; endpoint provider 'Stealth' at $0/$0."
+    }
+  ]
+}

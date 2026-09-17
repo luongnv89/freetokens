@@ -1,0 +1,15 @@
+{
+  "summary": "InclusionAI's multimodal Ling 3.0 Flash VL (text, image and video input; 262,144-token context, 32,768 max output on the Novita deployment) has free input and output tokens on Novita AI through September 23, 2026 at 2:30 AM UTC. Default catalog tier is 30 RPM.",
+  "claim_steps": [
+    "Sign up at novita.ai and create an API key.",
+    "Call model id inclusionai/ling-3.0-flash-vl via the OpenAI-compatible or Anthropic-compatible endpoint — input and output tokens are $0 until Sep 23, 2026 02:30 UTC."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://blogs.novita.ai/ling-3-0-flash-vl-on-novita-ai-launch-pricing/",
+      "title": "Ling-3.0-Flash-VL on Novita AI: Native Multimodal API and Pricing",
+      "text": "The hosted listing for inclusionai/ling-3.0-flash-vl shows a 262,144-token context window, 32,768-token maximum output, reasoning, function calling, and free input and output tokens through September 23, 2026, at 2:30 AM UTC."
+    }
+  ]
+}

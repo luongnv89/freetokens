@@ -1,0 +1,14 @@
+# Verified 2026-09-17 against https://blogs.novita.ai/ling-3-0-flash-vl-on-novita-ai-launch-pricing/
+# ("free input and output tokens through September 23, 2026, at 2:30 AM UTC"
+# — Novita listing: 262,144-token context, text/image/video input, model id
+# inclusionai/ling-3.0-flash-vl.)
+title: Ling 3.0 Flash VL Free (Novita)
+provider: Novita AI
+category: api_provider
+amount: Ling 3.0 Flash VL free input + output tokens (262K context, text/image/video input)
+expiry_date: 2026-09-23
+source_url: https://blogs.novita.ai/ling-3-0-flash-vl-on-novita-ai-launch-pricing/
+verified_date: 2026-09-17
+verification: social_proof
+review_status: under-review
+signup: required
