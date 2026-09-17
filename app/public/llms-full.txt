@@ -2,9 +2,152 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-16T18:18:24Z — 128 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-17T08:46:41Z — 141 active offers.
 
 ## Offers (full)
+
+### Ling 3.0 Flash Sante Free (Vercel AI Gateway)
+- Provider: Vercel
+- Category: api_provider
+- Amount: Ling 3.0 Flash Sante at $0 on AI Gateway (256K context, function calling)
+- Status: active — expiry 2026-10-04
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://vercel.com/changelog/ling-3-0-flash-sante-is-now-available-on-ai-gateway-for-free
+- Page: https://freetokens.custats.info/offers/vercel-ling-3-0-flash-sante-free.html
+- Summary: InclusionAI's healthcare-focused Ling 3.0 Flash Sante (256K context, function calling, medical reasoning) is free on Vercel AI Gateway through October 4, 2026. Model id inclusionai/ling-3.0-flash-sante-free stops serving requests after the free period; the non-free id continues at standard rates.
+- Claim steps: Create a Vercel account and provision an AI Gateway API key (npx vercel ai-gateway setup). | Call model inclusionai/ling-3.0-flash-sante-free for a guaranteed hard stop after Oct 4, or inclusionai/ling-3.0-flash-sante (bills at standard rates afterward).
+
+### Ling 3.0 Flash Fin Free (Vercel AI Gateway)
+- Provider: Vercel
+- Category: api_provider
+- Amount: Ling 3.0 Flash Fin at $0 on AI Gateway (256K context, function calling)
+- Status: active — expiry 2026-09-25
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://vercel.com/changelog/ling-3-0-flash-fin-now-available-on-ai-gateway-for-free
+- Page: https://freetokens.custats.info/offers/vercel-ling-3-0-flash-fin-free.html
+- Summary: InclusionAI's finance-focused Ling 3.0 Flash Fin (256K context, 32K output, reasoning and function calling) is free on Vercel AI Gateway through September 25, 2026. Model id inclusionai/ling-3.0-flash-fin-free returns an error after the offer ends; the non-free id bills at standard rates afterward.
+- Claim steps: Create a Vercel account and provision an AI Gateway API key (npx vercel ai-gateway setup, or vercel ai-gateway coding-agents setup for coding agents). | Call model inclusionai/ling-3.0-flash-fin-free for a guaranteed hard stop after Sep 25, or inclusionai/ling-3.0-flash-fin (bills at standard rates afterward).
+
+### Union Alpha Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free Union Alpha stealth model API access (262K context, tools/JSON, image input)
+- Status: active — expiry ongoing
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/stealth/union-alpha
+- Page: https://freetokens.custats.info/offers/openrouter-union-alpha-free.html
+- Summary: Union Alpha is a free stealth model served through OpenRouter (model id stealth/union-alpha): multimodal with image input, a 262K context window, tool calling and JSON output. Released 2026-09-16 and listed at $0 prompt / $0 completion in the OpenRouter models API.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for $0 models). | Call the chat completions API with model id stealth/union-alpha.
+
+### Ling 3.0 Flash VL Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free inclusionai/ling-3.0-flash-vl:free endpoint at $0 (262K context, multimodal)
+- Status: active — expiry 2026-09-23
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/inclusionai/ling-3.0-flash-vl:free
+- Page: https://freetokens.custats.info/offers/openrouter-ling-3-0-flash-vl-free.html
+- Summary: InclusionAI's multimodal Ling 3.0 Flash VL is free via OpenRouter's :free endpoint (inclusionai/ling-3.0-flash-vl:free), served by Novita at $0 prompt / $0 completion with a 262K context window. Released 2026-09-10; upstream Novita free window ends 2026-09-23 02:30 UTC.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id inclusionai/ling-3.0-flash-vl:free.
+
+### Ling 3.0 Flash Sante Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free inclusionai/ling-3.0-flash-sante:free endpoint at $0 (262K context, healthcare MoE)
+- Status: active — expiry ongoing
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/inclusionai/ling-3.0-flash-sante:free
+- Page: https://freetokens.custats.info/offers/openrouter-ling-3-0-flash-sante-free.html
+- Summary: InclusionAI's healthcare-focused Ling 3.0 Flash Sante is free via OpenRouter's :free endpoint (inclusionai/ling-3.0-flash-sante:free), served by Novita at $0 prompt / $0 completion with a 262K context window. Released 2026-09-04; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id inclusionai/ling-3.0-flash-sante:free.
+
+### Ling 3.0 Flash VL Free (Novita)
+- Provider: Novita AI
+- Category: api_provider
+- Amount: Ling 3.0 Flash VL free input + output tokens (262K context, text/image/video input)
+- Status: active — expiry 2026-09-23
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://blogs.novita.ai/ling-3-0-flash-vl-on-novita-ai-launch-pricing/
+- Page: https://freetokens.custats.info/offers/novita-ling-3-0-flash-vl-free.html
+- Summary: InclusionAI's multimodal Ling 3.0 Flash VL (text, image and video input; 262,144-token context, 32,768 max output on the Novita deployment) has free input and output tokens on Novita AI through September 23, 2026 at 2:30 AM UTC. Default catalog tier is 30 RPM.
+- Claim steps: Sign up at novita.ai and create an API key. | Call model id inclusionai/ling-3.0-flash-vl via the OpenAI-compatible or Anthropic-compatible endpoint — input and output tokens are $0 until Sep 23, 2026 02:30 UTC.
+
+### Ling 3.0 Flash Sante Free (Novita)
+- Provider: Novita AI
+- Category: api_provider
+- Amount: Ling 3.0 Flash Sante at $0 input / $0 output per M tokens (256K context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-sante
+- Page: https://freetokens.custats.info/offers/novita-ling-3-0-flash-sante-free.html
+- Summary: InclusionAI's Ling 3.0 Flash Sante (healthcare/medicine MoE, 124B total / ~5.1B active parameters) is listed on Novita AI's serverless API at $0/M input and $0/M output tokens, with 256K context and 32K max output. No published end date for the $0 pricing.
+- Claim steps: Sign up at novita.ai and create an API key. | Call model id inclusionai/ling-3.0-flash-sante via the OpenAI-compatible endpoint — input and output are $0/M tokens.
+
+### Ling 3.0 Flash Fin Free (Novita)
+- Provider: Novita AI
+- Category: api_provider
+- Amount: Ling 3.0 Flash Fin at $0 input / $0 output per M tokens (256K context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-fin
+- Page: https://freetokens.custats.info/offers/novita-ling-3-0-flash-fin-free.html
+- Summary: InclusionAI's Ling 3.0 Flash Fin (finance-enhanced MoE, 124B total / ~5.1B active parameters) is listed on Novita AI's serverless API at $0/M input and $0/M output tokens, with 256K context and 32K max output. No published end date for the $0 pricing.
+- Claim steps: Sign up at novita.ai and create an API key. | Call model id inclusionai/ling-3.0-flash-fin via the OpenAI-compatible endpoint — input and output are $0/M tokens.
+
+### Kimi API Free Trial (RMB 15)
+- Provider: Moonshot AI
+- Category: api_provider
+- Amount: RMB 15 API voucher on registration, valid 3 months
+- Status: active — expiry ongoing
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://www.kimi.com/en/help/kimi-api/api-free-trial
+- Page: https://freetokens.custats.info/offers/kimi-api-free-trial.html
+- Summary: Kimi API grants newly registered users an RMB 15 voucher, valid for 3 months from issue and applied automatically to API usage before any top-up balance. Eligibility requires registering with a mainland China mobile number.
+- Claim steps: Register on the Kimi platform with a mainland China mobile number. | The RMB 15 voucher is granted automatically — no manual activation; it deducts before your top-up balance. | Track remaining voucher credit on the Cost Details page in the console.
+
+### Electron Hub Free Tier
+- Provider: Electron Hub
+- Category: api_provider
+- Amount: $0.25 weekly credits (refills Sun 21:00 UTC) + 10 Neutrinos/day for :free models (up to 200/day via ads)
+- Status: active — expiry ongoing
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://docs.electronhub.ai/billing/credits
+- Page: https://freetokens.custats.info/offers/electronhub-free-tier.html
+- Summary: Electron Hub's free tier grants $0.25 in weekly API credits, refilled every Sunday at 21:00 UTC (unused weekly credit does not carry over), plus 10 Neutrinos per day for :free-suffixed models — expandable to 200 Neutrinos/day by watching up to 3 ads.
+- Claim steps: Sign up at app.electronhub.ai (no card required for the free tier). | Weekly credits land automatically every Sunday 21:00 UTC; Neutrinos reset daily at 21:00 UTC. | Call models ending in :free to spend Neutrinos instead of credits; watch ads in the dashboard to raise the daily Neutrino cap to 200.
+
+### Deepgram for Startups
+- Provider: Deepgram
+- Category: startup_program
+- Amount: Up to $100,000 in API credits over 12 months (STT, TTS, Voice Agent)
+- Status: active — expiry ongoing
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://deepgram.com/startup-program
+- Page: https://freetokens.custats.info/offers/deepgram-for-startups.html
+- Summary: Deepgram for Startups grants up to $100,000 in API credits usable over 12 months across speech-to-text, text-to-speech, and Voice Agent APIs. Applicants must be an AI builder or early-stage startup, in production or launching within the next 6 months. Credits are deposited 24–48 hours after acceptance.
+- Claim steps: Create a Deepgram account at console.deepgram.com and have your Project ID handy. | Apply at deepgram.com/startup-program (review typically takes about a week). | On acceptance, credits are automatically deposited in your console within 24–48 hours.
+
+### Deepgram Flux TTS Credit Match
+- Provider: Deepgram
+- Category: voice
+- Amount: $1 bonus credit per $1 spent on Flux TTS, up to $500 per project
+- Status: active — expiry 2026-12-31
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://deepgram.com/pricing
+- Page: https://freetokens.custats.info/offers/deepgram-flux-tts-match-promo.html
+- Summary: Limited-time Deepgram promotion: every $1 of paid Flux TTS usage earns $1 in bonus credits, up to $500 per eligible project. Open to new and existing Pay-As-You-Go and Growth projects (Enterprise excluded); a valid payment method is required. Runs Sep 15 – Dec 31, 2026; bonus credits never expire and stack with the standard $200 signup credit.
+- Claim steps: Use a Deepgram Pay-As-You-Go or Growth project with a valid payment method on file. | Spend paid credits on Flux TTS between Sep 15 and Dec 31, 2026 (usage paid with promotional credits does not qualify). | Bonus credits are granted to the project, typically within 1 week.
+
+### Context.dev Free Tier
+- Provider: Context.dev
+- Category: api_provider
+- Amount: 1,000 API credits/month + 10K one-time Logo Link requests (30 RPM work email / 10 RPM personal)
+- Status: active — expiry ongoing
+- Verified: 2026-09-17 (social_proof / under-review, signup required)
+- Source: https://www.context.dev/pricing
+- Page: https://freetokens.custats.info/offers/context-dev-free-tier.html
+- Summary: Context.dev's free tier includes 1,000 API credits per month (1 credit = 1 page scrape; extraction/brand calls cost more) plus a one-time 10K Logo Link quota — no credit card required. Rate limit is 30 calls/minute with a work email or 10/minute with a personal email.
+- Claim steps: Sign up at context.dev/signup — no credit card required. | 1,000 API credits renew monthly; the 10K Logo Link quota is one-time. | Register with a work email for 30 calls/minute; personal emails get 10/minute.
 
 ### ZCode Global Build — Free GLM-5.3-Flash (Round 4)
 - Provider: ZCode
