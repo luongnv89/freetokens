@@ -1,4 +1,4 @@
-# Verified 2026-09-15 against https://aws.amazon.com/startups/credits/
+# Verified 2026-09-18 against https://aws.amazon.com/startups/credits/
 # ("Apply for up to $200,000 in AWS Activate Credits, with additional credits
 # available for AI startups ready to scale." / "Activate Founders ... Start
 # with $1,000 USD in Activate Credits. Select participants may qualify for
@@ -10,7 +10,7 @@ category: startup_program
 amount: Activate Founders (self-funded): start with $1,000, up to $5,000; Activate Portfolio (pre-Series B): up to $200,000; usable across AWS incl. Amazon Bedrock; extra AI-startup credits invite-only
 expiry_date: null
 source_url: https://aws.amazon.com/startups/credits/
-verified_date: 2026-09-15
+verified_date: 2026-09-18
 verification: social_proof
-review_status: under-review
+review_status: verified
 signup: required
