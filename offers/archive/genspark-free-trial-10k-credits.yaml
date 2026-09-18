@@ -5,7 +5,9 @@ title: GenSpark Free Trial — 1 Month + 10K Credits
 provider: GenSpark
 category: api_provider
 amount: 1 month free subscription + 10,000 credits (code: WELCOME25)
-expiry_date: null
+expiry_date: 2026-09-18
+# Archived 2026-09-18: unverifiable — source X post suspended and genspark.ai
+# returns 403 to fetchers; no official evidence for the WELCOME25 promo.
 source_url: https://x.com/ariskaa_ai/status/2093696041417846888
 verified_date: 2026-09-03
 verification: social_proof
