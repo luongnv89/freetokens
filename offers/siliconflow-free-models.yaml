@@ -9,7 +9,7 @@ category: api_provider
 amount: Selected API models are free for input and output, incl. Hunyuan-MT-7B and PaddleOCR-VL-1.5 (chat), BGE embedding/reranker models, Kolors (image), and XingChen/Qwen3-ASR/SenseVoiceSmall (speech)
 expiry_date: null
 source_url: https://siliconflow.cn/pricing
-verified_date: 2026-09-15
+verified_date: 2026-09-18
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: unverified

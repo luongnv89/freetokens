@@ -7,9 +7,9 @@ title: Union Alpha Free (OpenRouter)
 provider: OpenRouter
 category: api_provider
 amount: Free Union Alpha stealth model API access (262K context, tools/JSON, image input)
-expiry_date: null
+expiry_date: 2026-09-18
 source_url: https://openrouter.ai/stealth/union-alpha
-verified_date: 2026-09-17
+verified_date: 2026-09-18
 verification: social_proof
 review_status: under-review
 signup: required
