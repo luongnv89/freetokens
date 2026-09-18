@@ -2,9 +2,240 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-17T09:31:38Z — 141 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-18T09:54:49Z — 159 active offers.
 
 ## Offers (full)
+
+### ZCode Global Build — Free GLM-5.3-Flash (Round 4)
+- Provider: ZCode
+- Category: coding
+- Amount: Free GLM-5.3-Flash in ZCode — 10h/day (11 PM Beijing / 8 AM PT), extended to Sep 20; 100M tokens for new users
+- Status: active — expiry 2026-09-20
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://zcode.z.ai/
+- Page: https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html
+- Summary: ZCode Global Build Round 4 is live — GLM-5.3-Flash is free in ZCode from Sep 3 through Sep 20 (extended from Sep 18 per ZCode's official reply), 10 hours/day inside the window 11 PM Beijing / 8 AM PT. Coding Plan members get it automatically every day inside the window; new users get 100M free tokens on sign-up (one-time, valid until the window closes). This is a recurring promotional event: Round 1 (Aug 16, paused after ~1 hour), Round 2 (Aug 21-23), Round 3 (Sep 3, 1 day).
+- Claim steps: Be a new ZCode user without an active paid coding plan. | Log into the ZCode desktop app during the promotional window (11 PM Beijing / 8 AM PT, 10 hrs/day). | Tap the card in the bottom-left corner to claim. The card is only for new sign-ups — Coding Plan members are free automatically inside the window (check Settings -> Usage stats). | If the card is not visible, restart the app. | Use the tokens inside ZCode before Sep 20; unused tokens expire.
+
+### Speechmatics Startup Program
+- Provider: Speechmatics
+- Category: startup_program
+- Amount: Up to $50,000 in usage credits (batch/real-time STT, TTS, on-prem) + engineering support
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://www.speechmatics.com/startup-program
+- Page: https://freetokens.custats.info/offers/speechmatics-startup-program.html
+- Summary: The Speechmatics Startup Program gives early-stage, voice-first startups up to $50,000 in usage credits spendable across batch and real-time speech-to-text, text-to-speech, and on-prem deployments, plus monthly office hours with engineers, priority developer support, early feature access, and co-marketing. Eligibility: raised less than $10M total, functional MVP in production or committed launch within 1-2 months, not on a paid enterprise plan, active dev team, defined ASR use case. Cohorts are capped at ~20 startups; a 30-minute call precedes the decision.
+- Claim steps: Apply via the Startup Program form at https://www.speechmatics.com/startup-program (rolling review, response within a few days). | Join a 30-minute call with the Speechmatics team about your use case and mission. | On approval, credits activate immediately; spend them on batch, real-time, TTS, or on-prem.
+
+### SiliconFlow — $1 Signup Credits
+- Provider: SiliconFlow
+- Category: api_provider
+- Amount: $1 in free credits at signup, no minimum commitment
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://www.siliconflow.com/pricing
+- Page: https://freetokens.custats.info/offers/siliconflow-1-dollar-free-credits.html
+- Summary: SiliconFlow grants $1 in free credits at signup for its serverless inference platform (LLM, image, video, audio models), with postpaid pay-as-you-go billing and no minimum commitments. Complements the separate siliconflow-free-models offer, which tracks SiliconFlow's permanently free model list.
+- Claim steps: Sign up at https://cloud.siliconflow.com . | $1 in free credits is granted to get started; no minimum commitment. | Selected models are also permanently free — see the pricing page's free entries.
+
+### SambaNova Cloud Free Tier
+- Provider: SambaNova
+- Category: api_provider
+- Amount: free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), applied when no payment method is linked — plans page now prompts adding payment + buying credits
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://docs.sambanova.ai/docs/en/models/rate-limits
+- Page: https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html
+- Summary: SambaNova's official rate limits policy still defines a Free Tier applied automatically to accounts with no linked payment method: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model for production models (DeepSeek-V3.1, Meta-Llama-3.3-70B-Instruct, gpt-oss-120b) and preview models (DeepSeek-V3.2, gemma-4-31B-it). However, as of 2026-09-18 the cloud plans page describes the Free plan as 'Add a payment method and purchase credits to run your first requests' — it is unconfirmed whether requests still run without a linked card. Curator decision needed before merge.
+- Claim steps: Go to https://cloud.sambanova.ai/ and create an account via Login/Signup. | Per the rate limits policy, the Free Tier is applied when there is no payment method linked — but the plans page now asks you to add a payment method and purchase credits to run first requests (conflict flagged 2026-09-18). | From the dashboard, open API Keys and create an API key. | Call the OpenAI-compatible API with your bearer key (https://api.sambanova.ai/v1/chat/completions). Documented Free Tier limits: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model.
+
+### Runware Grant Program
+- Provider: Runware
+- Category: startup_program
+- Amount: Up to $30,000 in API credits for 12 months (image, video, audio, LLM, 3D, avatar models)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://runware.ai/grant-program
+- Page: https://freetokens.custats.info/offers/runware-grant-program.html
+- Summary: The Runware Grant Program awards up to $30,000 in API credits usable over 12 months across Runware's production platform — image, video, image/video editing, audio, LLMs, 3D, and avatar models on one API. For early-stage teams (before Series A; bootstrapped welcome) with a real product or credible MVP, building or launching on Runware within six months, reachable at a business email. Applications are reviewed on a rolling basis within two weeks; no equity taken.
+- Claim steps: Submit the grant form at https://runware.ai/grant-program with product, stage, traction, and expected Runware usage. | Eligibility: pre-Series A or bootstrapped, credible MVP, business email, building/launching within 6 months. | Reviewed within 2 weeks; approved grants receive API credits on your Runware account.
+
+### North Mini Code Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free cohere/north-mini-code:free endpoint at $0 (256K context, 30B-A3B agentic coding MoE)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/cohere/north-mini-code:free
+- Page: https://freetokens.custats.info/offers/openrouter-north-mini-code-free.html
+- Summary: North Mini Code is Cohere's first agentic coding model and the debut of its North family — a sparse MoE with 30B total / 3B active parameters — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 256K context. Created 2026-06-17; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id cohere/north-mini-code:free.
+
+### Nex-N2.5-Pro Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nex-agi/nex-n2.5-pro:free endpoint at $0 (262K context, agentic coding / computer-use)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/nex-agi/nex-n2.5-pro:free
+- Page: https://freetokens.custats.info/offers/openrouter-nex-n2-5-pro-free.html
+- Summary: Nex-N2.5-Pro is Nex AGI's agentic model for turning goals into verified outcomes — agentic coding within a visual feedback loop, multi-file edits, computer use — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-09-08; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id nex-agi/nex-n2.5-pro:free.
+
+### Nemotron 3 Ultra Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nvidia/nemotron-3-ultra-550b-a55b:free endpoint at $0 (1M context, 550B-A55B hybrid MoE)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free
+- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-ultra-free.html
+- Summary: Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA — 55B active of 550B total on a hybrid Transformer-Mamba MoE, with a 1M-token context. Served free via OpenRouter's :free endpoint at bash prompt / bash completion. Created 2026-06-04; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id nvidia/nemotron-3-ultra-550b-a55b:free.
+
+### Nemotron 3 Super Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nvidia/nemotron-3-super-120b-a12b:free endpoint at $0 (262K context, 120B-A12B hybrid MoE)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free
+- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-super-free.html
+- Summary: Nemotron 3 Super is a 120B-parameter open hybrid MoE (12B active, Mamba-Transformer) for multi-agent applications — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-03-11; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id nvidia/nemotron-3-super-120b-a12b:free.
+
+### Nemotron 3.5 Lightning Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nvidia/nemotron-3.5-lightning:free endpoint at $0 (1M context, 30B-A3B MoE)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/nvidia/nemotron-3.5-lightning:free
+- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-lightning-free.html
+- Summary: Nemotron 3.5 Lightning is an open MoE from NVIDIA with 3B active of 30B total parameters for high-throughput agentic workloads — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 1M context. Created 2026-08-11; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id nvidia/nemotron-3.5-lightning:free.
+
+### Laguna S 2.1 Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free poolside/laguna-s-2.1:free endpoint at $0 (262K context, 118B-A8B coding agent)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/poolside/laguna-s-2.1:free
+- Page: https://freetokens.custats.info/offers/openrouter-laguna-s-2-1-free.html
+- Summary: Laguna S 2.1 is Poolside's latest coding agent model — 118B total, 8B active, 70.2% Terminal-Bench 2.1 — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-07-21; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id poolside/laguna-s-2.1:free.
+
+### Novita AI for Startups
+- Provider: Novita
+- Category: startup_program
+- Amount: Up to $10,000 in usage credits — $1K upfront, then 1:1 / 2:1 spend match (up to $5K Model APIs + $5K Agent Sandbox, 1 year)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://startups.novita.ai/
+- Page: https://freetokens.custats.info/offers/novita-ai-for-startups.html
+- Summary: Novita AI for Startups offers up to $10,000 in usage credits across Novita's Model APIs (LLM, image, video, voice) and Agent Sandbox: $1,000 upfront, the next $5,000 matched 1:1 (every dollar spent earns a dollar of credit), and the final $4,000 matched 2:1 (every two dollars spent earns one). Credits are redeemable for one year and split up to $5K Agent Sandbox + $5K Model API. Eligibility: venture-backed and Series B or earlier, AI-native product, new Novita user. Applications are reviewed on stage, team, spend, backing, traction, and expected usage.
+- Claim steps: Apply via the Google Form linked from https://startups.novita.ai/ . | Eligibility: VC-backed, Series B or earlier, AI-native product, new Novita user. | On approval: $1K upfront credit, then spend-match to unlock the rest (1:1 up to $5K, then 2:1 up to $4K); redeemable for one year.
+
+### Mixedbread Starter — $5 Free Credits
+- Provider: Mixedbread
+- Category: api_provider
+- Amount: $5 one-time credits (100 req/min, no card required)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://www.mixedbread.com/pricing
+- Page: https://freetokens.custats.info/offers/mixedbread-starter.html
+- Summary: Mixedbread's Starter plan is free and includes $5 in one-time credits — no card required — with 3 workspace users, 10 stores, and 100 requests/minute across its knowledge stack (Toast 1 agent, indexing, semantic/grep search, storage). Every plan bills at the same usage rates. Separately, Mixedbread for startups offers $250 in one-time credits to qualified startups (existing paying users or companies that raised up to $20M from institutional VCs).
+- Claim steps: Sign up for the free Starter plan at https://www.mixedbread.com/pricing — no card required. | $5 in one-time credits is included; 100 req/min limit. | When credits run out, add credits in billing settings or upgrade to Scale ($20/mo, returned as monthly credits).
+
+### LiveKit Startup Program
+- Provider: LiveKit
+- Category: startup_program
+- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://livekit.com/startups
+- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
+- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — AssemblyAI, Deepgram, Fish Audio, Gemma, Gradium, Inworld, Rime). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll.
+- Claim steps: Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
+
+### Gladia Starter — €50 Free Credits
+- Provider: Gladia
+- Category: voice
+- Amount: €50 one-time free credits (~80h async / ~60h real-time transcription); prepaid wallet afterwards
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://gladia.io/pricing
+- Page: https://freetokens.custats.info/offers/gladia-starter-free-credits.html
+- Summary: Gladia's Starter plan grants 50€ in free credits on signup — a one-time grant with no monthly reset, worth roughly 80+ hours of async (pre-recorded) transcription or 60+ hours of real-time transcription at current rates ($0.61/hr async, $0.75/hr real-time). Includes 30 real-time and 25 async concurrent requests, speaker diarization, 100+ languages. Once credits are used, top up a prepaid wallet or upgrade.
+- Claim steps: Sign up at https://gladia.io (Get started on the Starter plan). | 50€ in free credits are granted once — no monthly reset. | After the grant is consumed, top up the prepaid wallet or upgrade to Growth.
+
+### ElevenLabs Startup Grants
+- Provider: ElevenLabs
+- Category: startup_program
+- Amount: 12 months free platform access + 33M characters (~680h Agents usage; $5,500+ value)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://elevenlabs.io/startup-grants
+- Page: https://freetokens.custats.info/offers/elevenlabs-startup-grants.html
+- Summary: ElevenLabs Startup Grants give early-stage startups 12 months of free access to the full ElevenLabs platform at the Scale tier plus 33,000,000 characters — over 680 hours of Agents usage, valued at $5,500+. Covers Agents, Voice Design, Voice Cloning, Speech, Sound Effects, Music, and Image & Video. Eligibility: monetized product use case, valid business email, fewer than 25 employees, long-term product intent, no agencies/consultancies, no projects for minors, one application per company, existing enterprise customers excluded. Rolling applications; decisions within one week.
+- Claim steps: Apply at https://elevenlabs.io/grants-application with a valid business email and monetization strategy. | Eligibility: <25 employees, monetized use case, no agencies, one application per company. | Decision within one week; the grant plan and credits are applied to your ElevenLabs account for 12 months.
+
+### DeepInfra DeepStart
+- Provider: DeepInfra
+- Category: startup_program
+- Amount: 1,000,000,000 free inference tokens (valued at DeepSeek V3.1 prices)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://deepinfra.com/deepstart
+- Page: https://freetokens.custats.info/offers/deepinfra-deepstart.html
+- Summary: DeepInfra's DeepStart program grants 1,000,000,000 (one billion) free inference tokens, valued at DeepSeek V3.1 prices, usable across DeepInfra's hosted model catalog. Eligibility is narrow: the startup must have raised between $250K and $10M USD and been founded within the last 2 years.
+- Claim steps: Confirm eligibility: raised $250K-$10M USD, founded within the last 2 years. | Apply via the DeepStart page at https://deepinfra.com/deepstart . | On acceptance, 1B tokens are credited for inference at DeepSeek V3.1 prices.
+
+### Cloudflare for Startups
+- Provider: Cloudflare
+- Category: startup_program
+- Amount: Up to $350K in credits for 1 year (tiers $10K / $100K / $350K by stage; Workers AI capped $2.5K-$50K by tier)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://www.cloudflare.com/startups/
+- Page: https://freetokens.custats.info/offers/cloudflare-for-startups.html
+- Summary: Cloudflare for Startups gives early-stage companies up to $350K in credits for one year across three tiers — $10K (bootstrapped/self-funded, <$1M raised), $100K (<$5M raised, affiliated-partner funded), $350K ($5M+ raised, affiliated-partner funded). Credits cover usage-based services: Workers, Durable Objects, Workflows, Workers AI (capped $2.5K/$10K/$50K by tier), R2 (capped $10K), Pages, Images, Stream; core security/networking features are included at no cost. AI Gateway is temporarily not covered.
+- Claim steps: Confirm eligibility: founded within 10 years, funded up to Series B within the last 12 months, building a technology product, public website, active on LinkedIn/X/GitHub, first-time applicant, business email matching your domain. | Apply at https://www.cloudflare.com/startups/ . | Credits are valid for one year or until fully consumed, whichever comes first.
+
+### BytePlus AI Startups Accelerator
+- Provider: BytePlus
+- Category: startup_program
+- Amount: Up to $100,000 in cloud coupons + $6.5K voice AI credits + 10B+ LLM tokens + $137K+ cloud subsidies + workshops
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://www.byteplus.com/en/contact-us/vstart
+- Page: https://freetokens.custats.info/offers/byteplus-ai-startups-accelerator.html
+- Summary: The BytePlus AI Startups Accelerator (V-Start) offers up to $100,000 USD in cloud coupons plus a voice/LLM credit package: $6.5K in voice AI model credits and 10B+ tokens in LLM credits, $137K+ in cloud resource subsidies, and 5+ AI-powered workshops. Open to startups in round D and before (<= Series D) with technical innovation in AI, enterprise services, e-commerce, mass consumption, Web3, VR/AR, etc. Approval is discretionary after application review.
+- Claim steps: Apply via the form at https://www.byteplus.com/en/contact-us/vstart with company and funding-round details. | Eligibility: startups in round D or earlier, in a focus sector (AI, enterprise services, e-commerce, Web3, VR/AR...). | Benefits are granted on approval: up to $100K cloud coupons, $6.5K voice AI credits, 10B+ LLM tokens, $137K+ resource subsidies.
+
+### Browser Use — $15 Signup Credit
+- Provider: Browser Use
+- Category: api_provider
+- Amount: $15 free credits per person, never expire (eligible Google/GitHub/Microsoft signup, no card)
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / under-review, signup required)
+- Source: https://browser-use.com/pricing
+- Page: https://freetokens.custats.info/offers/browser-use-15-signup-credit.html
+- Summary: Browser Use grants $15 in free credits once per person to eligible signups via Google, GitHub, or Microsoft — no card required, and credits never expire. Credits pay for cloud browser time ($0.02/hour, proxies on by default) and Browser Use Agents (model tokens + 20% service fee). Pay-as-you-go top-ups start at $5; no subscription.
+- Claim steps: Sign up at https://browser-use.com with an eligible Google, GitHub, or Microsoft account. | $15 in free credits is granted once per person; no card required. | Credits never expire; use them for browser time or agent runs.
+
+### AWS Activate Credits
+- Provider: Amazon Web Services
+- Category: startup_program
+- Amount: Activate Founders (self-funded): start with $1,000, up to $5,000; Activate Portfolio (pre-Series B): up to $200,000; usable across AWS incl. Amazon Bedrock; extra AI-startup credits invite-only
+- Status: active — expiry ongoing
+- Verified: 2026-09-18 (social_proof / verified, signup required)
+- Source: https://aws.amazon.com/startups/credits/
+- Page: https://freetokens.custats.info/offers/aws-activate-credits.html
+- Summary: AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.
+- Claim steps: Create/confirm an AWS account on the Paid Tier plan. | Founders (self-funded): apply directly at aws.amazon.com/startups/credits. Portfolio: apply with your Activate Provider's Org ID. | After approval, apply credits to eligible AWS usage including Amazon Bedrock.
 
 ### Ling 3.0 Flash Sante Free (Vercel AI Gateway)
 - Provider: Vercel
@@ -148,17 +379,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-17T09:31:38Z — 
 - Page: https://freetokens.custats.info/offers/context-dev-free-tier.html
 - Summary: Context.dev's free tier includes 1,000 API credits per month (1 credit = 1 page scrape; extraction/brand calls cost more) plus a one-time 10K Logo Link quota — no credit card required. Rate limit is 30 calls/minute with a work email or 10/minute with a personal email.
 - Claim steps: Sign up at context.dev/signup — no credit card required. | 1,000 API credits renew monthly; the 10K Logo Link quota is one-time. | Register with a work email for 30 calls/minute; personal emails get 10/minute.
-
-### ZCode Global Build — Free GLM-5.3-Flash (Round 4)
-- Provider: ZCode
-- Category: coding
-- Amount: Free GLM-5.3-Flash in ZCode — 10h/day, Sep 3–18; 100M tokens for new users
-- Status: active — expiry 2026-09-18
-- Verified: 2026-09-16 (social_proof / under-review, signup required)
-- Source: https://zcode.z.ai/
-- Page: https://freetokens.custats.info/offers/zcode-glm-5-3-flash-free.html
-- Summary: ZCode Global Build Round 4 is live — GLM-5.3-Flash is free in ZCode from Sep 3–18 with 10 hours/day. Coding Plan members get it every day; new users get 100M free tokens on sign-up (one-time, valid until the window closes). This is a recurring promotional event: Round 1 (Aug 16, paused after ~1 hour), Round 2 (Aug 21-23), Round 3 (Sep 3, 1 day). Round 4 runs for 15 days.
-- Claim steps: Be a new ZCode user without an active paid coding plan. | Log into the ZCode desktop app during the promotional window. | Tap the card in the bottom-left corner to claim. | If the card is not visible, restart the app. | Use the tokens inside ZCode before Sep 18; unused tokens expire.
 
 ### OpenRouter for Startups
 - Provider: OpenRouter
@@ -489,17 +709,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-17T09:31:38Z — 
 - Page: https://freetokens.custats.info/offers/scaleway-business-100-credit.html
 - Summary: Scaleway offers €100 free credit when you create a Business account, promoted on the Generative APIs signup page as a way to get started with their Europe-hosted OpenAI-compatible APIs. This is separate from the Generative APIs free tier of 1,000,000 tokens + 60 minutes of transcription.
 - Claim steps: Go to scaleway.com/en/generative-apis-signup/ | Create a Business account to receive €100 free credit. | Use the credit with Generative APIs and other Scaleway services as billed.
-
-### SambaNova Cloud Free Tier
-- Provider: SambaNova
-- Category: api_provider
-- Amount: free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required
-- Status: active — expiry ongoing
-- Verified: 2026-09-15 (social_proof / under-review, signup required)
-- Source: https://docs.sambanova.ai/docs/en/models/rate-limits
-- Page: https://freetokens.custats.info/offers/sambanova-cloud-free-tier.html
-- Summary: SambaNova's official rate limits policy confirms a Free Tier that is applied automatically to any account without a linked payment method, alongside a Developer Tier for accounts with a payment method. Free Tier access is rate-limited per model: production models (DeepSeek-V3.1, Meta-Llama-3.3-70B-Instruct, gpt-oss-120b) and preview models (DeepSeek-V3.2, gemma-4-31B-it) each get 20 requests/minute, 20 requests/day, and 200,000 tokens/day. The cloud dashboard shows the claim path: sign up, create an API key, and call the OpenAI-compatible API. No fixed end date is stated anywhere, so the offer is ongoing.
-- Claim steps: Go to https://cloud.sambanova.ai/ and create an account via Login/Signup. | Do not link a payment method — per the rate limits policy, the Free Tier is applied when there is no payment method linked with your account. | From the dashboard, open API Keys and create an API key. | Call the OpenAI-compatible API with your bearer key (https://api.sambanova.ai/v1/chat/completions). Free Tier limits: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model.
 
 ### Runway Free Plan
 - Provider: Runway
@@ -1412,17 +1621,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-17T09:31:38Z — 
 - Page: https://freetokens.custats.info/offers/azure-for-students.html
 - Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
 - Claim steps: Go to https://azure.microsoft.com/en-us/free/students and click Activate. | Sign in with your school email and complete student verification via the Azure Education Hub. | Once approved, start building with $100 credit and free-tier services for 12 months.
-
-### AWS Activate Credits
-- Provider: Amazon Web Services
-- Category: startup_program
-- Amount: Activate Founders (self-funded): start with $1,000, up to $5,000; Activate Portfolio (pre-Series B): up to $200,000; usable across AWS incl. Amazon Bedrock; extra AI-startup credits invite-only
-- Status: active — expiry ongoing
-- Verified: 2026-09-15 (social_proof / under-review, signup required)
-- Source: https://aws.amazon.com/startups/credits/
-- Page: https://freetokens.custats.info/offers/aws-activate-credits.html
-- Summary: AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.
-- Claim steps: Create/confirm an AWS account on the Paid Tier plan. | Founders (self-funded): apply directly at aws.amazon.com/startups/credits. Portfolio: apply with your Activate Provider's Org ID. | After approval, apply credits to eligible AWS usage including Amazon Bedrock.
 
 ### AssemblyAI $50 Free Credits
 - Provider: AssemblyAI

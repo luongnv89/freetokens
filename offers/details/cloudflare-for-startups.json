@@ -1,0 +1,16 @@
+{
+  "summary": "Cloudflare for Startups gives early-stage companies up to $350K in credits for one year across three tiers — $10K (bootstrapped/self-funded, <$1M raised), $100K (<$5M raised, affiliated-partner funded), $350K ($5M+ raised, affiliated-partner funded). Credits cover usage-based services: Workers, Durable Objects, Workflows, Workers AI (capped $2.5K/$10K/$50K by tier), R2 (capped $10K), Pages, Images, Stream; core security/networking features are included at no cost. AI Gateway is temporarily not covered.",
+  "claim_steps": [
+    "Confirm eligibility: founded within 10 years, funded up to Series B within the last 12 months, building a technology product, public website, active on LinkedIn/X/GitHub, first-time applicant, business email matching your domain.",
+    "Apply at https://www.cloudflare.com/startups/ .",
+    "Credits are valid for one year or until fully consumed, whichever comes first."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.cloudflare.com/startups/",
+      "title": "Startup Program | Cloudflare",
+      "text": "Cloudflare for Startups gives early-stage companies up to $350k in credits. Workers AI: Covered up to a $2,500 cap for Tier 3, $10,000 for Tier 2, and $50,000 for Tier 1. Credits are valid for one year or until fully consumed."
+    }
+  ]
+}

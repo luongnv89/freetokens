@@ -1,0 +1,16 @@
+{
+  "summary": "Novita AI for Startups offers up to $10,000 in usage credits across Novita's Model APIs (LLM, image, video, voice) and Agent Sandbox: $1,000 upfront, the next $5,000 matched 1:1 (every dollar spent earns a dollar of credit), and the final $4,000 matched 2:1 (every two dollars spent earns one). Credits are redeemable for one year and split up to $5K Agent Sandbox + $5K Model API. Eligibility: venture-backed and Series B or earlier, AI-native product, new Novita user. Applications are reviewed on stage, team, spend, backing, traction, and expected usage.",
+  "claim_steps": [
+    "Apply via the Google Form linked from https://startups.novita.ai/ .",
+    "Eligibility: VC-backed, Series B or earlier, AI-native product, new Novita user.",
+    "On approval: $1K upfront credit, then spend-match to unlock the rest (1:1 up to $5K, then 2:1 up to $4K); redeemable for one year."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://startups.novita.ai/",
+      "title": "Novita AI for Startups",
+      "text": "Eligible startups can receive up to $10,000 in credits across Novita AI's Model APIs and Agent Sandbox. The program provides up to $1,000 in credits upfront. The next $5,000 is matched at a 1:1 ratio. For the final $4,000, every two dollars spent earns one dollar in credit."
+    }
+  ]
+}

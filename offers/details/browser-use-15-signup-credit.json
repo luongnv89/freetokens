@@ -1,0 +1,16 @@
+{
+  "summary": "Browser Use grants $15 in free credits once per person to eligible signups via Google, GitHub, or Microsoft — no card required, and credits never expire. Credits pay for cloud browser time ($0.02/hour, proxies on by default) and Browser Use Agents (model tokens + 20% service fee). Pay-as-you-go top-ups start at $5; no subscription.",
+  "claim_steps": [
+    "Sign up at https://browser-use.com with an eligible Google, GitHub, or Microsoft account.",
+    "$15 in free credits is granted once per person; no card required.",
+    "Credits never expire; use them for browser time or agent runs."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://browser-use.com/pricing",
+      "title": "Pricing | Browser Use",
+      "text": "$15 free credits for eligible signups. Free credits — $15 once per person. Eligible Google, GitHub or Microsoft signups. No card required. Credit expiry — Never."
+    }
+  ]
+}

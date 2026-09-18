@@ -1,0 +1,16 @@
+# Verified 2026-09-18 against https://runware.ai/grant-program
+# ("Up to $30,000 in API credits" — "12 months of Runware API access."
+# Covers "image, video, avatar, audio, and language models, plus 3D."
+# Eligibility: "early-stage startup before Series A, bootstrapped teams
+# welcome", credible MVP, "business email", building/launching within 6
+# months. "Reviewed within 2 weeks.")
+title: Runware Grant Program
+provider: Runware
+category: startup_program
+amount: Up to $30,000 in API credits for 12 months (image, video, audio, LLM, 3D, avatar models)
+expiry_date: null
+source_url: https://runware.ai/grant-program
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,16 @@
+{
+  "summary": "ElevenLabs Startup Grants give early-stage startups 12 months of free access to the full ElevenLabs platform at the Scale tier plus 33,000,000 characters — over 680 hours of Agents usage, valued at $5,500+. Covers Agents, Voice Design, Voice Cloning, Speech, Sound Effects, Music, and Image & Video. Eligibility: monetized product use case, valid business email, fewer than 25 employees, long-term product intent, no agencies/consultancies, no projects for minors, one application per company, existing enterprise customers excluded. Rolling applications; decisions within one week.",
+  "claim_steps": [
+    "Apply at https://elevenlabs.io/grants-application with a valid business email and monetization strategy.",
+    "Eligibility: <25 employees, monetized use case, no agencies, one application per company.",
+    "Decision within one week; the grant plan and credits are applied to your ElevenLabs account for 12 months."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://elevenlabs.io/startup-grants",
+      "title": "ElevenLabs Startup Grants",
+      "text": "33,000,000 characters — That's over 680 hours of Agents usage. More than $5,500+ in value. This grant gives you 12 months of free access to the full ElevenLabs platform. Open to startups or companies with less than 25 employees."
+    }
+  ]
+}

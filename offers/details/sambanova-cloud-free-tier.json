@@ -1,10 +1,10 @@
 {
-  "summary": "SambaNova's official rate limits policy confirms a Free Tier that is applied automatically to any account without a linked payment method, alongside a Developer Tier for accounts with a payment method. Free Tier access is rate-limited per model: production models (DeepSeek-V3.1, Meta-Llama-3.3-70B-Instruct, gpt-oss-120b) and preview models (DeepSeek-V3.2, gemma-4-31B-it) each get 20 requests/minute, 20 requests/day, and 200,000 tokens/day. The cloud dashboard shows the claim path: sign up, create an API key, and call the OpenAI-compatible API. No fixed end date is stated anywhere, so the offer is ongoing.",
+  "summary": "SambaNova's official rate limits policy still defines a Free Tier applied automatically to accounts with no linked payment method: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model for production models (DeepSeek-V3.1, Meta-Llama-3.3-70B-Instruct, gpt-oss-120b) and preview models (DeepSeek-V3.2, gemma-4-31B-it). However, as of 2026-09-18 the cloud plans page describes the Free plan as 'Add a payment method and purchase credits to run your first requests' — it is unconfirmed whether requests still run without a linked card. Curator decision needed before merge.",
   "claim_steps": [
     "Go to https://cloud.sambanova.ai/ and create an account via Login/Signup.",
-    "Do not link a payment method — per the rate limits policy, the Free Tier is applied when there is no payment method linked with your account.",
+    "Per the rate limits policy, the Free Tier is applied when there is no payment method linked — but the plans page now asks you to add a payment method and purchase credits to run first requests (conflict flagged 2026-09-18).",
     "From the dashboard, open API Keys and create an API key.",
-    "Call the OpenAI-compatible API with your bearer key (https://api.sambanova.ai/v1/chat/completions). Free Tier limits: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model."
+    "Call the OpenAI-compatible API with your bearer key (https://api.sambanova.ai/v1/chat/completions). Documented Free Tier limits: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model."
   ],
   "social_proof": [
     {
@@ -18,6 +18,12 @@
       "url": "https://cloud.sambanova.ai/",
       "title": "Dashboard",
       "text": "Start building AI powered applications in minutes with our OpenAI compatible API. 1 Create an API key Requests authenticate with a bearer key. Create and manage keys from your dashboard."
+    },
+    {
+      "type": "link",
+      "url": "https://cloud.sambanova.ai/plans",
+      "title": "Plan and Billing | SambaNova Cloud",
+      "text": "Free — Start exploring SambaNova Cloud. Add a payment method and purchase credits to run your first requests."
     }
   ]
 }

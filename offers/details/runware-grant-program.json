@@ -1,0 +1,16 @@
+{
+  "summary": "The Runware Grant Program awards up to $30,000 in API credits usable over 12 months across Runware's production platform — image, video, image/video editing, audio, LLMs, 3D, and avatar models on one API. For early-stage teams (before Series A; bootstrapped welcome) with a real product or credible MVP, building or launching on Runware within six months, reachable at a business email. Applications are reviewed on a rolling basis within two weeks; no equity taken.",
+  "claim_steps": [
+    "Submit the grant form at https://runware.ai/grant-program with product, stage, traction, and expected Runware usage.",
+    "Eligibility: pre-Series A or bootstrapped, credible MVP, business email, building/launching within 6 months.",
+    "Reviewed within 2 weeks; approved grants receive API credits on your Runware account."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://runware.ai/grant-program",
+      "title": "Grant Program | Runware",
+      "text": "Up to $30,000 in API credits. 12 months of Runware API access. We focus on teams before Series A. Bootstrapped teams are welcome, and there is no venture funding or investor introduction required."
+    }
+  ]
+}

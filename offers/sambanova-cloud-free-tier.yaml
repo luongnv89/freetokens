@@ -1,13 +1,19 @@
-# Verified 2026-09-04 against https://docs.sambanova.ai/docs/en/models/rate-limits
-# ("Free Tier: Applied when there is no payment method linked with your
-# account." Per-model limits: 20 RPM / 20 RPD / 200,000 tokens/day.)
+# Verified 2026-09-18 against https://docs.sambanova.ai/docs/en/models/rate-limits
+# and https://cloud.sambanova.ai/plans
+# CONFLICT — docs still define: "Free Tier: Applied when there is no
+# payment method linked with your account" (20 RPM / 20 RPD / 200,000
+# tokens/day per model, production + preview models). But the plans page
+# now says the Free plan requires you to "Add a payment method and
+# purchase credits to run your first requests." Whether requests actually
+# run without a linked card is unconfirmed — curator decision needed
+# before merging (keep offer / mark needs-review / drop).
 title: SambaNova Cloud Free Tier
 provider: SambaNova
 category: api_provider
-amount: free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), no payment method required
+amount: free tier, rate-limited (20 RPM / 20 RPD / 200,000 tokens per day per model), applied when no payment method is linked — plans page now prompts adding payment + buying credits
 expiry_date: null
 source_url: https://docs.sambanova.ai/docs/en/models/rate-limits
-verified_date: 2026-09-15
+verified_date: 2026-09-18
 verification: social_proof
 review_status: under-review
 signup: required

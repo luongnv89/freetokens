@@ -1,17 +1,19 @@
-# Verified 2026-09-16 — X post re-confirmed via oEmbed
-# (https://x.com/zcode_ai/status/2095526557670596868): "GLM-5.3-Flash, FREE in
-# ZCode. 10 hours a day. Sep 3 – 18." Still inside the Round 4 window.
-# Previous rounds: Round 1 (Aug 16, paused after ~1 hour);
-# Round 2 (Aug 21-23); Round 3 (Sep 3, 1 day).
-# Round 4 runs Sep 3–18 with 10 hours/day. Coding Plan members get it
-# every day; new users get 100M free tokens on sign-up (one-time).
+# Verified 2026-09-18 — window EXTENDED Sep 18 -> Sep 20 per ZCode's
+# official X reply (https://x.com/zcode_ai/status/2095696915874906452):
+# "Global Build runs all the way through Sep 20. Same daily window, just
+# more days of free Flash." Second reply
+# (https://x.com/zcode_ai/status/2095697743411110304): "Flash is free for
+# you automatically inside the window (11 PM Beijing / 8 AM PT, 10 hrs).
+# The card is only for new sign-ups." Original announcement
+# (status/2095526557670596868): "GLM-5.3-Flash, FREE in ZCode. 10 hours a
+# day."; new users get 100M free tokens on sign-up (one-time).
 title: ZCode Global Build — Free GLM-5.3-Flash (Round 4)
 provider: ZCode
 category: coding
-amount: Free GLM-5.3-Flash in ZCode — 10h/day, Sep 3–18; 100M tokens for new users
-expiry_date: 2026-09-18
+amount: Free GLM-5.3-Flash in ZCode — 10h/day (11 PM Beijing / 8 AM PT), extended to Sep 20; 100M tokens for new users
+expiry_date: 2026-09-20
 source_url: https://zcode.z.ai/
-verified_date: 2026-09-16
+verified_date: 2026-09-18
 verification: social_proof
 review_status: under-review
 signup: required

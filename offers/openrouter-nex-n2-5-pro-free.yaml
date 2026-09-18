@@ -1,0 +1,17 @@
+# Verified 2026-09-18 against https://openrouter.ai/nex-agi/nex-n2.5-pro:free
+# and https://openrouter.ai/api/v1/models
+# (Models API lists nex-agi/nex-n2.5-pro:free at prompt:0 /
+# completion:0, context_length 262144, created 2026-09-08. "Nex-N2.5 is
+# an agentic model built to turn goals into working, verified outcomes.
+# Its core strength is agentic coding within a visual feedback loop" —
+# no published end date.)
+title: Nex-N2.5-Pro Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free nex-agi/nex-n2.5-pro:free endpoint at $0 (262K context, agentic coding / computer-use)
+expiry_date: null
+source_url: https://openrouter.ai/nex-agi/nex-n2.5-pro:free
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,14 @@
+# Verified 2026-09-18 against https://browser-use.com/pricing
+# ("$15 free credits for eligible signups." Billing table: "Free credits —
+# $15 once per person. Eligible Google, GitHub or Microsoft signups. No
+# card required." "Credit expiry — Never.")
+title: Browser Use — $15 Signup Credit
+provider: Browser Use
+category: api_provider
+amount: $15 free credits per person, never expire (eligible Google/GitHub/Microsoft signup, no card)
+expiry_date: null
+source_url: https://browser-use.com/pricing
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,17 @@
+# Verified 2026-09-18 against https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free
+# and https://openrouter.ai/api/v1/models
+# (Models API lists nvidia/nemotron-3-ultra-550b-a55b:free at prompt:0 /
+# completion:0, context_length 1000000, created 2026-06-04. "NVIDIA
+# Nemotron 3 Ultra is an open frontier-reasoning and orchestration model
+# ... 55B active parameters out of 550B total (MoE) ... hybrid
+# Transformer-Mamba" — no published end date.)
+title: Nemotron 3 Ultra Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free nvidia/nemotron-3-ultra-550b-a55b:free endpoint at $0 (1M context, 550B-A55B hybrid MoE)
+expiry_date: null
+source_url: https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

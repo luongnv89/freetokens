@@ -1,0 +1,21 @@
+{
+  "summary": "Laguna S 2.1 is Poolside's latest coding agent model — 118B total, 8B active, 70.2% Terminal-Bench 2.1 — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-07-21; no published end date.",
+  "claim_steps": [
+    "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
+    "Call the chat completions API with model id poolside/laguna-s-2.1:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/poolside/laguna-s-2.1:free",
+      "title": "OpenRouter APIs — Poolside: Laguna S 2.1 (free)",
+      "text": "Model page confirms poolside/laguna-s-2.1:free is served through OpenRouter's chat completions API."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "poolside/laguna-s-2.1:free listed at prompt:0, completion:0, context_length 262144, created 2026-07-21."
+    }
+  ]
+}
