@@ -8,7 +8,9 @@ title: Lightning AI Free Tier
 provider: Lightning AI
 category: api_provider
 amount: 5 free Lightning credits (~$5) on registration, +25 more with a card; up to ~80 free GPU hours after phone verification; 1 free 4-CPU Studio + 10 GB storage free
-expiry_date: null
+expiry_date: 2026-09-18
+# Archived 2026-09-18: unverifiable — lightning.ai is fully JS-gated to
+# fetchers; official terms could not be confirmed from the source.
 source_url: https://lightning.ai/pricing
 verified_date: 2026-09-15
 verification: social_proof

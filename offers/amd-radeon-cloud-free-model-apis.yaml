@@ -1,12 +1,15 @@
-# Verified 2026-09-02 against https://developer.amd.com.cn/radeon/tokenfactory
-# ("Public Free Model APIs" — "Ready-to-use free API endpoints")
+# Verified 2026-09-18 against https://amd-aim.github.io/radeon-cloud-docs/models/overview/
+# ("Public Free Model APIs" — six chat models on /v1/chat/completions:
+# DeepSeek-V4-Flash, DeepSeek-V4-Flash-Vision-Exp, DeepSeek-V4.1-Flash,
+# Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B — plus MinerU2.5-Pro OCR on
+# POST /v1/ocr. GET /v1/models is the source of truth for availability.)
 title: AMD Radeon Cloud Token Factory — Free Model APIs
 provider: AMD Radeon Cloud
 category: api_provider
-amount: 3 free online text APIs plus 1 limited-free vision API (beta; quotas unpublished)
+amount: 6 free public chat-model APIs (DeepSeek-V4-Flash, DeepSeek-V4-Flash-Vision-Exp, DeepSeek-V4.1-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B) plus 1 OCR endpoint (MinerU2.5-Pro); beta, quotas unpublished
 expiry_date: null
 source_url: https://developer.amd.com.cn/radeon/tokenfactory
-verified_date: 2026-09-15
+verified_date: 2026-09-18
 verification: social_proof
 review_status: under-review
 signup: required
