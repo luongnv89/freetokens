@@ -1,0 +1,16 @@
+# Verified 2026-09-18 against https://www.cloudflare.com/startups/
+# ("Cloudflare for Startups gives early-stage companies up to $350k in
+# credits." Tiers: $10k (<$1M raised) / $100k (<$5M, partner-funded) /
+# $350k ($5M+, partner-funded). "Credits are valid for one year or until
+# fully consumed." Workers AI capped at $2,500 / $10,000 / $50,000 by tier;
+# R2 capped $10,000; AI Gateway temporarily not covered.)
+title: Cloudflare for Startups
+provider: Cloudflare
+category: startup_program
+amount: Up to $350K in credits for 1 year (tiers $10K / $100K / $350K by stage; Workers AI capped $2.5K-$50K by tier)
+expiry_date: null
+source_url: https://www.cloudflare.com/startups/
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

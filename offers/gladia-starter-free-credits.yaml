@@ -1,0 +1,16 @@
+# Verified 2026-09-18 against https://gladia.io/pricing
+# (Starter plan: "50€ in free credits." FAQ: "sign up and get 50€ in free
+# credits, a one-time grant with no monthly reset. That's roughly 80+
+# hours of pre-recorded transcription or 60+ hours of real-time
+# transcription at current rates. Once used, top up or upgrade to
+# continue." Prepaid wallet after the grant is consumed.)
+title: Gladia Starter — €50 Free Credits
+provider: Gladia
+category: voice
+amount: €50 one-time free credits (~80h async / ~60h real-time transcription); prepaid wallet afterwards
+expiry_date: null
+source_url: https://gladia.io/pricing
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

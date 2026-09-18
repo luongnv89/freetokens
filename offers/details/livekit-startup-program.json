@@ -1,0 +1,17 @@
+{
+  "summary": "The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — AssemblyAI, Deepgram, Fish Audio, Gemma, Gradium, Inworld, Rime). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll.",
+  "claim_steps": [
+    "Apply via the form at https://livekit.com/startups (no pitch deck required).",
+    "On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan.",
+    "A card on file is required to enroll. Credits expire 12 months from issuance.",
+    "YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://livekit.com/startups",
+      "title": "LiveKit Startup Program",
+      "text": "Get up to $23K in infrastructure and inference credits: $6,000 one year of Cloud Scale, $10,000 additional Cloud credits, $7,000 inference credits ($1K per partner). Under $5M raised and pre-Series A. A card on file is required to enroll."
+    }
+  ]
+}

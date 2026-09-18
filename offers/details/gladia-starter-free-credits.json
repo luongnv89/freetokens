@@ -1,0 +1,16 @@
+{
+  "summary": "Gladia's Starter plan grants 50€ in free credits on signup — a one-time grant with no monthly reset, worth roughly 80+ hours of async (pre-recorded) transcription or 60+ hours of real-time transcription at current rates ($0.61/hr async, $0.75/hr real-time). Includes 30 real-time and 25 async concurrent requests, speaker diarization, 100+ languages. Once credits are used, top up a prepaid wallet or upgrade.",
+  "claim_steps": [
+    "Sign up at https://gladia.io (Get started on the Starter plan).",
+    "50€ in free credits are granted once — no monthly reset.",
+    "After the grant is consumed, top up the prepaid wallet or upgrade to Growth."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://gladia.io/pricing",
+      "title": "Transparent API pricing | Gladia",
+      "text": "Sign up and get 50€ in free credits, a one-time grant with no monthly reset. That's roughly 80+ hours of pre-recorded transcription or 60+ hours of real-time transcription at current rates."
+    }
+  ]
+}

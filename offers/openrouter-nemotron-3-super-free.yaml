@@ -1,0 +1,18 @@
+# Verified 2026-09-18 against https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free
+# and https://openrouter.ai/api/v1/models
+# (Models API lists nvidia/nemotron-3-super-120b-a12b:free at prompt:0 /
+# completion:0, context_length 262144, created 2026-03-11. "NVIDIA
+# Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating
+# just 12B parameters" — no published end date. NOTE: curator input
+# claimed 1M context; the live :free endpoint is listed at 262144 —
+# amount reflects the API value.)
+title: Nemotron 3 Super Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free nvidia/nemotron-3-super-120b-a12b:free endpoint at $0 (262K context, 120B-A12B hybrid MoE)
+expiry_date: null
+source_url: https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

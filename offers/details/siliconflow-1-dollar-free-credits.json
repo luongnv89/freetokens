@@ -1,0 +1,16 @@
+{
+  "summary": "SiliconFlow grants $1 in free credits at signup for its serverless inference platform (LLM, image, video, audio models), with postpaid pay-as-you-go billing and no minimum commitments. Complements the separate siliconflow-free-models offer, which tracks SiliconFlow's permanently free model list.",
+  "claim_steps": [
+    "Sign up at https://cloud.siliconflow.com .",
+    "$1 in free credits is granted to get started; no minimum commitment.",
+    "Selected models are also permanently free — see the pricing page's free entries."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.siliconflow.com/pricing",
+      "title": "Pricing Plans - SiliconFlow",
+      "text": "Flexible token pricing, high usage limits, and postpaid billing—plus $1 in free credits to get you started! There are no minimum commitments. You only pay for what you use, and you can start with $1 in free credits."
+    }
+  ]
+}

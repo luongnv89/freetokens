@@ -1,0 +1,16 @@
+# Verified 2026-09-18 against https://openrouter.ai/poolside/laguna-s-2.1:free
+# and https://openrouter.ai/api/v1/models
+# (Models API lists poolside/laguna-s-2.1:free at prompt:0 /
+# completion:0, context_length 262144, created 2026-07-21. "Laguna S 2.1
+# is the latest coding agent model from Poolside ... 118B total parameter
+# model with 8B active" — no published end date.)
+title: Laguna S 2.1 Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free poolside/laguna-s-2.1:free endpoint at $0 (262K context, 118B-A8B coding agent)
+expiry_date: null
+source_url: https://openrouter.ai/poolside/laguna-s-2.1:free
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

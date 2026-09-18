@@ -1,0 +1,16 @@
+# Verified 2026-09-18 against https://www.speechmatics.com/startup-program
+# ("Get up to $50k in Speechmatics usage credits. Spend it across our
+# real-time and batch speech-to-text APIs." Credits usable for "batch,
+# real-time, text-to-speech, even on-prem." Eligibility: "Raised less than
+# $10 million total", functional MVP or launch within 1-2 months, not on a
+# paid enterprise plan. "We cap at 20 startups per cohort.")
+title: Speechmatics Startup Program
+provider: Speechmatics
+category: startup_program
+amount: Up to $50,000 in usage credits (batch/real-time STT, TTS, on-prem) + engineering support
+expiry_date: null
+source_url: https://www.speechmatics.com/startup-program
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

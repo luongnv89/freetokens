@@ -1,0 +1,16 @@
+# Verified 2026-09-18 against https://openrouter.ai/nvidia/nemotron-3.5-lightning:free
+# and https://openrouter.ai/api/v1/models
+# (Models API lists nvidia/nemotron-3.5-lightning:free at prompt:0 /
+# completion:0, context_length 1000000, created 2026-08-11. "NVIDIA
+# Nemotron 3.5 Lightning is an open mixture-of-experts model ... 3B
+# active parameters out of 30B total" — no published end date.)
+title: Nemotron 3.5 Lightning Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free nvidia/nemotron-3.5-lightning:free endpoint at $0 (1M context, 30B-A3B MoE)
+expiry_date: null
+source_url: https://openrouter.ai/nvidia/nemotron-3.5-lightning:free
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

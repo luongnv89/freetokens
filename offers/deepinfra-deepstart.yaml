@@ -1,0 +1,14 @@
+# Verified 2026-09-18 against https://deepinfra.com/deepstart
+# ("DeepStart 1,000,000,000 free tokens* — *at DeepSeek V3.1 prices.
+# To qualify your startup needs to meet the following: Have raised
+# between 250K and 10M USD; Founded in the last 2 years.")
+title: DeepInfra DeepStart
+provider: DeepInfra
+category: startup_program
+amount: 1,000,000,000 free inference tokens (valued at DeepSeek V3.1 prices)
+expiry_date: null
+source_url: https://deepinfra.com/deepstart
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

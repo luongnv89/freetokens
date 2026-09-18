@@ -1,0 +1,16 @@
+{
+  "summary": "The Speechmatics Startup Program gives early-stage, voice-first startups up to $50,000 in usage credits spendable across batch and real-time speech-to-text, text-to-speech, and on-prem deployments, plus monthly office hours with engineers, priority developer support, early feature access, and co-marketing. Eligibility: raised less than $10M total, functional MVP in production or committed launch within 1-2 months, not on a paid enterprise plan, active dev team, defined ASR use case. Cohorts are capped at ~20 startups; a 30-minute call precedes the decision.",
+  "claim_steps": [
+    "Apply via the Startup Program form at https://www.speechmatics.com/startup-program (rolling review, response within a few days).",
+    "Join a 30-minute call with the Speechmatics team about your use case and mission.",
+    "On approval, credits activate immediately; spend them on batch, real-time, TTS, or on-prem."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.speechmatics.com/startup-program",
+      "title": "Speechmatics Startup Program: Unlock $50K Credits",
+      "text": "Get up to $50k in Speechmatics usage credits. Spend it across our real-time and batch speech-to-text APIs. Raised less than $10 million total. We cap at 20 startups per cohort."
+    }
+  ]
+}

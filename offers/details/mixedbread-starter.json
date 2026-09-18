@@ -1,0 +1,16 @@
+{
+  "summary": "Mixedbread's Starter plan is free and includes $5 in one-time credits — no card required — with 3 workspace users, 10 stores, and 100 requests/minute across its knowledge stack (Toast 1 agent, indexing, semantic/grep search, storage). Every plan bills at the same usage rates. Separately, Mixedbread for startups offers $250 in one-time credits to qualified startups (existing paying users or companies that raised up to $20M from institutional VCs).",
+  "claim_steps": [
+    "Sign up for the free Starter plan at https://www.mixedbread.com/pricing — no card required.",
+    "$5 in one-time credits is included; 100 req/min limit.",
+    "When credits run out, add credits in billing settings or upgrade to Scale ($20/mo, returned as monthly credits)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.mixedbread.com/pricing",
+      "title": "Pricing | Mixedbread",
+      "text": "Starter: Free — Try Mixedbread with $5 in one-time credits. No card required. 100 requests / minute. Mixedbread for startups: Qualified startups can apply for $250 in one-time credits."
+    }
+  ]
+}

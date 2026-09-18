@@ -1,0 +1,16 @@
+# Verified 2026-09-18 against https://www.siliconflow.com/pricing
+# ("Flexible token pricing, high usage limits, and postpaid billing—plus
+# $1 in free credits to get you started!" FAQ: "there are no minimum
+# commitments. You only pay for what you use, and you can start with $1
+# in free credits." Complements siliconflow-free-models, which tracks the
+# permanently-free model list.)
+title: SiliconFlow — $1 Signup Credits
+provider: SiliconFlow
+category: api_provider
+amount: $1 in free credits at signup, no minimum commitment
+expiry_date: null
+source_url: https://www.siliconflow.com/pricing
+verified_date: 2026-09-18
+verification: social_proof
+review_status: under-review
+signup: required

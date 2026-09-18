@@ -1,0 +1,21 @@
+{
+  "summary": "Nex-N2.5-Pro is Nex AGI's agentic model for turning goals into verified outcomes — agentic coding within a visual feedback loop, multi-file edits, computer use — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-09-08; no published end date.",
+  "claim_steps": [
+    "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
+    "Call the chat completions API with model id nex-agi/nex-n2.5-pro:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/nex-agi/nex-n2.5-pro:free",
+      "title": "OpenRouter APIs — Nex AGI: Nex-N2.5-Pro (free)",
+      "text": "Model page confirms nex-agi/nex-n2.5-pro:free is served through OpenRouter's chat completions API."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "nex-agi/nex-n2.5-pro:free listed at prompt:0, completion:0, context_length 262144, created 2026-09-08."
+    }
+  ]
+}

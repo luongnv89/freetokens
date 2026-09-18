@@ -1,0 +1,16 @@
+{
+  "summary": "The BytePlus AI Startups Accelerator (V-Start) offers up to $100,000 USD in cloud coupons plus a voice/LLM credit package: $6.5K in voice AI model credits and 10B+ tokens in LLM credits, $137K+ in cloud resource subsidies, and 5+ AI-powered workshops. Open to startups in round D and before (<= Series D) with technical innovation in AI, enterprise services, e-commerce, mass consumption, Web3, VR/AR, etc. Approval is discretionary after application review.",
+  "claim_steps": [
+    "Apply via the form at https://www.byteplus.com/en/contact-us/vstart with company and funding-round details.",
+    "Eligibility: startups in round D or earlier, in a focus sector (AI, enterprise services, e-commerce, Web3, VR/AR...).",
+    "Benefits are granted on approval: up to $100K cloud coupons, $6.5K voice AI credits, 10B+ LLM tokens, $137K+ resource subsidies."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.byteplus.com/en/contact-us/vstart",
+      "title": "BytePlus AI Startups Accelerator (V-Start)",
+      "text": "Fuel your startup's growth with $100K in credits, on us! Up to $100,000 USD in cloud coupons; $6.5K voice AI models credits & 10B+ tokens in LLM credits; $137K+ in cloud resource subsidies; 5+ AI-powered workshops. Startups in round D and before round D."
+    }
+  ]
+}
