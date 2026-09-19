@@ -1,0 +1,27 @@
+{
+  "summary": "Free nex-agi/nex-n2.5-mini:free inference at $0 input and output (262K context).",
+  "claim_steps": [
+    "Create or sign in to an OpenRouter account and create an API key.",
+    "Call the OpenRouter chat-completions API with model nex-agi/nex-n2.5-mini:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/nex-agi/nex-n2.5-mini:free",
+      "title": "Nex-N2.5-Mini (free) - API Pricing & Providers | OpenRouter",
+      "text": "This model is free to use. 262,144 token context window."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "The exact model ID is listed with prompt and completion prices of 0."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/docs/quickstart",
+      "title": "OpenRouter Quickstart Guide",
+      "text": "Documents bearer-key use with the chat-completions API."
+    }
+  ]
+}

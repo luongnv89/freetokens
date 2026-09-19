@@ -1,0 +1,22 @@
+{
+  "summary": "Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens.",
+  "claim_steps": [
+    "Apply through the official form and explain the project and requested token range.",
+    "Wait for rolling review.",
+    "If approved, use the allocated Trinity API credits within 90 days."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.arcee.ai/trinity-builders-program",
+      "title": "Trinity Builders Program | Arcee AI | Building Open Intelligence",
+      "text": "Accepted applicants receive free API credits for Trinity models, allocated based on your project scope and our available capacity."
+    },
+    {
+      "type": "link",
+      "url": "https://www.arcee.ai/blog/introducing-the-trinity-builders-program",
+      "title": "Introducing the Trinity Builders Program | Arcee AI | Building Open Intelligence",
+      "text": "The program is open to anyone building with Trinity models."
+    }
+  ]
+}

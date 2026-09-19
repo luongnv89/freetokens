@@ -1,0 +1,27 @@
+{
+  "summary": "Free google/gemma-4-26b-a4b-it:free inference at $0 input and output (262K context).",
+  "claim_steps": [
+    "Create or sign in to an OpenRouter account and create an API key.",
+    "Call the OpenRouter chat-completions API with model google/gemma-4-26b-a4b-it:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/google/gemma-4-26b-a4b-it:free",
+      "title": "Gemma 4 26B A4B (free) - API Pricing & Benchmarks | OpenRouter",
+      "text": "The pricing shown on this page is zero, so you are not charged for prompt or completion tokens."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "The exact model ID is listed with prompt and completion prices of 0."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/google/gemma-4-26b-a4b-it:free/endpoints",
+      "title": "OpenRouter endpoint API — Gemma 4 26B A4B free",
+      "text": "The free endpoint reports status 0 and zero prompt and completion pricing."
+    }
+  ]
+}

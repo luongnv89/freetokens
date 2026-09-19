@@ -1,0 +1,22 @@
+{
+  "summary": "12 months of recurring free credits; exact credit amount unpublished.",
+  "claim_steps": [
+    "Complete the startup-program application with company, product, stage, and usage details.",
+    "Wait for AssemblyAI to review the application.",
+    "If approved, receive credits in the AssemblyAI console within 48 hours."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.assemblyai.com/contact/startup-program",
+      "title": "Startup Program | AssemblyAI",
+      "text": "The AssemblyAI Startup Program gives early-stage startups 12 months of recurring free credits, startup pricing that scales, and hands-on product guidance."
+    },
+    {
+      "type": "link",
+      "url": "https://www.assemblyai.com/contact/startup-program/apply",
+      "title": "Apply to the Startup Program | AssemblyAI",
+      "text": "Complete your application. Our team will review your application and get back to you within 2–3 business days."
+    }
+  ]
+}

@@ -2,9 +2,141 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-18T15:44:32Z — 158 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-19T06:36:09Z — 165 active offers.
 
 ## Offers (full)
+
+### Telnyx Startups Program
+- Provider: Telnyx
+- Category: startup_program
+- Amount: Up to $20,000 in AI credits for 6 months, plus 3 months of engineering support
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://telnyx.com/startups-program
+- Page: https://freetokens.custats.info/offers/telnyx-startups-program.html
+- Summary: Up to $20,000 in AI credits for 6 months, plus 3 months of engineering support.
+- Claim steps: Apply with a company email and provide product, funding, and launch details. | Wait for review, normally within 48 hours. | If accepted, complete the kickoff so credits can be added to the account.
+
+### Smallest.ai Startup Grants Program for Voice AI
+- Provider: Smallest.ai
+- Category: startup_program
+- Amount: $10,000 in Voice Agent Platform credits for up to 6 months
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://smallest.ai/grants
+- Page: https://freetokens.custats.info/offers/smallest-ai-startup-grants.html
+- Summary: $10,000 in Voice Agent Platform credits for up to 6 months.
+- Claim steps: Create a Smallest.ai account if needed. | Submit the grant application with company, product, team, and voice-AI usage details. | If selected, credits are applied to the account email supplied in the application.
+
+### Qwen3.8 27B Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/qwen/qwen3.8-27b:free
+- Page: https://freetokens.custats.info/offers/openrouter-qwen3-8-27b-free.html
+- Summary: Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context).
+- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model qwen/qwen3.8-27b:free.
+
+### Nex-N2.5-Mini Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nex-agi/nex-n2.5-mini:free inference at $0 input and output (262K context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/nex-agi/nex-n2.5-mini:free
+- Page: https://freetokens.custats.info/offers/openrouter-nex-n2-5-mini-free.html
+- Summary: Free nex-agi/nex-n2.5-mini:free inference at $0 input and output (262K context).
+- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model nex-agi/nex-n2.5-mini:free.
+
+### LFM2.5-2.6B Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/liquid/lfm-2.5-2.6b:free
+- Page: https://freetokens.custats.info/offers/openrouter-lfm-2-5-2-6b-free.html
+- Summary: Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context).
+- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Do not submit content you do not want retained or used for Liquid model training. | Call the OpenRouter chat-completions API with model liquid/lfm-2.5-2.6b:free.
+
+### Laguna XS 2.1 Free (OpenRouter)
+- Provider: OpenRouter
+- Category: coding
+- Amount: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/poolside/laguna-xs-2.1:free
+- Page: https://freetokens.custats.info/offers/openrouter-laguna-xs-2-1-free.html
+- Summary: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context).
+- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model poolside/laguna-xs-2.1:free.
+
+### Gemma 4 31B Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free google/gemma-4-31b-it:free inference at $0 input and output (262K context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/google/gemma-4-31b-it:free
+- Page: https://freetokens.custats.info/offers/openrouter-gemma-4-31b-free.html
+- Summary: Free google/gemma-4-31b-it:free inference at $0 input and output (262K context).
+- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model google/gemma-4-31b-it:free.
+
+### Gemma 4 26B A4B Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free google/gemma-4-26b-a4b-it:free inference at $0 input and output (262K context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/google/gemma-4-26b-a4b-it:free
+- Page: https://freetokens.custats.info/offers/openrouter-gemma-4-26b-a4b-free.html
+- Summary: Free google/gemma-4-26b-a4b-it:free inference at $0 input and output (262K context).
+- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model google/gemma-4-26b-a4b-it:free.
+
+### Gradium for Startups
+- Provider: Gradium
+- Category: startup_program
+- Amount: 54M credits worth over $2,000 through 6 months of the M plan
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://gradium.ai/startups
+- Page: https://freetokens.custats.info/offers/gradium-for-startups.html
+- Summary: 54M credits worth over $2,000 through 6 months of the M plan.
+- Claim steps: Submit the official startup-program application. | Wait for rolling review; Gradium aims to respond within two to three business days. | If accepted, activate the six-month M plan grant.
+
+### Cartesia Startups Grant
+- Provider: Cartesia
+- Category: startup_program
+- Amount: 96M credits/year plus $300/month in agent credits for 12 months (over $8,000 value)
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://www.cartesia.ai/startups
+- Page: https://freetokens.custats.info/offers/cartesia-startups-grant.html
+- Summary: 96M credits/year plus $300/month in agent credits for 12 months (over $8,000 value).
+- Claim steps: Submit the startup grant application. | Wait for Cartesia review; applicants typically hear back within one week. | If accepted, apply the provided coupon code to the Cartesia account.
+
+### AssemblyAI Startup Program
+- Provider: AssemblyAI
+- Category: startup_program
+- Amount: 12 months of recurring free credits; exact credit amount unpublished
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://www.assemblyai.com/contact/startup-program
+- Page: https://freetokens.custats.info/offers/assemblyai-startup-program.html
+- Summary: 12 months of recurring free credits; exact credit amount unpublished.
+- Claim steps: Complete the startup-program application with company, product, stage, and usage details. | Wait for AssemblyAI to review the application. | If approved, receive credits in the AssemblyAI console within 48 hours.
+
+### Arcee AI Trinity Builders Program
+- Provider: Arcee AI
+- Category: api_provider
+- Amount: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens
+- Status: active — expiry ongoing
+- Verified: 2026-09-19 (social_proof / under-review, signup required)
+- Source: https://www.arcee.ai/trinity-builders-program
+- Page: https://freetokens.custats.info/offers/arcee-trinity-builders-program.html
+- Summary: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens.
+- Claim steps: Apply through the official form and explain the project and requested token range. | Wait for rolling review. | If approved, use the allocated Trinity API credits within 90 days.
 
 ### Zed Pro for Students
 - Provider: Zed
@@ -380,17 +512,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-18T15:44:32Z — 
 - Summary: OrcaRouter's offers page lets you claim live voucher, student, and hackathon API credits (dollar amounts, scope, and expiry are printed on each card at claim time) and call a rotating set of $0 models. Create an account and claim an open offer with no payment method; a few partner offers are labelled card-required. Always-free $0 models are for established accounts (GitHub with some history, or any paid purchase). Promo credit expiry is shown before confirm; $0 models stay free while they remain in the lineup. Docs currently list DeepSeek V4 -free ids and the orcarouter/free router.
 - Claim steps: Create an account at orcarouter.ai (the offers page says an API key takes 30 seconds; no card, no sales call). | Open orcarouter.ai/offers and claim a live open offer; student/community offers unlock with an eligible email or invite code. | Call rotating $0 models (for example orcarouter/free or a -free catalog id) on the OpenAI-compatible endpoint; link GitHub with history if a free-model request is declined.
 
-### Union Alpha Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free Union Alpha stealth model API access (262K context, tools/JSON, image input)
-- Status: active — expiry 2026-09-18
-- Verified: 2026-09-18 (social_proof / under-review, signup required)
-- Source: https://openrouter.ai/stealth/union-alpha
-- Page: https://freetokens.custats.info/offers/openrouter-union-alpha-free.html
-- Summary: Union Alpha is a free stealth model served through OpenRouter (model id stealth/union-alpha): multimodal with image input, a 262K context window, tool calling and JSON output. Released 2026-09-16 and listed at $0 prompt / $0 completion in the OpenRouter models API.
-- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for $0 models). | Call the chat completions API with model id stealth/union-alpha.
-
 ### North Mini Code Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -500,17 +621,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-18T15:44:32Z — 
 - Page: https://freetokens.custats.info/offers/openrouter-for-startups.html
 - Summary: OpenRouter for Startups grants approved pre-Series B AI-native startups up to $5,000 in universal inference credits across 500+ models, plus waived processing fees (platform and BYOK) for 12 months. Marketing and FAQ state those figures; program terms say amounts and duration are at OpenRouter's discretion, with a ceiling of $5,000 and/or fee waivers up to 12 months. Most credits expire 6 months after issuance. Applications require an approved-partner referral, a public company website, a professional company-domain email, a valid OpenRouter account with under $500 lifetime spend, and no prior startup-program credits.
 - Claim steps: Confirm eligibility: pre-Series B, AI-native product, public website, company-domain professional email, OpenRouter account with under $500 lifetime spend, no prior startup credits, and a referral from an approved OpenRouter partner. | Submit the application on openrouter.ai/startup-program (rolling review). | If approved, credits and fee waivers are applied to the OpenRouter account tied to the applicant email. | Use credits across OpenRouter models; BYOK processing fees are also waived for 12 months if approved. Most credits expire 6 months after issuance.
-
-### Union Alpha Free on OpenCode Zen
-- Provider: OpenCode
-- Category: coding
-- Amount: Free Union Alpha model access on OpenCode Zen for one week
-- Status: active — expiry 2026-09-18
-- Verified: 2026-09-18 (social_proof / under-review, signup required)
-- Source: https://x.com/opencode/status/2100236430890991782
-- Page: https://freetokens.custats.info/offers/opencode-union-alpha-free.html
-- Summary: Union Alpha is a stealth model that is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-09-16 as "free for the next week" (through ~2026-09-23). OpenCode's docs state its provider follows a zero-retention policy and does not use your data for model training. The model is built for agentic coding and supports image inputs; models.dev lists it as union-alpha at $0 input / $0 output with a 262K context window.
-- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen and copy your API key. | In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key. | Run /models and select Union Alpha (model id: opencode/union-alpha). | Alternatively, call the Zen API directly at https://opencode.ai/zen/v1/messages with model union-alpha.
 
 ### OpenAI Startup Program
 - Provider: OpenAI
@@ -1709,39 +1819,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-18T15:44:32Z — 
 - Page: https://freetokens.custats.info/offers/1min-ai-daily-free-credits.html
 - Summary: 1min.AI grants free credits without purchase; the marketing page says those credits never expire and lists Daily Visit, reviews, and referrals. The Help Center article titled for this grant (and linking back to 1min.ai/free-credits) states 15,000 credits per day (~450,000/month) requiring daily login to app.1min.ai. The $0 pricing tier lists no credit card required. The 15,000 number is not in the static HTML of /free-credits (client-rendered), so the Help Center quote is the numeric evidence.
 - Claim steps: Create a free 1min.AI account (pricing page: no credit card required on the $0 plan). | Log in to app.1min.ai each day to receive the daily free-credit grant. | Optional: reviews and referrals can add more credits per the free-credits page headings.
-
-### Lightning AI Free Tier
-- Provider: Lightning AI
-- Category: api_provider
-- Amount: 5 free Lightning credits (~$5) on registration, +25 more with a card; up to ~80 free GPU hours after phone verification; 1 free 4-CPU Studio + 10 GB storage free
-- Status: active — expiry 2026-09-18
-- Verified: 2026-09-15 (social_proof / under-review, signup required)
-- Source: https://lightning.ai/pricing
-- Page: https://freetokens.custats.info/offers/lightning-ai-free-tier.html
-- Summary: Lightning AI's free tier: 5 free Lightning credits (~$5) on registration, plus 25 more when you add a card; marketing cites up to ~80 free GPU hours after phone verification; every account gets 1 free 4-CPU Studio and the first 10 GB of Drive storage free. Free credits are promotional, non-transferable, and expire 12 months after purchase/grant. (Pricing page is JS-rendered; terms corroborated via official lightning.ai pricing/docs pages in the search index.)
-- Claim steps: Create a free account at lightning.ai — no credit card required. | Verify your phone number to receive up to ~80 free GPU hours. | Get 5 free Lightning credits on registration; add a card for 25 more. | Start on the free 4-CPU Studio; switch to GPU when ready to run.
-
-### GenSpark Free Trial — 1 Month + 10K Credits
-- Provider: GenSpark
-- Category: api_provider
-- Amount: 1 month free subscription + 10,000 credits (code: WELCOME25)
-- Status: active — expiry 2026-09-18
-- Verified: 2026-09-03 (social_proof / verified, signup required)
-- Source: https://x.com/ariskaa_ai/status/2093696041417846888
-- Page: https://freetokens.custats.info/offers/genspark-free-trial-10k-credits.html
-- Summary: GenSpark offers a free trial with 1 month subscription and 10,000 credits using promo code WELCOME25. Includes access to multiple AI models: Claude 5, GPT-5.6, GPT Image 2, Gemini Veo 3.1, Seedance 2.5, ElevenLabs, MiniMax, plus AI slides, GenSpark Code, 50GB storage, and commercial use rights.
-- Claim steps: Go to genspark.ai and create a new account. | Navigate to Pricing / Plans. | Select the $25 free trial plan. | Enter promo code: WELCOME25. | You get 10,000 credits instantly. Cancel before renewal to avoid charges.
-
-### [UNVERIFIED] ChatGPT Business — Free Second Seat via TalentGenius
-- Provider: TalentGenius (OpenAI SMB Channel Partner)
-- Category: coding
-- Amount: 1 extra ChatGPT Business seat free for 4 years (with a paid $25/mo seat) — UNVERIFIED, claimed only in an X post
-- Status: active — expiry 2026-09-18
-- Verified: 2026-09-03 (social_proof / unverified, signup required)
-- Source: https://talentgenius.io/chatgpt/request
-- Page: https://freetokens.custats.info/offers/chatgpt-business-second-seat.html
-- Summary: TalentGenius, an OpenAI SMB Channel Partner, distributes ChatGPT Business signup links via a request form. An X post by @Rakib_Web3 (2026-08-22) claims that paying $25/mo for one seat gets a second seat completely free for 4 years through this partner program. The claim terms are not stated on TalentGenius's public pages and remain unverified.
-- Claim steps: Fill out the form at https://talentgenius.io/chatgpt/request (name, work email, company, region, team size). | Receive your unique ChatGPT Business signup link from TalentGenius. | Subscribe to ChatGPT Business ($25/mo per seat) using the link. | Add the second seat to the workspace at no extra cost, per the claimed partner promotion.
 
 ## Pages
 
