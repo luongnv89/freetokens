@@ -1,0 +1,28 @@
+{
+  "summary": "Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context).",
+  "claim_steps": [
+    "Create or sign in to an OpenRouter account and create an API key.",
+    "Do not submit content you do not want retained or used for Liquid model training.",
+    "Call the OpenRouter chat-completions API with model liquid/lfm-2.5-2.6b:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/liquid/lfm-2.5-2.6b:free",
+      "title": "LFM2.5-2.6B (free) - API Pricing & Providers | OpenRouter",
+      "text": "Prompts and outputs may be retained and used to train Liquid models. The pricing shown on this page is zero."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "The exact model ID is listed with prompt and completion prices of 0."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/liquid/lfm-2.5-2.6b:free/endpoints",
+      "title": "OpenRouter endpoint API — LFM2.5-2.6B free",
+      "text": "The free endpoint reports status 0 and zero prompt and completion pricing."
+    }
+  ]
+}

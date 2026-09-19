@@ -1,0 +1,22 @@
+{
+  "summary": "54M credits worth over $2,000 through 6 months of the M plan.",
+  "claim_steps": [
+    "Submit the official startup-program application.",
+    "Wait for rolling review; Gradium aims to respond within two to three business days.",
+    "If accepted, activate the six-month M plan grant."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://gradium.ai/startups",
+      "title": "Startup Program: Free Voice AI Credits for Startups | Gradium",
+      "text": "Grant recipients receive 6 months of our M plan completely free. That is 54 million credits worth over $2,000, equivalent to 1,200 hours of TTS or 4,998 hours of STT."
+    },
+    {
+      "type": "link",
+      "url": "https://gradium.ai/startups/apply",
+      "title": "Apply for Gradium Startup Program",
+      "text": "Official application page for the Gradium Startup Program."
+    }
+  ]
+}

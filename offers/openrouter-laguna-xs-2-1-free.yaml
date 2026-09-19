@@ -1,0 +1,12 @@
+# Verified 2026-09-19 against https://openrouter.ai/poolside/laguna-xs-2.1:free
+# ("Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from Poolside. This model is free to use.")
+title: Laguna XS 2.1 Free (OpenRouter)
+provider: OpenRouter
+category: coding
+amount: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context)
+expiry_date: null
+source_url: https://openrouter.ai/poolside/laguna-xs-2.1:free
+verified_date: 2026-09-19
+verification: social_proof
+review_status: under-review
+signup: required

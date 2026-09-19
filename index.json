@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-18T15:43:55Z",
-  "count": 173,
-  "active_count": 158,
-  "expired_count": 15,
+  "generated_at": "2026-09-19T06:36:09Z",
+  "count": 185,
+  "active_count": 165,
+  "expired_count": 20,
   "offers": [
     {
       "slug": "browser-use-15-signup-credit",
@@ -408,7 +408,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "vercel-ling-3-0-flash-fin-free",
@@ -562,7 +562,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "aws-activate-credits",
@@ -730,7 +730,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "free-ai-30000-tokens-day",
@@ -1780,7 +1780,7 @@
       "verification": "social_proof",
       "review_status": "verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "github-copilot-student-pack-2yr",
@@ -2004,7 +2004,7 @@
       "verification": "social_proof",
       "review_status": "unverified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "aihubmix-free-model-catalog",
@@ -2425,6 +2425,174 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "arcee-trinity-builders-program",
+      "title": "Arcee AI Trinity Builders Program",
+      "provider": "Arcee AI",
+      "category": "api_provider",
+      "amount": "Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens",
+      "expiry_date": null,
+      "source_url": "https://www.arcee.ai/trinity-builders-program",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "assemblyai-startup-program",
+      "title": "AssemblyAI Startup Program",
+      "provider": "AssemblyAI",
+      "category": "startup_program",
+      "amount": "12 months of recurring free credits; exact credit amount unpublished",
+      "expiry_date": null,
+      "source_url": "https://www.assemblyai.com/contact/startup-program",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "cartesia-startups-grant",
+      "title": "Cartesia Startups Grant",
+      "provider": "Cartesia",
+      "category": "startup_program",
+      "amount": "96M credits/year plus $300/month in agent credits for 12 months (over $8,000 value)",
+      "expiry_date": null,
+      "source_url": "https://www.cartesia.ai/startups",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "gradium-for-startups",
+      "title": "Gradium for Startups",
+      "provider": "Gradium",
+      "category": "startup_program",
+      "amount": "54M credits worth over $2,000 through 6 months of the M plan",
+      "expiry_date": null,
+      "source_url": "https://gradium.ai/startups",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-gemma-4-26b-a4b-free",
+      "title": "Gemma 4 26B A4B Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free google/gemma-4-26b-a4b-it:free inference at $0 input and output (262K context)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/google/gemma-4-26b-a4b-it:free",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-gemma-4-31b-free",
+      "title": "Gemma 4 31B Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free google/gemma-4-31b-it:free inference at $0 input and output (262K context)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/google/gemma-4-31b-it:free",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-laguna-xs-2-1-free",
+      "title": "Laguna XS 2.1 Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "coding",
+      "amount": "Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/poolside/laguna-xs-2.1:free",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-lfm-2-5-2-6b-free",
+      "title": "LFM2.5-2.6B Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/liquid/lfm-2.5-2.6b:free",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-nex-n2-5-mini-free",
+      "title": "Nex-N2.5-Mini Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free nex-agi/nex-n2.5-mini:free inference at $0 input and output (262K context)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/nex-agi/nex-n2.5-mini:free",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-qwen3-8-27b-free",
+      "title": "Qwen3.8 27B Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/qwen/qwen3.8-27b:free",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "smallest-ai-startup-grants",
+      "title": "Smallest.ai Startup Grants Program for Voice AI",
+      "provider": "Smallest.ai",
+      "category": "startup_program",
+      "amount": "$10,000 in Voice Agent Platform credits for up to 6 months",
+      "expiry_date": null,
+      "source_url": "https://smallest.ai/grants",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "telnyx-startups-program",
+      "title": "Telnyx Startups Program",
+      "provider": "Telnyx",
+      "category": "startup_program",
+      "amount": "Up to $20,000 in AI credits for 6 months, plus 3 months of engineering support",
+      "expiry_date": null,
+      "source_url": "https://telnyx.com/startups-program",
+      "verified_date": "2026-09-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ]
 }
