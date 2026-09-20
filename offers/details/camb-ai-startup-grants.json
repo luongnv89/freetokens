@@ -1,0 +1,15 @@
+{
+  "summary": "CAMB.AI Startup Grants give approved early-stage startups 33M characters of credits for the MARS Text-to-Speech APIs plus direct access to the CAMB.AI engineering team. Eligibility: pre-seed through Series A, founded within the last 5 years, under $5M raised, building a product that uses voice, speech, or localization AI, and no previous CAMB.AI program credits.",
+  "claim_steps": [
+    "Fill out the application form at camb.ai/startup-grants with company details and what you are building.",
+    "CAMB.AI reviews the submission and replies; approved teams receive credits and an onboarding call with engineering."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.camb.ai/startup-grants",
+      "title": "Join our Startup Program | CAMB.AI",
+      "text": "Get 33M characters in Speech AI credits. Build and deploy production-ready voice AI with credits for our MARS Text-to-Speech APIs, plus direct access to our engineering team. Early-stage startup (pre-seed through Series A), founded within the last 5 years, raised under $5M in total funding."
+    }
+  ]
+}

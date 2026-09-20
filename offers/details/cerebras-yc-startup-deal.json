@@ -1,0 +1,15 @@
+{
+  "summary": "The Cerebras YC Startup Deal gives Y Combinator startups from any batch up to $22.5K worth of inference on Cerebras Cloud, plus priority support and co-marketing opportunities. No setup fees.",
+  "claim_steps": [
+    "Apply via the form linked from cerebras.ai/yc-startup-deal (HubSpot application).",
+    "YC startups from any batch are eligible; no setup fees."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.cerebras.ai/yc-startup-deal",
+      "title": "Cerebras YC Startup Deal",
+      "text": "Get up to $22.5k worth of inference on Cerebras Cloud. Priority support and co-marketing opportunities. YC startups from any batch are eligible. No setup fees, no strings."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "summary": "The Sarvam AI Startup Program provides 6–12 months of API credits matched to the startup's scale (amount unpublished), priority support with direct access to Sarvam's engineering team, and launch visibility. Covers STT, TTS, voice agents, chat completion, translation, and document intelligence APIs, with native support for 22 Indian languages and English.",
+  "claim_steps": [
+    "Submit the application form at sarvam.ai/startup-program (company, product stage, funding, team, APIs of interest, expected usage).",
+    "Sarvam reviews the application and matches credits to your scale."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.sarvam.ai/startup-program",
+      "title": "Sarvam Startup Program",
+      "text": "Receive up to 12 months of credits, priority support, and production-ready infrastructure across speech, vision, and LLM APIs. 6–12 months of credits matched to your scale. Native support for 22 Indian languages and English."
+    }
+  ]
+}

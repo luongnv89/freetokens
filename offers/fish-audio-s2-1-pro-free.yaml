@@ -1,0 +1,15 @@
+# Verified 2026-09-20 against https://docs.fish.audio/developer-guide/models-pricing/models-overview
+# ("Fish Audio S2.1-Pro Free — The same model as S2.1-Pro, available at
+# $0 for development and testing"; "Free to use under fair-use limits";
+# "No TTFA or DPA guarantees"; 83 languages, same quality and language
+# coverage as s2.1-pro.)
+title: Fish Audio S2.1 Pro Free
+provider: Fish Audio
+category: voice
+amount: Free s2.1-pro-free TTS model at $0 under fair-use limits — same quality and 83-language coverage as S2.1 Pro; no TTFA/DPA guarantees
+expiry_date: null
+source_url: https://docs.fish.audio/developer-guide/models-pricing/models-overview
+verified_date: 2026-09-20
+verification: social_proof
+review_status: under-review
+signup: required

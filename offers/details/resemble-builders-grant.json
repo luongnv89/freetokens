@@ -1,0 +1,16 @@
+{
+  "summary": "Resemble AI's Builder's Grant awards $500–$30,000 in credits (most grants sized to a production proof-of-concept) usable across both voice generation and deepfake detection APIs, for up to 12 months. Open to teams under 50 employees or companies building a voice-enabled product; free-tier users eligible, existing paid customers excluded. One application per company; recipients agree to 12 months of marketing collaboration.",
+  "claim_steps": [
+    "Create a free Resemble account at app.resemble.ai.",
+    "Apply at resemble.ai/start/builders-grant-startup-program describing your project and use case.",
+    "Applications are reviewed within one business week; credits land in the account within 48 hours of approval."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.resemble.ai/start/builders-grant-startup-program",
+      "title": "Resemble AI Builder's Grant",
+      "text": "Apply for a Builder's Grant and get up to $30,000 in credits. Grants range from $500 to $30,000. Credits expire 12 months or less from grant approval. Not an existing paid Resemble customer. Free tier users are welcome to apply."
+    }
+  ]
+}

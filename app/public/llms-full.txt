@@ -2,9 +2,130 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-19T06:36:09Z — 165 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-20T11:54:18Z — 174 active offers.
 
 ## Offers (full)
+
+### Z.ai Startups Program
+- Provider: Z AI (Zhipu AI)
+- Category: startup_program
+- Amount: Free API credits up to 1B tokens plus GLM volume pricing, priority support, and early access
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://startup.z.ai/
+- Page: https://freetokens.custats.info/offers/z-ai-startups-program.html
+- Summary: The Z.ai Startups Program gives selected early-stage teams free API credits — up to 1B tokens — plus volume pricing on GLM models, technical guidance for production deployment, priority support, and early access to new models. The application page is JS-rendered; program confirmed via Z.ai's official announcement and indexed page content.
+- Claim steps: Complete the application form at startup.z.ai (requires a Z.ai login). | Z.ai reviews the application; approved startups receive API credits and program resources.
+
+### Sarvam AI Startup Program
+- Provider: Sarvam AI
+- Category: startup_program
+- Amount: 6–12 months of API credits matched to scale (amount unpublished) for STT, TTS, voice agents, and LLM APIs
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://www.sarvam.ai/startup-program
+- Page: https://freetokens.custats.info/offers/sarvam-ai-startup-program.html
+- Summary: The Sarvam AI Startup Program provides 6–12 months of API credits matched to the startup's scale (amount unpublished), priority support with direct access to Sarvam's engineering team, and launch visibility. Covers STT, TTS, voice agents, chat completion, translation, and document intelligence APIs, with native support for 22 Indian languages and English.
+- Claim steps: Submit the application form at sarvam.ai/startup-program (company, product stage, funding, team, APIs of interest, expected usage). | Sarvam reviews the application and matches credits to your scale.
+
+### Resemble AI Builder's Grant
+- Provider: Resemble AI
+- Category: startup_program
+- Amount: Up to $30,000 in credits ($500–$30K by use case) for voice generation and deepfake detection APIs; credits expire ≤12 months from approval
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://www.resemble.ai/start/builders-grant-startup-program
+- Page: https://freetokens.custats.info/offers/resemble-builders-grant.html
+- Summary: Resemble AI's Builder's Grant awards $500–$30,000 in credits (most grants sized to a production proof-of-concept) usable across both voice generation and deepfake detection APIs, for up to 12 months. Open to teams under 50 employees or companies building a voice-enabled product; free-tier users eligible, existing paid customers excluded. One application per company; recipients agree to 12 months of marketing collaboration.
+- Claim steps: Create a free Resemble account at app.resemble.ai. | Apply at resemble.ai/start/builders-grant-startup-program describing your project and use case. | Applications are reviewed within one business week; credits land in the account within 48 hours of approval.
+
+### PyAI for Startups
+- Provider: PyAI
+- Category: startup_program
+- Amount: $20K–$100K in voice AI credits over 12 months (Launch $20K / Growth $50K / Scale $100K) plus managed phone minutes
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://pyai.com/startups
+- Page: https://freetokens.custats.info/offers/pyai-for-startups.html
+- Summary: PyAI for Startups puts a $10M pool behind 200+ voice-product startups. Three tiers: Launch $20,000 (400k Omni + 25k phone minutes), Growth $50,000 (1M Omni + 50k phone minutes), Scale $100,000 (2M Omni + 100k phone minutes). Credits cover the whole PyAI rate card and release in 12 monthly parts over a one-year term; unused credit rolls forward inside the term. Eligibility: building a voice product live or launching within six months, working website, under $10M raised, incorporated fewer than seven years ago, not a current PyAI customer on an annual contract. No card required.
+- Claim steps: Apply at pyai.com/startups with company, product, stage, funding, and a demo link, two-minute video, or deck. | A person reviews within five business days (two via partner VC/accelerator). | On acceptance, sign up or sign in with the same email — credits attach automatically; no card needed.
+
+### Nemotron 3 Nano Omni Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free endpoint at $0 (256K context, omni multimodal input, text output)
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
+- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-nano-omni-free.html
+- Summary: NVIDIA Nemotron 3 Nano Omni is a 30B-A3B open multimodal reasoning model — a perception and context sub-agent accepting text, image, video, and audio input with text output over a 256K context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Listed since 2026-04-28; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free.
+
+### Nemotron 3.5 Content Safety Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nvidia/nemotron-3.5-content-safety:free endpoint at $0 (128K context guardrail model)
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/nvidia/nemotron-3.5-content-safety:free
+- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-content-safety-free.html
+- Summary: NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model (fine-tuned from Gemma-3-4B) that moderates inputs to and responses from LLMs and VLMs, accepting text and image input with a 128K context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Listed since 2026-06-04; no published end date.
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id nvidia/nemotron-3.5-content-safety:free.
+
+### GLM 5.2 Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free z-ai/glm-5.2:free endpoint at $0 input/output (32K context)
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/z-ai/glm-5.2:free
+- Page: https://freetokens.custats.info/offers/openrouter-glm-5-2-free.html
+- Summary: Z.ai's GLM 5.2 is served free through OpenRouter's :free endpoint (z-ai/glm-5.2:free) at $0 prompt / $0 completion with a 32K context window — text only; the paid variant carries the full 1M context. Listed in the Models API since 2026-06-16 with no published end date. Standard OpenRouter free-tier rate limits apply (50 requests/day, 1,000/day after $10 lifetime credit purchases).
+- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id z-ai/glm-5.2:free.
+
+### LiveKit Startup Program
+- Provider: LiveKit
+- Category: startup_program
+- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://livekit.com/startups
+- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
+- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll.
+- Claim steps: Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
+
+### Fish Audio S2.1 Pro Free
+- Provider: Fish Audio
+- Category: voice
+- Amount: Free s2.1-pro-free TTS model at $0 under fair-use limits — same quality and 83-language coverage as S2.1 Pro; no TTFA/DPA guarantees
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://docs.fish.audio/developer-guide/models-pricing/models-overview
+- Page: https://freetokens.custats.info/offers/fish-audio-s2-1-pro-free.html
+- Summary: Fish Audio offers s2.1-pro-free — the same TTS model as the paid S2.1-Pro — at $0 for development, testing, prototyping, and smaller businesses. Same quality and 83-language coverage as s2.1-pro, under fair-use limits, with no TTFA or DPA guarantees and no published end date.
+- Claim steps: Create an account and API key at fish.audio. | Use the s2.1-pro-free model string with the standard TTS API endpoint.
+
+### Cerebras YC Startup Deal
+- Provider: Cerebras
+- Category: startup_program
+- Amount: Up to $22.5K in Cerebras Cloud inference credits plus priority support and co-marketing
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://www.cerebras.ai/yc-startup-deal
+- Page: https://freetokens.custats.info/offers/cerebras-yc-startup-deal.html
+- Summary: The Cerebras YC Startup Deal gives Y Combinator startups from any batch up to $22.5K worth of inference on Cerebras Cloud, plus priority support and co-marketing opportunities. No setup fees.
+- Claim steps: Apply via the form linked from cerebras.ai/yc-startup-deal (HubSpot application). | YC startups from any batch are eligible; no setup fees.
+
+### CAMB.AI Startup Grants
+- Provider: CAMB.AI
+- Category: startup_program
+- Amount: 33M characters of MARS Text-to-Speech API credits plus direct engineering support
+- Status: active — expiry ongoing
+- Verified: 2026-09-20 (social_proof / under-review, signup required)
+- Source: https://www.camb.ai/startup-grants
+- Page: https://freetokens.custats.info/offers/camb-ai-startup-grants.html
+- Summary: CAMB.AI Startup Grants give approved early-stage startups 33M characters of credits for the MARS Text-to-Speech APIs plus direct access to the CAMB.AI engineering team. Eligibility: pre-seed through Series A, founded within the last 5 years, under $5M raised, building a product that uses voice, speech, or localization AI, and no previous CAMB.AI program credits.
+- Claim steps: Fill out the application form at camb.ai/startup-grants with company details and what you are building. | CAMB.AI reviews the submission and replies; approved teams receive credits and an onboarding call with engineering.
 
 ### Telnyx Startups Program
 - Provider: Telnyx
@@ -875,17 +996,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-19T06:36:09Z — 
 - Summary: LLM7 provides anonymous text generation with limits of 1 request per second, 10 per minute, 60 per hour, and 500,000 tokens per 24 hours. A free token raises the request and token limits.
 - Claim steps: Send an OpenAI-compatible request without a key using a currently available turbo model. | Stay within the anonymous limits of 10 requests per minute, 60 per hour, and 500,000 tokens per 24 hours. | Optionally get a free token from the LLM7 dashboard for higher limits.
 
-### LiveKit Startup Program
-- Provider: LiveKit
-- Category: startup_program
-- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
-- Status: active — expiry ongoing
-- Verified: 2026-09-18 (social_proof / under-review, signup required)
-- Source: https://livekit.com/startups
-- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
-- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — AssemblyAI, Deepgram, Fish Audio, Gemma, Gradium, Inworld, Rime). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll.
-- Claim steps: Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
-
 ### Ling 3.0 Flash Fin Free (InclusionAI)
 - Provider: InclusionAI
 - Category: api_provider
@@ -1533,17 +1643,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-19T06:36:09Z — 
 - Page: https://freetokens.custats.info/offers/cloudflare-for-startups.html
 - Summary: Cloudflare for Startups gives early-stage companies up to $350K in credits for one year across three tiers — $10K (bootstrapped/self-funded, <$1M raised), $100K (<$5M raised, affiliated-partner funded), $350K ($5M+ raised, affiliated-partner funded). Credits cover usage-based services: Workers, Durable Objects, Workflows, Workers AI (capped $2.5K/$10K/$50K by tier), R2 (capped $10K), Pages, Images, Stream; core security/networking features are included at no cost. AI Gateway is temporarily not covered.
 - Claim steps: Confirm eligibility: founded within 10 years, funded up to Series B within the last 12 months, building a technology product, public website, active on LinkedIn/X/GitHub, first-time applicant, business email matching your domain. | Apply at https://www.cloudflare.com/startups/ . | Credits are valid for one year or until fully consumed, whichever comes first.
-
-### Union Alpha Free in Cline
-- Provider: Cline
-- Category: coding
-- Amount: Free Union Alpha model access (256k context, multimodal), rate limited
-- Status: active — expiry ongoing
-- Verified: 2026-09-18 (social_proof / unverified, signup required)
-- Source: https://x.com/cline/status/2100265266026590322
-- Page: https://freetokens.custats.info/offers/cline-union-alpha-free.html
-- Summary: Cline announced on 2026-09-16 that Union Alpha (stealth model) is now free in Cline, with 256k context, multimodal support, built for agentic coding. Cline's free-models docs confirm free model promotions are available to any user with a Cline account, carry a limited usage quota, rotate over time, and work only in the Cline IDE extension and CLI (not the Cline API). No fixed end date is published, so this listing uses null expiry to mean no announced end date, not permanent availability.
-- Claim steps: Install the Cline CLI if needed: npm i -g cline. | Open the model picker (/model); select Cline as the provider. | Under 'Free', choose 'Union Alpha' while it is listed. | Use it in the Cline CLI or IDE extension within the limited free quota; free models are not available through the Cline API.
 
 ### GLM-5.3 Flash (Ox Alpha) Free in Cline
 - Provider: Cline

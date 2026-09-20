@@ -1,0 +1,16 @@
+{
+  "summary": "PyAI for Startups puts a $10M pool behind 200+ voice-product startups. Three tiers: Launch $20,000 (400k Omni + 25k phone minutes), Growth $50,000 (1M Omni + 50k phone minutes), Scale $100,000 (2M Omni + 100k phone minutes). Credits cover the whole PyAI rate card and release in 12 monthly parts over a one-year term; unused credit rolls forward inside the term. Eligibility: building a voice product live or launching within six months, working website, under $10M raised, incorporated fewer than seven years ago, not a current PyAI customer on an annual contract. No card required.",
+  "claim_steps": [
+    "Apply at pyai.com/startups with company, product, stage, funding, and a demo link, two-minute video, or deck.",
+    "A person reviews within five business days (two via partner VC/accelerator).",
+    "On acceptance, sign up or sign in with the same email — credits attach automatically; no card needed."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://pyai.com/startups",
+      "title": "PyAI for Startups",
+      "text": "PyAI is putting $10 million behind 200+ startups. Selected teams receive $20K–$100K in voice AI credit, including the first phone minutes. Released in 12 monthly parts over a one-year term. No card. Sandbox keys never bill."
+    }
+  ]
+}

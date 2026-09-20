@@ -8,7 +8,10 @@ title: Union Alpha Free in Cline
 provider: Cline
 category: coding
 amount: Free Union Alpha model access (256k context, multimodal), rate limited
-expiry_date: null
+expiry_date: 2026-09-18
+# Archived 2026-09-20: free stealth period ended — Union Alpha revealed as
+# Pareto (openrouter.ai/stealth). Matches the openrouter-union-alpha-free
+# archive from 2026-09-18.
 source_url: https://x.com/cline/status/2100265266026590322
 verified_date: 2026-09-18
 verification: social_proof
