@@ -9,7 +9,7 @@ category: api_provider
 amount: Free Nemotron/Laguna/Gemma/Leanstral models; 200 req/day + 20 RPM for new orgs (1,000/day + 60 RPM if paying); no credit card
 expiry_date: null
 source_url: https://www.requesty.ai/pricing
-verified_date: 2026-09-18
+verified_date: 2026-09-20
 verification: social_proof
 review_status: under-review
 signup: required

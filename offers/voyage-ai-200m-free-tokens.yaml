@@ -9,7 +9,7 @@ category: api_provider
 amount: First 200M tokens free per account on current embedding/rerank models (50M on specialized -2 models; multimodal: 200M text tokens + 150B pixels); Batch API excluded
 expiry_date: null
 source_url: https://docs.voyageai.com/docs/pricing
-verified_date: 2026-09-18
+verified_date: 2026-09-20
 verification: social_proof
 review_status: under-review
 signup: required
