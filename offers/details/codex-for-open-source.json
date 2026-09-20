@@ -1,22 +1,16 @@
 {
-  "summary": "Codex for Open Source gives eligible open-source maintainers six months of ChatGPT Pro with Codex for day-to-day coding, triage, review, and maintainer workflows, conditional access to Codex Security for repositories needing deeper coverage (reviewed case by case), and API credits through the Codex Open Source Fund for projects using Codex in PR review or maintainer automation. Core maintainers and widely used public projects should apply; edge cases can explain their ecosystem role.",
-  "claim_steps": [
-    "Confirm you're a core maintainer or run a widely used public open-source project.",
-    "Apply via the form linked on developers.openai.com/community/codex-for-oss (rolling review; submitting agrees to the Codex for Open Source Program Terms).",
-    "If selected: six months of ChatGPT Pro with Codex, conditional Codex Security access (case-by-case), and API credits via the Codex Open Source Fund for Codex-in-OSS workflows."
-  ],
-  "social_proof": [
-    {
-      "type": "link",
-      "url": "https://developers.openai.com/community/codex-for-oss",
-      "title": "Codex for Open Source | OpenAI Developers",
-      "text": "Open-source maintainers can apply for API credits, six months of ChatGPT Pro with Codex, and Codex Security. ... Six months of ChatGPT Pro with Codex for day-to-day coding, triage, review, and maintainer workflows."
-    },
-    {
-      "type": "link",
-      "url": "https://openai.com/form/codex-open-source-fund/",
-      "title": "Codex open source fund | OpenAI",
-      "text": "We're excited to launch a $1 million initiative supporting open source projects to use Codex CLI and OpenAI models. Applications will be reviewed on an ongoing basis, with projects receiving grants up to $25,000 in API credits."
-    }
-  ]
+ "summary": "Codex for Open Source gives eligible open-source maintainers six months of ChatGPT Pro with Codex for day-to-day coding, triage, review, and maintainer workflows, conditional access to Codex Security for repositories needing deeper coverage (reviewed case by case), and API credits through the Codex Open Source Fund for projects using Codex in PR review or maintainer automation. Core maintainers and widely used public projects should apply; edge cases can explain their ecosystem role.",
+ "claim_steps": [
+  "Confirm you're a core maintainer or run a widely used public open-source project.",
+  "Apply via the form linked on developers.openai.com/community/codex-for-oss (rolling review; submitting agrees to the Codex for Open Source Program Terms).",
+  "If selected: six months of ChatGPT Pro with Codex, conditional Codex Security access (case-by-case), and API credits via the Codex Open Source Fund for Codex-in-OSS workflows."
+ ],
+ "social_proof": [
+  {
+   "type": "link",
+   "url": "https://developers.openai.com/community/codex-for-oss",
+   "title": "Codex for Open Source | OpenAI Developers",
+   "text": "Open-source maintainers can apply for API credits, six months of ChatGPT Pro with Codex, and Codex Security. ... Six months of ChatGPT Pro with Codex for day-to-day coding, triage, review, and maintainer workflows."
+  }
+ ]
 }

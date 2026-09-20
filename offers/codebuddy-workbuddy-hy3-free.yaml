@@ -1,16 +1,16 @@
-# Verified 2026-09-01 against https://workbuddy.ai/pricing
-# (Rendered DOM: "Free $0 /mo Start for free 100 credits/month Daily active
-# reward: 30 credits/day Auto model routing 5,000 code completions" — Tencent.)
-# NOTE: the $0/mo free tier appears ongoing, but the user flagged Hy3 coding
-# models are free specifically "through 30 Sep 2026" — using that expiry and
-# flagging the nuance. Source page is JS-rendered; free tier terms confirmed.
+# Verified 2026-09-20 against https://workbuddy.ai/pricing
+# NOTE: official pricing page (checked 2026-09-20) no longer lists Hy3 models
+# as free — the current limited-time free-model banner is "Hy4 preview"
+# (2026-09-10 → 2026-09-23). Hy3 promo removed from the official page, so this
+# offer is marked expired on that basis. The $0/mo WorkBuddy free tier
+# (100 credits/month, 30/day reward, 5,000 completions) remains live.
 title: CodeBuddy / WorkBuddy Hy3 Free (Tencent)
 provider: Tencent
 category: coding
 amount: Hy3 coding models free on the $0/mo WorkBuddy plan (100 credits/month + 30/day reward, 5,000 code completions)
-expiry_date: 2026-09-30
+expiry_date: 2026-09-20
 source_url: https://workbuddy.ai/pricing
-verified_date: 2026-09-18
+verified_date: 2026-09-20
 verification: social_proof
 review_status: under-review
 signup: required
