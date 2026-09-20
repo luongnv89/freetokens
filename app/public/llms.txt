@@ -4,8 +4,19 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 165 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 174 active listings. Full directory at https://freetokens.custats.info/.
 
+- [Z.ai Startups Program](https://freetokens.custats.info/offers/z-ai-startups-program.html): Z AI (Zhipu AI) — Free API credits up to 1B tokens plus GLM volume pricing, priority support, and early access (startup_program)
+- [Sarvam AI Startup Program](https://freetokens.custats.info/offers/sarvam-ai-startup-program.html): Sarvam AI — 6–12 months of API credits matched to scale (amount unpublished) for STT, TTS, voice agents, and LLM APIs (startup_program)
+- [Resemble AI Builder's Grant](https://freetokens.custats.info/offers/resemble-builders-grant.html): Resemble AI — Up to $30,000 in credits ($500–$30K by use case) for voice generation and deepfake detection APIs; credits expire ≤12 months from approval (startup_program)
+- [PyAI for Startups](https://freetokens.custats.info/offers/pyai-for-startups.html): PyAI — $20K–$100K in voice AI credits over 12 months (Launch $20K / Growth $50K / Scale $100K) plus managed phone minutes (startup_program)
+- [Nemotron 3 Nano Omni Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-nemotron-3-nano-omni-free.html): OpenRouter — Free nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free endpoint at $0 (256K context, omni multimodal input, text output) (api_provider)
+- [Nemotron 3.5 Content Safety Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-nemotron-3-5-content-safety-free.html): OpenRouter — Free nvidia/nemotron-3.5-content-safety:free endpoint at $0 (128K context guardrail model) (api_provider)
+- [GLM 5.2 Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-glm-5-2-free.html): OpenRouter — Free z-ai/glm-5.2:free endpoint at $0 input/output (32K context) (api_provider)
+- [LiveKit Startup Program](https://freetokens.custats.info/offers/livekit-startup-program.html): LiveKit — Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits (startup_program)
+- [Fish Audio S2.1 Pro Free](https://freetokens.custats.info/offers/fish-audio-s2-1-pro-free.html): Fish Audio — Free s2.1-pro-free TTS model at $0 under fair-use limits — same quality and 83-language coverage as S2.1 Pro; no TTFA/DPA guarantees (voice)
+- [Cerebras YC Startup Deal](https://freetokens.custats.info/offers/cerebras-yc-startup-deal.html): Cerebras — Up to $22.5K in Cerebras Cloud inference credits plus priority support and co-marketing (startup_program)
+- [CAMB.AI Startup Grants](https://freetokens.custats.info/offers/camb-ai-startup-grants.html): CAMB.AI — 33M characters of MARS Text-to-Speech API credits plus direct engineering support (startup_program)
 - [Telnyx Startups Program](https://freetokens.custats.info/offers/telnyx-startups-program.html): Telnyx — Up to $20,000 in AI credits for 6 months, plus 3 months of engineering support (startup_program)
 - [Smallest.ai Startup Grants Program for Voice AI](https://freetokens.custats.info/offers/smallest-ai-startup-grants.html): Smallest.ai — $10,000 in Voice Agent Platform credits for up to 6 months (startup_program)
 - [Qwen3.8 27B Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-qwen3-8-27b-free.html): OpenRouter — Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context) (api_provider)
@@ -15,17 +26,6 @@ Top 20 currently active offers (newest verified first) from 165 active listings.
 - [Gemma 4 31B Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-gemma-4-31b-free.html): OpenRouter — Free google/gemma-4-31b-it:free inference at $0 input and output (262K context) (api_provider)
 - [Gemma 4 26B A4B Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-gemma-4-26b-a4b-free.html): OpenRouter — Free google/gemma-4-26b-a4b-it:free inference at $0 input and output (262K context) (api_provider)
 - [Gradium for Startups](https://freetokens.custats.info/offers/gradium-for-startups.html): Gradium — 54M credits worth over $2,000 through 6 months of the M plan (startup_program)
-- [Cartesia Startups Grant](https://freetokens.custats.info/offers/cartesia-startups-grant.html): Cartesia — 96M credits/year plus $300/month in agent credits for 12 months (over $8,000 value) (startup_program)
-- [AssemblyAI Startup Program](https://freetokens.custats.info/offers/assemblyai-startup-program.html): AssemblyAI — 12 months of recurring free credits; exact credit amount unpublished (startup_program)
-- [Arcee AI Trinity Builders Program](https://freetokens.custats.info/offers/arcee-trinity-builders-program.html): Arcee AI — Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens (api_provider)
-- [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
-- [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
-- [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
-- [Voyage AI — First 200M Tokens Free](https://freetokens.custats.info/offers/voyage-ai-200m-free-tokens.html): Voyage AI — First 200M tokens free per account on current embedding/rerank models (50M on specialized -2 models; multimodal: 200M text tokens + 150B pixels); Batch API excluded (api_provider)
-- [Vidu AI Video Free Credits](https://freetokens.custats.info/offers/vidu-free-credits.html): Vidu — Trial credits for new users on signup, topped up with daily login bonus credits (video)
-- [Ling 3.0 Flash Sante Free (Vercel AI Gateway)](https://freetokens.custats.info/offers/vercel-ling-3-0-flash-sante-free.html): Vercel — Ling 3.0 Flash Sante at $0 on AI Gateway (256K context, function calling) (api_provider)
-- [Ling 3.0 Flash Fin Free (Vercel AI Gateway)](https://freetokens.custats.info/offers/vercel-ling-3-0-flash-fin-free.html): Vercel — Ling 3.0 Flash Fin at $0 on AI Gateway (256K context, function calling) (api_provider)
-- [Vercel AI Gateway — Monthly Free Credit](https://freetokens.custats.info/offers/vercel-ai-gateway-free-tier.html): Vercel — Monthly free AI Gateway credit covering a free-tier subset of models (lower per-model rate limits); buying credits permanently ends the monthly free credit (api_provider)
 
 ## Pages
 
