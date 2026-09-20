@@ -1,0 +1,14 @@
+# Verified 2026-09-20 against https://www.cerebras.ai/yc-startup-deal
+# ("Get up to $22.5k worth of inference on Cerebras Cloud. Priority
+# support and co-marketing opportunities."; "YC startups from any batch
+# are eligible. No setup fees, no strings.")
+title: Cerebras YC Startup Deal
+provider: Cerebras
+category: startup_program
+amount: Up to $22.5K in Cerebras Cloud inference credits plus priority support and co-marketing
+expiry_date: null
+source_url: https://www.cerebras.ai/yc-startup-deal
+verified_date: 2026-09-20
+verification: social_proof
+review_status: under-review
+signup: required

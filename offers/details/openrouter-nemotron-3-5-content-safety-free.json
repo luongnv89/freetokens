@@ -1,0 +1,21 @@
+{
+  "summary": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model (fine-tuned from Gemma-3-4B) that moderates inputs to and responses from LLMs and VLMs, accepting text and image input with a 128K context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Listed since 2026-06-04; no published end date.",
+  "claim_steps": [
+    "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
+    "Call the chat completions API with model id nvidia/nemotron-3.5-content-safety:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/nvidia/nemotron-3.5-content-safety:free",
+      "title": "OpenRouter APIs — NVIDIA: Nemotron 3.5 Content Safety (free)",
+      "text": "Model page confirms nvidia/nemotron-3.5-content-safety:free is served through OpenRouter's chat completions API."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "nvidia/nemotron-3.5-content-safety:free listed at prompt:0, completion:0, context_length 128000, created 2026-06-04; input modalities text/image."
+    }
+  ]
+}

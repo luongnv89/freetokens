@@ -1,0 +1,16 @@
+# Verified 2026-09-20 against https://startup.z.ai/ — page is JS-rendered
+# (empty without JS); corroborated by its indexed official content and
+# Z.ai's own program announcement on LinkedIn.
+# ("Get free API credits — up to 1B tokens and volume pricing on GLM — to
+# build and scale AI-native."; "Apply Z.ai's Startup Program — Complete
+# the form below to apply for our startup program.")
+title: Z.ai Startups Program
+provider: Z AI (Zhipu AI)
+category: startup_program
+amount: Free API credits up to 1B tokens plus GLM volume pricing, priority support, and early access
+expiry_date: null
+source_url: https://startup.z.ai/
+verified_date: 2026-09-20
+verification: social_proof
+review_status: under-review
+signup: required

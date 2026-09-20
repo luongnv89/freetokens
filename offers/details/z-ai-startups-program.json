@@ -1,0 +1,21 @@
+{
+  "summary": "The Z.ai Startups Program gives selected early-stage teams free API credits — up to 1B tokens — plus volume pricing on GLM models, technical guidance for production deployment, priority support, and early access to new models. The application page is JS-rendered; program confirmed via Z.ai's official announcement and indexed page content.",
+  "claim_steps": [
+    "Complete the application form at startup.z.ai (requires a Z.ai login).",
+    "Z.ai reviews the application; approved startups receive API credits and program resources."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://startup.z.ai/",
+      "title": "Z.ai - Startups Program | AI Credits & Resources for Startups",
+      "text": "Get free API credits — up to 1B tokens and volume pricing on GLM — to build and scale AI-native. Complete the form below to apply for our startup program."
+    },
+    {
+      "type": "link",
+      "url": "https://www.linkedin.com/posts/zdotai_zaistartupprogram-ai-startups-activity-7434271819500691456-3daV",
+      "title": "Z.ai Startup Program is now open for applications!",
+      "text": "Selected startups receive access to Z.ai's advanced model capabilities including the GLM family, API credits to accelerate product development, technical guidance for production deployment, and a global community of AI founders. Apply now → startup.z.ai"
+    }
+  ]
+}

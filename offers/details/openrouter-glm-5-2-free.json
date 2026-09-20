@@ -1,0 +1,21 @@
+{
+  "summary": "Z.ai's GLM 5.2 is served free through OpenRouter's :free endpoint (z-ai/glm-5.2:free) at $0 prompt / $0 completion with a 32K context window — text only; the paid variant carries the full 1M context. Listed in the Models API since 2026-06-16 with no published end date. Standard OpenRouter free-tier rate limits apply (50 requests/day, 1,000/day after $10 lifetime credit purchases).",
+  "claim_steps": [
+    "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
+    "Call the chat completions API with model id z-ai/glm-5.2:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/z-ai/glm-5.2:free",
+      "title": "OpenRouter APIs — Z.ai: GLM 5.2 (free)",
+      "text": "Model page confirms z-ai/glm-5.2:free is served through OpenRouter's chat completions API."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "z-ai/glm-5.2:free listed at prompt:0, completion:0, context_length 32768, created 2026-06-16."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+# Verified 2026-09-20 against https://openrouter.ai/z-ai/glm-5.2:free and
+# https://openrouter.ai/api/v1/models
+# (Models API lists z-ai/glm-5.2:free at prompt:0 / completion:0,
+# context_length 32768, created 2026-06-16. Free endpoint is text-only
+# with a 32K context; the paid z-ai/glm-5.2 variant has 1M. No published
+# end date.)
+title: GLM 5.2 Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free z-ai/glm-5.2:free endpoint at $0 input/output (32K context)
+expiry_date: null
+source_url: https://openrouter.ai/z-ai/glm-5.2:free
+verified_date: 2026-09-20
+verification: social_proof
+review_status: under-review
+signup: required
