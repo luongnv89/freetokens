@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-21T09:30:23Z — 173 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-21T21:56:46Z — 174 active offers.
 
 ## Offers (full)
 
@@ -16,6 +16,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-21T09:30:23Z — 
 - Page: https://freetokens.custats.info/offers/zcode-bigmodel-new-user-trial.html
 - Summary: ZCode grants new users who connect a BigModel account a no-payment trial: 8 million tokens per day for the first 5 days (GLM-5.3 3M/day + GLM-5.3-Flash 5M/day). The daily quota refreshes during those 5 days and then expires — it is not an ongoing free tier. Intended for trying ZCode Agent before a GLM Coding Plan. The same docs say Z.ai (overseas) new users also get a free daily trial quota for flagship GLM models, but the 8M/5-day split is quoted only in the BigModel section. Distinct from Z.ai's ongoing Flash free APIs and the Z.ai Startups Program.
 - Claim steps: Install/open ZCode and connect a BigModel account (welcome screen Continue with BigModel, or Settings → Model Settings). | New users receive the 5-day trial automatically with no payment; check remaining daily quota on the BigModel provider page. | After day 5 the trial quota expires; subscribe to a GLM Coding Plan (Lite/Pro/Max) in-app if you need more.
+
+### Vercel AI Gateway Jev Free
+- Provider: Vercel
+- Category: api_provider
+- Amount: Free typesafe-ai/jev inference (32K context) via Vercel AI Gateway
+- Status: active — expiry 2026-09-25
+- Verified: 2026-09-21 (social_proof / verified, signup required)
+- Source: https://vercel.com/ai-gateway/models/jev
+- Page: https://freetokens.custats.info/offers/vercel-ai-gateway-jev-free.html
+- Summary: TypeSafe AI's Jev — a System One evaluation model for fast, structured decisions in software — is free on Vercel AI Gateway: $0 pricing, 32K context, per a promotional period ending September 25, 2026.
+- Claim steps: Get a Vercel AI Gateway API key from the Jev model page. | Call the evaluate endpoint with model 'typesafe-ai/jev' (see the page's SDK snippet).
 
 ### Rime $5K TTS Credits for YC
 - Provider: Rime

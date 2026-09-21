@@ -4,9 +4,10 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 173 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 174 active listings. Full directory at https://freetokens.custats.info/.
 
 - [ZCode / BigModel New-User Trial](https://freetokens.custats.info/offers/zcode-bigmodel-new-user-trial.html): ZCode (Z.ai) — 8M tokens/day for the first 5 days (GLM-5.3 3M + GLM-5.3-Flash 5M) after connecting a BigModel account; then expires — not an ongoing free tier (coding)
+- [Vercel AI Gateway Jev Free](https://freetokens.custats.info/offers/vercel-ai-gateway-jev-free.html): Vercel — Free typesafe-ai/jev inference (32K context) via Vercel AI Gateway (api_provider)
 - [Rime $5K TTS Credits for YC](https://freetokens.custats.info/offers/rime-5k-tts-credits-for-yc.html): Rime — $5,000 TTS API credits over the first year plus priority support and early feature access (YC W24+ only) (startup_program)
 - [Dots3-Note Preview Free (OpenRouter)](https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html): OpenRouter — Free dots-studio/dots-3-note-preview:free at $0 input/output (512K context, multimodal, tools) (api_provider)
 - [LlamaParse Startup Offer](https://freetokens.custats.info/offers/llamaparse-startup-offer.html): LlamaIndex — $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised) (startup_program)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 173 active listings.
 - [Upstage Free Access for Education & Public Interest](https://freetokens.custats.info/offers/upstage-education-public-interest-free.html): Upstage — Free access to Solar Pro LLM + Document Parse for up to 1 year for eligible schools, hospitals, and nonprofits (Upstage x AWS AI Initiative) (student)
 - [Together AI Startup Accelerator](https://freetokens.custats.info/offers/together-ai-startup-accelerator.html): Together AI — Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant) (startup_program)
 - [TinyFish Student Program — $35 Credits](https://freetokens.custats.info/offers/tinyfish-student-program-35-credits.html): TinyFish — $35 wallet credit automatic on .edu signup plus bounty-board gift cards for approved builds ($50 agentic apps, $20 Skills, $10 prompts) (student)
-- [Thunder Compute Student Program — $20 Credit](https://freetokens.custats.info/offers/thunder-compute-students.html): Thunder Compute — $20 free Thunder Compute credit for students at US universities (student)
 
 ## Pages
 
