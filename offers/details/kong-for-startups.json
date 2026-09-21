@@ -1,0 +1,16 @@
+{
+  "summary": "Kong for Startups gives selected early-stage AI/API teams up to $100,000 in Kong Konnect Plus credits, valid 12 months from the date they land in the Konnect org (unused credits do not roll over). Most early-stage startups receive between $25K and $100K upfront. Credits spend across AI Gateway, API Gateway, Metering and Billing, Mesh, and Event Gateway. After credits expire or for usage beyond the balance, accepted startups pay 50% of Konnect Plus list pricing for 24 months. Eligibility: typically pre-seed through Series A, under $10M total funding, in production or launching within 6 months. YC companies are pre-qualified for the full $100K plus the two-year discount. Kong reviews applications (typically within 5 business days); credits land within 24 hours of acceptance. Existing Kong customers who qualify can have their balance increased.",
+  "claim_steps": [
+    "Apply on konghq.com/solutions/startup-program with what you are building and which Kong products you will use (about 5 minutes). YC companies should indicate their batch.",
+    "Wait for Kong review (typically within 5 business days).",
+    "On acceptance, credits land in your Konnect org within 24 hours; the 50% discount auto-applies on invoices after credits run out."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://konghq.com/solutions/startup-program",
+      "title": "Kong for Startups: Apply for $100K Credits & 50% Off AI Gateway",
+      "text": "Up to $100,000 in credits, valid for 12 months on Kong Konnect Plus. Spend across AI Gateway, API Gateway, Metering and Billing, Mesh, Event Gateway. Most early-stage startups receive between $25K and $100K upfront. 50% off list pricing for two full years."
+    }
+  ]
+}

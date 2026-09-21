@@ -1,0 +1,27 @@
+{
+  "summary": "Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Listed in the Models API since 2026-08-14 with no published end date. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.",
+  "claim_steps": [
+    "Sign up at openrouter.ai and create an API key (OpenRouter :free models do not require purchasing credits).",
+    "Call the chat completions API with model id dots-studio/dots-3-note-preview:free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/dots-studio/dots-3-note-preview:free",
+      "title": "Dots3-Note Preview (free) - API Pricing & Providers | OpenRouter",
+      "text": "Yes. The pricing shown on this page for Dots3-Note Preview (free) is zero, so you are not charged for prompt or completion tokens. Free endpoints are rate limited. Context window 512,000 tokens. Accepts text and images; supports tools."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "dots-studio/dots-3-note-preview:free listed at prompt:0, completion:0, context_length 512000, created 2026-08-14; input_modalities text+image; supported_parameters include tools and tool_choice."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/dots-studio/dots-3-note-preview:free/endpoints",
+      "title": "OpenRouter endpoint API — Dots3-Note Preview free",
+      "text": "AtlasCloud endpoint reports pricing prompt:0 / completion:0, context_length 512000, status 0, and supported_parameters including tools and tool_choice."
+    }
+  ]
+}

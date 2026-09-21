@@ -1,0 +1,20 @@
+# Verified 2026-09-21 against
+# https://www.rime.ai/resources/announcing-our-5k-credits-program-for-yc-startups
+# ("This program offers $5,000 in credits to use our API during the first
+# year")
+# ("$5,000 in API credits over the first year" / "Priority support" /
+# "Early access to new features")
+# Eligibility: "Y Combinator's accelerator program (W24 onwards)" and
+# "actively using or planning to integrate text-to-speech". Apply via
+# the form linked from the announcement. Posted March 6, 2025; page
+# still live with no published end date.
+title: Rime $5K TTS Credits for YC
+provider: Rime
+category: startup_program
+amount: $5,000 TTS API credits over the first year plus priority support and early feature access (YC W24+ only)
+expiry_date: null
+source_url: https://www.rime.ai/resources/announcing-our-5k-credits-program-for-yc-startups
+verified_date: 2026-09-21
+verification: social_proof
+review_status: under-review
+signup: required

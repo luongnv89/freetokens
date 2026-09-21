@@ -1,0 +1,16 @@
+{
+  "summary": "Rime's YC credits program grants eligible Y Combinator startups $5,000 in TTS API credits over the first year, plus priority support and early access to new features. Open to YC batches W24 onwards that are actively using or planning to integrate text-to-speech. Apply via the form on the announcement page; credits are added after approval. Posted 2025-03-06; the page is still live with no published program end date. Distinct from Rime's broader (less documented) startup grants outreach.",
+  "claim_steps": [
+    "Confirm YC affiliation (W24 or later) and that you are using or planning TTS.",
+    "Fill out the application form linked from https://www.rime.ai/resources/announcing-our-5k-credits-program-for-yc-startups.",
+    "After approval, $5,000 in API credits is applied to the Rime account."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.rime.ai/resources/announcing-our-5k-credits-program-for-yc-startups",
+      "title": "Announcing Our $5K Credits Program for YC Startups | Rime",
+      "text": "This program offers $5,000 in credits to use our API during the first year. Open to any YC startup that is part of Y Combinator's accelerator program (W24 onwards) and is actively using or planning to integrate text-to-speech."
+    }
+  ]
+}

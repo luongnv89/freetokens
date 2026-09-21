@@ -2,9 +2,75 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-21T08:20:13Z — 167 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-21T09:30:23Z — 173 active offers.
 
 ## Offers (full)
+
+### ZCode / BigModel New-User Trial
+- Provider: ZCode (Z.ai)
+- Category: coding
+- Amount: 8M tokens/day for the first 5 days (GLM-5.3 3M + GLM-5.3-Flash 5M) after connecting a BigModel account; then expires — not an ongoing free tier
+- Status: active — expiry ongoing
+- Verified: 2026-09-21 (social_proof / under-review, signup required)
+- Source: https://zcode.z.ai/en/docs/configuration
+- Page: https://freetokens.custats.info/offers/zcode-bigmodel-new-user-trial.html
+- Summary: ZCode grants new users who connect a BigModel account a no-payment trial: 8 million tokens per day for the first 5 days (GLM-5.3 3M/day + GLM-5.3-Flash 5M/day). The daily quota refreshes during those 5 days and then expires — it is not an ongoing free tier. Intended for trying ZCode Agent before a GLM Coding Plan. The same docs say Z.ai (overseas) new users also get a free daily trial quota for flagship GLM models, but the 8M/5-day split is quoted only in the BigModel section. Distinct from Z.ai's ongoing Flash free APIs and the Z.ai Startups Program.
+- Claim steps: Install/open ZCode and connect a BigModel account (welcome screen Continue with BigModel, or Settings → Model Settings). | New users receive the 5-day trial automatically with no payment; check remaining daily quota on the BigModel provider page. | After day 5 the trial quota expires; subscribe to a GLM Coding Plan (Lite/Pro/Max) in-app if you need more.
+
+### Rime $5K TTS Credits for YC
+- Provider: Rime
+- Category: startup_program
+- Amount: $5,000 TTS API credits over the first year plus priority support and early feature access (YC W24+ only)
+- Status: active — expiry ongoing
+- Verified: 2026-09-21 (social_proof / under-review, signup required)
+- Source: https://www.rime.ai/resources/announcing-our-5k-credits-program-for-yc-startups
+- Page: https://freetokens.custats.info/offers/rime-5k-tts-credits-for-yc.html
+- Summary: Rime's YC credits program grants eligible Y Combinator startups $5,000 in TTS API credits over the first year, plus priority support and early access to new features. Open to YC batches W24 onwards that are actively using or planning to integrate text-to-speech. Apply via the form on the announcement page; credits are added after approval. Posted 2025-03-06; the page is still live with no published program end date. Distinct from Rime's broader (less documented) startup grants outreach.
+- Claim steps: Confirm YC affiliation (W24 or later) and that you are using or planning TTS. | Fill out the application form linked from https://www.rime.ai/resources/announcing-our-5k-credits-program-for-yc-startups. | After approval, $5,000 in API credits is applied to the Rime account.
+
+### Dots3-Note Preview Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free dots-studio/dots-3-note-preview:free at $0 input/output (512K context, multimodal, tools)
+- Status: active — expiry ongoing
+- Verified: 2026-09-21 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/dots-studio/dots-3-note-preview:free
+- Page: https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html
+- Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Listed in the Models API since 2026-08-14 with no published end date. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
+- Claim steps: Sign up at openrouter.ai and create an API key (OpenRouter :free models do not require purchasing credits). | Call the chat completions API with model id dots-studio/dots-3-note-preview:free.
+
+### LlamaParse Startup Offer
+- Provider: LlamaIndex
+- Category: startup_program
+- Amount: $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised)
+- Status: active — expiry ongoing
+- Verified: 2026-09-21 (social_proof / under-review, signup required)
+- Source: https://www.llamaindex.ai/startups
+- Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
+- Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
+- Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
+
+### Kong for Startups
+- Provider: Kong
+- Category: startup_program
+- Amount: Up to $100K Kong Konnect Plus credits (12 months; typically $25K–$100K) plus 50% off list for 2 years after; spend across AI Gateway, API Gateway, Mesh, Event Gateway
+- Status: active — expiry ongoing
+- Verified: 2026-09-21 (social_proof / under-review, signup required)
+- Source: https://konghq.com/solutions/startup-program
+- Page: https://freetokens.custats.info/offers/kong-for-startups.html
+- Summary: Kong for Startups gives selected early-stage AI/API teams up to $100,000 in Kong Konnect Plus credits, valid 12 months from the date they land in the Konnect org (unused credits do not roll over). Most early-stage startups receive between $25K and $100K upfront. Credits spend across AI Gateway, API Gateway, Metering and Billing, Mesh, and Event Gateway. After credits expire or for usage beyond the balance, accepted startups pay 50% of Konnect Plus list pricing for 24 months. Eligibility: typically pre-seed through Series A, under $10M total funding, in production or launching within 6 months. YC companies are pre-qualified for the full $100K plus the two-year discount. Kong reviews applications (typically within 5 business days); credits land within 24 hours of acceptance. Existing Kong customers who qualify can have their balance increased.
+- Claim steps: Apply on konghq.com/solutions/startup-program with what you are building and which Kong products you will use (about 5 minutes). YC companies should indicate their batch. | Wait for Kong review (typically within 5 business days). | On acceptance, credits land in your Konnect org within 24 hours; the 50% discount auto-applies on invoices after credits run out.
+
+### Cartesia x Google Cloud Startups
+- Provider: Cartesia
+- Category: startup_program
+- Amount: 12 months of Startup Tier — 1.25M credits/month plus up to 5 concurrent requests including Pro Voice Cloning (Google for Startups Cloud Program Scale Tier only)
+- Status: active — expiry ongoing
+- Verified: 2026-09-21 (social_proof / under-review, signup required)
+- Source: https://www.cartesia.ai/google-startups
+- Page: https://freetokens.custats.info/offers/cartesia-google-cloud-startups.html
+- Summary: Cartesia x Google Cloud Startups is 12 months of Cartesia Startup Tier for Scale Tier members of the Google for Startups Cloud Program: 1.25M credits per month, up to 5 concurrent requests, including Pro Voice Cloning. Distinct from the Cartesia Startups Grant (96M credits/year on cartesia.ai/startups). Cartesia pricing lists Startup at $49/mo with 1.25M credits/month and Pro voice cloning. The google-startups apply path 404s; claim via the program page as a GFS Cloud Program Scale Tier member.
+- Claim steps: Be a Scale Tier member of the Google for Startups Cloud Program. | Open https://www.cartesia.ai/google-startups and follow Cartesia's claim flow for that benefit (this is not the Cartesia Startups Grant at /startups).
 
 ### Zed Pro for Students
 - Provider: Zed

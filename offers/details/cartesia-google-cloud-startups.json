@@ -1,0 +1,21 @@
+{
+  "summary": "Cartesia x Google Cloud Startups is 12 months of Cartesia Startup Tier for Scale Tier members of the Google for Startups Cloud Program: 1.25M credits per month, up to 5 concurrent requests, including Pro Voice Cloning. Distinct from the Cartesia Startups Grant (96M credits/year on cartesia.ai/startups). Cartesia pricing lists Startup at $49/mo with 1.25M credits/month and Pro voice cloning. The google-startups apply path 404s; claim via the program page as a GFS Cloud Program Scale Tier member.",
+  "claim_steps": [
+    "Be a Scale Tier member of the Google for Startups Cloud Program.",
+    "Open https://www.cartesia.ai/google-startups and follow Cartesia's claim flow for that benefit (this is not the Cartesia Startups Grant at /startups)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.cartesia.ai/google-startups",
+      "title": "Cartesia x Google Cloud Startups",
+      "text": "An exclusive benefit of 12 months of Startup Tier on Cartesia for Scale Tier members of the Google for Startups Cloud Program. Get 1.25M credits per month with up to 5 concurrent requests, including Pro Voice Cloning."
+    },
+    {
+      "type": "link",
+      "url": "https://www.cartesia.ai/pricing",
+      "title": "Cartesia Pricing",
+      "text": "Startup: $49, 1.25M credits / month. Everything in Pro, plus Pro voice cloning and Organizations."
+    }
+  ]
+}
