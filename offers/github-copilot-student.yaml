@@ -10,7 +10,7 @@ category: student
 amount: Free Copilot Student plan for verified students: Copilot features incl. agents (excludes third-party agents) + GitHub AI Credits allowance; auto model selection only
 expiry_date: null
 source_url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-students
-verified_date: 2026-09-18
+verified_date: 2026-09-20
 verification: social_proof
 review_status: under-review
 signup: required

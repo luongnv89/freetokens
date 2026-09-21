@@ -8,7 +8,7 @@ category: api_provider
 amount: Basic tier with $0 minimum deposit — serverless OpenAI-compatible inference on 25+ open models at 60 RPM (Pro needs a >=$5 deposit)
 expiry_date: null
 source_url: https://www.hyperbolic.ai/docs/inference/overview
-verified_date: 2026-09-18
+verified_date: 2026-09-20
 verification: social_proof
 review_status: under-review
 signup: required

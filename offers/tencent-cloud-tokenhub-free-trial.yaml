@@ -1,14 +1,16 @@
-# Verified 2026-09-15 against https://intl.cloud.tencent.com/document/product/1300/80423
-# ("Each language model comes with a free trial quota of 1 million tokens, valid
-# for 90 days." / "This campaign is valid until December 31, 2026." /
-# "USD 1 will be automatically frozen in your account" per claim/enable)
+# Verified 2026-09-20 against https://intl.cloud.tencent.com/document/product/1300/80423
+# (doc updated 2026-09-17: "All language models provide a free trial quota of 1
+# million Tokens, valid for 1 year. ... Free quota starts from when it is
+# claimed. ... can be claimed only once per account per model" /
+# "USD 1 will be automatically frozen in your account" per claim/enable /
+# "This campaign is valid until December 31, 2026.")
 title: Tencent Cloud TokenHub — New User Free Trial
 provider: Tencent Cloud
 category: api_provider
-amount: 1,000,000 free tokens per eligible language model, valid 90 days from claim (one claim per model per root account; USD 1 balance frozen per claim/enable)
+amount: 1,000,000 free tokens per eligible language model, valid 1 year from claim (one claim per model per root account; USD 1 balance frozen per claim/enable)
 expiry_date: 2026-12-31
 source_url: https://intl.cloud.tencent.com/document/product/1300/80423
-verified_date: 2026-09-18
+verified_date: 2026-09-20
 verification: social_proof
 review_status: under-review
 signup: required
