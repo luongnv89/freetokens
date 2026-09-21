@@ -1,0 +1,27 @@
+{
+  "summary": "TypeSafe AI's Jev — a System One evaluation model for fast, structured decisions in software — is free on Vercel AI Gateway: $0 pricing, 32K context, per a promotional period ending September 25, 2026.",
+  "claim_steps": [
+    "Get a Vercel AI Gateway API key from the Jev model page.",
+    "Call the evaluate endpoint with model 'typesafe-ai/jev' (see the page's SDK snippet)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/ai-gateway/models/jev",
+      "title": "Jev API, Pricing & Playground | Vercel AI Gateway",
+      "text": "Price Free. Free Tier: Free. Promotional pricing ends on September 25, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/typesafe/jev-1.13",
+      "title": "Jev 1.13 - API Pricing & Providers | OpenRouter",
+      "text": "Jev 1.13 costs $0.042/M input tokens and $0.00/M output tokens."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/~typesafe/jev-latest",
+      "title": "Jev Latest - API Pricing & Providers | OpenRouter",
+      "text": "Jev Latest costs $0.042/M input tokens and $0.00/M output tokens."
+    }
+  ]
+}

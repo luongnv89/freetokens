@@ -1,0 +1,16 @@
+# Verified 2026-09-21 against https://vercel.com/ai-gateway/models/jev
+# ("Price Free"; Free tier "Free"; "Promotional pricing ends on September 25,
+# 2026"; model id typesafe-ai/jev, 32K context, released 09/15/2026).
+# OpenRouter routes typesafe/jev-1.13 and ~typesafe/jev-latest are NOT free
+# ("Jev 1.13 costs $0.042/M input tokens and $0.00/M output tokens") — per
+# curator decision 2026-09-21 only the Vercel AI Gateway entry is published.
+title: Vercel AI Gateway Jev Free
+provider: Vercel
+category: api_provider
+amount: Free typesafe-ai/jev inference (32K context) via Vercel AI Gateway
+expiry_date: 2026-09-25
+source_url: https://vercel.com/ai-gateway/models/jev
+verified_date: 2026-09-21
+verification: social_proof
+review_status: verified
+signup: required
