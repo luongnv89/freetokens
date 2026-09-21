@@ -1,0 +1,19 @@
+# Verified 2026-09-21 against https://www.llamaindex.ai/startups
+# ("$2K in free credits, dedicated engineering support, and
+# production-ready parsing")
+# ("Free platform credits — $2k, available for one year.")
+# ("Priority support slack channel with a dedicated AI engineer.")
+# ("Discounts on bulk credit purchases in production.")
+# ("Exclusive access to pre-release features")
+# Eligibility: "First time customers" / "Less than 50M raised" /
+# "$250k minimum raised to date".
+title: LlamaParse Startup Offer
+provider: LlamaIndex
+category: startup_program
+amount: $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised)
+expiry_date: null
+source_url: https://www.llamaindex.ai/startups
+verified_date: 2026-09-21
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,19 @@
+# Verified 2026-09-21 against
+# https://openrouter.ai/dots-studio/dots-3-note-preview:free and
+# https://openrouter.ai/api/v1/models
+# (Models API lists dots-studio/dots-3-note-preview:free at prompt:0 /
+# completion:0, context_length 512000, created 2026-08-14. Architecture
+# text+image->text; supported_parameters include tools and tool_choice.
+# Endpoints API: AtlasCloud provider, pricing 0/0, status 0. Page FAQ:
+# "the pricing shown on this page for Dots3-Note Preview (free) is zero".
+# No published end date. Standard OpenRouter :free rate limits apply.)
+title: Dots3-Note Preview Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: "Free dots-studio/dots-3-note-preview:free at $0 input/output (512K context, multimodal, tools)"
+expiry_date: null
+source_url: https://openrouter.ai/dots-studio/dots-3-note-preview:free
+verified_date: 2026-09-21
+verification: social_proof
+review_status: under-review
+signup: required

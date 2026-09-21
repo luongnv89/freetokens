@@ -1,0 +1,16 @@
+{
+  "summary": "ZCode grants new users who connect a BigModel account a no-payment trial: 8 million tokens per day for the first 5 days (GLM-5.3 3M/day + GLM-5.3-Flash 5M/day). The daily quota refreshes during those 5 days and then expires — it is not an ongoing free tier. Intended for trying ZCode Agent before a GLM Coding Plan. The same docs say Z.ai (overseas) new users also get a free daily trial quota for flagship GLM models, but the 8M/5-day split is quoted only in the BigModel section. Distinct from Z.ai's ongoing Flash free APIs and the Z.ai Startups Program.",
+  "claim_steps": [
+    "Install/open ZCode and connect a BigModel account (welcome screen Continue with BigModel, or Settings → Model Settings).",
+    "New users receive the 5-day trial automatically with no payment; check remaining daily quota on the BigModel provider page.",
+    "After day 5 the trial quota expires; subscribe to a GLM Coding Plan (Lite/Pro/Max) in-app if you need more."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://zcode.z.ai/en/docs/configuration",
+      "title": "Connect Models & Plans | ZCode Docs",
+      "text": "New users automatically receive a trial plan after connecting a BigModel account: no payment required, with 8 million tokens per day for the first 5 days for GLM model trials. The trial lasts 5 days only — it is not an ongoing daily allowance."
+    }
+  ]
+}
