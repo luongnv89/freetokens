@@ -10,7 +10,7 @@ category: api_provider
 amount: Free typesafe-ai/jev inference (32K context) via Vercel AI Gateway
 expiry_date: 2026-09-25
 source_url: https://vercel.com/ai-gateway/models/jev
-verified_date: 2026-09-21
+verified_date: 2026-09-22
 verification: social_proof
 review_status: verified
 signup: required
