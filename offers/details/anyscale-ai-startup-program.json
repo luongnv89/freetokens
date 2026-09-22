@@ -1,0 +1,15 @@
+{
+  "summary": "Anyscale's AI Startup Program grants eligible startups up to $20K in Anyscale usage credits that run on the startup's own cloud and stack with existing cloud provider credits, plus dedicated field-engineer support for architecture and hands-on technical help. The application is reviewed on cloud spend/credits and stage; a separate $100 signup credit is advertised via the 'Get Started with $100 Credit' nav link.",
+  "claim_steps": [
+    "Open the Anyscale Startup Program page and submit the application (review considers cloud spend/credits and stage).",
+    "For the separate $100 signup credit, click 'Get Started with $100 Credit' in the nav, which links to Anyscale's auth/signup flow."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.anyscale.com/startup",
+      "title": "Anyscale AI Startup Program",
+      "text": "Access up to $20K in Anyscale credits. Run on your own cloud and stack these with your existing cloud provider credits. Dedicated Field Engineers to support application architecture design and hands-on technical support."
+    }
+  ]
+}
