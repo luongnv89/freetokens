@@ -1,0 +1,15 @@
+# Verified 2026-09-22 against https://www.anyscale.com/startup
+# ("Access up to $20K in Anyscale credits. Run on your own cloud and stack
+# these with your existing cloud provider credits." / "Dedicated Field
+# Engineers to support application architecture design and hands-on
+# technical support.")
+title: Anyscale AI Startup Program
+provider: Anyscale
+category: startup_program
+amount: Up to $20,000 in Anyscale usage credits (stackable with AWS/GCP/Azure etc. cloud credits) + dedicated field-engineer support
+expiry_date: null
+source_url: https://www.anyscale.com/startup
+verified_date: 2026-09-22
+verification: social_proof
+review_status: under-review
+signup: required
