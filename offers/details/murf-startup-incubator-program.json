@@ -1,0 +1,16 @@
+{
+  "summary": "Murf's Startup Incubator Program gives early-stage startups $1,500 in free Murf API (TTS/voice) credits for a 3-month period, one-time only. Overage beyond the credits is charged at $0.03 per 1,000 characters. Eligibility: under 10 years since incorporation, fewer than 100 employees, a fully functioning company website, and a valid use case for the Murf API. Decisions come within 1–2 days; the application is a HubSpot form.",
+  "claim_steps": [
+    "Fill the application form linked from murf.ai/startup-program ('Apply Now').",
+    "Meet criteria: under 10 years since incorporation, fewer than 100 employees, functioning company website, valid Murf API use case (no reselling/non-compliant use).",
+    "Receive approval status within 1–2 days; on approval the credit plan is activated and $1,500 added to your account."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://murf.ai/startup-program",
+      "title": "Murf Startup Incubator Program — Get $1500 credits free for 3 Months",
+      "text": "The Murf Startup Incubator Program offers early-stage startups $1500 free credits for a 3-month period. If you exceed the $1500 credits threshold, any additional usage will be charged at $0.03 per 1000 characters. Program criteria: under 10 years since incorporation, fewer than 100 employees, fully functioning website, valid use case."
+    }
+  ]
+}

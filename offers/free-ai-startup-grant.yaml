@@ -1,0 +1,15 @@
+# Verified 2026-09-22 against https://free.ai/startup/
+# ("Accepted early-stage startups receive a grant of 15,000,000 tokens for
+# every tool that runs on our self-hosted models, plus API keys at the Pro
+# request tier." / "Granted tokens have no expiry date and stay in your
+# account until you use them.")
+title: Free.ai Startup Grant
+provider: Free.ai
+category: startup_program
+amount: 15,000,000 tokens for self-hosted-model tools/API (~1yr Pro allowance) + Pro API tier (100K req/mo); tokens never expire
+expiry_date: null
+source_url: https://free.ai/startup/
+verified_date: 2026-09-22
+verification: social_proof
+review_status: under-review
+signup: required
