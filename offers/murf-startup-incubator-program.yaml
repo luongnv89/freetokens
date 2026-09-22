@@ -1,0 +1,14 @@
+# Verified 2026-09-22 against https://murf.ai/startup-program
+# ("The Murf Startup Incubator Program offers early-stage startups $1500 free
+# credits for a 3-month period." / "If you exceed the $1500 credits threshold,
+# any additional usage will be charged at $0.03 per 1000 characters.")
+title: Murf Startup Incubator Program
+provider: Murf AI
+category: startup_program
+amount: $1,500 free TTS/voice API credits for 3 months (one-time; overage $0.03/1K characters)
+expiry_date: null
+source_url: https://murf.ai/startup-program
+verified_date: 2026-09-22
+verification: social_proof
+review_status: under-review
+signup: required
