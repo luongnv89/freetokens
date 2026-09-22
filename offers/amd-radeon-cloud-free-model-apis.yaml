@@ -6,10 +6,10 @@
 title: AMD Radeon Cloud Token Factory — Free Model APIs
 provider: AMD Radeon Cloud
 category: api_provider
-amount: 6 free public chat-model APIs (DeepSeek-V4-Flash, DeepSeek-V4-Flash-Vision-Exp, DeepSeek-V4.1-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B) plus 1 OCR endpoint (MinerU2.5-Pro); beta, quotas unpublished
+amount: Free public model APIs listed on the official page (7 models): DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, GLM-5.3-Flash, Qwen3.8-27B, MiniCPM5-2B, MinerU2.5-Pro; beta, quotas unpublished
 expiry_date: null
 source_url: https://developer.amd.com.cn/radeon/tokenfactory
-verified_date: 2026-09-20
+verified_date: 2026-09-22
 verification: social_proof
 review_status: under-review
 signup: required

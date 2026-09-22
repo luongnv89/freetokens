@@ -1,12 +1,12 @@
 # Verified 2026-08-31 against https://www.notion.com/help/notion-for-education
 # ("With the Education Plan, student orgs can upload unlimited blocks and files, add members to their workspace, get 30-day page history... free of charge")
-title: Notion Education Plus — Free Plus Plan
+title: Notion for Education — Free Education Plan
 provider: Notion
 category: student
-amount: Plus features free (unlimited blocks/files, 30-day history) while enrolled via school email
+amount: Free Education Plan for students/teachers via school email: unlimited pages & blocks, file uploads, 30-day version history
 expiry_date: null
 source_url: https://www.notion.com/help/notion-for-education
-verified_date: 2026-09-20
+verified_date: 2026-09-22
 verification: social_proof
 review_status: unverified
 signup: required

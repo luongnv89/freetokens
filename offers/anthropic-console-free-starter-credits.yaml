@@ -4,10 +4,10 @@
 title: Free starter credits for new Claude Console accounts
 provider: Anthropic
 category: api_provider
-amount: small free starter credits (exact amount not published)
+amount: small amount of free credits to test the API (exact amount not published)
 expiry_date: null
 source_url: https://platform.claude.com/docs/en/about-claude/pricing
-verified_date: 2026-09-20
+verified_date: 2026-09-22
 verification: social_proof
 review_status: under-review
 signup: required
