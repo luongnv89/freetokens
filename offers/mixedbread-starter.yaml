@@ -8,7 +8,7 @@ category: api_provider
 amount: $5 one-time credits (100 req/min, no card required)
 expiry_date: null
 source_url: https://www.mixedbread.com/pricing
-verified_date: 2026-09-20
+verified_date: 2026-09-22
 verification: social_proof
 review_status: under-review
 signup: required

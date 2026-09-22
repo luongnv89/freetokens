@@ -8,7 +8,7 @@ category: api_provider
 amount: $0.1 USD free credit in Wallet after register/login
 expiry_date: null
 source_url: https://apidoc.cometapi.com/overview/important-guidelines
-verified_date: 2026-09-20
+verified_date: 2026-09-22
 verification: social_proof
 review_status: under-review
 signup: required
