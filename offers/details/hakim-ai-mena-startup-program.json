@@ -1,0 +1,16 @@
+{
+  "summary": "Hakim's MENA startup program gives selected founders $6,000 in Hakim credits (equivalent to 6 months on the Business plan at $999/mo), early access to unreleased TTS/STT/voice-clone models, weekly technical office hours, and a direct Slack line to the engineering team. Eligibility is a MENA-based founding team, pre-seed to Series A (founded within 5 years, under $2M ARR if bootstrapped), under $10M raised. Decision within 5 working days, then a kickoff call and workspace enablement. Review exists for MENA founders; no card stated.",
+  "claim_steps": [
+    "Fill the application form at tryhakim.ai/en/startups (name, work email, startup name, website, country, stage, team size, raised, use case, volume, timeline).",
+    "Expect a decision within 5 working days.",
+    "On approval: 30-minute technical kickoff call, then the Business plan is enabled on the workspace, early-access flag flipped, and a shared Slack channel created."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://tryhakim.ai/en/startups",
+      "title": "Hakim AI Startup Program · MENA",
+      "text": "$6,000 in Hakim credits — A real credit grant against your workspace ... Equivalent to 6 months on our Business plan ($999/mo). Early access to unreleased models: First look at upcoming TTS, STT, and voice-cloning models, weeks before public launch. We promise a decision within 5 working days."
+    }
+  ]
+}
