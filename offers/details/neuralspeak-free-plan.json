@@ -1,0 +1,15 @@
+{
+  "summary": "NeuralSpeak's Free plan is $0/month with 500 NST (NeuralSpeak Tokens) included — roughly 40 minutes of voice or about 1,000 text exchanges — plus 1 service and 2 API keys, with STT/LLM/TTS orchestration, RAG, structured outputs, and analytics. No credit card required.",
+  "claim_steps": [
+    "Sign up for the Free plan at neuralspeak.ai (/register or 'Start free').",
+    "No credit card stated for the Free plan; once signed in, create a service and get API keys from the dashboard."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://neuralspeak.ai/",
+      "title": "NeuralSpeak — Voice & Text AI Platform",
+      "text": "Free $0/mo: 500 NST included ~40 min voice · ~1K texts, 1 service, 2 API keys, all AI providers, 3 pipeline modes, RAG / knowledge base. Free tier included. No credit card required."
+    }
+  ]
+}
