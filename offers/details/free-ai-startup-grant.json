@@ -1,0 +1,16 @@
+{
+  "summary": "Free.ai grants accepted early-stage startups 15,000,000 tokens usable on every tool/API endpoint running on their self-hosted open models — the same allowance as a year of the Pro plan — plus API keys at the Pro request tier (100,000 requests/month) and priority support. Granted tokens never expire. Premium external models are excluded and draw only on purchased tokens.",
+  "claim_steps": [
+    "Fill the application form at free.ai/startup/ with startup name, contact email, website, funding stage, and how you plan to use Free.ai.",
+    "Meet eligibility: company under 3 years old, under $5M total funding, working product or prototype, not currently on a paid Free.ai plan.",
+    "Wait for review (within 48 hours); on approval the tokens are added to your account and API keys get the Pro request tier."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://free.ai/startup/",
+      "title": "Free AI for Startups | Free.ai",
+      "text": "Accepted early-stage startups receive a grant of 15,000,000 tokens for every tool that runs on our self-hosted models, plus API keys at the Pro request tier (100,000 requests per month). Granted tokens have no expiry date and stay in your account until you use them."
+    }
+  ]
+}
