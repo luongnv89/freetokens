@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-22T12:24:42Z — 179 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-22T13:04:11Z — 180 active offers.
 
 ## Offers (full)
 
@@ -676,6 +676,17 @@ Source: https://freetokens.custats.info/ — generated 2026-09-22T12:24:42Z — 
 - Page: https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html
 - Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Listed in the Models API since 2026-08-14 with no published end date. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
 - Claim steps: Sign up at openrouter.ai and create an API key (OpenRouter :free models do not require purchasing credits). | Call the chat completions API with model id dots-studio/dots-3-note-preview:free.
+
+### MiMo V2.6 Flash Free on OpenCode Zen
+- Provider: OpenCode
+- Category: coding
+- Amount: Free MiMo V2.6 Flash model access on OpenCode Zen for one week
+- Status: active — expiry 2026-09-28
+- Verified: 2026-09-22 (social_proof / under-review, signup required)
+- Source: https://x.com/opencode/status/2102145730999730611
+- Page: https://freetokens.custats.info/offers/opencode-mimo-v2-6-flash-free.html
+- Summary: MiMo V2.6 Flash is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-09-21 as "free for the next week" (through ~2026-09-28). OpenCode's docs list model id mimo-v2.6-flash-free on the Zen chat-completions endpoint and note that during the free period collected data may be used to improve the model. The post also states Flash and Pro are available in Go.
+- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen and copy your API key. | In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key. | Run /models and select MiMo V2.6 Flash Free (model id: mimo-v2.6-flash-free). | Alternatively, call https://opencode.ai/zen/v1/chat/completions with model mimo-v2.6-flash-free.
 
 ### OpenAI Startup Program
 - Provider: OpenAI

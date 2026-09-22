@@ -1,0 +1,19 @@
+# Verified 2026-09-22 against https://x.com/opencode/status/2102145730999730611
+# ("MiMo V2.6 Flash is free for the next week / Both Flash and Pro are also
+# available in Go" — @opencode, 2026-09-21)
+# Corroborated by https://opencode.ai/docs/zen/: "MiMo-V2.6-Flash Free is
+# available on OpenCode for a limited time. The team is using this time to
+# collect feedback and improve the model." Listed as mimo-v2.6-flash-free at
+# https://opencode.ai/zen/v1/chat/completions; docs note during its free
+# period collected data may be used to improve the model.
+# expiry_date derived from announcement: "free for the next week" -> 2026-09-28.
+title: MiMo V2.6 Flash Free on OpenCode Zen
+provider: OpenCode
+category: coding
+amount: Free MiMo V2.6 Flash model access on OpenCode Zen for one week
+expiry_date: 2026-09-28
+source_url: https://x.com/opencode/status/2102145730999730611
+verified_date: 2026-09-22
+verification: social_proof
+review_status: under-review
+signup: required
