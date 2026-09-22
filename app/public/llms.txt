@@ -4,7 +4,7 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 179 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 180 active listings. Full directory at https://freetokens.custats.info/.
 
 - [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
 - [ZCode / BigModel New-User Trial](https://freetokens.custats.info/offers/zcode-bigmodel-new-user-trial.html): ZCode (Z.ai) — 8M tokens/day for the first 5 days (GLM-5.3 3M + GLM-5.3-Flash 5M) after connecting a BigModel account; then expires — not an ongoing free tier (coding)

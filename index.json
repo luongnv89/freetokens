@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-22T12:24:42Z",
-  "count": 201,
-  "active_count": 179,
+  "generated_at": "2026-09-22T13:04:11Z",
+  "count": 202,
+  "active_count": 180,
   "expired_count": 22,
   "offers": [
     {
@@ -2817,6 +2817,20 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "opencode-mimo-v2-6-flash-free",
+      "title": "MiMo V2.6 Flash Free on OpenCode Zen",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free MiMo V2.6 Flash model access on OpenCode Zen for one week",
+      "expiry_date": "2026-09-28",
+      "source_url": "https://x.com/opencode/status/2102145730999730611",
+      "verified_date": "2026-09-22",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ]
 }
