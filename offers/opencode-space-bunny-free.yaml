@@ -1,0 +1,18 @@
+# Verified 2026-09-23 against https://x.com/opencode/status/2102767716666941864
+# ("Space Bunny (stealth model) is free for the next week - 1M Context -
+# Multi-modal - Zero Data Retention" — @opencode, 2026-09-23)
+# Corroborated by https://opencode.ai/docs/zen/: "Space Bunny Free is a stealth
+# model that's free on OpenCode for a limited time. Its provider follows a
+# zero-retention policy and does not use your data for model training." Listed
+# as space-bunny-free at https://opencode.ai/zen/v1/chat/completions.
+# expiry_date derived from announcement: "free for the next week" -> 2026-09-30.
+title: Space Bunny Free on OpenCode Zen
+provider: OpenCode
+category: coding
+amount: Free Space Bunny model access on OpenCode Zen for one week
+expiry_date: 2026-09-30
+source_url: https://x.com/opencode/status/2102767716666941864
+verified_date: 2026-09-23
+verification: social_proof
+review_status: under-review
+signup: required

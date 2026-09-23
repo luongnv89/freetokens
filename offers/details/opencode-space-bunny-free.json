@@ -1,0 +1,24 @@
+{
+  "summary": "Space Bunny is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-09-23 as \"free for the next week\" (through ~2026-09-30). OpenCode's docs list model id space-bunny-free on the Zen chat-completions endpoint and note that its provider follows a zero-retention policy and does not use your data for model training. The announcement lists 1M context, multi-modal support, and zero data retention.",
+  "claim_steps": [
+    "Sign in to OpenCode Zen at opencode.ai/zen and copy your API key.",
+    "In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key.",
+    "Run /models and select Space Bunny Free (model id: space-bunny-free).",
+    "Alternatively, call https://opencode.ai/zen/v1/chat/completions with model space-bunny-free."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2102767716666941864",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "Space Bunny (stealth model) is free for the next week\n\n- 1M Context\n- Multi-modal\n- Zero Data Retention"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/docs/zen/",
+      "title": "Zen | OpenCode",
+      "text": "Space Bunny Free is a stealth model that's free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training. Model ID: space-bunny-free at https://opencode.ai/zen/v1/chat/completions; pricing Free input / Free output / Free cached read."
+    }
+  ]
+}
