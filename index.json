@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-23T06:41:20Z",
-  "count": 207,
-  "active_count": 185,
+  "generated_at": "2026-09-23T14:50:37Z",
+  "count": 208,
+  "active_count": 186,
   "expired_count": 22,
   "offers": [
     {
@@ -57,6 +57,20 @@
       "verified_date": "2026-09-23",
       "verification": "social_proof",
       "review_status": "verified",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-space-bunny-free",
+      "title": "Space Bunny Free on OpenCode Zen",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free Space Bunny model access on OpenCode Zen for one week",
+      "expiry_date": "2026-09-30",
+      "source_url": "https://x.com/opencode/status/2102767716666941864",
+      "verified_date": "2026-09-23",
+      "verification": "social_proof",
+      "review_status": "under-review",
       "signup": "required",
       "status": "active"
     },
