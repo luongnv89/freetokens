@@ -1,0 +1,15 @@
+# Verified 2026-09-23 against https://openrouter.ai/openrouter/free
+# ("The pricing shown on this page for Free Models Router is zero, so you
+#  are not charged for prompt or completion tokens." / Docs: "The Free Models
+#  Router (openrouter/free) automatically selects a free model at random from
+#  the available free models on OpenRouter.")
+title: OpenRouter Free Models Router
+provider: OpenRouter
+category: api_provider
+amount: Free openrouter/free auto-router to $0 models ($0 prompt/completion)
+expiry_date: null
+source_url: https://openrouter.ai/openrouter/free
+verified_date: 2026-09-23
+verification: social_proof
+review_status: verified
+signup: required

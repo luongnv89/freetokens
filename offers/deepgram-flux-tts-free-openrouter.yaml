@@ -1,0 +1,14 @@
+# Verified 2026-09-23 against https://openrouter.ai/deepgram/flux-tts:free
+# ("The pricing shown on this page for Flux TTS (free) is zero, so you are
+#  not charged for generated speech." / "Flux TTS (free) ships 36 voices."
+#  API docs list 36 flux-*-en voice IDs for model "deepgram/flux-tts".)
+title: Deepgram Flux TTS Free (OpenRouter)
+provider: OpenRouter
+category: voice
+amount: Free deepgram/flux-tts:free TTS endpoint ($0, rate-limited, 36 voices)
+expiry_date: null
+source_url: https://openrouter.ai/deepgram/flux-tts:free
+verified_date: 2026-09-23
+verification: social_proof
+review_status: verified
+signup: required

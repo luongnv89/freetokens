@@ -1,0 +1,14 @@
+# Verified 2026-09-23 against https://inworld.ai/pricing
+# ("On-Demand is great for testing and comes with up to 70 minutes of TTS
+#  or 400 minutes of STT for free." / On-Demand plan: "Start free",
+#  "Up to 70 min TTS included")
+title: Inworld On-Demand Free
+provider: Inworld AI
+category: voice
+amount: Free On-Demand plan with up to 70 min TTS (or 400 min STT) included
+expiry_date: null
+source_url: https://inworld.ai/pricing
+verified_date: 2026-09-23
+verification: social_proof
+review_status: verified
+signup: required
