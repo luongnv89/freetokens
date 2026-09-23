@@ -2,9 +2,64 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-22T13:04:11Z — 180 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-23T06:41:20Z — 185 active offers.
 
 ## Offers (full)
+
+### OpenRouter Free Models Router
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free openrouter/free auto-router to $0 models ($0 prompt/completion)
+- Status: active — expiry ongoing
+- Verified: 2026-09-23 (social_proof / verified, signup required)
+- Source: https://openrouter.ai/openrouter/free
+- Page: https://freetokens.custats.info/offers/openrouter-free-router.html
+- Summary: OpenRouter's openrouter/free router automatically selects a $0 free model matching request features (tools/vision/structured outputs); $0 prompt and completion.
+- Claim steps: Create an OpenRouter account and API key. | Set model to openrouter/free in chat-completion requests. | Free models carry default 50 req/day limits; no purchase required for free usage.
+
+### Lemonfox 1-Month Free Trial
+- Provider: Lemonfox.ai
+- Category: voice
+- Amount: 1 month free trial — 10M credits (30 hours speech-to-text or 2M TTS chars)
+- Status: active — expiry ongoing
+- Verified: 2026-09-23 (social_proof / verified, signup required)
+- Source: https://www.lemonfox.ai/
+- Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
+- Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
+- Claim steps: Go to lemonfox.ai and click Get Started / Start Your Free Trial. | Sign up for an account. | Trial covers the $5/month credit bundle for 1 month.
+
+### Inworld On-Demand Free
+- Provider: Inworld AI
+- Category: voice
+- Amount: Free On-Demand plan with up to 70 min TTS (or 400 min STT) included
+- Status: active — expiry ongoing
+- Verified: 2026-09-23 (social_proof / verified, signup required)
+- Source: https://inworld.ai/pricing
+- Page: https://freetokens.custats.info/offers/inworld-on-demand-free.html
+- Summary: Inworld AI's free On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT), plus voice cloning, Realtime API access and 220+ LLM models via Router.
+- Claim steps: Create an Inworld account. | Choose the On-Demand plan (Start free) at platform.inworld.ai/billing. | Free included usage applies to TTS, STT and LLM Router access.
+
+### Hume Free Tier — $20 Credits
+- Provider: Hume AI
+- Category: voice
+- Amount: $20 in credits for new accounts; Free plan ($0/mo) with 10k TTS chars (~10 min) + 5 EVI minutes/month
+- Status: active — expiry ongoing
+- Verified: 2026-09-23 (social_proof / verified, signup required)
+- Source: https://dev.hume.ai/docs/resources/billing
+- Page: https://freetokens.custats.info/offers/hume-free-tier-credits.html
+- Summary: Hume grants new accounts $20 in credits on the free tier; the $0/month Free plan covers TTS, EVI and Voice features with included usage.
+- Claim steps: Create a Hume account (sign up for free). | New accounts start on the free tier with $20 in credits. | Manage plan and usage in the billing portal.
+
+### Deepgram Flux TTS Free (OpenRouter)
+- Provider: OpenRouter
+- Category: voice
+- Amount: Free deepgram/flux-tts:free TTS endpoint ($0, rate-limited, 36 voices)
+- Status: active — expiry ongoing
+- Verified: 2026-09-23 (social_proof / verified, signup required)
+- Source: https://openrouter.ai/deepgram/flux-tts:free
+- Page: https://freetokens.custats.info/offers/deepgram-flux-tts-free-openrouter.html
+- Summary: OpenRouter serves Deepgram's Flux TTS as a free $0 TTS endpoint (deepgram/flux-tts:free) with 36 English voices; usage is rate-limited.
+- Claim steps: Create an OpenRouter account and API key. | POST to /api/v1/audio/speech with model deepgram/flux-tts:free. | Free endpoints are rate-limited; no purchase required for free usage.
 
 ### Zed Pro for Students
 - Provider: Zed
