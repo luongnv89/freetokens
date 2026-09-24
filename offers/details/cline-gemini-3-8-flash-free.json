@@ -1,0 +1,36 @@
+{
+  "summary": "Cline's September 24, 2026 announcement says Gemini 3.8 Flash is free in Cline, citing 1M context, ~291 tok/s, and Artificial Analysis Intelligence Index score 41. Official free-models docs say free promotions are available to any user with a Cline account, provide a limited usage quota, rotate over time, and work in the Cline IDE extension and CLI—not the Cline API. No fixed end date is published, so this listing uses a null expiry date to mean no announced end date, not permanent availability.",
+  "claim_steps": [
+    "Install the Cline IDE extension from the marketplace, or install the CLI with: npm install -g cline.",
+    "Sign in with a Cline account (IDE settings → API Provider Cline → Sign In, or run: cline auth).",
+    "In the model selector, look for Gemini 3.8 Flash tagged FREE under the Cline (usage-billing) provider; during promotional periods it may also appear under ClinePass.",
+    "Use it in the Cline IDE extension or CLI within the limited free quota; free models are not available through the Cline API."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/cline/status/2103165327815450815",
+      "author": "Cline",
+      "handle": "@cline",
+      "text": "Gemini 3.8 Flash is free in Cline.\n\nIt scores 41 on the Artificial Analysis Intelligence Index, the highest of any model in its price tier. 291 tok/s, 1M context, and it beats GPT-5.6 Luna, DeepSeek v4.1 Flash, and Qwen3.8 on benchmarks."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.cline.bot/getting-started/free-models",
+      "title": "Cline Free Models - Cline",
+      "text": "Cline periodically offers free model promotions that let you try select models at no cost, up to a limited usage quota. Free model promotions are offered on a rotating, limited-time basis. Free models are available to any user with a Cline account. Free model usage is not supported through the Cline API. Free models are only available in the Cline IDE Extension and CLI."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.cline.bot/getting-started/installing-cline",
+      "title": "Installing Cline - Cline",
+      "text": "Install the CLI with npm install -g cline, then authenticate with cline auth. IDE users install the Cline extension and authorize in settings."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.cline.bot/getting-started/authorizing-with-cline",
+      "title": "Authorization - Cline",
+      "text": "Cline (usage-billing) (recommended): sign in with Google/GitHub/email, no API key setup. Built-in billing and free model options."
+    }
+  ]
+}
