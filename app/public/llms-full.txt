@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-24T05:47:21Z — 186 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-24T20:40:44Z — 187 active offers.
 
 ## Offers (full)
+
+### Gemini 3.8 Flash Free in Cline
+- Provider: Cline
+- Category: coding
+- Amount: Free Gemini 3.8 Flash model access (1M context), rate limited
+- Status: active — expiry ongoing
+- Verified: 2026-09-24 (social_proof / unverified, signup required)
+- Source: https://x.com/cline/status/2103165327815450815
+- Page: https://freetokens.custats.info/offers/cline-gemini-3-8-flash-free.html
+- Summary: Cline's September 24, 2026 announcement says Gemini 3.8 Flash is free in Cline, citing 1M context, ~291 tok/s, and Artificial Analysis Intelligence Index score 41. Official free-models docs say free promotions are available to any user with a Cline account, provide a limited usage quota, rotate over time, and work in the Cline IDE extension and CLI—not the Cline API. No fixed end date is published, so this listing uses a null expiry date to mean no announced end date, not permanent availability.
+- Claim steps: Install the Cline IDE extension from the marketplace, or install the CLI with: npm install -g cline. | Sign in with a Cline account (IDE settings → API Provider Cline → Sign In, or run: cline auth). | In the model selector, look for Gemini 3.8 Flash tagged FREE under the Cline (usage-billing) provider; during promotional periods it may also appear under ClinePass. | Use it in the Cline IDE extension or CLI within the limited free quota; free models are not available through the Cline API.
 
 ### Claude Code Cloud Sessions — One-Time Launch Credit
 - Provider: Anthropic
