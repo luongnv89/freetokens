@@ -1,0 +1,19 @@
+# Verified 2026-09-24 against https://www.docker.com/c/sbx-promo/
+# ("New Docker Agentic Platform signups receive a one-time $250 compute credit
+# in lieu of the standard $25 credit. Limit one per user and account. Valid
+# credit card required at signup; the card will be charged only for usage
+# beyond the credit. Offer valid September 22–26, 2026, 11:59 PM PT. Credits
+# are non-transferable, have no cash value, and expire 6 months after
+# redemption.")
+# Email corroboration (Docker marketing webview, 2026-09-24): same $250 /
+# Sep 22–26 PT terms for new Agentic Platform sign-ups.
+title: Docker Cloud Sandboxes — $250 Compute Credit
+provider: Docker
+category: coding
+amount: $250 one-time Cloud Sandbox compute credit for new Docker Agentic Platform sign-ups (in lieu of standard $25); credit card required; unused credit expires 6 months after redemption
+expiry_date: 2026-09-26
+source_url: https://www.docker.com/c/sbx-promo/
+verified_date: 2026-09-24
+verification: social_proof
+review_status: under-review
+signup: required

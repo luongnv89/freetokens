@@ -1,0 +1,41 @@
+{
+  "summary": "Limited-time promo: new Docker Agentic Platform sign-ups get a one-time $250 Cloud Sandbox compute credit (instead of the standard $25), claimable September 22\u201326, 2026 11:59 PM PT. Credit applies to metered sandbox compute only; model/API usage is billed separately. Credit card required at signup; unused credit expires 6 months after redemption.",
+  "claim_steps": [
+    "Open the Docker Sandboxes promotion page and use Claim my $250 credit (or sign up at app.docker.com).",
+    "Create or sign in to a Docker account and complete Docker Agentic Platform signup with a valid credit card (charged only for usage beyond the credit).",
+    "Limit one credit per user and account; claim during the offer window (terms: September 22\u201326, 2026, 11:59 PM PT).",
+    "Use Cloud Sandboxes via the web console or sbx CLI (sbx 0.45.1+); compute draws down the $250 credit first."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.docker.com/c/sbx-promo/",
+      "title": "Docker Sandboxes Promotion | Claim your $250 Cloud Sandbox Credit",
+      "text": "New Docker Agentic Platform signups receive a one-time $250 compute credit in lieu of the standard $25 credit. Offer valid September 22\u201326, 2026, 11:59 PM PT. Credits expire 6 months after redemption."
+    },
+    {
+      "type": "link",
+      "url": "https://www.docker.com/blog/introducing-cloud-sandboxes-start-on-your-laptop-finish-in-the-cloud/",
+      "title": "Introducing Cloud Sandboxes: Start on Your Laptop, Finish in the Cloud",
+      "text": "Today, we're introducing Cloud Sandboxes: the same microVM-based sandbox, running on Docker-managed compute, with one command to move between them. Cloud Sandboxes are pay-as-you-go."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.docker.com/ai/sandboxes/cloud/",
+      "title": "Cloud sandboxes | Docker Docs",
+      "text": "To use cloud sandboxes, you need: The sbx CLI, version 0.45.0 or later; An active Docker Agentic Platform subscription."
+    },
+    {
+      "type": "link",
+      "url": "https://www.docker.com/blog/manufacturing-trust-for-ai-agents-keynote/",
+      "title": "Manufacturing Trust for AI Agents | Docker at WeAreDevelopers",
+      "text": "In the keynote, Mark announced Docker Cloud Sandboxes, bringing the same microVM-based isolation from the laptop to Docker-managed cloud compute. Docker Cloud Sandboxes are available today with pay-as-you-go pricing."
+    },
+    {
+      "type": "link",
+      "url": "https://web.docker.com/index.php/email/emailWebview?email=NzkwLVNTQi0zNzUAAAGkdEXn-6GxrVUZl9OZdGs6_9MpVYL6vde3d03_tFHBd-7aUO6l871d1LGdmqZpa8o73oteDJ0d6zwbVCP3wFoPfgCNgur71iD6vw",
+      "title": "Docker email: Introducing Cloud Sandboxes + $250 credit",
+      "text": "Pay as you go, starting at $0.07/hour. For a limited time, new sign-ups get $250 in credit. New Docker Agentic Platform sign-ups receive a one-time $250 compute credit. Offer valid September 22\u201326, 2026, 11:59 PM PT."
+    }
+  ]
+}
