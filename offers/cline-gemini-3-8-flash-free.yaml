@@ -1,0 +1,16 @@
+# Verified 2026-09-24 against https://x.com/cline/status/2103165327815450815
+# ("Gemini 3.8 Flash is free in Cline.")
+# Corroborated by https://docs.cline.bot/getting-started/free-models:
+# "Cline periodically offers free model promotions that let you try select models
+# at no cost, up to a limited usage quota." No fixed end date published, so
+# expiry_date is null (rotating promotion, not permanent).
+title: Gemini 3.8 Flash Free in Cline
+provider: Cline
+category: coding
+amount: Free Gemini 3.8 Flash model access (1M context), rate limited
+expiry_date: null
+source_url: https://x.com/cline/status/2103165327815450815
+verified_date: 2026-09-24
+verification: social_proof
+review_status: unverified
+signup: required

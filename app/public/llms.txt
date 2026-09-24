@@ -4,8 +4,9 @@
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 186 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest verified first) from 187 active listings. Full directory at https://freetokens.custats.info/.
 
+- [Gemini 3.8 Flash Free in Cline](https://freetokens.custats.info/offers/cline-gemini-3-8-flash-free.html): Cline — Free Gemini 3.8 Flash model access (1M context), rate limited (coding)
 - [Claude Code Cloud Sessions — One-Time Launch Credit](https://freetokens.custats.info/offers/claude-code-cloud-sessions-credit.html): Anthropic — One-time $100 credit on Pro or $250 credit on Max for Claude Code cloud sessions (coding)
 - [OpenRouter Free Models Router](https://freetokens.custats.info/offers/openrouter-free-router.html): OpenRouter — Free openrouter/free auto-router to $0 models ($0 prompt/completion) (api_provider)
 - [Space Bunny Free on OpenCode Zen](https://freetokens.custats.info/offers/opencode-space-bunny-free.html): OpenCode — Free Space Bunny model access on OpenCode Zen for one week (coding)
@@ -25,7 +26,6 @@ Top 20 currently active offers (newest verified first) from 186 active listings.
 - [Vercel AI Gateway Jev Free](https://freetokens.custats.info/offers/vercel-ai-gateway-jev-free.html): Vercel — Free typesafe-ai/jev inference (32K context) via Vercel AI Gateway (api_provider)
 - [Vercel AI Gateway — Monthly Free Credit](https://freetokens.custats.info/offers/vercel-ai-gateway-free-tier.html): Vercel — Monthly free AI Gateway credit covering a free-tier subset of models (lower per-model rate limits); buying credits permanently ends the monthly free credit (api_provider)
 - [Upstage Studio Agents — 10 Free Runs](https://freetokens.custats.info/offers/upstage-studio-agents-10-free-runs.html): Upstage — 10 free runs per Studio agent for document workflows (no credit card required) (api_provider)
-- [Upstage Free Access for Education & Public Interest](https://freetokens.custats.info/offers/upstage-education-public-interest-free.html): Upstage — Free access to Solar Pro LLM + Document Parse for up to 1 year for eligible schools, hospitals, and nonprofits (Upstage x AWS AI Initiative) (student)
 
 ## Pages
 
