@@ -1,0 +1,44 @@
+{
+  "summary": "Anthropic is giving existing Claude Pro and Max subscribers a one-time credit to try Claude Code cloud sessions, which left research preview on September 23, 2026: $100 on Pro, $250 on Max. The credit is separate from plan usage limits, applies automatically once a cloud session starts, and is limited to one credit per account for cloud sessions only. Must be claimed by October 7, 2026.",
+  "claim_steps": [
+    "You need an existing Claude Pro or Max subscription.",
+    "Claim at https://claude.ai/code/claim-credit/10 or run /claim-credit in the Claude Code CLI.",
+    "Connect GitHub - required to start a cloud session.",
+    "Claim by October 7, 2026. The credit applies automatically once you start a cloud session; one credit per account, cloud sessions only."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/ClaudeDevs/status/2102871555244257518",
+      "author": "ClaudeDevs",
+      "handle": "@ClaudeDevs",
+      "text": "Follow the link below to claim the credit or run /claim-credit in the CLI. You'll need GitHub connected to start a session. Claim by Oct 7. Terms apply."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/ClaudeDevs/status/2102871550974427462",
+      "author": "ClaudeDevs",
+      "handle": "@ClaudeDevs",
+      "text": "Cloud sessions are officially available and out of research preview! They let you keep Claude Code working, even when your laptop is closed.\n\nExisting subscribers get a one-time credit to try them: $100 on Pro, $250 on Max."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/ClaudeDevs/status/2102871554069774451",
+      "author": "ClaudeDevs",
+      "handle": "@ClaudeDevs",
+      "text": "The credit is separate from your usage limits, and it applies automatically once you start a cloud session.\n\nIf you hit a limit locally, keep going in the cloud until your credit runs out. One credit per account, for cloud sessions only."
+    },
+    {
+      "type": "link",
+      "url": "https://code.claude.com/docs/en/claude-code-on-the-web",
+      "title": "Use Claude Code in the cloud",
+      "text": "Cloud sessions are available on Pro, Max, and Team plans, and for Enterprise users with premium seats or Chat + Claude Code seats."
+    },
+    {
+      "type": "link",
+      "url": "https://saudishopper.com.sa/en/claude-code-cloud-sessions-launch/",
+      "title": "Anthropic Launches Claude Code Cloud Sessions With Trial Credits for Subscribers",
+      "text": "Users subscribed to the Pro plan receive a $100 trial credit to evaluate the feature across their active code repositories. Meanwhile, subscribers enrolled in the higher-tier Max plan receive a $250 trial credit."
+    }
+  ]
+}

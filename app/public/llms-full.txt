@@ -2,9 +2,20 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-23T14:50:37Z — 186 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-24T05:47:21Z — 186 active offers.
 
 ## Offers (full)
+
+### Claude Code Cloud Sessions — One-Time Launch Credit
+- Provider: Anthropic
+- Category: coding
+- Amount: One-time $100 credit on Pro or $250 credit on Max for Claude Code cloud sessions
+- Status: active — expiry 2026-10-07
+- Verified: 2026-09-24 (social_proof / under-review, signup required)
+- Source: https://x.com/ClaudeDevs/status/2102871555244257518
+- Page: https://freetokens.custats.info/offers/claude-code-cloud-sessions-credit.html
+- Summary: Anthropic is giving existing Claude Pro and Max subscribers a one-time credit to try Claude Code cloud sessions, which left research preview on September 23, 2026: $100 on Pro, $250 on Max. The credit is separate from plan usage limits, applies automatically once a cloud session starts, and is limited to one credit per account for cloud sessions only. Must be claimed by October 7, 2026.
+- Claim steps: You need an existing Claude Pro or Max subscription. | Claim at https://claude.ai/code/claim-credit/10 or run /claim-credit in the Claude Code CLI. | Connect GitHub - required to start a cloud session. | Claim by October 7, 2026. The credit applies automatically once you start a cloud session; one credit per account, cloud sessions only.
 
 ### OpenRouter Free Models Router
 - Provider: OpenRouter
@@ -830,17 +841,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-23T14:50:37Z — 
 - Page: https://freetokens.custats.info/offers/novita-sandbox-100-credits.html
 - Summary: New Novita AI users can complete a quick account setup survey and receive $100 in promotional credits for eligible Novita Sandbox (Agent Sandbox) usage. No credit card is required. Credits apply first to CPU, RAM, and billable storage. The same pricing page also grants 20 GB of ephemeral storage per running sandbox and 60 GB of free persistent storage per account. Credits may be subject to availability, validity period, usage scope, and quota limits; check balance on the Payments page. After credits are used up or expired, usage is pay-as-you-go.
 - Claim steps: Create a Novita AI account (no credit card required). | Complete the quick account setup survey. | Receive $100 in promotional credits for eligible Novita Sandbox CPU, RAM, and billable storage. | Check balance and voucher status on the Payments page. | Free-tier quotas still apply: 20 GB ephemeral storage per running sandbox and 60 GB persistent storage per account.
-
-### Ling 3.0 Flash VL Free (Novita)
-- Provider: Novita AI
-- Category: api_provider
-- Amount: Ling 3.0 Flash VL free input + output tokens (262K context, text/image/video input)
-- Status: active — expiry 2026-09-23
-- Verified: 2026-09-22 (social_proof / under-review, signup required)
-- Source: https://blogs.novita.ai/ling-3-0-flash-vl-on-novita-ai-launch-pricing/
-- Page: https://freetokens.custats.info/offers/novita-ling-3-0-flash-vl-free.html
-- Summary: InclusionAI's multimodal Ling 3.0 Flash VL (text, image and video input; 262,144-token context, 32,768 max output on the Novita deployment) has free input and output tokens on Novita AI through September 23, 2026 at 2:30 AM UTC. Default catalog tier is 30 RPM.
-- Claim steps: Sign up at novita.ai and create an API key. | Call model id inclusionai/ling-3.0-flash-vl via the OpenAI-compatible or Anthropic-compatible endpoint — input and output tokens are $0 until Sep 23, 2026 02:30 UTC.
 
 ### Ling 3.0 Flash Sante Free (Novita)
 - Provider: Novita AI
