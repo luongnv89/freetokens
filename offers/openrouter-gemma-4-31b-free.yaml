@@ -6,7 +6,7 @@ category: api_provider
 amount: Free google/gemma-4-31b-it:free inference at $0 input and output (262K context)
 expiry_date: null
 source_url: https://openrouter.ai/google/gemma-4-31b-it:free
-verified_date: 2026-09-22
+verified_date: 2026-09-25
 verification: social_proof
 review_status: under-review
 signup: required
