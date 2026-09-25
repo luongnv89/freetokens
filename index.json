@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-25T05:03:47Z",
-  "count": 211,
-  "active_count": 188,
+  "generated_at": "2026-09-25T21:31:36Z",
+  "count": 212,
+  "active_count": 189,
   "expired_count": 23,
   "offers": [
     {
@@ -2957,6 +2957,20 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "railway-free-vm",
+      "title": "Railway — $3 AI Budget + Free Linux VM, No Sign-Up",
+      "provider": "Railway",
+      "category": "coding",
+      "amount": "$3.00 AI budget per IP per day (shared across up to 3 free VMs), plus a free no-card Linux VM with 2 vCPU, 2 GB RAM and coding agents preinstalled",
+      "expiry_date": null,
+      "source_url": "https://railway.com/free-vm",
+      "verified_date": "2026-09-25",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
+      "status": "active"
     }
   ]
 }

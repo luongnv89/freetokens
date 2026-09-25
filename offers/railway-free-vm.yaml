@@ -1,0 +1,31 @@
+# Verified 2026-09-25 against https://railway.com/free-vm
+# ("Run ssh railway.new and get a free Linux VM in about 1.4 seconds, with
+# coding agents preinstalled and a preview URL. No Railway account needed.
+# Claim it to keep it.")
+# Specs: "2 vCPU and 2 GB of memory, ready in about 1.4 seconds, in the region
+# nearest you." / "Coding agents preinstalled: the Railway Agent (agent),
+# Claude Code, Codex, OpenCode, Cursor CLI, Grok, and pi, with an AI budget to
+# get started."
+# $3.00 AI budget is CURATOR FIRST-HAND evidence, not stated on the page: the
+# page says only "a shared AI budget per IP per day" with no dollar figure. The
+# curator's in-VM status line read "Trial VM · 41m 03s left to build · $2.31 of
+# $3.00 AI budget left" (2026-09-25), confirming a $3.00 pool shared per IP per
+# day across up to 3 boxes.
+# No fixed end date: the 60-minute build window and 24-hour claim window are a
+# per-box lifecycle, not an offer expiry ("60 minutes to build, then 24 hours
+# to claim. Unclaimed boxes are deleted with their files."), so expiry_date is
+# null. Cost: "Is it really free? Yes. While a box is unclaimed, nobody pays
+# for its compute, and you never enter a card."
+# Announced by @Railway: https://x.com/Railway/status/2103566393862136150
+# ("Get a free VM from your terminal or from @muse. Zero sign-up. One command.
+# ssh railway.new", 2026-09-25)
+title: Railway — $3 AI Budget + Free Linux VM, No Sign-Up
+provider: Railway
+category: coding
+amount: $3.00 AI budget per IP per day (shared across up to 3 free VMs), plus a free no-card Linux VM with 2 vCPU, 2 GB RAM and coding agents preinstalled
+expiry_date: null
+source_url: https://railway.com/free-vm
+verified_date: 2026-09-25
+verification: social_proof
+review_status: under-review
+signup: none
