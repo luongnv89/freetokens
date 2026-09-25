@@ -1,23 +1,9 @@
 {
-  "generated_at": "2026-09-25T21:53:39Z",
-  "count": 212,
-  "active_count": 189,
+  "generated_at": "2026-09-25T22:03:07Z",
+  "count": 211,
+  "active_count": 188,
   "expired_count": 23,
   "offers": [
-    {
-      "slug": "railway-free-vm",
-      "title": "Railway — $3 AI Budget + Free Linux VM, No Sign-Up",
-      "provider": "Railway",
-      "category": "coding",
-      "amount": "$3.00 AI budget per IP per day (shared across up to 3 free VMs), plus a free no-card Linux VM with 2 vCPU, 2 GB RAM and coding agents preinstalled",
-      "expiry_date": null,
-      "source_url": "https://railway.com/free-vm",
-      "verified_date": "2026-09-25",
-      "verification": "social_proof",
-      "review_status": "verified",
-      "signup": "none",
-      "status": "active"
-    },
     {
       "slug": "claude-code-cloud-sessions-credit",
       "title": "Claude Code Cloud Sessions — One-Time Launch Credit",
