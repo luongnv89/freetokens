@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-25T21:31:58Z — 185 of 189 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-09-25T21:53:40Z — 185 of 189 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 ## Offers (full)
 ### Zed Pro for Students
@@ -380,7 +380,7 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T21:31:58Z — 
 - Category: coding
 - Amount: $3.00 AI budget per IP per day (shared across up to 3 free VMs), plus a free no-card Linux VM with 2 vCPU, 2 GB RAM and coding agents preinstalled
 - Status: active — expiry ongoing
-- Verified: 2026-09-25 (social_proof / under-review, signup none)
+- Verified: 2026-09-25 (social_proof / verified, signup none)
 - Source: https://railway.com/free-vm
 - Page: https://freetokens.custats.info/offers/railway-free-vm.html
 - Summary: Railway gives anyone a free Linux VM by running `ssh railway.new` — no account, no card, and no sign-up to get it. The box has 2 vCPU and 2 GB of memory, boots in about 1.4 seconds in the region nearest you, and serves a preview URL from the first second. Coding agents are preinstalled (Railway Agent, Claude Code, Codex, OpenCode, Cursor CLI, Grok, pi) along with Node, Python, gh, mise, the Railway CLI, and Chromium with Playwright. Each IP gets a $3.00 AI budget per day, shared across up to 3 boxes — the curator's in-VM status line read "Trial VM · 41m 03s left to build · $2.31 of $3.00 AI budget left", running Claude Opus 5 at medium effort, with `/status` available to check the claim link. Note that Railway's page states only "a shared AI budget per IP per day" without a dollar figure; the $3.00 value is first-hand measured, and the pool is shared, so the amount you actually get can differ. The offer is ongoing with no end date: each box gets a 60-minute build window and then 24 hours to claim, after which unclaimed boxes are deleted with their files. Railway identifies you by your SSH key, so the same key returns you to the same VM; claiming the box into an account makes the preview URL shareable. Compute is free only while a box is unclaimed.
