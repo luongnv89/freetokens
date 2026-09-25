@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-25T05:44:16Z — 187 of 188 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-09-25T21:31:58Z — 185 of 189 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 ## Offers (full)
 ### Zed Pro for Students
@@ -375,6 +375,16 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T05:44:16Z — 
 - Page: https://freetokens.custats.info/offers/replicate-try-for-free.html
 - Summary: Replicate's official 'Try for Free' collection page is live and states you can run the listed models without purchasing credit once you have a Replicate account. The FAQ clarifies the free usage is a limited number of runs per model; once the limit is hit, billing/credit purchase is required to continue. No fixed end date is published, so the offer appears ongoing. Terms match the offer claim exactly.
 - Claim steps: Create a Replicate account (free runs require being signed in). | Go to the Try for Free collection page at replicate.com/collections/try-for-free. | Select a model that matches your task (e.g. google/imagen-4 for images, minimax/video-01 for video). | Upload your input (text, image, or video) or provide a URL if required. | Run the model and review the output. | If it works for your needs, add a credit card and purchase credit to continue using the model beyond the free limit.
+### Railway — $3 AI Budget + Free Linux VM, No Sign-Up
+- Provider: Railway
+- Category: coding
+- Amount: $3.00 AI budget per IP per day (shared across up to 3 free VMs), plus a free no-card Linux VM with 2 vCPU, 2 GB RAM and coding agents preinstalled
+- Status: active — expiry ongoing
+- Verified: 2026-09-25 (social_proof / under-review, signup none)
+- Source: https://railway.com/free-vm
+- Page: https://freetokens.custats.info/offers/railway-free-vm.html
+- Summary: Railway gives anyone a free Linux VM by running `ssh railway.new` — no account, no card, and no sign-up to get it. The box has 2 vCPU and 2 GB of memory, boots in about 1.4 seconds in the region nearest you, and serves a preview URL from the first second. Coding agents are preinstalled (Railway Agent, Claude Code, Codex, OpenCode, Cursor CLI, Grok, pi) along with Node, Python, gh, mise, the Railway CLI, and Chromium with Playwright. Each IP gets a $3.00 AI budget per day, shared across up to 3 boxes — the curator's in-VM status line read "Trial VM · 41m 03s left to build · $2.31 of $3.00 AI budget left", running Claude Opus 5 at medium effort, with `/status` available to check the claim link. Note that Railway's page states only "a shared AI budget per IP per day" without a dollar figure; the $3.00 value is first-hand measured, and the pool is shared, so the amount you actually get can differ. The offer is ongoing with no end date: each box gets a 60-minute build window and then 24 hours to claim, after which unclaimed boxes are deleted with their files. Railway identifies you by your SSH key, so the same key returns you to the same VM; claiming the box into an account makes the preview URL shareable. Compute is free only while a box is unclaimed.
+- Claim steps: Run `ssh railway.new` from a terminal — no account and no card required. | If you have no SSH key, run `ssh-keygen -t ed25519` first, then connect again. | Read the JSON manifest on stderr from the first connect: it carries the preview URL, the build deadline, and the human claim link. | Build on $PORT (8080) and the preview URL takes over from the first second. | Open the claim link within 24 hours and sign up to keep the box; it moves into your workspace with the same VM, files, and URL. | Up to 3 boxes per IP address per day, subject to a shared per-IP AI budget.
 ### PyAI for Startups
 - Provider: PyAI
 - Category: startup_program
@@ -1844,36 +1854,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T05:44:16Z — 
 - Page: https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html
 - Summary: Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation (or model release/approval, whichever is later). Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry.
 - Claim steps: Create an Alibaba Cloud account and open Alibaba Cloud Model Studio (Singapore region). | Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed. | Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page. | Call eligible models in real time; enable 'Free Quota Only' mode to avoid pay-as-you-go charges after the quota runs out.
-### AI21 Studio Free Trial — $10 Credits
-- Provider: AI21
-- Category: api_provider
-- Amount: $10 credit for new accounts, good for 3 months on platform APIs/SDK/playground (no card to start)
-- Status: active — expiry ongoing
-- Verified: 2026-09-25 (social_proof / under-review, signup required)
-- Source: https://docs.ai21.com/docs/usage-cost
-- Page: https://freetokens.custats.info/offers/ai21-studio-10-credits.html
-- Summary: New AI21 Studio accounts receive a $10 credit good for three months on the AI21 platform (REST APIs, SDK, and playground). After the credit is used or expires, valid billing information is required to continue. Cloud-hosted AI21 models (Bedrock, SageMaker, Azure) are billed by those providers, not this credit. A marketing-page claim of a 7-day window was not independently verified (pricing site 403); this listing follows the official docs.
-- Claim steps: Create an AI21 Studio account (no credit card required to start). | Use the $10 credit on APIs, SDK, and playground for up to three months. | Add billing information after the credit is used or expires to continue.
-### OpenAI Startup Program
-- Provider: OpenAI
-- Category: startup_program
-- Amount: Free OpenAI API credits + rate-limit upgrades + solutions-engineer support (dollar amount not published; requires referral code from an eligible VC partner)
-- Status: active — expiry ongoing
-- Verified: 2026-09-22 (social_proof / under-review, signup required)
-- Source: https://openai.com/startups/
-- Page: https://freetokens.custats.info/offers/openai-startup-program.html
-- Summary: OpenAI's startup program gives portfolio companies of eligible VC partners (e.g. Thrive Capital, Sequoia, a16z, Kleiner Perkins, Conviction) free API credits, rate-limit upgrades, time with solutions engineers, and event access. The dollar amount is not published; applying requires a unique referral code from the VC, a product description, company contacts and basic funding details.
-- Claim steps: Confirm your VC is in OpenAI's partner network and obtain your unique referral code. | Create an OpenAI account and find your Organization ID (Settings → Organization settings). | Apply for credits via openai.com/startups with the referral code, product description, business email and funding details.
-### JetBrains Student Pack — All IDEs Free
-- Provider: JetBrains
-- Category: student
-- Amount: All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount)
-- Status: active — expiry ongoing
-- Verified: 2026-09-22 (social_proof / unverified, signup required)
-- Source: https://www.jetbrains.com/academy/student-pack/
-- Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
-- Summary: JetBrains gives verified students free access to the entire All Products Pack (IntelliJ IDEA Ultimate, PyCharm Professional, WebStorm, CLion, Rider, PhpStorm, GoLand, DataGrip, etc.) while enrolled. Licenses renew annually with fresh proof and include a 40% graduation discount for two years after expiry.
-- Claim steps: Go to https://www.jetbrains.com/academy/student-pack/ and click Apply. | Verify via school email, ISIC/ITIC, GitHub Student Pack, or uploaded enrollment proof. | Confirm the verification email link to activate approval. | Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
