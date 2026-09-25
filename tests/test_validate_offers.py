@@ -153,6 +153,29 @@ class ValidateDirTests(unittest.TestCase):
             ):
                 validate_offers.validate_offers_dir(offers_dir)
 
+    def test_tomorrow_verified_date_tolerated(self):
+        # A verifier stamping its *local* date can be a day ahead of the
+        # validating machine's clock (timezones ahead of UTC; CI runs UTC).
+        tomorrow = (dt.date.today() + dt.timedelta(days=1)).isoformat()
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = self._write(
+                tmp, "tz-ahead.yaml", offer_text(verified_date=tomorrow)
+            )
+            offers = validate_offers.validate_offers_dir(offers_dir)
+            self.assertEqual(len(offers), 1)
+
+    def test_far_future_verified_date_rejected(self):
+        later = (dt.date.today() + dt.timedelta(days=2)).isoformat()
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = self._write(
+                tmp, "typo.yaml", offer_text(verified_date=later)
+            )
+            with self.assertRaisesRegex(
+                validate_offers.build.OfferError,
+                r"typo\.yaml.*verified_date is in the future",
+            ):
+                validate_offers.validate_offers_dir(offers_dir)
+
     def test_duplicate_slug_names_both_files(self):
         with tempfile.TemporaryDirectory() as tmp:
             offers_dir = self._write(tmp, "alpha.yaml", offer_text())

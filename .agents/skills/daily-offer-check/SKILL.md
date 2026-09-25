@@ -175,6 +175,24 @@ re-verify. Fresh same-day reruns are idempotent; old snapshots are not reusable.
 and `writes` equals the number of files whose `action` is `bumped` or
 `expired` (not `unchanged`, not skipped).
 
+## Step 4b — Regenerate committed artifacts (you)
+
+Skip when `writes == 0` (empty-diff — no artifact changed).
+
+YAML writes drift the committed generated artifacts — repo-root `index.json`
+(the `load-offers` vitest contract deep-equals it against `offers/`) and
+`app/public/llms.txt` / `llms-full.txt`. Regenerate them so the sweep's PR
+does not ship a stale catalog:
+
+```bash
+cd app && node scripts/load-offers.mjs --index-json ../index.json && cd ..
+cd app && node scripts/generate-llms.mjs && cd ..
+```
+
+Done when `git status --porcelain` shows at most `offers/` writes plus
+`index.json`, `app/public/llms.txt`, `app/public/llms-full.txt` — anything
+else is out of scope for the sweep commit.
+
 ## Step 5 — Validate (you)
 
 ```bash
@@ -194,7 +212,9 @@ file. Otherwise:
   when the user named an existing stale-content issue
 - one commit on `chore/daily-offer-check-$today`
 - one PR against `main` whose body starts with `Closes #<issue>`
-- `git add` only paths listed in `applied[]`, never `git add .`
+- `git add` only paths listed in `applied[]` plus the regenerated artifacts
+  `index.json`, `app/public/llms.txt`, `app/public/llms-full.txt` — never
+  `git add .`
 
 Done when `gh pr view --json url` prints a URL, or the exception fired.
 

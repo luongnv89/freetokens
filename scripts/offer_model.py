@@ -454,7 +454,11 @@ def validate_offer(data: dict, filename: str) -> dict:
     data["verified_date"] = _validate_date(
         data["verified_date"], "verified_date", filename
     )
-    if data["verified_date"] > dt.date.today():
+    # Tolerate tomorrow's date: the catalog is stamped with the verifier's
+    # *local* date, which can be up to a day ahead of the validating machine's
+    # clock (any timezone ahead of UTC; CI runs on UTC). A farther-future date
+    # is still a typo and rejected.
+    if data["verified_date"] > dt.date.today() + dt.timedelta(days=1):
         raise OfferError(
             f"{filename}: verified_date is in the future ({data['verified_date']})"
         )
