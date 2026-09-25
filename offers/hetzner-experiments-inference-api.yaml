@@ -9,7 +9,7 @@ category: api_provider
 amount: Free OpenAI-compatible inference while in experimental status (Qwen3.6-35B-A3B-FP8, Qwen3.8-27B); 4M input / 100k output tokens per 60s, 10 req/60s
 expiry_date: null
 source_url: https://docs.hetzner.com/general/company-and-policy/experiments/inference/
-verified_date: 2026-09-22
+verified_date: 2026-09-25
 verification: social_proof
 review_status: under-review
 signup: required

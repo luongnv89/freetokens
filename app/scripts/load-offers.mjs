@@ -452,15 +452,24 @@ async function main(argv) {
   const here = path.dirname(fileURLToPath(import.meta.url));
   let offersDir = path.join(here, "..", "..", "offers");
   let outDir = path.join(here, "..", "src", "data");
+  let indexJsonPath = null;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--offers-dir") offersDir = argv[++i];
     else if (argv[i] === "--out") outDir = argv[++i];
+    else if (argv[i] === "--index-json") indexJsonPath = argv[++i];
   }
   const started = Date.now();
   const index = await runPipeline({ offersDir, outDir });
+  // --index-json additionally writes the committed repo-root index.json
+  // (the artifact load-offers.test.mjs deep-equals against offers/).
+  if (indexJsonPath) {
+    await writeFile(indexJsonPath, `${JSON.stringify(index, null, 2)}\n`);
+  }
   console.log(
     `loaded ${index.count} offers (${index.active_count} active, ${index.expired_count} expired)` +
-      ` -> ${path.join(outDir, "offers.json")}, offers.jsonl, details.json, details/*.json in ${Date.now() - started}ms`,
+      ` -> ${path.join(outDir, "offers.json")}, offers.jsonl, details.json, details/*.json` +
+      (indexJsonPath ? `, ${indexJsonPath}` : "") +
+      ` in ${Date.now() - started}ms`,
   );
 }
 

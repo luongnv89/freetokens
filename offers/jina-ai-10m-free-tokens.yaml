@@ -8,7 +8,7 @@ category: api_provider
 amount: 10M free tokens with every new API key; official free-key limits: Reader API 500 RPM; Embedding/Reranker API 100 RPM & 100K TPM
 expiry_date: null
 source_url: https://jina.ai/en-US/reader/
-verified_date: 2026-09-22
+verified_date: 2026-09-25
 verification: social_proof
 review_status: under-review
 signup: required

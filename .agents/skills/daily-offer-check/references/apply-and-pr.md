@@ -46,9 +46,12 @@ whose title contains `stale content`; never create an issue just for this.
    Any unrelated change stops publication; never stage it.
 2. Reuse the user's existing stale-content issue, or create one titled
    `Daily offer re-verify <today>` with the coverage and evidence table.
-3. Stage only applied paths with `git add -- <literal paths>`. Inspect the
-   staged diff: only verified_date and permitted expiry_date changes. Follow
-   repository security/pre-commit gates; a block stops publication.
+3. Stage only applied paths with `git add -- <literal paths>`, plus the
+   regenerated artifacts `index.json`, `app/public/llms.txt`,
+   `app/public/llms-full.txt` (Step 4b). Inspect the staged diff: only
+   verified_date and permitted expiry_date changes in `offers/`, and pure
+   generated refreshes in the artifacts. Follow repository
+   security/pre-commit gates; a block stops publication.
 4. Commit `chore(offers): re-verify active offers <today>`. Push only the sweep
    branch, never main and never force. Reuse an existing PR for that branch;
    otherwise create one against main. Body starts `Closes #<issue>` and includes

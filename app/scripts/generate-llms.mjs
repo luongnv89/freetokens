@@ -117,8 +117,10 @@ function buildLlmsTxt() {
   return lines.join("\n");
 }
 
-function buildLlmsFullTxt() {
+function buildFullHeader(emittedCount) {
   const lines = [];
+  const generatedAt = index.generated_at ?? new Date().toISOString();
+  const total = activeOffers.length;
   lines.push("# Free AI Credits — Full Content");
   lines.push("");
   lines.push(
@@ -126,37 +128,47 @@ function buildLlmsFullTxt() {
   );
   lines.push("");
   lines.push(
-    `Source: ${baseUrl}/ — generated ${index.generated_at ?? new Date().toISOString()} — ${activeOffers.length} active offers.`,
+    emittedCount === total
+      ? `Source: ${baseUrl}/ — generated ${generatedAt} — ${total} active offers.`
+      : `Source: ${baseUrl}/ — generated ${generatedAt} — ${emittedCount} of ${total} active offers (truncated to stay under the 200KB llms-full budget; full directory at ${baseUrl}/).`,
   );
   lines.push("");
   lines.push("## Offers (full)");
   lines.push("");
-  for (const offer of activeOffers) {
-    const url = `${baseUrl}/offers/${offer.slug}.html`;
-    const detail = details[offer.slug];
-    const summary = detail?.summary
-      ? String(detail.summary).trim().replace(/\s+/g, " ")
-      : "";
-    const description = summary || `${offer.amount} from ${offer.provider}.`;
-    lines.push(`### ${offer.title}`);
-    lines.push(`- Provider: ${offer.provider}`);
-    lines.push(`- Category: ${offer.category}`);
-    lines.push(`- Amount: ${offer.amount}`);
-    lines.push(
-      `- Status: ${offer.status} — expiry ${offer.expiry_date ?? "ongoing"}`,
-    );
-    lines.push(
-      `- Verified: ${offer.verified_date} (${offer.verification} / ${offer.review_status}, signup ${offer.signup})`,
-    );
-    lines.push(`- Source: ${offer.source_url}`);
-    lines.push(`- Page: ${url}`);
-    if (summary) lines.push(`- Summary: ${summary}`);
-    else lines.push(`- Summary: ${description}`);
-    if (detail?.claim_steps?.length) {
-      lines.push(`- Claim steps: ${detail.claim_steps.join(" | ")}`);
-    }
-    lines.push("");
+  return lines.join("\n");
+}
+
+function buildOfferBlock(offer) {
+  const url = `${baseUrl}/offers/${offer.slug}.html`;
+  const detail = details[offer.slug];
+  const summary = detail?.summary
+    ? String(detail.summary).trim().replace(/\s+/g, " ")
+    : "";
+  const description = summary || `${offer.amount} from ${offer.provider}.`;
+  const lines = [];
+  lines.push(`### ${offer.title}`);
+  lines.push(`- Provider: ${offer.provider}`);
+  lines.push(`- Category: ${offer.category}`);
+  lines.push(`- Amount: ${offer.amount}`);
+  lines.push(
+    `- Status: ${offer.status} — expiry ${offer.expiry_date ?? "ongoing"}`,
+  );
+  lines.push(
+    `- Verified: ${offer.verified_date} (${offer.verification} / ${offer.review_status}, signup ${offer.signup})`,
+  );
+  lines.push(`- Source: ${offer.source_url}`);
+  lines.push(`- Page: ${url}`);
+  if (summary) lines.push(`- Summary: ${summary}`);
+  else lines.push(`- Summary: ${description}`);
+  if (detail?.claim_steps?.length) {
+    lines.push(`- Claim steps: ${detail.claim_steps.join(" | ")}`);
   }
+  lines.push("");
+  return lines.join("\n");
+}
+
+function buildFullFooter() {
+  const lines = [];
   lines.push("## Pages");
   lines.push("");
   lines.push(`- [Home](${baseUrl}/): Main listing of active offers.`);
@@ -172,27 +184,24 @@ function buildLlmsFullTxt() {
 }
 
 const llmsTxt = buildLlmsTxt();
-let llmsFullTxt = buildLlmsFullTxt();
 
-// Enforce <200KB budget for llms-full.txt (truncate offer summaries if needed, rarely triggered)
+// Enforce <200KB budget for llms-full.txt by dropping whole trailing offer
+// entries — never slice mid-entry or lose the Pages/Feed footer (issue: PR
+// #475 review). The header reports the emitted count honestly when truncated.
 const MAX_FULL_BYTES = 200 * 1024;
-let fullBytes = Buffer.byteLength(llmsFullTxt, "utf8");
-if (fullBytes >= MAX_FULL_BYTES) {
-  // Trim progressive: shorten per-offer summaries first by truncating after fallback length
-  // Simple truncation to fit budget preserves header and at least 50% of summaries still present
-  const headerEnd = llmsFullTxt.indexOf("## Offers (full)");
-  const header = llmsFullTxt.slice(0, headerEnd);
-  let body = llmsFullTxt.slice(headerEnd);
-  // Iteratively cut body to fit
-  while (
-    Buffer.byteLength(header + body, "utf8") >= MAX_FULL_BYTES &&
-    body.length > 1000
-  ) {
-    body = body.slice(0, Math.floor(body.length * 0.9));
-  }
-  llmsFullTxt = (header + body).trimEnd() + "\n";
-  fullBytes = Buffer.byteLength(llmsFullTxt, "utf8");
+const offerBlocks = activeOffers.map(buildOfferBlock);
+const fullFooter = buildFullFooter();
+const assembleFull = (emitted) =>
+  buildFullHeader(emitted) + offerBlocks.slice(0, emitted).join("") + fullFooter;
+let emittedFull = activeOffers.length;
+while (
+  emittedFull > 0 &&
+  Buffer.byteLength(assembleFull(emittedFull), "utf8") >= MAX_FULL_BYTES
+) {
+  emittedFull--;
 }
+const llmsFullTxt = assembleFull(emittedFull);
+const fullBytes = Buffer.byteLength(llmsFullTxt, "utf8");
 
 await mkdir(publicDir, { recursive: true });
 await writeFile(path.join(publicDir, "llms.txt"), llmsTxt, "utf8");
@@ -207,6 +216,6 @@ if (existsSync(distDir)) {
 
 console.log(
   `generate-llms: wrote llms.txt (${(Buffer.byteLength(llmsTxt, "utf8") / 1024).toFixed(1)} KB, ${top20.length} offers) ` +
-    `and llms-full.txt (${(fullBytes / 1024).toFixed(1)} KB, ${activeOffers.length} offers) -> ${publicDir}` +
+    `and llms-full.txt (${(fullBytes / 1024).toFixed(1)} KB, ${emittedFull}${emittedFull < activeOffers.length ? ` of ${activeOffers.length}` : ""} offers) -> ${publicDir}` +
     (existsSync(distDir) ? ` + ${distDir}` : ""),
 );
