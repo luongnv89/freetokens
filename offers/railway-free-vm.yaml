@@ -19,6 +19,8 @@
 # Announced by @Railway: https://x.com/Railway/status/2103566393862136150
 # ("Get a free VM from your terminal or from @muse. Zero sign-up. One command.
 # ssh railway.new", 2026-09-25)
+# review_status: verified — the curator personally ran a trial VM on 2026-09-25
+# (the status line quoted above) rather than relying on the page alone.
 title: Railway — $3 AI Budget + Free Linux VM, No Sign-Up
 provider: Railway
 category: coding
@@ -27,5 +29,5 @@ expiry_date: null
 source_url: https://railway.com/free-vm
 verified_date: 2026-09-25
 verification: social_proof
-review_status: under-review
+review_status: verified
 signup: none
