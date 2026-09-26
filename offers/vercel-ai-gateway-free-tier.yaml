@@ -11,7 +11,7 @@ category: api_provider
 amount: Monthly free AI Gateway credit covering a free-tier subset of models (lower per-model rate limits); buying credits permanently ends the monthly free credit
 expiry_date: null
 source_url: https://vercel.com/docs/ai-gateway/pricing
-verified_date: 2026-09-25
+verified_date: 2026-09-26
 verification: social_proof
 review_status: under-review
 signup: required
