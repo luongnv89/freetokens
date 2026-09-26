@@ -10,7 +10,7 @@ category: api_provider
 amount: 1,000,000 free tokens per eligible language model, valid 1 year from claim (one claim per model per root account; USD 1 balance frozen per claim/enable)
 expiry_date: 2026-12-31
 source_url: https://intl.cloud.tencent.com/document/product/1300/80423
-verified_date: 2026-09-25
+verified_date: 2026-09-26
 verification: social_proof
 review_status: under-review
 signup: required

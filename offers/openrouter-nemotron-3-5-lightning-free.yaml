@@ -10,7 +10,7 @@ category: api_provider
 amount: Free nvidia/nemotron-3.5-lightning:free endpoint at $0 (1M context, 30B-A3B MoE)
 expiry_date: null
 source_url: https://openrouter.ai/nvidia/nemotron-3.5-lightning:free
-verified_date: 2026-09-25
+verified_date: 2026-09-26
 verification: social_proof
 review_status: under-review
 signup: required
