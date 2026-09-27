@@ -1,0 +1,15 @@
+{
+  "summary": "ModelBridge (aibridge-api.com) free tier: 500,000 tokens per month at $0 plus a one-time 500K welcome bonus, all models included. OpenAI-compatible gateway focused on Chinese LLMs (DeepSeek, Qwen, GLM, Kimi/Moonshot) on Hong Kong nodes.",
+  "claim_steps": [
+    "Create a free account on aibridge-api.com — no credit card for the free tier.",
+    "Use the OpenAI-compatible API endpoint with your ModelBridge key."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://aibridge-api.com/pricing.html",
+      "title": "Simple, Transparent Pricing | ModelBridge",
+      "text": "Free Tier — For testing and small projects — $0/month — 500,000 tokens / month — + 500K welcome bonus — All models available."
+    }
+  ]
+}

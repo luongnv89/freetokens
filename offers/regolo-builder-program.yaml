@@ -1,0 +1,16 @@
+# Verified 2026-09-27 against https://regolo.ai/builder-program/
+# ("Apply to get 60 days unlimited tokens + free credits"; "Start with 60 days
+# free, unlimited tokens, no credit card"; "Up to 50,000,000 tokens/day";
+# "100+ open-source models"; "OpenAI Compatible API"; "EU data residency and
+# Zero Data Retention"; "Voucher Opportunity up to €2,000 ... valid up to 12
+# months"; "Applications reviewed within 48 hours".)
+title: Regolo Builder Program
+provider: Regolo.ai
+category: startup_program
+amount: 60 days free unlimited tokens (up to 50M tokens/day) on 100+ OSS models; active teams can later apply for up to €2,000 voucher (≤12 months)
+expiry_date: null
+source_url: https://regolo.ai/builder-program/
+verified_date: 2026-09-27
+verification: social_proof
+review_status: under-review
+signup: required

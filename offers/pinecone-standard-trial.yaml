@@ -1,0 +1,15 @@
+# Verified 2026-09-27 against https://docs.pinecone.io/guides/organizations/manage-billing/standard-trial
+# ("Evaluate the Pinecone Standard plan with $300 in credits over 21 days,
+# including bulk import, backup and restore, RBAC, and higher scale limits";
+# "lets you evaluate Pinecone without requiring any up-front payment";
+# "Each organization is allowed only one trial".)
+title: Pinecone Standard Trial — $300 Credits
+provider: Pinecone
+category: api_provider
+amount: $300 in credits over 21 days on Standard plan features; one trial per organization
+expiry_date: null
+source_url: https://docs.pinecone.io/guides/organizations/manage-billing/standard-trial
+verified_date: 2026-09-27
+verification: social_proof
+review_status: under-review
+signup: required

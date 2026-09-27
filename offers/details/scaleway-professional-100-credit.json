@@ -1,0 +1,16 @@
+{
+  "summary": "New Scaleway Professional customers get a €100 free-credit voucher (emailed within 24 hours of account creation) usable across Scaleway cloud services including Generative APIs. Requires a valid payment method; anyone ever invoiced by Scaleway (even €0) is ineligible.",
+  "claim_steps": [
+    "Create a new Professional account at Scaleway with a valid payment method.",
+    "A €100 voucher code is emailed within 24 hours; redeem it to start the trial.",
+    "Eligibility: never previously invoiced by Scaleway (a €0 invoice counts)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.scaleway.com/en/scaleway-vs-digitalocean/",
+      "title": "Compare Scaleway vs DigitalOcean",
+      "text": "Create a Professional account and get started with €100 free credit. ... your free trial will start when you redeem the voucher code sent to you by email within 24 hours."
+    }
+  ]
+}

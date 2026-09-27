@@ -1,0 +1,16 @@
+# Verified 2026-09-27 against https://runway.com/product/builders
+# ("The Runway Builders Program gives Seed to Series C startups complementary
+# API credits"; "Up to 500k free API credits to start building immediately";
+# "Unlock Tier 5 access — Runway's highest API usage tier"; "Access to Runway
+# Characters via the Runway API"; "Private Runway Builders community: Slack
+# access, training sessions and direct support".)
+title: Runway Builders Program
+provider: Runway
+category: startup_program
+amount: Up to 500k free API credits + Tier 5 rate limits + Runway Characters API access + private Slack/training/support
+expiry_date: null
+source_url: https://runway.com/product/builders
+verified_date: 2026-09-27
+verification: social_proof
+review_status: under-review
+signup: required

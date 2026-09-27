@@ -1,0 +1,15 @@
+# Verified 2026-09-27 against https://openrouter.ai/inclusionai/ming-image-0.1-design-layer
+# (Model page live; OpenRouter images endpoints API lists
+# inclusionai/ming-image-0.1-design-layer served by NovitaAI with input_image
+# and output_image cost_usd of 0; PNG/WebP output, up to 1 input reference
+# image for image-to-image design layer decomposition.)
+title: Ming Image 0.1 Design Layer Free (OpenRouter)
+provider: OpenRouter
+category: image
+amount: Free inclusionai/ming-image-0.1-design-layer image-to-image design layer decomposition at $0 (PNG/WebP output)
+expiry_date: null
+source_url: https://openrouter.ai/inclusionai/ming-image-0.1-design-layer
+verified_date: 2026-09-27
+verification: social_proof
+review_status: under-review
+signup: required
