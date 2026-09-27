@@ -1,0 +1,92 @@
+{
+  "skill_name": "daily-offer-check",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "happy-path",
+      "name": "unattended-full-run",
+      "prompt": "/daily-offer-check",
+      "expected_output": "A plan that runs the whole pipeline unattended: dependency preflight, sync, sweep, safe writes, validation, issue via /issue-creator --auto, PR via --body-file, /issue-pr-review --auto --no-merge rounds, merge gate, squash merge, final report.",
+      "files": [],
+      "expectations": [
+        "Runs the dependency preflight for issue-creator and issue-pr-review before Repo Sync (before any stash, fetch, or pull)",
+        "Creates the tracking issue with /issue-creator using --auto, after validate_offers.py passes and before the commit",
+        "Opens the PR with gh pr create --body-file (not an inline --body), and the body's first line is Closes #<issue>",
+        "Runs /issue-pr-review <pr> --auto --no-merge for at most 3 rounds, with the scope gate (check_scope.py) and validate_offers.py after each round",
+        "Merges only after the merge gate (scope gate, PR open and mergeable at the bound head, all checks green including validate) with gh pr merge --squash --delete-branch --match-head-commit",
+        "Never asks the user for confirmation at any step",
+        "The final report has Issue, PR, Review, and Merge lines"
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "happy-path",
+      "name": "official-source-wins-conflict",
+      "prompt": "Run the daily offer check. Scenario for slug acme-free-credits: the listing says amount \"$10 in credits\" with source_url https://acme.ai/pricing; the official pricing page now says \"New accounts get $5 in free credits.\"; a third-party X post by @dealhunter claims $20. Show the exact verdict JSON the verifier returns for this slug and every file change the sweep makes for it.",
+      "expected_output": "A live verdict whose updates.amount carries the official $5 value, evidence from acme.ai, the X post ignored as corroboration, and apply_verdicts.py rewriting amount + verified_date and the reference trace.",
+      "files": [],
+      "expectations": [
+        "The verdict object has exactly the seven keys slug, verdict, evidence_url, quote, reason, updates, references",
+        "The verdict is live (not conflict) and updates.amount states the official $5 value",
+        "evidence_url is on acme.ai and quote contains the official $5 sentence",
+        "The @dealhunter X post neither sets the amount nor serves as evidence_url",
+        "references includes the acme.ai pricing page (url, title, text), matching evidence_url",
+        "The YAML amount and verified_date are written by apply_verdicts.py, not hand-edited, and offers/details/acme-free-credits.json gets the pricing-page link entry"
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "happy-path",
+      "name": "reference-trace-merge",
+      "prompt": "Run the daily offer check. Scenario for slug beta-ai-trial: it is live with unchanged terms; the verifier relied on https://beta.ai/trial (its source_url) and https://docs.beta.ai/credits. Its offers/details/beta-ai-trial.json already has a summary, claim_steps, an x entry, and a link entry for https://beta.ai/trial/ (trailing slash). What exactly happens to that offer's files?",
+      "expected_output": "The docs page is appended as a link entry; the existing beta.ai/trial link is deduped and left unchanged; summary, claim_steps, and the x entry are kept; the YAML only gets verified_date bumped.",
+      "files": [],
+      "expectations": [
+        "https://docs.beta.ai/credits is appended as a link entry with url, title, and text",
+        "https://beta.ai/trial is recognized as already present despite the trailing slash, and its excerpt is not refreshed because the terms did not change",
+        "summary, claim_steps, and the x entry are preserved and no entry is removed",
+        "offers/beta-ai-trial.yaml only has verified_date bumped (action bumped)",
+        "apply_verdicts.py is the only writer and the detail file is staged into the sweep PR"
+      ]
+    },
+    {
+      "id": 4,
+      "kind": "edge",
+      "name": "no-merge-branch",
+      "prompt": "run the daily offer check but leave the PR open, I'll merge it myself",
+      "expected_output": "No-merge branch: full sweep, issue, PR, and review rounds, but no merge; the report gives the PR URL and marks merge as skipped.",
+      "files": [],
+      "expectations": [
+        "Selects the No-merge branch",
+        "Still runs the dependency preflight, /issue-creator --auto, the PR, and /issue-pr-review --auto --no-merge rounds",
+        "Never runs gh pr merge, and the final report marks Merge as no-merge with the PR URL"
+      ]
+    },
+    {
+      "id": 5,
+      "kind": "edge",
+      "name": "report-only",
+      "prompt": "daily offer check, report only, don't open a PR",
+      "expected_output": "Report-only branch: inventory, verify, coverage, then the table; no writes, issue, PR, review, or merge.",
+      "files": [],
+      "expectations": [
+        "Selects the Report-only branch",
+        "Skips the dependency preflight",
+        "Stops after the coverage check: no apply_verdicts.py, issue, commit, PR, review, or merge",
+        "Prints the per-slug table with write none and the verdicts' proposed updates"
+      ]
+    },
+    {
+      "id": 6,
+      "kind": "negative-trigger",
+      "name": "add-new-offer",
+      "prompt": "Add this new offer: Foo AI gives $50 in free API credits to new accounts - https://foo.ai/pricing",
+      "expected_output": "The sweep does not run; the user is pointed to offer-updater.",
+      "files": [],
+      "expectations": [
+        "Does not run the sweep (no inventory, verifiers, writes, issue, PR, or merge)",
+        "Points the user to offer-updater"
+      ]
+    }
+  ]
+}

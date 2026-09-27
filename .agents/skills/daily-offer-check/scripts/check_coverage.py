@@ -5,9 +5,15 @@ import json
 from pathlib import Path
 import re
 import sys
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, urlunsplit
 
 from list_active import FIELDS, SLUG, date
+from offer_model import PROOF_META_MAX_CHARS, PROOF_TEXT_MAX_CHARS, SIGNUP_MODES
+
+UPDATABLE = ('title', 'amount', 'expiry_date', 'signup')
+REFERENCES_MAX = 5
+TEXT_MAX = 300
+URL_MAX = 200
 
 
 def nonempty(value):
@@ -21,7 +27,30 @@ def url(value):
     return parsed.scheme in ('http', 'https') and bool(parsed.netloc)
 
 
-def read_json(path):
+def normalize_url(value):
+    parsed = urlsplit(value)
+    return urlunsplit((parsed.scheme.lower(), parsed.netloc.lower(),
+                       parsed.path.rstrip('/'), parsed.query, ''))
+
+
+def site(value):
+    host = (urlsplit(value).hostname or '').rstrip('.')
+    if host.startswith('www.'):
+        host = host[4:]
+    host = '.'.join(host.split('.')[-2:])
+    return 'x.com' if host == 'twitter.com' else host
+
+
+def same_source(evidence_url, source_url):
+    if site(evidence_url) != site(source_url):
+        return False
+    if site(evidence_url) != 'x.com':
+        return True
+    handle = lambda v: urlsplit(v).path.lstrip('/').split('/')[0].lower()
+    return handle(evidence_url) == handle(source_url)
+
+
+def strict_loads(text):
     def unique(pairs):
         result = {}
         for key, value in pairs:
@@ -29,7 +58,51 @@ def read_json(path):
                 raise ValueError('duplicate JSON key: ' + key)
             result[key] = value
         return result
-    return json.loads(Path(path).read_text(encoding='utf-8'), object_pairs_hook=unique)
+    return json.loads(text, object_pairs_hook=unique)
+
+
+def read_json(path):
+    return strict_loads(Path(path).read_text(encoding='utf-8'))
+
+
+def update(key, value, today):
+    if key in ('title', 'amount'):
+        if (not isinstance(value, str) or not value or value != value.strip()
+                or any(ord(c) < 32 or ord(c) == 127 for c in value)
+                or len(value) > TEXT_MAX or value.lower() in ('null', '~')):
+            raise ValueError('invalid ' + key + ' update')
+    elif key == 'expiry_date':
+        if value is not None and date(value) < today:
+            raise ValueError('a past expiry means verdict expired')
+    elif key == 'signup' and value not in SIGNUP_MODES:
+        raise ValueError('invalid signup update')
+
+
+def references(row, verdict):
+    refs = row['references']
+    if not isinstance(refs, list) or len(refs) > REFERENCES_MAX:
+        raise ValueError('invalid references list')
+    seen = set()
+    for ref in refs:
+        if not isinstance(ref, dict) or set(ref) != {'url', 'title', 'text'}:
+            raise ValueError('invalid reference fields')
+        if not url(ref['url']) or len(ref['url']) > URL_MAX:
+            raise ValueError('invalid reference url')
+        if not nonempty(ref['title']) or len(ref['title']) > PROOF_META_MAX_CHARS:
+            raise ValueError('invalid reference title')
+        if not nonempty(ref['text']) or len(ref['text']) > PROOF_TEXT_MAX_CHARS:
+            raise ValueError('invalid reference text')
+        key = normalize_url(ref['url'])
+        if key in seen:
+            raise ValueError('duplicate reference url')
+        seen.add(key)
+    if verdict in ('live', 'expired'):
+        if not refs:
+            raise ValueError('live/expired verdicts require references')
+        if normalize_url(row['evidence_url']) not in seen:
+            raise ValueError('evidence_url must be listed in references')
+    elif refs:
+        raise ValueError('references are only recorded for live/expired verdicts')
 
 
 def coverage(inventory, verdicts):
@@ -45,7 +118,7 @@ def coverage(inventory, verdicts):
     skipped = inventory['skipped_expired']
     if not isinstance(skipped, list) or any(not isinstance(s, str) or not SLUG.fullmatch(s) for s in skipped) or len(set(skipped)) != len(skipped):
         raise ValueError('invalid skipped_expired slugs')
-    expected, paths = set(), set()
+    expected, paths, sources = set(), set(), {}
     for row in offers:
         if not isinstance(row, dict) or set(row) != set(FIELDS) | {'slug', 'path', 'sha256'}:
             raise ValueError('invalid inventory offer fields')
@@ -63,11 +136,12 @@ def coverage(inventory, verdicts):
             raise ValueError('inventory contains expired offer')
         expected.add(slug)
         paths.add(path)
+        sources[slug] = row['source_url']
     if not isinstance(verdicts, list):
         raise ValueError('verdicts must be a JSON array')
     actual = set()
     for row in verdicts:
-        if not isinstance(row, dict) or set(row) != {'slug', 'verdict', 'evidence_url', 'quote', 'reason'}:
+        if not isinstance(row, dict) or set(row) != {'slug', 'verdict', 'evidence_url', 'quote', 'reason', 'updates', 'references'}:
             raise ValueError('invalid verdict fields')
         slug, verdict = row['slug'], row['verdict']
         if not isinstance(slug, str) or not SLUG.fullmatch(slug) or slug in actual:
@@ -82,6 +156,19 @@ def coverage(inventory, verdicts):
             raise ValueError('conflict/unverifiable requires reason')
         if row['evidence_url'] and not url(row['evidence_url']):
             raise ValueError('invalid evidence_url')
+        updates = row['updates']
+        if not isinstance(updates, dict):
+            raise ValueError('updates must be an object')
+        for key in updates:
+            if key not in UPDATABLE:
+                raise ValueError('unknown update field: ' + key)
+        if updates and verdict != 'live':
+            raise ValueError('updates are only allowed on live verdicts')
+        for key, value in updates.items():
+            update(key, value, today)
+        if updates and slug in sources and not same_source(row['evidence_url'], sources[slug]):
+            raise ValueError("updates require evidence_url from the offer's official source site")
+        references(row, verdict)
         actual.add(slug)
     if expected != actual:
         raise ValueError(f'coverage mismatch: missing={sorted(expected - actual)}, extra={sorted(actual - expected)}')

@@ -1,33 +1,65 @@
 ---
 name: daily-offer-check
-description: "Re-verify active offers vs source_url, apply live/expired updates, open one PR (skip PR if report-only). Use for the daily check, freshness sweep, or a stale-content issue. Don't use for adding offers, screenshot ingest, or CI workflow edits."
+description: "Re-verify active offers vs official sources, fix drifted terms, refresh evidence, then issue, PR, review, merge unattended; report-only/no-merge modes. Use for daily checks or stale-content issues. Don't use for adding or editing one offer, or CI."
 license: MIT
 effort: high
-compatibility: "Requires git, GitHub CLI (gh), and python3. Run gh auth status to verify."
+compatibility: "Requires git, GitHub CLI (gh), python3, node, and the issue-creator and issue-pr-review skills. Run gh auth status to verify."
 metadata:
-  version: 1.0.1
-  author: Luong NGUYEN <luongnv89@gmail.com>
+  version: 2.0.0
+  author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
 
 # daily-offer-check
 
 You are the orchestrator. Inventory active offers, fan out verifiers, merge
-verdicts, apply **safe writes**, and open **one** pull request. You do not
-fetch `source_url` yourself, and you do not open `agents/` or `references/`
-files a phase's worker is supposed to receive as its Input.
+verdicts, apply **safe writes**, then carry one catalog PR from issue to merge.
+You do not fetch `source_url` yourself, and you do not open `agents/` or
+`references/` files a phase's worker is supposed to receive as its Input.
 
-This skill is **user-invoked**. The user asked for the sweep — proceed. Do not
-wait for a second "yes" before opening the PR. Never push to `main`.
+This skill is **user-invoked** and runs **unattended**: the user asked for the
+whole pipeline (sweep, issue, PR, review, merge), so do not stop for
+confirmations. Unattended removes confirmations, never safeguards: every gate
+below still stops the run. Never push to `main`; the only way in is the Step 8
+merge.
 
 ## Branch selector
 
 Pick **one** branch. If several rows match, use this precedence (highest first):
 
-1. add / publish a **new** offer, screenshot, pasted pitch → **Stop.** Point at `offer-updater`.
-2. "report only", "dry run", "don't open a PR", "don't commit" → **Report-only** (wins over "also apply the YAML").
-3. named slugs, `--offers-dir`, or a directory other than `<repo>/offers` → **filtered inventory**; if the directory is not `<repo>/offers`, force **Report-only** so fixtures cannot land in a catalog PR.
-4. `/daily-offer-check`, "run the daily offer check", "freshness sweep", "re-verify the catalog", "stale-content issue" → **Apply+PR**
+1. add / publish a **new** offer, change **one** offer from user-supplied details, screenshot, pasted pitch → **Stop.** Point at `offer-updater`.
+2. "report only", "dry run", "don't open a PR", "don't commit" → **Report-only** (wins over any apply, PR, or merge phrasing in the same request).
+3. `--offers-dir` naming a directory other than `<repo>/offers` → **Report-only**, so fixtures cannot land in a catalog PR.
+4. "don't merge", "leave the PR open", `--no-merge` → **No-merge**: run through a clean review, then stop with the PR open.
+5. `/daily-offer-check`, "run the daily offer check", "freshness sweep", "re-verify the catalog", "stale-content issue" → **Unattended**: issue → PR → review → merge.
+
+Named slugs filter the inventory (`--slugs a,b`) on whichever branch wins.
+**Publishing branches** = No-merge and Unattended.
+
+## Dependency Preflight (mandatory)
+
+Publishing branches invoke `issue-creator` (Step 6) and `issue-pr-review`
+(Step 7) and need an authenticated `gh`. Verify all three **before** Repo
+Sync, so a run that cannot publish never starts the sweep; Report-only never
+publishes and skips this check.
+
+```bash
+gh auth status >/dev/null 2>&1 || { echo "gh is not authenticated; run: gh auth login" >&2; exit 1; }
+for skill in issue-creator issue-pr-review; do
+  asm list -p agents --json 2>/dev/null | grep -q "\"$skill\"" \
+    || test -f "$HOME/.agents/skills/$skill/SKILL.md" \
+    || test -f "$HOME/.claude/skills/$skill/SKILL.md" || {
+    echo "Missing required skill: $skill" >&2
+    echo "Install it:      asm install https://github.com/luongnv89/idd --skill $skill -p agents -s global -y" >&2
+    echo "No asm yet:      npm install -g agent-skill-manager" >&2
+    echo "Verify:          asm list -p agents --json | grep '\"$skill\"'" >&2
+    exit 1
+  }
+done
+```
+
+On a miss, stop and print the fix commands; do not start a sweep you cannot
+publish.
 
 ## Repo Sync Before Edits (mandatory)
 
@@ -50,32 +82,39 @@ if [ "$stashed" = 1 ]; then
 fi
 ```
 
-Use that same `$today` for the branch name, `--today` flags, issue title, and PR title.
+Use that same `$today` for the branch name, `--today` flags, issue input, and PR title.
 
 - Stash tracked and untracked work **before** sync as above. On sync failure retain the stash; on pop conflicts stop and ask. Never drop a stash to get a clean tree.
 - If `origin` is missing or the rebase conflicts: stop, report the error verbatim, and ask. Never force-push.
 - **Report-only:** stop after fetch/rebase on the current branch. Do **not** create or check out `chore/daily-offer-check-$today`.
-- **Apply+PR:** require `git status --porcelain` empty **before** any checkout; restored WIP stops the run. If `chore/daily-offer-check-$today` exists, check it out only after confirming it contains solely prior sweep changes against `origin/main`; otherwise stop. Otherwise `git checkout -b "chore/daily-offer-check-$today" origin/main` (never `-B`). Require a clean tree again after checkout. `gh auth status` must succeed before Step 4; if it fails, stop — do not apply writes you cannot ship.
+- **Publishing branches:** require `git status --porcelain` empty **before** any checkout; restored WIP stops the run. If `chore/daily-offer-check-$today` exists (an earlier attempt today), check it out and require `python3 .agents/skills/daily-offer-check/scripts/check_scope.py --base origin/main --head HEAD` to pass, proving it holds only sweep changes; otherwise stop. Else `git checkout -b "chore/daily-offer-check-$today" origin/main` (never `-B`). Require a clean tree again after checkout.
 
 ## Leading words
 
 - **active offer** — `expiry_date` is `null` or ≥ today (an offer expiring *today* stays active).
-- **safe write** — bump `verified_date` on **live**, or set `expiry_date` + `verified_date` to today on **expired**. Never resolve a **conflict**.
-- **empty-diff exception** — zero YAML writes ⇒ no PR. Report instead; optionally comment on an open issue whose title contains `stale content`.
+- **official source** — the offer's `source_url` and the provider's own pages (`references/trust-policy.md`). It wins every disagreement; corroboration never overrides it.
+- **safe write** — the only writes: bump `verified_date` on **live**; set `title` / `amount` / `expiry_date` / `signup` to the official values in a live verdict's `updates`; set `expiry_date` + `verified_date` to today on **expired**; merge the verdict's references into the **reference trace**. Never resolve a **conflict**.
+- **reference trace** — `offers/details/<slug>.json` → `social_proof` `link` entries. Evidence URLs are appended (deduped by URL, cap 10), curated entries are never removed, and an excerpt is refreshed only when the offer's terms changed.
+- **scope gate** — `scripts/check_scope.py` exits 0: the diff touches only existing offer YAMLs (safe-write fields), reference traces (append or refresh), and the three generated artifacts.
+- **clean** — an `/issue-pr-review` round whose summary is its *Clean PR* block (`◆ PR Review: #<pr> (pass N — clean)`, `Result: PASS`) and whose round gate committed nothing; `head` is then the PR's `headRefOid`.
+- **empty-diff exception** — zero writes ⇒ no issue, no PR. Report instead; optionally comment on an open issue whose title contains `stale content`.
 - **fail-soft** — one dead URL or crashed worker does not abort the catalog. Mark that slug **unverifiable** and continue.
 
 ## Step Completion Reports
 
-After each major step, print `◆ <name> (step N of 7)`, its gate checks with
-`√` / `×`, and `Result: PASS | FAIL | PARTIAL`. Steps 3–6 respectively check
-coverage N/N, writes against applied length, validator exit 0, and PR URL or
-empty-diff exception. On failure print stderr and stop; do not report success
-for skipped gates. The final report includes all skipped steps.
+After each major step, print `◆ <name> (step N of 9)`, its gate checks with
+`√` / `×`, and `Result: PASS | FAIL | PARTIAL`. Steps 3–8 respectively check
+coverage N/N, writes against applied length, validator exit 0, issue + PR
+URLs (or the empty-diff exception), a clean round, and `MERGED`. On failure
+print stderr and stop; do not report success for skipped gates. The final
+report includes all skipped steps.
 
-Before inventory, require all three scripts below, `agents/verifier.md`,
-`references/trust-policy.md`, `references/apply-and-pr.md`, and root
-`scripts/offer_model.py` to exist. Missing dependency: stop and name the file.
-These are bundled files, not dependencies on other skills.
+Before inventory, require the five scripts (`list_active.py`,
+`check_coverage.py`, `apply_verdicts.py`, `check_scope.py`, `render_report.py`),
+`agents/verifier.md`, `references/trust-policy.md`,
+`references/apply-and-pr.md`, `references/review-and-merge.md`, and root
+`scripts/offer_model.py` to exist. Missing file: stop and name it. These are
+bundled files; skill dependencies are gated in *Dependency Preflight*.
 
 ## Step 1 — Inventory (you)
 
@@ -94,10 +133,10 @@ Save stdout to `/tmp/daily-offer-check-$today-inventory.json` (outside the repo)
 
 If the user named slugs that `skipped_expired` absorbed, say so in the report (named-but-expired is not a successful empty sweep).
 
-If `active_count` is 0: print the Step 1 report, skip to Step 7, no PR.
+If `active_count` is 0: print the Step 1 report, skip to Step 9, no PR.
 
 ```
-◆ Inventory (step 1 of 7)
+◆ Inventory (step 1 of 9)
 ··································································
   Script exit 0:          √
   Active listed:          √ N (skipped_expired=M)
@@ -128,10 +167,11 @@ Workers **must not** write `offers/`, commit, or ask questions. On tool
 failure they return `unverifiable` with the error in `reason`.
 
 Missing slugs after the first wave: respawn **once** for those slugs only.
-Still missing → synthesize `unverifiable` / `reason: worker dropped slug`.
+Still missing → synthesize `unverifiable` / `reason: worker dropped slug` /
+`updates: {}` / `references: []`.
 
 ```
-◆ Verify (step 2 of 7)
+◆ Verify (step 2 of 9)
 ··································································
   Workers spawned:        √ K in one turn (or sequential degrade)
   Every slug returned:    √ N/N
@@ -155,7 +195,7 @@ python3 .agents/skills/daily-offer-check/scripts/check_coverage.py \
 Done when the script prints `OK N/N slugs covered`. On exit 1, fix as the
 stderr says, then re-run once. Still failing → stop, paste stderr, no writes.
 
-**Report-only branch stops here.** Print the table from Step 7 (no PR URL)
+**Report-only branch stops here.** Print the table from Step 9 (no PR URL)
 and halt.
 
 ## Step 4 — Apply safe writes (you)
@@ -164,16 +204,20 @@ and halt.
 python3 .agents/skills/daily-offer-check/scripts/apply_verdicts.py \
   --today "$today" \
   --inventory /tmp/daily-offer-check-$today-inventory.json \
-  --verdicts /tmp/daily-offer-check-$today-verdicts.json
+  --verdicts /tmp/daily-offer-check-$today-verdicts.json \
+  > /tmp/daily-offer-check-$today-applied.json
 ```
 
-The script is the only writer. You do not hand-edit YAML. Its default trusted
-write root is repository `offers/`; inventory cannot redirect it. Fixture
-orchestration never reaches this step. Only offline helper tests explicitly
-pass a temporary `--offers-dir`. Stale inventory fails: regenerate and
-re-verify. Fresh same-day reruns are idempotent; old snapshots are not reusable. Done when exit 0
-and `writes` equals the number of files whose `action` is `bumped` or
-`expired` (not `unchanged`, not skipped).
+The script is the sweep's only writer (Step 7's `/issue-pr-review` fixes are
+the one other, bounded by the scope gate): you never hand-edit YAML or detail
+JSON. Its default trusted write root is repository `offers/`; inventory cannot
+redirect it. Fixture orchestration never reaches this step. Only offline
+helper tests explicitly pass a temporary `--offers-dir`. Stale inventory
+fails: regenerate and re-verify. Fresh same-day reruns are idempotent; old
+snapshots are not reusable. Done when exit 0 and `writes` equals
+`len(applied)`: offer YAMLs (`bumped` / `updated` / `expired`) plus reference
+traces (`references`).
+Steps 5, 6, and 9 read `results`, `references`, and `applied` from that file.
 
 ## Step 4b — Regenerate committed artifacts (you)
 
@@ -189,9 +233,9 @@ cd app && node scripts/load-offers.mjs --index-json ../index.json && cd ..
 cd app && node scripts/generate-llms.mjs && cd ..
 ```
 
-Done when `git status --porcelain` shows at most `offers/` writes plus
-`index.json`, `app/public/llms.txt`, `app/public/llms-full.txt` — anything
-else is out of scope for the sweep commit.
+Done when `git status --porcelain` shows at most `offers/` writes (offer
+YAMLs and `offers/details/` JSON) plus `index.json`, `app/public/llms.txt`,
+`app/public/llms-full.txt` — anything else is out of scope for the sweep commit.
 
 ## Step 5 — Validate (you)
 
@@ -199,49 +243,82 @@ else is out of scope for the sweep commit.
 python3 scripts/validate_offers.py
 ```
 
-Exit 0 required. If it fails, undo only paths in `applied[]`
-(prefix each relative path with `offers/`, then `git checkout -- <literal paths>`) and stop — do not open a PR on an invalid catalog.
+Exit 0 required. If it fails, undo only the files in `applied[]` (prefix each
+path with `offers/`; `git checkout -- <literal paths>` for tracked files,
+`rm -- <literal paths>` for detail files this run created per
+`references[].created`) and stop — never open a PR on an invalid catalog.
 
-## Step 6 — Issue + PR (you)
+## Step 6 — Issue + PR (you, via /issue-creator)
 
-Read `.agents/skills/daily-offer-check/references/apply-and-pr.md` now (not earlier). Empty-diff first: if
-`writes == 0`, do not create an issue or a PR — follow the exception in that
-file. Otherwise:
+Read `.agents/skills/daily-offer-check/references/apply-and-pr.md` now (not
+earlier). Empty-diff first: if `writes == 0`, create no issue and no PR —
+follow the exception in that file. Otherwise, in this order:
 
-- tracking issue titled `Daily offer re-verify $today`, **or** `Closes #<N>`
-  when the user named an existing stale-content issue
-- one commit on `chore/daily-offer-check-$today`
-- one PR against `main` whose body starts with `Closes #<issue>`
-- `git add` only paths listed in `applied[]` plus the regenerated artifacts
-  `index.json`, `app/public/llms.txt`, `app/public/llms-full.txt` — never
-  `git add .`
+- tracking issue: the user's named stale-content issue, an open issue from an
+  earlier attempt today, or `/issue-creator "<input>" --auto`
+- stage only `applied[]` paths plus `index.json`, `app/public/llms.txt`,
+  `app/public/llms-full.txt` — never `git add .` — and `check_scope.py
+  --staged` prints `OK scope`
+- one commit on `chore/daily-offer-check-$today`, pushed
+- one PR against `main`: body rendered by `render_report.py --pr-issue` into
+  a file and passed with `--body-file` (first line `Closes #<issue>`)
+- older open sweep PRs closed as superseded
 
-Done when `gh pr view --json url` prints a URL, or the exception fired.
+Done when `gh pr view --json url,number` returns both, or the exception
+fired. Bind `issue` and `pr`.
 
-## Step 7 — Report (you)
+## Step 7 — Review loop (you, via /issue-pr-review)
 
-Print this table (every inventory slug, one row), then the PR URL or the
-empty-diff reason:
+Read `.agents/skills/daily-offer-check/references/review-and-merge.md` now.
+Run up to **3 rounds** of `/issue-pr-review <pr> --auto --no-merge`, each
+followed by that file's round gate (artifact regeneration, scope gate,
+validator). Done when a round is **clean**; bind `head`. A failed gate
+(report the offending paths for manual triage), stagnation (the same findings
+twice in a row), or 3 rounds without a clean one → stop with the PR open; the
+run is `PARTIAL`.
 
-| slug | prior verified_date | verdict | write | evidence |
-| --- | --- | --- | --- | --- |
+## Step 8 — Merge (you)
 
-`write` is `bumped` / `expired` / `none`. `evidence` is the quote (or
-`reason` for unverifiable/conflict).
+**No-merge:** skip and report the clean PR URL. **Unattended:** run the merge
+gate in `references/review-and-merge.md` against `head` (scope gate; PR open,
+mergeable, on `main`, at `head`; every check green including `validate`), then
+`gh pr merge "$pr" --squash --delete-branch --match-head-commit "$head"`.
+Done when the PR reads `MERGED`. Any failed check → no merge, PR open,
+`PARTIAL`.
 
-Then:
+## Step 9 — Report (you)
+
+Render the per-slug table with the script, never by hand (quotes are
+untrusted page text). Drop `--applied` on Report-only:
+
+```bash
+python3 .agents/skills/daily-offer-check/scripts/render_report.py \
+  --inventory /tmp/daily-offer-check-$today-inventory.json \
+  --verdicts /tmp/daily-offer-check-$today-verdicts.json \
+  --applied /tmp/daily-offer-check-$today-applied.json
+```
+
+It prints the summary, the official-source updates (proposed ones on
+Report-only), and one row per inventory slug: `slug | prior verified_date |
+verdict | write | updates | refs | evidence`, where `refs` shows the reference
+trace change (`new`, `+added`, `~refreshed`, `-dropped`). Print it, then:
 
 ```
 ◆ Daily offer check (<today>)
 ··································································
   Inventory:              √ N active
   Coverage:               √ N/N
-  Safe writes:            √ W files
+  Safe writes:            √ W files (B bumped, U updated, E expired, R traces)
   validate_offers.py:     √ / — skipped (report-only or empty)
+  Issue:                  √ #<n> / — skipped
   PR:                     √ <url> / — empty-diff / — report-only
+  Superseded:             #<old PRs> / — none
+  Review:                 √ clean in round K / × <why not> / — skipped
+  Merge:                  √ merged / — no-merge / × <failed check> / — skipped
   ____________________________
   Result:                 PASS | FAIL | PARTIAL
 ```
 
-`PARTIAL` if any slug is `unverifiable` or `conflict` (the PR may still have
-shipped). `FAIL` only when a gate stopped the run before a complete table.
+`PARTIAL` if any slug is `unverifiable` or `conflict`, or an Unattended run
+ended without a merge (review not clean, a gate refused). `FAIL` only when a
+gate stopped the run before a complete table.
