@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-25T22:03:08Z — 187 of 188 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-09-27T03:03:33Z — 181 active offers.
 
 ## Offers (full)
 ### Zed Pro for Students
@@ -85,26 +85,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T22:03:08Z — 
 - Page: https://freetokens.custats.info/offers/vercel-ling-3-0-flash-sante-free.html
 - Summary: InclusionAI's healthcare-focused Ling 3.0 Flash Sante (256K context, function calling, medical reasoning) is free on Vercel AI Gateway through October 4, 2026. Model id inclusionai/ling-3.0-flash-sante-free stops serving requests after the free period; the non-free id continues at standard rates.
 - Claim steps: Create a Vercel account and provision an AI Gateway API key (npx vercel ai-gateway setup). | Call model inclusionai/ling-3.0-flash-sante-free for a guaranteed hard stop after Oct 4, or inclusionai/ling-3.0-flash-sante (bills at standard rates afterward).
-### Ling 3.0 Flash Fin Free (Vercel AI Gateway)
-- Provider: Vercel
-- Category: api_provider
-- Amount: Ling 3.0 Flash Fin at $0 on AI Gateway (256K context, function calling)
-- Status: active — expiry 2026-09-25
-- Verified: 2026-09-25 (social_proof / under-review, signup required)
-- Source: https://vercel.com/changelog/ling-3-0-flash-fin-now-available-on-ai-gateway-for-free
-- Page: https://freetokens.custats.info/offers/vercel-ling-3-0-flash-fin-free.html
-- Summary: InclusionAI's finance-focused Ling 3.0 Flash Fin (256K context, 32K output, reasoning and function calling) is free on Vercel AI Gateway through September 25, 2026. Model id inclusionai/ling-3.0-flash-fin-free returns an error after the offer ends; the non-free id bills at standard rates afterward.
-- Claim steps: Create a Vercel account and provision an AI Gateway API key (npx vercel ai-gateway setup, or vercel ai-gateway coding-agents setup for coding agents). | Call model inclusionai/ling-3.0-flash-fin-free for a guaranteed hard stop after Sep 25, or inclusionai/ling-3.0-flash-fin (bills at standard rates afterward).
-### Vercel AI Gateway Jev Free
-- Provider: Vercel
-- Category: api_provider
-- Amount: Free typesafe-ai/jev inference (32K context) via Vercel AI Gateway
-- Status: active — expiry 2026-09-25
-- Verified: 2026-09-25 (social_proof / verified, signup required)
-- Source: https://vercel.com/ai-gateway/models/jev
-- Page: https://freetokens.custats.info/offers/vercel-ai-gateway-jev-free.html
-- Summary: TypeSafe AI's Jev — a System One evaluation model for fast, structured decisions in software — is free on Vercel AI Gateway: $0 pricing, 32K context, per a promotional period ending September 25, 2026.
-- Claim steps: Get a Vercel AI Gateway API key from the Jev model page. | Call the evaluate endpoint with model 'typesafe-ai/jev' (see the page's SDK snippet).
 ### Vercel AI Gateway — Monthly Free Credit
 - Provider: Vercel
 - Category: api_provider
@@ -435,26 +415,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T22:03:08Z — 
 - Page: https://freetokens.custats.info/offers/openrouter-north-mini-code-free.html
 - Summary: North Mini Code is Cohere's first agentic coding model and the debut of its North family — a sparse MoE with 30B total / 3B active parameters — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 256K context. Created 2026-06-17; no published end date.
 - Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id cohere/north-mini-code:free.
-### Nex-N2.5-Pro Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free nex-agi/nex-n2.5-pro:free endpoint at $0 (262K context, agentic coding / computer-use)
-- Status: active — expiry 2026-09-25
-- Verified: 2026-09-25 (social_proof / under-review, signup required)
-- Source: https://openrouter.ai/nex-agi/nex-n2.5-pro:free
-- Page: https://freetokens.custats.info/offers/openrouter-nex-n2-5-pro-free.html
-- Summary: Nex-N2.5-Pro is Nex AGI's agentic model for turning goals into verified outcomes — agentic coding within a visual feedback loop, multi-file edits, computer use — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-09-08; no published end date.
-- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id nex-agi/nex-n2.5-pro:free.
-### Nex-N2.5-Mini Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free nex-agi/nex-n2.5-mini:free inference at $0 input and output (262K context)
-- Status: active — expiry 2026-09-25
-- Verified: 2026-09-25 (social_proof / under-review, signup required)
-- Source: https://openrouter.ai/nex-agi/nex-n2.5-mini:free
-- Page: https://freetokens.custats.info/offers/openrouter-nex-n2-5-mini-free.html
-- Summary: Free nex-agi/nex-n2.5-mini:free inference at $0 input and output (262K context).
-- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model nex-agi/nex-n2.5-mini:free.
 ### Nemotron 3 Ultra Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -895,16 +855,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T22:03:08Z — 
 - Page: https://freetokens.custats.info/offers/livekit-startup-program.html
 - Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll.
 - Claim steps: Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
-### Ling 3.0 Flash Fin Free (InclusionAI)
-- Provider: InclusionAI
-- Category: api_provider
-- Amount: Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling
-- Status: active — expiry 2026-09-25
-- Verified: 2026-09-25 (social_proof / under-review, signup required)
-- Source: https://openrouter.ai/models
-- Page: https://freetokens.custats.info/offers/ling-3-0-flash-fin-free.html
-- Summary: InclusionAI's Ling 3.0 Flash Fin is available at $0 via OpenRouter, a finance-tuned function-calling model with a 256K context window. The user flagged it as free through 25 Sep 2026.
-- Claim steps: Sign in to OpenRouter at openrouter.ai. | Select the inclusionai/ling-3.0-flash-fin:free model. | Send requests — prompt and completion are $0, with a 256K context window.
 ### Liner Startup Grant — up to $1,000 API Credits
 - Provider: Liner
 - Category: startup_program
@@ -1035,16 +985,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T22:03:08Z — 
 - Page: https://freetokens.custats.info/offers/ideogram-free-plan.html
 - Summary: Ideogram's official pricing page confirms a Free plan at $0 whose credit row reads "Slow credits — Weekly for eligible accounts", while paid tiers get "Unlimited". The page FAQ states eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft, and that the amount may vary — no fixed credit number is published. Free-tier limits also include 1 running + queued generation, and AI-powered editing features are unavailable in the slow queue. No end date for the free plan is stated, so the offer is ongoing.
 - Claim steps: Go to https://ideogram.ai/pricing/ and select the "Free plan" ($0), then click "Start for free". | Sign in or create an Ideogram account — sign in with Google, Apple, or Microsoft to be eligible for weekly credits (per the page FAQ). | Generate images in the slow queue using the weekly slow credits (free tier allows 1 running + queued generation). | Wait for the weekly credit refresh to continue generating; note AI-powered editing features require priority credits and are not available in the slow queue.
-### Hyperbolic Basic Free Tier
-- Provider: Hyperbolic
-- Category: api_provider
-- Amount: Basic tier with $0 minimum deposit — serverless OpenAI-compatible inference on 25+ open models at 60 RPM (Pro needs a >=$5 deposit)
-- Status: active — expiry 2026-09-25
-- Verified: 2026-09-25 (social_proof / under-review, signup required)
-- Source: https://www.hyperbolic.ai/docs/inference/overview
-- Page: https://freetokens.custats.info/offers/hyperbolic-basic-free-tier.html
-- Summary: Hyperbolic's Basic pricing tier requires no minimum deposit ($0) and gives API access to all models on its serverless OpenAI-compatible inference platform (base URL https://api.hyperbolic.xyz/v1) at 60 requests/minute with community support. The Pro tier (600 RPM, priority queue, email support) requires a >=$5 deposit; Enterprise is custom. Note the free element is the $0 barrier to start — usage itself is pay-per-token (text from $0.10/M input tokens); no free-credit grant is advertised on this page.
-- Claim steps: Sign up at app.hyperbolic.ai and generate an API key. | Point any OpenAI-compatible client at https://api.hyperbolic.xyz/v1 with your key. | Stay on the Basic tier: $0 minimum deposit, 60 RPM. Upgrading to Pro requires a >=$5 deposit.
 ### Hume Free Tier — $20 Credits
 - Provider: Hume AI
 - Category: voice
@@ -1345,16 +1285,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T22:03:08Z — 
 - Page: https://freetokens.custats.info/offers/e2b-hobby-100-free-credits.html
 - Summary: E2B's pricing page lists the Hobby plan at $0 with a $100 one-time usage credit. It includes sessions up to 1 hour, up to 20 concurrent sandboxes, and free 10 GiB storage. The page says no credit card is required; usage costs are separate after the included credit.
 - Claim steps: Open the E2B pricing page and choose the free Hobby plan. | Create or sign in to an E2B account; no credit card is required. | Use the included one-time $100 usage credit within the Hobby plan limits.
-### Docker Cloud Sandboxes — $250 Compute Credit
-- Provider: Docker
-- Category: coding
-- Amount: $250 one-time Cloud Sandbox compute credit for new Docker Agentic Platform sign-ups (in lieu of standard $25); credit card required; unused credit expires 6 months after redemption
-- Status: active — expiry 2026-09-26
-- Verified: 2026-09-25 (social_proof / under-review, signup required)
-- Source: https://www.docker.com/c/sbx-promo/
-- Page: https://freetokens.custats.info/offers/docker-cloud-sandbox-250-credit.html
-- Summary: Limited-time promo: new Docker Agentic Platform sign-ups get a one-time $250 Cloud Sandbox compute credit (instead of the standard $25), claimable September 22–26, 2026 11:59 PM PT. Credit applies to metered sandbox compute only; model/API usage is billed separately. Credit card required at signup; unused credit expires 6 months after redemption.
-- Claim steps: Open the Docker Sandboxes promotion page and use Claim my $250 credit (or sign up at app.docker.com). | Create or sign in to a Docker account and complete Docker Agentic Platform signup with a valid credit card (charged only for usage beyond the credit). | Limit one credit per user and account; claim during the offer window (terms: September 22–26, 2026, 11:59 PM PT). | Use Cloud Sandboxes via the web console or sbx CLI (sbx 0.45.1+); compute draws down the $250 credit first.
 ### DigitalOcean Startups (Hatch)
 - Provider: DigitalOcean
 - Category: startup_program
@@ -1874,6 +1804,16 @@ Source: https://freetokens.custats.info/ — generated 2026-09-25T22:03:08Z — 
 - Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
 - Summary: JetBrains gives verified students free access to the entire All Products Pack (IntelliJ IDEA Ultimate, PyCharm Professional, WebStorm, CLion, Rider, PhpStorm, GoLand, DataGrip, etc.) while enrolled. Licenses renew annually with fresh proof and include a 40% graduation discount for two years after expiry.
 - Claim steps: Go to https://www.jetbrains.com/academy/student-pack/ and click Apply. | Verify via school email, ISIC/ITIC, GitHub Student Pack, or uploaded enrollment proof. | Confirm the verification email link to activate approval. | Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled.
+### Google AI Studio — Free Image Generation
+- Provider: Google
+- Category: image
+- Amount: Free image generation in the AI Studio web app (rate-limited; not available via API free tier)
+- Status: active — expiry ongoing
+- Verified: 2026-09-22 (social_proof / verified, signup required)
+- Source: https://aistudio.google.com/
+- Page: https://freetokens.custats.info/offers/google-ai-studio-image.html
+- Summary: Google AI Studio offers free, rate-limited image generation directly in the browser using Gemini image models — no billing account required for the free tier.
+- Claim steps: Open aistudio.google.com in your browser. | Sign in with a Google account. | Choose an image-capable Gemini model and start generating. | Stay within the per-minute/per-day free rate limits.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
