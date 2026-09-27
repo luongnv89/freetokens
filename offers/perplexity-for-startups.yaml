@@ -1,0 +1,17 @@
+# Verified 2026-09-27 against https://www.perplexity.ai/startups/
+# (Direct fetch bot-walled HTTP 403; terms confirmed from the indexed official
+# page: "Eligible startups get 3 months of free Perplexity Enterprise Pro for
+# up to 50 seats, plus $5k in API credits to supercharge their growth."
+# Eligibility: "raised up to $20M in equity funding, less than 5 years old, and
+# associated with one of our Startup Partners". Older partner copy saying 6
+# months is superseded by the current official page's 3 months.)
+title: Perplexity for Startups
+provider: Perplexity
+category: startup_program
+amount: $5,000 in API credits + 3 months of Enterprise Pro for up to 50 seats
+expiry_date: null
+source_url: https://www.perplexity.ai/startups/
+verified_date: 2026-09-27
+verification: social_proof
+review_status: under-review
+signup: required

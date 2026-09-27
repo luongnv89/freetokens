@@ -1,0 +1,15 @@
+# Verified 2026-09-27 against https://aibridge-api.com/pricing.html
+# ("Free Tier — For testing and small projects — $0/month — 500,000 tokens /
+# month — + 500K welcome bonus — All models available". Site brands the
+# product "ModelBridge" on aibridge-api.com; OpenAI-compatible gateway for
+# Chinese LLMs: DeepSeek, Qwen, GLM, Kimi.)
+title: ModelBridge Free Tier
+provider: ModelBridge
+category: api_provider
+amount: 500K tokens/month free + 500K welcome bonus; OpenAI-compatible API gateway for Chinese LLMs (DeepSeek, Qwen, GLM, Kimi)
+expiry_date: null
+source_url: https://aibridge-api.com/pricing.html
+verified_date: 2026-09-27
+verification: social_proof
+review_status: under-review
+signup: required

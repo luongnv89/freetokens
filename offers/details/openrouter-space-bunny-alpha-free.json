@@ -1,0 +1,21 @@
+{
+  "summary": "stealth/space-bunny-alpha is a free stealth model on OpenRouter: $0 prompt and completion pricing, 1M-token context, multimodal input, tool calling and adjustable reasoning, subject to free-model rate limits. (Separate from the identically-named Space Bunny Free listing on OpenCode Zen, which expired 2026-09-30.)",
+  "claim_steps": [
+    "Create or sign in to an OpenRouter account and create an API key at https://openrouter.ai/settings/keys.",
+    "Call the OpenRouter chat-completions API with model stealth/space-bunny-alpha."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/stealth/space-bunny-alpha",
+      "title": "OpenRouter APIs — Space Bunny Alpha (stealth/space-bunny-alpha)",
+      "text": "Guide for calling every confirmed OpenRouter API that serves stealth/space-bunny-alpha — accepts reasoning, tool_choice, tools and multimodal messages."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "OpenRouter Models API",
+      "text": "stealth/space-bunny-alpha is listed with context_length 1,000,000 and prompt/completion prices of 0."
+    }
+  ]
+}

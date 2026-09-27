@@ -1,0 +1,16 @@
+{
+  "summary": "Pinecone for Startups gives free access to the Standard Tier and Pro Support — any cloud/region deployment, RBAC, backups, bulk import, Prometheus metrics, a dedicated Slack channel — plus usage credits and discounts. Eligibility: fewer than 100 employees, Series A or earlier.",
+  "claim_steps": [
+    "Apply via the form at https://www.pinecone.io/startup-program/ (Join the Program).",
+    "Eligibility: fewer than 100 employees and Series A or earlier.",
+    "Questions: startups@pinecone.io."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.pinecone.io/startup-program/",
+      "title": "Pinecone for Startups",
+      "text": "Pinecone for Startups gives you free access to Pinecone's Standard Tier and Pro Support ... Startups in the program also receive usage credits and discounts."
+    }
+  ]
+}

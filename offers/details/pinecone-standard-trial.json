@@ -1,0 +1,16 @@
+{
+  "summary": "Self-serve Pinecone Standard plan trial: $300 in credits over 21 days with access to Standard features (bulk import, backup/restore, RBAC, higher scale limits) — no up-front payment required. One trial per organization; orgs already on Standard/Enterprise or marketplace-subscribed cannot activate it.",
+  "claim_steps": [
+    "Create a Pinecone organization and activate the Standard trial in the console — no up-front payment required.",
+    "One trial per organization; quotas are blocked when credits run out or 21 days elapse.",
+    "Downgrade to Starter or add a payment method before expiry to keep access."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.pinecone.io/guides/organizations/manage-billing/standard-trial",
+      "title": "Pinecone Standard plan trial",
+      "text": "Evaluate the Pinecone Standard plan with $300 in credits over 21 days, including bulk import, backup and restore, RBAC, and higher scale limits."
+    }
+  ]
+}

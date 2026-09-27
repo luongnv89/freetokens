@@ -1,0 +1,16 @@
+# Verified 2026-09-27 against https://fish.audio/startup/
+# ("you get 3 months and 12 million characters per month of free access to Fish
+# Audio's real-time, emotionally rich speech engine"; "12,000,000 characters /
+# month — that's 240+ hours of audio generation every month to prototype, test,
+# and ship your apps"; "Premium Support ... We'll raise your concurrency and
+# even shape the model for you".)
+title: Fish Audio Startup Program
+provider: Fish Audio
+category: startup_program
+amount: 12M characters/month free for 3 months (~240+ hours of audio/month) + premium support and raised concurrency
+expiry_date: null
+source_url: https://fish.audio/startup/
+verified_date: 2026-09-27
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,16 @@
+{
+  "summary": "Regolo's startup partnership: 60 days of free unlimited tokens (up to 50M tokens/day) across 100+ open-source models on EU-hosted, zero-data-retention, OpenAI-compatible infrastructure. No credit card for the free period; applications reviewed within ~48 hours. In return, accepted startups do light co-marketing (logo, content, mentions). Active teams can later apply for a voucher up to €2,000 valid up to 12 months.",
+  "claim_steps": [
+    "Apply via the Builder Program form at https://regolo.ai/builder-program/ (applications reviewed within 48 hours, cohorts limited).",
+    "No credit card needed for the 60-day free period.",
+    "Accepted startups add the Regolo logo to their site and publish real usage content."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://regolo.ai/builder-program/",
+      "title": "Builder Program — Build with Privacy in Europe | Regolo",
+      "text": "Apply to get 60 days unlimited tokens + free credits ... Start with 60 days free, unlimited tokens, no credit card. ... Up to 50,000,000 tokens/day. ... Voucher Opportunity up to €2,000."
+    }
+  ]
+}

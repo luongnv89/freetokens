@@ -2,9 +2,109 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-27T03:03:33Z — 181 active offers.
+Source: https://freetokens.custats.info/ — generated 2026-09-27T14:48:12Z — 187 of 191 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 ## Offers (full)
+### Scaleway Professional €100 Free Credit
+- Provider: Scaleway
+- Category: api_provider
+- Amount: €100 free credit voucher for new Professional accounts, usable across Scaleway cloud services incl. Generative APIs
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://www.scaleway.com/en/scaleway-vs-digitalocean/
+- Page: https://freetokens.custats.info/offers/scaleway-professional-100-credit.html
+- Summary: New Scaleway Professional customers get a €100 free-credit voucher (emailed within 24 hours of account creation) usable across Scaleway cloud services including Generative APIs. Requires a valid payment method; anyone ever invoiced by Scaleway (even €0) is ineligible.
+- Claim steps: Create a new Professional account at Scaleway with a valid payment method. | A €100 voucher code is emailed within 24 hours; redeem it to start the trial. | Eligibility: never previously invoiced by Scaleway (a €0 invoice counts).
+### Runway Builders Program
+- Provider: Runway
+- Category: startup_program
+- Amount: Up to 500k free API credits + Tier 5 rate limits + Runway Characters API access + private Slack/training/support
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://runway.com/product/builders
+- Page: https://freetokens.custats.info/offers/runway-builders-program.html
+- Summary: Runway's startup program for Seed to Series C companies: up to 500k free API credits, Tier 5 (highest) API rate limits, access to the Runway Characters conversational avatar API, and a private builders community with Slack access, training and direct support.
+- Claim steps: Open https://runway.com/product/builders and fill in the application form (company, funding stage, use case). | Eligibility: Seed through Series C startups (incl. Pre-Seed and Bootstrapped options on the form). | Questions can be sent to runway-builders@runwayml.com.
+### Regolo Builder Program
+- Provider: Regolo.ai
+- Category: startup_program
+- Amount: 60 days free unlimited tokens (up to 50M tokens/day) on 100+ OSS models; active teams can later apply for up to €2,000 voucher (≤12 months)
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://regolo.ai/builder-program/
+- Page: https://freetokens.custats.info/offers/regolo-builder-program.html
+- Summary: Regolo's startup partnership: 60 days of free unlimited tokens (up to 50M tokens/day) across 100+ open-source models on EU-hosted, zero-data-retention, OpenAI-compatible infrastructure. No credit card for the free period; applications reviewed within ~48 hours. In return, accepted startups do light co-marketing (logo, content, mentions). Active teams can later apply for a voucher up to €2,000 valid up to 12 months.
+- Claim steps: Apply via the Builder Program form at https://regolo.ai/builder-program/ (applications reviewed within 48 hours, cohorts limited). | No credit card needed for the 60-day free period. | Accepted startups add the Regolo logo to their site and publish real usage content.
+### Pinecone Standard Trial — $300 Credits
+- Provider: Pinecone
+- Category: api_provider
+- Amount: $300 in credits over 21 days on Standard plan features; one trial per organization
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://docs.pinecone.io/guides/organizations/manage-billing/standard-trial
+- Page: https://freetokens.custats.info/offers/pinecone-standard-trial.html
+- Summary: Self-serve Pinecone Standard plan trial: $300 in credits over 21 days with access to Standard features (bulk import, backup/restore, RBAC, higher scale limits) — no up-front payment required. One trial per organization; orgs already on Standard/Enterprise or marketplace-subscribed cannot activate it.
+- Claim steps: Create a Pinecone organization and activate the Standard trial in the console — no up-front payment required. | One trial per organization; quotas are blocked when credits run out or 21 days elapse. | Downgrade to Starter or add a payment method before expiry to keep access.
+### Pinecone for Startups
+- Provider: Pinecone
+- Category: startup_program
+- Amount: Free Standard Tier + Pro Support (any cloud/region, RBAC, backups, import, Prometheus metrics, dedicated Slack) + usage credits and discounts
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://www.pinecone.io/startup-program/
+- Page: https://freetokens.custats.info/offers/pinecone-for-startups.html
+- Summary: Pinecone for Startups gives free access to the Standard Tier and Pro Support — any cloud/region deployment, RBAC, backups, bulk import, Prometheus metrics, a dedicated Slack channel — plus usage credits and discounts. Eligibility: fewer than 100 employees, Series A or earlier.
+- Claim steps: Apply via the form at https://www.pinecone.io/startup-program/ (Join the Program). | Eligibility: fewer than 100 employees and Series A or earlier. | Questions: startups@pinecone.io.
+### Perplexity for Startups
+- Provider: Perplexity
+- Category: startup_program
+- Amount: $5,000 in API credits + 3 months of Enterprise Pro for up to 50 seats
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://www.perplexity.ai/startups/
+- Page: https://freetokens.custats.info/offers/perplexity-for-startups.html
+- Summary: Perplexity's startup program: $5,000 in API credits plus 3 months of Enterprise Pro for up to 50 seats. Eligibility: raised up to $20M in equity funding, less than 5 years old, associated with an approved Perplexity Startup Partner. Existing Enterprise Pro customers are not eligible. Note: older announcement copy said 6 months of Enterprise Pro; the current official page states 3 months.
+- Claim steps: Apply at https://www.perplexity.ai/startups/. | Eligibility: ≤$20M equity funding raised, <5 years old, associated with an approved Startup Partner. | Existing Enterprise Pro subscribers are not eligible.
+### Space Bunny Alpha Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free stealth/space-bunny-alpha inference at $0 input and output — 1M context, multimodal, tools, adjustable reasoning (free-model rate limits)
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/stealth/space-bunny-alpha
+- Page: https://freetokens.custats.info/offers/openrouter-space-bunny-alpha-free.html
+- Summary: stealth/space-bunny-alpha is a free stealth model on OpenRouter: $0 prompt and completion pricing, 1M-token context, multimodal input, tool calling and adjustable reasoning, subject to free-model rate limits. (Separate from the identically-named Space Bunny Free listing on OpenCode Zen, which expired 2026-09-30.)
+- Claim steps: Create or sign in to an OpenRouter account and create an API key at https://openrouter.ai/settings/keys. | Call the OpenRouter chat-completions API with model stealth/space-bunny-alpha.
+### Ming Image 0.1 Design Layer Free (OpenRouter)
+- Provider: OpenRouter
+- Category: image
+- Amount: Free inclusionai/ming-image-0.1-design-layer image-to-image design layer decomposition at $0 (PNG/WebP output)
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://openrouter.ai/inclusionai/ming-image-0.1-design-layer
+- Page: https://freetokens.custats.info/offers/openrouter-ming-image-0-1-design-layer-free.html
+- Summary: inclusionai/ming-image-0.1-design-layer is a free image-to-image model on OpenRouter (served by NovitaAI): decomposes a flattened design image into separate RGBA layers. $0 input/output image-token pricing, PNG/WebP output, up to 1 input reference image per call.
+- Claim steps: Create or sign in to an OpenRouter account and create an API key at https://openrouter.ai/settings/keys. | Call POST https://openrouter.ai/api/v1/images with model inclusionai/ming-image-0.1-design-layer and an input_references image.
+### ModelBridge Free Tier
+- Provider: ModelBridge
+- Category: api_provider
+- Amount: 500K tokens/month free + 500K welcome bonus; OpenAI-compatible API gateway for Chinese LLMs (DeepSeek, Qwen, GLM, Kimi)
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://aibridge-api.com/pricing.html
+- Page: https://freetokens.custats.info/offers/modelbridge-free-tier.html
+- Summary: ModelBridge (aibridge-api.com) free tier: 500,000 tokens per month at $0 plus a one-time 500K welcome bonus, all models included. OpenAI-compatible gateway focused on Chinese LLMs (DeepSeek, Qwen, GLM, Kimi/Moonshot) on Hong Kong nodes.
+- Claim steps: Create a free account on aibridge-api.com — no credit card for the free tier. | Use the OpenAI-compatible API endpoint with your ModelBridge key.
+### Fish Audio Startup Program
+- Provider: Fish Audio
+- Category: startup_program
+- Amount: 12M characters/month free for 3 months (~240+ hours of audio/month) + premium support and raised concurrency
+- Status: active — expiry ongoing
+- Verified: 2026-09-27 (social_proof / under-review, signup required)
+- Source: https://fish.audio/startup/
+- Page: https://freetokens.custats.info/offers/fish-audio-startup-program.html
+- Summary: Fish Audio's startup program: 12 million characters per month of free TTS/audio generation for 3 months (~240+ hours of audio monthly), plus premium support with raised concurrency and model shaping help.
+- Claim steps: Apply via the Startup Program page at https://fish.audio/startup/ (Apply Now).
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1774,46 +1874,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-27T03:03:33Z — 
 - Page: https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html
 - Summary: Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation (or model release/approval, whichever is later). Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry.
 - Claim steps: Create an Alibaba Cloud account and open Alibaba Cloud Model Studio (Singapore region). | Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed. | Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page. | Call eligible models in real time; enable 'Free Quota Only' mode to avoid pay-as-you-go charges after the quota runs out.
-### AI21 Studio Free Trial — $10 Credits
-- Provider: AI21
-- Category: api_provider
-- Amount: $10 credit for new accounts, good for 3 months on platform APIs/SDK/playground (no card to start)
-- Status: active — expiry ongoing
-- Verified: 2026-09-25 (social_proof / under-review, signup required)
-- Source: https://docs.ai21.com/docs/usage-cost
-- Page: https://freetokens.custats.info/offers/ai21-studio-10-credits.html
-- Summary: New AI21 Studio accounts receive a $10 credit good for three months on the AI21 platform (REST APIs, SDK, and playground). After the credit is used or expires, valid billing information is required to continue. Cloud-hosted AI21 models (Bedrock, SageMaker, Azure) are billed by those providers, not this credit. A marketing-page claim of a 7-day window was not independently verified (pricing site 403); this listing follows the official docs.
-- Claim steps: Create an AI21 Studio account (no credit card required to start). | Use the $10 credit on APIs, SDK, and playground for up to three months. | Add billing information after the credit is used or expires to continue.
-### OpenAI Startup Program
-- Provider: OpenAI
-- Category: startup_program
-- Amount: Free OpenAI API credits + rate-limit upgrades + solutions-engineer support (dollar amount not published; requires referral code from an eligible VC partner)
-- Status: active — expiry ongoing
-- Verified: 2026-09-22 (social_proof / under-review, signup required)
-- Source: https://openai.com/startups/
-- Page: https://freetokens.custats.info/offers/openai-startup-program.html
-- Summary: OpenAI's startup program gives portfolio companies of eligible VC partners (e.g. Thrive Capital, Sequoia, a16z, Kleiner Perkins, Conviction) free API credits, rate-limit upgrades, time with solutions engineers, and event access. The dollar amount is not published; applying requires a unique referral code from the VC, a product description, company contacts and basic funding details.
-- Claim steps: Confirm your VC is in OpenAI's partner network and obtain your unique referral code. | Create an OpenAI account and find your Organization ID (Settings → Organization settings). | Apply for credits via openai.com/startups with the referral code, product description, business email and funding details.
-### JetBrains Student Pack — All IDEs Free
-- Provider: JetBrains
-- Category: student
-- Amount: All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount)
-- Status: active — expiry ongoing
-- Verified: 2026-09-22 (social_proof / unverified, signup required)
-- Source: https://www.jetbrains.com/academy/student-pack/
-- Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
-- Summary: JetBrains gives verified students free access to the entire All Products Pack (IntelliJ IDEA Ultimate, PyCharm Professional, WebStorm, CLion, Rider, PhpStorm, GoLand, DataGrip, etc.) while enrolled. Licenses renew annually with fresh proof and include a 40% graduation discount for two years after expiry.
-- Claim steps: Go to https://www.jetbrains.com/academy/student-pack/ and click Apply. | Verify via school email, ISIC/ITIC, GitHub Student Pack, or uploaded enrollment proof. | Confirm the verification email link to activate approval. | Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled.
-### Google AI Studio — Free Image Generation
-- Provider: Google
-- Category: image
-- Amount: Free image generation in the AI Studio web app (rate-limited; not available via API free tier)
-- Status: active — expiry ongoing
-- Verified: 2026-09-22 (social_proof / verified, signup required)
-- Source: https://aistudio.google.com/
-- Page: https://freetokens.custats.info/offers/google-ai-studio-image.html
-- Summary: Google AI Studio offers free, rate-limited image generation directly in the browser using Gemini image models — no billing account required for the free tier.
-- Claim steps: Open aistudio.google.com in your browser. | Sign in with a Google account. | Choose an image-capable Gemini model and start generating. | Stay within the per-minute/per-day free rate limits.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

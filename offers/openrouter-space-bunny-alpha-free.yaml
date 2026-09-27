@@ -1,0 +1,15 @@
+# Verified 2026-09-27 against https://openrouter.ai/stealth/space-bunny-alpha
+# (Model page live; https://openrouter.ai/api/v1/models lists
+# stealth/space-bunny-alpha with context_length 1,000,000 and prompt/completion
+# prices of 0; llms.txt confirms tools, adjustable reasoning and multimodal
+# input support. Stealth model — provider unnamed.)
+title: Space Bunny Alpha Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free stealth/space-bunny-alpha inference at $0 input and output — 1M context, multimodal, tools, adjustable reasoning (free-model rate limits)
+expiry_date: null
+source_url: https://openrouter.ai/stealth/space-bunny-alpha
+verified_date: 2026-09-27
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,16 @@
+{
+  "summary": "Runway's startup program for Seed to Series C companies: up to 500k free API credits, Tier 5 (highest) API rate limits, access to the Runway Characters conversational avatar API, and a private builders community with Slack access, training and direct support.",
+  "claim_steps": [
+    "Open https://runway.com/product/builders and fill in the application form (company, funding stage, use case).",
+    "Eligibility: Seed through Series C startups (incl. Pre-Seed and Bootstrapped options on the form).",
+    "Questions can be sent to runway-builders@runwayml.com."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://runway.com/product/builders",
+      "title": "Runway Builders Program — Startups building with Runway start here",
+      "text": "The Runway Builders Program gives Seed to Series C startups complementary API credits. ... Up to 500k free API credits to start building immediately. Unlock Tier 5 access — Runway's highest API usage tier."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "summary": "inclusionai/ming-image-0.1-design-layer is a free image-to-image model on OpenRouter (served by NovitaAI): decomposes a flattened design image into separate RGBA layers. $0 input/output image-token pricing, PNG/WebP output, up to 1 input reference image per call.",
+  "claim_steps": [
+    "Create or sign in to an OpenRouter account and create an API key at https://openrouter.ai/settings/keys.",
+    "Call POST https://openrouter.ai/api/v1/images with model inclusionai/ming-image-0.1-design-layer and an input_references image."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/inclusionai/ming-image-0.1-design-layer",
+      "title": "OpenRouter APIs — inclusionAI: Ming Image 0.1 Design Layer",
+      "text": "Generate images with inclusionai/ming-image-0.1-design-layer through OpenRouter's Image API — output_format png|webp, input_references up to 1 image."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/images/models/inclusionai/ming-image-0.1-design-layer-20260922/endpoints",
+      "title": "OpenRouter images endpoints API — Ming Image 0.1 Design Layer",
+      "text": "NovitaAI endpoint reports input_image and output_image cost_usd of 0."
+    }
+  ]
+}
