@@ -5,7 +5,7 @@ license: MIT
 effort: high
 compatibility: "Requires git, GitHub CLI (gh), python3, node, and the issue-creator and issue-pr-review skills. Run gh auth status to verify."
 metadata:
-  version: 2.0.0
+  version: 2.0.1
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
@@ -87,7 +87,7 @@ Use that same `$today` for the branch name, `--today` flags, issue input, and PR
 - Stash tracked and untracked work **before** sync as above. On sync failure retain the stash; on pop conflicts stop and ask. Never drop a stash to get a clean tree.
 - If `origin` is missing or the rebase conflicts: stop, report the error verbatim, and ask. Never force-push.
 - **Report-only:** stop after fetch/rebase on the current branch. Do **not** create or check out `chore/daily-offer-check-$today`.
-- **Publishing branches:** require `git status --porcelain` empty **before** any checkout; restored WIP stops the run. If `chore/daily-offer-check-$today` exists (an earlier attempt today), check it out and require `python3 .agents/skills/daily-offer-check/scripts/check_scope.py --base origin/main --head HEAD` to pass, proving it holds only sweep changes; otherwise stop. Else `git checkout -b "chore/daily-offer-check-$today" origin/main` (never `-B`). Require a clean tree again after checkout.
+- **Publishing branches:** require `git status --porcelain` empty **before** any checkout; restored WIP stops the run. Run the **bundled-files check**, then switch branches only with `python3 .agents/skills/daily-offer-check/scripts/prepare_branch.py --today "$today"`, which must print `OK branch`. It creates `chore/daily-offer-check-$today` from `origin/main`, or resumes an earlier attempt today by fast-forward only (to the pushed branch, else `origin/main`); it refuses, without switching branches, a branch that has diverged or lacks `origin/main` (a leftover cut from an older `main` lacks this skill's current scripts). On refusal, stop and report its stderr; never rebuild the branch by hand (`checkout -B`, `reset`, `branch -D`). Then run the bundled-files check again and require `python3 .agents/skills/daily-offer-check/scripts/check_scope.py --base origin/main --head HEAD` to print `OK scope`, proving a resumed branch holds only sweep changes.
 
 ## Leading words
 
@@ -109,12 +109,15 @@ URLs (or the empty-diff exception), a clean round, and `MERGED`. On failure
 print stderr and stop; do not report success for skipped gates. The final
 report includes all skipped steps.
 
-Before inventory, require the five scripts (`list_active.py`,
-`check_coverage.py`, `apply_verdicts.py`, `check_scope.py`, `render_report.py`),
-`agents/verifier.md`, `references/trust-policy.md`,
-`references/apply-and-pr.md`, `references/review-and-merge.md`, and root
-`scripts/offer_model.py` to exist. Missing file: stop and name it. These are
-bundled files; skill dependencies are gated in *Dependency Preflight*.
+The **bundled-files check** requires the six scripts (`list_active.py`,
+`check_coverage.py`, `apply_verdicts.py`, `check_scope.py`,
+`prepare_branch.py`, `render_report.py`), `agents/verifier.md`,
+`references/trust-policy.md`, `references/apply-and-pr.md`,
+`references/review-and-merge.md`, and root `scripts/offer_model.py` to exist.
+Run it before the first bundled script (in Repo Sync on publishing branches,
+before Step 1 on Report-only) and again after `prepare_branch.py`. Missing
+file: stop and name it. These are bundled files; skill dependencies are gated
+in *Dependency Preflight*.
 
 ## Step 1 — Inventory (you)
 
@@ -229,8 +232,8 @@ YAML writes drift the committed generated artifacts — repo-root `index.json`
 does not ship a stale catalog:
 
 ```bash
-cd app && node scripts/load-offers.mjs --index-json ../index.json && cd ..
-cd app && node scripts/generate-llms.mjs && cd ..
+(cd app && node scripts/load-offers.mjs --index-json ../index.json) || exit 1
+(cd app && node scripts/generate-llms.mjs) || exit 1
 ```
 
 Done when `git status --porcelain` shows at most `offers/` writes (offer
