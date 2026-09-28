@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-28T03:13:46Z — 187 of 191 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-09-28T03:21:30Z — 187 of 191 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 ## Offers (full)
 ### Zed Pro for Students
@@ -1218,7 +1218,7 @@ Source: https://freetokens.custats.info/ — generated 2026-09-28T03:13:46Z — 
 ### Figma Education — Professional Plan Free
 - Provider: Figma
 - Category: student
-- Amount: Professional plan free (1 year students / 2 years educators); eligible higher-education and bootcamp users get 3,000 AI credits/month, Figma Make & Sites (not K-12/high school)
+- Amount: Professional plan free (1 year high-school/higher-ed students, 6 months bootcamp/online students, 2 years educators); higher-ed and bootcamp users get 3,000 AI credits/month, Figma Make & Sites (not K-12/high school)
 - Status: active — expiry ongoing
 - Verified: 2026-09-28 (social_proof / unverified, signup required)
 - Source: https://www.figma.com/education/
