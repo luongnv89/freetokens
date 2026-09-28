@@ -12,6 +12,12 @@
       "author": "Merge",
       "handle": "@merge_api",
       "text": "Meet Merge Gateway. One API, every model. $10 in Free LLM Credits on us each month."
+    },
+    {
+      "type": "link",
+      "url": "https://www.merge.dev/pricing/gateway",
+      "title": "Merge Gateway Pricing",
+      "text": "Pro members receive $10 in complimentary Credits monthly, issued on the 1st of each month. Unused Complimentary Credits expire at the end of each month and do not roll over; no cash value; requires active Pro subscription."
     }
   ]
 }

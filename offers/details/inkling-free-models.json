@@ -17,6 +17,18 @@
       "url": "https://openrouter.ai/api/v1/models",
       "title": "OpenRouter Models API",
       "text": "API confirms thinkingmachines/inkling:free and thinkingmachines/inkling-small:free at prompt:0, completion:0, context_length:1048576."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/thinkingmachines/inkling-small:free",
+      "title": "Inkling Small (free) - API Pricing & Benchmarks | OpenRouter",
+      "text": "Thinking Machines: Inkling Small (free). PRICE Free. CONTEXT 1.0M."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/thinkingmachines/inkling:free",
+      "title": "Inkling (free) - API Pricing & Benchmarks | OpenRouter",
+      "text": "Thinking Machines: Inkling (free). PRICE Free. CONTEXT 1.0M."
     }
   ]
 }

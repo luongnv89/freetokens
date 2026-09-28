@@ -9,14 +9,26 @@
     {
       "type": "link",
       "url": "https://www.figma.com/education/",
-      "title": "Figma for Education",
-      "text": "Students and faculty get Figma for free. Use your student email address to sign up for Figma Education."
+      "title": "Figma for Education | Free Tools for the Classroom",
+      "text": "Figma and FigJam are design and collaboration software used by professional designers, engineers, and makers of all kinds. Use them to ideate, create, and share work—all free, as a student or teacher."
     },
     {
       "type": "link",
       "url": "https://help.figma.com/hc/en-us/articles/360041061214",
       "title": "Figma for Education — Help Center",
       "text": "Figma for Education provides free Figma access to students and educators. Higher education users get the Professional plan with AI tools and 3,000 AI credits per month for one year students, two years educators."
+    },
+    {
+      "type": "link",
+      "url": "https://help.figma.com/hc/en-us/articles/360041061214-Figma-for-Education",
+      "title": "Figma for Education – Figma Learn - Help Center",
+      "text": "Available only to higher education and bootcamp Education users (not available to K-12 or high school Education users): AI tools, including Figma Make and the agent in Figma Design"
+    },
+    {
+      "type": "link",
+      "url": "https://help.figma.com/hc/en-us/articles/37611757713431-AI-credits-on-the-Education-plan",
+      "title": "AI credits on the Education plan – Figma Learn - Help Center",
+      "text": "Education plan users get 3,000 AI credits per month."
     }
   ]
 }

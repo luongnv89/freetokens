@@ -11,6 +11,12 @@
       "url": "https://www.upstage.ai/pricing",
       "title": "Pricing — Upstage",
       "text": "AI support program for educational and public interest organizations: We provide eligible institutions with free access to Solar Pro (LLM) and Document Parse for up to one year."
+    },
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/pricing/api",
+      "title": "Pricing | Upstage AI",
+      "text": "AI access for schools, hospitals, and nonprofits. We provide eligible institutions with free access to Solar Pro (LLM) and Document Parse for up to one year — helping you explore and adopt AI without cost barriers."
     }
   ]
 }

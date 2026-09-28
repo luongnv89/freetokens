@@ -12,6 +12,12 @@
       "url": "https://cloud.google.com/free/docs/free-cloud-features",
       "title": "Free Google Cloud features and trial offer | Google Cloud Free Program | Google Cloud Documentation",
       "text": "Learn about Google Cloud's free offerings and free trials, plus how to upgrade your account."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.cloud.google.com/free/docs/free-cloud-features",
+      "title": "Free Google Cloud features and trial offer",
+      "text": "The Free Trial gets you a $300 Welcome credit to spend over 90 days on various Google Cloud products and you won't be billed."
     }
   ]
 }
