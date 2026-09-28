@@ -1,0 +1,16 @@
+# Verified 2026-09-28 against https://inferall.ai/pricing
+# ("New accounts get 25 free NIM calls before any payment; after those, the
+# $5 starter pack unlocks ongoing NIM access. That $5 is not a fee, it
+# becomes spendable balance" — 15+ NVIDIA NIM open models at $0 input/output
+# within free-plan daily caps: 50 chat / 100 text / 20 image-analyze /
+# 10 image-generate / 5 video-generate per day.)
+title: InferAll Free — 25 NIM Trial + $0 OSS Models
+provider: InferAll
+category: api_provider
+amount: 25 free NVIDIA NIM calls on signup (no card); ongoing $0 in/out on 15+ NIM open models after one-time $5 activation, within daily caps
+expiry_date: null
+source_url: https://inferall.ai/pricing
+verified_date: 2026-09-28
+verification: social_proof
+review_status: under-review
+signup: required
