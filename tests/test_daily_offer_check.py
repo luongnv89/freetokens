@@ -20,7 +20,7 @@ class DailyOfferCheckTests(unittest.TestCase):
     def test_bundled_dependencies_exist(self):
         for name in ('scripts/list_active.py', 'scripts/check_coverage.py',
                      'scripts/check_scope.py', 'scripts/apply_verdicts.py',
-                     'scripts/render_report.py',
+                     'scripts/render_report.py', 'scripts/prepare_branch.py',
                      'agents/verifier.md', 'references/trust-policy.md',
                      'references/apply-and-pr.md', 'references/review-and-merge.md'):
             with self.subTest(name=name):
@@ -441,7 +441,7 @@ class DailyOfferCheckTests(unittest.TestCase):
     def git(self, repo, *args):
         env = dict(os.environ, GIT_AUTHOR_NAME='t', GIT_AUTHOR_EMAIL='t@t',
                    GIT_COMMITTER_NAME='t', GIT_COMMITTER_EMAIL='t@t')
-        result = subprocess.run(['git', '-C', str(repo), *args],
+        result = subprocess.run(['git', '-c', 'core.hooksPath=/dev/null', '-C', str(repo), *args],
                                 capture_output=True, text=True, env=env)
         self.assertEqual(result.returncode, 0, result.stderr)
         return result.stdout
@@ -514,6 +514,148 @@ class DailyOfferCheckTests(unittest.TestCase):
                     result = self.run_scope(repo, mode, ok=False)
                     self.assertIn('Scope failed:', result.stderr)
                     self.assertNotIn('OK scope', result.stdout)
+
+    SWEEP = 'chore/daily-offer-check-2020-02-01'
+
+    def make_clone(self):
+        seed = self.make_repo()
+        self.git(seed, 'branch', '-M', 'main')
+        origin = self.root / f'origin{self.repo_count}.git'
+        work = self.root / f'work{self.repo_count}'
+        self.git(self.root, 'clone', '-q', '--bare', str(seed), str(origin))
+        self.git(self.root, 'clone', '-q', str(origin), str(work))
+        return origin, work
+
+    def spawn(self, origin):
+        self.repo_count += 1
+        clone = self.root / f'work{self.repo_count}'
+        self.git(self.root, 'clone', '-q', str(origin), str(clone))
+        return clone
+
+    def prepare(self, work, ok=True):
+        return self.cli('prepare_branch.py', '--repo', work, '--today', '2020-02-01', ok=ok)
+
+    def test_prepare_creates_from_origin_main(self):
+        origin, work = self.make_clone()
+        result = self.prepare(work)
+        self.assertIn(f'OK branch {self.SWEEP}', result.stdout)
+        self.assertIn('created from origin/main', result.stdout)
+        self.assertEqual(self.git(work, 'rev-parse', '--abbrev-ref', 'HEAD').strip(), self.SWEEP)
+        self.assertEqual(self.git(work, 'rev-parse', 'HEAD').strip(),
+                         self.git(work, 'rev-parse', 'origin/main').strip())
+        no_upstream = subprocess.run(['git', '-C', str(work), 'config', '--get',
+                                      f'branch.{self.SWEEP}.merge'], capture_output=True)
+        self.assertNotEqual(no_upstream.returncode, 0)
+
+    def test_prepare_fast_forwards_stale_leftover_to_pushed_attempt(self):
+        origin, work = self.make_clone()
+        self.git(work, 'branch', self.SWEEP, 'origin/main')
+        other = self.spawn(origin)
+        (other / 'skill-v2.txt').write_text('v2\n')
+        self.git(other, 'add', 'skill-v2.txt')
+        self.git(other, 'commit', '-qm', 'v2')
+        self.git(other, 'push', 'origin', 'main')
+        self.git(other, 'checkout', '-q', '-b', self.SWEEP)
+        yaml = other / 'offers/one.yaml'
+        yaml.write_text(yaml.read_text().replace('2020-01-01', '2020-02-01'))
+        self.git(other, 'add', 'offers/one.yaml')
+        self.git(other, 'commit', '-qm', 'sweep')
+        self.git(other, 'push', 'origin', self.SWEEP)
+        pushed = self.git(other, 'rev-parse', 'HEAD').strip()
+        result = self.prepare(work)
+        self.assertIn(f'fast-forwarded to origin/{self.SWEEP}', result.stdout)
+        self.assertEqual(self.git(work, 'rev-parse', 'HEAD').strip(), pushed)
+        self.assertTrue((work / 'skill-v2.txt').is_file())
+
+    def test_prepare_fast_forwards_unpushed_leftover_to_origin_main(self):
+        origin, work = self.make_clone()
+        self.git(work, 'branch', self.SWEEP, 'origin/main')
+        other = self.spawn(origin)
+        (other / 'next.txt').write_text('next\n')
+        self.git(other, 'add', 'next.txt')
+        self.git(other, 'commit', '-qm', 'next')
+        self.git(other, 'push', 'origin', 'main')
+        new_main = self.git(other, 'rev-parse', 'HEAD').strip()
+        result = self.prepare(work)
+        self.assertIn('fast-forwarded to origin/main', result.stdout)
+        self.assertEqual(self.git(work, 'rev-parse', 'HEAD').strip(), new_main)
+
+    def test_prepare_keeps_local_commits_ahead(self):
+        origin, work = self.make_clone()
+        self.git(work, 'checkout', '-q', '-b', self.SWEEP)
+        (work / 'wip.txt').write_text('wip\n')
+        self.git(work, 'add', 'wip.txt')
+        self.git(work, 'commit', '-qm', 'wip')
+        ahead = self.git(work, 'rev-parse', 'HEAD').strip()
+        self.git(work, 'checkout', '-q', 'main')
+        result = self.prepare(work)
+        self.assertIn('ahead of origin/main', result.stdout)
+        self.assertEqual(self.git(work, 'rev-parse', 'HEAD').strip(), ahead)
+
+    def test_prepare_refuses_diverged_branch(self):
+        origin, work = self.make_clone()
+        self.git(work, 'checkout', '-q', '-b', self.SWEEP)
+        (work / 'wip.txt').write_text('wip\n')
+        self.git(work, 'add', 'wip.txt')
+        self.git(work, 'commit', '-qm', 'wip')
+        stale = self.git(work, 'rev-parse', 'HEAD').strip()
+        self.git(work, 'checkout', '-q', 'main')
+        other = self.spawn(origin)
+        (other / 'next.txt').write_text('n\n')
+        self.git(other, 'add', 'next.txt')
+        self.git(other, 'commit', '-qm', 'next')
+        self.git(other, 'push', 'origin', 'main')
+        result = self.prepare(work, ok=False)
+        self.assertIn('diverged', result.stderr)
+        self.assertIn('Branch refused:', result.stderr)
+        self.assertEqual(self.git(work, 'rev-parse', '--abbrev-ref', 'HEAD').strip(), 'main')
+        self.assertEqual(self.git(work, 'rev-parse', self.SWEEP).strip(), stale)
+
+    def test_prepare_refuses_pushed_branch_behind_main(self):
+        origin, work = self.make_clone()
+        other = self.spawn(origin)
+        self.git(other, 'checkout', '-q', '-b', self.SWEEP)
+        (other / 'sweep.txt').write_text('s\n')
+        self.git(other, 'add', 'sweep.txt')
+        self.git(other, 'commit', '-qm', 'sweep')
+        self.git(other, 'push', 'origin', self.SWEEP)
+        self.git(other, 'checkout', '-q', 'main')
+        (other / 'next.txt').write_text('n\n')
+        self.git(other, 'add', 'next.txt')
+        self.git(other, 'commit', '-qm', 'next')
+        self.git(other, 'push', 'origin', 'main')
+        result = self.prepare(work, ok=False)
+        self.assertIn('does not contain origin/main', result.stderr)
+        self.assertEqual(self.git(work, 'rev-parse', '--abbrev-ref', 'HEAD').strip(), 'main')
+        missing = subprocess.run(['git', '-C', str(work), 'rev-parse', '--verify',
+                                  '--quiet', f'refs/heads/{self.SWEEP}'], capture_output=True)
+        self.assertNotEqual(missing.returncode, 0)
+
+    def test_prepare_refuses_dirty_tree(self):
+        origin, work = self.make_clone()
+        (work / 'stray.txt').write_text('x\n')
+        result = self.prepare(work, ok=False)
+        self.assertIn('not clean', result.stderr)
+        self.assertEqual(self.git(work, 'rev-parse', '--abbrev-ref', 'HEAD').strip(), 'main')
+        missing = subprocess.run(['git', '-C', str(work), 'rev-parse', '--verify',
+                                  '--quiet', f'refs/heads/{self.SWEEP}'], capture_output=True)
+        self.assertNotEqual(missing.returncode, 0)
+
+    def test_prepare_ignores_deleted_remote_branch(self):
+        origin, work = self.make_clone()
+        other = self.spawn(origin)
+        self.git(other, 'checkout', '-q', '-b', self.SWEEP)
+        (other / 'sweep.txt').write_text('s\n')
+        self.git(other, 'add', 'sweep.txt')
+        self.git(other, 'commit', '-qm', 'sweep')
+        self.git(other, 'push', 'origin', self.SWEEP)
+        self.git(other, 'checkout', '-q', 'main')
+        self.git(work, 'fetch', '-q', 'origin')
+        self.git(other, 'push', 'origin', '--delete', self.SWEEP)
+        result = self.prepare(work)
+        self.assertIn('created from origin/main', result.stdout)
+        self.assertEqual(self.git(work, 'rev-parse', 'HEAD').strip(),
+                         self.git(work, 'rev-parse', 'origin/main').strip())
 
     def report_inventory(self, slugs=('one',)):
         return dict(today='2020-02-01', offers_dir=str(self.offers.resolve()),

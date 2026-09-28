@@ -20,12 +20,15 @@ keeps the merge in Step 8, behind the scope gate. Run at most **3 rounds**.
 3. Round gate, every round, clean or not:
 
    ```bash
-   git fetch origin
-   git checkout "chore/daily-offer-check-$today"
-   git pull --ff-only origin "chore/daily-offer-check-$today"
-   cd app && node scripts/load-offers.mjs --index-json ../index.json && cd ..
-   cd app && node scripts/generate-llms.mjs && cd ..
+   git fetch origin \
+     && git checkout "chore/daily-offer-check-$today" \
+     && git pull --ff-only origin "chore/daily-offer-check-$today" || exit 1
+   (cd app && node scripts/load-offers.mjs --index-json ../index.json) || exit 1
+   (cd app && node scripts/generate-llms.mjs) || exit 1
    ```
+
+   Any of these failing stops the run with the PR open: the gates below never
+   run on a stale checkout or from `app/`.
 
    If regeneration changed anything, stage exactly `index.json`,
    `app/public/llms.txt`, and `app/public/llms-full.txt`, commit
