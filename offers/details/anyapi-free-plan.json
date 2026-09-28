@@ -1,0 +1,16 @@
+{
+  "summary": "AnyAPI's Free plan grants 100K anyTokens per day across free models on its OpenAI-compatible gateway to 400+ models. Unlimited users, AnyAPI SDK / AnyCLI / AnyChat included, no credit card required. Paid plans roll unused tokens over monthly; the free daily allowance does not carry over.",
+  "claim_steps": [
+    "Sign up at anyapi.ai — no credit card required.",
+    "Get an API key and call the OpenAI-compatible endpoint, or use the AnyChat playground.",
+    "Free plan provides 100K anyTokens/day on free models; the allowance resets daily."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://anyapi.ai/pricing",
+      "title": "Pricing | AnyAPI.ai",
+      "text": "Free — $0 / mo. Perfect for testing and learning. ANY Tokens: 100K / day. Users: Unlimited. All free models. No credit card required."
+    }
+  ]
+}

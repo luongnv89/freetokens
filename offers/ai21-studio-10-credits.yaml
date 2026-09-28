@@ -1,16 +1,15 @@
-# Verified 2026-09-07 against https://docs.ai21.com/docs/usage-cost
-# ("New accounts are given a $10 credit good for three months on the AI21
-# platform. You can use your credit for all usage of the APIs, the SDK, and
-# the playground.")
-# Marketing page https://www.ai21.com/pricing/ returned 403 (Cloudflare);
-# the reported "7 days" claim was not independently verified. Amount follows
-# the official docs (source_url).
+# Verified 2026-09-28 against https://www.ai21.com/pricing/
+# ("Free Trial — $10 credits for 7 days. No credit card needed.")
+# CONFLICT: docs.ai21.com/docs/usage-cost still states "$10 credit good for
+# three months". The marketing pricing page (reachable again after earlier
+# Cloudflare 403s) states 7 days — amount/duration follows the pricing page
+# per the input listing; needs curator sign-off.
 title: AI21 Studio Free Trial — $10 Credits
 provider: AI21
 category: api_provider
-amount: $10 credit for new accounts, good for 3 months on platform APIs/SDK/playground (no card to start)
+amount: $10 credit for new accounts, valid 7 days on platform APIs/SDK/playground (no card to start)
 expiry_date: null
-source_url: https://docs.ai21.com/docs/usage-cost
+source_url: https://www.ai21.com/pricing/
 verified_date: 2026-09-28
 verification: social_proof
 review_status: under-review

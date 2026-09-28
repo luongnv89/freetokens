@@ -1,16 +1,22 @@
 {
-  "summary": "InclusionAI's Ling 3.0 Flash Fin is available at $0 via OpenRouter, a finance-tuned function-calling model with a 256K context window. The user flagged it as free through 25 Sep 2026.",
+  "summary": "InclusionAI's Ling 3.0 Flash Fin is available at $0 via OpenRouter (model id inclusionai/ling-3.0-flash-fin:free), a finance-tuned function-calling MoE with a 262K context window. An earlier curator flag carried a 25 Sep 2026 end date from Vercel's changelog; that date applied to Vercel AI Gateway, not OpenRouter — the :free endpoint is still listed at $0 with no published end date as of 2026-09-28.",
   "claim_steps": [
-    "Sign in to OpenRouter at openrouter.ai.",
+    "Sign in to OpenRouter at openrouter.ai and create an API key.",
     "Select the inclusionai/ling-3.0-flash-fin:free model.",
-    "Send requests — prompt and completion are $0, with a 256K context window."
+    "Send requests — prompt and completion are $0, with a 262K context window."
   ],
   "social_proof": [
     {
       "type": "link",
+      "url": "https://openrouter.ai/inclusionai/ling-3.0-flash-fin:free",
+      "title": "inclusionAI: Ling 3.0 Flash Fin (free) | OpenRouter",
+      "text": "Model page for inclusionai/ling-3.0-flash-fin:free live 2026-09-28; API catalog lists the :free variant at prompt:0 / completion:0, context_length 262144."
+    },
+    {
+      "type": "link",
       "url": "https://openrouter.ai/models",
       "title": "OpenRouter Models",
-      "text": "API confirms inclusionai/ling-3.0-flash-fin:free at prompt:0, completion:0, context_length:262144. Re-verified 2026-09-16: :free variant still listed at $0."
+      "text": "API confirms inclusionai/ling-3.0-flash-fin:free at prompt:0, completion:0, context_length:262144. Re-verified 2026-09-28: :free variant still listed at $0."
     }
   ]
 }

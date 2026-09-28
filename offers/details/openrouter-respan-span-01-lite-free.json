@@ -1,0 +1,22 @@
+{
+  "summary": "Respan's Span-01 Lite is a behavior-scoring model released 2026-09-26: for each plain-language behavior you define it returns the probability the behavior is present in a conversation span, suited to high-volume evaluation and monitoring. The respan/span-01-lite:free endpoint is $0 and rate-limited. It runs on the OpenRouter Decisions API (typed questions over a state — noul, choice, score), not the chat-completions endpoint, so chat SDKs will not work with it.",
+  "claim_steps": [
+    "Create an OpenRouter account and API key at openrouter.ai/settings/keys.",
+    "Call model respan/span-01-lite:free via the OpenRouter Decisions API (openrouter.alpha.decisions.create) — not chat completions.",
+    "Free endpoint is rate-limited; pricing shows $0 for prompt and completion tokens."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/respan/span-01-lite:free",
+      "title": "Span-01 Lite (free) - API Pricing & Providers | OpenRouter",
+      "text": "Price: Free. Released Sep 26, 2026. Is Span-01 Lite (free) free? Yes. The pricing shown on this page for Span-01 Lite (free) is zero, so you are not charged for prompt or completion tokens. Free endpoints are rate limited."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/respan",
+      "title": "Respan API and Models | OpenRouter",
+      "text": "Span-01 Lite and Span-01 Lite (free) are available at no cost through the OpenRouter API. Span-01 is the most recently added Respan model on OpenRouter, listed on September 26, 2026."
+    }
+  ]
+}

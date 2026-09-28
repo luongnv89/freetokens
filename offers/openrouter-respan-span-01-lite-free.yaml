@@ -1,0 +1,18 @@
+# Verified 2026-09-28 against https://openrouter.ai/respan/span-01-lite:free
+# ("Price Free — Released Sep 26, 2026"; "Is Span-01 Lite (free) free? Yes.
+# The pricing shown on this page for Span-01 Lite (free) is zero, so you are
+# not charged for prompt or completion tokens. Free endpoints are rate
+# limited.") Behavior-scoring model on the OpenRouter Decisions API — not
+# chat completions; absent from /api/v1/models for that reason. Earlier
+# 2026-09-27 check saw a 404 under bot filtering; page loads with a
+# standard browser UA.
+title: Span-01 Lite Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free respan/span-01-lite:free behavior-scoring endpoint at $0 via OpenRouter Decisions API (rate-limited)
+expiry_date: null
+source_url: https://openrouter.ai/respan/span-01-lite:free
+verified_date: 2026-09-28
+verification: social_proof
+review_status: under-review
+signup: required
