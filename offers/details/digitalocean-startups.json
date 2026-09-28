@@ -11,6 +11,12 @@
       "url": "https://www.digitalocean.com/hatch",
       "title": "DigitalOcean Startups (Hatch)",
       "text": "12 months to scale: Get the cloud infrastructure you need with DigitalOcean credits (amount varies). Select startups will be invited to apply for GPU credit packages. Must have raised $10m or less. Must have a company website, and an email address associated with the company website. Must create a registered DigitalOcean team account with a business/company email."
+    },
+    {
+      "type": "link",
+      "url": "https://www.digitalocean.com/startups",
+      "title": "Grow with the Startup-Friendly AI-Native Cloud | DigitalOcean Startups",
+      "text": "Get the cloud infrastructure you need with DigitalOcean credits (amount varies) to focus on building, not billing."
     }
   ]
 }

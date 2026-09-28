@@ -4,10 +4,10 @@
 title: OpenRouter Free Models
 provider: OpenRouter
 category: api_provider
-amount: Free :free model variants - 50 requests/day at 20 req/min (1,000/day once you have purchased $10 in credits all-time)
+amount: Free :free model variants — 50 requests/day at 20 req/min (1,000/day after approximately $9 in purchased credits all-time, per the current threshold qualification)
 expiry_date: null
 source_url: https://openrouter.ai/docs/api-reference/limits
-verified_date: 2026-09-25
+verified_date: 2026-09-28
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: verified

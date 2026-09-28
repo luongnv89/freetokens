@@ -23,6 +23,12 @@
       "url": "https://exa.ai/docs/reference/rate-limits.md",
       "title": "Rate Limits",
       "text": "/search is limited to 10 QPS; /answer is limited to 10 QPS."
+    },
+    {
+      "type": "link",
+      "url": "https://exa.ai/docs/admin/billing",
+      "title": "Billing and Rate Limits - Exa",
+      "text": "Every new team starts on the Free tier with $10 in credits, available in full the day you sign up regardless of the date. Your free balance then resets to $10 on the first day of every calendar month. A user’s first team also earns a one-time $10 bonus when that user completes onboarding in the dashboard."
     }
   ]
 }

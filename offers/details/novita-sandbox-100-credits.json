@@ -19,6 +19,12 @@
       "url": "https://novita.ai/docs/guides/sandbox-overview",
       "title": "Novita Sandbox Overview",
       "text": "Novita Sandbox offers isolated, stateful execution environments designed for AI agents. Billing is per-second for CPU and RAM."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.novita.ai/guides/sandbox-pricing",
+      "title": "Pricing - Documentation",
+      "text": "New users can complete a quick account setup survey to receive $100 in promotional credits for eligible Novita Sandbox usage. No credit card is required."
     }
   ]
 }

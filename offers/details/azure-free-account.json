@@ -12,6 +12,12 @@
       "url": "https://azure.microsoft.com/en-us/free/",
       "title": "Create Your Azure Free Account Or Pay As You Go | Microsoft Azure",
       "text": "Access to full catalog of services up to free amounts and $200 credit. $200 credit to use on Azure services within 30 days. Spending protection—credit card won’t be charged. Move to pay-as-you-go pricing to continue beyond 30 days or after credit is used up."
+    },
+    {
+      "type": "link",
+      "url": "https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account?icid=azurefreeaccount",
+      "title": "Create Your Azure Free Account Or Pay As You Go | Microsoft Azure",
+      "text": "$200 credit to use on Azure services within 30 days"
     }
   ]
 }

@@ -9,8 +9,8 @@
     {
       "type": "link",
       "url": "https://docs.llm7.io/limits",
-      "title": "Limits | LLM7.io Documentation",
-      "text": "Anonymous access allows 1 request per second, 10 per minute, 60 per hour, and 500,000 tokens per 24 hours."
+      "title": "Limits - LLM7.io Documentation",
+      "text": "Anonymous 500,000 tokens per 24 hours"
     }
   ]
 }

@@ -11,6 +11,12 @@
       "url": "https://gladia.io/pricing",
       "title": "Transparent API pricing | Gladia",
       "text": "Sign up and get 50€ in free credits, a one-time grant with no monthly reset. That's roughly 80+ hours of pre-recorded transcription or 60+ hours of real-time transcription at current rates."
+    },
+    {
+      "type": "link",
+      "url": "https://www.gladia.io/pricing",
+      "title": "Pricing — Transparent API pricing | Gladia",
+      "text": "50€ in free credits"
     }
   ]
 }

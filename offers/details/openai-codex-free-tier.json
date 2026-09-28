@@ -32,6 +32,12 @@
       "url": "https://openai.com/chatgpt/pricing/",
       "title": "Pricing | ChatGPT",
       "text": "Paid plans (Plus, Pro, Business, and Enterprise) are priced per user per month. We offer monthly plans for Plus, Pro, an"
+    },
+    {
+      "type": "link",
+      "url": "https://learn.chatgpt.com/docs/pricing",
+      "title": "Pricing | ChatGPT Learn",
+      "text": "ChatGPT Work and Codex are included in your ChatGPT Free, Go, Plus, Pro, Business, Edu, or Enterprise plan. Free: Explore Codex capabilities on quick coding tasks. $0/month. GPT-6 Luna at Standard speed in the desktop app, subject to rollout"
     }
   ]
 }
