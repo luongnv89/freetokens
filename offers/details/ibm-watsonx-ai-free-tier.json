@@ -1,0 +1,15 @@
+{
+  "summary": "IBM watsonx.ai's Free Toolbox playground includes up to 300,000 foundation-model tokens per month, up to 20 Compute Usage Hours (CUH) per month of machine-learning tools, and up to 100 text-extraction documents per month.",
+  "claim_steps": [
+    "Create an IBM account and start the free trial from https://www.ibm.com/products/watsonx-ai/pricing.",
+    "Use the Free Toolbox playground: foundation models up to 300,000 tokens/month, ML tools up to 20 CUH/month, text extraction up to 100 docs/month."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.ibm.com/products/watsonx-ai/pricing",
+      "title": "watsonx.ai pricing",
+      "text": "Free Toolbox playground — Foundation Models: Up to 300,000 tokens per month. Machine Learning Tools: Up to 20 Compute Usage Hours (CUH) per month. Text Extraction: Up to 100 documents per month."
+    }
+  ]
+}

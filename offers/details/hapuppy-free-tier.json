@@ -1,0 +1,22 @@
+{
+  "summary": "Hapuppy's free tier grants a one-time 200K-credit signup bonus for its OpenAI-compatible API gateway (Claude, GPT, Gemini, Grok, DeepSeek and others — 105+ models total). The free tier is limited to basic models at 10 RPM and the grant never resets or refills. One-time credit packs ($9.99+) unlock all models at 100 RPM and never expire.",
+  "claim_steps": [
+    "Sign up at https://hapuppy.com/register.",
+    "Dashboard → API Keys → Create Key (key format sk-hapuppy-…).",
+    "Call https://beta.hapuppy.com/v1 with any OpenAI-compatible client; the 200K signup credits are granted once."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://hapuppy.com/en/terms",
+      "title": "Terms of Service · Hapuppy",
+      "text": "The Free tier includes a one-time 200K credit sign-up bonus that does not reset daily. ... Free tier: $0, 10 RPM, Basic models. The Free tier's sign-up credits are a one-time grant and are not refilled."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.hapuppy.com/quickstart",
+      "title": "Quickstart — Hapuppy",
+      "text": "Sign up for a free account at hapuppy.com/register. Free | $0 | 200K on sign-up | Basic models, one-time grant. Paid tiers share a 100 RPM rate limit; the Free tier is 10 RPM."
+    }
+  ]
+}

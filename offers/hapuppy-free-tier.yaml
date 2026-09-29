@@ -1,0 +1,16 @@
+# Verified 2026-09-29 against https://hapuppy.com/en/terms and
+# https://docs.hapuppy.com/quickstart
+# ("The Free tier includes a one-time 200K credit sign-up bonus that does
+# not reset daily." Free tier: $0, 10 RPM, basic models; 105+ models total
+# on one-time paid packs. Note: the submission's "100K daily" claim is
+# contradicted by the ToS — corrected to official terms.)
+title: Hapuppy Free Tier
+provider: Hapuppy
+category: api_provider
+amount: 200K one-time free credits on signup (basic models, 10 RPM); OpenAI-compatible gateway
+expiry_date: null
+source_url: https://hapuppy.com/en/terms
+verified_date: 2026-09-29
+verification: social_proof
+review_status: under-review
+signup: required

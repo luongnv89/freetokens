@@ -1,0 +1,16 @@
+# Verified 2026-09-29 — official OpenAPI announcement (tripo3d.ai blog,
+# bot-walled to direct fetch; verbatim via search index): "We offer 2,000
+# credits for free for every account when you first generate the API key."
+# docs.tripo3d.ai confirms credit billing ($1.00 = 100 credits). Corroborated
+# by aifree.dev (verified 2026-09-13) and aicredits.dev.
+# NOTE: Tripo API V2 retires 2026-11-01 per docs banner; V3 continues.
+title: Tripo AI 2,000 Free API Credits
+provider: Tripo AI
+category: image
+amount: 2,000 free API credits (~$20 at $0.01/credit), granted once per account on first API key generation
+expiry_date: null
+source_url: https://www.tripo3d.ai/blog/announcement-tripo-openapi-platform-payment-system
+verified_date: 2026-09-29
+verification: social_proof
+review_status: under-review
+signup: required

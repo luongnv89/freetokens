@@ -1,0 +1,15 @@
+# Verified 2026-09-29 against https://www.meshy.ai/pricing
+# (FAQ: "We provide free users with 100 credits every month, which
+# automatically reset at 00:00 (UTC) on the first day of each month."
+# "The Free plan is available with no credit card required. You get 100
+# credits/month. Free-plan outputs are licensed under CC BY 4.0.")
+title: Meshy Free Plan
+provider: Meshy
+category: image
+amount: 100 free credits/month (reset on the 1st at 00:00 UTC), 3D generation; outputs under CC BY 4.0
+expiry_date: null
+source_url: https://www.meshy.ai/pricing
+verified_date: 2026-09-29
+verification: social_proof
+review_status: under-review
+signup: required
