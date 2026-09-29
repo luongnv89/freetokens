@@ -1,0 +1,15 @@
+# Verified 2026-09-29 against https://www.speechmatics.com/pricing
+# ("Start with $100 in credit, no card required." FAQ: "New accounts start
+# with $100 in credit, no card required. Once it's used, add a card in your
+# account settings to switch to pay-as-you-go." Free tier: STT 55+ languages
+# + TTS, 2 concurrent real-time sessions.)
+title: Speechmatics $100 Free Credit
+provider: Speechmatics
+category: voice
+amount: $100 in free credits (STT 55+ languages + TTS), 2 concurrent real-time sessions, no card required
+expiry_date: null
+source_url: https://www.speechmatics.com/pricing
+verified_date: 2026-09-29
+verification: social_proof
+review_status: under-review
+signup: required

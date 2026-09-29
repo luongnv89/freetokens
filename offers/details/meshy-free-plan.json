@@ -1,0 +1,16 @@
+{
+  "summary": "Meshy's Free plan grants 100 credits every month for its 3D-generation tools (text-to-3D, image-to-3D, AI texturing), resetting at 00:00 UTC on the first of each month. No credit card required; free-plan outputs are licensed under CC BY 4.0.",
+  "claim_steps": [
+    "Sign up free at https://www.meshy.ai — no credit card required.",
+    "Receive 100 credits/month; credits reset at 00:00 UTC on the first day of each month.",
+    "Free-plan outputs carry a CC BY 4.0 license (commercial use allowed with attribution)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.meshy.ai/pricing",
+      "title": "Meshy Pricing & Plans",
+      "text": "We provide free users with 100 credits every month, which automatically reset at 00:00 (UTC) on the first day of each month. ... The Free plan is available with no credit card required. You get 100 credits/month. Free-plan outputs are licensed under CC BY 4.0."
+    }
+  ]
+}
