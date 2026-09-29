@@ -1,0 +1,74 @@
+{
+  "skill_name": "offer-updater",
+  "evals": [
+    {
+      "id": 1,
+      "name": "input-conflict-official-wins",
+      "kind": "happy-path",
+      "prompt": "Screenshot transcript of an X post by @ai_deals_daily: \"Google Cloud just bumped its free trial — every new account now gets $500 in credits for 120 days! cloud.google.com/free\". Please update our Google Cloud free trial listing.",
+      "expected_output": "Official Google Cloud pages win: the refresh draft keeps the officially stated credit and trial window (not $500 / 120 days) with today's verified_date, Step 5 shows a side-by-side 'Conflicts settled (official wins)' table, and the curator is asked nothing before the commit gate.",
+      "files": [],
+      "expectations": [
+        "No question or request for a decision is put to the curator before the Step 5 presentation",
+        "needs_review/google-cloud-300-free-trial.yaml states the amount quoted from an official Google Cloud page, not the input's $500 / 120 days",
+        "The final response contains a side-by-side conflicts table contrasting the input claim with the official quote and the value used",
+        "The validator helper validate_offer.py was run on the draft",
+        "Nothing was committed, pushed, or opened on GitHub"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "missing-fields-filled-from-official",
+      "kind": "happy-path",
+      "prompt": "Someone in a Discord said Leonardo.ai has a free plan that gives you daily tokens for image generation. Can you add it to the site?",
+      "expected_output": "The run finds Leonardo.ai's own pricing or plan page by itself and takes every value from it, then presents a validated draft (category image) — or, if no official page confirms the free allowance, lists it under Dropped. It never asks the curator for a source URL or missing fields.",
+      "files": [],
+      "expectations": [
+        "The run does not ask the curator for a source URL, amount, or expiry",
+        "Any draft's source_url is a leonardo.ai page, never a third-party page",
+        "Either a validated draft exists under needs_review/ with category image and an amount quoted from an official Leonardo.ai page, or the final response lists the offer under Dropped with the URLs tried",
+        "A kept draft is accompanied by a References verified list of URLs actually fetched"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "batch-real-plus-fictitious",
+      "kind": "happy-path",
+      "prompt": "Two offers to add from today's scroll: (1) Groq's free tier on GroqCloud — rate-limited free access to open models like gpt-oss-120b, see groq.com/pricing. (2) Screenshot of an X post by @launch_hunter: \"Zyntrix AI is giving every developer $250 in free API credits until 2026-12-31 — sign up at https://zyntrix-ai.dev/free\".",
+      "expected_output": "Groq is verified against official Groq pages and presented as a refresh of the existing listing; the Zyntrix offer has no official evidence and is listed under Dropped with its reason and URLs tried, with no needs_review file. Both appear in one Step 5 message and the curator is asked nothing before the commit gate.",
+      "files": [],
+      "expectations": [
+        "No needs_review/ or offers/ file exists for the Zyntrix offer",
+        "The final response lists the Zyntrix offer under a Dropped heading with a reason and the URLs tried",
+        "A validated Groq draft exists under needs_review/, or Groq is itself dropped for an official-evidence reason; the Zyntrix drop did not block it",
+        "Both offers are reported in a single Step 5 message with no question to the curator before the commit gate"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "fictitious-offer-dropped",
+      "kind": "edge",
+      "prompt": "NimbusForge AI (nimbusforge-ai.io) gives students 1M free GPT-5 tokens every month, no expiry. Add it to the site.",
+      "expected_output": "No official page confirms the offer, so after the bounded retry it is dropped: no file in offers/ or needs_review/, no question to the curator, and the run ends at Step 5 with a Dropped row naming the verdict, reason, and URLs tried.",
+      "files": [],
+      "expectations": [
+        "No file is created under needs_review/ or offers/",
+        "The final response has a Dropped row with verdict unverifiable, a reason, and the URLs tried",
+        "The run does not ask the curator anything, including for a source URL",
+        "The run attempted to fetch or search for an official page before dropping"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "negative-trigger-catalog-sweep",
+      "kind": "negative-trigger",
+      "prompt": "Re-verify every active offer in the catalog against its official source and open one PR with all the fixes.",
+      "expected_output": "offer-updater's per-offer pipeline is not applied to the catalog; the request is routed to catalog-wide re-verification (daily-offer-check) or declined as out of scope.",
+      "files": [],
+      "expectations": [
+        "The run did not apply offer-updater's per-offer pipeline to the catalog (no drafts written, no validator runs)",
+        "The response identifies the request as catalog-wide re-verification outside offer-updater's scope"
+      ]
+    }
+  ]
+}

@@ -33,7 +33,7 @@ See @prd.md and @tasks.md for scope. Epic: #31.
 - IMPORTANT: never record raw search queries in analytics — `search` events carry `query_length` only
 - IMPORTANT: pin all GitHub Actions to full commit SHAs, never floating tags
 - Expired offers disappear at build time only (#9); never add client-clock filtering without revisiting ADR #11
-- Never invent an offer or reuse stale data — unverified entries get `needs_review`, not published
+- Never invent an offer or reuse stale data — unverifiable offers are dropped (no `needs_review` draft), never published
 - Never commit `.env` or credentials
 
 ## Workflow preferences
