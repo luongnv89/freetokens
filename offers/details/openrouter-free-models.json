@@ -12,6 +12,12 @@
       "url": "https://openrouter.ai/docs/api-reference/limits",
       "title": "API Credit & Rate Limits - Handle 402 and 429 Errors",
       "text": "Credits purchased (all time) Requests per minute Requests per day. Less than 10 20 50. At least 10 20 1000. To absorb rounding and top-up fees, the higher daily ceiling is granted starting one credit below the table’s threshold (currently 9 credits)."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/docs/api_reference/limits",
+      "title": "API Credit & Rate Limits - Handle 402 and 429 Errors",
+      "text": "Free usage limits: If you’re using a free model variant (with an ID ending in :free), the following limits apply:\nCredits purchased (all time)\tRequests per minute\tRequests per day\nLess than 10\t20\t50\nAt least 10\t20\t1000"
     }
   ]
 }
