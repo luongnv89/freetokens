@@ -7,10 +7,10 @@
 title: OrcaRouter Free Credits & $0 Models
 provider: OrcaRouter
 category: api_provider
-amount: Live voucher/student/hackathon API credits (amounts on each offer card) plus rotating $0 models; most open claims need no card
+amount: Rotating $0 models for established accounts (an established GitHub account or a paid purchase); currently no voucher drops, with deposit-match campaigns shown separately
 expiry_date: null
 source_url: https://www.orcarouter.ai/offers
-verified_date: 2026-09-28
+verified_date: 2026-09-30
 verification: social_proof
 review_status: under-review
 signup: required

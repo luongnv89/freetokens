@@ -10,8 +10,8 @@
     {
       "type": "link",
       "url": "https://developer.amd.com.cn/radeon/tokenfactory",
-      "title": "AMD Radeon Cloud Token Factory",
-      "text": "Public Free Model APIs — Ready-to-use free API endpoints. The portal labels Token Factory as BETA and requires sign-in to obtain an API key."
+      "title": "Radeon Cloud",
+      "text": "Public Free Model APIs — 9 models — Ready-to-use free API endpoints: MiMo-V2.6-Flash, DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, DeepSeek-V4-Flash-Vision-Exp, GLM-5.3-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B, MinerU2.5-Pro."
     },
     {
       "type": "link",
