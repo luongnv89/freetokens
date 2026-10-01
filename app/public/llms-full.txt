@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-09-30T03:21:26Z — 188 of 202 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 188 of 201 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 ## Offers (full)
 ### Zed Pro for Students
@@ -625,16 +625,6 @@ Source: https://freetokens.custats.info/ — generated 2026-09-30T03:21:26Z — 
 - Page: https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html
 - Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Listed in the Models API since 2026-08-14 with no published end date. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
 - Claim steps: Sign up at openrouter.ai and create an API key (OpenRouter :free models do not require purchasing credits). | Call the chat completions API with model id dots-studio/dots-3-note-preview:free.
-### Space Bunny Free on OpenCode Zen
-- Provider: OpenCode
-- Category: coding
-- Amount: Free Space Bunny model access on OpenCode Zen for one week
-- Status: active — expiry 2026-09-30
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
-- Source: https://x.com/opencode/status/2102767716666941864
-- Page: https://freetokens.custats.info/offers/opencode-space-bunny-free.html
-- Summary: Space Bunny is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-09-23 as "free for the next week" (through ~2026-09-30). OpenCode's docs list model id space-bunny-free on the Zen chat-completions endpoint and note that its provider follows a zero-retention policy and does not use your data for model training. The announcement lists 1M context, multi-modal support, and zero data retention.
-- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen and copy your API key. | In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key. | Run /models and select Space Bunny Free (model id: space-bunny-free). | Alternatively, call https://opencode.ai/zen/v1/chat/completions with model space-bunny-free.
 ### MiMo V2.6 Flash Free on OpenCode Zen
 - Provider: OpenCode
 - Category: coding
@@ -1884,6 +1874,16 @@ Source: https://freetokens.custats.info/ — generated 2026-09-30T03:21:26Z — 
 - Page: https://freetokens.custats.info/offers/modal-for-startups.html
 - Summary: Modal for Startups grants a one-time award of free GPU/platform credits ('thousands' per the program page, not itemized) plus engineering/GTM support and a founder community. Eligibility: new Modal customers; Seed–Series A tier requires VC funding from Modal's partner network or >$1M raised from any fund; a Scaling/Series B+ tier exists for >$30M raised / post-Series B with a partner-network VC. A payment method is required; credits are a one-time grant per tier.
 - Claim steps: Apply at modal.com/startups (new Modal customers only). | Seed–Series A: VC funding from Modal's partner network, or >$1M raised from any fund. | On acceptance, the one-time credit grant lands on your account; add a payment method as required.
+### Mistral Free Plan — $10/mo API Credits
+- Provider: Mistral AI
+- Category: api_provider
+- Amount: $10/mo in API credits plus Studio access (no credit card for Free)
+- Status: active — expiry ongoing
+- Verified: 2026-09-28 (social_proof / under-review, signup required)
+- Source: https://mistral.ai/pricing
+- Page: https://freetokens.custats.info/offers/mistral-experiment-free-tier.html
+- Summary: Mistral's Free plan includes $10 per month in API credits and access to Mistral Studio, with no credit card required. The pricing page lists Studio plus $10/mo credits on the Free card. Studio docs still describe Free mode as rate-limited API access with no card — they do not mention the $10 monthly credit.
+- Claim steps: Create a free account at console.mistral.ai (no credit card required). | Use the Free plan — Studio access and $10/mo API credits apply. | Generate an API key and call api.mistral.ai within published limits.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
