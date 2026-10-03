@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 188 of 201 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-03T06:46:52Z — 188 of 201 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 ## Offers (full)
 ### Zed Pro for Students
@@ -30,7 +30,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: startup_program
 - Amount: Free API credits up to 1B tokens plus GLM volume pricing, priority support, and early access
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://startup.z.ai/
 - Page: https://freetokens.custats.info/offers/z-ai-startups-program.html
 - Summary: The Z.ai Startups Program gives selected early-stage teams free API credits — up to 1B tokens — plus volume pricing on GLM models, technical guidance for production deployment, priority support, and early access to new models. The application page is JS-rendered; program confirmed via Z.ai's official announcement and indexed page content.
@@ -180,7 +180,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: image
 - Amount: 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter)
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://platform.stability.ai/docs/getting-started
 - Page: https://freetokens.custats.info/offers/stability-ai-25-free-credits.html
 - Summary: Stability AI's developer platform grants 25 free API credits to new accounts created via Google social login (the grant does not apply to username/password or Discord signups per the getting-started guide). API usage is billed in credits at 1 credit = $0.01. NOTE: platform.stability.ai pages render only with JavaScript and returned an empty shell to the fetcher; the quoted terms come from search-index snippets of these exact URLs and should be re-verified in a browser.
@@ -420,7 +420,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: api_provider
 - Amount: Rotating $0 models for established accounts (an established GitHub account or a paid purchase); currently no voucher drops, with deposit-match campaigns shown separately
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://www.orcarouter.ai/offers
 - Page: https://freetokens.custats.info/offers/orcarouter-free-credits.html
 - Summary: OrcaRouter's offers page lets you claim live voucher, student, and hackathon API credits (dollar amounts, scope, and expiry are printed on each card at claim time) and call a rotating set of $0 models. Create an account and claim an open offer with no payment method; a few partner offers are labelled card-required. Always-free $0 models are for established accounts (GitHub with some history, or any paid purchase). Promo credit expiry is shown before confirm; $0 models stay free while they remain in the lineup. Docs currently list DeepSeek V4 -free ids and the orcarouter/free router.
@@ -700,7 +700,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: api_provider
 - Amount: Ling 3.0 Flash Sante at $0 input / $0 output per M tokens (256K context)
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-sante
 - Page: https://freetokens.custats.info/offers/novita-ling-3-0-flash-sante-free.html
 - Summary: InclusionAI's Ling 3.0 Flash Sante (healthcare/medicine MoE, 124B total / ~5.1B active parameters) is listed on Novita AI's serverless API at $0/M input and $0/M output tokens, with 256K context and 32K max output. No published end date for the $0 pricing.
@@ -960,7 +960,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: student
 - Amount: All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount)
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://www.jetbrains.com/academy/student-pack/
 - Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
 - Summary: JetBrains gives verified students free access to the entire All Products Pack (IntelliJ IDEA Ultimate, PyCharm Professional, WebStorm, CLion, Rider, PhpStorm, GoLand, DataGrip, etc.) while enrolled. Licenses renew annually with fresh proof and include a 40% graduation discount for two years after expiry.
@@ -1120,7 +1120,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: startup_program
 - Amount: Up to $350K Google Cloud credits over 2 years for AI-first VC-funded startups (selection-based; Pre-Seed/Seed/Series A rules; distinct from the $300 free trial)
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://cloud.google.com/startup/ai
 - Page: https://freetokens.custats.info/offers/google-cloud-ai-startup-program.html
 - Summary: Google Cloud's AI startup program grants up to $350,000 in Google Cloud credits over two years for eligible AI-first, VC-funded startups (Grow/Scale tier). Year 1 is 100% up to $100,000 generally, or 100% up to $250,000 for AI-first startups; Year 2 is 20% up to an additional $100,000. Credits cover Google models such as Gemini and Gemma; third-party models are billed directly and are not covered. Eligibility is selection-based: Pre-Seed/Seed within the last five years or Series A within the last 12 months, founded within five years, not yet received more than $5,000 in Google Cloud credits, and at Google Cloud's discretion. This is distinct from the $300 Free Trial listing.
@@ -1729,7 +1729,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: api_provider
 - Amount: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://www.arcee.ai/trinity-builders-program
 - Page: https://freetokens.custats.info/offers/arcee-trinity-builders-program.html
 - Summary: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens.
@@ -1779,7 +1779,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: api_provider
 - Amount: Free public model APIs listed on the official page (9 models): MiMo-V2.6-Flash, DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, DeepSeek-V4-Flash-Vision-Exp, GLM-5.3-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B, MinerU2.5-Pro; beta, quotas unpublished
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://developer.amd.com.cn/radeon/tokenfactory
 - Page: https://freetokens.custats.info/offers/amd-radeon-cloud-free-model-apis.html
 - Summary: AMD Radeon Cloud Token Factory provides free shared OpenAI- and Anthropic-compatible model APIs. At verification time, DeepSeek-V4-Flash, Qwen3.8-Flash-Next and MiniCPM5-1B were free and online; DeepSeek-V4-Flash-Vision-Exp was limited-free and experimental; MiniCPM-V46 was listed but temporarily offline. AMD says displayed points represent relative usage, not a charge, but does not publish account quotas or reset rules.
@@ -1819,7 +1819,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: api_provider
 - Amount: 1-week free trial with rolling allowance — $5 per 5 hours + $35 per week, no payment required
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://aerolink.lat/pricing
 - Page: https://freetokens.custats.info/offers/aerolink-starter-free-trial.html
 - Summary: Aerolink's Starter plan is a free 1-week trial of its unified API gateway (Claude, OpenAI and other model routes) with a rolling allowance of $5 per 5 hours and $35 per week. No payment is required.
@@ -1849,7 +1849,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-01T03:21:42Z — 
 - Category: api_provider
 - Amount: Ling 3.0 Flash Fin at $0 input / $0 output per M tokens (256K context)
 - Status: active — expiry ongoing
-- Verified: 2026-09-28 (social_proof / under-review, signup required)
+- Verified: 2026-09-28 (social_proof / to-be-verified, signup required)
 - Source: https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-fin
 - Page: https://freetokens.custats.info/offers/novita-ling-3-0-flash-fin-free.html
 - Summary: InclusionAI's Ling 3.0 Flash Fin (finance-enhanced MoE, 124B total / ~5.1B active parameters) is listed on Novita AI's serverless API at $0/M input and $0/M output tokens, with 256K context and 32K max output. No published end date for the $0 pricing.
