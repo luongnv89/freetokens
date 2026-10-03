@@ -83,8 +83,9 @@ jobs:
       # detail page (assertions in app/lighthouserc.json) against the built
       # static dist. Uses the runner's preinstalled Chrome when present, else
       # the one puppeteer fetched during npm ci.
-      # FCP median cap is 1650ms: main already fails the old 1550ms floor
-      # (1554ms on 118ef64) and CI medians sit on a ~15ms knife-edge.
+      # Hosted-runner TBT medians ~255ms in recent PRs (runs 36675084092,
+      # 37103375641); a 225ms gate fails unrelated PRs. Keep a 300ms cap in
+      # lighthouserc.json, still requiring the node-tests job before merge.
       #
       # The detail page is picked from whatever dist/offers/ contains right
       # now — prerender drops expired offers, so a hard-coded slug would 404
