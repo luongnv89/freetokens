@@ -107,7 +107,7 @@
         },
         "review_status": {
           "type": "string",
-          "enum": ["verified", "unverified", "under-review"],
+          "enum": ["verified", "unverified", "under-review", "to-be-verified"],
           "description": "Curator testing state, separate from evidence verification and build-time expiry."
         },
         "signup": {

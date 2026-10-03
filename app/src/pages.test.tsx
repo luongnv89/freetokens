@@ -1061,7 +1061,7 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
       ),
     );
     // Labelled in words, never by colour alone (WCAG 1.4.1).
-    expect(markup).toContain('<span class="stat-updated">last updated at ');
+    expect(markup).toContain('<span class="stat-updated">site rebuilt at ');
   });
 
   it("drops the updated chip rather than printing an unparseable date (#280)", () => {

@@ -90,7 +90,7 @@ export function SiteStats({
             &middot;
           </span>
           <span className="stat-updated">
-            last updated at{" "}
+            site rebuilt at{" "}
             <strong>
               <time dateTime={generatedAt}>{timestamp}</time>
             </strong>

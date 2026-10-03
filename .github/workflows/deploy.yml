@@ -3,6 +3,12 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Rebuild even on days with no catalog changes: expiry status is evaluated
+  # at build time, and generated_at describes the deployed site's build.
+  # Runs after the 03:00 UTC daily offer check; GitHub schedules are best
+  # effort, so site-health must still alert on a missed/failed deployment.
+  schedule:
+    - cron: "0 6 * * *"
   workflow_dispatch:
 # Note: no v* tag trigger on purpose — the github-pages environment restricts
 # deployments by branch pattern, so tag runs would always fail at the deploy

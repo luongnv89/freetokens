@@ -1,4 +1,6 @@
 import { describe, it, expect } from "vitest";
+import { renderToStaticMarkup } from "react-dom/server";
+import { ReviewStatusBadge } from "../components/Badge";
 import {
   amountSortValue,
   applySort,
@@ -132,6 +134,24 @@ function offer(overrides: Partial<Offer> = {}): Offer {
     ...overrides,
   };
 }
+
+describe("to-be-verified listing", () => {
+  it("keeps an active offer visible but not an expired offer", () => {
+    const pending = offer({ review_status: "to-be-verified" } as Partial<Offer>);
+    const expired = offer({ slug: "expired", status: "expired", review_status: "to-be-verified" } as Partial<Offer>);
+    const index = { offers: [pending, expired] } as OffersIndex;
+    expect(activeOffers(index)).toEqual([pending]);
+  });
+
+  it("renders a distinct, honest badge rather than verified or expired", () => {
+    const pending = offer({ review_status: "to-be-verified" } as Partial<Offer>);
+    const markup = renderToStaticMarkup(ReviewStatusBadge({ offer: pending }));
+    expect(markup).toContain("badge-review-status-to-be-verified");
+    expect(markup).toContain(">To be verified</span>");
+    expect(markup).not.toContain("#ti-expired");
+    expect(markup).not.toContain("#ti-review_verified");
+  });
+});
 
 describe("offerMatches", () => {
   const base = emptyState();

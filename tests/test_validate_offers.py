@@ -109,6 +109,15 @@ class ValidateDirTests(unittest.TestCase):
             offers = validate_offers.validate_offers_dir(offers_dir)
             self.assertEqual(len(offers), 1)
 
+    def test_to_be_verified_offer_passes_without_changing_evidence(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = self._write(
+                tmp, "pending-review.yaml", offer_text(review_status="to-be-verified")
+            )
+            offers = validate_offers.validate_offers_dir(offers_dir)
+            self.assertEqual(offers[0]["review_status"], "to-be-verified")
+            self.assertEqual(offers[0]["verification"], "social_proof")
+
     def test_missing_field_names_file_and_field(self):
         text = offer_text().replace("provider: Test Provider\n", "")
         with tempfile.TemporaryDirectory() as tmp:
