@@ -51,7 +51,7 @@ const CATEGORIES = [
   "student",
 ];
 const VERIFICATION_LEVELS = ["social_proof", "unverified"];
-const REVIEW_STATUSES = ["verified", "unverified", "under-review"];
+const REVIEW_STATUSES = ["verified", "unverified", "under-review", "to-be-verified"];
 const SIGNUP_MODES = ["none", "required"];
 const NULL_TOKENS = new Set(["null", "~", ""]);
 const DETAILS_DIRNAME = "details";

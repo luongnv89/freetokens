@@ -98,6 +98,7 @@ const REVIEW_STATUS_ICONS: Record<string, string> = {
   verified: "review_verified",
   unverified: "unverified",
   "under-review": "expired",
+  "to-be-verified": "unverified",
 };
 
 export function ReviewStatusBadge({ offer }: { offer: Offer }) {

@@ -70,7 +70,7 @@ export interface Offer {
   /**
    * Curator testing state, separate from evidence verification and build-time expiry.
    */
-  review_status: "verified" | "unverified" | "under-review";
+  review_status: "verified" | "unverified" | "under-review" | "to-be-verified";
   /**
    * Whether claiming needs an account.
    */

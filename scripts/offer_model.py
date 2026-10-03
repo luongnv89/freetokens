@@ -106,11 +106,12 @@ REQUIRED_FIELDS = (
 # verification / no-sign-up status. Every offer states exactly how its
 # listing was checked and whether claiming needs an account.
 VERIFICATION_LEVELS = ("social_proof", "unverified")
-REVIEW_STATUSES = ("verified", "unverified", "under-review")
+REVIEW_STATUSES = ("verified", "unverified", "under-review", "to-be-verified")
 REVIEW_STATUS_LABELS = {
     "verified": "verified",
     "unverified": "unverified",
     "under-review": "under review",
+    "to-be-verified": "To be verified",
 }
 VERIFICATION_LABELS = {
     "social_proof": "social proof",

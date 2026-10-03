@@ -62,8 +62,8 @@
     },
     "review_status": {
       "type": "string",
-      "enum": ["verified", "unverified", "under-review"],
-      "description": "Curator testing state: verified = reviewed firsthand, unverified = not reviewed firsthand, under-review = currently being tested. This is separate from verification evidence level and offer expiry."
+      "enum": ["verified", "unverified", "under-review", "to-be-verified"],
+      "description": "Curator testing state: verified = reviewed firsthand, unverified = not reviewed firsthand, under-review = currently being tested, to-be-verified = current details need follow-up. This is separate from verification evidence level and offer expiry."
     },
     "signup": {
       "type": "string",

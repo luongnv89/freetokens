@@ -86,6 +86,27 @@ describe("expiry boundaries (build-time status, ADR 0001)", () => {
   });
 });
 
+describe("review status", () => {
+  it("accepts to-be-verified and leaves an undated offer active", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "ft-review-"));
+    try {
+      const dir = path.join(root, "offers");
+      await mkdir(dir);
+      await writeFile(path.join(dir, "review.yaml"), offerText({ review_status: "to-be-verified" }));
+      const offers = await loadOffers(dir);
+      const index = buildIndex(offers, new Date(`${TODAY}T00:00:00Z`));
+      expect(index.offers[0]).toMatchObject({
+        review_status: "to-be-verified",
+        verification: "social_proof",
+        status: "active",
+      });
+      expect(index.active_count).toBe(1);
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+});
+
 describe("malformed input fails naming file and field", () => {
   it.each([
     [
