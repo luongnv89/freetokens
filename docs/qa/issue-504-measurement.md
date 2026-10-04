@@ -260,6 +260,8 @@ later screenshots — a test-order artifact, not an app defect.
 | forward-recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 21 | 39 | 22 | 0 | [1440-forward-recovery.jpg](issue-504/1440-forward-recovery.jpg) |
 | detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 36 | 0 | [1440-detail.jpg](issue-504/1440-detail.jpg) |
 
+"Below threshold" counts non-decorative failures only. The linked JSON keeps every sampled element, including `aria-hidden` decorative text (e.g. the `·` separators in offer metadata, ~1.2:1) whose `meetsThreshold` is `false`; decorative samples are exempt from WCAG 1.4.3 and excluded from the count above.
+
 ### Retained focus captures
 
 | Viewport | Stop | Element | Screenshot |
