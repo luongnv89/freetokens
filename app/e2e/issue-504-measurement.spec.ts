@@ -88,9 +88,8 @@ async function measure(page: Page) {
           background = composite(color, background);
         }
         if (complexBackground) unsupported.push("background image/gradient");
-        const fg = rgba(s.color);
-        const foreground = fg ? composite(fg, background) : null;
-        const ratio = foreground && unsupported.length === 0
+        const foreground = composite(rgba(s.color), background);
+        const ratio = unsupported.length === 0
           ? (Math.max(luminance(foreground), luminance(background)) + 0.05) /
             (Math.min(luminance(foreground), luminance(background)) + 0.05) : null;
         const large = parseFloat(s.fontSize) >= 24 || (parseFloat(s.fontSize) >= 18.667 && Number(s.fontWeight) >= 700);
@@ -136,7 +135,13 @@ async function tabWalk(page: Page, width: number, surface: string) {
         const top = document.elementFromPoint(r.x + r.width * x, r.y + r.height * y);
         return top === el || (top !== null && el.contains(top));
       });
-      return { tabStopIndex: Array.from(document.querySelectorAll("a[href],button,input,select,textarea,[tabindex]")).indexOf(el),
+      // Element identity for wrap-around detection: the selector index is -1
+      // for any focused element outside that list, so key on a persistent id.
+      const registry = ((window as Window & { __tabFocusIds?: { map: WeakMap<Element, number>; seq: number } })
+        .__tabFocusIds ??= { map: new WeakMap(), seq: 0 });
+      if (!registry.map.has(el)) registry.map.set(el, ++registry.seq);
+      return { focusId: registry.map.get(el),
+        tabStopIndex: Array.from(document.querySelectorAll("a[href],button,input,select,textarea,[tabindex]")).indexOf(el),
         tag: el.tagName, id: el.id, text: el.textContent?.replace(/\s+/g, " ").trim(),
         category: el.getAttribute("data-ft-category"), href: el.getAttribute("href"),
         rect: { x: r.x, y: r.y, width: r.width, height: r.height },
@@ -145,7 +150,7 @@ async function tabWalk(page: Page, width: number, surface: string) {
         focusVisible: el.matches(":focus-visible"), outline: `${s.outlineWidth} ${s.outlineStyle} ${s.outlineColor}`,
         boxShadow: s.boxShadow };
     });
-    const key = String(step.tabStopIndex);
+    const key = String(step.focusId);
     if (seen.has(key)) break;
     seen.add(key);
     steps.push({ index: index + 1, accessibleSnapshot: snapshot, ...step });
