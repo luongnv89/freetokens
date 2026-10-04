@@ -1,16 +1,16 @@
 {
-  "summary": "Aerolink's Starter plan is a free 1-week trial of its unified API gateway (Claude, OpenAI and other model routes) with a rolling allowance of $5 per 5 hours and $35 per week. No payment is required.",
+  "summary": "Aerolink advertises $5 in one-time testing credits for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan. The original one-week Starter trial is no longer on the pricing page.",
   "claim_steps": [
     "Register at https://aerolink.lat/register.",
     "Generate an API key from the dashboard and point your client at the Aerolink base URL.",
-    "Starter trial runs 1 week with $5 per 5-hour window and $35 per week included."
+    "Check eligibility for the $5 testing credit in the account dashboard; the credit is valid for 30 days."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://aerolink.lat/pricing",
       "title": "Pricing | Aerolink",
-      "text": "Starter — Free 1-week trial for getting started. Free. $5 / 5h · $35 / week · 1 week. Trial length: 1 week. Included allowance: $5 / 5h · $35 / week included. Price (INR): No payment."
+      "text": "Try Aerolink with $5 in testing credits. One-time credit for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan."
     }
   ]
 }
