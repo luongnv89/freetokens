@@ -9,7 +9,7 @@ was changed.
 ## Scope and reproduction
 
 The local production build at source commit
-`2fd5699a31c5703cb4a72ef3ddb206d293594885` was measured in headless Chromium
+`700519140e133324ba910506a627b9c40b6c3ebf` was measured in headless Chromium
 151.0.7922.34 at **320×900, 375×900, 768×900 and 1440×900 CSS pixels**.
 The default automation context uses DPR 1 and visual viewport scale 1. These
 values do **not** establish desktop browser zoom. No device scaling, pinch
@@ -43,12 +43,25 @@ be accompanied by an updated report if measurements change.
 - **No document or body horizontal overflow** was measured in any of the nine
   captured states at any width. This does not mean all controls fit: an
   internally clipped/scrollable strip can coexist with zero document overflow.
-- **Small-width toolbar focus needs follow-up.** In the
-  [320px Coding focus capture](issue-504/320-home-focus-13.jpg), the focused
-  chip's text and right ring are clipped/faded at the strip edge. In the
-  [375px capture](issue-504/375-home-focus-13.jpg), the sort select overlaps
-  the category strip. Some category Tab stops extend beyond the 375px viewport.
-  These are observed layout/access findings, not changes made by this PR.
+- **Small-width chip-strip focus clipping is systemic, not one-off.** At
+  320px the focused Coding stop scored 2/5 unobscured hit-test samples, Voice
+  3/5 and Startup programs 2/5; at 375px API providers scored 3/5 (with
+  `fullyInViewport: false`), Image 2/5 and Video 2/5 — see the
+  [320px](issue-504/320-home-focus-13.jpg) and
+  [375px](issue-504/375-home-focus-13.jpg) Coding focus captures. Chromium's
+  focus scroll-into-view only minimally reveals trailing chips, and the
+  mask-removal rule in
+  [`python-parity.css`](../../app/src/styles/python-parity.css) covers only
+  `.toolbar > .chips:has(> :last-child:focus-visible)` under
+  `@media (max-width: 48rem)`, so a mid-strip focused chip keeps the edge fade
+  painted over its focus ring. These are observed layout/access findings, not
+  changes made by this PR.
+- **The 375px "sort select overlapping the category strip" is an abutting clip
+  edge, not a true z-index overlap.** The scroll lane's left clip edge sits
+  flush against the sort select — `margin-inline: -0.15rem` tucks the lane
+  ~2.4px under it — and the mask fades only the right edge, so scrolled leading
+  chips clip flat mid-glyph (`…ograms`/`…mage`/`…ers` fragments) directly
+  against the select. The right edge has the deliberate fade; the left does not.
 - **Real Tab traversal reached search, sort, category filters and the detail
   claim links.** Nineteen home stops were collected through Saved and 41 detail
   stops through the document. All collected stops matched `:focus-visible`.
@@ -57,6 +70,20 @@ be accompanied by an updated report if measurements change.
   names. Selected screenshots show the actual search, Coding and claim focus.
   Partial hit-test misses can also arise from multiline links, rounded corners
   or clipping; they are screening evidence, not automatic occlusion failures.
+  The four `*-home-focus-9.jpg` captures show no visible search-input ring
+  because each screenshot fired <150ms after Tab, mid-CSS-transition: the JSON
+  records a transparent `box-shadow` (`oklab(0 0 0 / 0)`) at that instant while
+  `#ft-search` transitions `border-color`/`box-shadow` over 0.15s. Settled
+  captures show the green border and glow clearly, so focus-9 must not be cited
+  as evidence of a missing focus indicator.
+- **Several standalone controls measure below the WCAG 2.5.8 (AA) 24 CSS px
+  target-size minimum and are candidates for evaluation.** The in-row Save
+  (46.0×21.0) and Hide (43.8×21.0) buttons, the in-row tag-filter buttons
+  (14–17.2px height) and the footer Cookie settings button (85.7×14.0) are
+  standalone controls where the inline exception does not clearly apply and
+  adjacent targets may also fail the spacing exception. These are candidates
+  for 2.5.8 evaluation, not an audit verdict: spacing, inline and other
+  exceptions were not assessed.
 - **The exact Aerolink route and destination were checked.**
   `/offers/aerolink-starter-free-trial.html` rendered the Aerolink heading and
   its claim link resolved to `https://aerolink.lat/pricing`. The browser did not
@@ -165,14 +192,17 @@ The following tables are generated from the linked JSON and link every retained
 image. Home screenshots show the initial viewport; provider/empty/recovery and
 history screenshots show the scrolled search/results region. Detail screenshots
 capture the full page. Focus captures show the viewport after the recorded Tab.
+The chip strip appears end-scrolled in the provider/empty/recovery captures
+because the home `tabWalk` ran first and the lane's `scrollLeft` persisted into
+later screenshots — a test-order artifact, not an app defect.
 ### Run summary
 
 | Viewport (CSS px) | JSON | Captured (UTC) | Home rows | Home stops | Detail stops | Document/body overflow |
 | --- | --- | --- | --- | --- | --- | --- |
-| 320×900 | [320.json](issue-504/320.json) | 2026-10-04T22:46:10.652Z | 201 | 19 | 41 | none in any state |
-| 375×900 | [375.json](issue-504/375.json) | 2026-10-04T22:46:16.854Z | 201 | 19 | 41 | none in any state |
-| 768×900 | [768.json](issue-504/768.json) | 2026-10-04T22:46:23.154Z | 201 | 19 | 41 | none in any state |
-| 1440×900 | [1440.json](issue-504/1440.json) | 2026-10-04T22:46:29.502Z | 201 | 19 | 41 | none in any state |
+| 320×900 | [320.json](issue-504/320.json) | 2026-10-04T23:05:57.530Z | 201 | 19 | 41 | none in any state |
+| 375×900 | [375.json](issue-504/375.json) | 2026-10-04T23:06:03.821Z | 201 | 19 | 41 | none in any state |
+| 768×900 | [768.json](issue-504/768.json) | 2026-10-04T23:06:10.160Z | 201 | 19 | 41 | none in any state |
+| 1440×900 | [1440.json](issue-504/1440.json) | 2026-10-04T23:06:16.520Z | 201 | 19 | 41 | none in any state |
 
 ### 320px state captures
 

@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-04T22:46:29.502Z",
-  "sourceCommit": "2fd5699a31c5703cb4a72ef3ddb206d293594885",
+  "capturedAt": "2026-10-04T23:06:16.520Z",
+  "sourceCommit": "700519140e133324ba910506a627b9c40b6c3ebf",
   "browser": {
     "name": "chromium",
     "version": "151.0.7922.34",
@@ -928,7 +928,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 22:45 UTC",
+          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -959,7 +959,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 22:45 UTC",
+          "text": "Oct 4, 2026 23:05 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -2703,7 +2703,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 22:45 UTC",
+          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -2734,7 +2734,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 22:45 UTC",
+          "text": "Oct 4, 2026 23:05 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -4429,7 +4429,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 22:45 UTC",
+          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -4460,7 +4460,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 22:45 UTC",
+          "text": "Oct 4, 2026 23:05 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -5905,7 +5905,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 22:45 UTC",
+          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -5936,7 +5936,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 22:45 UTC",
+          "text": "Oct 4, 2026 23:05 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -7602,7 +7602,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 22:45 UTC",
+          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -7633,7 +7633,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 22:45 UTC",
+          "text": "Oct 4, 2026 23:05 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -9091,7 +9091,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 22:45 UTC",
+          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -9122,7 +9122,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 22:45 UTC",
+          "text": "Oct 4, 2026 23:05 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -10817,7 +10817,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 22:45 UTC",
+          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -10848,7 +10848,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 22:45 UTC",
+          "text": "Oct 4, 2026 23:05 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -12293,7 +12293,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 22:45 UTC",
+          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -12324,7 +12324,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 22:45 UTC",
+          "text": "Oct 4, 2026 23:05 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -16145,6 +16145,7 @@
       {
         "index": 1,
         "accessibleSnapshot": "- link \"Visit custats.info — custats AI usage tracking tool\":\n  - /url: https://custats.info\n  - text: custats.info",
+        "focusId": 1,
         "tabStopIndex": 0,
         "tag": "A",
         "id": "",
@@ -16167,6 +16168,7 @@
       {
         "index": 2,
         "accessibleSnapshot": "- link \"Visit free-llm-models.custats.info — free AI model directory\":\n  - /url: https://free-llm-models.custats.info\n  - text: free-llm-models.custats.info",
+        "focusId": 2,
         "tabStopIndex": 1,
         "tag": "A",
         "id": "",
@@ -16189,6 +16191,7 @@
       {
         "index": 3,
         "accessibleSnapshot": "- link \"Free AI Credits — home\":\n  - /url: ./index.html\n  - heading \"Free AI Credits\" [level=1]",
+        "focusId": 3,
         "tabStopIndex": 2,
         "tag": "A",
         "id": "",
@@ -16211,6 +16214,7 @@
       {
         "index": 4,
         "accessibleSnapshot": "- link \"Offers\":\n  - /url: ./index.html",
+        "focusId": 4,
         "tabStopIndex": 3,
         "tag": "A",
         "id": "",
@@ -16233,6 +16237,7 @@
       {
         "index": 5,
         "accessibleSnapshot": "- 'link \"Archive: all deals\"':\n  - /url: archive.html\n  - text: Archive",
+        "focusId": 5,
         "tabStopIndex": 4,
         "tag": "A",
         "id": "",
@@ -16255,6 +16260,7 @@
       {
         "index": 6,
         "accessibleSnapshot": "- link \"About\":\n  - /url: about.html",
+        "focusId": 6,
         "tabStopIndex": 5,
         "tag": "A",
         "id": "",
@@ -16277,6 +16283,7 @@
       {
         "index": 7,
         "accessibleSnapshot": "- link \"Privacy\":\n  - /url: privacy.html",
+        "focusId": 7,
         "tabStopIndex": 6,
         "tag": "A",
         "id": "",
@@ -16299,6 +16306,7 @@
       {
         "index": 8,
         "accessibleSnapshot": "- link \"moved to the archive\":\n  - /url: archive.html",
+        "focusId": 8,
         "tabStopIndex": 7,
         "tag": "A",
         "id": "",
@@ -16321,6 +16329,7 @@
       {
         "index": 9,
         "accessibleSnapshot": "- searchbox \"Search\"",
+        "focusId": 9,
         "tabStopIndex": 8,
         "tag": "INPUT",
         "id": "ft-search",
@@ -16343,6 +16352,7 @@
       {
         "index": 10,
         "accessibleSnapshot": "- combobox \"Sort\":\n  - option \"Latest added\" [selected]\n  - option \"Recently checked\"\n  - option \"Expiring soon\"\n  - option \"Largest amount\"",
+        "focusId": 10,
         "tabStopIndex": 9,
         "tag": "SELECT",
         "id": "ft-sort",
@@ -16365,6 +16375,7 @@
       {
         "index": 11,
         "accessibleSnapshot": "- button \"All\" [pressed]",
+        "focusId": 11,
         "tabStopIndex": 10,
         "tag": "BUTTON",
         "id": "",
@@ -16387,6 +16398,7 @@
       {
         "index": 12,
         "accessibleSnapshot": "- button \"API providers\"",
+        "focusId": 12,
         "tabStopIndex": 11,
         "tag": "BUTTON",
         "id": "",
@@ -16409,6 +16421,7 @@
       {
         "index": 13,
         "accessibleSnapshot": "- button \"Coding\"",
+        "focusId": 13,
         "tabStopIndex": 12,
         "tag": "BUTTON",
         "id": "",
@@ -16431,6 +16444,7 @@
       {
         "index": 14,
         "accessibleSnapshot": "- button \"Image\"",
+        "focusId": 14,
         "tabStopIndex": 13,
         "tag": "BUTTON",
         "id": "",
@@ -16453,6 +16467,7 @@
       {
         "index": 15,
         "accessibleSnapshot": "- button \"Voice\"",
+        "focusId": 15,
         "tabStopIndex": 14,
         "tag": "BUTTON",
         "id": "",
@@ -16475,6 +16490,7 @@
       {
         "index": 16,
         "accessibleSnapshot": "- button \"Video\"",
+        "focusId": 16,
         "tabStopIndex": 15,
         "tag": "BUTTON",
         "id": "",
@@ -16497,6 +16513,7 @@
       {
         "index": 17,
         "accessibleSnapshot": "- button \"Startup programs\"",
+        "focusId": 17,
         "tabStopIndex": 16,
         "tag": "BUTTON",
         "id": "",
@@ -16519,6 +16536,7 @@
       {
         "index": 18,
         "accessibleSnapshot": "- button \"Student\"",
+        "focusId": 18,
         "tabStopIndex": 17,
         "tag": "BUTTON",
         "id": "",
@@ -16541,6 +16559,7 @@
       {
         "index": 19,
         "accessibleSnapshot": "- button \"Saved (0)\"",
+        "focusId": 19,
         "tabStopIndex": 18,
         "tag": "BUTTON",
         "id": "ft-saved-toggle",
@@ -16565,6 +16584,7 @@
       {
         "index": 1,
         "accessibleSnapshot": "- link \"Visit custats.info — custats AI usage tracking tool\":\n  - /url: https://custats.info\n  - text: custats.info",
+        "focusId": 1,
         "tabStopIndex": 0,
         "tag": "A",
         "id": "",
@@ -16587,6 +16607,7 @@
       {
         "index": 2,
         "accessibleSnapshot": "- link \"Visit free-llm-models.custats.info — free AI model directory\":\n  - /url: https://free-llm-models.custats.info\n  - text: free-llm-models.custats.info",
+        "focusId": 2,
         "tabStopIndex": 1,
         "tag": "A",
         "id": "",
@@ -16609,6 +16630,7 @@
       {
         "index": 3,
         "accessibleSnapshot": "- link \"Free AI Credits — home\":\n  - /url: ../index.html\n  - text: Free AI Credits",
+        "focusId": 3,
         "tabStopIndex": 2,
         "tag": "A",
         "id": "",
@@ -16631,6 +16653,7 @@
       {
         "index": 4,
         "accessibleSnapshot": "- link \"Offers\":\n  - /url: ../index.html",
+        "focusId": 4,
         "tabStopIndex": 3,
         "tag": "A",
         "id": "",
@@ -16653,6 +16676,7 @@
       {
         "index": 5,
         "accessibleSnapshot": "- 'link \"Archive: all deals\"':\n  - /url: ../archive.html\n  - text: Archive",
+        "focusId": 5,
         "tabStopIndex": 4,
         "tag": "A",
         "id": "",
@@ -16675,6 +16699,7 @@
       {
         "index": 6,
         "accessibleSnapshot": "- link \"About\":\n  - /url: ../about.html",
+        "focusId": 6,
         "tabStopIndex": 5,
         "tag": "A",
         "id": "",
@@ -16697,6 +16722,7 @@
       {
         "index": 7,
         "accessibleSnapshot": "- link \"Privacy\":\n  - /url: ../privacy.html",
+        "focusId": 7,
         "tabStopIndex": 6,
         "tag": "A",
         "id": "",
@@ -16719,6 +16745,7 @@
       {
         "index": 8,
         "accessibleSnapshot": "- link \"Offers\":\n  - /url: ../index.html",
+        "focusId": 8,
         "tabStopIndex": 7,
         "tag": "A",
         "id": "",
@@ -16741,6 +16768,7 @@
       {
         "index": 9,
         "accessibleSnapshot": "- link \"← All offers\":\n  - /url: ../index.html",
+        "focusId": 9,
         "tabStopIndex": 8,
         "tag": "A",
         "id": "",
@@ -16763,6 +16791,7 @@
       {
         "index": 10,
         "accessibleSnapshot": "- link \"See offers tagged API providers\":\n  - /url: ../index.html?category=api_provider\n  - text: API providers",
+        "focusId": 10,
         "tabStopIndex": 9,
         "tag": "A",
         "id": "",
@@ -16785,6 +16814,7 @@
       {
         "index": 11,
         "accessibleSnapshot": "- link \"See offers tagged sign-up required\":\n  - /url: ../index.html?signup=required\n  - text: sign-up required",
+        "focusId": 11,
         "tabStopIndex": 10,
         "tag": "A",
         "id": "",
@@ -16807,6 +16837,7 @@
       {
         "index": 12,
         "accessibleSnapshot": "- link \"See offers tagged social proof\":\n  - /url: ../index.html?verification=social_proof\n  - text: social proof",
+        "focusId": 12,
         "tabStopIndex": 11,
         "tag": "A",
         "id": "",
@@ -16829,6 +16860,7 @@
       {
         "index": 13,
         "accessibleSnapshot": "- link \"Claim at Aerolink\":\n  - /url: https://aerolink.lat/pricing",
+        "focusId": 13,
         "tabStopIndex": 12,
         "tag": "A",
         "id": "",
@@ -16851,6 +16883,7 @@
       {
         "index": 14,
         "accessibleSnapshot": "- link \"See offers tagged API providers\":\n  - /url: ../index.html?category=api_provider\n  - text: API providers",
+        "focusId": 14,
         "tabStopIndex": 13,
         "tag": "A",
         "id": "",
@@ -16873,6 +16906,7 @@
       {
         "index": 15,
         "accessibleSnapshot": "- link \"See offers tagged sign-up required\":\n  - /url: ../index.html?signup=required\n  - text: sign-up required",
+        "focusId": 15,
         "tabStopIndex": 14,
         "tag": "A",
         "id": "",
@@ -16895,6 +16929,7 @@
       {
         "index": 16,
         "accessibleSnapshot": "- link \"See offers tagged social proof\":\n  - /url: ../index.html?verification=social_proof\n  - text: social proof",
+        "focusId": 16,
         "tabStopIndex": 15,
         "tag": "A",
         "id": "",
@@ -16917,6 +16952,7 @@
       {
         "index": 17,
         "accessibleSnapshot": "- checkbox \"Register at https://aerolink.lat/register.\"",
+        "focusId": 17,
         "tabStopIndex": 16,
         "tag": "INPUT",
         "id": "ft-step-aerolink-starter-free-trial-1",
@@ -16939,6 +16975,7 @@
       {
         "index": 18,
         "accessibleSnapshot": "- link \"https://aerolink.lat/register\":\n  - /url: https://aerolink.lat/register",
+        "focusId": 18,
         "tabStopIndex": 17,
         "tag": "A",
         "id": "",
@@ -16961,6 +16998,7 @@
       {
         "index": 19,
         "accessibleSnapshot": "- checkbox \"Generate an API key from the dashboard and point your client at the Aerolink base URL.\"",
+        "focusId": 19,
         "tabStopIndex": 18,
         "tag": "INPUT",
         "id": "ft-step-aerolink-starter-free-trial-2",
@@ -16983,6 +17021,7 @@
       {
         "index": 20,
         "accessibleSnapshot": "- checkbox \"Check eligibility for the $5 testing credit in the account dashboard; the credit is valid for 30 days.\"",
+        "focusId": 20,
         "tabStopIndex": 19,
         "tag": "INPUT",
         "id": "ft-step-aerolink-starter-free-trial-3",
@@ -17005,6 +17044,7 @@
       {
         "index": 21,
         "accessibleSnapshot": "- link \"Claim at Aerolink\":\n  - /url: https://aerolink.lat/pricing",
+        "focusId": 21,
         "tabStopIndex": 20,
         "tag": "A",
         "id": "",
@@ -17027,6 +17067,7 @@
       {
         "index": 22,
         "accessibleSnapshot": "- link \"Open source\":\n  - /url: https://aerolink.lat/pricing",
+        "focusId": 22,
         "tabStopIndex": 21,
         "tag": "A",
         "id": "",
@@ -17049,6 +17090,7 @@
       {
         "index": 23,
         "accessibleSnapshot": "- button \"Copy link\"",
+        "focusId": 23,
         "tabStopIndex": 22,
         "tag": "BUTTON",
         "id": "",
@@ -17071,6 +17113,7 @@
       {
         "index": 24,
         "accessibleSnapshot": "- link \"View details for Hapuppy Free Tier\":\n  - /url: hapuppy-free-tier.html\n  - text: Hapuppy Free Tier",
+        "focusId": 24,
         "tabStopIndex": 23,
         "tag": "A",
         "id": "",
@@ -17093,6 +17136,7 @@
       {
         "index": 25,
         "accessibleSnapshot": "- link \"View details for IBM watsonx.ai Free Tier\":\n  - /url: ibm-watsonx-ai-free-tier.html\n  - text: IBM watsonx.ai Free Tier",
+        "focusId": 25,
         "tabStopIndex": 24,
         "tag": "A",
         "id": "",
@@ -17115,6 +17159,7 @@
       {
         "index": 26,
         "accessibleSnapshot": "- link \"View details for AnyAPI Free Plan — 100K anyTokens/day\":\n  - /url: anyapi-free-plan.html\n  - text: AnyAPI Free Plan — 100K anyTokens/day",
+        "focusId": 26,
         "tabStopIndex": 25,
         "tag": "A",
         "id": "",
@@ -17137,6 +17182,7 @@
       {
         "index": 27,
         "accessibleSnapshot": "- link \"View details for BazaarLink Free LLM API\":\n  - /url: bazaarlink-free-llm-api.html\n  - text: BazaarLink Free LLM API",
+        "focusId": 27,
         "tabStopIndex": 26,
         "tag": "A",
         "id": "",
@@ -17159,6 +17205,7 @@
       {
         "index": 28,
         "accessibleSnapshot": "- link \"Browse all offers\":\n  - /url: ../index.html",
+        "focusId": 28,
         "tabStopIndex": 27,
         "tag": "A",
         "id": "",
@@ -17181,6 +17228,7 @@
       {
         "index": 29,
         "accessibleSnapshot": "- link \"Browse the archive\":\n  - /url: ../archive.html",
+        "focusId": 29,
         "tabStopIndex": 28,
         "tag": "A",
         "id": "",
@@ -17203,6 +17251,7 @@
       {
         "index": 30,
         "accessibleSnapshot": "- link \"Free AI Credits\":\n  - /url: ../index.html\n  - img \"Free AI Credits\"",
+        "focusId": 30,
         "tabStopIndex": 29,
         "tag": "A",
         "id": "",
@@ -17225,6 +17274,7 @@
       {
         "index": 31,
         "accessibleSnapshot": "- link \"Offers\":\n  - /url: ../index.html",
+        "focusId": 31,
         "tabStopIndex": 30,
         "tag": "A",
         "id": "",
@@ -17247,6 +17297,7 @@
       {
         "index": 32,
         "accessibleSnapshot": "- link \"Archive\":\n  - /url: ../archive.html",
+        "focusId": 32,
         "tabStopIndex": 31,
         "tag": "A",
         "id": "",
@@ -17269,6 +17320,7 @@
       {
         "index": 33,
         "accessibleSnapshot": "- link \"About\":\n  - /url: ../about.html",
+        "focusId": 33,
         "tabStopIndex": 32,
         "tag": "A",
         "id": "",
@@ -17291,6 +17343,7 @@
       {
         "index": 34,
         "accessibleSnapshot": "- link \"Privacy policy\":\n  - /url: ../privacy.html",
+        "focusId": 34,
         "tabStopIndex": 33,
         "tag": "A",
         "id": "",
@@ -17313,6 +17366,7 @@
       {
         "index": 35,
         "accessibleSnapshot": "- link \"RSS\":\n  - /url: ../feed.xml",
+        "focusId": 35,
         "tabStopIndex": 34,
         "tag": "A",
         "id": "",
@@ -17335,6 +17389,7 @@
       {
         "index": 36,
         "accessibleSnapshot": "- link \"X\":\n  - /url: https://x.com/luongnv89",
+        "focusId": 36,
         "tabStopIndex": 35,
         "tag": "A",
         "id": "",
@@ -17357,6 +17412,7 @@
       {
         "index": 37,
         "accessibleSnapshot": "- link \"LinkedIn\":\n  - /url: https://linkedin.com/in/luongnv89",
+        "focusId": 37,
         "tabStopIndex": 36,
         "tag": "A",
         "id": "",
@@ -17379,6 +17435,7 @@
       {
         "index": 38,
         "accessibleSnapshot": "- link \"Website\":\n  - /url: https://luongnv.com",
+        "focusId": 38,
         "tabStopIndex": 37,
         "tag": "A",
         "id": "",
@@ -17401,6 +17458,7 @@
       {
         "index": 39,
         "accessibleSnapshot": "- link \"logo-designer skill\":\n  - /url: https://github.com/luongnv89/skills/tree/main/skills/logo-designer",
+        "focusId": 39,
         "tabStopIndex": 38,
         "tag": "A",
         "id": "",
@@ -17423,6 +17481,7 @@
       {
         "index": 40,
         "accessibleSnapshot": "- link \"Brand showcase\":\n  - /url: ../brand-showcase.html",
+        "focusId": 40,
         "tabStopIndex": 39,
         "tag": "A",
         "id": "",
@@ -17445,6 +17504,7 @@
       {
         "index": 41,
         "accessibleSnapshot": "- button \"Cookie settings\"",
+        "focusId": 41,
         "tabStopIndex": 40,
         "tag": "BUTTON",
         "id": "ft-consent-settings",
