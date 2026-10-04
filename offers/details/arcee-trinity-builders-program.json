@@ -8,15 +8,9 @@
   "social_proof": [
     {
       "type": "link",
-      "url": "https://www.arcee.ai/trinity-builders-program",
-      "title": "Trinity Builders Program | Arcee AI | Building Open Intelligence",
-      "text": "Accepted applicants receive free API credits for Trinity models, allocated based on your project scope and our available capacity."
-    },
-    {
-      "type": "link",
       "url": "https://www.arcee.ai/blog/introducing-the-trinity-builders-program",
       "title": "Introducing the Trinity Builders Program | Arcee AI | Building Open Intelligence",
-      "text": "The program is open to anyone building with Trinity models."
+      "text": "Accepted applicants receive free API credits for Trinity models, allocated based on project scope and available capacity; the article links to the application form."
     }
   ]
 }

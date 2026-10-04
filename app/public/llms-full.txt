@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-03T06:46:52Z — 188 of 201 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-04T03:07:53Z — 188 of 201 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 ## Offers (full)
 ### Zed Pro for Students
@@ -1624,16 +1624,16 @@ Source: https://freetokens.custats.info/ — generated 2026-10-03T06:46:52Z — 
 - Page: https://freetokens.custats.info/offers/byteplus-ai-startups-accelerator.html
 - Summary: The BytePlus AI Startups Accelerator (V-Start) offers up to $100,000 USD in cloud coupons plus a voice/LLM credit package: $6.5K in voice AI model credits and 10B+ tokens in LLM credits, $137K+ in cloud resource subsidies, and 5+ AI-powered workshops. Open to startups in round D and before (<= Series D) with technical innovation in AI, enterprise services, e-commerce, mass consumption, Web3, VR/AR, etc. Approval is discretionary after application review.
 - Claim steps: Apply via the form at https://www.byteplus.com/en/contact-us/vstart with company and funding-round details. | Eligibility: startups in round D or earlier, in a focus sector (AI, enterprise services, e-commerce, Web3, VR/AR...). | Benefits are granted on approval: up to $100K cloud coupons, $6.5K voice AI credits, 10B+ LLM tokens, $137K+ resource subsidies.
-### Browser Use — $15 Signup Credit
+### Browser Use — $1 Signup Credit
 - Provider: Browser Use
 - Category: api_provider
-- Amount: $15 free credits per person, never expire (eligible Google/GitHub/Microsoft signup, no card)
+- Amount: $1 free credit for eligible signups (eligibility details not published on pricing page)
 - Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://browser-use.com/pricing
 - Page: https://freetokens.custats.info/offers/browser-use-15-signup-credit.html
-- Summary: Browser Use grants $15 in free credits once per person to eligible signups via Google, GitHub, or Microsoft — no card required, and credits never expire. Credits pay for cloud browser time ($0.02/hour, proxies on by default) and Browser Use Agents (model tokens + 20% service fee). Pay-as-you-go top-ups start at $5; no subscription.
-- Claim steps: Sign up at https://browser-use.com with an eligible Google, GitHub, or Microsoft account. | $15 in free credits is granted once per person; no card required. | Credits never expire; use them for browser time or agent runs.
+- Summary: Browser Use now advertises $1 in free credits for eligible signups; the pricing page does not specify who qualifies. Credits can pay for browser time ($0.02/hour, plus proxy traffic) and Browser Use Agents (model cost + 20% service fee). Top-ups start at $5; no subscription.
+- Claim steps: Check https://browser-use.com/pricing for the current eligibility terms before signing up. | Sign up at https://browser-use.com and check your dashboard for the advertised $1 free credit if eligible. | Use any awarded credits for browser time or agent runs; verify expiration in the account.
 ### Bing Image Creator
 - Provider: Microsoft Bing
 - Category: image
@@ -1730,7 +1730,7 @@ Source: https://freetokens.custats.info/ — generated 2026-10-03T06:46:52Z — 
 - Amount: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens
 - Status: active — expiry ongoing
 - Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
-- Source: https://www.arcee.ai/trinity-builders-program
+- Source: https://www.arcee.ai/blog/introducing-the-trinity-builders-program
 - Page: https://freetokens.custats.info/offers/arcee-trinity-builders-program.html
 - Summary: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens.
 - Claim steps: Apply through the official form and explain the project and requested token range. | Wait for rolling review. | If approved, use the allocated Trinity API credits within 90 days.
@@ -1814,16 +1814,16 @@ Source: https://freetokens.custats.info/ — generated 2026-10-03T06:46:52Z — 
 - Page: https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html
 - Summary: Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation (or model release/approval, whichever is later). Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry.
 - Claim steps: Create an Alibaba Cloud account and open Alibaba Cloud Model Studio (Singapore region). | Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed. | Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page. | Call eligible models in real time; enable 'Free Quota Only' mode to avoid pay-as-you-go charges after the quota runs out.
-### Aerolink Starter Free Trial
+### Aerolink $5 Testing Credit
 - Provider: Aerolink
 - Category: api_provider
-- Amount: 1-week free trial with rolling allowance — $5 per 5 hours + $35 per week, no payment required
+- Amount: $5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks
 - Status: active — expiry ongoing
 - Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
 - Source: https://aerolink.lat/pricing
 - Page: https://freetokens.custats.info/offers/aerolink-starter-free-trial.html
-- Summary: Aerolink's Starter plan is a free 1-week trial of its unified API gateway (Claude, OpenAI and other model routes) with a rolling allowance of $5 per 5 hours and $35 per week. No payment is required.
-- Claim steps: Register at https://aerolink.lat/register. | Generate an API key from the dashboard and point your client at the Aerolink base URL. | Starter trial runs 1 week with $5 per 5-hour window and $35 per week included.
+- Summary: Aerolink advertises $5 in one-time testing credits for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan. The original one-week Starter trial is no longer on the pricing page.
+- Claim steps: Register at https://aerolink.lat/register. | Generate an API key from the dashboard and point your client at the Aerolink base URL. | Check eligibility for the $5 testing credit in the account dashboard; the credit is valid for 30 days.
 ### Tripo AI 2,000 Free API Credits
 - Provider: Tripo AI
 - Category: image

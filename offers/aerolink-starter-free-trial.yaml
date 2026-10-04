@@ -1,11 +1,10 @@
-# Verified 2026-09-29 against https://aerolink.lat/pricing
-# ("Starter — Free 1-week trial for getting started. Free. $5 / 5h ·
-# $35 / week · 1 week." Plan table: "Trial length: 1 week; Included
-# allowance: $5 / 5h · $35 / week included; Price (INR): No payment.")
-title: Aerolink Starter Free Trial
+# Checked 2026-10-04 against https://aerolink.lat/pricing
+# ("Try Aerolink with $5 in testing credits"; one-time for eligible new accounts,
+# after verification and abuse checks; valid 30 days; no recurring free plan.)
+title: Aerolink $5 Testing Credit
 provider: Aerolink
 category: api_provider
-amount: 1-week free trial with rolling allowance — $5 per 5 hours + $35 per week, no payment required
+amount: $5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks
 expiry_date: null
 source_url: https://aerolink.lat/pricing
 verified_date: 2026-09-30
