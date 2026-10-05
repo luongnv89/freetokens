@@ -5,6 +5,15 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Crawler access evidence recorded (#506):** the sampled home and detail URLs
+  were probed by unauthenticated HTTP GET and their served policy artifacts
+  (`robots.txt`, `sitemap.xml`, `llms.txt`) captured with agent, date, response
+  and rendering signals. Real search/retrieval crawler **delivery** is recorded
+  as not-tested: no authorized engine inspection and no owner-side request logs
+  were available, and ordinary `200` + `robots.txt` `Allow` are not delivery
+  evidence. Crawl policy, authentication and consent rules are unchanged. See
+  [docs/qa/issue-506-crawler-access-verification.md](docs/qa/issue-506-crawler-access-verification.md).
+
 - **320px WebKit layout and keyboard filters (#254):** At 320px, category
   chips, offer badges, the privacy file-input control, and the offer-detail
   facts table no longer force horizontal scroll (Safari/WebKit). Category
