@@ -288,7 +288,7 @@ describe("HomePage clear and reset filters", () => {
     const gtag = grantedGtag();
     render(<HomePage index={index} />);
     fireEvent.change(screen.getByLabelText("Sort"), {
-      target: { value: "amount" },
+      target: { value: "expiring" },
     });
     expect(eventCalls(gtag, "sort_use")).toHaveLength(1);
     fireEvent.change(screen.getByLabelText("Search"), {
@@ -306,17 +306,17 @@ describe("HomePage clear and reset filters", () => {
     );
 
     expect(listedSlugs()).toEqual([
-      "beta-copilot",
-      "alpha-image",
       "alpha-copilot",
-      "alpha-free",
       "alpha-social",
+      "alpha-free",
+      "alpha-image",
+      "beta-copilot",
     ]);
     expect(screen.getByLabelText("Search")).toHaveValue("");
-    expect(screen.getByLabelText("Sort")).toHaveValue("amount");
+    expect(screen.getByLabelText("Sort")).toHaveValue("expiring");
     const params = new URLSearchParams(window.location.search);
     expect(params.get("q")).toBeNull();
-    expect(params.get("sort")).toBe("amount");
+    expect(params.get("sort")).toBe("expiring");
     expect(document.activeElement).toBe(screen.getByLabelText("Search"));
     expect(eventCalls(gtag, "search")).toHaveLength(0);
     expect(eventCalls(gtag, "sort_use")).toHaveLength(0);
@@ -355,19 +355,34 @@ describe("HomePage deep link and popstate", () => {
     expect(eventCalls(gtag, "sort_use")).toHaveLength(1);
     gtag.mockClear();
     act(() => {
-      window.history.replaceState({}, "", "?q=alpha&sort=amount");
+      window.history.replaceState({}, "", "?q=alpha&sort=expiring");
       window.dispatchEvent(new PopStateEvent("popstate"));
     });
     expect(listedSlugs()).toEqual([
-      "alpha-image",
       "alpha-copilot",
-      "alpha-free",
       "alpha-social",
+      "alpha-free",
+      "alpha-image",
     ]);
     expect(screen.getByLabelText("Search")).toHaveValue("alpha");
-    expect(screen.getByLabelText("Sort")).toHaveValue("amount");
+    expect(screen.getByLabelText("Sort")).toHaveValue("expiring");
     expect(eventCalls(gtag, "search")).toHaveLength(0);
     expect(eventCalls(gtag, "sort_use")).toHaveLength(0);
+  });
+
+  it("degrades a legacy ?sort=amount deep link to the default order (#508)", () => {
+    setSearch("?sort=amount");
+    render(<HomePage index={index} />);
+    // No cross-unit cash ranking: the retired mode falls back to index order
+    // and the control reflects the real, supported sort.
+    expect(listedSlugs()).toEqual([
+      "alpha-copilot",
+      "alpha-image",
+      "alpha-social",
+      "alpha-free",
+      "beta-copilot",
+    ]);
+    expect(screen.getByLabelText("Sort")).toHaveValue("");
   });
 });
 
@@ -790,7 +805,7 @@ describe("HomePage saved and dismissed personal state (#140)", () => {
       category: "image",
       verification: "",
       signup: "",
-      sort: "amount",
+      sort: "expiring",
     });
     render(<HomePage index={index} />);
     expect(categoryChip("image").getAttribute("aria-pressed")).toBe("true");
@@ -824,6 +839,26 @@ describe("HomePage saved and dismissed personal state (#140)", () => {
     render(<HomePage index={index} />);
     expect(categoryChip("not-a-category")).toBeNull();
     expect(window.location.search).toBe("");
+  });
+
+  it("a stored legacy amount sort degrades to the default order (#508)", () => {
+    store[PREFS_KEY] = JSON.stringify({
+      v: 1,
+      category: "",
+      verification: "",
+      signup: "",
+      sort: "amount",
+    });
+    render(<HomePage index={index} />);
+    expect(screen.getByLabelText("Sort")).toHaveValue("");
+    expect(listedSlugs()).toEqual([
+      "alpha-copilot",
+      "alpha-image",
+      "alpha-social",
+      "alpha-free",
+      "beta-copilot",
+    ]);
+    expect(window.location.search).not.toContain("sort=");
   });
 
   it("clearing browser storage returns the site to its default state with no error", () => {

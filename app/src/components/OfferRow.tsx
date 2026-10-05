@@ -4,8 +4,6 @@ import {
   SIGNUP_TITLES,
   VERIFICATION_LABELS,
   VERIFICATION_TITLES,
-  amountSortValue,
-  formatAmountSort,
   humanDate,
   relativeDate,
   type Offer,
@@ -158,7 +156,6 @@ export function OfferRow({
         data-signup={offer.signup}
         data-verified={offer.verified_date}
         data-expiry={offer.expiry_date ?? ""}
-        data-amount-sort={formatAmountSort(amountSortValue(offer.amount))}
       >
         <p className="row-eyebrow">
           <span className="r-prov">{offer.provider}</span>

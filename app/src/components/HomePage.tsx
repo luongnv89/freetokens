@@ -240,7 +240,6 @@ function Toolbar({
           <option value="">Latest added</option>
           <option value="newest">Recently checked</option>
           <option value="expiring">Expiring soon</option>
-          <option value="amount">Largest amount</option>
         </select>
       </div>
       <div className="chips" role="group" aria-label="Filter by category">

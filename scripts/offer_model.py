@@ -53,16 +53,10 @@ OFFER_CLICK_DEDUPE_MS = 1000
 # the reserved root output filenames (index.html, archive.html, ...).
 OFFERS_OUTPUT_DIRNAME = "offers"
 
-# Sort modes (F10): client-side reordering driven by the ?sort= URL param,
-# consistent with the category/q state params. "" (absent) keeps the
-# build-time default order — newest-verified first since #70. The select's
-# option labels live in SORT_LABELS.
-SORT_MODES = ("newest", "expiring", "amount")
-SORT_LABELS = {
-    "newest": "Newest verified",
-    "expiring": "Expiring soon",
-    "amount": "Largest amount",
-}
+# Sort modes moved to the React app (app/src/lib/urlState.ts). The former
+# cross-unit "amount" sort was removed there in #508: the free-text amount
+# field mixes units and periods, so any single numeric magnitude fabricated a
+# value equivalence the catalog cannot support.
 
 # --- Offer detail cards (#48) ----------------------------------------------
 # Optional per-offer detail data lives in offers/details/<slug>.json: one
@@ -522,27 +516,6 @@ def is_expired(offer: dict, today: dt.date | None = None) -> bool:
 def filter_expired(offers: list, today: dt.date | None = None) -> list:
     """Return only non-expired offers; None expiry means ongoing."""
     return [o for o in offers if not is_expired(o, today)]
-
-
-def amount_sort_value(amount: str) -> float:
-    """Best-effort numeric magnitude of a free-value string (F10 'amount').
-
-    Used ONLY as a sort key, never displayed. Heuristic: first number in the
-    string wins ("$300 in credits" -> 300, "2,000 completions + 50 chats"
-    -> 2000), with k/M multipliers honored ("10k credits/month" -> 10000).
-    Unparseable strings sort as 0 so they never crash the build.
-    """
-    match = re.search(r"[0-9][0-9.,]*", amount or "")
-    if not match:
-        return 0.0
-    try:
-        value = float(match.group(0).replace(",", "").rstrip("."))
-    except ValueError:
-        return 0.0
-    suffix = re.match(r"[0-9][0-9.,]*\s*([kKmM])", amount)
-    if suffix:
-        value *= {"k": 1_000, "m": 1_000_000}[suffix.group(1).lower()]
-    return value
 
 
 def _check_str(value, name: str, filename: str, max_chars: int) -> str:

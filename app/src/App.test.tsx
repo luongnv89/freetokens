@@ -47,7 +47,8 @@ describe("App home listing prerender", () => {
     expect(markup).toContain(`data-category="${offer.category}"`);
     expect(markup).toContain(`data-verification="${offer.verification}"`);
     expect(markup).toContain(`data-signup="${offer.signup}"`);
-    expect(markup).toMatch(/data-amount-sort="[\d.]+"/);
+    // #508: the fabricated cross-unit amount-sort hook is gone.
+    expect(markup).not.toContain("data-amount-sort");
   });
 
   it("uses descriptive link text on every title link (a11y)", () => {
