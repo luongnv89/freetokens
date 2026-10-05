@@ -52,7 +52,13 @@ async function measure(page: Page) {
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 1;
     const context = canvas.getContext("2d", { willReadFrequently: true })!;
-    const rgba = (color: string): number[] => {
+    // Canvas silently keeps the previous fillStyle for a value it cannot
+    // parse, which would record a wrong color with nothing to notice it by.
+    // CSS.supports checks the same CSS color grammar canvas parses, so flag
+    // the syntax and let the flag suppress the ratio. No pre-fill: a
+    // transparent color must stay transparent, not read as the last paint.
+    const rgba = (color: string, unsupported: string[]): number[] => {
+      if (!CSS.supports("color", color)) unsupported.push("unsupported color syntax");
       context.clearRect(0, 0, 1, 1);
       context.fillStyle = color;
       context.fillRect(0, 0, 1, 1);
@@ -81,14 +87,14 @@ async function measure(page: Page) {
           
           if (Number(style.opacity) !== 1) unsupported.push("group opacity");
           if (style.mixBlendMode !== "normal" || style.filter !== "none") unsupported.push("blend/filter");
-          const color = rgba(style.backgroundColor);
+          const color = rgba(style.backgroundColor, unsupported);
           // An opaque descendant covers ancestor gradients/images.
           if (color[3] === 1) complexBackground = false;
           if (style.backgroundImage !== "none") complexBackground = true;
           background = composite(color, background);
         }
         if (complexBackground) unsupported.push("background image/gradient");
-        const foreground = composite(rgba(s.color), background);
+        const foreground = composite(rgba(s.color, unsupported), background);
         const ratio = unsupported.length === 0
           ? (Math.max(luminance(foreground), luminance(background)) + 0.05) /
             (Math.min(luminance(foreground), luminance(background)) + 0.05) : null;
@@ -102,6 +108,10 @@ async function measure(page: Page) {
       });
     const targets = Array.from(document.querySelectorAll("a[href],button,input,select,textarea,[tabindex]"))
       .filter(visible)
+      // The focus-revealed skip link parks at left:-9999px until it is
+      // focused, so it is not a rendered target-size candidate. Vertical
+      // position is left alone: the footer sits below the fold and counts.
+      .filter((el) => { const r = el.getBoundingClientRect(); return r.right > 0 && r.left < innerWidth; })
       .filter((el) => !el.closest("#ft-grid > li") || el.closest("#ft-grid > li") === document.querySelector("#ft-grid > li"))
       .map((el) => { const r = rect(el); return { name: name(el), tag: el.tagName, id: el.id,
         rect: r, below24: r.width < 24 || r.height < 24, below44: r.width < 44 || r.height < 44 }; });
@@ -133,7 +143,7 @@ async function tabWalk(page: Page, width: number, surface: string) {
       const points = [[0.5, 0.5], [0.1, 0.1], [0.9, 0.1], [0.1, 0.9], [0.9, 0.9]];
       const hits = points.map(([x, y]) => {
         const top = document.elementFromPoint(r.x + r.width * x, r.y + r.height * y);
-        return top === el || (top !== null && el.contains(top));
+        return { x, y, hit: top === el || (top !== null && el.contains(top)) };
       });
       // Element identity for wrap-around detection: the selector index is -1
       // for any focused element outside that list, so key on a persistent id.
@@ -146,7 +156,7 @@ async function tabWalk(page: Page, width: number, surface: string) {
         category: el.getAttribute("data-ft-category"), href: el.getAttribute("href"),
         rect: { x: r.x, y: r.y, width: r.width, height: r.height },
         fullyInViewport: r.x >= 0 && r.y >= 0 && r.right <= innerWidth && r.bottom <= innerHeight,
-        unobscuredSamples: hits.filter(Boolean).length, hitTestSamples: hits.length,
+        unobscuredSamples: hits.filter((sample) => sample.hit).length, hitTestSamples: hits.length, hitPoints: hits,
         focusVisible: el.matches(":focus-visible"), outline: `${s.outlineWidth} ${s.outlineStyle} ${s.outlineColor}`,
         boxShadow: s.boxShadow };
     });
@@ -157,6 +167,23 @@ async function tabWalk(page: Page, width: number, surface: string) {
     // Retain selected visible focus states; all other stops stay in JSON.
     if (step.id === "ft-search" || step.category === "coding" || step.href === "https://aerolink.lat/pricing") {
       await page.screenshot({ path: path.join(output, `${width}-${surface}-focus-${index + 1}.jpg`), quality: 85 });
+    }
+    // The shot above fires mid-transition; for the search ring, wait out the
+    // 0.15s border/box-shadow transition and retain the settled state too, so
+    // the report never has to infer the end state from an earlier frame.
+    if (step.id === "ft-search") {
+      const settledFocus = await page.evaluate(async () => {
+        const el = document.activeElement as HTMLElement | null;
+        const animations = (el?.getAnimations() ?? []).filter((animation) =>
+          animation.effect?.getComputedTiming().iterations !== Infinity);
+        await Promise.all(animations.map((animation) => animation.finished.catch(() => undefined)));
+        if (!el) return null;
+        const s = getComputedStyle(el);
+        return { boxShadow: s.boxShadow, borderColor: s.borderColor };
+      });
+      const settledScreenshot = `${width}-${surface}-focus-${index + 1}-settled.jpg`;
+      await page.screenshot({ path: path.join(output, settledScreenshot), quality: 85 });
+      Object.assign(steps[steps.length - 1], { settledScreenshot, settledFocus });
     }
     if (surface === "home" && step.id === "ft-saved-toggle") break;
   }
@@ -178,7 +205,10 @@ for (const width of [320, 375, 768, 1440]) {
     const states = [];
     const record = async (state: string) => {
       await page.evaluate(async () => {
+        // Scroll-driven animations (the chip rail's fade) never finish — their
+        // progress is scroll position — so only time-based timelines settle.
         await Promise.all(document.getAnimations()
+          .filter((animation) => animation.timeline instanceof DocumentTimeline)
           .filter((animation) => animation.effect?.getComputedTiming().iterations !== Infinity)
           .map((animation) => animation.finished.catch(() => undefined)));
       });
@@ -227,7 +257,9 @@ for (const width of [320, 375, 768, 1440]) {
       browser: { name: browserName, version: browser.version(), headless: true },
       zoom: { desktop: "not measured; default automation context", emulation: "none", requested200Percent: "pending manual browser zoom" },
       limitations: ["Consent pre-dismissed; no consent-overlay coverage", "First home row only for target/contrast sampling",
-        "Computed rendered color compositing, not screenshot pixel sampling; pseudo-elements, overlapping siblings and antialiasing not modeled",
+        "Computed rendered color compositing, not screenshot pixel sampling; pseudo-elements, overlapping siblings and antialiasing not modeled; a color CSS.supports rejects is flagged unsupported and its ratio suppressed",
+        "Target sampling ignores controls parked outside the horizontal viewport (the focus-revealed skip link); vertical offset below the fold still counts",
+        "Focus screenshots are immediate frames; the search stop also retains a settled screenshot and computed style",
         "ARIA snapshots are control-name evidence, not screen-reader speech", "Five focus hit-test samples do not prove entire outline unobscured",
         "24/44px flags are dimensions, not WCAG target-spacing exception verdicts"],
       states, keyboard: { home: homeFocus, detail: detailFocus } };
