@@ -5,6 +5,17 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Performance baseline recorded (#505):** cold-load and search-interaction lab
+  traces were captured for the home and detail surfaces on the local production
+  build (headless Chromium 151, cold cache, 1440×900, no throttling), covering
+  transfer size, main-thread work, LCP, CLS and interaction timing, plus a
+  deployed `curl` size probe. Response size and client work are bounded on the
+  sampled surfaces; the only structural candidate — 242 per-row view-count
+  requests on home — is recorded as unproven pending a throttled run. Field Core
+  Web Vitals are unavailable and retained as an explicit gap; no performance
+  score is assigned. See
+  [docs/qa/issue-505-performance-baseline.md](docs/qa/issue-505-performance-baseline.md).
+
 - **Trust language made consistent across UI, structured data and exports
   (#507):** review status and evidence level are now one documented vocabulary
   with a single source of truth (`app/scripts/trust-vocabulary.mjs`, mirrored

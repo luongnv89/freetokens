@@ -1,0 +1,396 @@
+{
+  "surface": "detail",
+  "url": "/offers/aerolink-starter-free-trial.html",
+  "capturedAt": "2026-10-05T21:30:38.006Z",
+  "sourceCommit": "b603097714a908ab792aa208971b02d305585c7c",
+  "tool": {
+    "browser": "chromium",
+    "version": "151.0.7922.34",
+    "driver": "Playwright + CDP Performance domain + PerformanceObserver",
+    "headless": true
+  },
+  "device": {
+    "viewport": "1440x900 CSS px",
+    "deviceScaleFactor": 1,
+    "mobile": false
+  },
+  "network": {
+    "transport": "loopback HTTP to the local `vite preview` server (gzip, like GitHub Pages)",
+    "throttling": "none (no CDP Network.emulateNetworkConditions)",
+    "thirdParty": "analytics/traffic hosts stubbed with 204; same-origin served for real"
+  },
+  "cache": "cold — a fresh browser context per repetition (empty HTTP + memory cache)",
+  "repetitions": 3,
+  "limitations": [
+    "Lab trace on the local production build, not field Core Web Vitals",
+    "No network or CPU throttling: loopback and host CPU are faster than a real mobile client",
+    "LCP/CLS from PerformanceObserver; only long tasks >=50ms are counted",
+    "transferSize excludes cross-origin resources without Timing-Allow-Origin",
+    "Subresources reached by same-origin `fetch()` are counted; the navigation document is reported separately"
+  ],
+  "runs": [
+    {
+      "run": 1,
+      "wallMs": 1106,
+      "coldLoad": {
+        "ttfbMs": 3.1,
+        "domContentLoadedMs": 49.9,
+        "loadEventMs": 50.2,
+        "navigationTransferBytes": 6941,
+        "navigationDecodedBytes": 26700,
+        "requestCount": 12,
+        "transferBytes": 359307,
+        "decodedBytes": 954605,
+        "byInitiator": {
+          "link": {
+            "count": 4,
+            "transferBytes": 140123,
+            "decodedBytes": 183809
+          },
+          "script": {
+            "count": 1,
+            "transferBytes": 95854,
+            "decodedBytes": 307701
+          },
+          "css": {
+            "count": 2,
+            "transferBytes": 20772,
+            "decodedBytes": 20172
+          },
+          "fetch": {
+            "count": 5,
+            "transferBytes": 102558,
+            "decodedBytes": 442923
+          }
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:4173/fonts/archivo-var-latin.woff2",
+            "initiatorType": "link",
+            "transferBytes": 90396,
+            "decodedBytes": 90096
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/lora-var-latin.woff2",
+            "initiatorType": "link",
+            "transferBytes": 38092,
+            "decodedBytes": 37792
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/index-qfpGt87G.css",
+            "initiatorType": "link",
+            "transferBytes": 10931,
+            "decodedBytes": 55517
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/index-Dyi9AbD8.js",
+            "initiatorType": "script",
+            "transferBytes": 95854,
+            "decodedBytes": 307701
+          },
+          {
+            "name": "http://127.0.0.1:4173/logo-mark.svg",
+            "initiatorType": "link",
+            "transferBytes": 704,
+            "decodedBytes": 404
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/plex-mono-600-latin.woff2",
+            "initiatorType": "css",
+            "transferBytes": 10420,
+            "decodedBytes": 10120
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/plex-mono-400-latin.woff2",
+            "initiatorType": "css",
+            "transferBytes": 10352,
+            "decodedBytes": 10052
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/offers-iKVQ4BC8.json",
+            "initiatorType": "fetch",
+            "transferBytes": 21078,
+            "decodedBytes": 127917
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/details-brFZegun.json",
+            "initiatorType": "fetch",
+            "transferBytes": 81480,
+            "decodedBytes": 315006
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/%2Foffers%2Faerolink-starter-free-trial.html.json",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/TOTAL.json",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/TOTAL.json?start=2026-10-05&end=2026-10-06",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          }
+        ],
+        "lcpMs": 56,
+        "lcpElement": "p",
+        "cls": 0.0395,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "LayoutDuration": 0.012256,
+        "RecalcStyleDuration": 0.010813,
+        "ScriptDuration": 0.028299,
+        "TaskDuration": 0.084467,
+        "JSHeapUsedSize": 4560400
+      }
+    },
+    {
+      "run": 2,
+      "wallMs": 1111,
+      "coldLoad": {
+        "ttfbMs": 3,
+        "domContentLoadedMs": 40.8,
+        "loadEventMs": 62.3,
+        "navigationTransferBytes": 6941,
+        "navigationDecodedBytes": 26700,
+        "requestCount": 12,
+        "transferBytes": 359307,
+        "decodedBytes": 954605,
+        "byInitiator": {
+          "link": {
+            "count": 4,
+            "transferBytes": 140123,
+            "decodedBytes": 183809
+          },
+          "script": {
+            "count": 1,
+            "transferBytes": 95854,
+            "decodedBytes": 307701
+          },
+          "fetch": {
+            "count": 5,
+            "transferBytes": 102558,
+            "decodedBytes": 442923
+          },
+          "css": {
+            "count": 2,
+            "transferBytes": 20772,
+            "decodedBytes": 20172
+          }
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:4173/fonts/archivo-var-latin.woff2",
+            "initiatorType": "link",
+            "transferBytes": 90396,
+            "decodedBytes": 90096
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/index-qfpGt87G.css",
+            "initiatorType": "link",
+            "transferBytes": 10931,
+            "decodedBytes": 55517
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/lora-var-latin.woff2",
+            "initiatorType": "link",
+            "transferBytes": 38092,
+            "decodedBytes": 37792
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/index-Dyi9AbD8.js",
+            "initiatorType": "script",
+            "transferBytes": 95854,
+            "decodedBytes": 307701
+          },
+          {
+            "name": "http://127.0.0.1:4173/logo-mark.svg",
+            "initiatorType": "link",
+            "transferBytes": 704,
+            "decodedBytes": 404
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/offers-iKVQ4BC8.json",
+            "initiatorType": "fetch",
+            "transferBytes": 21078,
+            "decodedBytes": 127917
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/plex-mono-600-latin.woff2",
+            "initiatorType": "css",
+            "transferBytes": 10420,
+            "decodedBytes": 10120
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/plex-mono-400-latin.woff2",
+            "initiatorType": "css",
+            "transferBytes": 10352,
+            "decodedBytes": 10052
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/details-brFZegun.json",
+            "initiatorType": "fetch",
+            "transferBytes": 81480,
+            "decodedBytes": 315006
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/%2Foffers%2Faerolink-starter-free-trial.html.json",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/TOTAL.json",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/TOTAL.json?start=2026-10-05&end=2026-10-06",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          }
+        ],
+        "lcpMs": 76,
+        "lcpElement": "p",
+        "cls": 0.0395,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "LayoutDuration": 0.03101,
+        "RecalcStyleDuration": 0.008275,
+        "ScriptDuration": 0.025175,
+        "TaskDuration": 0.094437,
+        "JSHeapUsedSize": 4575512
+      }
+    },
+    {
+      "run": 3,
+      "wallMs": 1097,
+      "coldLoad": {
+        "ttfbMs": 2.9,
+        "domContentLoadedMs": 45.1,
+        "loadEventMs": 45.3,
+        "navigationTransferBytes": 6941,
+        "navigationDecodedBytes": 26700,
+        "requestCount": 12,
+        "transferBytes": 359307,
+        "decodedBytes": 954605,
+        "byInitiator": {
+          "link": {
+            "count": 4,
+            "transferBytes": 140123,
+            "decodedBytes": 183809
+          },
+          "script": {
+            "count": 1,
+            "transferBytes": 95854,
+            "decodedBytes": 307701
+          },
+          "css": {
+            "count": 2,
+            "transferBytes": 20772,
+            "decodedBytes": 20172
+          },
+          "fetch": {
+            "count": 5,
+            "transferBytes": 102558,
+            "decodedBytes": 442923
+          }
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:4173/fonts/archivo-var-latin.woff2",
+            "initiatorType": "link",
+            "transferBytes": 90396,
+            "decodedBytes": 90096
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/lora-var-latin.woff2",
+            "initiatorType": "link",
+            "transferBytes": 38092,
+            "decodedBytes": 37792
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/index-qfpGt87G.css",
+            "initiatorType": "link",
+            "transferBytes": 10931,
+            "decodedBytes": 55517
+          },
+          {
+            "name": "http://127.0.0.1:4173/logo-mark.svg",
+            "initiatorType": "link",
+            "transferBytes": 704,
+            "decodedBytes": 404
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/index-Dyi9AbD8.js",
+            "initiatorType": "script",
+            "transferBytes": 95854,
+            "decodedBytes": 307701
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/plex-mono-600-latin.woff2",
+            "initiatorType": "css",
+            "transferBytes": 10420,
+            "decodedBytes": 10120
+          },
+          {
+            "name": "http://127.0.0.1:4173/fonts/plex-mono-400-latin.woff2",
+            "initiatorType": "css",
+            "transferBytes": 10352,
+            "decodedBytes": 10052
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/offers-iKVQ4BC8.json",
+            "initiatorType": "fetch",
+            "transferBytes": 21078,
+            "decodedBytes": 127917
+          },
+          {
+            "name": "http://127.0.0.1:4173/assets/details-brFZegun.json",
+            "initiatorType": "fetch",
+            "transferBytes": 81480,
+            "decodedBytes": 315006
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/%2Foffers%2Faerolink-starter-free-trial.html.json",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/TOTAL.json",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          },
+          {
+            "name": "https://luongnv89.goatcounter.com/counter/TOTAL.json?start=2026-10-05&end=2026-10-06",
+            "initiatorType": "fetch",
+            "transferBytes": 0,
+            "decodedBytes": 0
+          }
+        ],
+        "lcpMs": 52,
+        "lcpElement": "p",
+        "cls": 0.0395,
+        "longTaskCount": 0,
+        "longTaskTotalMs": 0,
+        "longTaskMaxMs": 0,
+        "LayoutDuration": 0.010545,
+        "RecalcStyleDuration": 0.010382,
+        "ScriptDuration": 0.025039,
+        "TaskDuration": 0.075575,
+        "JSHeapUsedSize": 4580480
+      }
+    }
+  ]
+}
