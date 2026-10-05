@@ -1241,17 +1241,20 @@ a:focus-visible {
 
 /* The rail's Save/Hide are the same neutral pill as the toolbar chips,
    one step smaller; the saved state answers in the accent, not in ink.
-   Fine pointers keep the smaller pill but not the 21px box: WCAG 2.5.8
-   measures the target, and 21px sat under its 24px floor. Coarse
-   pointers still take the 44px floor from the shared .chip rule. */
+   WCAG 2.5.8 measures the target, and the 21px box sat under its 24px
+   floor, so the pill carries the floor itself — unconditionally, since
+   pointer:none (keyboard, remote, TV) must clear it too. Coarse pointers
+   get the 44px floor from the override below, which outranks the shared
+   .chip rule on specificity. */
 .row-rail .chip {
   font-size: 0.72rem;
   padding: 0.22rem 0.55rem;
+  min-height: 1.5rem;
 }
 
-@media (pointer: fine) {
+@media (pointer: coarse) {
   .row-rail .chip {
-    min-height: 1.5rem;
+    min-height: 44px;
   }
 }
 
