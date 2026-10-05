@@ -1240,10 +1240,19 @@ a:focus-visible {
 }
 
 /* The rail's Save/Hide are the same neutral pill as the toolbar chips,
-   one step smaller; the saved state answers in the accent, not in ink. */
+   one step smaller; the saved state answers in the accent, not in ink.
+   Fine pointers keep the smaller pill but not the 21px box: WCAG 2.5.8
+   measures the target, and 21px sat under its 24px floor. Coarse
+   pointers still take the 44px floor from the shared .chip rule. */
 .row-rail .chip {
   font-size: 0.72rem;
   padding: 0.22rem 0.55rem;
+}
+
+@media (pointer: fine) {
+  .row-rail .chip {
+    min-height: 1.5rem;
+  }
 }
 
 .row-rail .chip[aria-pressed="true"] {
@@ -1726,7 +1735,11 @@ a:focus-visible {
     flex-wrap: nowrap;
     overflow-x: auto;
     overscroll-behavior-x: contain;
-    scrollbar-width: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--hairline-strong) transparent;
+    /* Keyboard scroll-into-view parks the focused chip inside the crisp
+       zone instead of at the faded edge. */
+    scroll-padding-inline: 0.5rem;
     margin-inline: -0.15rem;
     padding: 0.1rem 0.15rem 0.2rem;
   }
@@ -1741,7 +1754,16 @@ a:focus-visible {
   }
 
   .toolbar > .chips::-webkit-scrollbar {
-    display: none;
+    height: 0.3rem;
+  }
+
+  .toolbar > .chips::-webkit-scrollbar-thumb {
+    background: var(--hairline-strong);
+    border-radius: 999px;
+  }
+
+  .toolbar > .chips::-webkit-scrollbar-track {
+    background: transparent;
   }
 
   .toolbar > .chips > * {
@@ -1751,7 +1773,10 @@ a:focus-visible {
   /* The row already scrolled; nothing said so. A chip clipped flat by the
      viewport edge reads as a layout bug, so the right edge fades out to
      announce there is more, and the fade is removed once the rail is
-     scrolled to its end. Mask only — no extra element, no scrollbar. */
+     scrolled to its end. The thin scrollbar above backs the fade up for
+     pointer users; mask only, no extra element. Keyboard focus drops the
+     mask for the whole rail: the old rule cleared it only for the last
+     chip, which left a mid-strip focus ring under the fade. */
   .toolbar > .chips {
     -webkit-mask-image: linear-gradient(
       to right,
@@ -1765,9 +1790,34 @@ a:focus-visible {
     );
   }
 
-  .toolbar > .chips:has(> :last-child:focus-visible) {
+  .toolbar > .chips:has(> :focus-visible) {
     -webkit-mask-image: none;
     mask-image: none;
+  }
+
+  /* "Removed once the rail is scrolled to its end" is not readable from the
+     DOM in plain CSS, so where scroll-driven animations exist the fade width
+     follows the rail's own scroll position: full 2.2rem at the start,
+     opaque at the end, so the last label is never clipped there. The static
+     fade above stays the fallback elsewhere. */
+  @supports (animation-timeline: scroll()) {
+    .toolbar > .chips:not(:has(> :focus-visible)) {
+      animation: chip-rail-fade linear both;
+      animation-timeline: scroll(self inline);
+    }
+  }
+
+  @keyframes chip-rail-fade {
+    from {
+      mask-image: linear-gradient(
+        to right,
+        #000 calc(100% - 2.2rem),
+        transparent
+      );
+    }
+    to {
+      mask-image: linear-gradient(to right, #000 100%, transparent);
+    }
   }
 }
 

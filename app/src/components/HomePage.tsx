@@ -4,6 +4,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type FocusEvent,
   type KeyboardEvent,
 } from "react";
 import {
@@ -181,6 +182,14 @@ function Toolbar({
     event.preventDefault();
     onCategorySet(next);
   }
+  // The category rail scrolls sideways at narrow widths, and a chip that is
+  // only partly visible keeps its right edge clipped when focus lands on it
+  // (Blink does not scroll a partially visible target into view), so the
+  // chip asks for its own reveal. `nearest` scrolls the minimum, and leaves
+  // vertical position alone so the page never jumps.
+  function revealOnFocus(event: FocusEvent<HTMLButtonElement>) {
+    event.currentTarget.scrollIntoView({ inline: "nearest", block: "nearest" });
+  }
   return (
     <section className="toolbar" aria-label="Search and filter offers">
       <div className="field field-search">
@@ -242,6 +251,7 @@ function Toolbar({
           data-ft-category=""
           aria-pressed={category === "" ? "true" : "false"}
           onClick={() => onCategorySet("")}
+          onFocus={revealOnFocus}
           onKeyDown={(e) => onChipKeyDown(e, "")}
         >
           <span>All</span>
@@ -255,6 +265,7 @@ function Toolbar({
             data-ft-category={cat}
             aria-pressed={category === cat ? "true" : "false"}
             onClick={() => onCategorySet(cat)}
+            onFocus={revealOnFocus}
             onKeyDown={(e) => onChipKeyDown(e, cat)}
           >
             <ChipGlyph value={cat} />
