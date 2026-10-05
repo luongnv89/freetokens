@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-04T03:07:47Z",
-  "count": 231,
-  "active_count": 201,
-  "expired_count": 30,
+  "generated_at": "2026-10-05T03:04:11Z",
+  "count": 230,
+  "active_count": 199,
+  "expired_count": 31,
   "offers": [
     {
       "slug": "aerolink-starter-free-trial",
@@ -1248,7 +1248,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "novita-ling-3-0-flash-fin-free",
@@ -1986,20 +1986,6 @@
       "amount": "$10 free credits every month (including signup month) plus a one-time $10 bonus after dashboard onboarding for a user's first team",
       "expiry_date": null,
       "source_url": "https://exa.ai/docs/reference/billing",
-      "verified_date": "2026-09-30",
-      "verification": "social_proof",
-      "review_status": "unverified",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "fal-builder-grant",
-      "title": "fal Builder Grant — $25–$250",
-      "provider": "fal",
-      "category": "startup_program",
-      "amount": "$25–$250 in fal credits for direct generative-media apps (Europe/Asia-based teams only; one application per company every three months)",
-      "expiry_date": null,
-      "source_url": "https://fal.ai/startups",
       "verified_date": "2026-09-30",
       "verification": "social_proof",
       "review_status": "unverified",
