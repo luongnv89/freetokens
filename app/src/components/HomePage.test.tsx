@@ -340,7 +340,7 @@ describe("HomePage deep link and popstate", () => {
     expect(screen.getByLabelText("Search")).toHaveValue("alpha");
     expect(screen.getByLabelText("Sort")).toHaveValue("expiring");
     expect(document.getElementById("ft-results-status")?.textContent).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · Coding · social proof · sign-up required`,
+      `Showing 1 of ${fixtureOffers.length} offers · Coding · corroborated · sign-up required`,
     );
     expect(eventCalls(gtag, "search")).toHaveLength(0);
     expect(eventCalls(gtag, "sort_use")).toHaveLength(0);
@@ -519,7 +519,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     expect(params.get("category")).toBe("coding");
     expect(params.get("q")).toBe("social");
     expect(statusText()).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · Coding · unverified · sign-up required`,
+      `Showing 1 of ${fixtureOffers.length} offers · Coding · community-sourced · sign-up required`,
     );
   });
 
@@ -529,7 +529,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     fireEvent.click(tagOn("alpha-social", "signup"));
     expect(listedSlugs()).toEqual(["alpha-social"]);
     expect(statusText()).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · unverified · sign-up required`,
+      `Showing 1 of ${fixtureOffers.length} offers · community-sourced · sign-up required`,
     );
     fireEvent.click(
       screen.getByRole("button", { name: "Remove sign-up required filter" }),
@@ -537,7 +537,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     expect(listedSlugs()).toEqual(["alpha-social"]);
     expect(window.location.search).toBe("?verification=unverified");
     expect(statusText()).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · unverified`,
+      `Showing 1 of ${fixtureOffers.length} offers · community-sourced`,
     );
   });
 
@@ -546,7 +546,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     fireEvent.click(tagOn("alpha-social", "verification"));
     fireEvent.click(tagOn("alpha-social", "signup"));
     fireEvent.click(
-      screen.getByRole("button", { name: "Remove unverified filter" }),
+      screen.getByRole("button", { name: "Remove community-sourced filter" }),
     );
     expect(document.activeElement).toBe(
       screen.getByRole("button", { name: "Remove sign-up required filter" }),

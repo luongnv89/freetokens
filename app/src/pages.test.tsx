@@ -16,6 +16,7 @@ import {
 import {
   activeOffers,
   humanDate,
+  LAST_CHECKED,
   SIGNUP_LABELS,
   VERIFICATION_LABELS,
   REVIEW_STATUS_LABELS,
@@ -23,6 +24,7 @@ import {
   type OffersIndex,
 } from "./lib/offers";
 import indexData from "./data/offers.json";
+import { REVIEW_STATUS } from "../scripts/trust-vocabulary.mjs";
 import { DEFAULT_BASE_URL } from "./lib/site";
 
 const PUBLIC_DIR = path.resolve(import.meta.dirname, "../public");
@@ -331,7 +333,9 @@ describe("ArchivePage (#26 parity)", () => {
     // OfferRow uses "Filter by" aria-labels, not "See offers tagged"
     expect(markup).toContain('aria-label="Filter by Coding"');
     expect(markup).not.toContain('aria-label="Filter by hand-verified"');
-    expect(markup).toContain('aria-label="Filter by social proof"');
+    expect(markup).toContain(
+      `aria-label="Filter by ${VERIFICATION_LABELS.social_proof}"`,
+    );
     expect(markup).toContain('aria-label="Filter by no sign-up"');
   });
 });
@@ -419,7 +423,9 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
     expect(markup).not.toContain(
       'aria-label="See offers tagged hand-verified"',
     );
-    expect(markup).toContain('aria-label="See offers tagged social proof"');
+    expect(markup).toContain(
+      `aria-label="See offers tagged ${VERIFICATION_LABELS.social_proof}"`,
+    );
     expect(markup).toContain('aria-label="See offers tagged no sign-up"');
     expect(markup).not.toMatch(/<button[^>]*data-ft-tag/);
   });
@@ -725,7 +731,7 @@ describe("no-signup and verification honesty badges (#111)", () => {
       (markup.match(/badge-review-status-unverified\b/g) ?? []).length,
     ).toBe(2);
     expect(markup).toContain(">no sign-up</span>");
-    expect(markup).toContain(">social proof</span>");
+    expect(markup).toContain(`>${VERIFICATION_LABELS.social_proof}</span>`);
     expect(markup).toContain('<th scope="row">Verification</th>');
     expect(markup).toContain(`>${REVIEW_STATUS_LABELS.unverified}</span>`);
   });
@@ -1192,5 +1198,81 @@ describe("masthead stats rail (#279 / #280 / #281)", () => {
     });
     // The rail is the catalog total; only the toolbar line narrows.
     expect(deals()).toBe(String(total));
+  });
+});
+
+// T4 / #507: the trust vocabulary has to reach every surface — the two pages a
+// reader lands on, and the machine-readable collection metadata — or the
+// definitions only exist in the code.
+describe("trust vocabulary on the rendered surfaces (#507)", () => {
+  const detail = () =>
+    renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+      />,
+    );
+
+  it("renders the hover-free legend on the home listing", () => {
+    const markup = renderToStaticMarkup(<HomePage index={index} />);
+    expect(markup).toContain('id="trust-legend-head"');
+    expect(markup).toContain("How to read these labels");
+    expect(markup).toContain(REVIEW_STATUS_LABELS["to-be-verified"]);
+    expect(markup).toContain(VERIFICATION_LABELS.social_proof);
+    // Expanded by default: the definitions are in the first paint, not behind
+    // a click. The nested full-definition disclosure is the only closed one.
+    const legend = markup.slice(
+      markup.indexOf('class="policy trust-legend"'),
+      markup.indexOf('id="ft-grid"'),
+    );
+    expect(legend.match(/<details open(?:=""|)>/g)).toHaveLength(1);
+    expect(legend).toContain(REVIEW_STATUS["to-be-verified"].short);
+    // The legend sits before the list it qualifies, and never inside it.
+    expect(markup.indexOf('id="trust-legend-head"')).toBeLessThan(
+      markup.indexOf('id="ft-grid"'),
+    );
+    expect(markup.match(/<li style/g)?.length).toBe(
+      activeOffers(index).length,
+    );
+  });
+
+  it("renders the same legend on an offer detail page", () => {
+    const markup = detail();
+    expect(markup).toContain('id="trust-legend-head"');
+    expect(markup).toContain("How to read these labels");
+    expect(markup).toContain(LAST_CHECKED.label);
+    expect(markup).toMatch(/enrollment deadline/i);
+  });
+
+  it("makes no blanket 'verified' claim in the deployed collection metadata", () => {
+    const markup = renderToStaticMarkup(<HomePage index={index} />);
+    const graph = allJsonLd(markup)
+      .map((block) => block["@graph"])
+      .find(Array.isArray) as { "@type"?: string; name: string; description: string }[];
+    const collection = graph.find(
+      (node) => node["@type"] === "CollectionPage",
+    )!;
+    expect(collection.name).not.toMatch(/verified/i);
+    expect(collection.name).toContain("review status and evidence level");
+    expect(collection.description).toContain("evidence level");
+    expect(collection.description).not.toMatch(/verified/i);
+  });
+
+  it("leaves every underlying trust value untouched", () => {
+    // The wording pass must not move a single date, status, evidence or
+    // signup value: the badges still key off the data, not the copy.
+    const row = offer({
+      review_status: "to-be-verified",
+      verification: "social_proof",
+      signup: "required",
+      verified_date: "2026-09-30",
+    });
+    const markup = renderToStaticMarkup(
+      <HomePage index={{ ...index, offers: [row] }} />,
+    );
+    expect(markup).toContain('data-verification="social_proof"');
+    expect(markup).toContain('data-signup="required"');
+    expect(markup).toContain('data-verified="2026-09-30"');
+    expect(markup).toContain("badge-review-status-to-be-verified");
   });
 });

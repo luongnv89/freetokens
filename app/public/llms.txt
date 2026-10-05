@@ -1,40 +1,66 @@
 # Free AI Credits
 
-> Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page. Curated from official provider sources and refreshed at build time.
+> Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page. Curated from official provider sources and refreshed at build time.
+
+## Trust labels
+
+Two independent labels qualify every offer: review status says how far the curator has reviewed the listing; evidence level says what the offer's terms rest on. Neither one means the curator completed the claim, and the last-checked date is when the entry was last confirmed against its source.
+
+In one line: corroborated = evidence level · reviewed / tested = review status · checked = the last-checked date.
+
+**Review status** (`review_status`) — How far has the curator reviewed this listing?
+
+- `review_status=verified` — reviewed: The curator has read this listing against the provider's own source and its terms match what is listed. No claim attempt is attested by this value.
+- `review_status=under-review` — under review: The curator is testing this listing now. A claim attempt is in progress; its outcome is not recorded yet.
+- `review_status=unverified` — not reviewed: The curator has not reviewed this listing firsthand yet. No claim attempt is attested.
+- `review_status=to-be-verified` — to be verified: The listing's current details need follow-up verification before they can be relied on. No claim attempt is attested.
+
+**Evidence level** (`verification`) — What do this offer's terms rest on?
+
+- `verification=social_proof` — corroborated: The offer's terms are corroborated by the provider's own site plus at least one social or community source. This axis records corroboration only — whether a claim was attempted is the review status.
+- `verification=unverified` — community-sourced: Only social or community sources describe this offer; there is no official-site confirmation yet, so treat every term as unconfirmed. This axis records corroboration only — whether a claim was attempted is the review status.
+
+**Sign-up need** (`signup`) — Does claiming need an account?
+
+- `signup=none` — no sign-up: Claimable without creating an account.
+- `signup=required` — sign-up required: Claiming needs a (free) account.
+
+**Last checked** (`last_checked`) — The date the curator last confirmed the entry against its source. It describes the listing's freshness, not the offer's expiry. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers
 
-Top 20 currently active offers (newest verified first) from 199 active listings. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest checked first) from 199 active listings. Every line ends with the offer's own review status, evidence level, sign-up need and last-checked date. Full directory at https://freetokens.custats.info/.
 
-- [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student)
-- [ZCode / BigModel New-User Trial](https://freetokens.custats.info/offers/zcode-bigmodel-new-user-trial.html): ZCode (Z.ai) — 8M tokens/day for the first 5 days (GLM-5.3 3M + GLM-5.3-Flash 5M) after connecting a BigModel account; then expires — not an ongoing free tier (coding)
-- [Z.ai Startups Program](https://freetokens.custats.info/offers/z-ai-startups-program.html): Z AI (Zhipu AI) — Free API credits up to 1B tokens plus GLM volume pricing, priority support, and early access (startup_program)
-- [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider)
-- [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider)
-- [Voyage AI — First 200M Tokens Free](https://freetokens.custats.info/offers/voyage-ai-200m-free-tokens.html): Voyage AI — First 200M tokens free per account on current embedding/rerank models (50M on specialized -2 models; multimodal: 200M text tokens + 150B pixels); Batch API excluded (api_provider)
-- [Vidu AI Video Free Credits](https://freetokens.custats.info/offers/vidu-free-credits.html): Vidu — Trial credits for new users on signup, topped up with daily login bonus credits (video)
-- [Vercel AI Gateway — Monthly Free Credit](https://freetokens.custats.info/offers/vercel-ai-gateway-free-tier.html): Vercel — Monthly free AI Gateway credit covering a free-tier subset of models (lower per-model rate limits); buying credits permanently ends the monthly free credit (api_provider)
-- [Upstage Free Access for Education & Public Interest](https://freetokens.custats.info/offers/upstage-education-public-interest-free.html): Upstage — Free access to Solar Pro LLM + Document Parse for up to 1 year for eligible schools, hospitals, and nonprofits (Upstage x AWS AI Initiative) (student)
-- [Together AI Startup Accelerator](https://freetokens.custats.info/offers/together-ai-startup-accelerator.html): Together AI — Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant) (startup_program)
-- [TinyFish Student Program — $35 Credits](https://freetokens.custats.info/offers/tinyfish-student-program-35-credits.html): TinyFish — $35 wallet credit automatic on eligible academic-email signup plus bounty-board gift cards for approved builds ($50 agentic apps, $20 Skills, $10 prompts) (student)
-- [Thunder Compute Student Program — $20 Credit](https://freetokens.custats.info/offers/thunder-compute-students.html): Thunder Compute — $20 free Thunder Compute credit for students at US universities (student)
-- [Tencent Cloud TokenHub — New User Free Trial](https://freetokens.custats.info/offers/tencent-cloud-tokenhub-free-trial.html): Tencent Cloud — 1,000,000 free tokens per eligible language model, valid 1 year from claim (one claim per model per root account; USD 1 balance frozen per claim/enable) (api_provider)
-- [Telnyx Startups Program](https://freetokens.custats.info/offers/telnyx-startups-program.html): Telnyx — Up to $20,000 in AI credits for 6 months, plus 3 months of engineering support (startup_program)
-- [Tavily Researcher Free — 1,000 API Credits/Month](https://freetokens.custats.info/offers/tavily-free-tier.html): Tavily — 1,000 free API credits every month (api_provider)
-- [Suno Free Plan — 50 credits per day](https://freetokens.custats.info/offers/suno-free-plan.html): Suno — Free plan: 50 credits/day (voice)
-- [Stability AI — 25 Free API Credits](https://freetokens.custats.info/offers/stability-ai-25-free-credits.html): Stability AI — 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter) (image)
-- [Speechmatics $100 Free Credit](https://freetokens.custats.info/offers/speechmatics-100-free-credit.html): Speechmatics — $100 in free credits (STT 55+ languages + TTS), 2 concurrent real-time sessions, no card required (voice)
-- [SmarToken $5 Free API Credit Campaign](https://freetokens.custats.info/offers/smartoken-5-free-api-credit.html): SmarToken — $5 one-time promotional API credit for eligible accounts (api_provider)
-- [Smallest.ai Startup Grants Program for Voice AI](https://freetokens.custats.info/offers/smallest-ai-startup-grants.html): Smallest.ai — $10,000 in Voice Agent Platform credits for up to 6 months (startup_program)
+- [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student) · review_status=verified · verification=social_proof · signup=required · last_checked=2026-09-30
+- [ZCode / BigModel New-User Trial](https://freetokens.custats.info/offers/zcode-bigmodel-new-user-trial.html): ZCode (Z.ai) — 8M tokens/day for the first 5 days (GLM-5.3 3M + GLM-5.3-Flash 5M) after connecting a BigModel account; then expires — not an ongoing free tier (coding) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Z.ai Startups Program](https://freetokens.custats.info/offers/z-ai-startups-program.html): Z AI (Zhipu AI) — Free API credits up to 1B tokens plus GLM volume pricing, priority support, and early access (startup_program) · review_status=to-be-verified · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Z AI Free Model APIs](https://freetokens.custats.info/offers/z-ai-free-models.html): Z AI (Zhipu AI) — Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash (api_provider) · review_status=unverified · verification=social_proof · signup=required · last_checked=2026-09-30
+- [YepAPI $5 Signup Credit](https://freetokens.custats.info/offers/yepapi-5-signup-credit.html): YepAPI — $5 free credit on signup for 60+ models via OpenAI-compatible gateway (api_provider) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Voyage AI — First 200M Tokens Free](https://freetokens.custats.info/offers/voyage-ai-200m-free-tokens.html): Voyage AI — First 200M tokens free per account on current embedding/rerank models (50M on specialized -2 models; multimodal: 200M text tokens + 150B pixels); Batch API excluded (api_provider) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Vidu AI Video Free Credits](https://freetokens.custats.info/offers/vidu-free-credits.html): Vidu — Trial credits for new users on signup, topped up with daily login bonus credits (video) · review_status=unverified · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Vercel AI Gateway — Monthly Free Credit](https://freetokens.custats.info/offers/vercel-ai-gateway-free-tier.html): Vercel — Monthly free AI Gateway credit covering a free-tier subset of models (lower per-model rate limits); buying credits permanently ends the monthly free credit (api_provider) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Upstage Free Access for Education & Public Interest](https://freetokens.custats.info/offers/upstage-education-public-interest-free.html): Upstage — Free access to Solar Pro LLM + Document Parse for up to 1 year for eligible schools, hospitals, and nonprofits (Upstage x AWS AI Initiative) (student) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Together AI Startup Accelerator](https://freetokens.custats.info/offers/together-ai-startup-accelerator.html): Together AI — Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant) (startup_program) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [TinyFish Student Program — $35 Credits](https://freetokens.custats.info/offers/tinyfish-student-program-35-credits.html): TinyFish — $35 wallet credit automatic on eligible academic-email signup plus bounty-board gift cards for approved builds ($50 agentic apps, $20 Skills, $10 prompts) (student) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Thunder Compute Student Program — $20 Credit](https://freetokens.custats.info/offers/thunder-compute-students.html): Thunder Compute — $20 free Thunder Compute credit for students at US universities (student) · review_status=unverified · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Tencent Cloud TokenHub — New User Free Trial](https://freetokens.custats.info/offers/tencent-cloud-tokenhub-free-trial.html): Tencent Cloud — 1,000,000 free tokens per eligible language model, valid 1 year from claim (one claim per model per root account; USD 1 balance frozen per claim/enable) (api_provider) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Telnyx Startups Program](https://freetokens.custats.info/offers/telnyx-startups-program.html): Telnyx — Up to $20,000 in AI credits for 6 months, plus 3 months of engineering support (startup_program) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Tavily Researcher Free — 1,000 API Credits/Month](https://freetokens.custats.info/offers/tavily-free-tier.html): Tavily — 1,000 free API credits every month (api_provider) · review_status=unverified · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Suno Free Plan — 50 credits per day](https://freetokens.custats.info/offers/suno-free-plan.html): Suno — Free plan: 50 credits/day (voice) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Stability AI — 25 Free API Credits](https://freetokens.custats.info/offers/stability-ai-25-free-credits.html): Stability AI — 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter) (image) · review_status=to-be-verified · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Speechmatics $100 Free Credit](https://freetokens.custats.info/offers/speechmatics-100-free-credit.html): Speechmatics — $100 in free credits (STT 55+ languages + TTS), 2 concurrent real-time sessions, no card required (voice) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
+- [SmarToken $5 Free API Credit Campaign](https://freetokens.custats.info/offers/smartoken-5-free-api-credit.html): SmarToken — $5 one-time promotional API credit for eligible accounts (api_provider) · review_status=unverified · verification=social_proof · signup=required · last_checked=2026-09-30
+- [Smallest.ai Startup Grants Program for Voice AI](https://freetokens.custats.info/offers/smallest-ai-startup-grants.html): Smallest.ai — $10,000 in Voice Agent Platform credits for up to 6 months (startup_program) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-09-30
 
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Browse all currently active free AI credit offers, filterable by category and searchable — the site's main listing.
 - [Archive](https://freetokens.custats.info/archive.html): Reference archive of expired free AI credit offers, newest-expired first with original terms.
-- [About](https://freetokens.custats.info/about.html): What the site is, how listings are verified, and what the numbers mean.
+- [About](https://freetokens.custats.info/about.html): What the site is, how listings are reviewed and checked, and what the numbers mean.
 - [Privacy Policy](https://freetokens.custats.info/privacy.html): How the site handles data — consent-gated anonymized analytics, no forms, no personal data storage.
+- [Full export](https://freetokens.custats.info/llms-full.txt): the long-form companion to this file — every active offer with its summary, claim steps, source and detail links and the same trust fields, plus the build date and any truncation.
 
 ## Feed
 
-- [RSS Feed](https://freetokens.custats.info/feed.xml): RSS 2.0 feed of active offers (newest verified first), updated on each build — subscribe for new free credit listings.
+- [RSS Feed](https://freetokens.custats.info/feed.xml): RSS 2.0 feed of active offers (newest checked first), updated on each build — subscribe for new free credit listings.
 - [Sitemap](https://freetokens.custats.info/sitemap.xml): XML sitemap listing all index, archive, privacy and offer detail pages for crawlers.

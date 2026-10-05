@@ -5,6 +5,30 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Trust language made consistent across UI, structured data and exports
+  (#507):** review status and evidence level are now one documented vocabulary
+  with a single source of truth (`app/scripts/trust-vocabulary.mjs`, mirrored
+  in [docs/schema.md](docs/schema.md#trust-vocabulary-verification-and-review_status)).
+  The home and detail pages carry a hover-free "How to read these labels"
+  legend, so the meanings no longer live only in `title` attributes; it spells
+  out the reviewed + corroborated combination and states per value whether a
+  claim attempt is attested. Evidence-level labels became "corroborated" /
+  "community-sourced" so no row shows "verified" beside "unverified" from two
+  different axes. The deployed CollectionPage metadata no longer calls the
+  mixed directory "verified", and the full export labels the checked date
+  "Last checked" instead of "Verified". No underlying
+  date/status/evidence/signup value changed.
+
+- **Trust qualifications preserved in the short AI summaries (#509):**
+  every `llms.txt` offer line now ends with the offer's own `review_status`,
+  `verification`, `signup` and `last_checked` values, so a caution such as
+  Z.ai Startups' `to-be-verified` survives the short summary instead of
+  appearing only in the full export. Both files define the four fields in a
+  `## Trust labels` section, `llms.txt` links the long-form
+  `llms-full.txt`, and both state that an expiry date is an enrollment
+  deadline rather than a credit-validity period. `llms-full.txt` keeps its
+  build date and its whole-entry truncation.
+
 - **Cross-unit "Largest amount" sort removed (#508):** the allowance sort
   compared the first number in each free-text `amount` string across dollars,
   tokens, credits, characters, minutes and durations, presenting unrelated

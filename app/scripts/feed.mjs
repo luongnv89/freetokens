@@ -6,10 +6,10 @@
 export const DEFAULT_BASE_URL = "https://freetokens.custats.info";
 
 export const FEED_TITLE =
-  "Free AI Credits — free AI credit offers, tagged by verification";
+  "Free AI Credits — free AI credit offers, labeled by review status and evidence level";
 export const FEED_DESCRIPTION =
   "Newly published free AI credit offers from the freetokens directory, " +
-  "each tagged with its verification level and sign-up requirement.";
+  "each labeled with its review status, evidence level and sign-up requirement.";
 
 const MONTHS = [
   "Jan",

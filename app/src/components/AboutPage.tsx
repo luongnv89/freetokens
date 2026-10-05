@@ -30,7 +30,7 @@ export default function AboutPage({
             <h1>About Free AI Credits</h1>
             <p className="tagline">
               Every claimable free-credit offer worth your time, on one fast
-              page. Each carries a curator review status, verification level
+              page. Each carries a curator review status, an evidence level
               (corroborated or community-sourced), and a sign-up tag, refreshed
               on every rebuild.
             </p>
@@ -43,12 +43,12 @@ export default function AboutPage({
                 This site collects every currently claimable free AI credit
                 offer — API providers, coding assistants, image, voice and video
                 tools — on one fast page. Each listing is labeled with review
-                status, verification level and sign-up need so you can see at a
+                status, evidence level and sign-up need so you can see at a
                 glance what is worth your time.
               </p>
               <p className="muted">
                 zero runtime &middot; every offer labeled with review status,
-                verification level &amp; sign-up need
+                evidence level &amp; sign-up need
               </p>
               <p className="count">
                 <strong>{offers.length}</strong> live offers &middot;{" "}
@@ -65,10 +65,19 @@ export default function AboutPage({
                   from YAML.
                 </li>
                 <li>
-                  Verification tags: corroborated by the official site + social
-                  proof, or community-sourced.
+                  Review status: reviewed, under review, not reviewed, or to be
+                  verified — how far the curator has reviewed the listing. It
+                  never claims the curator completed the claim.
+                </li>
+                <li>
+                  Evidence level: corroborated by the official site plus social
+                  proof, or community-sourced with no official confirmation yet.
                 </li>
                 <li>Sign-up need: none vs. required (free account).</li>
+                <li>
+                  Last checked: the date the curator last confirmed the entry
+                  against its source — not the offer's expiry.
+                </li>
                 <li>
                   Refreshed on every rebuild — expired offers move to the
                   archive automatically.

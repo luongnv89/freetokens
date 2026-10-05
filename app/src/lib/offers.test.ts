@@ -108,9 +108,23 @@ describe("to-be-verified listing", () => {
     const pending = offer({ review_status: "to-be-verified" } as Partial<Offer>);
     const markup = renderToStaticMarkup(ReviewStatusBadge({ offer: pending }));
     expect(markup).toContain("badge-review-status-to-be-verified");
-    expect(markup).toContain(">To be verified</span>");
+    expect(markup).toContain(">to be verified</span>");
     expect(markup).not.toContain("#ti-expired");
     expect(markup).not.toContain("#ti-review_verified");
+  });
+});
+
+// #507: "no unknown method is promoted to verified" — a value outside the enum
+// must render as itself, never as the reviewed/verified label.
+describe("unknown review status", () => {
+  it("renders the raw value verbatim instead of promoting it", () => {
+    const odd = offer({
+      review_status: "published",
+    } as unknown as Partial<Offer>);
+    const markup = renderToStaticMarkup(ReviewStatusBadge({ offer: odd }));
+    expect(markup).toContain(">published</span>");
+    expect(markup).not.toContain(">reviewed</span>");
+    expect(markup).not.toContain(">verified</span>");
   });
 });
 

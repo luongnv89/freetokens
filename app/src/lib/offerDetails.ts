@@ -155,6 +155,6 @@ export function offerMetaDescription(
   }
   return (
     `${offer.amount} from ${offer.provider} — free AI credits, ` +
-    "tagged by review status, verification level, and sign-up need."
+    "tagged by review status, evidence level and sign-up need."
   );
 }

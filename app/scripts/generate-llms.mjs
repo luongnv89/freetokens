@@ -7,9 +7,11 @@
 //  - starts with `# Free AI Credits`
 //  - blockquote summary line
 //  - >=3 `##` sections with `- [Title](https://...) : Description` absolute https links
-//  - Sections: ## Offers / ## Pages / ## Feed
+//  - Sections: ## Trust labels / ## Offers / ## Pages / ## Feed
 //  - Offers: top 20 active offers sorted by verified_date desc (newest first) — qualifies as updatedAt ordering;
-//  - Pages: home / archive / privacy absolute URLs
+//    every entry ends with the offer's review status, evidence level, sign-up need and last-checked date (#509),
+//    defined once in `## Trust labels` from scripts/trust-vocabulary.mjs
+//  - Pages: home / archive / about / privacy / llms-full.txt absolute URLs
 //  - Feed: feed.xml (and sitemap) absolute URLs
 //  - llms-full.txt concatenates >=50% offer summaries and stays <200KB.
 
@@ -17,6 +19,18 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+// Trust wording has ONE home (issues #507/#509): the same module the site's
+// badges, hover text and hover-free legend read, so a short AI summary can
+// never drop a qualification the UI states.
+import {
+  ENROLLMENT_DEADLINE_NOTE,
+  LAST_CHECKED,
+  TRUST_SUMMARY,
+  TRUST_VERB_MAP,
+  trustDefinitions,
+  trustFieldPairs,
+  trustFields,
+} from "./trust-vocabulary.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_BASE_URL = "https://freetokens.custats.info";
@@ -62,11 +76,44 @@ const activeOffers = index.offers
 const top20 = activeOffers.slice(0, 20);
 
 function offerDescription(offer) {
-  // Keep short but trailing description after colon satisfies audit requiring ": Description"
+  // Keep short but trailing description after colon satisfies audit requiring ": Description".
+  // The trust fields are appended, not summarised away (issue #509): a short
+  // AI summary that drops "to-be-verified" tells a consumer more than the
+  // listing supports, which is exactly the qualification loss T6 found.
   const amount = offer.amount.replace(/\s+/g, " ").trim();
   const provider = offer.provider;
   const category = offer.category;
-  return `${provider} — ${amount} (${category})`;
+  return `${provider} — ${amount} (${category}) · ${trustFields(offer)}`;
+}
+
+/**
+ * The `## Trust labels` section: the same definitions the site's hover-free
+ * legend renders, written as `field=value` so a machine can map each emitted
+ * value back to the YAML schema and a reader gets the meaning in plain words.
+ */
+function buildTrustLabelLines() {
+  const lines = [];
+  lines.push("## Trust labels");
+  lines.push("");
+  lines.push(TRUST_SUMMARY);
+  lines.push("");
+  lines.push(`In one line: ${TRUST_VERB_MAP}.`);
+  lines.push("");
+  for (const group of trustDefinitions()) {
+    lines.push(`**${group.name}** (\`${group.field}\`) — ${group.question}`);
+    lines.push("");
+    for (const entry of group.entries) {
+      lines.push(
+        `- \`${group.field}=${entry.value}\` — ${entry.label}: ${entry.definition} ${entry.claim}`.trim(),
+      );
+    }
+    lines.push("");
+  }
+  lines.push(
+    `**${LAST_CHECKED.label}** (\`last_checked\`) — ${LAST_CHECKED.definition} ${ENROLLMENT_DEADLINE_NOTE}`,
+  );
+  lines.push("");
+  return lines;
 }
 
 function buildLlmsTxt() {
@@ -74,13 +121,14 @@ function buildLlmsTxt() {
   lines.push("# Free AI Credits");
   lines.push("");
   lines.push(
-    "> Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page. Curated from official provider sources and refreshed at build time.",
+    "> Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page. Curated from official provider sources and refreshed at build time.",
   );
   lines.push("");
+  lines.push(...buildTrustLabelLines());
   lines.push("## Offers");
   lines.push("");
   lines.push(
-    `Top ${top20.length} currently active offers (newest verified first) from ${activeOffers.length} active listings. Full directory at ${baseUrl}/.`,
+    `Top ${top20.length} currently active offers (newest checked first) from ${activeOffers.length} active listings. Every line ends with the offer's own review status, evidence level, sign-up need and last-checked date. Full directory at ${baseUrl}/.`,
   );
   lines.push("");
   for (const offer of top20) {
@@ -99,16 +147,19 @@ function buildLlmsTxt() {
     `- [Archive](${baseUrl}/archive.html): Reference archive of expired free AI credit offers, newest-expired first with original terms.`,
   );
   lines.push(
-    `- [About](${baseUrl}/about.html): What the site is, how listings are verified, and what the numbers mean.`,
+    `- [About](${baseUrl}/about.html): What the site is, how listings are reviewed and checked, and what the numbers mean.`,
   );
   lines.push(
     `- [Privacy Policy](${baseUrl}/privacy.html): How the site handles data — consent-gated anonymized analytics, no forms, no personal data storage.`,
+  );
+  lines.push(
+    `- [Full export](${baseUrl}/llms-full.txt): the long-form companion to this file — every active offer with its summary, claim steps, source and detail links and the same trust fields, plus the build date and any truncation.`,
   );
   lines.push("");
   lines.push("## Feed");
   lines.push("");
   lines.push(
-    `- [RSS Feed](${baseUrl}/feed.xml): RSS 2.0 feed of active offers (newest verified first), updated on each build — subscribe for new free credit listings.`,
+    `- [RSS Feed](${baseUrl}/feed.xml): RSS 2.0 feed of active offers (newest checked first), updated on each build — subscribe for new free credit listings.`,
   );
   lines.push(
     `- [Sitemap](${baseUrl}/sitemap.xml): XML sitemap listing all index, archive, privacy and offer detail pages for crawlers.`,
@@ -133,6 +184,10 @@ function buildFullHeader(emittedCount) {
       : `Source: ${baseUrl}/ — generated ${generatedAt} — ${emittedCount} of ${total} active offers (truncated to stay under the 200KB llms-full budget; full directory at ${baseUrl}/).`,
   );
   lines.push("");
+  lines.push(
+    `Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at ${baseUrl}/llms.txt. ${ENROLLMENT_DEADLINE_NOTE}`,
+  );
+  lines.push("");
   lines.push("## Offers (full)");
   lines.push("");
   return lines.join("\n");
@@ -151,10 +206,14 @@ function buildOfferBlock(offer) {
   lines.push(`- Category: ${offer.category}`);
   lines.push(`- Amount: ${offer.amount}`);
   lines.push(
-    `- Status: ${offer.status} — expiry ${offer.expiry_date ?? "ongoing"}`,
+    `- Status: ${offer.status} — enrollment deadline: ${offer.expiry_date ?? "none (ongoing)"}`,
   );
+  // The checked date is labelled "Last checked", never "Verified" (issue #507):
+  // the old label claimed a review verdict for an entry whose review_status
+  // may be to-be-verified or under-review, which is precisely what the export
+  // must not do.
   lines.push(
-    `- Verified: ${offer.verified_date} (${offer.verification} / ${offer.review_status}, signup ${offer.signup})`,
+    `- ${LAST_CHECKED.label}: ${offer.verified_date} — ${trustFieldPairs(offer).join(" · ")}`,
   );
   lines.push(`- Source: ${offer.source_url}`);
   lines.push(`- Page: ${url}`);
@@ -174,7 +233,7 @@ function buildFullFooter() {
   lines.push(`- [Home](${baseUrl}/): Main listing of active offers.`);
   lines.push(`- [Archive](${baseUrl}/archive.html): Expired offers archive.`);
   lines.push(
-    `- [About](${baseUrl}/about.html): About the site — methodology and verification.`,
+    `- [About](${baseUrl}/about.html): About the site — methodology and trust labels.`,
   );
   lines.push(`- [Privacy Policy](${baseUrl}/privacy.html): Privacy policy.`);
   lines.push(`- [RSS Feed](${baseUrl}/feed.xml): RSS feed of active offers.`);
