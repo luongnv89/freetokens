@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-04T23:06:03.821Z",
-  "sourceCommit": "700519140e133324ba910506a627b9c40b6c3ebf",
+  "capturedAt": "2026-10-05T07:11:45.789Z",
+  "sourceCommit": "d1d883ff57f5f166d0dcafd918d2b233b55da7cc",
   "browser": {
     "name": "chromium",
     "version": "151.0.7922.34",
@@ -14,7 +14,9 @@
   "limitations": [
     "Consent pre-dismissed; no consent-overlay coverage",
     "First home row only for target/contrast sampling",
-    "Computed rendered color compositing, not screenshot pixel sampling; pseudo-elements, overlapping siblings and antialiasing not modeled",
+    "Computed rendered color compositing, not screenshot pixel sampling; pseudo-elements, overlapping siblings and antialiasing not modeled; a color CSS.supports rejects is flagged unsupported and its ratio suppressed",
+    "Target sampling ignores controls parked outside the horizontal viewport (the focus-revealed skip link); vertical offset below the fold still counts",
+    "Focus screenshots are immediate frames; the search stop also retains a settled screenshot and computed style",
     "ARIA snapshots are control-name evidence, not screen-reader speech",
     "Five focus hit-test samples do not prove entire outline unobscured",
     "24/44px flags are dimensions, not WCAG target-spacing exception verdicts"
@@ -39,8 +41,8 @@
         "body": 0
       },
       "input": "",
-      "results": 201,
-      "status": "Showing all 201 offers",
+      "results": 199,
+      "status": "Showing all 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -203,84 +205,6 @@
           "below44": true
         },
         {
-          "name": "Coding",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": 387.46875,
-            "y": 259.078125,
-            "width": 82.515625,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Image",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": 475.578125,
-            "y": 259.078125,
-            "width": 76.796875,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Voice",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": 557.96875,
-            "y": 259.078125,
-            "width": 73.125,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Video",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": 636.6875,
-            "y": 259.078125,
-            "width": 74.3125,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Startup programs",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": 716.59375,
-            "y": 259.078125,
-            "width": 139.953125,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Student",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": 862.140625,
-            "y": 259.078125,
-            "width": 86.109375,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
           "name": "Saved (0)",
           "tag": "BUTTON",
           "id": "ft-saved-toggle",
@@ -291,19 +215,6 @@
             "height": 25.59375
           },
           "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 366.0625,
-            "width": 1,
-            "height": 1
-          },
-          "below24": true,
           "below44": true
         },
         {
@@ -366,9 +277,9 @@
             "x": 226.140625,
             "y": 476.765625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -379,9 +290,9 @@
             "x": 276.890625,
             "y": 476.765625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -390,7 +301,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30664.421875,
+            "y": 30927.828125,
             "width": 24,
             "height": 24
           },
@@ -403,7 +314,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 35.59375,
             "height": 19.6875
           },
@@ -416,7 +327,7 @@
           "id": "",
           "rect": {
             "x": 78.359375,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 44.0625,
             "height": 19.6875
           },
@@ -429,7 +340,7 @@
           "id": "",
           "rect": {
             "x": 150.796875,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 35.140625,
             "height": 19.6875
           },
@@ -442,7 +353,7 @@
           "id": "",
           "rect": {
             "x": 214.3125,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 80.078125,
             "height": 19.6875
           },
@@ -455,7 +366,7 @@
           "id": "",
           "rect": {
             "x": 322.765625,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 27.1875,
             "height": 19.6875
           },
@@ -468,7 +379,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 8.9375,
             "height": 19.6875
           },
@@ -481,7 +392,7 @@
           "id": "",
           "rect": {
             "x": 51.703125,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 49.203125,
             "height": 19.6875
           },
@@ -494,7 +405,7 @@
           "id": "",
           "rect": {
             "x": 129.28125,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 46.875,
             "height": 19.6875
           },
@@ -507,7 +418,7 @@
           "id": "",
           "rect": {
             "x": 150.40625,
-            "y": 30751.484375,
+            "y": 31014.890625,
             "width": 104.84375,
             "height": 15
           },
@@ -520,7 +431,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30751.484375,
+            "y": 31014.890625,
             "width": 286.09375,
             "height": 34.6875
           },
@@ -533,7 +444,7 @@
           "id": "ft-consent-settings",
           "rect": {
             "x": 14.390625,
-            "y": 30791.859375,
+            "y": 31055.265625,
             "width": 85.734375,
             "height": 14
           },
@@ -698,14 +609,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 158.90625,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -729,14 +640,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 160.90625,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -765,7 +676,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 98.203125,
+            "x": 98.1875,
             "y": 158.90625,
             "width": 4.15625,
             "height": 18.09375
@@ -791,14 +702,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 158.90625,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -822,14 +733,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 160.90625,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -915,7 +826,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -946,7 +857,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -1300,14 +1211,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing all 201 offers",
+          "text": "Showing all 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 334.234375,
-            "width": 117.296875,
+            "width": 117.359375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -1600,7 +1511,7 @@
           "decorative": false,
           "rect": {
             "x": 29.78125,
-            "y": 479.8125,
+            "y": 481.296875,
             "width": 60.15625,
             "height": 15.109375
           },
@@ -1623,13 +1534,13 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
           "rect": {
             "x": 89.9375,
-            "y": 479.71875,
+            "y": 481.203125,
             "width": 114.28125,
             "height": 14
           },
@@ -1652,13 +1563,13 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 163.890625,
-            "y": 479.71875,
+            "y": 481.203125,
             "width": 40.328125,
             "height": 14
           },
@@ -1689,7 +1600,7 @@
             "x": 226.140625,
             "y": 476.765625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -1718,7 +1629,7 @@
             "x": 276.890625,
             "y": 476.765625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -1760,7 +1671,7 @@
       },
       "input": "aerolink",
       "results": 1,
-      "status": "Showing 1 of 201 offers",
+      "status": "Showing 1 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -1897,58 +1808,6 @@
           "below44": true
         },
         {
-          "name": "All",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -367.453125,
-            "y": 259.078125,
-            "width": 38.984375,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "API providers",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -322.875,
-            "y": 259.078125,
-            "width": 117.75,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Coding",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -199.53125,
-            "y": 259.078125,
-            "width": 82.515625,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Image",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -111.421875,
-            "y": 259.078125,
-            "width": 76.796875,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
           "name": "Voice",
           "tag": "BUTTON",
           "id": "",
@@ -2018,23 +1877,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 151.59375,
+            "x": 151.65625,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 369.484375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -2099,9 +1945,9 @@
             "x": 226.140625,
             "y": 480.1875,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -2112,9 +1958,9 @@
             "x": 276.890625,
             "y": 480.1875,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -2123,7 +1969,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 579.21875,
+            "y": 582.1875,
             "width": 24,
             "height": 24
           },
@@ -2136,7 +1982,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 35.59375,
             "height": 19.6875
           },
@@ -2149,7 +1995,7 @@
           "id": "",
           "rect": {
             "x": 78.359375,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 44.0625,
             "height": 19.6875
           },
@@ -2162,7 +2008,7 @@
           "id": "",
           "rect": {
             "x": 150.796875,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 35.140625,
             "height": 19.6875
           },
@@ -2175,7 +2021,7 @@
           "id": "",
           "rect": {
             "x": 214.3125,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 80.078125,
             "height": 19.6875
           },
@@ -2188,7 +2034,7 @@
           "id": "",
           "rect": {
             "x": 322.765625,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 27.1875,
             "height": 19.6875
           },
@@ -2201,7 +2047,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 644.59375,
+            "y": 647.5625,
             "width": 8.9375,
             "height": 19.6875
           },
@@ -2214,7 +2060,7 @@
           "id": "",
           "rect": {
             "x": 51.703125,
-            "y": 644.59375,
+            "y": 647.5625,
             "width": 49.203125,
             "height": 19.6875
           },
@@ -2227,7 +2073,7 @@
           "id": "",
           "rect": {
             "x": 129.28125,
-            "y": 644.59375,
+            "y": 647.5625,
             "width": 46.875,
             "height": 19.6875
           },
@@ -2240,7 +2086,7 @@
           "id": "",
           "rect": {
             "x": 150.40625,
-            "y": 666.28125,
+            "y": 669.25,
             "width": 104.84375,
             "height": 15
           },
@@ -2253,7 +2099,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 666.28125,
+            "y": 669.25,
             "width": 286.09375,
             "height": 34.6875
           },
@@ -2266,7 +2112,7 @@
           "id": "ft-consent-settings",
           "rect": {
             "x": 14.390625,
-            "y": 706.65625,
+            "y": 709.625,
             "width": 85.734375,
             "height": 14
           },
@@ -2431,14 +2277,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 158.90625,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -2462,14 +2308,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 160.90625,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -2498,7 +2344,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 98.203125,
+            "x": 98.1875,
             "y": 158.90625,
             "width": 4.15625,
             "height": 18.09375
@@ -2524,14 +2370,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 158.90625,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -2555,14 +2401,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 160.90625,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -2648,7 +2494,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -2679,7 +2525,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -3033,14 +2879,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 1 of 201 offers",
+          "text": "Showing 1 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 335.9375,
-            "width": 124.40625,
+            "width": 124.46875,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -3069,7 +2915,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 151.59375,
+            "x": 151.65625,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
@@ -3362,7 +3208,7 @@
           "decorative": false,
           "rect": {
             "x": 29.78125,
-            "y": 483.234375,
+            "y": 484.71875,
             "width": 60.15625,
             "height": 15.109375
           },
@@ -3385,13 +3231,13 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
           "rect": {
             "x": 89.9375,
-            "y": 483.140625,
+            "y": 484.625,
             "width": 114.28125,
             "height": 14
           },
@@ -3414,13 +3260,13 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 163.890625,
-            "y": 483.140625,
+            "y": 484.625,
             "width": 40.328125,
             "height": 14
           },
@@ -3451,7 +3297,7 @@
             "x": 226.140625,
             "y": 480.1875,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -3480,7 +3326,7 @@
             "x": 276.890625,
             "y": 480.1875,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -3522,7 +3368,7 @@
       },
       "input": "no-such-provider-issue-504",
       "results": 0,
-      "status": "Showing 0 of 201 offers",
+      "status": "Showing 0 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -3659,58 +3505,6 @@
           "below44": true
         },
         {
-          "name": "All",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -367.453125,
-            "y": 259.078125,
-            "width": 38.984375,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "API providers",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -322.875,
-            "y": 259.078125,
-            "width": 117.75,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Coding",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -199.53125,
-            "y": 259.078125,
-            "width": 82.515625,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Image",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -111.421875,
-            "y": 259.078125,
-            "width": 76.796875,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
           "name": "Voice",
           "tag": "BUTTON",
           "id": "",
@@ -3780,23 +3574,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 152.21875,
+            "x": 152.28125,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 369.484375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -4128,14 +3909,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 158.90625,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -4159,14 +3940,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 160.90625,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -4195,7 +3976,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 98.203125,
+            "x": 98.1875,
             "y": 158.90625,
             "width": 4.15625,
             "height": 18.09375
@@ -4221,14 +4002,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 158.90625,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -4252,14 +4033,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 160.90625,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -4345,7 +4126,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -4376,7 +4157,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -4730,14 +4511,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 0 of 201 offers",
+          "text": "Showing 0 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 335.9375,
-            "width": 125.03125,
+            "width": 125.09375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -4766,7 +4547,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 152.21875,
+            "x": 152.28125,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
@@ -4932,8 +4713,8 @@
         "body": 0
       },
       "input": "",
-      "results": 201,
-      "status": "Showing all 201 offers",
+      "results": 199,
+      "status": "Showing all 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -5070,58 +4851,6 @@
           "below44": true
         },
         {
-          "name": "All",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -367.453125,
-            "y": 259.078125,
-            "width": 38.984375,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "API providers",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -322.875,
-            "y": 259.078125,
-            "width": 117.75,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Coding",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -199.53125,
-            "y": 259.078125,
-            "width": 82.515625,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Image",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -111.421875,
-            "y": 259.078125,
-            "width": 76.796875,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
           "name": "Voice",
           "tag": "BUTTON",
           "id": "",
@@ -5187,19 +4916,6 @@
           "below44": true
         },
         {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 366.0625,
-            "width": 1,
-            "height": 1
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
           "name": "Filter by API providers",
           "tag": "BUTTON",
           "id": "",
@@ -5259,9 +4975,9 @@
             "x": 226.140625,
             "y": 476.765625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -5272,9 +4988,9 @@
             "x": 276.890625,
             "y": 476.765625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -5283,7 +4999,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30664.421875,
+            "y": 30927.828125,
             "width": 24,
             "height": 24
           },
@@ -5296,7 +5012,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 35.59375,
             "height": 19.6875
           },
@@ -5309,7 +5025,7 @@
           "id": "",
           "rect": {
             "x": 78.359375,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 44.0625,
             "height": 19.6875
           },
@@ -5322,7 +5038,7 @@
           "id": "",
           "rect": {
             "x": 150.796875,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 35.140625,
             "height": 19.6875
           },
@@ -5335,7 +5051,7 @@
           "id": "",
           "rect": {
             "x": 214.3125,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 80.078125,
             "height": 19.6875
           },
@@ -5348,7 +5064,7 @@
           "id": "",
           "rect": {
             "x": 322.765625,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 27.1875,
             "height": 19.6875
           },
@@ -5361,7 +5077,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 8.9375,
             "height": 19.6875
           },
@@ -5374,7 +5090,7 @@
           "id": "",
           "rect": {
             "x": 51.703125,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 49.203125,
             "height": 19.6875
           },
@@ -5387,7 +5103,7 @@
           "id": "",
           "rect": {
             "x": 129.28125,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 46.875,
             "height": 19.6875
           },
@@ -5400,7 +5116,7 @@
           "id": "",
           "rect": {
             "x": 150.40625,
-            "y": 30751.484375,
+            "y": 31014.890625,
             "width": 104.84375,
             "height": 15
           },
@@ -5413,7 +5129,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30751.484375,
+            "y": 31014.890625,
             "width": 286.09375,
             "height": 34.6875
           },
@@ -5426,7 +5142,7 @@
           "id": "ft-consent-settings",
           "rect": {
             "x": 14.390625,
-            "y": 30791.859375,
+            "y": 31055.265625,
             "width": 85.734375,
             "height": 14
           },
@@ -5591,14 +5307,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 158.90625,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -5622,14 +5338,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 160.90625,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -5658,7 +5374,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 98.203125,
+            "x": 98.1875,
             "y": 158.90625,
             "width": 4.15625,
             "height": 18.09375
@@ -5684,14 +5400,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 158.90625,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -5715,14 +5431,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 160.90625,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -5808,7 +5524,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -5839,7 +5555,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -6193,14 +5909,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing all 201 offers",
+          "text": "Showing all 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 334.234375,
-            "width": 117.296875,
+            "width": 117.359375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -6493,7 +6209,7 @@
           "decorative": false,
           "rect": {
             "x": 29.78125,
-            "y": 479.8125,
+            "y": 481.296875,
             "width": 60.15625,
             "height": 15.109375
           },
@@ -6516,13 +6232,13 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
           "rect": {
             "x": 89.9375,
-            "y": 479.71875,
+            "y": 481.203125,
             "width": 114.28125,
             "height": 14
           },
@@ -6545,13 +6261,13 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 163.890625,
-            "y": 479.71875,
+            "y": 481.203125,
             "width": 40.328125,
             "height": 14
           },
@@ -6582,7 +6298,7 @@
             "x": 226.140625,
             "y": 476.765625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -6611,7 +6327,7 @@
             "x": 276.890625,
             "y": 476.765625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -6653,7 +6369,7 @@
       },
       "input": "no-such-provider-issue-504",
       "results": 0,
-      "status": "Showing 0 of 201 offers",
+      "status": "Showing 0 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -6790,58 +6506,6 @@
           "below44": true
         },
         {
-          "name": "All",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -367.453125,
-            "y": 259.078125,
-            "width": 38.984375,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "API providers",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -322.875,
-            "y": 259.078125,
-            "width": 117.75,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Coding",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -199.53125,
-            "y": 259.078125,
-            "width": 82.515625,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Image",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -111.421875,
-            "y": 259.078125,
-            "width": 76.796875,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
           "name": "Voice",
           "tag": "BUTTON",
           "id": "",
@@ -6911,23 +6575,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 152.21875,
+            "x": 152.28125,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 369.484375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -7259,14 +6910,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 158.90625,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -7290,14 +6941,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 160.90625,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -7326,7 +6977,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 98.203125,
+            "x": 98.1875,
             "y": 158.90625,
             "width": 4.15625,
             "height": 18.09375
@@ -7352,14 +7003,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 158.90625,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -7383,14 +7034,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 160.90625,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -7476,7 +7127,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -7507,7 +7158,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -7861,14 +7512,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 0 of 201 offers",
+          "text": "Showing 0 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 335.9375,
-            "width": 125.03125,
+            "width": 125.09375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -7897,7 +7548,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 152.21875,
+            "x": 152.28125,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
@@ -8064,7 +7715,7 @@
       },
       "input": "aerolink",
       "results": 1,
-      "status": "Showing 1 of 201 offers",
+      "status": "Showing 1 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -8201,58 +7852,6 @@
           "below44": true
         },
         {
-          "name": "All",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -367.453125,
-            "y": 259.078125,
-            "width": 38.984375,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "API providers",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -322.875,
-            "y": 259.078125,
-            "width": 117.75,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Coding",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -199.53125,
-            "y": 259.078125,
-            "width": 82.515625,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Image",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -111.421875,
-            "y": 259.078125,
-            "width": 76.796875,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
           "name": "Voice",
           "tag": "BUTTON",
           "id": "",
@@ -8322,23 +7921,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 151.59375,
+            "x": 151.65625,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 369.484375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -8403,9 +7989,9 @@
             "x": 226.140625,
             "y": 480.1875,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -8416,9 +8002,9 @@
             "x": 276.890625,
             "y": 480.1875,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -8427,7 +8013,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 579.21875,
+            "y": 582.1875,
             "width": 24,
             "height": 24
           },
@@ -8440,7 +8026,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 35.59375,
             "height": 19.6875
           },
@@ -8453,7 +8039,7 @@
           "id": "",
           "rect": {
             "x": 78.359375,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 44.0625,
             "height": 19.6875
           },
@@ -8466,7 +8052,7 @@
           "id": "",
           "rect": {
             "x": 150.796875,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 35.140625,
             "height": 19.6875
           },
@@ -8479,7 +8065,7 @@
           "id": "",
           "rect": {
             "x": 214.3125,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 80.078125,
             "height": 19.6875
           },
@@ -8492,7 +8078,7 @@
           "id": "",
           "rect": {
             "x": 322.765625,
-            "y": 616.90625,
+            "y": 619.875,
             "width": 27.1875,
             "height": 19.6875
           },
@@ -8505,7 +8091,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 644.59375,
+            "y": 647.5625,
             "width": 8.9375,
             "height": 19.6875
           },
@@ -8518,7 +8104,7 @@
           "id": "",
           "rect": {
             "x": 51.703125,
-            "y": 644.59375,
+            "y": 647.5625,
             "width": 49.203125,
             "height": 19.6875
           },
@@ -8531,7 +8117,7 @@
           "id": "",
           "rect": {
             "x": 129.28125,
-            "y": 644.59375,
+            "y": 647.5625,
             "width": 46.875,
             "height": 19.6875
           },
@@ -8544,7 +8130,7 @@
           "id": "",
           "rect": {
             "x": 150.40625,
-            "y": 666.28125,
+            "y": 669.25,
             "width": 104.84375,
             "height": 15
           },
@@ -8557,7 +8143,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 666.28125,
+            "y": 669.25,
             "width": 286.09375,
             "height": 34.6875
           },
@@ -8570,7 +8156,7 @@
           "id": "ft-consent-settings",
           "rect": {
             "x": 14.390625,
-            "y": 706.65625,
+            "y": 709.625,
             "width": 85.734375,
             "height": 14
           },
@@ -8735,14 +8321,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 158.90625,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -8766,14 +8352,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 160.90625,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -8802,7 +8388,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 98.203125,
+            "x": 98.1875,
             "y": 158.90625,
             "width": 4.15625,
             "height": 18.09375
@@ -8828,14 +8414,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 158.90625,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -8859,14 +8445,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 160.90625,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -8952,7 +8538,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -8983,7 +8569,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -9337,14 +8923,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 1 of 201 offers",
+          "text": "Showing 1 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 335.9375,
-            "width": 124.40625,
+            "width": 124.46875,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -9373,7 +8959,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 151.59375,
+            "x": 151.65625,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
@@ -9666,7 +9252,7 @@
           "decorative": false,
           "rect": {
             "x": 29.78125,
-            "y": 483.234375,
+            "y": 484.71875,
             "width": 60.15625,
             "height": 15.109375
           },
@@ -9689,13 +9275,13 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
           "rect": {
             "x": 89.9375,
-            "y": 483.140625,
+            "y": 484.625,
             "width": 114.28125,
             "height": 14
           },
@@ -9718,13 +9304,13 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 163.890625,
-            "y": 483.140625,
+            "y": 484.625,
             "width": 40.328125,
             "height": 14
           },
@@ -9755,7 +9341,7 @@
             "x": 226.140625,
             "y": 480.1875,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -9784,7 +9370,7 @@
             "x": 276.890625,
             "y": 480.1875,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -9826,7 +9412,7 @@
       },
       "input": "no-such-provider-issue-504",
       "results": 0,
-      "status": "Showing 0 of 201 offers",
+      "status": "Showing 0 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -9963,58 +9549,6 @@
           "below44": true
         },
         {
-          "name": "All",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -367.453125,
-            "y": 259.078125,
-            "width": 38.984375,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "API providers",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -322.875,
-            "y": 259.078125,
-            "width": 117.75,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Coding",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -199.53125,
-            "y": 259.078125,
-            "width": 82.515625,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Image",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -111.421875,
-            "y": 259.078125,
-            "width": 76.796875,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
           "name": "Voice",
           "tag": "BUTTON",
           "id": "",
@@ -10084,23 +9618,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 152.21875,
+            "x": 152.28125,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 369.484375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -10432,14 +9953,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 158.90625,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -10463,14 +9984,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 160.90625,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -10499,7 +10020,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 98.203125,
+            "x": 98.1875,
             "y": 158.90625,
             "width": 4.15625,
             "height": 18.09375
@@ -10525,14 +10046,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 158.90625,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -10556,14 +10077,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 160.90625,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -10649,7 +10170,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -10680,7 +10201,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -11034,14 +10555,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 0 of 201 offers",
+          "text": "Showing 0 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 335.9375,
-            "width": 125.03125,
+            "width": 125.09375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -11070,7 +10591,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 152.21875,
+            "x": 152.28125,
             "y": 334.234375,
             "width": 92.046875,
             "height": 21.65625
@@ -11236,8 +10757,8 @@
         "body": 0
       },
       "input": "",
-      "results": 201,
-      "status": "Showing all 201 offers",
+      "results": 199,
+      "status": "Showing all 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -11374,58 +10895,6 @@
           "below44": true
         },
         {
-          "name": "All",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -367.453125,
-            "y": 259.078125,
-            "width": 38.984375,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "API providers",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -322.875,
-            "y": 259.078125,
-            "width": 117.75,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Coding",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -199.53125,
-            "y": 259.078125,
-            "width": 82.515625,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
-          "name": "Image",
-          "tag": "BUTTON",
-          "id": "",
-          "rect": {
-            "x": -111.421875,
-            "y": 259.078125,
-            "width": 76.796875,
-            "height": 25.59375
-          },
-          "below24": false,
-          "below44": true
-        },
-        {
           "name": "Voice",
           "tag": "BUTTON",
           "id": "",
@@ -11491,19 +10960,6 @@
           "below44": true
         },
         {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 366.0625,
-            "width": 1,
-            "height": 1
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
           "name": "Filter by API providers",
           "tag": "BUTTON",
           "id": "",
@@ -11563,9 +11019,9 @@
             "x": 226.140625,
             "y": 476.765625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -11576,9 +11032,9 @@
             "x": 276.890625,
             "y": 476.765625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -11587,7 +11043,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30664.421875,
+            "y": 30927.828125,
             "width": 24,
             "height": 24
           },
@@ -11600,7 +11056,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 35.59375,
             "height": 19.6875
           },
@@ -11613,7 +11069,7 @@
           "id": "",
           "rect": {
             "x": 78.359375,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 44.0625,
             "height": 19.6875
           },
@@ -11626,7 +11082,7 @@
           "id": "",
           "rect": {
             "x": 150.796875,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 35.140625,
             "height": 19.6875
           },
@@ -11639,7 +11095,7 @@
           "id": "",
           "rect": {
             "x": 214.3125,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 80.078125,
             "height": 19.6875
           },
@@ -11652,7 +11108,7 @@
           "id": "",
           "rect": {
             "x": 322.765625,
-            "y": 30702.109375,
+            "y": 30965.515625,
             "width": 27.1875,
             "height": 19.6875
           },
@@ -11665,7 +11121,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 8.9375,
             "height": 19.6875
           },
@@ -11678,7 +11134,7 @@
           "id": "",
           "rect": {
             "x": 51.703125,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 49.203125,
             "height": 19.6875
           },
@@ -11691,7 +11147,7 @@
           "id": "",
           "rect": {
             "x": 129.28125,
-            "y": 30729.796875,
+            "y": 30993.203125,
             "width": 46.875,
             "height": 19.6875
           },
@@ -11704,7 +11160,7 @@
           "id": "",
           "rect": {
             "x": 150.40625,
-            "y": 30751.484375,
+            "y": 31014.890625,
             "width": 104.84375,
             "height": 15
           },
@@ -11717,7 +11173,7 @@
           "id": "",
           "rect": {
             "x": 14.390625,
-            "y": 30751.484375,
+            "y": 31014.890625,
             "width": 286.09375,
             "height": 34.6875
           },
@@ -11730,7 +11186,7 @@
           "id": "ft-consent-settings",
           "rect": {
             "x": 14.390625,
-            "y": 30791.859375,
+            "y": 31055.265625,
             "width": 85.734375,
             "height": 14
           },
@@ -11895,14 +11351,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 158.90625,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -11926,14 +11382,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 160.90625,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -11962,7 +11418,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 98.203125,
+            "x": 98.1875,
             "y": 158.90625,
             "width": 4.15625,
             "height": 18.09375
@@ -11988,14 +11444,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 158.90625,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.09375
           },
           "color": "rgb(106, 99, 90)",
@@ -12019,14 +11475,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 109.546875,
+            "x": 109.53125,
             "y": 160.90625,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -12112,7 +11568,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -12143,7 +11599,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -12497,14 +11953,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing all 201 offers",
+          "text": "Showing all 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 14.390625,
             "y": 334.234375,
-            "width": 117.296875,
+            "width": 117.359375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -12797,7 +12253,7 @@
           "decorative": false,
           "rect": {
             "x": 29.78125,
-            "y": 479.8125,
+            "y": 481.296875,
             "width": 60.15625,
             "height": 15.109375
           },
@@ -12820,13 +12276,13 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
           "rect": {
             "x": 89.9375,
-            "y": 479.71875,
+            "y": 481.203125,
             "width": 114.28125,
             "height": 14
           },
@@ -12849,13 +12305,13 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 163.890625,
-            "y": 479.71875,
+            "y": 481.203125,
             "width": 40.328125,
             "height": 14
           },
@@ -12886,7 +12342,7 @@
             "x": 226.140625,
             "y": 476.765625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -12915,7 +12371,7 @@
             "x": 276.890625,
             "y": 476.765625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -15951,6 +15407,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -15974,6 +15457,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -15997,6 +15507,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16020,6 +15557,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16043,6 +15607,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16066,6 +15657,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16089,6 +15707,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16112,6 +15757,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16135,9 +15807,41 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "3px none rgb(31, 27, 22)",
-        "boxShadow": "oklab(0 0 0 / 0) 0px 0px 0px 0px"
+        "boxShadow": "oklab(0 0 0 / 0) 0px 0px 0px 0px",
+        "settledScreenshot": "375-home-focus-9-settled.jpg",
+        "settledFocus": {
+          "boxShadow": "color(srgb 0.0745098 0.447059 0.211765 / 0.16) 0px 0px 0px 4px",
+          "borderColor": "rgb(19, 114, 54)"
+        }
       },
       {
         "index": 10,
@@ -16158,6 +15862,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16181,6 +15912,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 3,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": false
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": false
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16196,14 +15954,41 @@
         "category": "api_provider",
         "href": null,
         "rect": {
-          "x": 264.125,
+          "x": 237.125,
           "y": 259.078125,
           "width": 117.75,
           "height": 25.59375
         },
-        "fullyInViewport": false,
-        "unobscuredSamples": 3,
+        "fullyInViewport": true,
+        "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16227,6 +16012,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16242,14 +16054,41 @@
         "category": "image",
         "href": null,
         "rect": {
-          "x": 336.578125,
+          "x": 278.578125,
           "y": 259.078125,
           "width": 76.796875,
           "height": 25.59375
         },
-        "fullyInViewport": false,
-        "unobscuredSamples": 2,
+        "fullyInViewport": true,
+        "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16273,6 +16112,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16288,14 +16154,41 @@
         "category": "video",
         "href": null,
         "rect": {
-          "x": 332.6875,
+          "x": 280.6875,
           "y": 259.078125,
           "width": 74.3125,
           "height": 25.59375
         },
-        "fullyInViewport": false,
-        "unobscuredSamples": 2,
+        "fullyInViewport": true,
+        "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16319,6 +16212,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16342,6 +16262,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16365,6 +16312,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16390,6 +16364,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16413,6 +16414,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16436,6 +16464,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16459,6 +16514,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16482,6 +16564,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16505,6 +16614,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16528,6 +16664,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16551,6 +16714,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16574,6 +16764,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16597,6 +16814,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16620,6 +16864,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16643,6 +16914,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16666,6 +16964,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16689,6 +17014,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16712,6 +17064,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16735,6 +17114,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16758,6 +17164,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "1px auto rgb(0, 95, 204)",
         "boxShadow": "none"
@@ -16781,6 +17214,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16804,6 +17264,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "1px auto rgb(0, 95, 204)",
         "boxShadow": "none"
@@ -16827,6 +17314,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "1px auto rgb(0, 95, 204)",
         "boxShadow": "none"
@@ -16850,6 +17364,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16873,6 +17414,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16896,6 +17464,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16919,6 +17514,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16942,6 +17564,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16965,6 +17614,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16988,6 +17664,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17011,6 +17714,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17034,6 +17764,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17057,6 +17814,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17080,6 +17864,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17103,6 +17914,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17126,6 +17964,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17149,6 +18014,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17172,6 +18064,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17195,6 +18114,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17218,6 +18164,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17241,6 +18214,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17264,6 +18264,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17287,6 +18314,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 2,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": false
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": false
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": false
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17310,6 +18364,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"

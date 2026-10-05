@@ -1,15 +1,17 @@
 # Issue #504: three-surface measurement
 
 Measured **5 October 2026, Europe/Paris** (UTC timestamps in the JSON). This is
-partial evidence for [issue #504](https://github.com/luongnv89/freetokens/issues/504).
-**Do not close the issue:** real 200% desktop zoom, screen-reader speech and
-representative-user comprehension remain unmeasured. No layout or offer data
-was changed.
+partial evidence for [issue #504](https://github.com/luongnv89/freetokens/issues/504):
+real 200% desktop zoom, screen-reader speech and representative-user
+comprehension remain unmeasured, and the *Remaining acceptance work* table
+records the evidence each one still needs. No offer data was changed; the
+review follow-ups touched only the chip rail's scroll affordance and the row
+pills' minimum height, and the evidence was re-captured after they landed.
 
 ## Scope and reproduction
 
 The local production build at source commit
-`700519140e133324ba910506a627b9c40b6c3ebf` was measured in headless Chromium
+`d1d883ff57f5f166d0dcafd918d2b233b55da7cc` was measured in headless Chromium
 151.0.7922.34 at **320×900, 375×900, 768×900 and 1440×900 CSS pixels**.
 The default automation context uses DPR 1 and visual viewport scale 1. These
 values do **not** establish desktop browser zoom. No device scaling, pinch
@@ -34,28 +36,27 @@ be accompanied by an updated report if measurements change.
 
 ## Findings
 
-- **Search and recovery passed at all four widths.** Home had 201 rows;
+- **Search and recovery passed at all four widths.** Home had 199 rows;
   `q=aerolink` had exactly one, `#offer-aerolink-starter-free-trial`;
   `q=no-such-provider-issue-504` had zero. “Clear search & filters” returned
-  all 201 rows, an empty input, no URL query and focus in the search field.
+  all 199 rows, an empty input, no URL query and focus in the search field.
   Back restored empty then provider state; Forward restored empty then cleared
   state. Each transition asserted input, results, status and URL together.
 - **No document or body horizontal overflow** was measured in any of the nine
   captured states at any width. This does not mean all controls fit: an
   internally clipped/scrollable strip can coexist with zero document overflow.
-- **Small-width chip-strip focus clipping is systemic, not one-off.** At
-  320px the focused Coding stop scored 2/5 unobscured hit-test samples, Voice
-  3/5 and Startup programs 2/5; at 375px API providers scored 3/5 (with
-  `fullyInViewport: false`), Image 2/5 and Video 2/5 — see the
-  [320px](issue-504/320-home-focus-13.jpg) and
-  [375px](issue-504/375-home-focus-13.jpg) Coding focus captures. Chromium's
-  focus scroll-into-view only minimally reveals trailing chips, and the
-  mask-removal rule in
-  [`python-parity.css`](../../app/src/styles/python-parity.css) covers only
-  `.toolbar > .chips:has(> :last-child:focus-visible)` under
-  `@media (max-width: 48rem)`, so a mid-strip focused chip keeps the edge fade
-  painted over its focus ring. These are observed layout/access findings, not
-  changes made by this PR.
+- **Small-width chip-strip focus clipping is resolved.** The first capture
+  recorded the focused chip left partly outside the rail at 320/375px (Coding
+  2/5 unobscured hit-test samples, Startup programs 2/5, API providers 3/5 with
+  `fullyInViewport: false`): Chromium does not scroll a partially visible
+  target into view, and the rail's mask stayed painted over a mid-strip focus
+  ring. The follow-ups make the chip ask for its own reveal on focus
+  (`scrollIntoView({ inline: "nearest" })`), drop the rail's mask while any
+  chip has focus, drive the fade from the rail's scroll position so it clears
+  at the end, and mark the rail scrollable with a thin scrollbar. All seven
+  category chips now score 5/5 unobscured samples and `fullyInViewport: true`
+  at all four widths — see the [320px](issue-504/320-home-focus-13.jpg) and
+  [375px](issue-504/375-home-focus-13.jpg) Coding focus captures.
 - **The 375px "sort select overlapping the category strip" is an abutting clip
   edge, not a true z-index overlap.** The scroll lane's left clip edge sits
   flush against the sort select — `margin-inline: -0.15rem` tucks the lane
@@ -70,20 +71,24 @@ be accompanied by an updated report if measurements change.
   names. Selected screenshots show the actual search, Coding and claim focus.
   Partial hit-test misses can also arise from multiline links, rounded corners
   or clipping; they are screening evidence, not automatic occlusion failures.
-  The four `*-home-focus-9.jpg` captures show no visible search-input ring
-  because each screenshot fired <150ms after Tab, mid-CSS-transition: the JSON
-  records a transparent `box-shadow` (`oklab(0 0 0 / 0)`) at that instant while
-  `#ft-search` transitions `border-color`/`box-shadow` over 0.15s. Settled
-  captures show the green border and glow clearly, so focus-9 must not be cited
-  as evidence of a missing focus indicator.
+  The four `*-home-focus-9.jpg` captures fire <150ms after Tab, mid-transition:
+  the JSON records a transparent `box-shadow` (`oklab(0 0 0 / 0)`) at that
+  instant while `#ft-search` transitions `border-color`/`box-shadow` over
+  0.15s. Each search stop now also retains the settled state — a
+  `*-home-focus-9-settled.jpg` screenshot plus the post-transition computed
+  style (`border-color: rgb(19, 114, 54)`, `box-shadow: … 0 0 0 4px`) — so the
+  green border and glow are retained artifacts, and focus-9 alone must not be
+  cited as evidence of a missing focus indicator.
 - **Several standalone controls measure below the WCAG 2.5.8 (AA) 24 CSS px
-  target-size minimum and are candidates for evaluation.** The in-row Save
-  (46.0×21.0) and Hide (43.8×21.0) buttons, the in-row tag-filter buttons
-  (14–17.2px height) and the footer Cookie settings button (85.7×14.0) are
-  standalone controls where the inline exception does not clearly apply and
-  adjacent targets may also fail the spacing exception. These are candidates
-  for 2.5.8 evaluation, not an audit verdict: spacing, inline and other
-  exceptions were not assessed.
+  target-size minimum and are candidates for evaluation.** The in-row
+  tag-filter buttons (14–17.2px height) and the footer Cookie settings button
+  (85.7×14.0) are standalone controls where the inline exception does not
+  clearly apply and adjacent targets may also fail the spacing exception;
+  masthead, nav and archive-line links also measure under 24px on one axis.
+  The in-row Save (46.0×24.0) and Hide (43.8×24.0) pills now clear the floor —
+  their earlier 21px height was a review follow-up. These are candidates for
+  2.5.8 evaluation, not an audit verdict: spacing, inline and other exceptions
+  were not assessed.
 - **The exact Aerolink route and destination were checked.**
   `/offers/aerolink-starter-free-trial.html` rendered the Aerolink heading and
   its claim link resolved to `https://aerolink.lat/pricing`. The browser did not
@@ -95,16 +100,21 @@ be accompanied by an updated report if measurements change.
 Interactive dimensions come from live `getBoundingClientRect()` results, in
 CSS pixels. Targets below 24 or 44 pixels on either axis are flagged for
 review, not declared WCAG failures: spacing, inline-link and other exceptions
-were not evaluated. On the home surface, target sampling covers the
-toolbar/header, footer and first offer row, while contrast sampling covers
-`main *` and `.site-header *` only — the `<footer>` is outside the contrast
-selector — and neither exhausts all 201 rows. Detail includes all rendered
-interactive elements, even those below the initial fold.
+were not evaluated. Target sampling ignores controls parked outside the
+horizontal viewport (the focus-revealed skip link sits at `left: -9999px`
+until focused); vertical offset below the fold still counts. On the home
+surface, target sampling covers the toolbar/header, footer and first offer
+row, while contrast sampling covers `main *` and `.site-header *` only — the
+`<footer>` is outside the contrast selector on both surfaces — and neither
+exhausts all 199 rows. Detail includes all rendered interactive elements, even
+those below the initial fold.
 
 Contrast uses runtime computed foreground/background colors after rendering.
-Chromium converts each CSS color to sRGB RGBA through a one-pixel canvas; the
-collector composites alpha colors through the ancestor backgrounds, then
-calculates WCAG relative luminance and ratio. Opaque descendants cover ancestor
+Chromium converts each CSS color to sRGB RGBA through a one-pixel canvas; a
+color `CSS.supports` rejects is flagged `unsupported color syntax` and its
+ratio suppressed rather than read from the canvas's stale fill. The collector
+composites alpha colors through the ancestor backgrounds, then calculates WCAG
+relative luminance and ratio. Opaque descendants cover ancestor
 images/gradients. Uncovered gradients/images, group opacity and blend/filter
 paint are explicitly excluded (`ratio: null`); the body's radial wash therefore
 leaves many header/toolbar text samples unmeasured. This is a rendered color
@@ -182,11 +192,13 @@ in this report.**
 
 - Focused capture: four Chromium cases passed, including all state assertions.
 - The local production build completed through the existing preview harness.
-- Resolver QA reported 451 Vitest tests, 119 Python tests and all 231 offer
-  files passing validation.
-- Broader browser QA passed 13 Chromium checks and skipped the four opt-in
-  cases, then was interrupted when Firefox launch stalled: two Firefox checks
-  interrupted and 32 cases not run. The full cross-browser suite is **not** green.
+- Review QA reported 451 Vitest tests, 119 Python tests and all 230 offer files
+  passing validation.
+- Broader browser QA passed 13 Chromium and 13 WebKit checks and skipped the
+  eight opt-in capture cases (four per engine). Firefox is launch-blocked in
+  this environment (macOS sandbox denies plugin-container; identical across
+  specs including untouched ones), so Firefox coverage is absent by
+  environment, not by diff, and the cross-browser suite is **not** fully green.
 
 ## Captured measurements and artifact index
 
@@ -201,66 +213,66 @@ later screenshots — a test-order artifact, not an app defect.
 
 | Viewport (CSS px) | JSON | Captured (UTC) | Home rows | Home stops | Detail stops | Document/body overflow |
 | --- | --- | --- | --- | --- | --- | --- |
-| 320×900 | [320.json](issue-504/320.json) | 2026-10-04T23:05:57.530Z | 201 | 19 | 41 | none in any state |
-| 375×900 | [375.json](issue-504/375.json) | 2026-10-04T23:06:03.821Z | 201 | 19 | 41 | none in any state |
-| 768×900 | [768.json](issue-504/768.json) | 2026-10-04T23:06:10.160Z | 201 | 19 | 41 | none in any state |
-| 1440×900 | [1440.json](issue-504/1440.json) | 2026-10-04T23:06:16.520Z | 201 | 19 | 41 | none in any state |
+| 320×900 | [320.json](issue-504/320.json) | 2026-10-05T07:11:39.576Z | 199 | 19 | 41 | none in any state |
+| 375×900 | [375.json](issue-504/375.json) | 2026-10-05T07:11:45.789Z | 199 | 19 | 41 | none in any state |
+| 768×900 | [768.json](issue-504/768.json) | 2026-10-05T07:11:52.090Z | 199 | 19 | 41 | none in any state |
+| 1440×900 | [1440.json](issue-504/1440.json) | 2026-10-05T07:11:58.413Z | 199 | 19 | 41 | none in any state |
 
 ### 320px state captures
 
 | State | URL | Input | Rows | Status | Overflow html/body | Targets <24px | <44px | Contrast measured | Below threshold | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| home | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 24 | 38 | 21 | 0 | [320-home.jpg](issue-504/320-home.jpg) |
-| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 201 offers | 0/0 | 25 | 39 | 22 | 0 | [320-provider.jpg](issue-504/320-provider.jpg) |
-| empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 19 | 34 | 11 | 0 | [320-empty.jpg](issue-504/320-empty.jpg) |
-| recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 24 | 38 | 21 | 0 | [320-recovery.jpg](issue-504/320-recovery.jpg) |
-| back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 19 | 34 | 11 | 0 | [320-back-empty.jpg](issue-504/320-back-empty.jpg) |
-| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 201 offers | 0/0 | 25 | 39 | 22 | 0 | [320-back-provider.jpg](issue-504/320-back-provider.jpg) |
-| forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 19 | 34 | 11 | 0 | [320-forward-empty.jpg](issue-504/320-forward-empty.jpg) |
-| forward-recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 24 | 38 | 21 | 0 | [320-forward-recovery.jpg](issue-504/320-forward-recovery.jpg) |
-| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 27 | 41 | 36 | 0 | [320-detail.jpg](issue-504/320-detail.jpg) |
+| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 22 | 0 | [320-home.jpg](issue-504/320-home.jpg) |
+| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 32 | 23 | 0 | [320-provider.jpg](issue-504/320-provider.jpg) |
+| empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 27 | 11 | 0 | [320-empty.jpg](issue-504/320-empty.jpg) |
+| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 22 | 0 | [320-recovery.jpg](issue-504/320-recovery.jpg) |
+| back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 27 | 11 | 0 | [320-back-empty.jpg](issue-504/320-back-empty.jpg) |
+| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 32 | 23 | 0 | [320-back-provider.jpg](issue-504/320-back-provider.jpg) |
+| forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 27 | 11 | 0 | [320-forward-empty.jpg](issue-504/320-forward-empty.jpg) |
+| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 22 | 0 | [320-forward-recovery.jpg](issue-504/320-forward-recovery.jpg) |
+| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 27 | 41 | 41 | 0 | [320-detail.jpg](issue-504/320-detail.jpg) |
 
 ### 375px state captures
 
 | State | URL | Input | Rows | Status | Overflow html/body | Targets <24px | <44px | Contrast measured | Below threshold | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| home | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 24 | 38 | 21 | 0 | [375-home.jpg](issue-504/375-home.jpg) |
-| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 201 offers | 0/0 | 25 | 39 | 22 | 0 | [375-provider.jpg](issue-504/375-provider.jpg) |
-| empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 19 | 34 | 11 | 0 | [375-empty.jpg](issue-504/375-empty.jpg) |
-| recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 24 | 38 | 21 | 0 | [375-recovery.jpg](issue-504/375-recovery.jpg) |
-| back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 19 | 34 | 11 | 0 | [375-back-empty.jpg](issue-504/375-back-empty.jpg) |
-| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 201 offers | 0/0 | 25 | 39 | 22 | 0 | [375-back-provider.jpg](issue-504/375-back-provider.jpg) |
-| forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 19 | 34 | 11 | 0 | [375-forward-empty.jpg](issue-504/375-forward-empty.jpg) |
-| forward-recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 24 | 38 | 21 | 0 | [375-forward-recovery.jpg](issue-504/375-forward-recovery.jpg) |
-| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 29 | 41 | 36 | 0 | [375-detail.jpg](issue-504/375-detail.jpg) |
+| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 22 | 0 | [375-home.jpg](issue-504/375-home.jpg) |
+| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 34 | 23 | 0 | [375-provider.jpg](issue-504/375-provider.jpg) |
+| empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 29 | 11 | 0 | [375-empty.jpg](issue-504/375-empty.jpg) |
+| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 22 | 0 | [375-recovery.jpg](issue-504/375-recovery.jpg) |
+| back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 29 | 11 | 0 | [375-back-empty.jpg](issue-504/375-back-empty.jpg) |
+| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 34 | 23 | 0 | [375-back-provider.jpg](issue-504/375-back-provider.jpg) |
+| forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 29 | 11 | 0 | [375-forward-empty.jpg](issue-504/375-forward-empty.jpg) |
+| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 22 | 0 | [375-forward-recovery.jpg](issue-504/375-forward-recovery.jpg) |
+| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 29 | 41 | 41 | 0 | [375-detail.jpg](issue-504/375-detail.jpg) |
 
 ### 768px state captures
 
 | State | URL | Input | Rows | Status | Overflow html/body | Targets <24px | <44px | Contrast measured | Below threshold | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| home | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 20 | 38 | 21 | 0 | [768-home.jpg](issue-504/768-home.jpg) |
-| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 201 offers | 0/0 | 21 | 39 | 22 | 0 | [768-provider.jpg](issue-504/768-provider.jpg) |
-| empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 15 | 34 | 11 | 0 | [768-empty.jpg](issue-504/768-empty.jpg) |
-| recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 20 | 38 | 21 | 0 | [768-recovery.jpg](issue-504/768-recovery.jpg) |
-| back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 15 | 34 | 11 | 0 | [768-back-empty.jpg](issue-504/768-back-empty.jpg) |
-| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 201 offers | 0/0 | 21 | 39 | 22 | 0 | [768-back-provider.jpg](issue-504/768-back-provider.jpg) |
-| forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 15 | 34 | 11 | 0 | [768-forward-empty.jpg](issue-504/768-forward-empty.jpg) |
-| forward-recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 20 | 38 | 21 | 0 | [768-forward-recovery.jpg](issue-504/768-forward-recovery.jpg) |
-| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 36 | 0 | [768-detail.jpg](issue-504/768-detail.jpg) |
+| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 22 | 0 | [768-home.jpg](issue-504/768-home.jpg) |
+| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 18 | 37 | 23 | 0 | [768-provider.jpg](issue-504/768-provider.jpg) |
+| empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 14 | 32 | 11 | 0 | [768-empty.jpg](issue-504/768-empty.jpg) |
+| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 22 | 0 | [768-recovery.jpg](issue-504/768-recovery.jpg) |
+| back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 14 | 32 | 11 | 0 | [768-back-empty.jpg](issue-504/768-back-empty.jpg) |
+| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 18 | 37 | 23 | 0 | [768-back-provider.jpg](issue-504/768-back-provider.jpg) |
+| forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 14 | 32 | 11 | 0 | [768-forward-empty.jpg](issue-504/768-forward-empty.jpg) |
+| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 22 | 0 | [768-forward-recovery.jpg](issue-504/768-forward-recovery.jpg) |
+| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 41 | 0 | [768-detail.jpg](issue-504/768-detail.jpg) |
 
 ### 1440px state captures
 
 | State | URL | Input | Rows | Status | Overflow html/body | Targets <24px | <44px | Contrast measured | Below threshold | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| home | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 21 | 39 | 22 | 0 | [1440-home.jpg](issue-504/1440-home.jpg) |
-| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 201 offers | 0/0 | 22 | 40 | 23 | 0 | [1440-provider.jpg](issue-504/1440-provider.jpg) |
-| empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 16 | 34 | 11 | 0 | [1440-empty.jpg](issue-504/1440-empty.jpg) |
-| recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 21 | 39 | 22 | 0 | [1440-recovery.jpg](issue-504/1440-recovery.jpg) |
-| back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 16 | 34 | 11 | 0 | [1440-back-empty.jpg](issue-504/1440-back-empty.jpg) |
-| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 201 offers | 0/0 | 22 | 40 | 23 | 0 | [1440-back-provider.jpg](issue-504/1440-back-provider.jpg) |
-| forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 201 offers | 0/0 | 16 | 34 | 11 | 0 | [1440-forward-empty.jpg](issue-504/1440-forward-empty.jpg) |
-| forward-recovery | `/index.html` | — | 201 | Showing all 201 offers | 0/0 | 21 | 39 | 22 | 0 | [1440-forward-recovery.jpg](issue-504/1440-forward-recovery.jpg) |
-| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 36 | 0 | [1440-detail.jpg](issue-504/1440-detail.jpg) |
+| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 23 | 0 | [1440-home.jpg](issue-504/1440-home.jpg) |
+| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 19 | 39 | 24 | 0 | [1440-provider.jpg](issue-504/1440-provider.jpg) |
+| empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 15 | 33 | 11 | 0 | [1440-empty.jpg](issue-504/1440-empty.jpg) |
+| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 23 | 0 | [1440-recovery.jpg](issue-504/1440-recovery.jpg) |
+| back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 15 | 33 | 11 | 0 | [1440-back-empty.jpg](issue-504/1440-back-empty.jpg) |
+| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 19 | 39 | 24 | 0 | [1440-back-provider.jpg](issue-504/1440-back-provider.jpg) |
+| forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 15 | 33 | 11 | 0 | [1440-forward-empty.jpg](issue-504/1440-forward-empty.jpg) |
+| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 23 | 0 | [1440-forward-recovery.jpg](issue-504/1440-forward-recovery.jpg) |
+| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 41 | 0 | [1440-detail.jpg](issue-504/1440-detail.jpg) |
 
 "Below threshold" counts non-decorative failures only. The linked JSON keeps every sampled element, including `aria-hidden` decorative text (e.g. the `·` separators in offer metadata, ~1.2:1) whose `meetsThreshold` is `false`; decorative samples are exempt from WCAG 1.4.3 and excluded from the count above.
 
@@ -269,21 +281,25 @@ later screenshots — a test-order artifact, not an app defect.
 | Viewport | Stop | Element | Screenshot |
 | --- | --- | --- | --- |
 | 320px | home #9 | `ft-search` | [320-home-focus-9.jpg](issue-504/320-home-focus-9.jpg) |
+| 320px | home #9 settled | `ft-search` | [320-home-focus-9-settled.jpg](issue-504/320-home-focus-9-settled.jpg) |
 | 320px | home #13 | `coding` | [320-home-focus-13.jpg](issue-504/320-home-focus-13.jpg) |
 | 320px | detail #13 | `https://aerolink.lat/pricing` | [320-detail-focus-13.jpg](issue-504/320-detail-focus-13.jpg) |
 | 320px | detail #21 | `https://aerolink.lat/pricing` | [320-detail-focus-21.jpg](issue-504/320-detail-focus-21.jpg) |
 | 320px | detail #22 | `https://aerolink.lat/pricing` | [320-detail-focus-22.jpg](issue-504/320-detail-focus-22.jpg) |
 | 375px | home #9 | `ft-search` | [375-home-focus-9.jpg](issue-504/375-home-focus-9.jpg) |
+| 375px | home #9 settled | `ft-search` | [375-home-focus-9-settled.jpg](issue-504/375-home-focus-9-settled.jpg) |
 | 375px | home #13 | `coding` | [375-home-focus-13.jpg](issue-504/375-home-focus-13.jpg) |
 | 375px | detail #13 | `https://aerolink.lat/pricing` | [375-detail-focus-13.jpg](issue-504/375-detail-focus-13.jpg) |
 | 375px | detail #21 | `https://aerolink.lat/pricing` | [375-detail-focus-21.jpg](issue-504/375-detail-focus-21.jpg) |
 | 375px | detail #22 | `https://aerolink.lat/pricing` | [375-detail-focus-22.jpg](issue-504/375-detail-focus-22.jpg) |
 | 768px | home #9 | `ft-search` | [768-home-focus-9.jpg](issue-504/768-home-focus-9.jpg) |
+| 768px | home #9 settled | `ft-search` | [768-home-focus-9-settled.jpg](issue-504/768-home-focus-9-settled.jpg) |
 | 768px | home #13 | `coding` | [768-home-focus-13.jpg](issue-504/768-home-focus-13.jpg) |
 | 768px | detail #13 | `https://aerolink.lat/pricing` | [768-detail-focus-13.jpg](issue-504/768-detail-focus-13.jpg) |
 | 768px | detail #21 | `https://aerolink.lat/pricing` | [768-detail-focus-21.jpg](issue-504/768-detail-focus-21.jpg) |
 | 768px | detail #22 | `https://aerolink.lat/pricing` | [768-detail-focus-22.jpg](issue-504/768-detail-focus-22.jpg) |
 | 1440px | home #9 | `ft-search` | [1440-home-focus-9.jpg](issue-504/1440-home-focus-9.jpg) |
+| 1440px | home #9 settled | `ft-search` | [1440-home-focus-9-settled.jpg](issue-504/1440-home-focus-9-settled.jpg) |
 | 1440px | home #13 | `coding` | [1440-home-focus-13.jpg](issue-504/1440-home-focus-13.jpg) |
 | 1440px | detail #13 | `https://aerolink.lat/pricing` | [1440-detail-focus-13.jpg](issue-504/1440-detail-focus-13.jpg) |
 | 1440px | detail #21 | `https://aerolink.lat/pricing` | [1440-detail-focus-21.jpg](issue-504/1440-detail-focus-21.jpg) |

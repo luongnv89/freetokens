@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-04T23:06:16.520Z",
-  "sourceCommit": "700519140e133324ba910506a627b9c40b6c3ebf",
+  "capturedAt": "2026-10-05T07:11:58.413Z",
+  "sourceCommit": "d1d883ff57f5f166d0dcafd918d2b233b55da7cc",
   "browser": {
     "name": "chromium",
     "version": "151.0.7922.34",
@@ -14,7 +14,9 @@
   "limitations": [
     "Consent pre-dismissed; no consent-overlay coverage",
     "First home row only for target/contrast sampling",
-    "Computed rendered color compositing, not screenshot pixel sampling; pseudo-elements, overlapping siblings and antialiasing not modeled",
+    "Computed rendered color compositing, not screenshot pixel sampling; pseudo-elements, overlapping siblings and antialiasing not modeled; a color CSS.supports rejects is flagged unsupported and its ratio suppressed",
+    "Target sampling ignores controls parked outside the horizontal viewport (the focus-revealed skip link); vertical offset below the fold still counts",
+    "Focus screenshots are immediate frames; the search stop also retains a settled screenshot and computed style",
     "ARIA snapshots are control-name evidence, not screen-reader speech",
     "Five focus hit-test samples do not prove entire outline unobscured",
     "24/44px flags are dimensions, not WCAG target-spacing exception verdicts"
@@ -39,8 +41,8 @@
         "body": 0
       },
       "input": "",
-      "results": 201,
-      "status": "Showing all 201 offers",
+      "results": 199,
+      "status": "Showing all 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -294,19 +296,6 @@
           "below44": true
         },
         {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 206.234375,
-            "width": 1,
-            "height": 1
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
           "name": "Filter by API providers",
           "tag": "BUTTON",
           "id": "",
@@ -364,11 +353,11 @@
           "id": "",
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -377,11 +366,11 @@
           "id": "",
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -403,7 +392,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21498.296875,
+            "y": 21293.578125,
             "width": 24,
             "height": 24
           },
@@ -416,7 +405,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 35.59375,
             "height": 19.6875
           },
@@ -429,7 +418,7 @@
           "id": "",
           "rect": {
             "x": 217.5625,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 44.0625,
             "height": 19.6875
           },
@@ -442,7 +431,7 @@
           "id": "",
           "rect": {
             "x": 290,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 35.140625,
             "height": 19.6875
           },
@@ -455,7 +444,7 @@
           "id": "",
           "rect": {
             "x": 353.515625,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 80.078125,
             "height": 19.6875
           },
@@ -468,7 +457,7 @@
           "id": "",
           "rect": {
             "x": 461.96875,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 27.1875,
             "height": 19.6875
           },
@@ -481,7 +470,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 8.9375,
             "height": 19.6875
           },
@@ -494,7 +483,7 @@
           "id": "",
           "rect": {
             "x": 190.90625,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 49.203125,
             "height": 19.6875
           },
@@ -507,7 +496,7 @@
           "id": "",
           "rect": {
             "x": 268.484375,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 46.875,
             "height": 19.6875
           },
@@ -520,7 +509,7 @@
           "id": "",
           "rect": {
             "x": 289.609375,
-            "y": 21585.359375,
+            "y": 21380.640625,
             "width": 104.84375,
             "height": 15
           },
@@ -533,7 +522,7 @@
           "id": "",
           "rect": {
             "x": 404.328125,
-            "y": 21585.359375,
+            "y": 21380.640625,
             "width": 96.828125,
             "height": 15
           },
@@ -546,7 +535,7 @@
           "id": "ft-consent-settings",
           "rect": {
             "x": 153.59375,
-            "y": 21606.046875,
+            "y": 21401.328125,
             "width": 85.734375,
             "height": 14
           },
@@ -711,14 +700,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 99.546875,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -742,14 +731,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 101.546875,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -778,7 +767,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 238.21875,
+            "x": 238.203125,
             "y": 99.546875,
             "width": 4.15625,
             "height": 18.71875
@@ -804,14 +793,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 99.546875,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -835,14 +824,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 101.546875,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -928,7 +917,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -959,7 +948,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -1313,14 +1302,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing all 201 offers",
+          "text": "Showing all 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 482.421875,
             "y": 177.921875,
-            "width": 117.296875,
+            "width": 117.359375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -1636,7 +1625,7 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
@@ -1665,7 +1654,7 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -1700,9 +1689,9 @@
           "decorative": false,
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -1729,9 +1718,9 @@
           "decorative": false,
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -1802,7 +1791,7 @@
       },
       "input": "aerolink",
       "results": 1,
-      "status": "Showing 1 of 201 offers",
+      "status": "Showing 1 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -2060,23 +2049,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 614.828125,
+            "x": 614.890625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 206.234375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -2139,11 +2115,11 @@
           "id": "",
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -2152,11 +2128,11 @@
           "id": "",
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -2486,14 +2462,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 99.546875,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -2517,14 +2493,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 101.546875,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -2553,7 +2529,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 238.21875,
+            "x": 238.203125,
             "y": 99.546875,
             "width": 4.15625,
             "height": 18.71875
@@ -2579,14 +2555,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 99.546875,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -2610,14 +2586,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 101.546875,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -2703,7 +2679,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -2734,7 +2710,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -3088,14 +3064,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 1 of 201 offers",
+          "text": "Showing 1 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 482.421875,
             "y": 177.921875,
-            "width": 124.40625,
+            "width": 124.46875,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -3124,7 +3100,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 614.828125,
+            "x": 614.890625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
@@ -3440,7 +3416,7 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
@@ -3469,7 +3445,7 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -3504,9 +3480,9 @@
           "decorative": false,
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -3533,9 +3509,9 @@
           "decorative": false,
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -3606,7 +3582,7 @@
       },
       "input": "no-such-provider-issue-504",
       "results": 0,
-      "status": "Showing 0 of 201 offers",
+      "status": "Showing 0 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -3864,23 +3840,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 615.453125,
+            "x": 615.515625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 206.234375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -4212,14 +4175,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 99.546875,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -4243,14 +4206,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 101.546875,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -4279,7 +4242,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 238.21875,
+            "x": 238.203125,
             "y": 99.546875,
             "width": 4.15625,
             "height": 18.71875
@@ -4305,14 +4268,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 99.546875,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -4336,14 +4299,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 101.546875,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -4429,7 +4392,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -4460,7 +4423,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -4814,14 +4777,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 0 of 201 offers",
+          "text": "Showing 0 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 482.421875,
             "y": 177.921875,
-            "width": 125.03125,
+            "width": 125.09375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -4850,7 +4813,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 615.453125,
+            "x": 615.515625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
@@ -5016,8 +4979,8 @@
         "body": 0
       },
       "input": "",
-      "results": 201,
-      "status": "Showing all 201 offers",
+      "results": 199,
+      "status": "Showing all 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -5271,19 +5234,6 @@
           "below44": true
         },
         {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 206.234375,
-            "width": 1,
-            "height": 1
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
           "name": "Filter by API providers",
           "tag": "BUTTON",
           "id": "",
@@ -5341,11 +5291,11 @@
           "id": "",
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -5354,11 +5304,11 @@
           "id": "",
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -5380,7 +5330,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21498.296875,
+            "y": 21293.578125,
             "width": 24,
             "height": 24
           },
@@ -5393,7 +5343,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 35.59375,
             "height": 19.6875
           },
@@ -5406,7 +5356,7 @@
           "id": "",
           "rect": {
             "x": 217.5625,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 44.0625,
             "height": 19.6875
           },
@@ -5419,7 +5369,7 @@
           "id": "",
           "rect": {
             "x": 290,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 35.140625,
             "height": 19.6875
           },
@@ -5432,7 +5382,7 @@
           "id": "",
           "rect": {
             "x": 353.515625,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 80.078125,
             "height": 19.6875
           },
@@ -5445,7 +5395,7 @@
           "id": "",
           "rect": {
             "x": 461.96875,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 27.1875,
             "height": 19.6875
           },
@@ -5458,7 +5408,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 8.9375,
             "height": 19.6875
           },
@@ -5471,7 +5421,7 @@
           "id": "",
           "rect": {
             "x": 190.90625,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 49.203125,
             "height": 19.6875
           },
@@ -5484,7 +5434,7 @@
           "id": "",
           "rect": {
             "x": 268.484375,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 46.875,
             "height": 19.6875
           },
@@ -5497,7 +5447,7 @@
           "id": "",
           "rect": {
             "x": 289.609375,
-            "y": 21585.359375,
+            "y": 21380.640625,
             "width": 104.84375,
             "height": 15
           },
@@ -5510,7 +5460,7 @@
           "id": "",
           "rect": {
             "x": 404.328125,
-            "y": 21585.359375,
+            "y": 21380.640625,
             "width": 96.828125,
             "height": 15
           },
@@ -5523,7 +5473,7 @@
           "id": "ft-consent-settings",
           "rect": {
             "x": 153.59375,
-            "y": 21606.046875,
+            "y": 21401.328125,
             "width": 85.734375,
             "height": 14
           },
@@ -5688,14 +5638,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 99.546875,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -5719,14 +5669,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 101.546875,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -5755,7 +5705,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 238.21875,
+            "x": 238.203125,
             "y": 99.546875,
             "width": 4.15625,
             "height": 18.71875
@@ -5781,14 +5731,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 99.546875,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -5812,14 +5762,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 101.546875,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -5905,7 +5855,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -5936,7 +5886,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -6290,14 +6240,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing all 201 offers",
+          "text": "Showing all 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 482.421875,
             "y": 177.921875,
-            "width": 117.296875,
+            "width": 117.359375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -6613,7 +6563,7 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
@@ -6642,7 +6592,7 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -6677,9 +6627,9 @@
           "decorative": false,
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -6706,9 +6656,9 @@
           "decorative": false,
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -6779,7 +6729,7 @@
       },
       "input": "no-such-provider-issue-504",
       "results": 0,
-      "status": "Showing 0 of 201 offers",
+      "status": "Showing 0 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -7037,23 +6987,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 615.453125,
+            "x": 615.515625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 206.234375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -7385,14 +7322,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 99.546875,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -7416,14 +7353,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 101.546875,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -7452,7 +7389,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 238.21875,
+            "x": 238.203125,
             "y": 99.546875,
             "width": 4.15625,
             "height": 18.71875
@@ -7478,14 +7415,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 99.546875,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -7509,14 +7446,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 101.546875,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -7602,7 +7539,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -7633,7 +7570,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -7987,14 +7924,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 0 of 201 offers",
+          "text": "Showing 0 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 482.421875,
             "y": 177.921875,
-            "width": 125.03125,
+            "width": 125.09375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -8023,7 +7960,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 615.453125,
+            "x": 615.515625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
@@ -8190,7 +8127,7 @@
       },
       "input": "aerolink",
       "results": 1,
-      "status": "Showing 1 of 201 offers",
+      "status": "Showing 1 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -8448,23 +8385,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 614.828125,
+            "x": 614.890625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 206.234375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -8527,11 +8451,11 @@
           "id": "",
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -8540,11 +8464,11 @@
           "id": "",
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -8874,14 +8798,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 99.546875,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -8905,14 +8829,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 101.546875,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -8941,7 +8865,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 238.21875,
+            "x": 238.203125,
             "y": 99.546875,
             "width": 4.15625,
             "height": 18.71875
@@ -8967,14 +8891,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 99.546875,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -8998,14 +8922,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 101.546875,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -9091,7 +9015,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -9122,7 +9046,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -9476,14 +9400,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 1 of 201 offers",
+          "text": "Showing 1 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 482.421875,
             "y": 177.921875,
-            "width": 124.40625,
+            "width": 124.46875,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -9512,7 +9436,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 614.828125,
+            "x": 614.890625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
@@ -9828,7 +9752,7 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
@@ -9857,7 +9781,7 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -9892,9 +9816,9 @@
           "decorative": false,
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -9921,9 +9845,9 @@
           "decorative": false,
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -9994,7 +9918,7 @@
       },
       "input": "no-such-provider-issue-504",
       "results": 0,
-      "status": "Showing 0 of 201 offers",
+      "status": "Showing 0 of 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -10252,23 +10176,10 @@
           "tag": "BUTTON",
           "id": "ft-clear-filters",
           "rect": {
-            "x": 615.453125,
+            "x": 615.515625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 206.234375,
-            "width": 1,
-            "height": 1
           },
           "below24": true,
           "below44": true
@@ -10600,14 +10511,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 99.546875,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -10631,14 +10542,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 101.546875,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -10667,7 +10578,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 238.21875,
+            "x": 238.203125,
             "y": 99.546875,
             "width": 4.15625,
             "height": 18.71875
@@ -10693,14 +10604,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 99.546875,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -10724,14 +10635,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 101.546875,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -10817,7 +10728,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -10848,7 +10759,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -11202,14 +11113,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing 0 of 201 offers",
+          "text": "Showing 0 of 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 482.421875,
             "y": 177.921875,
-            "width": 125.03125,
+            "width": 125.09375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -11238,7 +11149,7 @@
           "class": "chip clear",
           "decorative": false,
           "rect": {
-            "x": 615.453125,
+            "x": 615.515625,
             "y": 176.21875,
             "width": 92.046875,
             "height": 21.65625
@@ -11404,8 +11315,8 @@
         "body": 0
       },
       "input": "",
-      "results": 201,
-      "status": "Showing all 201 offers",
+      "results": 199,
+      "status": "Showing all 199 offers",
       "statusSemantics": {
         "role": "status",
         "live": "polite"
@@ -11659,19 +11570,6 @@
           "below44": true
         },
         {
-          "name": "Skip the offer list",
-          "tag": "A",
-          "id": "",
-          "rect": {
-            "x": -9999,
-            "y": 206.234375,
-            "width": 1,
-            "height": 1
-          },
-          "below24": true,
-          "below44": true
-        },
-        {
           "name": "Filter by API providers",
           "tag": "BUTTON",
           "id": "",
@@ -11729,11 +11627,11 @@
           "id": "",
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -11742,11 +11640,11 @@
           "id": "",
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
-          "below24": true,
+          "below24": false,
           "below44": true
         },
         {
@@ -11768,7 +11666,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21498.296875,
+            "y": 21293.578125,
             "width": 24,
             "height": 24
           },
@@ -11781,7 +11679,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 35.59375,
             "height": 19.6875
           },
@@ -11794,7 +11692,7 @@
           "id": "",
           "rect": {
             "x": 217.5625,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 44.0625,
             "height": 19.6875
           },
@@ -11807,7 +11705,7 @@
           "id": "",
           "rect": {
             "x": 290,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 35.140625,
             "height": 19.6875
           },
@@ -11820,7 +11718,7 @@
           "id": "",
           "rect": {
             "x": 353.515625,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 80.078125,
             "height": 19.6875
           },
@@ -11833,7 +11731,7 @@
           "id": "",
           "rect": {
             "x": 461.96875,
-            "y": 21535.984375,
+            "y": 21331.265625,
             "width": 27.1875,
             "height": 19.6875
           },
@@ -11846,7 +11744,7 @@
           "id": "",
           "rect": {
             "x": 153.59375,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 8.9375,
             "height": 19.6875
           },
@@ -11859,7 +11757,7 @@
           "id": "",
           "rect": {
             "x": 190.90625,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 49.203125,
             "height": 19.6875
           },
@@ -11872,7 +11770,7 @@
           "id": "",
           "rect": {
             "x": 268.484375,
-            "y": 21563.671875,
+            "y": 21358.953125,
             "width": 46.875,
             "height": 19.6875
           },
@@ -11885,7 +11783,7 @@
           "id": "",
           "rect": {
             "x": 289.609375,
-            "y": 21585.359375,
+            "y": 21380.640625,
             "width": 104.84375,
             "height": 15
           },
@@ -11898,7 +11796,7 @@
           "id": "",
           "rect": {
             "x": 404.328125,
-            "y": 21585.359375,
+            "y": 21380.640625,
             "width": 96.828125,
             "height": 15
           },
@@ -11911,7 +11809,7 @@
           "id": "ft-consent-settings",
           "rect": {
             "x": 153.59375,
-            "y": 21606.046875,
+            "y": 21401.328125,
             "width": 85.734375,
             "height": 14
           },
@@ -12076,14 +11974,14 @@
           ]
         },
         {
-          "text": "201 live offers",
+          "text": "199 live offers",
           "tag": "SPAN",
           "class": "stat-deals",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 99.546875,
-            "width": 76.625,
+            "width": 76.609375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -12107,14 +12005,14 @@
           ]
         },
         {
-          "text": "201",
+          "text": "199",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
             "x": 153.59375,
             "y": 101.546875,
-            "width": 21.5625,
+            "width": 21.546875,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -12143,7 +12041,7 @@
           "class": "stat-sep",
           "decorative": true,
           "rect": {
-            "x": 238.21875,
+            "x": 238.203125,
             "y": 99.546875,
             "width": 4.15625,
             "height": 18.71875
@@ -12169,14 +12067,14 @@
           ]
         },
         {
-          "text": "30 expired moved to the archive",
+          "text": "31 expired moved to the archive",
           "tag": "SPAN",
           "class": "stat-archived",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 99.546875,
-            "width": 174.96875,
+            "width": 174.984375,
             "height": 18.71875
           },
           "color": "rgb(106, 99, 90)",
@@ -12200,14 +12098,14 @@
           ]
         },
         {
-          "text": "30",
+          "text": "31",
           "tag": "STRONG",
           "class": "",
           "decorative": false,
           "rect": {
-            "x": 250.375,
+            "x": 250.359375,
             "y": 101.546875,
-            "width": 14.375,
+            "width": 14.390625,
             "height": 14
           },
           "color": "rgb(31, 27, 22)",
@@ -12293,7 +12191,7 @@
           ]
         },
         {
-          "text": "site rebuilt at Oct 4, 2026 23:05 UTC",
+          "text": "site rebuilt at Oct 5, 2026 07:11 UTC",
           "tag": "SPAN",
           "class": "stat-updated",
           "decorative": false,
@@ -12324,7 +12222,7 @@
           ]
         },
         {
-          "text": "Oct 4, 2026 23:05 UTC",
+          "text": "Oct 5, 2026 07:11 UTC",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -12678,14 +12576,14 @@
           "unsupported": []
         },
         {
-          "text": "Showing all 201 offers",
+          "text": "Showing all 199 offers",
           "tag": "P",
           "class": "results-status",
           "decorative": false,
           "rect": {
             "x": 482.421875,
             "y": 177.921875,
-            "width": 117.296875,
+            "width": 117.359375,
             "height": 18.234375
           },
           "color": "rgb(106, 99, 90)",
@@ -13001,7 +12899,7 @@
           "unsupported": []
         },
         {
-          "text": "checked 4d ago",
+          "text": "checked 5d ago",
           "tag": "SPAN",
           "class": "r-vfd",
           "decorative": false,
@@ -13030,7 +12928,7 @@
           "unsupported": []
         },
         {
-          "text": "4d ago",
+          "text": "5d ago",
           "tag": "TIME",
           "class": "",
           "decorative": false,
@@ -13065,9 +12963,9 @@
           "decorative": false,
           "rect": {
             "x": 1115.84375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 45.953125,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -13094,9 +12992,9 @@
           "decorative": false,
           "rect": {
             "x": 1166.59375,
-            "y": 234.109375,
+            "y": 232.625,
             "width": 43.84375,
-            "height": 21.03125
+            "height": 24
           },
           "color": "rgb(31, 27, 22)",
           "background": [
@@ -16161,6 +16059,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16184,6 +16109,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16207,6 +16159,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16230,6 +16209,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16253,6 +16259,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16276,6 +16309,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16299,6 +16359,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16322,6 +16409,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16345,9 +16459,41 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "3px none rgb(31, 27, 22)",
-        "boxShadow": "oklab(0 0 0 / 0) 0px 0px 0px 0px"
+        "boxShadow": "oklab(0 0 0 / 0) 0px 0px 0px 0px",
+        "settledScreenshot": "1440-home-focus-9-settled.jpg",
+        "settledFocus": {
+          "boxShadow": "color(srgb 0.0745098 0.447059 0.211765 / 0.16) 0px 0px 0px 4px",
+          "borderColor": "rgb(19, 114, 54)"
+        }
       },
       {
         "index": 10,
@@ -16368,6 +16514,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16391,6 +16564,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 3,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": false
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": false
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16414,6 +16614,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16437,6 +16664,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16460,6 +16714,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16483,6 +16764,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16506,6 +16814,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16529,6 +16864,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16552,6 +16914,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16575,6 +16964,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16600,6 +17016,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16623,6 +17066,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16646,6 +17116,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16669,6 +17166,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16692,6 +17216,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16715,6 +17266,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16738,6 +17316,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16761,6 +17366,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16784,6 +17416,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16807,6 +17466,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16830,6 +17516,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16853,6 +17566,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16876,6 +17616,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16899,6 +17666,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16922,6 +17716,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16945,6 +17766,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -16968,6 +17816,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "1px auto rgb(0, 95, 204)",
         "boxShadow": "none"
@@ -16991,6 +17866,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17014,6 +17916,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "1px auto rgb(0, 95, 204)",
         "boxShadow": "none"
@@ -17037,6 +17966,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "1px auto rgb(0, 95, 204)",
         "boxShadow": "none"
@@ -17060,6 +18016,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17083,6 +18066,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17106,6 +18116,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17129,6 +18166,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17152,6 +18216,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17175,6 +18266,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17198,6 +18316,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17221,6 +18366,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17244,6 +18416,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17267,6 +18466,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17290,6 +18516,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17313,6 +18566,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17336,6 +18616,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17359,6 +18666,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17382,6 +18716,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17405,6 +18766,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17428,6 +18816,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17451,6 +18866,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17474,6 +18916,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17497,6 +18966,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
@@ -17520,6 +19016,33 @@
         "fullyInViewport": true,
         "unobscuredSamples": 5,
         "hitTestSamples": 5,
+        "hitPoints": [
+          {
+            "x": 0.5,
+            "y": 0.5,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.1,
+            "hit": true
+          },
+          {
+            "x": 0.1,
+            "y": 0.9,
+            "hit": true
+          },
+          {
+            "x": 0.9,
+            "y": 0.9,
+            "hit": true
+          }
+        ],
         "focusVisible": true,
         "outline": "2px solid rgb(31, 27, 22)",
         "boxShadow": "none"
