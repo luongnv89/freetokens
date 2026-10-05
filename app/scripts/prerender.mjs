@@ -181,7 +181,7 @@ try {
     }
     return (
       `${offer.amount} from ${offer.provider} — free AI credits, ` +
-      "tagged by verification level and sign-up need."
+      "tagged by review status, evidence level and sign-up need."
     );
   }
 
@@ -301,7 +301,7 @@ try {
       markup: await renderRoute({ page: "home" }, origin),
       title: "Free AI Credits",
       description:
-        "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
+        "Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page.",
       canonical: `${origin}/`,
       page: "home",
       baseUrl: origin,

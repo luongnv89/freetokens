@@ -19,15 +19,23 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // rows with their category spines and hover lift, the rounded toolbar
 // controls, the hot-today shelf, the offer-detail rail, and the motion
 // system — staggered rise reveals, hover lifts, press scales — all of it
-// duplicated for the reduced-motion gate.
+// duplicated for the reduced-motion gate. It also covers the hover-free trust
+// legend (#507): a bordered note above the listing that names review status,
+// evidence level and sign-up need with their meanings, borrowing the policy
+// prose rules so the same words read the same on the listing, on an offer page
+// and on the About page.
 //
 // The number is a BUDGET, not a checksum: measured raw CSS rounded up to the
-// next 500 plus ~1.5 kB of headroom, so a one-rule fix does not fail the
-// build and another feature cannot land unnoticed. The warm-linen redesign
-// measured 54,284 raw going in, which sets the ceiling at 56,000. Raise it
-// deliberately, in this style, when a change is worth the bytes — giving
-// bytes back does not spend them.
-const PYTHON_INLINE_CSS_BYTES = 56_000;
+// next 500 plus headroom, so a one-rule fix does not fail the build and another
+// feature cannot land unnoticed. The warm-linen redesign measured 54,284 raw
+// going in, which set the ceiling at 56,000. The trust legend then measured
+// 56,040 raw with its mobile-height fix (the values flow inline instead of
+// stacking a bullet each, which took the block from 756 px to ~250 px at 375
+// CSS px), so the ceiling moves to 56,500 — the legend is worth the bytes, and
+// its 460 bytes of headroom still fails on the next feature that lands
+// unnoticed. Raise it deliberately, in this style, when a change is worth the
+// bytes — giving bytes back does not spend them.
+const PYTHON_INLINE_CSS_BYTES = 56_500;
 
 function cssBytesIn(dir) {
   let total = 0;

@@ -468,7 +468,7 @@ describe("static route coverage (#123)", () => {
     }
   });
 
-  it("produces a new offer's page with no code edit (data-driven routes)", () => {
+  it("produces a new offer's page with no code edit (data-driven routes)", async () => {
     const dataCopy = path.join(tmpdir(), `ft-data-${process.pid}.json`);
     writeFileSync(
       dataCopy,
@@ -505,9 +505,67 @@ describe("static route coverage (#123)", () => {
       "Open the official offer page.",
     );
     expect(readFileSync(page, "utf8")).not.toContain('class="od-brief"');
+    // An offer with no summary falls back to the shared meta description
+    // (#507): prerender.mjs keeps its own copy of that string for Node, and
+    // this pins it to the one src/lib/offerDetails.ts renders.
+    const { offerMetaDescription } = await import("../src/lib/offerDetails.ts");
+    expect(
+      metaContents(readFileSync(page, "utf8"), "name", "description"),
+    ).toEqual([
+      htmlAttr(
+        offerMetaDescription({ amount: "$0", provider: "Example" }, undefined),
+      ),
+    ]);
     const feed = readFileSync(path.join(outDir, "feed.xml"), "utf8");
     expect(feed).toContain("<title>Synthetic New Offer</title>");
     expect(feed).toContain("/offers/zz-synthetic-new-offer.html");
+  });
+
+  // T4 / #507: the trust definitions have to survive prerender (the deployed
+  // HTML a reader gets before any JS), and the collection metadata must stop
+  // calling the mixed directory "verified".
+  it("prerenders the hover-free trust legend on home and detail", () => {
+    const home = readFileSync(path.join(outDir, "index.html"), "utf8");
+    expect(home).toContain('id="trust-legend-head"');
+    expect(home).toContain("How to read these labels");
+    expect(home).toContain("review_status");
+    expect(home).toContain("enrollment deadline");
+    const slug = index.offers[0].slug;
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${slug}.html`),
+      "utf8",
+    );
+    expect(detail).toContain('id="trust-legend-head"');
+    expect(detail).toContain("How to read these labels");
+  });
+
+  it("makes no blanket verified claim in the deployed collection metadata", () => {
+    const home = readFileSync(path.join(outDir, "index.html"), "utf8");
+    expect(home).not.toContain("verified free AI credit offers");
+    const marker = '<script type="application/ld+json">';
+    let collection;
+    let cursor = 0;
+    while (cursor < home.length) {
+      const start = home.indexOf(marker, cursor);
+      if (start < 0) break;
+      const end = home.indexOf("</script>", start);
+      const block = JSON.parse(home.slice(start + marker.length, end));
+      if (Array.isArray(block["@graph"])) {
+        collection = block["@graph"].find(
+          (node) => node["@type"] === "CollectionPage",
+        );
+      }
+      if (collection) break;
+      cursor = end + "</script>".length;
+    }
+    expect(collection).toBeTruthy();
+    expect(collection.name).toContain("review status and evidence level");
+    expect(collection.name).not.toMatch(/verified/i);
+    // The meta description and the structured data carry ONE description, so
+    // the vocabulary cannot diverge between prerender and the React graph.
+    expect(metaContents(home, "name", "description")).toEqual([
+      htmlAttr(collection.description),
+    ]);
   });
 
   it("stamps /privacy.html with its own title and meta description", () => {
@@ -657,7 +715,7 @@ describe("static route coverage (#123)", () => {
         file: "index.html",
         title: "Free AI Credits",
         description:
-          "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.",
+          "Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page.",
         canonical: `${DEFAULT_BASE_URL}/`,
         type: "website",
       },
@@ -738,7 +796,7 @@ describe("static route coverage (#123)", () => {
     const shell = readFileSync(path.join(APP_ROOT, "index.html"), "utf8");
     const canonical = "https://freetokens.custats.info/";
     const description =
-      "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
+      "Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page.";
     const image = "https://freetokens.custats.info/og.png";
     const expectedProperties = {
       "og:title": "Free AI Credits",
@@ -802,7 +860,7 @@ describe("static route coverage (#123)", () => {
     prerender(outDir);
     const home = readFileSync(indexPath, "utf8");
     const description =
-      "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
+      "Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page.";
     expect(metaContents(home, "name", "description")).toEqual([
       htmlAttr(description),
     ]);

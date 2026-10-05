@@ -48,6 +48,7 @@ import {
   type UrlState,
 } from "../lib/urlState";
 import { IconSprite, OfferRow } from "./OfferRow";
+import { TrustLegend } from "./TrustLegend";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { SiteStats } from "./SiteStats";
@@ -677,6 +678,11 @@ export default function HomePage({
                 onToggleSavedOnly={onToggleSavedOnly}
                 onRestoreDismissed={onRestoreDismissed}
               />
+              {/* Hover-free trust definitions (#507 / T4). The rows carry
+                  review-status and evidence-level labels whose meanings used to
+                  live only in `title` attributes; the legend states them as
+                  visible text, before the list they qualify. */}
+              <TrustLegend />
               <a className="skip-list" href="#site-footer">
                 Skip the offer list
               </a>

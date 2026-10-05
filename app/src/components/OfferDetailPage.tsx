@@ -23,6 +23,7 @@ import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { StructuredData } from "./StructuredData";
+import { TrustLegend } from "./TrustLegend";
 
 function relatedOffers(index: OffersIndex, current: Offer, limit = 4): Offer[] {
   const sameCategory = index.offers.filter(
@@ -309,6 +310,11 @@ export default function OfferDetailPage({
                     <p className="od-summary">{detail.summary}</p>
                   </section>
                 ) : null}
+                {/* Hover-free trust definitions (#507 / T4): the facts rail
+                    names Verification, Review status and Last checked, and this
+                    block says what each of those words does and does not mean
+                    without requiring a hover. */}
+                <TrustLegend />
                 <ClaimChecklist slug={offer.slug} steps={claimSteps(detail)} />
                 {/* Second CTA, at the end of the steps. Redundant on a desktop
                 where the rail is stuck to the viewport, but on a phone the

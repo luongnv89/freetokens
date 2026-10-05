@@ -2,15 +2,17 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 188 of 199 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-05T22:43:55Z — 178 of 199 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+
+Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
 - Amount: Zed Pro free for 1 year + $10/month in AI token credits
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://zed.dev/education
 - Page: https://freetokens.custats.info/offers/zed-student-pro.html
 - Summary: Zed Pro free for 1 year + $10/month in AI token credits for verified university students. Includes unlimited edit predictions, real-time multiplayer collaboration, and all Zed Pro features.
@@ -19,8 +21,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: ZCode (Z.ai)
 - Category: coding
 - Amount: 8M tokens/day for the first 5 days (GLM-5.3 3M + GLM-5.3-Flash 5M) after connecting a BigModel account; then expires — not an ongoing free tier
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://zcode.z.ai/en/docs/configuration
 - Page: https://freetokens.custats.info/offers/zcode-bigmodel-new-user-trial.html
 - Summary: ZCode grants new users who connect a BigModel account a no-payment trial: 8 million tokens per day for the first 5 days (GLM-5.3 3M/day + GLM-5.3-Flash 5M/day). The daily quota refreshes during those 5 days and then expires — it is not an ongoing free tier. Intended for trying ZCode Agent before a GLM Coding Plan. The same docs say Z.ai (overseas) new users also get a free daily trial quota for flagship GLM models, but the 8M/5-day split is quoted only in the BigModel section. Distinct from Z.ai's ongoing Flash free APIs and the Z.ai Startups Program.
@@ -29,8 +31,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Z AI (Zhipu AI)
 - Category: startup_program
 - Amount: Free API credits up to 1B tokens plus GLM volume pricing, priority support, and early access
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://startup.z.ai/
 - Page: https://freetokens.custats.info/offers/z-ai-startups-program.html
 - Summary: The Z.ai Startups Program gives selected early-stage teams free API credits — up to 1B tokens — plus volume pricing on GLM models, technical guidance for production deployment, priority support, and early access to new models. The application page is JS-rendered; program confirmed via Z.ai's official announcement and indexed page content.
@@ -39,8 +41,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Z AI (Zhipu AI)
 - Category: api_provider
 - Amount: Free input, cached input, and output for GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://docs.z.ai/guides/overview/pricing.md
 - Page: https://freetokens.custats.info/offers/z-ai-free-models.html
 - Summary: Z.AI's pricing table lists GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash with Free input, cached input, cached input storage, and output prices.
@@ -49,8 +51,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: YepAPI
 - Category: api_provider
 - Amount: $5 free credit on signup for 60+ models via OpenAI-compatible gateway
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.yepapi.com/ai-api
 - Page: https://freetokens.custats.info/offers/yepapi-5-signup-credit.html
 - Summary: YepAPI grants $5 free credit on signup with no credit card. One API key accesses 60+ models (GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and more) through a single OpenAI-compatible endpoint. After the credit, usage is pay-per-token with no subscription.
@@ -59,8 +61,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Voyage AI
 - Category: api_provider
 - Amount: First 200M tokens free per account on current embedding/rerank models (50M on specialized -2 models; multimodal: 200M text tokens + 150B pixels); Batch API excluded
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.voyageai.com/docs/pricing
 - Page: https://freetokens.custats.info/offers/voyage-ai-200m-free-tokens.html
 - Summary: Voyage AI (MongoDB) gives every account its first 200 million tokens free on current text-embedding models (voyage-4-large, voyage-4, voyage-4-lite, voyage-context-4) and rerankers (rerank-3, rerank-3-lite), and 50 million tokens on specialized -2 models (voyage-finance-2, voyage-law-2, voyage-code-2). Multimodal models get 200M text tokens plus 150B pixels free. Free token credits do not apply to Batch API usage, which bills at the discounted batch rate.
@@ -69,8 +71,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Vidu
 - Category: video
 - Amount: Trial credits for new users on signup, topped up with daily login bonus credits
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.vidu.com/pricing
 - Page: https://freetokens.custats.info/offers/vidu-free-credits.html
 - Summary: Vidu's AI video platform hands new users trial credits at registration and keeps topping them up through daily login bonuses, letting you generate text-to-video and image-to-video clips without paying. Credits can also be earned through official events.
@@ -79,8 +81,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Vercel
 - Category: api_provider
 - Amount: Monthly free AI Gateway credit covering a free-tier subset of models (lower per-model rate limits); buying credits permanently ends the monthly free credit
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://vercel.com/docs/ai-gateway/pricing
 - Page: https://freetokens.custats.info/offers/vercel-ai-gateway-free-tier.html
 - Summary: Every Vercel team account gets a monthly free AI Gateway credit covering a free-tier subset of the model catalog, at lower per-model rate limits than the paid tier. Free credits start on your first AI Gateway request and are a recurring monthly inclusion, not an expiring trial. Buying AI Gateway Credits moves the team to the paid tier and permanently ends the monthly free credit. Vercel's docs and FAQ confirm the monthly credit but do not publish a dollar amount; the ~$5/month figure in circulation is unverified against official pages.
@@ -89,8 +91,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Upstage
 - Category: student
 - Amount: Free access to Solar Pro LLM + Document Parse for up to 1 year for eligible schools, hospitals, and nonprofits (Upstage x AWS AI Initiative)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.upstage.ai/pricing
 - Page: https://freetokens.custats.info/offers/upstage-education-public-interest-free.html
 - Summary: The Upstage x AWS AI Initiative provides eligible educational and public-interest organizations — schools, hospitals, and nonprofits — with free access to Solar Pro (LLM) and Document Parse for up to one year. Applications go through the 'Get free access' link on the Upstage pricing page.
@@ -99,8 +101,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Together AI
 - Category: startup_program
 - Amount: Up to $15K / $30K / $50K free platform credits by funding tier (selection-based; not a general signup grant)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.together.ai/startup-accelerator
 - Page: https://freetokens.custats.info/offers/together-ai-startup-accelerator.html
 - Summary: Together AI Startup Accelerator is a selection-based program, not a general signup grant. Approved startups receive up to $15K, $30K, or $50K in free platform credits depending on funding stage (under $5M / $5–10M / over $10M). Credits can be used for serverless inference, dedicated endpoints, fine-tuning, and instant clusters.
@@ -109,8 +111,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: TinyFish
 - Category: student
 - Amount: $35 wallet credit automatic on eligible academic-email signup plus bounty-board gift cards for approved builds ($50 agentic apps, $20 Skills, $10 prompts)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.tinyfish.ai/students
 - Page: https://freetokens.custats.info/offers/tinyfish-student-program-35-credits.html
 - Summary: Currently enrolled students who sign up with a .edu address receive $35 wallet credit automatically — a .edu address is the only check and there is nothing else to claim. The program also runs a monthly Bounty Board: approved agentic apps earn a $50 gift card, Skills $20, and prompts $10. Gift cards go to every student from day one. If the student email is not .edu, the page says to email community@tinyfish.ai. Sign up at agent.tinyfish.ai; bounty submissions are at tinybounties.com.
@@ -119,8 +121,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Thunder Compute
 - Category: student
 - Amount: $20 free Thunder Compute credit for students at US universities
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.thundercompute.com/students
 - Page: https://freetokens.custats.info/offers/thunder-compute-students.html
 - Summary: Thunder Compute's Student Program gives students enrolled at a US university $20 of free credit when they sign up with their university email. The credit can be used on A6000 and L40 GPUs. When the credit runs out, normal pay-as-you-go billing applies; the student page does not state a fixed expiration date.
@@ -129,8 +131,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Tencent Cloud
 - Category: api_provider
 - Amount: 1,000,000 free tokens per eligible language model, valid 1 year from claim (one claim per model per root account; USD 1 balance frozen per claim/enable)
-- Status: active — expiry 2026-12-31
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: 2026-12-31
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://intl.cloud.tencent.com/document/product/1300/80423
 - Page: https://freetokens.custats.info/offers/tencent-cloud-tokenhub-free-trial.html
 - Summary: Tencent Cloud TokenHub gives each root account a one-time free trial quota covering multiple model types. Each eligible language model gets 1,000,000 free tokens valid 90 days from claim; the campaign runs through December 31, 2026. TokenHub is an OpenAI-compatible gateway serving DeepSeek, GLM, Kimi, MiniMax and other models. Claiming or enabling a model freezes USD 1 of account balance (returned when endpoints are deleted).
@@ -139,8 +141,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Telnyx
 - Category: startup_program
 - Amount: Up to $20,000 in AI credits for 6 months, plus 3 months of engineering support
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://telnyx.com/startups-program
 - Page: https://freetokens.custats.info/offers/telnyx-startups-program.html
 - Summary: Up to $20,000 in AI credits for 6 months, plus 3 months of engineering support.
@@ -149,8 +151,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Tavily
 - Category: api_provider
 - Amount: 1,000 free API credits every month
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.tavily.com/pricing
 - Page: https://freetokens.custats.info/offers/tavily-free-tier.html
 - Summary: Tavily's Researcher Free plan provides 1,000 free API credits every month. Credits reset on the first day of each month, requests stop after the monthly balance is exhausted, and no credit card is required. Tavily separately advertises a student path with four months of Project Plan access and 4,000 API credits per month.
@@ -159,8 +161,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Suno
 - Category: voice
 - Amount: Free plan: 50 credits/day
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://suno.com/pricing
 - Page: https://freetokens.custats.info/offers/suno-free-plan.html
 - Summary: Suno's official pricing page lists a Free Plan at $0 that includes 50 credits renewing daily (about 10 songs), with up to 4 songs generated at once, no commercial use, no credit top-ups, and a shared generation queue. The page was fetched live on 2026-09-04 and the terms match the claim exactly. No end date is stated, so the offer appears ongoing.
@@ -169,8 +171,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Stability AI
 - Category: image
 - Amount: 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://platform.stability.ai/docs/getting-started
 - Page: https://freetokens.custats.info/offers/stability-ai-25-free-credits.html
 - Summary: Stability AI's developer platform grants 25 free API credits to new accounts created via Google social login (the grant does not apply to username/password or Discord signups per the getting-started guide). API usage is billed in credits at 1 credit = $0.01. NOTE: platform.stability.ai pages render only with JavaScript and returned an empty shell to the fetcher; the quoted terms come from search-index snippets of these exact URLs and should be re-verified in a browser.
@@ -179,8 +181,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Speechmatics
 - Category: voice
 - Amount: $100 in free credits (STT 55+ languages + TTS), 2 concurrent real-time sessions, no card required
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.speechmatics.com/pricing
 - Page: https://freetokens.custats.info/offers/speechmatics-100-free-credit.html
 - Summary: Speechmatics grants new accounts $100 in credit (1 credit = $1) usable on speech-to-text in 55+ languages and low-latency text-to-speech, no card required. The Free tier allows 2 concurrent real-time sessions; once the credit is used, add a card to continue on pay-as-you-go.
@@ -189,8 +191,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: SmarToken
 - Category: api_provider
 - Amount: $5 one-time promotional API credit for eligible accounts
-- Status: active — expiry 2026-12-31
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: 2026-12-31
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://thesmartoken.com/campaign/free-credit
 - Page: https://freetokens.custats.info/offers/smartoken-5-free-api-credit.html
 - Summary: SmarToken's campaign grants a one-time $5 promotional credit for OpenAI-compatible model calls to existing users and eligible new Google users. The campaign ends on December 31, 2026 at 23:59:59 UTC+8. New users must be low-risk Google users, pass the stated signup checks, and receive the credit once per account; no credit card is required.
@@ -199,8 +201,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Smallest.ai
 - Category: startup_program
 - Amount: $10,000 in Voice Agent Platform credits for up to 6 months
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://smallest.ai/grants
 - Page: https://freetokens.custats.info/offers/smallest-ai-startup-grants.html
 - Summary: $10,000 in Voice Agent Platform credits for up to 6 months.
@@ -209,8 +211,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: SiliconFlow
 - Category: api_provider
 - Amount: Selected API models are free for input and output, incl. Hunyuan-MT-7B and PaddleOCR-VL-1.5 (chat), BGE embedding/reranker models, Kolors (image), and XingChen/Qwen3-ASR/SenseVoiceSmall (speech)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://siliconflow.cn/pricing
 - Page: https://freetokens.custats.info/offers/siliconflow-free-models.html
 - Summary: SiliconFlow's API pricing page marks selected models free for input and output. Currently free: tencent/Hunyuan-MT-7B and PaddlePaddle/PaddleOCR-VL-1.5 (chat), BAAI bge-m3 / bge-reranker-v2-m3 / bge-large-zh-v1.5 / bge-large-en-v1.5 (embeddings), Kwai-Kolors/Kolors (image), and XingChenAGI XingChenGSR-V1.0 / XingChenASR V3.2 / V3.2-Ultra / ASR-Diarize-V3.0, Qwen/Qwen3-ASR-1.7B and FunAudioLLM/SenseVoiceSmall (speech). GLM-Z1-9B-0414 was removed from the free tier and is now paid ($0.086/M tokens).
@@ -219,8 +221,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: SiliconFlow
 - Category: api_provider
 - Amount: $1 in free credits at signup, no minimum commitment
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.siliconflow.com/pricing
 - Page: https://freetokens.custats.info/offers/siliconflow-1-dollar-free-credits.html
 - Summary: SiliconFlow grants $1 in free credits at signup for its serverless inference platform (LLM, image, video, audio models), with postpaid pay-as-you-go billing and no minimum commitments. Complements the separate siliconflow-free-models offer, which tracks SiliconFlow's permanently free model list.
@@ -229,8 +231,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Scaleway
 - Category: api_provider
 - Amount: €100 free credit voucher for new Professional accounts, usable across Scaleway cloud services incl. Generative APIs
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.scaleway.com/en/scaleway-vs-digitalocean/
 - Page: https://freetokens.custats.info/offers/scaleway-professional-100-credit.html
 - Summary: New Scaleway Professional customers get a €100 free-credit voucher (emailed within 24 hours of account creation) usable across Scaleway cloud services including Generative APIs. Requires a valid payment method; anyone ever invoiced by Scaleway (even €0) is ineligible.
@@ -239,8 +241,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Scaleway
 - Category: api_provider
 - Amount: First 1,000,000 tokens free + 60 minutes audio transcription; pay from token 1,000,001 (card + KYC needed for full rate limits)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.scaleway.com/en/pricing/model-as-a-service/
 - Page: https://freetokens.custats.info/offers/scaleway-generative-apis-free-tier.html
 - Summary: Scaleway Generative APIs (serverless, Europe-hosted, OpenAI-compatible) include a free tier of the first 1,000,000 tokens plus 60 minutes of audio transcription. Usage is billed from token 1,000,001. A credit card and KYC are required to get official rate limits (tokens per minute and queries per minute). Distinct from the separate €100 Business-account credit on the signup page.
@@ -249,8 +251,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Sarvam AI
 - Category: startup_program
 - Amount: 6–12 months of API credits matched to scale (amount unpublished) for STT, TTS, voice agents, and LLM APIs
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.sarvam.ai/startup-program
 - Page: https://freetokens.custats.info/offers/sarvam-ai-startup-program.html
 - Summary: The Sarvam AI Startup Program provides 6–12 months of API credits matched to the startup's scale (amount unpublished), priority support with direct access to Sarvam's engineering team, and launch visibility. Covers STT, TTS, voice agents, chat completion, translation, and document intelligence APIs, with native support for 22 Indian languages and English.
@@ -259,8 +261,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Runway
 - Category: video
 - Amount: 125 one-time credits for AI video and image generation
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://runwayml.com/pricing
 - Page: https://freetokens.custats.info/offers/runway-free-plan.html
 - Summary: Runway grants every new account 125 one-time credits for AI video and image generation (Gen-4 and friends). The credits do not renew; upgrade or wait for promotional refreshes for more.
@@ -269,8 +271,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Runway
 - Category: startup_program
 - Amount: Up to 500k free API credits + Tier 5 rate limits + Runway Characters API access + private Slack/training/support
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://runway.com/product/builders
 - Page: https://freetokens.custats.info/offers/runway-builders-program.html
 - Summary: Runway's startup program for Seed to Series C companies: up to 500k free API credits, Tier 5 (highest) API rate limits, access to the Runway Characters conversational avatar API, and a private builders community with Slack access, training and direct support.
@@ -279,8 +281,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Runware
 - Category: startup_program
 - Amount: Up to $30,000 in API credits for 12 months (image, video, audio, LLM, 3D, avatar models)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://runware.ai/grant-program
 - Page: https://freetokens.custats.info/offers/runware-grant-program.html
 - Summary: The Runware Grant Program awards up to $30,000 in API credits usable over 12 months across Runware's production platform — image, video, image/video editing, audio, LLMs, 3D, and avatar models on one API. For early-stage teams (before Series A; bootstrapped welcome) with a real product or credible MVP, building or launching on Runware within six months, reachable at a business email. Applications are reviewed on a rolling basis within two weeks; no equity taken.
@@ -289,8 +291,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: RunPod
 - Category: startup_program
 - Amount: $1,000 free credits across Pods, Serverless, Clusters, Endpoints, and Storage (Growth tier is $25K bonus only with a $50K commit — not free)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.runpod.io/startup-program
 - Page: https://freetokens.custats.info/offers/runpod-startup-starter-tier.html
 - Summary: RunPod's Startup Program Starter Tier gives accepted earlier-stage startups $1,000 in credits usable across Pods, Serverless, Clusters, Public Endpoints, and Storage, with self-serve onboarding. The program is selective; venture backing is strongly preferred; it is primarily for new customers. The separate Growth Tier is not a free grant: you deposit $50,000 and receive $25,000 in bonus credits.
@@ -299,8 +301,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Rime
 - Category: startup_program
 - Amount: $5,000 TTS API credits over the first year plus priority support and early feature access (YC W24+ only)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.rime.ai/resources/announcing-our-5k-credits-program-for-yc-startups
 - Page: https://freetokens.custats.info/offers/rime-5k-tts-credits-for-yc.html
 - Summary: Rime's YC credits program grants eligible Y Combinator startups $5,000 in TTS API credits over the first year, plus priority support and early access to new features. Open to YC batches W24 onwards that are actively using or planning to integrate text-to-speech. Apply via the form on the announcement page; credits are added after approval. Posted 2025-03-06; the page is still live with no published program end date. Distinct from Rime's broader (less documented) startup grants outreach.
@@ -309,8 +311,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Resemble AI
 - Category: startup_program
 - Amount: Up to $30,000 in credits ($500–$30K by use case) for voice generation and deepfake detection APIs; credits expire ≤12 months from approval
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.resemble.ai/start/builders-grant-startup-program
 - Page: https://freetokens.custats.info/offers/resemble-builders-grant.html
 - Summary: Resemble AI's Builder's Grant awards $500–$30,000 in credits (most grants sized to a production proof-of-concept) usable across both voice generation and deepfake detection APIs, for up to 12 months. Open to teams under 50 employees or companies building a voice-enabled product; free-tier users eligible, existing paid customers excluded. One application per company; recipients agree to 12 months of marketing collaboration.
@@ -319,8 +321,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Requesty
 - Category: startup_program
 - Amount: $1,000 in AI credits across 600+ models + 6 months with no gateway fee (then 5% on model cost, or 0% with own keys); VC/accelerator-backed (YC, 20VC, Tapestry, TinyVC, or comparable)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.requesty.ai/startup
 - Page: https://freetokens.custats.info/offers/requesty-startup-program-1000-credits.html
 - Summary: Requesty grants approved early-stage startups $1,000 in credits spendable on any of 600+ models across 30+ providers, plus six months with no gateway fee (pay model cost only). After those six months the markup is 5% on model cost, or 0% with your own keys. Eligibility is VC or accelerator backing: YC, 20VC, Tapestry, TinyVC, or a comparable fund. Apply with a work email; Requesty says review is within 48 hours and credits are applied to the organization.
@@ -329,8 +331,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Requesty
 - Category: api_provider
 - Amount: Free Nemotron/Laguna/Gemma/Leanstral models; 200 req/day + 20 RPM for new orgs (1,000/day + 60 RPM if paying); no credit card
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.requesty.ai/pricing
 - Page: https://freetokens.custats.info/offers/requesty-free-models.html
 - Summary: Requesty's Free tier gives access to listed models at $0 through the same OpenAI-compatible gateway (NVIDIA Nemotron 3 Ultra/Super/Nano, Poolside Laguna, Google Gemma 4, Mistral Leanstral, and a Nemotron content-safety model). New organizations get 200 requests per day and 20 RPM across all free models combined; paying organizations get 1,000/day and 60 RPM. No credit card. Docs say these models are free for now and any pricing change will be announced in the changelog.
@@ -339,8 +341,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Replicate
 - Category: api_provider
 - Amount: limited free runs of featured models (image, video, upscaling) — no credit purchase needed until the free limit is hit
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://replicate.com/collections/try-for-free
 - Page: https://freetokens.custats.info/offers/replicate-try-for-free.html
 - Summary: Replicate's official 'Try for Free' collection page is live and states you can run the listed models without purchasing credit once you have a Replicate account. The FAQ clarifies the free usage is a limited number of runs per model; once the limit is hit, billing/credit purchase is required to continue. No fixed end date is published, so the offer appears ongoing. Terms match the offer claim exactly.
@@ -349,8 +351,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Regolo.ai
 - Category: startup_program
 - Amount: 60 days free unlimited tokens (up to 50M tokens/day) on 100+ OSS models; active teams can later apply for up to €2,000 voucher (≤12 months)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://regolo.ai/builder-program/
 - Page: https://freetokens.custats.info/offers/regolo-builder-program.html
 - Summary: Regolo's startup partnership: 60 days of free unlimited tokens (up to 50M tokens/day) across 100+ open-source models on EU-hosted, zero-data-retention, OpenAI-compatible infrastructure. No credit card for the free period; applications reviewed within ~48 hours. In return, accepted startups do light co-marketing (logo, content, mentions). Active teams can later apply for a voucher up to €2,000 valid up to 12 months.
@@ -359,8 +361,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: PyAI
 - Category: startup_program
 - Amount: $20K–$100K in voice AI credits over 12 months (Launch $20K / Growth $50K / Scale $100K) plus managed phone minutes
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://pyai.com/startups
 - Page: https://freetokens.custats.info/offers/pyai-for-startups.html
 - Summary: PyAI for Startups puts a $10M pool behind 200+ voice-product startups. Three tiers: Launch $20,000 (400k Omni + 25k phone minutes), Growth $50,000 (1M Omni + 50k phone minutes), Scale $100,000 (2M Omni + 100k phone minutes). Credits cover the whole PyAI rate card and release in 12 monthly parts over a one-year term; unused credit rolls forward inside the term. Eligibility: building a voice product live or launching within six months, working website, under $10M raised, incorporated fewer than seven years ago, not a current PyAI customer on an annual contract. No card required.
@@ -369,8 +371,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Pinecone
 - Category: api_provider
 - Amount: $300 in credits over 21 days on Standard plan features; one trial per organization
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.pinecone.io/guides/organizations/manage-billing/standard-trial
 - Page: https://freetokens.custats.info/offers/pinecone-standard-trial.html
 - Summary: Self-serve Pinecone Standard plan trial: $300 in credits over 21 days with access to Standard features (bulk import, backup/restore, RBAC, higher scale limits) — no up-front payment required. One trial per organization; orgs already on Standard/Enterprise or marketplace-subscribed cannot activate it.
@@ -379,8 +381,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Pinecone
 - Category: startup_program
 - Amount: Free Standard Tier + Pro Support (any cloud/region, RBAC, backups, import, Prometheus metrics, dedicated Slack) + usage credits and discounts
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.pinecone.io/startup-program/
 - Page: https://freetokens.custats.info/offers/pinecone-for-startups.html
 - Summary: Pinecone for Startups gives free access to the Standard Tier and Pro Support — any cloud/region deployment, RBAC, backups, bulk import, Prometheus metrics, a dedicated Slack channel — plus usage credits and discounts. Eligibility: fewer than 100 employees, Series A or earlier.
@@ -389,8 +391,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Pika
 - Category: video
 - Amount: Free plan $0 — 0 monthly credits (credit packs only); all models, 2 parallel video + 2 image/audio generations, no watermark
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://pika.art/pricing
 - Page: https://freetokens.custats.info/offers/pika-free-plan.html
 - Summary: Pika's free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and credits refresh monthly.
@@ -399,8 +401,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OVHcloud
 - Category: startup_program
 - Amount: Start tier: €10,000 free cloud credits over 12 months + 6h engineer time; Scale tier: up to €100,000 + 20h engineer time
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://startup.ovhcloud.com/en/
 - Page: https://freetokens.custats.info/offers/ovhcloud-startup-program.html
 - Summary: OVHcloud Startup Program: the 12-month Start level gives €10,000 of free cloud credits + 6 hours of 1-on-1 engineer time + visibility; the 12-month Scale level gives up to €100,000 of free cloud credits + up to 20 hours of engineer time. For early-stage startups and scaleups by application.
@@ -409,8 +411,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OrcaRouter
 - Category: api_provider
 - Amount: Rotating $0 models for established accounts (an established GitHub account or a paid purchase); currently no voucher drops, with deposit-match campaigns shown separately
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://www.orcarouter.ai/offers
 - Page: https://freetokens.custats.info/offers/orcarouter-free-credits.html
 - Summary: OrcaRouter's offers page lets you claim live voucher, student, and hackathon API credits (dollar amounts, scope, and expiry are printed on each card at claim time) and call a rotating set of $0 models. Create an account and claim an open offer with no payment method; a few partner offers are labelled card-required. Always-free $0 models are for established accounts (GitHub with some history, or any paid purchase). Promo credit expiry is shown before confirm; $0 models stay free while they remain in the lineup. Docs currently list DeepSeek V4 -free ids and the orcarouter/free router.
@@ -419,8 +421,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free stealth/space-bunny-alpha inference at $0 input and output — 1M context, multimodal, tools, adjustable reasoning (free-model rate limits)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/stealth/space-bunny-alpha
 - Page: https://freetokens.custats.info/offers/openrouter-space-bunny-alpha-free.html
 - Summary: stealth/space-bunny-alpha is a free stealth model on OpenRouter: $0 prompt and completion pricing, 1M-token context, multimodal input, tool calling and adjustable reasoning, subject to free-model rate limits. (Separate from the identically-named Space Bunny Free listing on OpenCode Zen, which expired 2026-09-30.)
@@ -429,8 +431,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free respan/span-01-lite:free behavior-scoring endpoint at $0 via OpenRouter Decisions API (rate-limited)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/respan/span-01-lite:free
 - Page: https://freetokens.custats.info/offers/openrouter-respan-span-01-lite-free.html
 - Summary: Respan's Span-01 Lite is a behavior-scoring model released 2026-09-26: for each plain-language behavior you define it returns the probability the behavior is present in a conversation span, suited to high-volume evaluation and monitoring. The respan/span-01-lite:free endpoint is $0 and rate-limited. It runs on the OpenRouter Decisions API (typed questions over a state — noul, choice, score), not the chat-completions endpoint, so chat SDKs will not work with it.
@@ -439,8 +441,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/qwen/qwen3.8-27b:free
 - Page: https://freetokens.custats.info/offers/openrouter-qwen3-8-27b-free.html
 - Summary: Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context).
@@ -449,8 +451,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free cohere/north-mini-code:free endpoint at $0 (256K context, 30B-A3B agentic coding MoE)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/cohere/north-mini-code:free
 - Page: https://freetokens.custats.info/offers/openrouter-north-mini-code-free.html
 - Summary: North Mini Code is Cohere's first agentic coding model and the debut of its North family — a sparse MoE with 30B total / 3B active parameters — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 256K context. Created 2026-06-17; no published end date.
@@ -459,8 +461,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free nvidia/nemotron-3-ultra-550b-a55b:free endpoint at $0 (1M context, 550B-A55B hybrid MoE)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b:free
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-ultra-free.html
 - Summary: Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA — 55B active of 550B total on a hybrid Transformer-Mamba MoE, with a 1M-token context. Served free via OpenRouter's :free endpoint at bash prompt / bash completion. Created 2026-06-04; no published end date.
@@ -469,8 +471,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free nvidia/nemotron-3-super-120b-a12b:free endpoint at $0 (262K context, 120B-A12B hybrid MoE)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-super-free.html
 - Summary: Nemotron 3 Super is a 120B-parameter open hybrid MoE (12B active, Mamba-Transformer) for multi-agent applications — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-03-11; no published end date.
@@ -479,8 +481,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free endpoint at $0 (256K context, omni multimodal input, text output)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-nano-omni-free.html
 - Summary: NVIDIA Nemotron 3 Nano Omni is a 30B-A3B open multimodal reasoning model — a perception and context sub-agent accepting text, image, video, and audio input with text output over a 256K context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Listed since 2026-04-28; no published end date.
@@ -489,8 +491,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free nvidia/nemotron-3.5-lightning:free endpoint at $0 (1M context, 30B-A3B MoE)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/nvidia/nemotron-3.5-lightning:free
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-lightning-free.html
 - Summary: Nemotron 3.5 Lightning is an open MoE from NVIDIA with 3B active of 30B total parameters for high-throughput agentic workloads — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 1M context. Created 2026-08-11; no published end date.
@@ -499,8 +501,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free nvidia/nemotron-3.5-content-safety:free endpoint at $0 (128K context guardrail model)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/nvidia/nemotron-3.5-content-safety:free
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-content-safety-free.html
 - Summary: NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model (fine-tuned from Gemma-3-4B) that moderates inputs to and responses from LLMs and VLMs, accepting text and image input with a 128K context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Listed since 2026-06-04; no published end date.
@@ -509,8 +511,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: image
 - Amount: Free inclusionai/ming-image-0.1-design-layer image-to-image design layer decomposition at $0 (PNG/WebP output)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/inclusionai/ming-image-0.1-design-layer
 - Page: https://freetokens.custats.info/offers/openrouter-ming-image-0-1-design-layer-free.html
 - Summary: inclusionai/ming-image-0.1-design-layer is a free image-to-image model on OpenRouter (served by NovitaAI): decomposes a flattened design image into separate RGBA layers. $0 input/output image-token pricing, PNG/WebP output, up to 1 input reference image per call.
@@ -519,8 +521,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free inclusionai/ling-3.0-flash-sante:free endpoint at $0 (262K context, healthcare MoE)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/inclusionai/ling-3.0-flash-sante:free
 - Page: https://freetokens.custats.info/offers/openrouter-ling-3-0-flash-sante-free.html
 - Summary: InclusionAI's healthcare-focused Ling 3.0 Flash Sante is free via OpenRouter's :free endpoint (inclusionai/ling-3.0-flash-sante:free), served by Novita at $0 prompt / $0 completion with a 262K context window. Released 2026-09-04; no published end date.
@@ -529,8 +531,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/liquid/lfm-2.5-2.6b:free
 - Page: https://freetokens.custats.info/offers/openrouter-lfm-2-5-2-6b-free.html
 - Summary: Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context).
@@ -539,8 +541,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: coding
 - Amount: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/poolside/laguna-xs-2.1:free
 - Page: https://freetokens.custats.info/offers/openrouter-laguna-xs-2-1-free.html
 - Summary: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context).
@@ -549,8 +551,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free poolside/laguna-s-2.1:free endpoint at $0 (262K context, 118B-A8B coding agent)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/poolside/laguna-s-2.1:free
 - Page: https://freetokens.custats.info/offers/openrouter-laguna-s-2-1-free.html
 - Summary: Laguna S 2.1 is Poolside's latest coding agent model — 118B total, 8B active, 70.2% Terminal-Bench 2.1 — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-07-21; no published end date.
@@ -559,8 +561,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free google/gemma-4-31b-it:free inference at $0 input and output (262K context)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/google/gemma-4-31b-it:free
 - Page: https://freetokens.custats.info/offers/openrouter-gemma-4-31b-free.html
 - Summary: Free google/gemma-4-31b-it:free inference at $0 input and output (262K context).
@@ -569,8 +571,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free google/gemma-4-26b-a4b-it:free inference at $0 input and output (262K context)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/google/gemma-4-26b-a4b-it:free
 - Page: https://freetokens.custats.info/offers/openrouter-gemma-4-26b-a4b-free.html
 - Summary: Free google/gemma-4-26b-a4b-it:free inference at $0 input and output (262K context).
@@ -579,8 +581,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free openrouter/free auto-router to $0 models ($0 prompt/completion)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://openrouter.ai/openrouter/free
 - Page: https://freetokens.custats.info/offers/openrouter-free-router.html
 - Summary: OpenRouter's openrouter/free router automatically selects a $0 free model matching request features (tools/vision/structured outputs); $0 prompt and completion.
@@ -589,8 +591,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free :free model variants — 50 requests/day at 20 req/min (1,000/day after approximately $9 in purchased credits all-time, per the current threshold qualification)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://openrouter.ai/docs/api-reference/limits
 - Page: https://freetokens.custats.info/offers/openrouter-free-models.html
 - Summary: OpenRouter routes many popular models with ':free' variants that cost nothing: 50 requests per day at up to 20 requests per minute on accounts holding under $10 in credits, rising to 1,000 requests per day once you have bought at least $10 of credits. One API key reaches dozens of free model endpoints.
@@ -599,8 +601,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: startup_program
 - Amount: Up to $5,000 promotional inference credits (most expire 6 months after issuance) plus 0% processing fees for 12 months if approved; amount/duration at OpenRouter discretion
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/startup-program
 - Page: https://freetokens.custats.info/offers/openrouter-for-startups.html
 - Summary: OpenRouter for Startups grants approved pre-Series B AI-native startups up to $5,000 in universal inference credits across 500+ models, plus waived processing fees (platform and BYOK) for 12 months. Marketing and FAQ state those figures; program terms say amounts and duration are at OpenRouter's discretion, with a ceiling of $5,000 and/or fee waivers up to 12 months. Most credits expire 6 months after issuance. Applications require an approved-partner referral, a public company website, a professional company-domain email, a valid OpenRouter account with under $500 lifetime spend, and no prior startup-program credits.
@@ -609,8 +611,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free dots-studio/dots-3-note-preview:free at $0 input/output (512K context, multimodal, tools)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/dots-studio/dots-3-note-preview:free
 - Page: https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html
 - Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Listed in the Models API since 2026-08-14 with no published end date. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
@@ -619,8 +621,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenCode
 - Category: coding
 - Amount: Free MiMo V2.6 Flash model access on OpenCode Zen (limited time)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://x.com/opencode/status/2102145730999730611
 - Page: https://freetokens.custats.info/offers/opencode-mimo-v2-6-flash-free.html
 - Summary: MiMo V2.6 Flash is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-09-21 as "free for the next week" (through ~2026-09-28); as of 2026-09-28 the Zen docs pricing table still lists mimo-v2.6-flash-free at Free/Free/Free with no new end date, so the free window is continuing past the announced date. During the free period collected data may be used to improve the model.
@@ -629,8 +631,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenAI
 - Category: coding
 - Amount: Limited free Codex access on the ChatGPT Free plan, incl. GPT-6 Luna in the desktop app (subject to rollout; no credit card)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://learn.chatgpt.com/docs/pricing
 - Page: https://freetokens.custats.info/offers/openai-codex-free-tier.html
 - Summary: Every ChatGPT Free account ($0, no credit card) includes limited access to Codex, OpenAI's coding agent, across its clients (desktop app Codex mode, CLI, IDE extension, web). The free tier runs GPT-5.6 Luna (OpenAI's cheapest model) and gives limited access to GPT-5.6 Terra in Work and Codex on desktop; the flagship GPT-5.6 Sol is not available on Free. OpenAI does not publish numeric free quotas - usage draws from a shared allowance with rolling reset windows, visible in the usage dashboard. Note 'Luna Max' is not a separate model: it means GPT-5.6 Luna running at the 'max' reasoning-effort setting, which ships disabled by default in Codex settings.
@@ -639,8 +641,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Ollama
 - Category: api_provider
 - Amount: Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://ollama.com/pricing
 - Page: https://freetokens.custats.info/offers/ollama-cloud-free-tier.html
 - Summary: Ollama's $0 Free plan includes access to cloud models. Cloud usage is light on Free, with session limits resetting every 5 hours and weekly limits resetting every 7 days.
@@ -649,8 +651,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Ocean Network
 - Category: api_provider
 - Amount: 6 complimentary hours of H200 inference (launch promo; OpenAI-compatible endpoints, curated models, templates)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://oncompute.ai/blog/ocean-network-inference-is-on-your-first-6-hours-are-on-us
 - Page: https://freetokens.custats.info/offers/ocean-network-inference-6-free-h200-hours.html
 - Summary: Ocean Network (oncompute.ai) launched its Inference product on September 10, 2026 and is giving away 6 hours of H200 inference in complimentary tokens to mark the launch. Inference runs OpenAI-compatible models from Hugging Face Hub on dedicated node-operator GPUs with per-hour pricing shown before launch (H200 listed at $2.16/hr). Requires a funded wallet on Base — either an external wallet or the built-in Smart Wallet with email/social login and fiat on-ramp.
@@ -659,8 +661,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: NVIDIA
 - Category: api_provider
 - Amount: $0 hosted trial for prototyping with NVIDIA NIM, rate-limited
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://developer.nvidia.com/nim
 - Page: https://freetokens.custats.info/offers/nvidia-nim-free-trial.html
 - Summary: NVIDIA NIM Developer Program offers a $0 hosted trial for prototyping, including coding models, rate-limited. No credit card required.
@@ -669,8 +671,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: NVIDIA
 - Category: startup_program
 - Amount: Free program with cloud credits from NVIDIA and partners, free technical training, SDKs and model libraries, preferred hardware pricing, and investor exposure via Capital Connect; amounts at NVIDIA discretion, rolling applications with no fees or deadlines
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.nvidia.com/en-us/startups/
 - Page: https://freetokens.custats.info/offers/nvidia-inception-startup-program.html
 - Summary: NVIDIA Inception is a free, rolling startup program (verified Sep 13, 2026): free cloud credits from NVIDIA and partners, free technical courses and workshops, latest SDKs and model libraries, preferred pricing on NVIDIA hardware/software, investor exposure via Capital Connect, and go-to-market support. No application fees, deadlines, or cohorts; applications are reviewed by NVIDIA. Distinct from the NVIDIA NIM free trial and Inception Labs listings.
@@ -679,8 +681,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Novita AI
 - Category: api_provider
 - Amount: $100 promotional credits for eligible Agent Sandbox usage (CPU/RAM/storage) after account setup survey; 20 GB ephemeral + 60 GB persistent storage free-tier quotas also apply
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://novita.ai/docs/guides/sandbox-pricing
 - Page: https://freetokens.custats.info/offers/novita-sandbox-100-credits.html
 - Summary: New Novita AI users can complete a quick account setup survey and receive $100 in promotional credits for eligible Novita Sandbox (Agent Sandbox) usage. No credit card is required. Credits apply first to CPU, RAM, and billable storage. The same pricing page also grants 20 GB of ephemeral storage per running sandbox and 60 GB of free persistent storage per account. Credits may be subject to availability, validity period, usage scope, and quota limits; check balance on the Payments page. After credits are used up or expired, usage is pay-as-you-go.
@@ -689,8 +691,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Novita AI
 - Category: api_provider
 - Amount: Ling 3.0 Flash Sante at $0 input / $0 output per M tokens (256K context)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-sante
 - Page: https://freetokens.custats.info/offers/novita-ling-3-0-flash-sante-free.html
 - Summary: InclusionAI's Ling 3.0 Flash Sante (healthcare/medicine MoE, 124B total / ~5.1B active parameters) is listed on Novita AI's serverless API at $0/M input and $0/M output tokens, with 256K context and 32K max output. No published end date for the $0 pricing.
@@ -699,8 +701,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Novita
 - Category: startup_program
 - Amount: Up to $10,000 in usage credits — $1K upfront, then 1:1 / 2:1 spend match (up to $5K Model APIs + $5K Agent Sandbox, 1 year)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://startups.novita.ai/
 - Page: https://freetokens.custats.info/offers/novita-ai-for-startups.html
 - Summary: Novita AI for Startups offers up to $10,000 in usage credits across Novita's Model APIs (LLM, image, video, voice) and Agent Sandbox: $1,000 upfront, the next $5,000 matched 1:1 (every dollar spent earns a dollar of credit), and the final $4,000 matched 2:1 (every two dollars spent earns one). Credits are redeemable for one year and split up to $5K Agent Sandbox + $5K Model API. Eligibility: venture-backed and Series B or earlier, AI-native product, new Novita user. Applications are reviewed on stage, team, spend, backing, traction, and expected usage.
@@ -709,8 +711,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Notion
 - Category: student
 - Amount: Free Education Plan for students/teachers via school email: unlimited pages & blocks, file uploads, 30-day version history
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.notion.com/help/notion-for-education
 - Page: https://freetokens.custats.info/offers/notion-education-plus.html
 - Summary: Notion gives verified college/university students a free Education Plus plan (same as paid Plus: unlimited blocks and file uploads, 30-day version history, up to 10 guests) while enrolled via a school email recognised in the WHED. Stays active as long as the school email remains valid.
@@ -719,8 +721,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: NeuralSpeak
 - Category: api_provider
 - Amount: Free plan: 500 NST/month (~40 min voice or ~1K texts), 1 service, 2 API keys
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://neuralspeak.ai/
 - Page: https://freetokens.custats.info/offers/neuralspeak-free-plan.html
 - Summary: NeuralSpeak's Free plan is $0/month with 500 NST (NeuralSpeak Tokens) included — roughly 40 minutes of voice or about 1,000 text exchanges — plus 1 service and 2 API keys, with STT/LLM/TTS orchestration, RAG, structured outputs, and analytics. No credit card required.
@@ -729,8 +731,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Nebius Token Factory
 - Category: api_provider
 - Amount: $1 credit for 30 days (bank card required to onboard)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.tokenfactory.nebius.com/other-capabilities/billing-new
 - Page: https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html
 - Summary: Nebius Token Factory's official billing documentation states that every new account automatically receives $1 in trial credit upon first sign-up, valid for 30 days. Onboarding requires creating a billing account with a bank card — the docs explicitly say billing setup is mandatory and cannot be skipped, matching the claimed card-required onboarding. The credit is an ongoing signup bonus with no fixed end date, so the offer is treated as ongoing. Terms on the live page match the claimed offer exactly.
@@ -739,8 +741,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Nebius
 - Category: startup_program
 - Amount: $25 Nebius Token Factory + $25 Tavily promo credits after registration and email verification (expire 90 days after issuance); marketing cites $400+ total in partner credits/discounts
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://nebius.com/builders-terms-and-conditions
 - Page: https://freetokens.custats.info/offers/nebius-ai-builder-program.html
 - Summary: The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.
@@ -749,8 +751,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Murf AI
 - Category: startup_program
 - Amount: $1,500 free TTS/voice API credits for 3 months (one-time; overage $0.03/1K characters)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://murf.ai/startup-program
 - Page: https://freetokens.custats.info/offers/murf-startup-incubator-program.html
 - Summary: Murf's Startup Incubator Program gives early-stage startups $1,500 in free Murf API (TTS/voice) credits for a 3-month period, one-time only. Overage beyond the credits is charged at $0.03 per 1,000 characters. Eligibility: under 10 years since incorporation, fewer than 100 employees, a fully functioning company website, and a valid use case for the Murf API. Decisions come within 1–2 days; the application is a HubSpot form.
@@ -759,8 +761,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: ModelBridge
 - Category: api_provider
 - Amount: 500K tokens/month free + 500K welcome bonus; OpenAI-compatible API gateway for Chinese LLMs (DeepSeek, Qwen, GLM, Kimi)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://aibridge-api.com/pricing.html
 - Page: https://freetokens.custats.info/offers/modelbridge-free-tier.html
 - Summary: ModelBridge (aibridge-api.com) free tier: 500,000 tokens per month at $0 plus a one-time 500K welcome bonus, all models included. OpenAI-compatible gateway focused on Chinese LLMs (DeepSeek, Qwen, GLM, Kimi/Moonshot) on Hong Kong nodes.
@@ -769,8 +771,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Modal
 - Category: api_provider
 - Amount: $30/month in compute credits
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://modal.com/pricing
 - Page: https://freetokens.custats.info/offers/modal-starter-30-month-free-compute.html
 - Summary: Modal's Starter plan costs $0/month plus metered compute and includes $30/month in free credits, with up to 3 workspace seats, 100 containers, and 10 GPU concurrency. The credit recurs monthly as included compute rather than a one-time grant, and no expiry date or fixed end for the offer is stated on the pricing page. Claiming requires creating a Modal account via the Get Started flow. The docs billing guide corroborates that credits are deducted from monthly usage charges.
@@ -779,8 +781,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Mixedbread
 - Category: api_provider
 - Amount: $5 one-time credits (100 req/min, no card required)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.mixedbread.com/pricing
 - Page: https://freetokens.custats.info/offers/mixedbread-starter.html
 - Summary: Mixedbread's Starter plan is free and includes $5 in one-time credits — no card required — with 3 workspace users, 10 stores, and 100 requests/minute across its knowledge stack (Toast 1 agent, indexing, semantic/grep search, storage). Every plan bills at the same usage rates. Separately, Mixedbread for startups offers $250 in one-time credits to qualified startups (existing paying users or companies that raised up to $20M from institutional VCs).
@@ -789,8 +791,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Microsoft
 - Category: startup_program
 - Amount: Up to $150,000 in Azure credits usable across eligible Azure services incl. Azure AI / OpenAI services, plus free dev tools
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.microsoft.com/en-us/startups
 - Page: https://freetokens.custats.info/offers/microsoft-for-startups.html
 - Summary: Microsoft for Startups offers up to $150,000 in Azure credits usable across eligible Azure services including Azure AI and Azure OpenAI services, plus free access to dev tools, expert guidance and go-to-market support through Microsoft's customer network.
@@ -799,8 +801,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Meshy
 - Category: image
 - Amount: 100 free credits/month (reset on the 1st at 00:00 UTC), 3D generation; outputs under CC BY 4.0
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.meshy.ai/pricing
 - Page: https://freetokens.custats.info/offers/meshy-free-plan.html
 - Summary: Meshy's Free plan grants 100 credits every month for its 3D-generation tools (text-to-3D, image-to-3D, AI texturing), resetting at 00:00 UTC on the first of each month. No credit card required; free-plan outputs are licensed under CC BY 4.0.
@@ -809,8 +811,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Merge
 - Category: api_provider
 - Amount: $10 in free LLM credits every month (Pro plan)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://www.merge.dev/pricing/gateway
 - Page: https://freetokens.custats.info/offers/merge-gateway-10-monthly-credits.html
 - Summary: Merge Gateway routes every major LLM through one API with built-in routing, spend caps, and security. The Pro plan grants $10 in complimentary LLM credits every month (issued on the 1st of each month), with unused credits expiring at month end. A credit card is required.
@@ -819,8 +821,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: LLM7.io
 - Category: api_provider
 - Amount: Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup none)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=none
 - Source: https://docs.llm7.io/limits
 - Page: https://freetokens.custats.info/offers/llm7-free-tier.html
 - Summary: LLM7 provides anonymous text generation with limits of 1 request per second, 10 per minute, 60 per hour, and 500,000 tokens per 24 hours. A free token raises the request and token limits.
@@ -829,8 +831,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: LlamaIndex
 - Category: startup_program
 - Amount: $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.llamaindex.ai/startups
 - Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
 - Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
@@ -839,8 +841,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: LiveKit
 - Category: startup_program
 - Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://livekit.com/startups
 - Page: https://freetokens.custats.info/offers/livekit-startup-program.html
 - Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll.
@@ -849,8 +851,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: InclusionAI
 - Category: api_provider
 - Amount: Ling 3.0 Flash Fin at $0 via OpenRouter, 256K context, finance-tuned function-calling
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/inclusionai/ling-3.0-flash-fin:free
 - Page: https://freetokens.custats.info/offers/ling-3-0-flash-fin-free.html
 - Summary: InclusionAI's Ling 3.0 Flash Fin is available at $0 via OpenRouter (model id inclusionai/ling-3.0-flash-fin:free), a finance-tuned function-calling MoE with a 262K context window. An earlier curator flag carried a 25 Sep 2026 end date from Vercel's changelog; that date applied to Vercel AI Gateway, not OpenRouter — the :free endpoint is still listed at $0 with no published end date as of 2026-09-28.
@@ -859,8 +861,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Liner
 - Category: startup_program
 - Amount: Up to $1,000 in Liner Search/Search Agent API credits; no equity
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://build.liner.com/blog/liner-startup-grant-program
 - Page: https://freetokens.custats.info/offers/liner-startup-grant.html
 - Summary: The Liner Startup Grant Program gives eligible early-stage startups up to $1,000 in Liner API credits, including Search API and Search Agent API, with no equity taken and nothing to repay. The application asks for company email, company name, company website, and which product you will build on; Liner confirms by email. Current eligibility terms are listed on the application itself. The 2026-07-30 blog (last updated 2026-07-28) is the official program write-up.
@@ -869,8 +871,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Lemonfox.ai
 - Category: voice
 - Amount: 1 month free trial — 10M credits (30 hours speech-to-text or 2M TTS chars)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://www.lemonfox.ai/
 - Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
 - Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
@@ -879,8 +881,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Lambda
 - Category: api_provider
 - Amount: Up to $5,000 Lambda Cloud GPU (on-demand Instance) credits; research-and-mentorship framing on the grant hub
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://lambda.ai/research
 - Page: https://freetokens.custats.info/offers/lambda-research-grant.html
 - Summary: Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement.
@@ -889,8 +891,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Kong
 - Category: startup_program
 - Amount: Up to $100K Kong Konnect Plus credits (12 months; typically $25K–$100K) plus 50% off list for 2 years after; spend across AI Gateway, API Gateway, Mesh, Event Gateway
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://konghq.com/solutions/startup-program
 - Page: https://freetokens.custats.info/offers/kong-for-startups.html
 - Summary: Kong for Startups gives selected early-stage AI/API teams up to $100,000 in Kong Konnect Plus credits, valid 12 months from the date they land in the Konnect org (unused credits do not roll over). Most early-stage startups receive between $25K and $100K upfront. Credits spend across AI Gateway, API Gateway, Metering and Billing, Mesh, and Event Gateway. After credits expire or for usage beyond the balance, accepted startups pay 50% of Konnect Plus list pricing for 24 months. Eligibility: typically pre-seed through Series A, under $10M total funding, in production or launching within 6 months. YC companies are pre-qualified for the full $100K plus the two-year discount. Kong reviews applications (typically within 5 business days); credits land within 24 hours of acceptance. Existing Kong customers who qualify can have their balance increased.
@@ -899,8 +901,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Kiro
 - Category: student
 - Amount: 1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over; content collection for service improvement and model training is enabled by default, with opt-out
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://kiro.dev/students/
 - Page: https://freetokens.custats.info/offers/kiro-students-1000-credits-month.html
 - Summary: Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. Amazon's September 2026 announcement expands the program to 132 universities across 18 countries (a 12x scale-up from the 11-university pilot). Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.
@@ -909,8 +911,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Kiro
 - Category: startup_program
 - Amount: Up to 1 year of Kiro Pro+ credits (Starter ≤2 users / Growth ≤10 / Scale ≤30); credits expire 1 year after issuance; AWS Activate credit holders not eligible
-- Status: active — expiry 2026-12-31
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: 2026-12-31
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://kiro.dev/startups/
 - Page: https://freetokens.custats.info/offers/kiro-startup-credits.html
 - Summary: Kiro for Startups gives early-stage to Series A VC-backed startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center.
@@ -919,8 +921,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Moonshot AI
 - Category: api_provider
 - Amount: RMB 15 API voucher on registration, valid 3 months
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.kimi.com/en/help/kimi-api/api-free-trial
 - Page: https://freetokens.custats.info/offers/kimi-api-free-trial.html
 - Summary: Kimi API grants newly registered users an RMB 15 voucher, valid for 3 months from issue and applied automatically to API usage before any top-up balance. Eligibility requires registering with a mainland China mobile number.
@@ -929,8 +931,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Kilo Code
 - Category: api_provider
 - Amount: Free :free models without an API key, limited to 200 requests/hour per IP
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup none)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=none
 - Source: https://kilo.ai/docs/gateway/authentication
 - Page: https://freetokens.custats.info/offers/kilo-code-free-models.html
 - Summary: Kilo's AI Gateway allows unauthenticated access to models tagged :free, with anonymous requests limited to 200 requests per hour per IP.
@@ -939,8 +941,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Jina AI
 - Category: api_provider
 - Amount: 10M free tokens with every new API key; official free-key limits: Reader API 500 RPM; Embedding/Reranker API 100 RPM & 100K TPM
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://jina.ai/en-US/reader/
 - Page: https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html
 - Summary: Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Free-tier rate limits are 500 RPM, 1M TPM, and 5 concurrent requests; once the token grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.
@@ -949,8 +951,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: JetBrains
 - Category: student
 - Amount: All JetBrains IDEs free while enrolled (annual renewal, ~$289/yr value; 40% graduation discount)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://www.jetbrains.com/academy/student-pack/
 - Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
 - Summary: JetBrains gives verified students free access to the entire All Products Pack (IntelliJ IDEA Ultimate, PyCharm Professional, WebStorm, CLion, Rider, PhpStorm, GoLand, DataGrip, etc.) while enrolled. Licenses renew annually with fresh proof and include a 40% graduation discount for two years after expiry.
@@ -959,8 +961,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Inworld AI
 - Category: voice
 - Amount: Free On-Demand plan with up to 70 min TTS (or 400 min STT) included
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://inworld.ai/pricing
 - Page: https://freetokens.custats.info/offers/inworld-on-demand-free.html
 - Summary: Inworld AI's free On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT), plus voice cloning, Realtime API access and 220+ LLM models via Router.
@@ -969,8 +971,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Thinking Machines
 - Category: coding
 - Amount: Inkling and Inkling Small at $0 via OpenRouter, 1M-token context
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/thinkingmachines/inkling-small:free
 - Page: https://freetokens.custats.info/offers/inkling-free-models.html
 - Summary: Thinking Machines offers both Inkling and Inkling Small as free models on OpenRouter at $0 prompt and completion, with a 1M-token context window. No hard end date is listed on the OpenRouter models page.
@@ -979,8 +981,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: InferAll
 - Category: api_provider
 - Amount: 25 free NVIDIA NIM calls on signup (no card); ongoing $0 in/out on 15+ NIM open models after one-time $5 activation, within daily caps
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://inferall.ai/pricing
 - Page: https://freetokens.custats.info/offers/inferall-free-nim-models.html
 - Summary: InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. A one-time $5 activation (which becomes spendable balance, not a fee) then unlocks ongoing $0 input/output access to 15+ NIM open-source models — Nemotron, GLM 5.3, Gemma 4 and more — within free-plan daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate requests per day.
@@ -989,8 +991,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Inception
 - Category: api_provider
 - Amount: 100 million API tokens (one-time credit, no payment details required)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.inceptionlabs.ai/blog/mercury-2-10x-free-tokens
 - Page: https://freetokens.custats.info/offers/inception-mercury-2-100m-free-tokens.html
 - Summary: New Inception accounts receive a one-time credit of 100 million API tokens shared across Mercury 2 and Mercury Edit 2, with no payment details required. Mercury 2 supports reasoning, tool calling and structured outputs through an OpenAI-compatible API.
@@ -999,8 +1001,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Ideogram
 - Category: image
 - Amount: Free plan ($0) with weekly slow credits for eligible accounts; amount may vary
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://ideogram.ai/pricing/
 - Page: https://freetokens.custats.info/offers/ideogram-free-plan.html
 - Summary: Ideogram's official pricing page confirms a Free plan at $0 whose credit row reads "Slow credits — Weekly for eligible accounts", while paid tiers get "Unlimited". The page FAQ states eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft, and that the amount may vary — no fixed credit number is published. Free-tier limits also include 1 running + queued generation, and AI-powered editing features are unavailable in the slow queue. No end date for the free plan is stated, so the offer is ongoing.
@@ -1009,8 +1011,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: IBM
 - Category: api_provider
 - Amount: Up to 300,000 foundation-model tokens/month + 20 CUH/month machine-learning tools + 100 text-extraction docs/month
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.ibm.com/products/watsonx-ai/pricing
 - Page: https://freetokens.custats.info/offers/ibm-watsonx-ai-free-tier.html
 - Summary: IBM watsonx.ai's Free Toolbox playground includes up to 300,000 foundation-model tokens per month, up to 20 Compute Usage Hours (CUH) per month of machine-learning tools, and up to 100 text-extraction documents per month.
@@ -1019,8 +1021,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Hume AI
 - Category: voice
 - Amount: $20 in credits for new accounts; Free plan ($0/mo) with 10k TTS chars (~10 min) + 5 EVI minutes/month
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://dev.hume.ai/docs/resources/billing
 - Page: https://freetokens.custats.info/offers/hume-free-tier-credits.html
 - Summary: Hume grants new accounts $20 in credits on the free tier; the $0/month Free plan covers TTS, EVI and Voice features with included usage.
@@ -1029,8 +1031,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Hugging Face
 - Category: api_provider
 - Amount: Free users get $0.10/mo Inference Providers credits (subject to change); PRO $2/mo
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://huggingface.co/docs/inference-providers/en/pricing
 - Page: https://freetokens.custats.info/offers/hugging-face-inference-credits.html
 - Summary: Every Hugging Face user receives monthly credits for Inference Providers. Free users get $0.10 per month (subject to change) for Inference Providers only; extra usage requires purchasing credits. PRO users get $2.00 per month in general-purpose compute credits (Inference Providers, Endpoints, Spaces hardware, Jobs). Credits apply when requests are routed by Hugging Face, not when using a custom provider key. This reactivates the previously archived hugging-face-inference-credits listing.
@@ -1039,8 +1041,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Hetzner
 - Category: api_provider
 - Amount: Free OpenAI-compatible inference while in experimental status (Qwen3.6-35B-A3B-FP8, Qwen3.8-27B); 4M input / 100k output tokens per 60s, 10 req/60s
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.hetzner.com/general/company-and-policy/experiments/inference/
 - Page: https://freetokens.custats.info/offers/hetzner-experiments-inference-api.html
 - Summary: Hetzner's experimental Inference API exposes open-weight LLMs through an OpenAI-compatible REST API (base URL https://inference.hetzner.com/api/v1 exposing /v1/models, /v1/completions and /v1/chat/completions) and is free of charge while in experimental status — performance and availability are not guaranteed and it is not intended for production. Current models: Qwen/Qwen3.6-35B-A3B-FP8 (MoE, 35B total / 3B active, vision) and Qwen3.8-27B (dense), both with 262,144-token context and text+image input. Rate limits per API key: 4M input and 100k output tokens per 60 seconds, plus 10 requests per 60 seconds; the /v1/models response is the definitive live model list.
@@ -1049,8 +1051,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Hapuppy
 - Category: api_provider
 - Amount: 200K one-time free credits on signup (basic models, 10 RPM); OpenAI-compatible gateway
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://hapuppy.com/en/terms
 - Page: https://freetokens.custats.info/offers/hapuppy-free-tier.html
 - Summary: Hapuppy's free tier grants a one-time 200K-credit signup bonus for its OpenAI-compatible API gateway (Claude, GPT, Gemini, Grok, DeepSeek and others — 105+ models total). The free tier is limited to basic models at 10 RPM and the grant never resets or refills. One-time credit packs ($9.99+) unlock all models at 100 RPM and never expire.
@@ -1059,8 +1061,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Hakim AI
 - Category: startup_program
 - Amount: $6,000 in Hakim credits (~6 months Business at $999/mo) + early unreleased TTS/STT/voice-clone model access + weekly eng office hours + Slack
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://tryhakim.ai/en/startups
 - Page: https://freetokens.custats.info/offers/hakim-ai-mena-startup-program.html
 - Summary: Hakim's MENA startup program gives selected founders $6,000 in Hakim credits (equivalent to 6 months on the Business plan at $999/mo), early access to unreleased TTS/STT/voice-clone models, weekly technical office hours, and a direct Slack line to the engineering team. Eligibility is a MENA-based founding team, pre-seed to Series A (founded within 5 years, under $2M ARR if bootstrapped), under $10M raised. Decision within 5 working days, then a kickoff call and workspace enablement. Review exists for MENA founders; no card stated.
@@ -1069,8 +1071,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Hailuo AI
 - Category: video
 - Amount: One-time welcome credit package (expires 3 days after grant) + limited free generation (watermarked)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://hailuoai.video/doc/payment-policy.html
 - Page: https://freetokens.custats.info/offers/hailuo-free-tier.html
 - Summary: New Hailuo AI Video accounts receive a one-time welcome package of credits plus limited free video generation. Free-tier outputs are watermarked, and paid plans remove the limits.
@@ -1079,8 +1081,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Gradium
 - Category: startup_program
 - Amount: 54M credits worth over $2,000 through 6 months of the M plan
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://gradium.ai/startups
 - Page: https://freetokens.custats.info/offers/gradium-for-startups.html
 - Summary: 54M credits worth over $2,000 through 6 months of the M plan.
@@ -1089,8 +1091,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Google
 - Category: student
 - Amount: 1 year of Google AI Pro (US) or Google AI Plus (140+ countries) free
-- Status: active — expiry 2026-12-31
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: 2026-12-31
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://x.com/GeminiApp/status/2090165248196252003
 - Page: https://freetokens.custats.info/offers/google-gemini-student-free-year.html
 - Summary: Google offers eligible college students 1 year of Gemini subscription free. US students get Google AI Pro; students in 140+ countries get Google AI Plus. This is a back-to-school promotion announced by the official Gemini App account.
@@ -1099,8 +1101,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Google Gemini
 - Category: api_provider
 - Amount: Free input and output tokens on supported Gemini API models (quotas vary by model)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://ai.google.dev/gemini-api/docs/pricing
 - Page: https://freetokens.custats.info/offers/google-gemini-free-api-tier.html
 - Summary: Google's Gemini Developer API pricing page lists a Free Tier with free input and output tokens for supported models; quotas and model availability vary.
@@ -1109,8 +1111,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Google Cloud
 - Category: startup_program
 - Amount: Up to $350K Google Cloud credits over 2 years for AI-first VC-funded startups (selection-based; Pre-Seed/Seed/Series A rules; distinct from the $300 free trial)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://cloud.google.com/startup/ai
 - Page: https://freetokens.custats.info/offers/google-cloud-ai-startup-program.html
 - Summary: Google Cloud's AI startup program grants up to $350,000 in Google Cloud credits over two years for eligible AI-first, VC-funded startups (Grow/Scale tier). Year 1 is 100% up to $100,000 generally, or 100% up to $250,000 for AI-first startups; Year 2 is 20% up to an additional $100,000. Credits cover Google models such as Gemini and Gemma; third-party models are billed directly and are not covered. Eligibility is selection-based: Pre-Seed/Seed within the last five years or Series A within the last 12 months, founded within five years, not yet received more than $5,000 in Google Cloud credits, and at Google Cloud's discretion. This is distinct from the $300 Free Trial listing.
@@ -1119,8 +1121,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Google Cloud
 - Category: api_provider
 - Amount: $300 in credits (90 days from signup)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://cloud.google.com/free/docs/free-cloud-features
 - Page: https://freetokens.custats.info/offers/google-cloud-300-free-trial.html
 - Summary: New Google Cloud customers get $300 in free credits to spend on any Cloud Platform service during a 90-day trial window counted from signup. A billing account is created, but you are not charged until you manually upgrade.
@@ -1129,8 +1131,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Gladia
 - Category: voice
 - Amount: €50 one-time free credits (~80h async / ~60h real-time transcription); prepaid wallet afterwards
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://gladia.io/pricing
 - Page: https://freetokens.custats.info/offers/gladia-starter-free-credits.html
 - Summary: Gladia's Starter plan grants 50€ in free credits on signup — a one-time grant with no monthly reset, worth roughly 80+ hours of async (pre-recorded) transcription or 60+ hours of real-time transcription at current rates ($0.61/hr async, $0.75/hr real-time). Includes 30 real-time and 25 async concurrent requests, speaker diarization, 100+ languages. Once credits are used, top up a prepaid wallet or upgrade.
@@ -1139,8 +1141,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: GitHub
 - Category: student
 - Amount: Free Copilot Student plan for verified students: Copilot features incl. agents (excludes third-party agents) + GitHub AI Credits allowance; auto model selection only
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-students
 - Page: https://freetokens.custats.info/offers/github-copilot-student.html
 - Summary: GitHub Copilot Student gives GitHub Education-verified students free access to Copilot's features: inline suggestions/chat with agents included (excluding third-party agents) and an allowance of GitHub AI Credits, with auto model selection only. GitHub re-evaluates eligibility monthly. This is distinct from the expired 'Student Pack 2 years' promo.
@@ -1149,8 +1151,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Free.ai
 - Category: startup_program
 - Amount: 15,000,000 tokens for self-hosted-model tools/API (~1yr Pro allowance) + Pro API tier (100K req/mo); tokens never expire
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://free.ai/startup/
 - Page: https://freetokens.custats.info/offers/free-ai-startup-grant.html
 - Summary: Free.ai grants accepted early-stage startups 15,000,000 tokens usable on every tool/API endpoint running on their self-hosted open models — the same allowance as a year of the Pro plan — plus API keys at the Pro request tier (100,000 requests/month) and priority support. Granted tokens never expire. Premium external models are excluded and draw only on purchased tokens.
@@ -1159,8 +1161,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Free.ai
 - Category: api_provider
 - Amount: 30,000 tokens/day on signup (6,000 anonymous); OpenAI-compatible API to 400+ tools; no credit card
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://free.ai/
 - Page: https://freetokens.custats.info/offers/free-ai-30000-tokens-day.html
 - Summary: Free.ai grants 30,000 tokens/day after a free email signup (6,000/day if you stay anonymous). No credit card. Tokens reset every 24 hours and can be spent across 400+ tools; free accounts also cap heavy tools at 1 video, 2 music tracks, 5 images, and 5 image edits per day. A free account unlocks the OpenAI-compatible developer API at api.free.ai, which shares the same daily pool. The API docs How-it-works line says "Purchase tokens, then generate your key," but the same page's FAQ and rate table list a Free plan at 30K tokens/day and $0.
@@ -1169,8 +1171,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Fish Audio
 - Category: startup_program
 - Amount: 12M characters/month free for 3 months (~240+ hours of audio/month) + premium support and raised concurrency
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://fish.audio/startup/
 - Page: https://freetokens.custats.info/offers/fish-audio-startup-program.html
 - Summary: Fish Audio's startup program: 12 million characters per month of free TTS/audio generation for 3 months (~240+ hours of audio monthly), plus premium support with raised concurrency and model shaping help.
@@ -1179,8 +1181,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Fish Audio
 - Category: voice
 - Amount: Free s2.1-pro-free TTS model at $0 under fair-use limits — same quality and 83-language coverage as S2.1 Pro; no TTFA/DPA guarantees
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.fish.audio/developer-guide/models-pricing/models-overview
 - Page: https://freetokens.custats.info/offers/fish-audio-s2-1-pro-free.html
 - Summary: Fish Audio offers s2.1-pro-free — the same TTS model as the paid S2.1-Pro — at $0 for development, testing, prototyping, and smaller businesses. Same quality and 83-language coverage as s2.1-pro, under fair-use limits, with no TTFA or DPA guarantees and no published end date.
@@ -1189,8 +1191,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Fireworks AI
 - Category: startup_program
 - Amount: Build credits for inference, fine-tuning and on-demand GPUs (amount unpublished; credits expire 1 year after grant) + higher rate-limit options
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://fireworks.ai/startups
 - Page: https://freetokens.custats.info/offers/fireworks-for-startups.html
 - Summary: Fireworks for Startups gives eligible startups build credits (amount unpublished) usable for serverless text/vision inference, image generation, STT, embeddings, fine-tuning and on-demand GPU deployments — credits expire 1 year after grant — plus higher rate-limit options, applied-AI expert access and community. Eligibility: registered privately-held for-profit company founded within the last 5 years, venture backed with >$500k funding, pre-Series D.
@@ -1199,8 +1201,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Fireworks AI
 - Category: api_provider
 - Amount: $1 in free credits
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://fireworks.ai/pricing
 - Page: https://freetokens.custats.info/offers/fireworks-ai-1-dollar-free-credits.html
 - Summary: Fireworks AI's official pricing page states: "Pay per token, with high rate limits and postpaid billing. Get started with $1 in free credits." This matches the claimed $1 starter credit for new accounts. The page's "Get Started" button links to /signup, so claiming requires creating an account. No expiry or limited-time language appears near the offer, so it is treated as ongoing with no fixed end date. The offer was not personally redeemed; the verdict is based on the official page.
@@ -1209,8 +1211,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Firecrawl
 - Category: student
 - Amount: 10,000 free credits for verified students (academic email; coupon code redeemed in Settings → Billing)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.firecrawl.dev/student-program
 - Page: https://freetokens.custats.info/offers/firecrawl-student-program-10k-credits.html
 - Summary: Firecrawl's Student Program gives verified students 10,000 free credits for educational or personal projects. Eligibility requires a valid academic email address and enrollment in a college, university, or accredited program. Credits are added instantly after redeeming the student coupon code in Settings → Billing. Distinct from the ongoing Firecrawl Free Plan.
@@ -1219,8 +1221,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Firecrawl
 - Category: api_provider
 - Amount: 1,000 free credits every month (about 1,000 pages or 500 searches)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.firecrawl.dev/pricing
 - Page: https://freetokens.custats.info/offers/firecrawl-free-plan.html
 - Summary: Firecrawl's Free tier provides 1,000 credits every month, refreshed monthly, with no credit card required. The pricing page describes that allowance as roughly 1,000 pages scraped or 500 searches, with two concurrent requests and low rate limits. Search, crawl, scrape, and interaction operations can consume credits at different rates.
@@ -1229,8 +1231,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Figma
 - Category: student
 - Amount: Professional plan free (1 year high-school/higher-ed students, 6 months bootcamp/online students, 2 years educators); higher-ed and bootcamp users get 3,000 AI credits/month, Figma Make & Sites (not K-12/high school)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.figma.com/education/
 - Page: https://freetokens.custats.info/offers/figma-education-professional.html
 - Summary: Figma Education gives verified higher-education students the Professional plan free for one year (educators two years), including Figma Make, Figma Sites (one publishable site), and 3,000 AI credits per month. Access renews with re-verification via SheerID.
@@ -1239,8 +1241,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: fal
 - Category: startup_program
 - Amount: $1,000–$5,000 in fal credits for scaling startups (Europe/Asia-based teams only; one application per company every three months)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://fal.ai/startups
 - Page: https://freetokens.custats.info/offers/fal-startup-program.html
 - Summary: fal's Startup Program starts approved teams at $1,000 in credits and can grow to $5,000 as usage scales. It is for companies that can show traction, revenue, real users, or institutional funding, and is open to teams based in Europe and Asia. A short intro call is usually part of approval; promotional credits expire after 90 days under fal's terms.
@@ -1249,8 +1251,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: fal
 - Category: video
 - Amount: MiniMax H3 Max free — text-to-video and image-to-video, 5 free videos/day up to 15s each (account required, resets every 24h)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://fal.ai/minimax-h3-max
 - Page: https://freetokens.custats.info/offers/fal-minimax-h3-max-free.html
 - Summary: fal offers free generations with MiniMax H3 Max, a model that turns a prompt or an image into a 768p clip in as little as 3 seconds, supporting both text-to-video (T2V) and image-to-video (I2V). The tool runs in the browser with no sign-up required for the no-account path, and a free fal account raises the limit to 15 free videos per day. Announced by fal's Blendi (@blendibyl) on X.
@@ -1259,8 +1261,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Exa
 - Category: api_provider
 - Amount: $10 free credits every month (including signup month) plus a one-time $10 bonus after dashboard onboarding for a user's first team
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://exa.ai/docs/reference/billing
 - Page: https://freetokens.custats.info/offers/exa-free-tier.html
 - Summary: Exa's billing documentation says new accounts receive $20 in free credits on signup, while Free Tier accounts receive $10 in free credits each month. No payment method is required. The free tier covers all endpoints, with published rate limits including 10 Search QPS and 50 Agent concurrency; requests stop when the balance reaches zero.
@@ -1269,8 +1271,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Embercloud
 - Category: startup_program
 - Amount: $100 free API credits on approval (GLM-5, GLM-4.7, etc.; OpenAI-compatible); add $5 to verify company after approval
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.embercloud.ai/startups
 - Page: https://freetokens.custats.info/offers/embercloud-startups-100-credits.html
 - Summary: Embercloud for Startups grants $100 in free API credits after application approval. Credits cover EmberCloud models including GLM-5 and GLM-4.7 via an OpenAI-compatible API. No credit card is required to apply. After approval, add $5 to verify the company and start building.
@@ -1279,8 +1281,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: ElevenLabs
 - Category: startup_program
 - Amount: 12 months free platform access + 33M characters (~680h Agents usage; $5,500+ value)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://elevenlabs.io/startup-grants
 - Page: https://freetokens.custats.info/offers/elevenlabs-startup-grants.html
 - Summary: ElevenLabs Startup Grants give early-stage startups 12 months of free access to the full ElevenLabs platform at the Scale tier plus 33,000,000 characters — over 680 hours of Agents usage, valued at $5,500+. Covers Agents, Voice Design, Voice Cloning, Speech, Sound Effects, Music, and Image & Video. Eligibility: monetized product use case, valid business email, fewer than 25 employees, long-term product intent, no agencies/consultancies, no projects for minors, one application per company, existing enterprise customers excluded. Rolling applications; decisions within one week.
@@ -1289,8 +1291,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: ElevenLabs
 - Category: voice
 - Amount: 10k credits/month (~10 min of audio)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://elevenlabs.io/pricing
 - Page: https://freetokens.custats.info/offers/elevenlabs-free-plan.html
 - Summary: The ElevenLabs free plan includes 10,000 credits per month, roughly 10 minutes of audio, with access to the core text-to-speech voices. Credits reset monthly and no credit card is required.
@@ -1299,8 +1301,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Electron Hub
 - Category: api_provider
 - Amount: $0.25 weekly credits (refills Sun 21:00 UTC) + 10 Neutrinos/day for :free models (up to 200/day via ads)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.electronhub.ai/billing/credits
 - Page: https://freetokens.custats.info/offers/electronhub-free-tier.html
 - Summary: Electron Hub's free tier grants $0.25 in weekly API credits, refilled every Sunday at 21:00 UTC (unused weekly credit does not carry over), plus 10 Neutrinos per day for :free-suffixed models — expandable to 200 Neutrinos/day by watching up to 3 ads.
@@ -1309,8 +1311,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: E2B
 - Category: coding
 - Amount: $100 one-time usage credits on the Hobby plan ($0 plan fee)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://e2b.dev/pricing
 - Page: https://freetokens.custats.info/offers/e2b-hobby-100-free-credits.html
 - Summary: E2B's pricing page lists the Hobby plan at $0 with a $100 one-time usage credit. It includes sessions up to 1 hour, up to 20 concurrent sandboxes, and free 10 GiB storage. The page says no credit card is required; usage costs are separate after the included credit.
@@ -1319,8 +1321,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: DigitalOcean
 - Category: startup_program
 - Amount: 12 months of DigitalOcean credits (amount varies by partner award level); select startups invited to GPU credit packages; 15 months free Standard-tier support
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.digitalocean.com/hatch
 - Page: https://freetokens.custats.info/offers/digitalocean-startups.html
 - Summary: DigitalOcean Startups (Hatch) gives approved startups 12 months of DigitalOcean credits (amount varies by partner award level), 15 months of free Standard-tier support, and select startups are invited to apply for GPU credit packages. Eligibility: raised $10M or less, company website with matching email domain, registered DigitalOcean team account with a business/company email; AI-native startups are prioritized and service-based businesses are ineligible. Core credits exclude some GPU/dedicated inference products.
@@ -1329,8 +1331,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cognition (Devin)
 - Category: startup_program
 - Amount: $15K in Devin credits on approval + up to $50K in matching grants ($65K total)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://devin.ai/startups
 - Page: https://freetokens.custats.info/offers/devin-startups-program.html
 - Summary: Devin for Startups gives early-stage teams $65K to build with the AI software engineer: $15K in Devin credits loaded into the account the day the startup is approved, plus a dollar-for-dollar match of up to $50K in grants on the next $100K of usage. Accepted startups also get unlimited Team-plan seats, invitations to founder meetups and early-access previews with the Cognition team, and a Devin swag pack. Applications are reviewed on a rolling basis.
@@ -1339,8 +1341,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cognition (Devin)
 - Category: coding
 - Amount: Light coding-agent quota + unlimited Tab completions ($0 plan)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://devin.ai/pricing
 - Page: https://freetokens.custats.info/offers/devin-free-plan.html
 - Summary: Devin's $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.
@@ -1349,8 +1351,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: DeepInfra
 - Category: startup_program
 - Amount: 1,000,000,000 free inference tokens (valued at DeepSeek V3.1 prices)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://deepinfra.com/deepstart
 - Page: https://freetokens.custats.info/offers/deepinfra-deepstart.html
 - Summary: DeepInfra's DeepStart program grants 1,000,000,000 (one billion) free inference tokens, valued at DeepSeek V3.1 prices, usable across DeepInfra's hosted model catalog. Eligibility is narrow: the startup must have raised between $250K and $10M USD and been founded within the last 2 years.
@@ -1359,8 +1361,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Deepgram
 - Category: voice
 - Amount: $200 signup credit (no card, no expiration)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://deepgram.com/pricing
 - Page: https://freetokens.custats.info/offers/deepgram-free-credit.html
 - Summary: Deepgram Pay As You Go grants $200 in signup credits with no credit card and no expiration. The earlier Flux TTS free promo (through September 14, 2026) has ended: Flux TTS is now billed at $0.0450/1k characters pay-as-you-go, with a 'Buy Flux TTS, get matching credits' promo adding $1 in credits per $1 spent, up to $500.
@@ -1369,8 +1371,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Deepgram
 - Category: startup_program
 - Amount: Up to $100,000 in API credits over 12 months (STT, TTS, Voice Agent)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://deepgram.com/startup-program
 - Page: https://freetokens.custats.info/offers/deepgram-for-startups.html
 - Summary: Deepgram for Startups grants up to $100,000 in API credits usable over 12 months across speech-to-text, text-to-speech, and Voice Agent APIs. Applicants must be an AI builder or early-stage startup, in production or launching within the next 6 months. Credits are deposited 24–48 hours after acceptance.
@@ -1379,8 +1381,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Deepgram
 - Category: voice
 - Amount: $1 bonus credit per $1 spent on Flux TTS, up to $500 per project
-- Status: active — expiry 2026-12-31
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: 2026-12-31
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://deepgram.com/pricing
 - Page: https://freetokens.custats.info/offers/deepgram-flux-tts-match-promo.html
 - Summary: Limited-time Deepgram promotion: every $1 of paid Flux TTS usage earns $1 in bonus credits, up to $500 per eligible project. Open to new and existing Pay-As-You-Go and Growth projects (Enterprise excluded); a valid payment method is required. Runs Sep 15 – Dec 31, 2026; bonus credits never expire and stack with the standard $200 signup credit.
@@ -1389,8 +1391,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenRouter
 - Category: voice
 - Amount: Free deepgram/flux-tts:free TTS endpoint ($0, rate-limited, 36 voices)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://openrouter.ai/deepgram/flux-tts:free
 - Page: https://freetokens.custats.info/offers/deepgram-flux-tts-free-openrouter.html
 - Summary: OpenRouter serves Deepgram's Flux TTS as a free $0 TTS endpoint (deepgram/flux-tts:free) with 36 English voices; usage is rate-limited.
@@ -1399,8 +1401,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Daytona
 - Category: startup_program
 - Amount: Up to $100K in Daytona credits for startups; program page says $10K straight away on the account and easily up to $100K
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.daytona.io/startups
 - Page: https://freetokens.custats.info/offers/daytona-startup-program.html
 - Summary: Daytona's Startup Grid offers startups up to $100,000 in Daytona credits. The official page says startups receive $10,000 straight away on their account and can reach up to $100,000. Applicants submit the startup form for review.
@@ -1409,8 +1411,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Daytona
 - Category: coding
 - Amount: $200 in free compute at signup; free credits cannot be used for GPU sandboxes
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.daytona.io/pricing
 - Page: https://freetokens.custats.info/offers/daytona-200-free-compute.html
 - Summary: Daytona includes $200 in free compute with its free trial, with no credit card required. Daytona's billing documentation says free-credit balances are not available for GPU sandboxes. The submitted 5 GiB free-storage claim was omitted because neither official source currently states it.
@@ -1419,8 +1421,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cursor (Anysphere)
 - Category: coding
 - Amount: Free Hobby plan - limited Agent requests plus Composer access, no credit card required
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://cursor.com/pricing
 - Page: https://freetokens.custats.info/offers/cursor-hobby-plan.html
 - Summary: Cursor's Hobby plan is a genuinely free tier of the AI code editor: no credit card required, with limited Agent requests and access to the Composer model. Pro tiers only extend limits, so everyday autocomplete and agent use stay free.
@@ -1429,8 +1431,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Context.dev
 - Category: api_provider
 - Amount: 1,000 API credits/month + 10K one-time Logo Link requests (30 RPM work email / 10 RPM personal)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.context.dev/pricing
 - Page: https://freetokens.custats.info/offers/context-dev-free-tier.html
 - Summary: Context.dev's free tier includes 1,000 API credits per month (1 credit = 1 page scrape; extraction/brand calls cost more) plus a one-time 10K Logo Link quota — no credit card required. Rate limit is 30 calls/minute with a work email or 10/minute with a personal email.
@@ -1439,8 +1441,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: CometAPI
 - Category: api_provider
 - Amount: $0.1 USD free credit in Wallet after register/login
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://apidoc.cometapi.com/overview/important-guidelines
 - Page: https://freetokens.custats.info/offers/cometapi-signup-credit.html
 - Summary: CometAPI (an OpenAI-compatible multi-model API gateway) credits new accounts $0.1 USD in the Wallet after register and login, with no extra claim step. Docs describe pay-as-you-go top-ups via Stripe with a $10 minimum; they do not require a card to receive the signup credit.
@@ -1449,8 +1451,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cohere
 - Category: api_provider
 - Amount: Free evaluation/trial keys — 1,000 API calls/month; Chat ~20 RPM
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.cohere.com/docs/rate-limits
 - Page: https://freetokens.custats.info/offers/cohere-trial-key.html
 - Summary: Cohere evaluation/trial API keys are free but limited: 1,000 API calls per month, and Chat models at 20 requests per minute. Production keys are paid with higher limits. Create a trial or production key on the API keys page. This reactivates the previously archived cohere-trial-key listing. The rate-limits page does not state a non-commercial restriction.
@@ -1459,8 +1461,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: OpenAI
 - Category: coding
 - Amount: Six months of ChatGPT Pro with Codex + conditional Codex Security + API credits via the Codex Open Source Fund, for eligible OSS maintainers
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://developers.openai.com/community/codex-for-oss
 - Page: https://freetokens.custats.info/offers/codex-for-open-source.html
 - Summary: Codex for Open Source gives eligible open-source maintainers six months of ChatGPT Pro with Codex for day-to-day coding, triage, review, and maintainer workflows, conditional access to Codex Security for repositories needing deeper coverage (reviewed case by case), and API credits through the Codex Open Source Fund for projects using Codex in PR review or maintainer automation. Core maintainers and widely used public projects should apply; edge cases can explain their ecosystem role.
@@ -1469,8 +1471,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: CodeRabbit
 - Category: coding
 - Amount: Free Team features for public repositories: AI reviews, slop detection, triage, Change Stack, and Security; no card or application; rate limits apply
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.coderabbit.ai/oss
 - Page: https://freetokens.custats.info/offers/coderabbit-oss-free-reviews.html
 - Summary: CodeRabbit reviews public repositories for free, including AI reviews, slop detection, triage, Change Stack, and Security. No card or application. The $10M figure is CodeRabbit’s overall OSS commitment, not a per-project grant.
@@ -1478,8 +1480,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cloudflare
 - Category: api_provider
 - Amount: 10,000 Neurons per day at no charge (resets daily at 00:00 UTC)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://developers.cloudflare.com/workers-ai/platform/pricing/
 - Page: https://freetokens.custats.info/offers/cloudflare-workers-ai-free-tier.html
 - Summary: Cloudflare's Workers AI includes a free allocation of 10,000 Neurons per day for anyone - enough for thousands of small LLM or image generations. It runs on Cloudflare's edge network with an OpenAI-compatible REST interface and resets daily at 00:00 UTC.
@@ -1488,8 +1490,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cloudflare
 - Category: startup_program
 - Amount: Up to $350K in credits for 1 year (tiers $10K / $100K / $350K by stage; Workers AI capped $2.5K-$50K by tier)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.cloudflare.com/startups/
 - Page: https://freetokens.custats.info/offers/cloudflare-for-startups.html
 - Summary: Cloudflare for Startups gives early-stage companies up to $350K in credits for one year across three tiers — $10K (bootstrapped/self-funded, <$1M raised), $100K (<$5M raised, affiliated-partner funded), $350K ($5M+ raised, affiliated-partner funded). Credits cover usage-based services: Workers, Durable Objects, Workflows, Workers AI (capped $2.5K/$10K/$50K by tier), R2 (capped $10K), Pages, Images, Stream; core security/networking features are included at no cost. AI Gateway is temporarily not covered.
@@ -1498,8 +1500,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Anthropic
 - Category: coding
 - Amount: 10,000 seats; Standard seats $0/mo for 12 months; Premium $15/mo (5x usage); Claude Science, Code, and Cowork; limited availability
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://claude.com/programs/team-plan-for-scientists
 - Page: https://freetokens.custats.info/offers/claude-team-plan-for-scientists.html
 - Summary: Anthropic's Claude Team plan for scientists offers promotional Team seating to verified principal investigators (or equivalent) at academic or nonprofit research institutions. Standard seats are free; Premium seats are $15/month (regularly $100) with 5x usage. The promotion covers 12 months from signup, is limited to about 10,000 seats, and is not guaranteed. Includes Claude Science, Code, and Cowork. Verification typically takes 5–7 business days. 1–25 seats per group; larger groups contact Anthropic. This is a Claude.ai Team subscription, distinct from API credit grants in AI for Science.
@@ -1508,8 +1510,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Anthropic
 - Category: startup_program
 - Amount: Apply for free Claude API credits + priority rate limits (credits mainly for equity-funded startups founded within 4 years; no published dollar amount)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://claude.com/programs/startups
 - Page: https://freetokens.custats.info/offers/claude-for-startups.html
 - Summary: Claude for Startups lets founders apply for free Claude API credits and priority rate limits. The program is open to early-stage founders with or without VC backing, but credits require equity funding from an institutional investor, a company founded within the last four years, and no prior Anthropic startup credits. You need a Claude Console account (API console, not the Claude app) and a company email. Credits apply only to the first-party Claude API, not AWS Bedrock or Google Vertex AI. Anthropic does not publish a dollar amount for the credit grant.
@@ -1518,8 +1520,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Anthropic
 - Category: coding
 - Amount: 6 months of free Claude Max 20x (~$1,200 value at $200/mo list); subscription grant, not API credits; capped at 10,000 recipients
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://claude.com/contact-sales/claude-for-oss
 - Page: https://freetokens.custats.info/offers/claude-for-open-source.html
 - Summary: Claude for Open Source grants eligible maintainers and contributors a complimentary Claude Max 20x subscription for six months — a subscription grant, not API credits. Capped at 10,000 approved recipients, rolling review until the cap is reached or the application period closes. Eligibility tracks: maintainers (500+ dependent repos, 100+ dependent packages, or 200k+ monthly downloads), core contributors on recognized foundation/language projects, active contributors (100+ merged PRs on others' repos in 12 months), community builders (20+ unique external merged-PR contributors in 12 months), critical infrastructure (OpenSSF criticality score >=0.4), plus a discretionary ecosystem-impact track. General requirements: natural person, GitHub account at least two years old, public OSS activity in the last 90 days, and at least one OSI-approved-licensed project.
@@ -1528,8 +1530,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cerebras
 - Category: startup_program
 - Amount: Up to $22.5K in Cerebras Cloud inference credits plus priority support and co-marketing
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.cerebras.ai/yc-startup-deal
 - Page: https://freetokens.custats.info/offers/cerebras-yc-startup-deal.html
 - Summary: The Cerebras YC Startup Deal gives Y Combinator startups from any batch up to $22.5K worth of inference on Cerebras Cloud, plus priority support and co-marketing opportunities. No setup fees.
@@ -1538,8 +1540,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cerebras
 - Category: api_provider
 - Amount: $5 free credits after adding a verified payment method; expire in 30 days; no permanent free tier; API inactive until payment method added (no charge until purchase)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://inference-docs.cerebras.ai/support/rate-limits
 - Page: https://freetokens.custats.info/offers/cerebras-free-credit.html
 - Summary: Cerebras Inference Free Trial grants new accounts $5 in credits after adding a verified payment method. Credits expire 30 days after they are granted and work across all public catalog models. There is no charge until you purchase more credits. Skipping the payment method leaves Playground and API access inactive. There is no permanently free or auto-renewing free tier. This reactivates the previously archived cerebras-free-credit listing with the official rate-limits FAQ as source.
@@ -1548,8 +1550,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cartesia
 - Category: startup_program
 - Amount: 96M credits/year plus $299/month in agent credits for 12 months (over $8,000 value)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.cartesia.ai/startups
 - Page: https://freetokens.custats.info/offers/cartesia-startups-grant.html
 - Summary: 96M credits/year plus $300/month in agent credits for 12 months (over $8,000 value).
@@ -1558,8 +1560,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cartesia
 - Category: startup_program
 - Amount: 12 months of Startup Tier — 1.25M credits/month plus up to 5 concurrent requests including Pro Voice Cloning (Google for Startups Cloud Program Scale Tier only)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.cartesia.ai/google-startups
 - Page: https://freetokens.custats.info/offers/cartesia-google-cloud-startups.html
 - Summary: Cartesia x Google Cloud Startups is 12 months of Cartesia Startup Tier for Scale Tier members of the Google for Startups Cloud Program: 1.25M credits per month, up to 5 concurrent requests, including Pro Voice Cloning. Distinct from the Cartesia Startups Grant (96M credits/year on cartesia.ai/startups). Cartesia pricing lists Startup at $49/mo with 1.25M credits/month and Pro voice cloning. The google-startups apply path 404s; claim via the program page as a GFS Cloud Program Scale Tier member.
@@ -1568,8 +1570,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Cartesia
 - Category: voice
 - Amount: 20K credits/month for text-to-speech and speech-to-text on the $0 plan
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://cartesia.ai/pricing
 - Page: https://freetokens.custats.info/offers/cartesia-free-plan.html
 - Summary: Cartesia's $0 Free plan includes 20,000 credits per month covering Sonic text-to-speech (about 27 minutes) and Ink speech-to-text (about 1h51m), plus one voice agent slot and unlimited workspace seats - no card required to start.
@@ -1578,8 +1580,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: CAMB.AI
 - Category: startup_program
 - Amount: 33M characters of MARS Text-to-Speech API credits plus direct engineering support
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.camb.ai/startup-grants
 - Page: https://freetokens.custats.info/offers/camb-ai-startup-grants.html
 - Summary: CAMB.AI Startup Grants give approved early-stage startups 33M characters of credits for the MARS Text-to-Speech APIs plus direct access to the CAMB.AI engineering team. Eligibility: pre-seed through Series A, founded within the last 5 years, under $5M raised, building a product that uses voice, speech, or localization AI, and no previous CAMB.AI program credits.
@@ -1588,8 +1590,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: BytePlus
 - Category: api_provider
 - Amount: Free-token package per eligible model (e.g. 500,000 tokens/model; actual amount shown on the Model Activation page); requires BytePlus account + enterprise info submission
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.byteplus.com/en/docs/legal/termsandconditions_modelark_free-token_campaign
 - Page: https://freetokens.custats.info/offers/byteplus-modelark-free-tokens.html
 - Summary: BytePlus's ModelArk Free-Token Campaign grants a free-token resource package per eligible model — the terms cite 500,000 tokens per model as an example, with the actual amount shown on the Model Activation page. Eligibility requires completing BytePlus account registration and submitting enterprise information; the package is redeemable once per account and may carry a validity period visible in the Billing Center. Packages offset post-paid token consumption in the ModelArk Playground or after model-service activation.
@@ -1598,8 +1600,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: BytePlus
 - Category: startup_program
 - Amount: Up to $100,000 in cloud coupons + $6.5K voice AI credits + 10B+ LLM tokens + $137K+ cloud subsidies + workshops
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.byteplus.com/en/contact-us/vstart
 - Page: https://freetokens.custats.info/offers/byteplus-ai-startups-accelerator.html
 - Summary: The BytePlus AI Startups Accelerator (V-Start) offers up to $100,000 USD in cloud coupons plus a voice/LLM credit package: $6.5K in voice AI model credits and 10B+ tokens in LLM credits, $137K+ in cloud resource subsidies, and 5+ AI-powered workshops. Open to startups in round D and before (<= Series D) with technical innovation in AI, enterprise services, e-commerce, mass consumption, Web3, VR/AR, etc. Approval is discretionary after application review.
@@ -1608,8 +1610,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Browser Use
 - Category: api_provider
 - Amount: $1 free credit for eligible signups (eligibility details not published on pricing page)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://browser-use.com/pricing
 - Page: https://freetokens.custats.info/offers/browser-use-15-signup-credit.html
 - Summary: Browser Use now advertises $1 in free credits for eligible signups; the pricing page does not specify who qualifies. Credits can pay for browser time ($0.02/hour, plus proxy traffic) and Browser Use Agents (model cost + 20% service fee). Top-ups start at $5; no subscription.
@@ -1618,8 +1620,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Microsoft Bing
 - Category: image
 - Amount: Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.microsoft.com/en-us/bing/features/bing-image-creator
 - Page: https://freetokens.custats.info/offers/bing-image-creator.html
 - Summary: Bing Image Creator is free for everyone with a personal Microsoft account, offering image generation with Microsoft MAI-Image, GPT-Image, and DALL-E-class models. You get 15 fast creations per day plus slower standard-speed generations (up to 200 prompts per 24 hours).
@@ -1628,8 +1630,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: BazaarLink
 - Category: api_provider
 - Amount: Free OpenAI-compatible API — 2 free models, 10 RPM + 50 weighted units/day shared (20 RPM + 100/day with credit), no credit card
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://bazaarlink.ai/free
 - Page: https://freetokens.custats.info/offers/bazaarlink-free-llm-api.html
 - Summary: BazaarLink's free tier is an OpenAI-compatible LLM gateway with 2 enabled free models — qwen/qwen3.7-flash and deepseek/deepseek-v4-flash-0731free. Shared account allowance: 10 RPM + 50 weighted units/day without credit, 20 RPM + 100 weighted units/day with credit; counters reset at 00:00 UTC. No credit card required; 2 concurrent free requests per account.
@@ -1638,8 +1640,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Baseten
 - Category: api_provider
 - Amount: Starting credits for new workspaces (amount not published)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.baseten.co/organization/billing
 - Page: https://freetokens.custats.info/offers/baseten-starting-credits.html
 - Summary: Baseten's official billing documentation states that every new workspace automatically receives starting credits for testing and deployment, applied to invoices before any payment method is charged — no redemption step. The docs explicitly note there is no separate free tier or perpetual free plan, and usage beyond the starting credits is billed at standard per-minute instance pricing. The credit balance is visible on the billing dashboard. Neither the docs nor the pricing FAQ publishes the exact credit amount, so it is reported as unpublished. The offer is ongoing with no stated end date.
@@ -1648,8 +1650,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Baseten
 - Category: startup_program
 - Amount: Up to $25,000 for Dedicated Inference or Training plus up to $2,500 for Model APIs
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.baseten.co/startup-program/
 - Page: https://freetokens.custats.info/offers/baseten-ai-startup-program.html
 - Summary: Baseten's AI Startup Program offers accepted, net-new AI-first early-stage startups up to $25,000 in credits for Dedicated Inference or Training and up to $2,500 for Model APIs. Eligibility is selective: the program targets Seed-to-Series-A startups operating for less than five years, and applicants must not have previously received Baseten credits.
@@ -1658,8 +1660,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Microsoft Azure
 - Category: api_provider
 - Amount: $200 credit for 30 days plus always-free and 12-month free-service amounts for new customers
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://azure.microsoft.com/en-us/free/
 - Page: https://freetokens.custats.info/offers/azure-free-account.html
 - Summary: New Azure customers can create a free account with a $200 credit to use on Azure services within 30 days, plus monthly free amounts of popular services for 12 months and always-free services. Microsoft states the credit card is used for verification and will not be charged for the trial (a temporary authorization may apply). After 30 days or when the credit is exhausted, you must move to pay-as-you-go to keep using services. Distinct from Azure for Students.
@@ -1668,8 +1670,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Microsoft Azure
 - Category: student
 - Amount: $100 Azure credits for 12 months + 25+ free services (no credit card required)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://azure.microsoft.com/en-us/free/students
 - Page: https://freetokens.custats.info/offers/azure-for-students.html
 - Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
@@ -1678,8 +1680,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Amazon Web Services
 - Category: startup_program
 - Amount: Activate Founders (self-funded): start with $1,000, up to $5,000; Activate Portfolio (pre-Series B): up to $200,000; usable across AWS incl. Amazon Bedrock; extra AI-startup credits invite-only
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://aws.amazon.com/startups/credits/
 - Page: https://freetokens.custats.info/offers/aws-activate-credits.html
 - Summary: AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.
@@ -1688,8 +1690,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: AssemblyAI
 - Category: startup_program
 - Amount: 12 months of recurring free credits; exact credit amount unpublished
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.assemblyai.com/contact/startup-program
 - Page: https://freetokens.custats.info/offers/assemblyai-startup-program.html
 - Summary: 12 months of recurring free credits; exact credit amount unpublished.
@@ -1698,8 +1700,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: AssemblyAI
 - Category: voice
 - Amount: $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.assemblyai.com/docs/billing-and-pricing
 - Page: https://freetokens.custats.info/offers/assemblyai-50-free-credits.html
 - Summary: New AssemblyAI accounts receive $50 in free credits that do not expire. Credits apply to Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, and Guardrails. LLM Gateway is billed from the account balance from the first request and is not covered by the free tier. No credit card is required to start; add a card after credits are used up to keep using the API.
@@ -1708,8 +1710,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Arcee AI
 - Category: api_provider
 - Amount: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://www.arcee.ai/blog/introducing-the-trinity-builders-program
 - Page: https://freetokens.custats.info/offers/arcee-trinity-builders-program.html
 - Summary: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens.
@@ -1718,8 +1720,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Anyscale
 - Category: startup_program
 - Amount: Up to $20,000 in Anyscale usage credits (stackable with AWS/GCP/Azure etc. cloud credits) + dedicated field-engineer support
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.anyscale.com/startup
 - Page: https://freetokens.custats.info/offers/anyscale-ai-startup-program.html
 - Summary: Anyscale's AI Startup Program grants eligible startups up to $20K in Anyscale usage credits that run on the startup's own cloud and stack with existing cloud provider credits, plus dedicated field-engineer support for architecture and hands-on technical help. The application is reviewed on cloud spend/credits and stage; a separate $100 signup credit is advertised via the 'Get Started with $100 Credit' nav link.
@@ -1728,8 +1730,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: AnyAPI
 - Category: api_provider
 - Amount: 100K anyTokens/day on free models via OpenAI-compatible gateway (resets daily, no rollover)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://anyapi.ai/pricing
 - Page: https://freetokens.custats.info/offers/anyapi-free-plan.html
 - Summary: AnyAPI's Free plan grants 100K anyTokens per day across free models on its OpenAI-compatible gateway to 400+ models. Unlimited users, AnyAPI SDK / AnyCLI / AnyChat included, no credit card required. Paid plans roll unused tokens over monthly; the free daily allowance does not carry over.
@@ -1738,8 +1740,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Anthropic
 - Category: api_provider
 - Amount: small amount of free credits to test the API (exact amount not published)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://platform.claude.com/docs/en/about-claude/pricing
 - Page: https://freetokens.custats.info/offers/anthropic-console-free-starter-credits.html
 - Summary: Anthropic's official Claude Platform pricing documentation states under the FAQ 'Are there free tiers or trials?' that new users receive a small amount of free credits to test the API, matching the offer. The exact credit amount is deliberately not published on the page, so no number can be stated; extended trials for enterprise evaluation are available via sales. The get-started docs confirm claiming requires a Claude Console account and an API key. No expiry date or fixed end date for the starter credits is stated, so the offer is treated as ongoing.
@@ -1748,8 +1750,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: Anthropic
 - Category: api_provider
 - Amount: Free Claude API credits for high-impact research; Help Center cites up to $20,000 for 6 months; Aug 2026 news cites up to $50,000 per project
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program
 - Page: https://freetokens.custats.info/offers/anthropic-ai-for-science.html
 - Summary: Anthropic's AI for Science program grants free Claude API credits to researchers at research institutions working on high-impact scientific projects (biology/life sciences emphasized, other fields eligible). The Help Center (updated Mar 16, 2026) says successful applicants receive up to $20,000 in API credits for 6 months. Anthropic's Aug 27, 2026 news post says groups can apply for up to $50,000 in credits per project for more ambitious work. Credits are API-only (not Claude.ai). Applications are reviewed on the first Monday of each month. Distinct from the Claude Team plan for scientists seating promotion.
@@ -1758,8 +1760,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: AMD Radeon Cloud
 - Category: api_provider
 - Amount: Free public model APIs listed on the official page (9 models): MiMo-V2.6-Flash, DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, DeepSeek-V4-Flash-Vision-Exp, GLM-5.3-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B, MinerU2.5-Pro; beta, quotas unpublished
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://developer.amd.com.cn/radeon/tokenfactory
 - Page: https://freetokens.custats.info/offers/amd-radeon-cloud-free-model-apis.html
 - Summary: AMD Radeon Cloud Token Factory provides free shared OpenAI- and Anthropic-compatible model APIs. At verification time, DeepSeek-V4-Flash, Qwen3.8-Flash-Next and MiniCPM5-1B were free and online; DeepSeek-V4-Flash-Vision-Exp was limited-free and experimental; MiniCPM-V46 was listed but temporarily offline. AMD says displayed points represent relative usage, not a charge, but does not publish account quotas or reset rules.
@@ -1768,8 +1770,8 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: AMD
 - Category: api_provider
 - Amount: $100 in AMD Developer Cloud credits (expire 30 days after activation)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://developer.amd.com/ai-developer-program/
 - Page: https://freetokens.custats.info/offers/amd-ai-developer-program.html
 - Summary: AMD's free AI Developer Program includes $100 in AMD Developer Cloud credits. The credit-request flow asks for affiliation, job function, intended use, and a public profile for verification; AMD says approval takes 2–3 business days and the credits expire 30 days after activation. This is separate from AMD Radeon Cloud's free model API endpoints.
@@ -1778,117 +1780,17 @@ Source: https://freetokens.custats.info/ — generated 2026-10-05T03:04:34Z — 
 - Provider: AWS
 - Category: voice
 - Amount: Legacy accounts (created before July 15, 2025): 5M chars/month Standard + 1M chars/month Neural voices for first 12 months. New accounts get up to $200 in AWS Free Tier credits on a 6-month free plan.
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / unverified, signup required)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://aws.amazon.com/polly/pricing/
 - Page: https://freetokens.custats.info/offers/amazon-polly-free-tier.html
 - Summary: Amazon Polly's free tier gives new AWS accounts 5 million characters per month on Standard voices and 1 million characters per month on Neural voices for the first 12 months after signup - roughly thousands of minutes of narration at zero cost.
 - Claim steps: Create an AWS account at aws.amazon.com (free tier applies automatically). | Open the Amazon Polly console. | Convert text to speech using Standard or Neural voices within the monthly free character allowance. | Note the free window runs for the first 12 months from account creation.
-### Alibaba Cloud Model Studio — Free Quota for New Users
-- Provider: Alibaba Cloud
-- Category: api_provider
-- Amount: ~1,000,000 free tokens per eligible model, valid 90 days from activation (real-time inference only; Singapore region, International scope)
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / under-review, signup required)
-- Source: https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota
-- Page: https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html
-- Summary: Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation (or model release/approval, whichever is later). Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry.
-- Claim steps: Create an Alibaba Cloud account and open Alibaba Cloud Model Studio (Singapore region). | Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed. | Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page. | Call eligible models in real time; enable 'Free Quota Only' mode to avoid pay-as-you-go charges after the quota runs out.
-### Aerolink $5 Testing Credit
-- Provider: Aerolink
-- Category: api_provider
-- Amount: $5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks
-- Status: active — expiry ongoing
-- Verified: 2026-09-30 (social_proof / to-be-verified, signup required)
-- Source: https://aerolink.lat/pricing
-- Page: https://freetokens.custats.info/offers/aerolink-starter-free-trial.html
-- Summary: Aerolink advertises $5 in one-time testing credits for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan. The original one-week Starter trial is no longer on the pricing page.
-- Claim steps: Register at https://aerolink.lat/register. | Generate an API key from the dashboard and point your client at the Aerolink base URL. | Check eligibility for the $5 testing credit in the account dashboard; the credit is valid for 30 days.
-### Tripo AI 2,000 Free API Credits
-- Provider: Tripo AI
-- Category: image
-- Amount: 2,000 free API credits (~$20 at $0.01/credit), granted once per account on first API key generation
-- Status: active — expiry ongoing
-- Verified: 2026-09-29 (social_proof / under-review, signup required)
-- Source: https://www.tripo3d.ai/blog/announcement-tripo-openapi-platform-payment-system
-- Page: https://freetokens.custats.info/offers/tripo-ai-2000-free-api-credits.html
-- Summary: Tripo AI grants 2,000 free OpenAPI credits (~$20 at $0.01/credit) once per account the first time an API key is generated, per its official OpenAPI launch announcement. Credits pay for image and 3D-model generation tasks. Note: Tripo API V2 is unmaintained from 2026-10-01 and retired 2026-11-01; a V2→V3 migration guide is published.
-- Claim steps: Create an account at https://platform.tripo3d.ai (no card required). | Open the API Keys page and generate a key — 2,000 free credits are granted on first key generation. | Call https://api.tripo3d.ai/v2/openapi/task with the key as a Bearer token.
-### Speechmatics Startup Program
-- Provider: Speechmatics
-- Category: startup_program
-- Amount: Up to $50,000 in usage credits (batch/real-time STT, TTS, on-prem) + engineering support
-- Status: active — expiry ongoing
-- Verified: 2026-09-28 (social_proof / under-review, signup required)
-- Source: https://www.speechmatics.com/startup-program
-- Page: https://freetokens.custats.info/offers/speechmatics-startup-program.html
-- Summary: The Speechmatics Startup Program gives early-stage, voice-first startups up to $50,000 in usage credits spendable across batch and real-time speech-to-text, text-to-speech, and on-prem deployments, plus monthly office hours with engineers, priority developer support, early feature access, and co-marketing. Eligibility: raised less than $10M total, functional MVP in production or committed launch within 1-2 months, not on a paid enterprise plan, active dev team, defined ASR use case. Cohorts are capped at ~20 startups; a 30-minute call precedes the decision.
-- Claim steps: Apply via the Startup Program form at https://www.speechmatics.com/startup-program (rolling review, response within a few days). | Join a 30-minute call with the Speechmatics team about your use case and mission. | On approval, credits activate immediately; spend them on batch, real-time, TTS, or on-prem.
-### Ling 3.0 Flash Fin Free (Novita)
-- Provider: Novita AI
-- Category: api_provider
-- Amount: Ling 3.0 Flash Fin at $0 input / $0 output per M tokens (256K context)
-- Status: active — expiry ongoing
-- Verified: 2026-09-28 (social_proof / to-be-verified, signup required)
-- Source: https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-fin
-- Page: https://freetokens.custats.info/offers/novita-ling-3-0-flash-fin-free.html
-- Summary: InclusionAI's Ling 3.0 Flash Fin (finance-enhanced MoE, 124B total / ~5.1B active parameters) is listed on Novita AI's serverless API at $0/M input and $0/M output tokens, with 256K context and 32K max output. No published end date for the $0 pricing.
-- Claim steps: Sign up at novita.ai and create an API key. | Call model id inclusionai/ling-3.0-flash-fin via the OpenAI-compatible endpoint — input and output are $0/M tokens.
-### Muse Spark 1.3 Contributor Free on OpenCode Zen
-- Provider: Meta (via OpenCode Zen)
-- Category: coding
-- Amount: Free Muse Spark 1.3 Contributor tier on OpenCode Zen for a limited time (Meta may use your prompts and completions to train future models)
-- Status: active — expiry ongoing
-- Verified: 2026-09-28 (social_proof / verified, signup required)
-- Source: https://opencode.ai/docs/zen/
-- Page: https://freetokens.custats.info/offers/muse-spark-1-3-contributor-free.html
-- Summary: Muse Spark 1.3 Contributor Free is available on OpenCode Zen for a limited time. This is Meta's Contributor tier: free access in exchange for permission to use your prompts and completions to train future Meta models. The standard Muse Spark 1.3 remains paid on other platforms. Confirmed via user screenshot showing Muse Spark 1.3 Free running on OpenCode Zen at 206.3 tok/s with high quality setting.
-- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen. | Select the Muse Spark 1.3 Contributor Free model. | Start building — no payment info required for the Contributor tier. | Note: Meta may use your prompts and completions to train future models.
-### Modal for Startups
-- Provider: Modal
-- Category: startup_program
-- Amount: One-time free GPU/platform credits ("thousands" per program page, not itemized) + technical and GTM support
-- Status: active — expiry ongoing
-- Verified: 2026-09-28 (social_proof / under-review, signup required)
-- Source: https://modal.com/startups
-- Page: https://freetokens.custats.info/offers/modal-for-startups.html
-- Summary: Modal for Startups grants a one-time award of free GPU/platform credits ('thousands' per the program page, not itemized) plus engineering/GTM support and a founder community. Eligibility: new Modal customers; Seed–Series A tier requires VC funding from Modal's partner network or >$1M raised from any fund; a Scaling/Series B+ tier exists for >$30M raised / post-Series B with a partner-network VC. A payment method is required; credits are a one-time grant per tier.
-- Claim steps: Apply at modal.com/startups (new Modal customers only). | Seed–Series A: VC funding from Modal's partner network, or >$1M raised from any fund. | On acceptance, the one-time credit grant lands on your account; add a payment method as required.
-### Mistral Free Plan — $10/mo API Credits
-- Provider: Mistral AI
-- Category: api_provider
-- Amount: $10/mo in API credits plus Studio access (no credit card for Free)
-- Status: active — expiry ongoing
-- Verified: 2026-09-28 (social_proof / under-review, signup required)
-- Source: https://mistral.ai/pricing
-- Page: https://freetokens.custats.info/offers/mistral-experiment-free-tier.html
-- Summary: Mistral's Free plan includes $10 per month in API credits and access to Mistral Studio, with no credit card required. The pricing page lists Studio plus $10/mo credits on the Free card. Studio docs still describe Free mode as rate-limited API access with no card — they do not mention the $10 monthly credit.
-- Claim steps: Create a free account at console.mistral.ai (no credit card required). | Use the Free plan — Studio access and $10/mo API credits apply. | Generate an API key and call api.mistral.ai within published limits.
-### AI21 Studio Free Trial — $10 Credits
-- Provider: AI21
-- Category: api_provider
-- Amount: $10 credit for new accounts, valid 7 days on platform APIs/SDK/playground (no card to start)
-- Status: active — expiry ongoing
-- Verified: 2026-09-28 (social_proof / under-review, signup required)
-- Source: https://www.ai21.com/pricing/
-- Page: https://freetokens.custats.info/offers/ai21-studio-10-credits.html
-- Summary: New AI21 Studio accounts receive a $10 free-trial credit — no credit card needed to start. CONFLICT as of 2026-09-28: the marketing pricing page (ai21.com/pricing) states "$10 credits for 7 days", while the docs page (docs.ai21.com/docs/usage-cost) still says "$10 credit good for three months". The listing follows the pricing page; verify at signup which window applies. Cloud-hosted AI21 models (Bedrock, SageMaker, Azure) are billed by those providers, not this credit.
-- Claim steps: Create an AI21 Studio account (no credit card required to start). | Use the $10 credit on Foundation Model APIs, SDK, and playground within the trial window. | Add billing information after the credit is used or expires to continue.
-### Perplexity for Startups
-- Provider: Perplexity
-- Category: startup_program
-- Amount: $5,000 in API credits + 3 months of Enterprise Pro for up to 50 seats
-- Status: active — expiry ongoing
-- Verified: 2026-09-27 (social_proof / to-be-verified, signup required)
-- Source: https://www.perplexity.ai/startups/
-- Page: https://freetokens.custats.info/offers/perplexity-for-startups.html
-- Summary: Perplexity's startup program: $5,000 in API credits plus 3 months of Enterprise Pro for up to 50 seats. Eligibility: raised up to $20M in equity funding, less than 5 years old, associated with an approved Perplexity Startup Partner. Existing Enterprise Pro customers are not eligible. Note: older announcement copy said 6 months of Enterprise Pro; the current official page states 3 months.
-- Claim steps: Apply at https://www.perplexity.ai/startups/. | Eligibility: ≤$20M equity funding raised, <5 years old, associated with an approved Startup Partner. | Existing Enterprise Pro subscribers are not eligible.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
 - [Archive](https://freetokens.custats.info/archive.html): Expired offers archive.
-- [About](https://freetokens.custats.info/about.html): About the site — methodology and verification.
+- [About](https://freetokens.custats.info/about.html): About the site — methodology and trust labels.
 - [Privacy Policy](https://freetokens.custats.info/privacy.html): Privacy policy.
 - [RSS Feed](https://freetokens.custats.info/feed.xml): RSS feed of active offers.
 - [Sitemap](https://freetokens.custats.info/sitemap.xml): XML sitemap.

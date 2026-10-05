@@ -22,8 +22,12 @@ function normalizeBaseUrl(baseUrl?: string): string {
   );
 }
 
+// One site description, used by the meta tags and the structured-data graph.
+// It names both trust axes ("review status", "evidence level") because the
+// directory is mixed: an entry can be under review or to be verified, so no
+// blanket "verified" claim belongs in machine-readable metadata (#507).
 const SITE_DESCRIPTION =
-  "Every currently-claimable free AI credit offer, labeled with review status, verification level, and sign-up need, on one fast page.";
+  "Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page.";
 
 function safeJsonLd(value: unknown): string {
   return (JSON.stringify(value) ?? "").replace(/[&<>\u2028\u2029]/g, (ch) => {
@@ -91,7 +95,7 @@ export function StructuredData(props: StructuredDataProps) {
       "@type": "CollectionPage",
       "@id": `${base}/#webpage`,
       url: `${base}/`,
-      name: "Free AI Credits — verified free AI credit offers",
+      name: "Free AI Credits — free AI credit offers with review status and evidence level",
       description: SITE_DESCRIPTION,
       isPartOf: { "@id": `${base}/#website` },
       about: { "@id": `${base}/#organization` },
@@ -174,7 +178,7 @@ export function StructuredData(props: StructuredDataProps) {
     const detail = props.detail ?? null;
     const summary = detail?.summary
       ? String(detail.summary).trim().replace(/\s+/g, " ")
-      : `${offer.amount} from ${offer.provider} — free AI credits, tagged by verification level and sign-up need.`;
+      : `${offer.amount} from ${offer.provider} — free AI credits, tagged by review status, evidence level and sign-up need.`;
     const canonical = `${base}/offers/${offer.slug}.html`;
     pageNode = {
       "@type": "TechArticle",

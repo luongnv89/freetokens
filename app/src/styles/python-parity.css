@@ -633,6 +633,58 @@ a.badge:focus-visible {
   padding-left: 1.1rem;
 }
 
+/* ---- Hover-free trust legend (#507) ------------------------------------
+   The listing badges name review status, evidence level and sign-up need;
+   this block is the one place that says what those words do and do not mean,
+   as visible text rather than a `title` tooltip. It borrows the policy prose
+   rules (code chips, muted notes, list rhythm) so the same definitions read
+   the same on the listing, on an offer page and on the About page, and adds
+   only the box and the disclosure underneath. The always-visible tier is
+   deliberately terse — a label plus a one-clause meaning — so it can sit above
+   the offer list without pushing the first row off the fold. */
+.trust-legend {
+  margin: 1.1rem 0 0.7rem;
+  padding: 0.6rem 0.95rem 0.7rem;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+/* The legend is a `<details open>`: expanded on first paint, collapsible for a
+   reader who already knows the words. Its outer summary keeps the small-caps
+   label treatment the block had as an `h2`; the nested one stays prose. */
+.trust-legend > details > summary {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray);
+  cursor: pointer;
+}
+
+/* The always-visible tier flows the values inline — a label and its one-clause
+   meaning, wrapped like prose — instead of stacking one bullet per value. At
+   375 CSS px the stacked version measured 756 px tall and pushed the first
+   offer below the fold; the flowing version is about a third of that. The
+   nested full definitions keep the bulleted policy rhythm, where the entries
+   are long enough that flowing would hurt. */
+.trust-legend > details > section > .trust-legend-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem 1.1rem;
+  margin: 0.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trust-legend .trust-legend-full {
+  margin-top: 0.5rem;
+}
+
+.trust-legend .trust-legend-full > summary {
+  color: var(--gray);
+}
+
 /* Separator glyphs. Every one is aria-hidden and therefore exempt from WCAG
    1.4.3 as decoration, but painting them with --hairline (a 12% alpha meant
    for BORDERS) put them at 1.33:1 — a separator nobody can see separates

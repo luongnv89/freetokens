@@ -8,7 +8,58 @@
 // a schema change that breaks a component is a compile error.
 import type { Offer, OffersIndex } from "../types/offers-index";
 import type { UrlState } from "./urlState";
+// Trust wording has ONE home: scripts/trust-vocabulary.mjs (issues #507/#509).
+// The maps below are projections of it, so the badges, the hover-free legend,
+// the JSON-LD and the llms exports can never drift apart. Plain ESM + a
+// sibling .d.mts, the same arrangement as scripts/env-file.mjs.
+import {
+  EVIDENCE_LEVEL,
+  REVIEW_STATUS,
+  SIGNUP,
+  TRUST_COMBINED_EXAMPLE,
+  TRUST_SUMMARY,
+  TRUST_VERB_MAP,
+  ENROLLMENT_DEADLINE_NOTE,
+  LAST_CHECKED,
+  trustDefinitions,
+  trustFields,
+  type TrustValueDefinition,
+} from "../../scripts/trust-vocabulary.mjs";
 export type { Offer, OffersIndex };
+
+export {
+  ENROLLMENT_DEADLINE_NOTE,
+  LAST_CHECKED,
+  TRUST_COMBINED_EXAMPLE,
+  TRUST_SUMMARY,
+  TRUST_VERB_MAP,
+  trustDefinitions,
+  trustFields,
+};
+
+/** `value -> label` for one vocabulary axis (unknown values keep their name). */
+function labelsOf<T extends TrustValueDefinition>(
+  defs: Record<string, T>,
+): Record<string, string> {
+  return Object.fromEntries(
+    Object.entries(defs).map(([value, entry]) => [value, entry.label]),
+  );
+}
+
+/**
+ * Hover text = the full definition plus what the value does NOT attest, so a
+ * tooltip can never state less than the legend does.
+ */
+function titlesOf<T extends TrustValueDefinition>(
+  defs: Record<string, T>,
+): Record<string, string> {
+  return Object.fromEntries(
+    Object.entries(defs).map(([value, entry]) => [
+      value,
+      entry.claim ? `${entry.definition} ${entry.claim}` : entry.definition,
+    ]),
+  );
+}
 
 export const CATEGORIES = [
   "api_provider",
@@ -30,40 +81,25 @@ export const CATEGORY_LABELS: Record<string, string> = {
   student: "Student",
 };
 
-export const VERIFICATION_LABELS: Record<string, string> = {
-  social_proof: "social proof",
-  unverified: "unverified",
-};
+// Evidence level (`verification`). The labels deliberately avoid the word
+// "verified" on this axis: it belongs to review_status, and reusing it here
+// was what made "verified" and "unverified" appear side by side on one row.
+export const VERIFICATION_LABELS: Record<string, string> =
+  labelsOf(EVIDENCE_LEVEL);
 
-export const VERIFICATION_TITLES: Record<string, string> = {
-  social_proof:
-    "Not personally verified, but corroborated by the official website and social proof",
-  unverified: "Only social-media proofs — no official-website confirmation yet",
-};
+export const VERIFICATION_TITLES: Record<string, string> =
+  titlesOf(EVIDENCE_LEVEL);
 
-export const REVIEW_STATUS_LABELS: Record<string, string> = {
-  verified: "verified",
-  unverified: "unverified",
-  "under-review": "under review",
-  "to-be-verified": "To be verified",
-};
+// Review status (`review_status`).
+export const REVIEW_STATUS_LABELS: Record<string, string> =
+  labelsOf(REVIEW_STATUS);
 
-export const REVIEW_STATUS_TITLES: Record<string, string> = {
-  verified: "The curator has reviewed this offer firsthand",
-  unverified: "The curator has not reviewed this offer firsthand yet",
-  "under-review": "The curator is currently testing this offer",
-  "to-be-verified": "Current offer details need further verification before relying on this listing",
-};
+export const REVIEW_STATUS_TITLES: Record<string, string> =
+  titlesOf(REVIEW_STATUS);
 
-export const SIGNUP_LABELS: Record<string, string> = {
-  none: "no sign-up",
-  required: "sign-up required",
-};
+export const SIGNUP_LABELS: Record<string, string> = labelsOf(SIGNUP);
 
-export const SIGNUP_TITLES: Record<string, string> = {
-  none: "Claimable without creating an account",
-  required: "Claiming requires creating a (free) account",
-};
+export const SIGNUP_TITLES: Record<string, string> = titlesOf(SIGNUP);
 
 // Past this many days an age falls back to the absolute date (build.py
 // RELATIVE_DATE_MAX_DAYS).

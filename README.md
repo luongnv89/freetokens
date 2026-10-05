@@ -87,8 +87,14 @@ Since v2.0 (#25) expiry works as **retain-and-flag**: every validated offer
 stays in the generated `index.json`, each entry stamped with a build-time
 `"status": "active" | "expired"` (null-expiry offers are always `active`).
 Each entry also carries a curator `review_status`: `verified`, `unverified`,
-or `under-review`; this testing state is independent of expiry and evidence
-level.
+`under-review`, or `to-be-verified`. That is how far the curator has reviewed
+the listing (and whether a claim attempt is attested); it is independent of the
+`verification` evidence level (`social_proof` = corroborated by the provider's
+own site plus social proof, `unverified` = community-sourced only) and of
+expiry. The exact meaning of every value, including the claim-attempt answer,
+is fixed in [docs/schema.md](docs/schema.md#trust-vocabulary-verification-and-review_status),
+rendered as the hover-free "How to read these labels" legend on the home and
+offer-detail pages, and emitted in `llms.txt` / `llms-full.txt`.
 What changes between rebuilds is only visibility:
 
 - the home list renders **active** offers exactly as before;
