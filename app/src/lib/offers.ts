@@ -120,35 +120,6 @@ export function relativeDate(iso: string, today: string): string {
   return humanDate(iso);
 }
 
-/**
- * Best-effort numeric magnitude of a free-value string (build.py
- * amount_sort_value): first number wins, k/M multipliers honored,
- * unparseable strings sort as 0.
- */
-export function amountSortValue(amount: string): number {
-  const match = (amount || "").match(/[0-9][0-9.,]*/);
-  if (!match) return 0.0;
-  let value = parseFloat(match[0].replace(/,/g, "").replace(/\.$/, ""));
-  if (Number.isNaN(value)) return 0.0;
-  // Anchored to the string START exactly like build.py's re.match: only a
-  // value that *begins* the string ("10k credits") carries a multiplier.
-  const suffix = amount.match(/^[0-9][0-9.,]*\s*([kKmM])/);
-  if (suffix) value *= suffix[1].toLowerCase() === "k" ? 1_000 : 1_000_000;
-  return value;
-}
-
-/** Python %-formatting %g: 6 significant digits, exponent when compact. */
-export function formatAmountSort(value: number): string {
-  const exp = Math.floor(Math.log10(Math.abs(value)));
-  if (!Number.isFinite(exp)) return String(value); // 0 / Infinity fall through
-  if (exp >= 6 || exp < -4) {
-    const [mantissa, exponent] = value.toExponential(5).split("e");
-    const e = Number(exponent);
-    return `${mantissa.replace(/\.?0+$/, "")}e${e >= 0 ? "+" : "-"}${String(Math.abs(e)).padStart(2, "0")}`;
-  }
-  return String(parseFloat(value.toPrecision(6)));
-}
-
 /** Expired entries never reach the default visitor list (#25). */
 export function activeOffers(index: OffersIndex): Offer[] {
   return index.offers.filter((o) => o.status !== "expired");
@@ -178,7 +149,11 @@ export function offerMatches(offer: Offer, state: UrlState): boolean {
  * mode restores that original index order — which is the build's newest-ADDED
  * ordering (see readAddedDates in scripts/load-offers.mjs), and is therefore
  * the "Latest added" option in the sort control, not an unsorted fallback.
- * Null expiry sorts last under expiring.
+ * Null expiry sorts last under expiring. There is deliberately no amount /
+ * allowance sort: the free-text `amount` field mixes units (dollars, tokens,
+ * credits, characters, minutes, requests) and periods, so ranking it would
+ * fabricate a cross-unit value equivalence (#508). Any unrecognised mode —
+ * including the legacy "amount" — falls through to index order.
  */
 export function applySort(offers: Offer[], mode: string): Offer[] {
   const indexed = offers.map((offer, index) => ({ offer, index }));
@@ -197,12 +172,6 @@ export function applySort(offers: Offer[], mode: string): Offer[] {
       if (!eb) return -1;
       return ea.localeCompare(eb) || a.index - b.index;
     });
-  } else if (mode === "amount") {
-    indexed.sort(
-      (a, b) =>
-        amountSortValue(b.offer.amount) - amountSortValue(a.offer.amount) ||
-        a.index - b.index,
-    );
   } else {
     indexed.sort((a, b) => a.index - b.index);
   }

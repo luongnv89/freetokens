@@ -5,6 +5,14 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Cross-unit "Largest amount" sort removed (#508):** the allowance sort
+  compared the first number in each free-text `amount` string across dollars,
+  tokens, credits, characters, minutes and durations, presenting unrelated
+  units as comparable cash amounts. The sort control now offers only the two
+  orderings backed by a real comparable value — Recently checked and Expiring
+  soon — and a legacy `?sort=amount` URL or stored preference degrades to the
+  default order instead of ranking mixed units.
+
 - **Crawler access evidence recorded (#506):** the sampled home and detail URLs
   were probed by unauthenticated HTTP GET and their served policy artifacts
   (`robots.txt`, `sitemap.xml`, `llms.txt`) captured with agent, date, response

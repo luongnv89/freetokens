@@ -2,7 +2,13 @@
 // Whitelist-only: unknown params are dropped, matching the analytics
 // privacy stance of never persisting arbitrary query strings.
 
-export const SORT_MODES = ["newest", "expiring", "amount"] as const;
+// `amount` was removed (#508): the catalog carries dollars, tokens, credits,
+// characters, minutes and requests in one free-text field, so any single
+// numeric magnitude fabricated a cross-unit value equivalence that does not
+// exist. Only orderings backed by a real, comparable value are offered. A
+// legacy `?sort=amount` URL (or a stored `ft-prefs` value) degrades to the
+// default order via normalizeSort.
+export const SORT_MODES = ["newest", "expiring"] as const;
 export const DIMENSIONS = ["category", "verification", "signup"] as const;
 
 export type SortMode = (typeof SORT_MODES)[number];

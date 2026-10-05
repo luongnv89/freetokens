@@ -2,10 +2,8 @@ import { describe, it, expect } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ReviewStatusBadge } from "../components/Badge";
 import {
-  amountSortValue,
   applySort,
   buildDate,
-  formatAmountSort,
   humanDate,
   offerMatches,
   relativeDate,
@@ -16,8 +14,9 @@ import {
 import { emptyState } from "./urlState";
 
 // Expected values cross-checked against scripts/build.py (_human_date,
-// _relative_date, amount_sort_value) so the React parity layer can never
-// silently drift from the Python builder.
+// _relative_date) so the React parity layer can never silently drift from
+// the Python builder. There is no amount-sort parity anchor: the cross-unit
+// allowance ranking was removed in #508.
 describe("humanDate", () => {
   it("renders YYYY-MM-DD as e.g. 'Sep 6, 2026'", () => {
     expect(humanDate("2026-09-06")).toBe("Sep 6, 2026");
@@ -58,44 +57,6 @@ describe("relativeDate", () => {
 
   it("falls back to the absolute date past RELATIVE_DATE_MAX_DAYS (14)", () => {
     expect(relativeDate("2026-08-01", today)).toBe("Aug 1, 2026");
-  });
-});
-
-describe("amountSortValue", () => {
-  it("takes the first number and strips commas", () => {
-    expect(amountSortValue("$300 in credits")).toBe(300);
-    expect(amountSortValue("2,000 completions + 50 chats")).toBe(2000);
-  });
-
-  it("honors k/M multipliers", () => {
-    expect(amountSortValue("10k credits/month")).toBe(10_000);
-    expect(amountSortValue("5M tokens")).toBe(5_000_000);
-  });
-
-  it("sorts unparseable strings as 0", () => {
-    expect(amountSortValue("free while stocks last")).toBe(0);
-    expect(amountSortValue("")).toBe(0);
-  });
-
-  it("only applies k/M when the value STARTS the string (build.py re.match)", () => {
-    // Regression: "MiniMax M3" must sort as 3, never "M for million".
-    expect(amountSortValue("MiniMax M3, M2.7 free for 14 days")).toBe(3);
-  });
-});
-
-describe("formatAmountSort", () => {
-  // Expected strings lifted straight from the Python-built site/index.html
-  // data-amount-sort attributes — byte parity with build.py's %g formatting.
-  it("keeps small values plain", () => {
-    expect(formatAmountSort(3)).toBe("3");
-    expect(formatAmountSort(15)).toBe("15");
-    expect(formatAmountSort(5.2)).toBe("5.2");
-    expect(formatAmountSort(20000)).toBe("20000");
-  });
-
-  it("switches to exponent notation past 6 digits, %g-style", () => {
-    expect(formatAmountSort(3_000_000)).toBe("3e+06");
-    expect(formatAmountSort(50_000_000)).toBe("5e+07");
   });
 });
 
@@ -233,11 +194,23 @@ describe("applySort", () => {
     ]);
   });
 
-  it("orders amount descending by amountSortValue", () => {
-    expect(applySort(rows, "amount").map((o) => o.slug)).toEqual([
-      "b",
-      "c",
-      "a",
+  it("never ranks mixed allowance units as comparable cash amounts (#508)", () => {
+    // The catalog's single free-text `amount` field mixes dollars, tokens,
+    // credits and durations, so the legacy cross-unit "Largest amount" mode
+    // must degrade to index order rather than invent a cash equivalence from
+    // the first number. The old algorithm ranked this fixture
+    // tokens > credits > cash > year.
+    const mixed = [
+      offer({ slug: "cash", amount: "$300 in credits" }),
+      offer({ slug: "tokens", amount: "300000 tokens/month" }),
+      offer({ slug: "credits", amount: "1,000 one-time credits" }),
+      offer({ slug: "year", amount: "1-year free access" }),
+    ];
+    expect(applySort(mixed, "amount").map((o) => o.slug)).toEqual([
+      "cash",
+      "tokens",
+      "credits",
+      "year",
     ]);
   });
 

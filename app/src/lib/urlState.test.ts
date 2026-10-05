@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { emptyState, parseState, serializeState } from "./urlState";
+import { emptyState, normalizeSort, parseState, serializeState } from "./urlState";
 
 const FULL =
   "?q=foo&sort=expiring&category=coding&verification=social_proof&signup=required";
@@ -42,6 +42,13 @@ describe("parseState / serializeState", () => {
     expect(parseState("?sort=").sort).toBe("");
     expect(parseState("").sort).toBe("");
     expect(serializeState({ ...emptyState(), sort: "" })).toBe("");
+  });
+
+  it("retires the legacy cross-unit amount sort to the default order (#508)", () => {
+    // "amount" is no longer a supported mode, so an old bookmark or stored
+    // pref must fall back to the default order instead of ranking mixed units.
+    expect(parseState("?sort=amount").sort).toBe("");
+    expect(normalizeSort("amount")).toBe("");
   });
 
   it("drops unknown params and omits empty keys", () => {
