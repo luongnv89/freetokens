@@ -173,6 +173,7 @@ No sitemap resubmit is needed per offer — the file is regenerated on every bui
 - `Invalid JSON-LD structured data` — the breadcrumb JSON in `Breadcrumbs.tsx` is malformed (check `safeJsonLd` escaping).
 - `Missing robots.txt` / `Missing sitemap.xml` — `app/public/robots.txt` was deleted or `buildSitemap()` threw (check `lastmod` clamping or MAX_URLS).
 - GSC "**Submitted URL blocked by robots.txt**" — cross-check `app/public/robots.txt` policy A blocks: only `GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `Bytespider` should be `Disallow`. Search bots must stay `Allow`.
+- Treat **declared policy and real crawler delivery as separate signals.** A live `200` on a page and an `Allow` line in `robots.txt` prove only what the host serves to an ordinary client; they do not prove a search or retrieval crawler fetched it. Delivery needs authorized engine inspection (GSC URL Inspection → Test live URL) or request logs — the state, sampling method and the owner-only follow-up are recorded in [docs/qa/issue-506-crawler-access-verification.md](qa/issue-506-crawler-access-verification.md).
 
 ### 4.4 After every SEO-related change
 
