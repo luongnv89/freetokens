@@ -222,59 +222,59 @@ later screenshots — a test-order artifact, not an app defect.
 
 | State | URL | Input | Rows | Status | Overflow html/body | Targets <24px | <44px | Contrast measured | Below threshold | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 22 | 0 | [320-home.jpg](issue-504/320-home.jpg) |
-| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 32 | 23 | 0 | [320-provider.jpg](issue-504/320-provider.jpg) |
+| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 21 | 0 | [320-home.jpg](issue-504/320-home.jpg) |
+| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 32 | 22 | 0 | [320-provider.jpg](issue-504/320-provider.jpg) |
 | empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 27 | 11 | 0 | [320-empty.jpg](issue-504/320-empty.jpg) |
-| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 22 | 0 | [320-recovery.jpg](issue-504/320-recovery.jpg) |
+| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 21 | 0 | [320-recovery.jpg](issue-504/320-recovery.jpg) |
 | back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 27 | 11 | 0 | [320-back-empty.jpg](issue-504/320-back-empty.jpg) |
-| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 32 | 23 | 0 | [320-back-provider.jpg](issue-504/320-back-provider.jpg) |
+| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 32 | 22 | 0 | [320-back-provider.jpg](issue-504/320-back-provider.jpg) |
 | forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 27 | 11 | 0 | [320-forward-empty.jpg](issue-504/320-forward-empty.jpg) |
-| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 22 | 0 | [320-forward-recovery.jpg](issue-504/320-forward-recovery.jpg) |
-| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 27 | 41 | 41 | 0 | [320-detail.jpg](issue-504/320-detail.jpg) |
+| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 21 | 0 | [320-forward-recovery.jpg](issue-504/320-forward-recovery.jpg) |
+| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 27 | 41 | 36 | 0 | [320-detail.jpg](issue-504/320-detail.jpg) |
 
 ### 375px state captures
 
 | State | URL | Input | Rows | Status | Overflow html/body | Targets <24px | <44px | Contrast measured | Below threshold | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 22 | 0 | [375-home.jpg](issue-504/375-home.jpg) |
-| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 34 | 23 | 0 | [375-provider.jpg](issue-504/375-provider.jpg) |
+| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 31 | 21 | 0 | [375-home.jpg](issue-504/375-home.jpg) |
+| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 34 | 22 | 0 | [375-provider.jpg](issue-504/375-provider.jpg) |
 | empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 29 | 11 | 0 | [375-empty.jpg](issue-504/375-empty.jpg) |
-| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 22 | 0 | [375-recovery.jpg](issue-504/375-recovery.jpg) |
+| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 21 | 0 | [375-recovery.jpg](issue-504/375-recovery.jpg) |
 | back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 29 | 11 | 0 | [375-back-empty.jpg](issue-504/375-back-empty.jpg) |
-| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 34 | 23 | 0 | [375-back-provider.jpg](issue-504/375-back-provider.jpg) |
+| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 22 | 34 | 22 | 0 | [375-back-provider.jpg](issue-504/375-back-provider.jpg) |
 | forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 18 | 29 | 11 | 0 | [375-forward-empty.jpg](issue-504/375-forward-empty.jpg) |
-| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 22 | 0 | [375-forward-recovery.jpg](issue-504/375-forward-recovery.jpg) |
-| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 29 | 41 | 41 | 0 | [375-detail.jpg](issue-504/375-detail.jpg) |
+| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 21 | 33 | 21 | 0 | [375-forward-recovery.jpg](issue-504/375-forward-recovery.jpg) |
+| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 29 | 41 | 36 | 0 | [375-detail.jpg](issue-504/375-detail.jpg) |
 
 ### 768px state captures
 
 | State | URL | Input | Rows | Status | Overflow html/body | Targets <24px | <44px | Contrast measured | Below threshold | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 22 | 0 | [768-home.jpg](issue-504/768-home.jpg) |
-| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 18 | 37 | 23 | 0 | [768-provider.jpg](issue-504/768-provider.jpg) |
+| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 21 | 0 | [768-home.jpg](issue-504/768-home.jpg) |
+| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 18 | 37 | 22 | 0 | [768-provider.jpg](issue-504/768-provider.jpg) |
 | empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 14 | 32 | 11 | 0 | [768-empty.jpg](issue-504/768-empty.jpg) |
-| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 22 | 0 | [768-recovery.jpg](issue-504/768-recovery.jpg) |
+| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 21 | 0 | [768-recovery.jpg](issue-504/768-recovery.jpg) |
 | back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 14 | 32 | 11 | 0 | [768-back-empty.jpg](issue-504/768-back-empty.jpg) |
-| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 18 | 37 | 23 | 0 | [768-back-provider.jpg](issue-504/768-back-provider.jpg) |
+| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 18 | 37 | 22 | 0 | [768-back-provider.jpg](issue-504/768-back-provider.jpg) |
 | forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 14 | 32 | 11 | 0 | [768-forward-empty.jpg](issue-504/768-forward-empty.jpg) |
-| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 22 | 0 | [768-forward-recovery.jpg](issue-504/768-forward-recovery.jpg) |
-| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 41 | 0 | [768-detail.jpg](issue-504/768-detail.jpg) |
+| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 17 | 36 | 21 | 0 | [768-forward-recovery.jpg](issue-504/768-forward-recovery.jpg) |
+| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 36 | 0 | [768-detail.jpg](issue-504/768-detail.jpg) |
 
 ### 1440px state captures
 
 | State | URL | Input | Rows | Status | Overflow html/body | Targets <24px | <44px | Contrast measured | Below threshold | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 23 | 0 | [1440-home.jpg](issue-504/1440-home.jpg) |
-| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 19 | 39 | 24 | 0 | [1440-provider.jpg](issue-504/1440-provider.jpg) |
+| home | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 22 | 0 | [1440-home.jpg](issue-504/1440-home.jpg) |
+| provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 19 | 39 | 23 | 0 | [1440-provider.jpg](issue-504/1440-provider.jpg) |
 | empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 15 | 33 | 11 | 0 | [1440-empty.jpg](issue-504/1440-empty.jpg) |
-| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 23 | 0 | [1440-recovery.jpg](issue-504/1440-recovery.jpg) |
+| recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 22 | 0 | [1440-recovery.jpg](issue-504/1440-recovery.jpg) |
 | back-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 15 | 33 | 11 | 0 | [1440-back-empty.jpg](issue-504/1440-back-empty.jpg) |
-| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 19 | 39 | 24 | 0 | [1440-back-provider.jpg](issue-504/1440-back-provider.jpg) |
+| back-provider | `/index.html?q=aerolink` | `aerolink` | 1 | Showing 1 of 199 offers | 0/0 | 19 | 39 | 23 | 0 | [1440-back-provider.jpg](issue-504/1440-back-provider.jpg) |
 | forward-empty | `/index.html?q=no-such-provider-issue-504` | `no-such-provider-issue-504` | 0 | Showing 0 of 199 offers | 0/0 | 15 | 33 | 11 | 0 | [1440-forward-empty.jpg](issue-504/1440-forward-empty.jpg) |
-| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 23 | 0 | [1440-forward-recovery.jpg](issue-504/1440-forward-recovery.jpg) |
-| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 41 | 0 | [1440-detail.jpg](issue-504/1440-detail.jpg) |
+| forward-recovery | `/index.html` | — | 199 | Showing all 199 offers | 0/0 | 18 | 38 | 22 | 0 | [1440-forward-recovery.jpg](issue-504/1440-forward-recovery.jpg) |
+| detail | `/offers/aerolink-starter-free-trial.html` | — | 0 | — | 0/0 | 25 | 41 | 36 | 0 | [1440-detail.jpg](issue-504/1440-detail.jpg) |
 
-"Below threshold" counts non-decorative failures only. The linked JSON keeps every sampled element, including `aria-hidden` decorative text (e.g. the `·` separators in offer metadata, ~1.2:1) whose `meetsThreshold` is `false`; decorative samples are exempt from WCAG 1.4.3 and excluded from the count above.
+"Contrast measured" counts samples with a computed ratio, excluding decorative `aria-hidden` text; "Below threshold" counts non-decorative failures only. The linked JSON keeps every sampled element, including `aria-hidden` decorative text (e.g. the `·` separators in offer metadata, ~1.2:1) whose `meetsThreshold` is `false`; decorative samples are exempt from WCAG 1.4.3 and excluded from the count above.
 
 ### Retained focus captures
 
