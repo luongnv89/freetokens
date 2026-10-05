@@ -95,9 +95,11 @@ be accompanied by an updated report if measurements change.
 Interactive dimensions come from live `getBoundingClientRect()` results, in
 CSS pixels. Targets below 24 or 44 pixels on either axis are flagged for
 review, not declared WCAG failures: spacing, inline-link and other exceptions
-were not evaluated. Home target/contrast sampling includes the toolbar/header,
-footer and first offer row; it does not exhaust all 201 rows. Detail includes
-all rendered interactive elements, even those below the initial fold.
+were not evaluated. On the home surface, target sampling covers the
+toolbar/header, footer and first offer row, while contrast sampling covers
+`main *` and `.site-header *` only — the `<footer>` is outside the contrast
+selector — and neither exhausts all 201 rows. Detail includes all rendered
+interactive elements, even those below the initial fold.
 
 Contrast uses runtime computed foreground/background colors after rendering.
 Chromium converts each CSS color to sRGB RGBA through a one-pixel canvas; the
