@@ -1,0 +1,24 @@
+{
+  "summary": "Approval-based Sentry SaaS service credits, not general AI-token or LLM API credits. Applicants must be founded in the last two years, have raised less than $5M venture capital and be new to paying for Sentry. A free Sentry account and organization slug are needed. No mandatory partner referral stated for the general application; separate YC/a16z speedrun portal offers do not stack. Program page states one-year credit expiry from joining. Live form accepts company, organization slug, founders, email, founding date and funding details. No application deadline stated and no application or redemption tested.",
+  "claim_steps": [
+    "Confirm company founded within the last two years, less than $5M venture funding and new to paying for Sentry.",
+    "Create a free Sentry account/organization and record its organization slug.",
+    "Submit company website, org slug, founder names, email, founding date and funding details at https://sentry.io/for/startups/apply/.",
+    "If in YC or a16z speedrun, compare the separate portal deal; it cannot stack with this offer.",
+    "If approved, confirm your actual award and the 12-month expiry."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://sentry.io/for/startups/apply/",
+      "title": "Apply to Sentry for Startups | Sentry",
+      "text": "Get up to $5,000 in credits (expiring after 12 months) and priority support"
+    },
+    {
+      "type": "link",
+      "url": "https://sentry.io/for/startups/",
+      "title": "Sentry for Startups",
+      "text": "$5,000 in credits* so you can try everything Sentry has to offer"
+    }
+  ]
+}

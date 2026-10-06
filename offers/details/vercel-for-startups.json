@@ -1,0 +1,30 @@
+{
+  "summary": "Approval-based Vercel platform credit covering eligible seats, transfer, compute, v0 and AI Gateway, not $30K exclusively for LLM inference. Applicants must be backed by an approved Startup Partner, Series A or earlier, applying within 12 months of latest funding, with no previous Vercel startup credits. Company website, matching email, proof of partner affiliation and payment method required. Current Flexible Commitment terms apply to acceptances on or after August 6, 2026; earlier participants must consult their acceptance email. FAQ provides Enterprise-tier access although the form still says Free Vercel Pro. Allocation lasts up to one year or exhaustion, no rollover, single team only. AI Gateway is capped at 50% of total allocation and monthly credit amount; excess is billed even with remaining other credit. Standard billing follows expiry/exhaustion. Approval-specific contract was not available without applying.",
+  "claim_steps": [
+    "Confirm approved Startup Partner affiliation, Series A or earlier, no prior startup credits, and funding within the last 12 months.",
+    "Sign in at https://vercel.com/startups/credits, select/create the intended team and supply company-domain email.",
+    "Upload partner dashboard/hub/wiki/console proof; acceptance-email/profile screenshots alone are insufficient.",
+    "If approved, review and accept the startup terms and provide a valid payment method.",
+    "Monitor monthly and total AI Gateway caps and the one-year expiry; excess Gateway usage is billed at standard rates."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/startups/credits",
+      "title": "Vercel for Startups",
+      "text": "The Flexible Commitment Amount depends on the arrangement between Vercel and your Startup Partner and may vary between partners, up to a maximum of $30,000."
+    },
+    {
+      "type": "link",
+      "url": "https://vercel.com/startups",
+      "title": "Vercel for Startups",
+      "text": "Vercel for Startups gives eligible teams up to $30,000 in Flexible Commitment Amount, Enterprise-tier access, and startup-focused support to build and scale on Vercel."
+    },
+    {
+      "type": "link",
+      "url": "https://vercel.com/docs/pricing/flex-commit",
+      "title": "Vercel Flexible Commitment",
+      "text": "Flexible Commitment is a prepaid balance you can use across Vercel products. Each unit is valued at $1.00 USD."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "summary": "OpenAI offers verified university students $100 in ChatGPT credits (2,500 credits) for Codex. Students must be currently enrolled at a degree-granting university in the United States or Canada and reside in the United States or Canada when claiming. One offer per student. These are not OpenAI API credits. Credits expire 12 months after the grant; no claim deadline is stated. The official page links to an active claim flow, but a bot challenge prevented completing it. Enrollment verification and credit delivery were not tested.",
+  "claim_steps": [
+    "Confirm current enrollment at a degree-granting university in the United States or Canada and residence in either country when claiming.",
+    "Open https://chatgpt.com/codex/offers/students and sign in with a ChatGPT Free, Go, Plus, or Pro account; a personal account is permitted.",
+    "Use your university email in the student-verification flow. Successful verification is required; one offer per student.",
+    "After successful verification, OpenAI states that $100 (2,500 credits) is automatically added to the ChatGPT account for Codex, not the API.",
+    "Check https://chatgpt.com/codex/settings/usage and use the credits within 12 months of the grant date. Service Credit Terms apply."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://developers.openai.com/community/students",
+      "title": "Codex for Students — OpenAI Developers",
+      "text": "Verified university students in the United States and Canada can claim $100 in ChatGPT credits to use in Codex. One offer per student, subject to successful verification."
+    }
+  ]
+}

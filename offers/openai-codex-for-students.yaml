@@ -1,0 +1,13 @@
+# Verified 2026-10-06 against https://developers.openai.com/community/students
+# "Verified university students in the United States and Canada can claim $100 in ChatGPT credits to use in Codex."
+# Official claim link exists; bot challenge prevented completion. No account, enrollment, or credit delivery tested.
+title: OpenAI Codex for Students — $100 ChatGPT Credits
+provider: OpenAI
+category: student
+amount: "$100 (2,500 ChatGPT credits) for Codex, not API credits; verified university students enrolled and residing in US/Canada only; one offer per student; credits expire 12 months after grant"
+expiry_date: null
+source_url: https://developers.openai.com/community/students
+verified_date: 2026-10-06
+verification: social_proof
+review_status: under-review
+signup: required
