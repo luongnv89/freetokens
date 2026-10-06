@@ -5,6 +5,14 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **AI content usage preferences declared as Content Signals (#523):**
+  `app/public/robots.txt` now carries
+  `Content-Signal: ai-train=no, search=yes, ai-input=no` inside the
+  `User-agent: *` group — the Policy A posture expressed in the
+  [Content Signals vocabulary](https://datatracker.ietf.org/doc/draft-romm-aipref-contentsignals/)
+  so AI-preference parsers (and the isitagentready `contentSignals` check)
+  can read it directly. Per-agent group rules are unchanged.
+
 - **Trust legend moved to the bottom of the page as a reference (#518):** the
   "How to read these labels" block no longer sits above the offer list on home
   or between the summary and the claim steps on an offer page; it renders as a
