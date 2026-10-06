@@ -4,6 +4,6 @@
   "resource_documentation": "https://freetokens.custats.info/auth.md",
   "resource_logo_uri": "https://freetokens.custats.info/logo-icon.svg",
   "authorization_servers": ["https://freetokens.custats.info"],
-  "scopes_supported": [],
+  "scopes_supported": ["read"],
   "bearer_methods_supported": ["header"]
 }
