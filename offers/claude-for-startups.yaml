@@ -1,17 +1,13 @@
-# Verified 2026-10-06 against https://claude.com/programs/startups
-# ("Apply to be considered for credits and priority rate limits.")
-# ("Venture backed? Apply for free credits and priority rate limits.")
-# FAQ: "To qualify for Claude credits and extras, your company must have
-# received equity funding from institutional investor, been founded within
-# the last four years, and not previously received Anthropic startup credits."
-# ("You'll need a Claude Console account, a company email...")
-# No published dollar amount for the credits.
-title: Claude for Startups
+# Verified 2026-10-06 against https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build
+# ("Claude Startups members can get up to $7,000 in Claude products and credits to build*.")
+# ("A one-time API credit of $1,000 to start building: available as soon as you’re approved...")
+# ("Startups founded in the last five years or funded in the last two are eligible to apply.")
+title: Claude Startups
 provider: Anthropic
 category: startup_program
-amount: Apply for free Claude API credits + priority rate limits (credits require institutional equity funding, founded within 4 years, no prior Anthropic startup credits; first-party Claude API only; dollar amount unpublished)
+amount: "$1,000 in Claude API credits (valid for 6 months) + 1 year of Claude Team for up to 5 Premium seats; up to $45,000 in partner offers"
 expiry_date: null
-source_url: https://claude.com/programs/startups
+source_url: https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build
 verified_date: 2026-10-06
 verification: social_proof
 review_status: under-review
