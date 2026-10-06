@@ -5,6 +5,19 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **OAuth/agent-auth discovery metadata published (#531, #533, #534):**
+  `/.well-known/oauth-authorization-server` now serves an RFC 8414
+  authorization-server document with the site as its own `issuer`, empty
+  `grant_types_supported`/`response_types_supported`, and an `agent_auth`
+  block declaring anonymous-only access; `/.well-known/oauth-protected-resource`
+  serves the RFC 9728 protected-resource document naming the site as the
+  resource and that issuer in `authorization_servers`; and `/auth.md` tells
+  agents the catalog needs no registration. The site runs no auth server, so
+  the documents honestly declare "no protected resources" — no endpoint URLs
+  are fabricated — and both extensionless well-known paths ship identical
+  `.json` twins because GitHub Pages serves extensionless files with a generic
+  Content-Type.
+
 - **DNS-AID runbook added (#525):** `docs/dns-aid.md` records the exact
   `_index._agents.freetokens.custats.info` HTTPS/SVCB record set, the DNSSEC
   requirement, and the DNS-host move the isitagentready `dnsAid` check needs.
