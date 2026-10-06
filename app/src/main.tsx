@@ -6,6 +6,7 @@ import type { OffersIndex } from "./lib/offers.ts";
 import type { DetailsMap } from "./lib/offerDetails.ts";
 import { resolveRoute } from "./routes.ts";
 import { scheduleAnalyticsInit } from "./lib/analytics.ts";
+import { registerWebMcpTools } from "./lib/webmcp.ts";
 
 // Keep the catalog out of the executable bundle: it changes with every offer
 // while the application code does not. Resolve against this module URL so
@@ -68,6 +69,11 @@ async function boot() {
         </StrictMode>,
       );
     }
+    // WebMCP (#535): expose the catalog's real actions — search/filter,
+    // offer lookup, detail navigation — to in-browser agents. The call
+    // feature-detects document/navigator.modelContext and no-ops where the
+    // draft API is absent; registration is cheap and runs on every page.
+    registerWebMcpTools(index);
   } catch (error) {
     console.error(
       "Unable to hydrate FreeTokens; prerendered content remains available.",
