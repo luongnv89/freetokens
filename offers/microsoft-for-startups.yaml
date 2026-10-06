@@ -1,15 +1,12 @@
-# Verified 2026-09-15 against https://www.microsoft.com/en-us/startups
-# ("Access cutting-edge AI models, developer tools, and up to $150,000 in
-# credits" / "Startup credits: Credits can be applied across eligible Azure
-# services to support your startup from early development through production
-# workloads")
-title: Microsoft for Startups — up to $150K Azure
+# Verified 2026-10-06 against https://learn.microsoft.com/en-us/startups/benefits
+# "Eligible Investor Network-backed startups may unlock up to $200K in Startup credits and expanded support."
+title: Microsoft for Startups — Up to $150K / $200K Azure
 provider: Microsoft
 category: startup_program
-amount: Up to $150,000 in Azure credits usable across eligible Azure services incl. Azure AI / OpenAI services, plus free dev tools
+amount: Up to $150,000 in Azure startup credits progressively unlocked with verified progress/adoption/usage; eligible Investor Network-backed startups may unlock up to $200,000; approval and conditions apply
 expiry_date: null
-source_url: https://www.microsoft.com/en-us/startups
-verified_date: 2026-09-30
+source_url: https://learn.microsoft.com/en-us/startups/benefits
+verified_date: 2026-10-06
 verification: social_proof
 review_status: under-review
 signup: required

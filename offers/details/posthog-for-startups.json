@@ -1,0 +1,24 @@
+{
+  "summary": "PostHog platform credits for eligible analytics, session replay, feature flags and other services, not general LLM API credits. Company must be under two years old, have raised less than $5M, not be acquired, and use a company-domain account. Eligible accounts were created from January 2023; official pages differ on the exact January 1 boundary, so do not rely on that boundary without confirmation. A paid usage-based plan and billing details are required. Credits run for 12 months from application and do not roll over or convert to cash. Since September 14, 2026 they exclude PostHog Desktop, Slack app, Replay Vision, PostHog AI and Inbox; AI observability and context warehouse remain eligible. General startup credits do not cover a BAA under Boost. Separate YC annual benefits and partner discounts are not included here. Standard billing follows expiry/exhaustion. No application submitted.",
+  "claim_steps": [
+    "Confirm the company is under two years old, has raised less than $5M, and is not acquired.",
+    "Use a company-domain PostHog account and enroll in a paid usage-based plan with billing details.",
+    "Apply at https://app.posthog.com/startups; applications are reviewed for eligibility.",
+    "Use eligible credits within 12 months starting at application, not activation.",
+    "Do not spend these credits on excluded PostHog AI tools or Boost BAA; monitor usage to avoid unexpected standard billing."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://posthog.com/startups",
+      "title": "PostHog for Startups | $50K in credits for early-stage teams",
+      "text": "$50,000 in PostHog credits for 12 months"
+    },
+    {
+      "type": "link",
+      "url": "https://posthog.com/handbook/marketing/startups",
+      "title": "Startup programs and partnerships - Handbook - PostHog",
+      "text": "They are valid for 12 months and that timer begins at application. Once expired or fully used, teams are moved to standard billing."
+    }
+  ]
+}

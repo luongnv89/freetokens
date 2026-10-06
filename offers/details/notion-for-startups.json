@@ -1,0 +1,30 @@
+{
+  "summary": "Free subscription time, not cash or a $12,000 credit balance. Eligible partner-affiliated startups may get six months of Business including Notion AI; eligible non-partner startups three months. SMBs/service businesses, companies under ten employees or insufficiently verified applicants may receive one month. Requires new/non-paying Notion customer, fewer than 100 employees, company website, work-domain email, valid Notion domain and no prior Notion promotions. Three/six-month offers target scalable tech products/services. Six months requires partner code. One redemption; offers do not stack. No public campaign end date established; legal page was JS-only so separate issuance-expiry terms were not fully verified. No application or benefit delivery tested.",
+  "claim_steps": [
+    "Confirm new/non-paying Notion status, fewer than 100 employees, and no previous Notion promotions.",
+    "Prepare a public company website, company-domain email and valid Notion workspace/domain.",
+    "If partner-affiliated, request the partner code; this is needed for consideration for the six-month offer.",
+    "Apply via https://www.notion.com/startups-apply and sign in; Notion determines eligibility and the 1/3/6-month benefit.",
+    "If approved, confirm the Business plan with Notion AI was applied; review billing and expiry before the free period ends."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.notion.com/help/notion-for-startups",
+      "title": "Notion for startups | Notion Help – Notion Help Center",
+      "text": "Partner-affiliated startups: Get 6 months free on the Business Plan (including Notion AI)."
+    },
+    {
+      "type": "link",
+      "url": "https://www.notion.com/startups",
+      "title": "Notion for Startups",
+      "text": "The startup offer is equivalent to a maximum of $12,000 for 100 employees."
+    },
+    {
+      "type": "link",
+      "url": "https://www.notion.com/startups-apply",
+      "title": "Notion startup application",
+      "text": "Only professional email domains are eligible for this offer."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "summary": "Approval-based Datadog observability and security platform credits, not an external LLM API grant. Applicants must be Series A or earlier and referred by an official partner; current/prior Datadog customers and prior startup-credit recipients are excluded. Allocation is specified in the acceptance notice. Activate within 30 days; program ends at credit exhaustion, removal, or 12 months after activation. Three months of inactivity can cause removal. Credits exclude taxes, technical/premier support and professional services. Standard paid billing follows completion. No claim deadline stated; no application or redemption tested.",
+  "claim_steps": [
+    "Obtain a referral from an official Datadog startup partner; direct un-referred applications are not eligible.",
+    "Confirm Series A or earlier status and no current/prior Datadog customer or startup-credit history.",
+    "Apply through https://www.datadoghq.com/partner/datadog-for-startups/#apply with a valid Datadog account.",
+    "If accepted, review your awarded allocation and activate it within 30 days.",
+    "Monitor usage and the 12-month validity period; standard billing follows program completion."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.datadoghq.com/partner/datadog-for-startups/",
+      "title": "Datadog for Startups | Datadog",
+      "text": "A year of Datadog (up to $100k in credits)"
+    },
+    {
+      "type": "link",
+      "url": "https://www.datadoghq.com/legal/datadog-for-startups/",
+      "title": "Datadog for Startups Program Terms | Datadog",
+      "text": "Startup Credits have no cash value, are non-refundable, non-transferable, and may not be applied to taxes or amounts owed for technical, premier support, or professional services."
+    }
+  ]
+}

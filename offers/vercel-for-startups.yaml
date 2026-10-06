@@ -1,0 +1,13 @@
+# Verified 2026-10-06 against https://vercel.com/startups/credits
+# "The Flexible Commitment Amount depends on the arrangement between Vercel and your Startup Partner and may vary between partners, up to a maximum of $30,000."
+# Known conflict: https://vercel.com/startups/credits form says "Get Free Vercel Pro for Startups!"; current FAQ and program landing describe Enterprise-tier access and Flexible Commitment terms applying from August 6, 2026.
+title: "Vercel for Startups — Up to $30K Platform Credits"
+provider: "Vercel"
+category: "startup_program"
+amount: "Up to $30,000 partner-dependent Flexible Commitment for up to 1 year with Enterprise-tier access; AI Gateway limited to 50% of total allocation and monthly credit amount; overages billed"
+expiry_date: null
+source_url: "https://vercel.com/startups/credits"
+verified_date: "2026-10-06"
+verification: "social_proof"
+review_status: "under-review"
+signup: "required"

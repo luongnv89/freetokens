@@ -1,0 +1,24 @@
+{
+  "summary": "One-time credit for an approved GitHub Enterprise Cloud account on GitHub.com, usable for eligible Enterprise licenses and add-ons/metered services including Copilot, Advanced Security and Actions. Requires approved partner affiliation and outside funding, Series B or earlier; non-equity credits do not count as funding. Must not have used Enterprise in the preceding six months or previously received qualifying GitHub/Microsoft startup credits or Enterprise-license grants. Enterprise Server/data-residency enterprises excluded. Apply through partner referral, not the obsolete application URL. Credits last up to 12 months from approval or exhaustion; nontransferable, no reapplication, valid payment method required. Downgrading forfeits remaining credit; active services automatically transition to paid billing. Previous free-seat offer is discontinued. No application or credit delivery tested.",
+  "claim_steps": [
+    "Confirm Series B or earlier and both outside funding and approved startup-partner affiliation.",
+    "Check https://github.com/enterprise/startups/partners and request a referral from your investor, accelerator or incubator.",
+    "Confirm no Enterprise use in the last six months and no prior disqualifying startup credits/license grants.",
+    "Follow the partner referral for an eligible Enterprise Cloud account and provide a valid payment method.",
+    "Use awarded credits within 12 months from approval; monitor exhaustion because active products automatically switch to paid billing."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://github.com/enterprise/startups",
+      "title": "Build your startup on GitHub · GitHub",
+      "text": "Eligible startups receive $10,000 in GitHub credits to use across the full GitHub Enterprise platform for up to 12 months."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/enterprise/startups/partners",
+      "title": "GitHub for Startups partners",
+      "text": "Check whether your investor, accelerator, or incubator participates in GitHub for Startups. If they do, ask them for a referral to the program—we’ll handle everything from there."
+    }
+  ]
+}

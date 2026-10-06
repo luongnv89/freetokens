@@ -1,16 +1,30 @@
 {
-  "summary": "Microsoft for Startups offers up to $150,000 in Azure credits usable across eligible Azure services including Azure AI and Azure OpenAI services, plus free access to dev tools, expert guidance and go-to-market support through Microsoft's customer network.",
+  "summary": "Microsoft offers up to $150,000 in Azure startup credits unlocked over time with verified progress, service adoption and sustained Azure usage; eligible Investor Network-backed startups may unlock up to $200,000. Neither maximum is guaranteed upfront. Applicants must own a software product/service, be privately held and for-profit, headquartered where Azure is available, not have received more than $350,000 lifetime free Azure credits, and not have raised Series C or later. Educational/government organizations, consultancies/agencies and cryptocurrency mining are excluded. Current documentation does not state a general credit duration or claim deadline. Application destination was documented but not independently completed; no award/redemption tested.",
   "claim_steps": [
-    "Sign in / apply via the Microsoft for Startups portal (microsoft.com/en-us/startups).",
-    "Unlock startup benefits and claim Azure credits through the portal.",
-    "Apply credits to eligible Azure services as the startup scales."
+    "Apply via https://startups.microsoft.com by selecting Get started.",
+    "Confirm company-owned software product, privately held for-profit status, eligible headquarters, funding stage and prior-credit eligibility.",
+    "Eligible Investor Network-backed applicants can provide an optional investor referral code for additional benefits.",
+    "Review the actual portal allocation: credits unlock progressively with verified progress, adoption and Azure usage.",
+    "Confirm expiry and billing conditions in the award/portal rather than assuming older Founders Hub terms."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://learn.microsoft.com/en-us/startups/benefits",
+      "title": "Microsoft for Startups Investor Offer Benefits | Microsoft Learn",
+      "text": "Eligible Investor Network-backed startups may unlock up to $200K in Startup credits and expanded support."
+    },
     {
       "type": "link",
       "url": "https://www.microsoft.com/en-us/startups",
       "title": "Microsoft for Startups",
       "text": "Access cutting-edge AI models, developer tools, and up to $150,000 in credits, backed by Microsoft's global customer network, enterprise-grade security, and privacy you can trust. Startup credits: Credits can be applied across eligible Azure services to support your startup from early development through production workloads."
+    },
+    {
+      "type": "link",
+      "url": "https://learn.microsoft.com/en-us/startups/microsoft-for-startups/overview",
+      "title": "Microsoft for Startups overview",
+      "text": "Unlock up to $150K in Startup credits over time as your startup demonstrates verified progress, service adoption, and sustained Azure usage."
     }
   ]
 }

@@ -2,11 +2,81 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-06T07:09:33Z — 177 of 195 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-06T14:18:08Z — 172 of 202 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Vercel for Startups — Up to $30K Platform Credits
+- Provider: Vercel
+- Category: startup_program
+- Amount: Up to $30,000 partner-dependent Flexible Commitment for up to 1 year with Enterprise-tier access; AI Gateway limited to 50% of total allocation and monthly credit amount; overages billed
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://vercel.com/startups/credits
+- Page: https://freetokens.custats.info/offers/vercel-for-startups.html
+- Summary: Approval-based Vercel platform credit covering eligible seats, transfer, compute, v0 and AI Gateway, not $30K exclusively for LLM inference. Applicants must be backed by an approved Startup Partner, Series A or earlier, applying within 12 months of latest funding, with no previous Vercel startup credits. Company website, matching email, proof of partner affiliation and payment method required. Current Flexible Commitment terms apply to acceptances on or after August 6, 2026; earlier participants must consult their acceptance email. FAQ provides Enterprise-tier access although the form still says Free Vercel Pro. Allocation lasts up to one year or exhaustion, no rollover, single team only. AI Gateway is capped at 50% of total allocation and monthly credit amount; excess is billed even with remaining other credit. Standard billing follows expiry/exhaustion. Approval-specific contract was not available without applying.
+- Claim steps: Confirm approved Startup Partner affiliation, Series A or earlier, no prior startup credits, and funding within the last 12 months. | Sign in at https://vercel.com/startups/credits, select/create the intended team and supply company-domain email. | Upload partner dashboard/hub/wiki/console proof; acceptance-email/profile screenshots alone are insufficient. | If approved, review and accept the startup terms and provide a valid payment method. | Monitor monthly and total AI Gateway caps and the one-year expiry; excess Gateway usage is billed at standard rates.
+### Sentry for Startups — Up to $5K Credits
+- Provider: Sentry
+- Category: startup_program
+- Amount: Up to $5,000 in Sentry observability/debugging credits expiring after 12 months + priority support; founded within 2 years, under $5M VC raised, new to paying for Sentry
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://sentry.io/for/startups/apply/
+- Page: https://freetokens.custats.info/offers/sentry-for-startups.html
+- Summary: Approval-based Sentry SaaS service credits, not general AI-token or LLM API credits. Applicants must be founded in the last two years, have raised less than $5M venture capital and be new to paying for Sentry. A free Sentry account and organization slug are needed. No mandatory partner referral stated for the general application; separate YC/a16z speedrun portal offers do not stack. Program page states one-year credit expiry from joining. Live form accepts company, organization slug, founders, email, founding date and funding details. No application deadline stated and no application or redemption tested.
+- Claim steps: Confirm company founded within the last two years, less than $5M venture funding and new to paying for Sentry. | Create a free Sentry account/organization and record its organization slug. | Submit company website, org slug, founder names, email, founding date and funding details at https://sentry.io/for/startups/apply/. | If in YC or a16z speedrun, compare the separate portal deal; it cannot stack with this offer. | If approved, confirm your actual award and the 12-month expiry.
+### PostHog for Startups — $50K Credits
+- Provider: PostHog
+- Category: startup_program
+- Amount: $50,000 in PostHog credits for 12 months from application; startups under 2 years old and under $5M raised; AI tools excluded since September 14, 2026 (AI observability/context warehouse remain eligible)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://posthog.com/startups
+- Page: https://freetokens.custats.info/offers/posthog-for-startups.html
+- Summary: PostHog platform credits for eligible analytics, session replay, feature flags and other services, not general LLM API credits. Company must be under two years old, have raised less than $5M, not be acquired, and use a company-domain account. Eligible accounts were created from January 2023; official pages differ on the exact January 1 boundary, so do not rely on that boundary without confirmation. A paid usage-based plan and billing details are required. Credits run for 12 months from application and do not roll over or convert to cash. Since September 14, 2026 they exclude PostHog Desktop, Slack app, Replay Vision, PostHog AI and Inbox; AI observability and context warehouse remain eligible. General startup credits do not cover a BAA under Boost. Separate YC annual benefits and partner discounts are not included here. Standard billing follows expiry/exhaustion. No application submitted.
+- Claim steps: Confirm the company is under two years old, has raised less than $5M, and is not acquired. | Use a company-domain PostHog account and enroll in a paid usage-based plan with billing details. | Apply at https://app.posthog.com/startups; applications are reviewed for eligibility. | Use eligible credits within 12 months starting at application, not activation. | Do not spend these credits on excluded PostHog AI tools or Boost BAA; monitor usage to avoid unexpected standard billing.
+### OpenAI Codex for Students — $100 ChatGPT Credits
+- Provider: OpenAI
+- Category: student
+- Amount: $100 (2,500 ChatGPT credits) for Codex, not API credits; verified university students enrolled and residing in US/Canada only; one offer per student; credits expire 12 months after grant
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://developers.openai.com/community/students
+- Page: https://freetokens.custats.info/offers/openai-codex-for-students.html
+- Summary: OpenAI offers verified university students $100 in ChatGPT credits (2,500 credits) for Codex. Students must be currently enrolled at a degree-granting university in the United States or Canada and reside in the United States or Canada when claiming. One offer per student. These are not OpenAI API credits. Credits expire 12 months after the grant; no claim deadline is stated. The official page links to an active claim flow, but a bot challenge prevented completing it. Enrollment verification and credit delivery were not tested.
+- Claim steps: Confirm current enrollment at a degree-granting university in the United States or Canada and residence in either country when claiming. | Open https://chatgpt.com/codex/offers/students and sign in with a ChatGPT Free, Go, Plus, or Pro account; a personal account is permitted. | Use your university email in the student-verification flow. Successful verification is required; one offer per student. | After successful verification, OpenAI states that $100 (2,500 credits) is automatically added to the ChatGPT account for Codex, not the API. | Check https://chatgpt.com/codex/settings/usage and use the credits within 12 months of the grant date. Service Credit Terms apply.
+### Notion for Startups — Up to 6 Months Business + AI
+- Provider: Notion
+- Category: startup_program
+- Amount: 1–6 months free Notion Business including Notion AI: 6 months eligible partner startups, 3 months eligible non-partner startups, 1 month SMBs/teams under 10; $12K is advertised nominal value, not credits
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.notion.com/help/notion-for-startups
+- Page: https://freetokens.custats.info/offers/notion-for-startups.html
+- Summary: Free subscription time, not cash or a $12,000 credit balance. Eligible partner-affiliated startups may get six months of Business including Notion AI; eligible non-partner startups three months. SMBs/service businesses, companies under ten employees or insufficiently verified applicants may receive one month. Requires new/non-paying Notion customer, fewer than 100 employees, company website, work-domain email, valid Notion domain and no prior Notion promotions. Three/six-month offers target scalable tech products/services. Six months requires partner code. One redemption; offers do not stack. No public campaign end date established; legal page was JS-only so separate issuance-expiry terms were not fully verified. No application or benefit delivery tested.
+- Claim steps: Confirm new/non-paying Notion status, fewer than 100 employees, and no previous Notion promotions. | Prepare a public company website, company-domain email and valid Notion workspace/domain. | If partner-affiliated, request the partner code; this is needed for consideration for the six-month offer. | Apply via https://www.notion.com/startups-apply and sign in; Notion determines eligibility and the 1/3/6-month benefit. | If approved, confirm the Business plan with Notion AI was applied; review billing and expiry before the free period ends.
+### Microsoft for Startups — Up to $150K / $200K Azure
+- Provider: Microsoft
+- Category: startup_program
+- Amount: Up to $150,000 in Azure startup credits progressively unlocked with verified progress/adoption/usage; eligible Investor Network-backed startups may unlock up to $200,000; approval and conditions apply
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://learn.microsoft.com/en-us/startups/benefits
+- Page: https://freetokens.custats.info/offers/microsoft-for-startups.html
+- Summary: Microsoft offers up to $150,000 in Azure startup credits unlocked over time with verified progress, service adoption and sustained Azure usage; eligible Investor Network-backed startups may unlock up to $200,000. Neither maximum is guaranteed upfront. Applicants must own a software product/service, be privately held and for-profit, headquartered where Azure is available, not have received more than $350,000 lifetime free Azure credits, and not have raised Series C or later. Educational/government organizations, consultancies/agencies and cryptocurrency mining are excluded. Current documentation does not state a general credit duration or claim deadline. Application destination was documented but not independently completed; no award/redemption tested.
+- Claim steps: Apply via https://startups.microsoft.com by selecting Get started. | Confirm company-owned software product, privately held for-profit status, eligible headquarters, funding stage and prior-credit eligibility. | Eligible Investor Network-backed applicants can provide an optional investor referral code for additional benefits. | Review the actual portal allocation: credits unlock progressively with verified progress, adoption and Azure usage. | Confirm expiry and billing conditions in the award/portal rather than assuming older Founders Hub terms.
+### GitHub for Startups — $10K Platform Credits
+- Provider: GitHub
+- Category: startup_program
+- Amount: $10,000 GitHub Enterprise Cloud platform credits for up to 12 months; approved startup partner + outside funding required, Series B or earlier; covers eligible Enterprise/Copilot/Actions/security usage
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://github.com/enterprise/startups
+- Page: https://freetokens.custats.info/offers/github-for-startups.html
+- Summary: One-time credit for an approved GitHub Enterprise Cloud account on GitHub.com, usable for eligible Enterprise licenses and add-ons/metered services including Copilot, Advanced Security and Actions. Requires approved partner affiliation and outside funding, Series B or earlier; non-equity credits do not count as funding. Must not have used Enterprise in the preceding six months or previously received qualifying GitHub/Microsoft startup credits or Enterprise-license grants. Enterprise Server/data-residency enterprises excluded. Apply through partner referral, not the obsolete application URL. Credits last up to 12 months from approval or exhaustion; nontransferable, no reapplication, valid payment method required. Downgrading forfeits remaining credit; active services automatically transition to paid billing. Previous free-seat offer is discontinued. No application or credit delivery tested.
+- Claim steps: Confirm Series B or earlier and both outside funding and approved startup-partner affiliation. | Check https://github.com/enterprise/startups/partners and request a referral from your investor, accelerator or incubator. | Confirm no Enterprise use in the last six months and no prior disqualifying startup credits/license grants. | Follow the partner referral for an eligible Enterprise Cloud account and provide a valid payment method. | Use awarded credits within 12 months from approval; monitor exhaustion because active products automatically switch to paid billing.
 ### Freebuff — Free Coding Agent Funded by Ads
 - Provider: Freebuff
 - Category: coding
@@ -17,6 +87,26 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/freebuff-free-coding-agent.html
 - Summary: Freebuff is a free coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Text ads fund access to its model catalog instead of a subscription. Its free daily allowance of 150 Freebucks covers up to 10 hours of DeepSeek V4.1 Flash per day (or a mix of other models such as GLM 5.3 Flash and MiMo 2.6 Flash). Supported regions receive full access; other regions and VPN users get a limited daily allowance.
 - Claim steps: Install the CLI (Node.js 18+): npm install -g freebuff | Open a project: cd your-project | Run freebuff and describe what you want — no account to create, no API key, no credit card. | Or use another Freebuff product: Desktop (freebuff.com/desktop), Web (freebuff.com/web), Cloud (freebuff.com/cloud), or Chat (freebuff.com/chat).
+### Datadog for Startups — Up to $100K Credits
+- Provider: Datadog
+- Category: startup_program
+- Amount: Up to $100,000 in Datadog platform credits for up to 12 months; Series A or earlier, new customers, official partner referral required; not LLM API credits
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.datadoghq.com/partner/datadog-for-startups/
+- Page: https://freetokens.custats.info/offers/datadog-for-startups.html
+- Summary: Approval-based Datadog observability and security platform credits, not an external LLM API grant. Applicants must be Series A or earlier and referred by an official partner; current/prior Datadog customers and prior startup-credit recipients are excluded. Allocation is specified in the acceptance notice. Activate within 30 days; program ends at credit exhaustion, removal, or 12 months after activation. Three months of inactivity can cause removal. Credits exclude taxes, technical/premier support and professional services. Standard paid billing follows completion. No claim deadline stated; no application or redemption tested.
+- Claim steps: Obtain a referral from an official Datadog startup partner; direct un-referred applications are not eligible. | Confirm Series A or earlier status and no current/prior Datadog customer or startup-credit history. | Apply through https://www.datadoghq.com/partner/datadog-for-startups/#apply with a valid Datadog account. | If accepted, review your awarded allocation and activate it within 30 days. | Monitor usage and the 12-month validity period; standard billing follows program completion.
+### Claude for Startups
+- Provider: Anthropic
+- Category: startup_program
+- Amount: Apply for free Claude API credits + priority rate limits (credits require institutional equity funding, founded within 4 years, no prior Anthropic startup credits; first-party Claude API only; dollar amount unpublished)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://claude.com/programs/startups
+- Page: https://freetokens.custats.info/offers/claude-for-startups.html
+- Summary: Claude for Startups lets founders apply for free Claude API credits and priority rate limits. The program is open to early-stage founders with or without VC backing, but credits require equity funding from an institutional investor, a company founded within the last four years, and no prior Anthropic startup credits. You need a Claude Console account (API console, not the Claude app) and a company email. Credits apply only to the first-party Claude API, not AWS Bedrock or Google Vertex AI. Anthropic does not publish a dollar amount for the credit grant.
+- Claim steps: Create a Claude Console account (API console, not claude.ai) with a company email. | Apply at claude.com/programs/startups (about two minutes). | To qualify for credits: institutional equity funding, founded within 4 years, no prior Anthropic startup credits. Mention a partner VC if you have one. | If accepted, credits and highest rate limits apply to the first-party Claude API only (not Bedrock or Vertex AI).
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -777,16 +867,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/mixedbread-starter.html
 - Summary: Mixedbread's Starter plan is free and includes $5 in one-time credits — no card required — with 3 workspace users, 10 stores, and 100 requests/minute across its knowledge stack (Toast 1 agent, indexing, semantic/grep search, storage). Every plan bills at the same usage rates. Separately, Mixedbread for startups offers $250 in one-time credits to qualified startups (existing paying users or companies that raised up to $20M from institutional VCs).
 - Claim steps: Sign up for the free Starter plan at https://www.mixedbread.com/pricing — no card required. | $5 in one-time credits is included; 100 req/min limit. | When credits run out, add credits in billing settings or upgrade to Scale ($20/mo, returned as monthly credits).
-### Microsoft for Startups — up to $150K Azure
-- Provider: Microsoft
-- Category: startup_program
-- Amount: Up to $150,000 in Azure credits usable across eligible Azure services incl. Azure AI / OpenAI services, plus free dev tools
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.microsoft.com/en-us/startups
-- Page: https://freetokens.custats.info/offers/microsoft-for-startups.html
-- Summary: Microsoft for Startups offers up to $150,000 in Azure credits usable across eligible Azure services including Azure AI and Azure OpenAI services, plus free access to dev tools, expert guidance and go-to-market support through Microsoft's customer network.
-- Claim steps: Sign in / apply via the Microsoft for Startups portal (microsoft.com/en-us/startups). | Unlock startup benefits and claim Azure credits through the portal. | Apply credits to eligible Azure services as the startup scales.
 ### Meshy Free Plan
 - Provider: Meshy
 - Category: image
@@ -1486,16 +1566,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/claude-team-plan-for-scientists.html
 - Summary: Anthropic's Claude Team plan for scientists offers promotional Team seating to verified principal investigators (or equivalent) at academic or nonprofit research institutions. Standard seats are free; Premium seats are $15/month (regularly $100) with 5x usage. The promotion covers 12 months from signup, is limited to about 10,000 seats, and is not guaranteed. Includes Claude Science, Code, and Cowork. Verification typically takes 5–7 business days. 1–25 seats per group; larger groups contact Anthropic. This is a Claude.ai Team subscription, distinct from API credit grants in AI for Science.
 - Claim steps: Confirm you are a PI or equivalent at an accredited university or nonprofit research institute (natural sciences, math, CS, engineering, related fields). | Complete the verification form on claude.com/programs/team-plan-for-scientists. | Wait for review (most applications 5–7 business days) and the approval email. | Add lab members as Standard (free) or Premium ($15/mo) seats. Final pricing is confirmed after verification.
-### Claude for Startups
-- Provider: Anthropic
-- Category: startup_program
-- Amount: Apply for free Claude API credits + priority rate limits (credits mainly for equity-funded startups founded within 4 years; no published dollar amount)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://claude.com/programs/startups
-- Page: https://freetokens.custats.info/offers/claude-for-startups.html
-- Summary: Claude for Startups lets founders apply for free Claude API credits and priority rate limits. The program is open to early-stage founders with or without VC backing, but credits require equity funding from an institutional investor, a company founded within the last four years, and no prior Anthropic startup credits. You need a Claude Console account (API console, not the Claude app) and a company email. Credits apply only to the first-party Claude API, not AWS Bedrock or Google Vertex AI. Anthropic does not publish a dollar amount for the credit grant.
-- Claim steps: Create a Claude Console account (API console, not claude.ai) with a company email. | Apply at claude.com/programs/startups (about two minutes). | To qualify for credits: institutional equity funding, founded within 4 years, no prior Anthropic startup credits. Mention a partner VC if you have one. | If accepted, credits and highest rate limits apply to the first-party Claude API only (not Bedrock or Vertex AI).
 ### Claude for Open Source
 - Provider: Anthropic
 - Category: coding
@@ -1656,126 +1726,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/azure-for-students.html
 - Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
 - Claim steps: Go to https://azure.microsoft.com/en-us/free/students and click Activate. | Sign in with your school email and complete student verification via the Azure Education Hub. | Once approved, start building with $100 credit and free-tier services for 12 months.
-### AWS Activate Credits
-- Provider: Amazon Web Services
-- Category: startup_program
-- Amount: Activate Founders (self-funded): start with $1,000, up to $5,000; Activate Portfolio (pre-Series B): up to $200,000; usable across AWS incl. Amazon Bedrock; extra AI-startup credits invite-only
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
-- Source: https://aws.amazon.com/startups/credits/
-- Page: https://freetokens.custats.info/offers/aws-activate-credits.html
-- Summary: AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.
-- Claim steps: Create/confirm an AWS account on the Paid Tier plan. | Founders (self-funded): apply directly at aws.amazon.com/startups/credits. Portfolio: apply with your Activate Provider's Org ID. | After approval, apply credits to eligible AWS usage including Amazon Bedrock.
-### AssemblyAI Startup Program
-- Provider: AssemblyAI
-- Category: startup_program
-- Amount: 12 months of recurring free credits; exact credit amount unpublished
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.assemblyai.com/contact/startup-program
-- Page: https://freetokens.custats.info/offers/assemblyai-startup-program.html
-- Summary: 12 months of recurring free credits; exact credit amount unpublished.
-- Claim steps: Complete the startup-program application with company, product, stage, and usage details. | Wait for AssemblyAI to review the application. | If approved, receive credits in the AssemblyAI console within 48 hours.
-### AssemblyAI $50 Free Credits
-- Provider: AssemblyAI
-- Category: voice
-- Amount: $50 free credits for Pre-recorded STT, Real-time STT, Voice Agent, Speech Understanding, Guardrails (LLM Gateway excluded); credits do not expire
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.assemblyai.com/docs/billing-and-pricing
-- Page: https://freetokens.custats.info/offers/assemblyai-50-free-credits.html
-- Summary: New AssemblyAI accounts receive $50 in free credits that do not expire. Credits apply to Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, and Guardrails. LLM Gateway is billed from the account balance from the first request and is not covered by the free tier. No credit card is required to start; add a card after credits are used up to keep using the API.
-- Claim steps: Create a free AssemblyAI account at assemblyai.com (no credit card required). | Open the dashboard and copy an API key. | Use Pre-recorded STT, Real-time STT, Voice Agent API, Speech Understanding, or Guardrails — $50 in credits apply automatically. | Do not expect LLM Gateway usage to be covered by the free credits.
-### Arcee AI Trinity Builders Program
-- Provider: Arcee AI
-- Category: api_provider
-- Amount: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://www.arcee.ai/blog/introducing-the-trinity-builders-program
-- Page: https://freetokens.custats.info/offers/arcee-trinity-builders-program.html
-- Summary: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens.
-- Claim steps: Apply through the official form and explain the project and requested token range. | Wait for rolling review. | If approved, use the allocated Trinity API credits within 90 days.
-### Anyscale AI Startup Program
-- Provider: Anyscale
-- Category: startup_program
-- Amount: Up to $20,000 in Anyscale usage credits (stackable with AWS/GCP/Azure etc. cloud credits) + dedicated field-engineer support
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.anyscale.com/startup
-- Page: https://freetokens.custats.info/offers/anyscale-ai-startup-program.html
-- Summary: Anyscale's AI Startup Program grants eligible startups up to $20K in Anyscale usage credits that run on the startup's own cloud and stack with existing cloud provider credits, plus dedicated field-engineer support for architecture and hands-on technical help. The application is reviewed on cloud spend/credits and stage; a separate $100 signup credit is advertised via the 'Get Started with $100 Credit' nav link.
-- Claim steps: Open the Anyscale Startup Program page and submit the application (review considers cloud spend/credits and stage). | For the separate $100 signup credit, click 'Get Started with $100 Credit' in the nav, which links to Anyscale's auth/signup flow.
-### AnyAPI Free Plan — 100K anyTokens/day
-- Provider: AnyAPI
-- Category: api_provider
-- Amount: 100K anyTokens/day on free models via OpenAI-compatible gateway (resets daily, no rollover)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://anyapi.ai/pricing
-- Page: https://freetokens.custats.info/offers/anyapi-free-plan.html
-- Summary: AnyAPI's Free plan grants 100K anyTokens per day across free models on its OpenAI-compatible gateway to 400+ models. Unlimited users, AnyAPI SDK / AnyCLI / AnyChat included, no credit card required. Paid plans roll unused tokens over monthly; the free daily allowance does not carry over.
-- Claim steps: Sign up at anyapi.ai — no credit card required. | Get an API key and call the OpenAI-compatible endpoint, or use the AnyChat playground. | Free plan provides 100K anyTokens/day on free models; the allowance resets daily.
-### Free starter credits for new Claude Console accounts
-- Provider: Anthropic
-- Category: api_provider
-- Amount: small amount of free credits to test the API (exact amount not published)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://platform.claude.com/docs/en/about-claude/pricing
-- Page: https://freetokens.custats.info/offers/anthropic-console-free-starter-credits.html
-- Summary: Anthropic's official Claude Platform pricing documentation states under the FAQ 'Are there free tiers or trials?' that new users receive a small amount of free credits to test the API, matching the offer. The exact credit amount is deliberately not published on the page, so no number can be stated; extended trials for enterprise evaluation are available via sales. The get-started docs confirm claiming requires a Claude Console account and an API key. No expiry date or fixed end date for the starter credits is stated, so the offer is treated as ongoing.
-- Claim steps: Create a Claude Console account. | New accounts receive a small amount of free credits to test the API (credited to the account; amount not published by Anthropic). | Create an API key in the Console (listed as a prerequisite in the official get-started docs). | Use the API key to make API calls against the free starter credits. | Enterprises needing larger/extended trials for evaluation can contact sales@anthropic.com.
-### Anthropic AI for Science
-- Provider: Anthropic
-- Category: api_provider
-- Amount: Free Claude API credits for high-impact research; Help Center cites up to $20,000 for 6 months; Aug 2026 news cites up to $50,000 per project
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program
-- Page: https://freetokens.custats.info/offers/anthropic-ai-for-science.html
-- Summary: Anthropic's AI for Science program grants free Claude API credits to researchers at research institutions working on high-impact scientific projects (biology/life sciences emphasized, other fields eligible). The Help Center (updated Mar 16, 2026) says successful applicants receive up to $20,000 in API credits for 6 months. Anthropic's Aug 27, 2026 news post says groups can apply for up to $50,000 in credits per project for more ambitious work. Credits are API-only (not Claude.ai). Applications are reviewed on the first Monday of each month. Distinct from the Claude Team plan for scientists seating promotion.
-- Claim steps: Create a Claude Console account if you do not already have one (API access; credits do not apply to Claude.ai). | Complete the AI for Science application form with team and project details (research-institution affiliation). | Wait for the monthly review (first Monday of each month). Unapproved submissions do not receive individual replies. | If approved, API credits are applied to the organization ID for the stated period. Multi-lab programs should apply on one account.
-### AMD Radeon Cloud Token Factory — Free Model APIs
-- Provider: AMD Radeon Cloud
-- Category: api_provider
-- Amount: Free public model APIs listed on the official page (9 models): MiMo-V2.6-Flash, DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, DeepSeek-V4-Flash-Vision-Exp, GLM-5.3-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B, MinerU2.5-Pro; beta, quotas unpublished
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://developer.amd.com.cn/radeon/tokenfactory
-- Page: https://freetokens.custats.info/offers/amd-radeon-cloud-free-model-apis.html
-- Summary: AMD Radeon Cloud Token Factory provides free shared OpenAI- and Anthropic-compatible model APIs. At verification time, DeepSeek-V4-Flash, Qwen3.8-Flash-Next and MiniCPM5-1B were free and online; DeepSeek-V4-Flash-Vision-Exp was limited-free and experimental; MiniCPM-V46 was listed but temporarily offline. AMD says displayed points represent relative usage, not a charge, but does not publish account quotas or reset rules.
-- Claim steps: Open the AMD Radeon Cloud Token Factory at developer.amd.com.cn/radeon/tokenfactory. | Sign in with an AMDAI account and obtain an API key. | Use the OpenAI-compatible base URL https://developer.amd.com.cn/radeon/api/v1 with a currently online model ID. | Check the live Token Factory before relying on a model because the catalog is beta and availability is dynamic.
-### AMD AI Developer Program — $100 Cloud Credits
-- Provider: AMD
-- Category: api_provider
-- Amount: $100 in AMD Developer Cloud credits (expire 30 days after activation)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://developer.amd.com/ai-developer-program/
-- Page: https://freetokens.custats.info/offers/amd-ai-developer-program.html
-- Summary: AMD's free AI Developer Program includes $100 in AMD Developer Cloud credits. The credit-request flow asks for affiliation, job function, intended use, and a public profile for verification; AMD says approval takes 2–3 business days and the credits expire 30 days after activation. This is separate from AMD Radeon Cloud's free model API endpoints.
-- Claim steps: Create a free AMD account and complete the AI Developer Program sign-up form. | Verify your email and request AMD Developer Cloud credits with your affiliation, job function, intended use, and a public profile. | Wait for AMD's approval email; issued credits expire 30 days after activation.
-### Amazon Polly Free Tier
-- Provider: AWS
-- Category: voice
-- Amount: Legacy accounts (created before July 15, 2025): 5M chars/month Standard + 1M chars/month Neural voices for first 12 months. New accounts get up to $200 in AWS Free Tier credits on a 6-month free plan.
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://aws.amazon.com/polly/pricing/
-- Page: https://freetokens.custats.info/offers/amazon-polly-free-tier.html
-- Summary: Amazon Polly's free tier gives new AWS accounts 5 million characters per month on Standard voices and 1 million characters per month on Neural voices for the first 12 months after signup - roughly thousands of minutes of narration at zero cost.
-- Claim steps: Create an AWS account at aws.amazon.com (free tier applies automatically). | Open the Amazon Polly console. | Convert text to speech using Standard or Neural voices within the monthly free character allowance. | Note the free window runs for the first 12 months from account creation.
-### Alibaba Cloud Model Studio — Free Quota for New Users
-- Provider: Alibaba Cloud
-- Category: api_provider
-- Amount: ~1,000,000 free tokens per eligible model, valid 90 days from activation (real-time inference only; Singapore region, International scope)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota
-- Page: https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html
-- Summary: Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation (or model release/approval, whichever is later). Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry.
-- Claim steps: Create an Alibaba Cloud account and open Alibaba Cloud Model Studio (Singapore region). | Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed. | Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page. | Call eligible models in real time; enable 'Free Quota Only' mode to avoid pay-as-you-go charges after the quota runs out.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
