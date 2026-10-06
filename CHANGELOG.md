@@ -5,6 +5,13 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **DNS-AID runbook added (#525):** `docs/dns-aid.md` records the exact
+  `_index._agents.freetokens.custats.info` HTTPS/SVCB record set, the DNSSEC
+  requirement, and the DNS-host move the isitagentready `dnsAid` check needs.
+  Publishing the records is owner-side DNS work — no repository change can
+  apply it, so the check stays `fail` until the owner runs the runbook and
+  re-scans.
+
 - **AI content usage preferences declared as Content Signals (#523):**
   `app/public/robots.txt` now carries
   `Content-Signal: ai-train=no, search=yes, ai-input=no` inside the
