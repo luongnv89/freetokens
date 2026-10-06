@@ -183,8 +183,8 @@ describe("robots.txt declares AI content signals (#523)", () => {
   const robots = readFileSync(path.join(PUBLIC_DIR, "robots.txt"), "utf8");
 
   it("declares ai-train, search and ai-input inside the User-agent: * group", () => {
-    expect(robots).toContain(
-      "User-agent: *\nAllow: /\nContent-Signal: ai-train=no, search=yes, ai-input=no",
+    expect(robots).toMatch(
+      /User-agent: \*\nAllow: \/\n(?:#[^\n]*\n)*Content-Signal: ai-train=no, search=yes, ai-input=no\n/,
     );
   });
 
