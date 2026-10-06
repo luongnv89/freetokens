@@ -8,6 +8,8 @@ Content-Signal: ai-train=no, search=yes, ai-input=no
 
 # llms.txt: https://freetokens.custats.info/llms.txt
 Sitemap: https://freetokens.custats.info/sitemap.xml
+# ARD spec §6.1 — pointer to the Agentic Resource Discovery manifest.
+Agentmap: https://freetokens.custats.info/.well-known/ai-catalog.json
 
 # AI training / dataset crawlers — block.
 User-agent: GPTBot

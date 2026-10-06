@@ -1,0 +1,178 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Free AI Credits — static content API",
+    "description": "Free AI Credits is a static site; this document describes its read-only HTTPS GET surface for agents. There is no query API, no authentication, and no write access. Every offer page has a Markdown twin at the same path with a .md extension.",
+    "version": "1.0.0",
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/luongnv89/freetokens/blob/main/LICENSE"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://freetokens.custats.info",
+      "description": "Production static host (GitHub Pages)"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Offer directory home page",
+        "operationId": "getHome",
+        "responses": {
+          "200": {
+            "description": "HTML listing of active free AI credit offers",
+            "content": {
+              "text/html": {}
+            }
+          }
+        }
+      }
+    },
+    "/index.md": {
+      "get": {
+        "summary": "Markdown twin of the home page",
+        "operationId": "getHomeMarkdown",
+        "responses": {
+          "200": {
+            "description": "Markdown rendering of the offer listing",
+            "content": {
+              "text/markdown": {}
+            }
+          }
+        }
+      }
+    },
+    "/offers/{slug}.html": {
+      "get": {
+        "summary": "Offer detail page",
+        "operationId": "getOffer",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "description": "Offer slug — the filename stem used in llms.txt links and sitemap.xml",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z0-9-]+$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTML detail page: amount, terms, claim steps, source URL, trust labels",
+            "content": {
+              "text/html": {}
+            }
+          },
+          "404": {
+            "description": "No offer with that slug (or the offer expired out of the listing)"
+          }
+        }
+      }
+    },
+    "/offers/{slug}.md": {
+      "get": {
+        "summary": "Markdown twin of an offer detail page",
+        "operationId": "getOfferMarkdown",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "description": "Offer slug — the filename stem used in llms.txt links and sitemap.xml",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z0-9-]+$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Markdown detail: amount, terms, claim steps, source URL, trust labels",
+            "content": {
+              "text/markdown": {}
+            }
+          },
+          "404": {
+            "description": "No offer with that slug (or the offer expired out of the listing)"
+          }
+        }
+      }
+    },
+    "/llms.txt": {
+      "get": {
+        "summary": "LLM-oriented summary: top offers plus trust-label definitions",
+        "operationId": "getLlmsTxt",
+        "responses": {
+          "200": {
+            "description": "Markdown summary document per llmstxt.org",
+            "content": {
+              "text/markdown": {},
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/llms-full.txt": {
+      "get": {
+        "summary": "Full export: every active offer with summary, claim steps, source and detail links",
+        "operationId": "getLlmsFull",
+        "responses": {
+          "200": {
+            "description": "Markdown export of the entire active listing",
+            "content": {
+              "text/markdown": {},
+              "text/plain": {}
+            }
+          }
+        }
+      }
+    },
+    "/feed.xml": {
+      "get": {
+        "summary": "RSS 2.0 feed of active offers, newest-checked first",
+        "operationId": "getFeed",
+        "responses": {
+          "200": {
+            "description": "RSS 2.0 document",
+            "content": {
+              "application/rss+xml": {}
+            }
+          }
+        }
+      }
+    },
+    "/sitemap.xml": {
+      "get": {
+        "summary": "XML sitemap of all index, archive, and offer detail pages",
+        "operationId": "getSitemap",
+        "responses": {
+          "200": {
+            "description": "sitemaps.org urlset document",
+            "content": {
+              "application/xml": {}
+            }
+          }
+        }
+      }
+    },
+    "/about.html": {
+      "get": {
+        "summary": "What the site is and how listings are reviewed",
+        "operationId": "getAbout",
+        "responses": {
+          "200": {
+            "description": "HTML about page (Markdown twin at /about.md)",
+            "content": {
+              "text/html": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

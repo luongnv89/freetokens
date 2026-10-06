@@ -1,0 +1,59 @@
+{
+  "protocolVersion": "1.0",
+  "name": "Free AI Credits",
+  "description": "Static, read-only directory of currently-claimable free AI credit offers, each labeled with review status, evidence level, and sign-up need. Free AI Credits runs no interactive agent endpoint: supportedInterfaces points at the ordinary HTTPS document surface (HTML pages, per-page Markdown twins, llms.txt exports, RSS feed, and an OpenAPI-described static content API) through which agents read the catalog.",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "freetokens",
+    "url": "https://freetokens.custats.info/"
+  },
+  "iconUrl": "https://freetokens.custats.info/logo-icon.svg",
+  "documentationUrl": "https://freetokens.custats.info/about.html",
+  "supportedInterfaces": [
+    {
+      "url": "https://freetokens.custats.info/",
+      "protocolBinding": "HTTP+JSON",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extendedAgentCard": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/html", "text/markdown", "application/json"],
+  "skills": [
+    {
+      "id": "list-free-ai-credit-offers",
+      "name": "List free AI credit offers",
+      "description": "Enumerate the currently active free AI credit offers with provider, category, amount, expiry, and trust labels via llms.txt or the Markdown page twins.",
+      "tags": ["free-credits", "ai-offers", "directory"],
+      "examples": [
+        "Which providers currently offer free API credits?",
+        "List free coding-agent credits with no sign-up required."
+      ]
+    },
+    {
+      "id": "read-offer-detail",
+      "name": "Read offer detail",
+      "description": "Fetch a single offer's full terms, claim steps, source URL, and last-checked date from its detail page or /offers/{slug}.md Markdown twin.",
+      "tags": ["offer-detail", "terms", "markdown"],
+      "examples": [
+        "What are the claim steps for the Tavily free tier?",
+        "When was the Zed student offer last checked?"
+      ]
+    },
+    {
+      "id": "interpret-trust-labels",
+      "name": "Interpret offer trust labels",
+      "description": "Explain the review_status, verification, signup, and last_checked labels that qualify every listed offer, as documented in llms.txt.",
+      "tags": ["trust", "verification", "provenance"],
+      "examples": [
+        "What does verification=social_proof mean on an offer?",
+        "Does review_status=verified mean the curator claimed the offer?"
+      ]
+    }
+  ]
+}

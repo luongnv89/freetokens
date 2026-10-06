@@ -1,0 +1,69 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Free AI Credits",
+    "identifier": "did:web:freetokens.custats.info"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:freetokens.custats.info:agent:free-ai-credits",
+      "displayName": "Free AI Credits agent card",
+      "type": "application/a2a+json",
+      "url": "https://freetokens.custats.info/.well-known/agent-card.json",
+      "representativeQueries": [
+        "which AI providers currently offer free credits",
+        "find free coding-agent credits without sign-up"
+      ]
+    },
+    {
+      "identifier": "urn:air:freetokens.custats.info:server:freetokens-readonly",
+      "displayName": "Free AI Credits MCP server card",
+      "type": "application/mcp-server-card+json",
+      "url": "https://freetokens.custats.info/.well-known/mcp/server-card.json",
+      "representativeQueries": [
+        "what MCP resources does freetokens publish",
+        "how do agents read the free credits catalog"
+      ]
+    },
+    {
+      "identifier": "urn:air:freetokens.custats.info:skill:freetokens-offers",
+      "displayName": "freetokens-offers skill",
+      "type": "text/markdown",
+      "url": "https://freetokens.custats.info/.well-known/agent-skills/freetokens-offers/SKILL.md",
+      "representativeQueries": [
+        "how to list free AI credit offers programmatically",
+        "what do freetokens trust labels mean"
+      ]
+    },
+    {
+      "identifier": "urn:air:freetokens.custats.info:api:static-content",
+      "displayName": "Free AI Credits static content API",
+      "type": "application/vnd.oai.openapi+json",
+      "url": "https://freetokens.custats.info/openapi.json",
+      "representativeQueries": [
+        "fetch the offers feed",
+        "get the markdown version of an offer page"
+      ]
+    },
+    {
+      "identifier": "urn:air:freetokens.custats.info:api:api-catalog",
+      "displayName": "Free AI Credits API catalog (RFC 9727)",
+      "type": "application/linkset+json",
+      "url": "https://freetokens.custats.info/.well-known/api-catalog.json",
+      "representativeQueries": [
+        "which APIs does freetokens.custats.info publish",
+        "where is the service description for free AI credits"
+      ]
+    },
+    {
+      "identifier": "urn:air:freetokens.custats.info:resource:llms-full",
+      "displayName": "Free AI Credits full export",
+      "type": "text/markdown",
+      "url": "https://freetokens.custats.info/llms-full.txt",
+      "representativeQueries": [
+        "export every active free AI credit offer",
+        "show claim steps and source links for all offers"
+      ]
+    }
+  ]
+}

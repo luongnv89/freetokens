@@ -84,6 +84,20 @@
       title="Sitemap"
       href="./sitemap.xml"
     />
+    <!-- Agent-discovery manifests (issues #527–#532). The api-catalog link
+         relation is RFC 9727; rel="ai-catalog" is the ARD spec's HTML
+         mechanism. Both point at the .json twins because GitHub Pages
+         cannot set Content-Type on the extensionless well-known path. -->
+    <link
+      rel="api-catalog"
+      type="application/linkset+json"
+      href="./.well-known/api-catalog.json"
+    />
+    <link
+      rel="ai-catalog"
+      type="application/json"
+      href="./.well-known/ai-catalog.json"
+    />
     <title>Free AI Credits</title>
     <!-- Search Console verification injected at build when SEARCH_CONSOLE_TOKEN is set — see docs/search-console-setup.md -->
     <!-- free-ai-credits:social-meta:start -->

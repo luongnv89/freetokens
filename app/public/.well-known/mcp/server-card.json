@@ -1,0 +1,50 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/mcp-server-card/v1.json",
+  "version": "1.0",
+  "protocolVersion": "2025-06-18",
+  "serverInfo": {
+    "name": "freetokens",
+    "title": "Free AI Credits",
+    "version": "1.0.0"
+  },
+  "description": "Free AI Credits is a static, read-only directory of free AI credit offers. It does not run an interactive MCP transport: the endpoint below is the site's ordinary HTTPS document surface, and the only 'resources' are the static documents listed in this card. Agents should fetch those URLs directly rather than opening an MCP session.",
+  "iconUrl": "https://freetokens.custats.info/logo-icon.svg",
+  "documentationUrl": "https://freetokens.custats.info/about.html",
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://freetokens.custats.info/"
+  },
+  "capabilities": {
+    "tools": { "listChanged": false },
+    "resources": { "subscribe": false, "listChanged": false },
+    "prompts": { "listChanged": false }
+  },
+  "authentication": {
+    "required": false
+  },
+  "instructions": "No MCP session is required or supported. Read the offers catalog with plain HTTPS GET: llms.txt (top offers + trust-label definitions), llms-full.txt (full export), /offers/{slug}.md (per-offer detail), feed.xml (changes).",
+  "resources": [
+    {
+      "uri": "https://freetokens.custats.info/llms.txt",
+      "name": "llms.txt — top offers and trust-label definitions",
+      "mimeType": "text/markdown"
+    },
+    {
+      "uri": "https://freetokens.custats.info/llms-full.txt",
+      "name": "llms-full.txt — full export of every active offer",
+      "mimeType": "text/markdown"
+    },
+    {
+      "uri": "https://freetokens.custats.info/feed.xml",
+      "name": "feed.xml — RSS feed of listing changes",
+      "mimeType": "application/rss+xml"
+    },
+    {
+      "uri": "https://freetokens.custats.info/sitemap.xml",
+      "name": "sitemap.xml — index of all pages",
+      "mimeType": "application/xml"
+    }
+  ],
+  "tools": [],
+  "prompts": []
+}

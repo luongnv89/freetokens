@@ -1,0 +1,29 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://freetokens.custats.info/",
+      "service-desc": [
+        {
+          "href": "https://freetokens.custats.info/openapi.json",
+          "type": "application/vnd.oai.openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://freetokens.custats.info/about.html",
+          "type": "text/html"
+        },
+        {
+          "href": "https://freetokens.custats.info/llms.txt",
+          "type": "text/markdown"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://freetokens.custats.info/",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "freetokens-offers",
+      "type": "skill-md",
+      "description": "Read the Free AI Credits directory: enumerate currently-claimable free AI credit offers, fetch per-offer terms and claim steps, and interpret the site's review_status/verification/signup trust labels using only static HTTPS GETs.",
+      "url": "https://freetokens.custats.info/.well-known/agent-skills/freetokens-offers/SKILL.md",
+      "digest": "sha256:d1384486a8010b2a98b93e535c8ad987b552ccfd41caadee2a50a50d1dc6336f"
+    }
+  ]
+}
