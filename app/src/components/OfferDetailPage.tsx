@@ -310,11 +310,6 @@ export default function OfferDetailPage({
                     <p className="od-summary">{detail.summary}</p>
                   </section>
                 ) : null}
-                {/* Hover-free trust definitions (#507 / T4): the facts rail
-                    names Verification, Review status and Last checked, and this
-                    block says what each of those words does and does not mean
-                    without requiring a hover. */}
-                <TrustLegend />
                 <ClaimChecklist slug={offer.slug} steps={claimSteps(detail)} />
                 {/* Second CTA, at the end of the steps. Redundant on a desktop
                 where the rail is stuck to the viewport, but on a phone the
@@ -344,6 +339,11 @@ export default function OfferDetailPage({
               </p>
             </section>
           )}
+          {/* Hover-free trust definitions (#507 / T4), kept at the bottom of
+              the page as a reference: the facts rail names Verification, Review
+              status and Last checked, and this block says what each of those
+              words does and does not mean without requiring a hover. */}
+          <TrustLegend />
         </main>
         <SiteFooter depth={1} />
       </div>

@@ -20,10 +20,10 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // controls, the hot-today shelf, the offer-detail rail, and the motion
 // system — staggered rise reveals, hover lifts, press scales — all of it
 // duplicated for the reduced-motion gate. It also covers the hover-free trust
-// legend (#507): a bordered note above the listing that names review status,
-// evidence level and sign-up need with their meanings, borrowing the policy
-// prose rules so the same words read the same on the listing, on an offer page
-// and on the About page.
+// legend (#507): a bordered note at the bottom of the page that names review
+// status, evidence level and sign-up need with their meanings, borrowing the
+// policy prose rules so the same words read the same on the listing, on an
+// offer page and on the About page.
 //
 // The number is a BUDGET, not a checksum: measured raw CSS rounded up to the
 // next 500 plus headroom, so a one-rule fix does not fail the build and another

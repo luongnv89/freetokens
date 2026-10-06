@@ -5,6 +5,11 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Trust legend moved to the bottom of the page as a reference (#518):** the
+  "How to read these labels" block no longer sits above the offer list on home
+  or between the summary and the claim steps on an offer page; it renders as a
+  reference block at the bottom of both pages. No wording changed.
+
 - **Performance baseline recorded (#505):** cold-load and search-interaction lab
   traces were captured for the home and detail surfaces on the local production
   build (headless Chromium 151, cold cache, 1440×900, no throttling), covering

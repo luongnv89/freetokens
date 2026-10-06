@@ -640,8 +640,8 @@ a.badge:focus-visible {
    rules (code chips, muted notes, list rhythm) so the same definitions read
    the same on the listing, on an offer page and on the About page, and adds
    only the box and the disclosure underneath. The always-visible tier is
-   deliberately terse — a label plus a one-clause meaning — so it can sit above
-   the offer list without pushing the first row off the fold. */
+   deliberately terse — a label plus a one-clause meaning — so the page-bottom
+   reference stays scannable. */
 .trust-legend {
   margin: 1.1rem 0 0.7rem;
   padding: 0.6rem 0.95rem 0.7rem;
