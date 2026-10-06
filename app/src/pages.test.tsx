@@ -1223,25 +1223,36 @@ describe("trust vocabulary on the rendered surfaces (#507)", () => {
     // a click. The nested full-definition disclosure is the only closed one.
     const legend = markup.slice(
       markup.indexOf('class="policy trust-legend"'),
-      markup.indexOf('id="ft-grid"'),
+      markup.indexOf('id="site-footer"'),
     );
     expect(legend.match(/<details open(?:=""|)>/g)).toHaveLength(1);
     expect(legend).toContain(REVIEW_STATUS["to-be-verified"].short);
-    // The legend sits before the list it qualifies, and never inside it.
-    expect(markup.indexOf('id="trust-legend-head"')).toBeLessThan(
+    // The reference sits after the list it explains, before the footer, and
+    // never inside the list.
+    expect(markup.indexOf('id="trust-legend-head"')).toBeGreaterThan(
       markup.indexOf('id="ft-grid"'),
+    );
+    expect(markup.indexOf('id="trust-legend-head"')).toBeLessThan(
+      markup.indexOf('id="site-footer"'),
     );
     expect(markup.match(/<li style/g)?.length).toBe(
       activeOffers(index).length,
     );
   });
 
-  it("renders the same legend on an offer detail page", () => {
+  it("renders the same legend at the bottom of an offer detail page", () => {
     const markup = detail();
     expect(markup).toContain('id="trust-legend-head"');
     expect(markup).toContain("How to read these labels");
     expect(markup).toContain(LAST_CHECKED.label);
     expect(markup).toMatch(/enrollment deadline/i);
+    // Same page-bottom reference: after the article, before the footer.
+    expect(markup.indexOf('id="trust-legend-head"')).toBeGreaterThan(
+      markup.indexOf("</article>"),
+    );
+    expect(markup.indexOf('id="trust-legend-head"')).toBeLessThan(
+      markup.indexOf('id="site-footer"'),
+    );
   });
 
   it("makes no blanket 'verified' claim in the deployed collection metadata", () => {

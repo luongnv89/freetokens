@@ -31,9 +31,9 @@ export const TRUST_LEGEND_HEADING_ID = "trust-legend-head";
  *
  * The whole legend is a `<details open>`: it renders expanded (so nothing needs
  * an interaction to be read) and a reader who already knows the words can
- * collapse it to get to the offers. It was made collapsible after measuring the
- * open version at 375 CSS px, where it pushed the first offer roughly one and a
- * half screens down the page.
+ * collapse it. It renders at the bottom of the page as a reference; it was made
+ * collapsible while it sat above the listing, where the open version pushed the
+ * first offer roughly one and a half screens down the page at 375 CSS px.
  *
  * No `title` attribute appears here on purpose: the explanation must survive
  * without a pointer, a touch hover or a screen reader's title-quirk handling.

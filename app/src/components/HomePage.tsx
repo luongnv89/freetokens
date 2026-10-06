@@ -678,11 +678,6 @@ export default function HomePage({
                 onToggleSavedOnly={onToggleSavedOnly}
                 onRestoreDismissed={onRestoreDismissed}
               />
-              {/* Hover-free trust definitions (#507 / T4). The rows carry
-                  review-status and evidence-level labels whose meanings used to
-                  live only in `title` attributes; the legend states them as
-                  visible text, before the list they qualify. */}
-              <TrustLegend />
               <a className="skip-list" href="#site-footer">
                 Skip the offer list
               </a>
@@ -751,6 +746,11 @@ export default function HomePage({
               </p>
             </section>
           )}
+          {/* Hover-free trust definitions (#507 / T4), kept at the bottom of
+              the page as a reference. The rows carry review-status and
+              evidence-level labels whose meanings used to live only in `title`
+              attributes; the legend states them as visible text. */}
+          <TrustLegend />
         </main>
         <SiteFooter current="home" />
       </div>
