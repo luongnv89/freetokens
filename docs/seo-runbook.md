@@ -9,7 +9,7 @@
   - Robots: <https://freetokens.custats.info/robots.txt>
   - llms.txt: <https://freetokens.custats.info/llms.txt> (and `llms-full.txt` when task #210 is on `main`)
   - RSS: <https://freetokens.custats.info/feed.xml>
-- **Code owners:** `app/scripts/prerender.mjs`, `app/scripts/sitemap.mjs`, `app/scripts/feed.mjs`, `app/scripts/generate-llms.mjs` (when present), `app/src/components/Breadcrumbs.tsx`, `app/public/robots.txt`.
+- **Code owners:** `app/scripts/prerender.mjs`, `app/scripts/sitemap.mjs`, `app/scripts/feed.mjs`, `app/scripts/generate-llms.mjs` (when present), `app/scripts/generate-markdown.mjs`, `app/src/components/Breadcrumbs.tsx`, `app/public/robots.txt`.
 
 ---
 
@@ -62,6 +62,7 @@ Pushing the YAML to `main` is the deploy — `deploy.yml` runs `validate_offers.
 | JSON-LD `BreadcrumbList` | `app/src/components/Breadcrumbs.tsx` (`safeJsonLd()` escapes `&<>`) — visible trail and JSON-LD share `buildBreadcrumbItems()` | Home has no breadcrumbs (and no JSON-LD); `archive`/`privacy` render `Offers → Archive/Privacy`; `offers/<slug>.html` renders `Offers → <title>`. `pages.test.tsx` asserts trail and JSON-LD stay in same order and that titles are escaped parseably. |
 | `sitemap.xml` | `app/scripts/sitemap.mjs:buildSitemap()` called from `prerender.mjs` | Covers every prerendered route including expired offers + `feed.xml`. `lastmod` = `verified_date` (clamped to today UTC) → file mtime fallback → `generated_at`. Validated against namespace `http://www.sitemaps.org/schemas/sitemap/0.9`, 50k URL / 50 MB / 2048-char loc limits. `robots.txt` advertises it with `Sitemap: https://freetokens.custats.info/sitemap.xml`. |
 | `feed.xml`, `llms.txt` / `llms-full.txt` | `feed.mjs` / `generate-llms.mjs` invoked in the same `postbuild` | Not SEO-indexed, but they share the same `offers.json` source of truth so sitemap and feed never diverge. |
+| `<page>.md` markdown twins (`index.md`, `archive.md`, `about.md`, `privacy.md`, `offers/<slug>.md`) | `generate-markdown.mjs` last in `postbuild`; per-page `rel="alternate" type="text/markdown"` link stamped by `prerender.mjs` | Static approximation of `Accept: text/markdown` negotiation — GitHub Pages cannot negotiate (ADR-0004). Data twins come from `offers.json`/`details.json`; prose twins are converted from the page's own prerendered `<main>`. |
 
 ### 1.3 5-minute smoke test (the acceptance gate)
 

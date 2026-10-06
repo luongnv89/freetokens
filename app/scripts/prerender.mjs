@@ -227,6 +227,7 @@ try {
     page,
     slug,
     baseUrl,
+    markdownHref,
   }) {
     // All dynamic replacements go through replacer FUNCTIONS: offer copy
     // routinely contains "$15K"-style amounts, and a string replacement
@@ -274,6 +275,28 @@ try {
     // reference emitted by Vite gets one ../ prefix.
     if (depth > 0)
       doc = doc.replaceAll(/((?:src|href)=")\.\//g, `$1${"../".repeat(depth)}`);
+    // Per-page markdown twin (#524): GitHub Pages cannot negotiate
+    // Accept: text/markdown, so discovery rides on a rel=alternate link to the
+    // generated .md next to each route (scripts/generate-markdown.mjs).
+    // Absolute href keeps offers/<slug>.html resolving to offers/<slug>.md
+    // instead of climbing a directory like the ./ asset rewrite above.
+    // Strip any previously injected twin link first: a re-run reads
+    // dist/index.html (already stamped) as the template, so without this
+    // every page would accumulate one more link per rerun — same
+    // strip-then-write pattern as canonical/social above. The title
+    // attribute is the marker; the static llms.txt/llms-full.txt alternates
+    // in the shell carry different titles and are untouched.
+    doc = doc.replace(
+      /[ \t]*<link\b[^>]*title="Markdown version of this page"[^>]*\/?>[ \t]*(?:\r?\n)?/g,
+      "",
+    );
+    if (markdownHref) {
+      doc = doc.replace(
+        "</title>",
+        () =>
+          `</title>\n    <link rel="alternate" type="text/markdown" title="Markdown version of this page" href="${htmlAttr(markdownHref)}" />`,
+      );
+    }
     const attrs =
       (page ? ` data-page="${page}"` : "") +
       (slug ? ` data-slug="${slug}"` : "") +
@@ -305,6 +328,7 @@ try {
       canonical: `${origin}/`,
       page: "home",
       baseUrl: origin,
+      markdownHref: `${origin}/index.md`,
     }),
   );
   written.push("index.html");
@@ -320,6 +344,7 @@ try {
       canonical: `${origin}/archive.html`,
       page: "archive",
       baseUrl: origin,
+      markdownHref: `${origin}/archive.md`,
     }),
   );
   written.push("archive.html");
@@ -335,6 +360,7 @@ try {
       canonical: `${origin}/privacy.html`,
       page: "privacy",
       baseUrl: origin,
+      markdownHref: `${origin}/privacy.md`,
     }),
   );
   written.push("privacy.html");
@@ -350,6 +376,7 @@ try {
       canonical: `${origin}/about.html`,
       page: "about",
       baseUrl: origin,
+      markdownHref: `${origin}/about.md`,
     }),
   );
   written.push("about.html");
@@ -384,6 +411,7 @@ try {
         page: "detail",
         slug: offer.slug,
         baseUrl: origin,
+        markdownHref: `${origin}/offers/${offer.slug}.md`,
       }),
     );
     offerFileMtimes.set(offer.slug, (await stat(offerPath)).mtime);

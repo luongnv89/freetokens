@@ -71,6 +71,13 @@
       title="Full content for LLMs"
       href="./llms-full.txt"
     />
+    <!-- RFC 8288 discovery relations, in-band HTML form (issue #526).
+         GitHub Pages cannot emit Link response headers, so the relations an
+         agent would read from `Link:` live here instead; app/public/_headers
+         carries the header-form equivalents for a future edge host. -->
+    <link rel="describedby" type="text/markdown" href="./llms.txt" />
+    <link rel="service-desc" type="text/markdown" href="./llms-full.txt" />
+    <link rel="service-doc" type="text/html" href="./about.html" />
     <link
       rel="sitemap"
       type="application/xml"

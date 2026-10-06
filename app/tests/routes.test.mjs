@@ -647,6 +647,64 @@ describe("static route coverage (#123)", () => {
     );
   });
 
+  // #524/#526: GitHub Pages cannot negotiate Accept: text/markdown nor emit
+  // Link: headers, so discovery ships in-band — a rel=alternate link to the
+  // page's generated .md twin plus the RFC 8288 relations from the template.
+  it("advertises each route's markdown twin via rel=alternate text/markdown", async () => {
+    const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
+    const mdAlternate = (html) =>
+      [
+        ...headOf(html).matchAll(
+          /<link[^>]*rel="alternate"[^>]*type="text\/markdown"[^>]*href="([^"]+)"[^>]*>/g,
+        ),
+      ].map((m) => m[1]);
+
+    const pages = [
+      ["index.html", `${DEFAULT_BASE_URL}/index.md`],
+      ["archive.html", `${DEFAULT_BASE_URL}/archive.md`],
+      ["privacy.html", `${DEFAULT_BASE_URL}/privacy.md`],
+      ["about.html", `${DEFAULT_BASE_URL}/about.md`],
+    ];
+    for (const [file, twin] of pages) {
+      expect(
+        mdAlternate(readFileSync(path.join(outDir, file), "utf8")),
+        `${file} links its own .md twin`,
+      ).toContain(twin);
+    }
+    for (const offer of index.offers.slice(0, 5)) {
+      const detail = readFileSync(
+        path.join(outDir, "offers", `${offer.slug}.html`),
+        "utf8",
+      );
+      expect(mdAlternate(detail)).toContain(
+        `${DEFAULT_BASE_URL}/offers/${offer.slug}.md`,
+      );
+      // The absolute twin href must not break the depth-1 ./ → ../ contract.
+      expect(detail).not.toContain('href="./llms.txt"');
+    }
+  });
+
+  it("carries RFC 8288 discovery relations in every prerendered head (#526)", () => {
+    for (const file of ["index.html", "about.html", "privacy.html"]) {
+      const head = headOf(readFileSync(path.join(outDir, file), "utf8"));
+      expect(head).toMatch(
+        /<link[^>]*rel="describedby"[^>]*type="text\/markdown"/,
+      );
+      expect(head).toMatch(
+        /<link[^>]*rel="service-desc"[^>]*type="text\/markdown"/,
+      );
+      expect(head).toMatch(/<link[^>]*rel="service-doc"[^>]*href="/);
+    }
+    const detail = readFileSync(
+      path.join(outDir, "offers", `${index.offers[0].slug}.html`),
+      "utf8",
+    );
+    const detailHead = headOf(detail);
+    // Depth-1 pages keep the relations, climbing ../ like every root asset.
+    expect(detailHead).toContain('rel="service-doc" type="text/html" href="../about.html"');
+    expect(detailHead).toContain('rel="describedby" type="text/markdown" href="../llms.txt"');
+  });
+
   it("stamps every prerendered page with one route-matching canonical", async () => {
     const { DEFAULT_BASE_URL } = await import("../src/lib/site.ts");
     const canonicalLinks = (html) =>
