@@ -5,6 +5,18 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Home list paginated, 20 offers per page (#548):** the listing now ships
+  in pages of twenty rows with a numbered pager — Previous/Next steps plus
+  a steady seven-slot window of page links — under the grid. Pages are real
+  `?page=N` URLs, so they are shareable, open in a new tab, and survive the
+  browser's back/forward buttons; searching, filtering, sorting and
+  clearing all reset to page 1. The prerender ships page 1 only, which
+  shrinks `dist/index.html` from ~668 KB to ~95 KB raw (~43 KB to ~13 KB
+  gzip) and still gives JS-off visitors the first twenty offers — every
+  offer keeps its own detail page in the sitemap. All-time
+  view-count lookups now cover just the visible page instead of every row
+  at once.
+
 - **Protected-resource metadata declares a non-empty scope list (#544):**
   `/.well-known/oauth-protected-resource` (and its `.json` twin) now ships
   `"scopes_supported": ["read"]` instead of an empty array — some validators

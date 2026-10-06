@@ -35,7 +35,13 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // its 460 bytes of headroom still fails on the next feature that lands
 // unnoticed. Raise it deliberately, in this style, when a change is worth the
 // bytes — giving bytes back does not spend them.
-const PYTHON_INLINE_CSS_BYTES = 56_500;
+//
+// 2026-10-06 (#548): the numbered pager under the offer list — the chip-pill
+// page links and steps, the pressed-chip inversion on aria-current, the
+// dimmed inert steps at the ends, the sub-30rem label collapse and tighter
+// spacing, the coarse-pointer 44px targets, and the programmatic-focus and
+// scroll-margin rules — measured 57,457 raw, so the ceiling moves to 58,000.
+const PYTHON_INLINE_CSS_BYTES = 58_000;
 
 function cssBytesIn(dir) {
   let total = 0;

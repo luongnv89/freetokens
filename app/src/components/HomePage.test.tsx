@@ -16,6 +16,7 @@ import {
   resetAnalyticsForTests,
 } from "../lib/analytics";
 import { DISMISSED_KEY, PREFS_KEY, SAVED_KEY } from "../lib/personalState";
+import { PAGE_SIZE } from "../lib/pagination";
 import type { Offer, OffersIndex } from "../lib/offers";
 
 const MID = "G-TESTID12345";
@@ -1155,5 +1156,257 @@ describe("hottestSlugs ranking boundaries (#282)", () => {
     expect([...hottestSlugs({ a: 4, b: null })]).toEqual(["a"]);
     expect([...hottestSlugs({ a: 0, b: null })]).toEqual([]);
     expect([...hottestSlugs({})]).toEqual([]);
+  });
+});
+
+describe("HomePage pagination (#548)", () => {
+  // 45 offers so the default list spans three pages (20 + 20 + 5). Slugs
+  // are zero-padded so index order reads as the row order; the last three
+  // carry a second category so one filter yields fewer than a page.
+  const pagedOffers: Offer[] = Array.from({ length: 45 }, (_, i) => {
+    const n = i + 1;
+    return offer({
+      slug: `offer-${String(n).padStart(2, "0")}`,
+      title: `Offer ${String(n).padStart(2, "0")}`,
+      provider: "Paged Co",
+      category: n > 42 ? "image" : "coding",
+    });
+  });
+  const pagedIndex: OffersIndex = {
+    generated_at: "2026-08-24T00:00:00Z",
+    count: pagedOffers.length,
+    active_count: pagedOffers.length,
+    expired_count: 0,
+    offers: pagedOffers,
+  };
+  const slugs = pagedOffers.map((o) => o.slug);
+
+  function pager() {
+    return document.getElementById("ft-pager");
+  }
+
+  function savedToggle() {
+    return document.querySelector(
+      "[data-ft-saved-toggle]",
+    ) as HTMLButtonElement;
+  }
+
+  function dismissButton(slug: string) {
+    return document.querySelector(
+      `[data-ft-dismiss="${slug}"]`,
+    ) as HTMLButtonElement;
+  }
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("renders the first page of rows plus a working pager", () => {
+    render(<HomePage index={pagedIndex} />);
+    expect(listedSlugs()).toEqual(slugs.slice(0, PAGE_SIZE));
+    const nav = pager();
+    expect(nav).not.toBeNull();
+    expect(nav?.getAttribute("aria-label")).toBe("Offer list pages");
+    const current = nav?.querySelector('a[aria-current="page"]');
+    expect(current?.textContent).toBe("1");
+    // No previous page: the step keeps its box but is not a link.
+    const prev = nav?.querySelector(".pager-prev");
+    expect(prev?.tagName).toBe("SPAN");
+    expect(nav?.querySelector("a.pager-prev")).toBeNull();
+    const next = nav?.querySelector(".pager-next") as HTMLAnchorElement;
+    expect(next.tagName).toBe("A");
+    expect(next.getAttribute("href")).toBe("?page=2");
+    expect(statusText()).toBe("Showing 1–20 of 45 offers");
+  });
+
+  it("navigates to page 2: rows, URL, status, focus — no events, no prefs write", () => {
+    const gtag = grantedGtag();
+    render(<HomePage index={pagedIndex} />);
+    fireEvent.click(screen.getByRole("link", { name: "Page 2" }));
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+    expect(window.location.search).toBe("?page=2");
+    expect(statusText()).toBe("Showing 21–40 of 45 offers");
+    expect(document.activeElement).toBe(document.getElementById("ft-grid"));
+    expect(eventCalls(gtag, "search")).toHaveLength(0);
+    expect(eventCalls(gtag, "sort_use")).toHaveLength(0);
+    expect(eventCalls(gtag, "filter_use")).toHaveLength(0);
+    expect(window.localStorage.getItem(PREFS_KEY)).toBeNull();
+  });
+
+  it("walks with Next and Previous steps", () => {
+    render(<HomePage index={pagedIndex} />);
+    fireEvent.click(screen.getByRole("link", { name: "Next" }));
+    expect(window.location.search).toBe("?page=2");
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+    fireEvent.click(screen.getByRole("link", { name: "Next" }));
+    expect(window.location.search).toBe("?page=3");
+    expect(listedSlugs()).toEqual(slugs.slice(2 * PAGE_SIZE));
+    fireEvent.click(screen.getByRole("link", { name: "Previous" }));
+    expect(window.location.search).toBe("?page=2");
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+  });
+
+  it("deep-links a page, keeping the last step inert there", () => {
+    setSearch("?page=3");
+    render(<HomePage index={pagedIndex} />);
+    expect(listedSlugs()).toEqual(slugs.slice(2 * PAGE_SIZE));
+    expect(statusText()).toBe("Showing 41–45 of 45 offers");
+    const next = pager()?.querySelector(".pager-next");
+    expect(next?.tagName).toBe("SPAN");
+    expect(pager()?.querySelector("a.pager-next")).toBeNull();
+  });
+
+  it("clamps ?page=99 to the last page without rewriting the URL", () => {
+    setSearch("?page=99");
+    render(<HomePage index={pagedIndex} />);
+    expect(listedSlugs()).toEqual(slugs.slice(2 * PAGE_SIZE));
+    expect(window.location.search).toBe("?page=99");
+  });
+
+  it("treats ?page=abc as page 1", () => {
+    setSearch("?page=abc");
+    render(<HomePage index={pagedIndex} />);
+    expect(listedSlugs()).toEqual(slugs.slice(0, PAGE_SIZE));
+    expect(pager()?.querySelector('a[aria-current="page"]')?.textContent).toBe(
+      "1",
+    );
+  });
+
+  it("resets to page 1 on a category chip", () => {
+    setSearch("?page=2");
+    render(<HomePage index={pagedIndex} />);
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+    fireEvent.click(categoryChip("image"));
+    expect(listedSlugs()).toEqual(["offer-43", "offer-44", "offer-45"]);
+    const params = new URLSearchParams(window.location.search);
+    expect(params.get("page")).toBeNull();
+    expect(params.get("category")).toBe("image");
+  });
+
+  it("resets to page 1 on a sort change", () => {
+    setSearch("?page=2");
+    render(<HomePage index={pagedIndex} />);
+    fireEvent.change(screen.getByLabelText("Sort"), {
+      target: { value: "newest" },
+    });
+    const params = new URLSearchParams(window.location.search);
+    expect(params.get("page")).toBeNull();
+    expect(params.get("sort")).toBe("newest");
+    expect(listedSlugs()).toEqual(slugs.slice(0, PAGE_SIZE));
+  });
+
+  it("resets to page 1 on a committed search", () => {
+    vi.useFakeTimers();
+    setSearch("?page=2");
+    render(<HomePage index={pagedIndex} />);
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+    fireEvent.change(screen.getByLabelText("Search"), {
+      target: { value: "offer" },
+    });
+    act(() => {
+      vi.advanceTimersByTime(SEARCH_DEBOUNCE_MS);
+    });
+    const params = new URLSearchParams(window.location.search);
+    expect(params.get("page")).toBeNull();
+    expect(params.get("q")).toBe("offer");
+    expect(listedSlugs()).toEqual(slugs.slice(0, PAGE_SIZE));
+  });
+
+  it("resets to page 1 on Clear all filters", () => {
+    setSearch("?category=coding&page=2");
+    render(<HomePage index={pagedIndex} />);
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+    fireEvent.click(screen.getByRole("button", { name: "Clear all filters" }));
+    expect(window.location.search).toBe("");
+    expect(listedSlugs()).toEqual(slugs.slice(0, PAGE_SIZE));
+  });
+
+  it("restores the page on popstate", () => {
+    render(<HomePage index={pagedIndex} />);
+    fireEvent.click(screen.getByRole("link", { name: "Page 2" }));
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+    act(() => {
+      window.history.replaceState({}, "", "?page=3");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    });
+    expect(listedSlugs()).toEqual(slugs.slice(2 * PAGE_SIZE));
+  });
+
+  it("leaves modified clicks to the browser and intercepts plain ones", () => {
+    render(<HomePage index={pagedIndex} />);
+    const link = screen.getByRole("link", { name: "Page 2" });
+    expect(fireEvent.click(link, { ctrlKey: true })).toBe(true);
+    expect(listedSlugs()).toEqual(slugs.slice(0, PAGE_SIZE));
+    expect(window.location.search).toBe("");
+    expect(fireEvent.click(link)).toBe(false);
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+    expect(window.location.search).toBe("?page=2");
+  });
+
+  it("clamps the saved-only view without touching the URL page", () => {
+    window.localStorage.setItem(
+      SAVED_KEY,
+      JSON.stringify({ v: 1, slugs: ["offer-01", "offer-02"] }),
+    );
+    setSearch("?page=3");
+    render(<HomePage index={pagedIndex} />);
+    fireEvent.click(savedToggle());
+    expect(listedSlugs()).toEqual(["offer-01", "offer-02"]);
+    expect(pager()).toBeNull();
+    expect(window.location.search).toBe("?page=3");
+    fireEvent.click(savedToggle());
+    expect(listedSlugs()).toEqual(slugs.slice(2 * PAGE_SIZE));
+  });
+
+  it("clamps to the new last page when its rows are all dismissed", () => {
+    setSearch("?page=3");
+    render(<HomePage index={pagedIndex} />);
+    act(() => {
+      for (const slug of slugs.slice(2 * PAGE_SIZE)) {
+        dismissButton(slug).click();
+      }
+    });
+    expect(listedSlugs()).toEqual(slugs.slice(PAGE_SIZE, 2 * PAGE_SIZE));
+    expect(statusText()).toContain("Showing 21–40 of 40 offers");
+    expect(statusText()).toContain("5 hidden — restore");
+    expect(window.location.search).toBe("?page=3");
+  });
+
+  it("fetches all-time counts for the visible page only, today counts for the whole list", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const calls: string[] = [];
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: RequestInfo | URL) => {
+        calls.push(String(url));
+        return {
+          ok: true,
+          json: async () => ({ count: "5" }),
+        } as unknown as Response;
+      }),
+    );
+    const slugOf = (url: string) =>
+      decodeURIComponent(url).match(/\/offers\/([^.]+)\.html/)?.[1] ?? "";
+    const slugSet = (windowed: boolean) =>
+      new Set(
+        calls
+          .filter((u) => u.includes("start=") === windowed)
+          .map((u) => slugOf(u)),
+      );
+    render(<HomePage index={pagedIndex} />);
+    await waitFor(() => {
+      expect(slugSet(false)).toEqual(new Set(slugs.slice(0, PAGE_SIZE)));
+    });
+    expect(slugSet(true)).toEqual(new Set(slugs));
+    fireEvent.click(screen.getByRole("link", { name: "Page 2" }));
+    await waitFor(() => {
+      expect(slugSet(false)).toEqual(new Set(slugs.slice(0, 2 * PAGE_SIZE)));
+    });
+    expect(slugSet(true)).toEqual(new Set(slugs));
+  });
+
+  it("renders no pager when the whole result fits one page", () => {
+    render(<HomePage index={index} />);
+    expect(pager()).toBeNull();
   });
 });
