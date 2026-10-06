@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-05T03:04:11Z",
-  "count": 230,
-  "active_count": 199,
+  "generated_at": "2026-10-06T03:14:06Z",
+  "count": 225,
+  "active_count": 194,
   "expired_count": 31,
   "offers": [
     {
@@ -84,7 +84,7 @@
       "source_url": "https://www.tripo3d.ai/blog/announcement-tripo-openapi-platform-payment-system",
       "verified_date": "2026-09-29",
       "verification": "social_proof",
-      "review_status": "under-review",
+      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
@@ -107,7 +107,7 @@
       "title": "BazaarLink Free LLM API",
       "provider": "BazaarLink",
       "category": "api_provider",
-      "amount": "Free OpenAI-compatible API — 2 free models, 10 RPM + 50 weighted units/day shared (20 RPM + 100/day with credit), no credit card",
+      "amount": "Free OpenAI-compatible API — 2 free models, 10 RPM + 60 weighted units/day shared (20 RPM + 120/day with credit), no credit card",
       "expiry_date": null,
       "source_url": "https://bazaarlink.ai/free",
       "verified_date": "2026-09-30",
@@ -180,20 +180,6 @@
       "amount": "Free inclusionai/ming-image-0.1-design-layer image-to-image design layer decomposition at $0 (PNG/WebP output)",
       "expiry_date": null,
       "source_url": "https://openrouter.ai/inclusionai/ming-image-0.1-design-layer",
-      "verified_date": "2026-09-30",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "openrouter-space-bunny-alpha-free",
-      "title": "Space Bunny Alpha Free (OpenRouter)",
-      "provider": "OpenRouter",
-      "category": "api_provider",
-      "amount": "Free stealth/space-bunny-alpha inference at $0 input and output — 1M context, multimodal, tools, adjustable reasoning (free-model rate limits)",
-      "expiry_date": null,
-      "source_url": "https://openrouter.ai/stealth/space-bunny-alpha",
       "verified_date": "2026-09-30",
       "verification": "social_proof",
       "review_status": "under-review",
@@ -311,20 +297,6 @@
       "review_status": "under-review",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "deepgram-flux-tts-free-openrouter",
-      "title": "Deepgram Flux TTS Free (OpenRouter)",
-      "provider": "OpenRouter",
-      "category": "voice",
-      "amount": "Free deepgram/flux-tts:free TTS endpoint ($0, rate-limited, 36 voices)",
-      "expiry_date": null,
-      "source_url": "https://openrouter.ai/deepgram/flux-tts:free",
-      "verified_date": "2026-09-30",
-      "verification": "social_proof",
-      "review_status": "verified",
-      "signup": "required",
-      "status": "active"
     },
     {
       "slug": "hume-free-tier-credits",
@@ -542,7 +514,7 @@
       "provider": "OpenRouter",
       "category": "api_provider",
       "amount": "Free dots-studio/dots-3-note-preview:free at $0 input/output (512K context, multimodal, tools)",
-      "expiry_date": null,
+      "expiry_date": "2026-12-31",
       "source_url": "https://openrouter.ai/dots-studio/dots-3-note-preview:free",
       "verified_date": "2026-09-30",
       "verification": "social_proof",
@@ -672,7 +644,7 @@
       "source_url": "https://www.resemble.ai/start/builders-grant-startup-program",
       "verified_date": "2026-09-30",
       "verification": "social_proof",
-      "review_status": "under-review",
+      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
@@ -701,20 +673,6 @@
       "verified_date": "2026-09-30",
       "verification": "social_proof",
       "review_status": "to-be-verified",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "openrouter-glm-5-2-free",
-      "title": "GLM 5.2 Free (OpenRouter)",
-      "provider": "OpenRouter",
-      "category": "api_provider",
-      "amount": "Free z-ai/glm-5.2:free endpoint at $0 input/output (32K context)",
-      "expiry_date": null,
-      "source_url": "https://openrouter.ai/z-ai/glm-5.2:free",
-      "verified_date": "2026-09-25",
-      "verification": "social_proof",
-      "review_status": "under-review",
       "signup": "required",
       "status": "active"
     },
@@ -831,20 +789,6 @@
       "status": "active"
     },
     {
-      "slug": "openrouter-qwen3-8-27b-free",
-      "title": "Qwen3.8 27B Free (OpenRouter)",
-      "provider": "OpenRouter",
-      "category": "api_provider",
-      "amount": "Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context)",
-      "expiry_date": null,
-      "source_url": "https://openrouter.ai/qwen/qwen3.8-27b:free",
-      "verified_date": "2026-09-30",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
-    },
-    {
       "slug": "smallest-ai-startup-grants",
       "title": "Smallest.ai Startup Grants Program for Voice AI",
       "provider": "Smallest.ai",
@@ -933,7 +877,7 @@
       "title": "DeepInfra DeepStart",
       "provider": "DeepInfra",
       "category": "startup_program",
-      "amount": "1,000,000,000 free inference tokens (valued at DeepSeek V3.1 prices)",
+      "amount": "Approximately 50 billion free inference tokens at DeepSeek V4 Flash prices; credits expire one year after approval",
       "expiry_date": null,
       "source_url": "https://deepinfra.com/deepstart",
       "verified_date": "2026-09-30",
@@ -1148,7 +1092,7 @@
       "source_url": "https://www.context.dev/pricing",
       "verified_date": "2026-09-30",
       "verification": "social_proof",
-      "review_status": "under-review",
+      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
@@ -1249,20 +1193,6 @@
       "review_status": "under-review",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "novita-ling-3-0-flash-fin-free",
-      "title": "Ling 3.0 Flash Fin Free (Novita)",
-      "provider": "Novita AI",
-      "category": "api_provider",
-      "amount": "Ling 3.0 Flash Fin at $0 input / $0 output per M tokens (256K context)",
-      "expiry_date": null,
-      "source_url": "https://novita.ai/models/model-detail/inclusionai-ling-3.0-flash-fin",
-      "verified_date": "2026-09-28",
-      "verification": "social_proof",
-      "review_status": "to-be-verified",
-      "signup": "required",
-      "status": "active"
     },
     {
       "slug": "openrouter-ling-3-0-flash-vl-free",
@@ -2296,7 +2226,7 @@
       "source_url": "https://fireworks.ai/pricing",
       "verified_date": "2026-09-30",
       "verification": "social_proof",
-      "review_status": "under-review",
+      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
@@ -2380,7 +2310,7 @@
       "source_url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
       "verified_date": "2026-09-25",
       "verification": "social_proof",
-      "review_status": "under-review",
+      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
@@ -2870,7 +2800,7 @@
       "source_url": "https://docs.llm7.io/limits",
       "verified_date": "2026-09-30",
       "verification": "social_proof",
-      "review_status": "unverified",
+      "review_status": "to-be-verified",
       "signup": "none",
       "status": "active"
     },

@@ -1,12 +1,12 @@
 # Verified 2026-09-29 against https://bazaarlink.ai/free
-# ("Try 2 enabled free models ... No credit: 10 RPM and 50 weighted
-# units/day. With credit: 20 RPM and 100 weighted units/day ... resets at
+# ("Try 2 enabled free models ... No credit: 10 RPM and 60 weighted
+# units/day. With credit: 20 RPM and 120 weighted units/day ... resets at
 # 00:00 UTC." Free models live now: qwen/qwen3.7-flash and
 # deepseek/deepseek-v4-flash-0731free; OpenAI-compatible endpoint.)
 title: BazaarLink Free LLM API
 provider: BazaarLink
 category: api_provider
-amount: Free OpenAI-compatible API — 2 free models, 10 RPM + 50 weighted units/day shared (20 RPM + 100/day with credit), no credit card
+amount: Free OpenAI-compatible API — 2 free models, 10 RPM + 60 weighted units/day shared (20 RPM + 120/day with credit), no credit card
 expiry_date: null
 source_url: https://bazaarlink.ai/free
 verified_date: 2026-09-30

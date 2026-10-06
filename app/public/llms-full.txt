@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-05T22:43:55Z — 178 of 199 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-06T03:14:07Z — 177 of 194 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -312,7 +312,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: startup_program
 - Amount: Up to $30,000 in credits ($500–$30K by use case) for voice generation and deepfake detection APIs; credits expire ≤12 months from approval
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://www.resemble.ai/start/builders-grant-startup-program
 - Page: https://freetokens.custats.info/offers/resemble-builders-grant.html
 - Summary: Resemble AI's Builder's Grant awards $500–$30,000 in credits (most grants sized to a production proof-of-concept) usable across both voice generation and deepfake detection APIs, for up to 12 months. Open to teams under 50 employees or companies building a voice-enabled product; free-tier users eligible, existing paid customers excluded. One application per company; recipients agree to 12 months of marketing collaboration.
@@ -417,16 +417,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/orcarouter-free-credits.html
 - Summary: OrcaRouter's offers page lets you claim live voucher, student, and hackathon API credits (dollar amounts, scope, and expiry are printed on each card at claim time) and call a rotating set of $0 models. Create an account and claim an open offer with no payment method; a few partner offers are labelled card-required. Always-free $0 models are for established accounts (GitHub with some history, or any paid purchase). Promo credit expiry is shown before confirm; $0 models stay free while they remain in the lineup. Docs currently list DeepSeek V4 -free ids and the orcarouter/free router.
 - Claim steps: Create an account at orcarouter.ai (the offers page says an API key takes 30 seconds; no card, no sales call). | Open orcarouter.ai/offers and claim a live open offer; student/community offers unlock with an eligible email or invite code. | Call rotating $0 models (for example orcarouter/free or a -free catalog id) on the OpenAI-compatible endpoint; link GitHub with history if a free-model request is declined.
-### Space Bunny Alpha Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free stealth/space-bunny-alpha inference at $0 input and output — 1M context, multimodal, tools, adjustable reasoning (free-model rate limits)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/stealth/space-bunny-alpha
-- Page: https://freetokens.custats.info/offers/openrouter-space-bunny-alpha-free.html
-- Summary: stealth/space-bunny-alpha is a free stealth model on OpenRouter: $0 prompt and completion pricing, 1M-token context, multimodal input, tool calling and adjustable reasoning, subject to free-model rate limits. (Separate from the identically-named Space Bunny Free listing on OpenCode Zen, which expired 2026-09-30.)
-- Claim steps: Create or sign in to an OpenRouter account and create an API key at https://openrouter.ai/settings/keys. | Call the OpenRouter chat-completions API with model stealth/space-bunny-alpha.
 ### Span-01 Lite Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -437,16 +427,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-respan-span-01-lite-free.html
 - Summary: Respan's Span-01 Lite is a behavior-scoring model released 2026-09-26: for each plain-language behavior you define it returns the probability the behavior is present in a conversation span, suited to high-volume evaluation and monitoring. The respan/span-01-lite:free endpoint is $0 and rate-limited. It runs on the OpenRouter Decisions API (typed questions over a state — noul, choice, score), not the chat-completions endpoint, so chat SDKs will not work with it.
 - Claim steps: Create an OpenRouter account and API key at openrouter.ai/settings/keys. | Call model respan/span-01-lite:free via the OpenRouter Decisions API (openrouter.alpha.decisions.create) — not chat completions. | Free endpoint is rate-limited; pricing shows $0 for prompt and completion tokens.
-### Qwen3.8 27B Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/qwen/qwen3.8-27b:free
-- Page: https://freetokens.custats.info/offers/openrouter-qwen3-8-27b-free.html
-- Summary: Free qwen/qwen3.8-27b:free inference at $0 input and output (262K context).
-- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model qwen/qwen3.8-27b:free.
 ### North Mini Code Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -611,11 +591,11 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free dots-studio/dots-3-note-preview:free at $0 input/output (512K context, multimodal, tools)
-- Status: active — enrollment deadline: none (ongoing)
+- Status: active — enrollment deadline: 2026-12-31
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/dots-studio/dots-3-note-preview:free
 - Page: https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html
-- Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Listed in the Models API since 2026-08-14 with no published end date. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
+- Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Current page and API announce a December 31, 2026 sunset. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
 - Claim steps: Sign up at openrouter.ai and create an API key (OpenRouter :free models do not require purchasing credits). | Call the chat completions API with model id dots-studio/dots-3-note-preview:free.
 ### MiMo V2.6 Flash Free on OpenCode Zen
 - Provider: OpenCode
@@ -822,7 +802,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: api_provider
 - Amount: Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=none
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=none
 - Source: https://docs.llm7.io/limits
 - Page: https://freetokens.custats.info/offers/llm7-free-tier.html
 - Summary: LLM7 provides anonymous text generation with limits of 1 request per second, 10 per minute, 60 per hour, and 500,000 tokens per 24 hours. A free token raises the request and token limits.
@@ -1202,7 +1182,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: api_provider
 - Amount: $1 in free credits
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://fireworks.ai/pricing
 - Page: https://freetokens.custats.info/offers/fireworks-ai-1-dollar-free-credits.html
 - Summary: Fireworks AI's official pricing page states: "Pay per token, with high rate limits and postpaid billing. Get started with $1 in free credits." This matches the claimed $1 starter credit for new accounts. The page's "Get Started" button links to /signup, so claiming requires creating an account. No expiry or limited-time language appears near the offer, so it is treated as ongoing with no fixed end date. The offer was not personally redeemed; the verdict is based on the official page.
@@ -1350,13 +1330,13 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### DeepInfra DeepStart
 - Provider: DeepInfra
 - Category: startup_program
-- Amount: 1,000,000,000 free inference tokens (valued at DeepSeek V3.1 prices)
+- Amount: Approximately 50 billion free inference tokens at DeepSeek V4 Flash prices; credits expire one year after approval
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://deepinfra.com/deepstart
 - Page: https://freetokens.custats.info/offers/deepinfra-deepstart.html
-- Summary: DeepInfra's DeepStart program grants 1,000,000,000 (one billion) free inference tokens, valued at DeepSeek V3.1 prices, usable across DeepInfra's hosted model catalog. Eligibility is narrow: the startup must have raised between $250K and $10M USD and been founded within the last 2 years.
-- Claim steps: Confirm eligibility: raised $250K-$10M USD, founded within the last 2 years. | Apply via the DeepStart page at https://deepinfra.com/deepstart . | On acceptance, 1B tokens are credited for inference at DeepSeek V3.1 prices.
+- Summary: DeepInfra's DeepStart program grants approximately 50 billion free inference tokens at DeepSeek V4 Flash prices, expiring one year after approval. Eligibility is narrow: the startup must have raised between $250K and $10M USD and been founded within the last 2 years.
+- Claim steps: Confirm eligibility: raised $250K-$10M USD, founded within the last 2 years. | Apply via the DeepStart page at https://deepinfra.com/deepstart . | On acceptance, credits equivalent to approximately 50 billion tokens at DeepSeek V4 Flash prices expire one year after approval.
 ### Deepgram $200 Free Credit
 - Provider: Deepgram
 - Category: voice
@@ -1387,16 +1367,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/deepgram-flux-tts-match-promo.html
 - Summary: Limited-time Deepgram promotion: every $1 of paid Flux TTS usage earns $1 in bonus credits, up to $500 per eligible project. Open to new and existing Pay-As-You-Go and Growth projects (Enterprise excluded); a valid payment method is required. Runs Sep 15 – Dec 31, 2026; bonus credits never expire and stack with the standard $200 signup credit.
 - Claim steps: Use a Deepgram Pay-As-You-Go or Growth project with a valid payment method on file. | Spend paid credits on Flux TTS between Sep 15 and Dec 31, 2026 (usage paid with promotional credits does not qualify). | Bonus credits are granted to the project, typically within 1 week.
-### Deepgram Flux TTS Free (OpenRouter)
-- Provider: OpenRouter
-- Category: voice
-- Amount: Free deepgram/flux-tts:free TTS endpoint ($0, rate-limited, 36 voices)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
-- Source: https://openrouter.ai/deepgram/flux-tts:free
-- Page: https://freetokens.custats.info/offers/deepgram-flux-tts-free-openrouter.html
-- Summary: OpenRouter serves Deepgram's Flux TTS as a free $0 TTS endpoint (deepgram/flux-tts:free) with 36 English voices; usage is rate-limited.
-- Claim steps: Create an OpenRouter account and API key. | POST to /api/v1/audio/speech with model deepgram/flux-tts:free. | Free endpoints are rate-limited; no purchase required for free usage.
 ### Daytona Startup Program — up to $100K
 - Provider: Daytona
 - Category: startup_program
@@ -1432,7 +1402,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: api_provider
 - Amount: 1,000 API credits/month + 10K one-time Logo Link requests (30 RPM work email / 10 RPM personal)
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://www.context.dev/pricing
 - Page: https://freetokens.custats.info/offers/context-dev-free-tier.html
 - Summary: Context.dev's free tier includes 1,000 API credits per month (1 credit = 1 page scrape; extraction/brand calls cost more) plus a one-time 10K Logo Link quota — no credit card required. Rate limit is 30 calls/minute with a work email or 10/minute with a personal email.
@@ -1629,12 +1599,12 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### BazaarLink Free LLM API
 - Provider: BazaarLink
 - Category: api_provider
-- Amount: Free OpenAI-compatible API — 2 free models, 10 RPM + 50 weighted units/day shared (20 RPM + 100/day with credit), no credit card
+- Amount: Free OpenAI-compatible API — 2 free models, 10 RPM + 60 weighted units/day shared (20 RPM + 120/day with credit), no credit card
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://bazaarlink.ai/free
 - Page: https://freetokens.custats.info/offers/bazaarlink-free-llm-api.html
-- Summary: BazaarLink's free tier is an OpenAI-compatible LLM gateway with 2 enabled free models — qwen/qwen3.7-flash and deepseek/deepseek-v4-flash-0731free. Shared account allowance: 10 RPM + 50 weighted units/day without credit, 20 RPM + 100 weighted units/day with credit; counters reset at 00:00 UTC. No credit card required; 2 concurrent free requests per account.
+- Summary: BazaarLink's free tier is an OpenAI-compatible LLM gateway with 2 enabled free models — qwen/qwen3.7-flash and deepseek/deepseek-v4-flash-0731free. Shared account allowance: 10 RPM + 60 weighted units/day without credit, 20 RPM + 120 weighted units/day with credit; counters reset at 00:00 UTC. No credit card required; 2 concurrent free requests per account.
 - Claim steps: Sign up at bazaarlink.ai and create an API key — no credit card. | Set base_url to https://api.bazaarlink.ai/v1 in any OpenAI SDK. | Call one of the enabled free model ids, e.g. qwen/qwen3.7-flash; shared limits reset daily at 00:00 UTC.
 ### Baseten starting credits for new workspaces
 - Provider: Baseten
@@ -1786,6 +1756,26 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/amazon-polly-free-tier.html
 - Summary: Amazon Polly's free tier gives new AWS accounts 5 million characters per month on Standard voices and 1 million characters per month on Neural voices for the first 12 months after signup - roughly thousands of minutes of narration at zero cost.
 - Claim steps: Create an AWS account at aws.amazon.com (free tier applies automatically). | Open the Amazon Polly console. | Convert text to speech using Standard or Neural voices within the monthly free character allowance. | Note the free window runs for the first 12 months from account creation.
+### Alibaba Cloud Model Studio — Free Quota for New Users
+- Provider: Alibaba Cloud
+- Category: api_provider
+- Amount: ~1,000,000 free tokens per eligible model, valid 90 days from activation (real-time inference only; Singapore region, International scope)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota
+- Page: https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html
+- Summary: Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation (or model release/approval, whichever is later). Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry.
+- Claim steps: Create an Alibaba Cloud account and open Alibaba Cloud Model Studio (Singapore region). | Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed. | Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page. | Call eligible models in real time; enable 'Free Quota Only' mode to avoid pay-as-you-go charges after the quota runs out.
+### Aerolink $5 Testing Credit
+- Provider: Aerolink
+- Category: api_provider
+- Amount: $5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
+- Source: https://aerolink.lat/pricing
+- Page: https://freetokens.custats.info/offers/aerolink-starter-free-trial.html
+- Summary: Aerolink advertises $5 in one-time testing credits for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan. The original one-week Starter trial is no longer on the pricing page.
+- Claim steps: Register at https://aerolink.lat/register. | Generate an API key from the dashboard and point your client at the Aerolink base URL. | Check eligibility for the $5 testing credit in the account dashboard; the credit is valid for 30 days.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
