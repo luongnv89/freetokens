@@ -26,13 +26,15 @@ but still prints the JSON. A non-zero exit, a non-null `error`, or an
 blocks private addresses after DNS resolution, redirects included.
 
 The oEmbed lookup runs this command once per X post, with the post URL
-in place of `<post-url>`:
+in place of `<post-url>`. Substitute it only after it passes the
+**Shell quoting** rule below and the status-URL pattern; the in-shell
+check runs after the assignment, so it cannot stop a `'` breakout.
 
 ```bash
 POST='<post-url>'
 RE='^https://(www\.)?(x|twitter)\.com/[A-Za-z0-9_]{1,15}/status/[0-9]{1,20}$'
 [[ $POST =~ $RE ]] || { echo "oEmbed skipped: not an x.com/twitter.com status URL" >&2; exit 0; }
-curl -sS --fail --proto '=https' --max-redirs 0 --connect-timeout 10 \
+curl -q -sS --fail --proto '=https' --max-redirs 0 --connect-timeout 10 \
   --max-time 20 --max-filesize 100000 -H 'Accept: application/json' \
   --get --data-urlencode "url=$POST" -w '\n%{http_code}\n' \
   'https://publish.x.com/oembed'
@@ -41,7 +43,8 @@ curl -sS --fail --proto '=https' --max-redirs 0 --connect-timeout 10 \
 The check accepts only `https://x.com/<handle>/status/<id>` or the same on
 `twitter.com` (optional `www.`), with no query string or fragment; strip
 those from the post URL before the check. The command reads one fixed
-host and follows no redirects, so the final URL is the request URL. It
+host and follows no redirects, so the final URL is the request URL; `-q`
+(first) ignores any `.curlrc`. It
 prints the JSON body, then the HTTP status on the last line. The lookup
 succeeded only if curl exits 0, the status is `200`, and the body is JSON
 with an `author_name` and an `author_url` on `x.com` or `twitter.com`.
