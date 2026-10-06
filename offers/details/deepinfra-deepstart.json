@@ -1,16 +1,16 @@
 {
-  "summary": "DeepInfra's DeepStart program grants 1,000,000,000 (one billion) free inference tokens, valued at DeepSeek V3.1 prices, usable across DeepInfra's hosted model catalog. Eligibility is narrow: the startup must have raised between $250K and $10M USD and been founded within the last 2 years.",
+  "summary": "DeepInfra's DeepStart program grants approximately 50 billion free inference tokens at DeepSeek V4 Flash prices, expiring one year after approval. Eligibility is narrow: the startup must have raised between $250K and $10M USD and been founded within the last 2 years.",
   "claim_steps": [
     "Confirm eligibility: raised $250K-$10M USD, founded within the last 2 years.",
     "Apply via the DeepStart page at https://deepinfra.com/deepstart .",
-    "On acceptance, 1B tokens are credited for inference at DeepSeek V3.1 prices."
+    "On acceptance, credits equivalent to approximately 50 billion tokens at DeepSeek V4 Flash prices expire one year after approval."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://deepinfra.com/deepstart",
       "title": "DeepStart | DeepInfra",
-      "text": "DeepStart 1,000,000,000 free tokens* — *at DeepSeek V3.1 prices. To qualify your startup needs to meet the following: Have raised between 250K and 10M USD; Founded in the last 2 years."
+      "text": "DeepStart ~50,000,000,000 free tokens at DeepSeek V4 Flash prices. Credits expire one year after approval. To qualify: raised between 250K and 10M USD; founded in the last 2 years."
     }
   ]
 }
