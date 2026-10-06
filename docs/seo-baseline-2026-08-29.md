@@ -110,6 +110,8 @@ The lists below are the decision record for the future `robots.txt` directives. 
 
 This split keeps the site discoverable in ordinary search and supports explicit user-requested answer retrieval without treating either as permission for general-purpose training collection. Task 2.3 should encode these categories explicitly and preserve the global search crawl allowance.
 
+`app/public/robots.txt` encodes the same posture twice: the per-agent groups above, and a wildcard-group `Content-Signal: ai-train=no, search=yes, ai-input=no` directive ([draft-romm-aipref-contentsignals](https://datatracker.ietf.org/doc/draft-romm-aipref-contentsignals/), #523). The signal is the default for agents without a dedicated group — the named groups keep governing the bots they match.
+
 ## Downstream use
 
 Tasks 2.4 and 3.1 depend on this decision and baseline. Their entries in `tasks.md` pin this document to the commit that introduced it.

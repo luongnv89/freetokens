@@ -2,6 +2,9 @@
 # Search and user-requested retrieval stay discoverable; training crawlers are blocked.
 User-agent: *
 Allow: /
+# Content Signals (draft-romm-aipref-contentsignals) — the same posture in
+# preference form: no AI training, search indexing yes, no AI input by default.
+Content-Signal: ai-train=no, search=yes, ai-input=no
 
 # llms.txt: https://freetokens.custats.info/llms.txt
 Sitemap: https://freetokens.custats.info/sitemap.xml

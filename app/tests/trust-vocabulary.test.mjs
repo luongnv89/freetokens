@@ -179,6 +179,32 @@ describe("committed llms artifacts carry the trust vocabulary (#509)", () => {
   });
 });
 
+describe("robots.txt declares AI content signals (#523)", () => {
+  const robots = readFileSync(path.join(PUBLIC_DIR, "robots.txt"), "utf8");
+
+  it("declares ai-train, search and ai-input inside the User-agent: * group", () => {
+    expect(robots).toMatch(
+      /User-agent: \*\nAllow: \/\n(?:#[^\n]*\n)*Content-Signal: ai-train=no, search=yes, ai-input=no\n/,
+    );
+  });
+
+  it("keeps the signals consistent with Policy A's per-agent rules", () => {
+    // Training crawlers are Disallow'd above; the wildcard group declares
+    // ai-train=no. Retrieval bots allowed by their own groups keep explicit
+    // Allow rules, so the wildcard default never grants ai-input.
+    const signal = robots.match(/^Content-Signal: (.+)$/m);
+    expect(signal).toBeTruthy();
+    const prefs = Object.fromEntries(
+      signal[1].split(",").map((kv) => kv.trim().split("=")),
+    );
+    expect(prefs).toEqual({
+      "ai-train": "no",
+      search: "yes",
+      "ai-input": "no",
+    });
+  });
+});
+
 describe("curator documentation covers the vocabulary (#507)", () => {
   const schema = readFileSync(path.join(REPO_ROOT, "docs", "schema.md"), "utf8");
 

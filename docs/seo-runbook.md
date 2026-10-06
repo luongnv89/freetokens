@@ -118,6 +118,7 @@ ls -l app/public/llms.txt app/dist/llms.txt 2>&1 | head
 grep -q "Sitemap: https://freetokens.custats.info/sitemap.xml" app/dist/robots.txt && echo "robots sitemap ok"
 grep -q "User-agent: GPTBot" app/dist/robots.txt && echo "training crawler block present"
 grep -q "User-agent: Googlebot" app/dist/robots.txt && echo "search allow present"
+grep -q "Content-Signal: ai-train=no, search=yes, ai-input=no" app/dist/robots.txt && echo "content signals present"   # after #523
 
 xmllint --noout app/dist/sitemap.xml 2>&1 | head   # or: python3 -c "import xml.etree.ElementTree as ET; ET.parse('app/dist/sitemap.xml')"
 grep -c "<url>" app/dist/sitemap.xml               # one per route
