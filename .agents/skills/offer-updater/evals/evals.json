@@ -83,6 +83,33 @@
         "No TinyFish agent, browser, or automation tool is used",
         "The offer is either kept with evidence quoted from a page actually read, or listed under Dropped with every URL tried"
       ]
+    },
+    {
+      "id": 7,
+      "name": "x-post-oembed-lookup",
+      "kind": "edge",
+      "prompt": "Add this offer: https://x.com/OpenAI/status/1234567890123456789 says new API accounts get $5 in free credits. Assume the official OpenAI pricing page confirms it.",
+      "expected_output": "Step 1 checks the post URL against the x.com/twitter.com status-URL pattern, then runs the pinned curl command from references/web-tools.md against https://publish.x.com/oembed (not TinyFish fetch and not publish.twitter.com). author comes from the response's author_name; if the lookup fails, the run falls back to the text captured during verification and says oEmbed was unreachable.",
+      "files": [],
+      "expectations": [
+        "The oEmbed lookup uses the pinned curl command to https://publish.x.com/oembed with --proto '=https', --max-redirs 0, and the post URL passed through --data-urlencode",
+        "The post URL is checked as an x.com or twitter.com status URL before the lookup runs",
+        "The lookup does not use TinyFish fetch or publish.twitter.com",
+        "The detail file's social_proof author comes from oEmbed author_name, or the run states oEmbed was unreachable and uses the text captured during verification"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "oembed-rejects-non-status-url",
+      "kind": "edge",
+      "prompt": "Add the Groq free API tier. The curator's evidence link is https://x.com/GroqInc (a profile page, not a post) plus https://groq-credits.example.com/status/42.",
+      "expected_output": "Neither URL passes the x.com/twitter.com status-URL check, so no oEmbed request is sent for either; no X social_proof entry is built from them; the offer is verified from official Groq pages or dropped.",
+      "files": [],
+      "expectations": [
+        "No oEmbed request is sent for a URL that is not an x.com or twitter.com status URL",
+        "No social_proof entry of type x is created from the profile URL or the look-alike domain",
+        "The offer is either kept with evidence quoted from an official page actually read, or listed under Dropped with every URL tried"
+      ]
     }
   ]
 }
