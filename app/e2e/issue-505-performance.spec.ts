@@ -39,9 +39,17 @@ interface Perf505 {
   longTasks: { start: number; duration: number }[];
 }
 
+// Chrome defaults the Resource Timing buffer to 250 entries; the home surface
+// issues ~400 same-origin subresource requests, so the default silently
+// truncates the evidence down to 250. The init script below raises it well
+// above the observed count (the literal is inlined because addInitScript
+// serialises the function source, so it cannot close over a module constant)
+// and exposes the cap so the harness can assert that nothing was dropped.
+
 declare global {
   interface Window {
     __perf505?: Perf505;
+    __perf505BufferSize?: number;
   }
 }
 
@@ -50,6 +58,14 @@ declare global {
 function installObservers() {
   const store: Perf505 = { lcp: 0, lcpElement: "", cls: 0, longTasks: [] };
   window.__perf505 = store;
+  // Registered before any page script runs, so every resource timing entry of
+  // the load lands in the enlarged buffer instead of being dropped at 250.
+  try {
+    performance.setResourceTimingBufferSize(5000);
+    window.__perf505BufferSize = 5000;
+  } catch {
+    /* buffer sizing unsupported in this engine */
+  }
   try {
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
@@ -99,6 +115,7 @@ interface TimingSnapshot {
   navigationTransferBytes: number;
   navigationDecodedBytes: number;
   requestCount: number;
+  resourceBufferSize: number;
   transferBytes: number;
   decodedBytes: number;
   byInitiator: Record<string, { count: number; transferBytes: number; decodedBytes: number }>;
@@ -140,6 +157,7 @@ function collectInPage(): TimingSnapshot {
     navigationTransferBytes: nav?.transferSize ?? 0,
     navigationDecodedBytes: nav?.decodedBodySize ?? 0,
     requestCount: entries.length,
+    resourceBufferSize: window.__perf505BufferSize ?? 0,
     transferBytes,
     decodedBytes,
     byInitiator,
@@ -238,6 +256,9 @@ test("issue 505 lab baseline — home cold load and search interaction", async (
     expect(snapshot.transferBytes).toBeGreaterThan(0);
     expect(snapshot.lcpMs).toBeGreaterThan(0);
     expect(snapshot.cls).toBeGreaterThanOrEqual(0);
+    // Guard against silent Resource Timing truncation: the collected entry count
+    // must stay below the raised buffer cap, or the evidence is corrupt.
+    expect(snapshot.resourceBufferSize).toBeGreaterThan(snapshot.requestCount);
 
     // Search interaction: fill, then wait for the URL, result count and status
     // to settle together. Timing is the in-page performance.now() delta, so it
@@ -308,6 +329,7 @@ test("issue 505 lab baseline — detail cold load", async ({ browser, browserNam
     expect(snapshot.requestCount).toBeGreaterThan(0);
     expect(snapshot.transferBytes).toBeGreaterThan(0);
     expect(snapshot.lcpMs).toBeGreaterThan(0);
+    expect(snapshot.resourceBufferSize).toBeGreaterThan(snapshot.requestCount);
 
     runs.push({
       run: i + 1,

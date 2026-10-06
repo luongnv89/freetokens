@@ -7,12 +7,13 @@ local production build in headless Chromium. Response size and client work are b
 under ~360 KB transferred, largest-contentful-paint stayed in the low hundreds of
 milliseconds and cumulative layout shift stayed under 0.06. The one structural
 finding the measurement does support is a **request-count** observation on home:
-242 of 250 requests are per-row view-count fetches. Field Core Web Vitals are
+401 of its 409 subresource requests are per-row (and aggregate) view-count
+fetches. Field Core Web Vitals are
 **unavailable** to this run, so that gap is retained rather than filled with a
 fabricated score. Nothing here claims the site is slow or fast in production.
 
 Evidence for [issue #505](https://github.com/luongnv89/freetokens/issues/505)
-(original UX/AX review task T2). Captured 5 October 2026, 21:30–21:31 UTC. No
+(original UX/AX review task T2). Captured 6 October 2026, 05:32 UTC. No
 application code or offer data changed; this is measurement plus its harness.
 
 ## Scope and method
@@ -20,7 +21,7 @@ application code or offer data changed; this is measurement plus its harness.
 Two independent measurements, kept deliberately separate:
 
 1. **Lab trace (primary).** The local production build at source commit
-   `b603097714a908ab792aa208971b02d305585c7c`, served by `vite preview` on
+   `48498bc481d1aa9e03bd232144c4b9632d946c78`, served by `vite preview` on
    `http://127.0.0.1:4173` with gzip — the same compression GitHub Pages applies.
    Headless Chromium **151.0.7922.34** driven by Playwright, collecting the CDP
    `Performance` domain metrics plus `PerformanceObserver` entries for
@@ -67,39 +68,39 @@ document. `transfer` is bytes on the wire; `decoded` is the uncompressed body.
 
 | Metric | Run 1 | Run 2 | Run 3 | Range |
 | --- | --- | --- | --- | --- |
-| TTFB | 13.6 | 3.4 | 3.6 | 3.4–13.6 |
-| DOMContentLoaded | 76.8 | 125.4 | 124.4 | 76.8–125.4 |
-| Load event | 200.0 | 126.7 | 125.6 | 125.6–200.0 |
-| Requests (incl. document) | 250 | 250 | 250 | 250 |
-| Document transfer / decoded (B) | 42,442 / 644,470 | 42,442 / 644,470 | 42,442 / 644,470 | gzip |
-| Subresource transfer / decoded (B) | 277,827 / 639,599 | same | same | — |
-| LCP | 224 | 132 | 132 | 132–224 |
+| TTFB | 7.3 | 3.3 | 2.7 | 2.7–7.3 |
+| DOMContentLoaded | 43.9 | 118.8 | 119.2 | 43.9–119.2 |
+| Load event | 143.2 | 120.0 | 120.4 | 120.0–143.2 |
+| Subresource requests | 409 | 409 | 409 | 409 |
+| Document transfer / decoded (B) | 42,452 / 644,482 | same | same | gzip |
+| Subresource transfer / decoded (B) | 277,824 / 639,599 | same | same | — |
+| LCP | 160 | 124 | 124 | 124–160 |
 | LCP element | `p` | `p` | `p` | — |
-| CLS | 0.0554 | 0.0406 | 0.0566 | 0.041–0.057 |
-| Long tasks (≥50 ms) | 1 (114 ms) | 0 | 0 | 0–1 |
-| Main-thread task time (CDP `TaskDuration`, s) | 0.620 | 0.487 | 0.486 | 0.486–0.620 |
-| Script time (`ScriptDuration`, s) | 0.110 | 0.080 | 0.080 | 0.080–0.110 |
-| Recalc style (`RecalcStyleDuration`, s) | 0.138 | 0.117 | 0.115 | 0.115–0.138 |
-| JS heap used (MB) | 8.50 | 7.79 | 7.79 | 7.79–8.50 |
+| CLS | 0.0517 | 0.0406 | 0.0406 | 0.041–0.052 |
+| Long tasks (≥50 ms) | 1 (88 ms) | 0 | 0 | 0–1 |
+| Main-thread task time (CDP `TaskDuration`, s) | 0.526 | 0.479 | 0.480 | 0.479–0.526 |
+| Script time (`ScriptDuration`, s) | 0.084 | 0.080 | 0.080 | 0.080–0.084 |
+| Recalc style (`RecalcStyleDuration`, s) | 0.121 | 0.115 | 0.116 | 0.115–0.121 |
+| JS heap used (MB) | 9.06 | 7.91 | 7.94 | 7.91–9.06 |
 
 ### Detail (`/offers/aerolink-starter-free-trial.html`)
 
 | Metric | Run 1 | Run 2 | Run 3 | Range |
 | --- | --- | --- | --- | --- |
-| TTFB | 3.1 | 3.0 | 2.9 | 2.9–3.1 |
-| DOMContentLoaded | 49.9 | 40.8 | 45.1 | 40.8–49.9 |
-| Load event | 50.2 | 62.3 | 45.3 | 45.3–62.3 |
-| Requests (incl. document) | 12 | 12 | 12 | 12 |
+| TTFB | 2.9 | 2.8 | 3.3 | 2.8–3.3 |
+| DOMContentLoaded | 46.3 | 45.3 | 48.3 | 45.3–48.3 |
+| Load event | 46.6 | 45.6 | 48.5 | 45.6–48.5 |
+| Subresource requests | 12 | 12 | 12 | 12 |
 | Document transfer / decoded (B) | 6,941 / 26,700 | same | same | gzip |
-| Subresource transfer / decoded (B) | 359,307 / 954,605 | same | same | — |
-| LCP | 56 | 76 | 52 | 52–76 |
+| Subresource transfer / decoded (B) | 359,304 / 954,605 | same | same | — |
+| LCP | 60 | 52 | 60 | 52–60 |
 | LCP element | `p` | `p` | `p` | — |
 | CLS | 0.0395 | 0.0395 | 0.0395 | 0.0395 |
 | Long tasks (≥50 ms) | 0 | 0 | 0 | 0 |
-| Main-thread task time (CDP `TaskDuration`, s) | 0.084 | 0.094 | 0.076 | 0.076–0.094 |
-| Script time (`ScriptDuration`, s) | 0.028 | 0.025 | 0.025 | 0.025–0.028 |
-| Recalc style (`RecalcStyleDuration`, s) | 0.011 | 0.008 | 0.010 | 0.008–0.011 |
-| JS heap used (MB) | 4.56 | 4.58 | 4.58 | 4.56–4.58 |
+| Main-thread task time (CDP `TaskDuration`, s) | 0.079 | 0.076 | 0.079 | 0.076–0.079 |
+| Script time (`ScriptDuration`, s) | 0.026 | 0.025 | 0.026 | 0.025–0.026 |
+| Recalc style (`RecalcStyleDuration`, s) | 0.010 | 0.010 | 0.011 | 0.010–0.011 |
+| JS heap used (MB) | 4.56 | 4.57 | 4.57 | 4.56–4.57 |
 
 Run-to-run variance is small and the transfer totals are byte-identical across the
 three cold runs, so the traces are repeatable in the sense the criterion asks:
@@ -116,11 +117,11 @@ text to agree before stopping the clock. Timing is the in-page
 | --- | --- | --- | --- |
 | Query | `aerolink` | `aerolink` | `aerolink` |
 | Result rows | 1 | 1 | 1 |
-| Interaction duration (ms) | 173.2 | 152.8 | 151.5 |
-| Main-thread task time during interaction (s) | 0.072 | 0.064 | 0.062 |
+| Interaction duration (ms) | 182.7 | 153.0 | 150.4 |
+| Main-thread task time during interaction (s) | 0.071 | 0.063 | 0.062 |
 | Long tasks during interaction | 0 | 0 | 0 |
 
-Filtering 212 rows to one costs ~150–175 ms end-to-end on this machine, with no
+Filtering 199 rows to one costs ~150–185 ms end-to-end on this machine, with no
 long task and under 0.1 s of main-thread task time.
 
 ## Response size
@@ -129,20 +130,20 @@ long task and under 0.1 s of main-thread task time.
 
 | Initiator | Home requests | Home transfer (B) | Home decoded (B) | Detail requests | Detail transfer (B) | Detail decoded (B) |
 | --- | --- | --- | --- | --- | --- | --- |
-| script | 1 | 95,854 | 307,701 | 1 | 95,854 | 307,701 |
+| script | 1 | 95,850 | 307,701 | 1 | 95,850 | 307,701 |
 | link (fonts, CSS preload) | 4 | 140,123 | 183,809 | 4 | 140,123 | 183,809 |
 | css | 2 | 20,772 | 20,172 | 2 | 20,772 | 20,172 |
-| fetch | 243 | 21,078 | 127,917 | 5 | 102,558 | 442,923 |
+| fetch | 402 | 21,079 | 127,917 | 5 | 102,559 | 442,923 |
 
 Largest assets by wire bytes:
 
 | Asset | Surface | Transfer (B, gzip) | Decoded (B) |
 | --- | --- | --- | --- |
-| `assets/index-*.js` | both | 95,854 | 307,701 |
+| `assets/index-*.js` | both | 95,850 | 307,701 |
 | `fonts/archivo-var-latin.woff2` | both | 90,396 | 90,096 |
 | `assets/details-*.json` | detail | 81,480 | 315,006 |
 | `fonts/lora-var-latin.woff2` | both | 38,092 | 37,792 |
-| `assets/offers-*.json` | both | 21,078 | 127,917 |
+| `assets/offers-*.json` | both | 21,079 | 127,917 |
 | `assets/index-*.css` | both | 10,931 | 55,517 |
 | `fonts/plex-mono-{400,600}-latin.woff2` | both | ~10,400 each | ~10,100 each |
 
@@ -159,22 +160,22 @@ detail ≈ 366 KB.
 | `/assets/index-qfpGt87G.css` | 200 | gzip | 10,845 | — |
 
 The deployed gzip sizes closely track the lab's `vite preview` numbers (home
-document 44,146 vs 42,442 lab; detail 6,674 vs 6,941 lab; JS 95,977 vs 95,854
+document 44,146 vs 42,452 lab; detail 6,674 vs 6,941 lab; JS 95,977 vs 95,850
 lab), so the local harness is a fair proxy for **transfer size**. It is not a
 proxy for network latency or field experience. The deployed build's JS hash
-(`index-BTseAQcg.js`) differs from the local build's (`index-Dyi9AbD8.js`); the
+(`index-BTseAQcg.js`) differs from the local build's (`index-Km2Hvscp.js`); the
 sizes agree, so the comparison is size-level, not byte-identical.
 
 ## Main-thread work
 
 - Home does an order of magnitude more main-thread work than detail:
-  `TaskDuration` 0.49–0.62 s vs 0.08–0.09 s, and `RecalcStyleDuration`
-  0.115–0.138 s vs 0.008–0.011 s. This is consistent with rendering 212 offer
-  rows and processing 250 responses versus a single detail document.
-- Script time itself is small on both surfaces (home 0.08–0.11 s, detail
-  0.025–0.028 s), so the home cost is dominated by style recalculation and task
+  `TaskDuration` 0.479–0.526 s vs 0.076–0.079 s, and `RecalcStyleDuration`
+  0.115–0.121 s vs 0.010–0.011 s. This is consistent with rendering 199 offer
+  rows and processing 409 responses versus a single detail document.
+- Script time itself is small on both surfaces (home 0.080–0.084 s, detail
+  0.025–0.026 s), so the home cost is dominated by style recalculation and task
   handling rather than JavaScript execution.
-- Exactly one long task (114 ms) appeared across six cold runs, on the first home
+- Exactly one long task (88 ms) appeared across six cold runs, on the first home
   run only.
 
 ## Lab versus field
@@ -193,14 +194,15 @@ it does.
 The measurements support **one** candidate, and only as a hypothesis that needs a
 throttled follow-up before anyone acts on it:
 
-- **Home issues one view-count request per offer row.** 242 of the 250
-  subresource requests on a cold home load are GoatCounter fetches: 2 aggregate
-  counters (`TOTAL`, plus a today-window variant), 1 home-page counter, and 239
-  per-row counters covering 199 distinct rendered rows — 40 rows fetch a second,
-  date-windowed counter as well. Detail issues 3. The lab stubs those hosts with
+- **Home issues two view-count requests per offer row.** 401 of the 402
+  fetch-initiated subresource requests on a cold home load are GoatCounter
+  fetches: 2 aggregate counters (`TOTAL`, all-time plus a today-windowed
+  variant), 1 home-page counter, and 398 per-row counters — two per rendered
+  offer row across all 199 rows (an all-time counter and a date-windowed one).
+  Detail issues 3. The lab stubs those hosts with
   `204`, so their **real network cost is unmeasured** — what is measured is the
   request *count*, not its latency. On loopback the total is immaterial; on a
-  high-latency mobile link 242 cross-origin requests per load is the kind of
+  high-latency mobile link 401 cross-origin requests per load is the kind of
   pattern worth measuring under throttling. Batching or deferring the per-row
   counters is the natural candidate, but it is **not proposed as a fix** until a
   network-throttled run shows the cost is material.
