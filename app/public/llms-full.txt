@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-06T14:18:08Z — 172 of 202 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-06T20:38:03Z — 173 of 202 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -97,16 +97,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/datadog-for-startups.html
 - Summary: Approval-based Datadog observability and security platform credits, not an external LLM API grant. Applicants must be Series A or earlier and referred by an official partner; current/prior Datadog customers and prior startup-credit recipients are excluded. Allocation is specified in the acceptance notice. Activate within 30 days; program ends at credit exhaustion, removal, or 12 months after activation. Three months of inactivity can cause removal. Credits exclude taxes, technical/premier support and professional services. Standard paid billing follows completion. No claim deadline stated; no application or redemption tested.
 - Claim steps: Obtain a referral from an official Datadog startup partner; direct un-referred applications are not eligible. | Confirm Series A or earlier status and no current/prior Datadog customer or startup-credit history. | Apply through https://www.datadoghq.com/partner/datadog-for-startups/#apply with a valid Datadog account. | If accepted, review your awarded allocation and activate it within 30 days. | Monitor usage and the 12-month validity period; standard billing follows program completion.
-### Claude for Startups
+### Claude Startups
 - Provider: Anthropic
 - Category: startup_program
-- Amount: Apply for free Claude API credits + priority rate limits (credits require institutional equity funding, founded within 4 years, no prior Anthropic startup credits; first-party Claude API only; dollar amount unpublished)
+- Amount: $1,000 in Claude API credits (valid for 6 months) + 1 year of Claude Team for up to 5 Premium seats; up to $45,000 in partner offers
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://claude.com/programs/startups
+- Source: https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build
 - Page: https://freetokens.custats.info/offers/claude-for-startups.html
-- Summary: Claude for Startups lets founders apply for free Claude API credits and priority rate limits. The program is open to early-stage founders with or without VC backing, but credits require equity funding from an institutional investor, a company founded within the last four years, and no prior Anthropic startup credits. You need a Claude Console account (API console, not the Claude app) and a company email. Credits apply only to the first-party Claude API, not AWS Bedrock or Google Vertex AI. Anthropic does not publish a dollar amount for the credit grant.
-- Claim steps: Create a Claude Console account (API console, not claude.ai) with a company email. | Apply at claude.com/programs/startups (about two minutes). | To qualify for credits: institutional equity funding, founded within 4 years, no prior Anthropic startup credits. Mention a partner VC if you have one. | If accepted, credits and highest rate limits apply to the first-party Claude API only (not Bedrock or Vertex AI).
+- Summary: Claude Startups gives approved founders $1,000 in Claude API credits, a free year of Claude Team for up to five Premium seats if they are new to Team, and access to up to $45,000 in partner offers. API credits expire six months after they are granted and apply only to the first-party Claude API through Claude Console.
+- Claim steps: Create a Claude Console account with a company email matching your website's domain. | Apply at https://claude.com/programs/startups and provide a short description of what you are building. | Meet the eligibility criteria: your startup was founded within the last five years or funded within the last two years. | After approval, sign in to the Claude Startups page in Claude Console to claim the API credits and Team offer.
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1726,6 +1726,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/azure-for-students.html
 - Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
 - Claim steps: Go to https://azure.microsoft.com/en-us/free/students and click Activate. | Sign in with your school email and complete student verification via the Azure Education Hub. | Once approved, start building with $100 credit and free-tier services for 12 months.
+### AWS Activate Credits
+- Provider: Amazon Web Services
+- Category: startup_program
+- Amount: Activate Founders (self-funded): start with $1,000, up to $5,000; Activate Portfolio (pre-Series B): up to $200,000; usable across AWS incl. Amazon Bedrock; extra AI-startup credits invite-only
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
+- Source: https://aws.amazon.com/startups/credits/
+- Page: https://freetokens.custats.info/offers/aws-activate-credits.html
+- Summary: AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.
+- Claim steps: Create/confirm an AWS account on the Paid Tier plan. | Founders (self-funded): apply directly at aws.amazon.com/startups/credits. Portfolio: apply with your Activate Provider's Org ID. | After approval, apply credits to eligible AWS usage including Amazon Bedrock.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

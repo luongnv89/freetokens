@@ -1,17 +1,23 @@
 {
-  "summary": "Claude for Startups lets founders apply for free Claude API credits and priority rate limits. The program is open to early-stage founders with or without VC backing, but credits require equity funding from an institutional investor, a company founded within the last four years, and no prior Anthropic startup credits. You need a Claude Console account (API console, not the Claude app) and a company email. Credits apply only to the first-party Claude API, not AWS Bedrock or Google Vertex AI. Anthropic does not publish a dollar amount for the credit grant.",
+  "summary": "Claude Startups gives approved founders $1,000 in Claude API credits, a free year of Claude Team for up to five Premium seats if they are new to Team, and access to up to $45,000 in partner offers. API credits expire six months after they are granted and apply only to the first-party Claude API through Claude Console.",
   "claim_steps": [
-    "Create a Claude Console account (API console, not claude.ai) with a company email.",
-    "Apply at claude.com/programs/startups (about two minutes).",
-    "To qualify for credits: institutional equity funding, founded within 4 years, no prior Anthropic startup credits. Mention a partner VC if you have one.",
-    "If accepted, credits and highest rate limits apply to the first-party Claude API only (not Bedrock or Vertex AI)."
+    "Create a Claude Console account with a company email matching your website's domain.",
+    "Apply at https://claude.com/programs/startups and provide a short description of what you are building.",
+    "Meet the eligibility criteria: your startup was founded within the last five years or funded within the last two years.",
+    "After approval, sign in to the Claude Startups page in Claude Console to claim the API credits and Team offer."
   ],
   "social_proof": [
     {
       "type": "link",
+      "url": "https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build",
+      "title": "We’re expanding the Claude Startups program to help founders build | Claude by Anthropic",
+      "text": "Claude Startups members can get up to $7,000 in Claude products and credits to build*: A one-time API credit of $1,000 to start building."
+    },
+    {
+      "type": "link",
       "url": "https://claude.com/programs/startups",
-      "title": "Claude for startups | Claude by Anthropic",
-      "text": "To qualify for Claude credits and extras, your company must have received equity funding from institutional investor, been founded within the last four years, and not previously received Anthropic startup credits."
+      "title": "Claude for Startups Program | Claude by Anthropic",
+      "text": "Every approved company gets $1,000 in Claude API credits and one year of Claude Team free for up to five Premium seats, if you’re new to Claude Team."
     }
   ]
 }

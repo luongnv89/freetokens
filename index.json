@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T14:18:08Z",
+  "generated_at": "2026-10-06T20:38:02Z",
   "count": 233,
   "active_count": 202,
   "expired_count": 31,
@@ -2064,12 +2064,12 @@
     },
     {
       "slug": "claude-for-startups",
-      "title": "Claude for Startups",
+      "title": "Claude Startups",
       "provider": "Anthropic",
       "category": "startup_program",
-      "amount": "Apply for free Claude API credits + priority rate limits (credits require institutional equity funding, founded within 4 years, no prior Anthropic startup credits; first-party Claude API only; dollar amount unpublished)",
+      "amount": "$1,000 in Claude API credits (valid for 6 months) + 1 year of Claude Team for up to 5 Premium seats; up to $45,000 in partner offers",
       "expiry_date": null,
-      "source_url": "https://claude.com/programs/startups",
+      "source_url": "https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build",
       "verified_date": "2026-10-06",
       "verification": "social_proof",
       "review_status": "under-review",
