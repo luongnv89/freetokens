@@ -20,6 +20,7 @@ export type UrlState = {
   category: string;
   verification: string;
   signup: string;
+  page: number;
 };
 
 const VALID: Record<FilterDimension, readonly string[]> = {
@@ -36,7 +37,14 @@ const VALID: Record<FilterDimension, readonly string[]> = {
 };
 
 export function emptyState(): UrlState {
-  return { q: "", sort: "", category: "", verification: "", signup: "" };
+  return {
+    q: "",
+    sort: "",
+    category: "",
+    verification: "",
+    signup: "",
+    page: 1,
+  };
 }
 
 export function normalizeSort(value: string): string {
@@ -57,6 +65,14 @@ export function parseState(search: string): UrlState {
     const value = params.get(dim) || "";
     state[dim] = VALID[dim].includes(value) ? value : "";
   }
+  // 1-based page (#548): only a bare positive integer counts — "0", "-1",
+  // "2.5" and zero-padded "01" all fall back to the first page. There is no
+  // upper clamp here; the listing clamps against its own result count.
+  const rawPage = params.get("page") || "";
+  state.page =
+    /^[1-9]\d*$/.test(rawPage) && Number.isSafeInteger(Number(rawPage))
+      ? Number(rawPage)
+      : 1;
   return state;
 }
 
@@ -67,5 +83,6 @@ export function serializeState(state: UrlState): string {
   }
   if (state.q) params.set("q", state.q);
   if (state.sort) params.set("sort", state.sort);
+  if (state.page > 1) params.set("page", String(state.page));
   return params.toString();
 }

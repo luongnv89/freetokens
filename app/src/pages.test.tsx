@@ -26,6 +26,7 @@ import {
 import indexData from "./data/offers.json";
 import { REVIEW_STATUS } from "../scripts/trust-vocabulary.mjs";
 import { DEFAULT_BASE_URL } from "./lib/site";
+import { PAGE_SIZE } from "./lib/pagination";
 
 const PUBLIC_DIR = path.resolve(import.meta.dirname, "../public");
 
@@ -1236,7 +1237,7 @@ describe("trust vocabulary on the rendered surfaces (#507)", () => {
       markup.indexOf('id="site-footer"'),
     );
     expect(markup.match(/<li style/g)?.length).toBe(
-      activeOffers(index).length,
+      Math.min(PAGE_SIZE, activeOffers(index).length),
     );
   });
 

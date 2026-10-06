@@ -12,24 +12,44 @@ import {
 } from "./lib/offers";
 import { badgeVariants } from "./components/ui/badge";
 import { buttonVariants } from "./components/ui/button";
+import { PAGE_SIZE } from "./lib/pagination";
 import type { Offer } from "./types/offers-index";
 
 const index = indexData as OffersIndex;
 const offers = activeOffers(index);
+// The prerendered home markup ships the first page only (#548).
+const firstPage = offers.slice(0, PAGE_SIZE);
 
 function html() {
   return renderToStaticMarkup(<App index={index} />);
 }
 
-// Prerender-parity contract for the home listing (issue #119): every active
-// offer must be present in the SERVER-rendered markup with the same semantic
-// structure the Python builder emits — no div soup, no client-JS dependency.
+// Prerender-parity contract for the home listing (issue #119, paginated by
+// #548): the first page of active offers must be present in the
+// SERVER-rendered markup with the same semantic structure the Python
+// builder emits — no div soup, no client-JS dependency — and the pager must
+// be there so JS-off visitors can still reach the rest.
 describe("App home listing prerender", () => {
   const markup = html();
 
-  it("renders one ranked list containing every active offer", () => {
-    expect(markup).toContain('<ol class="grid" id="ft-grid" role="list">');
-    expect(markup.match(/<article class="card" /g)?.length).toBe(offers.length);
+  it("renders one ranked list containing the first page of offers", () => {
+    expect(markup).toContain(
+      '<ol class="grid" id="ft-grid" role="list" tabindex="-1">',
+    );
+    expect(markup.match(/<article class="card" /g)?.length).toBe(
+      firstPage.length,
+    );
+  });
+
+  it("ships the pager but keeps offers past page 1 out of the markup", () => {
+    expect(markup).toContain('id="ft-pager"');
+    expect(markup).toContain('href="?page=2"');
+    expect(markup).toContain(
+      `aria-label="Page ${Math.ceil(offers.length / PAGE_SIZE)}"`,
+    );
+    for (const offer of offers.slice(PAGE_SIZE)) {
+      expect(markup).not.toContain(`id="offer-${offer.slug}"`);
+    }
   });
 
   it("marks expired entries out of the default list (#25)", () => {
@@ -52,22 +72,26 @@ describe("App home listing prerender", () => {
   });
 
   it("uses descriptive link text on every title link (a11y)", () => {
-    for (const offer of offers) {
+    for (const offer of firstPage) {
       expect(markup).toContain(`aria-label="View details for ${escapeHtml(offer.title)}"`);
     }
   });
 
   it("renders the visible tag families as buttons with labels", () => {
-    const visibleVerificationTags = offers.length;
-    expect(markup.match(/data-ft-tag="category"/g)?.length).toBe(offers.length);
+    const visibleVerificationTags = firstPage.length;
+    expect(markup.match(/data-ft-tag="category"/g)?.length).toBe(
+      firstPage.length,
+    );
     expect(markup.match(/data-ft-tag="verification"/g)?.length).toBe(
       visibleVerificationTags,
     );
-    expect(markup.match(/data-ft-tag="signup"/g)?.length).toBe(offers.length);
+    expect(markup.match(/data-ft-tag="signup"/g)?.length).toBe(
+      firstPage.length,
+    );
   });
 
   it("shows 'ongoing' with a status dot when expiry_date is null", () => {
-    const ongoing = offers.find((o) => o.expiry_date === null);
+    const ongoing = firstPage.find((o) => o.expiry_date === null);
     if (!ongoing) return; // catalog-dependent; covered by fixture test below
     const rowStart = markup.indexOf(`id="offer-${ongoing.slug}"`);
     const nextId = markup.indexOf('id="offer-', rowStart + 1);
@@ -78,7 +102,7 @@ describe("App home listing prerender", () => {
   });
 
   it("renders an expiring offer with an absolute date in <time>", () => {
-    const expiring = offers.find((o) => o.expiry_date !== null);
+    const expiring = firstPage.find((o) => o.expiry_date !== null);
     if (!expiring) return;
     const rowStart = markup.indexOf(`id="offer-${expiring.slug}"`);
     const nextId = markup.indexOf('id="offer-', rowStart + 1);
@@ -110,7 +134,7 @@ describe("App home listing prerender", () => {
   it("keeps semantic list markup — no div-based rows", () => {
     // Every row is li > article; the only divs are the sanctioned row-head.
     expect(markup).not.toContain('<div class="card"');
-    expect(markup.match(/<li style/g)?.length).toBe(offers.length);
+    expect(markup.match(/<li style/g)?.length).toBe(firstPage.length);
   });
 
   it("emits no tracker markup when analytics env is unset (#131)", () => {
@@ -136,12 +160,12 @@ describe("App tag icon sprite (lucide mapping)", () => {
     // Category, review status, and sign-up are visible on every row.
     const grid =
       markup.match(/<ol class="grid" id="ft-grid"[\s\S]*?<\/ol>/)?.[0] ?? "";
-    const visibleVerificationTags = offers.length;
+    const visibleVerificationTags = firstPage.length;
     expect(
       grid.match(/<svg class="tag-i"[^>]*aria-hidden="true"/g)?.length,
-    ).toBe(offers.length * 3 + visibleVerificationTags);
+    ).toBe(firstPage.length * 3 + visibleVerificationTags);
     expect(grid.match(/data-ft-tag="/g)?.length).toBe(
-      offers.length * 2 + visibleVerificationTags,
+      firstPage.length * 2 + visibleVerificationTags,
     );
   });
 
@@ -214,8 +238,8 @@ describe("App empty state", () => {
 describe("App listing fields, order, and shadcn slots (#124)", () => {
   const markup = html();
 
-  it("renders provider, amount, tags, expiry, and details href on every active row", () => {
-    for (const offer of offers) {
+  it("renders provider, amount, tags, expiry, and details href on every first-page row", () => {
+    for (const offer of firstPage) {
       const row = articleOf(markup, offer.slug);
       expect(row).toContain(`class="r-prov">${escapeHtml(offer.provider)}<`);
       expect(row).toContain(`class="r-amount">${escapeHtml(offer.amount)}<`);
@@ -245,13 +269,13 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
 
   it("lists articles newest-verified-first, matching activeOffers order", () => {
     const grid = markup.match(
-      /<ol class="grid" id="ft-grid" role="list">([\s\S]*?)<\/ol>/,
+      /<ol class="grid" id="ft-grid" role="list" tabindex="-1">([\s\S]*?)<\/ol>/,
     );
     expect(grid).not.toBeNull();
     const ids = [...(grid?.[1].matchAll(/id="offer-([^"]+)"/g) ?? [])].map(
       (m) => m[1],
     );
-    expect(ids).toEqual(offers.map((o) => o.slug));
+    expect(ids).toEqual(firstPage.map((o) => o.slug));
   });
 
   it("omits expired slugs from a mixed catalog (not only the live empty-expired case)", async () => {
@@ -288,7 +312,7 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
     } satisfies OffersIndex;
     const mixedMarkup = renderToStaticMarkup(<HomePage index={mixed} />);
     const grid = mixedMarkup.match(
-      /<ol class="grid" id="ft-grid" role="list">([\s\S]*?)<\/ol>/,
+      /<ol class="grid" id="ft-grid" role="list" tabindex="-1">([\s\S]*?)<\/ol>/,
     );
     const ids = [...(grid?.[1].matchAll(/id="offer-([^"]+)"/g) ?? [])].map(
       (m) => m[1],
@@ -307,9 +331,9 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
   });
 
   it("composes visible tags through shadcn Badge (data-slot) as real buttons", () => {
-    const visibleVerificationTags = offers.length;
+    const visibleVerificationTags = firstPage.length;
     expect(markup.match(/data-slot="badge"/g)?.length).toBe(
-      offers.length * 2 + visibleVerificationTags,
+      firstPage.length * 2 + visibleVerificationTags,
     );
     expect(markup).toMatch(
       /<button type="button" class="badge badge-category[^"]*"[\s\S]*?data-slot="badge"/,
@@ -328,7 +352,7 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
 
   it("keeps semantic ol#ft-grid > li > article.card nesting", () => {
     expect(markup).toMatch(
-      /<ol class="grid" id="ft-grid" role="list"><li[^>]*><article class="card"/,
+      /<ol class="grid" id="ft-grid" role="list" tabindex="-1"><li[^>]*><article class="card"/,
     );
   });
 

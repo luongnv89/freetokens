@@ -2154,10 +2154,141 @@ button.badge:focus-visible {
   margin-top: 0.75rem;
 }
 
+/* ---- Pager (#548) ------------------------------------------------------
+   The numbered pager under the offer list borrows the chip's pill language:
+   control-plane fill, hairline edge, ink text — and only the CURRENT page
+   speaks in ink, the same inversion a pressed chip uses. Past seven pages
+   the window always holds seven slots — numbers and the "…" gaps each
+   count as one — so the strip keeps a steady shape between pages. */
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.9rem 0 0.2rem;
+}
+
+.pager-pages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a.pager-step,
+a.pager-page,
+span.pager-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.34em;
+  min-height: 2rem;
+  min-width: 2rem;
+  padding: 0.3rem 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+a.pager-step,
+a.pager-page {
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+a.pager-step:hover,
+a.pager-page:hover {
+  background: var(--surface);
+  border-color: var(--hairline-strong);
+}
+
+/* Current page: the chip's pressed-state inversion plus weight, so colour
+   is never the only cue. */
+a.pager-page[aria-current="page"],
+a.pager-page[aria-current="page"]:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
+}
+
+/* First/last page: the step keeps its box but is inert — same footprint,
+   dimmed, no pointer. */
+span.pager-step {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.pager-gap {
+  color: var(--gray);
+}
+
+/* Below ~30rem the step words would push the page slots plus two arrows
+   past a 320 px viewport; the labels stay in the accessible name and
+   collapse visually (the .sr-only technique). The tighter spacing keeps
+   the whole strip on one line — at the roomier values it wrapped. */
+@media (max-width: 30rem) {
+  .pager,
+  .pager-pages {
+    gap: 0.25rem;
+  }
+
+  a.pager-step,
+  a.pager-page,
+  span.pager-step {
+    min-width: 1.75rem;
+    padding-inline: 0.5rem;
+  }
+
+  .pager-step-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* The grid is a focus target only so a page change can announce the new
+   window — programmatic focus must not draw a control ring on a list. */
+#ft-grid:focus {
+  outline: none;
+}
+
+/* Page changes scroll the status line into view; keep it clear of the
+   viewport edge. */
+#ft-results-status {
+  scroll-margin-top: 1rem;
+}
+
 @media (pointer: coarse) {
   .chip,
   #ft-search,
   #ft-sort {
+    min-height: 44px;
+  }
+
+  /* Element-prefixed so these beat the `a.pager-step` base rule — a bare
+     class loses on specificity and the touch target would stay 32px. */
+  a.pager-step,
+  a.pager-page,
+  span.pager-step {
     min-height: 44px;
   }
 

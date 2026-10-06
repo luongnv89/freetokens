@@ -36,6 +36,7 @@ import {
   writeSavedSlugs,
 } from "../lib/personalState";
 import { TAG_ICONS } from "../lib/tagIcons";
+import { PAGE_SIZE, pageCount } from "../lib/pagination";
 import { hottestSlugs, topViewedSlugs, useOfferViews } from "../lib/offerStats";
 import {
   DIMENSIONS,
@@ -48,6 +49,7 @@ import {
   type UrlState,
 } from "../lib/urlState";
 import { IconSprite, OfferRow } from "./OfferRow";
+import { Pager } from "./Pager";
 import { TrustLegend } from "./TrustLegend";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
@@ -137,6 +139,7 @@ function SearchGlyph() {
 function Toolbar({
   total,
   shown,
+  pageRange,
   searchValue,
   sortValue,
   category,
@@ -155,6 +158,7 @@ function Toolbar({
 }: {
   total: number;
   shown: number;
+  pageRange: { start: number; end: number } | null;
   searchValue: string;
   sortValue: string;
   category: string;
@@ -171,8 +175,9 @@ function Toolbar({
   onToggleSavedOnly: () => void;
   onRestoreDismissed: () => void;
 }) {
-  const countText =
-    shown === total
+  const countText = pageRange
+    ? `Showing ${pageRange.start}–${pageRange.end} of ${shown} offers`
+    : shown === total
       ? `Showing all ${total} offers`
       : `Showing ${shown} of ${total} offers`;
   function onChipKeyDown(
@@ -371,8 +376,9 @@ function visibleOffers(
  * by the prerender script (react-dom/server) and hydrated client-side —
  * markup mirrors build.py's render_html exactly.
  *
- * First render (SSR/prerender) shows every active offer so static markup
- * tests stay matching. After mount, URL state is applied without events.
+ * First render (SSR/prerender) shows page 1 of the default list so static
+ * markup tests stay matching. After mount, URL state is applied without
+ * events.
  */
 export default function HomePage({
   index,
@@ -390,14 +396,16 @@ export default function HomePage({
   const [state, setState] = useState(emptyState);
   const [searchInput, setSearchInput] = useState("");
   // Personal state hydrates after mount (ClaimChecklist pattern): the
-  // prerendered first paint always shows every active offer.
+  // prerendered first paint always shows the first page of active offers.
   const [saved, setSaved] = useState<ReadonlySet<string>>(new Set());
   const [dismissed, setDismissed] = useState<ReadonlySet<string>>(new Set());
   const [savedOnly, setSavedOnly] = useState(false);
   const stateRef = useRef(state);
   stateRef.current = state;
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const pendingFocusRef = useRef<"search" | "next-pill" | null>(null);
+  const pendingFocusRef = useRef<"search" | "next-pill" | "grid" | null>(
+    null,
+  );
 
   const shownList = visibleOffers(offers, state, {
     savedOnly,
@@ -405,11 +413,21 @@ export default function HomePage({
     dismissed,
   });
 
+  // The URL's page is clamped against the live result count, never
+  // rewritten: a deep link past the end shows the last page and keeps its
+  // own address, and personal actions (dismiss, save) can shrink the list
+  // without touching the location bar.
+  const totalPages = pageCount(shownList.length);
+  const page = Math.min(state.page, totalPages);
+  const pageList = shownList.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   const offerSlugs = useMemo(
     () => activeOffers(index).map((o) => o.slug),
     [index],
   );
-  const views = useOfferViews(offerSlugs);
+  // All-time counters are fetched for the visible page only (#548) — one
+  // request per rendered row instead of one per catalog entry.
+  const views = useOfferViews(pageList.map((o) => o.slug));
   // Second, windowed read of the same public counters. GoatCounter windows by
   // calendar DATE, so `days: 1` is "today so far" — the honest approximation
   // of "last 24h" this stack can express. Ranked over the FULL slug list, never
@@ -434,11 +452,14 @@ export default function HomePage({
 
   function commit(
     patch: Partial<UrlState>,
-    source: "search" | "sort" | "filter",
+    source: "search" | "sort" | "filter" | "page",
   ) {
-    const next: UrlState = { ...stateRef.current, ...patch };
+    // Every source except "page" resets the list to its first page: the
+    // window the visitor was on no longer exists under the new results.
+    const next: UrlState = { ...stateRef.current, page: 1, ...patch };
     if (source === "sort" && next.sort === stateRef.current.sort) return;
     if (source === "search" && next.q === stateRef.current.q) return;
+    if (source === "page" && next.page === stateRef.current.page) return;
     stateRef.current = next;
     setState(next);
     const query = serializeState(next);
@@ -470,13 +491,16 @@ export default function HomePage({
     }
     // Remember the last filter/sort locally (issue #140). Never serialized
     // into the URL by this layer — the URL keeps reflecting only
-    // filter/search/sort, which serializeState already whitelists.
-    writePrefs({
-      category: next.category,
-      verification: next.verification,
-      signup: next.signup,
-      sort: next.sort,
-    });
+    // filter/search/sort, which serializeState already whitelists. Paging
+    // is view position, not a preference, so it never reaches storage.
+    if (source !== "page") {
+      writePrefs({
+        category: next.category,
+        verification: next.verification,
+        signup: next.signup,
+        sort: next.sort,
+      });
+    }
   }
 
   useEffect(() => {
@@ -603,6 +627,12 @@ export default function HomePage({
     commit({ sort }, "sort");
   }
 
+  function onPageChange(next: number) {
+    if (next === page) return;
+    pendingFocusRef.current = "grid";
+    commit({ page: next }, "page");
+  }
+
   function onCategorySet(category: string) {
     commit({ category }, "filter");
   }
@@ -640,6 +670,16 @@ export default function HomePage({
       else document.getElementById("ft-search")?.focus();
       return;
     }
+    if (pending === "grid") {
+      // Page change: land focus on the replaced list, then reveal the
+      // status line that announces the new window — nearest edge only, so
+      // the page never jumps.
+      document.getElementById("ft-grid")?.focus({ preventScroll: true });
+      document
+        .getElementById("ft-results-status")
+        ?.scrollIntoView({ block: "nearest" });
+      return;
+    }
     document.getElementById("ft-search")?.focus();
   });
 
@@ -662,6 +702,14 @@ export default function HomePage({
               <Toolbar
                 total={offers.length}
                 shown={shownList.length}
+                pageRange={
+                  totalPages > 1
+                    ? {
+                        start: (page - 1) * PAGE_SIZE + 1,
+                        end: (page - 1) * PAGE_SIZE + pageList.length,
+                      }
+                    : null
+                }
                 searchValue={searchInput}
                 sortValue={state.sort}
                 category={state.category}
@@ -681,8 +729,8 @@ export default function HomePage({
               <a className="skip-list" href="#site-footer">
                 Skip the offer list
               </a>
-              <ol className="grid" id="ft-grid" role="list">
-                {shownList.map((offer, i) => (
+              <ol className="grid" id="ft-grid" role="list" tabIndex={-1}>
+                {pageList.map((offer, i) => (
                   <OfferRow
                     key={offer.slug}
                     offer={offer}
@@ -702,6 +750,15 @@ export default function HomePage({
                   />
                 ))}
               </ol>
+              <Pager
+                page={page}
+                totalPages={totalPages}
+                hrefFor={(n) => {
+                  const q = serializeState({ ...state, page: n });
+                  return q ? `?${q}` : "./";
+                }}
+                onSelect={onPageChange}
+              />
               <section
                 className="empty"
                 id="ft-no-results"

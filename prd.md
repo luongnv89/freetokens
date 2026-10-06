@@ -79,7 +79,7 @@ A dead-simple, static website that aggregates currently-claimable free AI token/
 
 | ID | Feature | Description | Priority | Acceptance Criteria | Dependencies |
 |----|---------|-------------|----------|---------------------|--------------|
-| F1 | Offer list page | Single-page list of all active offers with provider, amount, expiry, category | Must | Given the site is built, When a visitor opens the home page, Then all non-expired offers render as list items with provider name, credit amount, expiry date, and category visible | F5 |
+| F1 | Offer list page | List of all active offers with provider, amount, expiry, category, paginated 20 per page (#548) | Must | Given the site is built, When a visitor opens the home page, Then non-expired offers render as list items, 20 per page with a numbered pager, with provider name, credit amount, expiry date, and category visible | F5 |
 | F2 | Category filtering | Filter offers by category (API provider, coding tools, image, voice, video) | Must | Given multiple offers exist across categories, When a visitor selects a category filter, Then only matching offers remain visible without page reload | F1 |
 | F3 | Text search | Client-side search over offer title/provider/description | Must | Given the full offer list is rendered, When a visitor types in the search box, Then the visible list narrows to offers matching the query within 200 ms | F1 |
 | F4 | Expiry handling | Expired offers hidden from default view; expiry date shown on each card | Must | Given an offer whose expiry date has passed, When the site is rebuilt/deployed, Then the offer no longer appears in the default list but remains accessible via archive view or URL | F1, F9 |
@@ -100,7 +100,7 @@ A dead-simple, static website that aggregates currently-claimable free AI token/
 
 #### F1: Offer List Page
 
-**Description**: The entire product is one fast page: every active free-AI-credit offer as a scannable card/list row.
+**Description**: The entire product is one fast page: every active free-AI-credit offer as a scannable card/list row, 20 rows per page behind a numbered pager (#548).
 
 **User Stories**:
 - As an indie dev, I want to see all current free credit offers at a glance so that I can decide where to sign up in under a minute.
