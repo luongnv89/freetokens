@@ -12,6 +12,7 @@
 ## Highlights
 
 - Parallel verifiers check each active offer against its official `source_url`; official information wins every conflict.
+- Verifiers read pages with TinyFish and retry bot-walled or JavaScript-heavy pages in the Lightpanda headless browser.
 - Safe writes only: `verified_date` bumps, expiries, and official-source rewrites of `title`, `amount`, `expiry_date`, and `signup`.
 - Each verified offer's reference trace (`offers/details/<slug>.json`) gains the evidence URLs the verifier used; curated entries are never deleted.
 - Files the tracking issue with `/issue-creator`, opens one PR, runs `/issue-pr-review` rounds until clean, and squash-merges behind a deterministic scope gate.

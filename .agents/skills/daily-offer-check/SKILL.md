@@ -3,9 +3,9 @@ name: daily-offer-check
 description: "Re-verify active offers vs official sources, fix drifted terms, refresh evidence, then issue, PR, review, merge unattended; report-only/no-merge modes. Use for daily checks or stale-content issues. Don't use for adding or editing one offer, or CI."
 license: MIT
 effort: high
-compatibility: "Requires git, GitHub CLI (gh), python3, node, and the issue-creator and issue-pr-review skills. Run gh auth status to verify."
+compatibility: "Requires git, GitHub CLI (gh), python3, node, TinyFish (MCP server or tinyfish CLI) for page reads, the lightpanda CLI as the browser (retry skipped without it), and the issue-creator and issue-pr-review skills. Run gh auth status to verify."
 metadata:
-  version: 2.0.1
+  version: 2.1.0
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
@@ -166,8 +166,10 @@ provider, amount, expiry_date, source_url, verified_date, sha256; also pass toda
 Each worker's Output: a JSON array, one object per input slug — never a
 silent drop. Shape is pinned in `agents/verifier.md`.
 
-Workers **must not** write `offers/`, commit, or ask questions. On tool
-failure they return `unverifiable` with the error in `reason`.
+Workers read pages with TinyFish and retry with the Lightpanda browser, per
+`agents/verifier.md` → *Web tools*. They **must not** write `offers/`,
+commit, or ask questions. On tool failure they return `unverifiable` with
+the error in `reason`.
 
 Missing slugs after the first wave: respawn **once** for those slugs only.
 Still missing → synthesize `unverifiable` / `reason: worker dropped slug` /
