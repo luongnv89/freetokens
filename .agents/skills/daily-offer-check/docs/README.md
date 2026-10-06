@@ -68,3 +68,8 @@ Updated offer YAMLs and reference traces, regenerated `index.json` and `llms` fi
 ## Requirements
 
 git, an authenticated `gh`, python3, node, and the `issue-creator` and `issue-pr-review` skills.
+
+Optional:
+
+- TinyFish (the `tinyfish` MCP server or an authenticated `tinyfish` CLI) for page reads. Without it, verifiers use the host's built-in read-only web tools.
+- The `lightpanda` CLI (on `PATH` or set with `LIGHTPANDA_BIN`) as the browser. Without it, the browser retry is skipped.
