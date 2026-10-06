@@ -102,6 +102,21 @@
         "If the retry also fails, the verdict is unverifiable with updates {} and references [], and reason names the failed tools",
         "No offers/ file is written and no issue or PR is created"
       ]
+    },
+    {
+      "id": 8,
+      "kind": "edge",
+      "name": "verifier-without-optional-tools",
+      "prompt": "Daily offer check, report only. The tinyfish MCP server and CLI are not available and lightpanda is not on PATH. Scenario for slug acme-free-credits with source_url https://acme.ai/pricing. Show the tool calls the verifier makes for this slug and the verdict it returns.",
+      "expected_output": "The sweep runs. The verifier reads the page with the host's built-in read-only web tools, skips the Lightpanda retry, and returns a schema-valid verdict. No writes or PR.",
+      "files": [],
+      "expectations": [
+        "The sweep does not abort or ask to install TinyFish or Lightpanda",
+        "The page is read with the host's built-in read-only web tools",
+        "No lightpanda or tinyfish command is run",
+        "The verdict is schema-valid: live or expired only with a quote from a page actually read, otherwise unverifiable with a reason",
+        "No offers/ file is written and no issue or PR is created"
+      ]
     }
   ]
 }

@@ -1,15 +1,18 @@
-# Web tools — TinyFish searches and reads, Lightpanda is the browser
+# Web tools — preferred when available, never required
 
-Every search and page load in offer-updater uses these tools. They are
-pinned for this skill and override any general preference for TinyFish's
-agent or automation tools.
+offer-updater prefers these tools for searches and page loads. Each one is
+optional: when it is missing, use the fallback in the same row (detailed in
+*Fallback* below) and carry on. The skill works end to end with only the
+host's built-in read-only web search and fetch. When a tool is used, the
+commands and rules here are pinned and override any general preference for
+TinyFish's agent or automation tools.
 
-| Need | Tool |
-|------|------|
-| Search | TinyFish search: the `tinyfish` MCP server's `search` tool, else `tinyfish search query '<query>'` |
-| Read a page | TinyFish fetch: the MCP `fetch_content` tool with `format: markdown`, else `tinyfish fetch content get --format markdown '<url>'` |
-| oEmbed (Step 1) | The pinned `curl` command below, to `https://publish.x.com/oembed` only; outside the Step 2 fetch budget. TinyFish fetch fails on this endpoint (`invalid_redirect_url`). |
-| Browser (retry) | Lightpanda, the command below: only for the offer page, once, when TinyFish fetch fails or returns a page without the offer. It is the budget's retry fetch. |
+| Need | Preferred tool | Fallback |
+|------|----------------|----------|
+| Search | TinyFish search: the `tinyfish` MCP server's `search` tool, else `tinyfish search query '<query>'` | The host's built-in web search |
+| Read a page | TinyFish fetch: the MCP `fetch_content` tool with `format: markdown`, else `tinyfish fetch content get --format markdown '<url>'` | The host's built-in read-only web fetch |
+| oEmbed (Step 1) | The pinned `curl` command below, to `https://publish.x.com/oembed` only; outside the Step 2 fetch budget. TinyFish fetch fails on this endpoint (`invalid_redirect_url`). | Step 1 fallback: the text captured during verification |
+| Browser (retry) | Lightpanda, the command below: only for the offer page, once, when the first fetch fails or returns a page without the offer. It is the budget's retry fetch. | One retry with a different read-only fetch method the host has |
 
 ```bash
 LP="${LIGHTPANDA_BIN:-$(command -v lightpanda)}"
@@ -57,7 +60,7 @@ use the Step 1 fallback.
   `http://` and whose host is not `localhost`, a private or link-local IP
   literal, or a cloud metadata address.
 - **Check after loading.** Cite the final URL (Lightpanda `url`, TinyFish
-  `final_url`). If it leaves public `http(s)` or the provider's domain, the
+  `final_url`, or the final URL a fallback tool reports). If it leaves public `http(s)` or the provider's domain, the
   fetch failed for official evidence.
 - **Shell quoting.** A CLI call single-quotes its URL or query. Pass a value
   to the shell only when it contains no `'` or control characters, and a URL
@@ -69,11 +72,19 @@ use the Step 1 fallback.
 
 ## Fallback
 
-- No TinyFish (no MCP tool, no CLI, or not authenticated): use the host's
+Check availability once, before the first search or fetch, and pick the
+route for the run. Never stop the run, ask the curator, or try to install
+a missing tool.
+
+- No TinyFish (no MCP tool, no CLI, not authenticated, or a call fails with
+  a tool error rather than a page error such as a 403): use the host's
   built-in read-only web search and fetch, under the same rules. If it
   cannot keep loads to public `http(s)` pages, the offer is unverifiable.
-- No Lightpanda: skip the browser retry; a bot-walled offer page is then
-  unverifiable.
+- No Lightpanda (the pinned command prints `lightpanda missing`): retry the
+  offer page once with a different read-only fetch method the host has
+  (a browser user agent or a headless browser) under the same rules, as
+  the budget's retry fetch. With no other method, skip the retry; a
+  bot-walled offer page is then unverifiable.
 - No `curl`, or the oEmbed lookup fails: treat oEmbed as unreachable and
   use the Step 1 fallback.
 - Name every fallback and skipped retry in a one-line **Web tools** note in

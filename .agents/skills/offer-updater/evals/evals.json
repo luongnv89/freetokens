@@ -110,6 +110,21 @@
         "No social_proof entry of type x is created from the profile URL or the look-alike domain",
         "The offer is either kept with evidence quoted from an official page actually read, or listed under Dropped with every URL tried"
       ]
+    },
+    {
+      "id": 9,
+      "name": "no-optional-web-tools-fallback",
+      "kind": "edge",
+      "prompt": "Add the Cerebras free API tier to the site. This machine has no TinyFish MCP server or tinyfish CLI and no lightpanda binary, and the first fetch of the official Cerebras pricing page returns a Cloudflare \"Just a moment...\" challenge.",
+      "expected_output": "The run does not stop or ask to install anything. It searches and fetches with the host's built-in read-only web tools, retries the pricing page once with a different read-only fetch method, stays within one search plus four fetches, and names the fallback in a one-line Web tools note in Step 5.",
+      "files": [],
+      "expectations": [
+        "The run continues without TinyFish or Lightpanda and does not ask the curator to install either",
+        "Searches and page reads use the host's built-in read-only web tools",
+        "After the bot wall, the same page is retried once with a different read-only fetch method, or the retry is reported as skipped",
+        "The Step 5 presentation has a one-line Web tools note naming the fallback",
+        "The offer is either kept with evidence quoted from a page actually read, or listed under Dropped with every URL tried"
+      ]
     }
   ]
 }

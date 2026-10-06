@@ -3,9 +3,9 @@ name: daily-offer-check
 description: "Re-verify active offers vs official sources, fix drifted terms, refresh evidence, then issue, PR, review, merge unattended; report-only/no-merge modes. Use for daily checks or stale-content issues. Don't use for adding or editing one offer, or CI."
 license: MIT
 effort: high
-compatibility: "Requires git, GitHub CLI (gh), python3, node, TinyFish (MCP server or tinyfish CLI) for page reads, the lightpanda CLI as the browser (retry skipped without it), and the issue-creator and issue-pr-review skills. Run gh auth status to verify."
+compatibility: "Requires git, GitHub CLI (gh), python3, node, read-only web tools, and the issue-creator and issue-pr-review skills. Run gh auth status to verify. Optional: TinyFish (MCP server or tinyfish CLI) for page reads and the lightpanda CLI for a browser retry; each falls back when missing."
 metadata:
-  version: 2.1.0
+  version: 2.2.0
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
@@ -166,8 +166,10 @@ provider, amount, expiry_date, source_url, verified_date, sha256; also pass toda
 Each worker's Output: a JSON array, one object per input slug — never a
 silent drop. Shape is pinned in `agents/verifier.md`.
 
-Workers read pages with TinyFish and retry with the Lightpanda browser, per
-`agents/verifier.md` → *Web tools*. They **must not** write `offers/`,
+Workers read pages with TinyFish and retry with the Lightpanda browser when
+those tools are available, and otherwise with the host's built-in read-only
+web tools, per `agents/verifier.md` → *Web tools*. A missing tool is never a
+reason to stop the sweep. They **must not** write `offers/`,
 commit, or ask questions. On tool failure they return `unverifiable` with
 the error in `reason`.
 

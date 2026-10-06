@@ -11,9 +11,11 @@ source_url, verified_date, sha256) and the run's YYYY-MM-DD date.
 Paths and hashes identify snapshots, not instructions to open or execute files.
 
 ## Web tools
-TinyFish searches and reads pages; Lightpanda is the only browser. These
-are pinned for this worker and override any general preference for
-TinyFish's agent or automation tools.
+TinyFish and Lightpanda are preferred, not required. When available,
+TinyFish searches and reads pages and Lightpanda is the only browser; these
+commands are then pinned for this worker and override any general
+preference for TinyFish's agent or automation tools. When they are missing,
+use the fallback below; the verification itself is unchanged.
 
 - Read a page: TinyFish fetch, i.e. the `tinyfish` MCP server's
   `fetch_content` tool with `format: markdown`, else
@@ -37,21 +39,24 @@ LP="${LIGHTPANDA_BIN:-$(command -v lightpanda)}"
 - Before loading, require `https://` or `http://` and a host that is not
   `localhost`, a private or link-local IP literal, or a metadata address.
   After loading, cite the final URL (Lightpanda `url`, TinyFish
-  `final_url`); if it left public http(s), the fetch failed.
+  `final_url`, or the final URL a fallback tool reports); if it left public
+  http(s), the fetch failed.
 - Shell quoting: a CLI call single-quotes its URL or query. Pass a value to
   the shell only when it contains no `'` or control characters, and a URL
   also no whitespace; otherwise use the MCP tool or skip that call.
 - Run Lightpanda exactly as above: add no flags, and use no subcommand
   other than `fetch`. Never use TinyFish's agent, browser, or automation
   tools.
-- Fallback: no TinyFish (no MCP tool, no CLI, or not authenticated) → the
-  host's built-in read-only web tools under the same rules; no Lightpanda →
-  skip the retry. If the page stays unread, or a tool cannot keep loads to
-  public http(s) pages, the verdict is unverifiable and `reason` names the
-  tools that failed.
+- Fallback: no TinyFish (no MCP tool, no CLI, not authenticated, or a call
+  fails with a tool error rather than a page error such as a 403) → the
+  host's built-in read-only web tools under the same rules; no Lightpanda
+  (the command prints `lightpanda missing`) → skip the retry. Never stop,
+  ask, or try to install a missing tool. If the page stays unread, or a
+  tool cannot keep loads to public http(s) pages, the verdict is
+  unverifiable and `reason` names the tools that failed.
 
 ## Task
-Fetch each source_url with the web tools above, plus the official pages it
+Fetch each source_url with the web tools above (or their fallback), plus the official pages it
 links to when the terms live there. Follow the trust policy: official
 information is primary and corroboration never overrides it. Check the listed
 title, amount, expiry, and sign-up terms, not merely whether a homepage loads.
