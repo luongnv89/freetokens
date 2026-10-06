@@ -1,0 +1,36 @@
+{
+  "summary": "Freebuff is a free coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Text ads fund access to its model catalog instead of a subscription. Its free daily allowance of 150 Freebucks covers up to 10 hours of DeepSeek V4.1 Flash per day (or a mix of other models such as GLM 5.3 Flash and MiMo 2.6 Flash). Supported regions receive full access; other regions and VPN users get a limited daily allowance.",
+  "claim_steps": [
+    "Install the CLI (Node.js 18+): npm install -g freebuff",
+    "Open a project: cd your-project",
+    "Run freebuff and describe what you want — no account to create, no API key, no credit card.",
+    "Or use another Freebuff product: Desktop (freebuff.com/desktop), Web (freebuff.com/web), Cloud (freebuff.com/cloud), or Chat (freebuff.com/chat)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://freebuff.com/",
+      "title": "Freebuff — the free coding agent (free Claude Code, Codex, Cursor & Lovable alternative)",
+      "text": "Powerful coding models, funded by ads."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/jahooma/status/2107253190873993292",
+      "author": "James Grugett",
+      "handle": "@jahooma",
+      "text": "HUGE: We just increased free daily usage by 50% (!) in our coding agent 🎉\n\nUse up to 10 hours of DeepSeek V4.1 Flash, completely free every day (varies by country)\n\nTry now: https://freebuff.com"
+    },
+    {
+      "type": "link",
+      "url": "https://freebuff.com/cli",
+      "title": "Freebuff CLI — the free coding agent for your terminal (free Claude Code, Codex & Cursor alternative)",
+      "text": "No accounts to create, no keys to paste."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/CodebuffAI/freebuff",
+      "title": "GitHub - CodebuffAI/freebuff: The free coding agent",
+      "text": "Freebuff is available in every country. Supported regions receive full access; other regions and VPN users receive limited access to GLM 5.3 Flash, DeepSeek V4.1 Flash, MiMo 2.6 Flash, Solar Mini 4, Solar Pro 4, and Space Bunny Alpha."
+    }
+  ]
+}
