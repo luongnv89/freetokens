@@ -10,7 +10,13 @@
   X-Permitted-Cross-Domain-Policies: none
 
 /
-  Link: </llms.txt>; rel="describedby"; type="text/markdown", </llms-full.txt>; rel="service-desc"; type="text/markdown", </about.html>; rel="service-doc"; type="text/html", </index.md>; rel="alternate"; type="text/markdown", </feed.xml>; rel="alternate"; type="application/rss+xml", </sitemap.xml>; rel="sitemap"; type="application/xml"
+  Link: </llms.txt>; rel="describedby"; type="text/markdown", </llms-full.txt>; rel="service-desc"; type="text/markdown", </about.html>; rel="service-doc"; type="text/html", </index.md>; rel="alternate"; type="text/markdown", </feed.xml>; rel="alternate"; type="application/rss+xml", </sitemap.xml>; rel="sitemap"; type="application/xml", </.well-known/api-catalog.json>; rel="api-catalog"; type="application/linkset+json", </.well-known/ai-catalog.json>; rel="ai-catalog"; type="application/json"
 
 /*.md
   Content-Type: text/markdown; charset=utf-8
+
+# ARD (ai-catalog) asks for Access-Control-Allow-Origin: * on the manifest;
+# GitHub Pages ignores this file, so the CORS header is inert today — kept for
+# a future edge host, same posture as the Link relations above.
+/.well-known/*
+  Access-Control-Allow-Origin: *
