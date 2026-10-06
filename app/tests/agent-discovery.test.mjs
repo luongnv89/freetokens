@@ -194,13 +194,18 @@ describe("OAuth authorization-server metadata — RFC 8414 (#533)", () => {
     }
   });
 
-  it("advertises anonymous agent_auth pointing back at /auth.md (#531)", () => {
+  it("advertises anonymous agent_auth pointing back at /auth.md (#531, #546)", () => {
     const agentAuth = asMeta.agent_auth;
     expect(agentAuth.skill).toBe(`${SITE}/auth.md`);
     expect(agentAuth.register_uri).toBe(`${SITE}/auth.md`);
+    // auth-md: claim_uri belongs at the agent_auth level — the scanner does
+    // not read a copy nested under `anonymous`.
+    expect(agentAuth.claim_uri).toBe(`${SITE}/auth.md`);
     expect(agentAuth.identity_types_supported).toContain("anonymous");
-    expect(agentAuth.anonymous.credential_types_supported).toEqual([]);
-    expect(agentAuth.anonymous.claim_uri).toBe(`${SITE}/auth.md`);
+    // Anonymous access carries no credential, so "none" is the honest
+    // non-empty declaration; the scanner rejects an empty array.
+    expect(agentAuth.anonymous.credential_types_supported).toEqual(["none"]);
+    expect(agentAuth.anonymous.claim_uri).toBeUndefined();
   });
 });
 
