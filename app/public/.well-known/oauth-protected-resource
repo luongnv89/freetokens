@@ -1,0 +1,9 @@
+{
+  "resource": "https://freetokens.custats.info/",
+  "resource_name": "Free AI Credits",
+  "resource_documentation": "https://freetokens.custats.info/auth.md",
+  "resource_logo_uri": "https://freetokens.custats.info/logo-icon.svg",
+  "authorization_servers": ["https://freetokens.custats.info"],
+  "scopes_supported": [],
+  "bearer_methods_supported": ["header"]
+}

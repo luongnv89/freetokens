@@ -159,6 +159,97 @@ describe("ARD ai-catalog manifest (#530)", () => {
   });
 });
 
+describe("OAuth authorization-server metadata — RFC 8414 (#533)", () => {
+  const asMeta = readJson(".well-known/oauth-authorization-server.json");
+
+  it("serves identical documents at the extensionless path and its .json twin", () => {
+    const extensionless = readFileSync(
+      path.join(WELL_KNOWN, "oauth-authorization-server"),
+      "utf8",
+    );
+    const json = readFileSync(
+      path.join(WELL_KNOWN, "oauth-authorization-server.json"),
+      "utf8",
+    );
+    expect(json).toBe(extensionless);
+    expect(asMeta.issuer).toBe(SITE);
+  });
+
+  it("declares no grant flows and fabricates no endpoints", () => {
+    // The site runs no auth server: RFC 8414 endpoint fields must stay absent
+    // rather than point at URLs that do not exist.
+    expect(asMeta.grant_types_supported).toEqual([]);
+    expect(asMeta.response_types_supported).toEqual([]);
+    for (const field of [
+      "authorization_endpoint",
+      "token_endpoint",
+      "jwks_uri",
+      "registration_endpoint",
+      "revocation_endpoint",
+    ]) {
+      expect(
+        asMeta[field],
+        `${field} must stay absent — no such endpoint exists on this static site`,
+      ).toBeUndefined();
+    }
+  });
+
+  it("advertises anonymous agent_auth pointing back at /auth.md (#531)", () => {
+    const agentAuth = asMeta.agent_auth;
+    expect(agentAuth.skill).toBe(`${SITE}/auth.md`);
+    expect(agentAuth.register_uri).toBe(`${SITE}/auth.md`);
+    expect(agentAuth.identity_types_supported).toContain("anonymous");
+    expect(agentAuth.anonymous.credential_types_supported).toEqual([]);
+    expect(agentAuth.anonymous.claim_uri).toBe(`${SITE}/auth.md`);
+  });
+});
+
+describe("OAuth protected-resource metadata — RFC 9728 (#534)", () => {
+  const prm = readJson(".well-known/oauth-protected-resource.json");
+
+  it("serves identical documents at the extensionless path and its .json twin", () => {
+    const extensionless = readFileSync(
+      path.join(WELL_KNOWN, "oauth-protected-resource"),
+      "utf8",
+    );
+    const json = readFileSync(
+      path.join(WELL_KNOWN, "oauth-protected-resource.json"),
+      "utf8",
+    );
+    expect(json).toBe(extensionless);
+  });
+
+  it("names the site as the resource and lists its own issuer as the AS", () => {
+    expect(prm.resource).toBe(`${SITE}/`);
+    expect(prm.resource_name).toBe("Free AI Credits");
+    expect(prm.authorization_servers).toEqual([SITE]);
+    expect(prm.bearer_methods_supported).toContain("header");
+    expect(prm.scopes_supported).toEqual([]);
+  });
+
+  it("every advertised authorization server resolves to served AS metadata", () => {
+    for (const issuer of prm.authorization_servers) {
+      assertResolvableSiteUrl(
+        `${issuer}/.well-known/oauth-authorization-server`,
+      );
+    }
+  });
+});
+
+describe("auth.md — agent registration document (#531)", () => {
+  const doc = readFileSync(path.join(PUBLIC, "auth.md"), "utf8");
+
+  it("is a Markdown document whose H1 contains 'auth.md'", () => {
+    expect(doc.split("\n")[0]).toMatch(/^#\s.*auth\.md/);
+  });
+
+  it("states honestly that no registration or credentials are needed", () => {
+    expect(doc).toMatch(/no authentication/i);
+    expect(doc).toMatch(/anonymous/i);
+    expect(doc).toMatch(/no\s+registration\s+endpoint\s+exists/i);
+  });
+});
+
 describe("MCP server card — SEP-1649 (#532)", () => {
   const card = readJson(".well-known/mcp/server-card.json");
 
@@ -187,6 +278,8 @@ describe("manifest URL integrity", () => {
       ".well-known/api-catalog.json",
       ".well-known/ai-catalog.json",
       ".well-known/mcp/server-card.json",
+      ".well-known/oauth-authorization-server.json",
+      ".well-known/oauth-protected-resource.json",
       "openapi.json",
     ];
     const all = [];

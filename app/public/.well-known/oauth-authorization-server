@@ -1,0 +1,16 @@
+{
+  "issuer": "https://freetokens.custats.info",
+  "service_documentation": "https://freetokens.custats.info/auth.md",
+  "grant_types_supported": [],
+  "response_types_supported": [],
+  "scopes_supported": [],
+  "agent_auth": {
+    "skill": "https://freetokens.custats.info/auth.md",
+    "register_uri": "https://freetokens.custats.info/auth.md",
+    "identity_types_supported": ["anonymous"],
+    "anonymous": {
+      "credential_types_supported": [],
+      "claim_uri": "https://freetokens.custats.info/auth.md"
+    }
+  }
+}
