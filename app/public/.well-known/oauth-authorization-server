@@ -7,10 +7,10 @@
   "agent_auth": {
     "skill": "https://freetokens.custats.info/auth.md",
     "register_uri": "https://freetokens.custats.info/auth.md",
+    "claim_uri": "https://freetokens.custats.info/auth.md",
     "identity_types_supported": ["anonymous"],
     "anonymous": {
-      "credential_types_supported": [],
-      "claim_uri": "https://freetokens.custats.info/auth.md"
+      "credential_types_supported": ["none"]
     }
   }
 }

@@ -13,7 +13,8 @@ endpoint, no claim ceremony, and no token endpoint — do not look for them.
 - Authorization Server metadata (RFC 8414):
   `GET /.well-known/oauth-authorization-server` — its `agent_auth` block points
   back to this document and declares `identity_types_supported: ["anonymous"]`
-  with an empty `credential_types_supported`.
+  with `credential_types_supported: ["none"]`: anonymous access carries no
+  credential, so there is nothing to claim.
 - OpenAPI description of the read-only surface: `GET /openapi.json`
 
 ## Step 2 — Register
