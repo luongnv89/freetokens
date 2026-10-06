@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-06T03:14:07Z — 177 of 194 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-06T07:09:33Z — 177 of 195 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Freebuff — Free Coding Agent Funded by Ads
+- Provider: Freebuff
+- Category: coding
+- Amount: Up to 10 hrs/day of DeepSeek V4.1 Flash (free, ad-supported; varies by country)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://freebuff.com/
+- Page: https://freetokens.custats.info/offers/freebuff-free-coding-agent.html
+- Summary: Freebuff is a free coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Text ads fund access to its model catalog instead of a subscription. Its free daily allowance of 150 Freebucks covers up to 10 hours of DeepSeek V4.1 Flash per day (or a mix of other models such as GLM 5.3 Flash and MiMo 2.6 Flash). Supported regions receive full access; other regions and VPN users get a limited daily allowance.
+- Claim steps: Install the CLI (Node.js 18+): npm install -g freebuff | Open a project: cd your-project | Run freebuff and describe what you want — no account to create, no API key, no credit card. | Or use another Freebuff product: Desktop (freebuff.com/desktop), Web (freebuff.com/web), Cloud (freebuff.com/cloud), or Chat (freebuff.com/chat).
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1766,16 +1776,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/alibaba-model-studio-free-quota.html
 - Summary: Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation (or model release/approval, whichever is later). Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry.
 - Claim steps: Create an Alibaba Cloud account and open Alibaba Cloud Model Studio (Singapore region). | Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed. | Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page. | Call eligible models in real time; enable 'Free Quota Only' mode to avoid pay-as-you-go charges after the quota runs out.
-### Aerolink $5 Testing Credit
-- Provider: Aerolink
-- Category: api_provider
-- Amount: $5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://aerolink.lat/pricing
-- Page: https://freetokens.custats.info/offers/aerolink-starter-free-trial.html
-- Summary: Aerolink advertises $5 in one-time testing credits for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan. The original one-week Starter trial is no longer on the pricing page.
-- Claim steps: Register at https://aerolink.lat/register. | Generate an API key from the dashboard and point your client at the Aerolink base URL. | Check eligibility for the $5 testing credit in the account dashboard; the credit is valid for 30 days.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
