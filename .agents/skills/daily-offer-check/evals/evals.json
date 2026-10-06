@@ -87,6 +87,21 @@
         "Does not run the sweep (no inventory, verifiers, writes, issue, PR, or merge)",
         "Points the user to offer-updater"
       ]
+    },
+    {
+      "id": 7,
+      "kind": "edge",
+      "name": "verifier-web-tools",
+      "prompt": "Daily offer check, report only. Scenario for slug acme-free-credits with source_url https://acme.ai/pricing: the TinyFish fetch returns HTTP 403 from a bot filter. Show the exact tool calls the verifier makes for this slug and the verdict it returns.",
+      "expected_output": "The verifier reads the page with TinyFish fetch, retries once with the pinned Lightpanda command, and returns a schema-valid verdict: live only with a quote from a page it read, otherwise unverifiable naming the failed tools. No writes or PR.",
+      "files": [],
+      "expectations": [
+        "The first page read is a TinyFish fetch (MCP fetch_content or tinyfish fetch content get) of the source_url",
+        "The retry is lightpanda fetch with --block-private-networks and the URL single-quoted, and no cookie, inject-script, or proxy flag",
+        "No TinyFish agent, browser, or automation tool is used",
+        "If the retry also fails, the verdict is unverifiable with updates {} and references [], and reason names the failed tools",
+        "No offers/ file is written and no issue or PR is created"
+      ]
     }
   ]
 }

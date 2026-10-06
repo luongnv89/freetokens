@@ -69,6 +69,20 @@
         "The run did not apply offer-updater's per-offer pipeline to the catalog (no drafts written, no validator runs)",
         "The response identifies the request as catalog-wide re-verification outside offer-updater's scope"
       ]
+    },
+    {
+      "id": 6,
+      "name": "bot-wall-lightpanda-retry",
+      "kind": "edge",
+      "prompt": "Add the Cerebras free API tier to the site. Assume the TinyFish fetch of the official Cerebras pricing page returns a Cloudflare \"Just a moment...\" challenge instead of the page.",
+      "expected_output": "The run searches with TinyFish, reads the official page with TinyFish fetch, and on the bot wall retries that same page once with the Lightpanda command (--block-private-networks, single-quoted URL) before any verdict. It never uses TinyFish agent or browser tools and stays within one search plus four fetches.",
+      "files": [],
+      "expectations": [
+        "Searches and page reads use TinyFish (the MCP search/fetch_content tools or the tinyfish CLI), not another web tool, unless a fallback is named",
+        "After the bot wall, the same page is retried once with lightpanda fetch including --block-private-networks and a single-quoted URL",
+        "No TinyFish agent, browser, or automation tool is used",
+        "The offer is either kept with evidence quoted from a page actually read, or listed under Dropped with every URL tried"
+      ]
     }
   ]
 }
