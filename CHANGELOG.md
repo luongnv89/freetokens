@@ -5,6 +5,13 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Protected-resource metadata declares a non-empty scope list (#544):**
+  `/.well-known/oauth-protected-resource` (and its `.json` twin) now ships
+  `"scopes_supported": ["read"]` instead of an empty array — some validators
+  treat an empty list as a missing member and fail the RFC 9728 document.
+  `read` is a capability declaration only: the site still runs no auth server
+  and no endpoints are added.
+
 - **OAuth/agent-auth discovery metadata published (#531, #533, #534):**
   `/.well-known/oauth-authorization-server` now serves an RFC 8414
   authorization-server document with the site as its own `issuer`, empty

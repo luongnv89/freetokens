@@ -224,7 +224,7 @@ describe("OAuth protected-resource metadata — RFC 9728 (#534)", () => {
     expect(prm.resource_name).toBe("Free AI Credits");
     expect(prm.authorization_servers).toEqual([SITE]);
     expect(prm.bearer_methods_supported).toContain("header");
-    expect(prm.scopes_supported).toEqual([]);
+    expect(prm.scopes_supported).toEqual(["read"]);
   });
 
   it("every advertised authorization server resolves to served AS metadata", () => {
