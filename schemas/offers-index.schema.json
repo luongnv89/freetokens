@@ -36,7 +36,7 @@
     "offers": {
       "type": "array",
       "items": { "$ref": "#/$defs/Offer" },
-      "description": "All validated offers, newest-verified first (ties by slug ascending). Expired entries are retained and flagged, never dropped."
+      "description": "All validated offers, newest-added first, then newest-verified, ties by slug ascending. Expired entries are retained and flagged, never dropped."
     }
   },
   "$defs": {
@@ -99,6 +99,11 @@
           "type": "string",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
               "description": "Date the curator last verified the offer is live, YYYY-MM-DD."
+        },
+        "added_date": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Date the offer's YAML first entered git history, YYYY-MM-DD; feeds the default ranking's newness signal. Null when the build has no git history (shallow clone). Always emitted by the loader; optional so older payloads stay valid."
         },
         "verification": {
           "type": "string",

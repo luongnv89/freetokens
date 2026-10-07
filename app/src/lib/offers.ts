@@ -8,6 +8,7 @@
 // a schema change that breaks a component is a compile error.
 import type { Offer, OffersIndex } from "../types/offers-index";
 import type { UrlState } from "./urlState";
+import { rankOffers, type RankContext } from "./ranking";
 // Trust wording has ONE home: scripts/trust-vocabulary.mjs (issues #507/#509).
 // The maps below are projections of it, so the badges, the hover-free legend,
 // the JSON-LD and the llms exports can never drift apart. Plain ESM + a
@@ -184,16 +185,24 @@ export function offerMatches(offer: Offer, state: UrlState): boolean {
 /**
  * Client listing order (build.py ftApplySort). Stable: ties fall back to
  * the offer's index in `offers` (the activeOffers order). Empty / invalid
- * mode restores that original index order — which is the build's newest-ADDED
- * ordering (see readAddedDates in scripts/load-offers.mjs), and is therefore
- * the "Latest added" option in the sort control, not an unsorted fallback.
+ * mode is the "Recommended" ranking (src/lib/ranking.ts). "added" restores
+ * the original index order — the build's newest-ADDED ordering (see
+ * readAddedDates in scripts/load-offers.mjs), shown as "Latest added".
  * Null expiry sorts last under expiring. There is deliberately no amount /
  * allowance sort: the free-text `amount` field mixes units (dollars, tokens,
  * credits, characters, minutes, requests) and periods, so ranking it would
  * fabricate a cross-unit value equivalence (#508). Any unrecognised mode —
- * including the legacy "amount" — falls through to index order.
+ * including the legacy "amount" — falls through to the default ranking,
+ * which never reads `amount` either.
  */
-export function applySort(offers: Offer[], mode: string): Offer[] {
+export function applySort(
+  offers: Offer[],
+  mode: string,
+  rank: RankContext,
+): Offer[] {
+  if (mode !== "newest" && mode !== "expiring" && mode !== "added") {
+    return rankOffers(offers, rank);
+  }
   const indexed = offers.map((offer, index) => ({ offer, index }));
   if (mode === "newest") {
     indexed.sort(

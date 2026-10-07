@@ -243,6 +243,14 @@ describe("search_offers tool", () => {
     expect(result.total).toBe(0);
   });
 
+  it("returns the Recommended ranking by default and index order for 'added'", async () => {
+    const order = async (input: Record<string, unknown>) =>
+      ((await run(input)).offers as { slug: string }[]).map((o) => o.slug);
+    // Coding (30) outranks a reviewed API offer (15 + 10).
+    expect(await order({})).toEqual(["beta-coding", "alpha-api"]);
+    expect(await order({ sort: "added" })).toEqual(["alpha-api", "beta-coding"]);
+  });
+
   it("drops values the URL-state whitelist would reject", async () => {
     const result = await run({ category: "student", sort: "bogus" });
     expect(result.applied_state).toEqual({});

@@ -23,7 +23,7 @@ export interface OffersIndex {
    */
   expired_count: number;
   /**
-   * All validated offers, newest-verified first (ties by slug ascending). Expired entries are retained and flagged, never dropped.
+   * All validated offers, newest-added first, then newest-verified, ties by slug ascending. Expired entries are retained and flagged, never dropped.
    */
   offers: Offer[];
 }
@@ -63,6 +63,10 @@ export interface Offer {
    * Date the curator last verified the offer is live, YYYY-MM-DD.
    */
   verified_date: string;
+  /**
+   * Date the offer's YAML first entered git history, YYYY-MM-DD; feeds the default ranking's newness signal. Null when the build has no git history (shallow clone). Always emitted by the loader; optional so older payloads stay valid.
+   */
+  added_date?: string | null;
   /**
    * How the listing was checked.
    */

@@ -99,6 +99,17 @@ const fixtureOffers: Offer[] = [
   }),
 ];
 
+// The default ("Recommended") order of fixtureOffers: the four GitHub coding
+// offers lead on big lab + coding, in index order, and the Acme image offer
+// trails. Index order ("Latest added") is fixtureOffers itself.
+const DEFAULT_ORDER = [
+  "alpha-copilot",
+  "alpha-social",
+  "alpha-free",
+  "beta-copilot",
+  "alpha-image",
+];
+
 const index: OffersIndex = {
   generated_at: "2026-08-24T00:00:00Z",
   count: fixtureOffers.length,
@@ -281,6 +292,25 @@ describe("HomePage sort_use", () => {
       sort_option: "default",
     });
   });
+
+  it("defaults to the Recommended ranking and keeps Latest added as index order", () => {
+    const gtag = grantedGtag();
+    render(<HomePage index={index} />);
+    const select = screen.getByLabelText("Sort");
+    expect(select).toHaveValue("");
+    expect(
+      screen.getByRole("option", { name: "Recommended" }),
+    ).toHaveProperty("selected", true);
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    fireEvent.change(select, { target: { value: "added" } });
+    expect(listedSlugs()).toEqual(fixtureOffers.map((o) => o.slug));
+    expect(new URLSearchParams(window.location.search).get("sort")).toBe(
+      "added",
+    );
+    expect(eventCalls(gtag, "sort_use")[0][2]).toEqual({
+      sort_option: "added",
+    });
+  });
 });
 
 describe("HomePage clear and reset filters", () => {
@@ -374,15 +404,9 @@ describe("HomePage deep link and popstate", () => {
   it("degrades a legacy ?sort=amount deep link to the default order (#508)", () => {
     setSearch("?sort=amount");
     render(<HomePage index={index} />);
-    // No cross-unit cash ranking: the retired mode falls back to index order
-    // and the control reflects the real, supported sort.
-    expect(listedSlugs()).toEqual([
-      "alpha-copilot",
-      "alpha-image",
-      "alpha-social",
-      "alpha-free",
-      "beta-copilot",
-    ]);
+    // No cross-unit cash ranking: the retired mode falls back to the default
+    // ranking and the control reflects the real, supported sort.
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
     expect(screen.getByLabelText("Sort")).toHaveValue("");
   });
 });
@@ -497,13 +521,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     expect(eventCalls(gtag, "filter_use")).toHaveLength(1);
 
     fireEvent.click(tagOn("alpha-social", "verification"));
-    expect(listedSlugs()).toEqual([
-      "alpha-copilot",
-      "alpha-image",
-      "alpha-social",
-      "alpha-free",
-      "beta-copilot",
-    ]);
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
     expect(window.location.search).toBe("");
     expect(eventCalls(gtag, "filter_use")).toHaveLength(2);
   });
@@ -584,13 +602,7 @@ describe("HomePage three-dimension filters (#126)", () => {
   it("filtering does not reorder remaining rows", () => {
     render(<HomePage index={index} />);
     const before = listedSlugs();
-    expect(before).toEqual([
-      "alpha-copilot",
-      "alpha-image",
-      "alpha-social",
-      "alpha-free",
-      "beta-copilot",
-    ]);
+    expect(before).toEqual(DEFAULT_ORDER);
     fireEvent.click(categoryChip("coding"));
     expect(listedSlugs()).toEqual(
       before.filter((slug) => slug !== "alpha-image"),
@@ -875,13 +887,7 @@ describe("HomePage saved and dismissed personal state (#140)", () => {
     });
     render(<HomePage index={index} />);
     expect(screen.getByLabelText("Sort")).toHaveValue("");
-    expect(listedSlugs()).toEqual([
-      "alpha-copilot",
-      "alpha-image",
-      "alpha-social",
-      "alpha-free",
-      "beta-copilot",
-    ]);
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
     expect(window.location.search).not.toContain("sort=");
   });
 
@@ -1154,6 +1160,48 @@ describe("HomePage hot-today badge (#282)", () => {
       expect(listedSlugs()).not.toContain("alpha-image");
     });
     expect(hotSlugs()).toEqual([]);
+  });
+
+  it("moves today's hot offer up the default list once the counts load", async () => {
+    configureAnalytics({ statsSite: SITE });
+    stubCounters({ "beta-copilot": 12 });
+    render(<HomePage index={index} />);
+    // First paint matches the prerender: no counts, plain default order.
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    await waitFor(() => {
+      expect(listedSlugs()[0]).toBe("beta-copilot");
+    });
+    expect(listedSlugs()).toEqual([
+      "beta-copilot",
+      "alpha-copilot",
+      "alpha-social",
+      "alpha-free",
+      "alpha-image",
+    ]);
+  });
+
+  it("never lets a below-floor count reorder the list", async () => {
+    configureAnalytics({ statsSite: SITE });
+    stubCounters({ "beta-copilot": 2 });
+    render(<HomePage index={index} />);
+    await waitFor(() => {
+      expect(
+        document.querySelector("#offer-beta-copilot .r-views"),
+      ).not.toBeNull();
+    });
+    await act(async () => {});
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+  });
+
+  it("leaves the Latest added order alone when counts load", async () => {
+    configureAnalytics({ statsSite: SITE });
+    stubCounters({ "beta-copilot": 12 });
+    setSearch("?sort=added");
+    render(<HomePage index={index} />);
+    await waitFor(() => {
+      expect(document.querySelector(".badge-hot")).not.toBeNull();
+    });
+    expect(listedSlugs()).toEqual(fixtureOffers.map((o) => o.slug));
   });
 });
 
