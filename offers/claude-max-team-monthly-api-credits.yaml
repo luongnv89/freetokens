@@ -1,0 +1,16 @@
+# Verified 2026-10-07 against https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
+# ("Max and Team plans include monthly credits for the Claude Platform. Use
+# them to build Claude into your own apps and agents with the Claude API."
+# Table: "Max 5x: $100", "Max 20x: $200", "Team (Standard seats): $20 per
+# seat", "Team (Premium seats): $100 per seat", team credits "capped at $500".
+# "Free, Pro, and Enterprise plans aren't eligible." No end date stated.)
+title: Monthly Claude API credits for Max and Team plans
+provider: Anthropic
+category: api_provider
+amount: $100/month (Max 5x) or $200/month (Max 20x) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month
+expiry_date: null
+source_url: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
+verified_date: 2026-10-07
+verification: social_proof
+review_status: under-review
+signup: required

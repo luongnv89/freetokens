@@ -1,0 +1,17 @@
+{
+  "summary": "Existing Claude Max and Team subscribers get monthly Claude Platform credits to build with the Claude API: $100 on Max 5x, $200 on Max 20x, and on Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500 per month. Credits arrive after each plan payment, expire at the end of each billing cycle and do not roll over. They cover the Claude API (Messages and Message Batches), the Console Playground, Claude Managed Agents and the Claude Agent SDK, but not Claude Code interactive sessions, extra usage, or Claude on third-party clouds. Free, Pro and Enterprise plans are not eligible.",
+  "claim_steps": [
+    "On claude.ai, go to Settings > Billing as a Max subscriber or Organization settings > Billing as a Team Owner or Primary Owner.",
+    "In the API credits section, select 'Link organization.'",
+    "Choose the Console organization you want to receive the credits, or create a new one.",
+    "Review the Supplemental Credit Terms, then Link organization."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans",
+      "title": "Monthly API credits for Max and Team plans | Claude Help Center",
+      "text": "Max and Team plans include monthly credits for the Claude Platform. Use them to build Claude into your own apps and agents with the Claude API. Available on Max and Team plans, including discounted Team plans. Free, Pro, and Enterprise plans aren't eligible."
+    }
+  ]
+}

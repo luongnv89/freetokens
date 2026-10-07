@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-07T13:35:15Z — 172 of 212 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-07T20:21:48Z — 171 of 213 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -96,6 +96,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/codiv-openjev-free-api-tokens.html
 - Summary: Codiv serves OpenJev through a Jev-compatible API. The free public experiment supplies 100M input tokens per account and a separate 10M text-generation-token allowance, with 60 requests per minute per key. Signup is required; no credit card or paid plan is required. No enrollment end date is stated on the loaded official pages.
 - Claim steps: Sign up with Google, GitHub or email. | Open the dashboard and create an API key. | Call the Codiv API using the official quickstart.
+### Monthly Claude API credits for Max and Team plans
+- Provider: Anthropic
+- Category: api_provider
+- Amount: $100/month (Max 5x) or $200/month (Max 20x) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
+- Page: https://freetokens.custats.info/offers/claude-max-team-monthly-api-credits.html
+- Summary: Existing Claude Max and Team subscribers get monthly Claude Platform credits to build with the Claude API: $100 on Max 5x, $200 on Max 20x, and on Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500 per month. Credits arrive after each plan payment, expire at the end of each billing cycle and do not roll over. They cover the Claude API (Messages and Message Batches), the Console Playground, Claude Managed Agents and the Claude Agent SDK, but not Claude Code interactive sessions, extra usage, or Claude on third-party clouds. Free, Pro and Enterprise plans are not eligible.
+- Claim steps: On claude.ai, go to Settings > Billing as a Max subscriber or Organization settings > Billing as a Team Owner or Primary Owner. | In the API credits section, select 'Link organization.' | Choose the Console organization you want to receive the credits, or create a new one. | Review the Supplemental Credit Terms, then Link organization.
 ### Baidu AI Studio — 1 Million Free Tokens
 - Provider: Baidu
 - Category: api_provider
@@ -1704,26 +1714,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/cartesia-startups-grant.html
 - Summary: 96M credits/year plus $300/month in agent credits for 12 months (over $8,000 value).
 - Claim steps: Submit the startup grant application. | Wait for Cartesia review; applicants typically hear back within one week. | If accepted, apply the provided coupon code to the Cartesia account.
-### Cartesia x Google Cloud Startups
-- Provider: Cartesia
-- Category: startup_program
-- Amount: 12 months of Startup Tier — 1.25M credits/month plus up to 5 concurrent requests including Pro Voice Cloning (Google for Startups Cloud Program Scale Tier only)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.cartesia.ai/google-startups
-- Page: https://freetokens.custats.info/offers/cartesia-google-cloud-startups.html
-- Summary: Cartesia x Google Cloud Startups is 12 months of Cartesia Startup Tier for Scale Tier members of the Google for Startups Cloud Program: 1.25M credits per month, up to 5 concurrent requests, including Pro Voice Cloning. Distinct from the Cartesia Startups Grant (96M credits/year on cartesia.ai/startups). Cartesia pricing lists Startup at $49/mo with 1.25M credits/month and Pro voice cloning. The google-startups apply path 404s; claim via the program page as a GFS Cloud Program Scale Tier member.
-- Claim steps: Be a Scale Tier member of the Google for Startups Cloud Program. | Open https://www.cartesia.ai/google-startups and follow Cartesia's claim flow for that benefit (this is not the Cartesia Startups Grant at /startups).
-### Cartesia Free Plan
-- Provider: Cartesia
-- Category: voice
-- Amount: 20K credits/month for text-to-speech and speech-to-text on the $0 plan
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://cartesia.ai/pricing
-- Page: https://freetokens.custats.info/offers/cartesia-free-plan.html
-- Summary: Cartesia's $0 Free plan includes 20,000 credits per month covering Sonic text-to-speech (about 27 minutes) and Ink speech-to-text (about 1h51m), plus one voice agent slot and unlimited workspace seats - no card required to start.
-- Claim steps: Open cartesia.ai/pricing and choose the Free plan ('Start free'). | Sign up at play.cartesia.ai - no credit card required. | Generate speech with Sonic or transcribe with Ink from the playground or API. | Stay within the 20K monthly credits; they reset each month.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
