@@ -6,13 +6,15 @@
 # embedded on freebuff.com): "Use up to 10 hours of DeepSeek V4.1 Flash, completely
 # free every day (varies by country)". No official end date stated, so expiry_date is null.
 # Claim flow per https://freebuff.com/cli: "No accounts to create, no keys to paste."
+# 2026-10-07: current https://freebuff.com/ table says "15 hrs DeepSeek V4.1 Flash";
+# historical 10-hour social post above is superseded; verify actual regional CLI allowance.
 title: Freebuff — Free Coding Agent Funded by Ads
 provider: Freebuff
 category: coding
-amount: Up to 10 hrs/day of DeepSeek V4.1 Flash (free, ad-supported; varies by country)
+amount: Up to 15 hrs/day of DeepSeek V4.1 Flash (free, ad-supported; varies by country)
 expiry_date: null
 source_url: https://freebuff.com/
 verified_date: 2026-10-06
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: none

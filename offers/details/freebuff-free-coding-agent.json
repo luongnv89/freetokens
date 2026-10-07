@@ -1,5 +1,5 @@
 {
-  "summary": "Freebuff is a free coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Text ads fund access to its model catalog instead of a subscription. Its free daily allowance of 150 Freebucks covers up to 10 hours of DeepSeek V4.1 Flash per day (or a mix of other models such as GLM 5.3 Flash and MiMo 2.6 Flash). Supported regions receive full access; other regions and VPN users get a limited daily allowance.",
+  "summary": "Freebuff is a free coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Text ads fund access to its model catalog instead of a subscription. Its free daily allowance of 150 Freebucks covers up to 15 hours of DeepSeek V4.1 Flash per day (or a mix of other models such as GLM 5.3 Flash and MiMo 2.6 Flash). Supported regions receive full access; other regions and VPN users get a limited daily allowance.",
   "claim_steps": [
     "Install the CLI (Node.js 18+): npm install -g freebuff",
     "Open a project: cd your-project",

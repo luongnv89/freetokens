@@ -1,5 +1,5 @@
 {
-  "summary": "InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. A one-time $5 activation (which becomes spendable balance, not a fee) then unlocks ongoing $0 input/output access to 15+ NIM open-source models — Nemotron, GLM 5.3, Gemma 4 and more — within free-plan daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate requests per day.",
+  "summary": "InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. A one-time $5 activation (which becomes spendable balance, not a fee) then unlocks ongoing $0 input/output access to 10+ NIM open-source models — Nemotron, GLM 5.3, Gemma 4 and more — within free-plan daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate requests per day.",
   "claim_steps": [
     "Create an account and get an API key at inferall.ai/keys — no card for the first 25 NIM calls.",
     "Call the OpenAI-compatible or Anthropic-compatible endpoint with any listed $0 NIM model id.",
@@ -10,7 +10,7 @@
       "type": "link",
       "url": "https://inferall.ai/pricing",
       "title": "Pricing — InferAll AI Gateway",
-      "text": "The 15+ open-source models on NVIDIA NIM are $0 input and $0 output, capped only by the free-plan daily request rate (50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate per day). New accounts get 25 free NIM calls before any payment; after those, the $5 starter pack unlocks ongoing NIM access."
+      "text": "The 10+ open-source models on NVIDIA NIM are $0 input and $0 output, capped only by the free-plan daily request rate (50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate per day). New accounts get 25 free NIM calls before any payment; after those, the $5 starter pack unlocks ongoing NIM access."
     }
   ]
 }

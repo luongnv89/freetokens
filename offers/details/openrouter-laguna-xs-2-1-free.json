@@ -1,5 +1,5 @@
 {
-  "summary": "Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context).",
+  "summary": "Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context). OpenRouter marks this model as going away October 31, 2026.",
   "claim_steps": [
     "Create or sign in to an OpenRouter account and create an API key.",
     "Call the OpenRouter chat-completions API with model poolside/laguna-xs-2.1:free."
@@ -9,7 +9,7 @@
       "type": "link",
       "url": "https://openrouter.ai/poolside/laguna-xs-2.1:free",
       "title": "Laguna XS 2.1 (free) - API Pricing & Providers | OpenRouter",
-      "text": "This model is free to use. 262,144 token context window, maximum output of 32,768 tokens."
+      "text": "This model is free to use. 262,144 token context window, maximum output of 32,768 tokens. Model page says: Going away October 31, 2026."
     },
     {
       "type": "link",
