@@ -1,8 +1,8 @@
 {
-  "summary": "Browser Use now advertises $1 in free credits for eligible signups; the pricing page does not specify who qualifies. Credits can pay for browser time ($0.02/hour, plus proxy traffic) and Browser Use Agents (model cost + 20% service fee). Top-ups start at $5; no subscription.",
+  "summary": "Browser Use advertises $1 in free credits once per person for eligible Google, GitHub or Microsoft signups; no card required. Credits can pay for browser time ($0.02/hour, plus proxy traffic) and Browser Use Agents (model cost + 20% service fee). Top-ups start at $5; no subscription.",
   "claim_steps": [
-    "Check https://browser-use.com/pricing for the current eligibility terms before signing up.",
-    "Sign up at https://browser-use.com and check your dashboard for the advertised $1 free credit if eligible.",
+    "Sign up at https://browser-use.com using Google, GitHub or Microsoft; the $1 free credit is once per person and requires no card.",
+    "Check your dashboard for the advertised $1 free credit if eligible.",
     "Use any awarded credits for browser time or agent runs; verify expiration in the account."
   ],
   "social_proof": [
@@ -10,7 +10,7 @@
       "type": "link",
       "url": "https://browser-use.com/pricing",
       "title": "Pricing | Browser Use",
-      "text": "$1 free credits for eligible signups. The public pricing page does not specify eligibility for the free credit."
+      "text": "$1 free credits for eligible signups. Eligible Google, GitHub or Microsoft signups; once per person; no card required."
     }
   ]
 }

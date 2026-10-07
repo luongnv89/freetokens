@@ -1,10 +1,12 @@
 # Checked 2026-10-04 against https://browser-use.com/pricing
 # ("$1 free credits for eligible signups"; eligibility details not stated publicly.
 # Legacy slug retained to avoid breaking links; review qualification in dashboard.)
+# 2026-10-07: https://browser-use.com/pricing now specifies once per person,
+# eligible Google/GitHub/Microsoft signups, no card required.
 title: Browser Use — $1 Signup Credit
 provider: Browser Use
 category: api_provider
-amount: $1 free credit for eligible signups (eligibility details not published on pricing page)
+amount: $1 free credit for eligible signups (once per person for eligible Google, GitHub or Microsoft signups; no card required)
 expiry_date: null
 source_url: https://browser-use.com/pricing
 verified_date: 2026-09-30

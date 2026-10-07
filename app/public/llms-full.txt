@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-06T20:38:03Z — 173 of 202 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-07T03:11:35Z — 172 of 202 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -80,12 +80,12 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### Freebuff — Free Coding Agent Funded by Ads
 - Provider: Freebuff
 - Category: coding
-- Amount: Up to 10 hrs/day of DeepSeek V4.1 Flash (free, ad-supported; varies by country)
+- Amount: Up to 15 hrs/day of DeepSeek V4.1 Flash (free, ad-supported; varies by country)
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=none
+- Last checked: 2026-10-06 — review_status=to-be-verified · verification=social_proof · signup=none
 - Source: https://freebuff.com/
 - Page: https://freetokens.custats.info/offers/freebuff-free-coding-agent.html
-- Summary: Freebuff is a free coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Text ads fund access to its model catalog instead of a subscription. Its free daily allowance of 150 Freebucks covers up to 10 hours of DeepSeek V4.1 Flash per day (or a mix of other models such as GLM 5.3 Flash and MiMo 2.6 Flash). Supported regions receive full access; other regions and VPN users get a limited daily allowance.
+- Summary: Freebuff is a free coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Text ads fund access to its model catalog instead of a subscription. Its free daily allowance of 150 Freebucks covers up to 15 hours of DeepSeek V4.1 Flash per day (or a mix of other models such as GLM 5.3 Flash and MiMo 2.6 Flash). Supported regions receive full access; other regions and VPN users get a limited daily allowance.
 - Claim steps: Install the CLI (Node.js 18+): npm install -g freebuff | Open a project: cd your-project | Run freebuff and describe what you want — no account to create, no API key, no credit card. | Or use another Freebuff product: Desktop (freebuff.com/desktop), Web (freebuff.com/web), Cloud (freebuff.com/cloud), or Chat (freebuff.com/chat).
 ### Datadog for Startups — Up to $100K Credits
 - Provider: Datadog
@@ -621,21 +621,21 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Provider: OpenRouter
 - Category: coding
 - Amount: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context)
-- Status: active — enrollment deadline: none (ongoing)
+- Status: active — enrollment deadline: 2026-10-31
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/poolside/laguna-xs-2.1:free
 - Page: https://freetokens.custats.info/offers/openrouter-laguna-xs-2-1-free.html
-- Summary: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context).
+- Summary: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context). OpenRouter marks this model as going away October 31, 2026.
 - Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model poolside/laguna-xs-2.1:free.
 ### Laguna S 2.1 Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
 - Amount: Free poolside/laguna-s-2.1:free endpoint at $0 (262K context, 118B-A8B coding agent)
-- Status: active — enrollment deadline: none (ongoing)
+- Status: active — enrollment deadline: 2026-10-31
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/poolside/laguna-s-2.1:free
 - Page: https://freetokens.custats.info/offers/openrouter-laguna-s-2-1-free.html
-- Summary: Laguna S 2.1 is Poolside's latest coding agent model — 118B total, 8B active, 70.2% Terminal-Bench 2.1 — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-07-21; no published end date.
+- Summary: Laguna S 2.1 is Poolside's latest coding agent model — 118B total, 8B active, 70.2% Terminal-Bench 2.1 — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-07-21; OpenRouter marks it as going away October 31, 2026.
 - Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Call the chat completions API with model id poolside/laguna-s-2.1:free.
 ### Gemma 4 31B Free (OpenRouter)
 - Provider: OpenRouter
@@ -890,13 +890,13 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### LLM7.io Free API Tier
 - Provider: LLM7.io
 - Category: api_provider
-- Amount: Anonymous access with 10 requests/minute, 60 requests/hour, and 500,000 tokens/day
+- Amount: Free dashboard token with 60 requests/minute, 250 requests/hour, and 100,000 tokens/day
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=none
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://docs.llm7.io/limits
 - Page: https://freetokens.custats.info/offers/llm7-free-tier.html
-- Summary: LLM7 provides anonymous text generation with limits of 1 request per second, 10 per minute, 60 per hour, and 500,000 tokens per 24 hours. A free token raises the request and token limits.
-- Claim steps: Send an OpenAI-compatible request without a key using a currently available turbo model. | Stay within the anonymous limits of 10 requests per minute, 60 per hour, and 500,000 tokens per 24 hours. | Optionally get a free token from the LLM7 dashboard for higher limits.
+- Summary: LLM7 documents a free dashboard token with text-generation limits of 1 request per second, 60 per minute, 250 per hour, and 100,000 tokens per 24 hours. Its current limits page no longer documents anonymous access.
+- Claim steps: Obtain a free token from the LLM7 dashboard at dash.llm7.io. | Send an OpenAI-compatible request with that token and a currently available model. | Stay within the free-token limits of 60 requests per minute, 250 per hour, and 100,000 tokens per 24 hours.
 ### LlamaParse Startup Offer
 - Provider: LlamaIndex
 - Category: startup_program
@@ -1050,12 +1050,12 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### InferAll Free — 25 NIM Trial + $0 OSS Models
 - Provider: InferAll
 - Category: api_provider
-- Amount: 25 free NVIDIA NIM calls on signup (no card); ongoing $0 in/out on 15+ NIM open models after one-time $5 activation, within daily caps
+- Amount: 25 free NVIDIA NIM calls on signup (no card); ongoing $0 in/out on 10+ NIM open models after one-time $5 activation, within daily caps
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://inferall.ai/pricing
 - Page: https://freetokens.custats.info/offers/inferall-free-nim-models.html
-- Summary: InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. A one-time $5 activation (which becomes spendable balance, not a fee) then unlocks ongoing $0 input/output access to 15+ NIM open-source models — Nemotron, GLM 5.3, Gemma 4 and more — within free-plan daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate requests per day.
+- Summary: InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. A one-time $5 activation (which becomes spendable balance, not a fee) then unlocks ongoing $0 input/output access to 10+ NIM open-source models — Nemotron, GLM 5.3, Gemma 4 and more — within free-plan daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate requests per day.
 - Claim steps: Create an account and get an API key at inferall.ai/keys — no card for the first 25 NIM calls. | Call the OpenAI-compatible or Anthropic-compatible endpoint with any listed $0 NIM model id. | To keep ongoing free NIM access after the 25-call trial, pay the one-time $5 activation; it becomes spendable balance for premium providers.
 ### Inception Mercury 2 — 100M Free API Tokens
 - Provider: Inception
@@ -1462,7 +1462,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: startup_program
 - Amount: Up to $100K in Daytona credits for startups; program page says $10K straight away on the account and easily up to $100K
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://www.daytona.io/startups
 - Page: https://freetokens.custats.info/offers/daytona-startup-program.html
 - Summary: Daytona's Startup Grid offers startups up to $100,000 in Daytona credits. The official page says startups receive $10,000 straight away on their account and can reach up to $100,000. Applicants submit the startup form for review.
@@ -1659,22 +1659,22 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### Browser Use — $1 Signup Credit
 - Provider: Browser Use
 - Category: api_provider
-- Amount: $1 free credit for eligible signups (eligibility details not published on pricing page)
+- Amount: $1 free credit for eligible signups (once per person for eligible Google, GitHub or Microsoft signups; no card required)
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://browser-use.com/pricing
 - Page: https://freetokens.custats.info/offers/browser-use-15-signup-credit.html
-- Summary: Browser Use now advertises $1 in free credits for eligible signups; the pricing page does not specify who qualifies. Credits can pay for browser time ($0.02/hour, plus proxy traffic) and Browser Use Agents (model cost + 20% service fee). Top-ups start at $5; no subscription.
-- Claim steps: Check https://browser-use.com/pricing for the current eligibility terms before signing up. | Sign up at https://browser-use.com and check your dashboard for the advertised $1 free credit if eligible. | Use any awarded credits for browser time or agent runs; verify expiration in the account.
+- Summary: Browser Use advertises $1 in free credits once per person for eligible Google, GitHub or Microsoft signups; no card required. Credits can pay for browser time ($0.02/hour, plus proxy traffic) and Browser Use Agents (model cost + 20% service fee). Top-ups start at $5; no subscription.
+- Claim steps: Sign up at https://browser-use.com using Google, GitHub or Microsoft; the $1 free credit is once per person and requires no card. | Check your dashboard for the advertised $1 free credit if eligible. | Use any awarded credits for browser time or agent runs; verify expiration in the account.
 ### Bing Image Creator
 - Provider: Microsoft Bing
 - Category: image
-- Amount: Free image generation with a Microsoft account - 15 fast creations/day plus standard speed (up to 200 prompts per 24h)
+- Amount: Free image generation with a Microsoft account - 15 fast creations/day plus standard speed
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.microsoft.com/en-us/bing/features/bing-image-creator
 - Page: https://freetokens.custats.info/offers/bing-image-creator.html
-- Summary: Bing Image Creator is free for everyone with a personal Microsoft account, offering image generation with Microsoft MAI-Image, GPT-Image, and DALL-E-class models. You get 15 fast creations per day plus slower standard-speed generations (up to 200 prompts per 24 hours).
+- Summary: Bing Image Creator is free for everyone with a personal Microsoft account, offering image generation with Microsoft MAI-Image, GPT-Image, and DALL-E-class models. You get 15 fast creations per day plus slower standard-speed generations.
 - Claim steps: Visit bing.com/create or the Bing Image Creator feature page. | Sign in with a personal Microsoft account (work/school Entra accounts are not supported). | Enter a prompt and press Create; each generation uses one of your daily creations. | Return daily - the 15 fast creations replenish every day.
 ### BazaarLink Free LLM API
 - Provider: BazaarLink
@@ -1726,16 +1726,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/azure-for-students.html
 - Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
 - Claim steps: Go to https://azure.microsoft.com/en-us/free/students and click Activate. | Sign in with your school email and complete student verification via the Azure Education Hub. | Once approved, start building with $100 credit and free-tier services for 12 months.
-### AWS Activate Credits
-- Provider: Amazon Web Services
-- Category: startup_program
-- Amount: Activate Founders (self-funded): start with $1,000, up to $5,000; Activate Portfolio (pre-Series B): up to $200,000; usable across AWS incl. Amazon Bedrock; extra AI-startup credits invite-only
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
-- Source: https://aws.amazon.com/startups/credits/
-- Page: https://freetokens.custats.info/offers/aws-activate-credits.html
-- Summary: AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.
-- Claim steps: Create/confirm an AWS account on the Paid Tier plan. | Founders (self-funded): apply directly at aws.amazon.com/startups/credits. Portfolio: apply with your Activate Provider's Org ID. | After approval, apply credits to eligible AWS usage including Amazon Bedrock.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
