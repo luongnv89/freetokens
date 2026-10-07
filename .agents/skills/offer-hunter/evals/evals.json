@@ -1,0 +1,104 @@
+{
+  "skill_name": "offer-hunter",
+  "evals": [
+    {
+      "id": 1,
+      "name": "report-only-coding-max-5",
+      "kind": "happy-path",
+      "prompt": "Find new free AI credit offers for coding tools and APIs, max 5, report only — don't open a PR.",
+      "expected_output": "Report-only branch: scouts run on x, reddit, and web; candidates are verified on official pages; shortlist.py selects at most 5 offers that clear the value floor; the run prints the render_pr.py report tables and changes no tracked file.",
+      "files": [],
+      "expectations": [
+        "The run executed scripts/catalog_snapshot.py and scripts/shortlist.py with --max 5",
+        "The final output prints at most 5 selected offers, each with an official source URL and a quote",
+        "Every selected offer's source_url is on the provider's own domain (not x.com, reddit.com, or news.ycombinator.com)",
+        "No selected offer is below $5 in credit or 100,000 tokens per month-equivalent",
+        "git status shows no change under offers/, index.json, or app/public/ after the run",
+        "No branch was created, nothing was committed, and no issue or PR was opened",
+        "The final output separates verified facts from leads (corroboration) and states that no approval is needed"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "publish-default-run",
+      "kind": "happy-path",
+      "prompt": "/offer-hunter",
+      "expected_output": "Publish branch: a feat/offer-hunt-<today> branch cut from origin/main, up to 10 offers written by write_offers.py, artifacts regenerated, validate_offers.py and check_scope.py passing, a tracking issue body and a PR body starting with 'Closes #<issue>', and a final report naming the PR and the decision to review and merge.",
+      "files": [],
+      "expectations": [
+        "The run synced with origin and created a branch named feat/offer-hunt-<today> from origin/main",
+        "Offer files were written only by scripts/write_offers.py (no hand-edited YAML)",
+        "python3 scripts/validate_offers.py exited 0 after the writes",
+        "scripts/check_scope.py printed OK scope on the staged diff",
+        "New offer YAMLs carry verification social_proof and review_status under-review",
+        "The PR body was produced by render_pr.py --mode pr and starts with 'Closes #'",
+        "The run did not merge the PR or push main",
+        "The final report names the PR and says merging it publishes the offers"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "this-week-reddit-and-x",
+      "kind": "happy-path",
+      "prompt": "Scout Reddit and X for free LLM API credits people posted this week and propose the best ones for the site, but just show me the shortlist first.",
+      "expected_output": "Report-only branch with a 7-day lead window: leads from the reddit and x channels (web channel may also run), official verification, a shortlist table plus a Not included table with reasons, and no writes.",
+      "files": [],
+      "expectations": [
+        "The run treated the request as report-only and wrote no files under offers/",
+        "Scouts were given a lead window of about 7 days",
+        "The output includes a Not included table with a reason per rejected candidate",
+        "Each selected offer cites an official page quote, not only a Reddit or X post"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "max-over-cap",
+      "kind": "edge",
+      "prompt": "/offer-hunter --max 25 report only",
+      "expected_output": "The run explains the cap is 10, uses --max 10, and continues in report-only mode without writes.",
+      "files": [],
+      "expectations": [
+        "The output states that at most 10 offers are allowed and that 10 was used",
+        "shortlist.py ran with --max 10 (never 25)",
+        "No files under offers/ were written"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "dirty-offers-tree",
+      "kind": "edge",
+      "prompt": "/offer-hunter (the working tree has an uncommitted edit to offers/cursor-hobby-plan.yaml)",
+      "expected_output": "Repo sync stashes and restores the edit, then the Publish branch stops before cutting a branch because tracked changes remain, naming offers/cursor-hobby-plan.yaml; nothing is committed or lost.",
+      "files": [],
+      "expectations": [
+        "The run stopped before creating the hunt branch",
+        "The output names offers/cursor-hobby-plan.yaml as the blocking change",
+        "The uncommitted edit is still present after the run"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "single-offer-screenshot",
+      "kind": "negative-trigger",
+      "prompt": "Here's a screenshot transcript: 'Cerebras now gives every new developer 2M free tokens a day.' Add it to the site.",
+      "expected_output": "The run does not hunt; it points to /offer-updater (or handles the single offer with that workflow).",
+      "files": [],
+      "expectations": [
+        "No scout workers were spawned and shortlist.py was not run",
+        "The output points to offer-updater for adding a single supplied offer"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "catalog-recheck",
+      "kind": "negative-trigger",
+      "prompt": "Re-verify every active offer in the catalog against its source and fix stale ones.",
+      "expected_output": "The run does not hunt for new offers; it points to /daily-offer-check.",
+      "files": [],
+      "expectations": [
+        "No offer-hunter scripts were run",
+        "The output points to daily-offer-check"
+      ]
+    }
+  ]
+}
