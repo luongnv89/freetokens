@@ -1,0 +1,35 @@
+{
+  "summary": "Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. Starter credits do not require a credit card or upfront paid subscription. Paid workspace plans start at $50/month after the free credits. No enrollment deadline or starter-credit expiration is stated on the loaded official pages.",
+  "claim_steps": [
+    "Create a Viktor account.",
+    "Join your team or add Viktor to Slack or Microsoft Teams.",
+    "Finish the setup wizard."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://viktor.com/pricing",
+      "title": "Pricing | Viktor",
+      "text": "$100 in credits, no credit card required. Use them however you want. When they're gone, pick a plan."
+    },
+    {
+      "type": "link",
+      "url": "https://viktor.com/",
+      "title": "Viktor | Not a tool. A hire.",
+      "text": "Every feature. Every integration. $100 in credits on the house. No credit card, no sales call, no catch. When you need more,it starts $50/month."
+    },
+    {
+      "type": "link",
+      "url": "https://viktor.com/docs",
+      "title": "Viktor Docs: Guides, Admin and Developer API",
+      "text": "Create your Viktor account, join your team or add Viktor to Slack or Microsoft Teams, and finish the setup wizard."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/dr_cintas/status/2106027763106713694",
+      "author": "Alvaro Cintas",
+      "text": "Most AI tells you what to do. Viktor does it. Hire @viktor_com for your team. $100 in credits included, no card. Full link in first comment. Paid partnership",
+      "handle": "@dr_cintas"
+    }
+  ]
+}

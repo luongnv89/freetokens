@@ -1,0 +1,34 @@
+{
+  "summary": "Official sources accessed 2026-10-07. One application covers the consolidated Databricks and Neon program. Benefits include conditional credits, hands-on technical guidance and go-to-market support. Enrollment deadline, credit-use expiry, payment-card conditions and existing-paid-customer exclusions are not stated in the loaded program pages. General Databricks documentation confirms account signup is necessary for users without an account; this does not establish the startup application itself requires a login.",
+  "claim_steps": [
+    "Apply to the Databricks Startup Program from its official program page.",
+    "Databricks reviews the application and gets back to the applicant."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.databricks.com/product/startups",
+      "title": "Databricks for startups",
+      "text": "Qualifying startups can receive up to $200K in credits for Databricks and Neon. Not sure if you qualify? Apply or ask your investor"
+    },
+    {
+      "type": "link",
+      "url": "https://www.databricks.com/blog/announcing-new-databricks-startup-program",
+      "title": "Announcing the new Databricks Startup Program",
+      "text": "This program is purpose-built for early-stage, venture-backed startups. We’re especially looking to support founders who have recently raised institutional funding (pre-seed through Series A) and are building their company on data and AI."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.databricks.com/aws/en/getting-started/",
+      "title": "Get started tutorials on Databricks | Databricks on AWS",
+      "text": "If you do not have a Databricks account, sign up for a free trial."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/databricks/status/2069437158939648163",
+      "author": "Databricks",
+      "text": "We're launching a new Databricks Startup Program! Qualifying venture-backed startups can now receive up to $200K in credits across Databricks and @neondatabase, giving founders access to the app backend, data, and AI stack they need to go from idea to product-market fit.",
+      "handle": "@databricks"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "summary": "New accounts receive $10 in free credits, or $20 with a work email. The free signup grant does not require a card. One shared balance covers Search, Answer, Contents and DeepResearch; official documentation says the free trial includes every source. After the trial, specialised datasets have plan-dependent access, pay-as-you-go top-ups have a $10 minimum, and overage is billed at the applicable plan rates. No enrollment deadline or free-grant validity duration is stated in the loaded pages.",
+  "claim_steps": [
+    "Sign up for a new Valyu account; use a work email for the officially stated $20 grant instead of $10.",
+    "Use the free balance to try the APIs and source catalog; no card is required for the signup grant."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.valyu.ai/pricing",
+      "title": "Pricing | Valyu",
+      "text": "New accounts get **$10 in free credits** ($20 with a work email), usable across **every source** so you can try the full catalog first."
+    },
+    {
+      "type": "link",
+      "url": "https://www.valyu.ai/pricing",
+      "title": "Pricing | Usage-based search and research APIs | Valyu",
+      "text": "Free Get: $10 free credits on signup (No card required)"
+    },
+    {
+      "type": "link",
+      "url": "https://www.valyu.ai/blogs/jev-vs-decisions-api",
+      "title": "Jev vs OpenAI Decisions API: What to Expect (2026)",
+      "text": "Valyu's pricing page currently lists $10 in free credits for new accounts ($20 with a work email); check source entitlements before running the clinical-trials or other subscription datasets."
+    }
+  ]
+}

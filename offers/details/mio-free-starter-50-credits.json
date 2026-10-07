@@ -1,0 +1,23 @@
+{
+  "summary": "Mio's current public Free plan supplies the first $50 of work at $0 to start, without a credit card. It handles meeting prep, briefs and website fixes, including preparing code changes as pull requests. The homepage's free-start links point to https://app.mio.xyz/auth/sign-up, establishing account signup. Paid Team plans start from $50/month after trying the product. The loaded official pages state neither a first-100-companies restriction nor an enrollment deadline. The older $100 beta amount is not presented as currently claimable.",
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.mio.xyz/pricing",
+      "title": "Pricing - Mio",
+      "text": "Free. Try Mio on real work. **$0**to start. Your first $50 of work is on us. Start with $50 on us. Give Mio a real job. Choose a plan when you’re ready. Get started for freeNo credit card. No sales call."
+    },
+    {
+      "type": "link",
+      "url": "https://www.mio.xyz/",
+      "title": "Slack-Native AI Coworker - Mio",
+      "text": "Free to start · install in 30 seconds"
+    },
+    {
+      "type": "link",
+      "url": "https://www.mio.xyz/faq",
+      "title": "FAQ - Mio",
+      "text": "Mio is a Slack-native AI employee that already knows your company. Mention @mio with what you need and it assembles the work across your connected tools, drafts it, and waits for your approval. Install it in about 30 seconds from app.mio.xyz."
+    }
+  ]
+}

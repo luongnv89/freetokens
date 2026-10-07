@@ -1,0 +1,23 @@
+{
+  "summary": "Official pages accessed 2026-10-07. Claim once while signed in to the intended ChatGPT account after SheerID enrollment verification. Previous student-promotion participation does not itself exclude eligibility. Apple App Store and Google Play subscriptions are excluded while store-billed. Cancellation retains access through the current billing period but forfeits remaining promotional months when it takes effect. This is a subscription promotion, not API or Codex credit.",
+  "claim_steps": [
+    "Open the official Back to School offer page in a web or mobile web browser.",
+    "Sign in to the ChatGPT account where the offer should apply.",
+    "Verify current enrollment through SheerID.",
+    "Return to the offer flow and complete activation with a valid payment method."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://chatgpt.com/students/2026/",
+      "title": "ChatGPT for students - 4 months free",
+      "text": "# Study. Build. Launch. Get 4 months of ChatGPT Work on us. An $80 value for eligible U.S. college students. Claim by October 31."
+    },
+    {
+      "type": "link",
+      "url": "https://help.openai.com/en/articles/20001493-chatgpt-back-to-school-offer-for-students",
+      "title": "ChatGPT Back to School offer for students | OpenAI Help Center",
+      "text": "A valid payment method is required to activate the offer. You will not be charged for the four free monthly billing periods. After the promotional period, the subscription renews at $20 per month unless you cancel. * Claim the offer by October 31, 2026."
+    }
+  ]
+}
