@@ -2,11 +2,109 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-07T03:11:35Z — 172 of 202 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-07T13:35:15Z — 172 of 212 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Viktor — $100 Free Starter Credits
+- Provider: Viktor
+- Category: coding
+- Amount: $100 in free starter credits for Viktor's AI coworker; no credit card required; choose a paid plan only when the credits are used up
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://viktor.com/pricing
+- Page: https://freetokens.custats.info/offers/viktor-free-starter-100-credits.html
+- Summary: Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. Starter credits do not require a credit card or upfront paid subscription. Paid workspace plans start at $50/month after the free credits. No enrollment deadline or starter-credit expiration is stated on the loaded official pages.
+- Claim steps: Create a Viktor account. | Join your team or add Viktor to Slack or Microsoft Teams. | Finish the setup wizard.
+### Valyu — $10 Free API Credits ($20 with a Work Email)
+- Provider: Valyu
+- Category: api_provider
+- Amount: $10 free credits for new accounts ($20 with a work email), usable across Search, Answer, Contents, DeepResearch and every source during the free trial; no card required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.valyu.ai/pricing
+- Page: https://freetokens.custats.info/offers/valyu-new-account-search-credits.html
+- Summary: New accounts receive $10 in free credits, or $20 with a work email. The free signup grant does not require a card. One shared balance covers Search, Answer, Contents and DeepResearch; official documentation says the free trial includes every source. After the trial, specialised datasets have plan-dependent access, pay-as-you-go top-ups have a $10 minimum, and overage is billed at the applicable plan rates. No enrollment deadline or free-grant validity duration is stated in the loaded pages.
+- Claim steps: Sign up for a new Valyu account; use a work email for the officially stated $20 grant instead of $10. | Use the free balance to try the APIs and source catalog; no card is required for the signup grant.
+### Upstage Console — $10 Free Solar API Credits
+- Provider: Upstage
+- Category: api_provider
+- Amount: $10 in free credits automatically on Upstage Console signup, usable to test all Upstage APIs including Solar Pro 2; credit-validity duration not published on the loaded official pages
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.upstage.ai/blog/en/guide-1-upstage-console-api
+- Page: https://freetokens.custats.info/offers/upstage-solar-api-10-free-credits.html
+- Summary: Upstage's official Solar Pro 2 guide says new Console signups automatically receive $10 in free credits, usable for all Upstage APIs. A default API key is generated upon signup. Neither an enrollment deadline nor a three-month credit-validity period is stated on the loaded official pages. Whether the free grant requires a card is unknown; the pricing page's card information concerns paid credit purchases and is not evidence of free-grant eligibility. Paid credit usage can continue with charges to a registered payment method after credits run out. This grant is distinct from institutional free access and Studio agent free runs.
+- Claim steps: Create an Upstage Console account using the Log in control; the official guide says $10 in free credits is granted automatically. | On the Getting Started page, copy the default API key generated upon signup to test the APIs.
+### OpenAI ChatGPT for Teachers — Free for U.S. K–12 Educators
+- Provider: OpenAI
+- Category: coding
+- Amount: Free ChatGPT for Teachers with unlimited GPT-5.1 Auto messages through June 2028 for verified teachers, staff, school leaders and district administrators employed by accredited U.S. K–12 schools or districts; not for students
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openai.com/index/chatgpt-for-teachers/
+- Page: https://freetokens.custats.info/offers/openai-chatgpt-for-teachers.html
+- Summary: Official sources accessed 2026-10-07 confirm educator-only eligibility, school/district-email verification and workspace onboarding. The free-service period runs through June 2028, but no exact enrollment deadline is stated, so expiry_date remains null. Payment-card requirements are not stated in the loaded pages. This is workspace access, not API credits. Unlimited applies to GPT-5.1 Auto messages, not every tool or feature.
+- Claim steps: Start educator verification at chatgpt.com/k12-verification using your school or district email address. | After verification, create a workspace or join an existing workspace tied to your district domain. | Follow educator onboarding prompts to set your role, subjects and grade levels.
+### OpenAI ChatGPT Back to School 2026 — Four Free Months of Plus
+- Provider: OpenAI
+- Category: student
+- Amount: 4 free months of ChatGPT Plus incl. Work ($80 value); SheerID-verified full-/part-time college/graduate students at eligible U.S. degree-granting institutions; payment method required; renews $20/mo unless canceled; new/direct-billed monthly Plus users eligible, store-billed users excluded
+- Status: active — enrollment deadline: 2026-10-31
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://chatgpt.com/students/2026/
+- Page: https://freetokens.custats.info/offers/openai-chatgpt-back-to-school-2026.html
+- Summary: Official pages accessed 2026-10-07. Claim once while signed in to the intended ChatGPT account after SheerID enrollment verification. Previous student-promotion participation does not itself exclude eligibility. Apple App Store and Google Play subscriptions are excluded while store-billed. Cancellation retains access through the current billing period but forfeits remaining promotional months when it takes effect. This is a subscription promotion, not API or Codex credit.
+- Claim steps: Open the official Back to School offer page in a web or mobile web browser. | Sign in to the ChatGPT account where the offer should apply. | Verify current enrollment through SheerID. | Return to the offer flow and complete activation with a valid payment method.
+### Mio — $50 Free Starter Credits
+- Provider: Mio
+- Category: coding
+- Amount: $50 in free work credits on Mio's $0 Free plan; no credit card required; choose a monthly budget after trying Mio
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.mio.xyz/pricing
+- Page: https://freetokens.custats.info/offers/mio-free-starter-50-credits.html
+- Summary: Mio's current public Free plan supplies the first $50 of work at $0 to start, without a credit card. It handles meeting prep, briefs and website fixes, including preparing code changes as pull requests. The homepage's free-start links point to https://app.mio.xyz/auth/sign-up, establishing account signup. Paid Team plans start from $50/month after trying the product. The loaded official pages state neither a first-100-companies restriction nor an enrollment deadline. The older $100 beta amount is not presented as currently claimable.
+### GitHub Copilot Pro — Free for Teachers and OSS Maintainers
+- Provider: GitHub
+- Category: coding
+- Amount: Free Copilot Pro for verified GitHub Education teachers and eligible maintainers of popular open-source repositories; 1,500 GitHub AI Credits/month (1,000 base + 500 variable flex, $15 at the official $0.01/credit rate); eligibility reevaluated monthly
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-teachers-and-os-maintainers
+- Page: https://freetokens.custats.info/offers/github-copilot-pro-teachers-oss-maintainers.html
+- Summary: Official pages checked on 2026-10-07. The old eligibility URL redirects to the cited teachers-and-maintainers URL on docs.github.com. Teachers must be verified through GitHub Education; maintainers must be eligible based on a popular open-source repository. Eligibility is reevaluated monthly. The settings-based flow requires a GitHub account and does not state a paid-plan prerequisite or explicit card requirement. Free eligible users cannot cancel their granted plan through the usual cancellation flow. Base allowance is 1,000 monthly credits; the current 500-credit flex allowance is variable. Included credits expire monthly, with optional paid additional usage separate from the free grant. No official enrollment deadline is stated. Dollar valuation uses the explicit AI-credit rate, not Copilot subscription price. Token allowance is unspecified and access is not unlimited.
+- Claim steps: Become a verified GitHub Education teacher, or check eligibility as a maintainer of a popular open-source repository. | From your GitHub profile menu, open Copilot settings. | If the GitHub Copilot Pro page shows free-access eligibility, click Get access to GitHub Copilot. | Configure Copilot use policies, then click Save and complete.
+### Databricks Startup Program — Up to $200K Credits
+- Provider: Databricks
+- Category: startup_program
+- Amount: Up to $200,000 in combined Databricks and Neon credits for qualifying early-stage venture-backed startups, especially those with institutional pre-seed through Series A funding; application and approval required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.databricks.com/product/startups
+- Page: https://freetokens.custats.info/offers/databricks-startup-program-200k-credits.html
+- Summary: Official sources accessed 2026-10-07. One application covers the consolidated Databricks and Neon program. Benefits include conditional credits, hands-on technical guidance and go-to-market support. Enrollment deadline, credit-use expiry, payment-card conditions and existing-paid-customer exclusions are not stated in the loaded program pages. General Databricks documentation confirms account signup is necessary for users without an account; this does not establish the startup application itself requires a login.
+- Claim steps: Apply to the Databricks Startup Program from its official program page. | Databricks reviews the application and gets back to the applicant.
+### Codiv OpenJev — 100M Free Input Tokens
+- Provider: Codiv.ai
+- Category: api_provider
+- Amount: 100M System One input tokens per account, plus 10M text-generation tokens, during the free public experiment; no credit card required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://codiv.ai
+- Page: https://freetokens.custats.info/offers/codiv-openjev-free-api-tokens.html
+- Summary: Codiv serves OpenJev through a Jev-compatible API. The free public experiment supplies 100M input tokens per account and a separate 10M text-generation-token allowance, with 60 requests per minute per key. Signup is required; no credit card or paid plan is required. No enrollment end date is stated on the loaded official pages.
+- Claim steps: Sign up with Google, GitHub or email. | Open the dashboard and create an API key. | Call the Codiv API using the official quickstart.
+### Baidu AI Studio — 1 Million Free Tokens
+- Provider: Baidu
+- Category: api_provider
+- Amount: 1,000,000 free Tokens per developer for AI Studio LLM API services; token consumption varies by model
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://ai.baidu.com/ai-doc/AISTUDIO/Mmhslv9lf
+- Page: https://freetokens.custats.info/offers/baidu-ai-studio-1m-free-tokens.html
+- Summary: Baidu's official documentation describes OpenAI-compatible AI Studio LLM API services, including ERNIE and other models. API calls require an AI Studio user's access token, available in the personal center. Each developer receives a free quota of 1 million Tokens; model-dependent consumption applies, and additional Tokens can be purchased after the free balance is used. Enrollment deadline, credit-validity duration, renewal schedule, and card requirement are not stated in the loaded documentation. The lead's PaddlePaddle wording is not independently confirmed by this LLM API page. No account or claim flow was entered.
 ### Vercel for Startups — Up to $30K Platform Credits
 - Provider: Vercel
 - Category: startup_program
@@ -1626,106 +1724,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/cartesia-free-plan.html
 - Summary: Cartesia's $0 Free plan includes 20,000 credits per month covering Sonic text-to-speech (about 27 minutes) and Ink speech-to-text (about 1h51m), plus one voice agent slot and unlimited workspace seats - no card required to start.
 - Claim steps: Open cartesia.ai/pricing and choose the Free plan ('Start free'). | Sign up at play.cartesia.ai - no credit card required. | Generate speech with Sonic or transcribe with Ink from the playground or API. | Stay within the 20K monthly credits; they reset each month.
-### CAMB.AI Startup Grants
-- Provider: CAMB.AI
-- Category: startup_program
-- Amount: 33M characters of MARS Text-to-Speech API credits plus direct engineering support
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.camb.ai/startup-grants
-- Page: https://freetokens.custats.info/offers/camb-ai-startup-grants.html
-- Summary: CAMB.AI Startup Grants give approved early-stage startups 33M characters of credits for the MARS Text-to-Speech APIs plus direct access to the CAMB.AI engineering team. Eligibility: pre-seed through Series A, founded within the last 5 years, under $5M raised, building a product that uses voice, speech, or localization AI, and no previous CAMB.AI program credits.
-- Claim steps: Fill out the application form at camb.ai/startup-grants with company details and what you are building. | CAMB.AI reviews the submission and replies; approved teams receive credits and an onboarding call with engineering.
-### BytePlus ModelArk — Free-Token Campaign
-- Provider: BytePlus
-- Category: api_provider
-- Amount: Free-token package per eligible model (e.g. 500,000 tokens/model; actual amount shown on the Model Activation page); requires BytePlus account + enterprise info submission
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.byteplus.com/en/docs/legal/termsandconditions_modelark_free-token_campaign
-- Page: https://freetokens.custats.info/offers/byteplus-modelark-free-tokens.html
-- Summary: BytePlus's ModelArk Free-Token Campaign grants a free-token resource package per eligible model — the terms cite 500,000 tokens per model as an example, with the actual amount shown on the Model Activation page. Eligibility requires completing BytePlus account registration and submitting enterprise information; the package is redeemable once per account and may carry a validity period visible in the Billing Center. Packages offset post-paid token consumption in the ModelArk Playground or after model-service activation.
-- Claim steps: Register a BytePlus account and submit the required enterprise information. | Open the ModelArk Model Activation page to see the free-token package granted per eligible model. | Consume the package in the ModelArk Playground or activate the model service; once a model's package is exhausted, continued use is billed post-paid.
-### BytePlus AI Startups Accelerator
-- Provider: BytePlus
-- Category: startup_program
-- Amount: Up to $100,000 in cloud coupons + $6.5K voice AI credits + 10B+ LLM tokens + $137K+ cloud subsidies + workshops
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.byteplus.com/en/contact-us/vstart
-- Page: https://freetokens.custats.info/offers/byteplus-ai-startups-accelerator.html
-- Summary: The BytePlus AI Startups Accelerator (V-Start) offers up to $100,000 USD in cloud coupons plus a voice/LLM credit package: $6.5K in voice AI model credits and 10B+ tokens in LLM credits, $137K+ in cloud resource subsidies, and 5+ AI-powered workshops. Open to startups in round D and before (<= Series D) with technical innovation in AI, enterprise services, e-commerce, mass consumption, Web3, VR/AR, etc. Approval is discretionary after application review.
-- Claim steps: Apply via the form at https://www.byteplus.com/en/contact-us/vstart with company and funding-round details. | Eligibility: startups in round D or earlier, in a focus sector (AI, enterprise services, e-commerce, Web3, VR/AR...). | Benefits are granted on approval: up to $100K cloud coupons, $6.5K voice AI credits, 10B+ LLM tokens, $137K+ resource subsidies.
-### Browser Use — $1 Signup Credit
-- Provider: Browser Use
-- Category: api_provider
-- Amount: $1 free credit for eligible signups (once per person for eligible Google, GitHub or Microsoft signups; no card required)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://browser-use.com/pricing
-- Page: https://freetokens.custats.info/offers/browser-use-15-signup-credit.html
-- Summary: Browser Use advertises $1 in free credits once per person for eligible Google, GitHub or Microsoft signups; no card required. Credits can pay for browser time ($0.02/hour, plus proxy traffic) and Browser Use Agents (model cost + 20% service fee). Top-ups start at $5; no subscription.
-- Claim steps: Sign up at https://browser-use.com using Google, GitHub or Microsoft; the $1 free credit is once per person and requires no card. | Check your dashboard for the advertised $1 free credit if eligible. | Use any awarded credits for browser time or agent runs; verify expiration in the account.
-### Bing Image Creator
-- Provider: Microsoft Bing
-- Category: image
-- Amount: Free image generation with a Microsoft account - 15 fast creations/day plus standard speed
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://www.microsoft.com/en-us/bing/features/bing-image-creator
-- Page: https://freetokens.custats.info/offers/bing-image-creator.html
-- Summary: Bing Image Creator is free for everyone with a personal Microsoft account, offering image generation with Microsoft MAI-Image, GPT-Image, and DALL-E-class models. You get 15 fast creations per day plus slower standard-speed generations.
-- Claim steps: Visit bing.com/create or the Bing Image Creator feature page. | Sign in with a personal Microsoft account (work/school Entra accounts are not supported). | Enter a prompt and press Create; each generation uses one of your daily creations. | Return daily - the 15 fast creations replenish every day.
-### BazaarLink Free LLM API
-- Provider: BazaarLink
-- Category: api_provider
-- Amount: Free OpenAI-compatible API — 2 free models, 10 RPM + 60 weighted units/day shared (20 RPM + 120/day with credit), no credit card
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://bazaarlink.ai/free
-- Page: https://freetokens.custats.info/offers/bazaarlink-free-llm-api.html
-- Summary: BazaarLink's free tier is an OpenAI-compatible LLM gateway with 2 enabled free models — qwen/qwen3.7-flash and deepseek/deepseek-v4-flash-0731free. Shared account allowance: 10 RPM + 60 weighted units/day without credit, 20 RPM + 120 weighted units/day with credit; counters reset at 00:00 UTC. No credit card required; 2 concurrent free requests per account.
-- Claim steps: Sign up at bazaarlink.ai and create an API key — no credit card. | Set base_url to https://api.bazaarlink.ai/v1 in any OpenAI SDK. | Call one of the enabled free model ids, e.g. qwen/qwen3.7-flash; shared limits reset daily at 00:00 UTC.
-### Baseten starting credits for new workspaces
-- Provider: Baseten
-- Category: api_provider
-- Amount: Starting credits for new workspaces (amount not published)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.baseten.co/organization/billing
-- Page: https://freetokens.custats.info/offers/baseten-starting-credits.html
-- Summary: Baseten's official billing documentation states that every new workspace automatically receives starting credits for testing and deployment, applied to invoices before any payment method is charged — no redemption step. The docs explicitly note there is no separate free tier or perpetual free plan, and usage beyond the starting credits is billed at standard per-minute instance pricing. The credit balance is visible on the billing dashboard. Neither the docs nor the pricing FAQ publishes the exact credit amount, so it is reported as unpublished. The offer is ongoing with no stated end date.
-- Claim steps: Sign up for a new Baseten workspace at app.baseten.co (account required). | Credits are applied automatically — per the docs, 'you do not need to redeem them.' | Use credits for testing and deployment; usage is billed per-minute and deducted from credits first. | Check your current credit balance and remaining amount on the billing dashboard. | If credits don't appear after signup, or you need more for a proof of concept, contact Baseten via the link in the billing docs.
-### Baseten AI Startup Program — up to $27.5K
-- Provider: Baseten
-- Category: startup_program
-- Amount: Up to $25,000 for Dedicated Inference or Training plus up to $2,500 for Model APIs
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://www.baseten.co/startup-program/
-- Page: https://freetokens.custats.info/offers/baseten-ai-startup-program.html
-- Summary: Baseten's AI Startup Program offers accepted, net-new AI-first early-stage startups up to $25,000 in credits for Dedicated Inference or Training and up to $2,500 for Model APIs. Eligibility is selective: the program targets Seed-to-Series-A startups operating for less than five years, and applicants must not have previously received Baseten credits.
-- Claim steps: Confirm that the startup is AI-first, at Seed to Series A, and has operated for less than five years. | Confirm that the company is a net-new Baseten customer and has not previously received Baseten credits. | Apply through Baseten's AI Startup Program page and wait for acceptance.
-### Azure Free Account
-- Provider: Microsoft Azure
-- Category: api_provider
-- Amount: $200 credit for 30 days plus always-free and 12-month free-service amounts for new customers
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://azure.microsoft.com/en-us/free/
-- Page: https://freetokens.custats.info/offers/azure-free-account.html
-- Summary: New Azure customers can create a free account with a $200 credit to use on Azure services within 30 days, plus monthly free amounts of popular services for 12 months and always-free services. Microsoft states the credit card is used for verification and will not be charged for the trial (a temporary authorization may apply). After 30 days or when the credit is exhausted, you must move to pay-as-you-go to keep using services. Distinct from Azure for Students.
-- Claim steps: Sign up at azure.microsoft.com/en-us/free/ as a new Azure customer. | Complete identity verification (phone and typically a credit/debit card; Microsoft says the card is not charged for the trial aside from a possible temporary authorization). | Use the $200 credit within 30 days, plus listed free-service amounts. | Upgrade to pay-as-you-go before the credit or 30-day window ends if you need to keep running workloads.
-### Azure for Students — $100 Credit + Free Services
-- Provider: Microsoft Azure
-- Category: student
-- Amount: $100 Azure credits for 12 months + 25+ free services (no credit card required)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://azure.microsoft.com/en-us/free/students
-- Page: https://freetokens.custats.info/offers/azure-for-students.html
-- Summary: Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.
-- Claim steps: Go to https://azure.microsoft.com/en-us/free/students and click Activate. | Sign in with your school email and complete student verification via the Azure Education Hub. | Once approved, start building with $100 credit and free-tier services for 12 months.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

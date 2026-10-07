@@ -1,0 +1,34 @@
+{
+  "summary": "Official sources accessed 2026-10-07 confirm educator-only eligibility, school/district-email verification and workspace onboarding. The free-service period runs through June 2028, but no exact enrollment deadline is stated, so expiry_date remains null. Payment-card requirements are not stated in the loaded pages. This is workspace access, not API credits. Unlimited applies to GPT-5.1 Auto messages, not every tool or feature.",
+  "claim_steps": [
+    "Start educator verification at chatgpt.com/k12-verification using your school or district email address.",
+    "After verification, create a workspace or join an existing workspace tied to your district domain.",
+    "Follow educator onboarding prompts to set your role, subjects and grade levels."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openai.com/index/chatgpt-for-teachers/",
+      "title": "A free version of ChatGPT built for teachers",
+      "text": "ChatGPT for Teachers brings the most helpful tools in ChatGPT—like unlimited messages with GPT‑5.1 Auto, search, file uploads, connectors, and image generation—into a workspace where teachers can securely work with classroom materials and student information, collaborate with colleagues, and learn from other educators."
+    },
+    {
+      "type": "link",
+      "url": "https://help.openai.com/en/articles/12844995-chatgpt-for-teachers",
+      "title": "ChatGPT for Teachers | OpenAI Help Center",
+      "text": "ChatGPT for Teachers is free for verified U.S. K–12 educators through **June 2028**. You are eligible if you: * Work for an **accredited U.S. K–12 school or district**, and * Are a **teacher, staff member, school leader, or district administrator**"
+    },
+    {
+      "type": "link",
+      "url": "https://openai.com/index/bringing-chatgpt-for-teachers-to-more-us-school-districts/",
+      "title": "Bringing ChatGPT for Teachers to more U.S. school districts",
+      "text": "ChatGPT for Teachers remains a free tool for verified U.S. K–12 educators through June 2028."
+    },
+    {
+      "type": "link",
+      "url": "https://felloai.com/ai-deals/",
+      "title": "AI Deals 2026: Every Way to Save on AI Tools That Works",
+      "text": "Eligible universities can enroll in ChatGPT Edu, and verified US K–12 teachers get ChatGPT for Teachers free through June 2028."
+    }
+  ]
+}

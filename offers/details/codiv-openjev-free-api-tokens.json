@@ -1,0 +1,29 @@
+{
+  "summary": "Codiv serves OpenJev through a Jev-compatible API. The free public experiment supplies 100M input tokens per account and a separate 10M text-generation-token allowance, with 60 requests per minute per key. Signup is required; no credit card or paid plan is required. No enrollment end date is stated on the loaded official pages.",
+  "claim_steps": [
+    "Sign up with Google, GitHub or email.",
+    "Open the dashboard and create an API key.",
+    "Call the Codiv API using the official quickstart."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://codiv.ai",
+      "title": "Codiv",
+      "text": "100M input tokens for every account while the experiment runs. No card required. Free public experiment. Free. Available now. $0. No card required. 100M System One tokens per account. 10M text-generation tokens. All models, including OpenJev. 60 requests per minute per key."
+    },
+    {
+      "type": "link",
+      "url": "https://codiv.ai/docs/quickstart",
+      "title": "Codiv",
+      "text": "Sign up with Google, GitHub or email, then open the dashboard and create a key. Every account starts with **100M free input tokens**."
+    },
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1wjlyzr/still_on_the_jev_waitlist_i_hosted_openjev_its/",
+      "author": "Every-Comment5473",
+      "text": "Free hosted API: [https://codiv.ai](https://codiv.ai) (100M tokens per account, no card) Your prompts and answers are **not stored**, only token counts for your quota. It runs on my RTX PRO 6000, which just got promoted to \"production infrastructure\" overnight!",
+      "community": "r/LocalLLaMA"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "summary": "Baidu's official documentation describes OpenAI-compatible AI Studio LLM API services, including ERNIE and other models. API calls require an AI Studio user's access token, available in the personal center. Each developer receives a free quota of 1 million Tokens; model-dependent consumption applies, and additional Tokens can be purchased after the free balance is used. Enrollment deadline, credit-validity duration, renewal schedule, and card requirement are not stated in the loaded documentation. The lead's PaddlePaddle wording is not independently confirmed by this LLM API page. No account or claim flow was entered.",
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://ai.baidu.com/ai-doc/AISTUDIO/Mmhslv9lf",
+      "title": "LLM_API",
+      "text": "AI Studio provides each developer with a free quota of 1 million Tokens. Developers will be charged a different number of Tokens for using different models. You can check the Token Management to view the usage details. If Tokens are used up, you can Buy Tokens before using again."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/ErnieforDevs/status/1996866892875944305",
+      "author": "ERNIE for Developers",
+      "text": "You can now register to Baidu AI Studio through the link below, and claim 1M free tokens to start building and experimenting with ERNIE & PaddlePaddle & more models.",
+      "handle": "@ErnieforDevs"
+    }
+  ]
+}

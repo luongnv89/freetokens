@@ -1,0 +1,21 @@
+{
+  "summary": "Upstage's official Solar Pro 2 guide says new Console signups automatically receive $10 in free credits, usable for all Upstage APIs. A default API key is generated upon signup. Neither an enrollment deadline nor a three-month credit-validity period is stated on the loaded official pages. Whether the free grant requires a card is unknown; the pricing page's card information concerns paid credit purchases and is not evidence of free-grant eligibility. Paid credit usage can continue with charges to a registered payment method after credits run out. This grant is distinct from institutional free access and Studio agent free runs.",
+  "claim_steps": [
+    "Create an Upstage Console account using the Log in control; the official guide says $10 in free credits is granted automatically.",
+    "On the Getting Started page, copy the default API key generated upon signup to test the APIs."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/blog/en/guide-1-upstage-console-api",
+      "title": "Solar Pro 2 Introduces – “Call the Upstage Console API in Just 1 Minute”",
+      "text": "Visit the Upstage Console and sign up to receive **$10 in free credits** automatically. With these credits, you can test all Upstage APIs, including me!"
+    },
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/pricing/api",
+      "title": "Pricing | Upstage AI",
+      "text": "We provide eligible institutions with free access to Solar Pro (LLM) and Document Parse for up to one year — helping you explore and adopt AI without cost barriers."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "summary": "Official pages checked on 2026-10-07. The old eligibility URL redirects to the cited teachers-and-maintainers URL on docs.github.com. Teachers must be verified through GitHub Education; maintainers must be eligible based on a popular open-source repository. Eligibility is reevaluated monthly. The settings-based flow requires a GitHub account and does not state a paid-plan prerequisite or explicit card requirement. Free eligible users cannot cancel their granted plan through the usual cancellation flow. Base allowance is 1,000 monthly credits; the current 500-credit flex allowance is variable. Included credits expire monthly, with optional paid additional usage separate from the free grant. No official enrollment deadline is stated. Dollar valuation uses the explicit AI-credit rate, not Copilot subscription price. Token allowance is unspecified and access is not unlimited.",
+  "claim_steps": [
+    "Become a verified GitHub Education teacher, or check eligibility as a maintainer of a popular open-source repository.",
+    "From your GitHub profile menu, open Copilot settings.",
+    "If the GitHub Copilot Pro page shows free-access eligibility, click Get access to GitHub Copilot.",
+    "Configure Copilot use policies, then click Save and complete."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-teachers-and-os-maintainers",
+      "title": "Access Copilot Pro for free as a teacher or open source maintainer - GitHub Docs",
+      "text": "There are two ways to qualify for free access to Copilot Pro: As a verified teacher on GitHub Education. As a maintainer of a popular open-source repository. GitHub reevaluates your eligibility every month."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.github.com/en/copilot/get-started/plans",
+      "title": "Plans for GitHub Copilot - GitHub Docs",
+      "text": "| Plan | Price per month | Base credits | Flex allotment | Total monthly AI credits | | Copilot Pro | $10 USD | 1,000 | 500 | 1,500 |"
+    },
+    {
+      "type": "link",
+      "url": "https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing",
+      "title": "Usage-based billing for individuals - GitHub Docs",
+      "text": "This total is converted into AI credits (1 AI credit = $0.01 USD). Included AI credits do not carry over between months. Unused credits are forfeited, and your allowance resets to the full monthly amount at 00:00:00 UTC on the first day of each calendar month."
+    },
+    {
+      "type": "link",
+      "url": "https://felloai.com/ai-deals/",
+      "title": "AI Deals 2026: Every Way to Save on AI Tools That Works",
+      "text": "Verified teachers and maintainers of popular open-source projects may qualify for Copilot Pro free instead."
+    }
+  ]
+}

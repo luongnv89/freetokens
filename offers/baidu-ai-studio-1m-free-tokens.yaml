@@ -1,0 +1,13 @@
+# Hunted 2026-10-07 by offer-hunter; verified against https://ai.baidu.com/ai-doc/AISTUDIO/Mmhslv9lf
+# ("AI Studio provides each developer with a free quota of 1 million Tokens. Developers will be charged a different number of Tokens for using different models.")
+# Lead: https://x.com/ErnieforDevs/status/1996866892875944305
+title: Baidu AI Studio — 1 Million Free Tokens
+provider: Baidu
+category: api_provider
+amount: 1,000,000 free Tokens per developer for AI Studio LLM API services; token consumption varies by model
+expiry_date: null
+source_url: https://ai.baidu.com/ai-doc/AISTUDIO/Mmhslv9lf
+verified_date: 2026-10-07
+verification: social_proof
+review_status: under-review
+signup: required
