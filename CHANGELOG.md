@@ -5,6 +5,24 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Home list ranked by a "Recommended" order by default:** the default
+  sort is now one weighted score per offer, with criteria weighted in
+  priority order: today's views (scaled against the day's most-viewed
+  offer, above the same 3-view floor the "Hot today" badge uses), a big-lab
+  provider (Anthropic, OpenAI, xAI, Google, Microsoft/GitHub, Amazon/AWS/Kiro,
+  OpenRouter, Meta, Mistral, NVIDIA, DeepSeek), category (coding, then API
+  providers, then the rest), how recently the offer was added (fading out
+  over 30 days), and a reviewed listing (a `to-be-verified` listing is
+  docked). An offer loses 10 points for each better-ranked offer from the
+  same provider, so one provider's many free-model listings cannot fill the
+  first page.
+  The free-text `amount` is still never ranked (#508). The prerender and
+  the home ItemList JSON-LD use the same order without view counts; on the
+  client, the list re-ranks once today's counts load. The old default is
+  still available as **Latest added** (`?sort=added`), and the WebMCP
+  `search_offers` tool accepts `added` too. The generated index now carries
+  each offer's git `added_date`, which the newness signal reads.
+
 - **Home list paginated, 20 offers per page (#548):** the listing now ships
   in pages of twenty rows with a numbered pager — Previous/Next steps plus
   a steady seven-slot window of page links — under the grid. Pages are real

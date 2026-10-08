@@ -378,6 +378,7 @@ export function buildIndex(offers, now = new Date(), addedDates = {}) {
       expiry_date: o.expiry_date,
       source_url: o.source_url,
       verified_date: o.verified_date,
+      added_date: addedOf(o) || null,
       verification: o.verification,
       review_status: o.review_status,
       signup: o.signup,

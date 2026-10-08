@@ -8,7 +8,10 @@
 // exist. Only orderings backed by a real, comparable value are offered. A
 // legacy `?sort=amount` URL (or a stored `ft-prefs` value) degrades to the
 // default order via normalizeSort.
-export const SORT_MODES = ["newest", "expiring"] as const;
+//
+// The empty value is the default "Recommended" ranking (src/lib/ranking.ts);
+// `added` is newest-added first, the build's index order.
+export const SORT_MODES = ["added", "newest", "expiring"] as const;
 export const DIMENSIONS = ["category", "verification", "signup"] as const;
 
 export type SortMode = (typeof SORT_MODES)[number];

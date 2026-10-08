@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { expect, test, type Page } from "@playwright/test";
+import { rankOffers } from "../src/lib/ranking";
+import type { Offer, OffersIndex } from "../src/types/offers-index";
 import "./http-preview";
 
 // Home offer-list pagination (#548): the listing renders PAGE_SIZE rows per
@@ -8,12 +10,15 @@ import "./http-preview";
 // refinement resets to the first page.
 
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
-const index = JSON.parse(
+const index: OffersIndex = JSON.parse(
   readFileSync(path.join(APP_ROOT, "src/data/offers.json"), "utf8"),
 );
-const active = index.offers
-  .filter((offer: { status: string }) => offer.status !== "expired")
-  .map((offer: { slug: string }) => offer.slug);
+// The default list is the Recommended ranking. http-preview answers
+// GoatCounter with an empty 204, so no hot counts ever reorder it here.
+const active = rankOffers(
+  index.offers.filter((offer: Offer) => offer.status !== "expired"),
+  { today: index.generated_at.slice(0, 10) },
+).map((offer) => offer.slug);
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {

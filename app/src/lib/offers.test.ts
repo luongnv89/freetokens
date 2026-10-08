@@ -169,6 +169,8 @@ describe("offerMatches", () => {
   });
 });
 
+const RANK = { today: "2026-08-24" };
+
 describe("applySort", () => {
   const rows = [
     offer({
@@ -195,7 +197,7 @@ describe("applySort", () => {
   ];
 
   it("puts dated expiries first (ascending) and null expiry last", () => {
-    expect(applySort(rows, "expiring").map((o) => o.slug)).toEqual([
+    expect(applySort(rows, "expiring", RANK).map((o) => o.slug)).toEqual([
       "c",
       "a",
       "b",
@@ -203,7 +205,7 @@ describe("applySort", () => {
   });
 
   it("orders newest by verified_date descending", () => {
-    expect(applySort(rows, "newest").map((o) => o.slug)).toEqual([
+    expect(applySort(rows, "newest", RANK).map((o) => o.slug)).toEqual([
       "b",
       "c",
       "a",
@@ -213,16 +215,17 @@ describe("applySort", () => {
   it("never ranks mixed allowance units as comparable cash amounts (#508)", () => {
     // The catalog's single free-text `amount` field mixes dollars, tokens,
     // credits and durations, so the legacy cross-unit "Largest amount" mode
-    // must degrade to index order rather than invent a cash equivalence from
-    // the first number. The old algorithm ranked this fixture
-    // tokens > credits > cash > year.
+    // must degrade to the default ranking — which never reads `amount`, so
+    // these otherwise-identical rows keep index order — rather than invent a
+    // cash equivalence from the first number. The old algorithm ranked this
+    // fixture tokens > credits > cash > year.
     const mixed = [
       offer({ slug: "cash", amount: "$300 in credits" }),
       offer({ slug: "tokens", amount: "300000 tokens/month" }),
       offer({ slug: "credits", amount: "1,000 one-time credits" }),
       offer({ slug: "year", amount: "1-year free access" }),
     ];
-    expect(applySort(mixed, "amount").map((o) => o.slug)).toEqual([
+    expect(applySort(mixed, "amount", RANK).map((o) => o.slug)).toEqual([
       "cash",
       "tokens",
       "credits",
@@ -230,13 +233,27 @@ describe("applySort", () => {
     ]);
   });
 
-  it("keeps original index order for empty or invalid sort", () => {
-    expect(applySort(rows, "").map((o) => o.slug)).toEqual(["a", "b", "c"]);
-    expect(applySort(rows, "bogus").map((o) => o.slug)).toEqual([
-      "a",
-      "b",
-      "c",
+  // Index order is the build's newest-added order; the default ranking lifts
+  // the big-lab coding offer over it.
+  const ranked = [
+    offer({ slug: "indie-image", provider: "Acme", category: "image" }),
+    offer({ slug: "lab-coding", provider: "OpenAI", category: "coding" }),
+  ];
+
+  it("keeps original index order for the 'added' sort", () => {
+    expect(applySort(ranked, "added", RANK).map((o) => o.slug)).toEqual([
+      "indie-image",
+      "lab-coding",
     ]);
+  });
+
+  it("uses the default ranking for an empty or invalid sort", () => {
+    for (const mode of ["", "bogus"]) {
+      expect(applySort(ranked, mode, RANK).map((o) => o.slug)).toEqual([
+        "lab-coding",
+        "indie-image",
+      ]);
+    }
   });
 });
 
@@ -265,7 +282,7 @@ describe("match+sort performance", () => {
       category: "coding",
     };
     const t0 = performance.now();
-    const matched = applySort(rows, state.sort).filter((row) =>
+    const matched = applySort(rows, state.sort, RANK).filter((row) =>
       offerMatches(row, state),
     );
     const elapsed = performance.now() - t0;

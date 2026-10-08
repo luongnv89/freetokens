@@ -16,6 +16,7 @@
 import {
   activeOffers,
   applySort,
+  buildDate,
   offerMatches,
   type Offer,
   type OffersIndex,
@@ -195,8 +196,8 @@ function buildTools(index: OffersIndex, navigate: Navigate): ModelContextTool[] 
       sort: {
         type: "string",
         description:
-          "Result order: 'newest' = recently checked first, 'expiring' = soonest expiry first.",
-        enum: ["newest", "expiring"],
+          "Result order. Omit for the recommended order (big labs, coding then API offers, newly added, and reviewed listings first); 'added' = latest added first, 'newest' = recently checked first, 'expiring' = soonest expiry first.",
+        enum: ["added", "newest", "expiring"],
       },
     },
     additionalProperties: false,
@@ -226,9 +227,9 @@ function buildTools(index: OffersIndex, navigate: Navigate): ModelContextTool[] 
       annotations: { untrustedContentHint: true },
       execute: async (input) => {
         const state = stateFromInput(input ?? {});
-        const matched = applySort(activeOffers(index), state.sort).filter(
-          (offer) => offerMatches(offer, state),
-        );
+        const matched = applySort(activeOffers(index), state.sort, {
+          today: buildDate(index.generated_at),
+        }).filter((offer) => offerMatches(offer, state));
         const serialized = serializeState(state);
         return {
           total: matched.length,

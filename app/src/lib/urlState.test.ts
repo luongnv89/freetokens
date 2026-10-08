@@ -45,6 +45,12 @@ describe("parseState / serializeState", () => {
     expect(serializeState({ ...emptyState(), sort: "" })).toBe("");
   });
 
+  it("accepts the 'added' (Latest added) sort and round-trips it", () => {
+    const state = parseState("?sort=added");
+    expect(state.sort).toBe("added");
+    expect(serializeState(state)).toBe("sort=added");
+  });
+
   it("retires the legacy cross-unit amount sort to the default order (#508)", () => {
     // "amount" is no longer a supported mode, so an old bookmark or stored
     // pref must fall back to the default order instead of ranking mixed units.

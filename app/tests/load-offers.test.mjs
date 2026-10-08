@@ -188,11 +188,13 @@ describe("generated artifacts vs committed index.json", () => {
     // GitHub Actions checkouts (same files, different first-commit dates).
     // Compare the catalog as a slug-keyed set so CI cannot block Pages on
     // sort drift. Display order is still computed at build time from git.
+    // added_date comes from the same git history (a squash merge can move it
+    // a day), so it is excluded for the same reason.
     const bySlug = (idx) => ({
       ...idx,
-      offers: [...idx.offers].sort((a, b) =>
-        a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0,
-      ),
+      offers: [...idx.offers]
+        .map(({ added_date: _added, ...rest }) => rest)
+        .sort((a, b) => (a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0)),
     });
     expect(bySlug(generated)).toEqual(bySlug(committed));
   });
@@ -441,6 +443,18 @@ describe("newest-added default ordering", () => {
       { "aaa-old": "2026-08-30", "zzz-new": "2026-09-02" },
     );
     expect(index.offers.map((o) => o.slug)).toEqual(["zzz-new", "aaa-old"]);
+  });
+
+  it("ships each offer's add date, and null when it is unknown", () => {
+    const index = buildIndex(
+      [mk("unknown", "2026-09-03"), mk("known", "2026-09-03")],
+      new Date("2026-09-04T00:00:00Z"),
+      { known: "2026-08-01" },
+    );
+    expect(
+      Object.fromEntries(index.offers.map((o) => [o.slug, o.added_date])),
+    ).toEqual({ known: "2026-08-01", unknown: null });
+    expect(validateIndexData(index)).toBe(true);
   });
 
   it("sorts an offer with no known add date after every offer that has one", () => {

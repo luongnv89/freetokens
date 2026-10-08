@@ -8,6 +8,8 @@ import {
   VERIFICATION_LABELS,
   REVIEW_STATUS_LABELS,
   activeOffers,
+  applySort,
+  buildDate,
   type OffersIndex,
 } from "./lib/offers";
 import { badgeVariants } from "./components/ui/badge";
@@ -17,8 +19,10 @@ import type { Offer } from "./types/offers-index";
 
 const index = indexData as OffersIndex;
 const offers = activeOffers(index);
-// The prerendered home markup ships the first page only (#548).
-const firstPage = offers.slice(0, PAGE_SIZE);
+// The prerender lists the default "Recommended" ranking — without hot views,
+// which only exist client-side — and ships the first page only (#548).
+const ranked = applySort(offers, "", { today: buildDate(index.generated_at) });
+const firstPage = ranked.slice(0, PAGE_SIZE);
 
 function html() {
   return renderToStaticMarkup(<App index={index} />);
@@ -47,7 +51,7 @@ describe("App home listing prerender", () => {
     expect(markup).toContain(
       `aria-label="Page ${Math.ceil(offers.length / PAGE_SIZE)}"`,
     );
-    for (const offer of offers.slice(PAGE_SIZE)) {
+    for (const offer of ranked.slice(PAGE_SIZE)) {
       expect(markup).not.toContain(`id="offer-${offer.slug}"`);
     }
   });
@@ -62,7 +66,7 @@ describe("App home listing prerender", () => {
   });
 
   it("carries the row data-* hooks the filter runtime reads", () => {
-    const offer = offers[0];
+    const offer = firstPage[0];
     expect(markup).toContain(`id="offer-${offer.slug}"`);
     expect(markup).toContain(`data-category="${offer.category}"`);
     expect(markup).toContain(`data-verification="${offer.verification}"`);
@@ -267,7 +271,20 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
     }
   });
 
-  it("lists articles newest-verified-first, matching activeOffers order", () => {
+  it("names the same top ten in the home ItemList JSON-LD as the first rows", () => {
+    const marker = '<script type="application/ld+json">';
+    const items = markup
+      .split(marker)
+      .slice(1)
+      .map((chunk) => JSON.parse(chunk.slice(0, chunk.indexOf("</script>"))))
+      .flatMap((block) => block["@graph"] ?? [])
+      .find((node: { "@type": string }) => node["@type"] === "ItemList");
+    expect(
+      items.itemListElement.map((item: { name: string }) => item.name),
+    ).toEqual(firstPage.slice(0, 10).map((o) => o.title));
+  });
+
+  it("lists articles in the default ranking order", () => {
     const grid = markup.match(
       /<ol class="grid" id="ft-grid" role="list" tabindex="-1">([\s\S]*?)<\/ol>/,
     );

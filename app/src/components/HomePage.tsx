@@ -37,7 +37,13 @@ import {
 } from "../lib/personalState";
 import { TAG_ICONS } from "../lib/tagIcons";
 import { PAGE_SIZE, pageCount } from "../lib/pagination";
-import { hottestSlugs, topViewedSlugs, useOfferViews } from "../lib/offerStats";
+import {
+  hotViewCounts,
+  hottestSlugs,
+  topViewedSlugs,
+  useOfferViews,
+} from "../lib/offerStats";
+import type { RankContext } from "../lib/ranking";
 import {
   DIMENSIONS,
   emptyState,
@@ -239,11 +245,10 @@ function Toolbar({
           value={sortValue}
           onChange={(e) => onSortChange(e.target.value)}
         >
-          {/* The empty value means "index order", and the build now emits that
-              index newest-added first, so this label follows the data. It read
-              "Alphabetical" because that is what the order degenerated to when
-              every offer shared one verified_date. */}
-          <option value="">Latest added</option>
+          {/* The empty value is the default ranking (lib/ranking.ts); "added"
+              is the build's index order, which it emits newest-added first. */}
+          <option value="">Recommended</option>
+          <option value="added">Latest added</option>
           <option value="newest">Recently checked</option>
           <option value="expiring">Expiring soon</option>
         </select>
@@ -346,16 +351,27 @@ function Toolbar({
   );
 }
 
+function sameCounts(
+  a: Record<string, number>,
+  b: Record<string, number>,
+): boolean {
+  const keys = Object.keys(a);
+  return (
+    keys.length === Object.keys(b).length && keys.every((k) => a[k] === b[k])
+  );
+}
+
 function visibleOffers(
   offers: ReturnType<typeof activeOffers>,
   state: UrlState,
+  rank: RankContext,
   personal?: {
     savedOnly: boolean;
     saved: ReadonlySet<string>;
     dismissed: ReadonlySet<string>;
   },
 ) {
-  const base = applySort(offers, state.sort);
+  const base = applySort(offers, state.sort, rank);
   if (!personal) {
     return base.filter((offer) => offerMatches(offer, state));
   }
@@ -406,8 +422,23 @@ export default function HomePage({
   const pendingFocusRef = useRef<"search" | "next-pill" | "grid" | null>(
     null,
   );
+  // Today's floored view counts, mirrored out of `todayViews` (declared
+  // below). The default ranking needs them before the page slice is known,
+  // but the windowed hook must stay after the all-time one, so they arrive
+  // one render late. Empty on the prerender and on the hydration render, so
+  // both lists match.
+  const [hotViews, setHotViews] = useState<Record<string, number>>({});
+  // Counts that land after the visitor has touched the list or scrolled are
+  // held here instead of reordering rows under their pointer or focus, and
+  // applied with the next list change they make themselves (#570).
+  const interactedRef = useRef(false);
+  const heldHotViewsRef = useRef<Record<string, number> | null>(null);
+  const rankContext = useMemo<RankContext>(
+    () => ({ today: buildDay, hotViews }),
+    [buildDay, hotViews],
+  );
 
-  const shownList = visibleOffers(offers, state, {
+  const shownList = visibleOffers(offers, state, rankContext, {
     savedOnly,
     saved,
     dismissed,
@@ -436,6 +467,42 @@ export default function HomePage({
   // keeps the unwindowed request first.
   const todayViews = useOfferViews(offerSlugs, 1);
   const hotSlugs = useMemo(() => hottestSlugs(todayViews), [todayViews]);
+  useEffect(() => {
+    const next = hotViewCounts(todayViews);
+    if (interactedRef.current) {
+      heldHotViewsRef.current = next;
+      return;
+    }
+    setHotViews((prev) => (sameCounts(prev, next) ? prev : next));
+  }, [todayViews]);
+  useEffect(() => {
+    const grid = document.getElementById("ft-grid");
+    // Hovering counts too: a cursor heading for a row's Hide or Save must
+    // not see the row shift just before the click.
+    const events = [
+      "pointerdown",
+      "pointermove",
+      "pointerover",
+      "keydown",
+      "focusin",
+    ] as const;
+    const windowEvents = ["scroll", "wheel", "touchstart"] as const;
+    const detach = () => {
+      events.forEach((type) => grid?.removeEventListener(type, onInteract));
+      windowEvents.forEach((type) =>
+        window.removeEventListener(type, onInteract),
+      );
+    };
+    const onInteract = () => {
+      interactedRef.current = true;
+      detach();
+    };
+    events.forEach((type) => grid?.addEventListener(type, onInteract));
+    windowEvents.forEach((type) =>
+      window.addEventListener(type, onInteract, { passive: true }),
+    );
+    return detach;
+  }, []);
   // The highlight shelf ranks the same windowed counters the badge uses, over
   // the FULL slug list rather than what is on screen, so filtering or
   // searching never changes which offers are "hot" — only the list below.
@@ -462,6 +529,14 @@ export default function HomePage({
     if (source === "page" && next.page === stateRef.current.page) return;
     stateRef.current = next;
     setState(next);
+    // Paging keeps held counts held: page 2 cut from a new order would skip
+    // or repeat offers seen on page 1. Sort, filter and search restart at
+    // page 1, so the reorder lands coherently there.
+    const held = heldHotViewsRef.current;
+    if (held && source !== "page") {
+      heldHotViewsRef.current = null;
+      setHotViews((prev) => (sameCounts(prev, held) ? prev : held));
+    }
     const query = serializeState(next);
     const nextSearch = query ? `?${query}` : "";
     if (

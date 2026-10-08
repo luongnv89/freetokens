@@ -123,6 +123,22 @@ export function topViewedSlugs(
     .map(([slug, count]) => ({ slug, views: count }));
 }
 
+/**
+ * Every count that clears the same HOT_MIN_VIEWS floor, keyed by slug: the
+ * hot signal the default ranking scales by. Below the floor a count is noise,
+ * so it must not reorder the list any more than it may fill the shelf.
+ */
+export function hotViewCounts(
+  views: Record<string, number | null>,
+): Record<string, number> {
+  return Object.fromEntries(
+    topViewedSlugs(views, Number.POSITIVE_INFINITY).map((row) => [
+      row.slug,
+      row.views,
+    ]),
+  );
+}
+
 export function hottestSlugs(
   views: Record<string, number | null>,
 ): ReadonlySet<string> {

@@ -1,5 +1,11 @@
 import { DEFAULT_BASE_URL, currentBaseUrl } from "../lib/site";
-import { activeOffers, expiredOffers, type OffersIndex } from "../lib/offers";
+import {
+  activeOffers,
+  applySort,
+  buildDate,
+  expiredOffers,
+  type OffersIndex,
+} from "../lib/offers";
 import type { OfferDetail } from "../lib/offerDetails";
 
 type StructuredDataProps =
@@ -90,7 +96,11 @@ export function StructuredData(props: StructuredDataProps) {
     const offers = activeOffers(props.index);
     // Top 10 only: the full directory is one click away, and every extra
     // kilobyte in <head>-adjacent markup costs FCP milliseconds (LH budget #209).
-    const top = offers.slice(0, 10);
+    // Same default ranking as the prerendered list, so the "top 10" here are
+    // the first ten rows a visitor sees (hot views only exist client-side).
+    const top = applySort(offers, "", {
+      today: buildDate(props.index.generated_at),
+    }).slice(0, 10);
     pageNode = {
       "@type": "CollectionPage",
       "@id": `${base}/#webpage`,
