@@ -64,7 +64,7 @@ the Dropped list.
 |-----------------|-----------------------------------------------------------------------|
 | `title`         | Human-readable offer name (non-empty).                                |
 | `provider`      | Company/product granting the credit (non-empty).                      |
-| `category`      | Exactly one of: `api_provider`, `coding`, `image`, `voice`, `video`, `startup_program`, `student`. |
+| `category`      | Exactly one of: `api_provider`, `coding`, `image`, `voice`, `video`, `startup_program`, `student`, `oss_program`. |
 | `amount`        | Free value in human terms, e.g. `$300 in credits` (non-empty).        |
 | `expiry_date`   | `YYYY-MM-DD` the offer stops being claimable, or explicit `null` if ongoing. |
 | `source_url`    | Official provider page describing the offer (`http(s)://`).           |
@@ -281,7 +281,7 @@ there until Step 6 — `needs_review/` is gitignored precisely so a stray
 # Known conflict: <url> says "<quote>"   (only when an official page lost a tie-break)
 title: ...
 provider: ...
-category: ...            # api_provider | coding | image | voice | video | startup_program | student
+category: ...            # api_provider | coding | image | voice | video | startup_program | student | oss_program
 amount: ...
 expiry_date: null        # or YYYY-MM-DD
 source_url: https://...

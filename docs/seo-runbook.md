@@ -24,7 +24,7 @@ No manual SEO step. Every field below is derived from the YAML you commit.
 cat > offers/my-provider-free-credits.yaml <<'YAML'
 title: My Provider Free Credits
 provider: My Provider
-category: api_provider   # api_provider | coding | image | voice | video | startup_program | student
+category: api_provider   # api_provider | coding | image | voice | video | startup_program | student | oss_program
 amount: $100 in API credits
 expiry_date: 2026-12-31  # null if ongoing
 source_url: https://example.com/offer

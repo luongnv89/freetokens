@@ -84,7 +84,7 @@ Field rules:
   naming each such slug and why this is a different program. Otherwise
   `null`.
 - `offer.category`: `api_provider` | `coding` | `image` | `voice` | `video`
-  | `startup_program` | `student`. `offer.signup`: `none` | `required`, read
+  | `startup_program` | `student` | `oss_program`. `offer.signup`: `none` | `required`, read
   from the official claim flow. `offer.expiry_date`: the official
   enrollment deadline `YYYY-MM-DD`, or `null` when no official end date
   exists. `offer.source_url`: the official page, never x.com, Reddit, or

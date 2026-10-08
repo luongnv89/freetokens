@@ -69,6 +69,13 @@ describe("parseState / serializeState", () => {
     expect(parseState("?verification=nope").verification).toBe("");
     expect(parseState("?signup=maybe").signup).toBe("");
   });
+
+  it("carries the oss_program category through parse and serialize", () => {
+    expect(parseState("?category=oss_program").category).toBe("oss_program");
+    const state = { ...emptyState(), category: "oss_program" };
+    expect(serializeState(state)).toBe("category=oss_program");
+    expect(parseState(`?${serializeState(state)}`)).toEqual(state);
+  });
 });
 
 describe("page param (#548)", () => {

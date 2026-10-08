@@ -300,3 +300,17 @@ describe("RFC 8288 discovery relations (#526)", () => {
     );
   });
 });
+
+describe("markdown twin category labels", () => {
+  it("names the oss_program category OSS program", () => {
+    const { distDir, read } = runGenerator({
+      offers: [offer(1, { category: "oss_program" })],
+    });
+    try {
+      const twin = read("offers/test-offer-1.md");
+      expect(twin).toContain("- Category: OSS program (`oss_program`)");
+    } finally {
+      rmSync(path.dirname(distDir), { recursive: true, force: true });
+    }
+  });
+});

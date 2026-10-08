@@ -96,6 +96,60 @@ class SchemaConsistencyTests(unittest.TestCase):
         self.assertIsNone(re.match(pattern, "Aug 21, 2026"))
 
 
+class OssProgramCategoryTests(unittest.TestCase):
+    """`oss_program` ("OSS program") joins Startup programs and Student."""
+
+    CLAIM_HUES = (
+        "review_verified",
+        "social_proof",
+        "unverified",
+        "none",
+        "required",
+        "expired",
+    )
+
+    @property
+    def build(self):
+        return validate_offers.build
+
+    def test_registered_alongside_student_and_startup(self):
+        self.assertIn("oss_program", self.build.CATEGORIES)
+        self.assertEqual(
+            self.build.CATEGORIES[-3:],
+            ("startup_program", "student", "oss_program"),
+        )
+        self.assertEqual(self.build.CATEGORY_LABELS["oss_program"], "OSS program")
+
+    def test_every_category_has_a_label(self):
+        for category in self.build.CATEGORIES:
+            self.assertIn(category, self.build.CATEGORY_LABELS)
+
+    def test_offer_with_oss_program_category_validates(self):
+        parsed = self.build.parse_offer_text(
+            offer_text(category="oss_program"), "oss.yaml"
+        )
+        offer = self.build.validate_offer(parsed, "oss.yaml")
+        self.assertEqual(offer["category"], "oss_program")
+
+    def test_hue_clears_aa_and_is_unique_inside_the_category_family(self):
+        hues = self.build.TAG_HUES
+        self.assertIn("oss_program", hues)
+        hex_value, ratio = hues["oss_program"]
+        self.assertRegex(hex_value, r"^#[0-9a-f]{6}$")
+        self.assertGreaterEqual(ratio, 4.5)
+        category_hues = [hues[c][0] for c in self.build.CATEGORIES if c in hues]
+        self.assertEqual(len(category_hues), len(set(category_hues)))
+        for claim in self.CLAIM_HUES:
+            self.assertNotEqual(hex_value, hues[claim][0])
+        self.assertNotEqual(hex_value, "#000000")
+
+    def test_glyph_ships_with_the_other_tag_icons(self):
+        glyph = self.build.TAG_ICONS.get("oss_program", "")
+        self.assertTrue(glyph.startswith("<"))
+        self.assertNotIn("stroke=", glyph)
+        self.assertNotIn("fill=", glyph)
+
+
 class ValidateDirTests(unittest.TestCase):
     def _write(self, tmp, name, text):
         offers_dir = os.path.join(tmp, "offers")

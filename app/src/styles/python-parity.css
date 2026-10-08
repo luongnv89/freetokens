@@ -64,6 +64,7 @@
   --t-video: var(--color-tag-video);
   --t-startup_program: var(--color-tag-startup-program);
   --t-student: var(--color-tag-student);
+  --t-oss_program: var(--color-tag-oss-program);
   --t-review-verified: var(--color-tag-review-verified);
   --t-social_proof: var(--color-tag-social-proof);
   --t-unverified: var(--color-tag-unverified);
@@ -377,6 +378,9 @@ h1 {
 }
 .badge-category-student {
   --tag-hue: var(--t-student);
+}
+.badge-category-oss_program {
+  --tag-hue: var(--t-oss_program);
 }
 .badge-verification-social_proof {
   --tag-hue: var(--t-social_proof);
@@ -1079,6 +1083,9 @@ a:focus-visible {
 .grid > li[data-category="student"] {
   --row-hue: var(--t-student);
 }
+.grid > li[data-category="oss_program"] {
+  --row-hue: var(--t-oss_program);
+}
 
 /* The rank counter is hidden, not removed: a CSS counter skips
    `display: none` rows, so keeping the node keeps the machinery intact for
@@ -1548,6 +1555,9 @@ a:focus-visible {
 .hot-deal[data-category="student"] {
   --row-hue: var(--t-student);
 }
+.hot-deal[data-category="oss_program"] {
+  --row-hue: var(--t-oss_program);
+}
 
 @media (hover: hover) {
   .hot-deal:hover,
@@ -1952,6 +1962,9 @@ a:focus-visible {
 }
 .chip-category-student {
   --tag-hue: var(--t-student);
+}
+.chip-category-oss_program {
+  --tag-hue: var(--t-oss_program);
 }
 
 .results-status {
@@ -2721,6 +2734,9 @@ button:focus-visible {
 }
 .od-related-card[data-category="student"] {
   --row-hue: var(--t-student);
+}
+.od-related-card[data-category="oss_program"] {
+  --row-hue: var(--t-oss_program);
 }
 
 @media (hover: hover) and (pointer: fine) {

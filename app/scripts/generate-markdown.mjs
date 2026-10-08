@@ -50,6 +50,7 @@ const CATEGORY_LABELS = {
   video: "Video",
   startup_program: "Startup programs",
   student: "Student",
+  oss_program: "OSS program",
 };
 
 const here = path.dirname(fileURLToPath(import.meta.url));

@@ -22,7 +22,7 @@ case "$mode" in publish|report) ;; *) fail "--mode must be publish or report, go
 [[ "$max" =~ ^[0-9]+$ ]] && [ "$max" -ge 1 ] || fail "--max must be a positive integer, got '$max'" "omit --max to use 10"
 if [ "$max" -gt 10 ]; then echo "Note: --max $max is above the cap; using 10." >&2; max=10; fi
 [[ "$since" =~ ^[0-9]+$ ]] && [ "$since" -ge 1 ] && [ "$since" -le 365 ] || fail "--since must be 1-365 days, got '$since'" "omit --since to use 30"
-valid="api_provider coding image voice video startup_program student"
+valid="api_provider coding image voice video startup_program student oss_program"
 for c in ${categories//,/ }; do
   [[ " $valid " == *" $c "* ]] || fail "unknown category '$c'" "use a comma list of: ${valid// /, }"
 done

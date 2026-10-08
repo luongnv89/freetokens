@@ -69,6 +69,7 @@ export const CATEGORIES = [
   "video",
   "startup_program",
   "student",
+  "oss_program",
 ] as const;
 
 export const CATEGORY_LABELS: Record<string, string> = {
@@ -79,6 +80,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
   video: "Video",
   startup_program: "Startup programs",
   student: "Student",
+  oss_program: "OSS program",
 };
 
 // Evidence level (`verification`). The labels deliberately avoid the word
