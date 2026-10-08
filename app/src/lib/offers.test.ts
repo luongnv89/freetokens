@@ -8,6 +8,8 @@ import {
   offerMatches,
   relativeDate,
   activeOffers,
+  CATEGORIES,
+  CATEGORY_LABELS,
   type Offer,
   type OffersIndex,
 } from "./offers";
@@ -269,5 +271,29 @@ describe("match+sort performance", () => {
     const elapsed = performance.now() - t0;
     expect(matched.length).toBeGreaterThan(0);
     expect(elapsed).toBeLessThan(100);
+  });
+});
+
+describe("category vocabulary", () => {
+  it("registers oss_program alongside student and startup", () => {
+    expect(CATEGORIES).toContain("oss_program");
+    expect([...CATEGORIES].slice(-3)).toEqual([
+      "startup_program",
+      "student",
+      "oss_program",
+    ]);
+    expect(CATEGORY_LABELS.oss_program).toBe("OSS program");
+  });
+
+  it("labels every category", () => {
+    for (const category of CATEGORIES) {
+      expect(CATEGORY_LABELS[category], category).toBeTruthy();
+    }
+  });
+
+  it("filters on the oss_program category like any other", () => {
+    const state = { ...emptyState(), category: "oss_program" };
+    expect(offerMatches(offer({ category: "oss_program" }), state)).toBe(true);
+    expect(offerMatches(offer({ category: "coding" }), state)).toBe(false);
   });
 });

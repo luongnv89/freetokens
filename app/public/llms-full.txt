@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-08T03:03:31Z — 171 of 212 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-08T06:40:59Z — 171 of 212 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1627,7 +1627,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Claim steps: Sign up at dashboard.cohere.com (no card mentioned for trial keys). | Open the API keys page and create a Trial (evaluation) key. | Stay within 1,000 API calls/month and Chat 20 req/min trial limits.
 ### Codex for Open Source
 - Provider: OpenAI
-- Category: coding
+- Category: oss_program
 - Amount: Six months of ChatGPT Pro with Codex + conditional Codex Security + API credits via the Codex Open Source Fund, for eligible OSS maintainers
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
@@ -1637,7 +1637,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Claim steps: Confirm you're a core maintainer or run a widely used public open-source project. | Apply via the form linked on developers.openai.com/community/codex-for-oss (rolling review; submitting agrees to the Codex for Open Source Program Terms). | If selected: six months of ChatGPT Pro with Codex, conditional Codex Security access (case-by-case), and API credits via the Codex Open Source Fund for Codex-in-OSS workflows.
 ### CodeRabbit OSS — Free AI Code Reviews
 - Provider: CodeRabbit
-- Category: coding
+- Category: oss_program
 - Amount: Free Team features for public repositories: AI reviews, slop detection, triage, Change Stack, and Security; no card or application; rate limits apply
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
@@ -1676,7 +1676,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Claim steps: Confirm you are a PI or equivalent at an accredited university or nonprofit research institute (natural sciences, math, CS, engineering, related fields). | Complete the verification form on claude.com/programs/team-plan-for-scientists. | Wait for review (most applications 5–7 business days) and the approval email. | Add lab members as Standard (free) or Premium ($15/mo) seats. Final pricing is confirmed after verification.
 ### Claude for Open Source
 - Provider: Anthropic
-- Category: coding
+- Category: oss_program
 - Amount: 6 months of free Claude Max 20x (~$1,200 value at $200/mo list); subscription grant, not API credits; capped at 10,000 recipients
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required

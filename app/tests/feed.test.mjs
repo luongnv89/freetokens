@@ -214,3 +214,15 @@ describe("RSS 2.0 feed (#130 / #27)", () => {
     expect(xml).toContain("10k tokens &amp; extra");
   });
 });
+
+describe("category label vocabulary in the feed", () => {
+  it("names the oss_program category OSS program", () => {
+    const xmlText = buildFeed(
+      indexFor([offer("oss", { category: "oss_program" })]),
+    );
+    const description = parseRss(xmlText).querySelector("item > description")
+      .textContent;
+    expect(description).toContain("— OSS program ·");
+    expect(description).not.toContain("oss_program");
+  });
+});

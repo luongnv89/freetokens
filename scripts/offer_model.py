@@ -16,7 +16,16 @@ import json
 import os
 import re
 
-CATEGORIES = ("api_provider", "coding", "image", "voice", "video", "startup_program", "student")
+CATEGORIES = (
+    "api_provider",
+    "coding",
+    "image",
+    "voice",
+    "video",
+    "startup_program",
+    "student",
+    "oss_program",
+)
 CATEGORY_LABELS = {
     "api_provider": "API providers",
     "coding": "Coding",
@@ -25,6 +34,7 @@ CATEGORY_LABELS = {
     "video": "Video",
     "startup_program": "Startup programs",
     "student": "Student",
+    "oss_program": "OSS program",
 }
 # Absolute site origin used ONLY where syndication formats require it: RSS
 # item/channel links must be absolute per the RSS 2.0 spec (and the W3C feed
@@ -151,6 +161,8 @@ NULL_TOKENS = {"null", "~", ""}
 # "code" color. Green already means "strongest claim" on the verification and
 # sign-up tags sitting immediately beside it; a green category tag would read
 # as an endorsement of the offer rather than a description of it.
+# NOTE ON `oss_program`: same rule — it is royal blue, not green, so an open
+# source listing can never be mistaken for a verified/no-sign-up claim.
 TAG_HUES = {
     # value: (hex, contrast-vs-white)
     "api_provider": ("#3538cd", 8.08),
@@ -160,6 +172,7 @@ TAG_HUES = {
     "video": ("#be123c", 6.29),
     "startup_program": ("#a21caf", 6.33),
     "student": ("#c2410c", 5.18),
+    "oss_program": ("#1e40af", 8.72),
     "review_verified": ("#15803d", 5.02),
     "social_proof": ("#1e3a5f", 11.50),
     "unverified": ("#5f6673", 5.78),
@@ -203,6 +216,11 @@ TAG_ICONS = {
     '<path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
     "student": '<path d="M12 4L2 8l10 4 10-4-10-4z"/><path d="M6 12l6 3 6-3"/><path d="M12 15v4"/>'
     '<path d="M22 10v3"/>',
+    "oss_program": '<circle cx="6" cy="6" r="3"/>'
+    '<circle cx="18" cy="6" r="3"/>'
+    '<circle cx="12" cy="18" r="3"/>'
+    '<path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/>'
+    '<path d="M12 12v3"/>',
     # Verification: how hard the listing was CHECKED. The glyphs form their
     # own ladder -- hearsay bubble, open question.
     "review_verified": '<circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.4"/>',

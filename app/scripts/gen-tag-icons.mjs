@@ -35,6 +35,10 @@ const TAG_TO_LUCIDE = {
     note: "lucide rocket; hand-drawn set uses the same four-path rocket",
   },
   student: { icon: "graduation-cap", note: "mortarboard for student offers" },
+  oss_program: {
+    icon: "git-fork",
+    note: "fork glyph for open source programs; hand-drawn python set uses the same three-node fork",
+  },
   review_verified: {
     icon: "circle-check",
     note: "same circle+check seal as the former hand_verified tag",

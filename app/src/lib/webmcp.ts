@@ -178,6 +178,8 @@ function buildTools(index: OffersIndex, navigate: Navigate): ModelContextTool[] 
           "voice",
           "video",
           "startup_program",
+          "student",
+          "oss_program",
         ],
       },
       verification: {

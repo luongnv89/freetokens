@@ -220,6 +220,29 @@ describe("search_offers tool", () => {
     });
   });
 
+  it("advertises the oss_program category alongside student and startup", async () => {
+    const registerTool = stubModelContext("document");
+    registerWebMcpTools(index);
+    const tool = registeredTools(registerTool).find(
+      (t) => t.name === "search_offers",
+    )!;
+    const schema = tool.inputSchema as {
+      properties: { category: { enum: string[] } };
+    };
+    expect(schema.properties.category.enum.slice(-3)).toEqual([
+      "startup_program",
+      "student",
+      "oss_program",
+    ]);
+  });
+
+  it("keeps an oss_program filter in the applied state", async () => {
+    const result = await run({ category: "oss_program" });
+    expect(result.applied_state).toEqual({ category: "oss_program" });
+    expect(result.results_url).toContain("category=oss_program");
+    expect(result.total).toBe(0);
+  });
+
   it("drops values the URL-state whitelist would reject", async () => {
     const result = await run({ category: "student", sort: "bogus" });
     expect(result.applied_state).toEqual({});

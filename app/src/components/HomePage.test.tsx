@@ -388,6 +388,29 @@ describe("HomePage deep link and popstate", () => {
 });
 
 describe("HomePage three-dimension filters (#126)", () => {
+  it("offers an OSS program chip alongside Startup programs and Student", () => {
+    render(<HomePage index={index} />);
+    const chips = [...document.querySelectorAll("[data-ft-category]")].map(
+      (el) => el.getAttribute("data-ft-category"),
+    );
+    expect(chips.slice(-3)).toEqual([
+      "startup_program",
+      "student",
+      "oss_program",
+    ]);
+    const oss = categoryChip("oss_program");
+    expect(oss).not.toBeNull();
+    expect(oss.textContent).toContain("OSS program");
+    expect(oss).toHaveAttribute("aria-pressed", "false");
+
+    fireEvent.click(oss);
+    expect(new URLSearchParams(window.location.search).get("category")).toBe(
+      "oss_program",
+    );
+    expect(categoryChip("oss_program")).toHaveAttribute("aria-pressed", "true");
+    expect(listedSlugs()).toEqual([]);
+  });
+
   it("chip click SETs category, does not toggle, and fires filter_use once per click", () => {
     const gtag = grantedGtag();
     const pushSpy = vi.spyOn(window.history, "pushState");

@@ -92,6 +92,7 @@ const HUE_TOKENS = [
   "--color-tag-video",
   "--color-tag-startup-program",
   "--color-tag-student",
+  "--color-tag-oss-program",
   "--color-tag-review-verified",
   "--color-tag-social-proof",
   "--color-tag-unverified",

@@ -31,6 +31,7 @@ const VALID: Record<FilterDimension, readonly string[]> = {
     "voice",
     "video",
     "startup_program",
+    "oss_program",
   ],
   verification: ["social_proof", "unverified"],
   signup: ["none", "required"],

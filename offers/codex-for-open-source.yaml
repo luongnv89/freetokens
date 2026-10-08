@@ -4,7 +4,7 @@
 # reviewed case by case; API credits come via the Codex Open Source Fund.)
 title: Codex for Open Source
 provider: OpenAI
-category: coding
+category: oss_program
 amount: Six months of ChatGPT Pro with Codex + conditional Codex Security + API credits via the Codex Open Source Fund, for eligible OSS maintainers
 expiry_date: null
 source_url: https://developers.openai.com/community/codex-for-oss

@@ -49,6 +49,7 @@ const CATEGORIES = [
   "video",
   "startup_program",
   "student",
+  "oss_program",
 ];
 const VERIFICATION_LEVELS = ["social_proof", "unverified"];
 const REVIEW_STATUSES = ["verified", "unverified", "under-review", "to-be-verified"];

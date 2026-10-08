@@ -17,6 +17,8 @@ export const TAG_ICONS: Record<string, string> = {
     '<path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/>',
   student:
     '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>',
+  oss_program:
+    '<circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/><path d="M12 12v3"/>',
   review_verified: '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
   social_proof:
     '<path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M7 11h10"/><path d="M7 15h6"/><path d="M7 7h8"/>',
@@ -47,6 +49,10 @@ export const TAG_LUCIDE_MAP: Record<string, TagIconMeta> = {
     note: "lucide rocket; hand-drawn set uses the same four-path rocket",
   },
   student: { lucide: "graduation-cap", note: "mortarboard for student offers" },
+  oss_program: {
+    lucide: "git-fork",
+    note: "fork glyph for open source programs; hand-drawn python set uses the same three-node fork",
+  },
   review_verified: {
     lucide: "circle-check",
     note: "same circle+check seal as the former hand_verified tag",
