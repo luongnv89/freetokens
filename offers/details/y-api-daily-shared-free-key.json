@@ -1,0 +1,28 @@
+{
+  "summary": "Y-API is an OpenAI-compatible LLM gateway (~20 models across OpenAI, Anthropic, DeepSeek, Moonshot, Z.ai, Qwen, MiniMax, Tencent, Xiaomi, StepFun prefixes). Its /daily-key page issues one shared key per day funded by a $20 pool, refilled at 00:05 UTC; the pool is shared across all users and can drain early, and keys die at the next rotation. Sign-in via GitHub or Google is required. Personal accounts separately get $1 starter credit, no card required.",
+  "claim_steps": [
+    "Sign in to Y-API with GitHub or Google",
+    "Open https://y-api.bestvirtualgoods.com/daily-key and copy today's shared key and the Base URL shown",
+    "Point any OpenAI-compatible client at the Base URL with the key (OPENAI_BASE_URL / OPENAI_API_KEY)"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://y-api.bestvirtualgoods.com/llms.txt",
+      "title": "Y-API llms.txt",
+      "text": "https://y-api.bestvirtualgoods.com/daily-key hands out one key shared by the whole site, refilled with $20 of credit every day at 00:05 UTC — sign in, copy the key, call any of the 20 models. It is a shared pool, so it drains as the site uses it and can be gone before you reach it; an account of your own comes with $1 of starter credit and no shared pool."
+    },
+    {
+      "type": "link",
+      "url": "https://y-api.bestvirtualgoods.com/",
+      "title": "Affordable LLM API, OpenAI-Compatible — Y-API",
+      "text": "OpenAI-compatible LLM API for 20+ models. Pay per token. Compare prices and start with $1 in free credit."
+    },
+    {
+      "type": "link",
+      "url": "https://dev.to/freeourdays/a-fresh-free-llm-api-keyevery-morning-e8f",
+      "title": "A fresh free LLM API key, every morning",
+      "text": "Y-API hands out a ready-to-use shared API key every day backed by a $20 quota pool for that day; sign in with GitHub or Google, open /daily-key. Article snapshot dated 2026-10-06."
+    }
+  ]
+}
