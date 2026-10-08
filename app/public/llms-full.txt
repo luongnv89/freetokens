@@ -2,11 +2,31 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-08T06:40:59Z — 171 of 212 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-08T23:31:02Z — 171 of 214 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Y-API Daily Shared Free API Key — $20/Day Pool
+- Provider: Y-API
+- Category: api_provider
+- Amount: One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation (~20 models). Own accounts also get $1 starter credit.
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-08 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://y-api.bestvirtualgoods.com/daily-key
+- Page: https://freetokens.custats.info/offers/y-api-daily-shared-free-key.html
+- Summary: Y-API is an OpenAI-compatible LLM gateway (~20 models across OpenAI, Anthropic, DeepSeek, Moonshot, Z.ai, Qwen, MiniMax, Tencent, Xiaomi, StepFun prefixes). Its /daily-key page issues one shared key per day funded by a $20 pool, refilled at 00:05 UTC; the pool is shared across all users and can drain early, and keys die at the next rotation. Sign-in via GitHub or Google is required. Personal accounts separately get $1 starter credit, no card required.
+- Claim steps: Sign in to Y-API with GitHub or Google | Open https://y-api.bestvirtualgoods.com/daily-key and copy today's shared key and the Base URL shown | Point any OpenAI-compatible client at the Base URL with the key (OPENAI_BASE_URL / OPENAI_API_KEY)
+### Ling 3.1 Flash Free (InclusionAI)
+- Provider: InclusionAI
+- Category: api_provider
+- Amount: Ling 3.1 Flash free on Vercel AI Gateway through Oct 13, 2026 — model IDs inclusionai/ling-3.1-flash and inclusionai/ling-3.1-flash-free (560B MoE, 25B active, 262K context, hybrid reasoning); also listed at $0 on Kilo Code and OpenCode Zen
+- Status: active — enrollment deadline: 2026-10-13
+- Last checked: 2026-10-08 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://vercel.com/changelog/ling-3-1-flash-is-now-available-on-ai-gateway
+- Page: https://freetokens.custats.info/offers/inclusionai-ling-3-1-flash-free.html
+- Summary: Ling 3.1 Flash is InclusionAI's hybrid-reasoning MoE model: 560B total parameters, 25B active, 262K context and 32K max output on gateways, with reasoning and tool calling. Vercel AI Gateway offers it free through 2026-10-13 under two model IDs: inclusionai/ling-3.1-flash (starts billing when the promotion ends) and inclusionai/ling-3.1-flash-free (stops serving instead of billing). Kilo Code lists it at $0.00/1M 'currently available at no cost', and OpenCode Zen serves a ling-3.1-flash-free endpoint at $0.00/$0.00.
+- Claim steps: Get a Vercel AI Gateway API key (or sign in with Vercel in a supported coding agent) | Call the gateway with model ID inclusionai/ling-3.1-flash or inclusionai/ling-3.1-flash-free before 2026-10-13 | For coding agents, run the AI Gateway agent setup, then /model and pick Ling 3.1 Flash; in Kilo Code or OpenCode Zen select the listed ling-3.1-flash(-free) model
 ### Viktor — $100 Free Starter Credits
 - Provider: Viktor
 - Category: coding
@@ -1694,26 +1714,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/cerebras-yc-startup-deal.html
 - Summary: The Cerebras YC Startup Deal gives Y Combinator startups from any batch up to $22.5K worth of inference on Cerebras Cloud, plus priority support and co-marketing opportunities. No setup fees.
 - Claim steps: Apply via the form linked from cerebras.ai/yc-startup-deal (HubSpot application). | YC startups from any batch are eligible; no setup fees.
-### Cerebras Inference Free Trial — $5
-- Provider: Cerebras
-- Category: api_provider
-- Amount: $5 free credits after adding a verified payment method; expire in 30 days; no permanent free tier; API inactive until payment method added (no charge until purchase)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://inference-docs.cerebras.ai/support/rate-limits
-- Page: https://freetokens.custats.info/offers/cerebras-free-credit.html
-- Summary: Cerebras Inference Free Trial grants new accounts $5 in credits after adding a verified payment method. Credits expire 30 days after they are granted and work across all public catalog models. There is no charge until you purchase more credits. Skipping the payment method leaves Playground and API access inactive. There is no permanently free or auto-renewing free tier. This reactivates the previously archived cerebras-free-credit listing with the official rate-limits FAQ as source.
-- Claim steps: Create a Cerebras Cloud account. | Add a verified payment method (no charge until you purchase additional credits). | Receive $5 in Free Trial credits (expire 30 days after grant). | Use public catalog models in Playground or API; purchase credits to continue after trial.
-### Cartesia Startups Grant
-- Provider: Cartesia
-- Category: startup_program
-- Amount: 96M credits/year plus $299/month in agent credits for 12 months (over $8,000 value)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.cartesia.ai/startups
-- Page: https://freetokens.custats.info/offers/cartesia-startups-grant.html
-- Summary: 96M credits/year plus $300/month in agent credits for 12 months (over $8,000 value).
-- Claim steps: Submit the startup grant application. | Wait for Cartesia review; applicants typically hear back within one week. | If accepted, apply the provided coupon code to the Cartesia account.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

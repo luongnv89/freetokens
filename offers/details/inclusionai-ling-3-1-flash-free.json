@@ -1,0 +1,40 @@
+{
+  "summary": "Ling 3.1 Flash is InclusionAI's hybrid-reasoning MoE model: 560B total parameters, 25B active, 262K context and 32K max output on gateways, with reasoning and tool calling. Vercel AI Gateway offers it free through 2026-10-13 under two model IDs: inclusionai/ling-3.1-flash (starts billing when the promotion ends) and inclusionai/ling-3.1-flash-free (stops serving instead of billing). Kilo Code lists it at $0.00/1M 'currently available at no cost', and OpenCode Zen serves a ling-3.1-flash-free endpoint at $0.00/$0.00.",
+  "claim_steps": [
+    "Get a Vercel AI Gateway API key (or sign in with Vercel in a supported coding agent)",
+    "Call the gateway with model ID inclusionai/ling-3.1-flash or inclusionai/ling-3.1-flash-free before 2026-10-13",
+    "For coding agents, run the AI Gateway agent setup, then /model and pick Ling 3.1 Flash; in Kilo Code or OpenCode Zen select the listed ling-3.1-flash(-free) model"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/changelog/ling-3-1-flash-is-now-available-on-ai-gateway",
+      "title": "Ling 3.1 Flash is now available on AI Gateway",
+      "text": "Ling 3.1 Flash from InclusionAI is now available on AI Gateway. The model is free to use through October 13, 2026. The standard model ID is free during the promotion and begins billing when it ends. The -free model ID stops serving instead of billing when the free promotion ends."
+    },
+    {
+      "type": "link",
+      "url": "https://vercel.com/ai-gateway/models/ling-3.1-flash",
+      "title": "Ling 3.1 Flash",
+      "text": "Model ID: inclusionai/ling-3.1-flash. Type: chat. Providers: novita. Context window: 262,144. Maximum output tokens: 32,768. 560B total parameters with 25B activated."
+    },
+    {
+      "type": "link",
+      "url": "https://kilo.ai/models/inclusionai-ling-3-1-flash",
+      "title": "inclusionAI: Ling 3.1 Flash (new) Coding Benchmark | Kilo Code",
+      "text": "This model is currently available at no cost in Kilo Code. inclusionai/ling-3.1-flash — $0.00 per 1M tokens. Context 262,144 tokens, max output 32,768."
+    },
+    {
+      "type": "link",
+      "url": "https://models.opencode.ai/models/inclusionai/ling-3.1-flash/",
+      "title": "Ling 3.1 Flash pricing, providers, and specs | Models.dev",
+      "text": "OpenCode Zen: ling-3.1-flash-free at $0.00 / $0.00, 262,144 context, reasoning and tool calls. Vercel AI Gateway: inclusionai/ling-3.1-flash and inclusionai/ling-3.1-flash-free at $0.00 / $0.00."
+    },
+    {
+      "type": "link",
+      "url": "https://aitoolsreview.co.uk/insights/ling-3-1-flash-free-560b-moe",
+      "title": "Ling 3.1 Flash: Free 560B MoE Model Reviewed (October 2026)",
+      "text": "Ling 3.1 Flash is InclusionAI (Ant Group)'s hybrid-reasoning MoE model... free until 13/10/2026 on Vercel AI Gateway, OpenCode and Kilo Code. Released 29/09/2026. New model — distinct from the cataloged Ling 3.0 Flash variants."
+    }
+  ]
+}

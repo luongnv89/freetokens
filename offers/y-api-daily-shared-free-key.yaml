@@ -1,0 +1,13 @@
+# Hunted 2026-10-08 by offer-hunter; verified against https://y-api.bestvirtualgoods.com/llms.txt
+# ("https://y-api.bestvirtualgoods.com/daily-key hands out one key shared by the whole site, refilled with $20 of credit every day at 00:05 UTC — sign in, copy the key, call any of the 20 models. It is a…")
+# Lead: https://dev.to/freeourdays/a-fresh-free-llm-api-keyevery-morning-e8f
+title: Y-API Daily Shared Free API Key — $20/Day Pool
+provider: Y-API
+category: api_provider
+amount: One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation (~20 models). Own accounts also get $1 starter credit.
+expiry_date: null
+source_url: https://y-api.bestvirtualgoods.com/daily-key
+verified_date: 2026-10-08
+verification: social_proof
+review_status: under-review
+signup: required

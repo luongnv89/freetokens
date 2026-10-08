@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-08T22:42:31Z",
-  "count": 244,
-  "active_count": 212,
+  "generated_at": "2026-10-08T23:31:02Z",
+  "count": 246,
+  "active_count": 214,
   "expired_count": 32,
   "offers": [
     {
@@ -3663,6 +3663,36 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "inclusionai-ling-3-1-flash-free",
+      "title": "Ling 3.1 Flash Free (InclusionAI)",
+      "provider": "InclusionAI",
+      "category": "api_provider",
+      "amount": "Ling 3.1 Flash free on Vercel AI Gateway through Oct 13, 2026 — model IDs inclusionai/ling-3.1-flash and inclusionai/ling-3.1-flash-free (560B MoE, 25B active, 262K context, hybrid reasoning); also listed at $0 on Kilo Code and OpenCode Zen",
+      "expiry_date": "2026-10-13",
+      "source_url": "https://vercel.com/changelog/ling-3-1-flash-is-now-available-on-ai-gateway",
+      "verified_date": "2026-10-08",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "y-api-daily-shared-free-key",
+      "title": "Y-API Daily Shared Free API Key — $20/Day Pool",
+      "provider": "Y-API",
+      "category": "api_provider",
+      "amount": "One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation (~20 models). Own accounts also get $1 starter credit.",
+      "expiry_date": null,
+      "source_url": "https://y-api.bestvirtualgoods.com/daily-key",
+      "verified_date": "2026-10-08",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ]
 }
