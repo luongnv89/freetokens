@@ -1248,6 +1248,59 @@ describe("HomePage hot-today badge (#282)", () => {
     });
   });
 
+  it("holds counts while the cursor is merely hovering a row (#570)", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const release = stubLateCounters({ "beta-copilot": 12 });
+    render(<HomePage index={index} />);
+    fireEvent.pointerOver(document.querySelector("#offer-alpha-social")!);
+    await release();
+    await waitFor(() => {
+      expect(hotSlugs()).toEqual(["beta-copilot"]);
+    });
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+  });
+
+  it("keeps held counts held across a page change, applying them on the next filter (#570)", async () => {
+    // 25 tied offers: the default order is index order across two pages, and
+    // the hot one sits last, on page 2, until its count is applied.
+    const many = Array.from({ length: 25 }, (_, i) =>
+      offer({
+        slug: `paged-${String(i + 1).padStart(2, "0")}`,
+        title: `Paged ${String(i + 1).padStart(2, "0")}`,
+        provider: "Paged Co",
+      }),
+    );
+    const manySlugs = many.map((o) => o.slug);
+    configureAnalytics({ statsSite: SITE });
+    const release = stubLateCounters({ "paged-25": 12 });
+    render(
+      <HomePage
+        index={{
+          ...index,
+          count: many.length,
+          active_count: many.length,
+          offers: many,
+        }}
+      />,
+    );
+    fireEvent.pointerDown(document.querySelector("#offer-paged-01")!);
+    await release();
+    await act(async () => {});
+    // Page 2 continues page 1's order: nothing skipped, nothing repeated.
+    fireEvent.click(screen.getByRole("link", { name: "Page 2" }));
+    expect(listedSlugs()).toEqual(manySlugs.slice(PAGE_SIZE));
+    expect(hotSlugs()).toEqual(["paged-25"]);
+    // A filter restarts at page 1, where the held counts now land.
+    fireEvent.click(categoryChip("coding"));
+    await waitFor(() => {
+      expect(listedSlugs()[0]).toBe("paged-25");
+    });
+    expect(listedSlugs()).toEqual([
+      "paged-25",
+      ...manySlugs.slice(0, PAGE_SIZE - 1),
+    ]);
+  });
+
   it("never lets a below-floor count reorder the list", async () => {
     configureAnalytics({ statsSite: SITE });
     stubCounters({ "beta-copilot": 2 });

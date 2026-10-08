@@ -477,17 +477,30 @@ export default function HomePage({
   }, [todayViews]);
   useEffect(() => {
     const grid = document.getElementById("ft-grid");
-    const events = ["pointerdown", "keydown", "focusin"] as const;
+    // Hovering counts too: a cursor heading for a row's Hide or Save must
+    // not see the row shift just before the click.
+    const events = [
+      "pointerdown",
+      "pointermove",
+      "pointerover",
+      "keydown",
+      "focusin",
+    ] as const;
+    const windowEvents = ["scroll", "wheel", "touchstart"] as const;
     const detach = () => {
       events.forEach((type) => grid?.removeEventListener(type, onInteract));
-      window.removeEventListener("scroll", onInteract);
+      windowEvents.forEach((type) =>
+        window.removeEventListener(type, onInteract),
+      );
     };
     const onInteract = () => {
       interactedRef.current = true;
       detach();
     };
     events.forEach((type) => grid?.addEventListener(type, onInteract));
-    window.addEventListener("scroll", onInteract, { passive: true });
+    windowEvents.forEach((type) =>
+      window.addEventListener(type, onInteract, { passive: true }),
+    );
     return detach;
   }, []);
   // The highlight shelf ranks the same windowed counters the badge uses, over
@@ -516,8 +529,11 @@ export default function HomePage({
     if (source === "page" && next.page === stateRef.current.page) return;
     stateRef.current = next;
     setState(next);
+    // Paging keeps held counts held: page 2 cut from a new order would skip
+    // or repeat offers seen on page 1. Sort, filter and search restart at
+    // page 1, so the reorder lands coherently there.
     const held = heldHotViewsRef.current;
-    if (held) {
+    if (held && source !== "page") {
       heldHotViewsRef.current = null;
       setHotViews((prev) => (sameCounts(prev, held) ? prev : held));
     }
