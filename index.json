@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-07T20:21:48Z",
+  "generated_at": "2026-10-08T03:03:18Z",
   "count": 244,
-  "active_count": 213,
-  "expired_count": 31,
+  "active_count": 212,
+  "expired_count": 32,
   "offers": [
     {
       "slug": "baidu-ai-studio-1m-free-tokens",
@@ -12,6 +12,20 @@
       "amount": "1,000,000 free Tokens per developer for AI Studio LLM API services; token consumption varies by model",
       "expiry_date": null,
       "source_url": "https://ai.baidu.com/ai-doc/AISTUDIO/Mmhslv9lf",
+      "verified_date": "2026-10-07",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "claude-max-team-monthly-api-credits",
+      "title": "Monthly Claude API credits for Max and Team plans",
+      "provider": "Anthropic",
+      "category": "api_provider",
+      "amount": "$100/month (Max 5x) or $200/month (Max 20x) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month",
+      "expiry_date": null,
+      "source_url": "https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans",
       "verified_date": "2026-10-07",
       "verification": "social_proof",
       "review_status": "under-review",
@@ -520,7 +534,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "cline-gemini-3-8-flash-free",
@@ -3178,7 +3192,7 @@
       "source_url": "https://mistral.ai/pricing",
       "verified_date": "2026-09-28",
       "verification": "social_proof",
-      "review_status": "under-review",
+      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
@@ -3405,20 +3419,6 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "claude-max-team-monthly-api-credits",
-      "title": "Monthly Claude API credits for Max and Team plans",
-      "provider": "Anthropic",
-      "category": "api_provider",
-      "amount": "$100/month (Max 5x) or $200/month (Max 20x) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month",
-      "expiry_date": null,
-      "source_url": "https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans",
-      "verified_date": "2026-10-07",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
     }
   ]
 }
