@@ -29,7 +29,7 @@ In one line: corroborated = evidence level · reviewed / tested = review status 
 
 ## Offers
 
-Top 20 currently active offers (newest checked first) from 213 active listings. Every line ends with the offer's own review status, evidence level, sign-up need and last-checked date. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest checked first) from 212 active listings. Every line ends with the offer's own review status, evidence level, sign-up need and last-checked date. Full directory at https://freetokens.custats.info/.
 
 - [Viktor — $100 Free Starter Credits](https://freetokens.custats.info/offers/viktor-free-starter-100-credits.html): Viktor — $100 in free starter credits for Viktor's AI coworker; no credit card required; choose a paid plan only when the credits are used up (coding) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-10-07
 - [Valyu — $10 Free API Credits ($20 with a Work Email)](https://freetokens.custats.info/offers/valyu-new-account-search-credits.html): Valyu — $10 free credits for new accounts ($20 with a work email), usable across Search, Answer, Contents, DeepResearch and every source during the free trial; no card required (api_provider) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-10-07
