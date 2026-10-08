@@ -428,6 +428,11 @@ export default function HomePage({
   // one render late. Empty on the prerender and on the hydration render, so
   // both lists match.
   const [hotViews, setHotViews] = useState<Record<string, number>>({});
+  // Counts that land after the visitor has touched the list or scrolled are
+  // held here instead of reordering rows under their pointer or focus, and
+  // applied with the next list change they make themselves (#570).
+  const interactedRef = useRef(false);
+  const heldHotViewsRef = useRef<Record<string, number> | null>(null);
   const rankContext = useMemo<RankContext>(
     () => ({ today: buildDay, hotViews }),
     [buildDay, hotViews],
@@ -464,8 +469,27 @@ export default function HomePage({
   const hotSlugs = useMemo(() => hottestSlugs(todayViews), [todayViews]);
   useEffect(() => {
     const next = hotViewCounts(todayViews);
+    if (interactedRef.current) {
+      heldHotViewsRef.current = next;
+      return;
+    }
     setHotViews((prev) => (sameCounts(prev, next) ? prev : next));
   }, [todayViews]);
+  useEffect(() => {
+    const grid = document.getElementById("ft-grid");
+    const events = ["pointerdown", "keydown", "focusin"] as const;
+    const detach = () => {
+      events.forEach((type) => grid?.removeEventListener(type, onInteract));
+      window.removeEventListener("scroll", onInteract);
+    };
+    const onInteract = () => {
+      interactedRef.current = true;
+      detach();
+    };
+    events.forEach((type) => grid?.addEventListener(type, onInteract));
+    window.addEventListener("scroll", onInteract, { passive: true });
+    return detach;
+  }, []);
   // The highlight shelf ranks the same windowed counters the badge uses, over
   // the FULL slug list rather than what is on screen, so filtering or
   // searching never changes which offers are "hot" — only the list below.
@@ -492,6 +516,11 @@ export default function HomePage({
     if (source === "page" && next.page === stateRef.current.page) return;
     stateRef.current = next;
     setState(next);
+    const held = heldHotViewsRef.current;
+    if (held) {
+      heldHotViewsRef.current = null;
+      setHotViews((prev) => (sameCounts(prev, held) ? prev : held));
+    }
     const query = serializeState(next);
     const nextSearch = query ? `?${query}` : "";
     if (

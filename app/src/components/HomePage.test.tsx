@@ -1180,6 +1180,74 @@ describe("HomePage hot-today badge (#282)", () => {
     ]);
   });
 
+  // Holds every "today" response until release(), so a test can interact
+  // with the list before the counts land.
+  function stubLateCounters(today: Record<string, number>) {
+    let release = () => {};
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: RequestInfo | URL) => {
+        const href = String(url);
+        const slug =
+          decodeURIComponent(href).match(/\/offers\/([^.]+)\.html/)?.[1] ?? "";
+        if (href.includes("start=")) await gate;
+        const value = today[slug];
+        if (typeof value !== "number") throw new Error("no count");
+        return counterResponse(String(value));
+      }),
+    );
+    return () => act(async () => release());
+  }
+
+  it("holds counts that land after the visitor touched the list (#570)", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const release = stubLateCounters({ "beta-copilot": 12 });
+    render(<HomePage index={index} />);
+    fireEvent.pointerDown(document.querySelector("#offer-alpha-social")!);
+    await release();
+    // The counts did land — the badge shows — but the rows stay put.
+    await waitFor(() => {
+      expect(hotSlugs()).toEqual(["beta-copilot"]);
+    });
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+  });
+
+  it("also holds counts once the visitor has scrolled (#570)", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const release = stubLateCounters({ "beta-copilot": 12 });
+    render(<HomePage index={index} />);
+    fireEvent.scroll(window);
+    await release();
+    await waitFor(() => {
+      expect(hotSlugs()).toEqual(["beta-copilot"]);
+    });
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+  });
+
+  it("applies held counts with the visitor's next list change (#570)", async () => {
+    configureAnalytics({ statsSite: SITE });
+    const release = stubLateCounters({ "beta-copilot": 12 });
+    render(<HomePage index={index} />);
+    fireEvent.focusIn(document.querySelector("#offer-alpha-social")!);
+    await release();
+    await waitFor(() => {
+      expect(hotSlugs()).toEqual(["beta-copilot"]);
+    });
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    fireEvent.click(categoryChip("coding"));
+    await waitFor(() => {
+      expect(listedSlugs()).toEqual([
+        "beta-copilot",
+        "alpha-copilot",
+        "alpha-social",
+        "alpha-free",
+      ]);
+    });
+  });
+
   it("never lets a below-floor count reorder the list", async () => {
     configureAnalytics({ statsSite: SITE });
     stubCounters({ "beta-copilot": 2 });
