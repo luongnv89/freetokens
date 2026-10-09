@@ -555,7 +555,7 @@
       "verified_date": "2026-09-30",
       "added_date": "2026-09-27",
       "verification": "social_proof",
-      "review_status": "under-review",
+      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
@@ -3495,7 +3495,7 @@
       "verified_date": "2026-09-25",
       "added_date": "2026-08-22",
       "verification": "social_proof",
-      "review_status": "verified",
+      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
