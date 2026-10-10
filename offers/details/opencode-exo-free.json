@@ -1,0 +1,17 @@
+{
+  "summary": "OpenCode Zen lists Exo Free (model ID exo-free) with free input, output and cached reads. It is available for a limited time, with no end date stated. Use it for coding in OpenCode or through the OpenAI-compatible Zen API. During the free period, collected data may be used to improve the model; avoid sending sensitive or confidential material. The general Zen setup instructs users to sign in, add billing details and obtain an API key. Whether Exo Free specifically requires a payment method or funded balance has not been confirmed. Account enrollment and an Exo API request were not completed, so this entry records published pricing rather than firsthand delivered access.",
+  "claim_steps": [
+    "Sign in to OpenCode Zen and obtain your API key. General Zen instructions include adding billing details; an Exo-specific payment-method requirement is unconfirmed.",
+    "In OpenCode, run /connect, select OpenCode Zen and enter your API key locally.",
+    "Run /models and select Exo Free (model ID: exo-free). Alternatively, use exo-free with https://opencode.ai/zen/v1/chat/completions.",
+    "During the free period, collected data may be used to improve the model. Avoid sensitive inputs and check current pricing before use; the offer is limited-time."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/docs/zen/",
+      "title": "Zen | OpenCode",
+      "text": "Exo Free is available on OpenCode for a limited time. Pricing table lists input, output and cached reads as Free. Exo Free: During its free period, collected data may be used to improve the model. General setup: sign in, add billing details, and copy your API key."
+    }
+  ]
+}
