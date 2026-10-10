@@ -1,0 +1,14 @@
+# Verified 2026-10-10 against https://opencode.ai/docs/zen/
+# Pricing table: "Exo Free | Free | Free | Free | -" (input/output/cached read/cached write).
+# "Exo Free is available on OpenCode for a limited time."
+# "During its free period, collected data may be used to improve the model."
+title: Exo Free on OpenCode Zen
+provider: OpenCode
+category: coding
+amount: "Free Exo input, output and cached reads on OpenCode Zen (limited time); collected data may be used to improve the model"
+expiry_date: null
+source_url: https://opencode.ai/docs/zen/
+verified_date: 2026-10-10
+verification: social_proof
+review_status: under-review
+signup: required

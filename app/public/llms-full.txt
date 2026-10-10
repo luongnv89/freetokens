@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-09T03:08:37Z — 171 of 214 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-10T18:44:20Z — 170 of 215 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Exo Free on OpenCode Zen
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Exo input, output and cached reads on OpenCode Zen (limited time); collected data may be used to improve the model
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://opencode.ai/docs/zen/
+- Page: https://freetokens.custats.info/offers/opencode-exo-free.html
+- Summary: OpenCode Zen lists Exo Free (model ID exo-free) with free input, output and cached reads. It is available for a limited time, with no end date stated. Use it for coding in OpenCode or through the OpenAI-compatible Zen API. During the free period, collected data may be used to improve the model; avoid sending sensitive or confidential material. The general Zen setup instructs users to sign in, add billing details and obtain an API key. Whether Exo Free specifically requires a payment method or funded balance has not been confirmed. Account enrollment and an Exo API request were not completed, so this entry records published pricing rather than firsthand delivered access.
+- Claim steps: Sign in to OpenCode Zen and obtain your API key. General Zen instructions include adding billing details; an Exo-specific payment-method requirement is unconfirmed. | In OpenCode, run /connect, select OpenCode Zen and enter your API key locally. | Run /models and select Exo Free (model ID: exo-free). Alternatively, use exo-free with https://opencode.ai/zen/v1/chat/completions. | During the free period, collected data may be used to improve the model. Avoid sensitive inputs and check current pricing before use; the offer is limited-time.
 ### Y-API Daily Shared Free API Key — $20/Day Pool
 - Provider: Y-API
 - Category: api_provider
@@ -1694,26 +1704,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/claude-team-plan-for-scientists.html
 - Summary: Anthropic's Claude Team plan for scientists offers promotional Team seating to verified principal investigators (or equivalent) at academic or nonprofit research institutions. Standard seats are free; Premium seats are $15/month (regularly $100) with 5x usage. The promotion covers 12 months from signup, is limited to about 10,000 seats, and is not guaranteed. Includes Claude Science, Code, and Cowork. Verification typically takes 5–7 business days. 1–25 seats per group; larger groups contact Anthropic. This is a Claude.ai Team subscription, distinct from API credit grants in AI for Science.
 - Claim steps: Confirm you are a PI or equivalent at an accredited university or nonprofit research institute (natural sciences, math, CS, engineering, related fields). | Complete the verification form on claude.com/programs/team-plan-for-scientists. | Wait for review (most applications 5–7 business days) and the approval email. | Add lab members as Standard (free) or Premium ($15/mo) seats. Final pricing is confirmed after verification.
-### Claude for Open Source
-- Provider: Anthropic
-- Category: oss_program
-- Amount: 6 months of free Claude Max 20x (~$1,200 value at $200/mo list); subscription grant, not API credits; capped at 10,000 recipients
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://claude.com/contact-sales/claude-for-oss
-- Page: https://freetokens.custats.info/offers/claude-for-open-source.html
-- Summary: Claude for Open Source grants eligible maintainers and contributors a complimentary Claude Max 20x subscription for six months — a subscription grant, not API credits. Capped at 10,000 approved recipients, rolling review until the cap is reached or the application period closes. Eligibility tracks: maintainers (500+ dependent repos, 100+ dependent packages, or 200k+ monthly downloads), core contributors on recognized foundation/language projects, active contributors (100+ merged PRs on others' repos in 12 months), community builders (20+ unique external merged-PR contributors in 12 months), critical infrastructure (OpenSSF criticality score >=0.4), plus a discretionary ecosystem-impact track. General requirements: natural person, GitHub account at least two years old, public OSS activity in the last 90 days, and at least one OSI-approved-licensed project.
-- Claim steps: Check the eligibility tracks on claude.com/contact-sales/claude-for-oss. | Apply at claude.com/open-source-max — sign in with your GitHub account, add email, planned usage, and a <=500-word qualification statement. | If approved, an activation link is emailed to your GitHub account email; activate within 90 days. | Subscription runs 6 consecutive months; an existing paid plan pauses and resumes afterward unless cancelled.
-### Cerebras YC Startup Deal
-- Provider: Cerebras
-- Category: startup_program
-- Amount: Up to $22.5K in Cerebras Cloud inference credits plus priority support and co-marketing
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.cerebras.ai/yc-startup-deal
-- Page: https://freetokens.custats.info/offers/cerebras-yc-startup-deal.html
-- Summary: The Cerebras YC Startup Deal gives Y Combinator startups from any batch up to $22.5K worth of inference on Cerebras Cloud, plus priority support and co-marketing opportunities. No setup fees.
-- Claim steps: Apply via the form linked from cerebras.ai/yc-startup-deal (HubSpot application). | YC startups from any batch are eligible; no setup fees.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
