@@ -1,11 +1,12 @@
-# Verified 2026-09-18 against https://www.mixedbread.com/pricing
-# ("Starter: Free — Try Mixedbread with $5 in one-time credits. No card
-# required." Includes 3 workspace users, 10 stores, "100 requests /
-# minute". Same usage rates on every plan; prepaid top-ups after.)
+# Historical source check 2026-09-18 against https://www.mixedbread.com/pricing
+# ($5 one-time Starter credits, no card required.)
+# Source checked 2026-10-11 (not firsthand tested): "3 workspace users", "3 stores",
+# "100 queries/min, 6,000 uploads/min". Same usage rates on every plan.
+# "When the credits are used up, upgrade to Scale to keep going."
 title: Mixedbread Starter — $5 Free Credits
 provider: Mixedbread
 category: api_provider
-amount: $5 one-time credits (100 req/min, no card required)
+amount: $5 one-time credits (3 stores, 100 queries/min, 6,000 uploads/min; no card required)
 expiry_date: null
 source_url: https://www.mixedbread.com/pricing
 verified_date: 2026-09-30

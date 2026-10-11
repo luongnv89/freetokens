@@ -1,16 +1,18 @@
 {
-  "summary": "96M credits/year plus $300/month in agent credits for 12 months (over $8,000 value).",
+  "summary": "Accepted startups receive 12 months on Cartesia's Scale plan: 96M shared Sonic/Ink credits per year (8M each month) plus $299/month in separate Managed Agents credits. Unused model credits roll over up to 2× the monthly allowance. Sonic covers text to speech and Ink covers speech to text. After the grant, staying on Scale costs $299/month; you can cancel or switch plans.",
   "claim_steps": [
     "Submit the startup grant application.",
     "Wait for Cartesia review; applicants typically hear back within one week.",
-    "If accepted, apply the provided coupon code to the Cartesia account."
+    "If accepted, apply the provided coupon code to the Cartesia account for 12 months on Scale: 8M shared Sonic/Ink credits and $299 in Managed Agents credits each month.",
+    "Use the shared model allowance for Sonic and Ink; unused model credits roll over up to 2× the monthly allowance. Managed Agents has a separate credit allowance.",
+    "Before the 12-month grant ends, decide whether to stay on Scale at $299/month, cancel, or switch to a lower-volume plan."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.cartesia.ai/startups",
       "title": "Cartesia | Startup grant | 12 months of voice AI",
-      "text": "96M credits a year. 8M shared Sonic and Ink credits each month, plus $299 per month in Managed Agents credits."
+      "text": "Accepted startups receive 12 months on Scale, with 8 million shared Sonic and Ink credits each month, plus $299 per month in Managed Agents credits. Model credits roll over up to 2× your monthly allowance."
     },
     {
       "type": "link",

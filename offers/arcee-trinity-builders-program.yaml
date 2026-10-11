@@ -1,10 +1,12 @@
 # Original terms checked 2026-09-19; source URL repaired 2026-10-04 after 404.
 # https://www.arcee.ai/blog/introducing-the-trinity-builders-program links the application.
 # ("Accepted applicants receive free API credits for Trinity models, allocated based on your project scope and our available capacity.")
+# "Actual allocations, if approved, are determined at review time."
+# "Awarded credits are valid for 90 days from the date of allocation"; no global program end date.
 title: Arcee AI Trinity Builders Program
 provider: Arcee AI
 category: api_provider
-amount: Free Trinity API credits allocated at review; requested ranges from under 50M to over 1B tokens
+amount: Free Trinity API credits allocated at review based on project scope and capacity; requested ranges from under 50M to over 1B tokens are not guaranteed awards; awarded credits expire 90 days from allocation
 expiry_date: null
 source_url: https://www.arcee.ai/blog/introducing-the-trinity-builders-program
 verified_date: 2026-09-30

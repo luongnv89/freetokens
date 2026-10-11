@@ -1,12 +1,20 @@
 {
-  "summary": "Freebuff is a free coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Text ads fund access to its model catalog instead of a subscription. Its free daily allowance of 150 Freebucks covers up to 15 hours of DeepSeek V4.1 Flash per day (or a mix of other models such as GLM 5.3 Flash and MiMo 2.6 Flash). Supported regions receive full access; other regions and VPN users get a limited daily allowance.",
+  "summary": "Freebuff is an ad-supported coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Its current Free plan lists up to 10 hours per day of DeepSeek V4.1 Flash or GLM 5.3 Flash when the daily allowance is used on one model, with no card required. These are full-access estimates: account and regional allowances vary, fair-use limits apply, and model prices and allowances may change. Sign in to confirm your account's allowance. The embedded X announcement is historical evidence, not an account-specific guarantee.",
   "claim_steps": [
+    "Review the Free plan at https://freebuff.com/plans; displayed hours assume full access. Sign in to confirm your account's allowance.",
     "Install the CLI (Node.js 18+): npm install -g freebuff",
     "Open a project: cd your-project",
-    "Run freebuff and describe what you want — no account to create, no API key, no credit card.",
-    "Or use another Freebuff product: Desktop (freebuff.com/desktop), Web (freebuff.com/web), Cloud (freebuff.com/cloud), or Chat (freebuff.com/chat)."
+    "Run freebuff and describe what you want. The CLI page states no account or API key is needed to start; the Free plan states no card required.",
+    "Or use another Freebuff product: Desktop (freebuff.com/desktop), Web (freebuff.com/web), Cloud (freebuff.com/cloud), or Chat (freebuff.com/chat).",
+    "Use the daily allowance on one model or a mix; unused daily allowance does not roll over. Regional and fair-use limits may reduce access."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://freebuff.com/plans",
+      "title": "Freebuff Plans: Free and paid plans",
+      "text": "Free $0 / month No card required ... Per day GLM 5.3 Flash 10 hrs or DeepSeek V4.1 Flash 10 hrs ... Displayed allowances are for full access. Sign in to confirm your account’s allowance."
+    },
     {
       "type": "link",
       "url": "https://freebuff.com/",

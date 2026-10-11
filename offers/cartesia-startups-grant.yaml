@@ -1,9 +1,12 @@
-# Verified 2026-09-19 against https://www.cartesia.ai/startups
-# ("96M credits a year. 8M credits for Sonic & Ink every month, plus $300/mo in agent credits. Over $8,000 in total value to put straight into building.")
+# Official-page evidence checked 2026-10-11 at https://www.cartesia.ai/startups
+# ("Accepted startups receive 12 months on Scale, with 8 million shared Sonic
+# and Ink credits each month, plus $299 per month in Managed Agents credits.
+# Model credits roll over up to 2× your monthly allowance.")
+# No firsthand signup test; curator verification date and statuses retained.
 title: Cartesia Startups Grant
 provider: Cartesia
 category: startup_program
-amount: 96M credits/year plus $299/month in agent credits for 12 months (over $8,000 value)
+amount: 96M shared Sonic/Ink credits/year plus $299/month in Managed Agents credits for 12 months on Scale; model credits roll over up to 2× the monthly allowance
 expiry_date: null
 source_url: https://www.cartesia.ai/startups
 verified_date: 2026-09-30

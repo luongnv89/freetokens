@@ -1,13 +1,13 @@
-# Verified 2026-09-12 against https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota
-# ("When you first activate Alibaba Cloud Model Studio (Singapore region), the
-# platform automatically grants you a free quota for various models." / "The
-# free quota is valid for 90 days" / "Each model ... has its own independent
-# free quota (typically 1,000,000 tokens)" / "The free quota only covers
-# charges for real-time inference")
+# Official-page evidence checked 2026-10-11 at https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota
+# ("The free quota is valid for 90 days, starting from the date you activate
+# Alibaba Cloud Model Studio, the model is released, or your model request
+# is approved (whichever is later). After the quota expires or is exhausted,
+# you will be charged for continued use of the model inference service.")
+# No firsthand signup test; curator verification date and statuses retained.
 title: Alibaba Cloud Model Studio — Free Quota for New Users
 provider: Alibaba Cloud
 category: api_provider
-amount: ~1,000,000 free tokens per eligible model, valid 90 days from activation (real-time inference only; Singapore region, International scope)
+amount: ~1,000,000 free tokens per eligible model, valid 90 days from activation, model release, or model-request approval (whichever is later); real-time inference only, Singapore region/International scope
 expiry_date: null
 source_url: https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota
 verified_date: 2026-09-30

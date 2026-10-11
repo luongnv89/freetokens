@@ -1,23 +1,17 @@
 {
-  "summary": "Claude Startups gives approved founders $1,000 in Claude API credits, a free year of Claude Team for up to five Premium seats if they are new to Team, and access to up to $45,000 in partner offers. API credits expire six months after they are granted and apply only to the first-party Claude API through Claude Console.",
+  "summary": "Claude Startups continues to offer Startup Stack partner discounts and credits worth up to $45,000, subject to partner terms, plus Applied AI office hours and events. The current official FAQ says the free year of Claude Team and $1,000 API credit offers are over capacity, so new applicants should not expect guaranteed Team access or API credits. Already-claimed offers are unchanged. Anthropic is re-reviewing applications, which may change some application statuses; the ongoing partner program has not ended.",
   "claim_steps": [
-    "Create a Claude Console account with a company email matching your website's domain.",
-    "Apply at https://claude.com/programs/startups and provide a short description of what you are building.",
-    "Meet the eligibility criteria: your startup was founded within the last five years or funded within the last two years.",
-    "After approval, sign in to the Claude Startups page in Claude Console to claim the API credits and Team offer."
+    "Sign in to Claude Console and apply through https://claude.com/programs/startups.",
+    "Read the current FAQ before applying: the Claude Team and $1,000 API credit offers are over capacity and are not guaranteed for new applicants.",
+    "If accepted, redeem available Startup Stack offers in Claude Console and check each independent partner's terms and eligibility.",
+    "If you already claimed the Team or API offer, the FAQ says nothing changes; use the claimed offer in your account. Watch for application re-review updates."
   ],
   "social_proof": [
     {
       "type": "link",
-      "url": "https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build",
-      "title": "We’re expanding the Claude Startups program to help founders build | Claude by Anthropic",
-      "text": "Claude Startups members can get up to $7,000 in Claude products and credits to build*: A one-time API credit of $1,000 to start building."
-    },
-    {
-      "type": "link",
       "url": "https://claude.com/programs/startups",
-      "title": "Claude for Startups Program | Claude by Anthropic",
-      "text": "Every approved company gets $1,000 in Claude API credits and one year of Claude Team free for up to five Premium seats, if you’re new to Claude Team."
+      "title": "Claude for Startups program | Claude by Anthropic",
+      "text": "we’re currently over capacity on the Claude Team and $1,000 API credit offers. If you’ve already claimed the offer, nothing changes; you can use the offer in the account.\nAll existing members will still have full access to the Startup Stack, Applied AI office hours and events, and if you’re on a Claude Max or Team plan, your monthly API credits are available in Console as usual."
     }
   ]
 }

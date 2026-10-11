@@ -1,14 +1,14 @@
-# Verified 2026-09-05 against https://mistral.ai/pricing
-# Free plan card: "Test Mistral models in Studio. $10 /mo in API credits."
-# FAQ: "On the Free plan, you also get access to Mistral Studio."
-# Docs still say only: "Free mode: API access is enabled by default with no
-# credit card required. Usage and rate limits apply."
-title: Mistral Free Plan — $10/mo API Credits
+# Daily source correction: https://docs.mistral.ai/admin/billing-usage/usage-limits
+# "Free mode lets you create API keys and use included monthly usage within
+# the limits shown on the Limits page." No current public dollar allowance.
+# Pricing FAQ: "On the Free plan, you also get access to Mistral Studio."
+# Existing verification date and curator-testing status are unchanged.
+title: Mistral Free Mode — Included Monthly API Usage
 provider: Mistral AI
 category: api_provider
-amount: $10/mo in API credits plus Studio access (no credit card for Free)
+amount: Included monthly API usage in Free mode plus Mistral Studio access; allowance and limits are shown on the account Limits page, with no current public dollar amount
 expiry_date: null
-source_url: https://mistral.ai/pricing
+source_url: https://docs.mistral.ai/admin/billing-usage/usage-limits
 verified_date: 2026-09-28
 verification: social_proof
 review_status: to-be-verified
