@@ -1,22 +1,23 @@
 {
-  "summary": "fal's Startup Program starts approved teams at $1,000 in credits and can grow to $5,000 as usage scales. It is for companies that can show traction, revenue, real users, or institutional funding, and is open to teams based in Europe and Asia. A short intro call is usually part of approval; promotional credits expire after 90 days under fal's terms.",
+  "summary": "fal's Startup Program provides $1,000 initial credits to approved teams. On request, credits increase to $2,500 total at $1,000/month fal spend and $5,000 total at $2,500/month fal spend; spend elsewhere does not count. Teams already at a threshold may start at the matching tier. Eligible companies are based in Europe or Asia and can show real users, traction, revenue, or institutional funding. One application per company every three months; a short intro call is usually part of approval. Promotional credits expire after 90 days under fal's terms.",
   "claim_steps": [
     "Confirm that the company is based in Europe or Asia and can show real users, meaningful traction, revenue, or institutional funding.",
-    "Apply through fal's Startup Program and describe the company's traction or funding and intended fal usage.",
-    "Complete the usual approval call and create or sign in to a fal account for the credits."
+    "Apply at https://fal.ai/startup-program with the company's traction or funding and intended fal usage; one application per company every three months.",
+    "Complete the usual approval call and create or sign in to a fal account. Approved teams start with $1,000; teams already scaling may receive the matching tier.",
+    "Request additional credits once monthly fal spend reaches $1,000 ($2,500 total credits) or $2,500 ($5,000 total credits). Spend on other platforms does not count; promotional credits expire after 90 days."
   ],
   "social_proof": [
     {
       "type": "link",
-      "url": "https://fal.ai/startups",
-      "title": "fal for Startups & Builders | fal",
-      "text": "Apply for the Startup Program · $1,000–$5,000."
+      "url": "https://fal.ai/startup-program",
+      "title": "fal Startup Program | fal",
+      "text": "Every approved team starts with the Startup pack.\nUnlocks at $1,000/mo on fal · +$1,500 added on request\nUnlocks at $2,500/mo on fal · +$2,500 added on request"
     },
     {
       "type": "link",
-      "url": "https://fal.ai/startup-program",
-      "title": "fal Startup Program | fal",
-      "text": "Start with $1,000 in credits and grow to $5,000 as your usage scales; the program is open to teams based in Europe & Asia."
+      "url": "https://fal.ai/startups",
+      "title": "fal for Startups & Builders | fal — historical excerpt, 2026-09-11",
+      "text": "Apply for the Startup Program · $1,000–$5,000."
     },
     {
       "type": "link",

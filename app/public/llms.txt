@@ -29,7 +29,7 @@ In one line: corroborated = evidence level · reviewed / tested = review status 
 
 ## Offers
 
-Top 20 currently active offers (newest checked first) from 215 active listings. Every line ends with the offer's own review status, evidence level, sign-up need and last-checked date. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest checked first) from 210 active listings. Every line ends with the offer's own review status, evidence level, sign-up need and last-checked date. Full directory at https://freetokens.custats.info/.
 
 - [Exo Free on OpenCode Zen](https://freetokens.custats.info/offers/opencode-exo-free.html): OpenCode — Free Exo input, output and cached reads on OpenCode Zen (limited time); collected data may be used to improve the model (coding) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-10-10
 - [Y-API Daily Shared Free API Key — $20/Day Pool](https://freetokens.custats.info/offers/y-api-daily-shared-free-key.html): Y-API — One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation (~20 models). Own accounts also get $1 starter credit. (api_provider) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-10-08

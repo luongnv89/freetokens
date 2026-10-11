@@ -1,22 +1,22 @@
 {
-  "summary": "Mistral's Free plan includes $10 per month in API credits and access to Mistral Studio, with no credit card required. The pricing page lists Studio plus $10/mo credits on the Free card. Studio docs still describe Free mode as rate-limited API access with no card — they do not mention the $10 monthly credit.",
+  "summary": "Mistral Free mode lets you create API keys and use included monthly API usage within the limits shown on your account's Limits page. The Free plan also includes Mistral Studio access. Current official documentation does not publish a dollar allowance; check your Organization's included usage and limits rather than assuming a fixed credit amount. This remains an ongoing Free-mode listing, with curator verification pending.",
   "claim_steps": [
-    "Create a free account at console.mistral.ai (no credit card required).",
-    "Use the Free plan — Studio access and $10/mo API credits apply.",
-    "Generate an API key and call api.mistral.ai within published limits."
+    "Create or sign in to a Mistral account and open Mistral Studio.",
+    "Use Free mode and review Admin Panel > API > Limits for your Organization's included usage and API limits.",
+    "Create an API key and keep requests within the displayed limits; review Subscriptions before enabling pay-as-you-go usage."
   ],
   "social_proof": [
     {
       "type": "link",
-      "url": "https://mistral.ai/pricing",
-      "title": "Pricing | Mistral",
-      "text": "Free plan card lists: Test Mistral models in Studio. $10 /mo in API credits. FAQ: On the Free plan, you also get access to Mistral Studio."
+      "url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+      "title": "Usage and limits | Mistral Docs",
+      "text": "Your Mistral plan defines the included monthly usage and limits available to your Organization. Free mode lets you create API keys and use included monthly usage within the limits shown on the Limits page."
     },
     {
       "type": "link",
-      "url": "https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key",
-      "title": "Activate Studio and generate an API key | Mistral Docs",
-      "text": "Free mode: API access is enabled by default with no credit card required. Usage and rate limits apply."
+      "url": "https://mistral.ai/pricing",
+      "title": "Pricing | Mistral",
+      "text": "On the Free plan, you also get access to Mistral Studio."
     }
   ]
 }

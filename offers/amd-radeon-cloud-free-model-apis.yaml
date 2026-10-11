@@ -1,12 +1,12 @@
-# Verified 2026-09-18 against https://amd-aim.github.io/radeon-cloud-docs/models/overview/
-# ("Public Free Model APIs" — six chat models on /v1/chat/completions:
-# DeepSeek-V4-Flash, DeepSeek-V4-Flash-Vision-Exp, DeepSeek-V4.1-Flash,
-# Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B — plus MinerU2.5-Pro OCR on
-# POST /v1/ocr. GET /v1/models is the source of truth for availability.)
+# Current Token Factory listing: "Public Free Model APIs" / "10 models".
+# Nine cards are FREE, including Gemma-4-31B-IT; MinerU2.5-Pro is LIMITED FREE.
+# https://amd-aim.github.io/radeon-cloud-docs/api/usage/: "Quota values are per account".
+# Daily allowances apply; docs sample quotas are not universal guarantees.
+# Public-page evidence only: no signup or inference tested; verification date unchanged.
 title: AMD Radeon Cloud Token Factory — Free Model APIs
 provider: AMD Radeon Cloud
 category: api_provider
-amount: Free public model APIs listed on the official page (9 models): MiMo-V2.6-Flash, DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, DeepSeek-V4-Flash-Vision-Exp, GLM-5.3-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, MiniCPM5-2B, MinerU2.5-Pro; beta, quotas unpublished
+amount: "10 public model APIs: MiMo-V2.6-Flash, DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, DeepSeek-V4-Flash-Vision-Exp, GLM-5.3-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, Gemma-4-31B-IT and MiniCPM5-2B marked FREE; MinerU2.5-Pro marked LIMITED FREE; beta, per-account daily allowances apply"
 expiry_date: null
 source_url: https://developer.amd.com.cn/radeon/tokenfactory
 verified_date: 2026-09-30

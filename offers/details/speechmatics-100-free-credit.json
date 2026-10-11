@@ -1,16 +1,17 @@
 {
-  "summary": "Speechmatics grants new accounts $100 in credit (1 credit = $1) usable on speech-to-text in 55+ languages and low-latency text-to-speech, no card required. The Free tier allows 2 concurrent real-time sessions; once the credit is used, add a card to continue on pay-as-you-go.",
+  "summary": "Speechmatics advertises $100 in free speech-to-text credits for new accounts, no card required, with 55+ languages and 2 concurrent real-time sessions on Free. Separately, its text-to-speech pricing offers the first 1 million characters free. Current public pricing does not establish that the $100 STT credit is a shared STT/TTS pool. This listing is awaiting curator verification; signup and inference have not been tested in this source check.",
   "claim_steps": [
-    "Sign up at https://portal.speechmatics.com/signup/ — no card required.",
-    "$100 in credit is applied to the new account; usable on STT and TTS.",
-    "After the credit is consumed, add a card in account settings to continue."
+    "Sign up at https://portal.speechmatics.com/signup/ — the $100 STT offer states no card required.",
+    "Check the account's $100 speech-to-text credit allowance and Free-tier limit of 2 concurrent real-time sessions.",
+    "For text-to-speech, check the separate first-1-million-characters-free allowance; do not assume it draws from the $100 STT credit.",
+    "Review current billing terms before continuing beyond either free allowance."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.speechmatics.com/pricing",
-      "title": "Pricing for our Speech API services | Speechmatics",
-      "text": "Start with $100 in credit, no card required. ... New accounts start with $100 in credit, no card required. Once it's used, add a card in your account settings to switch to pay-as-you-go."
+      "title": "Speechmatics pricing: Speech to Text from $0.121/hr",
+      "text": "Start free • $100 in credits ... No card required ... Concurrent sessions (Real-time) 50 (2 on Free) ... Text to Speech ... First 1 million characters free (about 20 hours of speech)."
     }
   ]
 }

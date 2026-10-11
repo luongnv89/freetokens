@@ -1,14 +1,15 @@
-# Verified 2026-10-06 against https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build
-# ("Claude Startups members can get up to $7,000 in Claude products and credits to build*.")
-# ("A one-time API credit of $1,000 to start building: available as soon as you’re approved...")
-# ("Startups founded in the last five years or funded in the last two are eligible to apply.")
+# Current program FAQ: https://claude.com/programs/startups
+# "we’re currently over capacity on the Claude Team and $1,000 API credit offers."
+# "If you’ve already claimed the offer, nothing changes; you can use the offer in the account."
+# Startup Stack, Applied AI office hours and events continue; applications are being re-reviewed.
+# Existing verification date is unchanged; new Team/API grants need curator follow-up.
 title: Claude Startups
 provider: Anthropic
 category: startup_program
-amount: "$1,000 in Claude API credits (valid for 6 months) + 1 year of Claude Team for up to 5 Premium seats; up to $45,000 in partner offers"
+amount: "Startup Stack partner discounts and credits worth up to $45,000, subject to partner terms; Claude Team and $1,000 API credit offers currently over capacity, with already-claimed benefits unchanged"
 expiry_date: null
-source_url: https://claude.com/resources/articles/were-expanding-the-claude-startups-program-to-help-founders-build
+source_url: https://claude.com/programs/startups
 verified_date: 2026-10-06
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: required

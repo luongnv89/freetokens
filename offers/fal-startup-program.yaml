@@ -1,11 +1,13 @@
-# Verified 2026-09-11 against https://fal.ai/startups
-# ("Apply for the Startup Program · $1,000–$5,000"; "Open to teams based in Europe & Asia")
+# Official-page evidence checked 2026-10-11 at https://fal.ai/startup-program
+# ("Unlocks at $1,000/mo on fal · +$1,500 added on request";
+# "Unlocks at $2,500/mo on fal · +$2,500 added on request")
+# No firsthand signup test; curator verification date and statuses retained.
 title: fal Startup Program — $1,000–$5,000
 provider: fal
 category: startup_program
-amount: $1,000–$5,000 in fal credits for scaling startups (Europe/Asia-based teams only; one application per company every three months)
+amount: $1,000 initial fal credits; $2,500 total at $1,000/month fal spend and $5,000 total at $2,500/month fal spend, with tier increases on request (Europe/Asia teams with traction or VC backing; one application per company every three months)
 expiry_date: null
-source_url: https://fal.ai/startups
+source_url: https://fal.ai/startup-program
 verified_date: 2026-09-30
 verification: social_proof
 review_status: unverified

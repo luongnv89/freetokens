@@ -1,16 +1,16 @@
 {
-  "summary": "SiliconFlow's API pricing page marks selected models free for input and output. Currently free: tencent/Hunyuan-MT-7B and PaddlePaddle/PaddleOCR-VL-1.5 (chat), BAAI bge-m3 / bge-reranker-v2-m3 / bge-large-zh-v1.5 / bge-large-en-v1.5 (embeddings), Kwai-Kolors/Kolors (image), and XingChenAGI XingChenGSR-V1.0 / XingChenASR V3.2 / V3.2-Ultra / ASR-Diarize-V3.0, Qwen/Qwen3-ASR-1.7B and FunAudioLLM/SenseVoiceSmall (speech). GLM-Z1-9B-0414 was removed from the free tier and is now paid ($0.086/M tokens).",
+  "summary": "SiliconFlow's API pricing page marks selected models free. Free examples include tencent/Hunyuan-MT-7B and PaddlePaddle/PaddleOCR-VL-1.5 (chat input/output), BAAI bge-m3 / bge-reranker-v2-m3 / bge-large-zh-v1.5 / bge-large-en-v1.5 (embedding/reranker models), Kwai-Kolors/Kolors (image), and XingChenAGI XingChenGSR-V1.0 / XingChenASR-V3.2 / XingChenASR-V3.2-Ultra / XingChenASR-Diarize-V3.0 and FunAudioLLM/SenseVoiceSmall (speech). Qwen/Qwen3-ASR-1.7B is paid, currently listed at ¥0.00022 per audio second, and is not a free-model example. Historical checks also removed GLM-Z1-9B-0414 from the free examples.",
   "claim_steps": [
     "Sign in to SiliconFlow Cloud.",
-    "Choose a model marked 免费/free in the API pricing catalog.",
-    "Use the selected model through SiliconFlow's API."
+    "Choose a model marked 免费/free in the current API pricing catalog. Qwen/Qwen3-ASR-1.7B is paid; do not select it expecting free speech recognition.",
+    "Use the selected free model through SiliconFlow's API; recheck the model's current price before making requests."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://siliconflow.cn/pricing",
       "title": "SiliconFlow API Pricing",
-      "text": "tencent/Hunyuan-MT-7B and PaddlePaddle/PaddleOCR-VL-1.5 are listed with 免费 input/output prices; BAAI bge-* embeddings, Kwai-Kolors/Kolors, and XingChen/Qwen3-ASR/SenseVoiceSmall speech models are marked 免费."
+      "text": "Hunyuan-MT-7B tencent/Hunyuan-MT-7B 免费 免费 ... PaddleOCR-VL-1.5 PaddlePaddle/PaddleOCR-VL-1.5 免费 免费 ... bge-m3 BAAI/bge-m3 免费 ... Kolors Kwai-Kolors/Kolors 生成图片 每图片 免费 ... Qwen3-ASR-1.7B Qwen/Qwen3-ASR-1.7B 输入音频时长（s） 每秒 ¥ 0.00022 ... SenseVoiceSmall FunAudioLLM/SenseVoiceSmall 输入 UTF-8 字节 每千字符（UTF-8） 免费"
     }
   ]
 }

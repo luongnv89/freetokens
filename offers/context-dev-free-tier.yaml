@@ -1,12 +1,12 @@
-# Verified 2026-09-17 against https://www.context.dev/pricing
-# ("Start with 1,000 free credits/mo, no credit card required." /
-# "The free tier includes 1,000 API credits per month plus 10K one-time Logo
-# Link requests" / "Free is 30 calls/minute with a work email or 10 with a
-# personal email.")
+# Historical source check 2026-09-17 against https://www.context.dev/pricing
+# ("Start with 1,000 free credits/mo, no credit card required.")
+# Source checked 2026-10-11 (not firsthand tested): "1 concurrent request" on Free.
+# "Accounts created before concurrency limits keep their per-minute limits,
+# and the dashboard shows which applies." Legacy RPM is not a new-account promise.
 title: Context.dev Free Tier
 provider: Context.dev
 category: api_provider
-amount: 1,000 API credits/month + 10K one-time Logo Link requests (30 RPM work email / 10 RPM personal)
+amount: 1,000 API credits/month + 10K one-time Logo Link requests (1 concurrent request; legacy account RPM shown in dashboard)
 expiry_date: null
 source_url: https://www.context.dev/pricing
 verified_date: 2026-09-30
