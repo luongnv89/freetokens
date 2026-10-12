@@ -1,28 +1,23 @@
 {
-  "summary": "OrcaRouter's offers page lets you claim live voucher, student, and hackathon API credits (dollar amounts, scope, and expiry are printed on each card at claim time) and call a rotating set of $0 models. Create an account and claim an open offer with no payment method; a few partner offers are labelled card-required. Always-free $0 models are for established accounts (GitHub with some history, or any paid purchase). Promo credit expiry is shown before confirm; $0 models stay free while they remain in the lineup. Docs currently list DeepSeek V4 -free ids and the orcarouter/free router.",
+  "summary": "OrcaRouter offers a rotating set of $0 models for established accounts. The offers page currently shows 0 vouchers and 0 credit drops, so no live voucher, student, or hackathon credit grant is promised. To access always-free models, the workspace owner must link a GitHub account with some history (or use it to sign in), or the workspace must have a paid purchase of any amount. Free models require no credit and stay free while they remain in the lineup; rate and prompt-size limits apply. Check the current catalog for -free model IDs or use the orcarouter/free router; the lineup rotates as capacity allows.",
   "claim_steps": [
     "Create an account at orcarouter.ai (the offers page says an API key takes 30 seconds; no card, no sales call).",
-    "Open orcarouter.ai/offers and claim a live open offer; student/community offers unlock with an eligible email or invite code.",
-    "Call rotating $0 models (for example orcarouter/free or a -free catalog id) on the OpenAI-compatible endpoint; link GitHub with history if a free-model request is declined."
+    "Ensure the workspace owner has a GitHub account with some history linked in profile settings or used for sign-in; a paid purchase of any amount is the alternative established-account requirement.",
+    "Check orcarouter.ai/offers or the current catalog for rotating $0 models. The offers page currently lists 0 vouchers and 0 credit drops.",
+    "Call orcarouter/free or a current -free catalog ID on the OpenAI-compatible endpoint, subject to free-model rate and prompt-size limits."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.orcarouter.ai/offers",
       "title": "Free AI API Credits & Free AI Models — OrcaRouter Offers",
-      "text": "0 Credit drops. Free AI models on OrcaRouter cost $0 per token: no credit required, no trial clock. Always-free ($0) models are open to established accounts. The workspace owner needs a GitHub account with some history — linked in profile settings, or used to sign in — or the workspace needs a paid purchase of any amount."
-    },
-    {
-      "type": "link",
-      "url": "https://www.orcarouter.ai/blog/free-llm-api-what-it-costs",
-      "title": "Free LLM API in 2026: What's Free, What It Costs You",
-      "text": "OrcaRouter runs a rotating set of free AI models callable at $0 per token, alongside free API credits from open voucher drops, student programs and partner hackathons. Creating an account and claiming an open offer requires no payment method."
+      "text": "Vouchers 0. 0 Credit drops. Always-free ($0) models are open to established accounts. The workspace owner needs a GitHub account with some history — linked in profile settings, or used to sign in — or the workspace needs a paid purchase of any amount."
     },
     {
       "type": "link",
       "url": "https://docs.orcarouter.ai/routing/free-models",
       "title": "Free Models",
-      "text": "Some models are served at no charge under a model id ending in -free. They are ordinary catalog models priced at $0. Today that is the DeepSeek V4 line: deepseek/deepseek-v4-flash-free and deepseek/deepseek-v4-pro-free."
+      "text": "The free lineup rotates — models join and leave as capacity allows — so this page deliberately does not list ids. Read the catalog at the time you need it, or call GET /api/free-package/public, which returns the current free ids with the paid model each one shadows."
     },
     {
       "type": "link",

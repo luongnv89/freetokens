@@ -1,23 +1,32 @@
 {
-  "summary": "New Google Cloud customers get $300 in free credits to spend on any Cloud Platform service during a 90-day trial window counted from signup. A billing account is created, but you are not charged until you manually upgrade.",
+  "summary": "Eligible new Google Cloud customers get a $300 Welcome credit for covered services during a 90-day trial from signup. You must not have previously used the trial or been a paying Google Cloud, Google Maps Platform or Firebase user. A valid payment method is required for verification, but the trial does not automatically charge you; charges begin only after a manual paid-account upgrade. The trial restricts GPUs, Marketplace and third-party generative AI models. For billing accounts opened after March 2, 2026, Welcome credits cannot pay for Gemini API or AI Studio usage. Credits remain limited to covered services and the original 90-day window even after upgrading.",
   "claim_steps": [
     "Open cloud.google.com/free and click 'Start free'.",
     "Sign in with or create a Google account.",
-    "Complete the signup steps and create a billing account (no automatic charges).",
-    "Use the $300 credits on eligible services within the 90-day window."
+    "Confirm you have not previously used the Free Trial or been a paying Google Cloud, Google Maps Platform or Firebase user.",
+    "Complete signup and payment-method/identity verification to create a Free Trial billing account; the trial does not automatically charge you.",
+    "Use the $300 credits within 90 days on covered services. GPUs, Marketplace and third-party generative AI models are restricted during the trial.",
+    "Do not budget Welcome credits for Gemini API or AI Studio if your billing account was opened after March 2, 2026; those uses are excluded.",
+    "Upgrade manually only if you want paid access; excluded services or usage beyond your remaining credit and free limits can then be charged."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://cloud.google.com/free/docs/free-cloud-features",
       "title": "Free Google Cloud features and trial offer | Google Cloud Free Program | Google Cloud Documentation",
-      "text": "Learn about Google Cloud's free offerings and free trials, plus how to upgrade your account."
+      "text": "The Free Trial gets you a $300 Welcome credit to spend over 90 days on various Google Cloud products and you won't be billed. Products restricted during the Free Trial include GPUs, Google Cloud Marketplace, and third-party generative AI models."
     },
     {
       "type": "link",
       "url": "https://docs.cloud.google.com/free/docs/free-cloud-features",
       "title": "Free Google Cloud features and trial offer",
       "text": "The Free Trial gets you a $300 Welcome credit to spend over 90 days on various Google Cloud products and you won't be billed."
+    },
+    {
+      "type": "link",
+      "url": "https://ai.google.dev/gemini-api/docs/billing?hl=en",
+      "title": "Billing | Gemini API | Google AI for Developers",
+      "text": "If you opened your account after March 2, 2026, you can't use these credits to pay for Gemini API and AI Studio usage, but you can use them on other Google Cloud products in the Google Cloud console."
     }
   ]
 }

@@ -1,17 +1,29 @@
 {
-  "summary": "Fireworks AI's official pricing page states: \"Pay per token, with high rate limits and postpaid billing. Get started with $1 in free credits.\" This matches the claimed $1 starter credit for new accounts. The page's \"Get Started\" button links to /signup, so claiming requires creating an account. No expiry or limited-time language appears near the offer, so it is treated as ongoing with no fixed end date. The offer was not personally redeemed; the verdict is based on the official page.",
+  "summary": "Fireworks AI's official billing FAQ still refers to a $1 credit and explains what happens when it is exhausted. The current pricing page no longer advertises a $1 signup grant, so the actual grant to a new account remains to be verified; this offer has not been personally redeemed. Current self-serve billing is prepaid, not postpaid: usage draws from credits, and continuing after depletion requires a payment method and purchased credits. Auto Reload can purchase credits automatically if enabled. No fixed campaign end date is established.",
   "claim_steps": [
-    "Go to https://fireworks.ai/pricing, which states: \"Get started with $1 in free credits.\"",
-    "Click the \"Get Started\" button, which links to https://fireworks.ai/signup.",
-    "Create a new Fireworks AI account.",
-    "Use the $1 in free credits with pay-per-token serverless inference (Standard, Priority, or Fast tiers)."
+    "Create a Fireworks AI account at https://fireworks.ai/signup.",
+    "Check your billing dashboard for the $1 starter credit referenced by the official FAQ; a new-account grant has not been confirmed by this audit.",
+    "If the credit is granted, use it for eligible pay-per-token inference and monitor your balance.",
+    "After depletion, continuing service requires a payment method and purchased credits. Check Auto Reload settings before enabling automatic purchases."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://fireworks.ai/pricing",
       "title": "Fireworks - Pricing",
-      "text": "Pay per token, with high rate limits and postpaid billing. Get started with $1 in free credits."
+      "text": "Pay per token with pre-paid, usage-based billing. Simply add a payment method to buy credits, and usage is then deducted from your balance."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.fireworks.ai/faq-new/billing-pricing/what-happens-when-i-finish-my-1-dollar-credit",
+      "title": "How do credits work? - Fireworks AI Docs",
+      "text": "What happens when I finish my $1 credit? When you finish your $1 credit, the following occurs: Without payment method: Your account will be suspended until you add a payment method. With payment method: Add credits to continue usage."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.fireworks.ai/faq/billing-pricing-usage/billing/credit-system",
+      "title": "Credit system - Fireworks AI Docs",
+      "text": "Fireworks operates on a pre-paid credits billing system. Add a valid payment method and billing address, then purchase credits before usage. If your credits reach zero and Auto Reload is disabled, usage pauses until you add credits."
     }
   ]
 }

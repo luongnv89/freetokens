@@ -1,9 +1,10 @@
 {
-  "summary": "DigitalOcean Startups (Hatch) gives approved startups 12 months of DigitalOcean credits (amount varies by partner award level), 15 months of free Standard-tier support, and select startups are invited to apply for GPU credit packages. Eligibility: raised $10M or less, company website with matching email domain, registered DigitalOcean team account with a business/company email; AI-native startups are prioritized and service-based businesses are ineligible. Core credits exclude some GPU/dedicated inference products.",
+  "summary": "DigitalOcean Startups (Hatch) gives approved startups 12 months of DigitalOcean credits (amount varies by partner award level), 15 months of free Standard-tier support, and select startups are invited to apply for GPU credit packages. Eligibility: raised $10M or less, company website with matching email domain, registered DigitalOcean team account with a business/company email and a valid credit card before applying; AI-native startups are prioritized and service-based businesses are ineligible. The program is for new startups that have not used prior DigitalOcean credits. Core credits exclude GPU Droplets; NVIDIA H100 GPU Kubernetes; Bare Metal GPUs; Dedicated Inference; Serverless Inference, third-party AI models hosted outside DigitalOcean Infrastructure (including Anthropic and OpenAI); Paperspace Machines; Cloudways services; and other charges passed through to third-party providers outside DigitalOcean's infrastructure. GPU credits are a separate, selective benefit, not guaranteed by program acceptance. Excluded services are charged to the account's payment method. Participants generally have a $10,000 monthly credit limit; usage above the monthly limit is charged.",
   "claim_steps": [
-    "Create a registered DigitalOcean team account with a business/company email (not personal).",
+    "Create a registered DigitalOcean team account with a business/company email matching your company domain (not personal) and a valid credit card before applying.",
     "Apply via digitalocean.com/hatch — directly or through a DigitalOcean Startups partner.",
-    "Eligibility: raised ≤$10M, company website + matching email; AI-native prioritized; service businesses ineligible."
+    "Eligibility: raised ≤$10M, company website + matching email, and no prior DigitalOcean credits used; AI-native prioritized; service businesses ineligible.",
+    "Check your onboarding email for the credit allocation and monthly limit. Use core credits only for qualifying services; excluded services and usage above the monthly credit limit are charged. GPU credits require a separate, selective application."
   ],
   "social_proof": [
     {
@@ -17,6 +18,24 @@
       "url": "https://www.digitalocean.com/startups",
       "title": "Grow with the Startup-Friendly AI-Native Cloud | DigitalOcean Startups",
       "text": "Get the cloud infrastructure you need with DigitalOcean credits (amount varies) to focus on building, not billing."
+    },
+    {
+      "type": "link",
+      "url": "https://www.digitalocean.com/startups",
+      "title": "DigitalOcean Startups — account and prior-credit requirements",
+      "text": "Before applying for DigitalOcean Startups, you must create a new DigitalOcean team account for your startup with 1) the corporate email address associated with your company domain and 2) a valid credit card. This program is for new startups that have not used prior credits with DigitalOcean."
+    },
+    {
+      "type": "link",
+      "url": "https://www.digitalocean.com/startups",
+      "title": "DigitalOcean Startups — core-credit exclusions",
+      "text": "GPU Droplets; NVIDIA H100 GPU Kubernetes; Bare Metal GPUs; Dedicated Inference; Serverless Inference, Third-party AI models hosted outside of DigitalOcean Infrastructure (including commercial/frontier models, including but not limited to Anthropic and OpenAI); Paperspace Machines; Cloudways services; Any other charges passed through to third-party providers outside of DigitalOcean's infrastructure"
+    },
+    {
+      "type": "link",
+      "url": "https://www.digitalocean.com/startups",
+      "title": "DigitalOcean Startups — separate GPU benefit and billing",
+      "text": "GPU credits are a separate benefit and will not be covered by the core credits received when initially accepted into the program. Your account's payment method will be charged for usage of GPU Droplets and any other services not appearing on the Qualifying Program Services. Participants generally are entitled to a $10,000 monthly limit (and charges apply for any use in a month exceeding this amount)."
     }
   ]
 }

@@ -1,16 +1,17 @@
 {
-  "summary": "Ollama's $0 Free plan includes access to cloud models. Cloud usage is light on Free, with session limits resetting every 5 hours and weekly limits resetting every 7 days.",
+  "summary": "Ollama's $0 Free plan includes starter usage credits and access to starter cloud models, alongside running models locally. The included Free usage resets monthly from the signup date and does not roll over; no fixed starter-credit amount is published on the pricing page. Purchased usage credits unlock all cloud models and are separate from the free allowance. Free includes one concurrent request, not the old five-hour session and weekly reset limits.",
   "claim_steps": [
     "Create or sign in to an Ollama account.",
-    "Use a cloud model through Ollama, or create an API key for direct cloud API access.",
-    "Stay within the Free plan's session, weekly, and one-concurrent-model limits."
+    "Use an included starter cloud model through Ollama, or create an API key for direct cloud API access.",
+    "Monitor your included starter usage credits and stay within the one-concurrent-request Free limit.",
+    "Included usage resets monthly on your signup date and does not roll over. Buying additional usage credits to unlock all models is optional paid usage, not part of the free allowance."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://ollama.com/pricing",
       "title": "Pricing | Ollama",
-      "text": "The $0 Free plan includes access to cloud models. Free cloud usage is light, with session limits resetting every 5 hours and weekly limits resetting every 7 days."
+      "text": "Starter usage credits included. Includes access to starter models. Add credits to unlock all models. On the Free plan, usage resets monthly from the date you signed up. Free includes 1 concurrent request."
     }
   ]
 }

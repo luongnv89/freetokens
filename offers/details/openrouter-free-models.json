@@ -1,10 +1,11 @@
 {
-  "summary": "OpenRouter routes many popular models with ':free' variants that cost nothing: 50 requests per day at up to 20 requests per minute on accounts holding under $10 in credits, rising to 1,000 requests per day once you have bought at least $10 of credits. One API key reaches dozens of free model endpoints.",
+  "summary": "OpenRouter offers model variants ending in ':free' with zero token pricing, limited to 20 requests per minute and ordinarily 50 requests per day. The daily tier depends on all-time credits purchased, not the current held balance or the is_free_tier flag. The table lists a $10 purchase threshold for 1,000 requests/day, but the documented rounding/top-up-fee buffer grants that ceiling one credit below it (currently $9 in all-time purchases). Free access does not require buying credits to use the lower daily allowance. Model-specific restrictions still apply.",
   "claim_steps": [
     "Create a free account at openrouter.ai and open the Keys page.",
     "Create an API key.",
     "Browse models filtered to the :free variants at openrouter.ai/models.",
-    "Call the OpenAI-compatible endpoint with your key, staying within the free rate limits."
+    "Call the OpenAI-compatible endpoint with your key, respecting model-specific restrictions and the 20 requests/minute and 50 requests/day lower allowance.",
+    "For the 1,000 requests/day tier, check all-time credits purchased rather than your held balance. The documented buffer starts it at one credit below the $10 table threshold, currently $9; purchases are optional for the lower tier."
   ],
   "social_proof": [
     {

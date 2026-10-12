@@ -1,8 +1,9 @@
 {
-  "summary": "The Sarvam AI Startup Program provides 6–12 months of API credits matched to the startup's scale (amount unpublished), priority support with direct access to Sarvam's engineering team, and launch visibility. Covers STT, TTS, voice agents, chat completion, translation, and document intelligence APIs, with native support for 22 Indian languages and English.",
+  "summary": "The Sarvam AI Startup Program provides 6–12 months of API credits matched to the startup's scale (amount unpublished), priority support with direct access to Sarvam's engineering team, and launch visibility. Covers STT, TTS, voice agents, chat completion, translation, and document intelligence APIs, with native support for 22 Indian languages and English. Participants must display \"Powered by Sarvam\" in their product as a condition of the program. Credits are valid only for the program term; unused credits are forfeited when it ends and do not roll over.",
   "claim_steps": [
     "Submit the application form at sarvam.ai/startup-program (company, product stage, funding, team, APIs of interest, expected usage).",
-    "Sarvam reviews the application and matches credits to your scale."
+    "Sarvam reviews the application and matches credits to your scale.",
+    "If accepted, display \"Powered by Sarvam\" in your product and use the credits within your 6–12 month program term; unused credits do not roll over after it ends."
   ],
   "social_proof": [
     {
@@ -10,6 +11,12 @@
       "url": "https://www.sarvam.ai/startup-program",
       "title": "Sarvam Startup Program",
       "text": "Receive up to 12 months of credits, priority support, and production-ready infrastructure across speech, vision, and LLM APIs. 6–12 months of credits matched to your scale. Native support for 22 Indian languages and English."
+    },
+    {
+      "type": "link",
+      "url": "https://www.sarvam.ai/startup-program",
+      "title": "Sarvam Startup Program — branding and credit expiry FAQ",
+      "text": "Credits are valid for the duration of your program term (6–12 months). Unused credits do not roll over after the program ends. Program participants are expected to display \"Powered by Sarvam\" in their product. This helps build the ecosystem and is a condition of the program."
     }
   ]
 }

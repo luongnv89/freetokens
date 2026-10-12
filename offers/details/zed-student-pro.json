@@ -1,16 +1,17 @@
 {
-  "summary": "Zed Pro free for 1 year + $10/month in AI token credits for verified university students. Includes unlimited edit predictions, real-time multiplayer collaboration, and all Zed Pro features.",
+  "summary": "Zed Pro free for 1 year + $10/month in AI token credits for verified students aged 18 or older who are currently enrolled at accredited universities worldwide. Includes unlimited edit predictions, real-time multiplayer collaboration, and Zed Pro features, but the Student plan excludes Claude Fable, Claude Opus, and GPT Pro models.",
   "claim_steps": [
+    "Confirm you are at least 18 years old and currently enrolled at an accredited university; students worldwide are eligible.",
     "Sign in with a GitHub account older than 30 days on the Zed education dashboard.",
-    "Share your valid and current university (.edu) email address for verification.",
-    "Once verified, Zed Pro is free for 12 months and $10/month in AI token credits are applied."
+    "Share your valid and current university email address for enrollment verification.",
+    "Once verified, Zed Pro is free for 12 months and $10/month in AI token credits are applied; Claude Fable, Claude Opus, and GPT Pro models are excluded."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://zed.dev/education",
       "title": "Zed — Education",
-      "text": "For verified university students, Zed Pro is free for one year."
+      "text": "For verified university students, Zed Pro is free for one year. ... Eligibility Currently enrolled at an accredited university At least 18 years old The Zed Student plan does not include Claude Fable, Claude Opus, or GPT Pro models. ... Students currently enrolled at accredited universities worldwide."
     }
   ]
 }

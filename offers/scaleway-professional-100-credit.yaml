@@ -1,16 +1,17 @@
-# Verified 2026-09-27 against https://www.scaleway.com/en/scaleway-vs-digitalocean/
-# ("Create a Professional account and get started with €100 free credit";
+# Reverified 2026-10-12 against https://www.scaleway.com/en/signup-trial/
+# ("Get started with €100 free credit when you create a Business account";
 # "your free trial will start when you redeem the voucher code sent to you by
-# email within 24 hours"; "New Professional customers to Scaleway with a valid
+# email within 24 hours"; "New Business customers to Scaleway with a valid
 # payment method are eligible. To be eligible, you must never have had an
-# invoice issued by Scaleway (a €0 invoice is considered an invoice)".)
-title: Scaleway Professional €100 Free Credit
+# invoice issued by Scaleway (a €0 invoice is considered an invoice)";
+# "Once activated, the credits are valid for a period of 30 days.")
+title: Scaleway Business €100 Free Credit
 provider: Scaleway
 category: api_provider
-amount: €100 free credit voucher for new Professional accounts, usable across Scaleway cloud services incl. Generative APIs
+amount: €100 ex-VAT free credit voucher for new Business accounts, valid 30 days after activation for Scaleway services; valid payment method required and no previous invoice (even €0)
 expiry_date: null
-source_url: https://www.scaleway.com/en/scaleway-vs-digitalocean/
-verified_date: 2026-09-30
+source_url: https://www.scaleway.com/en/signup-trial/
+verified_date: 2026-10-12
 verification: social_proof
 review_status: to-be-verified
 signup: required

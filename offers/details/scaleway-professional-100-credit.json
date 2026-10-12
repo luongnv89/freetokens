@@ -1,16 +1,16 @@
 {
-  "summary": "New Scaleway Professional customers get a €100 free-credit voucher (emailed within 24 hours of account creation) usable across Scaleway cloud services including Generative APIs. Requires a valid payment method; anyone ever invoiced by Scaleway (even €0) is ineligible.",
+  "summary": "New Scaleway Business customers can receive a €100 ex-VAT free-credit voucher for Scaleway services. The voucher is emailed within 24 hours and must be activated once in the console; credits then remain valid for 30 days. A valid payment method is required, and anyone previously invoiced by Scaleway, even €0, is ineligible. Usage beyond the allowance is billed at public prices; unused expired credits cannot be refunded or reallocated. The enrollment offer has no stated global end date.",
   "claim_steps": [
-    "Create a new Professional account at Scaleway with a valid payment method.",
-    "A €100 voucher code is emailed within 24 hours; redeem it to start the trial.",
-    "Eligibility: never previously invoiced by Scaleway (a €0 invoice counts)."
+    "Create a new Business account at https://www.scaleway.com/en/signup-trial/ with a valid payment method; you must never have received a Scaleway invoice, including a €0 invoice.",
+    "Redeem the €100 ex-VAT voucher emailed within 24 hours in the client console. It can be activated only once, subject to Scaleway terms.",
+    "Use the credits within 30 days after activation. Monitor resources and billing: additional usage is charged, and unused expired credits are forfeited."
   ],
   "social_proof": [
     {
       "type": "link",
-      "url": "https://www.scaleway.com/en/scaleway-vs-digitalocean/",
-      "title": "Compare Scaleway vs DigitalOcean",
-      "text": "Create a Professional account and get started with €100 free credit. ... your free trial will start when you redeem the voucher code sent to you by email within 24 hours."
+      "url": "https://www.scaleway.com/en/signup-trial/",
+      "title": "Scaleway Business signup trial",
+      "text": "Get started with €100 free credit when you create a Business account. New Business customers with a valid payment method are eligible; you must never have had an invoice (even €0). Credits exclude VAT and are valid 30 days once activated; the voucher can only be activated once."
     }
   ]
 }
