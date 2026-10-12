@@ -1,17 +1,18 @@
 {
-  "summary": "Amazon Polly's free tier gives new AWS accounts 5 million characters per month on Standard voices and 1 million characters per month on Neural voices for the first 12 months after signup - roughly thousands of minutes of narration at zero cost.",
+  "summary": "Amazon Polly's legacy AWS Free Tier for accounts created before July 15, 2025 included monthly character allowances during the first 12 months: 5 million Standard, 1 million Neural, 500,000 Long-Form and 100,000 Generative characters. These are not blanket allowances for new accounts today. Starting July 15, 2025, new AWS customers receive up to $200 in AWS Free Tier credits usable on eligible services including Polly, with a choice of free or paid plan. The free plan lasts six months after account creation; all Free Tier credits must be used within 12 months. After upgrading to paid, remaining credits apply to AWS bills.",
   "claim_steps": [
-    "Create an AWS account at aws.amazon.com (free tier applies automatically).",
-    "Open the Amazon Polly console.",
-    "Convert text to speech using Standard or Neural voices within the monthly free character allowance.",
-    "Note the free window runs for the first 12 months from account creation."
+    "Create an AWS account at aws.amazon.com and review the current Free Tier credit eligibility; new accounts use the credit-based program, not legacy monthly Polly quotas.",
+    "Choose a free or paid plan at signup. The free plan is available for six months after account creation, with up to $200 in eligible AWS Free Tier credits.",
+    "Open the Amazon Polly console and monitor eligible usage against your actual AWS credit balance.",
+    "Use all Free Tier credits within 12 months of account creation. Upgrading to paid applies remaining credits to bills and can incur charges beyond credits.",
+    "Only eligible legacy accounts created before July 15, 2025 had the first-12-month character allowances; do not assume these apply to a new signup."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://aws.amazon.com/polly/pricing/",
       "title": "Amazon Polly Pricing",
-      "text": "Amazon Polly Pricing – Amazon Web Services (AWS)"
+      "text": "Starting July 15, 2025, new AWS customers will receive up to $200 in AWS Free Tier credits, which can be applied towards eligible AWS services, including Amazon Polly. The free plan will be available for 6 months after account creation. All Free Tier credits must be used within 12 months of your account creation date."
     }
   ]
 }

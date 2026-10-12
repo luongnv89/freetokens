@@ -1,16 +1,17 @@
 {
-  "summary": "Notion gives verified college/university students a free Education Plus plan (same as paid Plus: unlimited blocks and file uploads, 30-day version history, up to 10 guests) while enrolled via a school email recognised in the WHED. Stays active as long as the school email remains valid.",
+  "summary": "Notion gives eligible college/university students and teachers a free individual Education plan for a one-member workspace, with unlimited pages, blocks and file uploads, 30-day version history and up to 100 guests. Eligibility requires an education institution email per the WHED. You must re-verify your status with your school email once a year; if you can no longer verify a valid education email, the workspace and content move to the Free plan.",
   "claim_steps": [
-    "Sign up to Notion with your school email address.",
+    "Use your active WHED-recognized institution email as the main email on your Notion account, and keep only one workspace member for the individual Education plan.",
     "Go to Settings → Upgrade plan → Get free Education plan.",
-    "If your school is recognised, you are upgraded to Plus automatically; otherwise email team@makenotion.com to allowlist your domain."
+    "If your school is recognized, the upgrade applies automatically. If you meet the requirements but the option is missing, use the support contact linked in Notion's education help page.",
+    "Re-verify your education status with your school email once a year to keep the Education plan. If verification fails, the workspace moves to the Free plan."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.notion.com/help/notion-for-education",
       "title": "Get the Education Plan for students & teachers",
-      "text": "The Education Plan for individual students and teachers is a free plan for a one-member workspace. It is available for students at accredited colleges and universities with a WHED school email."
+      "text": "The Education Plan for individual students and teachers: a free plan for a one-member workspace. Up to 100 guests per workspace. To stay on the plan, verify your student status once a year with your school email."
     }
   ]
 }

@@ -1,17 +1,16 @@
 {
-  "summary": "Every ChatGPT Free account ($0, no credit card) includes limited access to Codex, OpenAI's coding agent, across its clients (desktop app Codex mode, CLI, IDE extension, web). The free tier runs GPT-5.6 Luna (OpenAI's cheapest model) and gives limited access to GPT-5.6 Terra in Work and Codex on desktop; the flagship GPT-5.6 Sol is not available on Free. OpenAI does not publish numeric free quotas - usage draws from a shared allowance with rolling reset windows, visible in the usage dashboard. Note 'Luna Max' is not a separate model: it means GPT-5.6 Luna running at the 'max' reasoning-effort setting, which ships disabled by default in Codex settings.",
+  "summary": "OpenAI's current official pricing lists ChatGPT Free at $0/month for exploring Codex on quick coding tasks, with GPT-6 Luna at Standard speed in the desktop app, subject to rollout. This is not a promise of Free access in every Codex client or to other models. The pricing page does not specify a numeric Free quota. Earlier community posts and the GPT-5.6 Luna screenshot below are historical corroboration, not evidence of today's client/model availability or a supported hidden reasoning setting.",
   "claim_steps": [
-    "Create or sign in to a free ChatGPT account at chatgpt.com - no credit card needed.",
-    "Launch any Codex client (ChatGPT desktop app Codex mode, Codex CLI, IDE extension, or chatgpt.com/codex) and sign in with your ChatGPT account.",
-    "Select GPT-5.6 Luna as the model - it is available on the Free plan (Terra is limited to Work/Codex-on-desktop; Sol requires a paid plan).",
-    "Optional: enable the hidden 'max' reasoning effort under Settings > Configuration > Available reasoning efforts (it is off by default, per community guides - not documented on OpenAI's help pages).",
-    "Track consumption with /status in the CLI or the usage dashboard at chatgpt.com/codex/settings/usage; Free accounts cannot buy credit top-ups, so wait for the window reset."
+    "Create or sign in to a ChatGPT Free account at https://chatgpt.com.",
+    "Use the official desktop app and sign in with your ChatGPT account; the advertised Free Codex access is subject to rollout.",
+    "If available to your account, use GPT-6 Luna at Standard speed for quick coding tasks. Do not assume the Free offer includes CLI, IDE, web or other-model access.",
+    "Check the app's current usage limits and availability; the official pricing page publishes no numeric Free quota."
   ],
   "social_proof": [
     {
       "type": "screenshot",
       "image": "assets/fx-gpt-luna-free-codex.png",
-      "caption": "Fx harness v0.0.5 running GPT-5.6 Luna at max reasoning effort on a free ChatGPT account via the Codex subscription provider (status bar: gpt-5.6-luna · max · Context 14k/272k)."
+      "caption": "Historical screenshot: Fx harness v0.0.5 running GPT-5.6 Luna at max reasoning effort on a free ChatGPT account via the Codex subscription provider (status bar: gpt-5.6-luna · max · Context 14k/272k). Does not establish current Free availability."
     },
     {
       "type": "x",

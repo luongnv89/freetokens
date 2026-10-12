@@ -1,17 +1,23 @@
 {
-  "summary": "Pika's free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and credits refresh monthly.",
+  "summary": "Current Pika Create pricing lists a $0 Free plan with 0 monthly credits (packs only), no watermark and no commercial license; it does not advertise renewable free generation credits. A separate official FAQ still says Basic (free) receives 150 credits/month and calls Pika 2.2 the latest model, suggesting older or legacy-product guidance. That conflict does not establish a current Create allowance or prove all Pika free generation has ended. Legacy/free account access remains to be verified. Create top-up credits are paid and cannot be used with the API, MCP, iOS app or old.pika.art. No campaign end date is established.",
   "claim_steps": [
-    "Sign up at pika.art with Google or Discord.",
-    "Open the generator from your workspace.",
-    "Create videos from text or image prompts; each generation spends credits.",
-    "Wait for the monthly reset to get your next 80 credits."
+    "Open https://pika.art/pricing and check which Pika product and plan your account uses before expecting free generation.",
+    "For current Pika Create, the $0 Free plan lists 0 monthly credits and packs only; no renewable free generation allowance is advertised there.",
+    "The separate https://pika.art/faq says Basic (free) has 150 credits/month, but its older-model guidance conflicts with current Create pricing. Confirm legacy/account eligibility before relying on that allowance.",
+    "Check your actual account balance before generating. Buying a Create credit pack is paid usage and those credits do not work in the API, MCP, iOS app or old.pika.art."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://pika.art/pricing",
       "title": "Pika",
-      "text": "The idea-to-video platform that sets your creativity in motion."
+      "text": "Free 0 credits / month · packs only. Included: No watermark. Not included: Commercial license. Top-up credits are only for Pika Create on pika.art. They can't be used with the API, MCP, iOS app, or old.pika.art."
+    },
+    {
+      "type": "link",
+      "url": "https://pika.art/faq",
+      "title": "Pika FAQ",
+      "text": "On the Basic (free) plan you get 150 credits per month. Pika 2.2, our latest model, introduces Pikaframes and generations up to 10 seconds."
     }
   ]
 }

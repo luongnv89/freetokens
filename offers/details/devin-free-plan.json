@@ -1,17 +1,17 @@
 {
-  "summary": "Devin's $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.",
+  "summary": "Devin's $0 Free plan is offered through the Download/local desktop path and includes a light quota to code with agents, limited model availability, unlimited inline edits and unlimited Tab completions. The pricing page lists access to cloud agents (Devin Cloud) under paid Pro, not Free; this offer does not promise free dashboard/cloud-agent sessions.",
   "claim_steps": [
-    "Open devin.ai/pricing and pick the Free $0 plan.",
-    "Sign up with your email or a Google/GitHub account.",
-    "Start a Devin session from the dashboard within your free quota.",
-    "Install the IDE extension for unlimited Tab completions."
+    "Open https://devin.ai/pricing and use Download under the Free $0 plan.",
+    "Install the downloaded local desktop app and follow its account setup/sign-in flow.",
+    "Use local agent coding within the light Free quota and limited model availability; inline edits and Tab completions are unlimited.",
+    "Do not expect Free to include Devin Cloud sessions: access to cloud agents is listed under paid Pro."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://devin.ai/pricing",
       "title": "Devin pricing \u2014 Free $0 plan",
-      "text": "Free $0 \u2014 Light quota to code with agents. Unlimited Tab completions."
+      "text": "Free $0 Download. Light quota to code with agents. Limited model availability. Unlimited inline edits. Unlimited Tab completions. Pro: Everything in Free, plus: Access to cloud agents (Devin Cloud)."
     }
   ]
 }

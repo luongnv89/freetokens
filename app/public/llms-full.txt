@@ -2,11 +2,31 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-11T03:14:41Z — 167 of 210 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-12T03:22:24Z — 159 of 210 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Tripo AI 300 Free API Credits
+- Provider: Tripo AI
+- Category: image
+- Amount: 300 free API credits (~$3 at 100 credits/$1); current pricing advertises "in 2 weeks" without clarifying grant timing or credit-validity semantics
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-12 — review_status=to-be-verified · verification=social_proof · signup=required
+- Source: https://docs.tripo3d.ai/get-started/pricing.html
+- Page: https://freetokens.custats.info/offers/tripo-ai-2000-free-api-credits.html
+- Summary: Current Tripo OpenAPI pricing advertises 300 free API credits (~$3 at 100 credits per $1), with the wording 'in 2 weeks'. The public page does not clarify whether that wording describes delivery timing or credit validity; confirm the allowance and expiry in your API wallet. This supersedes the historical 2,000-credit first-key launch reward. Credits cover supported image and 3D generation tasks. API V2 is no longer maintained from October 1, 2026 and retires November 1, 2026; follow the published V2-to-V3 migration guide.
+- Claim steps: Create or sign in to a Tripo API account at https://platform.tripo3d.ai. | Check the API wallet for the advertised 300-credit allowance and its account-specific timing/validity; current public pricing says 'in 2 weeks' without further explanation. | Generate an API key and follow current OpenAPI quickstart and V3 migration documentation. Paid usage uses prepaid credits; a no-card claim flow has not been tested.
+### Scaleway Business €100 Free Credit
+- Provider: Scaleway
+- Category: api_provider
+- Amount: €100 ex-VAT free credit voucher for new Business accounts, valid 30 days after activation for Scaleway services; valid payment method required and no previous invoice (even €0)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-12 — review_status=to-be-verified · verification=social_proof · signup=required
+- Source: https://www.scaleway.com/en/signup-trial/
+- Page: https://freetokens.custats.info/offers/scaleway-professional-100-credit.html
+- Summary: New Scaleway Business customers can receive a €100 ex-VAT free-credit voucher for Scaleway services. The voucher is emailed within 24 hours and must be activated once in the console; credits then remain valid for 30 days. A valid payment method is required, and anyone previously invoiced by Scaleway, even €0, is ineligible. Usage beyond the allowance is billed at public prices; unused expired credits cannot be refunded or reallocated. The enrollment offer has no stated global end date.
+- Claim steps: Create a new Business account at https://www.scaleway.com/en/signup-trial/ with a valid payment method; you must never have received a Scaleway invoice, including a €0 invoice. | Redeem the €100 ex-VAT voucher emailed within 24 hours in the client console. It can be activated only once, subject to Scaleway terms. | Use the credits within 30 days after activation. Monitor resources and billing: additional usage is charged, and unused expired credits are forfeited.
 ### Exo Free on OpenCode Zen
 - Provider: OpenCode
 - Category: coding
@@ -45,7 +65,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://viktor.com/pricing
 - Page: https://freetokens.custats.info/offers/viktor-free-starter-100-credits.html
-- Summary: Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. Starter credits do not require a credit card or upfront paid subscription. Paid workspace plans start at $50/month after the free credits. No enrollment deadline or starter-credit expiration is stated on the loaded official pages.
+- Summary: Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. The Free plan includes $100 in starter credits without a credit card or upfront paid subscription; free credits never expire. The current pricing table lists Team at $100/month after the free allowance. No enrollment deadline is stated.
 - Claim steps: Create a Viktor account. | Join your team or add Viktor to Slack or Microsoft Teams. | Finish the setup wizard.
 ### Valyu — $10 Free API Credits ($20 with a Work Email)
 - Provider: Valyu
@@ -134,8 +154,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
 - Page: https://freetokens.custats.info/offers/claude-max-team-monthly-api-credits.html
-- Summary: Existing Claude Max and Team subscribers get monthly Claude Platform credits to build with the Claude API: $100 on Max 5x, $200 on Max 20x, and on Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500 per month. Credits arrive after each plan payment, expire at the end of each billing cycle and do not roll over. They cover the Claude API (Messages and Message Batches), the Console Playground, Claude Managed Agents and the Claude Agent SDK, but not Claude Code interactive sessions, extra usage, or Claude on third-party clouds. Free, Pro and Enterprise plans are not eligible.
-- Claim steps: On claude.ai, go to Settings > Billing as a Max subscriber or Organization settings > Billing as a Team Owner or Primary Owner. | In the API credits section, select 'Link organization.' | Choose the Console organization you want to receive the credits, or create a new one. | Review the Supplemental Credit Terms, then Link organization.
+- Summary: Active Claude Max and Team subscribers can claim monthly Claude Platform credits after seven days on an eligible plan: $100 on Max 5x, $200 on Max 20x, and on Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500 per month. Credits arrive after each plan payment, expire at the end of each billing cycle and do not roll over. They cover the Claude API (Messages and Message Batches), the Console Playground, Claude Managed Agents and the Claude Agent SDK, but not Claude Code interactive sessions, extra usage, or Claude on third-party clouds. Free, Pro and Enterprise plans are not eligible.
+- Claim steps: Keep an eligible Max or Team subscription active and in good standing for at least seven days. You must be the Max subscriber or a Team Owner/Primary Owner, and an Owner, Admin or Billing member of the receiving Console organization. | On claude.ai, go to Settings > Billing as a Max subscriber or Organization settings > Billing as a Team Owner or Primary Owner. | In the API credits section, select 'Link organization.' | Choose the Console organization you want to receive the credits, or create a new one. | Review the Supplemental Credit Terms, then Link organization.
 ### Baidu AI Studio — 1 Million Free Tokens
 - Provider: Baidu
 - Category: api_provider
@@ -253,8 +273,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://zed.dev/education
 - Page: https://freetokens.custats.info/offers/zed-student-pro.html
-- Summary: Zed Pro free for 1 year + $10/month in AI token credits for verified university students. Includes unlimited edit predictions, real-time multiplayer collaboration, and all Zed Pro features.
-- Claim steps: Sign in with a GitHub account older than 30 days on the Zed education dashboard. | Share your valid and current university (.edu) email address for verification. | Once verified, Zed Pro is free for 12 months and $10/month in AI token credits are applied.
+- Summary: Zed Pro free for 1 year + $10/month in AI token credits for verified students aged 18 or older who are currently enrolled at accredited universities worldwide. Includes unlimited edit predictions, real-time multiplayer collaboration, and Zed Pro features, but the Student plan excludes Claude Fable, Claude Opus, and GPT Pro models.
+- Claim steps: Confirm you are at least 18 years old and currently enrolled at an accredited university; students worldwide are eligible. | Sign in with a GitHub account older than 30 days on the Zed education dashboard. | Share your valid and current university email address for enrollment verification. | Once verified, Zed Pro is free for 12 months and $10/month in AI token credits are applied; Claude Fable, Claude Opus, and GPT Pro models are excluded.
 ### ZCode / BigModel New-User Trial
 - Provider: ZCode (Z.ai)
 - Category: coding
@@ -343,8 +363,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.together.ai/startup-accelerator
 - Page: https://freetokens.custats.info/offers/together-ai-startup-accelerator.html
-- Summary: Together AI Startup Accelerator is a selection-based program, not a general signup grant. Approved startups receive up to $15K, $30K, or $50K in free platform credits depending on funding stage (under $5M / $5–10M / over $10M). Credits can be used for serverless inference, dedicated endpoints, fine-tuning, and instant clusters.
-- Claim steps: Confirm your startup is building an AI-native application. | Apply at together.ai/startup-accelerator (no card required to apply). | If selected, credits are granted according to funding tier: up to $15K / $30K / $50K.
+- Summary: Together AI Startup Accelerator is a selection-based program, not a general signup grant. Approved startups receive up to $15K, $30K, or $50K in free platform credits depending on funding stage (Build: up to $5M raised / Scale: $5–10M raised / Grow: over $10M raised). Credits can be used for serverless inference, dedicated endpoints, fine-tuning, and instant clusters, but do not apply to Reserved GPU Clusters.
+- Claim steps: Confirm your startup is building an AI-native application. | Apply at together.ai/startup-accelerator (no card required to apply). | If selected, credits are granted according to funding tier: Build (up to $5M raised), up to $15K; Scale ($5–10M raised), up to $30K; Grow (over $10M raised), up to $50K. Credits do not apply to Reserved GPU Clusters.
 ### TinyFish Student Program — $35 Credits
 - Provider: TinyFish
 - Category: student
@@ -465,16 +485,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/siliconflow-1-dollar-free-credits.html
 - Summary: SiliconFlow grants $1 in free credits at signup for its serverless inference platform (LLM, image, video, audio models), with postpaid pay-as-you-go billing and no minimum commitments. Complements the separate siliconflow-free-models offer, which tracks SiliconFlow's permanently free model list.
 - Claim steps: Sign up at https://cloud.siliconflow.com . | $1 in free credits is granted to get started; no minimum commitment. | Selected models are also permanently free — see the pricing page's free entries.
-### Scaleway Professional €100 Free Credit
-- Provider: Scaleway
-- Category: api_provider
-- Amount: €100 free credit voucher for new Professional accounts, usable across Scaleway cloud services incl. Generative APIs
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://www.scaleway.com/en/scaleway-vs-digitalocean/
-- Page: https://freetokens.custats.info/offers/scaleway-professional-100-credit.html
-- Summary: New Scaleway Professional customers get a €100 free-credit voucher (emailed within 24 hours of account creation) usable across Scaleway cloud services including Generative APIs. Requires a valid payment method; anyone ever invoiced by Scaleway (even €0) is ineligible.
-- Claim steps: Create a new Professional account at Scaleway with a valid payment method. | A €100 voucher code is emailed within 24 hours; redeem it to start the trial. | Eligibility: never previously invoiced by Scaleway (a €0 invoice counts).
 ### Scaleway Generative APIs Free Tier
 - Provider: Scaleway
 - Category: api_provider
@@ -493,8 +503,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.sarvam.ai/startup-program
 - Page: https://freetokens.custats.info/offers/sarvam-ai-startup-program.html
-- Summary: The Sarvam AI Startup Program provides 6–12 months of API credits matched to the startup's scale (amount unpublished), priority support with direct access to Sarvam's engineering team, and launch visibility. Covers STT, TTS, voice agents, chat completion, translation, and document intelligence APIs, with native support for 22 Indian languages and English.
-- Claim steps: Submit the application form at sarvam.ai/startup-program (company, product stage, funding, team, APIs of interest, expected usage). | Sarvam reviews the application and matches credits to your scale.
+- Summary: The Sarvam AI Startup Program provides 6–12 months of API credits matched to the startup's scale (amount unpublished), priority support with direct access to Sarvam's engineering team, and launch visibility. Covers STT, TTS, voice agents, chat completion, translation, and document intelligence APIs, with native support for 22 Indian languages and English. Participants must display "Powered by Sarvam" in their product as a condition of the program. Credits are valid only for the program term; unused credits are forfeited when it ends and do not roll over.
+- Claim steps: Submit the application form at sarvam.ai/startup-program (company, product stage, funding, team, APIs of interest, expected usage). | Sarvam reviews the application and matches credits to your scale. | If accepted, display "Powered by Sarvam" in your product and use the credits within your 6–12 month program term; unused credits do not roll over after it ends.
 ### Runway Free Plan
 - Provider: Runway
 - Category: video
@@ -630,11 +640,11 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: video
 - Amount: Free plan $0 — 0 monthly credits (credit packs only); all models, 2 parallel video + 2 image/audio generations, no watermark
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://pika.art/pricing
 - Page: https://freetokens.custats.info/offers/pika-free-plan.html
-- Summary: Pika's free plan includes 80 video-generation credits per month for text-to-video and image-to-video creation. Free generations carry Pika branding, and credits refresh monthly.
-- Claim steps: Sign up at pika.art with Google or Discord. | Open the generator from your workspace. | Create videos from text or image prompts; each generation spends credits. | Wait for the monthly reset to get your next 80 credits.
+- Summary: Current Pika Create pricing lists a $0 Free plan with 0 monthly credits (packs only), no watermark and no commercial license; it does not advertise renewable free generation credits. A separate official FAQ still says Basic (free) receives 150 credits/month and calls Pika 2.2 the latest model, suggesting older or legacy-product guidance. That conflict does not establish a current Create allowance or prove all Pika free generation has ended. Legacy/free account access remains to be verified. Create top-up credits are paid and cannot be used with the API, MCP, iOS app or old.pika.art. No campaign end date is established.
+- Claim steps: Open https://pika.art/pricing and check which Pika product and plan your account uses before expecting free generation. | For current Pika Create, the $0 Free plan lists 0 monthly credits and packs only; no renewable free generation allowance is advertised there. | The separate https://pika.art/faq says Basic (free) has 150 credits/month, but its older-model guidance conflicts with current Create pricing. Confirm legacy/account eligibility before relying on that allowance. | Check your actual account balance before generating. Buying a Create credit pack is paid usage and those credits do not work in the API, MCP, iOS app or old.pika.art.
 ### OVHcloud Startup Program
 - Provider: OVHcloud
 - Category: startup_program
@@ -653,8 +663,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://www.orcarouter.ai/offers
 - Page: https://freetokens.custats.info/offers/orcarouter-free-credits.html
-- Summary: OrcaRouter's offers page lets you claim live voucher, student, and hackathon API credits (dollar amounts, scope, and expiry are printed on each card at claim time) and call a rotating set of $0 models. Create an account and claim an open offer with no payment method; a few partner offers are labelled card-required. Always-free $0 models are for established accounts (GitHub with some history, or any paid purchase). Promo credit expiry is shown before confirm; $0 models stay free while they remain in the lineup. Docs currently list DeepSeek V4 -free ids and the orcarouter/free router.
-- Claim steps: Create an account at orcarouter.ai (the offers page says an API key takes 30 seconds; no card, no sales call). | Open orcarouter.ai/offers and claim a live open offer; student/community offers unlock with an eligible email or invite code. | Call rotating $0 models (for example orcarouter/free or a -free catalog id) on the OpenAI-compatible endpoint; link GitHub with history if a free-model request is declined.
+- Summary: OrcaRouter offers a rotating set of $0 models for established accounts. The offers page currently shows 0 vouchers and 0 credit drops, so no live voucher, student, or hackathon credit grant is promised. To access always-free models, the workspace owner must link a GitHub account with some history (or use it to sign in), or the workspace must have a paid purchase of any amount. Free models require no credit and stay free while they remain in the lineup; rate and prompt-size limits apply. Check the current catalog for -free model IDs or use the orcarouter/free router; the lineup rotates as capacity allows.
+- Claim steps: Create an account at orcarouter.ai (the offers page says an API key takes 30 seconds; no card, no sales call). | Ensure the workspace owner has a GitHub account with some history linked in profile settings or used for sign-in; a paid purchase of any amount is the alternative established-account requirement. | Check orcarouter.ai/offers or the current catalog for rotating $0 models. The offers page currently lists 0 vouchers and 0 credit drops. | Call orcarouter/free or a current -free catalog ID on the OpenAI-compatible endpoint, subject to free-model rate and prompt-size limits.
 ### Span-01 Lite Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -700,7 +710,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: api_provider
 - Amount: Free nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free endpoint at $0 (256K context, omni multimodal input, text output)
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://openrouter.ai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-nano-omni-free.html
 - Summary: NVIDIA Nemotron 3 Nano Omni is a 30B-A3B open multimodal reasoning model — a perception and context sub-agent accepting text, image, video, and audio input with text output over a 256K context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Listed since 2026-04-28; no published end date.
@@ -803,8 +813,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://openrouter.ai/docs/api-reference/limits
 - Page: https://freetokens.custats.info/offers/openrouter-free-models.html
-- Summary: OpenRouter routes many popular models with ':free' variants that cost nothing: 50 requests per day at up to 20 requests per minute on accounts holding under $10 in credits, rising to 1,000 requests per day once you have bought at least $10 of credits. One API key reaches dozens of free model endpoints.
-- Claim steps: Create a free account at openrouter.ai and open the Keys page. | Create an API key. | Browse models filtered to the :free variants at openrouter.ai/models. | Call the OpenAI-compatible endpoint with your key, staying within the free rate limits.
+- Summary: OpenRouter offers model variants ending in ':free' with zero token pricing, limited to 20 requests per minute and ordinarily 50 requests per day. The daily tier depends on all-time credits purchased, not the current held balance or the is_free_tier flag. The table lists a $10 purchase threshold for 1,000 requests/day, but the documented rounding/top-up-fee buffer grants that ceiling one credit below it (currently $9 in all-time purchases). Free access does not require buying credits to use the lower daily allowance. Model-specific restrictions still apply.
+- Claim steps: Create a free account at openrouter.ai and open the Keys page. | Create an API key. | Browse models filtered to the :free variants at openrouter.ai/models. | Call the OpenAI-compatible endpoint with your key, respecting model-specific restrictions and the 20 requests/minute and 50 requests/day lower allowance. | For the 1,000 requests/day tier, check all-time credits purchased rather than your held balance. The documented buffer starts it at one credit below the $10 table threshold, currently $9; purchases are optional for the lower tier.
 ### OpenRouter for Startups
 - Provider: OpenRouter
 - Category: startup_program
@@ -843,8 +853,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://learn.chatgpt.com/docs/pricing
 - Page: https://freetokens.custats.info/offers/openai-codex-free-tier.html
-- Summary: Every ChatGPT Free account ($0, no credit card) includes limited access to Codex, OpenAI's coding agent, across its clients (desktop app Codex mode, CLI, IDE extension, web). The free tier runs GPT-5.6 Luna (OpenAI's cheapest model) and gives limited access to GPT-5.6 Terra in Work and Codex on desktop; the flagship GPT-5.6 Sol is not available on Free. OpenAI does not publish numeric free quotas - usage draws from a shared allowance with rolling reset windows, visible in the usage dashboard. Note 'Luna Max' is not a separate model: it means GPT-5.6 Luna running at the 'max' reasoning-effort setting, which ships disabled by default in Codex settings.
-- Claim steps: Create or sign in to a free ChatGPT account at chatgpt.com - no credit card needed. | Launch any Codex client (ChatGPT desktop app Codex mode, Codex CLI, IDE extension, or chatgpt.com/codex) and sign in with your ChatGPT account. | Select GPT-5.6 Luna as the model - it is available on the Free plan (Terra is limited to Work/Codex-on-desktop; Sol requires a paid plan). | Optional: enable the hidden 'max' reasoning effort under Settings > Configuration > Available reasoning efforts (it is off by default, per community guides - not documented on OpenAI's help pages). | Track consumption with /status in the CLI or the usage dashboard at chatgpt.com/codex/settings/usage; Free accounts cannot buy credit top-ups, so wait for the window reset.
+- Summary: OpenAI's current official pricing lists ChatGPT Free at $0/month for exploring Codex on quick coding tasks, with GPT-6 Luna at Standard speed in the desktop app, subject to rollout. This is not a promise of Free access in every Codex client or to other models. The pricing page does not specify a numeric Free quota. Earlier community posts and the GPT-5.6 Luna screenshot below are historical corroboration, not evidence of today's client/model availability or a supported hidden reasoning setting.
+- Claim steps: Create or sign in to a ChatGPT Free account at https://chatgpt.com. | Use the official desktop app and sign in with your ChatGPT account; the advertised Free Codex access is subject to rollout. | If available to your account, use GPT-6 Luna at Standard speed for quick coding tasks. Do not assume the Free offer includes CLI, IDE, web or other-model access. | Check the app's current usage limits and availability; the official pricing page publishes no numeric Free quota.
 ### Ollama Cloud Free Tier
 - Provider: Ollama
 - Category: api_provider
@@ -853,8 +863,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://ollama.com/pricing
 - Page: https://freetokens.custats.info/offers/ollama-cloud-free-tier.html
-- Summary: Ollama's $0 Free plan includes access to cloud models. Cloud usage is light on Free, with session limits resetting every 5 hours and weekly limits resetting every 7 days.
-- Claim steps: Create or sign in to an Ollama account. | Use a cloud model through Ollama, or create an API key for direct cloud API access. | Stay within the Free plan's session, weekly, and one-concurrent-model limits.
+- Summary: Ollama's $0 Free plan includes starter usage credits and access to starter cloud models, alongside running models locally. The included Free usage resets monthly from the signup date and does not roll over; no fixed starter-credit amount is published on the pricing page. Purchased usage credits unlock all cloud models and are separate from the free allowance. Free includes one concurrent request, not the old five-hour session and weekly reset limits.
+- Claim steps: Create or sign in to an Ollama account. | Use an included starter cloud model through Ollama, or create an API key for direct cloud API access. | Monitor your included starter usage credits and stay within the one-concurrent-request Free limit. | Included usage resets monthly on your signup date and does not roll over. Buying additional usage credits to unlock all models is optional paid usage, not part of the free allowance.
 ### Ocean Network Inference — First 6 H200 Hours Free
 - Provider: Ocean Network
 - Category: api_provider
@@ -883,7 +893,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.nvidia.com/en-us/startups/
 - Page: https://freetokens.custats.info/offers/nvidia-inception-startup-program.html
-- Summary: NVIDIA Inception is a free, rolling startup program (verified Sep 13, 2026): free cloud credits from NVIDIA and partners, free technical courses and workshops, latest SDKs and model libraries, preferred pricing on NVIDIA hardware/software, investor exposure via Capital Connect, and go-to-market support. No application fees, deadlines, or cohorts; applications are reviewed by NVIDIA. Distinct from the NVIDIA NIM free trial and Inception Labs listings.
+- Summary: NVIDIA Inception is a free, rolling startup program (verified Sep 13, 2026): free cloud credits from NVIDIA and partners, free self-paced technical courses and discounted expert-led workshops, latest SDKs and model libraries, preferred pricing on NVIDIA hardware/software, investor exposure via Capital Connect, and go-to-market support. No application fees, deadlines, or cohorts; applications are reviewed by NVIDIA. Distinct from the NVIDIA NIM free trial and Inception Labs listings.
 - Claim steps: Confirm fit: AI startup, application reviewed by NVIDIA after submission. | Apply at nvidia.com/en-us/startups with business and product details; no fees, deadlines, or cohorts. | If accepted, access free cloud credits from NVIDIA and partners, training, SDKs, preferred hardware pricing, and Capital Connect investor exposure.
 ### Novita Sandbox — $100 Credits
 - Provider: Novita AI
@@ -913,8 +923,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
 - Source: https://www.notion.com/help/notion-for-education
 - Page: https://freetokens.custats.info/offers/notion-education-plus.html
-- Summary: Notion gives verified college/university students a free Education Plus plan (same as paid Plus: unlimited blocks and file uploads, 30-day version history, up to 10 guests) while enrolled via a school email recognised in the WHED. Stays active as long as the school email remains valid.
-- Claim steps: Sign up to Notion with your school email address. | Go to Settings → Upgrade plan → Get free Education plan. | If your school is recognised, you are upgraded to Plus automatically; otherwise email team@makenotion.com to allowlist your domain.
+- Summary: Notion gives eligible college/university students and teachers a free individual Education plan for a one-member workspace, with unlimited pages, blocks and file uploads, 30-day version history and up to 100 guests. Eligibility requires an education institution email per the WHED. You must re-verify your status with your school email once a year; if you can no longer verify a valid education email, the workspace and content move to the Free plan.
+- Claim steps: Use your active WHED-recognized institution email as the main email on your Notion account, and keep only one workspace member for the individual Education plan. | Go to Settings → Upgrade plan → Get free Education plan. | If your school is recognized, the upgrade applies automatically. If you meet the requirements but the option is missing, use the support contact linked in Notion's education help page. | Re-verify your education status with your school email once a year to keep the Education plan. If verification fails, the workspace moves to the Free plan.
 ### NeuralSpeak Free Plan
 - Provider: NeuralSpeak
 - Category: api_provider
@@ -943,8 +953,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://nebius.com/builders-terms-and-conditions
 - Page: https://freetokens.custats.info/offers/nebius-ai-builder-program.html
-- Summary: The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.
-- Claim steps: Complete the Builder Program registration form (name, email, company or university, role, country, what you are building) and accept the program terms. | Verify your email via the double opt-in message — membership activates only after verification. | Redeem the issued promo codes: $25 for Nebius Token Factory and $25 for Tavily. Credits expire 90 days from issuance.
+- Summary: The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Programme credits cannot be used for production workloads, large-scale commercial deployment, or revenue-generating activity beyond prototyping and experimentation. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.
+- Claim steps: Complete the Builder Program registration form (name, email, company or university, role, country, what you are building) and accept the program terms. | Verify your email via the double opt-in message — membership activates only after verification. | Redeem the issued promo codes: $25 for Nebius Token Factory and $25 for Tavily. Credits expire 90 days from issuance. | Use Programme credits for prototyping and experimentation, not production workloads, large-scale commercial deployment, or revenue-generating activity beyond that scope.
 ### Murf Startup Incubator Program
 - Provider: Murf AI
 - Category: startup_program
@@ -1093,8 +1103,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://kiro.dev/startups/
 - Page: https://freetokens.custats.info/offers/kiro-startup-credits.html
-- Summary: Kiro for Startups gives early-stage to Series A VC-backed startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center.
-- Claim steps: Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain. | Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30). | On approval, credits are deposited to the AWS account and activate on provisioning. | Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits.
+- Summary: Kiro for Startups gives early-stage to Series A startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Applicants must be 18 or older. Excluded residences: Argentina, Belarus, Brazil, China/GCR, Cuba, France, Germany, Iran, Italy, Mexico, North Korea, Poland, Russia, Spain, Syria, the region of Crimea, the so-called Donetsk People's Republic region (DNR), the so-called Luhansk People's Republic region (LNR), and the United Arab Emirates. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center.
+- Claim steps: Confirm early-stage to Series A eligibility, age 18+, and residence outside the excluded locations listed above (including France and Germany); active AWS Activate credit holders are not eligible. | Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain. | Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30). | On approval, credits are deposited to the AWS account and activate on provisioning. | Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits.
 ### Kimi API Free Trial (RMB 15)
 - Provider: Moonshot AI
 - Category: api_provider
@@ -1120,10 +1130,10 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: api_provider
 - Amount: 10M free tokens with every new API key; official free-key limits: Reader API 500 RPM; Embedding/Reranker API 100 RPM & 100K TPM
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://jina.ai/en-US/reader/
 - Page: https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html
-- Summary: Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Free-tier rate limits are 500 RPM, 1M TPM, and 5 concurrent requests; once the token grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.
+- Summary: Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Limits are endpoint-specific: the Reader page lists embeddings/rerank at 100 RPM and 100K TPM, while the current official OpenAPI spec lists 500 RPM and 1M TPM for those endpoints and different chat limits. The conflicting published limits require confirmation; do not apply one blanket rate or concurrency limit to all APIs. Once the grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.
 - Claim steps: Sign up at jina.ai and get your API key from jina.ai/api-dashboard/key-manager — new keys auto-receive 10M free tokens. | Authenticate with 'Authorization: Bearer jina_<key>' against api.jina.ai endpoints (embeddings, rerank, reader via r.jina.ai, etc.). | When free tokens run out, buy more on the key's 'Buy tokens' tab — the free grant is one-time.
 ### JetBrains Student Pack — All IDEs Free
 - Provider: JetBrains
@@ -1153,8 +1163,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/thinkingmachines/inkling-small:free
 - Page: https://freetokens.custats.info/offers/inkling-free-models.html
-- Summary: Thinking Machines offers both Inkling and Inkling Small as free models on OpenRouter at $0 prompt and completion, with a 1M-token context window. No hard end date is listed on the OpenRouter models page.
-- Claim steps: Sign in to OpenRouter at openrouter.ai. | Select the thinkingmachines/inkling:free or thinkingmachines/inkling-small:free model. | Send requests — both prompt and completion are priced at $0.
+- Summary: Thinking Machines offers Inkling and Inkling Small on OpenRouter at $0 prompt and completion, with a 1M-token context window. The free endpoints are restricted to agentic-harness use, not unrestricted chat. Do not send confidential information or personal data, including voices or images of people's faces. Prompts and outputs are logged and used for model training/improvement and to improve products and services; session data is disassociated from account identifiers before that use. Use constitutes agreement to the TML Free Research API terms. No hard end date is listed.
+- Claim steps: Sign in to OpenRouter at openrouter.ai. | Configure an agentic harness with thinkingmachines/inkling:free or thinkingmachines/inkling-small:free; the free endpoints are only available for agentic-harness use. | Review the TML Free Research API terms linked on the model page. Using the endpoint agrees to logging prompts and outputs for model training/improvement and service improvement. | Never send confidential information or personal data, including voices or images of people's faces. | Send eligible harness requests within OpenRouter's free-model limits; prompt and completion prices are $0.
 ### InferAll Free — 25 NIM Trial + $0 OSS Models
 - Provider: InferAll
 - Category: api_provider
@@ -1263,8 +1273,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://x.com/GeminiApp/status/2090165248196252003
 - Page: https://freetokens.custats.info/offers/google-gemini-student-free-year.html
-- Summary: Google offers eligible college students 1 year of Gemini subscription free. US students get Google AI Pro; students in 140+ countries get Google AI Plus. This is a back-to-school promotion announced by the official Gemini App account.
-- Claim steps: Verify your student status through your school's email or enrollment system. | Visit gemini.google.com and sign in with your verified student account. | The free 1-year subscription applies automatically to your account.
+- Summary: Google offers eligible college students one free year of Google AI Pro in the U.S. or Google AI Plus in over 140 eligible markets outside the U.S. The Plus offer excludes Bolivia, Albania, Canada, Macau, Hong Kong and Tunisia. Redeem by December 31, 2026 through the student offer flow. A valid payment method is required at signup. Unless canceled, Pro automatically renews at $19.99/month and Plus at $4.99/month or the local-currency equivalent after the trial. This is a back-to-school promotion announced by the official Gemini App account.
+- Claim steps: Visit https://gemini.google.com/students and follow the student redemption flow with your consumer Google account; do not assume a school-issued account automatically qualifies. | Check student and market eligibility and complete the verification requested in the offer flow. Pro is for eligible U.S. students; Plus excludes the U.S., Bolivia, Albania, Canada, Macau, Hong Kong and Tunisia. | Provide a valid payment method and redeem the one-year trial by December 31, 2026; enrollment is not automatic. | Cancel before the trial ends to avoid automatic renewal: $19.99/month for Pro or $4.99/month/local equivalent for Plus.
 ### Google Gemini API Free Tier
 - Provider: Google Gemini
 - Category: api_provider
@@ -1293,8 +1303,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://cloud.google.com/free/docs/free-cloud-features
 - Page: https://freetokens.custats.info/offers/google-cloud-300-free-trial.html
-- Summary: New Google Cloud customers get $300 in free credits to spend on any Cloud Platform service during a 90-day trial window counted from signup. A billing account is created, but you are not charged until you manually upgrade.
-- Claim steps: Open cloud.google.com/free and click 'Start free'. | Sign in with or create a Google account. | Complete the signup steps and create a billing account (no automatic charges). | Use the $300 credits on eligible services within the 90-day window.
+- Summary: Eligible new Google Cloud customers get a $300 Welcome credit for covered services during a 90-day trial from signup. You must not have previously used the trial or been a paying Google Cloud, Google Maps Platform or Firebase user. A valid payment method is required for verification, but the trial does not automatically charge you; charges begin only after a manual paid-account upgrade. The trial restricts GPUs, Marketplace and third-party generative AI models. For billing accounts opened after March 2, 2026, Welcome credits cannot pay for Gemini API or AI Studio usage. Credits remain limited to covered services and the original 90-day window even after upgrading.
+- Claim steps: Open cloud.google.com/free and click 'Start free'. | Sign in with or create a Google account. | Confirm you have not previously used the Free Trial or been a paying Google Cloud, Google Maps Platform or Firebase user. | Complete signup and payment-method/identity verification to create a Free Trial billing account; the trial does not automatically charge you. | Use the $300 credits within 90 days on covered services. GPUs, Marketplace and third-party generative AI models are restricted during the trial. | Do not budget Welcome credits for Gemini API or AI Studio if your billing account was opened after March 2, 2026; those uses are excluded. | Upgrade manually only if you want paid access; excluded services or usage beyond your remaining credit and free limits can then be charged.
 ### Gladia Starter — €50 Free Credits
 - Provider: Gladia
 - Category: voice
@@ -1333,8 +1343,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://free.ai/
 - Page: https://freetokens.custats.info/offers/free-ai-30000-tokens-day.html
-- Summary: Free.ai grants 30,000 tokens/day after a free email signup (6,000/day if you stay anonymous). No credit card. Tokens reset every 24 hours and can be spent across 400+ tools; free accounts also cap heavy tools at 1 video, 2 music tracks, 5 images, and 5 image edits per day. A free account unlocks the OpenAI-compatible developer API at api.free.ai, which shares the same daily pool. The API docs How-it-works line says "Purchase tokens, then generate your key," but the same page's FAQ and rate table list a Free plan at 30K tokens/day and $0.
-- Claim steps: Sign up at free.ai/signup with an email (no password or credit card; they send a link to set a password later). | Use the 30,000 daily tokens on the site, or open free.ai/api/ to generate an sk-free- API key. | Call https://api.free.ai with the OpenAI-compatible /v1/chat/ endpoint (and other tool endpoints) until the daily pool resets.
+- Summary: Free.ai grants 30,000 tokens/day after free signup (6,000/day if you stay anonymous). No credit card. Tokens reset every 24 hours and can be spent across 400+ tools. Free accounts allow 1 video every 2 days; a clip uses the whole 30,000-token daily pool on the day it is made. Other tools are limited by the token pool, not separate daily image, edit, or music caps. A free account unlocks the OpenAI-compatible developer API at api.free.ai, sharing the daily pool, with 1,000 requests/month and 60 requests/minute. The API docs How-it-works line says "Purchase tokens, then generate your key," but the same page's FAQ and rate table list a Free plan at 30K tokens/day and $0.
+- Claim steps: Sign up at free.ai/signup/ using the email/password form or Google or Microsoft sign-in; no credit card required. | Use the 30,000 daily tokens on the site, or open free.ai/api/ to generate an sk-free- API key. | Call https://api.free.ai with the OpenAI-compatible /v1/chat/ endpoint (and other tool endpoints), within the shared daily token pool and Free API limits of 1,000 requests/month and 60 requests/minute.
 ### Fish Audio Startup Program
 - Provider: Fish Audio
 - Category: startup_program
@@ -1373,8 +1383,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://fireworks.ai/pricing
 - Page: https://freetokens.custats.info/offers/fireworks-ai-1-dollar-free-credits.html
-- Summary: Fireworks AI's official pricing page states: "Pay per token, with high rate limits and postpaid billing. Get started with $1 in free credits." This matches the claimed $1 starter credit for new accounts. The page's "Get Started" button links to /signup, so claiming requires creating an account. No expiry or limited-time language appears near the offer, so it is treated as ongoing with no fixed end date. The offer was not personally redeemed; the verdict is based on the official page.
-- Claim steps: Go to https://fireworks.ai/pricing, which states: "Get started with $1 in free credits." | Click the "Get Started" button, which links to https://fireworks.ai/signup. | Create a new Fireworks AI account. | Use the $1 in free credits with pay-per-token serverless inference (Standard, Priority, or Fast tiers).
+- Summary: Fireworks AI's official billing FAQ still refers to a $1 credit and explains what happens when it is exhausted. The current pricing page no longer advertises a $1 signup grant, so the actual grant to a new account remains to be verified; this offer has not been personally redeemed. Current self-serve billing is prepaid, not postpaid: usage draws from credits, and continuing after depletion requires a payment method and purchased credits. Auto Reload can purchase credits automatically if enabled. No fixed campaign end date is established.
+- Claim steps: Create a Fireworks AI account at https://fireworks.ai/signup. | Check your billing dashboard for the $1 starter credit referenced by the official FAQ; a new-account grant has not been confirmed by this audit. | If the credit is granted, use it for eligible pay-per-token inference and monitor your balance. | After depletion, continuing service requires a payment method and purchased credits. Check Auto Reload settings before enabling automatic purchases.
 ### Firecrawl Student Program — 10,000 Free Credits
 - Provider: Firecrawl
 - Category: student
@@ -1423,8 +1433,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://fal.ai/minimax-h3-max
 - Page: https://freetokens.custats.info/offers/fal-minimax-h3-max-free.html
-- Summary: fal offers free generations with MiniMax H3 Max, a model that turns a prompt or an image into a 768p clip in as little as 3 seconds, supporting both text-to-video (T2V) and image-to-video (I2V). The tool runs in the browser with no sign-up required for the no-account path, and a free fal account raises the limit to 15 free videos per day. Announced by fal's Blendi (@blendibyl) on X.
-- Claim steps: Open https://fal.ai/tools/minimax-h3-max in a browser. | Type a prompt (T2V) or add an image (I2V); pick aspect ratio (16:9, 9:16, 1:1) and length (5s/10s). | Hit Generate — no account needed for the no-signup path. | Optional: sign up for a free fal account to get up to 15 free videos per day.
+- Summary: fal offers MiniMax H3 Max in its browser sandbox with five free videos per day, up to 15 seconds each with native audio. Both text-to-video (T2V) and image-to-video (I2V) are supported; fal advertises a 5-second video generated in under 3 seconds and identifies the leaderboard model as 768p. A fal account and sign-in are required; no installation or subscription is needed. The allowance resets every 24 hours. Announced by fal's Blendi (@blendibyl) on X.
+- Claim steps: Open https://fal.ai/minimax-h3-max and create a fal account or sign in. | Describe the shot, camera move and sound, or attach an image for image-to-video. | Generate up to five free clips per day, up to 15 seconds each with synchronized audio. | The free allowance resets every 24 hours; no subscription or installation is required.
 ### Exa Free Tier — $10/Month + $10 Onboarding Bonus
 - Provider: Exa
 - Category: api_provider
@@ -1493,8 +1503,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.digitalocean.com/hatch
 - Page: https://freetokens.custats.info/offers/digitalocean-startups.html
-- Summary: DigitalOcean Startups (Hatch) gives approved startups 12 months of DigitalOcean credits (amount varies by partner award level), 15 months of free Standard-tier support, and select startups are invited to apply for GPU credit packages. Eligibility: raised $10M or less, company website with matching email domain, registered DigitalOcean team account with a business/company email; AI-native startups are prioritized and service-based businesses are ineligible. Core credits exclude some GPU/dedicated inference products.
-- Claim steps: Create a registered DigitalOcean team account with a business/company email (not personal). | Apply via digitalocean.com/hatch — directly or through a DigitalOcean Startups partner. | Eligibility: raised ≤$10M, company website + matching email; AI-native prioritized; service businesses ineligible.
+- Summary: DigitalOcean Startups (Hatch) gives approved startups 12 months of DigitalOcean credits (amount varies by partner award level), 15 months of free Standard-tier support, and select startups are invited to apply for GPU credit packages. Eligibility: raised $10M or less, company website with matching email domain, registered DigitalOcean team account with a business/company email and a valid credit card before applying; AI-native startups are prioritized and service-based businesses are ineligible. The program is for new startups that have not used prior DigitalOcean credits. Core credits exclude GPU Droplets; NVIDIA H100 GPU Kubernetes; Bare Metal GPUs; Dedicated Inference; Serverless Inference, third-party AI models hosted outside DigitalOcean Infrastructure (including Anthropic and OpenAI); Paperspace Machines; Cloudways services; and other charges passed through to third-party providers outside DigitalOcean's infrastructure. GPU credits are a separate, selective benefit, not guaranteed by program acceptance. Excluded services are charged to the account's payment method. Participants generally have a $10,000 monthly credit limit; usage above the monthly limit is charged.
+- Claim steps: Create a registered DigitalOcean team account with a business/company email matching your company domain (not personal) and a valid credit card before applying. | Apply via digitalocean.com/hatch — directly or through a DigitalOcean Startups partner. | Eligibility: raised ≤$10M, company website + matching email, and no prior DigitalOcean credits used; AI-native prioritized; service businesses ineligible. | Check your onboarding email for the credit allocation and monthly limit. Use core credits only for qualifying services; excluded services and usage above the monthly credit limit are charged. GPU credits require a separate, selective application.
 ### Devin for Startups — $65K Credits and Grants
 - Provider: Cognition (Devin)
 - Category: startup_program
@@ -1513,8 +1523,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
 - Source: https://devin.ai/pricing
 - Page: https://freetokens.custats.info/offers/devin-free-plan.html
-- Summary: Devin's $0 plan gives you a light quota of the autonomous coding agent plus unlimited Tab completions in the IDE extension. It is aimed at trying out agent-driven tasks before upgrading to a paid plan.
-- Claim steps: Open devin.ai/pricing and pick the Free $0 plan. | Sign up with your email or a Google/GitHub account. | Start a Devin session from the dashboard within your free quota. | Install the IDE extension for unlimited Tab completions.
+- Summary: Devin's $0 Free plan is offered through the Download/local desktop path and includes a light quota to code with agents, limited model availability, unlimited inline edits and unlimited Tab completions. The pricing page lists access to cloud agents (Devin Cloud) under paid Pro, not Free; this offer does not promise free dashboard/cloud-agent sessions.
+- Claim steps: Open https://devin.ai/pricing and use Download under the Free $0 plan. | Install the downloaded local desktop app and follow its account setup/sign-in flow. | Use local agent coding within the light Free quota and limited model availability; inline edits and Tab completions are unlimited. | Do not expect Free to include Devin Cloud sessions: access to cloud agents is listed under paid Pro.
 ### DeepInfra DeepStart
 - Provider: DeepInfra
 - Category: startup_program
@@ -1585,95 +1595,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/cursor-hobby-plan.html
 - Summary: Cursor's Hobby plan is a genuinely free tier of the AI code editor: no credit card required, with limited Agent requests and access to the Composer model. Pro tiers only extend limits, so everyday autocomplete and agent use stay free.
 - Claim steps: Go to cursor.com/pricing and pick the Hobby (Free) plan. | Download and install the Cursor editor. | Sign in with a free account - no credit card needed. | Use Agent within the limited free quota; upgrade only if you need more.
-### Context.dev Free Tier
-- Provider: Context.dev
-- Category: api_provider
-- Amount: 1,000 API credits/month + 10K one-time Logo Link requests (1 concurrent request; legacy account RPM shown in dashboard)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://www.context.dev/pricing
-- Page: https://freetokens.custats.info/offers/context-dev-free-tier.html
-- Summary: Context.dev's free tier includes 1,000 API credits per month (a standard scrape uses 1 credit; extraction/brand calls cost more) plus a separate one-time 10K Logo Link quota — no credit card required. Free currently permits 1 concurrent core API request per organization. Accounts created before concurrency limits retain their legacy per-minute limits; the dashboard shows which applies. Work-email/personal-email RPM figures are not the current new-account limit.
-- Claim steps: Sign up at context.dev/signup — no credit card required. | 1,000 API credits renew monthly; the separate 10K Logo Link quota is one-time. | Limit new Free-tier core API usage to 1 concurrent request per organization. If you have a legacy account, check the dashboard for its applicable per-minute limit.
-### CometAPI Signup Credit
-- Provider: CometAPI
-- Category: api_provider
-- Amount: $0.1 USD free credit in Wallet after register/login
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://apidoc.cometapi.com/overview/important-guidelines
-- Page: https://freetokens.custats.info/offers/cometapi-signup-credit.html
-- Summary: CometAPI (an OpenAI-compatible multi-model API gateway) credits new accounts $0.1 USD in the Wallet after register and login, with no extra claim step. Docs describe pay-as-you-go top-ups via Stripe with a $10 minimum; they do not require a card to receive the signup credit.
-- Claim steps: Register and log in to CometAPI. | Open the Wallet page; the $0.1 USD credit is applied automatically. | Create an API token under Tokens to call supported models via api.cometapi.com.
-### Cohere Trial API Key
-- Provider: Cohere
-- Category: api_provider
-- Amount: Free evaluation/trial keys — 1,000 API calls/month; Chat ~20 RPM
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.cohere.com/docs/rate-limits
-- Page: https://freetokens.custats.info/offers/cohere-trial-key.html
-- Summary: Cohere evaluation/trial API keys are free but limited: 1,000 API calls per month, and Chat models at 20 requests per minute. Production keys are paid with higher limits. Create a trial or production key on the API keys page. This reactivates the previously archived cohere-trial-key listing. The rate-limits page does not state a non-commercial restriction.
-- Claim steps: Sign up at dashboard.cohere.com (no card mentioned for trial keys). | Open the API keys page and create a Trial (evaluation) key. | Stay within 1,000 API calls/month and Chat 20 req/min trial limits.
-### Codex for Open Source
-- Provider: OpenAI
-- Category: oss_program
-- Amount: Six months of ChatGPT Pro with Codex + conditional Codex Security + API credits via the Codex Open Source Fund, for eligible OSS maintainers
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://developers.openai.com/community/codex-for-oss
-- Page: https://freetokens.custats.info/offers/codex-for-open-source.html
-- Summary: Codex for Open Source gives eligible open-source maintainers six months of ChatGPT Pro with Codex for day-to-day coding, triage, review, and maintainer workflows, conditional access to Codex Security for repositories needing deeper coverage (reviewed case by case), and API credits through the Codex Open Source Fund for projects using Codex in PR review or maintainer automation. Core maintainers and widely used public projects should apply; edge cases can explain their ecosystem role.
-- Claim steps: Confirm you're a core maintainer or run a widely used public open-source project. | Apply via the form linked on developers.openai.com/community/codex-for-oss (rolling review; submitting agrees to the Codex for Open Source Program Terms). | If selected: six months of ChatGPT Pro with Codex, conditional Codex Security access (case-by-case), and API credits via the Codex Open Source Fund for Codex-in-OSS workflows.
-### CodeRabbit OSS — Free AI Code Reviews
-- Provider: CodeRabbit
-- Category: oss_program
-- Amount: Free Team features for public repositories: AI reviews, slop detection, triage, Change Stack, and Security; no card or application; rate limits apply
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.coderabbit.ai/oss
-- Page: https://freetokens.custats.info/offers/coderabbit-oss-free-reviews.html
-- Summary: CodeRabbit reviews public repositories for free, including AI reviews, slop detection, triage, Change Stack, and Security. No card or application. The $10M figure is CodeRabbit’s overall OSS commitment, not a per-project grant.
-### Cloudflare Workers AI Free Tier
-- Provider: Cloudflare
-- Category: api_provider
-- Amount: 10,000 Neurons per day at no charge (resets daily at 00:00 UTC)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://developers.cloudflare.com/workers-ai/platform/pricing/
-- Page: https://freetokens.custats.info/offers/cloudflare-workers-ai-free-tier.html
-- Summary: Cloudflare's Workers AI includes a free allocation of 10,000 Neurons per day for anyone - enough for thousands of small LLM or image generations. It runs on Cloudflare's edge network with an OpenAI-compatible REST interface and resets daily at 00:00 UTC.
-- Claim steps: Create a free Cloudflare account and open the dashboard. | Navigate to the Workers AI section and accept the terms. | Create a Workers AI API token, or add the AI binding inside any Worker. | Run models via REST or Worker bindings within the daily 10,000-Neuron free allowance.
-### Cloudflare for Startups
-- Provider: Cloudflare
-- Category: startup_program
-- Amount: Up to $350K in credits for 1 year (tiers $10K / $100K / $350K by stage; Workers AI capped $2.5K-$50K by tier)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.cloudflare.com/startups/
-- Page: https://freetokens.custats.info/offers/cloudflare-for-startups.html
-- Summary: Cloudflare for Startups gives early-stage companies up to $350K in credits for one year across three tiers — $10K (bootstrapped/self-funded, <$1M raised), $100K (<$5M raised, affiliated-partner funded), $350K ($5M+ raised, affiliated-partner funded). Credits cover usage-based services: Workers, Durable Objects, Workflows, Workers AI (capped $2.5K/$10K/$50K by tier), R2 (capped $10K), Pages, Images, Stream; core security/networking features are included at no cost. AI Gateway is temporarily not covered.
-- Claim steps: Confirm eligibility: founded within 10 years, funded up to Series B within the last 12 months, building a technology product, public website, active on LinkedIn/X/GitHub, first-time applicant, business email matching your domain. | Apply at https://www.cloudflare.com/startups/ . | Credits are valid for one year or until fully consumed, whichever comes first.
-### Claude Team plan for scientists
-- Provider: Anthropic
-- Category: coding
-- Amount: 10,000 seats; Standard seats $0/mo for 12 months; Premium $15/mo (5x usage); Claude Science, Code, and Cowork; limited availability
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://claude.com/programs/team-plan-for-scientists
-- Page: https://freetokens.custats.info/offers/claude-team-plan-for-scientists.html
-- Summary: Anthropic's Claude Team plan for scientists offers promotional Team seating to verified principal investigators (or equivalent) at academic or nonprofit research institutions. Standard seats are free; Premium seats are $15/month (regularly $100) with 5x usage. The promotion covers 12 months from signup, is limited to about 10,000 seats, and is not guaranteed. Includes Claude Science, Code, and Cowork. Verification typically takes 5–7 business days. 1–25 seats per group; larger groups contact Anthropic. This is a Claude.ai Team subscription, distinct from API credit grants in AI for Science.
-- Claim steps: Confirm you are a PI or equivalent at an accredited university or nonprofit research institute (natural sciences, math, CS, engineering, related fields). | Complete the verification form on claude.com/programs/team-plan-for-scientists. | Wait for review (most applications 5–7 business days) and the approval email. | Add lab members as Standard (free) or Premium ($15/mo) seats. Final pricing is confirmed after verification.
-### Claude for Open Source
-- Provider: Anthropic
-- Category: oss_program
-- Amount: 6 months of free Claude Max 20x (~$1,200 value at $200/mo list); subscription grant, not API credits; capped at 10,000 recipients
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://claude.com/contact-sales/claude-for-oss
-- Page: https://freetokens.custats.info/offers/claude-for-open-source.html
-- Summary: Claude for Open Source grants eligible maintainers and contributors a complimentary Claude Max 20x subscription for six months — a subscription grant, not API credits. Capped at 10,000 approved recipients, rolling review until the cap is reached or the application period closes. Eligibility tracks: maintainers (500+ dependent repos, 100+ dependent packages, or 200k+ monthly downloads), core contributors on recognized foundation/language projects, active contributors (100+ merged PRs on others' repos in 12 months), community builders (20+ unique external merged-PR contributors in 12 months), critical infrastructure (OpenSSF criticality score >=0.4), plus a discretionary ecosystem-impact track. General requirements: natural person, GitHub account at least two years old, public OSS activity in the last 90 days, and at least one OSI-approved-licensed project.
-- Claim steps: Check the eligibility tracks on claude.com/contact-sales/claude-for-oss. | Apply at claude.com/open-source-max — sign in with your GitHub account, add email, planned usage, and a <=500-word qualification statement. | If approved, an activation link is emailed to your GitHub account email; activate within 90 days. | Subscription runs 6 consecutive months; an existing paid plan pauses and resumes afterward unless cancelled.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

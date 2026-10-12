@@ -1,5 +1,5 @@
 {
-  "summary": "Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Free-tier rate limits are 500 RPM, 1M TPM, and 5 concurrent requests; once the token grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.",
+  "summary": "Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Limits are endpoint-specific: the Reader page lists embeddings/rerank at 100 RPM and 100K TPM, while the current official OpenAPI spec lists 500 RPM and 1M TPM for those endpoints and different chat limits. The conflicting published limits require confirmation; do not apply one blanket rate or concurrency limit to all APIs. Once the grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.",
   "claim_steps": [
     "Sign up at jina.ai and get your API key from jina.ai/api-dashboard/key-manager — new keys auto-receive 10M free tokens.",
     "Authenticate with 'Authorization: Bearer jina_<key>' against api.jina.ai endpoints (embeddings, rerank, reader via r.jina.ai, etc.).",
@@ -16,7 +16,7 @@
       "type": "link",
       "url": "https://api.jina.ai/openapi.json",
       "title": "Jina Search Foundation API (OpenAPI spec)",
-      "text": "Get your API key at jina.ai/api-dashboard/key-manager. New users receive 10M free tokens. ... Rate Limits — Free tier: 500 RPM / 1M TPM / concurrency 5."
+      "text": "OpenAPI version 2026.10.09.2011: /v1/embeddings and /v1/rerank free limits are 500 RPM / 1M TPM; /v1/chat/completions is 100 RPM / 500K TPM. The Reader page separately states embeddings/rerank 100 RPM / 100K TPM; this official-source conflict is unresolved."
     }
   ]
 }

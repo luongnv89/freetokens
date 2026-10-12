@@ -1,5 +1,5 @@
 {
-  "summary": "Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. Starter credits do not require a credit card or upfront paid subscription. Paid workspace plans start at $50/month after the free credits. No enrollment deadline or starter-credit expiration is stated on the loaded official pages.",
+  "summary": "Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. The Free plan includes $100 in starter credits without a credit card or upfront paid subscription; free credits never expire. The current pricing table lists Team at $100/month after the free allowance. No enrollment deadline is stated.",
   "claim_steps": [
     "Create a Viktor account.",
     "Join your team or add Viktor to Slack or Microsoft Teams.",
@@ -10,13 +10,13 @@
       "type": "link",
       "url": "https://viktor.com/pricing",
       "title": "Pricing | Viktor",
-      "text": "$100 in credits, no credit card required. Use them however you want. When they're gone, pick a plan."
+      "text": "$100 in credits, no credit card required. Free credits never expire. Team: $100 / month, 40,000 credits monthly."
     },
     {
       "type": "link",
       "url": "https://viktor.com/",
       "title": "Viktor | Not a tool. A hire.",
-      "text": "Every feature. Every integration. $100 in credits on the house. No credit card, no sales call, no catch. When you need more,it starts $50/month."
+      "text": "Every feature. Every integration. $100 in credits on the house. No credit card, no sales call, no catch."
     },
     {
       "type": "link",

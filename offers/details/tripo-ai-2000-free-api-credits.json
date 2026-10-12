@@ -1,16 +1,22 @@
 {
-  "summary": "Tripo AI grants 2,000 free OpenAPI credits (~$20 at $0.01/credit) once per account the first time an API key is generated, per its official OpenAPI launch announcement. Credits pay for image and 3D-model generation tasks. Note: Tripo API V2 is unmaintained from 2026-10-01 and retired 2026-11-01; a V2→V3 migration guide is published.",
+  "summary": "Current Tripo OpenAPI pricing advertises 300 free API credits (~$3 at 100 credits per $1), with the wording 'in 2 weeks'. The public page does not clarify whether that wording describes delivery timing or credit validity; confirm the allowance and expiry in your API wallet. This supersedes the historical 2,000-credit first-key launch reward. Credits cover supported image and 3D generation tasks. API V2 is no longer maintained from October 1, 2026 and retires November 1, 2026; follow the published V2-to-V3 migration guide.",
   "claim_steps": [
-    "Create an account at https://platform.tripo3d.ai (no card required).",
-    "Open the API Keys page and generate a key — 2,000 free credits are granted on first key generation.",
-    "Call https://api.tripo3d.ai/v2/openapi/task with the key as a Bearer token."
+    "Create or sign in to a Tripo API account at https://platform.tripo3d.ai.",
+    "Check the API wallet for the advertised 300-credit allowance and its account-specific timing/validity; current public pricing says 'in 2 weeks' without further explanation.",
+    "Generate an API key and follow current OpenAPI quickstart and V3 migration documentation. Paid usage uses prepaid credits; a no-card claim flow has not been tested."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://docs.tripo3d.ai/get-started/pricing.html",
-      "title": "Pricing | Tripo OpenAPI docs",
-      "text": "The Tripo API pricing is based on credits. ... $1.00 = 100 credits. Notice: From November 1, 2026, Tripo API V2 will be officially retired, and all V2 endpoints will stop serving requests."
+      "title": "Current Tripo OpenAPI pricing",
+      "text": "Get started with 300 free credits in 2 weeks. $1.00 = 100 credits. From November 1, 2026, Tripo API V2 will be officially retired, and all V2 endpoints will stop serving requests."
+    },
+    {
+      "type": "link",
+      "url": "https://www.tripo3d.ai/blog/announcement-tripo-openapi-platform-payment-system",
+      "title": "Historical OpenAPI launch reward — superseded",
+      "text": "Historical announcement offered 2,000 credits on first API key generation; current pricing instead advertises 300 free credits. Do not rely on the old grant amount."
     }
   ]
 }
