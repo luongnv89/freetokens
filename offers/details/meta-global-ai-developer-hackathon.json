@@ -1,0 +1,22 @@
+{
+  "summary": "Meta's 10-day virtual Global AI Developer Hackathon gives every participant $150 of Meta Model API credits, with a $1M cash prize pool. Applications are not open yet; Meta's page offers a sign-up to be notified when they open.",
+  "claim_steps": [
+    "Open the hackathon page at dev.meta.ai/events/global-hackathon.",
+    "Sign up with your name and email to get notified when applications open.",
+    "Apply once applications open; participants receive $150 of Meta Model API credits."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://dev.meta.ai/events/global-hackathon",
+      "title": "Win $1M: Meta Global AI Developer Hackathon",
+      "text": "Apply for a 10-day global virtual hackathon from Meta Superintelligence Labs. Build on the newest models from Meta through Meta Model API. Every participant gets $150 of Meta Model API credits. $1M cash prize pool. Virtual, worldwide. Applications opening soon."
+    },
+    {
+      "type": "link",
+      "url": "https://developers.meta.com/blog/meta-connect-recap/",
+      "title": "Meta Connect 2026: The end-to-end recap",
+      "text": "Build on Meta Model API, Muse Code or our open-weights models, with free Model API credits. There are two tracks, one for indie developers and one for startup teams, and a $1M cash prize pool. Sign up to get notified when applications open at dev.meta.ai."
+    }
+  ]
+}
