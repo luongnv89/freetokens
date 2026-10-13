@@ -1,0 +1,16 @@
+{
+  "summary": "OpenCode Console (formerly Zen) is OpenCode's pay-as-you-go AI gateway for coding agents. Its official models page lists Big Pickle, a stealth model, as free for input, output and cached reads for a limited time; during the free period collected data may be used to improve the model. Model ID big-pickle, endpoint https://opencode.ai/inference/v1/chat/completions, selectable in OpenCode as opencode/big-pickle.",
+  "claim_steps": [
+    "Sign in to the OpenCode console, add your billing details and credits, and copy your API key.",
+    "Run /connect in the OpenCode TUI, choose the OpenCode pay-as-you-go provider, and paste your API key.",
+    "Run /models and select Big Pickle (opencode/big-pickle)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models | OpenCode",
+      "text": "Big Pickle | Free | Free | Free | - ... Big Pickle is a stealth model that’s free on OpenCode for a limited time. The team is using this time to collect feedback and improve the model. ... Big Pickle: During its free period, collected data may be used to improve the model."
+    }
+  ]
+}

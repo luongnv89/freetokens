@@ -1,0 +1,24 @@
+{
+  "summary": "Dolphin's official API page offers $30 in Dolphin API credit with coupon code API30. Redemption happens in app.dphn.ai: connect a wallet, verify it by signing a message (free, no transaction), authorize with the Telegram bot, then enter API30 under Redeem Code. The API is OpenAI-compatible (base URL https://lighthouse.dphn.ai/run/text-v/v1) and currently serves DeepSeek V4.1 Flash at $0.01/M input and $0.07/M output tokens.",
+  "claim_steps": [
+    "Open app.dphn.ai and connect your wallet",
+    "Click Verify Wallet and sign the message (free, no transaction)",
+    "Click Open Telegram and press Start in the bot",
+    "Enter API30 in Redeem Code and click Redeem",
+    "In API Keys, click Create Key and send your first request"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://dphn.ai/API/",
+      "title": "Dolphin API - $30 Credit | Dolphin AI",
+      "text": "Get $30 in API credit. Use code API30. ... Go to app.dphn.ai and connect your wallet. Verify your wallet, then authorize with Telegram. ... Enter API30 in Redeem Code to add $30 to your balance. ... The API is live today. Use your credit on the Dolphin API today."
+    },
+    {
+      "type": "link",
+      "url": "https://dphn.ai/docs/coupon-credits/",
+      "title": "Coupon Credits Quick-Start",
+      "text": "Open app.dphn.ai and connect your wallet. Click Verify Wallet and sign the message. It is free and sends no transaction. ... Enter your code in Redeem Code and click Redeem. Your USD credit shows in Credit Balance. ... DeepSeek V4.1 Flash | deepseek-ai/DeepSeek-V4.1-Flash | Available | Input: $0.01 / Output: $0.07"
+    }
+  ]
+}

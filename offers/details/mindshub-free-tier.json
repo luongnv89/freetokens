@@ -1,0 +1,22 @@
+{
+  "summary": "MindsHub (by MindsDB, Inc.) has an always-free tier with no subscription and no credit card. The MindsHub Air model (a general-purpose model alias, API alias mindshub_air) and TypeSafe's Jev decision model (API alias jev, via the Decisions API) are free within fair use, both in MindsHub Agents and through the API. Daily rate limits apply and are not published as numbers. The free tier is meant for people using agents. Bulk pipelines, scripted volume traffic, scraping, reselling, or multiple accounts are not covered and can lead to suspension. Air is an alias MindsHub can repoint to a different model. Use outside the free tier is billed at published per-model rates.",
+  "claim_steps": [
+    "Create a free MindsHub account at mindshub.ai (no credit card required)",
+    "Use the MindsHub Air model in MindsHub Agents, or call it through Unified Inference with the alias mindshub_air",
+    "Use Jev through the Decisions API with the alias jev and your MindsHub key"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://mindshub.ai/pricing",
+      "title": "MindsHub pricing: Start free, then pay as you go",
+      "text": "Free: The MindsHub Air model and Jev, free within fair use. No card. ... $0 No credit card required ... Free within fair use, in MindsHub Agents and through the API. Daily limits apply."
+    },
+    {
+      "type": "link",
+      "url": "https://mindshub.ai/fair-use-policy",
+      "title": "Fair Use Policy — MindsHub",
+      "text": "A MindsHub account gives you access to the included models at no charge, with no credit card required. Currently included: The MindsHub Air model; Jev. ... MindsDB protects the free tier with daily rate limits and other measures. The limits are not published as numbers."
+    }
+  ]
+}

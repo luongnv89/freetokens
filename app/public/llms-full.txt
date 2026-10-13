@@ -2,11 +2,81 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-13T03:35:52Z — 144 of 210 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-13T15:18:53Z — 145 of 217 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Big Pickle Free on OpenCode Console
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Big Pickle stealth model access on OpenCode Console (free input, output and cached reads; limited time); collected data may be used to improve the model
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-big-pickle-free.html
+- Summary: OpenCode Console (formerly Zen) is OpenCode's pay-as-you-go AI gateway for coding agents. Its official models page lists Big Pickle, a stealth model, as free for input, output and cached reads for a limited time; during the free period collected data may be used to improve the model. Model ID big-pickle, endpoint https://opencode.ai/inference/v1/chat/completions, selectable in OpenCode as opencode/big-pickle.
+- Claim steps: Sign in to the OpenCode console, add your billing details and credits, and copy your API key. | Run /connect in the OpenCode TUI, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select Big Pickle (opencode/big-pickle).
+### Apodex 1.1 Mini Free (Novita)
+- Provider: Novita AI
+- Category: api_provider
+- Amount: Apodex 1.1 Mini free input + output tokens as a launch promotion (35B MoE, 256K context, function calling)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://novita.ai/pricing
+- Page: https://freetokens.custats.info/offers/novita-apodex-1-1-mini-free.html
+- Summary: Apodex 1.1 Mini (model ID apodex/apodex-1.1-mini) is a 35B-parameter mixture-of-experts text model with a 262,144-token context window, function calling, structured outputs and reasoning, served on Novita's OpenAI-compatible serverless API. Novita's pricing page lists its input and output as Free; the Oct 1 launch blog describes the $0 pricing as a launch promotion that is not permanent and may change.
+- Claim steps: Create a Novita AI account and an API key in Key Management | Call https://api.novita.ai/v3/openai/chat/completions with model apodex/apodex-1.1-mini
+### MindsHub Free Tier — MindsHub Air and Jev Models
+- Provider: MindsHub
+- Category: api_provider
+- Amount: MindsHub Air model and Jev decision model free within fair use in MindsHub Agents and through the API; no card, daily rate limits apply (limits not published)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://mindshub.ai/pricing
+- Page: https://freetokens.custats.info/offers/mindshub-free-tier.html
+- Summary: MindsHub (by MindsDB, Inc.) has an always-free tier with no subscription and no credit card. The MindsHub Air model (a general-purpose model alias, API alias mindshub_air) and TypeSafe's Jev decision model (API alias jev, via the Decisions API) are free within fair use, both in MindsHub Agents and through the API. Daily rate limits apply and are not published as numbers. The free tier is meant for people using agents. Bulk pipelines, scripted volume traffic, scraping, reselling, or multiple accounts are not covered and can lead to suspension. Air is an alias MindsHub can repoint to a different model. Use outside the free tier is billed at published per-model rates.
+- Claim steps: Create a free MindsHub account at mindshub.ai (no credit card required) | Use the MindsHub Air model in MindsHub Agents, or call it through Unified Inference with the alias mindshub_air | Use Jev through the Decisions API with the alias jev and your MindsHub key
+### Liner API — Up to $15 Free Credits on Sign-up
+- Provider: Liner
+- Category: api_provider
+- Amount: Up to $15 in free Liner API credits for new developer accounts; no purchase necessary, card required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://liner.com/developers
+- Page: https://freetokens.custats.info/offers/liner-api-signup-15-credits.html
+- Summary: Liner's developer site offers new users up to $15 in free API credits ('No purchase necessary. Just add your card.'). Credits are a prepaid balance that pays for any Liner API: the Liner Model API ($1 input / $5 output per 1M tokens on liner-mark-1.3), Web Search ($1 per 1,000 requests), Scholar Search ($0.3 per 1,000), and the Agent APIs (Quick Answer $3, Search Agent $20, Deep Research $200 per 1,000 requests).
+- Claim steps: Open https://liner.com/developers and select Claim now / Get started | Sign up and add a card (no purchase necessary) | Create an API key under API Keys in the dashboard; check the credit balance with GET /api/v1/credits/balance (free)
+### Dolphin API — $30 API Credit
+- Provider: Dolphin
+- Category: api_provider
+- Amount: $30 in Dolphin API credit with coupon code API30 (redeem at app.dphn.ai after connecting and verifying a wallet and authorizing with Telegram)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://dphn.ai/API/
+- Page: https://freetokens.custats.info/offers/dolphin-api-30-credit.html
+- Summary: Dolphin's official API page offers $30 in Dolphin API credit with coupon code API30. Redemption happens in app.dphn.ai: connect a wallet, verify it by signing a message (free, no transaction), authorize with the Telegram bot, then enter API30 under Redeem Code. The API is OpenAI-compatible (base URL https://lighthouse.dphn.ai/run/text-v/v1) and currently serves DeepSeek V4.1 Flash at $0.01/M input and $0.07/M output tokens.
+- Claim steps: Open app.dphn.ai and connect your wallet | Click Verify Wallet and sign the message (free, no transaction) | Click Open Telegram and press Start in the bot | Enter API30 in Redeem Code and click Redeem | In API Keys, click Create Key and send your first request
+### Brave Search API — $5 Free Credits Every Month
+- Provider: Brave
+- Category: api_provider
+- Amount: $5 in free credits every month on the Search plan ($5 per 1,000 requests) and the Answers plan; credits applied automatically; card required for identity verification but not charged
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://brave.com/search/api/
+- Page: https://freetokens.custats.info/offers/brave-search-api-monthly-free-credits.html
+- Summary: Brave Search API offers a Search plan (complete search results with LLM context, $5 per 1,000 requests, 50 queries per second) and an Answers plan (grounded summarized answers, $4 per 1,000 requests plus $5 per million input/output tokens, 2 queries per second). Both include $5 in free credits every month, applied to the account automatically. A credit card is required as an anti-fraud measure; on free plans it only confirms identity and is not charged.
+- Claim steps: Open https://brave.com/search/api/ and choose Get started on the Search or Answers plan | Create an account and add a credit card for identity verification (not charged on free plans) | The $5 monthly free credit is applied to your account automatically
+### AutoClaw Weekly Perks — 8M GLM-5.3-Flash Tokens Daily
+- Provider: AutoClaw (Z.ai)
+- Category: coding
+- Amount: Log in daily Oct 13-16 to claim 8M GLM-5.3-Flash tokens (800 Credits) per day, up to 32M total; each day's reward expires at midnight (UTC+8) on the day it is claimed. Paid members get extra daily rewards.
+- Status: active — enrollment deadline: 2026-10-16
+- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://autoclaw.z.ai/blog/news/Weekly-Perks-M10W2/
+- Page: https://freetokens.custats.info/offers/autoclaw-weekly-perks-glm-5-3-flash-tokens.html
+- Summary: AutoClaw Weekly Perks (Oct 12-16, UTC+8): on Oct 12 all users could claim 100M GLM-5.3-Flash tokens (expired at midnight Oct 12). From Oct 13 to 16, all users can log in each day to claim 8M GLM-5.3-Flash tokens (800 Credits); each daily reward expires at midnight on the day of claim. AutoClaw Monthly Subscription, Group Subscription and GLM Coding Plan Individual members can claim an additional daily reward by tier (5M-80M tokens). One claim per account per day; AutoClaw may revoke rewards for fraud or automated abuse.
+- Claim steps: Log in to AutoClaw after 12:00 AM (UTC+8) each day from Oct 13 to Oct 16 | Claim the daily 8M GLM-5.3-Flash token reward and use it before midnight that day
 ### Tripo AI 300 Free API Credits
 - Provider: Tripo AI
 - Category: image
@@ -1385,66 +1455,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/fireworks-ai-1-dollar-free-credits.html
 - Summary: Fireworks AI's official billing FAQ still refers to a $1 credit and explains what happens when it is exhausted. The current pricing page no longer advertises a $1 signup grant, so the actual grant to a new account remains to be verified; this offer has not been personally redeemed. Current self-serve billing is prepaid, not postpaid: usage draws from credits, and continuing after depletion requires a payment method and purchased credits. Auto Reload can purchase credits automatically if enabled. No fixed campaign end date is established.
 - Claim steps: Create a Fireworks AI account at https://fireworks.ai/signup. | Check your billing dashboard for the $1 starter credit referenced by the official FAQ; a new-account grant has not been confirmed by this audit. | If the credit is granted, use it for eligible pay-per-token inference and monitor your balance. | After depletion, continuing service requires a payment method and purchased credits. Check Auto Reload settings before enabling automatic purchases.
-### Firecrawl Student Program — 10,000 Free Credits
-- Provider: Firecrawl
-- Category: student
-- Amount: 10,000 free credits for verified students (academic email; coupon code redeemed in Settings → Billing)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.firecrawl.dev/student-program
-- Page: https://freetokens.custats.info/offers/firecrawl-student-program-10k-credits.html
-- Summary: Firecrawl's Student Program gives verified students 10,000 free credits for educational or personal projects. Eligibility requires a valid academic email address and enrollment in a college, university, or accredited program. Credits are added instantly after redeeming the student coupon code in Settings → Billing. Distinct from the ongoing Firecrawl Free Plan.
-- Claim steps: Sign up for Firecrawl with your educational email address. | Go to Settings → Billing and enter the student coupon code shown on the program page. | 10,000 credits are added to your account instantly — no credit card required.
-### Firecrawl Free Plan — 1,000 Credits/Month
-- Provider: Firecrawl
-- Category: api_provider
-- Amount: 1,000 free credits every month (about 1,000 pages or 500 searches)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://www.firecrawl.dev/pricing
-- Page: https://freetokens.custats.info/offers/firecrawl-free-plan.html
-- Summary: Firecrawl's Free tier provides 1,000 credits every month, refreshed monthly, with no credit card required. The pricing page describes that allowance as roughly 1,000 pages scraped or 500 searches, with two concurrent requests and low rate limits. Search, crawl, scrape, and interaction operations can consume credits at different rates.
-- Claim steps: Open Firecrawl's pricing page and choose the Free tier. | Create a Firecrawl account; no credit card is required. | Use the monthly 1,000-credit allowance within the Free tier's concurrency and rate limits.
-### Figma Education — Professional Plan Free
-- Provider: Figma
-- Category: student
-- Amount: Professional plan free (1 year high-school/higher-ed students, 6 months bootcamp/online students, 2 years educators); higher-ed and bootcamp users get 3,000 AI credits/month, Figma Make & Sites (not K-12/high school)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://www.figma.com/education/
-- Page: https://freetokens.custats.info/offers/figma-education-professional.html
-- Summary: Figma Education offers free Professional features to verified high-school/higher-ed students for one year and educators for two years; approved bootcamp/online-course students receive six months. Higher-ed applicants use SheerID; bootcamp students and educators are verified by the approved program administrator, not self-verification. AI tools including Figma Make and Figma Sites are only available to higher-ed/bootcamp users, not K-12/high-school users. Eligible Education users receive 3,000 AI credits per person each month, with no rollover and a stop at the limit. Each eligible user can publish one Site file they created; custom domains are unavailable. Education eligibility may require reverification and region/school-email checks.
-- Claim steps: Create a Figma account using the school-issued email; review age-of-consent and regional eligibility. | At https://www.figma.com/education/apply, high-school applicants select High school; higher-ed applicants select Higher ed and complete SheerID. Bootcamp/online-course students and educators ask the approved program administrator to verify them; they cannot self-verify. | After approval, create, upgrade or join an Education team. AI/Make/Sites access applies only to higher-ed/bootcamp users, and monthly AI credits are per person and do not roll over. | Reverify when the stated education term ends if still eligible; K-12 use with students follows the separate school/district application.
-### fal Startup Program — $1,000–$5,000
-- Provider: fal
-- Category: startup_program
-- Amount: $1,000 initial fal credits; $2,500 total at $1,000/month fal spend and $5,000 total at $2,500/month fal spend, with tier increases on request (Europe/Asia teams with traction or VC backing; one application per company every three months)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://fal.ai/startup-program
-- Page: https://freetokens.custats.info/offers/fal-startup-program.html
-- Summary: fal's Startup Program provides $1,000 initial credits to approved teams. On request, credits increase to $2,500 total at $1,000/month fal spend and $5,000 total at $2,500/month fal spend; spend elsewhere does not count. Teams already at a threshold may start at the matching tier. Eligible companies are based in Europe or Asia and can show real users, traction, revenue, or institutional funding. One application per company every three months; a short intro call is usually part of approval. Promotional credits expire after 90 days under fal's terms.
-- Claim steps: Confirm that the company is based in Europe or Asia and can show real users, meaningful traction, revenue, or institutional funding. | Apply at https://fal.ai/startup-program with the company's traction or funding and intended fal usage; one application per company every three months. | Complete the usual approval call and create or sign in to a fal account. Approved teams start with $1,000; teams already scaling may receive the matching tier. | Request additional credits once monthly fal spend reaches $1,000 ($2,500 total credits) or $2,500 ($5,000 total credits). Spend on other platforms does not count; promotional credits expire after 90 days.
-### fal — MiniMax H3 Max Free Generations (T2V + I2V)
-- Provider: fal
-- Category: video
-- Amount: MiniMax H3 Max free — text-to-video and image-to-video, 5 free videos/day up to 15s each (account required, resets every 24h)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
-- Source: https://fal.ai/minimax-h3-max
-- Page: https://freetokens.custats.info/offers/fal-minimax-h3-max-free.html
-- Summary: fal offers MiniMax H3 Max in its browser sandbox with five free videos per day, up to 15 seconds each with native audio. Both text-to-video (T2V) and image-to-video (I2V) are supported; fal advertises a 5-second video generated in under 3 seconds and identifies the leaderboard model as 768p. A fal account and sign-in are required; no installation or subscription is needed. The allowance resets every 24 hours. Announced by fal's Blendi (@blendibyl) on X.
-- Claim steps: Open https://fal.ai/minimax-h3-max and create a fal account or sign in. | Describe the shot, camera move and sound, or attach an image for image-to-video. | Generate up to five free clips per day, up to 15 seconds each with synchronized audio. | The free allowance resets every 24 hours; no subscription or installation is required.
-### Exa Free Tier — $10/Month + $10 Onboarding Bonus
-- Provider: Exa
-- Category: api_provider
-- Amount: User's first team receives $10 immediately in the signup month, resetting to $10 each calendar month without rollover, plus a one-time non-expiring $10 bonus after dashboard onboarding
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://exa.ai/docs/admin/billing
-- Page: https://freetokens.custats.info/offers/exa-free-tier.html
-- Summary: Exa's Free tier gives a user's first team $10 in monthly credits, available in full immediately in the signup month. The monthly grant resets to $10 on the first day of each calendar month; unused monthly credits do not roll over or accumulate. The user's first team also earns a one-time $10 bonus only after the user completes dashboard onboarding; that bonus does not expire. No payment method is required to start. The Free tier excludes Exa Snapshot despite pricing-page wording about access to all endpoints. Published limits include 10 Search QPS and 50 concurrent Agent runs; requests return 402 Payment Required when credits are exhausted.
-- Claim steps: Create an Exa account and use your first team to receive the full $10 monthly grant immediately, regardless of the signup date. No payment method is required to start. | Complete onboarding in the dashboard to unlock your first team's one-time $10 bonus. The bonus does not expire; it is not an unconditional $20 signup award. | Use monthly credits before they reset to $10 on the first of each calendar month; unused monthly credits do not roll over. Exa Snapshot is excluded. Add paid credits separately if your balance is exhausted.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
