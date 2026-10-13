@@ -1,12 +1,18 @@
 {
-  "summary": "New Inception accounts receive a one-time credit of 100 million API tokens shared across Mercury 2 and Mercury Edit 2, with no payment details required. Mercury 2 supports reasoning, tool calling and structured outputs through an OpenAI-compatible API.",
+  "summary": "New Inception accounts receive a one-time credit of 100 million API tokens shared across available models rather than per model; no payment details are required to start. Current documentation includes Mercury 2.5, Mercury 2, Mercury Edit 2 and Mercury Decide. Mercury Voice is enterprise-gated and requires enablement, so the signup credit is not a guarantee of access to it. The free tier is limited per minute to 1,000 requests, 1,000,000 input tokens and 100,000 output tokens. Add payment information when the shared balance runs low.",
   "claim_steps": [
     "Create a new account or sign in at platform.inceptionlabs.ai.",
     "Open API Keys and create an Inception API key.",
     "Use the key with the OpenAI-compatible base URL https://api.inceptionlabs.ai/v1 and model mercury-2.",
-    "Monitor the shared one-time token balance; add billing details only if you want paid usage after the free credit."
+    "Monitor the shared one-time balance and per-minute free-tier limits; check the current models documentation for supported endpoints and availability. Mercury Voice requires enterprise enablement. Add billing details only if you want paid usage after the free credit."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.inceptionlabs.ai/get-started/models",
+      "title": "Mercury Voice access is enterprise-gated",
+      "text": "Mercury Voice is available to enterprise customers through the OpenAI-compatible Inception API, and works with LiveKit, Pipecat, Vapi, Retell, or your own voice stack."
+    },
     {
       "type": "link",
       "url": "https://www.inceptionlabs.ai/blog/mercury-2-10x-free-tokens",

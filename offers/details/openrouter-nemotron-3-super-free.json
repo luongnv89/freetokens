@@ -1,7 +1,8 @@
 {
-  "summary": "Nemotron 3 Super is a 120B-parameter open hybrid MoE (12B active, Mamba-Transformer) for multi-agent applications — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 262K context. Created 2026-03-11; no published end date.",
+  "summary": "Nemotron 3 Super is a 120B-parameter open hybrid MoE (12B active, Mamba-Transformer) for multi-agent applications — free via OpenRouter's :free endpoint at $0 prompt / $0 completion with a 262K context. Created 2026-03-11; no published end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms.",
   "claim_steps": [
     "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
+    "Review the NVIDIA API Trial Terms; never submit confidential information or personal data, including voices or faces.",
     "Call the chat completions API with model id nvidia/nemotron-3-super-120b-a12b:free."
   ],
   "social_proof": [

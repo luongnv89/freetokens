@@ -1,10 +1,10 @@
 {
-  "summary": "Google AI Studio offers free, rate-limited image generation directly in the browser using Gemini image models — no billing account required for the free tier.",
+  "summary": "Google AI Studio supports browser-based image generation and has a free, rate-limited tier. Official billing says AI Studio stays free unless a paid API key is linked for paid features. Free image access is model-dependent: current image API pricing has no free tier, and the public-source check did not confirm which current browser image model works without billing. Check the authenticated model's free/paid notice before generating; linking a paid key can incur charges. No specific free quota or campaign end date is established.",
   "claim_steps": [
     "Open aistudio.google.com in your browser.",
     "Sign in with a Google account.",
-    "Choose an image-capable Gemini model and start generating.",
-    "Stay within the per-minute/per-day free rate limits."
+    "Check the image-model selector's free/paid notice; proceed only if that browser model offers free access without a paid API key. Do not assume every image model is free.",
+    "Respect the model-specific displayed limits; linking a paid API key for paid features can incur charges."
   ],
   "social_proof": [
     {
@@ -12,6 +12,12 @@
       "url": "https://aistudio.google.com/",
       "title": "Google AI Studio",
       "text": "The fastest path from prompt to production with Gemini"
+    },
+    {
+      "type": "link",
+      "url": "https://ai.google.dev/gemini-api/docs/billing?hl=en",
+      "title": "AI Studio paid-key billing caveat",
+      "text": "AI Studio usage remains free of charge unless users link a paid API key for access to paid features."
     }
   ]
 }

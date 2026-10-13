@@ -1,10 +1,10 @@
 {
-  "summary": "MiMo V2.6 Flash is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-09-21 as \"free for the next week\" (through ~2026-09-28); as of 2026-09-28 the Zen docs pricing table still lists mimo-v2.6-flash-free at Free/Free/Free with no new end date, so the free window is continuing past the announced date. During the free period collected data may be used to improve the model.",
+  "summary": "MiMo-V2.6-Flash Free remains available on OpenCode Console (formerly Zen) for a limited time. Current Console documentation lists model mimo-v2.6-flash-free at Free/Free/Free, and it appears in the live model catalog. The historical September 21 one-week announcement does not establish a current campaign end date. During the free period, collected data may be used to improve the model. Official setup describes account, billing details and credits; a no-card/no-deposit claim flow has not been verified.",
   "claim_steps": [
-    "Sign in to OpenCode Zen at opencode.ai/zen and copy your API key.",
-    "In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key.",
-    "Run /models and select MiMo V2.6 Flash Free (model id: mimo-v2.6-flash-free).",
-    "Alternatively, call https://opencode.ai/zen/v1/chat/completions with model mimo-v2.6-flash-free."
+    "Sign in to the OpenCode Console and obtain an API key; review any billing/credit requirements shown by the official setup flow.",
+    "In OpenCode, run /connect and choose the OpenCode pay-as-you-go provider, then paste the API key.",
+    "Run /models and select MiMo-V2.6-Flash Free (mimo-v2.6-flash-free) while it is listed.",
+    "For direct API use, call https://opencode.ai/inference/v1/chat/completions with model mimo-v2.6-flash-free."
   ],
   "social_proof": [
     {
@@ -12,13 +12,14 @@
       "url": "https://x.com/opencode/status/2102145730999730611",
       "author": "OpenCode",
       "handle": "@opencode",
+
       "text": "MiMo V2.6 Flash is free for the next week\n\nBoth Flash and Pro are also available in Go"
     },
     {
       "type": "link",
-      "url": "https://opencode.ai/docs/zen/",
-      "title": "Zen | OpenCode",
-      "text": "MiMo-V2.6-Flash Free is available on OpenCode for a limited time. The team is using this time to collect feedback and improve the model. Pricing table lists it Free/Free/Free; still listed 2026-09-28. Model ID: mimo-v2.6-flash-free at https://opencode.ai/zen/v1/chat/completions."
+      "url": "https://opencode.ai/v2/docs/console/models",
+      "title": "Models | OpenCode Console",
+      "text": "MiMo-V2.6-Flash Free is available on OpenCode for a limited time. The team is using this time to collect feedback and improve the model."
     }
   ]
 }

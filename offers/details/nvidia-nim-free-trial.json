@@ -1,16 +1,28 @@
 {
-  "summary": "NVIDIA NIM Developer Program offers a $0 hosted trial for prototyping, including coding models, rate-limited. No credit card required.",
+  "summary": "NVIDIA Developer Program members can access NVIDIA-hosted NIM API endpoints for free development and prototyping. Free access is rate-limited according to the model, use case and current traffic; no fixed numeric allowance is promised here. Hosted prototyping is distinct from paid production deployment or self-hosted infrastructure.",
   "claim_steps": [
-    "Sign up for the NVIDIA Developer Program at developer.nvidia.com/nim.",
-    "Access the NIM hosted trial for prototyping.",
-    "Use coding models via the hosted API — rate-limited, $0 for the trial period."
+    "Visit https://build.nvidia.com and choose a model exposing an NVIDIA-hosted free endpoint.",
+    "On its model page, click Get API Key and sign in or create an NVIDIA account to join the Developer Program.",
+    "Use the displayed API example with your key, within the endpoint's current free rate limits. Hosted prototyping is distinct from paid production/self-host infrastructure."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://developer.nvidia.com/nim",
       "title": "NIM for Developers | NVIDIA Developer",
-      "text": "NVIDIA NIM Developer Program — $0 hosted trial for prototyping, including coding models, rate-limited."
+      "text": "Get free access to NIM API endpoints for unlimited prototyping, powered by DGX Cloud."
+    },
+    {
+      "type": "link",
+      "url": "https://forums.developer.nvidia.com/t/api-rate-limit-increase-is-not-granted-by-requesting-it-here/368420/1",
+      "title": "API Rate Limit Increase is NOT granted by requesting it here — NVIDIA Developer Forums",
+      "text": "This usually involves a rate limit that is dependent on model, use-case and the amount of current overall traffic using the same access."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.api.nvidia.com/nim/docs/api-quickstart",
+      "title": "API Catalog Quickstart Guide — NVIDIA NIM",
+      "text": "In the right hand pane of the model page, click Get API Key."
     }
   ]
 }

@@ -1,12 +1,18 @@
 {
-  "summary": "Cloudflare's Workers AI includes a free allocation of 10,000 Neurons per day for anyone - enough for thousands of small LLM or image generations. It runs on Cloudflare's edge network with an OpenAI-compatible REST interface and resets daily at 00:00 UTC.",
+  "summary": "Workers AI includes 10,000 Neurons per day on Free and Paid Workers plans, resetting at 00:00 UTC. Model-dependent neuron costs mean this is not a fixed number of generations or tokens. On Workers Free, operations fail after exceeding the allowance; Workers Paid bills above it at the published rate. Some models require a paid billing method (Workers Paid or prepaid AI Gateway credits), including Kimi K2.6/K2.7 Code, GLM-5.2/5.3/5.3-Flash and the listed DeepSeek V4 variants.",
   "claim_steps": [
-    "Create a free Cloudflare account and open the dashboard.",
-    "Navigate to the Workers AI section and accept the terms.",
-    "Create a Workers AI API token, or add the AI binding inside any Worker.",
-    "Run models via REST or Worker bindings within the daily 10,000-Neuron free allowance."
+    "Create a Cloudflare account and open Workers AI.",
+    "Create an API token or add an AI binding to a Worker.",
+    "Choose a model available to your billing tier and stay within the 10,000-Neuron daily allocation. Some listed frontier models require Workers Paid or prepaid AI Gateway credits.",
+    "Monitor usage; model-dependent neuron costs determine how much the allocation can generate."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+      "title": "Workers AI billing-method restriction",
+      "text": "Some models require a paid billing method."
+    },
     {
       "type": "link",
       "url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",

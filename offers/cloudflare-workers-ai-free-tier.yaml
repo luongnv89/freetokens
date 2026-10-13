@@ -3,7 +3,7 @@
 title: Cloudflare Workers AI Free Tier
 provider: Cloudflare
 category: api_provider
-amount: 10,000 Neurons per day at no charge (resets daily at 00:00 UTC)
+amount: 10,000 Neurons per day at no charge (resets daily at 00:00 UTC); some frontier models require Workers Paid or prepaid AI Gateway credits
 expiry_date: null
 source_url: https://developers.cloudflare.com/workers-ai/platform/pricing/
 verified_date: 2026-09-30

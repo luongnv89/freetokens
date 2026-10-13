@@ -1,8 +1,10 @@
 {
-  "summary": "NVIDIA Nemotron 3 Nano Omni is a 30B-A3B open multimodal reasoning model — a perception and context sub-agent accepting text, image, video, and audio input with text output over a 256K context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Listed since 2026-04-28; no published end date.",
+  "summary": "NVIDIA Nemotron 3 Nano Omni is a 30B-A3B open multimodal reasoning model — a perception and context sub-agent accepting text, image, video, and audio input with text output over a 256K context. Published free pricing is $0 prompt / $0 completion. The sole endpoint remains listed but repeated current checks report status -5 and zero recent uptime; successful inference is unresolved, not evidence of a campaign end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms. Listed since 2026-04-28; no published end date.",
   "claim_steps": [
     "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
-    "Call the chat completions API with model id nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free."
+    "Check the exact model's current provider status before relying on inference; the sole listed endpoint currently reports status -5 and zero recent uptime.",
+    "Review the NVIDIA API Trial Terms; never submit confidential information or personal data, including voices or faces.",
+    "If the provider is available, call the chat completions API with model id nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free."
   ],
   "social_proof": [
     {

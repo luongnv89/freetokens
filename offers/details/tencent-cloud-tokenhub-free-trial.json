@@ -1,17 +1,18 @@
 {
-  "summary": "Tencent Cloud TokenHub gives each root account a one-time free trial quota covering multiple model types. Each eligible language model gets 1,000,000 free tokens valid 90 days from claim; the campaign runs through December 31, 2026. TokenHub is an OpenAI-compatible gateway serving DeepSeek, GLM, Kimi, MiniMax and other models. Claiming or enabling a model freezes USD 1 of account balance (returned when endpoints are deleted).",
+  "summary": "Tencent Cloud TokenHub gives root accounts a one-time free trial quota per eligible model. Each eligible language model gets 1,000,000 free tokens valid 1 year from claim; the campaign enrollment end is December 31, 2026, distinct from the quota's usage validity. Other model types may have different validity periods; confirm the claimed package. TokenHub is an OpenAI-compatible gateway serving DeepSeek, GLM, Kimi, MiniMax and other models. Claiming or enabling postpaid for a model freezes USD 1 of account balance, returned after resources are terminated. Postpaid is optional: without it, service stops when the free quota is exhausted or expires.",
   "claim_steps": [
     "Log in to the TokenHub console and activate the platform.",
-    "On the Model Gallery page, click 'New User Free Trial', select models, then 'Claim Now'. Free trial can also be auto-claimed on first invocation of a supported model.",
-    "Keep a positive balance: USD 1 is frozen per model claim/enablement (released when endpoints are terminated).",
-    "Use the quota within 90 days of claiming; unused quota expires."
+    "On the Model Gallery page, click 'New User Free Trial', select models, then 'Claim Now'. Free trial can also be auto-claimed on first invocation of a supported model. Each root account can claim once per model.",
+    "Maintain enough balance or credit limit: USD 1 is frozen per model claim/postpaid enablement and returned after resources are terminated. Delete all model endpoints to reclaim it; deleting a default endpoint requires customer service.",
+    "Use language-model quota within 1 year of claim; unused quota expires. Confirm validity for other model types. Campaign enrollment ends December 31, 2026.",
+    "Postpaid is optional. Without it, service stops after the free quota is exhausted or expires; enabling it bills subsequent token usage at the model's rates."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://intl.cloud.tencent.com/document/product/1300/80423",
       "title": "New User Free Trial Package — LLM Service TokenHub",
-      "text": "Each language model comes with a free trial quota of 1 million tokens, valid for 90 days. This campaign is valid until December 31, 2026. Each time you claim a free resource package for a model or enable postpaid service for a model, USD 1 will be automatically frozen in your account."
+      "text": "All language models provide a free trial quota of 1 million Tokens, valid for 1 year. ... This campaign is valid until December 31, 2026. ... Each time you claim a free resource package for a model or enable postpaid service for a model, USD 1 will be automatically frozen in your account."
     }
   ]
 }

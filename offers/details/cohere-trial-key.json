@@ -1,9 +1,10 @@
 {
-  "summary": "Cohere evaluation/trial API keys are free but limited: 1,000 API calls per month, and Chat models at 20 requests per minute. Production keys are paid with higher limits. Create a trial or production key on the API keys page. This reactivates the previously archived cohere-trial-key listing. The rate-limits page does not state a non-commercial restriction.",
+  "summary": "Cohere evaluation/trial keys are free for testing and proofs of concept, limited to 1,000 API calls per month with Chat models at 20 requests per minute. Official pricing explicitly says trial keys are not permitted for production or commercial purposes. When an account is created, a Trial API key is automatically created and available on the dashboard/API Keys page. Production access is paid and requires the Go to Production workflow.",
   "claim_steps": [
-    "Sign up at dashboard.cohere.com (no card mentioned for trial keys).",
-    "Open the API keys page and create a Trial (evaluation) key.",
-    "Stay within 1,000 API calls/month and Chat 20 req/min trial limits."
+    "Sign up at https://dashboard.cohere.com.",
+    "Retrieve the automatically created Trial API key from the dashboard or API Keys page.",
+    "Use it only for evaluation/testing, not production or commercial purposes; stay within 1,000 calls/month and Chat 20 RPM.",
+    "For production, an organization Owner must complete the billing/Go to Production workflow and use paid production access."
   ],
   "social_proof": [
     {
@@ -11,6 +12,18 @@
       "url": "https://docs.cohere.com/docs/rate-limits",
       "title": "Different Types of API Keys and Rate Limits | Cohere",
       "text": "Cohere offers two kinds of API keys: evaluation keys (free but limited in usage), and production keys. Trial keys are limited to 1,000 API calls a month. Chat API trial rate limit: 20 req / min."
+    },
+    {
+      "type": "link",
+      "url": "https://cohere.com/pricing",
+      "title": "Trial API key production and commercial-use restriction",
+      "text": "API calls made from a Trial API key are free. However, trial keys are rate limited and are not permitted to be used for production or commercial purposes."
+    },
+    {
+      "type": "link",
+      "url": "https://cohere.com/pricing",
+      "title": "Automatically created Trial API key",
+      "text": "When an account is created, we automatically create an Trial API key for you."
     }
   ]
 }

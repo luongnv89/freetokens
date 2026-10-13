@@ -1,17 +1,17 @@
 {
-  "summary": "Cursor's Hobby plan is a genuinely free tier of the AI code editor: no credit card required, with limited Agent requests and access to the Composer model. Pro tiers only extend limits, so everyday autocomplete and agent use stay free.",
+  "summary": "Cursor currently lists a $0/month Free plan with limited Agent and Chat requests. Usage is a shared AI pool across Cursor and Grok that refreshes weekly; no fixed Free quota is published on the pricing page. Cloud agents/automations and third-party model access are not included in Free. Higher plans unlock additional features; third-party model usage is billed separately.",
   "claim_steps": [
-    "Go to cursor.com/pricing and pick the Hobby (Free) plan.",
+    "Go to https://cursor.com/pricing and select Get started under the Free ($0/month) plan.",
     "Download and install the Cursor editor.",
-    "Sign in with a free account - no credit card needed.",
-    "Use Agent within the limited free quota; upgrade only if you need more."
+    "Sign in with a free account.",
+    "Use Agent and Chat within the shared free allowance; check usage in settings. Paid plans add features as well as larger allowances, and third-party model usage is billed separately."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://cursor.com/pricing",
       "title": "Cursor · Pricing",
-      "text": "Choose the plan that's right for you"
+      "text": "Free $0 /month. Limited agent requests. Limited Chat requests. Your allowance refreshes weekly, so one heavy day never wipes out your whole month."
     }
   ]
 }

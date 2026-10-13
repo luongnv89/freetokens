@@ -1,22 +1,22 @@
 {
-  "summary": "Exa's billing documentation says new accounts receive $20 in free credits on signup, while Free Tier accounts receive $10 in free credits each month. No payment method is required. The free tier covers all endpoints, with published rate limits including 10 Search QPS and 50 Agent concurrency; requests stop when the balance reaches zero.",
+  "summary": "Exa's Free tier gives a user's first team $10 in monthly credits, available in full immediately in the signup month. The monthly grant resets to $10 on the first day of each calendar month; unused monthly credits do not roll over or accumulate. The user's first team also earns a one-time $10 bonus only after the user completes dashboard onboarding; that bonus does not expire. No payment method is required to start. The Free tier excludes Exa Snapshot despite pricing-page wording about access to all endpoints. Published limits include 10 Search QPS and 50 concurrent Agent runs; requests return 402 Payment Required when credits are exhausted.",
   "claim_steps": [
-    "Create an Exa account to receive the $20 signup credits.",
-    "Use the Free Tier, which adds $10 in credits each month without requiring a payment method.",
-    "Use the credits before the balance reaches zero or add credits separately to continue making requests."
+    "Create an Exa account and use your first team to receive the full $10 monthly grant immediately, regardless of the signup date. No payment method is required to start.",
+    "Complete onboarding in the dashboard to unlock your first team's one-time $10 bonus. The bonus does not expire; it is not an unconditional $20 signup award.",
+    "Use monthly credits before they reset to $10 on the first of each calendar month; unused monthly credits do not roll over. Exa Snapshot is excluded. Add paid credits separately if your balance is exhausted."
   ],
   "social_proof": [
     {
       "type": "link",
-      "url": "https://exa.ai/docs/reference/billing",
-      "title": "Billing - Exa",
-      "text": "New accounts receive $20 in free credits on signup. Free Tier accounts receive $10 in free credits each month. No payment method is required."
+      "url": "https://exa.ai/docs/admin/billing",
+      "title": "Billing and Rate Limits - Exa",
+      "text": "Only a user’s first team receives the monthly grant. A user’s first team also earns a one-time $10 bonus when that user completes onboarding in the dashboard. The bonus does not expire. The Free tier does not include Exa Snapshot."
     },
     {
       "type": "link",
       "url": "https://exa.ai/pricing",
       "title": "Exa API Pricing | Pay-as-You-Go Plans for AI Search",
-      "text": "$20 credits on sign-up with $10 credits every month. No payment method required."
+      "text": "$10 credits every month plus a $10 onboarding bonus. No payment method required."
     },
     {
       "type": "link",
@@ -28,7 +28,7 @@
       "type": "link",
       "url": "https://exa.ai/docs/admin/billing",
       "title": "Billing and Rate Limits - Exa",
-      "text": "Every new team starts on the Free tier with $10 in credits, available in full the day you sign up regardless of the date. Your free balance then resets to $10 on the first day of every calendar month. A user’s first team also earns a one-time $10 bonus when that user completes onboarding in the dashboard."
+      "text": "Your free balance then resets to $10 on the first day of every calendar month. The grant does not accumulate: unused free credits from one month do not carry into the next, so this grant never holds more than $10 at a time. Only a user’s first team receives the monthly grant."
     }
   ]
 }

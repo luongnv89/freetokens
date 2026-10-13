@@ -1,5 +1,5 @@
 {
-  "summary": "North Mini Code is Cohere's first agentic coding model and the debut of its North family — a sparse MoE with 30B total / 3B active parameters — free via OpenRouter's :free endpoint at bash prompt / bash completion with a 256K context. Created 2026-06-17; no published end date.",
+  "summary": "North Mini Code is Cohere's first agentic coding model and the debut of its North family — a sparse MoE with 30B total / 3B active parameters — free via OpenRouter's :free endpoint at $0 prompt / $0 completion with a 256K context. Created 2026-06-17; no published end date.",
   "claim_steps": [
     "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
     "Call the chat completions API with model id cohere/north-mini-code:free."

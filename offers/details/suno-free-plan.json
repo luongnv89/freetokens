@@ -1,16 +1,22 @@
 {
-  "summary": "Suno's official pricing page lists a Free Plan at $0 that includes 50 credits renewing daily (about 10 songs), with up to 4 songs generated at once, no commercial use, no credit top-ups, and a shared generation queue. The page was fetched live on 2026-09-04 and the terms match the claim exactly. No end date is stated, so the offer appears ongoing.",
+  "summary": "Suno Free is $0/month with 50 credits per day, access to free models (currently v6-mini), standard features, and four concurrent generations in a shared queue. Free includes no commercial rights, no monthly song downloads, no add-on credit purchases and no stem separation. Credits do not carry over day to day. Uploads of up to eight minutes are listed. No fixed program end date is published. No account or actual generation/download was tested.",
   "claim_steps": [
     "Go to https://suno.com/pricing.",
     "Click Sign Up and create a free Suno account.",
-    "Use the Free Plan (no payment needed) — 50 credits renew daily (10 songs)."
+    "Use the Free Plan — 50 credits renew daily. Stay within the free model/features and shared queue; no commercial rights, monthly song downloads, add-on credits or stem separation are included."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://suno.com/pricing",
       "title": "Suno | Pricing",
-      "text": "Free Plan — features: 50 credits renew daily (10 songs); Create up to 4 songs at once; No commercial use; No credit top ups; Shared generation queue"
+      "text": "Free Our starter plan. $0 /month Sign Up Access to our free models 50 credits per day Standard features only Upload up to 8 min of audio Shared creation queue No monthly song downloads No commercial rights No add-on credit purchases No stem separation"
+    },
+    {
+      "type": "link",
+      "url": "https://suno.com/pricing",
+      "title": "Free plan model and concurrency comparison",
+      "text": "Best free model (v6-mini) ... Concurrent generations 4 in a Shared queue"
     }
   ]
 }

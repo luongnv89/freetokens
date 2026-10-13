@@ -1,11 +1,13 @@
 {
-  "summary": "Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation, model release, or model-request approval, whichever is later. Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry. Complete your account information before activation. Pay-as-you-go billing starts automatically when the quota expires or is exhausted unless you enable Free Quota Only, which is disabled by default.",
+  "summary": "Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation, model release, or model-request approval, whichever is later. Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry. Complete your account information before activation. Use a general-purpose pay-as-you-go API key; dedicated Token Plan/Coding Plan keys do not consume this quota. Pay-as-you-go billing starts automatically when the quota expires or is exhausted unless you enable Free Quota Only, which is disabled by default. Enable it before exhausting quota and wait for the setting to take effect; calls during the delay can still incur charges.",
   "claim_steps": [
     "Create an Alibaba Cloud account, complete your account information, and open Alibaba Cloud Model Studio in the Singapore region with International service scope.",
     "Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed.",
     "Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page.",
     "Check each model's quota validity: 90 days from activation, model release, or model-request approval, whichever is later.",
-    "Before calling eligible models in real time, enable 'Free Quota Only' mode (disabled by default) so usage stops rather than automatically incurring pay-as-you-go charges when quota expires or is exhausted."
+    "Before calling eligible models in real time, enable 'Free Quota Only' mode (disabled by default) so usage stops rather than automatically incurring pay-as-you-go charges when quota expires or is exhausted.",
+    "Create/use a general-purpose pay-as-you-go API key: Token Plan or Coding Plan dedicated keys do not consume this free quota.",
+    "After enabling Free Quota Only, wait for it to take effect before invoking; the delay can still cause charges. Enable it before the quota is exhausted and verify each model's remaining quota and protection status."
   ],
   "social_proof": [
     {
@@ -20,6 +22,18 @@
       "author": "AH",
       "handle": "@ah4alt",
       "text": "Alibaba Cloud is giving new users free AI model quotas for 90 days.\n\nYou can access eligible models from:\n\n→ Qwen\n→ DeepSeek\n→ GLM\n→ Kimi\n→ Wan\n\nUse them for coding, chat, image generation and video generation.\n\nThe quota is model-specific, but you can claim free quota"
+    },
+    {
+      "type": "link",
+      "url": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota",
+      "title": "Free-quota API key requirement",
+      "text": "Note that Token Plan or Coding Plan dedicated API keys do not consume free quota; only a general-purpose pay-as-you-go API key draws from your free quota."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota",
+      "title": "Free Quota Only activation delay",
+      "text": "Enabling or disabling the Free Quota Only feature does not take effect immediately. Wait a moment before making further invocations. If you continue to make invocations while the setting change is taking effect, the delay may cause charges even after your free quota has been exhausted."
     }
   ]
 }

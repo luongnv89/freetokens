@@ -1,11 +1,17 @@
 {
-  "summary": "LLM7 documents a free dashboard token with text-generation limits of 1 request per second, 60 per minute, 250 per hour, and 100,000 tokens per 24 hours. Its current limits page no longer documents anonymous access.",
+  "summary": "LLM7 documents a free dashboard token with text-generation limits of 1 request per second, 60 per minute, 250 per hour, and 100,000 tokens per 24 hours. Its current limits page no longer documents anonymous access. Token usage counts input plus output. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.",
   "claim_steps": [
     "Obtain a free token from the LLM7 dashboard at dash.llm7.io.",
     "Send an OpenAI-compatible request with that token and a currently available model.",
-    "Stay within the free-token limits of 60 requests per minute, 250 per hour, and 100,000 tokens per 24 hours."
+    "Check live model availability and dashboard allowance. Stay within the documented free text limits (60 requests/minute, 250/hour, 100,000 input-plus-output tokens/24 hours); quotas may be reduced without notice."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.llm7.io/limits",
+      "title": "LLM7 free-token capacity caveat",
+      "text": "Free-token quotas are provided at no charge and may be reduced without notice based on demand, service capacity, model availability, fair-use calculations, abuse-prevention controls, and other operational factors."
+    },
     {
       "type": "link",
       "url": "https://docs.llm7.io/limits",

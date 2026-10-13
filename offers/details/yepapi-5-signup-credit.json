@@ -1,5 +1,5 @@
 {
-  "summary": "YepAPI grants $5 free credit on signup with no credit card. One API key accesses 60+ models (GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and more) through a single OpenAI-compatible endpoint. After the credit, usage is pay-per-token with no subscription.",
+  "summary": "YepAPI grants $5 free credit on signup with no credit card. One API key accesses multiple models (GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and more) through a single OpenAI-compatible endpoint. After the credit, usage is pay-per-token with no subscription.",
   "claim_steps": [
     "Sign up at yepapi.com (no credit card required).",
     "Copy your API key — $5 credit is applied automatically.",

@@ -1,17 +1,23 @@
 {
-  "summary": "New Hailuo AI Video accounts receive a one-time welcome package of credits plus limited free video generation. Free-tier outputs are watermarked, and paid plans remove the limits.",
+  "summary": "New Hailuo AI Video users registering on or after June 18, 2025 receive a one-time welcome package of credits, limited to one package per user. The credits expire three days after grant; the policy does not specify the package size or promise recurring free replenishment. Free-tier outputs are watermarked, with at most three video-generation tasks queued and one video generating at a time. Paid plans offer additional credits, watermark-free downloads and queue priority. No global end date is stated for the welcome offer.",
   "claim_steps": [
-    "Create a free account at hailuoai.video.",
-    "Receive the welcome credit package on signup.",
-    "Generate videos from prompts or images within the free allowance.",
-    "Note that free-tier generations are watermarked."
+    "Create a free account at hailuoai.video. The policy covers new registrations on or after June 18, 2025.",
+    "Receive the one-time welcome package on signup; only one package per user is allowed and the package size is not specified in the policy.",
+    "Use welcome credits within three days of grant, before they expire. Do not assume recurring free credit replenishment.",
+    "Generate videos from prompts or images within the free allowance, with at most three tasks queued and one video generating at a time. Free-tier downloads are watermarked."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://hailuoai.video/doc/payment-policy.html",
       "title": "Hailuo AI — Payment Policy",
-      "text": "Hailuo AI Video payment policy and credit pricing."
+      "text": "New users who register an account on or after June 18, 2025 will receive a one-time welcome package of free credits. These credits will expire three days after being granted. This offer is limited to one package per user."
+    },
+    {
+      "type": "link",
+      "url": "https://hailuoai.video/doc/payment-policy.html",
+      "title": "Hailuo AI — free-user generation queue limits",
+      "text": "Free users may submit up to three video generation tasks to the queue at any given time ... Free users are limited to generating one video at a time in parallel"
     }
   ]
 }

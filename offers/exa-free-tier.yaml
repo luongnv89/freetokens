@@ -1,11 +1,14 @@
-# Verified 2026-09-11 against https://exa.ai/docs/reference/billing
+# Historical evidence from 2026-09-11 at https://exa.ai/docs/reference/billing (superseded terms):
 # ("New accounts receive $20 in free credits on signup. Free Tier accounts receive $10 in free credits each month. No payment method is required.")
+# Current https://exa.ai/docs/admin/billing: only a user's first team receives the monthly grant
+# and the one-time $10 dashboard-onboarding bonus. Monthly grant resets without rollover;
+# the onboarding bonus does not expire. Free tier excludes Exa Snapshot.
 title: Exa Free Tier — $10/Month + $10 Onboarding Bonus
 provider: Exa
 category: api_provider
-amount: $10 free credits every month (including signup month) plus a one-time $10 bonus after dashboard onboarding for a user's first team
+amount: User's first team receives $10 immediately in the signup month, resetting to $10 each calendar month without rollover, plus a one-time non-expiring $10 bonus after dashboard onboarding
 expiry_date: null
-source_url: https://exa.ai/docs/reference/billing
+source_url: https://exa.ai/docs/admin/billing
 verified_date: 2026-09-30
 verification: social_proof
 review_status: unverified

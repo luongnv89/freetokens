@@ -1,19 +1,19 @@
 {
-  "summary": "Freebuff is an ad-supported coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Its current Free plan lists up to 10 hours per day of DeepSeek V4.1 Flash or GLM 5.3 Flash when the daily allowance is used on one model, with no card required. These are full-access estimates: account and regional allowances vary, fair-use limits apply, and model prices and allowances may change. Sign in to confirm your account's allowance. The embedded X announcement is historical evidence, not an account-specific guarantee.",
+  "summary": "Freebuff is an ad-supported coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Its current Free pricing lists $1.50 refilled daily, estimated as up to 10 hours of DeepSeek V4.1 Flash or 2 hours of Claude Haiku 5.5 per day when used on one model, with no card required. The allowance resets at local midnight and unused daily allowance does not roll over. These are full-access estimates: account and regional allowances vary, fair-use limits apply, and model prices and allowances may change. Sign in to confirm your account's allowance. The official README instead calls DeepSeek V4.1 Flash and GLM 5.3 Flash unmetered at full access, conflicting with metered pricing; unlimited access is not verified. The embedded X announcement is historical evidence, not an account-specific guarantee.",
   "claim_steps": [
     "Review the Free plan at https://freebuff.com/plans; displayed hours assume full access. Sign in to confirm your account's allowance.",
     "Install the CLI (Node.js 18+): npm install -g freebuff",
     "Open a project: cd your-project",
-    "Run freebuff and describe what you want. The CLI page states no account or API key is needed to start; the Free plan states no card required.",
+    "Run freebuff and describe what you want. Confirm the applicable account allowance before use; the Free plan states no card required, but account-free CLI onboarding has not been reverified.",
     "Or use another Freebuff product: Desktop (freebuff.com/desktop), Web (freebuff.com/web), Cloud (freebuff.com/cloud), or Chat (freebuff.com/chat).",
-    "Use the daily allowance on one model or a mix; unused daily allowance does not roll over. Regional and fair-use limits may reduce access."
+    "Use the daily allowance on one model or a mix; it resets at local midnight and does not roll over. Regional and fair-use limits may reduce access; the README/pricing conflict needs confirmation."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://freebuff.com/plans",
       "title": "Freebuff Plans: Free and paid plans",
-      "text": "Free $0 / month No card required ... Per day GLM 5.3 Flash 10 hrs or DeepSeek V4.1 Flash 10 hrs ... Displayed allowances are for full access. Sign in to confirm your account’s allowance."
+      "text": "Free $0 / month No card required ... $1.50 refilled daily ... Per day DeepSeek V4.1 Flash 10 hrs or Claude Haiku 5.5 2 hrs ... Displayed allowances are for full access. Sign in to confirm your account’s allowance."
     },
     {
       "type": "link",
@@ -31,14 +31,20 @@
     {
       "type": "link",
       "url": "https://freebuff.com/cli",
-      "title": "Freebuff CLI — the free coding agent for your terminal (free Claude Code, Codex & Cursor alternative)",
-      "text": "No accounts to create, no keys to paste."
+      "title": "Freebuff CLI: Free coding in your terminal",
+      "text": "Then run freebuff in your project"
     },
     {
       "type": "link",
       "url": "https://github.com/CodebuffAI/freebuff",
-      "title": "GitHub - CodebuffAI/freebuff: The free coding agent",
-      "text": "Freebuff is available in every country. Supported regions receive full access; other regions and VPN users receive limited access to GLM 5.3 Flash, DeepSeek V4.1 Flash, MiMo 2.6 Flash, Solar Mini 4, Solar Pro 4, and Space Bunny Alpha."
+      "title": "Freebuff README — regional access",
+      "text": "Freebuff is available in every country. Supported regions receive full access; other regions and VPN users receive limited access to GLM 5.3 Flash, DeepSeek V4.1 Flash, MiMo 2.6 Flash, Solar Mini 4, and Solar Pro 4."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/CodebuffAI/freebuff",
+      "title": "Freebuff README — unmetered claim conflicts with current pricing",
+      "text": "GLM 5.3 Flash, DeepSeek V4.1 Flash, MiMo 2.6 Flash, Solar Mini 4 and Solar Pro 4 are unmetered at full access and cost no session at all."
     }
   ]
 }

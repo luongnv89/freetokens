@@ -1,8 +1,9 @@
 {
-  "summary": "Cartesia x Google Cloud Startups is 12 months of Cartesia Startup Tier for Scale Tier members of the Google for Startups Cloud Program: 1.25M credits per month, up to 5 concurrent requests, including Pro Voice Cloning. Distinct from the Cartesia Startups Grant (96M credits/year on cartesia.ai/startups). Cartesia pricing lists Startup at $49/mo with 1.25M credits/month and Pro voice cloning. The google-startups apply path 404s; claim via the program page as a GFS Cloud Program Scale Tier member.",
+  "summary": "Cartesia x Google Cloud Startups provides 12 months of Cartesia Startup Tier for Scale Tier members of the Google for Startups Cloud Program: 1.25M credits per month, up to five concurrent requests, including Pro Voice Cloning. This is distinct from the separate Cartesia Startups Grant. Cartesia pricing lists Startup at $49/month. The official program page links an application form at https://form.typeform.com/to/XVsY1DO3, headed “Welcome Google Startups!”. No application was submitted or award tested.",
   "claim_steps": [
     "Be a Scale Tier member of the Google for Startups Cloud Program.",
-    "Open https://www.cartesia.ai/google-startups and follow Cartesia's claim flow for that benefit (this is not the Cartesia Startups Grant at /startups)."
+    "Open https://www.cartesia.ai/google-startups and use its embedded application form or official “Open the application form” link: https://form.typeform.com/to/XVsY1DO3.",
+    "Apply for this Google Cloud benefit, not the separate /startups grant; await approval."
   ],
   "social_proof": [
     {
@@ -16,6 +17,18 @@
       "url": "https://www.cartesia.ai/pricing",
       "title": "Cartesia Pricing",
       "text": "Startup: $49, 1.25M credits / month. Everything in Pro, plus Pro voice cloning and Organizations."
+    },
+    {
+      "type": "link",
+      "url": "https://www.cartesia.ai/google-startups",
+      "title": "Official program application link",
+      "text": "Form not loading? Open the application form"
+    },
+    {
+      "type": "link",
+      "url": "https://form.typeform.com/to/XVsY1DO3",
+      "title": "Google Startups application form",
+      "text": "Welcome Google Startups!"
     }
   ]
 }

@@ -1,12 +1,18 @@
 {
-  "summary": "The ElevenLabs free plan includes 10,000 credits per month, roughly 10 minutes of audio, with access to the core text-to-speech voices. Credits reset monthly and no credit card is required.",
+  "summary": "The ElevenLabs Free plan includes 10,000 shared credits per monthly billing cycle, approximately 10 minutes of text-to-speech at typical pricing. Other products draw from the same balance at their own rates. Free-plan credits do not roll over. Content generated on the Free plan can be used noncommercially with attribution; a commercial license is not included.",
   "claim_steps": [
-    "Open elevenlabs.io/pricing and choose the Free plan.",
-    "Sign up for a free ElevenLabs account.",
-    "Confirm your email to unlock the 10k monthly credits.",
-    "Generate speech from the Playground or API within the free quota."
+    "Create a free ElevenLabs account and select/keep the Free plan.",
+    "Check the Subscription page for the monthly credit reset date and balance; credits are shared across products and do not roll over on Free.",
+    "Generate content within the balance and applicable product/per-request limits.",
+    "Use free-plan outputs noncommercially with required attribution; review service-specific terms before publishing."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://elevenlabs.io/docs/overview/administration/billing.mdx",
+      "title": "Free-plan commercial-use restriction",
+      "text": "If you are on the free plan, you can use the content non-commercially with attribution."
+    },
     {
       "type": "link",
       "url": "https://elevenlabs.io/pricing",

@@ -1,11 +1,17 @@
 {
-  "summary": "The Speechmatics Startup Program gives early-stage, voice-first startups up to $50,000 in usage credits spendable across batch and real-time speech-to-text, text-to-speech, and on-prem deployments, plus monthly office hours with engineers, priority developer support, early feature access, and co-marketing. Eligibility: raised less than $10M total, functional MVP in production or committed launch within 1-2 months, not on a paid enterprise plan, active dev team, defined ASR use case. Cohorts are capped at ~20 startups; a 30-minute call precedes the decision.",
+  "summary": "The Speechmatics Startup Program gives early-stage, voice-first startups up to $50,000 in usage credits spendable across batch and real-time speech-to-text, text-to-speech, and on-prem deployments, plus monthly office hours with engineers, priority developer support, early feature access, and co-marketing. Eligibility: normally raised less than $10M total, functional MVP in production or committed launch within 1-2 months, not on a paid enterprise plan, active dev team, defined ASR use case. Cohorts are capped at ~20 startups; a 30-minute call precedes the decision. A work email is required: free-email applications are not processed. Teams above the funding threshold can apply with an explanation and may receive a compelling-use-case exception.",
   "claim_steps": [
-    "Apply via the Startup Program form at https://www.speechmatics.com/startup-program (rolling review, response within a few days).",
+    "Apply via https://www.speechmatics.com/startup-program using a work email (not Gmail/Yahoo/Hotmail). If funding exceeds $10M, explain your circumstances; exceptions are discretionary. Review is rolling, with a response within a few days.",
     "Join a 30-minute call with the Speechmatics team about your use case and mission.",
     "On approval, credits activate immediately; spend them on batch, real-time, TTS, or on-prem."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.speechmatics.com/startup-program",
+      "title": "Speechmatics startup application email requirement",
+      "text": "Your application will not be processed if you use a free email address (e.g. gmail, yahoo, hotmail)."
+    },
     {
       "type": "link",
       "url": "https://www.speechmatics.com/startup-program",

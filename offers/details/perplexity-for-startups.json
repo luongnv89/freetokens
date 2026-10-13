@@ -1,21 +1,21 @@
 {
-  "summary": "Perplexity's startup program: $5,000 in API credits plus 3 months of Enterprise Pro for up to 50 seats. Eligibility: raised up to $20M in equity funding, less than 5 years old, associated with an approved Perplexity Startup Partner. Existing Enterprise Pro customers are not eligible. Note: older announcement copy said 6 months of Enterprise Pro; the current official page states 3 months.",
+  "summary": "Previously recorded Perplexity startup terms: $5,000 in API credits plus 3 months of Enterprise Pro for up to 50 seats; raised up to $20M in equity funding, less than 5 years old, associated with an approved Startup Partner, and not an existing Enterprise Pro customer. As of 2026-10-13, the recorded startup URL redirects to the generic /hub page. Current enrollment and these grant terms need provider/partner confirmation. Historical six-month launch copy is not current verification; the three-month figure came from the 2026-09-27 official-page snapshot.",
   "claim_steps": [
-    "Apply at https://www.perplexity.ai/startups/.",
-    "Eligibility: ≤$20M equity funding raised, <5 years old, associated with an approved Startup Partner.",
-    "Existing Enterprise Pro subscribers are not eligible."
+    "The recorded https://www.perplexity.ai/startups/ enrollment URL redirects to /hub as of 2026-10-13; it is not a confirmed current application path.",
+    "Ask an approved Startup Partner or Perplexity support for the current enrollment URL and written grant terms before relying on the listed benefits.",
+    "Confirm the previously recorded eligibility rules: ≤$20M equity funding, <5 years old, approved Startup Partner association, and no existing Enterprise Pro subscription."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.perplexity.ai/startups/",
-      "title": "Perplexity for Startups",
+      "title": "Perplexity for Startups — historical official-page snapshot, 2026-09-27",
       "text": "Eligible startups get 3 months of free Perplexity Enterprise Pro for up to 50 seats, plus $5k in API credits to supercharge their growth."
     },
     {
       "type": "link",
       "url": "https://www.linkedin.com/posts/perplexity-ai_introducing-perplexity-for-startups-were-activity-7315441228643254272-KqYx",
-      "title": "Introducing Perplexity for Startups — Perplexity on LinkedIn",
+      "title": "Historical launch announcement — Perplexity on LinkedIn",
       "text": "Eligible startups can apply to receive $5000 in Perplexity API credits ... if they have raised <$20M in equity funding, are less than 5 years old, and are associated with one of our Startup Partners."
     }
   ]

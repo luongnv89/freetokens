@@ -1,9 +1,10 @@
 {
-  "summary": "Deepgram for Startups grants up to $100,000 in API credits usable over 12 months across speech-to-text, text-to-speech, and Voice Agent APIs. Applicants must be an AI builder or early-stage startup, in production or launching within the next 6 months. Credits are deposited 24–48 hours after acceptance.",
+  "summary": "Deepgram for Startups offers direct applicants a starter award beginning at $1,000 in free API credits, with opportunities to upgrade to tiers worth up to $100,000 as product usage grows; partner referrals can provide enhanced offers. Each grant expires 12 months from issue and covers speech-to-text, text-to-speech and Voice Agent APIs. Applicants must be AI builders or early-stage startups building their own voice-AI product, in production or launching within the next 6 months, committed to active building and community engagement. Agencies or consultants building for clients are excluded. Existing customers and companies that raised more than $10M are reviewed case by case, not automatically excluded. Review typically takes one week; credits are deposited 24–48 hours after acceptance.",
   "claim_steps": [
     "Create a Deepgram account at console.deepgram.com and have your Project ID handy.",
-    "Apply at deepgram.com/startup-program (review typically takes about a week).",
-    "On acceptance, credits are automatically deposited in your console within 24–48 hours."
+    "Apply at deepgram.com/startup-program for your own voice-AI product, in production or launching within 6 months; commit to active building and community engagement. Client-agency/consultancy work is excluded.",
+    "Review typically takes about a week. Direct applicants start at $1,000; larger growth tiers are opportunities, not guaranteed. If referred by a partner, check its perks page for the applicable offer.",
+    "On acceptance, credits are automatically deposited in your console within 24–48 hours. Use each grant within 12 months of its issue date."
   ],
   "social_proof": [
     {
@@ -11,6 +12,18 @@
       "url": "https://deepgram.com/startup-program",
       "title": "Deepgram for Startups",
       "text": "Apply to Deepgram for Startups and get up to $100,000 in credits over 12 months. Applicants must be an AI builder or early-stage startup, in production or looking to launch in the next 6 months."
+    },
+    {
+      "type": "link",
+      "url": "https://deepgram.com/startup-program",
+      "title": "Deepgram Startup Program FAQ — direct applicant starter award",
+      "text": "For direct applicants, Deepgram’s starter offer starts at $1,000 in free Startup Program credits, with opportunities to upgrade to tiers worth up to $100,000 as you grow and deepen your product usage."
+    },
+    {
+      "type": "link",
+      "url": "https://deepgram.com/startup-program",
+      "title": "Deepgram Startup Program FAQ — grant validity and own-product scope",
+      "text": "Each credit grant expires 12 months from when it's issued. ... The Deepgram Startup Program is designed for startups building their own voice AI products, not for agencies or consultants building on behalf of clients."
     }
   ]
 }

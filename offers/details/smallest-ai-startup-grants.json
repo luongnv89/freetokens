@@ -1,6 +1,7 @@
 {
-  "summary": "$10,000 in Voice Agent Platform credits for up to 6 months.",
+  "summary": "Selected startups with 20 or fewer employees can receive $10,000 in Voice Agent Platform credits for up to six months. Teams worldwide may apply; voice must be a core product capability, not a secondary feature. The program prioritizes leading-accelerator teams, early-stage venture-backed companies and exceptional bootstrapped founders.",
   "claim_steps": [
+    "Confirm the startup has 20 or fewer employees and voice is a core product capability; worldwide teams and exceptional bootstrapped founders may apply.",
     "Create a Smallest.ai account if needed.",
     "Submit the grant application with company, product, team, and voice-AI usage details.",
     "If selected, credits are applied to the account email supplied in the application."
@@ -10,7 +11,7 @@
       "type": "link",
       "url": "https://smallest.ai/grants",
       "title": "Startup Grants Program for Voice AI - Smallest.ai",
-      "text": "Selected startups get $10,000 in credits to build with our Voice Agent Platform for up to 6 months."
+      "text": "Selected startups get $10,000 in credits to build with our Voice Agent Platform for up to 6 months. Startups should have 20 or fewer employees and be open to teams worldwide."
     },
     {
       "type": "link",

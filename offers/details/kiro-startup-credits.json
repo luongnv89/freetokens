@@ -1,11 +1,12 @@
 {
-  "summary": "Kiro for Startups gives early-stage to Series A startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Applicants must be 18 or older. Excluded residences: Argentina, Belarus, Brazil, China/GCR, Cuba, France, Germany, Iran, Italy, Mexico, North Korea, Poland, Russia, Spain, Syria, the region of Crimea, the so-called Donetsk People's Republic region (DNR), the so-called Luhansk People's Republic region (LNR), and the United Arab Emirates. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center.",
+  "summary": "Kiro for Startups gives early-stage to Series A startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Applicants must be 18 or older. Excluded residences: Argentina, Belarus, Brazil, China/GCR, Cuba, France, Germany, Iran, Italy, Mexico, North Korea, Poland, Russia, Spain, Syria, the region of Crimea, the so-called Donetsk People's Republic region (DNR), the so-called Luhansk People's Republic region (LNR), and the United Arab Emirates. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center. Choosing a plan above Pro+ or exceeding tier users can incur charges. Once credits are depleted, the AWS account automatically switches to standard Kiro Pro+ monthly billing on its card; continued use after expiry can also incur charges.",
   "claim_steps": [
     "Confirm early-stage to Series A eligibility, age 18+, and residence outside the excluded locations listed above (including France and Germany); active AWS Activate credit holders are not eligible.",
     "Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain.",
     "Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30).",
     "On approval, credits are deposited to the AWS account and activate on provisioning.",
-    "Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits."
+    "Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits.",
+    "Stay within the chosen tier and Pro+ plan. Monitor credits and stop/cancel unwanted billable access before depletion or expiry: standard Kiro Pro+ monthly billing starts automatically when credits run out."
   ],
   "social_proof": [
     {
@@ -19,6 +20,18 @@
       "url": "https://kiro.dev/startups/terms/",
       "title": "Kiro Pro+ promotional offer terms and conditions",
       "text": "Offer is only valid for individuals 18 years and older. Excludes individuals living in Argentina, Belarus, Brazil, China/GCR, Cuba, France, Germany, Iran, Italy, Mexico, North Korea, Poland, Russia, Spain, Syria, the region of Crimea, the so-called Donetsk People's Republic region (DNR), the so-called Luhansk People's Republic region (LNR), and the United Arab Emirates."
+    },
+    {
+      "type": "link",
+      "url": "https://kiro.dev/startups/",
+      "title": "Startup plan and user-tier overage conditions",
+      "text": "If you select a plan greater than Kiro Pro+ upon receiving credits or exceed the number of users for the package tier you selected, you may be charged additional fees."
+    },
+    {
+      "type": "link",
+      "url": "https://kiro.dev/startups/terms/",
+      "title": "Automatic standard Pro+ monthly billing",
+      "text": "Once you have used all Kiro credits provided under this promotion, your AWS Account will automatically switch to standard Kiro Pro+ billing at the then-current billing rates and billed to the credit card associated with your AWS Account on a monthly basis."
     }
   ]
 }
