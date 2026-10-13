@@ -1,9 +1,9 @@
 {
-  "summary": "Currently enrolled students who sign up with a .edu address receive $35 wallet credit automatically — a .edu address is the only check and there is nothing else to claim. The program also runs a monthly Bounty Board: approved agentic apps earn a $50 gift card, Skills $20, and prompts $10. Gift cards go to every student from day one. If the student email is not .edu, the page says to email community@tinyfish.ai. Sign up at agent.tinyfish.ai; bounty submissions are at tinybounties.com.",
+  "summary": "Currently enrolled students who sign up with an eligible academic email receive $35 wallet credit automatically. Eligible domains include .edu and international academic suffixes such as .ac.in, .edu.in, .edu.au, .ac.uk, .edu.sg, .ac.id, .edu.my, .ac.th, .edu.vn and .edu.ph, plus named university domains; check the official FAQ's supported list. Contact community@tinyfish.ai if your academic domain is not covered, not simply because it is non-.edu. The program also runs a monthly Bounty Board: approved agentic apps earn a $50 gift card, Skills $20, and prompts $10. Gift-card eligibility starts from day one, but awards require approved work. Sign up at agent.tinyfish.ai and use the same email at tinybounties.com for bounty submissions.",
   "claim_steps": [
-    "Sign up at agent.tinyfish.ai with a currently enrolled student .edu address — $35 wallet credit is added automatically.",
-    "If your student email is not .edu, email community@tinyfish.ai as the program page instructs.",
-    "Sign in at tinybounties.com to claim a monthly bounty, build it, and submit repo/social links for gift-card review."
+    "Sign up at agent.tinyfish.ai with a currently enrolled student's eligible academic email — $35 wallet credit is added automatically. Check the official FAQ's supported suffixes and university-domain list.",
+    "If your academic email domain is not covered by the official list, email community@tinyfish.ai.",
+    "Sign in at tinybounties.com with the same email to claim a monthly bounty, build it, and submit repo/social links for gift-card review. Approved apps earn $50, Skills $20 and prompts $10."
   ],
   "social_proof": [
     {
@@ -11,6 +11,12 @@
       "url": "https://www.tinyfish.ai/students",
       "title": "TinyFish Student Program. Free credits, real bounties, and proof of work.",
       "text": "Anyone enrolled can join, build and earn. The $35 wallet credit is automatic with an eligible academic email address. Check the supported domains in the FAQs, or email community@tinyfish.ai if yours is not covered."
+    },
+    {
+      "type": "link",
+      "url": "https://www.tinyfish.ai/students",
+      "title": "TinyFish student FAQ — international academic email suffixes",
+      "text": "Academic email addresses ending in these suffixes are eligible: US: .edu; India: .ac.in, .edu.in; Australia: .edu.au; UK: .ac.uk; Singapore: .edu.sg; Indonesia: .ac.id; Malaysia: .edu.my; Thailand: .ac.th; Vietnam: .edu.vn; Philippines: .edu.ph."
     }
   ]
 }

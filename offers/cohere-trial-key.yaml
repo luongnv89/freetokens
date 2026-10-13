@@ -4,12 +4,13 @@
 # ("Trial keys (and prod keys on newer Chat model variants) are limited to
 # 1,000 API calls a month.")
 # Chat models: Trial rate limit 20 req / min (Command A, Command R, etc.)
-# "non-commercial" was not stated on this page — omitted.
+# Official pricing FAQ prohibits production or commercial use of trial keys:
+# https://cohere.com/pricing
 # Reactivate from offers/archive/cohere-trial-key.yaml (archived 2026-08-26).
 title: Cohere Trial API Key
 provider: Cohere
 category: api_provider
-amount: Free evaluation/trial keys — 1,000 API calls/month; Chat ~20 RPM
+amount: Free evaluation/trial keys for testing only — 1,000 API calls/month; Chat 20 RPM; no production or commercial use
 expiry_date: null
 source_url: https://docs.cohere.com/docs/rate-limits
 verified_date: 2026-09-30

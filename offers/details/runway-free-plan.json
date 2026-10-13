@@ -1,12 +1,18 @@
 {
-  "summary": "Runway grants every new account 125 one-time credits for AI video and image generation (Gen-4 and friends). The credits do not renew; upgrade or wait for promotional refreshes for more.",
+  "summary": "Runway’s Free plan grants 125 one-time credits that do not expire and do not renew monthly. They can be used with a selection of generative creative models to test concepts; do not assume all paid-plan models are available. The Free plan also includes 5GB asset storage. Upgrade if more included credits or model access is needed; no recurring promotional refresh is promised.",
   "claim_steps": [
     "Create a free account at runwayml.com.",
     "Receive the one-time 125-credit grant on signup.",
-    "Generate video or images from the dashboard, spending credits per run.",
+    "Use the Free plan’s available selection of creative models, spending credits per run; the 125 credits do not expire or renew monthly.",
     "Upgrade to Standard when the one-time credits run out."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://runwayml.com/pricing",
+      "title": "Runway Free credit validity",
+      "text": "the Free plan includes a one-time deposit of 125 credits that doesn't expire."
+    },
     {
       "type": "link",
       "url": "https://runwayml.com/pricing",

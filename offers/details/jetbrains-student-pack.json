@@ -1,8 +1,8 @@
 {
-  "summary": "JetBrains gives verified students free access to the entire All Products Pack (IntelliJ IDEA Ultimate, PyCharm Professional, WebStorm, CLion, Rider, PhpStorm, GoLand, DataGrip, etc.) while enrolled. Licenses renew annually with fresh proof and include a 40% graduation discount for two years after expiry.",
+  "summary": "JetBrains Student Pack provides verified full-time students in programs lasting at least one year free JetBrains IDEs and .NET tools, with annual renewal. Educational licenses cannot be used for commercial work. Verify using university email, ISIC/ITIC or GitHub Student Developer Pack; general uploaded school documents are no longer accepted. The current Student Pack page includes coding courses and an AI Pro trial, not a perpetual free AI subscription. Official help confirms a 40% personal-subscription graduation discount valid for two years after the student license expires.",
   "claim_steps": [
     "Go to https://www.jetbrains.com/academy/student-pack/ and click Apply.",
-    "Verify via school email, ISIC/ITIC, GitHub Student Pack, or uploaded enrollment proof.",
+    "Confirm full-time enrollment in a program lasting one year or more and verify via university email, ISIC/ITIC or GitHub Student Developer Pack. General uploaded school enrollment documents are not accepted.",
     "Confirm the verification email link to activate approval.",
     "Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled."
   ],
@@ -11,13 +11,19 @@
       "type": "link",
       "url": "https://www.jetbrains.com/academy/student-pack/",
       "title": "Free JetBrains Student Pack",
-      "text": "Get free access to all the JetBrains IDEs and tools while you study. Free while you are a student, renewed annually."
+      "text": "Full-time student in a program lasting one year or more. Renewed annually in your JetBrains Account."
     },
     {
       "type": "link",
       "url": "https://sales.jetbrains.com/hc/en-gb/articles/207241195",
       "title": "Do you offer free educational licenses for students and teachers",
-      "text": "Yes! Students and teachers can get the JetBrains Student or Teacher Pack for free. It includes IntelliJ IDEA Ultimate, ReSharper, and all other JetBrains IDEs and .NET tools."
+      "text": "Yes! Students and teachers can get the JetBrains Student or Teacher Pack for free. It includes IntelliJ IDEA Ultimate, ReSharper, and all other JetBrains IDEs and .NET tools. Just note that educational licenses can’t be used for commercial work."
+    },
+    {
+      "type": "link",
+      "url": "https://sales.jetbrains.com/hc/en-gb/articles/19480141673106-Can-I-apply-for-a-free-individual-educational-license-using-official-documents-provided-by-my-school",
+      "title": "JetBrains educational license — school documents no longer accepted",
+      "text": "No, as of July 2024, it’s no longer possible to apply for the JetBrains educational license using official documents."
     }
   ]
 }

@@ -1,15 +1,15 @@
-# Verified 2026-09-28 against https://opencode.ai/docs/zen/
+# Historical 2026-09-28 verification against https://opencode.ai/docs/zen/
 # (Pricing table still lists "MiMo-V2.6-Flash Free — Free / Free / Free" and
 # "MiMo-V2.6-Flash Free is available on OpenCode for a limited time." The
 # announced one-week window from @opencode's 2026-09-21 post ends today, but
 # the model is still listed free with no new end date — expiry cleared to
 # ongoing/"limited time".)
-title: MiMo V2.6 Flash Free on OpenCode Zen
+title: MiMo V2.6 Flash Free on OpenCode Console
 provider: OpenCode
 category: coding
-amount: Free MiMo V2.6 Flash model access on OpenCode Zen (limited time)
+amount: Free MiMo V2.6 Flash model access on OpenCode Console (formerly Zen; limited time)
 expiry_date: null
-source_url: https://x.com/opencode/status/2102145730999730611
+source_url: https://opencode.ai/v2/docs/console/models
 verified_date: 2026-09-30
 verification: social_proof
 review_status: under-review

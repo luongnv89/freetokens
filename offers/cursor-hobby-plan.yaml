@@ -1,9 +1,9 @@
 # Verified 2026-08-31 against https://cursor.com/pricing
 # ("Hobby','price':'0','priceCurrency':'USD' ... credit card required")
-title: Cursor Hobby Plan
+title: Cursor Free Plan
 provider: Cursor (Anysphere)
 category: coding
-amount: Free Hobby plan - limited Agent requests plus Composer access, no credit card required
+amount: Free plan ($0/month) — limited Agent and Chat requests; shared AI usage allowance refreshes weekly
 expiry_date: null
 source_url: https://cursor.com/pricing
 verified_date: 2026-09-30

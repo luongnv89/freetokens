@@ -4,7 +4,10 @@
 # Corroborated by https://x.com/jahooma/status/2107253190873993292 (official account,
 # embedded on freebuff.com): "Use up to 10 hours of DeepSeek V4.1 Flash, completely
 # free every day (varies by country)". No official end date stated, so expiry_date is null.
-# Claim flow per https://freebuff.com/cli: "No accounts to create, no keys to paste."
+# Historical CLI wording: "No accounts to create, no keys to paste."
+# Current CLI says "Then run freebuff in your project"; account-free onboarding
+# has not been reverified. Pricing's metered allowance conflicts with README's
+# unmetered full-access claim; confirm your applicable allowance before use.
 # Source checked 2026-10-11 against https://freebuff.com/plans (not firsthand tested):
 # Free: "DeepSeek V4.1 Flash 10 hrs"; "Displayed allowances are for full access.
 # Sign in to confirm your account’s allowance." Historical X wording retained below.

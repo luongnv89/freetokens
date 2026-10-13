@@ -1,6 +1,7 @@
 {
-  "summary": "Bing Image Creator is free for everyone with a personal Microsoft account, offering image generation with Microsoft MAI-Image, GPT-Image, and DALL-E-class models. You get 15 fast creations per day plus slower standard-speed generations.",
+  "summary": "Bing Image Creator offers free AI image generation to eligible users with a personal Microsoft account, with 15 fast creations per day and standard-speed generation afterwards. Work/school Microsoft Entra IDs are unsupported. The official FAQ excludes Russia and China; feature availability also varies by device, market and browser.",
   "claim_steps": [
+    "Check regional availability: the official FAQ excludes Russia and China.",
     "Visit bing.com/create or the Bing Image Creator feature page.",
     "Sign in with a personal Microsoft account (work/school Entra accounts are not supported).",
     "Enter a prompt and press Create; each generation uses one of your daily creations.",
@@ -11,7 +12,7 @@
       "type": "link",
       "url": "https://www.microsoft.com/en-us/bing/features/bing-image-creator",
       "title": "Bing Image Creator | Microsoft Bing",
-      "text": "Bing Image Creator is a cutting-edge, AI-powered tool that transforms your words into stunning visuals in seconds. Av"
+      "text": "When you've used up your 15 free fast creations per day on Bing Image Creator, you'll be switched to Bing Image Creator's standard creation speed automatically."
     },
     {
       "type": "link",

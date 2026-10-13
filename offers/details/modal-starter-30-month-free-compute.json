@@ -1,10 +1,11 @@
 {
-  "summary": "Modal's Starter plan costs $0/month plus metered compute and includes $30/month in free credits, with up to 3 workspace seats, 100 containers, and 10 GPU concurrency. The credit recurs monthly as included compute rather than a one-time grant, and no expiry date or fixed end for the offer is stated on the pricing page. Claiming requires creating a Modal account via the Get Started flow. The docs billing guide corroborates that credits are deducted from monthly usage charges.",
+  "summary": "Modal's Starter plan costs $0/month plus metered usage and includes $30/month in compute credits for Functions, Sandboxes and Notebooks CPU, memory and GPU time, with up to 3 workspace seats, 100 containers and 10 GPU concurrency. The credit recurs monthly rather than being a one-time grant. It does not cover Shared Endpoints: token usage is billed from the first request, even if included compute remains unused. Compute beyond the $30 allowance and services not covered by it are separately billed; review workspace spend limits to cap out-of-pocket charges. No fixed end date is stated for the offer. Claiming requires creating a Modal account via the Get Started flow.",
   "claim_steps": [
     "Go to https://modal.com/pricing and review the Starter plan ($0 + compute / month).",
     "Click \"Get Started\" on the Starter plan to create a Modal account.",
     "Create a workspace — the Starter plan includes up to 3 workspace seats.",
-    "Deploy functions; the Starter plan's $30/month in free credits counts against your compute usage, which is auto-charged only beyond the credit."
+    "Use the $30/month allowance for Functions, Sandboxes or Notebooks CPU/memory/GPU compute. Compute overage is billed; Shared Endpoints tokens are billed separately from the first request and never covered by this allowance.",
+    "Review the billing guide and set workspace spend limits before running metered workloads to cap out-of-pocket charges."
   ],
   "social_proof": [
     {
@@ -18,6 +19,12 @@
       "url": "https://modal.com/docs/guide/billing",
       "title": "Billing | Modal Docs",
       "text": "At the end of each billing cycle, you are auto-charged for the Modal usage incurred during that cycle (less any credits and incremental usage charges)."
+    },
+    {
+      "type": "link",
+      "url": "https://modal.com/pricing",
+      "title": "Modal Starter FAQ — Shared Endpoints are excluded",
+      "text": "Free usage of Shared Endpoints is not part of the Starter plan. Tokens are billed from your first request, so they will appear on your invoice even if you haven't used your full $30 of included compute."
     }
   ]
 }

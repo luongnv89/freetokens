@@ -1,10 +1,11 @@
 {
-  "summary": "Notion gives eligible college/university students and teachers a free individual Education plan for a one-member workspace, with unlimited pages, blocks and file uploads, 30-day version history and up to 100 guests. Eligibility requires an education institution email per the WHED. You must re-verify your status with your school email once a year; if you can no longer verify a valid education email, the workspace and content move to the Free plan.",
+  "summary": "Notion gives eligible college/university students and teachers a free individual Education plan for a one-member workspace, with unlimited pages, blocks and file uploads, 30-day version history and up to 100 guests. Eligibility requires an active WHED-recognized higher-education institution email as the account's main email; K–12 is not eligible. Each school email can claim the Education Plan once, for one workspace. Upgrading that workspace to Plus, Business or Enterprise permanently ends its Education eligibility. You must re-verify your status with your school email once a year; if you can no longer verify a valid education email, the workspace and content move to the Free plan. Claim the plan on web or desktop, not mobile.",
   "claim_steps": [
-    "Use your active WHED-recognized institution email as the main email on your Notion account, and keep only one workspace member for the individual Education plan.",
-    "Go to Settings → Upgrade plan → Get free Education plan.",
+    "Use your active WHED-recognized college/university email as the main email on your Notion account, and keep only one workspace member for the individual Education plan. K–12 is not eligible.",
+    "On web or desktop (not mobile), go to Settings → Upgrade plan → Get free Education plan. Each school email may claim once, for one workspace.",
     "If your school is recognized, the upgrade applies automatically. If you meet the requirements but the option is missing, use the support contact linked in Notion's education help page.",
-    "Re-verify your education status with your school email once a year to keep the Education plan. If verification fails, the workspace moves to the Free plan."
+    "Re-verify your education status with your school email once a year to keep the Education plan. If verification fails, the workspace moves to the Free plan.",
+    "Do not upgrade your Education workspace to Plus, Business or Enterprise expecting to return later: a paid-plan upgrade permanently ends that workspace's Education eligibility."
   ],
   "social_proof": [
     {
@@ -12,6 +13,12 @@
       "url": "https://www.notion.com/help/notion-for-education",
       "title": "Get the Education Plan for students & teachers",
       "text": "The Education Plan for individual students and teachers: a free plan for a one-member workspace. Up to 100 guests per workspace. To stay on the plan, verify your student status once a year with your school email."
+    },
+    {
+      "type": "link",
+      "url": "https://www.notion.com/help/notion-for-education",
+      "title": "Notion Education — one-time claim and permanent loss after paid upgrade",
+      "text": "Each school email can claim the Education Plan once, for one workspace. Upgrading it to a Plus, Business, or Enterprise plan permanently ends that workspace's Education eligibility."
     }
   ]
 }

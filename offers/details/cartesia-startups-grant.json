@@ -1,6 +1,7 @@
 {
-  "summary": "Accepted startups receive 12 months on Cartesia's Scale plan: 96M shared Sonic/Ink credits per year (8M each month) plus $299/month in separate Managed Agents credits. Unused model credits roll over up to 2× the monthly allowance. Sonic covers text to speech and Ink covers speech to text. After the grant, staying on Scale costs $299/month; you can cancel or switch plans.",
+  "summary": "Accepted startups receive 12 months on Cartesia's Scale plan: 96M shared Sonic/Ink credits per year (8M each month) plus $299/month in separate Managed Agents credits. Unused model credits roll over up to 2× the monthly allowance. Sonic covers text to speech and Ink covers speech to text. After the grant, staying on Scale costs $299/month; you can cancel or switch plans. Startups at any stage are eligible; students and one-off projects are considered case by case. Participants share their logo, allow Cartesia to use their name/logo in marketing, and agree to social-media posting if requested.",
   "claim_steps": [
+    "Before applying, review the program’s name/logo marketing permission and requested social-media posting obligations.",
     "Submit the startup grant application.",
     "Wait for Cartesia review; applicants typically hear back within one week.",
     "If accepted, apply the provided coupon code to the Cartesia account for 12 months on Scale: 8M shared Sonic/Ink credits and $299 in Managed Agents credits each month.",
@@ -8,6 +9,12 @@
     "Before the 12-month grant ends, decide whether to stay on Scale at $299/month, cancel, or switch to a lower-volume plan."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.cartesia.ai/startups",
+      "title": "Cartesia startup program participant obligations",
+      "text": "Participants share their logo and give Cartesia the right to use their name and logo across marketing materials. Participants also agree to post about the grant on their social media accounts if Cartesia requests it."
+    },
     {
       "type": "link",
       "url": "https://www.cartesia.ai/startups",

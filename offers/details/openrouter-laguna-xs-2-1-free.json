@@ -1,7 +1,8 @@
 {
-  "summary": "Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context). OpenRouter marks this model as going away October 31, 2026.",
+  "summary": "Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context). OpenRouter marks this model as going away October 31, 2026. Poolside may use free-endpoint inputs and outputs to train and improve its models; review the linked OpenMDW-1.1 License and Acceptable Use Policy before use.",
   "claim_steps": [
     "Create or sign in to an OpenRouter account and create an API key.",
+    "Review the model's license, acceptable-use and data-use terms: Poolside may use free-endpoint inputs and outputs for model training and improvement.",
     "Call the OpenRouter chat-completions API with model poolside/laguna-xs-2.1:free."
   ],
   "social_proof": [

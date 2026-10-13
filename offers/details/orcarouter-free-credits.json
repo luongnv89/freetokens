@@ -1,12 +1,18 @@
 {
-  "summary": "OrcaRouter offers a rotating set of $0 models for established accounts. The offers page currently shows 0 vouchers and 0 credit drops, so no live voucher, student, or hackathon credit grant is promised. To access always-free models, the workspace owner must link a GitHub account with some history (or use it to sign in), or the workspace must have a paid purchase of any amount. Free models require no credit and stay free while they remain in the lineup; rate and prompt-size limits apply. Check the current catalog for -free model IDs or use the orcarouter/free router; the lineup rotates as capacity allows.",
+  "summary": "OrcaRouter offers a rotating set of $0 models for established accounts. The offers page currently shows 0 vouchers and 0 credit drops, so no live voucher, student, or hackathon credit grant is promised. To access always-free models, the workspace owner must link a GitHub account with some history (or use it to sign in), or the workspace must have a paid purchase of any amount. Free models require no credit and stay free while they remain in the lineup. Use current -free model IDs or the orcarouter/free router. Current default caps are 10 requests/minute and 50/day; lifetime paid purchases of $20+ lift these to 20/minute and 800/day. Model exceptions include OrcaVerify at 5/minute and 50/day, and HY4 Preview at 50/minute and 250/day (100/minute and 4,000/day at $20+). Limits are tuned live; the lower tier also has an unpublished per-request prompt cap. Capacity is best-effort, not a production guarantee.",
   "claim_steps": [
     "Create an account at orcarouter.ai (the offers page says an API key takes 30 seconds; no card, no sales call).",
     "Ensure the workspace owner has a GitHub account with some history linked in profile settings or used for sign-in; a paid purchase of any amount is the alternative established-account requirement.",
-    "Check orcarouter.ai/offers or the current catalog for rotating $0 models. The offers page currently lists 0 vouchers and 0 credit drops.",
+    "Check GET https://www.orcarouter.ai/api/free-package/public for current caps and free IDs. The offers page currently lists 0 vouchers and 0 credit drops. A $20 purchase is not required for established-GitHub free access.",
     "Call orcarouter/free or a current -free catalog ID on the OpenAI-compatible endpoint, subject to free-model rate and prompt-size limits."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.orcarouter.ai/api/free-package/public",
+      "title": "OrcaRouter live default free-tier caps — 2026-10-13 snapshot",
+      "text": "\"free_tier\":{\"tiers\":[{\"min_paid_usd\":0,\"rpm\":10,\"rpd\":50},{\"min_paid_usd\":20,\"rpm\":20,\"rpd\":800}]}"
+    },
     {
       "type": "link",
       "url": "https://www.orcarouter.ai/offers",

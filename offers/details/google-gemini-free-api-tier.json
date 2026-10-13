@@ -1,16 +1,17 @@
 {
-  "summary": "Google's Gemini Developer API pricing page lists a Free Tier with free input and output tokens for supported models; quotas and model availability vary.",
+  "summary": "Google's Gemini Developer API pricing page lists a Free Tier with free input and output tokens for supported models; quotas and model availability vary. The Free Tier is for developers and small projects with limited access to certain models. Google states that free-tier content is used to improve its products; consider this before sending sensitive inputs.",
   "claim_steps": [
     "Open Google AI Studio's API key page.",
     "Create an API key and call a model with a published Free Tier.",
-    "Check the current quota shown for your account because Google does not publish one fixed quota for every model."
+    "Check the current quota shown for your account because Google does not publish one fixed quota for every model.",
+    "Review the Free Tier data-use terms before sending sensitive material: the pricing page states that content is used to improve Google products."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://ai.google.dev/gemini-api/docs/pricing",
       "title": "Gemini Developer API pricing | Gemini API | Google AI for Developers",
-      "text": "Free input & output tokens"
+      "text": "Free input & output tokens. Content used to improve our products."
     }
   ]
 }

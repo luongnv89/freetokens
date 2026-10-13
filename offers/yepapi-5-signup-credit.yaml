@@ -1,11 +1,12 @@
 # Verified 2026-09-05 against https://www.yepapi.com/ai-api
 # ("$5 free credit, pay-per-token pricing, no subscriptions.")
 # ("Get API Key — Free $5 Credit. No credit card required.")
-# ("One API key, 60+ AI models")
+# Historical roster wording: "One API key, 60+ AI models".
+# Current page mixes "130+" and "203"; no fixed roster count is promised here.
 title: YepAPI $5 Signup Credit
 provider: YepAPI
 category: api_provider
-amount: $5 free credit on signup for 60+ models via OpenAI-compatible gateway
+amount: $5 free credit on signup for multiple models via an OpenAI-compatible gateway; no credit card required
 expiry_date: null
 source_url: https://www.yepapi.com/ai-api
 verified_date: 2026-09-30

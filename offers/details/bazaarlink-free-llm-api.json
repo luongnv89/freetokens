@@ -1,16 +1,17 @@
 {
-  "summary": "BazaarLink's free tier is an OpenAI-compatible LLM gateway with 2 enabled free models — qwen/qwen3.7-flash and deepseek/deepseek-v4-flash-0731free. Shared account allowance: 10 RPM + 60 weighted units/day without credit, 20 RPM + 120 weighted units/day with credit; counters reset at 00:00 UTC. No credit card required; 2 concurrent free requests per account.",
+  "summary": "BazaarLink's free tier is an OpenAI-compatible LLM gateway with 2 enabled free models — qwen/qwen3.7-flash and deepseek/deepseek-v4-flash-0731free. Shared account allowance: 10 RPM + 60 weighted units/day without credit, 20 RPM + 120 weighted units/day with credit; counters reset at 00:00 UTC. No credit card required; 2 concurrent free requests per account. A site-wide 15 RPM free cap and additional IP guard also apply, even to credited accounts. After a free limit, paid fallback runs only when enabled for the key and the account has sufficient credit.",
   "claim_steps": [
     "Sign up at bazaarlink.ai and create an API key — no credit card.",
     "Set base_url to https://api.bazaarlink.ai/v1 in any OpenAI SDK.",
-    "Call one of the enabled free model ids, e.g. qwen/qwen3.7-flash; shared limits reset daily at 00:00 UTC."
+    "Call one of the enabled free model ids, e.g. qwen/qwen3.7-flash; shared limits reset daily at 00:00 UTC.",
+    "Respect the site-wide 15 RPM free cap as well as account limits; keep paid fallback disabled for the key if you want only free usage."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://bazaarlink.ai/free",
       "title": "Free LLM API + Free AI API Key | 2 Models",
-      "text": "Try 2 enabled free models. No credit: 10 RPM and 60 weighted units/day. With credit: 20 RPM and 120 weighted units/day. Shared across free models. Daily; resets at 00:00 UTC. Free — No Credit Card Required."
+      "text": "Site-wide free cap: 15 RPM. Concurrent free requests per account: 2. After a limit, paid use is possible only when fallback is enabled and the account has sufficient credit."
     }
   ]
 }

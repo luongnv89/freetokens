@@ -1,10 +1,14 @@
 {
-  "summary": "Anthropic's Claude Team plan for scientists offers promotional Team seating to verified principal investigators (or equivalent) at academic or nonprofit research institutions. Standard seats are free; Premium seats are $15/month (regularly $100) with 5x usage. The promotion covers 12 months from signup, is limited to about 10,000 seats, and is not guaranteed. Includes Claude Science, Code, and Cowork. Verification typically takes 5–7 business days. 1–25 seats per group; larger groups contact Anthropic. This is a Claude.ai Team subscription, distinct from API credit grants in AI for Science.",
+  "summary": "Anthropic's Claude Team plan for scientists offers promotional Team seating to verified principal investigators (or equivalent) at academic or nonprofit research institutions. Standard seats are free; Premium seats are $15/month (regularly $100) with 5x usage. The promotion covers 12 months from signup, is limited to about 10,000 seats, and is not guaranteed. Includes Claude Science, Code, and Cowork. Verification typically takes 5–7 business days. 1–25 seats per group; larger groups contact Anthropic. This is a Claude.ai Team subscription, distinct from the application-based AI for Science grants. After 90 days of group inactivity, Anthropic may return the group to standard Team pricing after emailing the admin. After 12 months seats renew at then-current pricing, with advance admin notice. Official Scientist help also includes claimable monthly Claude API credits: $20 per qualifying Standard seat and $100 per qualifying Premium seat, pooled up to $500 per team based on seats on the plan when credits are granted. The plan must be active and in good standing for at least seven days; a Team Owner/Primary Owner must link one Console organization, hold Console Owner/Admin/Billing permission, and accept Supplemental Credit Terms. No Console card is needed to claim/use the allowance. Credits expire each billing cycle without rollover and do not cover interactive Claude Code or extra usage in Claude apps. Confirm eligibility and availability in Billing; no account claim was tested.",
   "claim_steps": [
     "Confirm you are a PI or equivalent at an accredited university or nonprofit research institute (natural sciences, math, CS, engineering, related fields).",
     "Complete the verification form on claude.com/programs/team-plan-for-scientists.",
     "Wait for review (most applications 5–7 business days) and the approval email.",
-    "Add lab members as Standard (free) or Premium ($15/mo) seats. Final pricing is confirmed after verification."
+    "Add lab members as Standard (free) or Premium ($15/mo) seats. Final pricing is confirmed after verification.",
+    "Keep the group active and monitor admin notices: 90 days of inactivity may end promotional pricing early; after 12 months seats renew at then-current pricing.",
+    "After seven days on an active eligible plan in good standing, a Team Owner/Primary Owner opens Organization settings → Billing → API credits → Link organization. Confirm the qualifying seat balance shown.",
+    "Choose one Console organization where you have Owner/Admin/Billing rights and accept Supplemental Credit Terms; only one plan can fund that organization.",
+    "Use credits within the billing cycle; no rollover or interactive Claude Code/app-extra-usage coverage. Monitor purchased credits and auto-reload to avoid paid continuation."
   ],
   "social_proof": [
     {
@@ -18,6 +22,30 @@
       "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
       "title": "Expanding our support for scientists",
       "text": "We are opening 10,000 seats for scientists around the world to access Claude subscriptions for free and at discounted rates for one year through our new Claude team plan for scientists. Standard seats will be free and premium seats with 5x usage limits will be available for $15 per month."
+    },
+    {
+      "type": "link",
+      "url": "https://claude.com/programs/team-plan-for-scientists",
+      "title": "Promotional pricing inactivity condition",
+      "text": "If a group has no activity for 90 days, we may return it to standard Team pricing so the promotional seats go to active researchers. We'll email the admin before that happens."
+    },
+    {
+      "type": "link",
+      "url": "https://support.claude.com/en/articles/16634237-claude-team-plan-for-scientists",
+      "title": "Scientists plan monthly API credit benefit",
+      "text": "On the Team plan for scientists, you’ll receive $20 USD per Standard seat and $100 USD per Premium seat. Credits for all seats are pooled into one monthly balance, capped at $500."
+    },
+    {
+      "type": "link",
+      "url": "https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans",
+      "title": "Monthly API credit seat calculation and eligibility",
+      "text": "The pool is calculated from the seats on the plan when the credits are granted. Eligibility Active plan. Your Max or Team subscription must be active and in good standing. Seven days on the plan. New subscribers can claim once they've been on an eligible plan for seven days."
+    },
+    {
+      "type": "link",
+      "url": "https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans",
+      "title": "Console organization linking and credit terms",
+      "text": "In the API credits section, select \"Link organization.\" Choose the Console organization you want to receive the credits, or create a new one. Review the Supplemental Credit Terms, then Link organization."
     }
   ]
 }

@@ -1,11 +1,16 @@
 {
-  "summary": "CodeRabbit reviews public repositories for free, including AI reviews, slop detection, triage, Change Stack, and Security. No card or application. The $10M figure is CodeRabbit’s overall OSS commitment, not a per-project grant.",
+  "summary": "CodeRabbit reviews public repositories for free, including AI reviews, slop detection, triage, Change Stack, and Security. No card or application. The $10M figure is CodeRabbit’s overall OSS commitment, not a per-project grant. OSS rate limits depend on community/popularity. Public repositories with fewer than 10 stars require manual review triggering; automatic next-PR reviews are not guaranteed for these repositories. Paid on-demand security scan products are separate from the advertised free PR-review features.",
+  "claim_steps": [
+    "Install CodeRabbit from the GitHub or GitLab marketplace and enable it for the public repository; no paid subscription or card required for OSS.",
+    "Open a PR. For repositories with fewer than 10 stars, choose Trigger review in the status comment or comment @coderabbitai review (or @coderabbitai full review for a full review).",
+    "Stay within current OSS review/file/chat rate limits; inspect the official plans page for model/community-dependent limits."
+  ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.coderabbit.ai/oss",
-      "title": "CodeRabbit for Open Source",
-      "text": "Install it for a public repository; reviews start on the next PR. No application, card, or sales call."
+      "title": "CodeRabbit for Open Source — marketing copy; see manual-review exception",
+      "text": "There’s no application or approval queue: every public repository gets CodeRabbit Review free the moment you install it."
     },
     {
       "type": "link",

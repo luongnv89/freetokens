@@ -1,10 +1,11 @@
 {
-  "summary": "Claude for Open Source grants eligible maintainers and contributors a complimentary Claude Max 20x subscription for six months — a subscription grant, not API credits. Capped at 10,000 approved recipients, rolling review until the cap is reached or the application period closes. Eligibility tracks: maintainers (500+ dependent repos, 100+ dependent packages, or 200k+ monthly downloads), core contributors on recognized foundation/language projects, active contributors (100+ merged PRs on others' repos in 12 months), community builders (20+ unique external merged-PR contributors in 12 months), critical infrastructure (OpenSSF criticality score >=0.4), plus a discretionary ecosystem-impact track. General requirements: natural person, GitHub account at least two years old, public OSS activity in the last 90 days, and at least one OSI-approved-licensed project.",
+  "summary": "Claude for Open Source grants eligible maintainers and contributors a complimentary Claude Max 20x subscription for six months. Capped at 10,000 approved recipients, rolling review until the cap is reached or the application period closes. Eligibility tracks: maintainers (500+ dependent repos, 100+ dependent packages, or 200k+ monthly downloads), core contributors on recognized foundation/language projects, active contributors (100+ merged PRs on others' repos in 12 months), community builders (20+ unique external merged-PR contributors in 12 months), critical infrastructure (OpenSSF criticality score >=0.4), plus a discretionary ecosystem-impact track. General requirements: natural person, GitHub account at least two years old and in good standing, public OSS activity in the last 90 days, and at least one OSI-approved-licensed project. Applicants must be at least 18 or their jurisdiction's age of majority, whichever is greater; be legal residents where Claude.ai is offered and not subject to US export/sanctions restrictions; and not be Anthropic/affiliate employees, contractors, agents, or their immediate family/household members. Approval is discretionary, not guaranteed by meeting a metric. The complimentary base subscription can still incur standard paid overage charges. Standard paid Max 20x help lists $200/month in separately claimable API credits, but neither the OSS page nor its terms establishes whether the complimentary grant qualifies. API-benefit inclusion is unresolved, not promised or categorically excluded; check Settings → Billing or obtain provider confirmation.",
   "claim_steps": [
-    "Check the eligibility tracks on claude.com/contact-sales/claude-for-oss.",
+    "Check the eligibility tracks and all general requirements at claude.com/contact-sales/claude-for-oss and anthropic.com/claude-for-oss-terms, including age, legal residence, sanctions and Anthropic-affiliate exclusions.",
     "Apply at claude.com/open-source-max — sign in with your GitHub account, add email, planned usage, and a <=500-word qualification statement.",
     "If approved, an activation link is emailed to your GitHub account email; activate within 90 days.",
-    "Subscription runs 6 consecutive months; an existing paid plan pauses and resumes afterward unless cancelled."
+    "The base subscription runs six consecutive months; overages may be billed. An existing paid plan pauses and resumes afterward unless cancelled.",
+    "Before counting on API credits, check Settings → Billing for the complimentary plan or ask Anthropic to confirm its eligibility; standard paid Max terms alone do not prove this benefit applies."
   ],
   "social_proof": [
     {
@@ -18,6 +19,30 @@
       "url": "https://www.anthropic.com/claude-for-oss-terms",
       "title": "Claude for Open Source Terms and Conditions | Anthropic",
       "text": "The Program provides eligible open-source software maintainers and contributors with a complimentary subscription to Claude Max 20x for a period of six months ... The Program is limited to 10,000 approved recipients unless this cap is increased by Anthropic."
+    },
+    {
+      "type": "link",
+      "url": "https://www.anthropic.com/claude-for-oss-terms",
+      "title": "OSS program age and residence eligibility",
+      "text": "Be at least 18 years of age or the age of majority in their jurisdiction, whichever is greater; Be a legal resident of a country, region, or territory where Anthropic offers Claude.ai access and not be a person or entity subject to restrictions under U.S. export control or sanctions laws;"
+    },
+    {
+      "type": "link",
+      "url": "https://www.anthropic.com/claude-for-oss-terms",
+      "title": "OSS program affiliate exclusions",
+      "text": "Not be an employee, contractor, or agent of Anthropic or its affiliates, or an immediate family member or household member of such person."
+    },
+    {
+      "type": "link",
+      "url": "https://www.anthropic.com/claude-for-oss-terms",
+      "title": "OSS program paid overage terms",
+      "text": "During the Benefit Period, you will not be charged for the base Claude Max 20x subscription, but you may be charged for overages in accordance with Anthropic’s standard overage pricing."
+    },
+    {
+      "type": "link",
+      "url": "https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans",
+      "title": "Standard Max API credits — complimentary OSS eligibility unconfirmed",
+      "text": "Monthly credits by plan Plan Monthly credit Max 5x $100 Max 20x $200"
     }
   ]
 }
