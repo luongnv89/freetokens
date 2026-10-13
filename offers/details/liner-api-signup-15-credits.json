@@ -1,0 +1,28 @@
+{
+  "summary": "Liner's developer site offers new users up to $15 in free API credits ('No purchase necessary. Just add your card.'). Credits are a prepaid balance that pays for any Liner API: the Liner Model API ($1 input / $5 output per 1M tokens on liner-mark-1.3), Web Search ($1 per 1,000 requests), Scholar Search ($0.3 per 1,000), and the Agent APIs (Quick Answer $3, Search Agent $20, Deep Research $200 per 1,000 requests).",
+  "claim_steps": [
+    "Open https://liner.com/developers and select Claim now / Get started",
+    "Sign up and add a card (no purchase necessary)",
+    "Create an API key under API Keys in the dashboard; check the credit balance with GET /api/v1/credits/balance (free)"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://liner.com/developers",
+      "title": "Liner Developers | The Most Accurate & Cheapest AI Search API",
+      "text": "Get started with up to $15 ... Get up to $15 for free. No purchase necessary. Just add your card. Claim now"
+    },
+    {
+      "type": "link",
+      "url": "https://liner.com/developers/docs/pricing",
+      "title": "Pricing | Liner Developers",
+      "text": "Credits are a prepaid balance used to pay for API use. When a request is successfully processed, the corresponding charge is deducted from your credits."
+    },
+    {
+      "type": "link",
+      "url": "https://pricingsaas.com/feed?dimension=ai-themes&category=credits",
+      "title": "AI pricing moves · Credit pricing — PricingSaaS Pulse",
+      "text": "Sep 21, 2026 | Liner | Discount added | New sign-up promotion added: 'Get up to $15 for free' banner in the top header and a matching sidebar widget prompting new users to join and claim free API credits."
+    }
+  ]
+}

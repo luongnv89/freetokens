@@ -1,0 +1,21 @@
+{
+  "summary": "Apodex 1.1 Mini (model ID apodex/apodex-1.1-mini) is a 35B-parameter mixture-of-experts text model with a 262,144-token context window, function calling, structured outputs and reasoning, served on Novita's OpenAI-compatible serverless API. Novita's pricing page lists its input and output as Free; the Oct 1 launch blog describes the $0 pricing as a launch promotion that is not permanent and may change.",
+  "claim_steps": [
+    "Create a Novita AI account and an API key in Key Management",
+    "Call https://api.novita.ai/v3/openai/chat/completions with model apodex/apodex-1.1-mini"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://novita.ai/pricing",
+      "title": "Novita AI – Model Libraries & GPU Cloud - Deploy, Scale & Innovate",
+      "text": "Apodex — Apodex 1.1 Mini — Context: 256K — Input: Free — Output: Free"
+    },
+    {
+      "type": "link",
+      "url": "https://blogs.novita.ai/apodex-1-1-mini-on-novita-ai-api-quickstart-pricing/",
+      "title": "Apodex 1.1 Mini on Novita AI: API Quickstart and Pricing - Novita",
+      "text": "As of October 1, 2026, Novita lists input and output pricing at $0 per million tokens as a launch promotion, so check the live model page before putting the model into a production budget."
+    }
+  ]
+}
