@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-13T03:35:52Z — 144 of 210 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-13T17:07:34Z — 144 of 211 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Meta Global AI Developer Hackathon API Credits
+- Provider: Meta
+- Category: api_provider
+- Amount: $150 in Meta Model API credits per hackathon participant (applications not yet open)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-13 — review_status=to-be-verified · verification=social_proof · signup=required
+- Source: https://dev.meta.ai/events/global-hackathon
+- Page: https://freetokens.custats.info/offers/meta-global-ai-developer-hackathon.html
+- Summary: Meta's 10-day virtual Global AI Developer Hackathon gives every participant $150 of Meta Model API credits, with a $1M cash prize pool. Applications are not open yet; Meta's page offers a sign-up to be notified when they open.
+- Claim steps: Open the hackathon page at dev.meta.ai/events/global-hackathon. | Sign up with your name and email to get notified when applications open. | Apply once applications open; participants receive $150 of Meta Model API credits.
 ### Tripo AI 300 Free API Credits
 - Provider: Tripo AI
 - Category: image
@@ -1435,16 +1445,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/fal-minimax-h3-max-free.html
 - Summary: fal offers MiniMax H3 Max in its browser sandbox with five free videos per day, up to 15 seconds each with native audio. Both text-to-video (T2V) and image-to-video (I2V) are supported; fal advertises a 5-second video generated in under 3 seconds and identifies the leaderboard model as 768p. A fal account and sign-in are required; no installation or subscription is needed. The allowance resets every 24 hours. Announced by fal's Blendi (@blendibyl) on X.
 - Claim steps: Open https://fal.ai/minimax-h3-max and create a fal account or sign in. | Describe the shot, camera move and sound, or attach an image for image-to-video. | Generate up to five free clips per day, up to 15 seconds each with synchronized audio. | The free allowance resets every 24 hours; no subscription or installation is required.
-### Exa Free Tier — $10/Month + $10 Onboarding Bonus
-- Provider: Exa
-- Category: api_provider
-- Amount: User's first team receives $10 immediately in the signup month, resetting to $10 each calendar month without rollover, plus a one-time non-expiring $10 bonus after dashboard onboarding
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://exa.ai/docs/admin/billing
-- Page: https://freetokens.custats.info/offers/exa-free-tier.html
-- Summary: Exa's Free tier gives a user's first team $10 in monthly credits, available in full immediately in the signup month. The monthly grant resets to $10 on the first day of each calendar month; unused monthly credits do not roll over or accumulate. The user's first team also earns a one-time $10 bonus only after the user completes dashboard onboarding; that bonus does not expire. No payment method is required to start. The Free tier excludes Exa Snapshot despite pricing-page wording about access to all endpoints. Published limits include 10 Search QPS and 50 concurrent Agent runs; requests return 402 Payment Required when credits are exhausted.
-- Claim steps: Create an Exa account and use your first team to receive the full $10 monthly grant immediately, regardless of the signup date. No payment method is required to start. | Complete onboarding in the dashboard to unlock your first team's one-time $10 bonus. The bonus does not expire; it is not an unconditional $20 signup award. | Use monthly credits before they reset to $10 on the first of each calendar month; unused monthly credits do not roll over. Exa Snapshot is excluded. Add paid credits separately if your balance is exhausted.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
