@@ -55,6 +55,11 @@ function htmlAttr(value) {
     .replaceAll('"', "&quot;");
 }
 
+// React escapes text nodes like attributes, plus the apostrophe.
+function htmlText(value) {
+  return htmlAttr(value).replaceAll("'", "&#x27;");
+}
+
 function metaContents(html, attribute, name) {
   const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return [
@@ -288,8 +293,8 @@ describe("static route coverage (#123)", () => {
       path.join(outDir, "offers", `${offer.slug}.html`),
       "utf8",
     );
-    expect(detail).toContain(`<h1>${offer.title}</h1>`);
-    expect(detail).toContain(offer.amount);
+    expect(detail).toContain(`<h1>${htmlText(offer.title)}</h1>`);
+    expect(detail).toContain(htmlText(offer.amount));
     // The claim CTA is real prerendered markup, not something JS injects.
     expect(detail).toMatch(new RegExp(`href="${offer.source_url}"`));
     expect(detail).toContain('class="claim-list"');
