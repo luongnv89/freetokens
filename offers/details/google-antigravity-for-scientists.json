@@ -1,0 +1,29 @@
+{
+  "summary": "Google is giving up to 10,000 selected scientists 6 months of free access to the highest usage tier in Google Antigravity, including Gemini 4 Argon, announced 2026-10-13 alongside the Gemini 4 Argon launch. The program is mainly for non-commercial scientific research by researchers with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory. Selection weighs scientific credentials and potential research impact; cohorts are onboarded weekly on a rolling basis as capacity allows, and only selected applicants are contacted. Access applies to the individual Antigravity service on the Google account used to apply. No application deadline is stated.",
+  "claim_steps": [
+    "Check eligibility: non-commercial scientific research with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory.",
+    "Open the interest form from https://antigravity.google/use-cases/science (Apply here) and sign in with the Google account that should receive access (institutional Workspace or personal Gmail).",
+    "Submit the form. Google reviews applications weekly as capacity allows and only contacts selected applicants; submitting does not guarantee selection.",
+    "If selected, the upgraded access applies to the individual Google Antigravity service on that account for 6 months."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://antigravity.google/use-cases/science",
+      "title": "Google Antigravity - Use Case: Why choose Google Antigravity for science",
+      "text": "Apply for free access. We're giving 10,000 scientists free access to Gemini 4 Argon in Google Antigravity at our highest usage tier, starting today."
+    },
+    {
+      "type": "link",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+      "title": "Gemini 4 Argon: Built to solve your hardest problems",
+      "text": "To further advance the pace of research, we're offering 10,000 scientists the highest usage tier in Google Antigravity free of charge for 6 months (onboarded on a rolling basis), subject to eligibility, capacity, and selection. Applications are now open."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLScSnOMSFSm8zfM9siaXufuqAeR6ZP6R33DTzxjqJObjW61GzQ/viewform",
+      "title": "Interest form: Accelerate scientific workflows in Google Antigravity",
+      "text": "We are providing up to 10,000 selected scientists with 6 months of access, free of charge, to our highest usage tier in Google Antigravity and our most advanced Gemini 4 Argon model. This program is primarily intended to support non-commercial scientific research."
+    }
+  ]
+}

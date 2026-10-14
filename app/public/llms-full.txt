@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-14T03:27:43Z — 138 of 216 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-14T05:33:09Z — 137 of 218 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Cat Jam Free on OpenCode Console
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Cat Jam stealth model access on OpenCode Console (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-14 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-cat-jam-free.html
+- Summary: Cat Jam is a stealth model that OpenCode made free on 2026-10-13. OpenCode's Console docs list Cat Jam Free (model id cat-jam-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/v1/chat/completions endpoint. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs.
+- Claim steps: Sign in to OpenCode Console and copy your API key. The general Console setup also asks for billing details and credits. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select Cat Jam Free (opencode/cat-jam-free). | Or call https://opencode.ai/inference/v1/chat/completions with model cat-jam-free. The free period is limited-time.
 ### Meta Global AI Developer Hackathon API Credits
 - Provider: Meta
 - Category: api_provider
@@ -57,6 +67,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/liner-api-signup-15-credits.html
 - Summary: Liner's developer site offers new users up to $15 in free API credits ('No purchase necessary. Just add your card.'). Credits are a prepaid balance that pays for any Liner API: the Liner Model API ($1 input / $5 output per 1M tokens on liner-mark-1.3), Web Search ($1 per 1,000 requests), Scholar Search ($0.3 per 1,000), and the Agent APIs (Quick Answer $3, Search Agent $20, Deep Research $200 per 1,000 requests).
 - Claim steps: Open https://liner.com/developers and select Claim now / Get started | Sign up and add a card (no purchase necessary) | Create an API key under API Keys in the dashboard; check the credit balance with GET /api/v1/credits/balance (free)
+### Google Antigravity Free Highest Tier for Scientists
+- Provider: Google
+- Category: coding
+- Amount: 6 months free on Google Antigravity's highest usage tier with Gemini 4 Argon (up to 10,000 selected scientists; application-based)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://antigravity.google/use-cases/science
+- Page: https://freetokens.custats.info/offers/google-antigravity-for-scientists.html
+- Summary: Google is giving up to 10,000 selected scientists 6 months of free access to the highest usage tier in Google Antigravity, including Gemini 4 Argon, announced 2026-10-13 alongside the Gemini 4 Argon launch. The program is mainly for non-commercial scientific research by researchers with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory. Selection weighs scientific credentials and potential research impact; cohorts are onboarded weekly on a rolling basis as capacity allows, and only selected applicants are contacted. Access applies to the individual Antigravity service on the Google account used to apply. No application deadline is stated.
+- Claim steps: Check eligibility: non-commercial scientific research with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory. | Open the interest form from https://antigravity.google/use-cases/science (Apply here) and sign in with the Google account that should receive access (institutional Workspace or personal Gmail). | Submit the form. Google reviews applications weekly as capacity allows and only contacts selected applicants; submitting does not guarantee selection. | If selected, the upgraded access applies to the individual Google Antigravity service on that account for 6 months.
 ### Dolphin API — $10 API Credit
 - Provider: Dolphin
 - Category: api_provider
@@ -1355,36 +1375,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/google-cloud-ai-startup-program.html
 - Summary: Google Cloud's AI startup program grants up to $350,000 in Google Cloud credits over two years for eligible AI-first, VC-funded startups (Grow/Scale tier). Year 1 is 100% up to $100,000 generally, or 100% up to $250,000 for AI-first startups; Year 2 is 20% up to an additional $100,000. Credits cover Google models such as Gemini and Gemma; third-party models are billed directly and are not covered. Eligibility is selection-based: Pre-Seed/Seed within the last five years or Series A within the last 12 months, founded within five years, not yet received more than $5,000 in Google Cloud credits, and at Google Cloud's discretion. The AI program also requires using or planning to use Gemini to deploy AI services as a foundation of the primary product or solution. This is distinct from the $300 Free Trial listing.
 - Claim steps: Confirm eligibility: VC-funded startup using or planning to use Gemini as a foundation of its primary product/solution; Pre-Seed/Seed raised within five years or Series A within 12 months, founded within five years, and no more than $5,000 prior Google Cloud credits. | Apply at cloud.google.com/startup/ai (selection-based; acceptance is at Google Cloud's discretion). | If accepted, use program credits on Google Cloud services and Google models (Gemini/Gemma). Third-party models are not covered. | Do not confuse this with the separate $300 Google Cloud Free Trial.
-### Google Cloud Free Trial — $300 Credit
-- Provider: Google Cloud
-- Category: api_provider
-- Amount: $300 in credits (90 days from signup)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
-- Source: https://cloud.google.com/free/docs/free-cloud-features
-- Page: https://freetokens.custats.info/offers/google-cloud-300-free-trial.html
-- Summary: Eligible new Google Cloud customers get a $300 Welcome credit for covered services during a 90-day trial from signup. You must not have previously used the trial or been a paying Google Cloud, Google Maps Platform or Firebase user. A valid payment method is required for verification, but the trial does not automatically charge you; charges begin only after a manual paid-account upgrade. The trial restricts GPUs, Marketplace and third-party generative AI models. For billing accounts opened after March 2, 2026, Welcome credits cannot pay for Gemini API or AI Studio usage. Credits remain limited to covered services and the original 90-day window even after upgrading.
-- Claim steps: Open cloud.google.com/free and click 'Start free'. | Sign in with or create a Google account. | Confirm you have not previously used the Free Trial or been a paying Google Cloud, Google Maps Platform or Firebase user. | Complete signup and payment-method/identity verification to create a Free Trial billing account; the trial does not automatically charge you. | Use the $300 credits within 90 days on covered services. GPUs, Marketplace and third-party generative AI models are restricted during the trial. | Do not budget Welcome credits for Gemini API or AI Studio if your billing account was opened after March 2, 2026; those uses are excluded. | Upgrade manually only if you want paid access; excluded services or usage beyond your remaining credit and free limits can then be charged.
-### Gladia Starter — €50 Free Credits
-- Provider: Gladia
-- Category: voice
-- Amount: €50 one-time free credits (~80h async / ~60h real-time transcription); prepaid wallet afterwards
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://gladia.io/pricing
-- Page: https://freetokens.custats.info/offers/gladia-starter-free-credits.html
-- Summary: Gladia's Starter plan grants 50€ in free credits on signup — a one-time grant with no monthly reset, worth roughly 80+ hours of async (pre-recorded) transcription or 60+ hours of real-time transcription at current rates ($0.61/hr async, $0.75/hr real-time). Includes 30 real-time and 25 async concurrent requests, speaker diarization, 100+ languages. Once credits are used, top up a prepaid wallet or upgrade.
-- Claim steps: Sign up at https://gladia.io (Get started on the Starter plan). | 50€ in free credits are granted once — no monthly reset. | After the grant is consumed, top up the prepaid wallet or upgrade to Growth.
-### GitHub Copilot Student
-- Provider: GitHub
-- Category: student
-- Amount: Free Copilot Student plan for verified students: Copilot features incl. agents (excludes third-party agents) + GitHub AI Credits allowance; auto model selection only
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-students
-- Page: https://freetokens.custats.info/offers/github-copilot-student.html
-- Summary: GitHub Copilot Student gives GitHub Education-verified students free access to Copilot's features: inline suggestions/chat with agents included (excluding third-party agents) and an allowance of GitHub AI Credits, with auto model selection only. GitHub re-evaluates eligibility monthly. This is distinct from the expired 'Student Pack 2 years' promo.
-- Claim steps: Get verified as a student via GitHub Education (apply to GitHub Education as a student). | Go to github.com/settings/education/benefits → 'Free GitHub developer resources for students and teachers' → Learn more. | Follow the prompts to activate Copilot Student. Approval and activation can take several days.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

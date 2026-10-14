@@ -1,0 +1,24 @@
+{
+  "summary": "Cat Jam is a stealth model that OpenCode made free on 2026-10-13. OpenCode's Console docs list Cat Jam Free (model id cat-jam-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/v1/chat/completions endpoint. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs.",
+  "claim_steps": [
+    "Sign in to OpenCode Console and copy your API key. The general Console setup also asks for billing details and credits.",
+    "In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key.",
+    "Run /models and select Cat Jam Free (opencode/cat-jam-free).",
+    "Or call https://opencode.ai/inference/v1/chat/completions with model cat-jam-free. The free period is limited-time."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models | OpenCode",
+      "text": "Cat Jam Free is a stealth model that’s free on OpenCode for a limited time. Its provider does not use your data for model training and retains it for 30 days for safety reasons. Pricing: Cat Jam Free | Free | Free | Free | -"
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2110068008945381853",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "Cat Jam (stealth model) is now free in OpenCode\n\n- very fast\n- built for agentic coding\n- zero data retention"
+    }
+  ]
+}

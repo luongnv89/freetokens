@@ -1,9 +1,39 @@
 {
-  "generated_at": "2026-10-14T03:27:43Z",
-  "count": 249,
-  "active_count": 216,
+  "generated_at": "2026-10-14T05:33:03Z",
+  "count": 251,
+  "active_count": 218,
   "expired_count": 33,
   "offers": [
+    {
+      "slug": "meta-global-ai-developer-hackathon",
+      "title": "Meta Global AI Developer Hackathon API Credits",
+      "provider": "Meta",
+      "category": "api_provider",
+      "amount": "$150 in Meta Model API credits per selected hackathon participant for ten days of development; applications open through Oct 25, 2026 at 11:59 PM ET, or earlier if 20,000 spots fill",
+      "expiry_date": "2026-10-25",
+      "source_url": "https://dev.meta.ai/events/global-hackathon",
+      "verified_date": "2026-10-14",
+      "added_date": "2026-10-13",
+      "verification": "social_proof",
+      "review_status": "to-be-verified",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-cat-jam-free",
+      "title": "Cat Jam Free on OpenCode Console",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free Cat Jam stealth model access on OpenCode Console (free input, output and cached reads; limited time)",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-10-14",
+      "added_date": "2026-10-13",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "autoclaw-weekly-perks-glm-5-3-flash-tokens",
       "title": "AutoClaw Weekly Perks — 8M GLM-5.3-Flash Tokens Daily",
@@ -42,6 +72,21 @@
       "amount": "$10 in Dolphin API credit with coupon code API10 (redeem at app.dphn.ai after connecting and verifying a wallet and authorizing with Telegram)",
       "expiry_date": null,
       "source_url": "https://dphn.ai/API/",
+      "verified_date": "2026-10-13",
+      "added_date": "2026-10-13",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "google-antigravity-for-scientists",
+      "title": "Google Antigravity Free Highest Tier for Scientists",
+      "provider": "Google",
+      "category": "coding",
+      "amount": "6 months free on Google Antigravity's highest usage tier with Gemini 4 Argon (up to 10,000 selected scientists; application-based)",
+      "expiry_date": null,
+      "source_url": "https://antigravity.google/use-cases/science",
       "verified_date": "2026-10-13",
       "added_date": "2026-10-13",
       "verification": "social_proof",
@@ -3723,21 +3768,6 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "meta-global-ai-developer-hackathon",
-      "title": "Meta Global AI Developer Hackathon API Credits",
-      "provider": "Meta",
-      "category": "api_provider",
-      "amount": "$150 in Meta Model API credits per selected hackathon participant for ten days of development; applications open through Oct 25, 2026 at 11:59 PM ET, or earlier if 20,000 spots fill",
-      "expiry_date": "2026-10-25",
-      "source_url": "https://dev.meta.ai/events/global-hackathon",
-      "verified_date": "2026-10-14",
-      "added_date": null,
-      "verification": "social_proof",
-      "review_status": "to-be-verified",
-      "signup": "required",
-      "status": "active"
     }
   ]
 }
