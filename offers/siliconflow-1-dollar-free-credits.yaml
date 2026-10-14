@@ -2,8 +2,8 @@
 # ("Flexible token pricing, high usage limits, and postpaid billing—plus
 # $1 in free credits to get you started!" FAQ: "there are no minimum
 # commitments. You only pay for what you use, and you can start with $1
-# in free credits." Complements siliconflow-free-models, which tracks the
-# permanently-free model list.)
+# in free credits." The separate siliconflow-free-models listing tracks selected
+# free entries in the mainland-China catalog, not guaranteed international access.)
 title: SiliconFlow — $1 Signup Credits
 provider: SiliconFlow
 category: api_provider

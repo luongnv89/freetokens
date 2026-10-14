@@ -1,22 +1,44 @@
 {
-  "summary": "MindsHub (by MindsDB, Inc.) has an always-free tier with no subscription and no credit card. The MindsHub Air model (a general-purpose model alias, API alias mindshub_air) and TypeSafe's Jev decision model (API alias jev, via the Decisions API) are free within fair use, both in MindsHub Agents and through the API. Daily rate limits apply and are not published as numbers. The free tier is meant for people using agents. Bulk pipelines, scripted volume traffic, scraping, reselling, or multiple accounts are not covered and can lead to suspension. Air is an alias MindsHub can repoint to a different model. Use outside the free tier is billed at published per-model rates.",
+  "summary": "MindsHub (by MindsDB, Inc.) advertises free access with no subscription or credit card for non-coding knowledge work with agents. MindsHub Air (API alias mindshub_air) uses a recurring, organization-specific weighted allowance whose absolute size is unpublished; an organization without a free grant has zero Air allowance. Air is an alias MindsHub can repoint to a different model. TypeSafe's Jev decision model (jev, through the Decisions API) costs $0 during a launch promotion, not guaranteed permanent free access. Unfunded organizations receive an allowance of 100,000 tokens and 100 requests while shared free capacity lasts; both refill continuously over 24 hours, capped at one day's allowance, rather than resetting at midnight. Jev does not consume Air's allowance. The broad fair-use policy says numeric daily limits are unpublished, but specific billing and Decisions docs publish Jev's limits; that statement must not be applied to Jev universally. Bulk pipelines, scripted volume traffic, scraping, reselling and multiple-account abuse are outside fair use and may lead to suspension. Air usage beyond its allowance is billed at published rates. No Jev promotion end date or completed API request was verified in the 2026-10-14 copy check.",
   "claim_steps": [
-    "Create a free MindsHub account at mindshub.ai (no credit card required)",
-    "Use the MindsHub Air model in MindsHub Agents, or call it through Unified Inference with the alias mindshub_air",
-    "Use Jev through the Decisions API with the alias jev and your MindsHub key"
+    "Create a free MindsHub account and obtain your API key from https://console.mindshub.ai; no card is required for the advertised free allowances.",
+    "Use MindsHub Air for non-coding knowledge work in MindsHub Agents or through Unified Inference with the alias mindshub_air. Its absolute weighted allowance is unpublished; organizations without a free grant have zero allowance.",
+    "Check Air's remaining allowance with GET https://auth.mindshub.ai/v1/entitlements/me/ using your API key. Read included_percent_remaining and next_refresh_at for your organization's grant.",
+    "Call Jev with model jev at POST https://api.mindshub.ai/v1/decisions using your MindsHub key; no separate TypeSafe key is needed. Unfunded organizations have both 100,000 tokens and 100 requests, refilled continuously over 24 hours while shared free capacity lasts.",
+    "Past the Jev allowance, or if shared free capacity runs out first, requests return 402 wallet_empty before the model runs. Wait for refill and available capacity, or fund the organization if you choose paid setup.",
+    "Wallet credit, or a card with a completed top-up and no unresolved payment error, lifts the daily Jev cap during the $0 promotion. Adding a card alone does not. Organization access and rate limits still apply.",
+    "Respect fair use: do not use the free tier for bulk pipelines, scripted volume traffic, scraping, reselling or multiple-account abuse. Check current pricing and account entitlements before use."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://mindshub.ai/pricing",
-      "title": "MindsHub pricing: Start free, then pay as you go",
-      "text": "Free: The MindsHub Air model and Jev, free within fair use. No card. ... $0 No credit card required ... Free within fair use, in MindsHub Agents and through the API. Daily limits apply."
+      "title": "Plans and pricing: reduce your AI spend — MindsHub",
+      "text": "Always free, for knowledge work with agents. $0 / month No credit card required. ... The MindsHub Air model ... for non-coding work ... Classify, route and score with Jev ... Call it through the Decisions API as jev with your MindsHub API key. Daily limits under fair use."
     },
     {
       "type": "link",
       "url": "https://mindshub.ai/fair-use-policy",
-      "title": "Fair Use Policy — MindsHub",
+      "title": "Fair Use Policy — MindsHub (general policy; see specific Jev docs for numeric limits)",
       "text": "A MindsHub account gives you access to the included models at no charge, with no credit card required. Currently included: The MindsHub Air model; Jev. ... MindsDB protects the free tier with daily rate limits and other measures. The limits are not published as numbers."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.mindshub.ai/inference/billing/",
+      "title": "MindsHub Inference billing — Air allowance and Jev launch promotion",
+      "text": "An organization with a free grant receives a recurring allowance for mindshub_air; one without a grant has an allowance of zero. ... The absolute size of the allowance is not published. ... Jev input and output are priced at $0 during its launch promotion, and Jev requests never draw the included allowance. ... A card on its own does not lift the cap; a completed top-up does."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.mindshub.ai/inference/decisions/",
+      "title": "MindsHub Decisions API — Jev limits and billing",
+      "text": "Launch promotion: Jev input and output both cost $0 through MindsHub, and requests do not consume the included allowance. ... Every other organization gets a free allowance of 100,000 tokens and 100 requests while shared free capacity lasts, and it refills continuously by that much over every 24 hours."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.mindshub.ai/inference/models/",
+      "title": "MindsHub Inference models — API aliases",
+      "text": "mindshub_air MindsHub Air Tracks the newest release. No fixed alias of its own. ... jev Jev Decision model. Currently jev-1.13.0; jev-latest is an accepted synonym. Uses /v1/decisions."
     }
   ]
 }

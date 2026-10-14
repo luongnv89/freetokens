@@ -1,12 +1,12 @@
 # Current program FAQ: https://claude.com/programs/startups
-# "we’re currently over capacity on the Claude Team and $1,000 API credit offers."
-# "If you’ve already claimed the offer, nothing changes; you can use the offer in the account."
-# Startup Stack, Applied AI office hours and events continue; applications are being re-reviewed.
-# Existing verification date is unchanged; new Team/API grants need curator follow-up.
+# "Our current cohort is now full, and we’re not accepting new applications right now."
+# "Yes, the program is continuing for current members."
+# Startup Stack, biweekly Applied AI group sessions and events continue for members.
+# Existing verification date is unchanged; future cohort claimability needs follow-up.
 title: Claude Startups
 provider: Anthropic
 category: startup_program
-amount: "Startup Stack partner discounts and credits worth up to $45,000, subject to partner terms; Claude Team and $1,000 API credit offers currently over capacity, with already-claimed benefits unchanged"
+amount: "Existing-member Startup Stack partner discounts and credits worth up to $45,000, subject to partner terms; current cohort full and no new applications accepted"
 expiry_date: null
 source_url: https://claude.com/programs/startups
 verified_date: 2026-10-06

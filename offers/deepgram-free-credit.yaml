@@ -3,7 +3,9 @@
 # pay-as-you-go" / "No minimums. No expiration.")
 # Flux TTS free promo ended as scheduled — page now lists Flux TTS at
 # $0.0450/1k chars PAYG with a "Buy Flux TTS, get matching credits" promo
-# ($1 credit per $1 spent, up to $500). Flux TTS free mention removed.
+# ($1 credit per $1 spent, up to $500; Pay As You Go and Growth plans;
+# offer ends December 31, 2026). This deadline does not apply to signup credits.
+# Flux TTS free mention removed.
 title: Deepgram $200 Free Credit
 provider: Deepgram
 category: voice

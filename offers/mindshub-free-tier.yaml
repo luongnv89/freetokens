@@ -1,10 +1,11 @@
 # Hunted 2026-10-13 by offer-hunter; verified against https://mindshub.ai/pricing
 # ("Free within fair use, in MindsHub Agents and through the API. Daily limits apply.")
+# Copy correction 2026-10-14: Air is for non-coding knowledge work; specific billing/Decisions docs publish Jev's launch-promotion limits separately from Air's unpublished weighted allowance.
 # Lead: https://pricingsaas.com/feed?dimension=ai-themes&category=credits
 title: MindsHub Free Tier — MindsHub Air and Jev Models
 provider: MindsHub
 category: api_provider
-amount: MindsHub Air model and Jev decision model free within fair use in MindsHub Agents and through the API; no card, daily rate limits apply (limits not published)
+amount: MindsHub Air free for non-coding knowledge work within an organization-specific recurring weighted allowance (absolute size unpublished); Jev $0 launch promotion with 100,000 tokens and 100 requests refilled continuously over 24 hours for unfunded organizations while shared free capacity lasts; no card needed for these free allowances
 expiry_date: null
 source_url: https://mindshub.ai/pricing
 verified_date: 2026-10-13

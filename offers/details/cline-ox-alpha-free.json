@@ -1,10 +1,10 @@
 {
-  "summary": "Cline's August 26, 2026 announcement says GLM-5.3 Flash (formerly Ox Alpha) is free in Cline. The current Cline documentation says free model promotions are available to any user with a Cline account, provide a limited usage quota, rotate over time, and work in the Cline IDE extension and CLI—not the Cline API. No fixed end date is published, so this listing uses a null expiry date to mean no announced end date, not permanent availability.",
+  "summary": "Cline's historical August 26, 2026 announcement says GLM-5.3 Flash (formerly Ox Alpha) is free. In the recommendation feed checked October 14, 2026, GLM-5.3 Flash is absent from the free list and appears under ClinePass instead; that listing alone does not establish free access. Confirm a FREE tag in the signed-in IDE/CLI selector before relying on this offer. Feed absence does not prove withdrawal, and current claimability remains unconfirmed. Free promotions rotate, have limited quotas and work only in the Cline IDE extension and CLI, not the API. Free usage may be used to improve model performance and quality. Null expiry means no announced end date, not permanent availability.",
   "claim_steps": [
     "Install the Cline CLI if needed: npm i -g cline.",
     "Open the model picker with /models; in the current CLI, go to /settings, select Cline as the provider, and browse available free models.",
-    "Select GLM-5.3 Flash (Ox Alpha) under the free options while it is listed.",
-    "Use it in the Cline CLI or IDE extension within the limited free quota; Cline's free models are not available through the Cline API."
+    "Confirm GLM-5.3 Flash (Ox Alpha) has a FREE tag in the signed-in Cline (usage-billing) selector. The October 14, 2026 feed omits it from the free list and lists cline-pass/glm-5.3-flash instead; ClinePass presence alone does not prove free access. Authenticated confirmation is still needed.",
+    "Use it only while free-tagged in the CLI or IDE extension and within the limited quota, not through the Cline API. Free usage may help improve model performance and quality. The earlier announcement and curator screenshot are historical evidence, not a successful current claim."
   ],
   "social_proof": [
     {
@@ -18,12 +18,12 @@
       "type": "link",
       "url": "https://docs.cline.bot/getting-started/free-models",
       "title": "Cline Free Models - Cline",
-      "text": "Cline periodically offers free model promotions that let you try select models at no cost, up to a limited usage quota. Free model promotions are offered on a rotating, limited-time basis. Free models are available to any user with a Cline account. Free model usage is not supported through the Cline API. Free models are only available in the Cline IDE Extension and CLI."
+      "text": "Free model promotions are offered on a rotating, limited-time basis. In the Cline (usage-billing) provider, look for models tagged FREE in the model selector. Free models are only available in the Cline IDE Extension and CLI. Free model usage may be used to help improve model performance and quality."
     },
     {
       "type": "screenshot",
       "image": "assets/cline-glm-5-3-flash-curator-run.png",
-      "caption": "Curator's firsthand Cline CLI run: GLM-5.3-Flash (high) is selected and the session shows $0.00."
+      "caption": "Historical curator Cline CLI run: GLM-5.3-Flash (high) is selected and the session shows $0.00. This does not establish current free availability."
     },
     {
       "type": "x",
@@ -38,6 +38,12 @@
       "author": "Z.ai",
       "handle": "@Zai_org",
       "text": "Introducing GLM-5.3-Flash\n\n- Leading capabilities at a highly competitive price\n- Natively multimodal with a 1M-token context window\n- A 320B-A18B model released under the MIT License\n- Previously previewed as Ox Alpha, running entirely on Chinese AI chips\n\nBlog:…"
+    },
+    {
+      "type": "link",
+      "url": "https://api.cline.bot/api/v1/ai/cline/recommended-models",
+      "title": "Cline recommended models — October 14, 2026 snapshot",
+      "text": "The free array contains Step 5 Preview, MiMo V2.6 Flash, Muse Spark 1.3 Contributor and Solar Mini 4, not GLM-5.3 Flash. The clinePass array contains cline-pass/glm-5.3-flash. This feed snapshot is not an authenticated free-access test."
     }
   ]
 }

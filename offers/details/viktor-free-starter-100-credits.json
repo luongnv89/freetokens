@@ -1,21 +1,22 @@
 {
-  "summary": "Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. The Free plan includes $100 in starter credits without a credit card or upfront paid subscription; free credits never expire. The current pricing table lists Team at $100/month after the free allowance. No enrollment deadline is stated.",
+  "summary": "Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. The current Free-plan card offers up to $100 in one-time starter credits for a new workspace without a credit card or upfront paid subscription; the actual award depends on how the workspace signed up and must be checked on its Billing page. Free credits never expire. Joining an existing workspace does not establish a separate starter award for each user. The pricing Team card lists $100/month, while Plans and Credits docs list paid choices from $50/month and note that some workspaces have a $100 minimum. The pricing headline/FAQ and older promotional quotes still say $100, but do not override the qualified Free-plan card and signup-dependent documentation. No enrollment deadline or account-specific grant was verified in the 2026-10-14 copy check.",
   "claim_steps": [
     "Create a Viktor account.",
     "Join your team or add Viktor to Slack or Microsoft Teams.",
-    "Finish the setup wizard."
+    "Finish the setup wizard, then check the free starter-credit balance on the intended workspace's Billing page. New-workspace credits are a one-time award of up to $100 and depend on signup path; do not assume each member joining an existing workspace receives $100.",
+    "Free credits never expire. When the workspace's starter credits run out, Viktor pauses until you choose a paid plan; check the workspace's plan picker for its available paid options."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://viktor.com/pricing",
       "title": "Pricing | Viktor",
-      "text": "$100 in credits, no credit card required. Free credits never expire. Team: $100 / month, 40,000 credits monthly."
+      "text": "Free ... $0 / month ... up to $100 credits for free ... No credit card, no sales call ... Free credits never expire ... Team ... $100 / month ... 40,000 credits monthly."
     },
     {
       "type": "link",
       "url": "https://viktor.com/",
-      "title": "Viktor | Not a tool. A hire.",
+      "title": "Viktor | Not a tool. A hire. — historical promotional quote, not a guaranteed award",
       "text": "Every feature. Every integration. $100 in credits on the house. No credit card, no sales call, no catch."
     },
     {
@@ -23,6 +24,12 @@
       "url": "https://viktor.com/docs",
       "title": "Viktor Docs: Guides, Admin and Developer API",
       "text": "Create your Viktor account, join your team or add Viktor to Slack or Microsoft Teams, and finish the setup wizard."
+    },
+    {
+      "type": "link",
+      "url": "https://viktor.com/docs/plans-and-credits",
+      "title": "Viktor Plans and Credits — workspace-dependent starter grant",
+      "text": "A new workspace gets one-time free starter credits, so you can try Viktor before you pay. The amount depends on how the workspace signed up. Your balance is on the Billing page. ... The plan picker shows the plans available to your workspace; for some workspaces the smallest plan offered is $100 per month."
     },
     {
       "type": "x",

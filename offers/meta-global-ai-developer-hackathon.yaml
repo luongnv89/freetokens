@@ -1,15 +1,14 @@
-# Verified 2026-10-13 against https://dev.meta.ai/events/global-hackathon
-# ("Every participant gets $150 of Meta Model API credits. $1M cash prize pool.")
-# Curator override 2026-10-13: published before claimable — the page says
-# "Virtual, worldwide. Applications opening soon." No official dates yet;
-# re-check when applications open and set expiry_date to the deadline.
+# Rechecked 2026-10-14 against Meta's event page and its linked organizer waiver.
+# Selected participants receive $150 in Model API credits for ten days of development.
+# Applications opened Oct 13; deadline Oct 25, 11:59 PM ET on Meta's page,
+# or earlier when 20,000 spots fill. Linked waiver labels the same time EST.
 title: Meta Global AI Developer Hackathon API Credits
 provider: Meta
 category: api_provider
-amount: $150 in Meta Model API credits per hackathon participant (applications not yet open)
-expiry_date: null
+amount: $150 in Meta Model API credits per selected hackathon participant for ten days of development; applications open through Oct 25, 2026 at 11:59 PM ET, or earlier if 20,000 spots fill
+expiry_date: 2026-10-25
 source_url: https://dev.meta.ai/events/global-hackathon
-verified_date: 2026-10-13
+verified_date: 2026-10-14
 verification: social_proof
 review_status: to-be-verified
 signup: required

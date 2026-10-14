@@ -4,8 +4,10 @@
 # partners" / "You can apply ... regardless of your company's current funding
 # stage. There are no application fees, deadlines, or cohorts.")
 # Social: https://x.com/kseniam0s/status/2099194454758523021 (Sep 13, 2026)
-# Eligibility per social post (developer on team, working website, incorporated,
-# under 10 years old) not restated verbatim on the page; application is reviewed.
+# Official FAQ criteria: employ at least one developer, working website,
+# officially incorporated, less than 10 years old; application is reviewed.
+# Excludes consulting/outsourced development, cryptocurrency-associated companies,
+# cloud providers, resellers/distributors, and public companies.
 title: NVIDIA Inception Startup Program
 provider: NVIDIA
 category: startup_program

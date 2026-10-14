@@ -1,16 +1,30 @@
 {
-  "summary": "Daytona's Startup Grid offers startups up to $100,000 in Daytona credits. The official page says startups receive $10,000 straight away on their account and can reach up to $100,000. Applicants submit the startup form for review.",
+  "summary": "Daytona's Startup Grid landing page advertises up to $100,000 in credits, but current pricing and the linked program terms state up to $50,000. The linked terms, last updated 5 June 2025, specify $10,000 upon acceptance and discretionary additional tranches up to $50,000 aggregate. The applicable cap and term version for new admissions remain unresolved; confirm with startupgrid@daytona.io rather than assuming either ceiling is guaranteed. Those linked terms describe privately held companies incorporated within five years, less than $15 million raised and fewer than 50 full-time equivalents at application. They require credit redemption within 12 months of issuance, internal business use only, and prohibit resale, sublicensing or third-party access using credits. Admission is discretionary, and no response time is guaranteed. The 12-month credit validity is not a campaign end date.",
   "claim_steps": [
-    "Open the Daytona Startup Grid page.",
-    "Complete and submit the startup application form.",
-    "Wait for Daytona to review the application and respond."
+    "Open https://www.daytona.io/startups and read the linked Startup Grid terms, last updated 5 June 2025, before submitting an application.",
+    "Check the linked terms' eligibility: privately held company, incorporated no more than five years before application, less than $15 million raised, and fewer than 50 full-time equivalents.",
+    "Ask startupgrid@daytona.io which cap and term version apply to your application: the landing page advertises up to $100K, while pricing and linked terms state up to $50K aggregate. Additional tranches are discretionary, not guaranteed.",
+    "Complete the startup application form if eligible. Acceptance is discretionary; the linked terms describe rolling review and an endeavor to respond within ten business days, with no guaranteed response time.",
+    "If accepted, confirm the $10K initial credit and any additional tranches in writing and in your account. Under the linked terms, redeem credits within 12 months of issuance for internal business use only; do not resell, sublicense or provide third-party access using credits."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.daytona.io/startups",
-      "title": "Daytona Startup Grid",
-      "text": "Get up to $100k in Daytona credits for your startup. Daytona is always committed to supercharging startups in their journey by giving them $10K straight away on their account and easily up to $100K."
+      "title": "Daytona Startup Grid — marketing cap conflicts with pricing and linked terms",
+      "text": "Get up to $100k in Daytona credits for your startup."
+    },
+    {
+      "type": "link",
+      "url": "https://daytonaio.notion.site/Daytona-Startup-Grid-Terms-and-Conditions-20929a8a0d0180a3bfbbea74398babf0",
+      "title": "Linked Startup Grid terms — last updated 5 June 2025; cap applicability unresolved",
+      "text": "Upon acceptance, each Participant receives USD 10,000 in Credits. Additional tranches up to an aggregate USD 50,000 may be granted at Daytona’s sole discretion based on milestones that Daytona communicates in writing."
+    },
+    {
+      "type": "link",
+      "url": "https://daytonaio.notion.site/Daytona-Startup-Grid-Terms-and-Conditions-20929a8a0d0180a3bfbbea74398babf0",
+      "title": "Linked 2025 terms — credit validity and permitted use",
+      "text": "Credits are applied to the Participant’s Daytona account upon acceptance and must be redeemed within twelve (12) months of issuance. Credits may be used solely for the Participant’s internal business purposes in accordance with Daytona’s Terms of Service, Acceptable Use Policy, and any applicable regional regulations."
     }
   ]
 }

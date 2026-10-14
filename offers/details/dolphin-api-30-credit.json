@@ -1,18 +1,18 @@
 {
-  "summary": "Dolphin's official API page offers $30 in Dolphin API credit with coupon code API30. Redemption happens in app.dphn.ai: connect a wallet, verify it by signing a message (free, no transaction), authorize with the Telegram bot, then enter API30 under Redeem Code. The API is OpenAI-compatible (base URL https://lighthouse.dphn.ai/run/text-v/v1) and currently serves DeepSeek V4.1 Flash at $0.01/M input and $0.07/M output tokens.",
+  "summary": "Dolphin's current public API page offers $10 in Dolphin API credit with coupon code API10. Redemption happens in app.dphn.ai: connect a wallet, verify it by signing a message (free, no transaction), authorize with the Telegram bot, then enter API10 under Redeem Code. The API is OpenAI-compatible (base URL https://lighthouse.dphn.ai/run/text-v/v1) and currently serves DeepSeek V4.1 Flash at $0.01/M input and $0.07/M output tokens. Copy checked 2026-10-14: no account redemption was tested, no enrollment deadline is published, and the historical API30 coupon's independent validity remains unknown.",
   "claim_steps": [
     "Open app.dphn.ai and connect your wallet",
     "Click Verify Wallet and sign the message (free, no transaction)",
     "Click Open Telegram and press Start in the bot",
-    "Enter API30 in Redeem Code and click Redeem",
+    "Enter API10 in Redeem Code and click Redeem",
     "In API Keys, click Create Key and send your first request"
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://dphn.ai/API/",
-      "title": "Dolphin API - $30 Credit | Dolphin AI",
-      "text": "Get $30 in API credit. Use code API30. ... Go to app.dphn.ai and connect your wallet. Verify your wallet, then authorize with Telegram. ... Enter API30 in Redeem Code to add $30 to your balance. ... The API is live today. Use your credit on the Dolphin API today."
+      "title": "Dolphin API - $10 Credit | Dolphin AI",
+      "text": "Get $10 in API credit. Use code API10. ... Enter API10 in Redeem Code to add $10 to your balance."
     },
     {
       "type": "link",

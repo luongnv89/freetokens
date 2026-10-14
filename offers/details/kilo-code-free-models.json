@@ -1,7 +1,8 @@
 {
-  "summary": "Kilo's AI Gateway allows unauthenticated access to models tagged :free, with anonymous requests limited to 200 requests per hour per IP.",
+  "summary": "Kilo's AI Gateway allows unauthenticated access to models tagged :free, limited to 200 requests per hour per IP. Availability rotates; check the live catalog for current free IDs. NVIDIA free endpoints are trial-only: do not submit personal or confidential data, and usage is logged for security and to improve NVIDIA products and services. Zero pricing is not a blanket production-use or privacy waiver.",
   "claim_steps": [
-    "Choose a Kilo Gateway model tagged :free.",
+    "Check https://api.kilo.ai/api/gateway/models for a currently available :free model and its pricing, capabilities and provider terms; availability and model IDs can change.",
+    "For NVIDIA free endpoints, use them only for trials and never submit personal or confidential data. Usage is logged for security and to improve NVIDIA products and services; zero pricing does not waive provider usage or data restrictions.",
     "Call the gateway without an Authorization header, or use a Kilo API key if preferred.",
     "Stay within the 200 requests per hour per IP anonymous limit."
   ],
@@ -11,6 +12,12 @@
       "url": "https://kilo.ai/docs/gateway/authentication",
       "title": "Authentication",
       "text": "The gateway allows unauthenticated access for free models only. Anonymous requests are identified by IP address and are subject to rate limiting (200 requests per hour per IP)."
+    },
+    {
+      "type": "link",
+      "url": "https://kilo.ai/docs/gateway/models-and-providers",
+      "title": "Models & Providers",
+      "text": "Availability changes; check the live model catalog for current free options and model IDs. For NVIDIA free endpoints (Super/Ultra/etc): Trial use only - do not submit personal or confidential data. Your use is logged for security purposes and to improve NVIDIA products and services."
     }
   ]
 }

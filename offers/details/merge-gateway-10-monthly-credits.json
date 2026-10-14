@@ -1,9 +1,10 @@
 {
-  "summary": "Merge Gateway routes every major LLM through one API with built-in routing, spend caps, and security. The Pro plan grants $10 in complimentary LLM credits every month (issued on the 1st of each month), with unused credits expiring at month end. A credit card is required.",
+  "summary": "Merge Gateway routes supported LLMs through one API with routing, spend caps and security. Pro is pay-as-you-go at LLM cost plus a 5% fee and requires a credit card. An active Pro subscription receives $10 in complimentary credits on the 1st of each month; unused credits expire at month end with no rollover or cash value. Review spending controls before use: the $10 allowance is not a promise that the card-funded account automatically stops billing at $10.",
   "claim_steps": [
     "Sign up at https://gateway.merge.dev/signup",
-    "Choose the Pro plan (requires a credit card).",
-    "Receive $10 in complimentary credits each month; use them against any supported model via the gateway.merge.dev/v1 endpoint."
+    "Choose the Pro plan, which requires a credit card and charges LLM cost plus a 5% fee on a pay-as-you-go basis.",
+    "Maintain an active Pro subscription to receive $10 in complimentary credits on the 1st of each month; unused credits expire at month end, do not roll over and have no cash value.",
+    "Review and configure spending controls before making requests via gateway.merge.dev/v1. Do not assume the account automatically stops or prevents paid usage once the $10 allowance is consumed."
   ],
   "social_proof": [
     {
@@ -17,7 +18,7 @@
       "type": "link",
       "url": "https://www.merge.dev/pricing/gateway",
       "title": "Merge Gateway Pricing",
-      "text": "Pro members receive $10 in complimentary Credits monthly, issued on the 1st of each month. Unused Complimentary Credits expire at the end of each month and do not roll over; no cash value; requires active Pro subscription."
+      "text": "Pay LLM cost plus a 5% fee. Get $10 in free credits every month. Credit card required. Pro members receive $10 in complimentary Credits monthly, issued on the 1st of each month. Unused Complimentary Credits expire at the end of each month and do not roll over; no cash value; requires active Pro subscription."
     }
   ]
 }

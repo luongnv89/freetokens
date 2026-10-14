@@ -1,9 +1,9 @@
 {
-  "summary": "AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, and either new to Activate or requesting more credits than previously received.",
+  "summary": "AWS Activate Credits: Activate Founders (self-funded/bootstrapped) starts at $1,000 with select participants qualifying up to $5,000; Activate Portfolio (pre-Series B, via an Activate Provider Org ID from an accelerator/VC) offers up to $200,000. Credits work across AWS services including Amazon Bedrock (incl. third-party foundation models); additional AI-startup credits are invite-only. Eligibility: pre-Series B, founded within the last 10 years, AWS account on Paid Tier plan, a working company website, and either new to Activate or requesting more credits than previously received. Award validity varies; monitor the balance and expiration in Billing → Credits. Ongoing AWS services are charged at standard rates after credits run out or expire.",
   "claim_steps": [
     "Create/confirm an AWS account on the Paid Tier plan.",
     "Founders (self-funded): apply directly at aws.amazon.com/startups/credits. Portfolio: apply with your Activate Provider's Org ID.",
-    "After approval, apply credits to eligible AWS usage including Amazon Bedrock."
+    "After approval, apply credits to eligible AWS usage including Amazon Bedrock. Monitor the award-specific expiration and balance in Billing → Credits; ongoing services are billed at standard rates after credits run out or expire."
   ],
   "social_proof": [
     {
@@ -17,7 +17,13 @@
       "url": "https://x.com/kseniam0s/status/2100646822574497908",
       "author": "Ksenia Moskalenko",
       "handle": "@kseniam0s",
-      "text": "@awscloud will give your startup up to $200K in cloud and AI credits, and the entry tier requires nothing but a website. @AWSstartups has given $7B since 2013. Founders (self-funded): start with $1,000, up to $5,000. Portfolio (VC-backed): up to $200K. Credits cover Amazon Bedrock (Claude, Llama, Mistral). No equity required."
+      "text": "Eligibility: founded within the last 10 years, pre-Series B, a working company website, on AWS's Paid Tier plan.\n\nNo equity required."
+    },
+    {
+      "type": "link",
+      "url": "https://aws.amazon.com/aws-startups/learn/applying-for-aws-activate-credits-a-step-by-step-guide/",
+      "title": "AWS Activate — award expiration and continued billing",
+      "text": "You'll be charged the standard rates for any ongoing AWS services when your credits run out or if the expiration date passes."
     }
   ]
 }

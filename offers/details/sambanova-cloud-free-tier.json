@@ -1,17 +1,18 @@
 {
-  "summary": "SambaNova's official rate limits policy still defines a Free Tier applied automatically to accounts with no linked payment method: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model for production models (DeepSeek-V3.1, Meta-Llama-3.3-70B-Instruct, gpt-oss-120b) and preview models (DeepSeek-V3.2, gemma-4-31B-it). However, as of 2026-09-18 the cloud plans page describes the Free plan as 'Add a payment method and purchase credits to run your first requests' — it is unconfirmed whether requests still run without a linked card. Curator decision needed before merge.",
+  "summary": "SambaNova's official rate limits policy still defines a Free Tier applied automatically to accounts with no linked payment method: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model for production models (DeepSeek-V3.1, Meta-Llama-3.3-70B-Instruct, gpt-oss-120b) and preview models (DeepSeek-V3.2, gemma-4-31B-it). Preview models are evaluation/developer-experimentation only, not for production, and may be removed at short notice. However, as of 2026-09-18 the cloud plans page describes the Free plan as 'Add a payment method and purchase credits to run your first requests' — it is unconfirmed whether requests still run without a linked card. Curator decision needed before merge.",
   "claim_steps": [
     "Go to https://cloud.sambanova.ai/ and create an account via Login/Signup.",
     "Per the rate limits policy, the Free Tier is applied when there is no payment method linked — but the plans page now asks you to add a payment method and purchase credits to run first requests (conflict flagged 2026-09-18).",
     "From the dashboard, open API Keys and create an API key.",
-    "Call the OpenAI-compatible API with your bearer key (https://api.sambanova.ai/v1/chat/completions). Documented Free Tier limits: 20 requests/minute, 20 requests/day, 200,000 tokens/day per model."
+    "Call https://api.sambanova.ai/v1/chat/completions with your bearer key. Documented Free limits: 20 RPM, 20 RPD and 200,000 tokens/day per model. Cardless inference remains unconfirmed; an authenticated no-payment test or provider clarification is needed to resolve the conflict.",
+    "Use preview models DeepSeek-V3.2 and gemma-4-31B-it only for evaluation and developer experimentation, not production; they have limited capacity and may be removed at short notice."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
       "title": "Rate Limits Policy - SambaNova Documentation",
-      "text": "SambaNova provides a few different rate limit tier offerings: Free Tier: Applied when there is no payment method linked with your account. Developer Tier: Applied when a payment method is linked with your account."
+      "text": "Free Tier: Applied when there is no payment method linked with your account. Preview models are intended for evaluation purposes and developer experimentation only, and should not be used in production environments. These models have limited capacity and may be removed at short notice."
     },
     {
       "type": "link",
