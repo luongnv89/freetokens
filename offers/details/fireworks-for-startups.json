@@ -1,9 +1,9 @@
 {
-  "summary": "Fireworks for Startups gives eligible startups build credits (amount unpublished) usable for serverless text/vision inference, image generation, STT, embeddings, fine-tuning and on-demand GPU deployments — credits expire 1 year after grant — plus higher rate-limit options, applied-AI expert access and community. Eligibility: registered privately-held for-profit company founded within the last 5 years, venture backed with >$500k funding, pre-Series D.",
+  "summary": "Fireworks for Startups gives eligible startups build credits (amount unpublished) usable for serverless text/vision inference, image generation, STT, embeddings, fine-tuning and on-demand GPU deployments — credits expire 1 year after grant — plus higher rate-limit options, applied-AI expert access and community. Eligibility: registered privately-held for-profit company founded within the last 5 years, venture backed with >$500k funding, pre-Series D. Credits cover on-demand usage only, not reserved GPU/compute commitments or SLAs, professional services, or premium support.",
   "claim_steps": [
     "Fill out the Fireworks for Startups application form (fireworks.ai/startup-program).",
     "Eligibility: registered company <5 years old, VC-backed >$500k, not Series D or later.",
-    "On acceptance, credits apply automatically to usage charges; PAYG billing resumes after exhaustion if a payment method is added."
+    "On acceptance, credits apply to on-demand usage only, not reserved GPU/compute commitments, SLAs, professional services or premium support. Use within 1 year of grant; PAYG billing resumes after exhaustion if a payment method is added."
   ],
   "social_proof": [
     {
@@ -11,6 +11,12 @@
       "url": "https://fireworks.ai/startups",
       "title": "Fireworks for Startups",
       "text": "Eligible startups can get access to credits (expire after 1-year) to help you prototype and scale without worrying about upfront costs. Unlock credits and options for higher rate limits. Eligibility: registered company with a functional website, privately held for-profit, founded within the last 5 years, venture backed with >$500k in funding, not Series D or later."
+    },
+    {
+      "type": "link",
+      "url": "https://fireworks.ai/startups",
+      "title": "Fireworks build-credit exclusions",
+      "text": "Reserved compute/GPU commitments: Credits only apply to on-demand usage, not long-term reserved GPU capacity or SLAs. Credits do not apply to Fireworks professional services or premium support."
     }
   ]
 }

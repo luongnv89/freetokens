@@ -1,9 +1,11 @@
 {
-  "summary": "Electron Hub's free tier grants $0.25 in weekly API credits, refilled every Sunday at 21:00 UTC (unused weekly credit does not carry over), plus 10 Neutrinos per day for :free-suffixed models — expandable to 200 Neutrinos/day by watching up to 3 ads.",
+  "summary": "Electron Hub's $0 Free tier provides $0.25 in weekly API credits refilled every Sunday at 21:00 UTC, plus 10 Neutrinos per day for :free-suffixed models, expandable to 200 by watching up to three ads. Ordinary weekly balances reset rather than automatically accumulating. The documented Flex Wallet permits saving up to 20% of weekly credits per week, capped at 50% of the weekly allowance; saved Flex credits roll over until used and are used after the regular balance runs out if enabled. Current pricing lists a 5-requests-per-minute Free limit. Failed, cancelled and successful :free requests consume Neutrinos; regular credits are charged only for successful or cancelled requests, not failed ones. Signup is through Google or Discord; the checked public sources do not explicitly confirm a card requirement or waiver, and no account grant was tested.",
   "claim_steps": [
-    "Sign up at app.electronhub.ai (no card required for the free tier).",
+    "Sign in or create an account at app.electronhub.ai through Google or Discord and choose the advertised $0 Free tier. Check account-specific billing requirements; no account grant or card waiver was tested.",
     "Weekly credits land automatically every Sunday 21:00 UTC; Neutrinos reset daily at 21:00 UTC.",
-    "Call models ending in :free to spend Neutrinos instead of credits; watch ads in the dashboard to raise the daily Neutrino cap to 200."
+    "Call models ending in :free to spend Neutrinos instead of credits; watch ads in the dashboard to raise the daily Neutrino cap to 200. Failed and cancelled :free requests also consume Neutrinos.",
+    "Keep Free-tier traffic within the current 5-requests-per-minute limit. Regular credits are charged only for successful or cancelled requests; failed regular-credit requests are not charged.",
+    "Inspect Flex Wallet settings to save up to 20% of weekly credits per week, capped at 50% of the weekly allowance. Saved Flex credits roll over until used; enable Flex to use them after regular balance runs out. Ordinary weekly balance resets."
   ],
   "social_proof": [
     {
@@ -11,6 +13,18 @@
       "url": "https://docs.electronhub.ai/billing/credits",
       "title": "Understanding Credits — Electron Hub Docs",
       "text": "Weekly Credits are automatically added to your account every Sunday at 21:00 UTC; Free tier receives $0.25. All users get 10 Neutrinos per day (resets 21:00 UTC); earn more by watching ads, up to 200 daily."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.electronhub.ai/billing/credits",
+      "title": "Electron Hub Flex Wallet and request charging rules",
+      "text": "You can save up to 20% of your weekly credits per week to your flex wallet. The total cap is 50% of your weekly credits. Flex balance rolls over until you use it. Regular Credits: Only charged for successful and cancelled requests. Failed requests are NOT charged. Neutrinos: Charged for all requests (failed, cancelled, and successful)."
+    },
+    {
+      "type": "link",
+      "url": "https://www.electronhub.ai/pricing",
+      "title": "Electron Hub Free tier pricing and rate limit",
+      "text": "Free: $0/month; $0.25/week; 5 requests/minute."
     }
   ]
 }

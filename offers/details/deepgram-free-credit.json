@@ -1,16 +1,17 @@
 {
-  "summary": "Deepgram Pay As You Go grants $200 in signup credits with no credit card and no expiration. The earlier Flux TTS free promo (through September 14, 2026) has ended: Flux TTS is now billed at $0.0450/1k characters pay-as-you-go, with a 'Buy Flux TTS, get matching credits' promo adding $1 in credits per $1 spent, up to $500.",
+  "summary": "Deepgram Pay As You Go grants $200 in signup credits with no credit card and no expiration. The earlier Flux TTS free promo (through September 14, 2026) has ended: Flux TTS is now billed at $0.0450/1k characters pay-as-you-go. A separate 'Buy Flux TTS, get matching credits' promotion adds $1 in credits per $1 spent, up to $500, for Pay As You Go and Growth plans, ending December 31, 2026. That spend-to-match deadline does not apply to the ongoing $200 signup credit.",
   "claim_steps": [
     "Click Sign Up Free at deepgram.com/pricing (no credit card required).",
     "Create a console account and an API key.",
-    "Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire)."
+    "Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire).",
+    "If considering the separate paid Flux TTS credit-match promotion, review its terms: Pay As You Go and Growth plans are eligible, matching is $1 per $1 spent up to $500, and the promotion ends December 31, 2026. This is not a deadline for the $200 signup offer."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://deepgram.com/pricing",
       "title": "Deepgram Pricing | Scalable Speech-to-Text, Text-to-Speech & Voice Agent APIs",
-      "text": "Pay As You Go: No minimums. No expiration. No credit card required. Free $200 Credit then pay-as-you-go. Buy Flux TTS, get matching credits: for every $1 you spend on Flux TTS, we'll add $1 in credits — up to $500."
+      "text": "Pay As You Go: No minimums. No expiration. No credit card required. Free $200 Credit then pay-as-you-go. Buy Flux TTS, get matching credits. For every $1 you spend on Flux TTS, we'll add $1 in credits — up to $500. Available on Pay As You Go and Growth plans. Offer ends December 31, 2026."
     }
   ]
 }

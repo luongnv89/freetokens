@@ -8,7 +8,7 @@
   "social_proof": [
     {
       "type": "link",
-      "url": "https://docs.pinecone.io/guides/organizations/manage-billing/standard-trial",
+      "url": "https://docs.pinecone.io/admin/billing/standard-trial",
       "title": "Pinecone Standard plan trial",
       "text": "Evaluate the Pinecone Standard plan with $300 in credits over 21 days, including bulk import, backup and restore, RBAC, and higher scale limits."
     }

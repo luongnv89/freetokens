@@ -1,22 +1,30 @@
 {
-  "summary": "Meta's 10-day virtual Global AI Developer Hackathon gives every participant $150 of Meta Model API credits, with a $1M cash prize pool. Applications are not open yet; Meta's page offers a sign-up to be notified when they open.",
+  "summary": "Applications for Meta's virtual Global AI Developer Hackathon are now open. The linked organizer waiver confirms $150 in Meta Model API credits for each selected participant for development over ten days; applying does not guarantee acceptance. Meta's application deadline is October 25, 2026 at 11:59 PM ET, or earlier if 20,000 spots fill; the waiver labels that time EST, so check the portal's exact cutoff. Applicants must be 18+ and of legal majority, and meet geographic, sanctions and affiliation restrictions. The hackathon runs October 26–November 4, with a $1M prize pool separate from the credits. The waiver permits marketing contact and broad use of submissions/materials without confidentiality; read it before applying. Official Hackathon Rules must be accepted when published before October 26. Credit delivery has not been personally tested.",
   "claim_steps": [
-    "Open the hackathon page at dev.meta.ai/events/global-hackathon.",
-    "Sign up with your name and email to get notified when applications open.",
-    "Apply once applications open; participants receive $150 of Meta Model API credits."
+    "Open https://dev.meta.ai/events/global-hackathon and follow Apply now to Meta's linked Cerebral Valley organizer portal.",
+    "Check the waiver: you must be at least 18 and of legal majority. Review excluded jurisdictions, sanctions, Meta/Cerebral Valley/government affiliations and family/household restrictions.",
+    "Read the waiver's marketing, recording and broad submission/material-use permissions; organizers do not agree to confidentiality. Apply only if you accept those terms.",
+    "Submit a truthful application by October 25, 2026 at 11:59 PM ET (Meta page; waiver says EST), or earlier if 20,000 places fill. Selection is rolling and not guaranteed.",
+    "If selected, accept the forthcoming official rules and use the stated $150 Model API credits for ten days of hackathon development; confirm account delivery and actual credit validity with the organizers."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://dev.meta.ai/events/global-hackathon",
-      "title": "Win $1M: Meta Global AI Developer Hackathon",
-      "text": "Apply for a 10-day global virtual hackathon from Meta Superintelligence Labs. Build on the newest models from Meta through Meta Model API. Every participant gets $150 of Meta Model API credits. $1M cash prize pool. Virtual, worldwide. Applications opening soon."
+      "title": "Meta hackathon applications and deadline",
+      "text": "Oct 13, 9:00 AM ET Applications open. Oct 25, 11:59 PM ET Applications Deadline, or earlier if all 20,000 spots are filled. Official Rules will be published before the Hackathon begins on October 26, 2026 and must be accepted by the selected participants."
     },
     {
       "type": "link",
-      "url": "https://developers.meta.com/blog/meta-connect-recap/",
-      "title": "Meta Connect 2026: The end-to-end recap",
-      "text": "Build on Meta Model API, Muse Code or our open-weights models, with free Model API credits. There are two tracks, one for indie developers and one for startup teams, and a $1M cash prize pool. Sign up to get notified when applications open at dev.meta.ai."
+      "url": "https://cerebralvalley.ai/e/meta-ai-developer-hackathon/waiver",
+      "title": "Meta-linked organizer waiver: credit amount and selection",
+      "text": "Participants selected to participate in the Hackathon will be provided $150 in Meta Model API credits for development over a ten (10) day period. Submission of an application does not guarantee attendance at the Event."
+    },
+    {
+      "type": "link",
+      "url": "https://cerebralvalley.ai/e/meta-ai-developer-hackathon/waiver",
+      "title": "Eligibility and waiver terms",
+      "text": "Participants must be at least 18 years old to join the Event and the age of majority in the applicant's jurisdiction of residence. Due to the nature of the Event, none of the Organizers can agree to obligations of confidentiality, non-use or non-disclosure."
     }
   ]
 }

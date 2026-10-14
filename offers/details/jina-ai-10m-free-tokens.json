@@ -16,7 +16,7 @@
       "type": "link",
       "url": "https://api.jina.ai/openapi.json",
       "title": "Jina Search Foundation API (OpenAPI spec)",
-      "text": "OpenAPI version 2026.10.09.2011: /v1/embeddings and /v1/rerank free limits are 500 RPM / 1M TPM; /v1/chat/completions is 100 RPM / 500K TPM. The Reader page separately states embeddings/rerank 100 RPM / 100K TPM; this official-source conflict is unresolved."
+      "text": "OpenAPI version 2026.10.13.1624 lists free limits of 500 RPM / 1M TPM for /v1/embeddings and /v1/rerank, and 100 RPM / 500K TPM for /v1/chat/completions. The current Reader page separately states embeddings/rerank 100 RPM / 100K TPM; this official-source conflict remains unresolved."
     }
   ]
 }

@@ -1,10 +1,10 @@
 {
-  "summary": "Cline's September 24, 2026 announcement says Gemini 3.8 Flash is free in Cline, citing 1M context, ~291 tok/s, and Artificial Analysis Intelligence Index score 41. Official free-models docs say free promotions are available to any user with a Cline account, provide a limited usage quota, rotate over time, and work in the Cline IDE extension and CLI—not the Cline API. No fixed end date is published, so this listing uses a null expiry date to mean no announced end date, not permanent availability.",
+  "summary": "Cline's September 24, 2026 announcement says Gemini 3.8 Flash is free in Cline, citing 1M context, ~291 tok/s, and Artificial Analysis Intelligence Index score 41. As of the October 14, 2026 source check, Gemini 3.8 Flash is absent from the live recommended-models feed's free list. That absence alone does not establish removal or expiry: confirm a FREE tag for the exact model in the signed-in selector before relying on the historical announcement. Official free-models docs say free promotions are available to any user with a Cline account, provide a limited usage quota, rotate over time, and work in the Cline IDE extension and CLI—not the Cline API. Free-model usage may be used to help improve model performance and quality. No fixed end date is published, so this listing uses a null expiry date to mean no announced end date, not permanent availability.",
   "claim_steps": [
     "Install the Cline IDE extension from the marketplace, or install the CLI with: npm install -g cline.",
     "Sign in with a Cline account (IDE settings → API Provider Cline → Sign In, or run: cline auth).",
-    "In the model selector, look for Gemini 3.8 Flash tagged FREE under the Cline (usage-billing) provider; during promotional periods it may also appear under ClinePass.",
-    "Use it in the Cline IDE extension or CLI within the limited free quota; free models are not available through the Cline API."
+    "Gemini 3.8 Flash is absent from the October 14, 2026 free recommendations. Confirm the exact model is tagged FREE in the signed-in Cline (usage-billing) selector before using it; during promotions it may also appear under ClinePass. Feed absence alone does not prove removal.",
+    "If confirmed FREE, use it in the Cline IDE extension or CLI within the limited free quota; free models are not available through the Cline API. Free-model usage may be used to help improve model performance and quality."
   ],
   "social_proof": [
     {
@@ -18,7 +18,13 @@
       "type": "link",
       "url": "https://docs.cline.bot/getting-started/free-models",
       "title": "Cline Free Models - Cline",
-      "text": "Cline periodically offers free model promotions that let you try select models at no cost, up to a limited usage quota. Free model promotions are offered on a rotating, limited-time basis. Free models are available to any user with a Cline account. Free model usage is not supported through the Cline API. Free models are only available in the Cline IDE Extension and CLI."
+      "text": "Cline periodically offers free model promotions that let you try select models at no cost, up to a limited usage quota. Free model promotions are offered on a rotating, limited-time basis. Free models are available to any user with a Cline account. Free model usage is not supported through the Cline API. Free models are only available in the Cline IDE Extension and CLI. Free model usage may be used to help improve model performance and quality."
+    },
+    {
+      "type": "link",
+      "url": "https://api.cline.bot/api/v1/ai/cline/recommended-models",
+      "title": "Cline live free recommendations — checked October 14, 2026",
+      "text": "The October 14, 2026 response's free list contains Step 5 Preview, MiMo V2.6 Flash, Muse Spark 1.3 Contributor, and Solar Mini 4, but not Gemini 3.8 Flash. This is a recommendation-feed observation, not proof of removal; signed-in selector confirmation is still required."
     },
     {
       "type": "link",

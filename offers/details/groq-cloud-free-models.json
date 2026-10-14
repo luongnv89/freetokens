@@ -1,16 +1,23 @@
 {
-  "summary": "Groq Cloud offers a free tier (no credit card required) with access to gpt-oss-120b and Qwen 3.8 27B models via API, rate-limited. Ongoing developer program, not a time-limited promo.",
+  "summary": "Groq Cloud offers free API access to openai/gpt-oss-120b and qwen/qwen3.8-27b without a credit card. Published baseline limits for each model are 30 requests/minute, 1,000 requests/day, 8,000 tokens/minute and 200,000 tokens/day, applied at the organization level; actual account limits can differ. qwen/qwen3.8-27b is a preview model for evaluation only, not production, and may be discontinued at short notice. No campaign end date is published.",
   "claim_steps": [
     "Sign up for Groq Cloud at console.groq.com.",
-    "Create an API key under the free tier.",
-    "Call gpt-oss-120b or Qwen 3.8 27B via the Groq API — rate-limited, no card required."
+    "Create an API key under the free tier; no credit card is required.",
+    "Call openai/gpt-oss-120b or qwen/qwen3.8-27b via the Groq API. Use qwen/qwen3.8-27b only for evaluation, not production; preview models may be discontinued at short notice.",
+    "Check the Limits page in your account settings. Published baseline limits for each listed model are 30 RPM, 1,000 RPD, 8,000 TPM and 200,000 TPD at organization level, not per user; your exact limits may differ."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://console.groq.com/docs/rate-limits",
       "title": "Rate Limits - GroqDocs",
-      "text": "The Free Plan Limits table lists openai/gpt-oss-120b and qwen/qwen3.8-27b; Qwen 3.6 is not listed."
+      "text": "openai/gpt-oss-120b 30 1K 8K 200K / qwen/qwen3.8-27b 30 1K 8K 200K. Rate limits apply at the organization level, not individual users. You can view the current, exact rate limits for your organization on the limits page in your account settings."
+    },
+    {
+      "type": "link",
+      "url": "https://console.groq.com/docs/models",
+      "title": "Supported Models - GroqDocs",
+      "text": "Preview models are intended for evaluation purposes only and should not be used in production environments as they may be discontinued at short notice. Qwen/Qwen3.8-27B: qwen/qwen3.8-27b."
     }
   ]
 }

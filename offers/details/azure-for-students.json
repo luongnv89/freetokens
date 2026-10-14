@@ -1,22 +1,31 @@
 {
-  "summary": "Microsoft Azure for Students gives verified students $100 in Azure credits valid for 12 months plus access to 25+ always-free services (compute, storage, database, networking) with no credit card required at sign-up. Renewable each active student year.",
+  "summary": "Azure for Students gives eligible students $100 in credits usable within 12 months, free monthly amounts of 20+ popular services for 12 months (new Azure customers only), and 65+ always-free services, with no credit card required. Eligibility requires age 18+, full-time enrollment at an accredited degree-granting two- or four-year institution and academic email verification; one subscription per eligible person, excluding MOOCs and for-profit professional training. Use is for education, teaching, noncommercial research and related software development. Credits exclude Azure Marketplace and other separately licensed products; the subscription is disabled when credits run out unless upgraded. Renewable annually while eligible.",
   "claim_steps": [
-    "Go to https://azure.microsoft.com/en-us/free/students and click Activate.",
-    "Sign in with your school email and complete student verification via the Azure Education Hub.",
-    "Once approved, start building with $100 credit and free-tier services for 12 months."
+    "Confirm you are 18 or older and a full-time student at an accredited, degree-granting two- or four-year educational institution. MOOCs and professional training from for-profit organizations do not qualify; only one Azure for Students subscription per eligible person is allowed.",
+    "Go to https://azure.microsoft.com/en-us/free/students, start the signup flow and verify academic status using your institution's email address. No credit card is required.",
+    "Once approved, use the $100 credit within 12 months. Free monthly amounts cover 20+ popular services for 12 months for new Azure customers only, plus 65+ always-free services, each within its specified limits.",
+    "Use the offer for education, teaching, noncommercial research or designing, developing, testing and demonstrating software for those purposes.",
+    "Credits exclude Azure Marketplace, third-party branded products, support plans, Azure DevOps, Visual Studio subscriptions, Visual Studio App Center, Express Route and separately licensed products such as Microsoft Entra ID Premium.",
+    "Monitor the remaining credit: your subscription and products are disabled when it runs out unless you upgrade to paid Pay As You Go. Renew annually while you remain eligible."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://azure.microsoft.com/en-us/free/students",
       "title": "Azure for Students",
-      "text": "Build in the cloud with Azure for Students for free. Get $100 credit for 12 months plus select free services, no credit card required."
+      "text": "No credit card required. Free monthly amounts of 20+ popular services for 12 months (new Azure customers only). Free monthly amounts of 65+ always-free services. $100 credit to use on Azure services within 12 months. Azure for Students provides access to all Azure products expressly for the support of education or teaching, non-commercial research, or efforts to design, develop, test, and demonstrate software applications for these purposes."
     },
     {
       "type": "link",
       "url": "https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0170p",
       "title": "Azure for Students — Offer Details",
-      "text": "Azure for Students gets you started with $100 in Azure credits to be used within the first 12 months, plus select free services without requiring a credit card at sign-up."
+      "text": "You must affirm that you are age 18 or older and attend an accredited, degree-granting two-year or four-year educational institution where you're a full-time student. You must verify your academic status through your organization's email address. This offer is not available for use in a massive open online course (MOOC) or in other professional trainings from for-profit organizations. This offer is limited to one Azure for Students subscription per eligible customer."
+    },
+    {
+      "type": "link",
+      "url": "https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0170p",
+      "title": "Azure for Students — Spending limits and exclusions",
+      "text": "If you exhaust your available credits, your Azure subscription will be disabled. Azure credits may not be used to purchase Azure support plans, Azure DevOps, Visual Studio subscriptions, Visual Studio App Center services, Express Route, third-party branded products, products sold through the Azure Marketplace, or products otherwise licensed separately from Azure (for example, Microsoft Entra ID Premium)."
     }
   ]
 }

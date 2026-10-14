@@ -1,10 +1,12 @@
-# Verified 2026-09-15 against https://www.daytona.io/startups
-# ("Get up to $100k in Daytona credits for your startup")
-# ("giving them $10K straight away on their account and easily up to $100K")
-title: Daytona Startup Program — up to $100K
+# Current landing page advertises up to $100K: https://www.daytona.io/startups
+# Current pricing says up to $50K: https://www.daytona.io/pricing
+# Linked Startup Grid terms, last updated 5 June 2025, state $10K upon acceptance
+# and discretionary additional tranches up to $50K aggregate; applicability unresolved.
+# Terms: https://daytonaio.notion.site/Daytona-Startup-Grid-Terms-and-Conditions-20929a8a0d0180a3bfbbea74398babf0
+title: Daytona Startup Program — credit cap unresolved
 provider: Daytona
 category: startup_program
-amount: Up to $100K in Daytona credits for startups; program page says $10K straight away on the account and easily up to $100K
+amount: "$10K upon acceptance; landing page advertises up to $100K, while pricing and linked 2025 terms state up to $50K aggregate; additional credits discretionary and applicable cap unresolved"
 expiry_date: null
 source_url: https://www.daytona.io/startups
 verified_date: 2026-09-30

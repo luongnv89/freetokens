@@ -5,7 +5,7 @@
 title: LLM7.io Free API Tier
 provider: LLM7.io
 category: api_provider
-amount: Free dashboard token with 60 requests/minute, 250 requests/hour, and 100,000 tokens/day
+amount: Free dashboard token for turbo text models with 60 requests/minute, 250 requests/hour, and 100,000 tokens/day
 expiry_date: null
 source_url: https://docs.llm7.io/limits
 verified_date: 2026-09-30

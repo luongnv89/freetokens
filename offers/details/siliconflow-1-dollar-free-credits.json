@@ -1,9 +1,9 @@
 {
-  "summary": "SiliconFlow grants $1 in free credits at signup for its serverless inference platform (LLM, image, video, audio models), with postpaid pay-as-you-go billing and no minimum commitments. Complements the separate siliconflow-free-models offer, which tracks SiliconFlow's permanently free model list.",
+  "summary": "SiliconFlow's international pricing page offers $1 in free credits to get started on its serverless inference platform (LLM, image, video, audio models), with postpaid pay-as-you-go billing and no minimum commitment. The separate siliconflow-free-models listing documents selected models marked free in the mainland-China catalog at siliconflow.cn/pricing; do not assume those regional free entries are available on the international account or permanently free.",
   "claim_steps": [
     "Sign up at https://cloud.siliconflow.com .",
     "$1 in free credits is granted to get started; no minimum commitment.",
-    "Selected models are also permanently free — see the pricing page's free entries."
+    "For the separate free-model offer, check the regional catalog and account eligibility. Selected models are marked free at https://siliconflow.cn/pricing; the international $1 signup credit does not itself establish free-model access or permanence."
   ],
   "social_proof": [
     {

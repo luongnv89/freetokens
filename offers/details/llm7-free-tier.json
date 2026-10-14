@@ -1,9 +1,10 @@
 {
-  "summary": "LLM7 documents a free dashboard token with text-generation limits of 1 request per second, 60 per minute, 250 per hour, and 100,000 tokens per 24 hours. Its current limits page no longer documents anonymous access. Token usage counts input plus output. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.",
+  "summary": "LLM7 documents a free dashboard token for current tier:turbo text-generation models with usage_based_only:false, not every catalog model or Pro/paid-only models. Limits are 1 request per second, 60 per minute, 250 per hour, and 100,000 input-plus-output tokens per 24 hours. Its current limits page no longer documents anonymous access. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.",
   "claim_steps": [
     "Obtain a free token from the LLM7 dashboard at dash.llm7.io.",
-    "Send an OpenAI-compatible request with that token and a currently available model.",
-    "Check live model availability and dashboard allowance. Stay within the documented free text limits (60 requests/minute, 250/hour, 100,000 input-plus-output tokens/24 hours); quotas may be reduced without notice."
+    "Check https://api.llm7.io/v1/models and select a current text-generation model with tier:turbo and usage_based_only:false. Send an OpenAI-compatible request using that model ID and your free dashboard token; Pro or usage_based_only:true models require paid accounting.",
+    "Check live availability and dashboard allowance. Stay within 1 request/second, 60/minute, 250/hour and 100,000 input-plus-output tokens/24 hours; quotas may be reduced without notice.",
+    "Turbo pricing metadata is for paid usage accounting, not proof the documented free allowance has ended. Image/video allowance and balance rules are separate."
   ],
   "social_proof": [
     {
@@ -17,6 +18,12 @@
       "url": "https://docs.llm7.io/limits",
       "title": "Limits - LLM7.io Documentation",
       "text": "Free token: 1 req/sec, 60 req/min, 250 req/hour, 100,000 tokens per 24 hours. Obtain a free token from dash.llm7.io."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.llm7.io/guides/models-api",
+      "title": "Models API - LLM7.io Documentation",
+      "text": "turbo models are fast models available with free API tokens, subject to the free-tier rate and token limits. data[].usage_based_only: true means the model is only available through paid usage accounting, such as a Pro allowance or topped-up balance. data[].pricing: Per-model pricing metadata used to calculate request cost for paid usage and paid allowance accounting."
     }
   ]
 }
