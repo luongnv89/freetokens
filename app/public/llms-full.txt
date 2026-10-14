@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-14T05:30:21Z — 137 of 218 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-14T05:33:09Z — 137 of 218 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Cat Jam Free on OpenCode Console
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Cat Jam stealth model access on OpenCode Console (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-14 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-cat-jam-free.html
+- Summary: Cat Jam is a stealth model that OpenCode made free on 2026-10-13. OpenCode's Console docs list Cat Jam Free (model id cat-jam-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/v1/chat/completions endpoint. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs.
+- Claim steps: Sign in to OpenCode Console and copy your API key. The general Console setup also asks for billing details and credits. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select Cat Jam Free (opencode/cat-jam-free). | Or call https://opencode.ai/inference/v1/chat/completions with model cat-jam-free. The free period is limited-time.
 ### Meta Global AI Developer Hackathon API Credits
 - Provider: Meta
 - Category: api_provider
@@ -17,16 +27,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/meta-global-ai-developer-hackathon.html
 - Summary: Applications for Meta's virtual Global AI Developer Hackathon are now open. The linked organizer waiver confirms $150 in Meta Model API credits for each selected participant for development over ten days; applying does not guarantee acceptance. Meta's application deadline is October 25, 2026 at 11:59 PM ET, or earlier if 20,000 spots fill; the waiver labels that time EST, so check the portal's exact cutoff. Applicants must be 18+ and of legal majority, and meet geographic, sanctions and affiliation restrictions. The hackathon runs October 26–November 4, with a $1M prize pool separate from the credits. The waiver permits marketing contact and broad use of submissions/materials without confidentiality; read it before applying. Official Hackathon Rules must be accepted when published before October 26. Credit delivery has not been personally tested.
 - Claim steps: Open https://dev.meta.ai/events/global-hackathon and follow Apply now to Meta's linked Cerebral Valley organizer portal. | Check the waiver: you must be at least 18 and of legal majority. Review excluded jurisdictions, sanctions, Meta/Cerebral Valley/government affiliations and family/household restrictions. | Read the waiver's marketing, recording and broad submission/material-use permissions; organizers do not agree to confidentiality. Apply only if you accept those terms. | Submit a truthful application by October 25, 2026 at 11:59 PM ET (Meta page; waiver says EST), or earlier if 20,000 places fill. Selection is rolling and not guaranteed. | If selected, accept the forthcoming official rules and use the stated $150 Model API credits for ten days of hackathon development; confirm account delivery and actual credit validity with the organizers.
-### Cat Jam Free on OpenCode Console
-- Provider: OpenCode
-- Category: coding
-- Amount: Free Cat Jam stealth model access on OpenCode Console (free input, output and cached reads; limited time)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://opencode.ai/v2/docs/console/models/
-- Page: https://freetokens.custats.info/offers/opencode-cat-jam-free.html
-- Summary: Cat Jam is a stealth model that OpenCode made free on 2026-10-13. OpenCode's Console docs list Cat Jam Free (model id cat-jam-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/v1/chat/completions endpoint. No end date is stated. The announcement describes it as very fast, built for agentic coding, with zero data retention; the docs do not list Cat Jam Free among the exceptions to OpenCode's zero-retention policy.
-- Claim steps: Sign in to OpenCode Console and copy your API key. The general Console setup also asks for billing details and credits. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select Cat Jam Free (opencode/cat-jam-free). | Or call https://opencode.ai/inference/v1/chat/completions with model cat-jam-free. The free period is limited-time.
 ### Big Pickle Free on OpenCode Console
 - Provider: OpenCode
 - Category: coding
