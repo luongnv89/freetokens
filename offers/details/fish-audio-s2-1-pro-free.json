@@ -2,7 +2,7 @@
   "summary": "Fish Audio offers s2.1-pro-free — the same TTS model as the paid S2.1-Pro — at $0 for development, testing, prototyping, and smaller businesses. Same quality and 83-language coverage as s2.1-pro, under fair-use limits, with no TTFA or DPA guarantees and no published end date.",
   "claim_steps": [
     "Create an account and API key at fish.audio.",
-    "Use the s2.1-pro-free model string with the standard TTS API endpoint."
+    "Call POST https://api.fish.audio/v1/tts with your Bearer API key and the exact HTTP header model: s2.1-pro-free. Do not omit or misspell the model header: missing or unrecognized values fall back to paid s2.1-pro."
   ],
   "social_proof": [
     {

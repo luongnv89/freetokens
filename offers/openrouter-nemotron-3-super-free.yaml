@@ -9,7 +9,7 @@
 title: Nemotron 3 Super Free (OpenRouter)
 provider: OpenRouter
 category: api_provider
-amount: Free nvidia/nemotron-3-super-120b-a12b:free endpoint at $0 (262K context, 120B-A12B hybrid MoE)
+amount: "Free nvidia/nemotron-3-super-120b-a12b:free endpoint at $0 (262K context, 120B-A12B hybrid MoE); trial/internal evaluation only, not production"
 expiry_date: null
 source_url: https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free
 verified_date: 2026-09-30

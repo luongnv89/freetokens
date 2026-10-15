@@ -5,10 +5,10 @@
 # It is the Contributor tier: free in exchange for permission to use your prompts
 # and completions to train future Meta models. The standard Muse Spark 1.3 remains
 # paid on other platforms (e.g. $1.25 input / $4.25 output on OpenRouter).
-title: Muse Spark 1.3 Contributor Free on OpenCode Zen
-provider: Meta (via OpenCode Zen)
+title: "Muse Spark 1.3 Contributor Free on OpenCode Console"
+provider: "Meta (via OpenCode Console)"
 category: coding
-amount: Free Muse Spark 1.3 Contributor tier on OpenCode Zen for a limited time (Meta may use your prompts and completions to train future models)
+amount: "Free Muse Spark 1.3 Contributor tier on OpenCode Console (formerly Zen) for a limited time (Meta may use your prompts and completions to train future models)"
 expiry_date: null
 source_url: https://opencode.ai/v2/docs/console/models/
 verified_date: 2026-09-28

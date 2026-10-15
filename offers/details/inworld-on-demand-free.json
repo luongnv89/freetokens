@@ -1,1 +1,22 @@
-{"claim_steps": ["Create an Inworld account.", "Choose the On-Demand plan (Start free) at platform.inworld.ai/billing.", "Use the included allowance for up to 70 minutes TTS or 400 minutes STT; LLM Router usage is billed separately at provider cost."], "social_proof": [{"text": "On-Demand is great for testing and comes with up to 70 minutes of TTS or 400 minutes of STT for free.", "title": "Pricing | Inworld AI", "type": "link", "url": "https://inworld.ai/pricing"}, {"text": "100+ LLM models via Router ... LLMs billed separately at provider cost.", "title": "Inworld pricing — Router access is separately billed", "type": "link", "url": "https://inworld.ai/pricing"}], "summary": "Inworld AI's On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT) for free, plus voice cloning and Realtime API access. It advertises access to 100+ LLM models via Router, but Router LLM usage is billed separately at provider cost, not included as free inference."}
+{
+  "claim_steps": [
+    "Create an Inworld account.",
+    "Choose the On-Demand plan (Start free) at platform.inworld.ai/billing.",
+    "Use the up-to-70-min TTS or 400-min STT allowance and check the actual Billing balance. Inference is charged per token from the shared credit balance at the selected model rate; confirm free-credit eligibility and premium-model payment requirements before calling it."
+  ],
+  "social_proof": [
+    {
+      "text": "On-Demand is great for testing and comes with up to 70 minutes of TTS or 400 minutes of STT for free.",
+      "title": "Pricing | Inworld AI",
+      "type": "link",
+      "url": "https://inworld.ai/pricing"
+    },
+    {
+      "type": "link",
+      "url": "https://inworld.ai/pricing",
+      "title": "Inworld pricing — shared credit balance",
+      "text": "Credits are a dollar-denominated balance used to pay for usage across all Inworld products. LLM Inference bills per token from the same credits as every other product."
+    }
+  ],
+  "summary": "Inworld AI's On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT) for free, with voice and Inworld Inference access. Usage is metered: current pricing and billing describe a shared credit balance across TTS, STT, Inference and Realtime rather than a blanket separately billed LLM exclusion. Confirm your actual balance and model eligibility; this does not promise unlimited inference or a fixed free LLM token allowance. Some premium LLMs require a card and a credit purchase or paid-plan upgrade even with an existing balance. Professional voice cloning on On-Demand also requires a payment method."
+}

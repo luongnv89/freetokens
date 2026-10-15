@@ -1,17 +1,24 @@
 {
-  "summary": "Vidu's AI video platform hands new users trial credits at registration and keeps topping them up through daily login bonuses, letting you generate text-to-video and image-to-video clips without paying. Credits can also be earned through official events.",
+  "summary": "Vidu's AI video platform hands new users trial credits at registration and keeps topping them up through daily login bonuses, letting you generate text-to-video and image-to-video clips without paying. Credits can also be earned through official events. The current Free plan does not permit commercial use and does not provide watermark-free downloads. No fixed signup or daily credit quantity is stated in the current pricing FAQ.",
   "claim_steps": [
     "Register a free account at vidu.com.",
     "Receive the sign-up trial credits automatically.",
     "Log in daily to collect bonus credits.",
-    "Spend credits on text-to-video or image-to-video generations."
+    "Spend credits on text-to-video or image-to-video generations.",
+    "Use Free outputs noncommercially and expect watermarked downloads; paid tiers add commercial-use and watermark-free features. Check your actual available credits rather than assuming a published fixed grant."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.vidu.com/pricing",
-      "title": "Vidu Pricing Plans for AI Video Generation | Vidu AI",
-      "text": "Compare Vidu pricing plans, credits, and features to choose the right option for AI video generation, image-to-video, an"
+      "title": "Vidu pricing FAQ — free-credit sources",
+      "text": "Sign-up Bonus: New users receive trial credits upon registering for Vidu. Daily Login: Earn credits by logging in every day."
+    },
+    {
+      "type": "link",
+      "url": "https://www.vidu.com/pricing",
+      "title": "Vidu Free feature comparison (rendered)",
+      "text": "The rendered Free column marks Commercial use allowed and Download without watermark as unavailable; paid columns mark them available."
     }
   ]
 }
