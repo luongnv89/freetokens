@@ -1,0 +1,25 @@
+{
+  "summary": "OpenCode made DeepSeek V4.1 Flash free on 2026-10-15. OpenCode's Console docs list DeepSeek V4.1 Flash Free (model id deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/v1/chat/completions endpoint. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash model (deepseek-v4.1-flash) is listed separately at $0.30/$1.20 per 1M input/output tokens, so pick the Free variant.",
+  "claim_steps": [
+    "Sign in to OpenCode Console and copy your API key. The general Console setup also asks for billing details and credits.",
+    "In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key.",
+    "Run /models and select DeepSeek V4.1 Flash Free (opencode/deepseek-v4.1-flash-free), not the paid DeepSeek V4.1 Flash.",
+    "Or call https://opencode.ai/inference/v1/chat/completions with model deepseek-v4.1-flash-free. The free period is limited-time.",
+    "Review Console billing before funding: auto-reload defaults to $20 when the balance goes below $5."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models | OpenCode",
+      "text": "DeepSeek V4.1 Flash Free is free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training. Pricing: DeepSeek V4.1 Flash Free | Free | Free | Free | -"
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2110635747648909472",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "DeepSeek V4.1 Flash is now free in OpenCode"
+    }
+  ]
+}
