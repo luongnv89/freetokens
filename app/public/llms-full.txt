@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-15T03:25:06Z — 133 of 218 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-15T11:34:14Z — 133 of 219 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### DeepSeek V4.1 Flash Free on OpenCode Console
+- Provider: OpenCode
+- Category: coding
+- Amount: Free DeepSeek V4.1 Flash model access on OpenCode Console (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-15 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-deepseek-v4-1-flash-free.html
+- Summary: OpenCode made DeepSeek V4.1 Flash free on 2026-10-15. OpenCode's Console docs list DeepSeek V4.1 Flash Free (model id deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/v1/chat/completions endpoint. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash model (deepseek-v4.1-flash) is listed separately at $0.30/$1.20 per 1M input/output tokens, so pick the Free variant.
+- Claim steps: Sign in to OpenCode Console and copy your API key. The general Console setup also asks for billing details and credits. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select DeepSeek V4.1 Flash Free (opencode/deepseek-v4.1-flash-free), not the paid DeepSeek V4.1 Flash. | Or call https://opencode.ai/inference/v1/chat/completions with model deepseek-v4.1-flash-free. The free period is limited-time. | Review Console billing before funding: auto-reload defaults to $20 when the balance goes below $5.
 ### Cat Jam Free on OpenCode Console
 - Provider: OpenCode
 - Category: coding
@@ -1325,16 +1335,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/hakim-ai-mena-startup-program.html
 - Summary: Hakim's MENA startup program gives selected founders $6,000 in Hakim credits (equivalent to 6 months on the Business plan at $999/mo), early access to unreleased TTS/STT/voice-clone models, weekly technical office hours, and a direct Slack line to the engineering team. Eligibility is a MENA-based founding team, pre-seed to Series A (founded within 5 years, under $2M ARR if bootstrapped), under $10M raised. Decision within 5 working days, then a kickoff call and workspace enablement. Review exists for MENA founders; no card stated.
 - Claim steps: Fill the application form at tryhakim.ai/en/startups (name, work email, startup name, website, country, stage, team size, raised, use case, volume, timeline). | Expect a decision within 5 working days. | On approval: 30-minute technical kickoff call, then the Business plan is enabled on the workspace, early-access flag flipped, and a shared Slack channel created.
-### Hailuo AI Video Free Tier
-- Provider: Hailuo AI
-- Category: video
-- Amount: One-time welcome credit package (expires 3 days after grant) + limited free generation (watermarked)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://hailuoai.video/doc/payment-policy.html
-- Page: https://freetokens.custats.info/offers/hailuo-free-tier.html
-- Summary: New Hailuo AI Video users registering on or after June 18, 2025 receive a one-time welcome package of credits, limited to one package per user. The credits expire three days after grant; the policy does not specify the package size or promise recurring free replenishment. Free-tier outputs are watermarked, with at most three video-generation tasks queued and one video generating at a time. Paid plans offer additional credits, watermark-free downloads and queue priority. No global end date is stated for the welcome offer.
-- Claim steps: Create a free account at hailuoai.video. The policy covers new registrations on or after June 18, 2025. | Receive the one-time welcome package on signup; only one package per user is allowed and the package size is not specified in the policy. | Use welcome credits within three days of grant, before they expire. Do not assume recurring free credit replenishment. | Generate videos from prompts or images within the free allowance, with at most three tasks queued and one video generating at a time. Free-tier downloads are watermarked.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

@@ -1,9 +1,39 @@
 {
-  "generated_at": "2026-10-15T03:25:06Z",
-  "count": 251,
-  "active_count": 218,
+  "generated_at": "2026-10-15T11:29:29Z",
+  "count": 252,
+  "active_count": 219,
   "expired_count": 33,
   "offers": [
+    {
+      "slug": "opencode-cat-jam-free",
+      "title": "Cat Jam Free on OpenCode Console",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free Cat Jam stealth model access on OpenCode Console (free input, output and cached reads; limited time)",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-10-14",
+      "added_date": "2026-10-14",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "google-antigravity-for-scientists",
+      "title": "Google Antigravity Free Highest Tier for Scientists",
+      "provider": "Google",
+      "category": "coding",
+      "amount": "6 months free on Google Antigravity's highest usage tier with Gemini 4 Argon (up to 10,000 selected scientists; application-based)",
+      "expiry_date": null,
+      "source_url": "https://antigravity.google/use-cases/science",
+      "verified_date": "2026-10-13",
+      "added_date": "2026-10-14",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "meta-global-ai-developer-hackathon",
       "title": "Meta Global AI Developer Hackathon API Credits",
@@ -16,21 +46,6 @@
       "added_date": "2026-10-13",
       "verification": "social_proof",
       "review_status": "to-be-verified",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "opencode-cat-jam-free",
-      "title": "Cat Jam Free on OpenCode Console",
-      "provider": "OpenCode",
-      "category": "coding",
-      "amount": "Free Cat Jam stealth model access on OpenCode Console (free input, output and cached reads; limited time)",
-      "expiry_date": null,
-      "source_url": "https://opencode.ai/v2/docs/console/models/",
-      "verified_date": "2026-10-14",
-      "added_date": "2026-10-13",
-      "verification": "social_proof",
-      "review_status": "under-review",
       "signup": "required",
       "status": "active"
     },
@@ -72,21 +87,6 @@
       "amount": "$10 in Dolphin API credit with coupon code API10 (redeem at app.dphn.ai after connecting and verifying a wallet and authorizing with Telegram)",
       "expiry_date": null,
       "source_url": "https://dphn.ai/API/",
-      "verified_date": "2026-10-13",
-      "added_date": "2026-10-13",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "google-antigravity-for-scientists",
-      "title": "Google Antigravity Free Highest Tier for Scientists",
-      "provider": "Google",
-      "category": "coding",
-      "amount": "6 months free on Google Antigravity's highest usage tier with Gemini 4 Argon (up to 10,000 selected scientists; application-based)",
-      "expiry_date": null,
-      "source_url": "https://antigravity.google/use-cases/science",
       "verified_date": "2026-10-13",
       "added_date": "2026-10-13",
       "verification": "social_proof",
@@ -3768,6 +3768,21 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "opencode-deepseek-v4-1-flash-free",
+      "title": "DeepSeek V4.1 Flash Free on OpenCode Console",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free DeepSeek V4.1 Flash model access on OpenCode Console (free input, output and cached reads; limited time)",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-10-15",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ]
 }

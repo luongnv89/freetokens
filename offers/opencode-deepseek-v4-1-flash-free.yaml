@@ -1,0 +1,15 @@
+# Verified 2026-10-15 against https://opencode.ai/v2/docs/console/models/
+# ("DeepSeek V4.1 Flash Free is free on OpenCode for a limited time."
+# Pricing table: "DeepSeek V4.1 Flash Free | Free | Free | Free | -"; model id deepseek-v4.1-flash-free.)
+# Announced by @opencode 2026-10-15: https://x.com/opencode/status/2110635747648909472
+# ("DeepSeek V4.1 Flash is now free in OpenCode"). No official end date stated.
+title: DeepSeek V4.1 Flash Free on OpenCode Console
+provider: OpenCode
+category: coding
+amount: Free DeepSeek V4.1 Flash model access on OpenCode Console (free input, output and cached reads; limited time)
+expiry_date: null
+source_url: https://opencode.ai/v2/docs/console/models/
+verified_date: 2026-10-15
+verification: social_proof
+review_status: under-review
+signup: required
