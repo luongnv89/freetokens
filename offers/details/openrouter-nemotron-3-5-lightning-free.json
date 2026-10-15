@@ -1,7 +1,8 @@
 {
-  "summary": "Nemotron 3.5 Lightning is an open MoE from NVIDIA with 3B active of 30B total parameters for high-throughput agentic workloads — free via OpenRouter's :free endpoint at $0 prompt / $0 completion with a 1M context. Created 2026-08-11; no published end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms.",
+  "summary": "Nemotron 3.5 Lightning is an open MoE from NVIDIA with 3B active of 30B total parameters for high-throughput agentic workloads — free via OpenRouter's :free endpoint at $0 prompt / $0 completion with a 1M context. Created 2026-08-11; no published end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms. The linked NVIDIA API Trial Terms permit free access and generated content only for internal testing and evaluation, not production use; production requires a separate subscription and its terms.",
   "claim_steps": [
     "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
+    "Use the free API service and generated content only for internal testing/evaluation, not production, under NVIDIA API Trial Terms sections 1.2 and 1.4. Production requires a separate subscription and its applicable terms.",
     "Review the NVIDIA API Trial Terms; never submit confidential information or personal data, including voices or faces.",
     "Call the chat completions API with model id nvidia/nemotron-3.5-lightning:free."
   ],

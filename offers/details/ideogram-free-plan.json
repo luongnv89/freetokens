@@ -1,9 +1,9 @@
 {
-  "summary": "Ideogram's official pricing page confirms a Free plan at $0 whose credit row reads \"Slow credits — Weekly for eligible accounts\", while paid tiers get \"Unlimited\". The page FAQ states eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft, and that the amount may vary — no fixed credit number is published. Free-tier limits also include 1 running + queued generation, and AI-powered editing features are unavailable in the slow queue. No end date for the free plan is stated, so the offer is ongoing.",
+  "summary": "Ideogram's current official pricing FAQ says eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft; the amount may vary, and no fixed free credit number is published. The current comparison table is headed Pay as you go at 1 cent per credit alongside paid subscription plans, rather than a Free/$0 column, so its PAYG concurrency cell should not be attributed to free-account entitlement. Confirm the weekly allowance and available queue/features in your account. AI-powered editing features require priority credits and are not available in the slow queue. No global end date for the FAQ-described weekly free-account credits is stated.",
   "claim_steps": [
-    "Go to https://ideogram.ai/pricing/ and select the \"Free plan\" ($0), then click \"Start for free\".",
+    "Open https://ideogram.ai/pricing/ and review the FAQ about discounts/free trials. Use the site's Sign up or Sign in link; do not select a paid subscription or assume Pay as you go credit purchases are the weekly free-account benefit.",
     "Sign in or create an Ideogram account — sign in with Google, Apple, or Microsoft to be eligible for weekly credits (per the page FAQ).",
-    "Generate images in the slow queue using the weekly slow credits (free tier allows 1 running + queued generation).",
+    "Check that your eligible account actually shows its weekly free credits, remaining balance and available generation queue/features before generating; the amount may vary. Do not treat the pricing table's Pay as you go concurrency limit as a verified free-account limit.",
     "Wait for the weekly credit refresh to continue generating; note AI-powered editing features require priority credits and are not available in the slow queue."
   ],
   "social_proof": [
@@ -11,7 +11,7 @@
       "type": "link",
       "url": "https://ideogram.ai/pricing/",
       "title": "Pricing — Ideogram",
-      "text": "Eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft; the amount may vary. Pricing table: \"Slow credits: Weekly for eligible accounts\" on the Free plan."
+      "text": "We don't offer discounts or free trials for subscription plans. Eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft; the amount may vary."
     }
   ]
 }

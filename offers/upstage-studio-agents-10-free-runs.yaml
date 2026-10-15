@@ -1,13 +1,13 @@
 # Verified 2026-09-12 against https://www.upstage.ai/pricing
 # ("Every agent includes 10 free runs — test with real documents, no credit
 # card required.")
-title: Upstage Studio Agents — 10 Free Runs
+title: "Upstage Studio — Free Daily Organization Usage"
 provider: Upstage
 category: api_provider
-amount: 10 free runs per Studio agent for document workflows (no credit card required)
+amount: "Free Studio plan with a daily-refilling organization-shared usage quota; no payment details required for Free; current numeric quota needs confirmation (official pricing shows 100-page reference volume, while docs contain a post-launch 10-page note)"
 expiry_date: null
-source_url: https://www.upstage.ai/pricing
+source_url: "https://www.upstage.ai/pricing/studio"
 verified_date: 2026-09-25
 verification: social_proof
-review_status: under-review
+review_status: "to-be-verified"
 signup: required

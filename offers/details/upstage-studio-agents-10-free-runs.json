@@ -1,16 +1,29 @@
 {
-  "summary": "Upstage Studio lets you build and deploy document AI agents (Parse, Extract, Classify, Instruct steps). Every agent includes 10 free runs to test with real documents — no credit card required. Each agent run is billed as the sum of the steps it executes once the free runs are used.",
+  "summary": "Upstage Studio has a $0 Free organization-level plan with a daily-refilling usage quota shared across its agents, not 10 free runs for each agent. The official changelog says the per-agent offer was replaced in September 2026. Free includes all Studio features; jobs stop when quota is exhausted and resume after the next daily refill, with no rollover or Free overage. Current pricing shows a 100-page reference volume, but docs retain a launch note saying a later adjustment to 10 pages/day, so confirm the actual organization quota rather than relying on either number. Page equivalents depend on workflow nodes and model usage; Studio UI and Agents API runs share quota, while direct Console APIs remain separately PAYG billed. The separate paid-plan 7-day trial requires a payment method and automatically starts paid billing if not cancelled.",
   "claim_steps": [
-    "Sign up at Upstage Studio — no credit card required.",
-    "Build a document agent by combining steps (Parse, Extract, Classify, Instruct).",
-    "Run the agent with real documents; each agent includes 10 free runs."
+    "Open https://www.upstage.ai/pricing/studio and sign up at studio.upstage.ai on Free; the Free plan states no payment details required.",
+    "Check organization settings/subscription for the actual daily quota. It is shared across agents; do not assume a fresh 10-run allowance per agent. Public pricing/docs disagree on the post-launch page allowance.",
+    "Build a document workflow and monitor node/model usage against the shared quota. When Free quota runs out, wait for the next daily refill; no Free overage or unused-quota rollover.",
+    "Distinguish Studio/Agents API quota from direct Console API PAYG charges. Do not activate the separate card-required 7-day paid-plan trial unless you intend to manage its automatic paid renewal."
   ],
   "social_proof": [
     {
       "type": "link",
-      "url": "https://www.upstage.ai/pricing",
-      "title": "Pricing — Upstage",
-      "text": "Every agent includes 10 free runs — test with real documents, no credit card required."
+      "url": "https://console.upstage.ai/docs/resources/changelog",
+      "title": "Upstage changelog — Studio subscription pricing",
+      "text": "The 10 free runs per agent are replaced by a usage quota shared across your organization."
+    },
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/pricing/studio",
+      "title": "Upstage Studio current Free pricing",
+      "text": "Free is the default plan. Everything in Studio. There is no feature limit, only a daily usage allowance. Once you use it up, you wait until it refills the next day."
+    },
+    {
+      "type": "link",
+      "url": "https://console.upstage.ai/docs/studio",
+      "title": "Upstage Studio — quota caveat",
+      "text": "The Free plan's 100 pages per day is a launch allowance that runs through September 21, 2026. It will then be adjusted to 10 pages per day, and we will announce the change in advance."
     }
   ]
 }

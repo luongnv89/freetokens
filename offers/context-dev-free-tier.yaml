@@ -6,7 +6,7 @@
 title: Context.dev Free Tier
 provider: Context.dev
 category: api_provider
-amount: 1,000 API credits/month + 10K one-time Logo Link requests (1 concurrent request; legacy account RPM shown in dashboard)
+amount: "1,000 API credits/month + 10K one-time Logo Link requests (2 concurrent core API requests; new Free accounts 10 requests/minute; existing allowances/custom overrides may differ)"
 expiry_date: null
 source_url: https://www.context.dev/pricing
 verified_date: 2026-09-30
