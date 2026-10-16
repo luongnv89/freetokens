@@ -52,3 +52,9 @@ needs_review/
 .hermes/
 .opencode/
 .pi/
+
+# Installed agent skills: skills/ is the source of truth; these folders hold
+# local installs (asm install ./skills/<name> -s project) and must never alias
+# skills/, or an install deletes its own source.
+.agents/skills/
+.claude/skills/
