@@ -1,8 +1,9 @@
 {
-  "summary": "Amazon Polly's legacy AWS Free Tier for accounts created before July 15, 2025 included monthly character allowances during the first 12 months: 5 million Standard, 1 million Neural, 500,000 Long-Form and 100,000 Generative characters. These are not blanket allowances for new accounts today. Starting July 15, 2025, new AWS customers receive up to $200 in AWS Free Tier credits usable on eligible services including Polly, with a choice of free or paid plan. The free plan lasts six months after account creation; all Free Tier credits must be used within 12 months. After upgrading to paid, remaining credits apply to AWS bills.",
+  "summary": "Amazon Polly's legacy AWS Free Tier for accounts created before July 15, 2025 included monthly character allowances during the first 12 months: 5 million Standard, 1 million Neural, 500,000 Long-Form and 100,000 Generative characters. These are not blanket allowances for new accounts today. Starting July 15, 2025, new AWS Free Tier customers receive $100 in credits immediately and can earn up to $100 more through eligible activities, usable on eligible services including Polly; $200 is not an automatic signup grant. Customers can choose a Free or Paid plan. The Free plan ends and the account closes at the earlier of six months after account creation or credit exhaustion unless upgraded to Paid. All Free Tier credits must be used within 12 months of account creation. After upgrading to Paid, remaining credits apply to AWS bills and usage beyond credits can incur charges.",
   "claim_steps": [
     "Create an AWS account at aws.amazon.com and review the current Free Tier credit eligibility; new accounts use the credit-based program, not legacy monthly Polly quotas.",
-    "Choose a free or paid plan at signup. The free plan is available for six months after account creation, with up to $200 in eligible AWS Free Tier credits.",
+    "Choose Free or Paid at signup: new AWS Free Tier accounts receive $100 immediately and can earn up to $100 more through eligible activities, not $200 automatically.",
+    "On Free, the plan ends and account closes at the earlier of 6 months after creation or credit exhaustion unless you upgrade to Paid. Monitor the balance and plan before relying on continued access.",
     "Open the Amazon Polly console and monitor eligible usage against your actual AWS credit balance.",
     "Use all Free Tier credits within 12 months of account creation. Upgrading to paid applies remaining credits to bills and can incur charges beyond credits.",
     "Only eligible legacy accounts created before July 15, 2025 had the first-12-month character allowances; do not assume these apply to a new signup."
@@ -13,6 +14,12 @@
       "url": "https://aws.amazon.com/polly/pricing/",
       "title": "Amazon Polly Pricing",
       "text": "Starting July 15, 2025, new AWS customers will receive up to $200 in AWS Free Tier credits, which can be applied towards eligible AWS services, including Amazon Polly. The free plan will be available for 6 months after account creation. All Free Tier credits must be used within 12 months of your account creation date."
+    },
+    {
+      "type": "link",
+      "url": "https://aws.amazon.com/free/",
+      "title": "AWS Free Tier — initial and earned credits; Free plan closure",
+      "text": "When you create a new AWS Free Tier account, you get $100 in credits immediately. As you explore key services, you can earn up to $100 more. ... The account closes on its own 6 months after you open it or when your credits run out, whichever comes first. You won’t be charged unless you convert to a Paid plan."
     }
   ]
 }

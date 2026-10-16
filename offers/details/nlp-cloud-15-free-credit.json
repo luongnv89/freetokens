@@ -1,9 +1,10 @@
 {
-  "summary": "NLP Cloud automatically grants a $15 free credit on the pay-as-you-go plan — per the site's own FAQ that plan requires a credit card, so the credit subsidizes a PAYG start rather than being a card-free grant. Separately, a $0 Free plan needs no card and covers pretrained models at 2 parallel requests with limited throughput, intended for development/testing. Pay-as-you-go has no fixed cost: CPU requests $0.003, GPU $0.005, plus per-token/second surcharges on generative models.",
+  "summary": "NLP Cloud automatically grants a $15 free credit on the pay-as-you-go plan — per the site's own FAQ that plan requires a credit card, so the credit subsidizes a PAYG start rather than being a card-free grant. Separately, a $0 Free plan needs no card and covers pretrained models at 2 parallel requests with limited throughput. Indexed official terms say this separate Free plan must only be used for development/testing, never production, and permit only one Free plan per application or website and per IP address. Those Free-plan restrictions are not being attributed to the PAYG credit. Direct pricing and terms access returned 403 during this recheck; official indexed excerpts support the qualification, but the current full terms were not verified. Pay-as-you-go has no fixed cost: CPU requests $0.003, GPU $0.005, plus per-token/second surcharges on generative models.",
   "claim_steps": [
     "Register at nlpcloud.com/home/register.",
     "For the $15 credit: activate the pay-as-you-go plan — the site FAQ states a credit card is needed for this plan; the $15 credit applies automatically.",
-    "Card-free option: choose the $0 Free plan — pretrained models only, 2 parallel requests, limited throughput."
+    "Card-free option: choose the separate $0 Free plan — pretrained models only, 2 parallel requests, limited throughput.",
+    "For the separate Free plan, indexed official terms prohibit production and limit it to one Free plan per application/website and per IP. Direct terms access was blocked; review the full terms yourself before relying on this option."
   ],
   "social_proof": [
     {
@@ -17,6 +18,18 @@
       "url": "https://nlpcloud.com/",
       "title": "Advanced Artificial Intelligence API | NLP Cloud",
       "text": "All the AI models can be tested for free thanks to the Free plan without a credit card, but the throughput on this plan is very limited. The pay-as-you-go plan is the best way to easily test all the features without restrictions. A credit card is needed for this plan, but you automatically get an initial $15 credit for your tests."
+    },
+    {
+      "type": "link",
+      "url": "https://nlpcloud.com/tos.html",
+      "title": "Indexed official terms — separate Free plan; direct access blocked, current full terms not verified",
+      "text": "Such plan is well suited to get to know the Service, and must only be used for development and testing. It must not be used in production."
+    },
+    {
+      "type": "link",
+      "url": "https://nlpcloud.com/tos.html",
+      "title": "Indexed official terms — Free-plan count limits; direct access blocked",
+      "text": "Only one free plan is permitted per one application or website, and per one IP address."
     }
   ]
 }

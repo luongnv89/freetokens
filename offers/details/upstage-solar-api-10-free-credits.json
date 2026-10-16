@@ -1,8 +1,10 @@
 {
-  "summary": "Upstage's official Solar Pro 2 guide says new Console signups automatically receive $10 in free credits, usable for all Upstage APIs. A default API key is generated upon signup. Neither an enrollment deadline nor a three-month credit-validity period is stated on the loaded official pages. Whether the free grant requires a card is unknown; the pricing page's card information concerns paid credit purchases and is not evidence of free-grant eligibility. Paid credit usage can continue with charges to a registered payment method after credits run out. This grant is distinct from institutional free access and Studio agent free runs.",
+  "summary": "Upstage's official Solar Pro 2 guide says new Console signups automatically receive $10 in free credits, usable for all Upstage APIs. A default API key is generated upon signup. Current API pricing lists Solar Pro 2, Solar Pro 3 and Solar Mini as ending service on 2026-10-30 (KST); choose a currently supported model such as Solar Pro 4. This future model cutoff is not the expiry of the $10 signup-credit campaign. Neither an enrollment deadline nor a three-month credit-validity period is stated on the loaded official pages. Whether the free grant requires a card is unknown; the pricing page's card information concerns paid credit purchases and is not evidence of free-grant eligibility. Paid credit usage can continue with charges to a registered payment method after credits run out. This grant is distinct from institutional free access and Studio agent free runs.",
   "claim_steps": [
     "Create an Upstage Console account using the Log in control; the official guide says $10 in free credits is granted automatically.",
-    "On the Getting Started page, copy the default API key generated upon signup to test the APIs."
+    "On the Getting Started page, copy the default API key generated upon signup to test the APIs.",
+    "Use a currently supported model such as Solar Pro 4. Solar Pro 2, Solar Pro 3 and Solar Mini end service on 2026-10-30 (KST); that model cutoff is not the signup-grant expiry.",
+    "Check remaining credits and billing settings: usage can continue with charges to a registered payment method after credits run out."
   ],
   "social_proof": [
     {
@@ -15,7 +17,13 @@
       "type": "link",
       "url": "https://www.upstage.ai/pricing/api",
       "title": "Pricing | Upstage AI",
-      "text": "We provide eligible institutions with free access to Solar Pro (LLM) and Document Parse for up to one year — helping you explore and adopt AI without cost barriers."
+      "text": "Solar Pro 2 ... * End of service on 2026-10-30 (KST)."
+    },
+    {
+      "type": "link",
+      "url": "https://console.upstage.ai/docs/resources/changelog",
+      "title": "Changelog — Solar Pro 3 deprecation and Solar Pro 4 transition",
+      "text": "Solar Pro 3 (the solar-pro3 alias and all of its versions) will be fully deprecated on October 30, 2026 (KST). This also applies to organizations in the Upstage x AWS AI Initiative. Requests naming it will return an error after that date."
     }
   ]
 }

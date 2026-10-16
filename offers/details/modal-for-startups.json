@@ -1,10 +1,12 @@
 {
-  "summary": "Modal for Startups grants a one-time award of free GPU/platform credits ('thousands' per the program page, not itemized) plus engineering/GTM support and a founder community. Eligibility: new Modal customers; Seed–Series A tier requires VC funding from Modal's partner network or >$1M raised from any fund; a Scaling/Series B+ tier exists for >$30M raised / post-Series B with a partner-network VC. A payment method is required; credits are a one-time grant per tier and cannot pay plan fees or endpoint charges. Create a Modal workspace before applying; the form requires its name, an email tied to it, and proof of funding.",
+  "summary": "Modal for Startups grants a one-time award of free GPU/platform credits ('thousands' per the program page, not itemized) plus engineering/GTM support and a founder community. Eligibility: new Modal customers; Seed–Series A tier requires VC funding from Modal's partner network or >$1M raised from any fund; a Scaling/Series B+ tier exists for >$30M raised / post-Series B with a partner-network VC. Credits are a one-time grant per tier, last one year, cannot be reinstated after expiry, and cannot pay plan fees or endpoint charges. Credit status and expiration are shown on the billing page. A payment method is required so apps can continue after credits run out; monitor usage and stop unwanted billable apps to avoid ongoing costs. Create a Modal workspace before applying; the form requires its name, an email tied to it, and proof of funding.",
   "claim_steps": [
     "Create a Modal account and organization workspace first (new Modal customers only).",
     "Apply at modal.com/startups with the workspace name, an email tied to that workspace, and proof of funding.",
     "Seed–Series A: VC funding from Modal's partner network, or >$1M raised from any fund.",
-    "On acceptance, the one-time credit grant lands on your account; add a payment method as required."
+    "On acceptance, the one-time credit grant lands on your account; add a payment method as required so apps can continue after credits run out.",
+    "Credits last one year and cannot be reinstated after expiry. Check credit status and expiration on the billing page.",
+    "Credits cannot pay plan fees or endpoint charges. Monitor usage and stop unwanted billable apps before credits run out to avoid ongoing costs."
   ],
   "social_proof": [
     {

@@ -1,10 +1,10 @@
 {
-  "summary": "Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA — 55B active of 550B total on a hybrid Transformer-Mamba MoE, with a 1M-token context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Created 2026-06-04; no published end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms. The linked NVIDIA API Trial Terms permit free access and generated content only for internal testing and evaluation, not production use; production requires a separate subscription and its terms.",
+  "summary": "Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA — 55B active of 550B total on a hybrid Transformer-Mamba MoE, with a 1M-token context. Published free pricing remains $0 prompt / $0 completion via OpenRouter's :free endpoint, but availability is unresolved: repeated provider-health checks found its sole provider unhealthy, and the model page reported Down. Check current provider health before use; published pricing and historical traffic do not guarantee a successful request. No inference request was tested. Created 2026-06-04; no published end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms. The linked NVIDIA API Trial Terms permit free access and generated content only for internal testing and evaluation, not production use; production requires a separate subscription and its terms.",
   "claim_steps": [
     "Sign up at openrouter.ai and create an API key (no card needed for :free models).",
     "Use the free API service and generated content only for internal testing/evaluation, not production, under NVIDIA API Trial Terms sections 1.2 and 1.4. Production requires a separate subscription and its applicable terms.",
     "Review the NVIDIA API Trial Terms; never submit confidential information or personal data, including voices or faces.",
-    "Call the chat completions API with model id nvidia/nemotron-3-ultra-550b-a55b:free."
+    "Check the model page's current provider health before calling chat completions with model id nvidia/nemotron-3-ultra-550b-a55b:free. Repeated checks found the sole provider unhealthy/Down; successful inference remains unresolved, not tested here."
   ],
   "social_proof": [
     {
@@ -18,6 +18,12 @@
       "url": "https://openrouter.ai/api/v1/models",
       "title": "OpenRouter Models API",
       "text": "nvidia/nemotron-3-ultra-550b-a55b:free listed at prompt:0, completion:0, context_length 1000000, created 2026-06-04."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/nvidia/nemotron-3-ultra-550b-a55b:free/endpoints",
+      "title": "OpenRouter exact provider endpoints — availability unresolved",
+      "text": "Repeated public endpoint checks retained one NVIDIA provider with free prompt/completion pricing and 1000000 context, but status -5. The model page reported Status: Down. These are provider-health observations, not a completed inference test or a campaign-end notice."
     }
   ]
 }

@@ -1,9 +1,11 @@
 {
-  "summary": "The Runware Grant Program awards up to $30,000 in API credits usable over 12 months across Runware's production platform — image, video, image/video editing, audio, LLMs, 3D, and avatar models on one API. For early-stage teams (before Series A; bootstrapped welcome) with a real product or credible MVP, building or launching on Runware within six months, reachable at a business email. Applications are reviewed on a rolling basis within two weeks; no equity taken.",
+  "summary": "The Runware Grant Program awards up to $30,000 in API credits usable over 12 months across Runware's production platform — image, video, image/video editing, audio, LLMs, 3D, and avatar models on one API. Each grant starts with a fixed initial allocation sized to the team's stage and product; the $30,000 ceiling is not a universal award. Top-ups and renewals are conditional on actively consuming credits and staying engaged, not automatic. For early-stage teams (before Series A; bootstrapped welcome) with a real product or credible MVP, building or launching on Runware within six months, reachable at a business email. Applications are reviewed on a rolling basis: the page body says within two weeks, while its FAQ aims for a few business days. No equity is taken. After the 12-month grant, the account moves to standard pay-as-you-go pricing.",
   "claim_steps": [
     "Submit the grant form at https://runware.ai/grant-program with product, stage, traction, and expected Runware usage.",
     "Eligibility: pre-Series A or bootstrapped, credible MVP, business email, building/launching within 6 months.",
-    "Reviewed within 2 weeks; approved grants receive API credits on your Runware account."
+    "The page body says review within two weeks; the FAQ aims for a few business days. If approved, check your initial credit allocation; up to $30,000 is a ceiling, not a guaranteed award.",
+    "Top-ups and renewals are conditional on active credit usage and program engagement; do not assume automatic replenishment.",
+    "Plan for billing: after the 12-month grant, your account moves to standard pay-as-you-go pricing."
   ],
   "social_proof": [
     {
@@ -11,6 +13,24 @@
       "url": "https://runware.ai/grant-program",
       "title": "Grant Program | Runware",
       "text": "Up to $30,000 in API credits. 12 months of Runware API access. We focus on teams before Series A. Bootstrapped teams are welcome, and there is no venture funding or investor introduction required."
+    },
+    {
+      "type": "link",
+      "url": "https://runware.ai/grant-program",
+      "title": "Runware grant FAQ — post-grant pricing",
+      "text": "Your grant covers 12 months of Runware API access. After that, your account simply moves to our standard pay-as-you-go pricing, with no disruption to anything you've shipped."
+    },
+    {
+      "type": "link",
+      "url": "https://runware.ai/grant-program",
+      "title": "Runware grant FAQ — initial allocation",
+      "text": "Grants are awarded as Runware API credits, up to $30,000. Every grant starts with a fixed initial allocation sized to your stage and what you're building, so you have a meaningful runway from day one."
+    },
+    {
+      "type": "link",
+      "url": "https://runware.ai/grant-program",
+      "title": "Runware grant FAQ — conditional top-ups and renewals",
+      "text": "The initial allocation is fixed, but it is not necessarily the end. Top-ups and renewals are available for teams that are actively consuming their credits and staying engaged with the program, so support follows the builders who are shipping."
     }
   ]
 }

@@ -4,7 +4,7 @@
 title: Brave Search API — $5 Free Credits Every Month
 provider: Brave
 category: api_provider
-amount: $5 in free credits every month on the Search plan ($5 per 1,000 requests) and the Answers plan; credits applied automatically; card required for identity verification but not charged
+amount: $5 in free credits every month on the Search plan ($5 per 1,000 requests) and the Answers plan; credits applied automatically; card required for identity verification but not charged; storing results requires explicit plan storage rights, and third-party content rights are not granted
 expiry_date: null
 source_url: https://brave.com/search/api/
 verified_date: 2026-10-13

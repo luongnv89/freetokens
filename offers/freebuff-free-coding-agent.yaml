@@ -11,10 +11,12 @@
 # Source checked 2026-10-11 against https://freebuff.com/plans (not firsthand tested):
 # Free: "DeepSeek V4.1 Flash 10 hrs"; "Displayed allowances are for full access.
 # Sign in to confirm your account’s allowance." Historical X wording retained below.
+# Current pricing describes 30 hours refilled daily, measured in MiMo Slow-equivalent
+# hours; other models consume multipliers. The DeepSeek estimate remains 10 hrs/day.
 title: Freebuff — Free Coding Agent Funded by Ads
 provider: Freebuff
 category: coding
-amount: Up to 10 hrs/day of DeepSeek V4.1 Flash (free, ad-supported; full-access estimate, account allowances vary)
+amount: Up to 10 hrs/day of DeepSeek V4.1 Flash from 30 MiMo Slow-equivalent hours refilled daily (free, ad-supported; full-access estimates, account allowances vary)
 expiry_date: null
 source_url: https://freebuff.com/plans
 verified_date: 2026-10-06

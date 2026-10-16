@@ -8,10 +8,10 @@
 title: Anthropic AI for Science
 provider: Anthropic
 category: api_provider
-amount: Free Claude API credits for high-impact research; Help Center cites up to $20,000 for 6 months; Aug 2026 news cites up to $50,000 per project
+amount: "Conflicting official terms: Help Center offers up to $20,000 API credits for 6 months; current application offers up to $50,000 Claude.ai extra-usage credits, including Claude Science; confirm applicable award"
 expiry_date: null
 source_url: https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program
 verified_date: 2026-09-30
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: required

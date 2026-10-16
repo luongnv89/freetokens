@@ -1,9 +1,13 @@
 # Verified 2026-09-19 against https://telnyx.com/startups-program
 # ("A program providing $20,000 in AI credits, dedicated engineering support, and co-marketing opportunities to early-stage startups building voice AI products.")
+# Current FAQ restricts credits to AI agents, inference, embeddings and storage:
+# no general call control/non-AI services; LLM credits cover only open-source models
+# on Telnyx infrastructure, not connected external proprietary models. Standard
+# pricing follows exhaustion. Existing funding/revenue wording remains ambiguous.
 title: Telnyx Startups Program
 provider: Telnyx
 category: startup_program
-amount: Up to $20,000 in voice-AI credits for 6 months (STT, TTS, LLM inference), plus 3 months of engineering support; selective voice-AI startup application
+amount: Up to $20,000 in credits for 6 months for Voice AI, STT/TTS, Telnyx-hosted open-source LLM inference, embeddings and cloud storage (not general call control, non-AI services or external proprietary LLMs); 3 months engineering support; standard pricing after exhaustion
 expiry_date: null
 source_url: https://telnyx.com/startups-program
 verified_date: 2026-09-30

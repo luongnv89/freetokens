@@ -1,17 +1,18 @@
 {
-  "summary": "Resemble AI's Builder's Grant awards $500–$30,000 in credits (most grants sized to a production-ready proof-of-concept) for detection, Intelligence, watermarking, and Identity APIs, expiring 12 months or less from approval. Voice-generation coverage is not promised by the current program. Open to teams under 50 employees or companies actively building a new product with Resemble detection, watermarking, or identity verification built in. Free-tier users are eligible; existing paid customers are excluded. One application per company; recipients agree to 12 months of marketing collaboration. Applicants must be committed to building a real ongoing product; one-off projects, prototypes and temporary campaigns do not qualify.",
+  "summary": "Resemble AI's Builder's Grant awards $500–$30,000 in credits (most grants sized to a production-ready proof-of-concept) for detection, Intelligence, watermarking, and Identity APIs, expiring 12 months or less from approval. Voice-generation coverage is not promised by the current program. Open to teams under 50 employees or companies actively building a new product with Resemble detection, watermarking, or identity verification built in. Free-tier users are eligible; existing paid customers are excluded. One application per company; recipients agree to 12 months of marketing collaboration. Applicants must be committed to building a real ongoing product; one-off projects, prototypes and temporary campaigns do not qualify. After 12 months, the account converts to Flex unless a paid plan has been selected; confirm ongoing usage and billing terms before continuing, rather than assuming unlimited free usage or an automatic cash charge.",
   "claim_steps": [
     "Create a free Resemble account at app.resemble.ai.",
     "Confirm eligibility: under 50 employees or actively building a new product with Resemble detection, watermarking, or identity verification; existing paid customers are excluded. You must also be committed to a real ongoing product, not a one-off project, prototype or temporary campaign.",
     "Apply at resemble.ai/start/builders-grant-startup-program describing your project and planned use of detection, Intelligence, watermarking, or Identity APIs; do not assume voice-generation coverage.",
-    "Applications are reviewed within one business week; credits land in the account within 48 hours of approval."
+    "Applications are reviewed within one business week; credits land in the account within 48 hours of approval.",
+    "Use credits within the awarded term (12 months or less from approval). After 12 months, the account converts to Flex unless you selected a paid plan; confirm ongoing usage and billing terms before continuing."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.resemble.ai/start/builders-grant-startup-program",
       "title": "Resemble AI Builder's Grant",
-      "text": "Up to 12 months to build, test, and launch with access to Resemble’s detection, Intelligence, watermarking, and Identity APIs. Grants range from $500 to $30,000, with most builders receiving enough credits to complete a full production-ready proof-of-concept. Credits expire 12 months or less from grant approval."
+      "text": "Up to 12 months to build, test, and launch with access to Resemble’s detection, Intelligence, watermarking, and Identity APIs. ... Grants range from $500 to $30,000, with most builders receiving enough credits to complete a full production-ready proof-of-concept. ... Credits expire 12 months or less from grant approval. ... Your account converts to our Flex tier unless you’ve selected a paid plan."
     }
   ]
 }

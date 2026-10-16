@@ -1,17 +1,23 @@
 {
-  "summary": "Speechmatics advertises $100 in free speech-to-text credits for new accounts, no card required, with 55+ languages and 2 concurrent real-time sessions on Free. Separately, its text-to-speech pricing offers the first 1 million characters free. Current public pricing does not establish that the $100 STT credit is a shared STT/TTS pool. This listing is awaiting curator verification; signup and inference have not been tested in this source check.",
+  "summary": "Speechmatics advertises $100 in free speech-to-text signup credits valid for 12 months, no card required, with 55+ languages and 2 concurrent real-time sessions on Free. No-card Free API access pauses when credits run out. Adding a payment card upgrades Free to Pro: granted credits are consumed first, then further usage is billed to the card. Separately, its text-to-speech pricing offers the first 1 million characters free. Current public pricing does not establish that the $100 STT credit is a shared STT/TTS pool. This listing is awaiting curator verification; signup and inference have not been tested in this source check.",
   "claim_steps": [
     "Sign up at https://portal.speechmatics.com/signup/ — the $100 STT offer states no card required.",
-    "Check the account's $100 speech-to-text credit allowance and Free-tier limit of 2 concurrent real-time sessions.",
+    "Use the $100 STT signup bonus within 12 months; confirm the account's allowance and Free-tier limit of 2 concurrent real-time sessions.",
     "For text-to-speech, check the separate first-1-million-characters-free allowance; do not assume it draws from the $100 STT credit.",
-    "Review current billing terms before continuing beyond either free allowance."
+    "Review current billing terms: no-card Free API access pauses at credit exhaustion. Adding a card upgrades Free to Pro; granted credits are consumed first, then further usage is billed to your card."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.speechmatics.com/pricing",
       "title": "Speechmatics pricing: Speech to Text from $0.121/hr",
-      "text": "Start free • $100 in credits ... No card required ... Concurrent sessions (Real-time) 50 (2 on Free) ... Text to Speech ... First 1 million characters free (about 20 hours of speech)."
+      "text": "Start free • $100 in credits ... No card required ... Concurrent sessions (Real-time) 50 (2 on Free) ... Text to Speech ... First 1 million characters free (about 20 hours of speech). ... Sign-up bonus, credit-pack credits and annual subscription credits last 12 months. ... If you’re on the free tier, your API access will be paused once your credits run out."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.speechmatics.com/administration/billing",
+      "title": "Billing | Speechmatics Docs",
+      "text": "Adding a card upgrades a Free plan to Pro. ... Pro accounts pay through pay-as-you-go (PAYG): you keep a payment card on file, and usage draws down your granted credits first. Once your granted credits are used up, further usage is charged to your card on the first of each month for the previous month's usage."
     }
   ]
 }

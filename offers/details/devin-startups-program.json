@@ -1,6 +1,7 @@
 {
-  "summary": "Devin for Startups gives early-stage teams $65K to build with the AI software engineer: $15K in Devin credits loaded into the account the day the startup is approved, plus a dollar-for-dollar match of up to $50K in grants on the next $100K of usage. Accepted startups also get unlimited seats as an advertised program benefit (not a statement about the ordinary Teams plan), invitations to founder meetups and early-access previews with the Cognition team, and a Devin swag pack. Applications are reviewed on a rolling basis.",
+  "summary": "Devin for Startups gives early-stage teams $65K to build with the AI software engineer: $15K in Devin credits loaded into the account the day the startup is approved, plus a dollar-for-dollar match of up to $50K in grants on the next $100K of usage. Accepted startups also get unlimited seats as an advertised program benefit (not a statement about the ordinary Teams plan), invitations to founder meetups and early-access previews with the Cognition team, and a Devin swag pack. Applications are reviewed on a rolling basis. The linked application asks for the email you will use to set up Devin and says you should be a GitHub organization admin; Slack-admin access is recommended, not mandatory.",
   "claim_steps": [
+    "Prepare the email you will use to set up Devin. The linked application says you should be a GitHub organization admin; Slack-admin access is recommended, not mandatory.",
     "Apply through https://devin.ai/startups and describe the startup; applications are reviewed on a rolling basis.",
     "If approved, follow Cognition’s account/setup instructions. The program says $15K Devin credits are loaded on approval and advertises unlimited seats as a program benefit.",
     "For additional matching grants, review the reload terms: dollar-for-dollar match up to $50K; spending $50K yields $100K of matched usage.",
@@ -19,6 +20,12 @@
       "url": "https://devin.ai/startups",
       "title": "Devin for Startups",
       "text": "$15K in free credits hit your account. Start building with Devin immediately."
+    },
+    {
+      "type": "link",
+      "url": "https://tally.so/r/zxGB7g",
+      "title": "Devin for Startups — linked application",
+      "text": "Enter the email you'll use to set up Devin. You should be a GitHub org admin (and ideally a Slack admin)."
     }
   ]
 }

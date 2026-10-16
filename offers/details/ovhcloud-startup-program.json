@@ -1,8 +1,13 @@
 {
-  "summary": "OVHcloud Startup Program: the 12-month Start level gives €10,000 of free cloud credits + 6 hours of 1-on-1 engineer time + visibility; the 12-month Scale level gives up to €100,000 of free cloud credits + up to 20 hours of engineer time. For early-stage startups and scaleups by application.",
+  "summary": "OVHcloud's Start level offers selected pre-seed/seed startups €10,000 in cloud credits and 6 hours of engineer time; Scale offers selected Series-A-and-beyond funded startups/scaleups up to €100,000 and up to 20 hours, with vouchers assessed against infrastructure needs. Applicants need an innovative technical project with an implementable POC/MVP and near-term cloud needs; prior program participants and nonprofessional projects are excluded. The current FAQ limits vouchers to Public Cloud and Hosted Private Cloud, with GPU instances restricted to V100, V100S and RTX5000; Bare Metal Cloud and Web Cloud are generally excluded. Vouchers are tied to the chosen customer account, which cannot be switched. Each level lasts at most 12 months from contract signature; unused vouchers then lapse and continuing services become fully payable. Products not covered by vouchers are charged at normal prices. No fixed signup deadline is published.",
   "claim_steps": [
-    "Apply at startup.ovhcloud.com for the Start or Scale level.",
-    "On acceptance, receive 12 months of credits (€10,000 Start / up to €100,000 Scale) plus engineer 1-on-1 time."
+    "Apply at https://startup.ovhcloud.com/en/ on the country site matching your business address. Prepare an implementable POC/MVP, business model and near-term infrastructure requirements; prior program participants are excluded.",
+    "Start selects pre-seed/seed startups (€10,000 and 6 engineer hours). Scale selects Series-A-and-beyond funded startups/scaleups; up to €100,000 and up to 20 hours depend on assessment of infrastructure needs.",
+    "Choose the company's OVHcloud customer account carefully: vouchers stay associated with that account and it cannot be switched. Do not use a personal account; create a company account in the application if needed.",
+    "If accepted, sign the contract to start the maximum 12-month term for that level. Check issued vouchers under Payment methods → My Startup Program vouchers in the OVHcloud Manager.",
+    "Use vouchers only for eligible Public Cloud or Hosted Private Cloud services. The current FAQ restricts GPU instances to V100, V100S and RTX5000; Bare Metal Cloud and Web Cloud are generally excluded. Confirm coverage with your program manager.",
+    "Monitor balances and invoices: uncovered products are payable. An invoice exceeding the remaining voucher balance is not automatically voucher-paid; ask your regional program manager about manual part-payment.",
+    "Before the term ends, budget for or stop continuing services: remaining vouchers lapse after at most 12 months and all services become fully payable. See https://startup.ovhcloud.com/en/faq-support/ for current eligibility and billing terms."
   ],
   "social_proof": [
     {
@@ -10,6 +15,12 @@
       "url": "https://startup.ovhcloud.com/en/",
       "title": "OVHcloud Startup Program",
       "text": "Our 12-month Start level offers you: €10,000 of free cloud credits, 6 hours of 1-on-1 time with an engineer (free). Our 12-month Scale level offers you: Up to €100,000 of free cloud credits, up to 20 hours of 1-on-1 time with an engineer (free)."
+    },
+    {
+      "type": "link",
+      "url": "https://startup.ovhcloud.com/en/faq-support/",
+      "title": "OVHcloud Startup Program FAQ — current voucher restrictions",
+      "text": "Your participation will last for a maximum of 12 months for each of our levels, Start and Scale. After this period, any remaining Startup Program vouchers will be invalid and you will be responsible for making full payment for all your OVHcloud solutions."
     }
   ]
 }
