@@ -1,0 +1,15 @@
+# Verified 2026-10-16 against https://opencode.ai/v2/docs/console/models/
+# ("GLM-5.3-Flash Free is free on OpenCode for a limited time."
+# Pricing table: "GLM-5.3-Flash Free | Free | Free | Free | -"; model id glm-5.3-flash-free.)
+# Announced by @opencode 2026-10-16: https://x.com/opencode/status/2110986357539754114
+# ("GLM 5.3 Flash is now free in OpenCode"). No official end date stated.
+title: GLM-5.3-Flash Free on OpenCode Console
+provider: OpenCode
+category: coding
+amount: Free GLM-5.3-Flash model access on OpenCode Console (free input, output and cached reads; limited time)
+expiry_date: null
+source_url: https://opencode.ai/v2/docs/console/models/
+verified_date: 2026-10-16
+verification: social_proof
+review_status: under-review
+signup: none

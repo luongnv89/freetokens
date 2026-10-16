@@ -1,9 +1,24 @@
 {
-  "generated_at": "2026-10-16T03:27:06Z",
-  "count": 252,
-  "active_count": 219,
+  "generated_at": "2026-10-16T07:43:12Z",
+  "count": 253,
+  "active_count": 220,
   "expired_count": 33,
   "offers": [
+    {
+      "slug": "opencode-deepseek-v4-1-flash-free",
+      "title": "DeepSeek V4.1 Flash Free on OpenCode Console",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free DeepSeek V4.1 Flash model access on OpenCode Console (free input, output and cached reads; limited time)",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-10-15",
+      "added_date": "2026-10-15",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
+      "status": "active"
+    },
     {
       "slug": "opencode-cat-jam-free",
       "title": "Cat Jam Free on OpenCode Console",
@@ -3770,14 +3785,14 @@
       "status": "expired"
     },
     {
-      "slug": "opencode-deepseek-v4-1-flash-free",
-      "title": "DeepSeek V4.1 Flash Free on OpenCode Console",
+      "slug": "opencode-glm-5-3-flash-free",
+      "title": "GLM-5.3-Flash Free on OpenCode Console",
       "provider": "OpenCode",
       "category": "coding",
-      "amount": "Free DeepSeek V4.1 Flash model access on OpenCode Console (free input, output and cached reads; limited time)",
+      "amount": "Free GLM-5.3-Flash model access on OpenCode Console (free input, output and cached reads; limited time)",
       "expiry_date": null,
       "source_url": "https://opencode.ai/v2/docs/console/models/",
-      "verified_date": "2026-10-15",
+      "verified_date": "2026-10-16",
       "added_date": null,
       "verification": "social_proof",
       "review_status": "under-review",
