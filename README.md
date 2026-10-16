@@ -48,6 +48,17 @@ Offer submissions go through pull requests — see
 supplying just the offer's source URL and letting the repository's agent
 skill verify it and open the PR for you.
 
+## Agent skills
+
+The curation skills (`daily-offer-check`, `offer-hunter`, `offer-updater`) live
+in [`skills/`](skills/), the only copy to edit. Install them into your agent
+before use; the install folders (`.agents/skills/`, `.claude/skills/`) are
+git-ignored:
+
+```bash
+asm install ./skills/offer-updater -s project   # repeat per skill; -p picks the tool
+```
+
 ## Local Build
 
 The site is a Vite + React 19 app under `app/` (see

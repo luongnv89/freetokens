@@ -1,4 +1,4 @@
-"""Tests for the offer-updater skill helper (.claude/skills/offer-updater).
+"""Tests for the offer-updater skill helper (skills/offer-updater).
 
 Covers issue #20's acceptance criteria: the deterministic validator must
 accept schema-compliant drafts, reject malformed ones naming the offending
@@ -17,8 +17,8 @@ import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-HELPER = REPO / ".claude" / "skills" / "offer-updater" / "validate_offer.py"
-SKILL_MD = REPO / ".claude" / "skills" / "offer-updater" / "SKILL.md"
+HELPER = REPO / "skills" / "offer-updater" / "validate_offer.py"
+SKILL_MD = REPO / "skills" / "offer-updater" / "SKILL.md"
 
 sys.path.insert(0, str(REPO / "scripts"))
 
