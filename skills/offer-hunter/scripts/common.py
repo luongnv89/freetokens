@@ -6,7 +6,16 @@ import re
 import sys
 from urllib.parse import urlsplit, urlunsplit
 
-REPO = Path(__file__).resolve().parents[4]
+def _repo_root(start):
+    """Walk up from *start* until scripts/offer_model.py is found."""
+    for candidate in (start, *start.parents):
+        if (candidate / 'scripts' / 'offer_model.py').is_file():
+            return candidate
+    raise SystemExit(f'could not locate scripts/offer_model.py above {start}; '
+                     'run this script from inside the freetokens repository')
+
+
+REPO = _repo_root(Path(__file__).resolve().parent)
 sys.path.insert(0, str(REPO / 'scripts'))
 from offer_model import (CATEGORIES, OfferError, parse_offer_text,  # noqa: E402
                          validate_detail, validate_offer)

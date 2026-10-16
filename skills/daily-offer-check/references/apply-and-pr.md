@@ -77,7 +77,7 @@ whose title contains `stale content`; never create an issue just for this.
    Created` and `gh issue view <N> --json state` reads `OPEN`; bind `issue`.
 3. **Stage.** `git add -- <offers/-prefixed applied paths>` plus `index.json`,
    `app/public/llms.txt`, and `app/public/llms-full.txt`; never `git add .`.
-   Then `python3 .agents/skills/daily-offer-check/scripts/check_scope.py
+   Then `python3 skills/daily-offer-check/scripts/check_scope.py
    --staged` must print `OK scope`, and repository security/pre-commit gates
    must pass. Either blocking stops publication; never stage around it.
 4. **Commit and push.** Message `chore(offers): re-verify active offers
@@ -88,7 +88,7 @@ whose title contains `stale content`; never create an issue just for this.
    page text; the script escapes them):
 
    ```bash
-   python3 .agents/skills/daily-offer-check/scripts/render_report.py \
+   python3 skills/daily-offer-check/scripts/render_report.py \
      --inventory /tmp/daily-offer-check-$today-inventory.json \
      --verdicts /tmp/daily-offer-check-$today-verdicts.json \
      --applied /tmp/daily-offer-check-$today-applied.json \

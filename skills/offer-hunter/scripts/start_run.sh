@@ -29,7 +29,7 @@ done
 
 REPO="$(git rev-parse --show-toplevel 2>/dev/null)" || fail "not inside a git repository" "cd into the freetokens repo first"
 cd "$REPO" || exit 1
-S=".agents/skills/offer-hunter"
+S="skills/offer-hunter"
 for f in scripts/common.py scripts/catalog_snapshot.py scripts/shortlist.py scripts/write_offers.py \
          scripts/check_scope.py scripts/render_pr.py agents/scout.md agents/verifier.md \
          references/sources.md references/web-tools.md references/trust-and-value.md references/publish.md; do

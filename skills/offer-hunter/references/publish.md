@@ -21,7 +21,7 @@ Otherwise render the body to a file and create it. Never pass a body
 inline, because the shell expands `$25` to `5`:
 
 ```bash
-python3 .agents/skills/offer-hunter/scripts/render_pr.py \
+python3 skills/offer-hunter/scripts/render_pr.py \
   --shortlist "$W/shortlist.json" --mode issue > "$W/issue-body.md"
 gh issue create --title "Offer hunt $today: $new_count new, $update_count updated offers" \
   --body-file "$W/issue-body.md"
@@ -39,7 +39,7 @@ or `git add -A`:
 python3 -c 'import json,sys; print("\0".join(json.load(open(sys.argv[1]))["applied"]), end="")' \
   "$W/applied.json" | xargs -0 git add --
 git add -- index.json app/public/llms.txt app/public/llms-full.txt
-python3 .agents/skills/offer-hunter/scripts/check_scope.py
+python3 skills/offer-hunter/scripts/check_scope.py
 ```
 
 `check_scope.py` must print `OK scope`. On exit 1, stop and report its
@@ -60,7 +60,7 @@ output.
 ## 4. Pull request
 
 ```bash
-python3 .agents/skills/offer-hunter/scripts/render_pr.py \
+python3 skills/offer-hunter/scripts/render_pr.py \
   --shortlist "$W/shortlist.json" --mode pr --issue "$issue" \
   --checks "validate_offers.py exit 0; check_scope.py OK scope; index.json and llms files regenerated" \
   --web-tools "$web_tools_note" > "$W/pr-body.md"

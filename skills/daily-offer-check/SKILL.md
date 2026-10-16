@@ -87,7 +87,7 @@ Use that same `$today` for the branch name, `--today` flags, issue input, and PR
 - Stash tracked and untracked work **before** sync as above. On sync failure retain the stash; on pop conflicts stop and ask. Never drop a stash to get a clean tree.
 - If `origin` is missing or the rebase conflicts: stop, report the error verbatim, and ask. Never force-push.
 - **Report-only:** stop after fetch/rebase on the current branch. Do **not** create or check out `chore/daily-offer-check-$today`.
-- **Publishing branches:** require `git status --porcelain` empty **before** any checkout; restored WIP stops the run. Run the **bundled-files check**, then switch branches only with `python3 .agents/skills/daily-offer-check/scripts/prepare_branch.py --today "$today"`, which must print `OK branch`. It creates `chore/daily-offer-check-$today` from `origin/main`, or resumes an earlier attempt today by fast-forward only (to the pushed branch, else `origin/main`); it refuses, without switching branches, a branch that has diverged or lacks `origin/main` (a leftover cut from an older `main` lacks this skill's current scripts). On refusal, stop and report its stderr; never rebuild the branch by hand (`checkout -B`, `reset`, `branch -D`). Then run the bundled-files check again and require `python3 .agents/skills/daily-offer-check/scripts/check_scope.py --base origin/main --head HEAD` to print `OK scope`, proving a resumed branch holds only sweep changes.
+- **Publishing branches:** require `git status --porcelain` empty **before** any checkout; restored WIP stops the run. Run the **bundled-files check**, then switch branches only with `python3 skills/daily-offer-check/scripts/prepare_branch.py --today "$today"`, which must print `OK branch`. It creates `chore/daily-offer-check-$today` from `origin/main`, or resumes an earlier attempt today by fast-forward only (to the pushed branch, else `origin/main`); it refuses, without switching branches, a branch that has diverged or lacks `origin/main` (a leftover cut from an older `main` lacks this skill's current scripts). On refusal, stop and report its stderr; never rebuild the branch by hand (`checkout -B`, `reset`, `branch -D`). Then run the bundled-files check again and require `python3 skills/daily-offer-check/scripts/check_scope.py --base origin/main --head HEAD` to print `OK scope`, proving a resumed branch holds only sweep changes.
 
 ## Leading words
 
@@ -124,7 +124,7 @@ in *Dependency Preflight*.
 From repo root:
 
 ```bash
-python3 .agents/skills/daily-offer-check/scripts/list_active.py --today "$today"
+python3 skills/daily-offer-check/scripts/list_active.py --today "$today"
 # add --offers-dir <dir> and/or --slugs a,b when the branch selector says so
 ```
 
@@ -157,8 +157,8 @@ another — say so in the Step 2 report.
 
 Put these paths in each worker prompt as files to Read (you do not Read them):
 
-- `.agents/skills/daily-offer-check/agents/verifier.md`
-- `.agents/skills/daily-offer-check/references/trust-policy.md`
+- `skills/daily-offer-check/agents/verifier.md`
+- `skills/daily-offer-check/references/trust-policy.md`
 
 Plus the batch objects with every inventory field: slug, path, title,
 provider, amount, expiry_date, source_url, verified_date, sha256; also pass today.
@@ -194,7 +194,7 @@ file is a JSON array — that is repair, not rewriting verdicts. Extra slugs, du
 corrected worker output rather than silently dropping or rewriting verdicts. Then:
 
 ```bash
-python3 .agents/skills/daily-offer-check/scripts/check_coverage.py \
+python3 skills/daily-offer-check/scripts/check_coverage.py \
   /tmp/daily-offer-check-$today-inventory.json \
   /tmp/daily-offer-check-$today-verdicts.json
 ```
@@ -208,7 +208,7 @@ and halt.
 ## Step 4 — Apply safe writes (you)
 
 ```bash
-python3 .agents/skills/daily-offer-check/scripts/apply_verdicts.py \
+python3 skills/daily-offer-check/scripts/apply_verdicts.py \
   --today "$today" \
   --inventory /tmp/daily-offer-check-$today-inventory.json \
   --verdicts /tmp/daily-offer-check-$today-verdicts.json \
@@ -257,7 +257,7 @@ path with `offers/`; `git checkout -- <literal paths>` for tracked files,
 
 ## Step 6 — Issue + PR (you, via /issue-creator)
 
-Read `.agents/skills/daily-offer-check/references/apply-and-pr.md` now (not
+Read `skills/daily-offer-check/references/apply-and-pr.md` now (not
 earlier). Empty-diff first: if `writes == 0`, create no issue and no PR —
 follow the exception in that file. Otherwise, in this order:
 
@@ -276,7 +276,7 @@ fired. Bind `issue` and `pr`.
 
 ## Step 7 — Review loop (you, via /issue-pr-review)
 
-Read `.agents/skills/daily-offer-check/references/review-and-merge.md` now.
+Read `skills/daily-offer-check/references/review-and-merge.md` now.
 Run up to **3 rounds** of `/issue-pr-review <pr> --auto --no-merge`, each
 followed by that file's round gate (artifact regeneration, scope gate,
 validator). Done when a round is **clean**; bind `head`. A failed gate
@@ -299,7 +299,7 @@ Render the per-slug table with the script, never by hand (quotes are
 untrusted page text). Drop `--applied` on Report-only:
 
 ```bash
-python3 .agents/skills/daily-offer-check/scripts/render_report.py \
+python3 skills/daily-offer-check/scripts/render_report.py \
   --inventory /tmp/daily-offer-check-$today-inventory.json \
   --verdicts /tmp/daily-offer-check-$today-verdicts.json \
   --applied /tmp/daily-offer-check-$today-applied.json

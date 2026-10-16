@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 REPO = Path(__file__).resolve().parents[1]
-SKILL = REPO / '.agents/skills/daily-offer-check'
+SKILL = REPO / 'skills/daily-offer-check'
 
 OFFER_YAML = ('title: "T"\nprovider: T\ncategory: api_provider\namount: $10\n'
               'expiry_date: null\nsource_url: https://example.com/offer\n'
