@@ -1,0 +1,23 @@
+{
+  "summary": "YC's AI Stack gives students who attend an eligible YC event (starting Fall 2025) over $25,000 in free credits for AI tools and cloud services, including $10,000 each on AWS and Microsoft Azure, $1,000 OpenAI and $500 Anthropic, plus credits from YC-company devtools such as Firecrawl, Exa, Vapi, Browser Use, Reducto and Gumloop. Access lasts one year from the qualifying event.",
+  "claim_steps": [
+    "Attend an eligible YC event (Fall 2025 onward), RSVPing with your Hacker News account",
+    "Watch for the confirmation email after the event",
+    "Sign in at deals.ycombinator.com/students with the same Hacker News account to check eligibility",
+    "Browse and redeem each partner deal"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://deals.ycombinator.com/students",
+      "title": "YC AI Stack | YC Deals",
+      "text": "Over $25,000 in free credits for AI tools and cloud services. Attend an eligible YC Event starting in Fall 2025. Your access lasts for one year from the date of the qualifying event."
+    },
+    {
+      "type": "link",
+      "url": "https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack",
+      "title": "Announcing the YC AI Stack | Y Combinator",
+      "text": "Students who attend a YC university event starting in Fall 2025 are eligible to redeem a deal. Over $20,000 in cloud credits on Azure and AWS; over $5,000 in credits for GPT/Claude/Grok."
+    }
+  ]
+}

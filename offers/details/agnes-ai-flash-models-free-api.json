@@ -1,0 +1,22 @@
+{
+  "summary": "Agnes AI's official Model Pricing page lists agnes-2.5-flash and agnes-3.0-flash at a current price of $0 per million tokens for cached input, input and output (list prices $0.005/M cached input, $0.05/M input, $0.15/M output shown struck through), and states they are currently free. The free pricing is promotional; end dates are subject to Agnes AI platform announcements. The API is reached at https://apihub.agnes-ai.com/v1 with a Bearer API key created in the Agnes AI console. The official page does not say 'permanently free', nor confirm the 256K context figure from the lead.",
+  "claim_steps": [
+    "Log in to the Agnes AI console and open the API Key management page",
+    "Create and copy an API key",
+    "Set the API base URL to https://apihub.agnes-ai.com/v1 and send requests with Authorization: Bearer YOUR_API_KEY using model agnes-2.5-flash or agnes-3.0-flash"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://wiki.agnes-ai.com/en/docs/pricing.md",
+      "title": "Model Pricing",
+      "text": "Cached input, input tokens, and output tokens are currently free for `agnes-2.5-flash` and `agnes-3.0-flash`. Current price: $0 / M (list: cached input $0.005 / M, input $0.05 / M, output $0.15 / M). Promotional end dates are subject to Agnes AI platform announcements and your account bill."
+    },
+    {
+      "type": "link",
+      "url": "https://agnes-ai.com/en/docs/overview",
+      "title": "Overview",
+      "text": "Set the API Base URL to: https://apihub.agnes-ai.com/v1. Log in to the Agnes AI console, go to the API Key management page, then create and copy your API Key."
+    }
+  ]
+}

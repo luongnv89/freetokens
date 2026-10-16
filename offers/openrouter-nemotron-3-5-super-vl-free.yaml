@@ -1,0 +1,13 @@
+# Hunted 2026-10-16 by offer-hunter; verified against https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-super-vl:free/endpoints
+# (""name": "NVIDIA: Nemotron 3.5 Super VL (free)" ... "context_length": 1000000, "pricing": {"prompt": "0", "completion": "0"}")
+# Lead: https://lmspeed.net/model/nemotron-3-5-super-vl
+title: Nemotron 3.5 Super VL Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free nvidia/nemotron-3.5-super-vl:free endpoint at $0 input/output (1M context, 120B-A12B multimodal MoE: text, image, video input); OpenRouter free-model rate limits apply
+expiry_date: null
+source_url: https://openrouter.ai/nvidia/nemotron-3.5-super-vl:free
+verified_date: 2026-10-16
+verification: social_proof
+review_status: under-review
+signup: required
