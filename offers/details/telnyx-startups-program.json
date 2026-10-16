@@ -1,18 +1,21 @@
 {
-  "summary": "Telnyx's selective startup program offers up to $20,000 in voice-AI credits for 6 months (STT, TTS and LLM inference), plus 3 months of engineering support. It targets startups building their own product with a working voice AI agent front and center and a working prototype or clear path to launch. The eligibility heading says 'Raised $500k+ in funding', but its body says 'If you've recently raised or are generating revenue from production users'; confirm eligibility during review rather than treating that ambiguous wording as an unconditional funding minimum. Apply with a company email and product, funding and launch details; accepted startups complete a kickoff before credits are added.",
+  "summary": "Telnyx's selective startup program offers up to $20,000 in voice-AI credits for 6 months (STT, TTS and LLM inference), plus 3 months of engineering support. Credits cover Voice AI agents, STT/TTS/LLM inference APIs, embeddings and cloud storage, not general call control or other non-AI services. LLM coverage is limited to open-source models running on Telnyx infrastructure: external proprietary models such as GPT-5 can be connected but are not paid for by these credits. Standard pricing applies after credits are exhausted. It targets startups building their own product with a working voice AI agent front and center and a working prototype or clear path to launch. The eligibility heading says 'Raised $500k+ in funding', but its body says 'If you've recently raised or are generating revenue from production users'; confirm eligibility during review rather than treating that ambiguous wording as an unconditional funding minimum. Apply with a company email and product, funding and launch details; accepted startups complete a kickoff before credits are added.",
   "claim_steps": [
     "Confirm your product has a working voice AI agent front and center and a working prototype or clear launch path.",
     "Review the funding/revenue criterion: the heading says 'Raised $500k+ in funding', while the body says recently raised or generating production-user revenue. Ask Telnyx to confirm your eligibility.",
     "Apply with a company email and provide product, funding, and launch details.",
     "Wait for review, normally within 48 hours.",
-    "If accepted, complete the kickoff so credits can be added to the account. Use credits within 6 months; engineering support lasts 3 months."
+    "If accepted, complete the kickoff so credits can be added to the account. Use credits within 6 months of approval; engineering support lasts 3 months.",
+    "Use credits for Voice AI agents, STT/TTS/LLM inference, embeddings and cloud storage, not general call control or other non-AI services.",
+    "For LLM inference, credits cover only open-source models running on Telnyx infrastructure; external proprietary models such as GPT-5 are not credit-covered.",
+    "Monitor the balance: standard pricing follows credit exhaustion, and unused credits do not roll over after the 6-month expiry."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://telnyx.com/startups-program",
       "title": "Telnyx Startups Program: Unlock $20K Credits",
-      "text": "A program providing $20,000 in AI credits, dedicated engineering support, and co-marketing opportunities to early-stage startups building voice AI products."
+      "text": "A program providing $20,000 in AI credits, dedicated engineering support, and co-marketing opportunities to early-stage startups building voice AI products. ... Voice AI agents, inference APIs (STT, TTS, LLM), embeddings, and cloud storage. Credits do not cover general call control or non-AI services. ... Credits only cover open-source models running on Telnyx infrastructure. ... You transition to standard pricing."
     },
     {
       "type": "link",

@@ -4,10 +4,11 @@
 # "Grants range from $500 to $30,000";
 # "Credits expire 12 months or less from grant approval.")
 # No firsthand signup test; curator verification date and statuses retained.
+# FAQ: "Your account converts to our Flex tier unless you’ve selected a paid plan."
 title: Resemble AI Builder's Grant
 provider: Resemble AI
 category: startup_program
-amount: Up to $30,000 in credits ($500–$30K by use case) for detection, Intelligence, watermarking and Identity APIs; credits expire ≤12 months from grant approval
+amount: Up to $30,000 in credits ($500–$30K by use case) for detection, Intelligence, watermarking and Identity APIs; credits expire ≤12 months from grant approval; account converts to Flex after 12 months unless a paid plan is selected
 expiry_date: null
 source_url: https://www.resemble.ai/start/builders-grant-startup-program
 verified_date: 2026-09-30

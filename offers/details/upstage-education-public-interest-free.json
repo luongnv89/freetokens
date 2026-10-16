@@ -1,9 +1,10 @@
 {
-  "summary": "The Upstage x AWS AI Initiative provides eligible educational and public-interest organizations — schools, hospitals, and nonprofits — with free access to Solar Pro (LLM) and Document Parse for up to one year. Applications go through the 'Get free access' link on the Upstage pricing page.",
+  "summary": "The Upstage x AWS AI Initiative offers approved K-12/university institutions, university hospitals and nonprofits/NGOs free access to Solar Pro 4 and Document Parse for up to one year, subject to a fixed usage cutoff of March 31, 2027 at 23:00 KST. The official event/application page says usage runs from application approval until March 31, 2027; its Event Info supplies the 11:00 PM KST time. Applicants must pass internal review and receive instructions by email. Unlike the pricing page's broader hospitals shorthand, the event's eligibility specifically names university hospitals. The usage/program cutoff is not a separately stated application deadline, and approval does not guarantee a full year beyond it.",
   "claim_steps": [
-    "Open the Upstage pricing page and find the 'AI support program for educational and public interest organizations' section.",
-    "Click 'Get free access' and submit the application for your school, hospital, or nonprofit.",
-    "On approval, use Solar Pro (LLM) and Document Parse free for up to one year."
+    "Read and apply through https://www.upstage.ai/events/ai-initiative-2026-en (linked from Upstage pricing). The current initiative covers Solar Pro 4 and Document Parse.",
+    "Check eligibility against the event's list: K-12 education/universities, university hospitals and NPOs/NGOs. Do not assume that the pricing page's broader hospitals wording makes every hospital eligible.",
+    "Submit the application and await internal review and approval. Approved applicants receive detailed instructions by email; processing may take time and acceptance is not automatic.",
+    "Use approved access for up to one year, but only until March 31, 2027 at 23:00 KST. This is the published usage/program cutoff, not a separately stated signup deadline; later approval does not extend it."
   ],
   "social_proof": [
     {
@@ -17,6 +18,18 @@
       "url": "https://www.upstage.ai/pricing/api",
       "title": "Pricing | Upstage AI",
       "text": "AI access for schools, hospitals, and nonprofits. We provide eligible institutions with free access to Solar Pro (LLM) and Document Parse for up to one year — helping you explore and adopt AI without cost barriers."
+    },
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/events/ai-initiative-2026-en",
+      "title": "Upstage x AWS AI Initiative — current model scope and usage cutoff",
+      "text": "Free access to AI models (Solar Pro 4, Document Parse) for up to one year"
+    },
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/events/ai-initiative-2026-en",
+      "title": "Upstage initiative Event Info — usage/program end, not a signup deadline",
+      "text": "~March 31, 2027 11:00 PM (KST)"
     }
   ]
 }

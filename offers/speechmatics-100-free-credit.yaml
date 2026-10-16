@@ -5,10 +5,13 @@
 # Source checked 2026-10-11 (not firsthand tested): STT "Start free • $100 in credits";
 # TTS separately offers "First 1 million characters free". No shared STT/TTS pool
 # established by current pricing. Free real-time concurrency remains 2 sessions.
+# Current pricing FAQ: "Sign-up bonus, credit-pack credits and annual subscription
+# credits last 12 months." No-card Free API pauses at exhaustion; adding a card
+# upgrades Free to Pro, where usage beyond the grant is billed to the card.
 title: Speechmatics $100 Free Credit
 provider: Speechmatics
 category: voice
-amount: $100 in free STT credits (55+ languages, no card required), 2 concurrent real-time sessions; separately, first 1M TTS characters free
+amount: $100 in free STT signup credits valid 12 months (55+ languages, no card required), 2 concurrent real-time sessions; separately, first 1M TTS characters free
 expiry_date: null
 source_url: https://www.speechmatics.com/pricing
 verified_date: 2026-09-30

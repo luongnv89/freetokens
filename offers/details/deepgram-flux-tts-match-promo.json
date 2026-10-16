@@ -1,9 +1,11 @@
 {
-  "summary": "Limited-time Deepgram promotion: every $1 of paid Flux TTS usage earns $1 in bonus credits, up to $500 per eligible project. Open to new and existing Pay-As-You-Go and Growth projects (Enterprise excluded); a valid payment method is required. Runs Sep 15 – Dec 31, 2026; bonus credits never expire and stack with the standard $200 signup credit.",
+  "summary": "Limited-time Deepgram promotion: every $1 of paid Flux TTS usage earns $1 in bonus credits, up to $500 per eligible project. Open to new and existing Pay-As-You-Go and Growth projects (Enterprise excluded); a valid payment method is required. Runs from 12:00 a.m. Pacific Time on September 15 through 11:59 p.m. Pacific Time on December 31, 2026. Bonus credits never expire, are nontransferable, and apply only to later Deepgram API usage in the project that earned them; usage cannot be pooled across projects. Other discounts, promotional codes/credits, referral or partner/program credits, and negotiated pricing cannot be combined without Deepgram's written permission. The standard $200 signup credit is an exception and can be kept alongside the bonus, but usage funded by it or any promotional credit earns no match. Auto-reload is optional; if enabled, it automatically charges the payment method according to Billing settings.",
   "claim_steps": [
     "Use a Deepgram Pay-As-You-Go or Growth project with a valid payment method on file.",
-    "Spend paid credits on Flux TTS between Sep 15 and Dec 31, 2026 (usage paid with promotional credits does not qualify).",
-    "Bonus credits are granted to the project, typically within 1 week."
+    "Spend paid credits on Flux TTS from 12:00 a.m. Pacific Time Sep 15 through 11:59 p.m. Pacific Time Dec 31, 2026. Usage paid with promotional credits, including the standard $200 signup credit or earned bonuses, does not qualify.",
+    "Bonus credits are granted to the earning project, typically within 1 week, for later API usage there. They are nontransferable; do not pool usage across projects.",
+    "Do not combine other discounts, promotions, referral/partner credits or negotiated pricing without Deepgram's written approval. The standard $200 signup credit is the exception, but spending it earns no match.",
+    "Auto-reload is optional, not required for the promotion. If enabled, it automatically charges your payment method per Billing settings; review, change or disable it there."
   ],
   "social_proof": [
     {
@@ -17,6 +19,24 @@
       "url": "https://deepgram.com/promotions/2026-09/flux-tts-promo-terms-and-conditions",
       "title": "Deepgram — Flux TTS Credit Bonus Promotion Terms",
       "text": "The Promotion begins at 12:00 a.m. Pacific Time on September 15, 2026 and ends at 11:59 p.m. Pacific Time on December 31, 2026. Up to $500 in Bonus Credits per Eligible Project."
+    },
+    {
+      "type": "link",
+      "url": "https://deepgram.com/promotions/2026-09/flux-tts-promo-terms-and-conditions",
+      "title": "Flux TTS promotion terms §3.7 — stacking exception",
+      "text": "The Promotion may not be combined with any other discount, promotional code, credit, referral, partner/program credit, or negotiated pricing unless Deepgram permits it in writing. This restriction does not apply to Deepgram's standard $200 in free sign-up credits, which every new account receives and which participants keep in addition to the Bonus Credits, however, usage paid with sign-up credits is not Qualifying Usage."
+    },
+    {
+      "type": "link",
+      "url": "https://deepgram.com/promotions/2026-09/flux-tts-promo-terms-and-conditions",
+      "title": "Flux TTS promotion terms §3.6 — project-specific credits",
+      "text": "The Promotion and Bonus Credits are specific to the Eligible Project and may not be sold, assigned, transferred, or applied to any other account or project."
+    },
+    {
+      "type": "link",
+      "url": "https://deepgram.com/promotions/2026-09/flux-tts-promo-terms-and-conditions",
+      "title": "Flux TTS promotion terms §4.2 — optional auto-reload",
+      "text": "Auto-reload is not a condition of the Promotion. If Auto-reload is enabled, your payment method will be automatically charged to replenish your balance per your Billing settings; you can review, change, or disable Auto-reload at any time in Billing."
     }
   ]
 }

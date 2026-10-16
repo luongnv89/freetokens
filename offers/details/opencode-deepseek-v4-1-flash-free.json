@@ -1,13 +1,20 @@
 {
-  "summary": "OpenCode made DeepSeek V4.1 Flash free on 2026-10-15. OpenCode's Console docs list DeepSeek V4.1 Flash Free (model id deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/v1/chat/completions endpoint. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash model (deepseek-v4.1-flash) is listed separately at $0.30/$1.20 per 1M input/output tokens, so pick the Free variant.",
+  "summary": "OpenCode made DeepSeek V4.1 Flash free on 2026-10-15. OpenCode's Console docs list DeepSeek V4.1 Flash Free (model id deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash model (deepseek-v4.1-flash) is listed separately at $0.30/$1.20 per 1M input/output tokens, so pick the Free variant.",
   "claim_steps": [
-    "Sign in to OpenCode Console and copy your API key. The general Console setup also asks for billing details and credits.",
+    "For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model deepseek-v4.1-flash-free and messages, omitting the Authorization header. No inference request was tested.",
+    "Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver.",
     "In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key.",
     "Run /models and select DeepSeek V4.1 Flash Free (opencode/deepseek-v4.1-flash-free), not the paid DeepSeek V4.1 Flash.",
-    "Or call https://opencode.ai/inference/v1/chat/completions with model deepseek-v4.1-flash-free. The free period is limited-time.",
-    "Review Console billing before funding: auto-reload defaults to $20 when the balance goes below $5."
+    "The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.",
+    "For the optional Console route, review billing before funding: auto-reload defaults to $20 when the balance goes below $5 and can be changed or disabled."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/api/inference/",
+      "title": "Inference API | OpenCode",
+      "text": "Paid models require the header; free chat models can be called without it. OpenAI Chat Completions: /inference/openai/v1/chat/completions."
+    },
     {
       "type": "link",
       "url": "https://opencode.ai/v2/docs/console/models/",

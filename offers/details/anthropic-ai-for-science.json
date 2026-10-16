@@ -1,16 +1,18 @@
 {
-  "summary": "Anthropic's AI for Science program grants free Claude API credits for high-impact scientific projects. The Help Center (updated Mar 16, 2026) focuses selection on researchers attached to research institutions, including academia and nonprofits, and says successful applicants receive up to $20,000 in API credits for 6 months. Anthropic's Aug 27, 2026 news post broadens the application scope: any researcher is eligible to apply for up to $50,000 in credits per project, without guaranteed acceptance. That announcement says biology and chemistry researchers remain limited to Opus-class models; Claude Fable models continue to block professional biology and drug-development queries because of dual-use risks. Credits are API-only (not Claude.ai). Applications are reviewed on the first Monday of each month. Distinct from the Claude Team plan for scientists seating promotion.",
+  "summary": "Anthropic's AI for Science program supports high-impact scientific research, but its official sources conflict and the applicable award needs confirmation. The Help Center dated March 16, 2026 describes up to $20,000 in API-only credits for six months, explicitly excluding the Claude web app. The current linked public application instead describes up to $50,000 in extra-usage credits across all Claude.ai tools, including Claude Science, and requires a Claude account and Claude.ai organization ID. It encourages approximately six-month project timelines, which does not establish credit validity for that route. The August 27, 2026 announcement also cites up to $50,000 per project and says any researcher may apply; the current form describes qualified nonprofit/academic researchers unless specified otherwise. Acceptance is discretionary, with monthly reviews (the Help Center specifies the first Monday). All projects need PI approval; the form asks for the PI's academic/organization email for selected-project approval and asks the Claude.ai account type only for credit distribution, not eligibility. Submit only non-confidential, non-proprietary project information and agree to the form's terms. Confirm award amount, API versus Claude.ai scope, eligibility and validity with aiforscience@anthropic.com before relying on either route. No policy-change date or signup deadline is established. Distinct from the Claude Team plan for scientists seating promotion.",
   "claim_steps": [
-    "Create a Claude Console account if you do not already have one (API access; credits do not apply to Claude.ai).",
-    "Complete the AI for Science application with team and project details. The Help Center prioritizes institution-attached researchers; the Aug 27, 2026 announcement says any researcher may apply. Acceptance is not guaranteed.",
-    "Wait for the monthly review (first Monday of each month). Unapproved submissions do not receive individual replies.",
-    "If approved, API credits are applied to the organization ID for the stated period. Multi-lab programs should apply on one account."
+    "Read both the Help Center and current application: the former says up to $20,000 API credits for six months; the latter says up to $50,000 Claude.ai extra-usage credits, including Claude Science. Ask aiforscience@anthropic.com which terms apply.",
+    "Open the current application: https://docs.google.com/forms/d/e/1FAIpQLSfwDGfVg2lHJ0cc0oF_ilEnjvr_r4_paYi7VLlr5cLNXASdvA/viewform?usp=header and select Standard AI for Science program. The form focuses on qualified nonprofit/academic researchers; approval is not guaranteed.",
+    "Have a Claude account and provide the required Claude.ai organization ID from account settings. The form asks your account type for credit distribution only; it explicitly says this does not affect project eligibility.",
+    "Obtain PI approval for the project. The form asks for your PI's academic/organization email (your own if you are the PI) and says selected projects require the PI to acknowledge and approve by email; the email field itself is not marked required.",
+    "Provide organization/profile links, team credentials, project proposal, expected impact, Claude workflow, requested credit budget and biosecurity details. Do not submit confidential or proprietary information; acceptance of the form's terms is required.",
+    "Wait for monthly review; the Help Center specifies the first Monday and says unapproved submissions receive no individual response. Before using an award, confirm its amount, product scope and validity rather than assuming both conflicting offers apply."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program",
-      "title": "Anthropic's AI for Science Program | Claude Help Center",
+      "title": "AI for Science Help Center — API terms conflict with current application",
       "text": "If successful, we will apply up to $20,000 in API credits to your account for a 6-month period. Note that these credits are for API use and do not apply to the Claude web app. We evaluate submissions on the first Monday of each month."
     },
     {
@@ -18,6 +20,12 @@
       "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
       "title": "Expanding our support for scientists",
       "text": "you can apply to our AI for Science program for up to $50,000 in credits per project. Any researcher is eligible to apply. For now, researchers working in biology and chemistry will still be limited to our Opus-class models. Claude Fable models will continue to block professional biology and drug development queries because of their potential dual-use risks."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSfwDGfVg2lHJ0cc0oF_ilEnjvr_r4_paYi7VLlr5cLNXASdvA/viewform?usp=header",
+      "title": "Current public AI for Science application — conflicting Claude.ai terms",
+      "text": "Note: The AI for Science program offers extra usage credits, which can be used across all Claude.ai tools, including Claude Science. The maximum award for the AI for Science program is $50,000 in credits."
     }
   ]
 }

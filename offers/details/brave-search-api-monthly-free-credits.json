@@ -1,9 +1,10 @@
 {
-  "summary": "Brave Search API offers a Search plan (complete search results with LLM context, $5 per 1,000 requests, 50 queries per second) and an Answers plan (grounded summarized answers, $4 per 1,000 requests plus $5 per million input/output tokens, 2 queries per second). Both include $5 in free credits every month, applied to the account automatically. A credit card is required as an anti-fraud measure; on free plans it only confirms identity and is not charged.",
+  "summary": "Brave Search API offers a Search plan (complete search results with LLM context, $5 per 1,000 requests, 50 queries per second) and an Answers plan (grounded summarized answers, $4 per 1,000 requests plus $5 per million input/output tokens, 2 queries per second). Both include $5 in free credits every month, applied to the account automatically. A credit card is required as an anti-fraud measure; on free plans it only confirms identity and is not charged. Storing API results in whole or part, including for LLM training or tuning, requires a plan explicitly granting storage rights; the free credit itself does not establish those rights. The API grants no rights to third-party webpage content, whose publishers' copyright terms still apply.",
   "claim_steps": [
     "Open https://brave.com/search/api/ and choose Get started on the Search or Answers plan",
     "Create an account and add a credit card for identity verification (not charged on free plans)",
-    "The $5 monthly free credit is applied to your account automatically"
+    "The $5 monthly free credit is applied to your account automatically",
+    "Before storing any API results, including for LLM training or tuning, subscribe to a plan explicitly granting storage rights. Access to third-party webpages must comply with their publishers' copyright terms."
   ],
   "social_proof": [
     {
@@ -17,6 +18,18 @@
       "url": "https://exa.ai/blog/best-web-search-tools-for-ai-agents",
       "title": "The 8 best web search tools for AI agents in 2026",
       "text": "Brave Search API uses Brave's independent index of more than 30 billion pages. It costs $5 per 1,000 requests and includes $5 in free credits each month."
+    },
+    {
+      "type": "link",
+      "url": "https://brave.com/search/api/",
+      "title": "Brave Search API FAQ — storage rights",
+      "text": "If you would like to store the API results in part or whole (for example, to train or tune an LLM), you will need to subscribe to a plan that explicitly grants storage rights."
+    },
+    {
+      "type": "link",
+      "url": "https://brave.com/search/api/",
+      "title": "Brave Search API FAQ — third-party copyright",
+      "text": "The Brave Search API does not grant any rights to third-party content such as webpages. Customers who access URLs displayed in the Brave Search API must ensure their access to those webpages complies with the copyright terms of the page publishers."
     }
   ]
 }

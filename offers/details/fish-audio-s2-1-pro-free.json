@@ -1,8 +1,9 @@
 {
-  "summary": "Fish Audio offers s2.1-pro-free — the same TTS model as the paid S2.1-Pro — at $0 for development, testing, prototyping, and smaller businesses. Same quality and 83-language coverage as s2.1-pro, under fair-use limits, with no TTFA or DPA guarantees and no published end date.",
+  "summary": "Fish Audio offers s2.1-pro-free — the same TTS model as the paid S2.1-Pro — at $0 for development, testing, prototyping, and smaller businesses. Same quality and 83-language coverage as s2.1-pro, under fair-use limits, with no TTFA or DPA guarantees and no published end date. Starter accounts below $100 in total prepaid amount have a five-concurrent-request API limit shared across all account keys and API requests, including speech-to-text. This is not a fixed QPM allowance; exceeding the native API limit returns 429 without Retry-After, so use exponential backoff. Payment is not required to use the free model.",
   "claim_steps": [
     "Create an account and API key at fish.audio.",
-    "Call POST https://api.fish.audio/v1/tts with your Bearer API key and the exact HTTP header model: s2.1-pro-free. Do not omit or misspell the model header: missing or unrecognized values fall back to paid s2.1-pro."
+    "Call POST https://api.fish.audio/v1/tts with your Bearer API key and the exact HTTP header model: s2.1-pro-free. Do not omit or misspell the model header: missing or unrecognized values fall back to paid s2.1-pro.",
+    "On Starter (below $100 total prepaid), keep all keys and API workloads within the shared five-concurrent-request limit. On native API 429 responses, retry with exponential backoff; no Retry-After header is returned."
   ],
   "social_proof": [
     {
@@ -10,6 +11,18 @@
       "url": "https://docs.fish.audio/developer-guide/models-pricing/models-overview",
       "title": "Models Overview | Fish Audio Docs",
       "text": "Fish Audio S2.1-Pro Free — The same model as S2.1-Pro, available at $0 for development and testing. Free to use under fair-use limits. No TTFA or DPA guarantees. Same model quality and language coverage as s2.1-pro (83 languages)."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.fish.audio/developer-guide/models-pricing/pricing-and-rate-limits.md",
+      "title": "Fish Audio pricing and rate limits — Starter concurrency",
+      "text": "| Starter | \\< \\$100 paid | 5 requests |"
+    },
+    {
+      "type": "link",
+      "url": "https://docs.fish.audio/developer-guide/models-pricing/pricing-and-rate-limits.md",
+      "title": "Fish Audio account-wide concurrency",
+      "text": "Speech-to-text requests count against the same concurrency limit as your other\nAPI requests, shared by all API keys on your account."
     }
   ]
 }

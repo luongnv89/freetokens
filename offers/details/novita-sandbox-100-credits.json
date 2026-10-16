@@ -1,10 +1,11 @@
 {
-  "summary": "New Novita AI users can complete a quick account setup survey and receive $100 in promotional credits for eligible Novita Sandbox (Agent Sandbox) usage. No credit card is required. Credits apply first to CPU, RAM, and billable storage. The same pricing page also grants 20 GB of ephemeral storage per running sandbox and 60 GB of free persistent storage per account. Credits may be subject to availability, validity period, usage scope, and quota limits; check balance on the Payments page. After credits are used up or expired, usage is pay-as-you-go.",
+  "summary": "New Novita AI users can complete a quick account setup survey and receive $100 in promotional credits for eligible Novita Sandbox (Agent Sandbox) usage. No credit card is required. Credits apply first to CPU, RAM, and billable storage. The same pricing page also grants 20 GB of ephemeral storage per running sandbox and 60 GB of free persistent storage per account. Credits may be subject to availability, validity period, usage scope, and quota limits; check balance on the Payments page. After credits are used up or expired, continued usage is billed pay-as-you-go. If the available account and voucher balance cannot cover the bill, the account is overdue: new sandboxes cannot start, running sandboxes are terminated and data loss can occur. Back up data, monitor balance and vouchers, and set low-balance alerts before relying on continued service.",
   "claim_steps": [
     "Create a Novita AI account (no credit card required).",
     "Complete the quick account setup survey.",
     "Receive $100 in promotional credits for eligible Novita Sandbox CPU, RAM, and billable storage.",
-    "Check balance and voucher status on the Payments page.",
+    "Check balance and voucher status on the Payments page; set low-balance alerts and back up important data.",
+    "Keep available account and voucher balances sufficient to cover bills. An overdue account cannot start new sandboxes; running sandboxes are terminated and data loss can occur.",
     "Free-tier quotas still apply: 20 GB ephemeral storage per running sandbox and 60 GB persistent storage per account."
   ],
   "social_proof": [
@@ -24,7 +25,7 @@
       "type": "link",
       "url": "https://docs.novita.ai/guides/sandbox-pricing",
       "title": "Pricing - Documentation",
-      "text": "New users can complete a quick account setup survey to receive $100 in promotional credits for eligible Novita Sandbox usage. No credit card is required."
+      "text": "If the account’s available balance (including available balance and voucher balance) is less than the bill to be paid, the account is considered overdue. Overdue payments result in sandboxes being terminated and data loss. During usage, ensure sufficient account balance. ... Unable to start new sandboxes. Running sandboxes will be terminated."
     }
   ]
 }

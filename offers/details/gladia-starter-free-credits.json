@@ -1,22 +1,29 @@
 {
-  "summary": "Gladia's Starter plan grants 50€ in free credits on signup — a one-time grant with no monthly reset, worth roughly 80+ hours of async (pre-recorded) transcription or 60+ hours of real-time transcription at current rates ($0.61/hr async, $0.75/hr real-time). Includes 30 real-time and 25 async concurrent requests, speaker diarization, 100+ languages. Once credits are used, top up a prepaid wallet or upgrade.",
+  "summary": "Gladia's Self-serve plan grants €50 in one-time signup credits valid for one year, not a recurring allowance. The provider estimates roughly 312 hours of Solaria-3 async transcription, 185 hours on Solaria-1, or 73 hours of real-time transcription. Current base rates are €0.16/hour for Solaria-3 async, €0.27/hour for Solaria-1 async, and €0.68/hour for real-time; enabled add-ons such as translation or summarization are billed separately. Includes 30 concurrent real-time sessions and 25 async jobs, speaker diarization and 100+ languages. Self-serve is opted into model training by default, with free opt-out in your profile. Continued usage uses a prepaid wallet with manual or optional automatic top-ups; auto top-up charges your saved payment method and can be disabled in billing settings. The one-year grant validity is not a signup deadline.",
   "claim_steps": [
-    "Sign up at https://gladia.io (Get started on the Starter plan).",
-    "50€ in free credits are granted once — no monthly reset.",
-    "After the grant is consumed, top up the prepaid wallet or upgrade to Growth."
+    "Sign up at https://gladia.io on the Self-serve plan.",
+    "Use the one-time €50 credit within one year. Approximate alternatives: 312h Solaria-3 async, 185h Solaria-1 async, or 73h real-time; enabled add-ons cost extra.",
+    "Check your profile's model-training setting: Self-serve opts in by default, but you can opt out at no extra cost.",
+    "After the grant is used, top up the prepaid wallet manually or optionally enable auto top-up. Auto top-up charges your saved payment method; change or disable it in billing settings."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://gladia.io/pricing",
-      "title": "Transparent API pricing | Gladia",
-      "text": "Sign up and get 50€ in free credits, a one-time grant with no monthly reset. That's roughly 80+ hours of pre-recorded transcription or 60+ hours of real-time transcription at current rates."
+      "title": "Gladia pricing FAQ — signup credit and validity",
+      "text": "Yes. New accounts get 50€ in free credits, valid for one year. That's roughly 312 hours of async transcription on solaria-3, 185 hours on solaria-1, or 73 hours of real-time. Once used, top up to continue, or get in touch for a demo."
     },
     {
       "type": "link",
       "url": "https://www.gladia.io/pricing",
-      "title": "Pricing — Transparent API pricing | Gladia",
-      "text": "50€ in free credits"
+      "title": "Gladia pricing FAQ — model-training opt-out",
+      "text": "Yes, at no extra cost. Self-serve is opted in by default, and you can opt out anytime from your profile. Enterprise is opted out by default."
+    },
+    {
+      "type": "link",
+      "url": "https://www.gladia.io/pricing",
+      "title": "Gladia pricing FAQ — prepaid wallet",
+      "text": "Gladia runs on a prepaid credit wallet. You can top up manually, or set auto top-up to refill when your balance drops below a threshold you choose. You'll get notified on low balance, top-ups, and failed payments, so there are no end-of-month surprises."
     }
   ]
 }

@@ -1,12 +1,19 @@
 {
-  "summary": "MiMo-V2.6-Flash Free remains available on OpenCode Console (formerly Zen) for a limited time. Current Console documentation lists model mimo-v2.6-flash-free at Free/Free/Free, and it appears in the live model catalog. The historical September 21 one-week announcement does not establish a current campaign end date. During the free period, collected data may be used to improve the model. Official setup describes account, billing details and credits; a no-card/no-deposit claim flow has not been verified.",
+  "summary": "MiMo-V2.6-Flash Free remains listed on OpenCode Console (formerly Zen) for a limited time. Current Console documentation lists model mimo-v2.6-flash-free at Free/Free/Free, and it appears in the live model catalog. The historical September 21 one-week announcement does not establish a current campaign end date. During the free period, collected data may be used to improve the model. The Inference API docs permit free chat calls without an Authorization header at https://opencode.ai/inference/openai/v1/chat/completions, providing an account-optional direct API route. Optional signed-in Console/TUI setup separately instructs adding billing details and credits; this is not a Console funding waiver. No inference request was tested.",
   "claim_steps": [
-    "Sign in to the OpenCode Console and obtain an API key; review any billing/credit requirements shown by the official setup flow.",
+    "For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model mimo-v2.6-flash-free and messages, omitting the Authorization header. No inference request was tested.",
+    "Alternatively, sign in to OpenCode Console and obtain an API key. General Console setup instructs adding billing details and credits; the direct free-chat exception is not a Console funding waiver.",
     "In OpenCode, run /connect and choose the OpenCode pay-as-you-go provider, then paste the API key.",
     "Run /models and select MiMo-V2.6-Flash Free (mimo-v2.6-flash-free) while it is listed.",
-    "For direct API use, call https://opencode.ai/inference/v1/chat/completions with model mimo-v2.6-flash-free."
+    "During the limited-time free period, collected data may be used to improve the model. Avoid sensitive inputs and check pricing before use."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/api/inference/",
+      "title": "Inference API | OpenCode",
+      "text": "Paid models require the header; free chat models can be called without it. OpenAI Chat Completions: /inference/openai/v1/chat/completions."
+    },
     {
       "type": "x",
       "url": "https://x.com/opencode/status/2102145730999730611",
