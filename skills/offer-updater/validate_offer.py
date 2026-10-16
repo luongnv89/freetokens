@@ -7,7 +7,7 @@ reuses scripts/offer_model.py's parser/validator — the same code path CI runs
 
 Usage:
 
-    python3 .agents/skills/offer-updater/validate_offer.py <draft.yaml> [...]
+    python3 skills/offer-updater/validate_offer.py <draft.yaml> [...]
 
 Exit codes:
     0  every named file is valid (one "OK <path> (<slug>)" line per file)

@@ -146,7 +146,7 @@ use TinyFish search and fetch, with Lightpanda for the browser retry; the
 Step 1 oEmbed call uses the pinned oEmbed `curl` command. None of these is
 required: without them the run uses the host's built-in read-only web
 search and fetch, and every step below works the same. Read
-`.agents/skills/offer-updater/references/web-tools.md` before the first
+`skills/offer-updater/references/web-tools.md` before the first
 search or fetch; it pins the commands, URL checks, quoting, and fallbacks.
 A missing tool never stops the run or prompts the curator to install it.
 
@@ -323,7 +323,7 @@ with a reference trace:
 ### Step 4 — Validate (deterministic, same rules as CI)
 
 ```bash
-python3 .agents/skills/offer-updater/validate_offer.py <draft.yaml>
+python3 skills/offer-updater/validate_offer.py <draft.yaml>
 # also validate the detail file if one was created/updated:
 python3 scripts/validate_offers.py  # validates offers/ and offers/details/*.json (CI gate)
 ```

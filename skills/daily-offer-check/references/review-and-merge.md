@@ -36,7 +36,7 @@ keeps the merge in Step 8, behind the scope gate. Run at most **3 rounds**.
    and count the round as not clean (the head moved). Then both must exit 0:
 
    ```bash
-   python3 .agents/skills/daily-offer-check/scripts/check_scope.py --base origin/main --head HEAD
+   python3 skills/daily-offer-check/scripts/check_scope.py --base origin/main --head HEAD
    python3 scripts/validate_offers.py
    ```
 
@@ -58,7 +58,7 @@ every check must hold against the `head` bound by the clean round:
 
 ```bash
 git fetch origin
-python3 .agents/skills/daily-offer-check/scripts/check_scope.py --base origin/main --head "$head"
+python3 skills/daily-offer-check/scripts/check_scope.py --base origin/main --head "$head"
 gh pr view "$pr" --json state,isDraft,baseRefName,mergeable,headRefOid \
   --jq '[.state, .isDraft, .baseRefName, .mergeable, .headRefOid] | @tsv'
 gh pr view "$pr" --json statusCheckRollup --jq '.statusCheckRollup as $c

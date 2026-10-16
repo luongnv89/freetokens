@@ -9,7 +9,7 @@ import tempfile
 import unittest
 
 REPO = Path(__file__).resolve().parents[1]
-SKILL = REPO / '.agents/skills/offer-hunter'
+SKILL = REPO / 'skills/offer-hunter'
 TODAY = dt.date.today().isoformat()
 
 EXISTING = ('# keep me\ntitle: Acme Free Tier\nprovider: Acme\ncategory: api_provider\n'

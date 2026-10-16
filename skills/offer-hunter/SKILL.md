@@ -87,7 +87,7 @@ force-push.
 ## Step 1 — Start the run (you, script)
 
 ```bash
-bash "$(git rev-parse --show-toplevel)/.agents/skills/offer-hunter/scripts/start_run.sh" \
+bash "$(git rev-parse --show-toplevel)/skills/offer-hunter/scripts/start_run.sh" \
   --mode publish --max 10 --since 30 --categories "" --tinyfish-mcp yes
 ```
 
@@ -103,7 +103,7 @@ lines and stop.
 
 ```bash
 . "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
-S=.agents/skills/offer-hunter/scripts
+S=skills/offer-hunter/scripts
 if [ "$mode" = publish ]; then
   gh pr list --state open --limit 200 --json number,files > "$W/pending.json" || exit 1
   python3 $S/catalog_snapshot.py --today "$today" --pending "$W/pending.json" > "$W/snapshot.json"
@@ -118,7 +118,7 @@ fi
 
 Spawn three workers **in one turn**, one per channel: `x`, `reddit`, `web`.
 Input: the channel, `today`, `since`, `categories`, the web route, the
-snapshot path, and three files to Read under `.agents/skills/offer-hunter/`:
+snapshot path, and three files to Read under `skills/offer-hunter/`:
 `agents/scout.md`, `references/sources.md`, `references/web-tools.md`.
 Output: a JSON array of leads, shape pinned in `agents/scout.md`. Save each
 to `$W/leads-<channel>.json`.
@@ -145,7 +145,7 @@ is 1–20 (or the zero-lead exit fired).
 Split candidates into batches of up to 4, keeping candidates from the same
 provider in one batch. Spawn `min(6, batches)` workers
 in one turn. Input: the batch, `today`, the web route, the snapshot path,
-and three files to Read under `.agents/skills/offer-hunter/`:
+and three files to Read under `skills/offer-hunter/`:
 `agents/verifier.md`, `references/web-tools.md`,
 `references/trust-and-value.md`. Output: one verdict record per candidate,
 shape pinned in `agents/verifier.md`.
@@ -161,7 +161,7 @@ still missing get `{"id", "label", "verdict": "unverifiable", "action":
 
 ```bash
 . "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
-python3 .agents/skills/offer-hunter/scripts/shortlist.py --snapshot "$W/snapshot.json" \
+python3 skills/offer-hunter/scripts/shortlist.py --snapshot "$W/snapshot.json" \
   --candidates "$W/candidates.json" --verdicts "$W/verdicts.json" \
   --max "$max" --categories "$categories" > "$W/shortlist.json"
 ```
@@ -180,7 +180,7 @@ with the error as `reason`. Exit 2 is fatal: stop.
 
 ```bash
 . "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
-python3 .agents/skills/offer-hunter/scripts/write_offers.py --shortlist "$W/shortlist.json" > "$W/applied.json" &&
+python3 skills/offer-hunter/scripts/write_offers.py --shortlist "$W/shortlist.json" > "$W/applied.json" &&
 (cd app && node scripts/load-offers.mjs --index-json ../index.json) &&
 (cd app && node scripts/generate-llms.mjs) &&
 python3 scripts/validate_offers.py
@@ -209,7 +209,7 @@ already had.
 
 ## Step 8 — Publish (you, gh)
 
-Read `.agents/skills/offer-hunter/references/publish.md` now and follow it.
+Read `skills/offer-hunter/references/publish.md` now and follow it.
 It covers the tracking issue (`gh issue create`), explicit staging,
 `check_scope.py`, one commit, the push, and one PR whose body starts with
 `Closes #<issue>`.
