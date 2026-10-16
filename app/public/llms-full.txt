@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-16T03:27:07Z — 125 of 219 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-16T07:43:17Z — 125 of 220 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### GLM-5.3-Flash Free on OpenCode Console
+- Provider: OpenCode
+- Category: coding
+- Amount: Free GLM-5.3-Flash model access on OpenCode Console (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-16 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-glm-5-3-flash-free.html
+- Summary: OpenCode made GLM 5.3 Flash free on 2026-10-16. OpenCode's Console docs list GLM-5.3-Flash Free (model id glm-5.3-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid GLM 5.3 Flash model (glm-5.3-flash) is listed separately at $0.15/$0.50 per 1M input/output tokens, so pick the Free variant.
+- Claim steps: For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model glm-5.3-flash-free and messages, omitting the Authorization header. No inference request was tested. | Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select GLM-5.3-Flash Free (opencode/glm-5.3-flash-free), not the paid GLM 5.3 Flash. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
 ### DeepSeek V4.1 Flash Free on OpenCode Console
 - Provider: OpenCode
 - Category: coding
@@ -1245,16 +1255,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/inworld-on-demand-free.html
 - Summary: Inworld AI's On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT) for free, with voice and Inworld Inference access. Usage is metered: current pricing and billing describe a shared credit balance across TTS, STT, Inference and Realtime rather than a blanket separately billed LLM exclusion. Confirm your actual balance and model eligibility; this does not promise unlimited inference or a fixed free LLM token allowance. Some premium LLMs require a card and a credit purchase or paid-plan upgrade even with an existing balance. Professional voice cloning on On-Demand also requires a payment method.
 - Claim steps: Create an Inworld account. | Choose the On-Demand plan (Start free) at platform.inworld.ai/billing. | Use the up-to-70-min TTS or 400-min STT allowance and check the actual Billing balance. Inference is charged per token from the shared credit balance at the selected model rate; confirm free-credit eligibility and premium-model payment requirements before calling it.
-### Inkling + Inkling Small Free (OpenRouter)
-- Provider: Thinking Machines
-- Category: coding
-- Amount: Inkling and Inkling Small at $0 via OpenRouter, 1M-token context
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/thinkingmachines/inkling-small:free
-- Page: https://freetokens.custats.info/offers/inkling-free-models.html
-- Summary: Thinking Machines offers Inkling and Inkling Small on OpenRouter at $0 prompt and completion, with a 1M-token context window. The free endpoints are restricted to agentic-harness use, not unrestricted chat. Do not send confidential information or personal data, including voices or images of people's faces. Prompts and outputs are logged and used for model training/improvement and to improve products and services; session data is disassociated from account identifiers before that use. Use constitutes agreement to the TML Free Research API terms. No hard end date is listed.
-- Claim steps: Sign in to OpenRouter at openrouter.ai. | Configure an agentic harness with thinkingmachines/inkling:free or thinkingmachines/inkling-small:free; the free endpoints are only available for agentic-harness use. | Review the TML Free Research API terms linked on the model page. Using the endpoint agrees to logging prompts and outputs for model training/improvement and service improvement. | Never send confidential information or personal data, including voices or images of people's faces. | Send eligible harness requests within OpenRouter's free-model limits; prompt and completion prices are $0.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

@@ -1,0 +1,31 @@
+{
+  "summary": "OpenCode made GLM 5.3 Flash free on 2026-10-16. OpenCode's Console docs list GLM-5.3-Flash Free (model id glm-5.3-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid GLM 5.3 Flash model (glm-5.3-flash) is listed separately at $0.15/$0.50 per 1M input/output tokens, so pick the Free variant.",
+  "claim_steps": [
+    "For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model glm-5.3-flash-free and messages, omitting the Authorization header. No inference request was tested.",
+    "Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver.",
+    "In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key.",
+    "Run /models and select GLM-5.3-Flash Free (opencode/glm-5.3-flash-free), not the paid GLM 5.3 Flash.",
+    "The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models | OpenCode",
+      "text": "GLM-5.3-Flash Free is free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training. Pricing: GLM-5.3-Flash Free | Free | Free | Free | -"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/api/inference/",
+      "title": "Inference API | OpenCode",
+      "text": "Paid models require the header; free chat models can be called without it. OpenAI Chat Completions: /inference/openai/v1/chat/completions."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2110986357539754114",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "GLM 5.3 Flash is now free in OpenCode"
+    }
+  ]
+}
