@@ -2,11 +2,31 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-16T07:43:17Z — 125 of 220 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-16T09:53:33Z — 125 of 223 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### YC AI Stack — $25K+ in AI & Cloud Credits for YC Event Attendees
+- Provider: Y Combinator
+- Category: student
+- Amount: Over $25,000 in free credits for AI tools and cloud services (AWS $10,000, Microsoft Azure $10,000, OpenAI $1,000, Anthropic $500, plus AI devtool credits) for students who attend an eligible YC event; access lasts one year from the event
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-16 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://deals.ycombinator.com/students
+- Page: https://freetokens.custats.info/offers/y-combinator-ai-stack-student-credits.html
+- Summary: YC's AI Stack gives students who attend an eligible YC event (starting Fall 2025) over $25,000 in free credits for AI tools and cloud services, including $10,000 each on AWS and Microsoft Azure, $1,000 OpenAI and $500 Anthropic, plus credits from YC-company devtools such as Firecrawl, Exa, Vapi, Browser Use, Reducto and Gumloop. Access lasts one year from the qualifying event.
+- Claim steps: Attend an eligible YC event (Fall 2025 onward), RSVPing with your Hacker News account | Watch for the confirmation email after the event | Sign in at deals.ycombinator.com/students with the same Hacker News account to check eligibility | Browse and redeem each partner deal
+### Nemotron 3.5 Super VL Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nvidia/nemotron-3.5-super-vl:free endpoint at $0 input/output (1M context, 120B-A12B multimodal MoE: text, image, video input); OpenRouter free-model rate limits apply
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-16 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/nvidia/nemotron-3.5-super-vl:free
+- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-super-vl-free.html
+- Summary: OpenRouter lists NVIDIA Nemotron 3.5 Super VL as a free endpoint (nvidia/nemotron-3.5-super-vl:free), served by NVIDIA, priced at $0 for prompt and completion tokens with a 1,000,000-token context. NVIDIA describes it as an open multimodal mixture-of-experts model with 12B active of 120B total parameters that accepts text, images, documents, GUI screenshots and video. The endpoint was created 2026-10-15; no end date is published.
+- Claim steps: Create an OpenRouter account and API key | Call the model nvidia/nemotron-3.5-super-vl:free via the OpenRouter API
 ### GLM-5.3-Flash Free on OpenCode Console
 - Provider: OpenCode
 - Category: coding
@@ -17,6 +37,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/opencode-glm-5-3-flash-free.html
 - Summary: OpenCode made GLM 5.3 Flash free on 2026-10-16. OpenCode's Console docs list GLM-5.3-Flash Free (model id glm-5.3-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid GLM 5.3 Flash model (glm-5.3-flash) is listed separately at $0.15/$0.50 per 1M input/output tokens, so pick the Free variant.
 - Claim steps: For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model glm-5.3-flash-free and messages, omitting the Authorization header. No inference request was tested. | Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select GLM-5.3-Flash Free (opencode/glm-5.3-flash-free), not the paid GLM 5.3 Flash. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
+### Agnes AI Flash Models — Free API (agnes-2.5-flash, agnes-3.0-flash)
+- Provider: Agnes AI
+- Category: api_provider
+- Amount: agnes-2.5-flash and agnes-3.0-flash text models currently free ($0/M cached input, input and output tokens; list $0.05/M input, $0.15/M output) via OpenAI-compatible API; promotional, end date subject to Agnes AI platform announcements
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-16 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://wiki.agnes-ai.com/en/docs/pricing.md
+- Page: https://freetokens.custats.info/offers/agnes-ai-flash-models-free-api.html
+- Summary: Agnes AI's official Model Pricing page lists agnes-2.5-flash and agnes-3.0-flash at a current price of $0 per million tokens for cached input, input and output (list prices $0.005/M cached input, $0.05/M input, $0.15/M output shown struck through), and states they are currently free. The free pricing is promotional; end dates are subject to Agnes AI platform announcements. The API is reached at https://apihub.agnes-ai.com/v1 with a Bearer API key created in the Agnes AI console. The official page does not say 'permanently free', nor confirm the 256K context figure from the lead.
+- Claim steps: Log in to the Agnes AI console and open the API Key management page | Create and copy an API key | Set the API base URL to https://apihub.agnes-ai.com/v1 and send requests with Authorization: Bearer YOUR_API_KEY using model agnes-2.5-flash or agnes-3.0-flash
 ### DeepSeek V4.1 Flash Free on OpenCode Console
 - Provider: OpenCode
 - Category: coding
@@ -1225,36 +1255,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/kilo-code-free-models.html
 - Summary: Kilo's AI Gateway allows unauthenticated access to models tagged :free, limited to 200 requests per hour per IP. Availability rotates; check the live catalog for current free IDs. NVIDIA free endpoints are trial-only: do not submit personal or confidential data, and usage is logged for security and to improve NVIDIA products and services. Zero pricing is not a blanket production-use or privacy waiver.
 - Claim steps: Check https://api.kilo.ai/api/gateway/models for a currently available :free model and its pricing, capabilities and provider terms; availability and model IDs can change. | For NVIDIA free endpoints, use them only for trials and never submit personal or confidential data. Usage is logged for security and to improve NVIDIA products and services; zero pricing does not waive provider usage or data restrictions. | Call the gateway without an Authorization header, or use a Kilo API key if preferred. | Stay within the 200 requests per hour per IP anonymous limit.
-### Jina AI — 10M Free Tokens
-- Provider: Jina AI
-- Category: api_provider
-- Amount: 10M free tokens with every new API key; Reader page lists 500 RPM Reader and 100 RPM / 100K TPM embeddings/rerank, but current official OpenAPI lists 500 RPM / 1M TPM embeddings/rerank; published limit conflict unresolved
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://jina.ai/en-US/reader/
-- Page: https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html
-- Summary: Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Limits are endpoint-specific: the Reader page lists embeddings/rerank at 100 RPM and 100K TPM, while the current official OpenAPI spec lists 500 RPM and 1M TPM for those endpoints and different chat limits. The conflicting published limits require confirmation; do not apply one blanket rate or concurrency limit to all APIs. Once the grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.
-- Claim steps: Sign up at jina.ai and get your API key from jina.ai/api-dashboard/key-manager — new keys auto-receive 10M free tokens. | Authenticate with 'Authorization: Bearer jina_<key>' against api.jina.ai endpoints (embeddings, rerank, reader via r.jina.ai, etc.). | When free tokens run out, buy more on the key's 'Buy tokens' tab — the free grant is one-time.
-### JetBrains Student Pack — All IDEs Free
-- Provider: JetBrains
-- Category: student
-- Amount: All JetBrains IDEs free for verified full-time students in programs lasting at least one year (annual renewal; non-commercial use only; 40% graduation discount)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://www.jetbrains.com/academy/student-pack/
-- Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
-- Summary: JetBrains Student Pack provides verified full-time students in programs lasting at least one year free JetBrains IDEs and .NET tools, with annual renewal. Educational licenses cannot be used for commercial work. Verify using university email, ISIC/ITIC or GitHub Student Developer Pack; general uploaded school documents are no longer accepted. The current Student Pack page includes coding courses and an AI Pro trial, not a perpetual free AI subscription. Official help confirms a 40% personal-subscription graduation discount valid for two years after the student license expires.
-- Claim steps: Go to https://www.jetbrains.com/academy/student-pack/ and click Apply. | Confirm full-time enrollment in a program lasting one year or more and verify via university email, ISIC/ITIC or GitHub Student Developer Pack. General uploaded school enrollment documents are not accepted. | Confirm the verification email link to activate approval. | Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled.
-### Inworld On-Demand Free
-- Provider: Inworld AI
-- Category: voice
-- Amount: Free On-Demand plan with up to 70 min TTS (or 400 min STT) included
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
-- Source: https://inworld.ai/pricing
-- Page: https://freetokens.custats.info/offers/inworld-on-demand-free.html
-- Summary: Inworld AI's On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT) for free, with voice and Inworld Inference access. Usage is metered: current pricing and billing describe a shared credit balance across TTS, STT, Inference and Realtime rather than a blanket separately billed LLM exclusion. Confirm your actual balance and model eligibility; this does not promise unlimited inference or a fixed free LLM token allowance. Some premium LLMs require a card and a credit purchase or paid-plan upgrade even with an existing balance. Professional voice cloning on On-Demand also requires a payment method.
-- Claim steps: Create an Inworld account. | Choose the On-Demand plan (Start free) at platform.inworld.ai/billing. | Use the up-to-70-min TTS or 400-min STT allowance and check the actual Billing balance. Inference is charged per token from the shared credit balance at the selected model rate; confirm free-credit eligibility and premium-model payment requirements before calling it.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

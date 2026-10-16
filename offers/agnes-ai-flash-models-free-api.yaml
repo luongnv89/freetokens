@@ -1,0 +1,13 @@
+# Hunted 2026-10-16 by offer-hunter; verified against https://wiki.agnes-ai.com/en/docs/pricing.md
+# ("Cached input, input tokens, and output tokens are currently free for `agnes-2.5-flash` and `agnes-3.0-flash`.")
+# Lead: https://dailyaiworld.com/blogs/agnes-25-flash-vs-claude-code-vs-codex-2026
+title: Agnes AI Flash Models — Free API (agnes-2.5-flash, agnes-3.0-flash)
+provider: Agnes AI
+category: api_provider
+amount: agnes-2.5-flash and agnes-3.0-flash text models currently free ($0/M cached input, input and output tokens; list $0.05/M input, $0.15/M output) via OpenAI-compatible API; promotional, end date subject to Agnes AI platform announcements
+expiry_date: null
+source_url: https://wiki.agnes-ai.com/en/docs/pricing.md
+verified_date: 2026-10-16
+verification: social_proof
+review_status: under-review
+signup: required
