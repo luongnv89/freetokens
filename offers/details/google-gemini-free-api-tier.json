@@ -1,10 +1,10 @@
 {
-  "summary": "Google's Gemini Developer API pricing page lists a Free Tier with free input and output tokens for supported models; quotas and model availability vary. The Free Tier is for developers and small projects with limited access to certain models. Google states that free-tier content is used to improve its products; consider this before sending sensitive inputs.",
+  "summary": "The Gemini Developer API has free input/output tokens for supported models, with model- and project-specific quotas and availability. Users must be 18+ and use an available region; the service is for developers building for professional/business purposes, not consumer use. The API terms prohibit clients directed toward or likely accessed by under-18s and require Paid Services for clients made available to users in the EEA, Switzerland or UK. Google generally uses unpaid-service inputs/outputs for product improvement, but its terms apply Paid Services data-use treatment to users in the EEA, Switzerland and UK, even for unpaid services. Review the current regional and data-use terms before sending sensitive data; a free pricing column is not a universal production-use entitlement.",
   "claim_steps": [
-    "Open Google AI Studio's API key page.",
-    "Create an API key and call a model with a published Free Tier.",
-    "Check the current quota shown for your account because Google does not publish one fixed quota for every model.",
-    "Review the Free Tier data-use terms before sending sensitive material: the pricing page states that content is used to improve Google products."
+    "Confirm you are 18+ and in a supported region; review Gemini API terms and available regions before creating a key. The service is for professional/business developers and not under-18-directed or likely-under-18 clients.",
+    "Create an API key in Google AI Studio and choose a model with a published Free Tier. Check your project’s current quotas; they vary by model and account.",
+    "Use Paid Services if making an API client available to users in the EEA, Switzerland or UK, as required by the current API terms.",
+    "Review data-use terms: unpaid-service content is generally used for improvement, but EEA, Switzerland and UK users receive Paid Services data-use treatment even on unpaid services. Avoid sending confidential data without checking the applicable terms."
   ],
   "social_proof": [
     {
@@ -12,6 +12,12 @@
       "url": "https://ai.google.dev/gemini-api/docs/pricing",
       "title": "Gemini Developer API pricing | Gemini API | Google AI for Developers",
       "text": "Free input & output tokens. Content used to improve our products."
+    },
+    {
+      "type": "link",
+      "url": "https://ai.google.dev/gemini-api/terms",
+      "title": "Gemini API Additional Terms — regional use and data treatment",
+      "text": "You may use only Paid Services when making API Clients available to users in the European Economic Area, Switzerland, or the United Kingdom."
     }
   ]
 }

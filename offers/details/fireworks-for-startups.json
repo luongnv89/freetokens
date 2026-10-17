@@ -1,9 +1,11 @@
 {
-  "summary": "Fireworks for Startups gives eligible startups build credits (amount unpublished) usable for serverless text/vision inference, image generation, STT, embeddings, fine-tuning and on-demand GPU deployments — credits expire 1 year after grant — plus higher rate-limit options, applied-AI expert access and community. Eligibility: registered privately-held for-profit company founded within the last 5 years, venture backed with >$500k funding, pre-Series D. Credits cover on-demand usage only, not reserved GPU/compute commitments or SLAs, professional services, or premium support.",
+  "summary": "Fireworks for Startups gives eligible startups build credits (amount unpublished) usable for serverless text/vision inference, image generation, STT, embeddings, fine-tuning and on-demand GPU deployments — credits expire 1 year after grant — plus higher rate-limit options, applied-AI expert access and community. Eligibility: registered privately-held for-profit company founded within the last 5 years, venture backed with >$500k funding, pre-Series D. Credits cover on-demand usage only, not reserved GPU/compute commitments or SLAs, professional services, or premium support. The application requires an existing Fireworks Account ID, company/website details, investors, and a work email matching the company website domain. Startup marketing describes seamless PAYG after credits if a payment method is added, but current self-serve billing docs require purchased prepaid credits and pause at zero unless Auto Reload is enabled; a card alone is not a promise of continued usage.",
   "claim_steps": [
-    "Fill out the Fireworks for Startups application form (fireworks.ai/startup-program).",
-    "Eligibility: registered company <5 years old, VC-backed >$500k, not Series D or later.",
-    "On acceptance, credits apply to on-demand usage only, not reserved GPU/compute commitments, SLAs, professional services or premium support. Use within 1 year of grant; PAYG billing resumes after exhaustion if a payment method is added."
+    "Create a Fireworks account and locate its Account ID before applying. Use a work email whose domain matches the company website.",
+    "Apply via fireworks.ai/startup-program with contact/company/website details, your Fireworks Account ID, investors and intended use case.",
+    "Eligibility: registered privately held for-profit company with a functional website, founded within five years, VC-backed with over $500K raised, and not Series D or later.",
+    "On approval, use the credits within one year for eligible on-demand usage; reserved GPU/compute commitments, SLAs, professional services and premium support are excluded.",
+    "Before continuing after depletion, confirm your billing arrangement. Current self-serve docs require prepaid purchased credits; usage pauses at zero without Auto Reload. A payment method alone does not ensure continued service."
   ],
   "social_proof": [
     {
@@ -17,6 +19,18 @@
       "url": "https://fireworks.ai/startups",
       "title": "Fireworks build-credit exclusions",
       "text": "Reserved compute/GPU commitments: Credits only apply to on-demand usage, not long-term reserved GPU capacity or SLAs. Credits do not apply to Fireworks professional services or premium support."
+    },
+    {
+      "type": "link",
+      "url": "https://fireworks.ai/api/forms/e18e4417-8ba5-45a1-9e93-1df94b91bfd0",
+      "title": "Official offer conditions and claim requirements",
+      "text": "Work email (Note: your company website and email domains must match)"
+    },
+    {
+      "type": "link",
+      "url": "https://docs.fireworks.ai/faq/billing-pricing-usage/billing/credit-system",
+      "title": "Official offer conditions and claim requirements",
+      "text": "If your balance reaches"
     }
   ]
 }

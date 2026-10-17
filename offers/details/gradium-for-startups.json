@@ -1,8 +1,9 @@
 {
-  "summary": "Approved Gradium startup grants provide 54M credits worth over $2,000 through six months of the M plan, covering TTS, STT and voice cloning APIs plus technical support. Eligibility requires a Seed or Series A round, fewer than 25 employees, and voice as a core product component with a clear monetization strategy; one-off projects are not eligible. Applications are reviewed on a rolling basis with an aim to respond in two to three business days.",
+  "summary": "Approved Gradium startup grants provide 54M credits worth over $2,000 through six months of the M plan, covering TTS, STT and voice cloning APIs plus technical support. Eligibility requires a Seed or Series A round, fewer than 25 employees, and voice as a core product component with a clear monetization strategy; one-off projects are not eligible. Applications are reviewed on a rolling basis with an aim to respond in two to three business days. Eligibility needs confirmation: the program FAQ requires Seed or Series A, while the current application form also offers Pre-Seed. Do not assume that a Pre-Seed form option guarantees eligibility. The form requires contact/company details, employee count, funding stage, amount raised and a project description; website and deck/demo attachments are optional.",
   "claim_steps": [
     "Confirm your startup has raised Seed or Series A, has fewer than 25 employees, and has voice as a core product component with a clear monetization strategy; one-off projects do not qualify.",
-    "Submit the official application at https://gradium.ai/startups/apply.",
+    "Pre-Seed applicants: ask Gradium to confirm eligibility. The current form offers Pre-Seed, but the program FAQ states Seed or Series A; the conflict is unresolved.",
+    "Complete the official application at gradium.ai/startups/apply with contact/company details, employee count, funding stage, amount raised and a project description. Website and deck/demo attachments are optional.",
     "Wait for rolling review; Gradium aims to respond within two to three business days.",
     "If accepted, activate the six-month M plan grant. When credits run out, continuing requires subscribing to a standard plan."
   ],
@@ -30,6 +31,12 @@
       "url": "https://gradium.ai/startups",
       "title": "Official startup-program FAQ review timing",
       "text": "We review applications on a rolling basis and aim to respond within 2-3 business days. You'll receive an email notification once your application has been reviewed."
+    },
+    {
+      "type": "link",
+      "url": "https://gradium.ai/_next/static/chunks/131vle8v3x4o7.js",
+      "title": "Official offer conditions and claim requirements",
+      "text": "T=[\"Pre-Seed\",\"Seed\",\"Series A\"]"
     }
   ]
 }

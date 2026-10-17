@@ -1,8 +1,12 @@
 {
-  "summary": "Official sources accessed 2026-10-07. One application covers the consolidated Databricks and Neon program. Benefits include conditional credits, hands-on technical guidance and go-to-market support. Enrollment deadline, credit-use expiry, payment-card conditions and existing-paid-customer exclusions are not stated in the loaded program pages. General Databricks documentation confirms account signup is necessary for users without an account; this does not establish the startup application itself requires a login.",
+  "summary": "The official program and linked application advertise up to $200,000 combined Databricks and Neon credits; the application splits this into $100K for Databricks and $100K for Neon and lets applicants select either or both. Awards require approval. The linked application requires accounts for the selected products with payment methods on file; Databricks applicants supply an account email and Account ID, and Neon applicants supply an account email and Org ID and confirm a paid plan. LinkedIn identity verification is required before submitting. Funding eligibility needs confirmation: the announcement targets venture-backed pre-seed through Series A companies, while the application welcomes bootstrapped teams and offers that funding-status option but also displays “At least $1M raised, or backing from a recognized accelerator or fund.” Raised-funding applicants must supply investors and verification; the shipped form hides those questions for bootstrapped/prefer-not-to-say selections. Do not infer guaranteed eligibility from that branch. Ask startup-program@databricks.com which criteria apply. No enrollment deadline, credit-use validity or paid-customer exclusion was established, and no account, payment or application was submitted.",
   "claim_steps": [
-    "Apply to the Databricks Startup Program from its official program page.",
-    "Databricks reviews the application and gets back to the applicant."
+    "Open the official program page and its linked application. Choose Databricks, Neon, or both; the displayed maximum is $100K per product, $200K combined, subject to approval.",
+    "Confirm funding eligibility with startup-program@databricks.com: the form welcomes bootstrapped teams but also displays at least $1M raised or recognized accelerator/fund backing; the announcement targets venture-backed startups.",
+    "Prepare accounts for each selected product with payment methods on file. Databricks requires its account email and Account ID; Neon requires its account email and Org ID plus confirmation of a paid plan.",
+    "Provide company contact, website, incorporation country, funding status and project details. If selecting raised funding, supply investors and the requested backing-verification link, code or VC contact.",
+    "Complete the required LinkedIn identity verification and application consent, then submit only if you accept the account/payment requirements. Approval and actual award are not guaranteed.",
+    "Before using credits, confirm their validity, covered services and post-grant billing in writing; the application does not establish that usage beyond the award will stay free."
   ],
   "social_proof": [
     {
@@ -29,6 +33,12 @@
       "author": "Databricks",
       "text": "We're launching a new Databricks Startup Program! Qualifying venture-backed startups can now receive up to $200K in credits across Databricks and @neondatabase, giving founders access to the app backend, data, and AI stack they need to go from idea to product-market fit.",
       "handle": "@databricks"
+    },
+    {
+      "type": "link",
+      "url": "https://sites.google.com/databricks.com/startup-program-apply",
+      "title": "Official offer conditions and claim requirements",
+      "text": "A Databricks and/or Neon account with a payment method on file, so credits can be applied immediately on approval."
     }
   ]
 }

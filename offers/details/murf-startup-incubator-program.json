@@ -1,7 +1,7 @@
 {
-  "summary": "Murf's Startup Incubator Program gives early-stage startups $1,500 in free Murf API (TTS/voice) credits for a 3-month period, one-time only. Overage beyond the credits is charged at $0.03 per 1,000 characters. Eligibility: under 10 years since incorporation, fewer than 100 employees, a fully functioning company website, and a valid use case for the Murf API. Applications are reviewed; the page gives 1–2 days in the process section and up to one week in the application FAQ. The application is a HubSpot form.",
+  "summary": "Murf's Startup Incubator Program gives early-stage startups $1,500 in free Murf API (TTS/voice) credits for a 3-month period, one-time only. Overage beyond the credits is charged at $0.03 per 1,000 characters. Eligibility: under 10 years since incorporation, fewer than 100 employees, a fully functioning company website, and a valid use case for the Murf API. Applications are reviewed; the page gives 1–2 days in the process section and up to one week in the application FAQ. The application is a HubSpot form. Continued usage after the three-month period requires upgrading to Pay-As-You-Go; confirm account billing before continuing. The linked form requires a work email and phone; LinkedIn is optional.",
   "claim_steps": [
-    "Fill the application form linked from murf.ai/startup-program ('Apply Now').",
+    "Open Apply Now at murf.ai/startup-program. Prepare your work email, phone, company website, founding year, location, headcount and product/API use case; the linked HubSpot form requires them. LinkedIn is optional.",
     "Meet criteria: under 10 years since incorporation, fewer than 100 employees, functioning company website, valid Murf API use case (no reselling/non-compliant use).",
     "Wait for application review: the process section says 1–2 days, while the application FAQ says within one week. On approval the credit plan is activated and $1,500 added to your account."
   ],
@@ -17,6 +17,12 @@
       "url": "https://murf.ai/startup-program",
       "title": "Murf application review — differing official estimates",
       "text": "You will be notified of your application status within 1 - 2 days. ... Once submitted, you’ll receive a response regarding approval within one week."
+    },
+    {
+      "type": "link",
+      "url": "https://forms.hsforms.com/embed/v3/form/24360943/dc1a781d-494d-4e28-a986-f4840c6162bf/json",
+      "title": "Official offer conditions and claim requirements",
+      "text": "\"label\":\"Work Email Address\" ... \"required\":true; \"label\":\"Phone Number\" ... \"required\":true; \"label\":\"LinkedIn Profile (optional)\" ... \"required\":false"
     }
   ]
 }

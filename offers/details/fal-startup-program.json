@@ -1,9 +1,9 @@
 {
-  "summary": "fal's Startup Program provides $1,000 initial credits to approved teams. On request, credits increase to $2,500 total at $1,000/month fal spend and $5,000 total at $2,500/month fal spend; spend elsewhere does not count. Teams already at a threshold may start at the matching tier. Eligible companies are based in Europe or Asia and can show real users, traction, revenue, or institutional funding. One application per company every three months; a short intro call is usually part of approval. Promotional credits expire after 90 days under fal's terms.",
+  "summary": "fal's Startup Program provides $1,000 initial credits to approved teams. On request, credits increase to $2,500 total at $1,000/month fal spend and $5,000 total at $2,500/month fal spend; spend elsewhere does not count. Teams already at a threshold may start at the matching tier. Eligible companies are based in Europe or Asia and can show real users, traction, revenue, or institutional funding. One application per company every three months; a short intro call is usually part of approval. Promotional credits expire after 90 days under fal's terms. Create or sign in to a fal account before submitting the account-bound application. Program credits cannot be resold or transferred.",
   "claim_steps": [
     "Confirm that the company is based in Europe or Asia and can show real users, meaningful traction, revenue, or institutional funding.",
-    "Apply at https://fal.ai/startup-program with the company's traction or funding and intended fal usage; one application per company every three months.",
-    "Complete the usual approval call and create or sign in to a fal account. Approved teams start with $1,000; teams already scaling may receive the matching tier.",
+    "Create or sign in to a fal account before applying: credits attach to that account. Submit traction/funding and intended fal usage at fal.ai/startup-program; one application per company every three months.",
+    "Complete the usual approval call. Approved teams start with $1,000; teams already at a fal-spend threshold may receive the matching tier. Do not resell or transfer program credits.",
     "Request additional credits once monthly fal spend reaches $1,000 ($2,500 total credits) or $2,500 ($5,000 total credits). Spend on other platforms does not count; promotional credits expire after 90 days."
   ],
   "social_proof": [

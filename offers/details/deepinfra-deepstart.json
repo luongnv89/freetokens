@@ -1,9 +1,11 @@
 {
-  "summary": "DeepInfra's DeepStart program grants approximately 50 billion free inference tokens at DeepSeek V4 Flash prices, expiring one year after approval. Eligibility is narrow: the startup must have raised between $250K and $10M USD and been founded within the last 2 years.",
+  "summary": "DeepInfra's DeepStart program grants approximately 50 billion free inference tokens at DeepSeek V4 Flash prices, expiring one year after approval. Eligibility is narrow: the startup must have raised between $250K and $10M USD and been founded within the last 2 years. Apply with a verified work-email account; personal email accounts are blocked. A team application must be submitted by a team admin (or use an account not in a team). Only one application per company is accepted; a rejected application cannot be resubmitted.",
   "claim_steps": [
-    "Confirm eligibility: raised $250K-$10M USD, founded within the last 2 years.",
-    "Apply via the DeepStart page at https://deepinfra.com/deepstart .",
-    "On acceptance, credits equivalent to approximately 50 billion tokens at DeepSeek V4 Flash prices expire one year after approval."
+    "Confirm eligibility: raised $250K-$10M USD and founded within the last 2 years.",
+    "Sign in with a verified work-email account. Personal email accounts are blocked. Apply as a team admin, or from an account not in a team; ordinary team members must ask their admin.",
+    "At https://deepinfra.com/deepstart select Apply now. The form requires company name, CEO, funding in USD and founding date; website is optional.",
+    "Submit only one application per company and await review. The page also blocks resubmitting a previously rejected application.",
+    "On approval, the grant is equivalent to approximately 50 billion tokens at DeepSeek V4 Flash prices; credits expire one year after approval."
   ],
   "social_proof": [
     {
@@ -11,6 +13,12 @@
       "url": "https://deepinfra.com/deepstart",
       "title": "DeepStart | DeepInfra",
       "text": "DeepStart ~50,000,000,000 free tokens at DeepSeek V4 Flash prices. Credits expire one year after approval. To qualify: raised between 250K and 10M USD; founded in the last 2 years."
+    },
+    {
+      "type": "link",
+      "url": "https://deepinfra.com/_next/static/chunks/pages/deepstart-d0208a06ea703160.js",
+      "title": "Official offer conditions and claim requirements",
+      "text": "messageKeys:{verify_email:\"pages.deepstart.application_dialog.verify_email\",team_member:\"pages.deepstart.application_dialog.team_member\"} ... required:!0 ... name:\"company\" ... name:\"ceo\" ... name:\"funding\" ... name:\"founded_on\" ... name:\"website\""
     }
   ]
 }

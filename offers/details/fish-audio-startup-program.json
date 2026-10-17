@@ -1,7 +1,9 @@
 {
-  "summary": "Fish Audio's startup program: 12 million characters per month of free TTS/audio generation for 3 months (~240+ hours of audio monthly), plus premium support with raised concurrency and model shaping help.",
+  "summary": "Fish Audio's startup program: 12 million characters per month of free TTS/audio generation for 3 months (~240+ hours of audio monthly), plus premium support with raised concurrency and model shaping help. Applications are reviewed rather than automatically awarded. The form requires full name, a field labeled Work email, company name, a valid company website and a description of what you are building. Role, team size and funding stage are optional, as is the case-study opt-in.",
   "claim_steps": [
-    "Apply via the Startup Program page at https://fish.audio/startup/ (Apply Now)."
+    "Open https://fish.audio/startup/ and select Apply to the Startup Program.",
+    "Provide full name, work email, company name, a valid company website and a description of at least 10 characters. Role, team size and funding stage are optional.",
+    "The case-study checkbox is optional. Submit only your real application and await email review; the form says the team will review it and get back to you."
   ],
   "social_proof": [
     {
@@ -9,6 +11,12 @@
       "url": "https://fish.audio/startup/",
       "title": "Startup Program | Fish Audio",
       "text": "You get 3 months and 12 million characters per month of free access to Fish Audio's real-time, emotionally rich speech engine."
+    },
+    {
+      "type": "link",
+      "url": "https://fish.audio/assets/startup-C1QUFinI.js",
+      "title": "Official offer conditions and claim requirements",
+      "text": "company_website:x().trim().min(1,\"Required\").max(200).refine(ae,{message:\"Enter a valid URL, e.g. https://acme.com\"}) ... use_case:x().trim().min(10,\"Tell us a bit more (min 10 characters)\") ... Thanks for applying to the Fish Audio Startup Program. We'll review your application and get back to you by email shortly."
     }
   ]
 }

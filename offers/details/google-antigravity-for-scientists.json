@@ -1,5 +1,5 @@
 {
-  "summary": "Google is giving up to 10,000 selected scientists 6 months of free access to the highest usage tier in Google Antigravity, including Gemini 4 Argon, announced 2026-10-13 alongside the Gemini 4 Argon launch. The program is mainly for non-commercial scientific research by researchers with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory. Selection weighs scientific credentials and potential research impact; cohorts are onboarded weekly on a rolling basis as capacity allows, and only selected applicants are contacted. Access applies to the individual Antigravity service on the Google account used to apply. No application deadline is stated. The official interest form requires institutional email and a public research-group/lab URL, plus at least one valid ORCID iD or Google Scholar profile for an application to be considered. Submitted information must be accurate, non-confidential and non-proprietary. The affiliation email is for verification/communications and may be associated with only one Google Account; upgraded access goes to the account used to submit.",
+  "summary": "Google is giving up to 10,000 selected scientists 6 months of free access to the highest usage tier in Google Antigravity, including Gemini 4 Argon, announced 2026-10-13 alongside the Gemini 4 Argon launch. The program is intended to support non-commercial scientific research by researchers with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory. Selection weighs scientific credentials and potential research impact; cohorts are onboarded weekly on a rolling basis as capacity allows, and only selected applicants are contacted. Access applies to the individual Antigravity service on the Google account used to apply. No application deadline is stated. The official interest form requires institutional email and a public research-group/lab URL, plus at least one valid ORCID iD or Google Scholar profile for an application to be considered. Submitted information must be accurate, non-confidential and non-proprietary. The affiliation email is for verification/communications and may be associated with only one Google Account; upgraded access goes to the account used to submit.",
   "claim_steps": [
     "Check eligibility: non-commercial scientific research with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory.",
     "Open the interest form from https://antigravity.google/use-cases/science (Apply here) and sign in with the Google account that should receive access (institutional Workspace or personal Gmail).",
@@ -12,7 +12,7 @@
       "type": "link",
       "url": "https://antigravity.google/use-cases/science",
       "title": "Google Antigravity - Use Case: Why choose Google Antigravity for science",
-      "text": "Apply for free access. We're giving 10,000 scientists free access to Gemini 4 Argon in Google Antigravity at our highest usage tier, starting today."
+      "text": "Apply for free access. We're giving 10,000 scientists our highest usage tier in Google Antigravity and our most advanced Gemini 4 Argon model, free of charge."
     },
     {
       "type": "link",
@@ -24,7 +24,7 @@
       "type": "link",
       "url": "https://docs.google.com/forms/d/e/1FAIpQLScSnOMSFSm8zfM9siaXufuqAeR6ZP6R33DTzxjqJObjW61GzQ/viewform",
       "title": "Interest form: Accelerate scientific workflows in Google Antigravity",
-      "text": "We are providing up to 10,000 selected scientists with 6 months of access, free of charge, to our highest usage tier in Google Antigravity and our most advanced Gemini 4 Argon model. This program is primarily intended to support non-commercial scientific research."
+      "text": "This program is intended to support non-commercial scientific research conducted by researchers with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory."
     }
   ]
 }

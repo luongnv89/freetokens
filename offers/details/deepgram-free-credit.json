@@ -1,10 +1,11 @@
 {
-  "summary": "Deepgram Pay As You Go grants $200 in signup credits with no credit card and no expiration. The earlier Flux TTS free promo (through September 14, 2026) has ended: Flux TTS is now billed at $0.0450/1k characters pay-as-you-go. A separate 'Buy Flux TTS, get matching credits' promotion adds $1 in credits per $1 spent, up to $500, for Pay As You Go and Growth plans, ending December 31, 2026. That spend-to-match deadline does not apply to the ongoing $200 signup credit.",
+  "summary": "Deepgram Pay As You Go grants $200 in signup credits with no credit card and no expiration. The earlier free Flux TTS promo through September 14, 2026 has ended. A separate paid Flux TTS credit-match promotion runs September 15 through December 31, 2026 (11:59 p.m. Pacific Time): each eligible active Pay-As-You-Go or Growth project in good standing, with accurate billing information and a valid payment method, can receive $1 bonus credit per $1 of qualifying paid-credit Flux TTS usage, up to $500 per project. Usage funded by the $200 signup grant or any other promotional/bonus credits does not qualify. Bonus credits are project-specific and non-expiring; Enterprise projects are excluded. Auto-reload is optional and can charge the stored payment method if enabled. The paid-match deadline is not an expiry for the ongoing $200 signup credit.",
   "claim_steps": [
-    "Click Sign Up Free at deepgram.com/pricing (no credit card required).",
-    "Create a console account and an API key.",
-    "Use the $200 credit on STT, TTS, and Voice Agent APIs (credits do not expire).",
-    "If considering the separate paid Flux TTS credit-match promotion, review its terms: Pay As You Go and Growth plans are eligible, matching is $1 per $1 spent up to $500, and the promotion ends December 31, 2026. This is not a deadline for the $200 signup offer."
+    "Click Sign Up Free at https://deepgram.com/pricing; the $200 signup credit requires no credit card and does not expire.",
+    "Create a console account and API key; monitor the project balance while using supported STT, TTS and Voice Agent APIs.",
+    "Optional paid Flux TTS match: read the separate promo terms. Only active PAYG/Growth projects in good standing with accurate billing information and a valid payment method qualify; Enterprise projects are excluded.",
+    "Only Flux TTS usage funded by purchased credits earns the $1-per-$1 match, up to $500 per eligible project. Spending signup or bonus/promotional credits does not earn matching.",
+    "The paid-match promotion ends December 31, 2026 at 11:59 p.m. Pacific Time. Bonus credits are project-specific; auto-reload is optional but can charge your payment method if enabled. This deadline does not apply to the $200 signup grant."
   ],
   "social_proof": [
     {
@@ -12,6 +13,12 @@
       "url": "https://deepgram.com/pricing",
       "title": "Deepgram Pricing | Scalable Speech-to-Text, Text-to-Speech & Voice Agent APIs",
       "text": "Pay As You Go: No minimums. No expiration. No credit card required. Free $200 Credit then pay-as-you-go. Buy Flux TTS, get matching credits. For every $1 you spend on Flux TTS, we'll add $1 in credits — up to $500. Available on Pay As You Go and Growth plans. Offer ends December 31, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://deepgram.com/promotions/2026-09/flux-tts-promo-terms-and-conditions",
+      "title": "Official offer conditions and claim requirements",
+      "text": "Usage paid with any promotional credit, including but not limited to the $200 signup credit and Bonus Credits from this Promotion, is not Qualifying Usage."
     }
   ]
 }

@@ -4,7 +4,7 @@
 title: Nemotron 3.5 Super VL Free (OpenRouter)
 provider: OpenRouter
 category: api_provider
-amount: Free nvidia/nemotron-3.5-super-vl:free endpoint at $0 input/output (1M context, 120B-A12B multimodal MoE: text, image, video input); OpenRouter free-model rate limits apply
+amount: "Free nvidia/nemotron-3.5-super-vl:free at $0 input/output (1M context, 120B-A12B multimodal MoE); rate-limited trial/internal evaluation only, not production"
 expiry_date: null
 source_url: https://openrouter.ai/nvidia/nemotron-3.5-super-vl:free
 verified_date: 2026-10-16

@@ -1,9 +1,9 @@
 {
-  "summary": "Hapuppy's free tier grants a one-time 200K-credit signup bonus for its OpenAI-compatible API gateway (Claude, GPT, Gemini, Grok, DeepSeek and others — 105+ models total). The free tier is limited to basic models at 10 RPM and the grant never resets or refills. One-time credit packs ($9.99+) unlock all models at 100 RPM and never expire.",
+  "summary": "Official Hapuppy sources conflict. The terms still describe a one-time 200K-credit signup bonus for basic models at 10 RPM. Current quickstart, Credits & Pricing and FAQ instead say there is no free tier or free credits and direct users to purchase a one-time pack; those docs list 100 RPM and require Discord account binding. The current documented OpenAI-compatible API base is https://api.hapuppy.com/v1. Do not assume a new account will receive free credits until Hapuppy resolves these conflicting terms. No signup or purchase was performed.",
   "claim_steps": [
-    "Sign up at https://hapuppy.com/register.",
-    "Dashboard → API Keys → Create Key (key format sk-hapuppy-…).",
-    "Call https://beta.hapuppy.com/v1 with any OpenAI-compatible client; the 200K signup credits are granted once."
+    "Read both https://hapuppy.com/en/terms and https://docs.hapuppy.com/guides/credits; they conflict on whether signup includes any free credit. Confirm with Hapuppy before relying on the 200K grant.",
+    "Current onboarding docs require binding a Discord account and purchasing a credit pack before generating a usable API key; this does not verify a free signup path.",
+    "If independently eligible and using the API, use the currently documented base https://api.hapuppy.com/v1. Do not assume the old beta endpoint or a free balance remains available."
   ],
   "social_proof": [
     {
@@ -15,8 +15,14 @@
     {
       "type": "link",
       "url": "https://docs.hapuppy.com/quickstart",
-      "title": "Quickstart — Hapuppy",
+      "title": "Historical Quickstart — previously recorded free-tier wording, not current onboarding",
       "text": "Sign up for a free account at hapuppy.com/register. Free | $0 | 200K on sign-up | Basic models, one-time grant. Paid tiers share a 100 RPM rate limit; the Free tier is 10 RPM."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.hapuppy.com/guides/faq.md",
+      "title": "Official offer conditions and claim requirements",
+      "text": "There is no free tier and no subscription, and any paid account can call every model."
     }
   ]
 }

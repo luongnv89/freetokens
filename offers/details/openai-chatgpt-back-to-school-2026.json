@@ -3,8 +3,8 @@
   "claim_steps": [
     "Open the official Back to School offer page in a web or mobile web browser.",
     "Sign in to the ChatGPT account where the offer should apply.",
-    "Verify current enrollment through SheerID.",
-    "Return to the offer flow and complete activation with a valid payment method."
+    "Verify enrollment through SheerID using a school-issued email while signed in to the intended ChatGPT account. Your ChatGPT account may use a different email.",
+    "Complete activation in the offer flow. New Plus subscriptions require a payment method; eligible existing directly billed Plus subscribers apply it to their current subscription. It renews at $20/month unless canceled."
   ],
   "social_proof": [
     {

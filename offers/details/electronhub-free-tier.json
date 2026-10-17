@@ -1,11 +1,12 @@
 {
-  "summary": "Electron Hub's $0 Free tier provides $0.25 in weekly API credits refilled every Sunday at 21:00 UTC, plus 10 Neutrinos per day for :free-suffixed models, expandable to 200 by watching up to three ads. Ordinary weekly balances reset rather than automatically accumulating. The documented Flex Wallet permits saving up to 20% of weekly credits per week, capped at 50% of the weekly allowance; saved Flex credits roll over until used and are used after the regular balance runs out if enabled. Current pricing lists a 5-requests-per-minute Free limit. Failed, cancelled and successful :free requests consume Neutrinos; regular credits are charged only for successful or cancelled requests, not failed ones. Signup is through Google or Discord; the checked public sources do not explicitly confirm a card requirement or waiver, and no account grant was tested.",
+  "summary": "Electron Hub's $0 Free tier provides $0.25 in weekly API credits refilled every Sunday at 21:00 UTC, plus 10 Neutrinos per day for :free-suffixed models, expandable to 200 by watching up to three ads. Ordinary weekly balances reset rather than automatically accumulating. The documented Flex Wallet permits saving up to 20% of weekly credits per week, capped at 50% of the weekly allowance; saved Flex credits roll over until used and are used after the regular balance runs out if enabled. Current pricing lists a 5-requests-per-minute Free limit. Failed, cancelled and successful :free requests consume Neutrinos; regular credits are charged only for successful or cancelled requests, not failed ones. Signup is through Google or Discord; the checked public sources do not explicitly confirm a card requirement or waiver, and no account grant was tested. Additional Free limits apply: Google experimental/preview/image models have 10 requests/day; Claude has 50 requests/day and 100K combined input/output tokens/month; OpenAI has 100K combined tokens/month. Daily caps reset at 21:00 UTC and monthly token caps at 21:00 UTC on the first. Check current model-specific limits before use.",
   "claim_steps": [
     "Sign in or create an account at app.electronhub.ai through Google or Discord and choose the advertised $0 Free tier. Check account-specific billing requirements; no account grant or card waiver was tested.",
     "Weekly credits land automatically every Sunday 21:00 UTC; Neutrinos reset daily at 21:00 UTC.",
     "Call models ending in :free to spend Neutrinos instead of credits; watch ads in the dashboard to raise the daily Neutrino cap to 200. Failed and cancelled :free requests also consume Neutrinos.",
     "Keep Free-tier traffic within the current 5-requests-per-minute limit. Regular credits are charged only for successful or cancelled requests; failed regular-credit requests are not charged.",
-    "Inspect Flex Wallet settings to save up to 20% of weekly credits per week, capped at 50% of the weekly allowance. Saved Flex credits roll over until used; enable Flex to use them after regular balance runs out. Ordinary weekly balance resets."
+    "Inspect Flex Wallet settings to save up to 20% of weekly credits per week, capped at 50% of the weekly allowance. Saved Flex credits roll over until used; enable Flex to use them after regular balance runs out. Ordinary weekly balance resets.",
+    "Check model-specific Free caps: Google experimental/preview/image models 10 requests/day; Claude 50/day plus 100K tokens/month; OpenAI 100K tokens/month (combined input/output). Daily resets are 21:00 UTC; monthly token resets are 21:00 UTC on the first."
   ],
   "social_proof": [
     {
@@ -25,6 +26,12 @@
       "url": "https://www.electronhub.ai/pricing",
       "title": "Electron Hub Free tier pricing and rate limit",
       "text": "Free: $0/month; $0.25/week; 5 requests/minute."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.electronhub.ai/getting-started/rate-limits.md",
+      "title": "Official offer conditions and claim requirements",
+      "text": "Free | 10 | Experimental/Preview/Image models only ... Free | 50 [Anthropic daily] ... Free | 100K tokens [Anthropic monthly] ... Free | 100K tokens [OpenAI monthly]."
     }
   ]
 }

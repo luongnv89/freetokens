@@ -1,9 +1,10 @@
 {
-  "summary": "Baseten's AI Startup Program offers accepted, net-new, VC-funded AI-first early-stage startups up to $25,000 in credits for Dedicated Inference or Training and up to $2,500 for Model APIs. Eligibility is selective: the program targets Seed-to-Series-A startups operating for less than five years, and applicants must not have previously received Baseten credits.",
+  "summary": "Baseten's AI Startup Program offers accepted, net-new, VC-funded AI-first early-stage startups up to $25,000 in credits for Dedicated Inference or Training and up to $2,500 for Model APIs. Eligibility is selective: the program targets Seed-to-Series-A startups operating for less than five years, and applicants must not have previously received Baseten credits. Linked legal terms say awarded credits expire six months after grant. The company domain must not have been on a paid Baseten Service plan from 31 days before application through the benefit-request date. IPO/acquired companies, educational/government/nonprofit entities, personal blogs/content, dev shops, consultancies/agencies, crypto mining and non-compliant token distribution are excluded. The form requires business email, company website, funding/age details and use-case answers. Its Pre-Seed and No Funding choices are not proof of approval outside the marketing criteria; confirm such cases with Baseten.",
   "claim_steps": [
-    "Confirm that the startup is AI-first and VC-funded, at Seed to Series A, and has operated for less than five years.",
-    "Confirm that the company is a net-new Baseten customer and has not previously received Baseten credits.",
-    "Apply through Baseten's AI Startup Program page and wait for acceptance."
+    "Check AI-first/VC-funded, Seed-to-Series-A and under-five-year marketing criteria, net-new status and no previous Baseten credits. The form also has Pre-Seed/No Funding options; confirm exceptions rather than assuming eligibility.",
+    "Read https://www.baseten.com/startup-program-legal-disclaimers for entity exclusions and the company-domain paid-plan restriction from 31 days before applying through the benefit-request date.",
+    "Apply through the linked program form with business email, company website, founding-age/funding details and product/use-case answers. Acceptance and award amounts are discretionary.",
+    "If approved, confirm credit scope and account billing, and use awarded credits within six months of grant; unused credits expire."
   ],
   "social_proof": [
     {
@@ -17,6 +18,12 @@
       "url": "https://www.baseten.co/talk-to-us/startup-program/",
       "title": "Startup program",
       "text": "If you are accepted into the program, you will get direct access to Baseten's platform and free credits."
+    },
+    {
+      "type": "link",
+      "url": "https://www.baseten.com/startup-program-legal-disclaimers",
+      "title": "Official offer conditions and claim requirements",
+      "text": "Company domain must not have been subscribed to a paid Baseten Service plan from within 31 days of applying to the Startup Program, to the day the benefit is requested. ... Credits ... expire if not consumed after 6 months."
     }
   ]
 }

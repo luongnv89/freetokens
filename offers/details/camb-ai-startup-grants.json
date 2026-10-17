@@ -1,7 +1,7 @@
 {
-  "summary": "CAMB.AI Startup Grants provide approved early-stage startups up to 33M characters of MARS Text-to-Speech API credits plus engineering support. The page headlines 33M characters, while the application invitation says “up to 33 million”. Eligibility: pre-seed through Series A, founded within the last five years, under $5M raised, building a product that uses voice, speech, or localization AI, and no previous CAMB.AI program credits.",
+  "summary": "CAMB.AI advertises 33M characters of MARS Text-to-Speech API credits and engineering onboarding for approved startups; the catalog retains an up-to ceiling, not a guaranteed award. Listed criteria are pre-seed through Series A, founded within five years, under $5M raised, a voice/speech/localization product, and no prior CAMB.AI program credits. The six-step application requires contact name/email, company name, startup-partner selection, primary cloud provider and product interests. No-partner/not-listed options are available; phone and CAMB.AI account email are optional. The page says no credit card is required. Confirm grant scope and validity on approval; no global deadline is published.",
   "claim_steps": [
-    "Fill out the application form at camb.ai/startup-grants with company details and what you are building.",
+    "Complete the six-step application at camb.ai/startup-grants with name/email, company, startup-partner choice, cloud provider and product interests. A no-referral option exists; phone and CAMB account email are optional.",
     "CAMB.AI reviews the submission and replies; approved teams receive up to 33M characters of credits and an onboarding call with engineering."
   ],
   "social_proof": [
@@ -14,7 +14,7 @@
     {
       "type": "link",
       "url": "https://www.camb.ai/startup-grants",
-      "title": "Startup grant application maximum",
+      "title": "Historical startup grant application invitation — previously recorded wording, not current form copy",
       "text": "Apply to receive up to 33 million free TTS API credits and direct support from the CAMB.AI team."
     }
   ]
