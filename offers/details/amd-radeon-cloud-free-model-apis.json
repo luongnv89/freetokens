@@ -1,9 +1,9 @@
 {
-  "summary": "AMD Radeon Cloud Token Factory lists 12 public model APIs, separate from its three dedicated models. Eleven are marked FREE: MiMo-V2.6-Flash, DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, DeepSeek-V4-Flash-Vision-Exp, GLM-5.3-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, Gemma-4-31B-IT, MiniCPM-V-4.7-35B-A3B, MiniCPM-V-4.7-1B and MiniCPM5-2B. MinerU2.5-Pro is marked LIMITED FREE. Per-account daily allowances apply; documentation examples are not guaranteed universal quotas. The beta catalog and availability can change. Public listing and documentation were checked, not authenticated signup or inference; curator verification remains pending.",
+  "summary": "AMD Radeon Cloud Token Factory lists 16 public model APIs, separate from its three dedicated models. Fifteen are marked FREE: Clef, MiMo-V2.6-Flash, OmniVoice, d3, d3-flash, DeepSeek-V4.1-Flash, DeepSeek-V4-Flash-0731, DeepSeek-V4-Flash-Vision-Exp, GLM-5.3-Flash, Qwen3.8-Flash-Next, Qwen3.8-27B, Gemma-4-31B-IT, MiniCPM-V-4.7-35B-A3B, MiniCPM-V-4.7-1B and MiniCPM5-2B. MinerU2.5-Pro is marked LIMITED FREE. OmniVoice is non-commercial only. Clef and d3 use /v1/systemone; OmniVoice uses /v1/audio/speech. Follow each model’s own documentation rather than assuming every model uses chat completions. Per-account daily allowances apply; documentation examples are not guaranteed universal quotas. The beta catalog and availability can change. Public listing and documentation were checked, not authenticated signup or inference; curator verification remains pending.",
   "claim_steps": [
     "Open AMD Radeon Cloud Token Factory at developer.amd.com.cn/radeon/tokenfactory and choose a public model rather than a separate dedicated offering.",
     "Sign in with an AMDAI account and obtain an API key; check the selected model's live availability and FREE or LIMITED FREE label.",
-    "Follow the official model documentation for the correct endpoint and model ID; the public listing includes chat models and MinerU OCR.",
+    "Follow each model’s own endpoint/schema: chat, MinerU OCR, Decisions (/v1/systemone) or OmniVoice TTS (/v1/audio/speech). OmniVoice is non-commercial only; do not assume all FREE models share chat routes or usage rights.",
     "Review your account's daily allowance and usage before making requests. Do not treat sample quotas in the documentation as a universal allocation; signup and inference have not been tested for this listing."
   ],
   "social_proof": [
@@ -11,7 +11,7 @@
       "type": "link",
       "url": "https://developer.amd.com.cn/radeon/tokenfactory",
       "title": "Radeon Cloud",
-      "text": "Public Free Model APIs — 12 models — Ready-to-use free API endpoints. FREE — Gemma-4-31B-IT. FREE — MiniCPM-V-4.7-35B-A3B. FREE — MiniCPM-V-4.7-1B. LIMITED FREE — MinerU2.5-Pro."
+      "text": "Public Free Model APIs — 16 models — Ready-to-use free API endpoints. FREE — Clef, d3, d3-flash, OmniVoice. OmniVoice: Non-commercial use only. LIMITED FREE — MinerU2.5-Pro. Dedicated Model APIs — 3 models."
     },
     {
       "type": "link",

@@ -1,8 +1,8 @@
 {
-  "summary": "Respan's Span-01 Lite is a behavior-scoring model released 2026-09-26: for each plain-language behavior you define it returns the probability the behavior is present in a conversation span, suited to high-volume evaluation and monitoring. The respan/span-01-lite:free endpoint is $0 and rate-limited. It runs on the OpenRouter Decisions API (typed questions over a state — noul, choice, score), not the chat-completions endpoint, so chat SDKs will not work with it.",
+  "summary": "Respan's Span-01 Lite is a behavior-scoring model released 2026-09-26: for each plain-language behavior you define it returns the probability the behavior is present in a conversation span, suited to high-volume evaluation and monitoring. The respan/span-01-lite:free endpoint is $0 and rate-limited. It runs at https://openrouter.ai/api/alpha/decisions, not chat completions. The OpenRouter SDK requires serverURL https://openrouter.ai for this path. Follow the Respan-specific state schema rather than copying Jev examples unchanged.",
   "claim_steps": [
     "Create an OpenRouter account and API key at openrouter.ai/settings/keys.",
-    "Call model respan/span-01-lite:free via the OpenRouter Decisions API (openrouter.alpha.decisions.create) — not chat completions.",
+    "POST model respan/span-01-lite:free to https://openrouter.ai/api/alpha/decisions, not chat completions. For the OpenRouter SDK, set serverURL to https://openrouter.ai before alpha.decisions.create; follow the model-specific state schema.",
     "Free endpoint is rate-limited; pricing shows $0 for prompt and completion tokens."
   ],
   "social_proof": [
@@ -17,6 +17,18 @@
       "url": "https://openrouter.ai/respan",
       "title": "Respan API and Models | OpenRouter",
       "text": "Span-01 Lite and Span-01 Lite (free) are available at no cost through the OpenRouter API. Span-01 is the most recently added Respan model on OpenRouter, listed on September 26, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/docs/cookbook/evaluate-and-optimize/jev-verified-cascade",
+      "title": "Official offer conditions and claim requirements",
+      "text": "The Decisions API is at https://openrouter.ai/api/alpha/decisions, outside the /api/v1 prefix the chat client uses. Use a separate OpenRouter instance with serverURL set to https://openrouter.ai, since the default SDK base URL doesn’t work for this path."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/docs/guides/community/jev",
+      "title": "Official offer conditions and claim requirements",
+      "text": "ScaleDown Classify-1 and Respan Span-01 take their own state shapes, so check the model page before you switch."
     }
   ]
 }

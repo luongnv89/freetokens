@@ -1,9 +1,10 @@
 {
-  "summary": "Firecrawl's Student Program gives verified students 10,000 free credits for educational or personal projects. Eligibility requires a valid academic email address and enrollment in a college, university, or accredited program. Credits are added instantly after redeeming the student coupon code in Settings → Billing. Distinct from the ongoing Firecrawl Free Plan.",
+  "summary": "Firecrawl’s Student Program gives verified students a one-time grant of 10,000 free credits for educational or personal projects, not 10,000 credits every month. Use a valid institution-issued academic email as your Firecrawl account email and redeem STUDENTEDU in Settings → Billing; no card is required. The page broadly lists college, university or accredited educational programs; its high-school/bootcamp FAQ directs bootcamp, accredited-program and high-school computer-science applicants to email for case-by-case review. If a side project becomes a paid/startup project, the FAQ directs users to upgrade and contact its partner programs. This grant is separate from the ongoing free plan.",
   "claim_steps": [
     "Sign up for Firecrawl with your educational email address.",
     "Go to Settings → Billing and enter the student coupon code shown on the program page.",
-    "10,000 credits are added to your account instantly — no credit card required."
+    "Receive the one-time 10,000-credit student grant instantly; no credit card is required. It is not a monthly student allowance.",
+    "High-school, bootcamp and other accredited-program applicants should email Firecrawl for case-by-case review rather than assume automatic eligibility."
   ],
   "social_proof": [
     {

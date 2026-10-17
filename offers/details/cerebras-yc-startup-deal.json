@@ -1,8 +1,9 @@
 {
-  "summary": "The Cerebras YC Startup Deal gives Y Combinator startups from any batch up to $22.5K worth of inference on Cerebras Cloud, plus priority support and co-marketing opportunities. No setup fees.",
+  "summary": "Cerebras offers active current Y Combinator companies from any batch a one-time redemption of three months of Tier 1 access to the program’s listed Cerebras Cloud LLMs, valued at up to $22.5K in total subscription cost, not an unrestricted cash or API-credit wallet. The FAQ currently lists Llama 3.3 70b, Llama 8b, Llama 4 Scout, Qwen 3 32B and R1 Llama Distilled 70b, and says models may change as new ones are released. Included benefits are live shared-Slack support and co-marketing opportunities. Apply using the official HubSpot form; no setup fees are advertised.",
   "claim_steps": [
-    "Apply via the form linked from cerebras.ai/yc-startup-deal (HubSpot application).",
-    "YC startups from any batch are eligible; no setup fees."
+    "Confirm that your company is an active current YC company; any batch is eligible, but the offer can be redeemed only once.",
+    "Apply using the HubSpot form linked from https://www.cerebras.ai/yc-startup-deal.",
+    "If accepted, confirm the three-month Tier 1 model subscriptions, current model list and model-specific rate limits. The advertised up-to-$22.5K is total subscription value, not a general cash balance."
   ],
   "social_proof": [
     {

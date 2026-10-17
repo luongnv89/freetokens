@@ -1,9 +1,10 @@
 {
-  "summary": "CometAPI (an OpenAI-compatible multi-model API gateway) credits new accounts $0.1 USD in the Wallet after register and login, with no extra claim step. Docs describe pay-as-you-go top-ups via Stripe with a $10 minimum; they do not require a card to receive the signup credit.",
+  "summary": "CometAPI (an OpenAI-compatible multi-model API gateway) credits new accounts $0.1 USD in the Wallet after register and login, with no extra claim step. Docs describe pay-as-you-go top-ups via Stripe with a $10 minimum; they do not require a card to receive the signup credit. A final call can exceed the remaining balance and leave it negative; the docs instruct users to top up before continuing. Monitor model costs rather than treating the signup credit as a guaranteed hard spending cap.",
   "claim_steps": [
     "Register and log in to CometAPI.",
     "Open the Wallet page; the $0.1 USD credit is applied automatically.",
-    "Create an API token under Tokens to call supported models via api.cometapi.com."
+    "Create an API token under Tokens to call supported models via api.cometapi.com.",
+    "Monitor costs and balance: the last call can exceed remaining credit and leave a negative balance. The docs require top-up to continue; Stripe top-ups have a $10 minimum."
   ],
   "social_proof": [
     {

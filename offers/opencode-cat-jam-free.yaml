@@ -1,14 +1,16 @@
-# Verified 2026-10-14 against https://opencode.ai/v2/docs/console/models/
+# Historical verification 2026-10-14 against https://opencode.ai/v2/docs/console/models/
 # ("Cat Jam Free is a stealth model that’s free on OpenCode for a limited time."
 # Pricing table: "Cat Jam Free | Free | Free | Free | -"; model id cat-jam-free.)
+# Current docs rename Cat Jam to Beam Free / beam-free; official merged PR:
+# https://github.com/anomalyco/opencode/pull/55993 (2026-10-16). Restrictions unchanged.
 # Announced by @opencode 2026-10-13: https://x.com/opencode/status/2110068008945381853
 # ("Cat Jam (stealth model) is now free in OpenCode"). No official end date stated.
 # Known conflict: https://x.com/opencode/status/2110068008945381853 says "zero data retention";
 # the docs (official, higher order) say "Data is retained for 30 days for safety reasons."
-title: Cat Jam Free on OpenCode Console
+title: "Beam Free (formerly Cat Jam) on OpenCode Console"
 provider: OpenCode
 category: coding
-amount: Free Cat Jam stealth model access on OpenCode Console (free input, output and cached reads; limited time)
+amount: "Free Beam (formerly Cat Jam) model access on OpenCode Console (free input, output and cached reads; limited time)"
 expiry_date: null
 source_url: https://opencode.ai/v2/docs/console/models/
 verified_date: 2026-10-14

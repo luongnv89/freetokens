@@ -1,10 +1,12 @@
 {
-  "summary": "Claude Startups' current cohort is full and is not accepting new applications. The program continues for existing members, including Startup Stack partner discounts and credits worth up to $45,000, subject to partner terms, group sessions with Anthropic's Applied AI team every other week, and startup events, hackathons and community meetups. Applications that were still in review could not proceed, and Anthropic says affected applicants were emailed. This is a closure to new applicants, not an end to existing-member benefits; no reopening date is stated.",
+  "summary": "Claude Startups' current cohort is full and is not accepting new applications. The program continues for existing members, including Startup Stack partner discounts and credits worth up to $45,000, subject to partner terms, group sessions with Anthropic's Applied AI team every other week, and startup events, hackathons and community meetups. Applications that were still in review could not proceed, and Anthropic says affected applicants were emailed. This is a closure to new applicants, not an end to existing-member benefits; no reopening date is stated. Separately, the current FAQ says startups backed by a VC in Anthropic’s partner network may qualify for up to $100K in additional API credits, claimed through that VC; this is not a guarantee or a reopening of cohort applications. Claude Startups API credits apply only to the first-party Claude API through Claude Console, not AWS, Google Cloud, Azure or other third-party platforms. This API-credit restriction is separate from each Startup Stack partner’s own terms.",
   "claim_steps": [
     "Read https://claude.com/programs/startups: the current cohort is full and no new applications are accepted.",
     "If you are already a member, sign in to your existing Claude Console account to access available Startup Stack offers; check each independent partner's terms and eligibility.",
     "Existing members can continue using program group sessions and events through their membership.",
-    "If you are not a member, monitor the program page for the next cohort's reopening before attempting to apply. Applications previously in review were not moved forward; do not assume they remain under re-review."
+    "If you are not a member, monitor the program page for the next cohort's reopening before attempting to apply. Applications previously in review were not moved forward; do not assume they remain under re-review.",
+    "If backed by a VC in Anthropic’s partner network, ask that VC about the separately advertised up-to-$100K API-credit route. Eligibility and award are not guaranteed; the general cohort remains closed.",
+    "Use any awarded Claude Startups API credits only for first-party Claude API usage through Claude Console, not AWS, Google Cloud, Azure or other third-party platforms."
   ],
   "social_proof": [
     {

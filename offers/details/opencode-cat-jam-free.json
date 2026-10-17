@@ -1,11 +1,11 @@
 {
-  "summary": "Cat Jam is a stealth model that OpenCode made free on 2026-10-13. OpenCode's Console docs list Cat Jam Free (model id cat-jam-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs. Cat Jam Free is not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.",
+  "summary": "OpenCode launched Cat Jam on 2026-10-13 and renamed it Beam Free (beam-free), as confirmed by its merged October 16 documentation update. OpenCode's Console docs list Beam Free (model id beam-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs. Beam Free is not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.",
   "claim_steps": [
-    "Check geographic eligibility first: Cat Jam Free excludes the countries and Ukrainian regions listed in the summary and current Console models docs, including China (Hong Kong/Macau), Russia, Iran and North Korea.",
-    "For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model cat-jam-free and messages, omitting the Authorization header. No inference request was tested.",
+    "Check geographic eligibility first: Beam Free excludes the countries and Ukrainian regions listed in the summary and current Console models docs, including China (Hong Kong/Macau), Russia, Iran and North Korea.",
+    "For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model beam-free and messages, omitting the Authorization header. No inference request was tested.",
     "Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver.",
     "In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key.",
-    "Run /models and select Cat Jam Free (opencode/cat-jam-free).",
+    "Run /models and select Beam Free (opencode/beam-free).",
     "The free period is limited-time. The provider retains data for 30 days for safety reasons despite the historical announcement's zero-retention claim; avoid sensitive inputs.",
     "For the optional Console route, review billing before funding: auto-reload defaults to $20 when the balance goes below $5 and can be changed or disabled."
   ],
@@ -20,7 +20,7 @@
       "type": "link",
       "url": "https://opencode.ai/v2/docs/console/models/",
       "title": "Models | OpenCode",
-      "text": "Cat Jam Free is a stealth model that’s free on OpenCode for a limited time. Its provider does not use your data for model training and retains it for 30 days for safety reasons. Pricing: Cat Jam Free | Free | Free | Free | -"
+      "text": "Beam Free is free on OpenCode for a limited time. Its provider does not use your data for model training and retains it for 30 days for safety reasons. Pricing: Beam Free | Free | Free | Free | -"
     },
     {
       "type": "x",
@@ -28,6 +28,12 @@
       "author": "OpenCode",
       "handle": "@opencode",
       "text": "Cat Jam (stealth model) is now free in OpenCode\n\n- very fast\n- built for agentic coding\n- zero data retention"
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/anomalyco/opencode/pull/55993",
+      "title": "OpenCode official rename: Cat Jam Free is now Beam Free",
+      "text": "Cat Jam Free is now public as Beam Free. The documentation changes the model ID to beam-free; region restrictions and the data policy are unchanged."
     }
   ]
 }

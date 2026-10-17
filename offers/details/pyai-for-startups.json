@@ -1,9 +1,10 @@
 {
-  "summary": "PyAI for Startups puts a $10M pool behind 200+ voice-product startups. Three tiers: Launch $20,000 (400k Omni + 25k phone minutes), Growth $50,000 (1M Omni + 50k phone minutes), Scale $100,000 (2M Omni + 100k phone minutes). Credits cover AI meters on the PyAI rate card and release in 12 monthly parts over a one-year term; unused credit rolls forward within the term but expires 12 months after activation. Credits are non-transferable, non-refundable, tied to one organization, and have no cash value. Phone minutes beyond the included allowance cost $0.01/min and are not covered; phone numbers, SMS, carrier pass-through fees, taxes, anything outside the rate card, and enterprise add-ons (SSO, BAA, dedicated capacity) are also excluded. Eligibility: building a voice product live or launching within six months, working website, under $10M raised, incorporated fewer than seven years ago, not a current PyAI customer on an annual contract. No card required.",
+  "summary": "PyAI for Startups puts a $10M pool behind 200+ voice-product startups. Three tiers: Launch $20,000 (400k Omni + 25k phone minutes), Growth $50,000 (1M Omni + 50k phone minutes), Scale $100,000 (2M Omni + 100k phone minutes). Credits cover AI meters on the PyAI rate card and release in 12 monthly parts over a one-year term; unused credit rolls forward within the term but expires 12 months after activation. Credits are non-transferable, non-refundable, tied to one organization, and have no cash value. Phone minutes beyond the included allowance cost $0.01/min and are not covered; phone numbers, SMS, carrier pass-through fees, taxes, anything outside the rate card, and enterprise add-ons (SSO, BAA, dedicated capacity) are also excluded. Eligibility: building a voice product live or launching within six months, working website, under $10M raised, incorporated fewer than seven years ago (or a team incorporating within 90 days), not a current PyAI customer on an annual or enterprise contract. No card required. Legal terms limit awards to one per company, corporate group or product; prior recipients cannot apply. Verify the application email to activate the single-organization award. Reselling, sublicensing, or sharing capacity, keys or minutes with another company or product forfeits the award.",
   "claim_steps": [
     "Apply at pyai.com/startups with company, product, stage, funding, and a demo link, two-minute video, or deck.",
+    "Check the legal terms: annual or enterprise-contract customers and prior recipients are excluded. One award per company, corporate group or product; no resale, sublicensing or sharing capacity, keys or minutes with another company or product.",
     "A person reviews within five business days (two via partner VC/accelerator).",
-    "On acceptance, sign up or sign in with the same email — credits attach automatically; no card needed.",
+    "On acceptance, create or sign in to the PyAI account with the application email and verify it. The award binds to one organization; no card is needed.",
     "Credits release in 12 monthly parts; unused credit rolls forward only within the term and expires 12 months after activation. The award is non-transferable, non-refundable, tied to one organization, and has no cash value.",
     "Budget separately for phone minutes beyond your allowance ($0.01/min), phone numbers, SMS, carrier pass-through fees, taxes, anything outside the PyAI rate card, and enterprise add-ons (SSO, BAA, dedicated capacity); the award does not cover them."
   ],
@@ -25,6 +26,12 @@
       "url": "https://pyai.com/startups",
       "title": "PyAI startup award — excluded charges",
       "text": "NOT COVERED Phone minutes past your allowance (billed at the listed $0.01/min) Phone numbers, SMS, and carrier pass-through fees Taxes, and anything outside the PyAI rate card Enterprise add-ons: SSO, BAA, dedicated capacity"
+    },
+    {
+      "type": "link",
+      "url": "https://pyai.com/startups/terms",
+      "title": "Official offer conditions and claim requirements",
+      "text": "The company is not a current PyAI customer on an annual or enterprise contract."
     }
   ]
 }

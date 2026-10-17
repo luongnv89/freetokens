@@ -1,9 +1,9 @@
 {
-  "summary": "The Liner Startup Grant Program gives eligible early-stage startups up to $1,000 in Liner API credits, including Search API and Search Agent API, with no equity taken and nothing to repay. The application asks for company email, company name, company website, and which product you will build on; Liner confirms by email. Current eligibility terms are listed on the application itself. The 2026-07-30 blog (last updated 2026-07-28) is the official program write-up.",
+  "summary": "The Liner Startup Grant Program advertises up to $1,000 in credits with no equity taken and nothing to repay. Its blog describes broader Liner API coverage including Search API and Search Agent API, but the current linked application calls the grant Search Agent API credits; confirm the approved product scope before budgeting. The form requires company email, company name, company website and product interest. Liner reviews applications by email, with a confirmation message saying next steps include a link to book a 20-minute onboarding call. No grant-spend expiry is stated publicly.",
   "claim_steps": [
     "Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes).",
     "Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on.",
-    "Watch email for Liner's confirmation; the post says self-serve credit programs like this move in days."
+    "Watch email for the review outcome and next steps, including a link to book a 20-minute onboarding call. Confirm which API products the approved credits cover; the form names Search Agent API while the blog describes broader API coverage."
   ],
   "social_proof": [
     {
@@ -17,6 +17,12 @@
       "url": "https://liner.com/developers/docs/pricing",
       "title": "Pricing | Liner Developers",
       "text": "Credits are a prepaid balance used to pay for API use. Search Agent is $20 per 1,000 requests; Quick Answer Agent is $3 per 1,000 requests; Deep Research Agent is $200 per 1,000 requests."
+    },
+    {
+      "type": "link",
+      "url": "https://forms.gle/L6GEKR8z13RmmARF8",
+      "title": "Official offer conditions and claim requirements",
+      "text": "Eligible startups can receive up to $1,000 in Liner Search Agent API credits. ... We’ll review your application and email you with next steps, including a link to book a 20-minute onboarding call."
     }
   ]
 }

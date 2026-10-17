@@ -7,10 +7,10 @@
 title: Hapuppy Free Tier
 provider: Hapuppy
 category: api_provider
-amount: 200K one-time free credits on signup (basic models, 10 RPM); OpenAI-compatible gateway
+amount: "Unconfirmed: terms still advertise a one-time 200K-credit signup bonus (basic models, 10 RPM), but current docs say there is no free tier or free credits; confirm eligibility before relying on a grant"
 expiry_date: null
 source_url: https://hapuppy.com/en/terms
 verified_date: 2026-09-30
 verification: social_proof
-review_status: under-review
+review_status: "to-be-verified"
 signup: required

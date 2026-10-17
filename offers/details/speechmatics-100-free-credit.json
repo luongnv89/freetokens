@@ -1,10 +1,10 @@
 {
-  "summary": "Speechmatics advertises $100 in free speech-to-text signup credits valid for 12 months, no card required, with 55+ languages and 2 concurrent real-time sessions on Free. No-card Free API access pauses when credits run out. Adding a payment card upgrades Free to Pro: granted credits are consumed first, then further usage is billed to the card. Separately, its text-to-speech pricing offers the first 1 million characters free. Current public pricing does not establish that the $100 STT credit is a shared STT/TTS pool. This listing is awaiting curator verification; signup and inference have not been tested in this source check.",
+  "summary": "Speechmatics advertises $100 in free signup credits, no card required, valid for 12 months, with 55+ STT languages and 2 concurrent real-time sessions on Free. No-card Free API access pauses at credit exhaustion. Adding a payment card upgrades Free to Pro: granted credits are consumed first, then further usage is billed to the card. The current pricing page’s “How credits work” content explicitly says one balance covers Speech to Text, add-ons and Text to Speech. It also separately advertises the first 1 million TTS characters free; confirm in the account how that allowance and the signup balance are applied rather than treating them as two interchangeable cash grants. The earlier catalog assertion that public pricing does not establish a shared balance is no longer supported. This source check did not test signup or inference; curator verification tags and date are retained.",
   "claim_steps": [
-    "Sign up at https://portal.speechmatics.com/signup/ — the $100 STT offer states no card required.",
-    "Use the $100 STT signup bonus within 12 months; confirm the account's allowance and Free-tier limit of 2 concurrent real-time sessions.",
-    "For text-to-speech, check the separate first-1-million-characters-free allowance; do not assume it draws from the $100 STT credit.",
-    "Review current billing terms: no-card Free API access pauses at credit exhaustion. Adding a card upgrades Free to Pro; granted credits are consumed first, then further usage is billed to your card."
+    "Sign up at https://portal.speechmatics.com/signup/ — the $100 signup offer states no card required.",
+    "Use the signup bonus within 12 months; confirm your account allowance and the Free limit of 2 concurrent real-time sessions.",
+    "Current pricing says one balance covers STT, add-ons and TTS, and separately offers the first 1 million TTS characters free. Confirm how both apply in your account; do not count the TTS allowance as a second $100 grant.",
+    "No-card Free API access pauses at credit exhaustion. Adding a card upgrades Free to Pro; granted credits are consumed first, then further usage is billed to your card."
   ],
   "social_proof": [
     {
@@ -18,6 +18,12 @@
       "url": "https://docs.speechmatics.com/administration/billing",
       "title": "Billing | Speechmatics Docs",
       "text": "Adding a card upgrades a Free plan to Pro. ... Pro accounts pay through pay-as-you-go (PAYG): you keep a payment card on file, and usage draws down your granted credits first. Once your granted credits are used up, further usage is charged to your card on the first of each month for the previous month's usage."
+    },
+    {
+      "type": "link",
+      "url": "https://www.speechmatics.com/pricing.md",
+      "title": "Official offer conditions and claim requirements",
+      "text": "One balance covers Speech to Text, add-ons and Text to Speech."
     }
   ]
 }

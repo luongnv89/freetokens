@@ -8,7 +8,7 @@
 title: fal — MiniMax H3 Max Free Generations (T2V + I2V)
 provider: fal
 category: video
-amount: MiniMax H3 Max free — text-to-video and image-to-video, 5 free videos/day up to 15s each (account required, resets every 24h)
+amount: "MiniMax H3 Max browser sandbox: 5 free 768p text-to-video or image-to-video generations per day (allowance resets every 24 hours), up to 15s with audio, signed-in account required; API calls are pay-per-use"
 expiry_date: null
 source_url: https://fal.ai/minimax-h3-max
 verified_date: 2026-09-30

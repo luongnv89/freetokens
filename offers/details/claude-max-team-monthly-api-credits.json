@@ -4,8 +4,9 @@
     "Keep an eligible Max or Team subscription active and in good standing for at least seven days. You must be the Max subscriber or a Team Owner/Primary Owner, and an Owner, Admin or Billing member of the receiving Console organization.",
     "On claude.ai, go to Settings > Billing as a Max subscriber or Organization settings > Billing as a Team Owner or Primary Owner.",
     "In the API credits section, select 'Link organization.'",
-    "Choose the Console organization you want to receive the credits, or create a new one.",
-    "Review the Supplemental Credit Terms, then Link organization."
+    "Choose the receiving Console organization carefully: one organization per plan and one plan per organization. You cannot change the linked organization yourself; contact support to change it.",
+    "Review the Supplemental Credit Terms, then Link organization.",
+    "No Console card is needed for the grant. Once it runs out, requests stop unless other credits, auto-reload, or invoiced billing are available; those can fund further paid usage."
   ],
   "social_proof": [
     {

@@ -1,9 +1,10 @@
 {
-  "summary": "Self-serve Pinecone Standard plan trial: $300 in credits over 21 days with access to Standard features (bulk import, backup/restore, RBAC, higher scale limits) — no up-front payment required. One trial per organization; orgs already on Standard/Enterprise or marketplace-subscribed cannot activate it.",
+  "summary": "Self-serve Pinecone Standard plan trial: $300 in credits over 21 days with access to Standard features (bulk import, backup/restore, RBAC, higher scale limits) — no up-front payment required. One trial per organization; orgs already on Standard/Enterprise or marketplace-subscribed cannot activate it. Downgrading to Starter is not a data-preserving automatic fallback: choose resources within Starter limits to keep; Pinecone deletes everything else, all backups, backup schedules and collections. Migrate incompatible indexes/regions and assistants before downgrading.",
   "claim_steps": [
     "Create a Pinecone organization and activate the Standard trial in the console — no up-front payment required.",
     "One trial per organization; quotas are blocked when credits run out or 21 days elapse.",
-    "Downgrade to Starter or add a payment method before expiry to keep access."
+    "Before expiry, add a payment method to continue Standard or downgrade deliberately to Starter. Trial exhaustion blocks quotas and limits console access to billing; it does not automatically restore your previous plan.",
+    "Before downgrading, migrate incompatible indexes/regions and assistants. Choose resources within Starter limits to keep; everything else, all backups, backup schedules and collections are deleted."
   ],
   "social_proof": [
     {

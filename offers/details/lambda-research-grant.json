@@ -1,9 +1,10 @@
 {
-  "summary": "Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement.",
+  "summary": "Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement. The linked application requires contact name/email, research problem, relevance/novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. Applicants must answer whether they are willing to co-write a Lambda blog; a required yes/no question is not evidence that yes is mandatory. Company, related publications and profile links are optional. No ORCID or institutional affiliation requirement was found in the current form.",
   "claim_steps": [
-    "Review the grant CTA on lambda.ai/research.",
-    "Apply for the Lambda Research Grant (competitive; qualifying researchers).",
-    "If awarded, use credits on Lambda on-demand GPU Instances."
+    "Review the current grant CTA at https://lambda.ai/research and open its linked Research Grant application.",
+    "Prepare required first/last name, email, research problem, relevance and novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan.",
+    "Answer the required yes/no question about willingness to co-write a Lambda blog. Company, related publications, GitHub/Scholar/social profiles and partnerships are optional; do not invent an ORCID or affiliation prerequisite.",
+    "Submit only your own accurate research application. If awarded, use the up-to-$5,000 credits on Lambda’s on-demand GPU Instances; exact award and expiry are not guaranteed by the public form."
   ],
   "social_proof": [
     {
@@ -23,6 +24,12 @@
       "url": "https://lambda.ai/blog/iclr-2026-12-papers",
       "title": "ICLR 2026: 12 papers on making AI systems reliable, efficient, and secure",
       "text": "For independent researchers who need compute, the Lambda Research Grant also offers up to $5,000 in credits for Lambda's on-demand Instances. Apply for the Lambda Research Grant at lambda.ai/research."
+    },
+    {
+      "type": "link",
+      "url": "https://form.typeform.com/to/Wn8YWMIj",
+      "title": "Official offer conditions and claim requirements",
+      "text": "Apply to be considered for up to $5,000 in credits for Lambda's On-Demand Cloud Platform."
     }
   ]
 }

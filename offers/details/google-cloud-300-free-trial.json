@@ -1,5 +1,5 @@
 {
-  "summary": "Eligible new Google Cloud customers get a $300 Welcome credit for covered services during a 90-day trial from signup. You must not have previously used the trial or been a paying Google Cloud, Google Maps Platform or Firebase user. A valid payment method is required for verification, but the trial does not automatically charge you; charges begin only after a manual paid-account upgrade. The trial restricts GPUs, Marketplace and third-party generative AI models. For billing accounts opened after March 2, 2026, Welcome credits cannot pay for Gemini API or AI Studio usage. Credits remain limited to covered services and the original 90-day window even after upgrading.",
+  "summary": "Eligible new Google Cloud customers get a $300 Welcome credit for covered services during a 90-day trial from signup. You must not have previously used the trial or been a paying Google Cloud, Google Maps Platform or Firebase user. A valid payment method is required for verification, but the trial does not automatically charge you; charges begin only after a manual paid-account upgrade. The trial restricts GPUs, Marketplace and third-party generative AI models. For billing accounts opened after March 2, 2026, Welcome credits cannot pay for Gemini API or AI Studio usage. Credits remain limited to covered services and the original 90-day window even after upgrading. Without a manual paid-account upgrade, spending the $300 or reaching 90 days closes the trial billing account and stops its resources. A 30-day grace period follows; resources are permanently deleted if you do not upgrade during it, and recovery is not guaranteed. Back up needed data before trial closure.",
   "claim_steps": [
     "Open cloud.google.com/free and click 'Start free'.",
     "Sign in with or create a Google account.",
@@ -7,7 +7,8 @@
     "Complete signup and payment-method/identity verification to create a Free Trial billing account; the trial does not automatically charge you.",
     "Use the $300 credits within 90 days on covered services. GPUs, Marketplace and third-party generative AI models are restricted during the trial.",
     "Do not budget Welcome credits for Gemini API or AI Studio if your billing account was opened after March 2, 2026; those uses are excluded.",
-    "Upgrade manually only if you want paid access; excluded services or usage beyond your remaining credit and free limits can then be charged."
+    "Upgrade manually only if you want paid access; excluded services or usage beyond your remaining credit and free limits can then be charged.",
+    "Back up needed data before credit exhaustion or day 90. Without a paid upgrade, trial resources stop; a 30-day grace period follows, after which resources are permanently deleted if you have not upgraded."
   ],
   "social_proof": [
     {

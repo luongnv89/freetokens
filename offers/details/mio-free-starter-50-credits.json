@@ -1,5 +1,5 @@
 {
-  "summary": "Mio's current public Free plan supplies the first $50 of work at $0 to start, without a credit card. It handles meeting prep, briefs and website fixes, including preparing code changes as pull requests. The homepage's free-start links point to https://app.mio.xyz/auth/sign-up, establishing account signup. Paid Team plans start from $50/month after trying the product. The loaded official pages state neither a first-100-companies restriction nor an enrollment deadline. The older $100 beta amount is not presented as currently claimable.",
+  "summary": "Mio's current public Free plan supplies the first $50 of work at $0 to start, without a credit card. It handles meeting prep, briefs and website fixes, including preparing code changes as pull requests. The homepage's free-start links point to https://app.mio.xyz/auth/sign-up, establishing account signup. Paid Team plans start from $50/month after trying the product. The loaded official pages state neither a first-100-companies restriction nor an enrollment deadline. The older $100 beta amount is not presented as currently claimable. The official FAQ also says Mio is in early access, onboarding a team a day, and users receive an email when it is their turn. Confirm account access before relying on the $50 allowance; immediate onboarding has not been verified.",
   "social_proof": [
     {
       "type": "link",
@@ -18,6 +18,12 @@
       "url": "https://www.mio.xyz/faq",
       "title": "FAQ - Mio",
       "text": "Mio is a Slack-native AI employee that already knows your company. Mention @mio with what you need and it assembles the work across your connected tools, drafts it, and waits for your approval. Install it in about 30 seconds from app.mio.xyz."
+    },
+    {
+      "type": "link",
+      "url": "https://www.mio.xyz/faq",
+      "title": "Mio FAQ — early-access onboarding qualification",
+      "text": "Mio is free to start. We’re currently in early access, onboarding a team a day. When it’s your turn, you’ll get an email."
     }
   ]
 }
