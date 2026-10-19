@@ -1,36 +1,36 @@
 {
-  "summary": "The Runware Grant Program awards up to $30,000 in API credits usable over 12 months across Runware's production platform — image, video, image/video editing, audio, LLMs, 3D, and avatar models on one API. Each grant starts with a fixed initial allocation sized to the team's stage and product; the $30,000 ceiling is not a universal award. Top-ups and renewals are conditional on actively consuming credits and staying engaged, not automatic. For early-stage teams (before Series A; bootstrapped welcome) with a real product or credible MVP, building or launching on Runware within six months, reachable at a business email. Applications are reviewed on a rolling basis: the page body says within two weeks, while its FAQ aims for a few business days. No equity is taken. After the 12-month grant, the account moves to standard pay-as-you-go pricing.",
+  "summary": "Runware's former Grant Program page (runware.ai/grant-program) now redirects to its Startup Program. The only free, no-deposit tier is Starter: up to $1,000 in Runware credits for bootstrapped and pre-seed companies with a working product. The award is not fixed: Runware scores each application on product, traction and how clearly inference fits, and awards credits in $100 steps up to $1,000. Starter credits do not expire and are usable across the platform (image, video, audio, 3D and LLM APIs, editing, serverless and compute) at standard pricing. The Growth and Scale tiers are deposit-matching, not free grants: deposit $25,000 to receive a $10,000 bonus, or deposit $50,000 to receive a $30,000 bonus; deposits and bonus credits are non-refundable and non-transferable. Every tier requires a company no later than Series A, a business email on the company's own domain, a live website, a real product or credible MVP with AI inference at its core, and a Runware account. Runware usually replies by email within a week. The program is equity-free. Earlier versions of this listing (verified 2026-09-30) described up to $30,000 in free API credits for 12 months; the current page no longer offers that, and it does not state when the terms changed.",
   "claim_steps": [
-    "Submit the grant form at https://runware.ai/grant-program with product, stage, traction, and expected Runware usage.",
-    "Eligibility: pre-Series A or bootstrapped, credible MVP, business email, building/launching within 6 months.",
-    "The page body says review within two weeks; the FAQ aims for a few business days. If approved, check your initial credit allocation; up to $30,000 is a ceiling, not a guaranteed award.",
-    "Top-ups and renewals are conditional on active credit usage and program engagement; do not assume automatic replenishment.",
-    "Plan for billing: after the 12-month grant, your account moves to standard pay-as-you-go pricing."
+    "Check eligibility: bootstrapped or pre-seed, no later than Series A, a live product or credible MVP where AI generation is core, a business email on your company's own domain, and a live website. Personal email addresses are declined.",
+    "Create a Runware account first; Runware says credits are awarded to that account if you are accepted.",
+    "Apply at https://runware.ai/startup-program and select Starter as your tier. Give detailed product, traction and expected-usage evidence: the award is scored in $100 steps up to $1,000.",
+    "Expect an email reply, usually within a week. Starter credits go straight onto your Runware account and do not expire.",
+    "Do not mistake Growth/Scale for free credits: they require a non-refundable prepaid deposit ($25,000 for a $10,000 bonus; $50,000 for a $30,000 bonus)."
   ],
   "social_proof": [
     {
       "type": "link",
+      "url": "https://runware.ai/startup-program",
+      "title": "Runware Startup Program — Starter tier",
+      "text": "Still bootstrapped or pre-seed? Apply anyway. Up to $1,000 in free credits for bootstrapped and pre-seed companies. No deposit. Apply with the same form and pick Starter as your tier."
+    },
+    {
+      "type": "link",
+      "url": "https://runware.ai/startup-program",
+      "title": "Runware Startup Program FAQ — how much do I get?",
+      "text": "Growth: deposit $25,000 and Runware adds $10,000 in credits, so you start with $35,000. Scale: deposit $50,000 and Runware adds $30,000, so you start with $80,000. Starter: up to $1,000 in free credits with no deposit, with the amount set by how we score your application."
+    },
+    {
+      "type": "link",
+      "url": "https://runware.ai/startup-program",
+      "title": "Runware Startup Program FAQ — expiry and stage cut-off",
+      "text": "Credits on every tier, bonus and Starter alike, do not expire. ... The program is for companies up to and including Series A."
+    },
+    {
+      "type": "link",
       "url": "https://runware.ai/grant-program",
-      "title": "Grant Program | Runware",
+      "title": "Historical Runware Grant Program page (quoted 2026-09-30; URL now redirects to /startup-program)",
       "text": "Up to $30,000 in API credits. 12 months of Runware API access. We focus on teams before Series A. Bootstrapped teams are welcome, and there is no venture funding or investor introduction required."
-    },
-    {
-      "type": "link",
-      "url": "https://runware.ai/grant-program",
-      "title": "Runware grant FAQ — post-grant pricing",
-      "text": "Your grant covers 12 months of Runware API access. After that, your account simply moves to our standard pay-as-you-go pricing, with no disruption to anything you've shipped."
-    },
-    {
-      "type": "link",
-      "url": "https://runware.ai/grant-program",
-      "title": "Runware grant FAQ — initial allocation",
-      "text": "Grants are awarded as Runware API credits, up to $30,000. Every grant starts with a fixed initial allocation sized to your stage and what you're building, so you have a meaningful runway from day one."
-    },
-    {
-      "type": "link",
-      "url": "https://runware.ai/grant-program",
-      "title": "Runware grant FAQ — conditional top-ups and renewals",
-      "text": "The initial allocation is fixed, but it is not necessarily the end. Top-ups and renewals are available for teams that are actively consuming their credits and staying engaged with the program, so support follows the builders who are shipping."
     }
   ]
 }

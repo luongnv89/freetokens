@@ -1,16 +1,22 @@
-# Verified 2026-09-18 against https://runware.ai/grant-program
-# ("Up to $30,000 in API credits" — "12 months of Runware API access."
-# Covers "image, video, avatar, audio, and language models, plus 3D."
-# Eligibility: "early-stage startup before Series A, bootstrapped teams
-# welcome", credible MVP, "business email", building/launching within 6
-# months. "Reviewed within 2 weeks.")
-title: Runware Grant Program
+# Re-verified 2026-10-19 against https://runware.ai/startup-program
+# (https://runware.ai/grant-program now 308-redirects there). Current page:
+# "Starter ... Up to $1,000 in free credits for bootstrapped and pre-seed
+# companies. No deposit." Awarded "in $100 steps" by application score;
+# "Starter credits do not expire." Growth/Scale tiers are deposit-matched:
+# "deposit $25,000 and Runware adds $10,000"; "deposit $50,000 and Runware
+# adds $30,000" — the $30,000 is a bonus on a $50,000 deposit, not a free
+# grant. Eligibility: "no later than Series A", business email on company
+# domain + live website, working product, Runware account.
+# Historical (verified 2026-09-18/30 at /grant-program): "Up to $30,000 in
+# API credits" for "12 months of Runware API access". When the terms
+# changed is not stated; only the current page state is evidenced.
+title: Runware Startup Program (Starter tier free credits)
 provider: Runware
 category: startup_program
-amount: Up to $30,000 in API credits for 12 months (image, video, audio, LLM, 3D, avatar models); initial allocation sized to the startup, conditional top-ups/renewals; standard pay-as-you-go pricing afterward
+amount: "Up to $1,000 in free, non-expiring Runware credits (Starter tier, no deposit; awarded in $100 steps by application score) for bootstrapped/pre-seed companies with a working product; larger Growth/Scale bonuses ($10K/$30K) require $25K/$50K deposits"
 expiry_date: null
-source_url: https://runware.ai/grant-program
-verified_date: 2026-09-30
+source_url: https://runware.ai/startup-program
+verified_date: 2026-10-19
 verification: social_proof
 review_status: under-review
 signup: required
