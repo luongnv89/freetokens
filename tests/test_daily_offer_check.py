@@ -34,13 +34,13 @@ class DailyOfferCheckTests(unittest.TestCase):
         self.offers.mkdir()
 
     def offer(self, slug, expiry='null', verified='2020-01-01',
-              source='https://example.com/offer', title='"Test"'):
+              source='https://example.com/offer', title='"Test"', verification='social_proof'):
         path = self.offers / (slug + '.yaml')
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes((f'# keep me\r\ntitle: {title}\r\nprovider: Test\r\n'
                           f'category: api_provider\r\namount: $10\r\nexpiry_date: {expiry}\r\n'
                           f'source_url: {source}\r\nverified_date: "{verified}"  \r\n'
-                          'verification: unverified\r\nreview_status: unverified\r\nsignup: required\r\n').encode())
+                          f'verification: {verification}\r\nreview_status: unverified\r\nsignup: required\r\n').encode())
         return path
 
     def detail(self, slug, doc, compact=False):
@@ -135,6 +135,29 @@ class DailyOfferCheckTests(unittest.TestCase):
             self.assertEqual(result['writes'], 0)
             self.assertFalse((self.offers / 'details' / (kind + '.json')).exists())
             self.assertEqual(path.read_bytes(), before)
+
+    def test_inventory_includes_verification(self):
+        self.offer('early', verification='unverified')
+        self.offer('official')
+        rows = {r['slug']: r for r in self.inventory()['offers']}
+        self.assertEqual(rows['early']['verification'], 'unverified')
+        self.assertEqual(rows['official']['verification'], 'social_proof')
+
+    def test_early_offer_verdicts_never_write(self):
+        for kind in ('live', 'expired'):
+            with self.subTest(kind=kind):
+                slug = 'early-' + kind
+                path = self.offer(slug, verification='unverified')
+                before = path.read_bytes()
+                updates = {'amount': '$5'} if kind == 'live' else None
+                result = self.batch(self.inventory('--slugs', slug), [self.verdict(slug, kind, updates)])
+                data = json.loads(result.stdout)
+                self.assertEqual(data['writes'], 0)
+                self.assertEqual(data['results'], [dict(slug=slug, path=slug + '.yaml', action='skipped', changes=[],
+                                                        reason='early offer — refresh with offer-updater')])
+                self.assertIn('early offer', result.stderr)
+                self.assertEqual(path.read_bytes(), before)
+                self.assertFalse((self.offers / 'details' / (slug + '.json')).exists())
 
     def test_fresh_rerun_is_idempotent(self):
         self.offer('one')
@@ -662,7 +685,8 @@ class DailyOfferCheckTests(unittest.TestCase):
                     active_count=len(slugs), skipped_expired=[],
                     offers=[dict(slug=s, path=f'{s}.yaml', sha256='0' * 64,
                                  title='T', provider='P', amount='$10', expiry_date=None,
-                                 source_url='https://example.com/offer', verified_date='2020-01-01')
+                                 source_url='https://example.com/offer', verified_date='2020-01-01',
+                                 verification='social_proof')
                             for s in slugs])
 
     def render(self, inventory, verdicts, applied=None, *args, ok=True):

@@ -14,6 +14,7 @@ from list_active import REPO, date, record, safe_path, safe_root
 from offer_model import NULL_TOKENS, parse_offer_text, validate_detail, validate_offer
 
 PROOF_MAX = 10
+EARLY_REASON = 'early offer — refresh with offer-updater'
 DETAIL_STYLE = (2, False, False, '\n')
 
 
@@ -135,6 +136,12 @@ def apply(inventory, verdicts, today, offers_dir):
         vrow = by_slug[row['slug']]
         verdict = vrow['verdict']
         updated, action, changes = text, 'skipped', []
+        if current['verification'] == 'unverified' and verdict in ('live', 'expired'):
+            # Early offers have no official source yet: never bump or update them.
+            print(f"Skipped {row['slug']}: {verdict} verdict refused, {EARLY_REASON}", file=sys.stderr)
+            results.append(dict(slug=row['slug'], path=row['path'], action='skipped',
+                                changes=[], reason=EARLY_REASON))
+            continue
         if verdict in ('live', 'expired'):
             parsed = parse_offer_text(text, str(path))
             updated = replace_scalar(updated, 'verified_date', today.isoformat())
