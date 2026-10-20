@@ -76,7 +76,9 @@ fits you.
 5. Open a pull request against `main`. Start the description with
    `Closes #<issue>` so the tracking issue closes automatically on merge.
    Once the `validate` check is green, a maintainer squash-merges and the
-   deploy pipeline typically publishes the site within 1–2 minutes.
+   deploy pipeline typically publishes the site within 1–2 minutes. (An
+   offer-updater PR carrying an X-first offer merges itself after the
+   curator's approval, once every check passes.)
 
 ## Option B — Let the agent skill open the pull request
 
@@ -107,7 +109,11 @@ and the PR mechanics, following exactly the same conventions as Option A.
    one was given).
 
 If the source page cannot be verified, the agent says so and stops rather
-than publishing — unverified entries never enter the directory.
+than publishing — unverified entries never enter the directory. The one
+exception is the offer-updater **early lane**: an offer seen first on X,
+which official pages do not mention yet, may ship labelled
+`verification: unverified` when a provider post, a staff post, or two
+independent posts back it (`skills/offer-updater/references/early-lane.md`).
 
 ## Pull-request checklist
 

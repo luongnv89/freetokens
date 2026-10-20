@@ -14,7 +14,10 @@ unverifiable instead of fetching.
 **Official** means pages the provider owns: the offer's `source_url` first,
 then the provider's docs, pricing, terms, blog, or changelog pages. A social
 post counts as official only when it comes from the account of an x.com
-`source_url`. Everything else (third-party posts, aggregators, forums, search
+`source_url` on an offer with `verification: social_proof`. An offer with
+`verification: unverified` (an offer-updater early offer) has no official
+source yet: return `unverifiable` with reason `early offer — refresh with
+offer-updater`, and never write `updates` for it. Everything else (third-party posts, aggregators, forums, search
 snippets) is **corroboration**: it can support official evidence, never
 override it, and never justify a write on its own.
 

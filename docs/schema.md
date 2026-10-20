@@ -17,7 +17,7 @@ build validator.
 | `category`      | enum (string)         | yes      | no          | One of: `api_provider`, `coding`, `image`, `voice`, `video`, `startup_program`, `student`, `oss_program`. |
 | `amount`        | string (non-empty)    | yes      | no          | Free value in human terms, e.g. `$300 in credits` or `10k credits/month`. |
 | `expiry_date`   | date or null          | yes      | **yes**     | Date the offer stops being claimable, `YYYY-MM-DD`. `null` = ongoing offer with no fixed end date. |
-| `source_url`    | URL string            | yes      | no          | Official provider page where the offer is described. Must start with `http://` or `https://`. |
+| `source_url`    | URL string            | yes      | no          | Official provider page where the offer is described. Must start with `http://` or `https://`. An early offer (`verification: unverified`) points at the public post it rests on. |
 | `verified_date` | date                  | yes      | no          | Date the curator last confirmed the offer is live and claimable, `YYYY-MM-DD`. This is the **Last checked** date. |
 | `verification` | enum (string)         | yes      | no          | Evidence level: `social_proof` or `unverified`. |
 | `review_status` | enum (string)        | yes      | no          | Curator testing state: `verified`, `unverified`, `under-review`, or `to-be-verified`. |

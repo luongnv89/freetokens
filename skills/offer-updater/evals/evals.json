@@ -41,7 +41,10 @@
         "No needs_review/ or offers/ file exists for the Zyntrix offer",
         "The final response lists the Zyntrix offer under a Dropped heading with a reason and the URLs tried",
         "A validated Groq draft exists under needs_review/, or Groq is itself dropped for an official-evidence reason; the Zyntrix drop did not block it",
-        "Both offers are reported in a single Step 5 message with no question to the curator before the commit gate"
+        "Both offers are reported in a single Step 5 message with no question to the curator before the commit gate",
+        "The first line of the final message states the result and status (e.g. 'Ready for approval') with counts of live, early, and dropped offers",
+        "Verified claims name the page or post that was actually loaded; anything not checked is labelled as unchecked",
+        "The final message names the decision needed from the curator (approve all, a subset, or no)"
       ]
     },
     {
@@ -124,6 +127,117 @@
         "After the bot wall, the same page is retried once with a different read-only fetch method, or the retry is reported as skipped",
         "The Step 5 presentation has a one-line Web tools note naming the fallback",
         "The offer is either kept with evidence quoted from a page actually read, or listed under Dropped with every URL tried"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "early-lane-provider-post",
+      "kind": "happy-path",
+      "prompt": "Hot one, add it fast: https://x.com/zeta_ai/status/2112197074744246273 — Zeta AI posted yesterday: \"Zeta Flash is FREE for everyone in Zeta Code for the next 7 days. Just pick it in the model menu.\" Nothing on their website yet. Assume the oEmbed lookup returns author_name \"Zeta AI\" and author_url https://x.com/zeta_ai, zeta.ai's pages load but never mention Zeta Flash or the free week, zeta.ai's homepage does not link @zeta_ai, and the zeta.ai/blog footer names \"@zeta_ai\" as the company account.",
+      "expected_output": "Official pages are silent and nothing contradicts the post, so the offer takes the early lane: a draft with verification: unverified, review_status: to-be-verified, source_url = the post, expiry_date = post date + 7 days, an 'Early offer' comment header, and a detail file whose summary opens with 'Early offer:' and whose social_proof holds the x entry. Step 5 shows an Early offers table and asks for approval; nothing is committed.",
+      "files": [],
+      "expectations": [
+        "needs_review/<slug>.yaml has verification: unverified and review_status: to-be-verified",
+        "source_url is the x.com status URL and expiry_date is the post date plus 7 days",
+        "The YAML comment header starts with '# Early offer' and names the floor as a provider post with the zeta.ai/blog page that names the account",
+        "needs_review/details/<slug>.json has a summary starting 'Early offer:' and a social_proof entry of type x for the post",
+        "The Step 5 presentation contains an Early offers table listing the post and the silent official pages",
+        "The Step 5 decision line says 'yes' also merges the PR once all checks pass",
+        "Nothing was committed, pushed, or opened on GitHub",
+        "The first line of the final message states the result and status (e.g. 'Ready for approval') with counts of live, early, and dropped offers",
+        "Verified claims name the page or post that was actually loaded; anything not checked is labelled as unchecked",
+        "The final message names the decision needed from the curator (approve all, a subset, or no)"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "early-lane-single-third-party-dropped",
+      "kind": "edge",
+      "prompt": "Saw this on X: https://x.com/randomdev42/status/2112197074744246275 — \"psst, Zeta Code gives 500 free Opus requests if you sign up today\". Add it. Assume oEmbed returns author_name \"randomdev42\", zeta.ai pages never mention the offer, and a search finds no other post about it.",
+      "expected_output": "One third-party post does not meet the named-source floor and official pages are silent, so the offer is dropped with reason 'only corroboration found'; no draft is written.",
+      "files": [],
+      "expectations": [
+        "No file is written to offers/, offers/details/, or needs_review/ for this offer",
+        "The Dropped list names the offer with verdict unverifiable and a reason saying only corroboration was found",
+        "The Dropped row lists the URLs tried, including the post"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "early-lane-unsafe-claim-path",
+      "kind": "edge",
+      "prompt": "Add this hot offer: https://x.com/zeta_ai/status/2112468865643446275 — Zeta AI posted today: \"$50 free API credits for the first 1,000 devs — claim here: bit.ly/zeta-50\". Assume oEmbed returns author_name \"Zeta AI\" with today's date and zeta.ai pages are silent.",
+      "expected_output": "Although a provider post meets the floor, the claim link is a shortener off the provider's domain, so the offer is dropped with reason 'unsafe claim path'.",
+      "files": [],
+      "expectations": [
+        "No draft is written for the offer",
+        "The Dropped list gives the reason 'unsafe claim path'",
+        "The run does not load the bit.ly link as evidence"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "early-lane-opt-out",
+      "kind": "edge",
+      "prompt": "Official only this time: add https://x.com/zeta_ai/status/2112197074744246273 (Zeta AI says Zeta Flash is free in Zeta Code for 7 days). Assume zeta.ai pages never mention it.",
+      "expected_output": "The curator turned the early lane off, so with official pages silent the offer is dropped as unverifiable; no early draft is written.",
+      "files": [],
+      "expectations": [
+        "No draft with verification: unverified is written",
+        "The Dropped list names the offer as unverifiable"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "early-offer-promoted-on-refresh",
+      "kind": "happy-path",
+      "prompt": "Refresh our Zeta Flash listing (offers/zeta-flash-free-week.yaml, currently verification: unverified, source_url an x.com post). Assume zeta.ai/blog/zeta-flash now says: \"Zeta Flash is free for all Zeta Code users until 2026-10-27.\"",
+      "expected_output": "An official page now confirms the offer, so the refresh promotes it: source_url becomes the official blog post, verification becomes social_proof, expiry_date 2026-10-27, today's verified_date, and the X post stays in social_proof.",
+      "files": [],
+      "expectations": [
+        "The refresh draft has verification: social_proof and source_url on zeta.ai",
+        "expiry_date is 2026-10-27, taken from the official quote",
+        "The detail file keeps the original x entry and adds the official page as a link entry",
+        "The diff is shown against the existing offers/zeta-flash-free-week.yaml"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "early-lane-impersonator-dropped",
+      "kind": "edge",
+      "prompt": "Add this: https://x.com/zeta_ai_dev/status/2112197074744246273 — display name \"Zeta AI\" with a checkmark: \"$100 free API credits for every dev, claim in Zeta Code\". Assume oEmbed returns author_name \"Zeta AI\" and author_url https://x.com/zeta_ai_dev, zeta.ai names only @zeta_ai anywhere on its pages, and no other post about the offer exists.",
+      "expected_output": "No provider-owned page names @zeta_ai_dev, so the post is third-party and one third-party post does not meet the floor; the offer is dropped with reason 'only corroboration found'.",
+      "files": [],
+      "expectations": [
+        "No draft is written for the offer",
+        "The Dropped row names the account as third-party or not provider-owned",
+        "The display name and checkmark are not treated as proof of ownership"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "social-proof-refresh-never-early",
+      "kind": "edge",
+      "prompt": "Refresh our Groq free tier listing. Assume every groq.com fetch hits a Cloudflare challenge (retry included), and a post from yesterday by an account named \"Groq Updates\" (not named on any groq.com page) says the free tier doubled.",
+      "expected_output": "A social_proof offer never takes the early lane: the refresh is unverifiable, the published file stays exactly as it is, nothing is merged, and the post is listed as corroboration only.",
+      "files": [],
+      "expectations": [
+        "offers/groq-*.yaml is unchanged (no date bump, no new source_url)",
+        "No draft with verification: unverified is written",
+        "No PR is opened or merged"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "mixed-batch-x-first-ships-after-checks",
+      "kind": "happy-path",
+      "prompt": "Two for today: refresh our Cerebras free tier, and add https://x.com/zeta_ai/status/2112468865643446275 (Zeta AI today: \"Zeta Flash is free in Zeta Code all week\"). Assume Cerebras' pricing page confirms the current listing, zeta.ai pages are silent about Zeta Flash, and zeta.ai/about names @zeta_ai as the company account. Then the curator replies: yes, ship it.",
+      "expected_output": "Step 5 shows one live refresh and one early offer and says 'yes' merges once all checks pass. After the yes, Step 6 regenerates index.json and the llms files, opens one PR, waits for every check with gh pr checks --watch, then squash-merges; on a failed check it reports and leaves the PR open.",
+      "files": [],
+      "expectations": [
+        "Step 5 states that approval also merges after all checks pass",
+        "index.json, app/public/llms.txt, and app/public/llms-full.txt are regenerated and committed",
+        "The merge runs only after gh pr checks --watch --fail-fast succeeds, without --admin"
       ]
     }
   ]

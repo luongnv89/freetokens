@@ -5,7 +5,7 @@ license: MIT
 effort: high
 compatibility: "Requires git, GitHub CLI (gh), python3, node, read-only web tools, and the issue-creator and issue-pr-review skills. Run gh auth status to verify. Optional: TinyFish (MCP server or tinyfish CLI) for page reads and the lightpanda CLI for a browser retry; each falls back when missing."
 metadata:
-  version: 2.2.0
+  version: 2.2.1
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
