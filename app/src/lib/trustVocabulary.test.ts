@@ -67,6 +67,17 @@ describe("trust vocabulary completeness", () => {
     expect(ENROLLMENT_DEADLINE_NOTE).toMatch(/amount/i);
   });
 
+  it("labels the unverified evidence level as an early offer (#610)", () => {
+    const entry = EVIDENCE_LEVEL.unverified;
+    expect(entry.label).toBe("early (unconfirmed)");
+    expect(VERIFICATION_LABELS.unverified).toBe("early (unconfirmed)");
+    // The home status line joins active filters with " · ", so the label must
+    // not carry that separator itself.
+    expect(entry.label).not.toContain("·");
+    expect(entry.definition).toMatch(/not yet on the provider's own site/);
+    expect(entry.definition).toMatch(/unconfirmed/);
+  });
+
   it("uses one label per value across both axes — no 'unverified' collision", () => {
     const labels = [
       ...Object.values(REVIEW_STATUS).map((e) => e.label),

@@ -561,7 +561,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     expect(params.get("category")).toBe("coding");
     expect(params.get("q")).toBe("social");
     expect(statusText()).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · Coding · community-sourced · sign-up required`,
+      `Showing 1 of ${fixtureOffers.length} offers · Coding · early (unconfirmed) · sign-up required`,
     );
   });
 
@@ -571,7 +571,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     fireEvent.click(tagOn("alpha-social", "signup"));
     expect(listedSlugs()).toEqual(["alpha-social"]);
     expect(statusText()).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · community-sourced · sign-up required`,
+      `Showing 1 of ${fixtureOffers.length} offers · early (unconfirmed) · sign-up required`,
     );
     fireEvent.click(
       screen.getByRole("button", { name: "Remove sign-up required filter" }),
@@ -579,7 +579,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     expect(listedSlugs()).toEqual(["alpha-social"]);
     expect(window.location.search).toBe("?verification=unverified");
     expect(statusText()).toBe(
-      `Showing 1 of ${fixtureOffers.length} offers · community-sourced`,
+      `Showing 1 of ${fixtureOffers.length} offers · early (unconfirmed)`,
     );
   });
 
@@ -588,7 +588,7 @@ describe("HomePage three-dimension filters (#126)", () => {
     fireEvent.click(tagOn("alpha-social", "verification"));
     fireEvent.click(tagOn("alpha-social", "signup"));
     fireEvent.click(
-      screen.getByRole("button", { name: "Remove community-sourced filter" }),
+      screen.getByRole("button", { name: "Remove early (unconfirmed) filter" }),
     );
     expect(document.activeElement).toBe(
       screen.getByRole("button", { name: "Remove sign-up required filter" }),
