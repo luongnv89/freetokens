@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-20T08:50:36Z — 119 of 226 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-20T11:48:30Z — 119 of 227 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Beam 1.0 Free (Vercel AI Gateway)
+- Provider: Vercel
+- Category: api_provider
+- Amount: Free Reflection AI Beam 1.0 on AI Gateway (reflection/beam-free, 1M context) for a limited launch period
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://vercel.com/changelog/reflection-ai-beam-now-available-on-ai-gateway-for-free
+- Page: https://freetokens.custats.info/offers/vercel-reflection-beam-free.html
+- Summary: Vercel's AI Gateway offers Reflection AI's Beam 1.0, formerly the stealth model stealth/cat-jam, free for a limited time during its launch period when Reflection AI serves the request. Beam is an open-weight (Apache 2.0) reasoning model for coding and agentic work, with 501B total and 23B active parameters, a 1M-token context, up to 131K output tokens, tool calling and structured outputs. Use reflection/beam-free, which stops serving when the offer ends, so it cannot turn into a bill. reflection/beam is also free when routed to Reflection, but switches to paid pricing when the offer ends, and other providers serving it bill at their own rates. Use is subject to Reflection's terms and privacy policy; Vercel's live endpoint data marks Reflection as neither zero-data-retention nor no-training, so avoid sensitive inputs. No end date is stated. Whether a payment method is needed to create an AI Gateway key was not tested.
+- Claim steps: Create a Vercel account and an AI Gateway API key. | Call model reflection/beam-free through the AI SDK, Chat Completions, Responses or Anthropic Messages API, or a coding agent connected to AI Gateway (npx vercel ai-gateway setup for Claude Code, Codex or Hermes). | Prefer reflection/beam-free: it stops serving when the free period ends instead of billing. If you use reflection/beam, pin provider reflection with only in the gateway provider options, and expect paid pricing after the launch period. | Reflection's terms and privacy policy apply; its endpoint is not marked zero-data-retention or no-training, so avoid sensitive code or data.
 ### MiniMax M3.1 Flash Free (Vercel AI Gateway)
 - Provider: Vercel
 - Category: api_provider
@@ -1185,16 +1195,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/merge-gateway-10-monthly-credits.html
 - Summary: Merge Gateway routes supported LLMs through one API with routing, spend caps and security. Pro is pay-as-you-go at LLM cost plus a 5% fee and requires a credit card. An active Pro subscription receives $10 in complimentary credits on the 1st of each month; unused credits expire at month end with no rollover or cash value. Review spending controls before use: the $10 allowance is not a promise that the card-funded account automatically stops billing at $10.
 - Claim steps: Sign up at https://gateway.merge.dev/signup | Choose the Pro plan, which requires a credit card and charges LLM cost plus a 5% fee on a pay-as-you-go basis. | Maintain an active Pro subscription to receive $10 in complimentary credits on the 1st of each month; unused credits expire at month end, do not roll over and have no cash value. | Review and configure spending controls before making requests via gateway.merge.dev/v1. Do not assume the account automatically stops or prevents paid usage once the $10 allowance is consumed.
-### LLM7.io Free API Tier
-- Provider: LLM7.io
-- Category: api_provider
-- Amount: Free dashboard token for turbo text models with 60 requests/minute, 250 requests/hour, and 100,000 tokens/day
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://docs.llm7.io/limits
-- Page: https://freetokens.custats.info/offers/llm7-free-tier.html
-- Summary: LLM7 documents a free dashboard token for current tier:turbo text-generation models with usage_based_only:false, not every catalog model or Pro/paid-only models. Limits are 1 request per second, 60 per minute, 250 per hour, and 100,000 input-plus-output tokens per 24 hours. Its current limits page no longer documents anonymous access. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.
-- Claim steps: Obtain a free token from the LLM7 dashboard at dash.llm7.io. | Check https://api.llm7.io/v1/models and select a current text-generation model with tier:turbo and usage_based_only:false. Send an OpenAI-compatible request using that model ID and your free dashboard token; Pro or usage_based_only:true models require paid accounting. | Check live availability and dashboard allowance. Stay within 1 request/second, 60/minute, 250/hour and 100,000 input-plus-output tokens/24 hours; quotas may be reduced without notice. | Turbo pricing metadata is for paid usage accounting, not proof the documented free allowance has ended. Image/video allowance and balance rules are separate.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

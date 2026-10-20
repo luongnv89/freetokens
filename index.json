@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-20T08:50:36Z",
-  "count": 260,
-  "active_count": 226,
+  "generated_at": "2026-10-20T11:48:29Z",
+  "count": 261,
+  "active_count": 227,
   "expired_count": 34,
   "offers": [
     {
@@ -27,6 +27,21 @@
       "amount": "Free MiniMax M3.1 Flash in the Cline IDE extension and CLI, up to a limited free quota",
       "expiry_date": null,
       "source_url": "https://x.com/cline/status/2112220504258224605",
+      "verified_date": "2026-10-20",
+      "added_date": "2026-10-20",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "cohere-north-mini-code-free-api",
+      "title": "Cohere North Mini Code — Free API Access (Trial and Production Keys)",
+      "provider": "Cohere",
+      "category": "coding",
+      "amount": "North Mini Code (30B total / 3B active agentic coding MoE, Apache 2.0) free on Cohere API trial and production keys until rate limits are reached (20 req/min trial, 500 req/min production; trial keys capped at 1,000 API calls/month); open weights downloadable free",
+      "expiry_date": null,
+      "source_url": "https://docs.cohere.com/docs/north-mini-code-1.0",
       "verified_date": "2026-10-20",
       "added_date": "2026-10-20",
       "verification": "social_proof",
@@ -72,6 +87,21 @@
       "amount": "MiniMax M3.1 Flash at $0 on AI Gateway when served by MiniMax, through October 22",
       "expiry_date": "2026-10-22",
       "source_url": "https://vercel.com/changelog/minimax-m3-1-flash-now-available-on-ai-gateway-for-free",
+      "verified_date": "2026-10-20",
+      "added_date": "2026-10-20",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "vercel-reflection-beam-free",
+      "title": "Beam 1.0 Free (Vercel AI Gateway)",
+      "provider": "Vercel",
+      "category": "api_provider",
+      "amount": "Free Reflection AI Beam 1.0 on AI Gateway (reflection/beam-free, 1M context) for a limited launch period",
+      "expiry_date": null,
+      "source_url": "https://vercel.com/changelog/reflection-ai-beam-now-available-on-ai-gateway-for-free",
       "verified_date": "2026-10-20",
       "added_date": "2026-10-20",
       "verification": "social_proof",
@@ -3888,21 +3918,6 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
-    },
-    {
-      "slug": "cohere-north-mini-code-free-api",
-      "title": "Cohere North Mini Code — Free API Access (Trial and Production Keys)",
-      "provider": "Cohere",
-      "category": "coding",
-      "amount": "North Mini Code (30B total / 3B active agentic coding MoE, Apache 2.0) free on Cohere API trial and production keys until rate limits are reached (20 req/min trial, 500 req/min production; trial keys capped at 1,000 API calls/month); open weights downloadable free",
-      "expiry_date": null,
-      "source_url": "https://docs.cohere.com/docs/north-mini-code-1.0",
-      "verified_date": "2026-10-20",
-      "added_date": null,
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
     }
   ]
 }
