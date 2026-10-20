@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-20T06:36:01Z — 119 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-20T08:50:36Z — 119 of 226 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -47,6 +47,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/opencode-deepseek-v4-1-flash-free.html
 - Summary: OpenCode made DeepSeek V4.1 Flash free on 2026-10-15 and updated it to DeepSeek's 1017 release on 2026-10-19, keeping the same model ID. OpenCode's Console docs list DeepSeek V4.1 Flash Free (deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-19 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash (deepseek-v4.1-flash, $0.30/$1.20 per 1M input/output tokens) and its OpenCode Go plan listing are separate, so pick the Free variant.
 - Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select DeepSeek V4.1 Flash Free (opencode/deepseek-v4.1-flash-free), not the paid DeepSeek V4.1 Flash. Existing setups pick up the 1017 update automatically; OpenCode says no changes are needed. | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-19), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
+### Cohere North Mini Code — Free API Access (Trial and Production Keys)
+- Provider: Cohere
+- Category: coding
+- Amount: North Mini Code (30B total / 3B active agentic coding MoE, Apache 2.0) free on Cohere API trial and production keys until rate limits are reached (20 req/min trial, 500 req/min production; trial keys capped at 1,000 API calls/month); open weights downloadable free
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.cohere.com/docs/north-mini-code-1.0
+- Page: https://freetokens.custats.info/offers/cohere-north-mini-code-free-api.html
+- Summary: North Mini Code is Cohere's first North-family agentic coding model: a 30B-total / 3B-active Mixture of Experts model under the Apache 2.0 license. Cohere's docs state it is free on both trial and production API keys until rate limits are reached. The rate-limit table lists 20 requests/min for trial keys and 500 requests/min for production keys. Trial keys (and production keys on newer Chat model variants) are limited to 1,000 API calls a month. The weights can be downloaded from Hugging Face or used through the Cohere API.
+- Claim steps: Create a Cohere account and get a trial or production API key | Call the North Mini Code model through the Cohere Chat API (free until rate limits are reached) | Or download the Apache 2.0 weights from Hugging Face to run locally
 ### MiniMax M3.1 Flash Free in Cline
 - Provider: Cline
 - Category: coding
@@ -1185,16 +1195,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llm7-free-tier.html
 - Summary: LLM7 documents a free dashboard token for current tier:turbo text-generation models with usage_based_only:false, not every catalog model or Pro/paid-only models. Limits are 1 request per second, 60 per minute, 250 per hour, and 100,000 input-plus-output tokens per 24 hours. Its current limits page no longer documents anonymous access. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.
 - Claim steps: Obtain a free token from the LLM7 dashboard at dash.llm7.io. | Check https://api.llm7.io/v1/models and select a current text-generation model with tier:turbo and usage_based_only:false. Send an OpenAI-compatible request using that model ID and your free dashboard token; Pro or usage_based_only:true models require paid accounting. | Check live availability and dashboard allowance. Stay within 1 request/second, 60/minute, 250/hour and 100,000 input-plus-output tokens/24 hours; quotas may be reduced without notice. | Turbo pricing metadata is for paid usage accounting, not proof the documented free allowance has ended. Image/video allowance and balance rules are separate.
-### LlamaParse Startup Offer
-- Provider: LlamaIndex
-- Category: startup_program
-- Amount: $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.llamaindex.ai/startups
-- Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
-- Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
-- Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
