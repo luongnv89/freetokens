@@ -1,0 +1,17 @@
+# Verified 2026-10-20 against https://opencode.ai/v2/docs/console/models/
+# ("MiniMax M3.1 Flash Free is free on OpenCode for a limited time. Its provider follows a
+# zero-retention policy and does not use your data for model training."
+# Pricing table: "MiniMax M3.1 Flash Free | Free | Free | Free | -"; model id minimax-m3.1-flash-free,
+# also present in https://opencode.ai/inference/v1/models.)
+# A keyless API call on 2026-10-20 05:39 UTC returned HTTP 403 FreeTierError "OpenCode's free tier
+# can only be used from within OpenCode." No official end date stated.
+title: MiniMax M3.1 Flash Free on OpenCode
+provider: OpenCode
+category: coding
+amount: Free MiniMax M3.1 Flash in the OpenCode app (free input, output and cached reads; limited time)
+expiry_date: null
+source_url: https://opencode.ai/v2/docs/console/models/
+verified_date: 2026-10-20
+verification: social_proof
+review_status: under-review
+signup: none

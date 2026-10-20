@@ -1,0 +1,28 @@
+{
+  "summary": "MiniMax's new M3.1 Flash (released October 19, 2026) has a free OpenRouter variant, minimax/minimax-m3.1-flash:free, priced at $0 for input and output with a 1M-token context and up to 524K output tokens. It accepts text, image and video input and supports tool calling. Free endpoints are rate limited under OpenRouter's standard free-model limits. MiniMax is the only provider; OpenRouter's listing says it does not train on your data but does retain prompts. No end date is stated, so free availability can end without notice. The paid minimax/minimax-m3.1-flash is listed separately.",
+  "claim_steps": [
+    "Create or sign in to an OpenRouter account and create an API key.",
+    "Call the OpenRouter chat-completions API with model minimax/minimax-m3.1-flash:free (keep the :free suffix; the version without it is paid).",
+    "Expect OpenRouter's standard free-model rate limits, and note the MiniMax endpoint retains prompts (no training)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/minimax/minimax-m3.1-flash:free",
+      "title": "MiniMax M3.1 Flash (free) - API Pricing & Benchmarks | OpenRouter",
+      "text": "Is MiniMax M3.1 Flash (free) free? Yes. The pricing shown on this page for MiniMax M3.1 Flash (free) is zero, so you are not charged for prompt or completion tokens. Free endpoints are rate limited."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/minimax/minimax-m3.1-flash:free/endpoints",
+      "title": "OpenRouter endpoints: minimax/minimax-m3.1-flash:free",
+      "text": "One endpoint, provider Minimax, prompt 0 / completion 0, context 1,000,000, max completion 524,288, status 0. Data policy: training false, retainsPrompts true."
+    },
+    {
+      "type": "link",
+      "url": "https://www.minimax.io/blog/minimax-m31f",
+      "title": "MiniMax M3.1 Flash: Redefining Agent Performance and Cost",
+      "text": "Today, we officially roll out MiniMax M3.1 Flash. Space Bunny, which processed more than 200 trillion tokens while operating anonymously, was an early version of MiniMax M3.1 Flash."
+    }
+  ]
+}

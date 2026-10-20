@@ -1,0 +1,23 @@
+{
+  "summary": "Vercel's AI Gateway offers MiniMax M3.1 Flash (model minimax/minimax-m3.1-flash, 1M-token context) free until October 22, 2026. The free rate applies only when MiniMax itself serves the request, so pin MiniMax with order in the gateway provider options. After the offer ends, pinned requests bill at MiniMax's standard rate; there is no separate -free model ID that stops automatically. Whether a payment method is needed to create an AI Gateway key was not tested.",
+  "claim_steps": [
+    "Create a Vercel account and an AI Gateway API key.",
+    "Call model minimax/minimax-m3.1-flash through the AI SDK, Chat Completions, Responses or Anthropic Messages API, or a coding agent connected to AI Gateway.",
+    "Set the gateway provider options order so MiniMax serves the request; other providers are not covered by the free rate.",
+    "Stop or budget usage after October 22: pinned requests then bill at MiniMax's standard rate."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/changelog/minimax-m3-1-flash-now-available-on-ai-gateway-for-free",
+      "title": "MiniMax M3.1 Flash now available on AI Gateway for free - Vercel",
+      "text": "MiniMax M3.1 Flash from MiniMax is now available on AI Gateway for free until Oct 22. The free rate applies only when MiniMax serves the request. To make sure it does, sort the provider with order in the gateway provider options. After the offer ends, pinned requests bill at MiniMax's standard rate."
+    },
+    {
+      "type": "link",
+      "url": "https://www.minimax.io/blog/minimax-m31f",
+      "title": "MiniMax M3.1 Flash: Redefining Agent Performance and Cost",
+      "text": "Flat pricing per 1M tokens: $0.15 input · $0.60 output · $0.015 cached input. M3.1 Flash is now available through the MiniMax API, M Plan, and MiniMax Code."
+    }
+  ]
+}

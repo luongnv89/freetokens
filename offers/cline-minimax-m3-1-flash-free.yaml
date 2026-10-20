@@ -1,0 +1,16 @@
+# Verified 2026-10-20 against https://x.com/cline/status/2112220504258224605
+# ("MiniMax M3.1 Flash goes toe-to-toe with Opus and GPT on coding at ~25x lower cost. This was the
+# model behind Space Bunny ... Free in Cline now!" — @cline, 2026-10-19; cline.bot links x.com/cline.)
+# Live feed https://api.cline.bot/api/v1/ai/cline/recommended-models lists cline-free/minimax-m3.1-flash
+# under "free" (checked 2026-10-20). Terms from https://docs.cline.bot/getting-started/free-models.
+# No official end date stated.
+title: MiniMax M3.1 Flash Free in Cline
+provider: Cline
+category: coding
+amount: Free MiniMax M3.1 Flash in the Cline IDE extension and CLI, up to a limited free quota
+expiry_date: null
+source_url: https://x.com/cline/status/2112220504258224605
+verified_date: 2026-10-20
+verification: social_proof
+review_status: under-review
+signup: required
