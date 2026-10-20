@@ -31,8 +31,8 @@ export default function AboutPage({
             <p className="tagline">
               Every claimable free-credit offer worth your time, on one fast
               page. Each carries a curator review status, an evidence level
-              (corroborated or community-sourced), and a sign-up tag, refreshed
-              on every rebuild.
+              (corroborated or early and unconfirmed), and a sign-up tag,
+              refreshed on every rebuild.
             </p>
           </header>
 
@@ -71,7 +71,8 @@ export default function AboutPage({
                 </li>
                 <li>
                   Evidence level: corroborated by the official site plus social
-                  proof, or community-sourced with no official confirmation yet.
+                  proof, or early (unconfirmed): public posts only, not yet on
+                  the provider's own site.
                 </li>
                 <li>Sign-up need: none vs. required (free account).</li>
                 <li>

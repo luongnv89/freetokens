@@ -91,11 +91,15 @@ export const EVIDENCE_LEVEL = {
     claim:
       "This axis records corroboration only — whether a claim was attempted is the review status.",
   },
+  // An early offer (#610): the offer-updater early lane publishes X-first
+  // offers here before the provider's own site states them. The label carries
+  // no middle dot on purpose: the home status line joins active filters with
+  // " · ", so "early · unconfirmed" would read as two filters.
   unverified: {
-    label: "community-sourced",
-    short: "social sources only",
+    label: "early (unconfirmed)",
+    short: "public posts only, not official yet",
     definition:
-      "Only social or community sources describe this offer; there is no official-site confirmation yet, so treat every term as unconfirmed.",
+      "Public posts describe this early offer, but its terms are not yet on the provider's own site, so treat every term as unconfirmed.",
     claim:
       "This axis records corroboration only — whether a claim was attempted is the review status.",
   },

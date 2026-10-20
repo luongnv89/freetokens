@@ -43,10 +43,10 @@ and the single source the code reads.
 
 `verification` — what the offer's **terms** rest on (its evidence level):
 
-| Value          | Shown as          | Meaning | Claim attempt |
-|----------------|-------------------|---------|---------------|
-| `social_proof` | corroborated      | The offer's terms are corroborated by the provider's own site plus at least one social or community source. | This axis says nothing about claim attempts — `review_status` carries that answer. |
-| `unverified`   | community-sourced | Only social or community sources describe the offer; there is no official-site confirmation yet, so treat every term as unconfirmed. | Same: the review status carries that answer. |
+| Value          | Shown as            | Meaning | Claim attempt |
+|----------------|---------------------|---------|---------------|
+| `social_proof` | corroborated        | The offer's terms are corroborated by the provider's own site plus at least one social or community source. | This axis says nothing about claim attempts — `review_status` carries that answer. |
+| `unverified`   | early (unconfirmed) | Public posts describe this early offer, but its terms are not yet on the provider's own site, so treat every term as unconfirmed. | Same: the review status carries that answer. |
 
 Rules:
 

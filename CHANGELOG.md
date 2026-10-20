@@ -5,6 +5,13 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Early offers labelled as such (#610):** the `unverified` evidence level
+  now reads "early (unconfirmed)" instead of "community-sourced" on rows, the
+  detail page, the trust legend, the filter chip and `llms.txt`, and its
+  definition says the terms are not yet on the provider's own site. These are
+  the X-first offers the offer-updater early lane publishes. Ranking is
+  unchanged: an early offer is `to-be-verified`, so it keeps the
+  needs-follow-up penalty.
 - **Home list ranked by a "Recommended" order by default:** the default
   sort is now one weighted score per offer, with criteria weighted in
   priority order: today's views (scaled against the day's most-viewed

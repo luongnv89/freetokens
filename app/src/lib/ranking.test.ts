@@ -115,6 +115,33 @@ describe("baseScore", () => {
     expect(baseScore(offer({ review_status: "unverified" }), ctx)).toBe(under);
   });
 
+  // Owner decision on #610: early-lane offers (verification: unverified +
+  // review_status: to-be-verified) keep the needs-follow-up penalty — the new
+  // "early (unconfirmed)" badge gives them visibility, the ranking does not.
+  it("keeps the needs-follow-up penalty for early offers (#610)", () => {
+    const early = offer({
+      slug: "early-offer",
+      verification: "unverified",
+      review_status: "to-be-verified",
+    });
+    const sameButUnderReview = offer({
+      verification: "unverified",
+      review_status: "under-review",
+    });
+    expect(RANK_WEIGHTS.needsFollowUp).toBe(-10);
+    expect(baseScore(early, ctx)).toBe(
+      baseScore(sameButUnderReview, ctx) + RANK_WEIGHTS.needsFollowUp,
+    );
+    // The evidence level itself is not a ranking signal: only the review
+    // status docks an early offer.
+    expect(baseScore(offer({ verification: "unverified" }), ctx)).toBe(
+      baseScore(offer({ verification: "social_proof" }), ctx),
+    );
+    expect(
+      slugs(rankOffers([early, offer({ slug: "corroborated" })], ctx)),
+    ).toEqual(["corroborated", "early-offer"]);
+  });
+
   it("never reads the free-text amount (#508)", () => {
     expect(baseScore(offer({ amount: "$100,000 in credits" }), ctx)).toBe(
       baseScore(offer({ amount: "1M tokens" }), ctx),

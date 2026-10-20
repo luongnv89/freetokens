@@ -91,7 +91,7 @@ Take every value from the qualifying posts — never invent one:
 | `expiry_date` | The end date a qualifying post states. A relative window ("free for 7 days") counts from the post date. `null` when no post states an end. A date already past → drop with reason `expired per post`. |
 | `source_url` | The URL of the strongest qualifying post. |
 | `verified_date` | Today — the day you loaded the qualifying post. |
-| `verification` | `unverified` (rendered as the community-sourced evidence level). |
+| `verification` | `unverified` (rendered as the "early (unconfirmed)" evidence level). |
 | `review_status` | `to-be-verified`. |
 | `signup` | `none` only when a qualifying post or provider page states no account is needed; otherwise `required` (the weaker claim). |
 
@@ -122,7 +122,7 @@ every check passes.
 
 - **Step 5.** Add an **Early offers** heading: offer | floor met by | posts
   (URL, author, date) | official pages tried (all silent). Say plainly that
-  each shows as community-sourced and unconfirmed, and end the decision line
+  each shows as an "early (unconfirmed)" offer, and end the decision line
   with: `"yes" commits, opens the PR, and merges it once all checks pass.`
 - **Step 6.** The commit gate is unchanged: nothing ships without the
   curator's explicit yes. Before pushing, regenerate and stage the build
