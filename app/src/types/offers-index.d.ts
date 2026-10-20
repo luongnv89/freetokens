@@ -26,6 +26,10 @@ export interface OffersIndex {
    * All validated offers, newest-added first, then newest-verified, ties by slug ascending. Expired entries are retained and flagged, never dropped.
    */
   offers: Offer[];
+  /**
+   * Curated 'Always free' shelf (#612): offer slugs from config/always-free.yaml in the curator's order. Every slug names an offer in offers; the home page shows only the ones that are active and not verification: unverified.
+   */
+  always_free?: string[];
 }
 /**
  * One offer entry in the generated index. Mirrors the YAML source fields plus the slug and the build-time-computed status.

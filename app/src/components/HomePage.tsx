@@ -19,11 +19,16 @@ import {
   CATEGORY_LABELS,
   SIGNUP_LABELS,
   VERIFICATION_LABELS,
+  NEW_WINDOW_DAYS,
+  SHELF_LIMIT,
   activeOffers,
+  alwaysFreeOffers,
   applySort,
   expiredOffers,
+  newOffersIn,
   offerMatches,
   buildDate,
+  relativeDate,
   type OffersIndex,
 } from "../lib/offers";
 import {
@@ -61,6 +66,7 @@ import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { SiteStats } from "./SiteStats";
 import { HotDeals } from "./HotDeals";
+import { OfferShelf } from "./OfferShelf";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { StructuredData } from "./StructuredData";
 import { Button } from "./ui/button";
@@ -408,6 +414,11 @@ export default function HomePage({
   // Proof-line inputs, both build-time: the live count and the archive count as
   // evidence that expired offers actually leave the list.
   const archivedCount = expiredOffers(index).length;
+  // Build-time shelves (#611, #612): pure functions of the index and the
+  // build date, so the prerendered and hydrated pages render the same rows.
+  const newThisWeek = newOffersIn(offers, buildDay, NEW_WINDOW_DAYS);
+  const newTodayCount = newOffersIn(offers, buildDay, 0).length;
+  const alwaysFree = alwaysFreeOffers(index);
 
   const [state, setState] = useState(emptyState);
   const [searchInput, setSearchInput] = useState("");
@@ -774,6 +785,26 @@ export default function HomePage({
           {offers.length > 0 ? (
             <>
               <HotDeals ranked={topToday} bySlug={offersBySlug} pending={hotPending} />
+              <OfferShelf
+                id="ft-new-shelf"
+                title="New this week"
+                sub={
+                  newTodayCount > 0
+                    ? `${newTodayCount} today · ${newThisWeek.length} this week`
+                    : `${newThisWeek.length} this week`
+                }
+                offers={newThisWeek.slice(0, SHELF_LIMIT)}
+                meta={(offer) =>
+                  offer.added_date ? relativeDate(offer.added_date, buildDay) : null
+                }
+                more={{ href: "?sort=added", label: "See all new" }}
+              />
+              <OfferShelf
+                id="ft-always-free-shelf"
+                title="Always free"
+                sub="ongoing free access, picked by hand"
+                offers={alwaysFree.slice(0, SHELF_LIMIT)}
+              />
               <Toolbar
                 total={offers.length}
                 shown={shownList.length}

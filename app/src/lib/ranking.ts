@@ -72,7 +72,8 @@ export type RankContext = {
 
 const DAY_MS = 86_400_000;
 
-function dayNumber(iso: string | null | undefined): number | null {
+/** Whole UTC day count for a YYYY-MM-DD date; null when absent or malformed. */
+export function dayNumber(iso: string | null | undefined): number | null {
   if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null;
   const ms = Date.parse(`${iso}T00:00:00Z`);
   return Number.isNaN(ms) ? null : ms / DAY_MS;

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T11:48:29Z",
+  "generated_at": "2026-10-20T15:17:30Z",
   "count": 261,
   "active_count": 227,
   "expired_count": 34,
@@ -3919,5 +3919,11 @@
       "signup": "required",
       "status": "expired"
     }
+  ],
+  "always_free": [
+    "kilo-code-free-models",
+    "cline-ox-alpha-free",
+    "cline-gemini-3-8-flash-free",
+    "opencode-mimo-v2-6-flash-free"
   ]
 }

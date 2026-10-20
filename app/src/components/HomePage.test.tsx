@@ -1602,3 +1602,137 @@ describe("HomePage pagination (#548)", () => {
     expect(pager()).toBeNull();
   });
 });
+
+describe("HomePage build-time shelves (#611 New this week, #612 Always free)", () => {
+  // Build date 2026-08-24 (generated_at). Ages: 0, 1, 7 and 8 days.
+  const shelfOffers: Offer[] = [
+    offer({ slug: "new-today", title: "New Today", added_date: "2026-08-24" }),
+    offer({ slug: "new-yday", title: "New Yesterday", added_date: "2026-08-23" }),
+    offer({ slug: "new-week", title: "New Week Edge", added_date: "2026-08-17" }),
+    offer({ slug: "old-8", title: "Eight Days Old", added_date: "2026-08-16" }),
+    offer({
+      slug: "free-expired",
+      title: "Free Expired",
+      expiry_date: "2026-08-01",
+      status: "expired",
+      added_date: "2026-08-24",
+    }),
+    offer({ slug: "free-early", title: "Free Early", verification: "unverified" }),
+    offer({ slug: "free-ok", title: "Free Ok", provider: "Kilo Code" }),
+  ];
+  const shelfIndex: OffersIndex = {
+    generated_at: "2026-08-24T06:00:00Z",
+    count: shelfOffers.length,
+    active_count: shelfOffers.length - 1,
+    expired_count: 1,
+    offers: shelfOffers,
+    always_free: ["free-expired", "free-early", "free-ok"],
+  };
+
+  function shelfSlugs(id: string) {
+    return [
+      ...document.querySelectorAll(`#${id} [data-ft-offer-id]`),
+    ].map((a) => a.getAttribute("data-ft-offer-id"));
+  }
+
+  it("New this week lists day 0..7 newest first, never day 8 or expired", () => {
+    render(<HomePage index={shelfIndex} />);
+    const shelf = screen.getByRole("region", { name: /New this week/ });
+    expect(shelfSlugs("ft-new-shelf")).toEqual([
+      "new-today",
+      "new-yday",
+      "new-week",
+    ]);
+    expect(shelf.textContent).toContain("1 today · 3 this week");
+    expect(shelf.querySelector("#ft-new-shelf [data-ft-offer-id='new-today']")
+      ?.closest("li")?.textContent).toContain("today");
+  });
+
+  it("caps New this week at six and links to the full Latest added list", () => {
+    const many = Array.from({ length: 8 }, (_, i) =>
+      offer({
+        slug: `fresh-${i}`,
+        title: `Fresh ${i}`,
+        added_date: "2026-08-24",
+      }),
+    );
+    render(
+      <HomePage
+        index={{ ...shelfIndex, offers: many, count: 8, active_count: 8, expired_count: 0 }}
+      />,
+    );
+    expect(shelfSlugs("ft-new-shelf")).toHaveLength(6);
+    const seeAll = screen.getByRole("link", { name: "See all new" });
+    expect(seeAll.getAttribute("href")).toBe("?sort=added");
+  });
+
+  it("renders no New this week shelf when nothing was added in the window", () => {
+    render(<HomePage index={index} />);
+    expect(document.getElementById("ft-new-shelf")).toBeNull();
+    expect(screen.queryByText("New this week")).toBeNull();
+  });
+
+  it("Always free shows curated active offers only, never expired or early ones", () => {
+    render(<HomePage index={shelfIndex} />);
+    expect(
+      screen.getByRole("region", { name: /Always free/ }),
+    ).toBeInTheDocument();
+    expect(shelfSlugs("ft-always-free-shelf")).toEqual(["free-ok"]);
+  });
+
+  it("renders no Always free shelf when no listed offer qualifies", () => {
+    render(
+      <HomePage
+        index={{ ...shelfIndex, always_free: ["free-expired", "free-early"] }}
+      />,
+    );
+    expect(document.getElementById("ft-always-free-shelf")).toBeNull();
+  });
+
+  it("shelf pills are keyboard-reachable links that reuse offer_click", () => {
+    const gtag = grantedGtag();
+    render(<HomePage index={shelfIndex} />);
+    bindAnalyticsListeners();
+    const link = document.querySelector(
+      "#ft-always-free-shelf a[data-ft-offer-id='free-ok']",
+    ) as HTMLAnchorElement;
+    expect(link.getAttribute("href")).toBe("offers/free-ok.html");
+    link.focus();
+    expect(document.activeElement).toBe(link);
+    link.addEventListener("click", (e) => e.preventDefault());
+    fireEvent.click(link);
+    const clicks = eventCalls(gtag, "offer_click");
+    expect(clicks).toHaveLength(1);
+    expect(clicks[0][2]).toMatchObject({
+      offer_id: "free-ok",
+      provider: "Kilo Code",
+      category: "coding",
+    });
+  });
+
+  it("prerendered markup hydrates without a mismatch (build-date only)", async () => {
+    const { renderToString } = await import("react-dom/server");
+    const { hydrateRoot } = await import("react-dom/client");
+    const html = renderToString(<HomePage index={shelfIndex} />);
+    expect(html).toContain("New this week");
+    expect(html).toContain("Always free");
+    const host = document.createElement("div");
+    host.innerHTML = html;
+    document.body.appendChild(host);
+    const errors: unknown[] = [];
+    let root: ReturnType<typeof hydrateRoot> | undefined;
+    await act(async () => {
+      root = hydrateRoot(host, <HomePage index={shelfIndex} />, {
+        onRecoverableError: (error) => errors.push(error),
+      });
+    });
+    expect(errors).toEqual([]);
+    expect(
+      [...host.querySelectorAll("#ft-new-shelf [data-ft-offer-id]")].map((a) =>
+        a.getAttribute("data-ft-offer-id"),
+      ),
+    ).toEqual(["new-today", "new-yday", "new-week"]);
+    act(() => root?.unmount());
+    host.remove();
+  });
+});

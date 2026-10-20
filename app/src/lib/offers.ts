@@ -8,7 +8,7 @@
 // a schema change that breaks a component is a compile error.
 import type { Offer, OffersIndex } from "../types/offers-index";
 import type { UrlState } from "./urlState";
-import { rankOffers, type RankContext } from "./ranking";
+import { dayNumber, rankOffers, type RankContext } from "./ranking";
 // Trust wording has ONE home: scripts/trust-vocabulary.mjs (issues #507/#509).
 // The maps below are projections of it, so the badges, the hover-free legend,
 // the JSON-LD and the llms exports can never drift apart. Plain ESM + a
@@ -162,6 +162,78 @@ export function relativeDate(iso: string, today: string): string {
 /** Expired entries never reach the default visitor list (#25). */
 export function activeOffers(index: OffersIndex): Offer[] {
   return index.offers.filter((o) => o.status !== "expired");
+}
+
+/** How many offers a home shelf shows before its "see all" link. */
+export const SHELF_LIMIT = 6;
+
+/** The "New this week" window: build day plus the seven days before it. */
+export const NEW_WINDOW_DAYS = 7;
+
+/**
+ * Whole days between an offer's `added_date` and the build date `today`,
+ * measured with the same day arithmetic as newness() in ranking.ts and
+ * never against the visitor's clock (ADR 0001). A date after `today` counts
+ * as 0, exactly as newness() clamps it; null when either date is unknown.
+ */
+export function addedAgeDays(
+  addedDate: string | null | undefined,
+  today: string,
+): number | null {
+  const added = dayNumber(addedDate);
+  const now = dayNumber(today);
+  if (added === null || now === null) return null;
+  return Math.max(0, now - added);
+}
+
+/**
+ * Active offers added within `days` days of the build date (#611): `days`
+ * 0 is "today" only, 7 is the week window, both ends inclusive — an offer
+ * added 7 days before the build is in, 8 days is out. Newest added first;
+ * equal dates keep their order in `offers` (the build's index order).
+ * Expired entries and offers with no known add date never qualify.
+ */
+export function newOffersIn(
+  offers: readonly Offer[],
+  today: string,
+  days: number,
+): Offer[] {
+  return offers
+    .map((offer, index) => ({
+      offer,
+      index,
+      age: addedAgeDays(offer.added_date, today),
+    }))
+    .filter(
+      (row): row is { offer: Offer; index: number; age: number } =>
+        row.offer.status !== "expired" && row.age !== null && row.age <= days,
+    )
+    .sort((a, b) => a.age - b.age || a.index - b.index)
+    .map((row) => row.offer);
+}
+
+/**
+ * The "Always free" shelf (#612): the curated slugs from
+ * config/always-free.yaml (carried as `index.always_free`), in the curator's
+ * order, narrowed to offers that are active at build time and are not early
+ * (`verification: unverified`) offers. Listing a slug is necessary but never
+ * sufficient: an offer that has since expired or is only an early report
+ * drops off the shelf without anyone editing the list.
+ */
+export function alwaysFreeOffers(index: OffersIndex): Offer[] {
+  const bySlug = new Map(index.offers.map((o) => [o.slug, o]));
+  const seen = new Set<string>();
+  const shelf: Offer[] = [];
+  for (const slug of index.always_free ?? []) {
+    const offer = bySlug.get(slug);
+    if (!offer || seen.has(slug)) continue;
+    seen.add(slug);
+    if (offer.status === "expired" || offer.verification === "unverified") {
+      continue;
+    }
+    shelf.push(offer);
+  }
+  return shelf;
 }
 
 /**

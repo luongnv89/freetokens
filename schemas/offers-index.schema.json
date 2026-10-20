@@ -37,6 +37,15 @@
       "type": "array",
       "items": { "$ref": "#/$defs/Offer" },
       "description": "All validated offers, newest-added first, then newest-verified, ties by slug ascending. Expired entries are retained and flagged, never dropped."
+    },
+    "always_free": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true,
+      "description": "Curated 'Always free' shelf (#612): offer slugs from config/always-free.yaml in the curator's order. Every slug names an offer in offers; the home page shows only the ones that are active and not verification: unverified."
     }
   },
   "$defs": {
