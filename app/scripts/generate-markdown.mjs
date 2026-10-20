@@ -309,7 +309,6 @@ const DROP_CLASSES = new Set([
   "stat-strip",
   "breadcrumbs",
   "toolbar",
-  "hot-deals",
   "custats-banner",
   "tag-sprite",
   "kicker",

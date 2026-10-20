@@ -5,17 +5,13 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
-- **"New this week" and "Always free" home shelves (#611, #612):** two
-  build-time shelves above the toolbar, beside "Most viewed today". "New
-  this week" lists active offers whose `added_date` is 0–7 days before the
-  build date (today counts, day 8 does not), newest first, six at most,
-  labels each with its age, counts today's adds, and links to the full
-  "Latest added" order (`?sort=added`). "Always free" lists the
-  curator-picked offers in `config/always-free.yaml` (see `docs/schema.md`),
-  showing only ones that are active and not early (`verification:
-  unverified`) offers; the build and `validate_offers.py` fail when a listed
-  slug names no offer. Both are prerendered, hidden when empty, and measured
-  against the build date only (ADR 0001).
+- **Home shelves removed; list defaults to "Recently checked":** the
+  "Most viewed today", "New this week" and "Always free" strips above the
+  toolbar are gone. The list now opens newest `verified_date` first. The
+  "Recommended" ranking is still one pick away (`?sort=recommended`), and a
+  legacy `?sort=newest` link opens the same default order. The curated
+  `config/always-free.yaml` list (#612) is still validated and copied into
+  the index as `always_free`, but the home page no longer shows it.
 - **Early offers labelled as such (#610):** the `unverified` evidence level
   now reads "early (unconfirmed)" instead of "community-sourced" on rows, the
   detail page, the trust legend, the filter chip and `llms.txt`, and its

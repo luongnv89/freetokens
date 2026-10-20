@@ -9,9 +9,12 @@
 // legacy `?sort=amount` URL (or a stored `ft-prefs` value) degrades to the
 // default order via normalizeSort.
 //
-// The empty value is the default "Recommended" ranking (src/lib/ranking.ts);
-// `added` is newest-added first, the build's index order.
-export const SORT_MODES = ["added", "newest", "expiring"] as const;
+// The empty value is the default "Recently checked" order (newest
+// verified_date first); `recommended` is the scored ranking
+// (src/lib/ranking.ts); `added` is newest-added first, the build's index
+// order. The old `?sort=newest` named today's default, so it normalizes to
+// the empty value and keeps one canonical URL per view.
+export const SORT_MODES = ["recommended", "added", "expiring"] as const;
 export const DIMENSIONS = ["category", "verification", "signup"] as const;
 
 export type SortMode = (typeof SORT_MODES)[number];

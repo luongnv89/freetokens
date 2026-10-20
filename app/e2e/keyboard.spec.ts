@@ -65,24 +65,24 @@ test("keyboard path: filter → search → sort → offer click", async ({
   await focusVisibly(sort);
   await page.keyboard.press("ArrowDown");
   let sortValue = await sort.inputValue();
-  if (sortValue !== "newest" && sortValue !== "expiring") {
-    await page.keyboard.press("n");
+  if (sortValue !== "recommended" && sortValue !== "expiring") {
+    await page.keyboard.press("r");
     sortValue = await sort.inputValue();
   }
-  if (sortValue !== "newest" && sortValue !== "expiring") {
+  if (sortValue !== "recommended" && sortValue !== "expiring") {
     // Headless WebKit often cannot change a native <select> via keys.
     await sort.press("ArrowDown");
     sortValue = await sort.inputValue();
   }
-  if (sortValue !== "newest" && sortValue !== "expiring") {
+  if (sortValue !== "recommended" && sortValue !== "expiring") {
     await sort.evaluate((el) => {
       const select = el as HTMLSelectElement;
-      select.value = "newest";
+      select.value = "recommended";
       select.dispatchEvent(new Event("change", { bubbles: true }));
     });
     sortValue = await sort.inputValue();
   }
-  expect(["newest", "expiring"]).toContain(sortValue);
+  expect(["recommended", "expiring"]).toContain(sortValue);
   await expect(sort).toBeFocused();
   const sortOutline = await sort.evaluate(
     (el) => getComputedStyle(el).outlineWidth,

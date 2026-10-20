@@ -9,7 +9,6 @@ import {
 } from "react";
 import {
   SEARCH_DEBOUNCE_MS,
-  isGoatCounterConfigured,
   trackFilterUse,
   trackSearch,
   trackSortUse,
@@ -19,16 +18,11 @@ import {
   CATEGORY_LABELS,
   SIGNUP_LABELS,
   VERIFICATION_LABELS,
-  NEW_WINDOW_DAYS,
-  SHELF_LIMIT,
   activeOffers,
-  alwaysFreeOffers,
   applySort,
   expiredOffers,
-  newOffersIn,
   offerMatches,
   buildDate,
-  relativeDate,
   type OffersIndex,
 } from "../lib/offers";
 import {
@@ -42,12 +36,7 @@ import {
 } from "../lib/personalState";
 import { TAG_ICONS } from "../lib/tagIcons";
 import { PAGE_SIZE, pageCount } from "../lib/pagination";
-import {
-  hotViewCounts,
-  hottestSlugs,
-  topViewedSlugs,
-  useOfferViews,
-} from "../lib/offerStats";
+import { hotViewCounts, hottestSlugs, useOfferViews } from "../lib/offerStats";
 import type { RankContext } from "../lib/ranking";
 import {
   DIMENSIONS,
@@ -65,8 +54,6 @@ import { TrustLegend } from "./TrustLegend";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { SiteStats } from "./SiteStats";
-import { HotDeals } from "./HotDeals";
-import { OfferShelf } from "./OfferShelf";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { StructuredData } from "./StructuredData";
 import { Button } from "./ui/button";
@@ -251,11 +238,12 @@ function Toolbar({
           value={sortValue}
           onChange={(e) => onSortChange(e.target.value)}
         >
-          {/* The empty value is the default ranking (lib/ranking.ts); "added"
-              is the build's index order, which it emits newest-added first. */}
-          <option value="">Recommended</option>
+          {/* The empty value is the default, newest verified_date first;
+              "recommended" is the ranking in lib/ranking.ts; "added" is the
+              build's index order, which it emits newest-added first. */}
+          <option value="">Recently checked</option>
+          <option value="recommended">Recommended</option>
           <option value="added">Latest added</option>
-          <option value="newest">Recently checked</option>
           <option value="expiring">Expiring soon</option>
         </select>
       </div>
@@ -414,11 +402,6 @@ export default function HomePage({
   // Proof-line inputs, both build-time: the live count and the archive count as
   // evidence that expired offers actually leave the list.
   const archivedCount = expiredOffers(index).length;
-  // Build-time shelves (#611, #612): pure functions of the index and the
-  // build date, so the prerendered and hydrated pages render the same rows.
-  const newThisWeek = newOffersIn(offers, buildDay, NEW_WINDOW_DAYS);
-  const newTodayCount = newOffersIn(offers, buildDay, 0).length;
-  const alwaysFree = alwaysFreeOffers(index);
 
   const [state, setState] = useState(emptyState);
   const [searchInput, setSearchInput] = useState("");
@@ -514,20 +497,6 @@ export default function HomePage({
     );
     return detach;
   }, []);
-  // The highlight shelf ranks the same windowed counters the badge uses, over
-  // the FULL slug list rather than what is on screen, so filtering or
-  // searching never changes which offers are "hot" — only the list below.
-  const topToday = useMemo(() => topViewedSlugs(todayViews, 3), [todayViews]);
-  // The shelf reserves its box until the windowed counters settle, but only
-  // where counters can ever arrive: unconfigured or JS-off visitors get no
-  // hole above the toolbar.
-  const hotPending =
-    isGoatCounterConfigured() && Object.keys(todayViews).length === 0;
-  const offersBySlug = useMemo(
-    () => new Map(offers.map((offer) => [offer.slug, offer])),
-    [offers],
-  );
-
   function commit(
     patch: Partial<UrlState>,
     source: "search" | "sort" | "filter" | "page",
@@ -784,27 +753,6 @@ export default function HomePage({
 
           {offers.length > 0 ? (
             <>
-              <HotDeals ranked={topToday} bySlug={offersBySlug} pending={hotPending} />
-              <OfferShelf
-                id="ft-new-shelf"
-                title="New this week"
-                sub={
-                  newTodayCount > 0
-                    ? `${newTodayCount} today · ${newThisWeek.length} this week`
-                    : `${newThisWeek.length} this week`
-                }
-                offers={newThisWeek.slice(0, SHELF_LIMIT)}
-                meta={(offer) =>
-                  offer.added_date ? relativeDate(offer.added_date, buildDay) : null
-                }
-                more={{ href: "?sort=added", label: "See all new" }}
-              />
-              <OfferShelf
-                id="ft-always-free-shelf"
-                title="Always free"
-                sub="picked by hand"
-                offers={alwaysFree.slice(0, SHELF_LIMIT)}
-              />
               <Toolbar
                 total={offers.length}
                 shown={shownList.length}
