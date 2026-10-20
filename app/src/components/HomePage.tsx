@@ -802,7 +802,7 @@ export default function HomePage({
               <OfferShelf
                 id="ft-always-free-shelf"
                 title="Always free"
-                sub="ongoing free access, picked by hand"
+                sub="picked by hand"
                 offers={alwaysFree.slice(0, SHELF_LIMIT)}
               />
               <Toolbar
