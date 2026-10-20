@@ -1,6 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { configureAnalytics, resetAnalyticsForTests } from "./analytics";
-import { fetchOfferViews, ftOfferViewsUrl, gcOfferPath } from "./offerStats";
+import {
+  fetchOfferViews,
+  ftOfferViewsUrl,
+  gcOfferPath,
+  topViewedSlugs,
+} from "./offerStats";
 
 const SITE = "https://luongnv89.goatcounter.com";
 
@@ -174,5 +179,36 @@ describe("windowed per-offer counters for the hot ranking (#282)", () => {
     expect(seen.every((u) => u.includes("start=") && u.includes("end="))).toBe(
       true,
     );
+  });
+});
+
+describe("topViewedSlugs", () => {
+  it("ranks by views, highest first, and stops at the limit", () => {
+    const ranked = topViewedSlugs({ a: 9, b: 40, c: 3, d: 12 }, 3);
+    expect(ranked.map((r) => r.slug)).toEqual(["b", "d", "a"]);
+    expect(ranked[0].views).toBe(40);
+  });
+
+  it("drops counts under the evidence floor", () => {
+    // Two views is noise on a counter only consenting visitors reach.
+    expect(topViewedSlugs({ a: 5, b: 2, c: 1 }, 3).map((r) => r.slug)).toEqual([
+      "a",
+    ]);
+  });
+
+  it("ignores blocked counters, which read as null rather than zero", () => {
+    expect(topViewedSlugs({ a: null, b: 6 }, 3).map((r) => r.slug)).toEqual([
+      "b",
+    ]);
+  });
+
+  it("breaks ties on slug so the same data never renders two different orders", () => {
+    expect(topViewedSlugs({ zeta: 7, alpha: 7 }, 3).map((r) => r.slug)).toEqual(
+      ["alpha", "zeta"],
+    );
+  });
+
+  it("returns nothing when no counter cleared the floor", () => {
+    expect(topViewedSlugs({ a: 1, b: null }, 3)).toEqual([]);
   });
 });

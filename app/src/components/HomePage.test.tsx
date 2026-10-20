@@ -99,10 +99,20 @@ const fixtureOffers: Offer[] = [
   }),
 ];
 
-// The default ("Recommended") order of fixtureOffers: the four GitHub coding
-// offers lead on big lab + coding, in index order, and the Acme image offer
-// trails. Index order ("Latest added") is fixtureOffers itself.
+// The default ("Recently checked") order of fixtureOffers: newest
+// verified_date first.
 const DEFAULT_ORDER = [
+  "beta-copilot",
+  "alpha-image",
+  "alpha-free",
+  "alpha-social",
+  "alpha-copilot",
+];
+
+// The "Recommended" order of fixtureOffers: the four GitHub coding offers
+// lead on big lab + coding, in index order, and the Acme image offer trails.
+// Index order ("Latest added") is fixtureOffers itself.
+const RECOMMENDED_ORDER = [
   "alpha-copilot",
   "alpha-social",
   "alpha-free",
@@ -293,23 +303,32 @@ describe("HomePage sort_use", () => {
     });
   });
 
-  it("defaults to the Recommended ranking and keeps Latest added as index order", () => {
+  it("defaults to Recently checked and keeps Recommended and Latest added", () => {
     const gtag = grantedGtag();
     render(<HomePage index={index} />);
     const select = screen.getByLabelText("Sort");
     expect(select).toHaveValue("");
     expect(
-      screen.getByRole("option", { name: "Recommended" }),
+      screen.getByRole("option", { name: "Recently checked" }),
     ).toHaveProperty("selected", true);
     expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    fireEvent.change(select, { target: { value: "recommended" } });
+    expect(listedSlugs()).toEqual(RECOMMENDED_ORDER);
     fireEvent.change(select, { target: { value: "added" } });
     expect(listedSlugs()).toEqual(fixtureOffers.map((o) => o.slug));
     expect(new URLSearchParams(window.location.search).get("sort")).toBe(
       "added",
     );
-    expect(eventCalls(gtag, "sort_use")[0][2]).toEqual({
+    expect(eventCalls(gtag, "sort_use")[1][2]).toEqual({
       sort_option: "added",
     });
+  });
+
+  it("degrades a legacy ?sort=newest deep link to the same default order", () => {
+    setSearch("?sort=newest");
+    render(<HomePage index={index} />);
+    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    expect(screen.getByLabelText("Sort")).toHaveValue("");
   });
 });
 
@@ -381,7 +400,7 @@ describe("HomePage deep link and popstate", () => {
     const gtag = grantedGtag();
     render(<HomePage index={index} />);
     fireEvent.change(screen.getByLabelText("Sort"), {
-      target: { value: "newest" },
+      target: { value: "recommended" },
     });
     expect(eventCalls(gtag, "sort_use")).toHaveLength(1);
     gtag.mockClear();
@@ -442,10 +461,10 @@ describe("HomePage three-dimension filters (#126)", () => {
 
     fireEvent.click(categoryChip("coding"));
     expect(listedSlugs()).toEqual([
-      "alpha-copilot",
-      "alpha-social",
-      "alpha-free",
       "beta-copilot",
+      "alpha-free",
+      "alpha-social",
+      "alpha-copilot",
     ]);
     expect(new URLSearchParams(window.location.search).get("category")).toBe(
       "coding",
@@ -465,10 +484,10 @@ describe("HomePage three-dimension filters (#126)", () => {
       "coding",
     );
     expect(listedSlugs()).toEqual([
-      "alpha-copilot",
-      "alpha-social",
-      "alpha-free",
       "beta-copilot",
+      "alpha-free",
+      "alpha-social",
+      "alpha-copilot",
     ]);
     expect(eventCalls(gtag, "filter_use")).toHaveLength(2);
     expect(pushSpy).toHaveBeenCalledTimes(1);
@@ -769,7 +788,7 @@ describe("HomePage saved and dismissed personal state (#140)", () => {
     setSearch("?category=image");
     render(<HomePage index={index} />);
     fireEvent.click(savedToggle());
-    expect(listedSlugs()).toEqual(["alpha-social", "beta-copilot"]);
+    expect(listedSlugs()).toEqual(["beta-copilot", "alpha-social"]);
     expect(savedToggle().getAttribute("aria-pressed")).toBe("true");
     // Toggling back restores the default (filtered) list.
     fireEvent.click(savedToggle());
@@ -964,7 +983,7 @@ describe("HomePage per-offer live view counts (#101)", () => {
       statText(document.querySelector("#offer-alpha-image .r-views")),
     ).toBe("8 views");
     expect(calls[0]).toBe(
-      `${SITE}/counter/%2Foffers%2Falpha-copilot.html.json`,
+      `${SITE}/counter/%2Foffers%2Fbeta-copilot.html.json`,
     );
     expect(
       calls.every((u) => u.startsWith(`${SITE}/counter/%2Foffers%2F`)),
@@ -1039,6 +1058,12 @@ describe("HomePage per-offer live view counts (#101)", () => {
 });
 
 describe("HomePage hot-today badge (#282)", () => {
+  // Today's views only reorder the Recommended ranking; the default
+  // Recently checked order never reads them.
+  beforeEach(() => {
+    setSearch("?sort=recommended");
+  });
+
   function counterResponse(count: unknown, ok = true) {
     return {
       ok,
@@ -1162,12 +1187,12 @@ describe("HomePage hot-today badge (#282)", () => {
     expect(hotSlugs()).toEqual([]);
   });
 
-  it("moves today's hot offer up the default list once the counts load", async () => {
+  it("moves today's hot offer up the Recommended list once the counts load", async () => {
     configureAnalytics({ statsSite: SITE });
     stubCounters({ "beta-copilot": 12 });
     render(<HomePage index={index} />);
     // First paint matches the prerender: no counts, plain default order.
-    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    expect(listedSlugs()).toEqual(RECOMMENDED_ORDER);
     await waitFor(() => {
       expect(listedSlugs()[0]).toBe("beta-copilot");
     });
@@ -1212,7 +1237,7 @@ describe("HomePage hot-today badge (#282)", () => {
     await waitFor(() => {
       expect(hotSlugs()).toEqual(["beta-copilot"]);
     });
-    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    expect(listedSlugs()).toEqual(RECOMMENDED_ORDER);
   });
 
   it("also holds counts once the visitor has scrolled (#570)", async () => {
@@ -1224,7 +1249,7 @@ describe("HomePage hot-today badge (#282)", () => {
     await waitFor(() => {
       expect(hotSlugs()).toEqual(["beta-copilot"]);
     });
-    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    expect(listedSlugs()).toEqual(RECOMMENDED_ORDER);
   });
 
   it("applies held counts with the visitor's next list change (#570)", async () => {
@@ -1236,7 +1261,7 @@ describe("HomePage hot-today badge (#282)", () => {
     await waitFor(() => {
       expect(hotSlugs()).toEqual(["beta-copilot"]);
     });
-    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    expect(listedSlugs()).toEqual(RECOMMENDED_ORDER);
     fireEvent.click(categoryChip("coding"));
     await waitFor(() => {
       expect(listedSlugs()).toEqual([
@@ -1257,7 +1282,7 @@ describe("HomePage hot-today badge (#282)", () => {
     await waitFor(() => {
       expect(hotSlugs()).toEqual(["beta-copilot"]);
     });
-    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    expect(listedSlugs()).toEqual(RECOMMENDED_ORDER);
   });
 
   it("keeps held counts held across a page change, applying them on the next filter (#570)", async () => {
@@ -1311,7 +1336,7 @@ describe("HomePage hot-today badge (#282)", () => {
       ).not.toBeNull();
     });
     await act(async () => {});
-    expect(listedSlugs()).toEqual(DEFAULT_ORDER);
+    expect(listedSlugs()).toEqual(RECOMMENDED_ORDER);
   });
 
   it("leaves the Latest added order alone when counts load", async () => {
@@ -1479,11 +1504,11 @@ describe("HomePage pagination (#548)", () => {
     setSearch("?page=2");
     render(<HomePage index={pagedIndex} />);
     fireEvent.change(screen.getByLabelText("Sort"), {
-      target: { value: "newest" },
+      target: { value: "recommended" },
     });
     const params = new URLSearchParams(window.location.search);
     expect(params.get("page")).toBeNull();
-    expect(params.get("sort")).toBe("newest");
+    expect(params.get("sort")).toBe("recommended");
     expect(listedSlugs()).toEqual(slugs.slice(0, PAGE_SIZE));
   });
 
@@ -1600,139 +1625,5 @@ describe("HomePage pagination (#548)", () => {
   it("renders no pager when the whole result fits one page", () => {
     render(<HomePage index={index} />);
     expect(pager()).toBeNull();
-  });
-});
-
-describe("HomePage build-time shelves (#611 New this week, #612 Always free)", () => {
-  // Build date 2026-08-24 (generated_at). Ages: 0, 1, 7 and 8 days.
-  const shelfOffers: Offer[] = [
-    offer({ slug: "new-today", title: "New Today", added_date: "2026-08-24" }),
-    offer({ slug: "new-yday", title: "New Yesterday", added_date: "2026-08-23" }),
-    offer({ slug: "new-week", title: "New Week Edge", added_date: "2026-08-17" }),
-    offer({ slug: "old-8", title: "Eight Days Old", added_date: "2026-08-16" }),
-    offer({
-      slug: "free-expired",
-      title: "Free Expired",
-      expiry_date: "2026-08-01",
-      status: "expired",
-      added_date: "2026-08-24",
-    }),
-    offer({ slug: "free-early", title: "Free Early", verification: "unverified" }),
-    offer({ slug: "free-ok", title: "Free Ok", provider: "Kilo Code" }),
-  ];
-  const shelfIndex: OffersIndex = {
-    generated_at: "2026-08-24T06:00:00Z",
-    count: shelfOffers.length,
-    active_count: shelfOffers.length - 1,
-    expired_count: 1,
-    offers: shelfOffers,
-    always_free: ["free-expired", "free-early", "free-ok"],
-  };
-
-  function shelfSlugs(id: string) {
-    return [
-      ...document.querySelectorAll(`#${id} [data-ft-offer-id]`),
-    ].map((a) => a.getAttribute("data-ft-offer-id"));
-  }
-
-  it("New this week lists day 0..7 newest first, never day 8 or expired", () => {
-    render(<HomePage index={shelfIndex} />);
-    const shelf = screen.getByRole("region", { name: /New this week/ });
-    expect(shelfSlugs("ft-new-shelf")).toEqual([
-      "new-today",
-      "new-yday",
-      "new-week",
-    ]);
-    expect(shelf.textContent).toContain("1 today · 3 this week");
-    expect(shelf.querySelector("#ft-new-shelf [data-ft-offer-id='new-today']")
-      ?.closest("li")?.textContent).toContain("today");
-  });
-
-  it("caps New this week at six and links to the full Latest added list", () => {
-    const many = Array.from({ length: 8 }, (_, i) =>
-      offer({
-        slug: `fresh-${i}`,
-        title: `Fresh ${i}`,
-        added_date: "2026-08-24",
-      }),
-    );
-    render(
-      <HomePage
-        index={{ ...shelfIndex, offers: many, count: 8, active_count: 8, expired_count: 0 }}
-      />,
-    );
-    expect(shelfSlugs("ft-new-shelf")).toHaveLength(6);
-    const seeAll = screen.getByRole("link", { name: "See all new" });
-    expect(seeAll.getAttribute("href")).toBe("?sort=added");
-  });
-
-  it("renders no New this week shelf when nothing was added in the window", () => {
-    render(<HomePage index={index} />);
-    expect(document.getElementById("ft-new-shelf")).toBeNull();
-    expect(screen.queryByText("New this week")).toBeNull();
-  });
-
-  it("Always free shows curated active offers only, never expired or early ones", () => {
-    render(<HomePage index={shelfIndex} />);
-    expect(
-      screen.getByRole("region", { name: /Always free/ }),
-    ).toBeInTheDocument();
-    expect(shelfSlugs("ft-always-free-shelf")).toEqual(["free-ok"]);
-  });
-
-  it("renders no Always free shelf when no listed offer qualifies", () => {
-    render(
-      <HomePage
-        index={{ ...shelfIndex, always_free: ["free-expired", "free-early"] }}
-      />,
-    );
-    expect(document.getElementById("ft-always-free-shelf")).toBeNull();
-  });
-
-  it("shelf pills are keyboard-reachable links that reuse offer_click", () => {
-    const gtag = grantedGtag();
-    render(<HomePage index={shelfIndex} />);
-    bindAnalyticsListeners();
-    const link = document.querySelector(
-      "#ft-always-free-shelf a[data-ft-offer-id='free-ok']",
-    ) as HTMLAnchorElement;
-    expect(link.getAttribute("href")).toBe("offers/free-ok.html");
-    link.focus();
-    expect(document.activeElement).toBe(link);
-    link.addEventListener("click", (e) => e.preventDefault());
-    fireEvent.click(link);
-    const clicks = eventCalls(gtag, "offer_click");
-    expect(clicks).toHaveLength(1);
-    expect(clicks[0][2]).toMatchObject({
-      offer_id: "free-ok",
-      provider: "Kilo Code",
-      category: "coding",
-    });
-  });
-
-  it("prerendered markup hydrates without a mismatch (build-date only)", async () => {
-    const { renderToString } = await import("react-dom/server");
-    const { hydrateRoot } = await import("react-dom/client");
-    const html = renderToString(<HomePage index={shelfIndex} />);
-    expect(html).toContain("New this week");
-    expect(html).toContain("Always free");
-    const host = document.createElement("div");
-    host.innerHTML = html;
-    document.body.appendChild(host);
-    const errors: unknown[] = [];
-    let root: ReturnType<typeof hydrateRoot> | undefined;
-    await act(async () => {
-      root = hydrateRoot(host, <HomePage index={shelfIndex} />, {
-        onRecoverableError: (error) => errors.push(error),
-      });
-    });
-    expect(errors).toEqual([]);
-    expect(
-      [...host.querySelectorAll("#ft-new-shelf [data-ft-offer-id]")].map((a) =>
-        a.getAttribute("data-ft-offer-id"),
-      ),
-    ).toEqual(["new-today", "new-yday", "new-week"]);
-    act(() => root?.unmount());
-    host.remove();
   });
 });

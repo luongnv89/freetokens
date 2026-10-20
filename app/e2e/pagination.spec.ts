@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { expect, test, type Page } from "@playwright/test";
-import { rankOffers } from "../src/lib/ranking";
+import { applySort } from "../src/lib/offers";
 import type { Offer, OffersIndex } from "../src/types/offers-index";
 import "./http-preview";
 
@@ -13,10 +13,11 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 const index: OffersIndex = JSON.parse(
   readFileSync(path.join(APP_ROOT, "src/data/offers.json"), "utf8"),
 );
-// The default list is the Recommended ranking. http-preview answers
-// GoatCounter with an empty 204, so no hot counts ever reorder it here.
-const active = rankOffers(
+// The default list is the Recently checked order (newest verified_date
+// first), which never reads view counts.
+const active = applySort(
   index.offers.filter((offer: Offer) => offer.status !== "expired"),
+  "",
   { today: index.generated_at.slice(0, 10) },
 ).map((offer) => offer.slug);
 

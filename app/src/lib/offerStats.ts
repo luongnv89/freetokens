@@ -90,15 +90,14 @@ const HOT_MIN_VIEWS = 3;
 const HOT_MAX_TIED = 3;
 
 /**
- * The highlight section's ranking: the `limit` most-viewed offers, ordered,
- * highest first.
+ * The `limit` most-viewed offers, ordered, highest first (hotViewCounts
+ * takes them all).
  *
  * Separate from `hottestSlugs` on purpose, and not a generalisation of it.
  * That function answers "which offers are tied at the top", and deliberately
  * returns NOTHING when the answer would be a wide tie, because it decides
  * whether a row gets a badge and a badge on half the list means nothing. This
- * one fills a fixed three-slot shelf, so it must rank rather than crown, and
- * a partial shelf is a fine outcome.
+ * one feeds a score, so it must rank rather than crown.
  *
  * What the two share is the floor: a count below HOT_MIN_VIEWS is not
  * evidence of anything. The input is weak — only consenting visitors are
@@ -125,8 +124,8 @@ export function topViewedSlugs(
 
 /**
  * Every count that clears the same HOT_MIN_VIEWS floor, keyed by slug: the
- * hot signal the default ranking scales by. Below the floor a count is noise,
- * so it must not reorder the list any more than it may fill the shelf.
+ * hot signal the Recommended ranking scales by. Below the floor a count is
+ * noise, so it must not reorder the list.
  */
 export function hotViewCounts(
   views: Record<string, number | null>,

@@ -196,8 +196,8 @@ function buildTools(index: OffersIndex, navigate: Navigate): ModelContextTool[] 
       sort: {
         type: "string",
         description:
-          "Result order. Omit for the recommended order (big labs, coding then API offers, newly added, and reviewed listings first); 'added' = latest added first, 'newest' = recently checked first, 'expiring' = soonest expiry first.",
-        enum: ["added", "newest", "expiring"],
+          "Result order. Omit for recently checked first; 'recommended' = the recommended order (big labs, coding then API offers, newly added, and reviewed listings first), 'added' = latest added first, 'expiring' = soonest expiry first.",
+        enum: ["recommended", "added", "expiring"],
       },
     },
     additionalProperties: false,

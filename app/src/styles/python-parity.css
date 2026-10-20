@@ -150,25 +150,19 @@ main {
 
 /* ---- Masthead -------------------------------------------------------- */
 
-/* The one eyebrow style, used sparingly: the page kicker and the hot shelf
-   title share it. Small sans caps over a green tick — a section marker,
-   never a headline. */
-.kicker,
-.hot-deals-title {
+/* The one eyebrow style, used sparingly: the page kicker. Small sans caps
+   over a green tick — a section marker, never a headline. */
+.kicker {
   font-family: var(--font-sans);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gray);
-}
-
-.kicker {
   margin: 0 0 0.75rem;
 }
 
-.kicker::before,
-.hot-deals-title::before {
+.kicker::before {
   content: "";
   display: inline-block;
   width: 1.5rem;
@@ -728,13 +722,12 @@ a:focus-visible {
 }
 
 /* ---- Load reveal (CSS-only, motion-safe) -------------------------------
-   One shared rise: the shelf and toolbar land on fixed delays and the rows
+   One shared rise: the toolbar lands on a fixed delay and the rows
    stagger in on their --i index (capped at 8 so a long list never waits
    more than 320 ms). */
 
 @media (prefers-reduced-motion: no-preference) {
   .toolbar,
-  .hot-deals,
   .grid > li,
   .empty {
     animation: rise 0.5s var(--ease-out) backwards;
@@ -742,9 +735,6 @@ a:focus-visible {
   }
   .toolbar {
     animation-delay: 60ms;
-  }
-  .hot-deals {
-    animation-delay: 120ms;
   }
 }
 
@@ -1431,216 +1421,6 @@ a:focus-visible {
   }
 }
 
-/* ---- Hot-today strip ---------------------------------------------------
-   Three most-viewed offers, above the toolbar. It is a strip, not a list:
-   one compact row — eyebrow, cadence note, then one pill per offer in the
-   feed's order — and the whole block is absent rather than empty when
-   there is nothing to show, so it never renders as a hole where data
-   failed to arrive.
-
-   It deliberately is NOT a copy of the ledger row: no spine, no save/hide,
-   no filters. It answers one question — what is everyone looking at right
-   now — and then gets out of the way of the list that does the real work. */
-
-.hot-deals {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem 0.9rem;
-  margin: 0 0 0.45rem;
-  min-width: 0;
-}
-
-/* While the windowed counters load, the strip's own skeleton sits on the
-   page with the `hidden` attribute; this flips it to visibility so the box
-   is reserved and the reveal fills space instead of pushing the toolbar
-   down — same trick as .site-header .stat-strip[hidden]. */
-.hot-deals[hidden] {
-  display: flex;
-  visibility: hidden;
-}
-
-.hot-deals-head {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin: 0;
-  flex: 0 0 auto;
-  min-width: 0;
-}
-
-/* The one place the accent is allowed to name a section; the eyebrow style
-   itself is shared with .kicker up in the masthead block. */
-.hot-deals-title {
-  color: var(--green);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  white-space: nowrap;
-}
-
-.hot-deals-sub {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  color: var(--gray);
-  white-space: nowrap;
-}
-
-.hot-deals-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0.45rem;
-  flex: 1 1 14rem;
-  min-width: 0;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    #000 calc(100% - 2.2rem),
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    #000 calc(100% - 2.2rem),
-    transparent
-  );
-}
-
-.hot-deals-list::-webkit-scrollbar {
-  display: none;
-}
-
-.hot-deal {
-  position: relative;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4rem;
-  flex: 0 0 auto;
-  min-width: 0;
-  max-width: 22rem;
-  padding: 0.25rem 0.7rem;
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
-  background: var(--surface);
-  font-size: 0.78rem;
-  white-space: nowrap;
-  overflow: hidden;
-  transition:
-    background-color 0.16s var(--ease-out),
-    border-color 0.16s var(--ease-out);
-}
-
-.hot-deal[data-category="api_provider"] {
-  --row-hue: var(--t-api_provider);
-}
-.hot-deal[data-category="coding"] {
-  --row-hue: var(--t-coding);
-}
-.hot-deal[data-category="image"] {
-  --row-hue: var(--t-image);
-}
-.hot-deal[data-category="voice"] {
-  --row-hue: var(--t-voice);
-}
-.hot-deal[data-category="video"] {
-  --row-hue: var(--t-video);
-}
-.hot-deal[data-category="startup_program"] {
-  --row-hue: var(--t-startup_program);
-}
-.hot-deal[data-category="student"] {
-  --row-hue: var(--t-student);
-}
-.hot-deal[data-category="oss_program"] {
-  --row-hue: var(--t-oss_program);
-}
-
-@media (hover: hover) {
-  .hot-deal:hover,
-  .hot-deal:focus-within {
-    background: var(--surface-2);
-    border-color: color-mix(
-      in srgb,
-      var(--row-hue, var(--ink)) 30%,
-      transparent
-    );
-  }
-}
-
-/* The rank is a quiet mono numeral in the reading order now — a pill has no
-   corner to park it in, and the pill's order already says who leads. */
-.hot-rank {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--gray);
-}
-
-.hot-prov {
-  font-weight: 500;
-  color: var(--gray);
-}
-
-.hot-prov::after {
-  content: "—";
-  margin-left: 0.4rem;
-  color: var(--hairline-strong);
-}
-
-.hot-title {
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.005em;
-  font-optical-sizing: auto;
-  color: var(--ink);
-  text-decoration: none;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* The whole pill is the target, so the pointer means it everywhere. */
-.hot-title::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.hot-title:hover,
-.hot-title:focus-visible {
-  text-decoration: underline;
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-}
-
-.hot-meta {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  color: var(--gray);
-  white-space: nowrap;
-}
-
-.hot-meta strong {
-  font-family: var(--font-mono);
-  color: var(--ink);
-  font-weight: 500;
-}
-
-.hot-cat {
-  display: none;
-}
-
-.hot-sep {
-  color: color-mix(in srgb, var(--ink) 32%, var(--paper));
-  margin: 0 0.25em;
-}
-
 /* ---- Toolbar: search + category filter (F2/F3) ------------------------- */
 
 /* No panel: the controls float on the page. The search field is the primary
@@ -2033,7 +1813,6 @@ button.badge:focus-visible {
   }
 
   .grid > li,
-  .hot-deal,
   .od-related-card {
     transition:
       background-color 0.16s ease,
@@ -2666,7 +2445,7 @@ button:focus-visible {
 }
 
 /* ---- Related offers ---------------------------------------------------
-   Cards, sharing the shelf's shape and the listing row's category spine, so
+   Cards, sharing the listing row's category spine, so
    the same object looks like the same object on all three pages. It was a
    bullet list of underlined titles, which is what made the bottom of this
    page read as a different site from the top. */

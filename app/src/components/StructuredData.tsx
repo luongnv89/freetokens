@@ -96,8 +96,8 @@ export function StructuredData(props: StructuredDataProps) {
     const offers = activeOffers(props.index);
     // Top 10 only: the full directory is one click away, and every extra
     // kilobyte in <head>-adjacent markup costs FCP milliseconds (LH budget #209).
-    // Same default ranking as the prerendered list, so the "top 10" here are
-    // the first ten rows a visitor sees (hot views only exist client-side).
+    // Same default order as the prerendered list, so the "top 10" here are
+    // the first ten rows a visitor sees.
     const top = applySort(offers, "", {
       today: buildDate(props.index.generated_at),
     }).slice(0, 10);

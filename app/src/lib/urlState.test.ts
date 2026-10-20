@@ -58,9 +58,14 @@ describe("parseState / serializeState", () => {
     expect(normalizeSort("amount")).toBe("");
   });
 
+  it("folds the legacy ?sort=newest into the default Recently checked order", () => {
+    expect(parseState("?sort=newest").sort).toBe("");
+    expect(normalizeSort("recommended")).toBe("recommended");
+  });
+
   it("drops unknown params and omits empty keys", () => {
     const serialized = serializeState(
-      parseState("?q=foo&utm_source=x&bogus=1&sort=newest"),
+      parseState("?q=foo&utm_source=x&bogus=1&sort=expiring"),
     );
     const params = new URLSearchParams(serialized);
     expect([...params.keys()].sort()).toEqual(["q", "sort"]);

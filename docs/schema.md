@@ -183,25 +183,21 @@ Example:
 
 ## Always free list (`config/always-free.yaml`) — curated
 
-The home page's **Always free** shelf (#612) lists dependable, ongoing
-offers for visitors who just want something that works today. Membership is
-a **curated list**, not a data rule and not a schema field: the curator
-decides, and the decision is reviewed like any other change.
+A curated list of dependable, ongoing offers (#612). It fed the home page's
+**Always free** shelf, which has since been removed; the list is still
+validated and carried in the index for later use. Membership is a **curated
+list**, not a data rule and not a schema field: the curator decides, and the
+decision is reviewed like any other change.
 
 - **Location:** `config/always-free.yaml`, deliberately outside `offers/` —
   every `offers/*.yaml` is read as an offer, so the list cannot live there.
 - **Format:** a YAML sequence of offer slugs, one `- <slug>` per line, in the
-  order the shelf shows them (the shelf shows the first six that qualify).
+  curator's order.
   Comments and blank lines are allowed.
 - **What belongs on it:** an offer with `expiry_date: null` whose provider
   dependably keeps *some* free access available (rotating free models,
   `:free` tiers) — e.g. Kilo Code, Cline, OpenCode. Prefer slugs over provider
   names; one slug per offer.
-- **Hard guards, applied at build time** (`alwaysFreeOffers` in
-  `app/src/lib/offers.ts`): a listed offer appears only while its build-time
-  `status` is `active` and its `verification` is not `unverified`. Expired and
-  early offers stay listed but never show, so the list needs no edit the day
-  an offer expires. No client clock is involved (ADR 0001).
 - **Validation:** `python3 scripts/validate_offers.py` and the app build
   (`app/scripts/load-offers.mjs`) both fail when a line is not a plain slug
   item, a slug is listed twice, or a slug names no offer. Deleting an offer
@@ -209,7 +205,3 @@ decides, and the decision is reviewed like any other change.
 - **Generated index:** the build copies the list into `offers.json` /
   `index.json` as the top-level `always_free` array
   (`schemas/offers-index.schema.json`).
-
-The **New this week** shelf (#611) needs no list: it is every active offer
-whose `added_date` (first git commit of its file) is 0–7 days before the
-build date, inclusive — today counts, 8 days ago does not — newest first.

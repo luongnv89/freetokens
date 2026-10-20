@@ -19,8 +19,8 @@ import type { Offer } from "./types/offers-index";
 
 const index = indexData as OffersIndex;
 const offers = activeOffers(index);
-// The prerender lists the default "Recommended" ranking — without hot views,
-// which only exist client-side — and ships the first page only (#548).
+// The prerender lists the default "Recently checked" order and ships the
+// first page only (#548).
 const ranked = applySort(offers, "", { today: buildDate(index.generated_at) });
 const firstPage = ranked.slice(0, PAGE_SIZE);
 

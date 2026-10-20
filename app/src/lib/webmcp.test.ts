@@ -209,14 +209,14 @@ describe("search_offers tool", () => {
     const result = await run({
       category: "coding",
       signup: "required",
-      sort: "newest",
+      sort: "expiring",
     });
     expect(result.total).toBe(1);
     expect((result.offers as { slug: string }[])[0].slug).toBe("beta-coding");
     expect(result.applied_state).toMatchObject({
       category: "coding",
       signup: "required",
-      sort: "newest",
+      sort: "expiring",
     });
   });
 
@@ -243,11 +243,15 @@ describe("search_offers tool", () => {
     expect(result.total).toBe(0);
   });
 
-  it("returns the Recommended ranking by default and index order for 'added'", async () => {
+  it("returns recently checked first by default, Recommended and 'added' on request", async () => {
     const order = async (input: Record<string, unknown>) =>
       ((await run(input)).offers as { slug: string }[]).map((o) => o.slug);
+    expect(await order({})).toEqual(["alpha-api", "beta-coding"]);
     // Coding (30) outranks a reviewed API offer (15 + 10).
-    expect(await order({})).toEqual(["beta-coding", "alpha-api"]);
+    expect(await order({ sort: "recommended" })).toEqual([
+      "beta-coding",
+      "alpha-api",
+    ]);
     expect(await order({ sort: "added" })).toEqual(["alpha-api", "beta-coding"]);
   });
 
