@@ -1,0 +1,14 @@
+# Verified 2026-10-20 against https://vercel.com/changelog/minimax-m3-1-flash-now-available-on-ai-gateway-for-free
+# ("MiniMax M3.1 Flash from MiniMax is now available on AI Gateway for free until Oct 22." /
+# "The free rate applies only when MiniMax serves the request. ... After the offer ends, pinned
+# requests bill at MiniMax's standard rate." — Vercel changelog, 2026-10-19)
+title: MiniMax M3.1 Flash Free (Vercel AI Gateway)
+provider: Vercel
+category: api_provider
+amount: MiniMax M3.1 Flash at $0 on AI Gateway when served by MiniMax, through October 22
+expiry_date: 2026-10-22
+source_url: https://vercel.com/changelog/minimax-m3-1-flash-now-available-on-ai-gateway-for-free
+verified_date: 2026-10-20
+verification: social_proof
+review_status: under-review
+signup: required

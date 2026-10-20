@@ -1,15 +1,20 @@
-# Verified 2026-10-15 against https://opencode.ai/v2/docs/console/models/
+# Verified 2026-10-20 against https://opencode.ai/v2/docs/console/models/
 # ("DeepSeek V4.1 Flash Free is free on OpenCode for a limited time."
 # Pricing table: "DeepSeek V4.1 Flash Free | Free | Free | Free | -"; model id deepseek-v4.1-flash-free.)
+# Updated by @opencode 2026-10-19: https://x.com/opencode/status/2112220734768779441
+# ("DeepSeek V4.1 Flash updated to 1017 in OpenCode Go and Free / No changes needed on your end").
 # Announced by @opencode 2026-10-15: https://x.com/opencode/status/2110635747648909472
-# ("DeepSeek V4.1 Flash is now free in OpenCode"). No official end date stated.
-title: DeepSeek V4.1 Flash Free on OpenCode Console
+# Known conflict: https://opencode.ai/v2/docs/console/api/inference/ says "free chat models can be
+# called without it [the Authorization header]"; a keyless call on 2026-10-19 16:39 UTC returned
+# HTTP 403 FreeTierError "OpenCode's free tier can only be used from within OpenCode." Newer live
+# API response used. No official end date stated.
+title: DeepSeek V4.1 Flash Free on OpenCode
 provider: OpenCode
 category: coding
-amount: Free DeepSeek V4.1 Flash model access on OpenCode Console (free input, output and cached reads; limited time)
+amount: Free DeepSeek V4.1 Flash (1017 update) in the OpenCode app (free input, output and cached reads; limited time)
 expiry_date: null
 source_url: https://opencode.ai/v2/docs/console/models/
-verified_date: 2026-10-15
+verified_date: 2026-10-20
 verification: social_proof
 review_status: under-review
 signup: none

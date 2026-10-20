@@ -1,0 +1,30 @@
+{
+  "summary": "Cline announced on October 19, 2026 that MiniMax M3.1 Flash is free in Cline, and its live recommendation feed lists cline-free/minimax-m3.1-flash under free models. Per Cline's docs, free model promotions rotate on a limited-time basis, need a Cline account, run up to a limited usage quota, and work only in the Cline IDE extension and CLI, not through the Cline API. Free model usage may be used to help improve model performance and quality. The quota size is not published. No end date is stated.",
+  "claim_steps": [
+    "Install the Cline CLI (npm i -g cline) or the desktop app (https://cline.bot/desktop), and sign in with a Cline account.",
+    "In the Cline (usage-billing) provider, pick MiniMax M3.1 Flash tagged FREE in the model selector.",
+    "Use it in the IDE extension or CLI only; free usage is not available through the Cline API and stops at the free quota.",
+    "Free usage may be used to help improve model performance and quality."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/cline/status/2112220504258224605",
+      "author": "Cline",
+      "handle": "@cline",
+      "text": "MiniMax M3.1 Flash goes toe-to-toe with Opus and GPT on coding at ~25x lower cost.\n\nThis was the model behind Space Bunny, the stealth model that’s been topping usage leaderboards recently.\n\nFree in Cline now!"
+    },
+    {
+      "type": "link",
+      "url": "https://api.cline.bot/api/v1/ai/cline/recommended-models",
+      "title": "Cline recommended-models feed",
+      "text": "free: {\"id\": \"cline-free/minimax-m3.1-flash\", \"name\": \"Minimax M3.1 Flash\", \"description\": \"Next-generation Flash model\"} (checked 2026-10-20)"
+    },
+    {
+      "type": "link",
+      "url": "https://docs.cline.bot/getting-started/free-models",
+      "title": "Cline Free Models - Cline",
+      "text": "Free model promotions are offered on a rotating, limited-time basis. Free models are available to any user with a Cline account. Free model usage is not supported through the Cline API. Free model usage may be used to help improve model performance and quality."
+    }
+  ]
+}

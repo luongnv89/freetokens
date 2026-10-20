@@ -1,0 +1,29 @@
+{
+  "summary": "OpenCode lists MiniMax M3.1 Flash Free (minimax-m3.1-flash-free) with free input, output and cached reads for a limited time. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-20 was rejected with \"OpenCode's free tier can only be used from within OpenCode.\" No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny, whose separate one-week OpenCode promotion ended September 30.",
+  "claim_steps": [
+    "Install the OpenCode app from https://opencode.ai.",
+    "Run /models and select MiniMax M3.1 Flash Free (opencode/minimax-m3.1-flash-free).",
+    "Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-20).",
+    "Whether the in-app free tier needs an OpenCode account or billing details was not tested. The free period is limited-time."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models | OpenCode",
+      "text": "MiniMax M3.1 Flash Free is free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training. Pricing: MiniMax M3.1 Flash Free | Free | Free | Free | -"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/inference/v1/models",
+      "title": "OpenCode inference model catalog",
+      "text": "Live catalog lists id minimax-m3.1-flash-free, owned_by opencode. (A keyless chat call on 2026-10-20 returned HTTP 403 FreeTierError: \"OpenCode's free tier can only be used from within OpenCode.\")"
+    },
+    {
+      "type": "link",
+      "url": "https://www.minimax.io/blog/minimax-m31f",
+      "title": "MiniMax M3.1 Flash: Redefining Agent Performance and Cost",
+      "text": "Today, we officially roll out MiniMax M3.1 Flash. Space Bunny, which processed more than 200 trillion tokens while operating anonymously, was an early version of MiniMax M3.1 Flash."
+    }
+  ]
+}
