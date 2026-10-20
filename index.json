@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-20T05:56:32Z",
-  "count": 258,
-  "active_count": 224,
+  "generated_at": "2026-10-20T06:31:53Z",
+  "count": 259,
+  "active_count": 225,
   "expired_count": 34,
   "offers": [
     {
@@ -3873,6 +3873,21 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "anthropic-oss-scanner",
+      "title": "OSS Scanner — Free AI Vulnerability Scanning for Open Source",
+      "provider": "Anthropic",
+      "category": "oss_program",
+      "amount": "Free periodic security scans of your open-source repo by Anthropic's strongest models, with emailed reports, reproducers and proposed patches; core maintainers of established, security-critical projects only; enrollment via GitHub PR, approved case-by-case",
+      "expiry_date": null,
+      "source_url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+      "verified_date": "2026-10-20",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ]
 }

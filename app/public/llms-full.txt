@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-20T05:56:33Z — 119 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-20T06:36:01Z — 119 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -57,6 +57,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/cline-minimax-m3-1-flash-free.html
 - Summary: Cline announced on October 19, 2026 that MiniMax M3.1 Flash is free in Cline, and its live recommendation feed lists cline-free/minimax-m3.1-flash under free models. Per Cline's docs, free model promotions rotate on a limited-time basis, need a Cline account, run up to a limited usage quota, and work only in the Cline IDE extension and CLI, not through the Cline API. Free model usage may be used to help improve model performance and quality. The quota size is not published. No end date is stated.
 - Claim steps: Install the Cline CLI (npm i -g cline) or the desktop app (https://cline.bot/desktop), and sign in with a Cline account. | In the Cline (usage-billing) provider, pick MiniMax M3.1 Flash tagged FREE in the model selector. | Use it in the IDE extension or CLI only; free usage is not available through the Cline API and stops at the free quota. | Free usage may be used to help improve model performance and quality.
+### OSS Scanner — Free AI Vulnerability Scanning for Open Source
+- Provider: Anthropic
+- Category: oss_program
+- Amount: Free periodic security scans of your open-source repo by Anthropic's strongest models, with emailed reports, reproducers and proposed patches; core maintainers of established, security-critical projects only; enrollment via GitHub PR, approved case-by-case
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source
+- Page: https://freetokens.custats.info/offers/anthropic-oss-scanner.html
+- Summary: Anthropic's OSS Scanner (launched 2026-10-08) runs periodic security audits of enrolled open-source repositories with Anthropic's strongest models, at no cost. The scanner builds the project in an isolated VM, analyses it with no Internet access, and emails findings to the project's primary contact with reproduction steps and a proposed patch where available. Reports are model-generated and not human-reviewed, so no 90-day disclosure clock applies and they are not made public. Eligibility mirrors OSS-Fuzz: established projects with a critical impact on infrastructure and user security; only the lead/core maintainer (or someone they authorize) may enroll, and Anthropic approves projects case-by-case and may withdraw approval or end the service at any time. Email addresses in project.yaml are public. Separate from Claude for Open Source (free Claude Max 20x).
+- Claim steps: Confirm your project is established and security-critical (Anthropic weighs project age, update frequency, OpenSSF criticality score, OSI license, stars/forks, usage) and that you are a core maintainer or authorized by the lead maintainer. | Open a pull request at github.com/anthropics/oss-scanner adding projects/<name>/project.yaml from the template, with required repo and primary_contact fields (emails are published — use a security alias). | Provide a Dockerfile that installs every dependency and builds the project, either in your repo (dockerfile: path) or next to project.yaml; optionally add threat_model.md and a PGP key for encrypted reports. | Run tools/validate.py (and optionally tools/check <name>) before opening the PR; by signing up you agree to the OSS Scanner terms. | After merge, reports arrive by email after each scan; set disabled: true to pause or delete projects/<name>/ to withdraw.
 ### Runware Startup Program (Starter tier free credits)
 - Provider: Runware
 - Category: startup_program
@@ -1185,16 +1195,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
 - Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
 - Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
-### LiveKit Startup Program
-- Provider: LiveKit
-- Category: startup_program
-- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://livekit.com/startups
-- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
-- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll. Applicants must be incorporated or actively incorporating and building for real end-users. The program targets net-new startup projects: free-plan evaluators/builders can apply, while projects running for a while or already paying/contractually committed may be declined and reviewed case by case.
-- Claim steps: Confirm the startup is incorporated or actively incorporating, is building for real end-users, and meets the net-new project rules; existing paid/committed users should explain their circumstances in the application. | Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

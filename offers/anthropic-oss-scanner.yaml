@@ -1,0 +1,17 @@
+# Verified 2026-10-20 against https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source
+# ("Projects that join will receive thorough, periodic security scans by our
+# strongest models at no cost.")
+# Terms (red.anthropic.com/oss-scanner/terms): "The Service is provided at no
+# cost." / "Anthropic accepts established projects with a critical impact on
+# infrastructure and user security" / "Anthropic may modify, suspend, or end
+# the Service, or any enrollment, at any time and for any reason."
+title: OSS Scanner — Free AI Vulnerability Scanning for Open Source
+provider: Anthropic
+category: oss_program
+amount: "Free periodic security scans of your open-source repo by Anthropic's strongest models, with emailed reports, reproducers and proposed patches; core maintainers of established, security-critical projects only; enrollment via GitHub PR, approved case-by-case"
+expiry_date: null
+source_url: https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source
+verified_date: 2026-10-20
+verification: social_proof
+review_status: under-review
+signup: required

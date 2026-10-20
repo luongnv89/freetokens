@@ -1,0 +1,36 @@
+{
+  "summary": "Anthropic's OSS Scanner (launched 2026-10-08) runs periodic security audits of enrolled open-source repositories with Anthropic's strongest models, at no cost. The scanner builds the project in an isolated VM, analyses it with no Internet access, and emails findings to the project's primary contact with reproduction steps and a proposed patch where available. Reports are model-generated and not human-reviewed, so no 90-day disclosure clock applies and they are not made public. Eligibility mirrors OSS-Fuzz: established projects with a critical impact on infrastructure and user security; only the lead/core maintainer (or someone they authorize) may enroll, and Anthropic approves projects case-by-case and may withdraw approval or end the service at any time. Email addresses in project.yaml are public. Separate from Claude for Open Source (free Claude Max 20x).",
+  "claim_steps": [
+    "Confirm your project is established and security-critical (Anthropic weighs project age, update frequency, OpenSSF criticality score, OSI license, stars/forks, usage) and that you are a core maintainer or authorized by the lead maintainer.",
+    "Open a pull request at github.com/anthropics/oss-scanner adding projects/<name>/project.yaml from the template, with required repo and primary_contact fields (emails are published — use a security alias).",
+    "Provide a Dockerfile that installs every dependency and builds the project, either in your repo (dockerfile: path) or next to project.yaml; optionally add threat_model.md and a PGP key for encrypted reports.",
+    "Run tools/validate.py (and optionally tools/check <name>) before opening the PR; by signing up you agree to the OSS Scanner terms.",
+    "After merge, reports arrive by email after each scan; set disabled: true to pause or delete projects/<name>/ to withdraw."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+      "title": "An opt-in vulnerability-finding service for open-source software | Anthropic",
+      "text": "Projects that join will receive thorough, periodic security scans by our strongest models at no cost. ... Core maintainers of eligible projects can enroll by submitting a PR to the GitHub repo following the standard project template."
+    },
+    {
+      "type": "link",
+      "url": "https://red.anthropic.com/oss-scanner",
+      "title": "OSS Scanner",
+      "text": "OSS Scanner is a service by Anthropic to scan open-source repositories for security vulnerabilities. ... We accept established projects that have a critical impact on infrastructure and user security."
+    },
+    {
+      "type": "link",
+      "url": "https://red.anthropic.com/oss-scanner/terms",
+      "title": "OSS Scanner Terms & Conditions",
+      "text": "The Service is provided at no cost. ... Anthropic may approve a Project or withdraw its approval, in its sole discretion. ... Anthropic may modify, suspend, or end the Service, or any enrollment, at any time and for any reason."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/anthropics/oss-scanner",
+      "title": "anthropics/oss-scanner",
+      "text": "Enroll an open-source project by opening a pull request that adds one directory: projects/<name>. ... Findings are emailed to primary_contact and any additional CCs with reproduction steps and a proposed patch where available."
+    }
+  ]
+}
