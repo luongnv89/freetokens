@@ -1,0 +1,16 @@
+# Verified 2026-10-20 against https://vercel.com/changelog/reflection-ai-beam-now-available-on-ai-gateway-for-free
+# ("Beam is free to use for a limited time during the launch period when serviced by Reflection AI."
+# / reflection/beam-free: "The model will stop serving when the free offer ends." — Vercel changelog, 2026-10-16)
+# Live https://ai-gateway.vercel.sh/v1/models lists reflection/beam-free at input 0 / output 0, 1,048,576 context,
+# 131,072 max output; endpoint provider reflection, has_zdr false, has_no_training false (checked 2026-10-20 11:47 UTC).
+# No end date stated.
+title: Beam 1.0 Free (Vercel AI Gateway)
+provider: Vercel
+category: api_provider
+amount: Free Reflection AI Beam 1.0 on AI Gateway (reflection/beam-free, 1M context) for a limited launch period
+expiry_date: null
+source_url: https://vercel.com/changelog/reflection-ai-beam-now-available-on-ai-gateway-for-free
+verified_date: 2026-10-20
+verification: social_proof
+review_status: under-review
+signup: required

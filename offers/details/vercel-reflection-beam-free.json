@@ -1,0 +1,29 @@
+{
+  "summary": "Vercel's AI Gateway offers Reflection AI's Beam 1.0, formerly the stealth model stealth/cat-jam, free for a limited time during its launch period when Reflection AI serves the request. Beam is an open-weight (Apache 2.0) reasoning model for coding and agentic work, with 501B total and 23B active parameters, a 1M-token context, up to 131K output tokens, tool calling and structured outputs. Use reflection/beam-free, which stops serving when the offer ends, so it cannot turn into a bill. reflection/beam is also free when routed to Reflection, but switches to paid pricing when the offer ends, and other providers serving it bill at their own rates. Use is subject to Reflection's terms and privacy policy; Vercel's live endpoint data marks Reflection as neither zero-data-retention nor no-training, so avoid sensitive inputs. No end date is stated. Whether a payment method is needed to create an AI Gateway key was not tested.",
+  "claim_steps": [
+    "Create a Vercel account and an AI Gateway API key.",
+    "Call model reflection/beam-free through the AI SDK, Chat Completions, Responses or Anthropic Messages API, or a coding agent connected to AI Gateway (npx vercel ai-gateway setup for Claude Code, Codex or Hermes).",
+    "Prefer reflection/beam-free: it stops serving when the free period ends instead of billing. If you use reflection/beam, pin provider reflection with only in the gateway provider options, and expect paid pricing after the launch period.",
+    "Reflection's terms and privacy policy apply; its endpoint is not marked zero-data-retention or no-training, so avoid sensitive code or data."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/changelog/reflection-ai-beam-now-available-on-ai-gateway-for-free",
+      "title": "Reflection AI's Beam now available on AI Gateway for free - Vercel",
+      "text": "Beam from Reflection AI, previously available in stealth as stealth/cat-jam, is now available on AI Gateway. Beam is free to use for a limited time during the launch period when serviced by Reflection AI. ... Using the -free suffix to the standard name (reflection/beam-free). The model will stop serving when the free offer ends."
+    },
+    {
+      "type": "link",
+      "url": "https://vercel.com/ai-gateway/models/beam-free",
+      "title": "Beam 1.0 (Free) API, Pricing & Playground | Vercel AI Gateway",
+      "text": "Beam 1.0 (Free). Your use is subject to Reflection's Terms & Privacy Policies. Price: Free. Provider Reflection: 1M context, 131K max output, input Free, output Free. Release date 10/16/2026."
+    },
+    {
+      "type": "link",
+      "url": "https://ai-gateway.vercel.sh/v1/models/reflection/beam-free/endpoints",
+      "title": "AI Gateway endpoints: reflection/beam-free",
+      "text": "One endpoint, provider reflection, prompt 0 / completion 0 / cache read 0, context 1,048,576, max completion 131,072, tags include free and open-weights; has_zdr false, has_no_training false (checked 2026-10-20)."
+    }
+  ]
+}
