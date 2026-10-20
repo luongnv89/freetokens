@@ -7,7 +7,9 @@ import {
   buildIndex,
   readAddedDates,
   isExpired,
+  loadAlwaysFree,
   loadOffers,
+  parseAlwaysFreeText,
   runPipeline,
   validateWrittenArtifacts,
 } from "../scripts/load-offers.mjs";
@@ -500,5 +502,80 @@ describe("newest-added default ordering", () => {
 
   it("returns an empty map outside a git repository instead of throwing", () => {
     expect(readAddedDates(tmpdir())).toEqual({});
+  });
+});
+
+describe("curated always-free list (#612, config/always-free.yaml)", () => {
+  it("parses a YAML slug sequence in curator order, skipping comments", () => {
+    expect(
+      parseAlwaysFreeText(
+        "# header\n\n- kilo-code-free-models  # trailing note\n- cline-ox-alpha-free\n",
+        "always-free.yaml",
+      ),
+    ).toEqual(["kilo-code-free-models", "cline-ox-alpha-free"]);
+  });
+
+  it("rejects a line that is not a plain slug item, naming file and line", () => {
+    expect(() =>
+      parseAlwaysFreeText("- ok-slug\nprovider: OpenCode\n", "af.yaml"),
+    ).toThrow(/af\.yaml:2: expected "- <offer-slug>"/);
+  });
+
+  it("rejects a slug listed twice", () => {
+    expect(() => parseAlwaysFreeText("- a\n- a\n", "af.yaml")).toThrow(
+      /listed twice/,
+    );
+  });
+
+  it("fails the build on a slug that names no offer", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "ft-af-"));
+    const file = path.join(root, "always-free.yaml");
+    await writeFile(file, "- real-offer\n- deleted-offer\n");
+    await expect(loadAlwaysFree(file, ["real-offer"])).rejects.toThrow(
+      /no offer named "deleted-offer"/,
+    );
+    await rm(root, { recursive: true, force: true });
+  });
+
+  it("a missing list means no shelf", async () => {
+    expect(await loadAlwaysFree("/nonexistent/always-free.yaml", [])).toEqual([]);
+  });
+
+  it("runPipeline reads config/ beside offers/ into index.always_free", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "ft-af-"));
+    const offersDir = path.join(root, "offers");
+    await mkdir(offersDir);
+    await mkdir(path.join(root, "config"));
+    await writeFile(path.join(offersDir, "listed-offer.yaml"), offerText());
+    await writeFile(path.join(offersDir, "other-offer.yaml"), offerText());
+    await writeFile(
+      path.join(root, "config", "always-free.yaml"),
+      "- listed-offer\n",
+    );
+    const index = await runPipeline({
+      offersDir,
+      outDir: path.join(root, "out"),
+    });
+    expect(index.always_free).toEqual(["listed-offer"]);
+    const written = JSON.parse(
+      await readFile(path.join(root, "out", "offers.json"), "utf8"),
+    );
+    expect(written.always_free).toEqual(["listed-offer"]);
+    await rm(root, { recursive: true, force: true });
+  });
+
+  it("the committed list names only real, active, non-early offers today", async () => {
+    const offers = await loadOffers(OFFERS_DIR, TODAY);
+    const bySlug = new Map(offers.map((o) => [o.slug, o]));
+    const listed = await loadAlwaysFree(
+      path.join(REPO_ROOT, "config", "always-free.yaml"),
+      offers.map((o) => o.slug),
+    );
+    expect(listed.length).toBeGreaterThan(0);
+    for (const slug of listed) {
+      const offer = bySlug.get(slug);
+      expect(offer.expiry_date).toBeNull();
+      expect(offer.verification).not.toBe("unverified");
+    }
   });
 });

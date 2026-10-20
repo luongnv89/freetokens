@@ -1,0 +1,15 @@
+# "Always free" home shelf (#612) — curated by hand, reviewed like any offer.
+#
+# One offer slug per line (the file name of offers/<slug>.yaml, without the
+# extension), in the order the shelf shows them. List an offer here only when
+# its provider dependably keeps SOME free access available (rotating free
+# models, `:free` tiers) and the offer itself has no expiry date.
+#
+# The build fails when a slug names no offer (a typo, or an offer that was
+# deleted — remove it here in the same change). Listed offers that expire or
+# are early reports (`verification: unverified`) are skipped automatically.
+# Rule and rationale: docs/schema.md, "Always free list".
+- kilo-code-free-models
+- cline-ox-alpha-free
+- cline-gemini-3-8-flash-free
+- opencode-mimo-v2-6-flash-free

@@ -262,6 +262,58 @@ class ValidateDirTests(unittest.TestCase):
                 validate_offers.validate_offers_dir(offers_dir)
 
 
+class AlwaysFreeListTests(unittest.TestCase):
+    """config/always-free.yaml (#612): curated slugs, checked against offers."""
+
+    def _list(self, tmp, text):
+        path = os.path.join(tmp, "always-free.yaml")
+        Path(path).write_text(text, encoding="utf-8")
+        return path
+
+    def test_valid_list_returns_slugs_in_order(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self._list(tmp, "# note\n- b-offer\n\n- a-offer  # why\n")
+            self.assertEqual(
+                validate_offers.validate_always_free(path, {"a-offer", "b-offer"}),
+                ["b-offer", "a-offer"],
+            )
+
+    def test_unknown_slug_fails_naming_file_and_slug(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self._list(tmp, "- gone-offer\n")
+            with self.assertRaisesRegex(validate_offers.build.OfferError, "gone-offer"):
+                validate_offers.validate_always_free(path, {"a-offer"})
+
+    def test_duplicate_and_malformed_lines_fail(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            dup = self._list(tmp, "- a-offer\n- a-offer\n")
+            with self.assertRaisesRegex(validate_offers.build.OfferError, "twice"):
+                validate_offers.validate_always_free(dup, {"a-offer"})
+            bad = self._list(tmp, "provider: OpenCode\n")
+            with self.assertRaisesRegex(validate_offers.build.OfferError, ":1: expected"):
+                validate_offers.validate_always_free(bad, {"a-offer"})
+
+    def test_missing_list_is_no_shelf(self):
+        self.assertEqual(
+            validate_offers.validate_always_free("/nonexistent/af.yaml", set()), []
+        )
+
+    def test_main_fails_when_list_names_a_deleted_offer(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            offers_dir = os.path.join(tmp, "offers")
+            os.makedirs(offers_dir)
+            Path(offers_dir, "kept-offer.yaml").write_text(offer_text(), encoding="utf-8")
+            os.makedirs(os.path.join(tmp, "config"))
+            Path(tmp, "config", "always-free.yaml").write_text(
+                "- kept-offer\n- deleted-offer\n", encoding="utf-8"
+            )
+            err = io.StringIO()
+            with redirect_stdout(io.StringIO()), redirect_stderr(err):
+                code = validate_offers.main(["--offers-dir", offers_dir])
+            self.assertEqual(code, 1)
+            self.assertIn("deleted-offer", err.getvalue())
+
+
 class WorkflowTests(unittest.TestCase):
     WORKFLOW = REPO / ".github" / "workflows" / "validate.yml"
 

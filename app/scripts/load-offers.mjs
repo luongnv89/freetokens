@@ -336,6 +336,63 @@ export function readAddedDates(offersDir) {
   return added;
 }
 
+const ALWAYS_FREE_SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+/** Where the curated "Always free" list lives: config/, beside offers/. */
+export function defaultAlwaysFreePath(offersDir) {
+  return path.join(offersDir, "..", "config", "always-free.yaml");
+}
+
+/**
+ * Parse config/always-free.yaml (#612): a YAML sequence of offer slugs, one
+ * `- slug` per line, comments and blank lines allowed. It lives OUTSIDE
+ * offers/ on purpose — every offers/*.yaml is read as an offer. Anything
+ * that is not a plain slug item is an error naming file and line, and so is
+ * a slug listed twice.
+ */
+export function parseAlwaysFreeText(text, filename) {
+  const slugs = [];
+  text.split(/\r?\n/).forEach((line, i) => {
+    const stripped = line.replace(/(^|\s)#.*$/, "").trim();
+    if (!stripped) return;
+    const match = /^-\s+(\S+)$/.exec(stripped);
+    const slug = match ? parseScalar(match[1]) : null;
+    if (!slug || !ALWAYS_FREE_SLUG.test(slug)) {
+      throw new OfferError(
+        `${filename}:${i + 1}: expected "- <offer-slug>", got ${JSON.stringify(line.trim())}`,
+      );
+    }
+    if (slugs.includes(slug)) {
+      throw new OfferError(
+        `${filename}:${i + 1}: slug ${JSON.stringify(slug)} is listed twice`,
+      );
+    }
+    slugs.push(slug);
+  });
+  return slugs;
+}
+
+/**
+ * The curated slugs, checked against the loaded catalog. A slug that names no
+ * offer fails the build — a typo or a deleted offer must be fixed in the list,
+ * never silently ignored. Expired or early (`verification: unverified`)
+ * offers are NOT an error here: they stay listed and the home page skips them
+ * (alwaysFreeOffers in src/lib/offers.ts), because offers expire on the build
+ * clock without anyone editing the list. A missing file means no shelf.
+ */
+export async function loadAlwaysFree(filePath, validSlugs) {
+  if (!filePath || !existsSync(filePath)) return [];
+  const slugs = parseAlwaysFreeText(await readFile(filePath, "utf8"), filePath);
+  for (const slug of slugs) {
+    if (!validSlugs.includes(slug)) {
+      throw new OfferError(
+        `${filePath}: no offer named ${JSON.stringify(slug)}; remove it from the list or fix the slug (offers/<slug>.yaml)`,
+      );
+    }
+  }
+  return slugs;
+}
+
 export function buildIndex(offers, now = new Date(), addedDates = {}) {
   // Default order: newest-ADDED first, then newest-verified, ties by slug
   // ascending. The three keys are applied as successive stable sorts, last
@@ -387,12 +444,21 @@ export function buildIndex(offers, now = new Date(), addedDates = {}) {
   };
 }
 
-export async function runPipeline({ offersDir, outDir, now = new Date() }) {
+export async function runPipeline({
+  offersDir,
+  outDir,
+  now = new Date(),
+  alwaysFreePath = defaultAlwaysFreePath(offersDir),
+}) {
   const today = todayISO(now);
   const offers = await loadOffers(offersDir, today);
   const index = buildIndex(offers, now, readAddedDates(offersDir));
   const details = await loadDetails(
     offersDir,
+    offers.map((o) => o.slug),
+  );
+  index.always_free = await loadAlwaysFree(
+    alwaysFreePath,
     offers.map((o) => o.slug),
   );
 

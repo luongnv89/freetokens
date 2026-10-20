@@ -163,12 +163,57 @@ def validate_offers_dir(offers_dir: str) -> list:
     return build.load_offers(offers_dir)
 
 
+ALWAYS_FREE_ITEM_RE = re.compile(r"^-\s+(\S+)$")
+
+
+def validate_always_free(path: str, slugs: set) -> list:
+    """Check config/always-free.yaml (#612) against the loaded offer slugs.
+
+    Mirrors parseAlwaysFreeText/loadAlwaysFree in app/scripts/load-offers.mjs:
+    a YAML sequence of ``- <slug>`` lines (comments and blank lines allowed),
+    no duplicates, and every slug must name an offer. Expired or early
+    (``verification: unverified``) offers are not errors -- the home page
+    skips them. A missing file means no shelf.
+    """
+    if not os.path.exists(path):
+        return []
+    listed = []
+    with open(path, encoding="utf-8") as fh:
+        for lineno, line in enumerate(fh, start=1):
+            stripped = re.sub(r"(^|\s)#.*$", "", line).strip()
+            if not stripped:
+                continue
+            match = ALWAYS_FREE_ITEM_RE.match(stripped)
+            slug = match.group(1).strip("\"'") if match else ""
+            if not SLUG_RE.match(slug):
+                raise build.OfferError(
+                    f"{path}:{lineno}: expected \"- <offer-slug>\", "
+                    f"got {line.strip()!r}"
+                )
+            if slug in listed:
+                raise build.OfferError(
+                    f"{path}:{lineno}: slug {slug!r} is listed twice"
+                )
+            if slug not in slugs:
+                raise build.OfferError(
+                    f"{path}: no offer named {slug!r}; remove it from the "
+                    "list or fix the slug (offers/<slug>.yaml)"
+                )
+            listed.append(slug)
+    return listed
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--offers-dir", default="offers")
     parser.add_argument("--schema", default="schemas/offer.schema.json")
     parser.add_argument(
         "--detail-schema", default="schemas/offer-detail.schema.json"
+    )
+    parser.add_argument(
+        "--always-free",
+        default=None,
+        help="curated Always-free list (default: <offers-dir>/../config/always-free.yaml)",
     )
     args = parser.parse_args(argv)
 
@@ -179,6 +224,10 @@ def main(argv=None) -> int:
         if os.path.exists(args.detail_schema):
             check_detail_schema_matches_build(load_schema(args.detail_schema))
             build.load_details(args.offers_dir, {o["slug"] for o in offers})
+        always_free = args.always_free or os.path.join(
+            args.offers_dir, os.pardir, "config", "always-free.yaml"
+        )
+        validate_always_free(always_free, {o["slug"] for o in offers})
     except SchemaMismatch as exc:
         print(f"validation failed: {exc}", file=sys.stderr)
         return 1

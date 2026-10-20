@@ -8,6 +8,10 @@ import {
   offerMatches,
   relativeDate,
   activeOffers,
+  addedAgeDays,
+  alwaysFreeOffers,
+  newOffersIn,
+  NEW_WINDOW_DAYS,
   CATEGORIES,
   CATEGORY_LABELS,
   type Offer,
@@ -312,5 +316,111 @@ describe("category vocabulary", () => {
     const state = { ...emptyState(), category: "oss_program" };
     expect(offerMatches(offer({ category: "oss_program" }), state)).toBe(true);
     expect(offerMatches(offer({ category: "coding" }), state)).toBe(false);
+  });
+});
+
+// #611 / #612 build-time shelves. Windows count from the BUILD date, never
+// the visitor's clock (ADR 0001), with the same day arithmetic as newness().
+describe("home shelves (#611 New this week, #612 Always free)", () => {
+  const BUILD_DAY = "2026-10-20";
+  const shelfOffer = (overrides: Partial<Offer>): Offer => ({
+    slug: "s",
+    title: "T",
+    provider: "P",
+    category: "coding",
+    amount: "free",
+    expiry_date: null,
+    source_url: "https://example.com",
+    verified_date: "2026-10-01",
+    added_date: null,
+    verification: "social_proof",
+    review_status: "unverified",
+    signup: "none",
+    status: "active",
+    ...overrides,
+  });
+  const day0 = shelfOffer({ slug: "day-0", added_date: "2026-10-20" });
+  const day1 = shelfOffer({ slug: "day-1", added_date: "2026-10-19" });
+  const day7 = shelfOffer({ slug: "day-7", added_date: "2026-10-13" });
+  const day8 = shelfOffer({ slug: "day-8", added_date: "2026-10-12" });
+
+  it("measures age in whole build-date days, unknown dates as null", () => {
+    expect(addedAgeDays("2026-10-20", BUILD_DAY)).toBe(0);
+    expect(addedAgeDays("2026-10-13", BUILD_DAY)).toBe(7);
+    expect(addedAgeDays("2026-10-21", BUILD_DAY)).toBe(0);
+    expect(addedAgeDays(null, BUILD_DAY)).toBeNull();
+    expect(addedAgeDays("2026-10-20", "garbage")).toBeNull();
+  });
+
+  it("week window keeps day 0 and day 7 and drops day 8", () => {
+    const slugs = newOffersIn([day8, day7, day0], BUILD_DAY, NEW_WINDOW_DAYS)
+      .map((o) => o.slug);
+    expect(slugs).toEqual(["day-0", "day-7"]);
+  });
+
+  it("today window is the build date only", () => {
+    expect(
+      newOffersIn([day1, day0, day7], BUILD_DAY, 0).map((o) => o.slug),
+    ).toEqual(["day-0"]);
+  });
+
+  it("lists newest added first and keeps index order on equal dates", () => {
+    const twin = shelfOffer({ slug: "day-0-b", added_date: "2026-10-20" });
+    expect(
+      newOffersIn([day7, day0, day1, twin], BUILD_DAY, NEW_WINDOW_DAYS).map(
+        (o) => o.slug,
+      ),
+    ).toEqual(["day-0", "day-0-b", "day-1", "day-7"]);
+  });
+
+  it("never lists expired offers or offers with no add date", () => {
+    const expired = shelfOffer({
+      slug: "gone",
+      added_date: BUILD_DAY,
+      status: "expired",
+    });
+    const undated = shelfOffer({ slug: "undated" });
+    expect(newOffersIn([expired, undated], BUILD_DAY, NEW_WINDOW_DAYS)).toEqual(
+      [],
+    );
+  });
+
+  const index = (offers: Offer[], always_free?: string[]): OffersIndex => ({
+    generated_at: `${BUILD_DAY}T06:00:00Z`,
+    count: offers.length,
+    active_count: offers.filter((o) => o.status === "active").length,
+    expired_count: offers.filter((o) => o.status === "expired").length,
+    offers,
+    ...(always_free ? { always_free } : {}),
+  });
+
+  it("always free = curated slugs in curator order, not index order", () => {
+    const kilo = shelfOffer({ slug: "kilo" });
+    const cline = shelfOffer({ slug: "cline" });
+    const other = shelfOffer({ slug: "other" });
+    expect(
+      alwaysFreeOffers(index([kilo, cline, other], ["cline", "kilo"])).map(
+        (o) => o.slug,
+      ),
+    ).toEqual(["cline", "kilo"]);
+  });
+
+  it("always free never shows expired or early (unverified) offers", () => {
+    const ok = shelfOffer({ slug: "ok" });
+    const expired = shelfOffer({ slug: "expired", status: "expired" });
+    const early = shelfOffer({ slug: "early", verification: "unverified" });
+    expect(
+      alwaysFreeOffers(
+        index([ok, expired, early], ["expired", "early", "ok"]),
+      ).map((o) => o.slug),
+    ).toEqual(["ok"]);
+  });
+
+  it("always free is empty without a list and ignores unknown or repeated slugs", () => {
+    const ok = shelfOffer({ slug: "ok" });
+    expect(alwaysFreeOffers(index([ok]))).toEqual([]);
+    expect(
+      alwaysFreeOffers(index([ok], ["missing", "ok", "ok"])).map((o) => o.slug),
+    ).toEqual(["ok"]);
   });
 });
