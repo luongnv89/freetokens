@@ -1,0 +1,34 @@
+{
+  "summary": "North Mini Code is Cohere's first North-family agentic coding model: a 30B-total / 3B-active Mixture of Experts model under the Apache 2.0 license. Cohere's docs state it is free on both trial and production API keys until rate limits are reached. The rate-limit table lists 20 requests/min for trial keys and 500 requests/min for production keys. Trial keys (and production keys on newer Chat model variants) are limited to 1,000 API calls a month. The weights can be downloaded from Hugging Face or used through the Cohere API.",
+  "claim_steps": [
+    "Create a Cohere account and get a trial or production API key",
+    "Call the North Mini Code model through the Cohere Chat API (free until rate limits are reached)",
+    "Or download the Apache 2.0 weights from Hugging Face to run locally"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.cohere.com/docs/north-mini-code-1.0",
+      "title": "North Mini Code | Cohere",
+      "text": "For both trial keys and production keys, North Mini Code is free until rate limits are reached. North Mini Code is a 30B total / 3B active parameter Mixture of Experts model trained specifically for agentic coding. It is the first model in Cohere's North family of code agent models, released under the Apache 2.0 license."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.cohere.com/docs/rate-limits",
+      "title": "Different Types of API Keys and Rate Limits",
+      "text": "North Mini Code | 20 req / min | 500 req / min. Trial keys (and prod keys on newer Chat model variants) are limited to 1,000 API calls a month."
+    },
+    {
+      "type": "link",
+      "url": "https://cohere.com/north-mini-code",
+      "title": "North Mini Code: Open-Source Agentic Coding | Cohere",
+      "text": "Apache 2.0. Freely available and yours to run, test, and improve. Download the weights on Hugging Face, or through the Cohere API."
+    },
+    {
+      "type": "link",
+      "url": "https://www.usagepricing.com/blueprint/activity/cohere-2026-09-11-north-mini-code-launch",
+      "title": "cohere 2026 09 11 north mini code launch",
+      "text": "Pricing-tracker entry: Cohere North Mini Code is Cohere's first agentic coding model, at $0 for both API key and model download; Apache 2.0, 30B total / 3B active parameters, privately deployable. (Catalog only lists the OpenRouter :free endpoint, not Cohere's direct API.)"
+    }
+  ]
+}

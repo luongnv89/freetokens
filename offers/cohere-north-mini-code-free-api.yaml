@@ -1,0 +1,13 @@
+# Hunted 2026-10-20 by offer-hunter; verified against https://docs.cohere.com/docs/north-mini-code-1.0
+# ("For both trial keys and production keys, North Mini Code is free until rate limits are reached.")
+# Lead: https://www.usagepricing.com/blueprint/activity/cohere-2026-09-11-north-mini-code-launch
+title: Cohere North Mini Code — Free API Access (Trial and Production Keys)
+provider: Cohere
+category: coding
+amount: North Mini Code (30B total / 3B active agentic coding MoE, Apache 2.0) free on Cohere API trial and production keys until rate limits are reached (20 req/min trial, 500 req/min production; trial keys capped at 1,000 API calls/month); open weights downloadable free
+expiry_date: null
+source_url: https://docs.cohere.com/docs/north-mini-code-1.0
+verified_date: 2026-10-20
+verification: social_proof
+review_status: under-review
+signup: required

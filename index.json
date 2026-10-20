@@ -1,9 +1,24 @@
 {
-  "generated_at": "2026-10-20T06:31:53Z",
-  "count": 259,
-  "active_count": 225,
+  "generated_at": "2026-10-20T08:50:36Z",
+  "count": 260,
+  "active_count": 226,
   "expired_count": 34,
   "offers": [
+    {
+      "slug": "anthropic-oss-scanner",
+      "title": "OSS Scanner — Free AI Vulnerability Scanning for Open Source",
+      "provider": "Anthropic",
+      "category": "oss_program",
+      "amount": "Free periodic security scans of your open-source repo by Anthropic's strongest models, with emailed reports, reproducers and proposed patches; core maintainers of established, security-critical projects only; enrollment via GitHub PR, approved case-by-case",
+      "expiry_date": null,
+      "source_url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+      "verified_date": "2026-10-20",
+      "added_date": "2026-10-20",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "cline-minimax-m3-1-flash-free",
       "title": "MiniMax M3.1 Flash Free in Cline",
@@ -3875,13 +3890,13 @@
       "status": "expired"
     },
     {
-      "slug": "anthropic-oss-scanner",
-      "title": "OSS Scanner — Free AI Vulnerability Scanning for Open Source",
-      "provider": "Anthropic",
-      "category": "oss_program",
-      "amount": "Free periodic security scans of your open-source repo by Anthropic's strongest models, with emailed reports, reproducers and proposed patches; core maintainers of established, security-critical projects only; enrollment via GitHub PR, approved case-by-case",
+      "slug": "cohere-north-mini-code-free-api",
+      "title": "Cohere North Mini Code — Free API Access (Trial and Production Keys)",
+      "provider": "Cohere",
+      "category": "coding",
+      "amount": "North Mini Code (30B total / 3B active agentic coding MoE, Apache 2.0) free on Cohere API trial and production keys until rate limits are reached (20 req/min trial, 500 req/min production; trial keys capped at 1,000 API calls/month); open weights downloadable free",
       "expiry_date": null,
-      "source_url": "https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source",
+      "source_url": "https://docs.cohere.com/docs/north-mini-code-1.0",
       "verified_date": "2026-10-20",
       "added_date": null,
       "verification": "social_proof",
