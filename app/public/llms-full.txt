@@ -2,11 +2,61 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-19T03:04:26Z — 119 of 220 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-20T05:56:33Z — 119 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### MiniMax M3.1 Flash Free (Vercel AI Gateway)
+- Provider: Vercel
+- Category: api_provider
+- Amount: MiniMax M3.1 Flash at $0 on AI Gateway when served by MiniMax, through October 22
+- Status: active — enrollment deadline: 2026-10-22
+- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://vercel.com/changelog/minimax-m3-1-flash-now-available-on-ai-gateway-for-free
+- Page: https://freetokens.custats.info/offers/vercel-minimax-m3-1-flash-free.html
+- Summary: Vercel's AI Gateway offers MiniMax M3.1 Flash (model minimax/minimax-m3.1-flash, 1M-token context) free until October 22, 2026. The free rate applies only when MiniMax itself serves the request, so pin MiniMax with order in the gateway provider options. After the offer ends, pinned requests bill at MiniMax's standard rate; there is no separate -free model ID that stops automatically. Whether a payment method is needed to create an AI Gateway key was not tested.
+- Claim steps: Create a Vercel account and an AI Gateway API key. | Call model minimax/minimax-m3.1-flash through the AI SDK, Chat Completions, Responses or Anthropic Messages API, or a coding agent connected to AI Gateway. | Set the gateway provider options order so MiniMax serves the request; other providers are not covered by the free rate. | Stop or budget usage after October 22: pinned requests then bill at MiniMax's standard rate.
+### MiniMax M3.1 Flash Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free minimax/minimax-m3.1-flash:free inference at $0 input and output (1M context; rate limited)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/minimax/minimax-m3.1-flash:free
+- Page: https://freetokens.custats.info/offers/openrouter-minimax-m3-1-flash-free.html
+- Summary: MiniMax's new M3.1 Flash (released October 19, 2026) has a free OpenRouter variant, minimax/minimax-m3.1-flash:free, priced at $0 for input and output with a 1M-token context and up to 524K output tokens. It accepts text, image and video input and supports tool calling. Free endpoints are rate limited under OpenRouter's standard free-model limits. MiniMax is the only provider; OpenRouter's listing says it does not train on your data but does retain prompts. No end date is stated, so free availability can end without notice. The paid minimax/minimax-m3.1-flash is listed separately.
+- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model minimax/minimax-m3.1-flash:free (keep the :free suffix; the version without it is paid). | Expect OpenRouter's standard free-model rate limits, and note the MiniMax endpoint retains prompts (no training).
+### MiniMax M3.1 Flash Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free MiniMax M3.1 Flash in the OpenCode app (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-minimax-m3-1-flash-free.html
+- Summary: OpenCode lists MiniMax M3.1 Flash Free (minimax-m3.1-flash-free) with free input, output and cached reads for a limited time. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-20 was rejected with "OpenCode's free tier can only be used from within OpenCode." No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny, whose separate one-week OpenCode promotion ended September 30.
+- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select MiniMax M3.1 Flash Free (opencode/minimax-m3.1-flash-free). | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-20). | Whether the in-app free tier needs an OpenCode account or billing details was not tested. The free period is limited-time.
+### DeepSeek V4.1 Flash Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free DeepSeek V4.1 Flash (1017 update) in the OpenCode app (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-deepseek-v4-1-flash-free.html
+- Summary: OpenCode made DeepSeek V4.1 Flash free on 2026-10-15 and updated it to DeepSeek's 1017 release on 2026-10-19, keeping the same model ID. OpenCode's Console docs list DeepSeek V4.1 Flash Free (deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-19 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash (deepseek-v4.1-flash, $0.30/$1.20 per 1M input/output tokens) and its OpenCode Go plan listing are separate, so pick the Free variant.
+- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select DeepSeek V4.1 Flash Free (opencode/deepseek-v4.1-flash-free), not the paid DeepSeek V4.1 Flash. Existing setups pick up the 1017 update automatically; OpenCode says no changes are needed. | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-19), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
+### MiniMax M3.1 Flash Free in Cline
+- Provider: Cline
+- Category: coding
+- Amount: Free MiniMax M3.1 Flash in the Cline IDE extension and CLI, up to a limited free quota
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://x.com/cline/status/2112220504258224605
+- Page: https://freetokens.custats.info/offers/cline-minimax-m3-1-flash-free.html
+- Summary: Cline announced on October 19, 2026 that MiniMax M3.1 Flash is free in Cline, and its live recommendation feed lists cline-free/minimax-m3.1-flash under free models. Per Cline's docs, free model promotions rotate on a limited-time basis, need a Cline account, run up to a limited usage quota, and work only in the Cline IDE extension and CLI, not through the Cline API. Free model usage may be used to help improve model performance and quality. The quota size is not published. No end date is stated.
+- Claim steps: Install the Cline CLI (npm i -g cline) or the desktop app (https://cline.bot/desktop), and sign in with a Cline account. | In the Cline (usage-billing) provider, pick MiniMax M3.1 Flash tagged FREE in the model selector. | Use it in the IDE extension or CLI only; free usage is not available through the Cline API and stops at the free quota. | Free usage may be used to help improve model performance and quality.
 ### Runware Startup Program (Starter tier free credits)
 - Provider: Runware
 - Category: startup_program
@@ -57,16 +107,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/agnes-ai-flash-models-free-api.html
 - Summary: Agnes AI's official Model Pricing page lists agnes-2.5-flash and agnes-3.0-flash at a current price of $0 per million tokens for cached input, input and output (list prices $0.005/M cached input, $0.05/M input, $0.15/M output shown struck through), and states they are currently free. The free pricing is promotional; end dates are subject to Agnes AI platform announcements. The API is reached at https://apihub.agnes-ai.com/v1 with a Bearer API key created in the Agnes AI console. The official page does not say 'permanently free', nor confirm the 256K context figure from the lead.
 - Claim steps: Log in to the Agnes AI console and open the API Key management page | Create and copy an API key | Set the API base URL to https://apihub.agnes-ai.com/v1 and send requests with Authorization: Bearer YOUR_API_KEY using model agnes-2.5-flash or agnes-3.0-flash
-### DeepSeek V4.1 Flash Free on OpenCode Console
-- Provider: OpenCode
-- Category: coding
-- Amount: Free DeepSeek V4.1 Flash model access on OpenCode Console (free input, output and cached reads; limited time)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-15 — review_status=under-review · verification=social_proof · signup=none
-- Source: https://opencode.ai/v2/docs/console/models/
-- Page: https://freetokens.custats.info/offers/opencode-deepseek-v4-1-flash-free.html
-- Summary: OpenCode made DeepSeek V4.1 Flash free on 2026-10-15. OpenCode's Console docs list DeepSeek V4.1 Flash Free (model id deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash model (deepseek-v4.1-flash) is listed separately at $0.30/$1.20 per 1M input/output tokens, so pick the Free variant.
-- Claim steps: For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model deepseek-v4.1-flash-free and messages, omitting the Authorization header. No inference request was tested. | Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select DeepSeek V4.1 Flash Free (opencode/deepseek-v4.1-flash-free), not the paid DeepSeek V4.1 Flash. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant. | For the optional Console route, review billing before funding: auto-reload defaults to $20 when the balance goes below $5 and can be changed or disabled.
 ### Beam Free (formerly Cat Jam) on OpenCode Console
 - Provider: OpenCode
 - Category: coding
@@ -1155,46 +1195,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/livekit-startup-program.html
 - Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll. Applicants must be incorporated or actively incorporating and building for real end-users. The program targets net-new startup projects: free-plan evaluators/builders can apply, while projects running for a while or already paying/contractually committed may be declined and reviewed case by case.
 - Claim steps: Confirm the startup is incorporated or actively incorporating, is building for real end-users, and meets the net-new project rules; existing paid/committed users should explain their circumstances in the application. | Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
-### Liner Startup Grant — up to $1,000 API Credits
-- Provider: Liner
-- Category: startup_program
-- Amount: Up to $1,000 in Liner Search/Search Agent API credits; no equity
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://build.liner.com/blog/liner-startup-grant-program
-- Page: https://freetokens.custats.info/offers/liner-startup-grant.html
-- Summary: The Liner Startup Grant Program advertises up to $1,000 in credits with no equity taken and nothing to repay. Its blog describes broader Liner API coverage including Search API and Search Agent API, but the current linked application calls the grant Search Agent API credits; confirm the approved product scope before budgeting. The form requires company email, company name, company website and product interest. Liner reviews applications by email, with a confirmation message saying next steps include a link to book a 20-minute onboarding call. No grant-spend expiry is stated publicly.
-- Claim steps: Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes). | Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on. | Watch email for the review outcome and next steps, including a link to book a 20-minute onboarding call. Confirm which API products the approved credits cover; the form names Search Agent API while the blog describes broader API coverage.
-### Lemonfox 1-Month Free Trial
-- Provider: Lemonfox.ai
-- Category: voice
-- Amount: 1 month free trial — 10M credits (30 hours speech-to-text or 2M TTS chars)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
-- Source: https://www.lemonfox.ai/
-- Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
-- Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
-- Claim steps: Go to lemonfox.ai and click Get Started / Start Your Free Trial. | Sign up for an account. | Trial covers the $5/month credit bundle for 1 month.
-### Lambda Research Grant
-- Provider: Lambda
-- Category: api_provider
-- Amount: Up to $5,000 Lambda Cloud GPU (on-demand Instance) credits; research-and-mentorship framing on the grant hub
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://lambda.ai/research
-- Page: https://freetokens.custats.info/offers/lambda-research-grant.html
-- Summary: Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement. The linked application requires contact name/email, research problem, relevance/novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. Applicants must answer whether they are willing to co-write a Lambda blog; a required yes/no question is not evidence that yes is mandatory. Company, related publications and profile links are optional. No ORCID or institutional affiliation requirement was found in the current form.
-- Claim steps: Review the current grant CTA at https://lambda.ai/research and open its linked Research Grant application. | Prepare required first/last name, email, research problem, relevance and novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. | Answer the required yes/no question about willingness to co-write a Lambda blog. Company, related publications, GitHub/Scholar/social profiles and partnerships are optional; do not invent an ORCID or affiliation prerequisite. | Submit only your own accurate research application. If awarded, use the up-to-$5,000 credits on Lambda’s on-demand GPU Instances; exact award and expiry are not guaranteed by the public form.
-### Kong for Startups
-- Provider: Kong
-- Category: startup_program
-- Amount: Up to $100K Kong Konnect Plus credits (12 months; typically $25K–$100K) plus 50% off list for 2 years after; spend across AI Gateway, API Gateway, Mesh, Event Gateway
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://konghq.com/solutions/startup-program
-- Page: https://freetokens.custats.info/offers/kong-for-startups.html
-- Summary: Kong for Startups gives selected early-stage AI/API teams up to $100,000 in Kong Konnect Plus credits, valid 12 months from the date they land in the Konnect org (unused credits do not roll over). Most early-stage startups receive between $25K and $100K upfront. Credits spend across AI Gateway, API Gateway, Metering and Billing, Mesh, and Event Gateway. After credits expire or for usage beyond the balance, accepted startups pay 50% of Konnect Plus list pricing for 24 months. Eligibility: typically pre-seed through Series A, under $10M total funding, in production or launching within 6 months. YC companies are pre-qualified for the full $100K plus the two-year discount. Kong reviews applications (typically within 5 business days); credits land within 24 hours of acceptance. Existing Kong customers who qualify can have their balance increased.
-- Claim steps: Apply on konghq.com/solutions/startup-program with what you are building and which Kong products you will use (about 5 minutes). YC companies should indicate their batch. | Wait for Kong review (typically within 5 business days). | On acceptance, credits land in your Konnect org within 24 hours; the 50% discount auto-applies on invoices after credits run out.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
