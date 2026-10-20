@@ -22,7 +22,8 @@ REPO = _repo_root(Path(__file__).resolve().parent)
 sys.path.insert(0, str(REPO / 'scripts'))
 from offer_model import parse_offer_text, validate_offer, is_expired
 
-FIELDS = ('title', 'provider', 'amount', 'expiry_date', 'source_url', 'verified_date')
+FIELDS = ('title', 'provider', 'amount', 'expiry_date', 'source_url', 'verified_date',
+          'verification')
 SLUG = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*')
 
 

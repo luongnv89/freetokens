@@ -132,6 +132,8 @@ def coverage(inventory, verdicts):
         if any(not nonempty(row[k]) for k in ('title', 'provider', 'amount')) or not url(row['source_url']):
             raise ValueError('invalid inventory offer text or source_url')
         date(row['verified_date'])
+        if row['verification'] not in ('social_proof', 'unverified'):
+            raise ValueError('invalid inventory verification')
         if row['expiry_date'] is not None and date(row['expiry_date']) < today:
             raise ValueError('inventory contains expired offer')
         expected.add(slug)

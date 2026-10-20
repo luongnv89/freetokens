@@ -161,7 +161,8 @@ Put these paths in each worker prompt as files to Read (you do not Read them):
 - `skills/daily-offer-check/references/trust-policy.md`
 
 Plus the batch objects with every inventory field: slug, path, title,
-provider, amount, expiry_date, source_url, verified_date, sha256; also pass today.
+provider, amount, expiry_date, source_url, verified_date, verification, sha256;
+also pass today.
 
 Each worker's Output: a JSON array, one object per input slug — never a
 silent drop. Shape is pinned in `agents/verifier.md`.

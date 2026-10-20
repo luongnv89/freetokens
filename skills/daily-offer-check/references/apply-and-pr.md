@@ -11,8 +11,12 @@ Inventory is an object with exactly `today` (YYYY-MM-DD), `offers_dir`
 (canonical absolute root), `active_count` (integer), `skipped_expired` (slug
 array), and `offers` (array). Each offer has exactly slug, path (relative to
 that root), title, provider, amount, expiry_date (date or null), source_url,
-verified_date, sha256 (hash of original bytes). Sort is verified_date then slug.
+verified_date, verification (`social_proof` | `unverified`), sha256 (hash of
+original bytes). Sort is verified_date then slug.
 Unknown requested slugs fail; named expired slugs appear in skipped_expired.
+The writer refuses any live or expired verdict for a `verification:
+unverified` (early) offer: no write, result `skipped` with reason
+`early offer — refresh with offer-updater`.
 
 Coverage accepts inventory and verdict filenames positionally. It rejects
 malformed records, duplicate keys/slugs, missing/extra slugs, invalid
