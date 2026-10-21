@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-21T03:05:06Z — 119 of 227 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-21T08:47:34Z — 119 of 228 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -17,6 +17,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/valyu-new-account-search-credits.html
 - Summary: New accounts receive $10 of free credits, or $20 when signing up with a company email; no card is required. One shared credit balance covers Search, Contents and DeepResearch. While free credits remain, the account can use every source on Valyu's standard plans; licensed sources outside the standard plans still need separate access. Free credits expire 12 months after signup. After that, pay-as-you-go top-ups start at $10 (1,600 credits per $10) and monthly plans unlock more sources. There are no overage charges: when the balance cannot cover a request, the API returns 402 Payment Required and does not run it.
 - Claim steps: Sign up for a new Valyu account; use a company email for the officially stated $20 grant instead of $10. | Use the free balance to try Search, Contents and DeepResearch across standard-plan sources; licensed sources outside the standard plans need separate access. No card is required. | Spend the free credits within 12 months of signup. When the balance runs out, requests return 402 until you top up ($10 minimum) or choose a plan.
+### Qoder International Free Daily Credits and Free Flash Models
+- Provider: Qoder
+- Category: coding
+- Amount: 100 free Credits per day (claim daily, each valid 30 days) plus free Qwen3.8-Flash; DeepSeek-V4.1-Flash-1017 free through October 24
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-21 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.qoder.com/events/100credits
+- Page: https://freetokens.custats.info/offers/qoder-daily-credits-free-models.html
+- Summary: Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is "to be announced". Qwen3.8-Flash is also free: its Credit rate is cut from 0.1x to 0.0x and it works even with a zero balance. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. Separately, Qoder's October 19 post says DeepSeek-V4.1-Flash-1017 costs 0.0x Credits for free and paid users through October 24. Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.
+- Claim steps: Download the Qoder desktop app and create or sign in to an individual Qoder International account. | During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later. | Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed. | For the free models, just select Qwen3.8-Flash or DeepSeek-V4.1-Flash-1017 (free through October 24); no claim is needed.
 ### MiMo V2.6 Flash Free on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -1185,16 +1195,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/meshy-free-plan.html
 - Summary: Meshy's Free web-app plan grants 100 credits every month for its 3D-generation tools (text-to-3D, image-to-3D, AI texturing), resetting at 00:00 UTC on the first of each month. Free includes one concurrent task, low queue priority, and ten Meshy 6 Lite model downloads per month; API access is not included. No credit card required; free-plan outputs are licensed under CC BY 4.0 (commercial use allowed with attribution).
 - Claim steps: Sign up free at https://www.meshy.ai — no credit card required. | Receive 100 credits/month; credits reset at 00:00 UTC on the first day of each month. | Use the web app within the Free limits: one concurrent task, low queue priority, and ten Meshy 6 Lite model downloads/month. The Free plan does not include API access. | Free-plan outputs carry a CC BY 4.0 license (commercial use allowed with attribution).
-### Merge Gateway — $10 in Free LLM Credits Every Month
-- Provider: Merge
-- Category: api_provider
-- Amount: $10 in free LLM credits every month (Pro plan)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
-- Source: https://www.merge.dev/pricing/gateway
-- Page: https://freetokens.custats.info/offers/merge-gateway-10-monthly-credits.html
-- Summary: Merge Gateway routes supported LLMs through one API with routing, spend caps and security. Pro is pay-as-you-go at LLM cost plus a 5% fee and requires a credit card. An active Pro subscription receives $10 in complimentary credits on the 1st of each month; unused credits expire at month end with no rollover or cash value. Review spending controls before use: the $10 allowance is not a promise that the card-funded account automatically stops billing at $10.
-- Claim steps: Sign up at https://gateway.merge.dev/signup | Choose the Pro plan, which requires a credit card and charges LLM cost plus a 5% fee on a pay-as-you-go basis. | Maintain an active Pro subscription to receive $10 in complimentary credits on the 1st of each month; unused credits expire at month end, do not roll over and have no cash value. | Review and configure spending controls before making requests via gateway.merge.dev/v1. Do not assume the account automatically stops or prevents paid usage once the $10 allowance is consumed.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

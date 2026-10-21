@@ -1,9 +1,24 @@
 {
-  "generated_at": "2026-10-20T15:17:30Z",
-  "count": 261,
-  "active_count": 227,
+  "generated_at": "2026-10-21T08:47:33Z",
+  "count": 262,
+  "active_count": 228,
   "expired_count": 34,
   "offers": [
+    {
+      "slug": "qoder-daily-credits-free-models",
+      "title": "Qoder International Free Daily Credits and Free Flash Models",
+      "provider": "Qoder",
+      "category": "coding",
+      "amount": "100 free Credits per day (claim daily, each valid 30 days) plus free Qwen3.8-Flash; DeepSeek-V4.1-Flash-1017 free through October 24",
+      "expiry_date": null,
+      "source_url": "https://docs.qoder.com/events/100credits",
+      "verified_date": "2026-10-21",
+      "added_date": "2026-10-21",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "anthropic-oss-scanner",
       "title": "OSS Scanner — Free AI Vulnerability Scanning for Open Source",
@@ -110,21 +125,6 @@
       "status": "active"
     },
     {
-      "slug": "agnes-ai-flash-models-free-api",
-      "title": "Agnes AI Flash Models — Free API (agnes-2.5-flash, agnes-3.0-flash)",
-      "provider": "Agnes AI",
-      "category": "api_provider",
-      "amount": "agnes-2.5-flash and agnes-3.0-flash text models currently free ($0/M cached input, input and output tokens; list $0.05/M input, $0.15/M output) via OpenAI-compatible API; promotional, end date subject to Agnes AI platform announcements",
-      "expiry_date": null,
-      "source_url": "https://wiki.agnes-ai.com/en/docs/pricing.md",
-      "verified_date": "2026-10-16",
-      "added_date": "2026-10-16",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
-    },
-    {
       "slug": "opencode-glm-5-3-flash-free",
       "title": "GLM-5.3-Flash Free on OpenCode",
       "provider": "OpenCode",
@@ -137,6 +137,21 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "none",
+      "status": "active"
+    },
+    {
+      "slug": "agnes-ai-flash-models-free-api",
+      "title": "Agnes AI Flash Models — Free API (agnes-2.5-flash, agnes-3.0-flash)",
+      "provider": "Agnes AI",
+      "category": "api_provider",
+      "amount": "agnes-2.5-flash and agnes-3.0-flash text models currently free ($0/M cached input, input and output tokens; list $0.05/M input, $0.15/M output) via OpenAI-compatible API; promotional, end date subject to Agnes AI platform announcements",
+      "expiry_date": null,
+      "source_url": "https://wiki.agnes-ai.com/en/docs/pricing.md",
+      "verified_date": "2026-10-16",
+      "added_date": "2026-10-16",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
       "status": "active"
     },
     {
@@ -212,6 +227,21 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-big-pickle-free",
+      "title": "Big Pickle Free on OpenCode",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free Big Pickle stealth model access in the OpenCode app (free input, output and cached reads; limited time); collected data may be used to improve the model",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-10-21",
+      "added_date": "2026-10-13",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
       "status": "active"
     },
     {
@@ -320,21 +350,6 @@
       "status": "active"
     },
     {
-      "slug": "opencode-big-pickle-free",
-      "title": "Big Pickle Free on OpenCode",
-      "provider": "OpenCode",
-      "category": "coding",
-      "amount": "Free Big Pickle stealth model access in the OpenCode app (free input, output and cached reads; limited time); collected data may be used to improve the model",
-      "expiry_date": null,
-      "source_url": "https://opencode.ai/v2/docs/console/models/",
-      "verified_date": "2026-10-21",
-      "added_date": "2026-10-13",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "none",
-      "status": "active"
-    },
-    {
       "slug": "inclusionai-ling-3-1-flash-free",
       "title": "Ling 3.1 Flash Free (InclusionAI)",
       "provider": "InclusionAI",
@@ -359,6 +374,21 @@
       "source_url": "https://y-api.bestvirtualgoods.com/daily-key",
       "verified_date": "2026-10-08",
       "added_date": "2026-10-09",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "valyu-new-account-search-credits",
+      "title": "Valyu — $10 Free API Credits ($20 with a Work Email)",
+      "provider": "Valyu",
+      "category": "api_provider",
+      "amount": "$10 free credits for new accounts ($20 with a company email), no card required; one balance for Search, Contents and DeepResearch across standard-plan sources; credits expire 12 months after signup",
+      "expiry_date": null,
+      "source_url": "https://docs.valyu.ai/pricing",
+      "verified_date": "2026-10-21",
+      "added_date": "2026-10-07",
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
@@ -493,21 +523,6 @@
       "expiry_date": null,
       "source_url": "https://www.upstage.ai/blog/en/guide-1-upstage-console-api",
       "verified_date": "2026-10-07",
-      "added_date": "2026-10-07",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "valyu-new-account-search-credits",
-      "title": "Valyu — $10 Free API Credits ($20 with a Work Email)",
-      "provider": "Valyu",
-      "category": "api_provider",
-      "amount": "$10 free credits for new accounts ($20 with a company email), no card required; one balance for Search, Contents and DeepResearch across standard-plan sources; credits expire 12 months after signup",
-      "expiry_date": null,
-      "source_url": "https://docs.valyu.ai/pricing",
-      "verified_date": "2026-10-21",
       "added_date": "2026-10-07",
       "verification": "social_proof",
       "review_status": "under-review",
@@ -1025,6 +1040,21 @@
       "status": "active"
     },
     {
+      "slug": "opencode-mimo-v2-6-flash-free",
+      "title": "MiMo V2.6 Flash Free on OpenCode",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free MiMo V2.6 Flash model access in the OpenCode app (free input, output and cached reads; limited time)",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models",
+      "verified_date": "2026-10-21",
+      "added_date": "2026-09-22",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
+      "status": "active"
+    },
+    {
       "slug": "anyscale-ai-startup-program",
       "title": "Anyscale AI Startup Program",
       "provider": "Anyscale",
@@ -1097,21 +1127,6 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "opencode-mimo-v2-6-flash-free",
-      "title": "MiMo V2.6 Flash Free on OpenCode",
-      "provider": "OpenCode",
-      "category": "coding",
-      "amount": "Free MiMo V2.6 Flash model access in the OpenCode app (free input, output and cached reads; limited time)",
-      "expiry_date": null,
-      "source_url": "https://opencode.ai/v2/docs/console/models",
-      "verified_date": "2026-10-21",
-      "added_date": "2026-09-22",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "none",
       "status": "active"
     },
     {
