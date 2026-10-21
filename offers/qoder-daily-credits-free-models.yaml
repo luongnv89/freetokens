@@ -1,0 +1,19 @@
+# Verified 2026-10-21 against https://docs.qoder.com/events/100credits
+# ("Starting September 18, 2026 at 10:00, individual users of Qoder International can claim 100 Credits every
+# day in the Qoder desktop app. Both free users and paid individual subscribers are eligible." / "End time : To be
+# announced." / "Teams and Enterprise subscribers are not eligible.")
+# Also https://docs.qoder.com/events/flashoffer (Qwen3.8-Flash 0.1x -> 0.0x, usable with a zero Credits balance,
+# extended past September 30, end date to be announced in advance) and the provider post
+# https://x.com/qoder_ai_ide/status/2112211366954344459 (2026-10-19; qoder.com links x.com/qoder_ai_ide):
+# "Now it's FREE through Oct 24. 0.0x credits for free and paid users." (DeepSeek-V4.1-Flash-1017).
+# Ongoing allowance + dated promo: expiry_date stays null; the DeepSeek end date is in amount.
+title: Qoder International Free Daily Credits and Free Flash Models
+provider: Qoder
+category: coding
+amount: 100 free Credits per day (claim daily, each valid 30 days) plus free Qwen3.8-Flash; DeepSeek-V4.1-Flash-1017 free through October 24
+expiry_date: null
+source_url: https://docs.qoder.com/events/100credits
+verified_date: 2026-10-21
+verification: social_proof
+review_status: under-review
+signup: required
