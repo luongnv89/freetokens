@@ -2,11 +2,61 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-20T14:43:34Z — 119 of 227 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-21T03:05:06Z — 119 of 227 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Valyu — $10 Free API Credits ($20 with a Work Email)
+- Provider: Valyu
+- Category: api_provider
+- Amount: $10 free credits for new accounts ($20 with a company email), no card required; one balance for Search, Contents and DeepResearch across standard-plan sources; credits expire 12 months after signup
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-21 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.valyu.ai/pricing
+- Page: https://freetokens.custats.info/offers/valyu-new-account-search-credits.html
+- Summary: New accounts receive $10 of free credits, or $20 when signing up with a company email; no card is required. One shared credit balance covers Search, Contents and DeepResearch. While free credits remain, the account can use every source on Valyu's standard plans; licensed sources outside the standard plans still need separate access. Free credits expire 12 months after signup. After that, pay-as-you-go top-ups start at $10 (1,600 credits per $10) and monthly plans unlock more sources. There are no overage charges: when the balance cannot cover a request, the API returns 402 Payment Required and does not run it.
+- Claim steps: Sign up for a new Valyu account; use a company email for the officially stated $20 grant instead of $10. | Use the free balance to try Search, Contents and DeepResearch across standard-plan sources; licensed sources outside the standard plans need separate access. No card is required. | Spend the free credits within 12 months of signup. When the balance runs out, requests return 402 until you top up ($10 minimum) or choose a plan.
+### MiMo V2.6 Flash Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free MiMo V2.6 Flash model access in the OpenCode app (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-21 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models
+- Page: https://freetokens.custats.info/offers/opencode-mimo-v2-6-flash-free.html
+- Summary: MiMo-V2.6-Flash Free remains listed on OpenCode Console (formerly Zen) for a limited time. Current Console documentation lists model mimo-v2.6-flash-free at Free/Free/Free, and it appears in the live model catalog. The historical September 21 one-week announcement does not establish a current campaign end date. During the free period, collected data may be used to improve the model. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-21 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed.
+- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select MiMo-V2.6-Flash Free (opencode/mimo-v2.6-flash-free) while it is listed. | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-21), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | During the limited-time free period, collected data may be used to improve the model. Avoid sensitive inputs and check pricing before use.
+### GLM-5.3-Flash Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free GLM-5.3-Flash model access in the OpenCode app (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-21 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-glm-5-3-flash-free.html
+- Summary: OpenCode made GLM 5.3 Flash free on 2026-10-16. OpenCode's Console docs list GLM-5.3-Flash Free (model id glm-5.3-flash-free) with free input, output and cached reads for a limited time. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-21 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid GLM 5.3 Flash model (glm-5.3-flash) is listed separately at $0.15/$0.50 per 1M input/output tokens, so pick the Free variant.
+- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select GLM-5.3-Flash Free (opencode/glm-5.3-flash-free), not the paid GLM 5.3 Flash. | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-21), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
+### Beam Free (formerly Cat Jam) on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Beam (formerly Cat Jam) model access in the OpenCode app (free input, output and cached reads; limited time)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-21 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-cat-jam-free.html
+- Summary: OpenCode launched Cat Jam on 2026-10-13 and renamed it Beam Free (beam-free), as confirmed by its merged October 16 documentation update. OpenCode's Console docs list Beam Free (model id beam-free) with free input, output and cached reads for a limited time. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-21 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs. Beam Free is not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.
+- Claim steps: Check geographic eligibility first: Beam Free excludes the countries and Ukrainian regions listed in the summary and current Console models docs, including China (Hong Kong/Macau), Russia, Iran and North Korea. | Install the OpenCode app from https://opencode.ai. | Run /models and select Beam Free (opencode/beam-free). | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-21), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | The free period is limited-time. The provider retains data for 30 days for safety reasons despite the historical announcement's zero-retention claim; avoid sensitive inputs.
+### Big Pickle Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Big Pickle stealth model access in the OpenCode app (free input, output and cached reads; limited time); collected data may be used to improve the model
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-21 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-big-pickle-free.html
+- Summary: OpenCode's official Console models page lists Big Pickle, a stealth model, as free for input, output and cached reads for a limited time; during the free period collected data may be used to improve the model. Model ID big-pickle, selectable in OpenCode as opencode/big-pickle. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-21 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated.
+- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select Big Pickle (opencode/big-pickle). | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-21), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | During the limited-time free period, collected data may be used to improve the model. Avoid sensitive inputs and check pricing before use.
 ### Beam 1.0 Free (Vercel AI Gateway)
 - Provider: Vercel
 - Category: api_provider
@@ -117,16 +167,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-super-vl-free.html
 - Summary: OpenRouter lists NVIDIA Nemotron 3.5 Super VL as a free endpoint (nvidia/nemotron-3.5-super-vl:free), served by NVIDIA, priced at $0 for prompt and completion tokens with a 1,000,000-token context. NVIDIA describes it as an open multimodal mixture-of-experts model with 12B active of 120B total parameters that accepts text, images, documents, GUI screenshots and video. The endpoint was created 2026-10-15; no end date is published. The free endpoint and generated content are for internal testing/evaluation only, not production, under the linked NVIDIA API Trial Terms sections 1.2 and 1.4; production requires a separate subscription and its terms. Do not submit confidential information or personal data, including voices or faces. Use is logged for security and NVIDIA product/service improvement, with improvement-session data not linked to persistent identifiers. Public provider metadata is not a completed inference test; check current provider health before use.
 - Claim steps: Create an OpenRouter account and API key; OpenRouter free-model rate limits apply. | Use the free API service and generated content only for internal testing/evaluation, not production, under NVIDIA API Trial Terms sections 1.2 and 1.4. Production requires a separate subscription and its terms. | Review the model-page notice and NVIDIA API Trial Terms. Never send confidential information or personal data, including voices or faces; use is logged for security and NVIDIA product/service improvement. | Check current provider health before calling chat completions with model nvidia/nemotron-3.5-super-vl:free. Public endpoint status/uptime is not a completed inference test.
-### GLM-5.3-Flash Free on OpenCode Console
-- Provider: OpenCode
-- Category: coding
-- Amount: Free GLM-5.3-Flash model access on OpenCode Console (free input, output and cached reads; limited time)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-16 — review_status=under-review · verification=social_proof · signup=none
-- Source: https://opencode.ai/v2/docs/console/models/
-- Page: https://freetokens.custats.info/offers/opencode-glm-5-3-flash-free.html
-- Summary: OpenCode made GLM 5.3 Flash free on 2026-10-16. OpenCode's Console docs list GLM-5.3-Flash Free (model id glm-5.3-flash-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid GLM 5.3 Flash model (glm-5.3-flash) is listed separately at $0.15/$0.50 per 1M input/output tokens, so pick the Free variant.
-- Claim steps: For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model glm-5.3-flash-free and messages, omitting the Authorization header. No inference request was tested. | Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select GLM-5.3-Flash Free (opencode/glm-5.3-flash-free), not the paid GLM 5.3 Flash. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
 ### Agnes AI Flash Models — Free API (agnes-2.5-flash, agnes-3.0-flash)
 - Provider: Agnes AI
 - Category: api_provider
@@ -137,16 +177,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/agnes-ai-flash-models-free-api.html
 - Summary: Agnes AI's official Model Pricing page lists agnes-2.5-flash and agnes-3.0-flash at a current price of $0 per million tokens for cached input, input and output (list prices $0.005/M cached input, $0.05/M input, $0.15/M output shown struck through), and states they are currently free. The free pricing is promotional; end dates are subject to Agnes AI platform announcements. The API is reached at https://apihub.agnes-ai.com/v1 with a Bearer API key created in the Agnes AI console. The official page does not say 'permanently free', nor confirm the 256K context figure from the lead.
 - Claim steps: Log in to the Agnes AI console and open the API Key management page | Create and copy an API key | Set the API base URL to https://apihub.agnes-ai.com/v1 and send requests with Authorization: Bearer YOUR_API_KEY using model agnes-2.5-flash or agnes-3.0-flash
-### Beam Free (formerly Cat Jam) on OpenCode Console
-- Provider: OpenCode
-- Category: coding
-- Amount: Free Beam (formerly Cat Jam) model access on OpenCode Console (free input, output and cached reads; limited time)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-14 — review_status=under-review · verification=social_proof · signup=none
-- Source: https://opencode.ai/v2/docs/console/models/
-- Page: https://freetokens.custats.info/offers/opencode-cat-jam-free.html
-- Summary: OpenCode launched Cat Jam on 2026-10-13 and renamed it Beam Free (beam-free), as confirmed by its merged October 16 documentation update. OpenCode's Console docs list Beam Free (model id beam-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs. Beam Free is not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.
-- Claim steps: Check geographic eligibility first: Beam Free excludes the countries and Ukrainian regions listed in the summary and current Console models docs, including China (Hong Kong/Macau), Russia, Iran and North Korea. | For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model beam-free and messages, omitting the Authorization header. No inference request was tested. | Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver. | In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select Beam Free (opencode/beam-free). | The free period is limited-time. The provider retains data for 30 days for safety reasons despite the historical announcement's zero-retention claim; avoid sensitive inputs. | For the optional Console route, review billing before funding: auto-reload defaults to $20 when the balance goes below $5 and can be changed or disabled.
 ### Meta Global AI Developer Hackathon API Credits
 - Provider: Meta
 - Category: api_provider
@@ -157,16 +187,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/meta-global-ai-developer-hackathon.html
 - Summary: Applications for Meta's virtual Global AI Developer Hackathon are now open. The linked organizer waiver confirms $150 in Meta Model API credits for each selected participant for development over ten days; applying does not guarantee acceptance. Meta's application deadline is October 25, 2026 at 11:59 PM ET, or earlier if 20,000 spots fill; the waiver labels that time EST, so check the portal's exact cutoff. Applicants must be 18+ and of legal majority, and meet geographic, sanctions and affiliation restrictions. The hackathon runs October 26–November 4, with a $1M prize pool separate from the credits. The waiver permits marketing contact and broad use of submissions/materials without confidentiality; read it before applying. Official Hackathon Rules must be accepted when published before October 26. Credit delivery has not been personally tested.
 - Claim steps: Open https://dev.meta.ai/events/global-hackathon and follow Apply now to Meta's linked Cerebral Valley organizer portal. | Check the waiver: you must be at least 18 and of legal majority. Review excluded jurisdictions, sanctions, Meta/Cerebral Valley/government affiliations and family/household restrictions. | Read the waiver's marketing, recording and broad submission/material-use permissions; organizers do not agree to confidentiality. Apply only if you accept those terms. | Submit a truthful application by October 25, 2026 at 11:59 PM ET (Meta page; waiver says EST), or earlier if 20,000 places fill. Selection is rolling and not guaranteed. | If selected, accept the forthcoming official rules and use the stated $150 Model API credits for ten days of hackathon development; confirm account delivery and actual credit validity with the organizers.
-### Big Pickle Free on OpenCode Console
-- Provider: OpenCode
-- Category: coding
-- Amount: Free Big Pickle stealth model access on OpenCode Console (free input, output and cached reads; limited time); collected data may be used to improve the model
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-13 — review_status=under-review · verification=social_proof · signup=none
-- Source: https://opencode.ai/v2/docs/console/models/
-- Page: https://freetokens.custats.info/offers/opencode-big-pickle-free.html
-- Summary: OpenCode Console (formerly Zen) is OpenCode's pay-as-you-go AI gateway for coding agents. Its official models page lists Big Pickle, a stealth model, as free for input, output and cached reads for a limited time; during the free period collected data may be used to improve the model. Model ID big-pickle, endpoint https://opencode.ai/inference/openai/v1/chat/completions, selectable in OpenCode as opencode/big-pickle. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional signed-in Console/TUI setup separately instructs adding billing details and credits; this is not a Console funding waiver. No inference request was tested.
-- Claim steps: For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model big-pickle and messages, omitting the Authorization header. No inference request was tested. | Alternatively, sign in to OpenCode Console and copy your API key. General Console setup instructs adding billing details and credits; the direct free-chat exception does not establish a Console funding waiver. | Run /connect in the OpenCode TUI, choose the OpenCode pay-as-you-go provider, and paste your API key. | Run /models and select Big Pickle (opencode/big-pickle). | During the limited-time free period, collected data may be used to improve the model. Avoid sensitive inputs and check pricing before use.
 ### Apodex 1.1 Mini Free (Novita)
 - Provider: Novita AI
 - Category: api_provider
@@ -267,16 +287,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/viktor-free-starter-100-credits.html
 - Summary: Viktor is an AI coworker for Slack and Microsoft Teams with integrations, automation, reports, code and PR reviews. The current Free-plan card offers up to $100 in one-time starter credits for a new workspace without a credit card or upfront paid subscription; the actual award depends on how the workspace signed up and must be checked on its Billing page. Free credits never expire. Joining an existing workspace does not establish a separate starter award for each user. The pricing Team card lists $100/month, while Plans and Credits docs list paid choices from $50/month and note that some workspaces have a $100 minimum. The pricing headline/FAQ and older promotional quotes still say $100, but do not override the qualified Free-plan card and signup-dependent documentation. No enrollment deadline or account-specific grant was verified in the 2026-10-14 copy check.
 - Claim steps: Create a Viktor account. | Join your team or add Viktor to Slack or Microsoft Teams. | Finish the setup wizard, then check the free starter-credit balance on the intended workspace's Billing page. New-workspace credits are a one-time award of up to $100 and depend on signup path; do not assume each member joining an existing workspace receives $100. | Free credits never expire. When the workspace's starter credits run out, Viktor pauses until you choose a paid plan; check the workspace's plan picker for its available paid options.
-### Valyu — $10 Free API Credits ($20 with a Work Email)
-- Provider: Valyu
-- Category: api_provider
-- Amount: $10 free credits for new accounts ($20 with a work email), usable across Search, Answer, Contents, DeepResearch and every source during the free trial; no card required
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.valyu.ai/pricing
-- Page: https://freetokens.custats.info/offers/valyu-new-account-search-credits.html
-- Summary: New accounts receive $10 in free credits, or $20 with a work email. The free signup grant does not require a card. One shared balance covers Search, Answer, Contents and DeepResearch; official documentation says the free trial includes every source. After the trial, specialised datasets have plan-dependent access, pay-as-you-go top-ups have a $10 minimum, and overage is billed at the applicable plan rates. No enrollment deadline or free-grant validity duration is stated in the loaded pages.
-- Claim steps: Sign up for a new Valyu account; use a work email for the officially stated $20 grant instead of $10. | Use the free balance to try the APIs and source catalog; no card is required for the signup grant.
 ### Upstage Console — $10 Free Solar API Credits
 - Provider: Upstage
 - Category: api_provider
@@ -1015,16 +1025,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html
 - Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Current page and API announce a December 31, 2026 sunset. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
 - Claim steps: Sign up at openrouter.ai and create an API key (OpenRouter :free models do not require purchasing credits). | Call the chat completions API with model id dots-studio/dots-3-note-preview:free.
-### MiMo V2.6 Flash Free on OpenCode Console
-- Provider: OpenCode
-- Category: coding
-- Amount: Free MiMo V2.6 Flash model access on OpenCode Console (formerly Zen; limited time)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=none
-- Source: https://opencode.ai/v2/docs/console/models
-- Page: https://freetokens.custats.info/offers/opencode-mimo-v2-6-flash-free.html
-- Summary: MiMo-V2.6-Flash Free remains listed on OpenCode Console (formerly Zen) for a limited time. Current Console documentation lists model mimo-v2.6-flash-free at Free/Free/Free, and it appears in the live model catalog. The historical September 21 one-week announcement does not establish a current campaign end date. During the free period, collected data may be used to improve the model. The Inference API docs permit free chat calls without an Authorization header at https://opencode.ai/inference/openai/v1/chat/completions, providing an account-optional direct API route. Optional signed-in Console/TUI setup separately instructs adding billing details and credits; this is not a Console funding waiver. No inference request was tested.
-- Claim steps: For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model mimo-v2.6-flash-free and messages, omitting the Authorization header. No inference request was tested. | Alternatively, sign in to OpenCode Console and obtain an API key. General Console setup instructs adding billing details and credits; the direct free-chat exception is not a Console funding waiver. | In OpenCode, run /connect and choose the OpenCode pay-as-you-go provider, then paste the API key. | Run /models and select MiMo-V2.6-Flash Free (mimo-v2.6-flash-free) while it is listed. | During the limited-time free period, collected data may be used to improve the model. Avoid sensitive inputs and check pricing before use.
 ### OpenAI Codex Free Tier
 - Provider: OpenAI
 - Category: coding

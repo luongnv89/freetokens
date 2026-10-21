@@ -1,21 +1,22 @@
 {
-  "summary": "New accounts receive $10 in free credits, or $20 with a work email. The free signup grant does not require a card. One shared balance covers Search, Answer, Contents and DeepResearch; official documentation says the free trial includes every source. After the trial, specialised datasets have plan-dependent access, pay-as-you-go top-ups have a $10 minimum, and overage is billed at the applicable plan rates. No enrollment deadline or free-grant validity duration is stated in the loaded pages.",
+  "summary": "New accounts receive $10 of free credits, or $20 when signing up with a company email; no card is required. One shared credit balance covers Search, Contents and DeepResearch. While free credits remain, the account can use every source on Valyu's standard plans; licensed sources outside the standard plans still need separate access. Free credits expire 12 months after signup. After that, pay-as-you-go top-ups start at $10 (1,600 credits per $10) and monthly plans unlock more sources. There are no overage charges: when the balance cannot cover a request, the API returns 402 Payment Required and does not run it.",
   "claim_steps": [
-    "Sign up for a new Valyu account; use a work email for the officially stated $20 grant instead of $10.",
-    "Use the free balance to try the APIs and source catalog; no card is required for the signup grant."
+    "Sign up for a new Valyu account; use a company email for the officially stated $20 grant instead of $10.",
+    "Use the free balance to try Search, Contents and DeepResearch across standard-plan sources; licensed sources outside the standard plans need separate access. No card is required.",
+    "Spend the free credits within 12 months of signup. When the balance runs out, requests return 402 until you top up ($10 minimum) or choose a plan."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://docs.valyu.ai/pricing",
       "title": "Pricing | Valyu",
-      "text": "New accounts get **$10 in free credits** ($20 with a work email), usable across **every source** so you can try the full catalog first."
+      "text": "New accounts get $10 of free credits, or $20 when you sign up with a company email. No card is required. While you have free credits left, your account can use every source on our standard plans... Free credits expire 12 months after signup."
     },
     {
       "type": "link",
       "url": "https://www.valyu.ai/pricing",
       "title": "Pricing | Usage-based search and research APIs | Valyu",
-      "text": "Free Get: $10 free credits on signup (No card required)"
+      "text": "Free Get: $10 free credits on signup, $20 with a work email (no card required). Every data source, while your free credits last."
     },
     {
       "type": "link",

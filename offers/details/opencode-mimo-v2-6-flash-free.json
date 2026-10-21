@@ -1,10 +1,10 @@
 {
-  "summary": "MiMo-V2.6-Flash Free remains listed on OpenCode Console (formerly Zen) for a limited time. Current Console documentation lists model mimo-v2.6-flash-free at Free/Free/Free, and it appears in the live model catalog. The historical September 21 one-week announcement does not establish a current campaign end date. During the free period, collected data may be used to improve the model. The Inference API docs permit free chat calls without an Authorization header at https://opencode.ai/inference/openai/v1/chat/completions, providing an account-optional direct API route. Optional signed-in Console/TUI setup separately instructs adding billing details and credits; this is not a Console funding waiver. No inference request was tested.",
+  "summary": "MiMo-V2.6-Flash Free remains listed on OpenCode Console (formerly Zen) for a limited time. Current Console documentation lists model mimo-v2.6-flash-free at Free/Free/Free, and it appears in the live model catalog. The historical September 21 one-week announcement does not establish a current campaign end date. During the free period, collected data may be used to improve the model. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-21 was rejected with \"OpenCode's free tier can only be used from within OpenCode,\" although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed.",
   "claim_steps": [
-    "For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model mimo-v2.6-flash-free and messages, omitting the Authorization header. No inference request was tested.",
-    "Alternatively, sign in to OpenCode Console and obtain an API key. General Console setup instructs adding billing details and credits; the direct free-chat exception is not a Console funding waiver.",
-    "In OpenCode, run /connect and choose the OpenCode pay-as-you-go provider, then paste the API key.",
-    "Run /models and select MiMo-V2.6-Flash Free (mimo-v2.6-flash-free) while it is listed.",
+    "Install the OpenCode app from https://opencode.ai.",
+    "Run /models and select MiMo-V2.6-Flash Free (opencode/mimo-v2.6-flash-free) while it is listed.",
+    "Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-21), despite older wording in the Inference API docs.",
+    "Whether the in-app free tier needs an OpenCode account or billing details was not tested.",
     "During the limited-time free period, collected data may be used to improve the model. Avoid sensitive inputs and check pricing before use."
   ],
   "social_proof": [
@@ -12,14 +12,13 @@
       "type": "link",
       "url": "https://opencode.ai/v2/docs/console/api/inference/",
       "title": "Inference API | OpenCode",
-      "text": "Paid models require the header; free chat models can be called without it. OpenAI Chat Completions: /inference/openai/v1/chat/completions."
+      "text": "Paid models require the header; free chat models can be called without it. (A keyless chat call on 2026-10-21 returned HTTP 403 FreeTierError: \"OpenCode's free tier can only be used from within OpenCode.\")"
     },
     {
       "type": "x",
       "url": "https://x.com/opencode/status/2102145730999730611",
       "author": "OpenCode",
       "handle": "@opencode",
-
       "text": "MiMo V2.6 Flash is free for the next week\n\nBoth Flash and Pro are also available in Go"
     },
     {

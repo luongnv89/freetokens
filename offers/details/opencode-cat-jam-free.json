@@ -1,20 +1,19 @@
 {
-  "summary": "OpenCode launched Cat Jam on 2026-10-13 and renamed it Beam Free (beam-free), as confirmed by its merged October 16 documentation update. OpenCode's Console docs list Beam Free (model id beam-free) with free input, output and cached reads for a limited time, on the https://opencode.ai/inference/openai/v1/chat/completions endpoint. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional Console/TUI setup separately asks for billing details and credits; this is not a Console funding waiver. No inference request was tested. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs. Beam Free is not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.",
+  "summary": "OpenCode launched Cat Jam on 2026-10-13 and renamed it Beam Free (beam-free), as confirmed by its merged October 16 documentation update. OpenCode's Console docs list Beam Free (model id beam-free) with free input, output and cached reads for a limited time. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-21 was rejected with \"OpenCode's free tier can only be used from within OpenCode,\" although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. The announcement describes it as very fast and built for agentic coding. Per OpenCode's docs, its provider does not use your data for model training but retains it for 30 days for safety reasons, so avoid sensitive inputs. Beam Free is not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.",
   "claim_steps": [
     "Check geographic eligibility first: Beam Free excludes the countries and Ukrainian regions listed in the summary and current Console models docs, including China (Hong Kong/Macau), Russia, Iran and North Korea.",
-    "For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model beam-free and messages, omitting the Authorization header. No inference request was tested.",
-    "Alternatively, sign in to OpenCode Console and copy your API key. General Console setup asks for billing details and credits; the direct free-chat exception is not a Console funding waiver.",
-    "In the OpenCode TUI, run /connect, choose the OpenCode pay-as-you-go provider, and paste your API key.",
+    "Install the OpenCode app from https://opencode.ai.",
     "Run /models and select Beam Free (opencode/beam-free).",
-    "The free period is limited-time. The provider retains data for 30 days for safety reasons despite the historical announcement's zero-retention claim; avoid sensitive inputs.",
-    "For the optional Console route, review billing before funding: auto-reload defaults to $20 when the balance goes below $5 and can be changed or disabled."
+    "Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-21), despite older wording in the Inference API docs.",
+    "Whether the in-app free tier needs an OpenCode account or billing details was not tested.",
+    "The free period is limited-time. The provider retains data for 30 days for safety reasons despite the historical announcement's zero-retention claim; avoid sensitive inputs."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://opencode.ai/v2/docs/console/api/inference/",
       "title": "Inference API | OpenCode",
-      "text": "Paid models require the header; free chat models can be called without it. OpenAI Chat Completions: /inference/openai/v1/chat/completions."
+      "text": "Paid models require the header; free chat models can be called without it. (A keyless chat call on 2026-10-21 returned HTTP 403 FreeTierError: \"OpenCode's free tier can only be used from within OpenCode.\")"
     },
     {
       "type": "link",
