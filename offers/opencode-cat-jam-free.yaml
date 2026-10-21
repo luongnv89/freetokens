@@ -7,13 +7,17 @@
 # ("Cat Jam (stealth model) is now free in OpenCode"). No official end date stated.
 # Known conflict: https://x.com/opencode/status/2110068008945381853 says "zero data retention";
 # the docs (official, higher order) say "Data is retained for 30 days for safety reasons."
-title: "Beam Free (formerly Cat Jam) on OpenCode Console"
+# Known conflict: https://opencode.ai/v2/docs/console/api/inference/ says "free chat models can be
+# called without it [the Authorization header]"; a keyless call for beam-free on 2026-10-21 returned
+# HTTP 403 FreeTierError "OpenCode's free tier can only be used from within OpenCode." Newer live
+# API response used; claim steps are in-app only. Rechecked against current docs 2026-10-21.
+title: "Beam Free (formerly Cat Jam) on OpenCode"
 provider: OpenCode
 category: coding
-amount: "Free Beam (formerly Cat Jam) model access on OpenCode Console (free input, output and cached reads; limited time)"
+amount: "Free Beam (formerly Cat Jam) model access in the OpenCode app (free input, output and cached reads; limited time)"
 expiry_date: null
 source_url: https://opencode.ai/v2/docs/console/models/
-verified_date: 2026-10-14
+verified_date: 2026-10-21
 verification: social_proof
 review_status: under-review
 signup: none

@@ -1,13 +1,17 @@
 # Hunted 2026-10-13 by offer-hunter; verified against https://opencode.ai/v2/docs/console/models/
 # ("Big Pickle is a stealth model that’s free on OpenCode for a limited time. The team is using this time to collect feedback and improve the model.")
 # Lead: https://github.com/12britz/awesome-free-models
-title: Big Pickle Free on OpenCode Console
+# Known conflict: https://opencode.ai/v2/docs/console/api/inference/ says "free chat models can be
+# called without it [the Authorization header]"; a keyless call for big-pickle on 2026-10-21 returned
+# HTTP 403 FreeTierError "OpenCode's free tier can only be used from within OpenCode." Newer live
+# API response used; claim steps are in-app only. Rechecked against current docs 2026-10-21.
+title: Big Pickle Free on OpenCode
 provider: OpenCode
 category: coding
-amount: Free Big Pickle stealth model access on OpenCode Console (free input, output and cached reads; limited time); collected data may be used to improve the model
+amount: Free Big Pickle stealth model access in the OpenCode app (free input, output and cached reads; limited time); collected data may be used to improve the model
 expiry_date: null
 source_url: https://opencode.ai/v2/docs/console/models/
-verified_date: 2026-10-13
+verified_date: 2026-10-21
 verification: social_proof
 review_status: under-review
 signup: none

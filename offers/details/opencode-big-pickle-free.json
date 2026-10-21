@@ -1,10 +1,10 @@
 {
-  "summary": "OpenCode Console (formerly Zen) is OpenCode's pay-as-you-go AI gateway for coding agents. Its official models page lists Big Pickle, a stealth model, as free for input, output and cached reads for a limited time; during the free period collected data may be used to improve the model. Model ID big-pickle, endpoint https://opencode.ai/inference/openai/v1/chat/completions, selectable in OpenCode as opencode/big-pickle. The Inference API docs permit free chat calls without an Authorization header, providing an account-optional direct API route. Optional signed-in Console/TUI setup separately instructs adding billing details and credits; this is not a Console funding waiver. No inference request was tested.",
+  "summary": "OpenCode's official Console models page lists Big Pickle, a stealth model, as free for input, output and cached reads for a limited time; during the free period collected data may be used to improve the model. Model ID big-pickle, selectable in OpenCode as opencode/big-pickle. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-21 was rejected with \"OpenCode's free tier can only be used from within OpenCode,\" although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated.",
   "claim_steps": [
-    "For the documented account-optional route, POST JSON to https://opencode.ai/inference/openai/v1/chat/completions with model big-pickle and messages, omitting the Authorization header. No inference request was tested.",
-    "Alternatively, sign in to OpenCode Console and copy your API key. General Console setup instructs adding billing details and credits; the direct free-chat exception does not establish a Console funding waiver.",
-    "Run /connect in the OpenCode TUI, choose the OpenCode pay-as-you-go provider, and paste your API key.",
+    "Install the OpenCode app from https://opencode.ai.",
     "Run /models and select Big Pickle (opencode/big-pickle).",
+    "Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-21), despite older wording in the Inference API docs.",
+    "Whether the in-app free tier needs an OpenCode account or billing details was not tested.",
     "During the limited-time free period, collected data may be used to improve the model. Avoid sensitive inputs and check pricing before use."
   ],
   "social_proof": [
@@ -12,7 +12,7 @@
       "type": "link",
       "url": "https://opencode.ai/v2/docs/console/api/inference/",
       "title": "Inference API | OpenCode",
-      "text": "Paid models require the header; free chat models can be called without it. OpenAI Chat Completions: /inference/openai/v1/chat/completions."
+      "text": "Paid models require the header; free chat models can be called without it. (A keyless chat call on 2026-10-21 returned HTTP 403 FreeTierError: \"OpenCode's free tier can only be used from within OpenCode.\")"
     },
     {
       "type": "link",

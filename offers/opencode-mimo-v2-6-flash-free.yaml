@@ -4,13 +4,17 @@
 # announced one-week window from @opencode's 2026-09-21 post ends today, but
 # the model is still listed free with no new end date — expiry cleared to
 # ongoing/"limited time".)
-title: MiMo V2.6 Flash Free on OpenCode Console
+# Known conflict: https://opencode.ai/v2/docs/console/api/inference/ says "free chat models can be
+# called without it [the Authorization header]"; a keyless call for mimo-v2.6-flash-free on 2026-10-21 returned
+# HTTP 403 FreeTierError "OpenCode's free tier can only be used from within OpenCode." Newer live
+# API response used; claim steps are in-app only. Rechecked against current docs 2026-10-21.
+title: MiMo V2.6 Flash Free on OpenCode
 provider: OpenCode
 category: coding
-amount: Free MiMo V2.6 Flash model access on OpenCode Console (formerly Zen; limited time)
+amount: Free MiMo V2.6 Flash model access in the OpenCode app (free input, output and cached reads; limited time)
 expiry_date: null
 source_url: https://opencode.ai/v2/docs/console/models
-verified_date: 2026-09-30
+verified_date: 2026-10-21
 verification: social_proof
 review_status: under-review
 signup: none

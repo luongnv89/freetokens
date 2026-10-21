@@ -1,13 +1,17 @@
 # Hunted 2026-10-07 by offer-hunter; verified against https://docs.valyu.ai/pricing
 # ("New accounts get **$10 in free credits** ($20 with a work email), usable across **every source** so you can try the full catalog first.")
 # Lead: https://www.valyu.ai/blogs/jev-vs-decisions-api
+# Rechecked 2026-10-21 against https://docs.valyu.ai/pricing ("New accounts get $10 of free credits,
+# or $20 when you sign up with a company email. No card is required. While you have free credits left,
+# your account can use every source on our standard plans... Licensed sources outside the standard plans
+# still need separate access. Free credits expire 12 months after signup." / "There are no overage charges.")
 title: Valyu — $10 Free API Credits ($20 with a Work Email)
 provider: Valyu
 category: api_provider
-amount: $10 free credits for new accounts ($20 with a work email), usable across Search, Answer, Contents, DeepResearch and every source during the free trial; no card required
+amount: "$10 free credits for new accounts ($20 with a company email), no card required; one balance for Search, Contents and DeepResearch across standard-plan sources; credits expire 12 months after signup"
 expiry_date: null
 source_url: https://docs.valyu.ai/pricing
-verified_date: 2026-10-07
+verified_date: 2026-10-21
 verification: social_proof
 review_status: under-review
 signup: required
