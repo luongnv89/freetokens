@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-22T03:04:37Z",
-  "count": 262,
-  "active_count": 228,
+  "generated_at": "2026-10-22T22:21:03Z",
+  "count": 263,
+  "active_count": 229,
   "expired_count": 34,
   "offers": [
     {
@@ -3933,6 +3933,21 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "xai-grok-for-startups",
+      "title": "Grok for Startups",
+      "provider": "xAI",
+      "category": "startup_program",
+      "amount": "Credits sized to ~6–12 months of real usage (varies by funding, revenue and AI spend) across Grok, Grok Build, Grok Bot and the Grok API; 20% on approval, 80% after onboarding; credits expire 6 months after being applied",
+      "expiry_date": null,
+      "source_url": "https://x.ai/startups",
+      "verified_date": "2026-10-22",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

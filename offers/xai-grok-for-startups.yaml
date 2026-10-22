@@ -1,0 +1,13 @@
+# Verified 2026-10-22 against https://x.ai/startups
+# ("We aim to offer six to twelve months of real usage." / "You get 20% when you're approved. The other 80% is released automatically once you're up and running.")
+# Terms (https://x.ai/legal/startup-program-terms, last updated 2026-10-07): "Credits expire six (6) months after the date they are applied to your Team Account"
+title: Grok for Startups
+provider: xAI
+category: startup_program
+amount: Credits sized to ~6–12 months of real usage (varies by funding, revenue and AI spend) across Grok, Grok Build, Grok Bot and the Grok API; 20% on approval, 80% after onboarding; credits expire 6 months after being applied
+expiry_date: null
+source_url: https://x.ai/startups
+verified_date: 2026-10-22
+verification: social_proof
+review_status: under-review
+signup: required
