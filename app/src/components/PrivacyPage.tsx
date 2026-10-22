@@ -130,8 +130,8 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
       <IconSprite />
       <div className="wrap">
         <main>
+          <SiteHeader current="privacy" />
           <header className="masthead">
-            <SiteHeader current="privacy" />
             <Breadcrumbs page="privacy" baseUrl={baseUrl} />
             <p className="kicker">free ai credits</p>
             <h1>Privacy Policy</h1>

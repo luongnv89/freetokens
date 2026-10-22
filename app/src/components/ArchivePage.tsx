@@ -46,8 +46,8 @@ export default function ArchivePage({
       <IconSprite />
       <div className="wrap">
         <main>
+          <SiteHeader current="archive" />
           <header className="masthead masthead-home">
-            <SiteHeader current="archive" />
             <Breadcrumbs page="archive" baseUrl={baseUrl} />
             <p className="kicker">free ai credits &middot; archive</p>
             <h1>Expired offer archive</h1>

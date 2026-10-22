@@ -74,6 +74,17 @@
   --t-hot: var(--color-hot);
 }
 
+:root {
+  /* Height reserved for the sticky .site-header: one row on wide screens,
+     brand + wrapped nav + traffic line on phones. */
+  --site-header-h: 6.5rem;
+}
+@media (min-width: 48rem) {
+  :root {
+    --site-header-h: 4rem;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -87,6 +98,8 @@
    the sticky rail and keep the overflow guard, which is the right trade. */
 html {
   -webkit-text-size-adjust: 100%;
+  /* In-page jumps (#hash, scrollIntoView) land below the sticky header. */
+  scroll-padding-top: var(--site-header-h);
   width: 100%;
   overflow-x: hidden;
   overflow-x: clip;
@@ -770,10 +783,23 @@ a:focus-visible {
    live-traffic line. No rule under it — the page's own rhythm separates the
    chrome from the list. */
 
+/* Sticky: the bar stays pinned to the top of the viewport on every route.
+   It is a direct child of <main> on every page (never nested inside a
+   masthead), so it holds for the whole scroll rather than its parent's box.
+   The paper background bleeds past .wrap's side padding via the spread
+   shadow, clipped to the bar's own height, so rows scrolling underneath
+   never show through at the edges. */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   width: 100%;
   margin-bottom: 0.6rem;
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  background: var(--paper);
+  box-shadow: 0 0 0 100vmax var(--paper);
+  clip-path: inset(0 -100vmax);
 }
 
 /* Wide enough that nav and the traffic line share one row: the bar keeps
@@ -2380,7 +2406,7 @@ button:focus-visible {
      then holds, so it never covers the footer or outruns its own column. */
   .od-rail {
     position: sticky;
-    top: 1.25rem;
+    top: calc(var(--site-header-h) + 1.25rem);
     align-self: start;
   }
 }
