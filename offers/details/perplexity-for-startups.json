@@ -1,9 +1,11 @@
 {
-  "summary": "Previously recorded Perplexity startup terms: $5,000 in API credits plus 3 months of Enterprise Pro for up to 50 seats; raised up to $20M in equity funding, less than 5 years old, associated with an approved Startup Partner, and not an existing Enterprise Pro customer. As of 2026-10-13, the recorded startup URL redirects to the generic /hub page. Current enrollment and these grant terms need provider/partner confirmation. Historical six-month launch copy is not current verification; the three-month figure came from the 2026-09-27 official-page snapshot.",
+  "summary": "Previously recorded Perplexity startup terms: $5,000 in API credits plus Enterprise Pro for up to 50 seats; raised up to $20M in equity funding, less than 5 years old, associated with an approved Startup Partner, and not an existing Enterprise Pro customer. The recorded startup URL still redirects to the generic /hub page (rechecked 2026-10-22). Perplexity's Typeform application (titled 'Startups (2025)') remains public; its metadata says 6 months of Enterprise Pro and $5,000 in Sonar API credits, while the 2026-09-27 official-page snapshot said 3 months. Whether applications are still reviewed and which term applies needs provider confirmation.",
   "claim_steps": [
-    "The recorded https://www.perplexity.ai/startups/ enrollment URL redirects to /hub as of 2026-10-13; it is not a confirmed current application path.",
-    "Ask an approved Startup Partner or Perplexity support for the current enrollment URL and written grant terms before relying on the listed benefits.",
-    "Confirm the previously recorded eligibility rules: ≤$20M equity funding, <5 years old, approved Startup Partner association, and no existing Enterprise Pro subscription."
+    "The recorded https://www.perplexity.ai/startups/ URL redirects to /hub (rechecked 2026-10-22); it is not a confirmed current program page.",
+    "Perplexity's Typeform at https://perplexity.typeform.com/startups-apply remains public. It asks for a company email, your Perplexity API Group ID, website, headcount, equity funding raised and your Startup Partner.",
+    "Before applying, confirm the previously recorded eligibility: ≤$20M equity funding (grants excluded), <5 years old, approved Startup Partner association, and no existing Enterprise Pro subscription.",
+    "The form metadata says 6 months of Enterprise Pro; the 2026-09-27 official page said 3 months. Ask startups@perplexity.ai or your partner for written current terms before relying on either.",
+    "YC alumni are routed to Bookface deals instead of this form."
   ],
   "social_proof": [
     {
@@ -17,6 +19,12 @@
       "url": "https://www.linkedin.com/posts/perplexity-ai_introducing-perplexity-for-startups-were-activity-7315441228643254272-KqYx",
       "title": "Historical launch announcement — Perplexity on LinkedIn",
       "text": "Eligible startups can apply to receive $5000 in Perplexity API credits ... if they have raised <$20M in equity funding, are less than 5 years old, and are associated with one of our Startup Partners."
+    },
+    {
+      "type": "link",
+      "url": "https://perplexity.typeform.com/startups-apply",
+      "title": "Perplexity for Startups Typeform application — still public 2026-10-22 (form titled 'Startups (2025)')",
+      "text": "Apply to the Perplexity for Startups program here. Eligible startups get 6 months of free Perplexity Enterprise Pro (up to 50 seats) and $5,000 in Sonar API credits."
     }
   ]
 }

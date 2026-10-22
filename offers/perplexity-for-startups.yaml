@@ -7,10 +7,15 @@
 # months was superseded by the official page's 3 months in that snapshot.)
 # 2026-10-13: recorded enrollment URL redirects to /hub; current enrollment
 # and grant terms need provider/partner confirmation. No end date inferred.
+# 2026-10-22: /startups/ still redirects to /hub. Perplexity's Typeform
+# https://perplexity.typeform.com/startups-apply ("Startups (2025)") is public
+# (is_public true); its metadata says "6 months of free Perplexity Enterprise
+# Pro (up to 50 seats) and $5,000 in Sonar API credits" — conflicts with the
+# 3-month snapshot. Review status kept; verified_date not refreshed.
 title: Perplexity for Startups
 provider: Perplexity
 category: startup_program
-amount: $5,000 in API credits + 3 months of Enterprise Pro for up to 50 seats
+amount: $5,000 in Sonar API credits + 3 or 6 months of Enterprise Pro for up to 50 seats (official sources conflict; confirm before applying)
 expiry_date: null
 source_url: https://www.perplexity.ai/startups/
 verified_date: 2026-09-27
