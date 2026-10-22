@@ -23,8 +23,8 @@ export default function AboutPage({
       <IconSprite />
       <div className="wrap">
         <main>
+          <SiteHeader current="about" />
           <header className="masthead masthead-home">
-            <SiteHeader current="about" />
             <Breadcrumbs page="about" baseUrl={baseUrl} />
             <p className="kicker">free ai credits &middot; about</p>
             <h1>About Free AI Credits</h1>
