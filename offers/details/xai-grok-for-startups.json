@@ -1,0 +1,23 @@
+{
+  "summary": "xAI's Grok for Startups program grants venture-backed startups one credit balance usable across Grok, Grok Build, Grok Bot and the Grok API, sized to about six months of realistic usage. 20% of the grant is released on approval and the remaining 80% after onboarding; credits expire six months after being applied. One grant per company.",
+  "claim_steps": [
+    "Apply at https://x.ai/startups/apply using a work email that matches your company website (personal emails are rejected).",
+    "Provide your LinkedIn profile, company website, funding details, revenue, current AI spend, team size and investors.",
+    "Eligibility: venture backing and a live product; if you don't qualify yet you can reapply once you've raised.",
+    "20% of credits are applied on approval; the other 80% is released automatically after the initial onboarding steps."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://x.ai/startups",
+      "title": "Grok for Startups | SpaceXSI",
+      "text": "Credits and support across Grok, Grok Build, Grok Bot, and the Grok API, all in one place. ... We aim to offer six to twelve months of real usage. ... You get 20% when you're approved. The other 80% is released automatically once you're up and running. ... We check every application for venture backing, a live product, and a company email that matches your website."
+    },
+    {
+      "type": "link",
+      "url": "https://x.ai/legal/startup-program-terms",
+      "title": "Grok for Startups Program Terms | SpaceXSI",
+      "text": "Last updated: October 7, 2026. ... Unless your Approval Communication states otherwise, Credits expire six (6) months after the date they are applied to your Team Account (the “Expiration Date”)."
+    }
+  ]
+}
