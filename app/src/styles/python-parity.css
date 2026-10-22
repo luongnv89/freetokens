@@ -764,6 +764,8 @@ a:focus-visible {
 /* Archive page: warm tinted background to signal expired status. */
 [data-page="archive"] {
   background: var(--archive-bg-soft);
+  /* The sticky header paints the page's ground, not plain paper. */
+  --header-bg: var(--archive-bg-soft);
 }
 
 /* Archive rows get a slightly muted paper background. */
@@ -797,8 +799,8 @@ a:focus-visible {
   margin-bottom: 0.6rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  background: var(--paper);
-  box-shadow: 0 0 0 100vmax var(--paper);
+  background: var(--header-bg, var(--paper));
+  box-shadow: 0 0 0 100vmax var(--header-bg, var(--paper));
   clip-path: inset(0 -100vmax);
 }
 
