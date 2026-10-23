@@ -3,12 +3,14 @@
 # you prototype and scale" / "Unlock credits and options for higher rate
 # limits" / eligibility: registered company, founded within last 5 years,
 # venture backed >$500k, pre-Series D)
+# Source URL repaired 2026-10-23: /startups now redirects to /solutions/for-startups (general marketing,
+# no program terms); the same program FAQ/eligibility text is at https://fireworks.ai/solutions/startups.
 title: Fireworks for Startups — Build Credits
 provider: Fireworks AI
 category: startup_program
 amount: Build credits for inference, fine-tuning and on-demand GPUs (amount unpublished; credits expire 1 year after grant) + higher rate-limit options
 expiry_date: null
-source_url: https://fireworks.ai/startups
+source_url: https://fireworks.ai/solutions/startups
 verified_date: 2026-09-30
 verification: social_proof
 review_status: under-review

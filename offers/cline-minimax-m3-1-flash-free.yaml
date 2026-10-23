@@ -4,6 +4,9 @@
 # Live feed https://api.cline.bot/api/v1/ai/cline/recommended-models lists cline-free/minimax-m3.1-flash
 # under "free" (checked 2026-10-20). Terms from https://docs.cline.bot/getting-started/free-models.
 # No official end date stated.
+# To be verified 2026-10-23: cline-free/minimax-m3.1-flash is no longer in the recommended-models "free"
+# list, and the OpenRouter and OpenCode free launch periods for this model ended 2026-10-22. Cline has
+# published no end date; confirm in the Cline model selector before treating it as ended.
 title: MiniMax M3.1 Flash Free in Cline
 provider: Cline
 category: coding
@@ -12,5 +15,5 @@ expiry_date: null
 source_url: https://x.com/cline/status/2112220504258224605
 verified_date: 2026-10-20
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: required

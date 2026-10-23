@@ -1,12 +1,19 @@
 {
-  "summary": "OpenCode lists MiniMax M3.1 Flash Free (minimax-m3.1-flash-free) with free input, output and cached reads for a limited time. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-20 was rejected with \"OpenCode's free tier can only be used from within OpenCode.\" No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny, whose separate one-week OpenCode promotion ended September 30.",
+  "summary": "OpenCode lists MiniMax M3.1 Flash Free (minimax-m3.1-flash-free) with free input, output and cached reads for a limited time. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-20 was rejected with \"OpenCode's free tier can only be used from within OpenCode.\" No in-app request was tested, and whether the app needs an account is unconfirmed. The promotion ended on October 22, 2026: OpenCode merged a change that day ending the MiniMax M3.1 Flash Free promo and listing the paid MiniMax M3.1 Flash instead, and on October 23 the API answered the free model ID with HTTP 410 ModelDeprecated, pointing to deepseek-v4.1-flash-free. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny, whose separate one-week OpenCode promotion ended September 30.",
   "claim_steps": [
+    "Ended October 22, 2026: minimax-m3.1-flash-free is deprecated (HTTP 410). The steps below describe how it was claimed during the promotion.",
     "Install the OpenCode app from https://opencode.ai.",
     "Run /models and select MiniMax M3.1 Flash Free (opencode/minimax-m3.1-flash-free).",
     "Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-20).",
     "Whether the in-app free tier needs an OpenCode account or billing details was not tested. The free period is limited-time."
   ],
   "social_proof": [
+    {
+      "type": "link",
+      "url": "https://github.com/anomalyco/opencode/pull/58102",
+      "title": "docs(go): replace MiniMax M3.1 Flash Free with paid MiniMax M3.1 Flash",
+      "text": "Ends the MiniMax M3.1 Flash Free promo: Go now lists the paid MiniMax M3.1 Flash ($0.15 / $0.60 / $0.015 per 1M, $20 Go / $80 Go Plus), the free model is removed from the Free and Go docs, and the Go page drops the free-promo banner and \"New\" badge. (Merged 2026-10-22.)"
+    },
     {
       "type": "link",
       "url": "https://opencode.ai/v2/docs/console/models/",

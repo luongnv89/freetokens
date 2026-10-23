@@ -1,6 +1,7 @@
 {
-  "summary": "MiniMax's new M3.1 Flash (released October 19, 2026) has a free OpenRouter variant, minimax/minimax-m3.1-flash:free, priced at $0 for input and output with a 1M-token context and up to 524K output tokens. It accepts text, image and video input and supports tool calling. Free endpoints are rate limited under OpenRouter's standard free-model limits. MiniMax is the only provider; OpenRouter's listing says it does not train on your data but does retain prompts. No end date is stated, so free availability can end without notice. The paid minimax/minimax-m3.1-flash is listed separately.",
+  "summary": "MiniMax's new M3.1 Flash (released October 19, 2026) has a free OpenRouter variant, minimax/minimax-m3.1-flash:free, priced at $0 for input and output with a 1M-token context and up to 524K output tokens. It accepts text, image and video input and supports tool calling. Free endpoints are rate limited under OpenRouter's standard free-model limits. MiniMax is the only provider; OpenRouter's listing says it does not train on your data but does retain prompts. This free launch period has ended: OpenRouter announced it would end on October 22, 2026 at 12:00 UTC (72 hours after launch), and on October 23 the :free variant was gone from the model catalog with no endpoints. MiniMax M3.1 Flash is now served only at list price ($0.15/M input, $0.60/M output) as minimax/minimax-m3.1-flash.",
   "claim_steps": [
+    "Ended October 22, 2026 at 12:00 UTC: the :free variant is retired. The steps below describe how it was claimed during the launch period.",
     "Create or sign in to an OpenRouter account and create an API key.",
     "Call the OpenRouter chat-completions API with model minimax/minimax-m3.1-flash:free (keep the :free suffix; the version without it is paid).",
     "Expect OpenRouter's standard free-model rate limits, and note the MiniMax endpoint retains prompts (no training)."
@@ -17,6 +18,12 @@
       "url": "https://openrouter.ai/api/v1/models/minimax/minimax-m3.1-flash:free/endpoints",
       "title": "OpenRouter endpoints: minimax/minimax-m3.1-flash:free",
       "text": "One endpoint, provider Minimax, prompt 0 / completion 0, context 1,000,000, max completion 524,288, status 0. Data policy: training false, retainsPrompts true."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/minimax/minimax-m3.1-flash:free",
+      "title": "OpenRouter end-of-free-period notice",
+      "text": "Checked 2026-10-22: \"Free launch period ends Thursday, Oct 22, 2026 at 12:00 UTC (72h after launch). After that, minimax/minimax-m3.1-flash is served at MiniMax list price ($0.15/M input, $0.60/M output, $0.015/M cached input) and the :free variant is retired.\" Checked 2026-10-23: \"The free launch period ended Oct 22, 2026.\""
     },
     {
       "type": "link",

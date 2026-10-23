@@ -4,14 +4,18 @@
 # Pricing table: "MiniMax M3.1 Flash Free | Free | Free | Free | -"; model id minimax-m3.1-flash-free,
 # also present in https://opencode.ai/inference/v1/models.)
 # A keyless API call on 2026-10-20 05:39 UTC returned HTTP 403 FreeTierError "OpenCode's free tier
-# can only be used from within OpenCode." No official end date stated.
+# can only be used from within OpenCode."
+# Ended 2026-10-22: official merged PR https://github.com/anomalyco/opencode/pull/58102 (merged
+# 2026-10-22 14:57 UTC) "Ends the MiniMax M3.1 Flash Free promo" and replaces it with the paid MiniMax
+# M3.1 Flash. Rechecked 2026-10-23: the model is gone from the docs pricing table and /inference/v1/models,
+# and a keyless call returns HTTP 410 ModelDeprecated ("Use deepseek-v4.1-flash-free instead").
 title: MiniMax M3.1 Flash Free on OpenCode
 provider: OpenCode
 category: coding
 amount: Free MiniMax M3.1 Flash in the OpenCode app (free input, output and cached reads; limited time)
-expiry_date: null
+expiry_date: 2026-10-22
 source_url: https://opencode.ai/v2/docs/console/models/
-verified_date: 2026-10-20
+verified_date: 2026-10-23
 verification: social_proof
 review_status: under-review
 signup: none
