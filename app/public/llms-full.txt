@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-21T08:47:34Z — 119 of 228 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-23T03:05:25Z — 118 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -77,36 +77,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/vercel-reflection-beam-free.html
 - Summary: Vercel's AI Gateway offers Reflection AI's Beam 1.0, formerly the stealth model stealth/cat-jam, free for a limited time during its launch period when Reflection AI serves the request. Beam is an open-weight (Apache 2.0) reasoning model for coding and agentic work, with 501B total and 23B active parameters, a 1M-token context, up to 131K output tokens, tool calling and structured outputs. Use reflection/beam-free, which stops serving when the offer ends, so it cannot turn into a bill. reflection/beam is also free when routed to Reflection, but switches to paid pricing when the offer ends, and other providers serving it bill at their own rates. Use is subject to Reflection's terms and privacy policy; Vercel's live endpoint data marks Reflection as neither zero-data-retention nor no-training, so avoid sensitive inputs. No end date is stated. Whether a payment method is needed to create an AI Gateway key was not tested.
 - Claim steps: Create a Vercel account and an AI Gateway API key. | Call model reflection/beam-free through the AI SDK, Chat Completions, Responses or Anthropic Messages API, or a coding agent connected to AI Gateway (npx vercel ai-gateway setup for Claude Code, Codex or Hermes). | Prefer reflection/beam-free: it stops serving when the free period ends instead of billing. If you use reflection/beam, pin provider reflection with only in the gateway provider options, and expect paid pricing after the launch period. | Reflection's terms and privacy policy apply; its endpoint is not marked zero-data-retention or no-training, so avoid sensitive code or data.
-### MiniMax M3.1 Flash Free (Vercel AI Gateway)
-- Provider: Vercel
-- Category: api_provider
-- Amount: MiniMax M3.1 Flash at $0 on AI Gateway when served by MiniMax, through October 22
-- Status: active — enrollment deadline: 2026-10-22
-- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://vercel.com/changelog/minimax-m3-1-flash-now-available-on-ai-gateway-for-free
-- Page: https://freetokens.custats.info/offers/vercel-minimax-m3-1-flash-free.html
-- Summary: Vercel's AI Gateway offers MiniMax M3.1 Flash (model minimax/minimax-m3.1-flash, 1M-token context) free until October 22, 2026. The free rate applies only when MiniMax itself serves the request, so pin MiniMax with order in the gateway provider options. After the offer ends, pinned requests bill at MiniMax's standard rate; there is no separate -free model ID that stops automatically. Whether a payment method is needed to create an AI Gateway key was not tested.
-- Claim steps: Create a Vercel account and an AI Gateway API key. | Call model minimax/minimax-m3.1-flash through the AI SDK, Chat Completions, Responses or Anthropic Messages API, or a coding agent connected to AI Gateway. | Set the gateway provider options order so MiniMax serves the request; other providers are not covered by the free rate. | Stop or budget usage after October 22: pinned requests then bill at MiniMax's standard rate.
-### MiniMax M3.1 Flash Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free minimax/minimax-m3.1-flash:free inference at $0 input and output (1M context; rate limited)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/minimax/minimax-m3.1-flash:free
-- Page: https://freetokens.custats.info/offers/openrouter-minimax-m3-1-flash-free.html
-- Summary: MiniMax's new M3.1 Flash (released October 19, 2026) has a free OpenRouter variant, minimax/minimax-m3.1-flash:free, priced at $0 for input and output with a 1M-token context and up to 524K output tokens. It accepts text, image and video input and supports tool calling. Free endpoints are rate limited under OpenRouter's standard free-model limits. MiniMax is the only provider; OpenRouter's listing says it does not train on your data but does retain prompts. No end date is stated, so free availability can end without notice. The paid minimax/minimax-m3.1-flash is listed separately.
-- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Call the OpenRouter chat-completions API with model minimax/minimax-m3.1-flash:free (keep the :free suffix; the version without it is paid). | Expect OpenRouter's standard free-model rate limits, and note the MiniMax endpoint retains prompts (no training).
-### MiniMax M3.1 Flash Free on OpenCode
-- Provider: OpenCode
-- Category: coding
-- Amount: Free MiniMax M3.1 Flash in the OpenCode app (free input, output and cached reads; limited time)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=none
-- Source: https://opencode.ai/v2/docs/console/models/
-- Page: https://freetokens.custats.info/offers/opencode-minimax-m3-1-flash-free.html
-- Summary: OpenCode lists MiniMax M3.1 Flash Free (minimax-m3.1-flash-free) with free input, output and cached reads for a limited time. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-20 was rejected with "OpenCode's free tier can only be used from within OpenCode." No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny, whose separate one-week OpenCode promotion ended September 30.
-- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select MiniMax M3.1 Flash Free (opencode/minimax-m3.1-flash-free). | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-20). | Whether the in-app free tier needs an OpenCode account or billing details was not tested. The free period is limited-time.
 ### DeepSeek V4.1 Flash Free on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -132,10 +102,10 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: coding
 - Amount: Free MiniMax M3.1 Flash in the Cline IDE extension and CLI, up to a limited free quota
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-20 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-10-20 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://x.com/cline/status/2112220504258224605
 - Page: https://freetokens.custats.info/offers/cline-minimax-m3-1-flash-free.html
-- Summary: Cline announced on October 19, 2026 that MiniMax M3.1 Flash is free in Cline, and its live recommendation feed lists cline-free/minimax-m3.1-flash under free models. Per Cline's docs, free model promotions rotate on a limited-time basis, need a Cline account, run up to a limited usage quota, and work only in the Cline IDE extension and CLI, not through the Cline API. Free model usage may be used to help improve model performance and quality. The quota size is not published. No end date is stated.
+- Summary: Cline announced on October 19, 2026 that MiniMax M3.1 Flash is free in Cline, and on October 20 its live recommendation feed listed cline-free/minimax-m3.1-flash under free models. On October 23 the model was no longer in that free list, and the OpenRouter and OpenCode free periods for the same model ended October 22; Cline has not announced an end, so check the model selector before relying on it. Per Cline's docs, free model promotions rotate on a limited-time basis, need a Cline account, run up to a limited usage quota, and work only in the Cline IDE extension and CLI, not through the Cline API. Free model usage may be used to help improve model performance and quality. The quota size is not published. No end date is stated.
 - Claim steps: Install the Cline CLI (npm i -g cline) or the desktop app (https://cline.bot/desktop), and sign in with a Cline account. | In the Cline (usage-billing) provider, pick MiniMax M3.1 Flash tagged FREE in the model selector. | Use it in the IDE extension or CLI only; free usage is not available through the Cline API and stops at the free quota. | Free usage may be used to help improve model performance and quality.
 ### OSS Scanner — Free AI Vulnerability Scanning for Open Source
 - Provider: Anthropic
@@ -428,13 +398,13 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### Notion for Startups — Up to 6 Months Business + AI
 - Provider: Notion
 - Category: startup_program
-- Amount: 1–6 months free Notion Business including Notion AI: 6 months eligible partner startups, 3 months eligible non-partner startups, 1 month SMBs/teams under 10; $12K is advertised nominal value, not credits
+- Amount: 1–6 months free Notion Business including monthly AI credits: 6 months eligible partner startups, 3 months eligible non-partner startups, 1 month SMBs/teams under 10; $12K is advertised nominal value, not credits
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://www.notion.com/help/notion-for-startups
 - Page: https://freetokens.custats.info/offers/notion-for-startups.html
-- Summary: Free subscription time, not cash or a $12,000 credit balance. Eligible partner-affiliated startups may get six months of Business including Notion AI; eligible non-partner startups three months. SMBs/service businesses, companies under ten employees or insufficiently verified applicants may receive one month. Requires new/non-paying Notion customer, fewer than 100 employees, company website, work-domain email, valid Notion domain and no prior Notion promotions. Three/six-month offers target scalable tech products/services. Six months requires partner code. One redemption; offers do not stack. No public campaign end date established; legal page was JS-only so separate issuance-expiry terms were not fully verified. No application or benefit delivery tested.
-- Claim steps: Confirm new/non-paying Notion status, fewer than 100 employees, and no previous Notion promotions. | Prepare a public company website, company-domain email and valid Notion workspace/domain. | If partner-affiliated, request the partner code; this is needed for consideration for the six-month offer. | Apply via https://www.notion.com/startups-apply and sign in; Notion determines eligibility and the 1/3/6-month benefit. | If approved, confirm the Business plan with Notion AI was applied; review billing and expiry before the free period ends.
+- Summary: Free subscription time, not cash or a $12,000 credit balance. Eligible partner-affiliated startups may get six months of Business including monthly AI credits; eligible non-partner startups three months. SMBs/service businesses, companies under ten employees or insufficiently verified applicants may receive one month. Requires new/non-paying Notion customer, fewer than 100 employees, company website, work-domain email, valid Notion domain and no prior Notion promotions. Three/six-month offers target scalable tech products/services. Six months requires partner code. One redemption; offers do not stack. No public campaign end date established; legal page was JS-only so separate issuance-expiry terms were not fully verified. No application or benefit delivery tested.
+- Claim steps: Confirm new/non-paying Notion status, fewer than 100 employees, and no previous Notion promotions. | Prepare a public company website, company-domain email and valid Notion workspace/domain. | If partner-affiliated, request the partner code; this is needed for consideration for the six-month offer. | Apply via https://www.notion.com/startups-apply and sign in; Notion determines eligibility and the 1/3/6-month benefit. | If approved, confirm the Business plan (with its monthly AI credits) was applied; review billing and expiry before the free period ends.
 ### Microsoft for Startups — Up to $150K / $200K Azure
 - Provider: Microsoft
 - Category: startup_program
@@ -463,7 +433,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-10-06 — review_status=to-be-verified · verification=social_proof · signup=none
 - Source: https://freebuff.com/plans
 - Page: https://freetokens.custats.info/offers/freebuff-free-coding-agent.html
-- Summary: Freebuff is an ad-supported coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Its current Free pricing lists 30 hours refilled daily, measured in MiMo Slow-equivalent hours: an hour on MiMo Slow uses one hour, while other models consume a multiplier. The Free plan estimates 30 hours of MiMo Slow, 15 hours of MiMo Fast, up to 10 hours of DeepSeek V4.1 Flash or 2 hours of Claude Haiku 5.5 per day when used on one model, with no card required. The allowance resets at local midnight and unused daily allowance does not roll over. These are full-access estimates: account and regional allowances vary, fair-use limits apply, and model prices and allowances may change. Sign in to confirm your account's allowance. The official README instead calls DeepSeek V4.1 Flash and GLM 5.3 Flash unmetered at full access, conflicting with metered pricing; unlimited access is not verified. The embedded X announcement is historical evidence, not an account-specific guarantee. Uncertainty rechecked 2026-10-14: the metered/unmetered conflict persists, authenticated account/region/model allowances were not tested, and current CLI copy does not establish account-free onboarding. Confirm these before relying on the advertised allowance or signup-free access. The current README separately states that the limited-access allowance is 5 hours a day, or 4 on a VPN/proxy, metered at the selected model's multiplier and spent before earned wallet hours. This does not resolve the full-access metered/unmetered discrepancy; confirm the in-product allowance for your account.
+- Summary: Freebuff is an ad-supported coding agent available as a CLI, desktop app, web app builder, cloud IDE, and chat. Its current Free pricing lists 30 hours refilled daily, measured in MiMo Slow-equivalent hours: an hour on MiMo Slow uses one hour, while other models consume a multiplier. The Free plan estimates 30 hours of MiMo Slow, 15 hours of MiMo Fast, up to 10 hours of DeepSeek V4.1 Flash or 1 hour of Claude Haiku 5.5 per day when used on one model, with no card required. The allowance resets at local midnight and unused daily allowance does not roll over. These are full-access estimates: account and regional allowances vary, fair-use limits apply, and model prices and allowances may change. Sign in to confirm your account's allowance. The official README instead calls DeepSeek V4.1 Flash and GLM 5.3 Flash unmetered at full access, conflicting with metered pricing; unlimited access is not verified. The embedded X announcement is historical evidence, not an account-specific guarantee. Uncertainty rechecked 2026-10-14: the metered/unmetered conflict persists, authenticated account/region/model allowances were not tested, and current CLI copy does not establish account-free onboarding. Confirm these before relying on the advertised allowance or signup-free access. The current README separately states that the limited-access allowance is 5 hours a day, or 4 on a VPN/proxy, metered at the selected model's multiplier and spent before earned wallet hours. This does not resolve the full-access metered/unmetered discrepancy; confirm the in-product allowance for your account.
 - Claim steps: Review the Free plan at https://freebuff.com/plans: 30 MiMo Slow-equivalent hours refilled daily, with other models consuming multipliers. Displayed hours assume full access; sign in to confirm your account's allowance. | Install the CLI (Node.js 18+): npm install -g freebuff | Open a project: cd your-project | Run freebuff and describe what you want. Confirm the applicable account allowance before use; the Free plan states no card required, but account-free CLI onboarding has not been reverified. | Or use another Freebuff product: Desktop (freebuff.com/desktop), Web (freebuff.com/web), Cloud (freebuff.com/cloud), or Chat (freebuff.com/chat). | Use the daily allowance on one model or a mix; it resets at local midnight and does not roll over. Regional and fair-use limits may reduce access; the README/pricing conflict needs confirmation.
 ### Datadog for Startups — Up to $100K Credits
 - Provider: Datadog
@@ -1195,6 +1165,26 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/meshy-free-plan.html
 - Summary: Meshy's Free web-app plan grants 100 credits every month for its 3D-generation tools (text-to-3D, image-to-3D, AI texturing), resetting at 00:00 UTC on the first of each month. Free includes one concurrent task, low queue priority, and ten Meshy 6 Lite model downloads per month; API access is not included. No credit card required; free-plan outputs are licensed under CC BY 4.0 (commercial use allowed with attribution).
 - Claim steps: Sign up free at https://www.meshy.ai — no credit card required. | Receive 100 credits/month; credits reset at 00:00 UTC on the first day of each month. | Use the web app within the Free limits: one concurrent task, low queue priority, and ten Meshy 6 Lite model downloads/month. The Free plan does not include API access. | Free-plan outputs carry a CC BY 4.0 license (commercial use allowed with attribution).
+### Merge Gateway — $10 in Free LLM Credits Every Month
+- Provider: Merge
+- Category: api_provider
+- Amount: $10 in free LLM credits every month (Pro plan)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
+- Source: https://www.merge.dev/pricing/gateway
+- Page: https://freetokens.custats.info/offers/merge-gateway-10-monthly-credits.html
+- Summary: Merge Gateway routes supported LLMs through one API with routing, spend caps and security. Pro is pay-as-you-go at LLM cost plus a 5% fee and requires a credit card. An active Pro subscription receives $10 in complimentary credits on the 1st of each month; unused credits expire at month end with no rollover or cash value. Review spending controls before use: the $10 allowance is not a promise that the card-funded account automatically stops billing at $10.
+- Claim steps: Sign up at https://gateway.merge.dev/signup | Choose the Pro plan, which requires a credit card and charges LLM cost plus a 5% fee on a pay-as-you-go basis. | Maintain an active Pro subscription to receive $10 in complimentary credits on the 1st of each month; unused credits expire at month end, do not roll over and have no cash value. | Review and configure spending controls before making requests via gateway.merge.dev/v1. Do not assume the account automatically stops or prevents paid usage once the $10 allowance is consumed.
+### LLM7.io Free API Tier
+- Provider: LLM7.io
+- Category: api_provider
+- Amount: Free dashboard token for turbo text models with 60 requests/minute, 250 requests/hour, and 100,000 tokens/day
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
+- Source: https://docs.llm7.io/limits
+- Page: https://freetokens.custats.info/offers/llm7-free-tier.html
+- Summary: LLM7 documents a free dashboard token for current tier:turbo text-generation models with usage_based_only:false, not every catalog model or Pro/paid-only models. Limits are 1 request per second, 60 per minute, 250 per hour, and 100,000 input-plus-output tokens per 24 hours. Its current limits page no longer documents anonymous access. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.
+- Claim steps: Obtain a free token from the LLM7 dashboard at dash.llm7.io. | Check https://api.llm7.io/v1/models and select a current text-generation model with tier:turbo and usage_based_only:false. Send an OpenAI-compatible request using that model ID and your free dashboard token; Pro or usage_based_only:true models require paid accounting. | Check live availability and dashboard allowance. Stay within 1 request/second, 60/minute, 250/hour and 100,000 input-plus-output tokens/24 hours; quotas may be reduced without notice. | Turbo pricing metadata is for paid usage accounting, not proof the documented free allowance has ended. Image/video allowance and balance rules are separate.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
