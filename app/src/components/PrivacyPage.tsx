@@ -21,6 +21,10 @@ import {
  * #141 adds the "Your local data" section: names every personal-state
  * localStorage key, hosts client-side-only export/import/erase controls,
  * and documents that nothing stored locally is ever transmitted.
+ *
+ * #625 adds the optional applicant profile (`ft-profile`) behind the offer
+ * pages' agent apply prompt: typed by the visitor, kept in localStorage,
+ * never sent anywhere.
  */
 
 const EXPORT_FILENAME = "freetokens-personal-state.json";
@@ -72,7 +76,7 @@ function LocalDataControls() {
     const result = importPersonalState(text);
     setStatus(
       result.ok
-        ? "Backup restored: your saved offers, dismissed offers, filters, and claim progress were imported."
+        ? "Backup restored: your saved offers, dismissed offers, filters, claim progress, and any saved details were imported."
         : result.reason,
     );
   };
@@ -80,7 +84,7 @@ function LocalDataControls() {
   const onClearAll = () => {
     if (
       !window.confirm(
-        "Erase everything this site stores in this browser? Your saved offers, dismissed offers, filters, claim progress, and cookie choice will be removed. This cannot be undone.",
+        "Erase everything this site stores in this browser? Your saved offers, dismissed offers, filters, claim progress, saved details, and cookie choice will be removed. This cannot be undone.",
       )
     ) {
       return;
@@ -146,8 +150,10 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
               <h2 id="privacy-summary">In short</h2>
               <ul>
                 <li>
-                  No accounts, no forms, no logins &mdash; we have nowhere to
-                  store personal details.
+                  No accounts, no logins, and no server &mdash; we have nowhere
+                  to store personal details. The one form, the optional
+                  &ldquo;your details&rdquo; box on offer pages, saves only to
+                  your own browser.
                 </li>
                 <li>
                   If visit-counting is switched on, it runs through Google
@@ -176,8 +182,9 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
                 <li>
                   Everything this site saves on your device lives in your
                   browser&apos;s local storage &mdash; your cookie choice, saved
-                  offers, dismissed offers, filters, and claim checklists. It
-                  never leaves your browser, and you can export or erase it in{" "}
+                  offers, dismissed offers, filters, claim checklists, and any
+                  details you type for the agent apply prompt. It never leaves
+                  your browser, and you can export or erase it in{" "}
                   <a href="#privacy-local-data">Your local data</a> below.
                 </li>
                 <li>
@@ -194,8 +201,19 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
                 from GitHub Pages. There are no user accounts, no comment forms,
                 no newsletter sign-ups, and no server-side database. Nothing
                 about you is written down on our side &mdash; we couldn&apos;t
-                store your name or email address even by accident, because v1.0
-                has no form that could submit them.
+                store your name or email address even by accident, because no
+                form on this site submits anything to a server.
+              </p>
+              <p>
+                Offer pages have an optional &ldquo;your details&rdquo; box
+                (name, email, GitHub username, country, school or company, role,
+                website, notes) that fills in a prompt you can copy for an AI
+                agent. What you type there is saved only in your browser&apos;s
+                local storage, under <code>ft-profile</code>. It is never sent
+                to this site, to analytics, or to anyone else; it only reaches
+                an agent or a provider if you paste the prompt there yourself.
+                Please don&apos;t put passwords, API keys, or payment details in
+                it.
               </p>
             </section>
 
@@ -359,6 +377,11 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
                   <code>ft-claim-&lt;offer&gt;</code> &mdash; your step-by-step
                   checklist progress for one offer.
                 </li>
+                <li>
+                  <code>ft-profile</code> &mdash; the optional details you saved
+                  for the agent apply prompt on offer pages. Delete them from
+                  any offer page, or with the clear-all button below.
+                </li>
               </ul>
               <p>
                 None of this ever leaves your browser. It is never transmitted
@@ -366,7 +389,10 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
                 server that could receive it. Clearing your browser data removes
                 all of it automatically.
               </p>
-              <p>You can also take it with you or erase it right here:</p>
+              <p>
+                You can also take it with you or erase it right here. The
+                exported file includes your saved details, so keep it private:
+              </p>
               <LocalDataControls />
             </section>
 
@@ -421,7 +447,8 @@ export default function PrivacyPage({ baseUrl }: { baseUrl?: string }) {
                 </li>
                 <li>
                   We never collect your name, email, or any identifier tied to
-                  you personally.
+                  you personally &mdash; details you save for the apply prompt
+                  stay in your browser.
                 </li>
                 <li>We never collect the text you type into search.</li>
               </ul>
