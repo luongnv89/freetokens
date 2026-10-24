@@ -1,29 +1,12 @@
 import { useState } from "react";
-
-function copyLegacy(text: string): boolean {
-  if (typeof document === "undefined") return false;
-  let ok = false;
-  const box = document.createElement("textarea");
-  box.value = text;
-  box.setAttribute("readonly", "");
-  box.style.position = "fixed";
-  box.style.left = "-9999px";
-  document.body.appendChild(box);
-  box.select();
-  try {
-    ok = document.execCommand("copy");
-  } catch {
-    ok = false;
-  }
-  document.body.removeChild(box);
-  return ok;
-}
+import { copyText } from "../lib/clipboard";
 
 /**
  * Copy-only share control (build.py `_SHARE_JS` clipboard path).
  * Modern `navigator.clipboard.writeText` with a textarea+execCommand
- * fallback. Visible confirmation via a polite live region. No social
- * share links and no `offer_share` analytics (#128).
+ * fallback (shared `copyText`, lib/clipboard.ts). Visible confirmation via
+ * a polite live region. No social share links and no `offer_share`
+ * analytics (#128).
  */
 export function CopyLinkButton({ url }: { url: string }) {
   const [status, setStatus] = useState("");
@@ -35,18 +18,7 @@ export function CopyLinkButton({ url }: { url: string }) {
   }
 
   function onCopy() {
-    const hasClipboard =
-      typeof navigator !== "undefined" &&
-      navigator.clipboard &&
-      typeof navigator.clipboard.writeText === "function";
-    if (hasClipboard) {
-      navigator.clipboard.writeText(url).then(
-        () => confirm(true),
-        () => confirm(copyLegacy(url)),
-      );
-      return;
-    }
-    confirm(copyLegacy(url));
+    void copyText(url).then(confirm);
   }
 
   return (

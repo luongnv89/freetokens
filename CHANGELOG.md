@@ -5,6 +5,16 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Agent apply prompt on offer pages (#625):** each live offer page has an
+  "Apply with an AI agent" panel. It builds an editable prompt for that offer
+  (provider, amount and eligibility, official link, claim steps) that you can
+  copy into Claude Code, Codex or any browser-driving agent. The prompt always
+  tells the agent to work one step at a time, check each result, and ask
+  before any submit, sign-up, payment or sending of details. An optional
+  details box (name, email, GitHub, country, organization, role, website,
+  notes) fills the prompt in. It is saved only in this browser under
+  `ft-profile`, never sent to analytics or any server, included in the local
+  data export, and wiped by "clear all". Home rows link to the panel.
 - **Home shelves removed; list defaults to "Recently checked":** the
   "Most viewed today", "New this week" and "Always free" strips above the
   toolbar are gone. The list now opens newest `verified_date` first. The

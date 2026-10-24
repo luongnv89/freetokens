@@ -1266,6 +1266,28 @@ a:focus-visible {
   display: none;
 }
 
+/* Apply-prompt link (#625): same quiet weight as the filters beside it. */
+.r-apply {
+  color: var(--gray);
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.r-apply:hover,
+.r-apply:focus-visible {
+  color: var(--ink);
+  text-decoration-color: var(--green);
+}
+
+@media (pointer: coarse) {
+  .r-apply {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding-inline: 0.3rem;
+  }
+}
+
 .row-quiet button.badge:hover,
 .row-quiet button.badge:focus-visible,
 .row-quiet button.badge[aria-pressed="true"] {
@@ -3157,6 +3179,71 @@ figure.proof-screenshot {
   font-family: var(--font-mono);
   font-size: 0.74rem;
   color: var(--gray);
+}
+
+/* ---- Agent apply prompt (#625): reuses the copy bar's pills ---------- */
+
+.ap-note {
+  margin: 0.4rem 0 0.75rem;
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+
+.ap-profile {
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}
+
+.ap-profile > summary {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.ap-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0.6rem 0.9rem;
+  margin: 0 0 0.85rem;
+}
+
+.ap-fields label,
+.ap-label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.ap-wide {
+  grid-column: 1 / -1;
+}
+
+.ap-panel :is(input, textarea) {
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.55rem;
+}
+
+.ap-panel :is(input, textarea):focus-visible {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 16%, transparent);
+}
+
+.ap-panel .ap-text {
+  margin: 0.3rem 0 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  resize: vertical;
 }
 
 /* ---- Custats sibling-product banner (issue #257) -------------------- */

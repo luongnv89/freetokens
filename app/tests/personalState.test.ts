@@ -5,7 +5,10 @@ import {
   EXPORT_VERSION,
   GA_CONSENT_KEY,
   IMPORT_MAX_LENGTH,
+  MAX_PROFILE_FIELD_LENGTH,
+  MAX_PROFILE_NOTES_LENGTH,
   PREFS_KEY,
+  PROFILE_KEY,
   SAVED_KEY,
   SCHEMA_VERSION,
   claimSlugsInStorage,
@@ -13,17 +16,20 @@ import {
   clearAllPersonalState,
   clearClaimProgress,
   clearDismissedSlugs,
+  clearProfile,
   exportPersonalState,
   importPersonalState,
   readClaimProgress,
   readDismissedSlugs,
   readGaConsent,
   readPrefs,
+  readProfile,
   readSavedSlugs,
   writeClaimProgress,
   writeDismissedSlugs,
   writeGaConsent,
   writePrefs,
+  writeProfile,
   writeSavedSlugs,
 } from "../src/lib/personalState";
 
@@ -647,5 +653,143 @@ describe("privacy: personal state never leaves the browser", () => {
     // Values never leak into the URL either.
     expect(window.location.href).not.toContain("granted");
     expect(window.location.search).toBe("");
+  });
+});
+
+describe("applicant profile (issue #625)", () => {
+  const PROFILE = {
+    name: "Ada Lovelace",
+    email: "ada@example.com",
+    github: "ada",
+    country: "United Kingdom",
+    organization: "Analytical Engines Ltd",
+    role: "indie developer",
+    website: "https://ada.example",
+    notes: "Student until June.",
+  };
+
+  it("round-trips through the versioned ft-profile envelope and survives a re-read", () => {
+    expect(writeProfile(PROFILE)).toBe(true);
+    const raw: unknown = JSON.parse(
+      window.localStorage.getItem(PROFILE_KEY) as string,
+    );
+    expect(raw).toEqual({ v: SCHEMA_VERSION, ...PROFILE });
+    expect(readProfile()).toEqual(PROFILE);
+  });
+
+  it("edits overwrite the stored profile and missing fields store as blank", () => {
+    writeProfile(PROFILE);
+    writeProfile({ name: "  Grace Hopper  ", email: "grace@example.com" });
+    expect(readProfile()).toEqual({
+      name: "Grace Hopper",
+      email: "grace@example.com",
+      github: "",
+      country: "",
+      organization: "",
+      role: "",
+      website: "",
+      notes: "",
+    });
+  });
+
+  it("caps every field and drops unknown keys", () => {
+    writeProfile({
+      ...PROFILE,
+      name: "x".repeat(MAX_PROFILE_FIELD_LENGTH + 50),
+      notes: "y".repeat(MAX_PROFILE_NOTES_LENGTH + 50),
+      // @ts-expect-error unknown keys are ignored at runtime
+      password: "hunter2",
+    });
+    const profile = readProfile();
+    expect(profile?.name).toHaveLength(MAX_PROFILE_FIELD_LENGTH);
+    expect(profile?.notes).toHaveLength(MAX_PROFILE_NOTES_LENGTH);
+    expect(window.localStorage.getItem(PROFILE_KEY)).not.toContain("hunter2");
+  });
+
+  it("delete removes the key; an all-blank save removes it too", () => {
+    writeProfile(PROFILE);
+    clearProfile();
+    expect(window.localStorage.getItem(PROFILE_KEY)).toBeNull();
+    expect(readProfile()).toBeNull();
+
+    writeProfile(PROFILE);
+    expect(writeProfile({ name: "   " })).toBe(true);
+    expect(window.localStorage.getItem(PROFILE_KEY)).toBeNull();
+  });
+
+  it("hostile data and storage degrade to null without throwing", () => {
+    for (const bad of [
+      "{not json",
+      "[]",
+      "null",
+      JSON.stringify({ v: 99, name: "Ada" }),
+      JSON.stringify({ v: SCHEMA_VERSION, name: 42 }),
+    ]) {
+      window.localStorage.setItem(PROFILE_KEY, bad);
+      expect(readProfile()).toBeNull();
+    }
+    installStorage(makeLocalStorage({ throwOnAccess: true }).impl);
+    expect(readProfile()).toBeNull();
+    expect(writeProfile(PROFILE)).toBe(false);
+    expect(() => clearProfile()).not.toThrow();
+  });
+
+  it("clearAllPersonalState wipes ft-profile", () => {
+    writeProfile(PROFILE);
+    clearAllPersonalState([]);
+    expect(window.localStorage.getItem(PROFILE_KEY)).toBeNull();
+  });
+
+  it("export carries the profile and import restores it", () => {
+    writeProfile(PROFILE);
+    const data = exportPersonalState();
+    expect(data.profile).toEqual({ v: SCHEMA_VERSION, ...PROFILE });
+    clearAllPersonalState([]);
+    expect(importPersonalState(JSON.stringify(data)).ok).toBe(true);
+    expect(readProfile()).toEqual(PROFILE);
+  });
+
+  it("export without a profile says null; pre-#625 imports keep the saved profile", () => {
+    expect(exportPersonalState().profile).toBeNull();
+    writeProfile(PROFILE);
+    const legacy = { format: EXPORT_FORMAT, version: EXPORT_VERSION };
+    expect(importPersonalState(JSON.stringify(legacy)).ok).toBe(true);
+    expect(readProfile()).toEqual(PROFILE);
+  });
+
+  it("rejects a malformed profile before writing anything", () => {
+    for (const profile of [[], "Ada", { name: 7 }]) {
+      const result = importPersonalState(
+        JSON.stringify({
+          format: EXPORT_FORMAT,
+          version: EXPORT_VERSION,
+          saved: ["alpha"],
+          profile,
+        }),
+      );
+      expect(result.ok).toBe(false);
+    }
+    expect(readSavedSlugs()).toEqual([]);
+    expect(readProfile()).toBeNull();
+  });
+
+  it("never touches the network or the URL", () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(() => {
+      throw new Error("network use forbidden");
+    });
+    const beacon = vi.fn(() => {
+      throw new Error("beacon use forbidden");
+    });
+    Object.defineProperty(navigator, "sendBeacon", {
+      value: beacon,
+      configurable: true,
+    });
+    writeProfile(PROFILE);
+    readProfile();
+    exportPersonalState();
+    clearProfile();
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(beacon).not.toHaveBeenCalled();
+    expect(window.location.href).not.toContain("ada");
   });
 });

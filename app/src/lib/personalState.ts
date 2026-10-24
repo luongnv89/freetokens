@@ -346,6 +346,117 @@ export function writePrefs(prefs: PrefsInput): boolean {
   return safeWrite(PREFS_KEY, JSON.stringify(record));
 }
 
+// ---------------------------------------------------------------------------
+// Applicant profile for the per-offer agent apply prompt (issue #625).
+// A fixed set of short text fields the visitor types themselves, used only
+// to fill in the copyable prompt on offer pages. Same envelope rules as
+// everything above; purely local — never in URLs, analytics events, or any
+// network request (asserted by tests).
+// ---------------------------------------------------------------------------
+
+export const PROFILE_KEY = "ft-profile";
+
+/** Every field the profile form offers, in display order. */
+export const PROFILE_FIELDS = [
+  "name",
+  "email",
+  "github",
+  "country",
+  "organization",
+  "role",
+  "website",
+  "notes",
+] as const;
+
+export type ProfileField = (typeof PROFILE_FIELDS)[number];
+
+/** The visitor's applicant details; an empty string means "not given". */
+export type Profile = Record<ProfileField, string>;
+
+/** v1 profile envelope written by this layer. */
+export interface ProfileRecordV1 extends Profile {
+  v: typeof SCHEMA_VERSION;
+}
+
+export const MAX_PROFILE_FIELD_LENGTH = 200;
+export const MAX_PROFILE_NOTES_LENGTH = 1000;
+
+function profileFieldLimit(field: ProfileField): number {
+  return field === "notes"
+    ? MAX_PROFILE_NOTES_LENGTH
+    : MAX_PROFILE_FIELD_LENGTH;
+}
+
+/**
+ * Normalize untrusted profile input: known fields only, trimmed and
+ * length-capped. Returns null when any present field is not a string.
+ */
+function normalizeProfile(input: Record<string, unknown>): Profile | null {
+  const out = {} as Profile;
+  for (const field of PROFILE_FIELDS) {
+    const value = input[field];
+    if (value === undefined || value === null) {
+      out[field] = "";
+    } else if (typeof value === "string") {
+      out[field] = value.trim().slice(0, profileFieldLimit(field));
+    } else {
+      return null;
+    }
+  }
+  return out;
+}
+
+function isBlankProfile(profile: Profile): boolean {
+  return PROFILE_FIELDS.every((field) => profile[field] === "");
+}
+
+/**
+ * Read the visitor's saved applicant profile, or null when unset,
+ * unreadable, corrupted, an unknown schema, or every field is blank.
+ */
+export function readProfile(): Profile | null {
+  const raw = safeRead(PROFILE_KEY);
+  if (raw === null) return null;
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    if (
+      parsed === null ||
+      typeof parsed !== "object" ||
+      Array.isArray(parsed)
+    ) {
+      return null;
+    }
+    const env = parsed as Record<string, unknown>;
+    // Unknown future schema version: documented migration point.
+    if (env.v !== SCHEMA_VERSION) return null;
+    const profile = normalizeProfile(env);
+    return profile && !isBlankProfile(profile) ? profile : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Persist the applicant profile (trimmed, capped). An all-blank profile
+ * removes the key instead. Returns false when persistence was not possible
+ * (the details then live only in the page's memory).
+ */
+export function writeProfile(profile: Partial<Profile>): boolean {
+  const normalized = normalizeProfile(profile);
+  if (!normalized) return false;
+  if (isBlankProfile(normalized)) {
+    safeRemove(PROFILE_KEY);
+    return true;
+  }
+  const record: ProfileRecordV1 = { v: SCHEMA_VERSION, ...normalized };
+  return safeWrite(PROFILE_KEY, JSON.stringify(record));
+}
+
+/** Delete the applicant profile from this browser. */
+export function clearProfile(): void {
+  safeRemove(PROFILE_KEY);
+}
+
 /**
  * Wipe every personal-state key this layer owns. Never removes keys
  * it does not recognize.
@@ -355,6 +466,7 @@ export function clearAllPersonalState(slugs: Iterable<string>): void {
   safeRemove(SAVED_KEY);
   safeRemove(DISMISSED_KEY);
   safeRemove(PREFS_KEY);
+  safeRemove(PROFILE_KEY);
   for (const slug of slugs) {
     safeRemove(claimStorageKey(slug));
   }
@@ -393,6 +505,8 @@ export interface PersonalStateExport {
   dismissed: string[];
   prefs: PrefsRecordV1 | null;
   claims: Record<string, number[]>;
+  /** Applicant profile (#625); optional so pre-#625 exports stay valid. */
+  profile?: ProfileRecordV1 | null;
 }
 
 export type ImportResult =
@@ -452,7 +566,12 @@ export function exportPersonalState(
     dismissed: readDismissedSlugs(),
     prefs: readPrefs(),
     claims,
+    profile: profileRecord(readProfile()),
   };
+}
+
+function profileRecord(profile: Profile | null): ProfileRecordV1 | null {
+  return profile ? { v: SCHEMA_VERSION, ...profile } : null;
 }
 
 function reject(reason: string): ImportResult {
@@ -469,6 +588,7 @@ function validateImport(parsed: unknown): {
   dismissed: string[];
   prefs: PrefsRecordV1 | null;
   claims: [string, number[]][];
+  profile: Profile | null;
 } | null {
   if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
     return null;
@@ -554,7 +674,18 @@ function validateImport(parsed: unknown): {
     }
   }
 
-  return { consent, saved, dismissed, prefs, claims };
+  // Profile (#625): absent/null → left untouched; present → known string
+  // fields only, trimmed and capped like live writes.
+  let profile: Profile | null = null;
+  if (doc.profile !== undefined && doc.profile !== null) {
+    if (typeof doc.profile !== "object" || Array.isArray(doc.profile)) {
+      return null;
+    }
+    profile = normalizeProfile(doc.profile as Record<string, unknown>);
+    if (profile === null) return null;
+  }
+
+  return { consent, saved, dismissed, prefs, claims, profile };
 }
 
 /**
@@ -594,10 +725,11 @@ export function importPersonalState(raw: string | unknown): ImportResult {
     );
   }
 
-  const { consent, saved, dismissed, prefs, claims } = validated;
+  const { consent, saved, dismissed, prefs, claims, profile } = validated;
   let refused = false;
   if (consent !== null && !writeGaConsent(consent)) refused = true;
   if (prefs !== null && !writePrefs(prefs)) refused = true;
+  if (profile !== null && !writeProfile(profile)) refused = true;
   if (!writeSavedSlugs(saved)) refused = true;
   if (!writeDismissedSlugs(dismissed)) refused = true;
   for (const [slug, done] of claims) {
