@@ -155,6 +155,31 @@ describe("ApplyPrompt (#625)", () => {
     expect(field("Full name").value).toBe("");
     expect(promptBox().value).toContain("[YOUR FULL NAME]");
     expect(screen.getByText(/deleted from this browser/)).toBeInTheDocument();
+    // Delete unmounts itself; focus lands on Save details, not <body>.
+    expect(screen.queryByRole("button", { name: "Delete details" })).toBeNull();
+    expect(document.activeElement).toBe(
+      screen.getByRole("button", { name: "Save details" }),
+    );
+  });
+
+  it("saving an all-blank form over a saved profile says it was deleted", async () => {
+    window.localStorage.setItem(
+      PROFILE_KEY,
+      JSON.stringify({ v: SCHEMA_VERSION, name: "Ada Lovelace" }),
+    );
+    renderPanel();
+    await waitFor(() => expect(field("Full name").value).toBe("Ada Lovelace"));
+    fireEvent.change(field("Full name"), { target: { value: "" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save details" }));
+    expect(window.localStorage.getItem(PROFILE_KEY)).toBeNull();
+    expect(screen.getByText(/deleted from this browser/)).toBeInTheDocument();
+    expect(screen.queryByText(/Nothing to save/)).toBeNull();
+  });
+
+  it("saving an all-blank form with nothing saved says nothing to save", () => {
+    renderPanel();
+    fireEvent.click(screen.getByRole("button", { name: "Save details" }));
+    expect(screen.getByText(/Nothing to save/)).toBeInTheDocument();
   });
 
   it("copies exactly the edited prompt text, and Undo restores the generated one", async () => {
@@ -172,6 +197,9 @@ describe("ApplyPrompt (#625)", () => {
     expect(promptBox().value).toBe(edited);
 
     fireEvent.click(screen.getByRole("button", { name: "Undo my edits" }));
+    // Undo unmounts itself; focus moves to the prompt box, not <body>.
+    expect(screen.queryByRole("button", { name: "Undo my edits" })).toBeNull();
+    expect(document.activeElement).toBe(promptBox());
     expect(promptBox().value).toContain("- Full name: Ada");
     expect(promptBox().value).not.toContain("Also mention I am a student.");
   });

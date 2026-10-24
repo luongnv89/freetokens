@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PROFILE_LABELS, buildApplyPrompt } from "../lib/applyPrompt";
 import { copyText } from "../lib/clipboard";
 import type { OfferDetail } from "../lib/offerDetails";
@@ -60,6 +60,10 @@ export function ApplyPrompt({
   const [edited, setEdited] = useState<string | null>(null);
   const [profileStatus, setProfileStatus] = useState("");
   const [copyStatus, setCopyStatus] = useState("");
+  // Delete and Undo unmount their own buttons; these refs give focus a
+  // stable landing spot so keyboard users are not dropped to <body>.
+  const saveRef = useRef<HTMLButtonElement>(null);
+  const promptRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     const saved = readProfile();
@@ -79,7 +83,9 @@ export function ApplyPrompt({
       setProfile(next);
       setProfileStatus(
         !next
-          ? "Nothing to save: every field is empty."
+          ? profile
+            ? "Your details were deleted from this browser."
+            : "Nothing to save: every field is empty."
           : edited !== null
             ? "Saved in this browser. Your edited prompt was kept; use Undo my edits to rebuild it with your details."
             : "Saved in this browser. The prompt below now uses your details.",
@@ -102,6 +108,12 @@ export function ApplyPrompt({
     setProfile(null);
     setDraft(EMPTY_PROFILE);
     setProfileStatus("Your details were deleted from this browser.");
+    saveRef.current?.focus();
+  }
+
+  function onUndo() {
+    setEdited(null);
+    promptRef.current?.focus();
   }
 
   function onCopy() {
@@ -165,7 +177,12 @@ export function ApplyPrompt({
           ))}
         </div>
         <div className="share-actions">
-          <button type="button" className="share-copy" onClick={onSave}>
+          <button
+            ref={saveRef}
+            type="button"
+            className="share-copy"
+            onClick={onSave}
+          >
             Save details
           </button>
           {profile ? (
@@ -193,6 +210,7 @@ export function ApplyPrompt({
         Prompt (edit it before copying if you like)
       </label>
       <textarea
+        ref={promptRef}
         id="ft-apply-prompt-text"
         className="ap-text"
         rows={14}
@@ -205,11 +223,7 @@ export function ApplyPrompt({
           Copy prompt
         </button>
         {edited !== null ? (
-          <button
-            type="button"
-            className="share-copy"
-            onClick={() => setEdited(null)}
-          >
+          <button type="button" className="share-copy" onClick={onUndo}>
             Undo my edits
           </button>
         ) : null}
