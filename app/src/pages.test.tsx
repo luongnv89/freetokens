@@ -305,6 +305,8 @@ describe("ArchivePage (#26 parity)", () => {
     expect(markup).toContain("Skip the offer list");
     // OfferRow uses .r-details link instead of .detail-btn
     expect(markup).toContain('class="r-details"');
+    // Ended offers get no apply-prompt link (#625).
+    expect(markup).not.toContain("#apply-prompt");
   });
 
   it("archive tags are interactive buttons, not inert links", () => {
@@ -407,6 +409,26 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
     );
     expect(markup).toContain("This offer ended");
     expect(markup).not.toContain('class="od-cta"');
+  });
+
+  it("prerenders the agent apply prompt for live offers only (#625)", () => {
+    const live = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer()] }}
+        slug="example-offer"
+        details={{}}
+      />,
+    );
+    expect(live).toContain('id="apply-prompt"');
+    expect(live).toContain("[YOUR FULL NAME]");
+    const ended = renderToStaticMarkup(
+      <OfferDetailPage
+        index={{ ...index, offers: [offer({ status: "expired" as const })] }}
+        slug="example-offer"
+        details={{}}
+      />,
+    );
+    expect(ended).not.toContain('id="apply-prompt"');
   });
 
   it("detail tags are links to a pre-filtered home, never inert buttons", () => {
@@ -843,9 +865,14 @@ describe("PrivacyPage (#132 shipped-analytics claims)", () => {
       "<code>ft-dismissed</code>",
       "<code>ft-prefs</code>",
       "<code>ft-claim-&lt;offer&gt;</code>",
+      "<code>ft-profile</code>",
     ]) {
       expect(markup).toContain(key);
     }
+    // #625: the applicant profile has its own entry in the key list, and the
+    // policy says where it lives and that it is never sent anywhere.
+    expect(markup).toContain("<li><code>ft-profile</code>");
+    expect(markup).toContain("never sent to this site, to analytics");
     // The policy states nothing stored locally is ever transmitted.
     expect(markup).toContain("never leaves your browser");
     expect(markup).toContain("never transmitted");

@@ -268,6 +268,13 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
         `aria-label="View details for ${escapeHtml(offer.title)}"`,
       );
       expect(row).toContain('class="r-details"');
+      // #625: quiet link to the detail page's apply-prompt panel, carrying
+      // no data-ft-* hook so it can never fire offer_click.
+      expect(row).toMatch(
+        new RegExp(
+          `<a class="r-apply" href="offers/${offer.slug}\\.html#apply-prompt" aria-label="[^"]*">Apply prompt</a>`,
+        ),
+      );
     }
   });
 
