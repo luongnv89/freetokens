@@ -1,6 +1,8 @@
 # Verified 2026-09-04 against https://modal.com/pricing
 # ("Starter | $0 + compute / month — Get started with $30 / month free
 # credit"; feature table shows "Included compute: $30 / month" under Starter)
+# 2026-10-24 copy correction: the pricing FAQ now says "Included usage applies to compute:
+# Functions and Sandboxes"; Notebooks is no longer listed in scope or in the product menu.
 title: Modal Starter Plan — $30/month free compute credits
 provider: Modal
 category: api_provider

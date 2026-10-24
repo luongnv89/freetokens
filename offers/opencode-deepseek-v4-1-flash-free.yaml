@@ -8,6 +8,8 @@
 # called without it [the Authorization header]"; a keyless call on 2026-10-19 16:39 UTC returned
 # HTTP 403 FreeTierError "OpenCode's free tier can only be used from within OpenCode." Newer live
 # API response used. No official end date stated.
+# 2026-10-24: conflict resolved — the Inference API docs now say "Free-tier chat models are only
+# available from within OpenCode; other clients receive HTTP 403, even with an API key."
 title: DeepSeek V4.1 Flash Free on OpenCode
 provider: OpenCode
 category: coding
