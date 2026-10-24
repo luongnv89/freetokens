@@ -1,6 +1,9 @@
 # Checked 2026-10-04 against https://aerolink.lat/pricing
 # ("Try Aerolink with $5 in testing credits"; one-time for eligible new accounts,
 # after verification and abuse checks; valid 30 days; no recurring free plan.)
+# 2026-10-24: https://aerolink.lat/pricing (static HTML and rendered page) and /register no
+# longer mention the $5 testing credit; it was still shown on 2026-10-23. No end statement
+# found; claimability needs confirmation. No expiry date inferred.
 title: Aerolink $5 Testing Credit
 provider: Aerolink
 category: api_provider
