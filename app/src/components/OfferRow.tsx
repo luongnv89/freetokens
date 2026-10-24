@@ -202,6 +202,24 @@ export function OfferRow({
             pressed={pressed.signup === offer.signup}
             onToggle={onToggleTag}
           />
+          {/* Agent apply prompt (#625): a quiet link to the detail page's
+              panel, on this wrapping line because the rail's control row is
+              already full. No data-ft-* hooks, so it never fires offer_click.
+              Ended offers have nothing to apply for. */}
+          {offer.status !== "expired" ? (
+            <>
+              <span className="sep" aria-hidden="true">
+                &middot;
+              </span>
+              <a
+                className="r-apply"
+                href={`${detailHref}#apply-prompt`}
+                aria-label={`Agent apply prompt for ${offer.title}`}
+              >
+                Apply prompt
+              </a>
+            </>
+          ) : null}
         </p>
         <div className="row-rail">
           {offer.expiry_date ? (

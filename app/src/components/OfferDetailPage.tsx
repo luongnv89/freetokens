@@ -15,6 +15,7 @@ import {
   SignupBadge,
   VerificationBadge,
 } from "./Badge";
+import { ApplyPrompt } from "./ApplyPrompt";
 import { ClaimChecklist } from "./ClaimChecklist";
 import { CopyLinkButton } from "./CopyLinkButton";
 import { IconSprite } from "./OfferRow";
@@ -316,6 +317,15 @@ export default function OfferDetailPage({
                 rail has long since scrolled away and this is the button that
                 catches someone who just finished reading how to claim. */}
                 {offer.status !== "expired" ? <ClaimCta offer={offer} /> : null}
+                {/* Agent apply prompt (#625). Only for claimable offers — like
+                the CTA, an ended offer has nothing left to apply for. */}
+                {offer.status !== "expired" ? (
+                  <ApplyPrompt
+                    offer={offer}
+                    detail={detail}
+                    offerUrl={offerAbsoluteUrl(offer.slug, baseUrl)}
+                  />
+                ) : null}
                 <SocialProofList
                   proofs={detail?.social_proof}
                   relPrefix="../"
