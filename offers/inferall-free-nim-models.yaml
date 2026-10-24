@@ -6,10 +6,14 @@
 # 10 image-generate / 5 video-generate per day.)
 # 2026-10-07: current https://inferall.ai/pricing advertises 10+ free NIM models;
 # the 15+ model count quoted above is historical. Confirm exact live roster.
+# 2026-10-24: pricing FAQ now says "after those, open models stay free at 25 calls a day
+# (reset 00:00 UTC), and the $5 starter pack raises that to 50 chat calls a day"; the plan
+# cards still say ongoing NIM access comes "after a $5 activation". Known conflict on the same
+# official page; both disclosed. No change date inferred.
 title: InferAll Free — 25 NIM Trial + $0 OSS Models
 provider: InferAll
 category: api_provider
-amount: 25 free NVIDIA NIM calls on signup (no card); ongoing $0 in/out on 10+ NIM open models after one-time $5 activation, within daily caps
+amount: 25 free NVIDIA NIM calls on signup (no card); $0 in/out on 10+ NIM open models within daily caps — FAQ says 25 calls/day free after the trial, 50 chat/day after a one-time $5 activation (plan cards conflict)
 expiry_date: null
 source_url: https://inferall.ai/pricing
 verified_date: 2026-09-30

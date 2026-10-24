@@ -1,16 +1,22 @@
 {
-  "summary": "InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. A one-time $5 activation (which becomes spendable balance, not a fee) then unlocks ongoing $0 input/output access to 10+ NIM open-source models — Nemotron, GLM 5.3 and other currently listed $0 models; consult the live model catalog — within free-plan daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate requests per day. Catalog presence and zero listed prices are not a redeemed inference test.",
+  "summary": "InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. The current pricing FAQ says open models then stay free at 25 calls a day (reset 00:00 UTC), and a one-time $5 activation (which becomes spendable balance, not a fee) raises that to the free plan's 50 chat calls a day. The plan cards on the same page still describe ongoing NIM access as coming after the $5 activation, so the no-payment 25/day allowance needs confirmation. The 10+ NIM open-source models (Nemotron, GLM 5.3 and others; consult the live catalog) are $0 input/output within daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate per day. Catalog presence and zero listed prices are not a redeemed inference test.",
   "claim_steps": [
     "Create an account and get an API key at inferall.ai/keys — no card for the first 25 NIM calls.",
     "Check https://api.inferall.ai/ai/v1/models for currently listed $0 NIM model IDs, then call the OpenAI-compatible or Anthropic-compatible endpoint with one of those IDs.",
-    "To keep ongoing free NIM access after the 25-call trial, pay the one-time $5 activation; it becomes spendable balance for premium providers."
+    "After the 25-call trial, the FAQ says open models stay free at 25 calls a day; plan cards conflict and say ongoing access needs the one-time $5 activation, which raises chat to 50 calls a day and becomes spendable balance."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://inferall.ai/pricing",
       "title": "Pricing — InferAll AI Gateway",
-      "text": "The 10+ open-source models on NVIDIA NIM are $0 input and $0 output, capped only by the free-plan daily request rate (50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate per day). New accounts get 25 free NIM calls before any payment; after those, the $5 starter pack unlocks ongoing NIM access."
+      "text": "New accounts get 25 free NIM calls before any payment; after those, open models stay free at 25 calls a day (reset 00:00 UTC), and the $5 starter pack raises that to 50 chat calls a day."
+    },
+    {
+      "type": "link",
+      "url": "https://inferall.ai/pricing",
+      "title": "InferAll plan card — conflicting wording",
+      "text": "Ongoing NVIDIA NIM open-source access after a $5 activation (the $5 becomes spendable balance)"
     },
     {
       "type": "link",

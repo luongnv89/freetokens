@@ -1,15 +1,15 @@
 {
-  "summary": "Aerolink advertises $5 in one-time testing credits for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan. The original one-week Starter trial is no longer on the pricing page.",
+  "summary": "Aerolink previously advertised $5 in one-time testing credits for eligible new accounts after verification and abuse checks, valid for 30 days, with no recurring free plan. On 2026-10-24 the pricing and registration pages no longer mention the testing credit (it was shown on 2026-10-23), and no end notice was found. Confirm the credit in your dashboard before relying on it.",
   "claim_steps": [
     "Register at https://aerolink.lat/register.",
     "Generate an API key from the dashboard and point your client at the Aerolink base URL.",
-    "Check eligibility for the $5 testing credit in the account dashboard; the credit is valid for 30 days."
+    "Check your account dashboard for the $5 testing credit before relying on it: the pricing page no longer advertised it on 2026-10-24 and no end notice was found. When shown, it is valid for 30 days."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://aerolink.lat/pricing",
-      "title": "Pricing | Aerolink",
+      "title": "Pricing | Aerolink (text present in the 2026-10-23 check; absent on 2026-10-24)",
       "text": "Try Aerolink with $5 in testing credits. One-time credit for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan."
     }
   ]

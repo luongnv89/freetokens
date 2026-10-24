@@ -7,6 +7,8 @@
 # called without it [the Authorization header]"; a keyless call for glm-5.3-flash-free on 2026-10-21 returned
 # HTTP 403 FreeTierError "OpenCode's free tier can only be used from within OpenCode." Newer live
 # API response used; claim steps are in-app only. Rechecked against current docs 2026-10-21.
+# 2026-10-24: conflict resolved — the Inference API docs now say "Free-tier chat models are only
+# available from within OpenCode; other clients receive HTTP 403, even with an API key."
 title: GLM-5.3-Flash Free on OpenCode
 provider: OpenCode
 category: coding
