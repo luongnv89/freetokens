@@ -1279,6 +1279,15 @@ a:focus-visible {
   text-decoration-color: var(--green);
 }
 
+@media (pointer: coarse) {
+  .r-apply {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding-inline: 0.3rem;
+  }
+}
+
 .row-quiet button.badge:hover,
 .row-quiet button.badge:focus-visible,
 .row-quiet button.badge[aria-pressed="true"] {

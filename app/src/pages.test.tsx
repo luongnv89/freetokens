@@ -384,6 +384,12 @@ describe("archive layout at 320 px (#129)", () => {
       /@media \(pointer: coarse\) and \(min-width: 48rem\) \{[\s\S]*?\.r-details \{[^}]*min-height:\s*44px/,
     );
   });
+
+  it("styles the row apply-prompt link as a tap target on coarse pointers", () => {
+    expect(css).toMatch(
+      /@media \(pointer: coarse\) \{\s*\.r-apply \{[^}]*display:\s*inline-flex[^}]*min-height:\s*32px/s,
+    );
+  });
 });
 
 describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
