@@ -5,10 +5,13 @@
 # https://amd-aim.github.io/radeon-cloud-docs/api/usage/: "Quota values are per account".
 # Daily allowances apply; docs sample quotas are not universal guarantees.
 # Public-page evidence only: no signup or inference tested; verification date unchanged.
+# 2026-10-25 rendered listing: "Public Free Model APIs" / "15 models"; all 15 cards are FREE.
+# DeepSeek-V4-Flash-Vision-Exp is no longer listed and MinerU2.5-Pro is now labelled FREE (was LIMITED FREE).
+# "Dedicated Model APIs" / "3 models" remain separate. No end notice seen.
 title: AMD Radeon Cloud Token Factory — Free Model APIs
 provider: AMD Radeon Cloud
 category: api_provider
-amount: "16 public model APIs: 15 FREE including Clef, d3, d3-flash and OmniVoice (non-commercial only), plus MiMo/DeepSeek/GLM/Qwen/Gemma/MiniCPM models; MinerU2.5-Pro LIMITED FREE; beta, per-account daily allowances apply"
+amount: "15 public model APIs, all labelled FREE: Clef, d3, d3-flash, OmniVoice (non-commercial only) and MinerU2.5-Pro OCR, plus MiMo/DeepSeek/GLM/Qwen/Gemma/MiniCPM models; beta, per-account daily allowances apply"
 expiry_date: null
 source_url: https://developer.amd.com.cn/radeon/tokenfactory
 verified_date: 2026-09-30

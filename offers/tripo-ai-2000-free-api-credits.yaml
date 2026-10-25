@@ -3,10 +3,13 @@
 # Supersedes the historical 2,000-credit launch announcement. The two-week
 # wording does not establish a global enrollment deadline or exact grant timing.
 # NOTE: Tripo API V2 retires 2026-11-01 per docs banner; V3 continues.
+# 2026-10-25: https://docs.tripo3d.ai/get-started/pricing.html (static + rendered; also /zh/) no longer shows the
+# 300-free-credit line or the V2 banner. It now says "Triop API for generation is a pay-before-you-go product. You need
+# to purchase API usage based on your application's need before using Tripo API." No end notice found; no expiry inferred.
 title: Tripo AI 300 Free API Credits
 provider: Tripo AI
 category: image
-amount: 300 free API credits (~$3 at 100 credits/$1); current pricing advertises "in 2 weeks" without clarifying grant timing or credit-validity semantics
+amount: "300 free API credits (~$3 at 100 credits/$1) previously advertised; current official pricing no longer mentions free credits and describes prepaid API usage, so confirm any grant in your API wallet"
 expiry_date: null
 source_url: https://docs.tripo3d.ai/get-started/pricing.html
 verified_date: 2026-10-12

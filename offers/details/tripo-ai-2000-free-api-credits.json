@@ -1,16 +1,16 @@
 {
-  "summary": "Current Tripo OpenAPI pricing advertises 300 free API credits (~$3 at 100 credits per $1), with the wording 'in 2 weeks'. The public page does not clarify whether that wording describes delivery timing or credit validity; confirm the allowance and expiry in your API wallet. This supersedes the historical 2,000-credit first-key launch reward. Credits cover supported image and 3D generation tasks. API V2 is no longer maintained from October 1, 2026 and retires November 1, 2026 at 00:00 Beijing Time (UTC+8); follow the published V2-to-V3 migration guide. Uncertainty rechecked 2026-10-14: grant timing, credit validity and a no-card claim flow remain untested in an account. The V2 service cutoff is not the grant's enrollment expiry.",
+  "summary": "Tripo OpenAPI pricing previously advertised 300 free API credits (~$3 at 100 credits per $1) with the wording 'in 2 weeks'. As of 2026-10-25, the official pricing page (English and Chinese) no longer mentions free credits; it says Tripo API generation is a pay-before-you-go product and that you need to purchase API usage before using the API. No end notice was found, so no expiry date is inferred: confirm in your API wallet whether any free allowance is still granted before relying on it. This listing supersedes the historical 2,000-credit first-key launch reward. Credits cover supported image and 3D generation tasks. An earlier docs banner said API V2 would retire on November 1, 2026 at 00:00 Beijing Time (UTC+8); the current pricing page no longer shows that banner, so check the current changelog and migration docs. Grant timing, credit validity and a no-card claim flow remain untested in an account.",
   "claim_steps": [
     "Create or sign in to a Tripo API account at https://platform.tripo3d.ai.",
-    "Check the API wallet for the advertised 300-credit allowance and its account-specific timing/validity; current public pricing says 'in 2 weeks' without further explanation.",
-    "Generate an API key and follow current OpenAPI quickstart and V3 migration documentation. Paid usage uses prepaid credits; a no-card claim flow has not been tested."
+    "Check the API wallet for any free-credit allowance before relying on it: current public pricing no longer advertises the earlier 300 free credits and says API usage must be purchased before use.",
+    "Generate an API key and follow the current OpenAPI quickstart. Paid usage uses prepaid credits ($1.00 = 100 credits); a no-card claim flow has not been tested."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://docs.tripo3d.ai/get-started/pricing.html",
       "title": "Current Tripo OpenAPI pricing",
-      "text": "Get started with 300 free credits in 2 weeks. $1.00 = 100 credits. From November 1, 2026, 00:00 (Beijing Time, UTC+8): Tripo API V2 will be officially retired, and all V2 endpoints will stop serving requests."
+      "text": "Triop API for generation is a pay-before-you-go product. You need to purchase API usage based on your application's need before using Tripo API. ... $1.00 = 100 credits (current page, 2026-10-25). Earlier capture (2026-10-12): Get started with 300 free credits in 2 weeks."
     },
     {
       "type": "link",
