@@ -1,22 +1,22 @@
 {
-  "summary": "Stability AI's developer platform grants 25 free API credits to new accounts created via Google social login (the grant does not apply to username/password or Discord signups per the getting-started guide). API usage is billed in credits at 1 credit = $0.01. NOTE: platform.stability.ai pages render only with JavaScript and returned an empty shell to the fetcher; the quoted terms come from search-index snippets of these exact URLs and should be re-verified in a browser.",
+  "summary": "Stability AI's developer platform grants 25 free API credits to new accounts created via Google social login; the getting-started guide offers username/password signup too but ties the free credits to Google login. API usage is billed in credits at 1 credit = $0.01, and further credits are bought in the billing dashboard at $1 per 100 credits. Terms were rechecked on 2026-10-25 against the official docs at docs.stability.ai; account signup was not tested.",
   "claim_steps": [
     "Open platform.stability.ai and click Login.",
-    "Choose the Google social login option — creating the account this way grants 25 free credits.",
+    "Choose the Google social login option — the official getting-started guide says creating the account this way grants 25 free credits.",
     "Create an API key on your account page and check the credit balance under billing."
   ],
   "social_proof": [
     {
       "type": "link",
-      "url": "https://platform.stability.ai/docs/getting-started",
-      "title": "Getting Started — Stability AI Developer Platform",
-      "text": "Creating your account with Google's social login will grant you 25 free credits! (Captured via search-index snippet; the page requires JavaScript.)"
+      "url": "https://docs.stability.ai/getting-started",
+      "title": "Getting started — Stability AI API Platform",
+      "text": "Creating your account with Google's social login will grant you 25 free credits! ... After depleting your free credits, additional credits can be purchased via your Billing dashboard at a rate of $1 USD per 100 credits."
     },
     {
       "type": "link",
-      "url": "https://platform.stability.ai/pricing",
-      "title": "Pricing — Stability AI Developer Platform",
-      "text": "API usage is based on credits. 1 credit = $0.01. Get started with 25 free credits. (Captured via search-index snippet; the page requires JavaScript.)"
+      "url": "https://docs.stability.ai/pricing",
+      "title": "Pricing — Stability AI API Platform",
+      "text": "API usage is based on credits. 1 credit = $0.01. ... Get started with 25 free credits. Check your credit balance and purchase additional credits on your account page."
     }
   ]
 }

@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-24T03:06:21Z — 118 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-25T04:11:13Z — 118 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Stability AI — 25 Free API Credits
+- Provider: Stability AI
+- Category: image
+- Amount: 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-25 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.stability.ai/getting-started
+- Page: https://freetokens.custats.info/offers/stability-ai-25-free-credits.html
+- Summary: Stability AI's developer platform grants 25 free API credits to new accounts created via Google social login; the getting-started guide offers username/password signup too but ties the free credits to Google login. API usage is billed in credits at 1 credit = $0.01, and further credits are bought in the billing dashboard at $1 per 100 credits. Terms were rechecked on 2026-10-25 against the official docs at docs.stability.ai; account signup was not tested.
+- Claim steps: Open platform.stability.ai and click Login. | Choose the Google social login option — the official getting-started guide says creating the account this way grants 25 free credits. | Create an API key on your account page and check the credit balance under billing.
 ### Valyu — $10 Free API Credits ($20 with a Work Email)
 - Provider: Valyu
 - Category: api_provider
@@ -20,13 +30,13 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### Qoder International Free Daily Credits and Free Flash Models
 - Provider: Qoder
 - Category: coding
-- Amount: 100 free Credits per day (claim daily, each valid 30 days) plus free Qwen3.8-Flash; DeepSeek-V4.1-Flash-1017 free through October 24
+- Amount: 100 free Credits per day (claim daily, each valid 30 days) plus free Qwen3.8-Flash; DeepSeek-V4.1-Flash-1017 free until November 1, 00:00 UTC+8
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-10-21 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.qoder.com/events/100credits
 - Page: https://freetokens.custats.info/offers/qoder-daily-credits-free-models.html
-- Summary: Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is "to be announced". Qwen3.8-Flash is also free: its Credit rate is cut from 0.1x to 0.0x and it works even with a zero balance. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. Separately, Qoder's October 19 post says DeepSeek-V4.1-Flash-1017 costs 0.0x Credits for free and paid users through October 24. Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.
-- Claim steps: Download the Qoder desktop app and create or sign in to an individual Qoder International account. | During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later. | Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed. | For the free models, just select Qwen3.8-Flash or DeepSeek-V4.1-Flash-1017 (free through October 24); no claim is needed.
+- Summary: Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is "to be announced". Qwen3.8-Flash is also free: its Credit rate is cut from 0.1x to 0.0x and it works even with a zero balance. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. Separately, Qoder's October 19 post made DeepSeek-V4.1-Flash-1017 cost 0.0x Credits for free and paid users through October 24; its October 24 post extends that window: the model stays at 0x credits until November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.
+- Claim steps: Download the Qoder desktop app and create or sign in to an individual Qoder International account. | During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later. | Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed. | For the free models, just select Qwen3.8-Flash or DeepSeek-V4.1-Flash-1017 (0x credits until November 1, 00:00 UTC+8) in the Qoder model picker; no claim is needed.
 ### MiMo V2.6 Flash Free on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -230,13 +240,13 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### Tripo AI 300 Free API Credits
 - Provider: Tripo AI
 - Category: image
-- Amount: 300 free API credits (~$3 at 100 credits/$1); current pricing advertises "in 2 weeks" without clarifying grant timing or credit-validity semantics
+- Amount: 300 free API credits (~$3 at 100 credits/$1) previously advertised; current official pricing no longer mentions free credits and describes prepaid API usage, so confirm any grant in your API wallet
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-10-12 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://docs.tripo3d.ai/get-started/pricing.html
 - Page: https://freetokens.custats.info/offers/tripo-ai-2000-free-api-credits.html
-- Summary: Current Tripo OpenAPI pricing advertises 300 free API credits (~$3 at 100 credits per $1), with the wording 'in 2 weeks'. The public page does not clarify whether that wording describes delivery timing or credit validity; confirm the allowance and expiry in your API wallet. This supersedes the historical 2,000-credit first-key launch reward. Credits cover supported image and 3D generation tasks. API V2 is no longer maintained from October 1, 2026 and retires November 1, 2026 at 00:00 Beijing Time (UTC+8); follow the published V2-to-V3 migration guide. Uncertainty rechecked 2026-10-14: grant timing, credit validity and a no-card claim flow remain untested in an account. The V2 service cutoff is not the grant's enrollment expiry.
-- Claim steps: Create or sign in to a Tripo API account at https://platform.tripo3d.ai. | Check the API wallet for the advertised 300-credit allowance and its account-specific timing/validity; current public pricing says 'in 2 weeks' without further explanation. | Generate an API key and follow current OpenAPI quickstart and V3 migration documentation. Paid usage uses prepaid credits; a no-card claim flow has not been tested.
+- Summary: Tripo OpenAPI pricing previously advertised 300 free API credits (~$3 at 100 credits per $1) with the wording 'in 2 weeks'. As of 2026-10-25, the official pricing page (English and Chinese) no longer mentions free credits; it says Tripo API generation is a pay-before-you-go product and that you need to purchase API usage before using the API. No end notice was found, so no expiry date is inferred: confirm in your API wallet whether any free allowance is still granted before relying on it. This listing supersedes the historical 2,000-credit first-key launch reward. Credits cover supported image and 3D generation tasks. An earlier docs banner said API V2 would retire on November 1, 2026 at 00:00 Beijing Time (UTC+8); the current pricing page no longer shows that banner, so check the current changelog and migration docs. Grant timing, credit validity and a no-card claim flow remain untested in an account.
+- Claim steps: Create or sign in to a Tripo API account at https://platform.tripo3d.ai. | Check the API wallet for any free-credit allowance before relying on it: current public pricing no longer advertises the earlier 300 free credits and says API usage must be purchased before use. | Generate an API key and follow the current OpenAPI quickstart. Paid usage uses prepaid credits ($1.00 = 100 credits); a no-card claim flow has not been tested.
 ### Scaleway Business €100 Free Credit
 - Provider: Scaleway
 - Category: api_provider
@@ -250,12 +260,12 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### Y-API Daily Shared Free API Key — $20/Day Pool
 - Provider: Y-API
 - Category: api_provider
-- Amount: One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation. All catalog models supported (currently 35+); unavailable to users in mainland China. Own accounts also get $1 starter credit.
+- Amount: One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation. All catalog models supported (currently 47+); unavailable to users in mainland China. Own accounts also get $1 starter credit.
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-10-08 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://y-api.bestvirtualgoods.com/daily-key
 - Page: https://freetokens.custats.info/offers/y-api-daily-shared-free-key.html
-- Summary: Y-API is an OpenAI-compatible LLM gateway with 35+ models. Its daily-key page issues one shared key per day funded by a $20 pool, refilled at 00:05 UTC; the shared pool can drain early, and keys stop working at the next rotation. Sign-in via GitHub or Google is required. Every catalog model works. Personal accounts separately get $1 starter credit, no card required. The service is unavailable to users in mainland China.
+- Summary: Y-API is an OpenAI-compatible LLM gateway with 47+ models. Its daily-key page issues one shared key per day funded by a $20 pool, refilled at 00:05 UTC; the shared pool can drain early, and keys stop working at the next rotation. Sign-in via GitHub or Google is required. Every catalog model works. Personal accounts separately get $1 starter credit, no card required. The service is unavailable to users in mainland China.
 - Claim steps: Confirm the service is available in your region (mainland China is excluded), then sign in to Y-API with GitHub or Google | Open https://y-api.bestvirtualgoods.com/daily-key and copy today's shared key and the Base URL shown | Point any OpenAI-compatible client at the Base URL with the key (OPENAI_BASE_URL / OPENAI_API_KEY)
 ### Viktor — Up to $100 Free Starter Credits
 - Provider: Viktor
@@ -615,16 +625,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/suno-free-plan.html
 - Summary: Suno Free is $0/month with 50 credits per day, access to free models (currently v6-mini), standard features, and four concurrent generations in a shared queue. Free includes no commercial rights, no monthly song downloads, no add-on credit purchases and no stem separation. Credits do not carry over day to day. Uploads of up to eight minutes are listed. No fixed program end date is published. No account or actual generation/download was tested.
 - Claim steps: Go to https://suno.com/pricing. | Click Sign Up and create a free Suno account. | Use the Free Plan — 50 credits renew daily. Stay within the free model/features and shared queue; no commercial rights, monthly song downloads, add-on credits or stem separation are included.
-### Stability AI — 25 Free API Credits
-- Provider: Stability AI
-- Category: image
-- Amount: 25 free API credits for new accounts created via Google social login (1 credit = $0.01 thereafter)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://platform.stability.ai/docs/getting-started
-- Page: https://freetokens.custats.info/offers/stability-ai-25-free-credits.html
-- Summary: Stability AI's developer platform grants 25 free API credits to new accounts created via Google social login (the grant does not apply to username/password or Discord signups per the getting-started guide). API usage is billed in credits at 1 credit = $0.01. NOTE: platform.stability.ai pages render only with JavaScript and returned an empty shell to the fetcher; the quoted terms come from search-index snippets of these exact URLs and should be re-verified in a browser.
-- Claim steps: Open platform.stability.ai and click Login. | Choose the Google social login option — creating the account this way grants 25 free credits. | Create an API key on your account page and check the credit balance under billing.
 ### Speechmatics $100 Free Credit
 - Provider: Speechmatics
 - Category: voice
