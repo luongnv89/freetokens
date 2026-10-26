@@ -6,7 +6,12 @@
 title: Context.dev Free Tier
 provider: Context.dev
 category: api_provider
-amount: "1,000 API credits/month + 10K one-time Logo Link requests (2 concurrent core API requests; new Free accounts 10 requests/minute; existing allowances/custom overrides may differ)"
+# 2026-10-26 copy correction: https://www.context.dev/pricing FAQ says "Free allows 2;
+# ... Plans have no per-minute cap by default." https://docs.context.dev/account/billing.md says
+# "Organizations created before concurrency limits keep per-minute limits per API key on every
+# plan: 30 on Free with a work email, 10 on Free with a personal email". The earlier
+# "new Free accounts 10 requests/minute" wording was not supported; no policy-change date inferred.
+amount: "1,000 API credits/month + 10K one-time Logo Link requests (2 concurrent core API requests, no per-minute cap by default; older organizations keep legacy per-minute limits; custom overrides may differ)"
 expiry_date: null
 source_url: https://www.context.dev/pricing
 verified_date: 2026-09-30

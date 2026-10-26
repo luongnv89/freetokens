@@ -1,15 +1,27 @@
 {
-  "summary": "Context.dev's free tier includes 1,000 API credits per month (a standard scrape starts at 1 credit; extraction/brand calls cost more) plus a separate one-time 10K Logo Link quota — no credit card required. The Free plan currently permits 2 concurrent core API requests per organization and 10 requests per minute across a new account’s API keys. Existing accounts keep their allowances until they change plans, and custom overrides may apply; check the dashboard for effective limits.",
+  "summary": "Context.dev's free tier includes 1,000 API credits per month (a standard scrape starts at 1 credit; extraction/brand calls cost more) plus a separate one-time 10K Logo Link quota — no credit card required. The Free plan allows 2 concurrent core API requests per organization, with no per-minute cap by default. Organizations created before concurrency limits keep per-key per-minute limits (Free: 10 personal email, 30 work email); custom overrides may apply. Check the dashboard.",
   "claim_steps": [
     "Sign up at context.dev/signup — no credit card required.",
     "1,000 API credits renew monthly; the separate 10K Logo Link quota is one-time.",
-    "The Free plan currently permits 2 concurrent core API requests per organization and 10 requests per minute across a new account’s API keys. Existing accounts keep their allowances until they change plans, and custom overrides may apply; check the dashboard for effective limits."
+    "The Free plan allows 2 concurrent core API requests per organization, with no per-minute cap by default. Organizations created before concurrency limits keep per-key per-minute limits (Free: 10 personal email, 30 work email); custom overrides may apply. Check the dashboard."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://www.context.dev/pricing",
-      "title": "Context.dev current Free pricing and organization limits",
+      "title": "Context.dev pricing FAQ (checked 2026-10-26)",
+      "text": "Core API limits cap concurrent requests per organization: Free allows 2; Developer 10, Pro 100, Growth 250, and Scale 500. Plans have no per-minute cap by default. Existing accounts keep their current allowances until they change plans; custom overrides can apply to either limit or both. The dashboard shows your effective limits."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.context.dev/account/billing.md",
+      "title": "Context.dev Plans and billing docs (checked 2026-10-26)",
+      "text": "Organizations created before concurrency limits keep per-minute limits per API key on every plan: 30 on Free with a work email, 10 on Free with a personal email, 60 on Developer, 200 on Pro, 600 on Growth, and 700 on Scale."
+    },
+    {
+      "type": "link",
+      "url": "https://www.context.dev/pricing",
+      "title": "Context.dev Free pricing and organization limits (summarized 2026-10-15; per-minute wording superseded)",
       "text": "The free tier includes 1,000 API credits per month, plus 10K one-time Logo Link requests, with no credit card required. Core API: Free allows 2 concurrent requests; new Free accounts also allow 10 requests per minute across their API keys. Existing accounts keep current allowances until changing plans; custom overrides can apply. The dashboard shows effective limits."
     }
   ]

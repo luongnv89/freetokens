@@ -1,16 +1,22 @@
 {
-  "summary": "Aerolink previously advertised $5 in one-time testing credits for eligible new accounts after verification and abuse checks, valid for 30 days, with no recurring free plan. On 2026-10-24 the pricing and registration pages no longer mention the testing credit (it was shown on 2026-10-23), and no end notice was found. Confirm the credit in your dashboard before relying on it.",
+  "summary": "Aerolink advertises $5 in one-time testing credits for eligible new accounts after verification and abuse checks, valid for 30 days, with no recurring free plan. The offer text disappeared from the pricing and registration pages on 2026-10-24 and reappeared on 2026-10-26; confirm the credit in your dashboard before relying on it.",
   "claim_steps": [
     "Register at https://aerolink.lat/register.",
     "Generate an API key from the dashboard and point your client at the Aerolink base URL.",
-    "Check your account dashboard for the $5 testing credit before relying on it: the pricing page no longer advertised it on 2026-10-24 and no end notice was found. When shown, it is valid for 30 days."
+    "Check your account dashboard for the $5 testing credit before relying on it: the pricing page briefly stopped advertising it (2026-10-24/25) before it reappeared on 2026-10-26. When granted, it is valid for 30 days."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://aerolink.lat/pricing",
-      "title": "Pricing | Aerolink (text present in the 2026-10-23 check; absent on 2026-10-24)",
+      "title": "Pricing | Aerolink (present 2026-10-23, absent 2026-10-24/25, present again 2026-10-26)",
       "text": "Try Aerolink with $5 in testing credits. One-time credit for eligible new accounts after verification and abuse checks. Valid for 30 days; no recurring free plan."
+    },
+    {
+      "type": "link",
+      "url": "https://aerolink.lat/register",
+      "title": "Aerolink registration page (checked 2026-10-26)",
+      "text": "Create your account $5 in testing credits after verification and abuse checks. Valid for 30 days."
     }
   ]
 }
