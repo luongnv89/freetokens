@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-25T04:11:13Z — 118 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-26T04:06:04Z — 118 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -167,16 +167,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/agnes-ai-flash-models-free-api.html
 - Summary: Agnes AI's official Model Pricing page lists agnes-2.5-flash and agnes-3.0-flash at a current price of $0 per million tokens for cached input, input and output (list prices $0.005/M cached input, $0.05/M input, $0.15/M output shown struck through), and states they are currently free. The free pricing is promotional; end dates are subject to Agnes AI platform announcements. The API is reached at https://apihub.agnes-ai.com/v1 with a Bearer API key created in the Agnes AI console. The official page does not say 'permanently free', nor confirm the 256K context figure from the lead.
 - Claim steps: Log in to the Agnes AI console and open the API Key management page | Create and copy an API key | Set the API base URL to https://apihub.agnes-ai.com/v1 and send requests with Authorization: Bearer YOUR_API_KEY using model agnes-2.5-flash or agnes-3.0-flash
-### Meta Global AI Developer Hackathon API Credits
-- Provider: Meta
-- Category: api_provider
-- Amount: $150 in Meta Model API credits per selected hackathon participant for ten days of development; applications open through Oct 25, 2026 at 11:59 PM ET, or earlier if 20,000 spots fill
-- Status: active — enrollment deadline: 2026-10-25
-- Last checked: 2026-10-14 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://dev.meta.ai/events/global-hackathon
-- Page: https://freetokens.custats.info/offers/meta-global-ai-developer-hackathon.html
-- Summary: Applications for Meta's virtual Global AI Developer Hackathon are now open. The linked organizer waiver confirms $150 in Meta Model API credits for each selected participant for development over ten days; applying does not guarantee acceptance. Meta's application deadline is October 25, 2026 at 11:59 PM ET, or earlier if 20,000 spots fill; the waiver labels that time EST, so check the portal's exact cutoff. Applicants must be 18+ and of legal majority, and meet geographic, sanctions and affiliation restrictions. The hackathon runs October 26–November 4, with a $1M prize pool separate from the credits. The waiver permits marketing contact and broad use of submissions/materials without confidentiality; read it before applying. Official Hackathon Rules must be accepted when published before October 26. Credit delivery has not been personally tested.
-- Claim steps: Open https://dev.meta.ai/events/global-hackathon and follow Apply now to Meta's linked Cerebral Valley organizer portal. | Check the waiver: you must be at least 18 and of legal majority. Review excluded jurisdictions, sanctions, Meta/Cerebral Valley/government affiliations and family/household restrictions. | Read the waiver's marketing, recording and broad submission/material-use permissions; organizers do not agree to confidentiality. Apply only if you accept those terms. | Submit a truthful application by October 25, 2026 at 11:59 PM ET (Meta page; waiver says EST), or earlier if 20,000 places fill. Selection is rolling and not guaranteed. | If selected, accept the forthcoming official rules and use the stated $150 Model API credits for ten days of hackathon development; confirm account delivery and actual credit validity with the organizers.
 ### Apodex 1.1 Mini Free (Novita)
 - Provider: Novita AI
 - Category: api_provider
@@ -1185,6 +1175,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llm7-free-tier.html
 - Summary: LLM7 documents a free dashboard token for current tier:turbo text-generation models with usage_based_only:false, not every catalog model or Pro/paid-only models. Limits are 1 request per second, 60 per minute, 250 per hour, and 100,000 input-plus-output tokens per 24 hours. Its current limits page no longer documents anonymous access. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.
 - Claim steps: Obtain a free token from the LLM7 dashboard at dash.llm7.io. | Check https://api.llm7.io/v1/models and select a current text-generation model with tier:turbo and usage_based_only:false. Send an OpenAI-compatible request using that model ID and your free dashboard token; Pro or usage_based_only:true models require paid accounting. | Check live availability and dashboard allowance. Stay within 1 request/second, 60/minute, 250/hour and 100,000 input-plus-output tokens/24 hours; quotas may be reduced without notice. | Turbo pricing metadata is for paid usage accounting, not proof the documented free allowance has ended. Image/video allowance and balance rules are separate.
+### LlamaParse Startup Offer
+- Provider: LlamaIndex
+- Category: startup_program
+- Amount: $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.llamaindex.ai/startups
+- Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
+- Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
+- Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

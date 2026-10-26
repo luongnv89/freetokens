@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-25T04:11:06Z",
+  "generated_at": "2026-10-26T04:05:56Z",
   "count": 262,
-  "active_count": 225,
-  "expired_count": 37,
+  "active_count": 224,
+  "expired_count": 38,
   "offers": [
     {
       "slug": "qoder-daily-credits-free-models",
@@ -257,7 +257,7 @@
       "verification": "social_proof",
       "review_status": "to-be-verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "autoclaw-weekly-perks-glm-5-3-flash-tokens",
@@ -1809,7 +1809,7 @@
       "title": "Context.dev Free Tier",
       "provider": "Context.dev",
       "category": "api_provider",
-      "amount": "1,000 API credits/month + 10K one-time Logo Link requests (2 concurrent core API requests; new Free accounts 10 requests/minute; existing allowances/custom overrides may differ)",
+      "amount": "1,000 API credits/month + 10K one-time Logo Link requests (2 concurrent core API requests, no per-minute cap by default; older organizations keep legacy per-minute limits; custom overrides may differ)",
       "expiry_date": null,
       "source_url": "https://www.context.dev/pricing",
       "verified_date": "2026-09-30",
