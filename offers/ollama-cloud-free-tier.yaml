@@ -5,6 +5,12 @@
 # on your own hardware is always unlimited.") The old 5-hour session / 7-day
 # weekly reset wording is gone ("session and weekly limits of the old plans
 # no longer apply").
+# 2026-10-27: https://ollama.com/pricing (static and browser-rendered) no longer shows a Free plan.
+# The $0 card is now "Pay as you go $0 Pay per token for every cloud model. Includes: Run models
+# locally No subscription 3 concurrent requests"; the FAQ says "Pro, Max, and Team plans include a
+# set dollar amount of usage credits each month. Pay as you go accounts pay for each request with
+# usage credits." The starter-credit / "On the Free plan" wording quoted above is absent. Claimability
+# of any included free cloud usage is unresolved; no end date inferred. Flagged to-be-verified.
 title: Ollama Cloud Free Tier
 provider: Ollama
 category: api_provider
@@ -14,5 +20,5 @@ source_url: https://ollama.com/pricing
 verified_date: 2026-09-30
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
-review_status: verified
+review_status: to-be-verified
 signup: required

@@ -5,6 +5,12 @@
 # venture backed >$500k, pre-Series D)
 # Source URL repaired 2026-10-23: /startups now redirects to /solutions/for-startups (general marketing,
 # no program terms); the same program FAQ/eligibility text is at https://fireworks.ai/solutions/startups.
+# 2026-10-27: https://fireworks.ai/solutions/startups and https://fireworks.ai/startup-program now
+# redirect to https://fireworks.ai/solutions/for-startups, a redesigned page ("Start building with
+# serverless inference ... Launch with pay-per-token pricing and no commitment") with no credits,
+# eligibility or application form (browser-rendered: no "credit" text). The HubSpot form
+# "Startup Program Application" (api/forms/e18e4417-...) still returns its definition and the
+# 2025-10-01 launch blog still lists Build Credits. Program status unresolved; no end date inferred.
 title: Fireworks for Startups — Build Credits
 provider: Fireworks AI
 category: startup_program
@@ -13,5 +19,5 @@ expiry_date: null
 source_url: https://fireworks.ai/solutions/startups
 verified_date: 2026-09-30
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: required
