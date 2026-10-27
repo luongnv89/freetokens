@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-26T04:06:04Z — 118 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-27T04:04:37Z — 118 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1010,11 +1010,11 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: api_provider
 - Amount: Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=verified · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://ollama.com/pricing
 - Page: https://freetokens.custats.info/offers/ollama-cloud-free-tier.html
-- Summary: Ollama's $0 Free plan includes starter usage credits and access to starter cloud models, alongside running models locally. The included Free usage resets monthly from the signup date and does not roll over; no fixed starter-credit amount is published on the pricing page. Purchased usage credits unlock all cloud models and are separate from the free allowance. Free includes one concurrent request, not the old five-hour session and weekly reset limits.
-- Claim steps: Create or sign in to an Ollama account. | Use an included starter cloud model through Ollama, or create an API key for direct cloud API access. | Monitor your included starter usage credits and stay within the one-concurrent-request Free limit. | Included usage resets monthly on your signup date and does not roll over. Buying additional usage credits to unlock all models is optional paid usage, not part of the free allowance.
+- Summary: Ollama previously listed a $0 Free plan with starter usage credits for starter cloud models, resetting monthly from the signup date. As of 2026-10-27 the pricing page instead shows a $0 Pay as you go plan (pay per token for every cloud model, 3 concurrent requests) and says only Pro, Max and Team include monthly usage credits. Whether new accounts still receive any included free cloud usage is unconfirmed. Running models locally remains free and unlimited.
+- Claim steps: Check https://ollama.com/pricing and your account balance first: as of 2026-10-27 the page lists Pay as you go ($0, pay per token) instead of a Free plan with starter credits, so new accounts may get no included cloud usage. | Create or sign in to an Ollama account. | Use an included starter cloud model through Ollama, or create an API key for direct cloud API access. | Monitor your included starter usage credits and stay within the one-concurrent-request Free limit. | Included usage resets monthly on your signup date and does not roll over. Buying additional usage credits to unlock all models is optional paid usage, not part of the free allowance.
 ### Ocean Network Inference — First 6 H200 Hours Free
 - Provider: Ocean Network
 - Category: api_provider

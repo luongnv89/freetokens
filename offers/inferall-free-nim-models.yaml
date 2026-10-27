@@ -10,10 +10,14 @@
 # (reset 00:00 UTC), and the $5 starter pack raises that to 50 chat calls a day"; the plan
 # cards still say ongoing NIM access comes "after a $5 activation". Known conflict on the same
 # official page; both disclosed. No change date inferred.
+# 2026-10-27: the Free plan card now matches the FAQ: "Open models stay free at 25 calls a day with no
+# card (reset 00:00 UTC); the $5 activation raises that to 50 chat calls a day and becomes spendable
+# balance". The Activation card still says "Cheapest path to unlock ongoing free use". Residual
+# conflict narrowed to that card; still to-be-verified pending an account test.
 title: InferAll Free — 25 NIM Trial + $0 OSS Models
 provider: InferAll
 category: api_provider
-amount: 25 free NVIDIA NIM calls on signup (no card); $0 in/out on 10+ NIM open models within daily caps — FAQ says 25 calls/day free after the trial, 50 chat/day after a one-time $5 activation (plan cards conflict)
+amount: 25 free NVIDIA NIM calls on signup (no card); $0 in/out on 10+ NIM open models within daily caps — Free card and FAQ say 25 calls/day free after the trial, 50 chat/day after a one-time $5 activation (Activation card still says $5 unlocks ongoing free use)
 expiry_date: null
 source_url: https://inferall.ai/pricing
 verified_date: 2026-09-30
