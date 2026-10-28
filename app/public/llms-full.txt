@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-27T04:04:37Z — 118 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-28T04:05:20Z — 118 of 223 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -140,13 +140,13 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### YC AI Stack — $25K+ in AI & Cloud Credits for YC Event Attendees
 - Provider: Y Combinator
 - Category: student
-- Amount: Over $25,000 in free credits for AI tools and cloud services (AWS $10,000, Microsoft Azure $10,000, OpenAI $1,000, Anthropic $500, plus AI devtool credits) for students who attend an eligible YC event; access lasts one year from the event
+- Amount: Over $25,000 in free credits for AI tools and cloud services (deals page lists AWS $5,000, OpenAI $1,000, Anthropic $500, plus AI devtool credits; Azure not currently listed) for students who attend an eligible YC event; access lasts one year from the event
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-16 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-10-16 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://deals.ycombinator.com/students
 - Page: https://freetokens.custats.info/offers/y-combinator-ai-stack-student-credits.html
-- Summary: YC's AI Stack gives students who attend an eligible YC event (starting Fall 2025) over $25,000 in free credits for AI tools and cloud services, including $10,000 each on AWS and Microsoft Azure, $1,000 OpenAI and $500 Anthropic, plus credits from YC-company devtools such as Firecrawl, Exa, Vapi, Browser Use, Reducto and Gumloop. Access lasts one year from the qualifying event.
-- Claim steps: Attend an eligible YC event (Fall 2025 onward), RSVPing with your Hacker News account | Watch for the confirmation email after the event | Sign in at deals.ycombinator.com/students with the same Hacker News account to check eligibility | Browse and redeem each partner deal
+- Summary: YC's AI Stack gives students who attend an eligible YC event (starting Fall 2025) over $25,000 in free credits for AI tools and cloud services, with the deals page listing $5,000 on AWS (down from $10,000 as of 2026-10-28), $1,000 OpenAI and $500 Anthropic, plus credits from YC-company devtools such as Firecrawl, Exa, Vapi, Browser Use, Reducto and Gumloop. Access lasts one year from the qualifying event. The 2025 launch blog also mentioned Azure credits, but Azure is not listed on the current deals page.
+- Claim steps: Attend an eligible YC event (Fall 2025 onward), RSVPing with your Hacker News account | Watch for the confirmation email after the event | Sign in at deals.ycombinator.com/students with the same Hacker News account to check eligibility | Check each partner's current amount after sign-in: on 2026-10-28 the page listed AWS at $5,000 (previously $10,000) and no Azure deal. | Browse and redeem each partner deal
 ### Nemotron 3.5 Super VL Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -250,12 +250,12 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### Y-API Daily Shared Free API Key — $20/Day Pool
 - Provider: Y-API
 - Category: api_provider
-- Amount: One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation. All catalog models supported (currently 47+); unavailable to users in mainland China. Own accounts also get $1 starter credit.
+- Amount: One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation. All catalog models supported (currently 48+); unavailable to users in mainland China. Own accounts also get $1 starter credit.
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-10-08 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://y-api.bestvirtualgoods.com/daily-key
 - Page: https://freetokens.custats.info/offers/y-api-daily-shared-free-key.html
-- Summary: Y-API is an OpenAI-compatible LLM gateway with 47+ models. Its daily-key page issues one shared key per day funded by a $20 pool, refilled at 00:05 UTC; the shared pool can drain early, and keys stop working at the next rotation. Sign-in via GitHub or Google is required. Every catalog model works. Personal accounts separately get $1 starter credit, no card required. The service is unavailable to users in mainland China.
+- Summary: Y-API is an OpenAI-compatible LLM gateway with 48+ models. Its daily-key page issues one shared key per day funded by a $20 pool, refilled at 00:05 UTC; the shared pool can drain early, and keys stop working at the next rotation. Sign-in via GitHub or Google is required. Every catalog model works. Personal accounts separately get $1 starter credit, no card required. The service is unavailable to users in mainland China.
 - Claim steps: Confirm the service is available in your region (mainland China is excluded), then sign in to Y-API with GitHub or Google | Open https://y-api.bestvirtualgoods.com/daily-key and copy today's shared key and the Base URL shown | Point any OpenAI-compatible client at the Base URL with the key (OPENAI_BASE_URL / OPENAI_API_KEY)
 ### Viktor — Up to $100 Free Starter Credits
 - Provider: Viktor
@@ -383,8 +383,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-10-06 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://posthog.com/startups
 - Page: https://freetokens.custats.info/offers/posthog-for-startups.html
-- Summary: PostHog platform credits for eligible analytics, session replay, feature flags and other services, not general LLM API credits. Company must be under two years old, have raised less than $5M, not be acquired, and use a company-domain account. Eligible accounts were created from January 2023; official pages differ on the exact January 1 boundary, so do not rely on that boundary without confirmation. A paid usage-based plan and billing details are required. Credits run for 12 months from application and do not roll over or convert to cash. Since September 14, 2026 they exclude PostHog Desktop, Slack app, Replay Vision, PostHog AI and Inbox; AI observability and context warehouse remain eligible. General startup credits do not cover a BAA under Boost. Separate YC annual benefits and partner discounts are not included here. Standard billing follows expiry/exhaustion. No application submitted.
-- Claim steps: Confirm the company is under two years old, has raised less than $5M, and is not acquired. | Use a company-domain PostHog account and enroll in a paid usage-based plan with billing details. | Apply at https://app.posthog.com/startups; applications are reviewed for eligibility. | Use eligible credits within 12 months starting at application, not activation. | Do not spend these credits on excluded PostHog AI tools or Boost BAA; monitor usage to avoid unexpected standard billing.
+- Summary: PostHog platform credits for eligible analytics, session replay, feature flags and other services, not general LLM API credits. Company must be under two years old, have raised less than $5M, not be acquired, and use a company-domain account. Eligible accounts were created from January 2023; official pages differ on the exact January 1 boundary, so do not rely on that boundary without confirmation. A paid usage-based plan and billing details are required. Credits run for 12 months from application and do not roll over or convert to cash. Since September 14, 2026 they exclude PostHog Desktop, Slack app, Replay Vision, PostHog AI and Inbox; AI observability and context warehouse remain eligible. General startup credits do not cover a BAA under Boost. Separate YC annual benefits and partner discounts are not included here. Credits are issued only once per founder and once per organization. Standard billing follows expiry/exhaustion. No application submitted.
+- Claim steps: Confirm the company is under two years old, has raised less than $5M, and is not acquired. | Credits are issued only once per founder and once per organization: founders who already received them for another startup or PostHog organization cannot claim again. | Use a company-domain PostHog account and enroll in a paid usage-based plan with billing details. | Apply at https://app.posthog.com/startups; applications are reviewed for eligibility. | Use eligible credits within 12 months starting at application, not activation. | Do not spend these credits on excluded PostHog AI tools or Boost BAA; monitor usage to avoid unexpected standard billing.
 ### OpenAI Codex for Students — $100 ChatGPT Credits
 - Provider: OpenAI
 - Category: student
@@ -865,16 +865,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-ultra-free.html
 - Summary: Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA — 55B active of 550B total on a hybrid Transformer-Mamba MoE, with a 1M-token context. Published free pricing remains $0 prompt / $0 completion via OpenRouter's :free endpoint, but availability is unresolved: repeated provider-health checks found its sole provider unhealthy, and the model page reported Down. Check current provider health before use; published pricing and historical traffic do not guarantee a successful request. No inference request was tested. Created 2026-06-04; no published end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms. The linked NVIDIA API Trial Terms permit free access and generated content only for internal testing and evaluation, not production use; production requires a separate subscription and its terms.
 - Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Use the free API service and generated content only for internal testing/evaluation, not production, under NVIDIA API Trial Terms sections 1.2 and 1.4. Production requires a separate subscription and its applicable terms. | Review the NVIDIA API Trial Terms; never submit confidential information or personal data, including voices or faces. | Check the model page's current provider health before calling chat completions with model id nvidia/nemotron-3-ultra-550b-a55b:free. Repeated checks found the sole provider unhealthy/Down; successful inference remains unresolved, not tested here.
-### Nemotron 3 Super Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free nvidia/nemotron-3-super-120b-a12b:free endpoint at $0 (262K context, 120B-A12B hybrid MoE); trial/internal evaluation only, not production
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free
-- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-super-free.html
-- Summary: Nemotron 3 Super is a 120B-parameter open hybrid MoE (12B active, Mamba-Transformer) for multi-agent applications — free via OpenRouter's :free endpoint at $0 prompt / $0 completion with a 262K context. Created 2026-03-11; no published end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms. The linked NVIDIA API Trial Terms permit free access and generated content only for internal testing and evaluation, not production use; production requires a separate subscription and its terms.
-- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Use the free API service and generated content only for internal testing/evaluation, not production, under NVIDIA API Trial Terms sections 1.2 and 1.4. Production requires a separate subscription and its applicable terms. | Review the NVIDIA API Trial Terms; never submit confidential information or personal data, including voices or faces. | Call the chat completions API with model id nvidia/nemotron-3-super-120b-a12b:free.
 ### Nemotron 3 Nano Omni Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -1185,6 +1175,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
 - Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
 - Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
+### LiveKit Startup Program
+- Provider: LiveKit
+- Category: startup_program
+- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://livekit.com/startups
+- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
+- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll. Applicants must be incorporated or actively incorporating and building for real end-users. The program targets net-new startup projects: free-plan evaluators/builders can apply, while projects running for a while or already paying/contractually committed may be declined and reviewed case by case.
+- Claim steps: Confirm the startup is incorporated or actively incorporating, is building for real end-users, and meets the net-new project rules; existing paid/committed users should explain their circumstances in the application. | Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

@@ -1,5 +1,7 @@
 # Verified 2026-10-06 against https://posthog.com/startups
 # "$50,000 in PostHog credits for 12 months"
+# 2026-10-28: https://posthog.com/startups FAQ: "We issue startup credits only once per founder and once
+# per organization, whichever comes first." Added as a claim condition (copy omission; no date inferred).
 title: "PostHog for Startups — $50K Credits"
 provider: "PostHog"
 category: "startup_program"
