@@ -1,9 +1,10 @@
 {
-  "summary": "YC's AI Stack gives students who attend an eligible YC event (starting Fall 2025) over $25,000 in free credits for AI tools and cloud services, including $10,000 each on AWS and Microsoft Azure, $1,000 OpenAI and $500 Anthropic, plus credits from YC-company devtools such as Firecrawl, Exa, Vapi, Browser Use, Reducto and Gumloop. Access lasts one year from the qualifying event.",
+  "summary": "YC's AI Stack gives students who attend an eligible YC event (starting Fall 2025) over $25,000 in free credits for AI tools and cloud services, with the deals page listing $5,000 on AWS (down from $10,000 as of 2026-10-28), $1,000 OpenAI and $500 Anthropic, plus credits from YC-company devtools such as Firecrawl, Exa, Vapi, Browser Use, Reducto and Gumloop. Access lasts one year from the qualifying event. The 2025 launch blog also mentioned Azure credits, but Azure is not listed on the current deals page.",
   "claim_steps": [
     "Attend an eligible YC event (Fall 2025 onward), RSVPing with your Hacker News account",
     "Watch for the confirmation email after the event",
     "Sign in at deals.ycombinator.com/students with the same Hacker News account to check eligibility",
+    "Check each partner's current amount after sign-in: on 2026-10-28 the page listed AWS at $5,000 (previously $10,000) and no Azure deal.",
     "Browse and redeem each partner deal"
   ],
   "social_proof": [
@@ -18,6 +19,12 @@
       "url": "https://www.ycombinator.com/blog/the-yc-ai-student-starter-pack",
       "title": "Announcing the YC AI Stack | Y Combinator",
       "text": "Students who attend a YC university event starting in Fall 2025 are eligible to redeem a deal. Over $20,000 in cloud credits on Azure and AWS; over $5,000 in credits for GPT/Claude/Grok."
+    },
+    {
+      "type": "link",
+      "url": "https://deals.ycombinator.com/students",
+      "title": "YC AI Stack — What's Included (checked 2026-10-28)",
+      "text": "What's Included Cloud Credits Amazon Web Services $5,000 AI API Credits OpenAI $1,000 Anthropic $500 AI Devtools from YC Companies"
     }
   ]
 }

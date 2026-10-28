@@ -3,13 +3,17 @@
 # AI-native startups" / eligibility: "Must have raised $10m or less", company
 # website + matching email, registered team account with business email;
 # select startups invited to apply for GPU credit packages)
+# 2026-10-28: https://www.digitalocean.com/hatch FAQ now says "Applications for our current cohort are
+# temporarily paused as we prepare to launch an updated program experience in early 2027." and "Active
+# program members are not affected by this pause." The non-VC "select Other" application FAQ is gone.
+# New applications are not currently accepted; no end date inferred (relaunch planned, not ended).
 title: DigitalOcean Startups (Hatch)
 provider: DigitalOcean
 category: startup_program
-amount: 12 months of DigitalOcean credits (amount varies by partner award level); select startups invited to GPU credit packages; 15 months free Standard-tier support
+amount: "New applications paused until an updated program launches in early 2027 (existing members unaffected); approved startups receive 12 months of DigitalOcean credits (amount varies by partner award level); select startups invited to GPU credit packages; 15 months free Standard-tier support"
 expiry_date: null
 source_url: https://www.digitalocean.com/hatch
 verified_date: 2026-09-30
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: required

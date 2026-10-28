@@ -1,5 +1,5 @@
 {
-  "summary": "Y-API is an OpenAI-compatible LLM gateway with 47+ models. Its daily-key page issues one shared key per day funded by a $20 pool, refilled at 00:05 UTC; the shared pool can drain early, and keys stop working at the next rotation. Sign-in via GitHub or Google is required. Every catalog model works. Personal accounts separately get $1 starter credit, no card required. The service is unavailable to users in mainland China.",
+  "summary": "Y-API is an OpenAI-compatible LLM gateway with 48+ models. Its daily-key page issues one shared key per day funded by a $20 pool, refilled at 00:05 UTC; the shared pool can drain early, and keys stop working at the next rotation. Sign-in via GitHub or Google is required. Every catalog model works. Personal accounts separately get $1 starter credit, no card required. The service is unavailable to users in mainland China.",
   "claim_steps": [
     "Confirm the service is available in your region (mainland China is excluded), then sign in to Y-API with GitHub or Google",
     "Open https://y-api.bestvirtualgoods.com/daily-key and copy today's shared key and the Base URL shown",
@@ -16,7 +16,7 @@
       "type": "link",
       "url": "https://y-api.bestvirtualgoods.com/",
       "title": "Affordable LLM API, OpenAI-Compatible — Y-API",
-      "text": "OpenAI-compatible LLM API for 47+ models. Pay per token. Compare prices and start with $1 in free credit."
+      "text": "OpenAI-compatible LLM API for 48+ models. Pay per token. Compare prices and start with $1 in free credit."
     },
     {
       "type": "link",
