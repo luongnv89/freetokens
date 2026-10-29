@@ -4,13 +4,19 @@
 # Available on Pay As You Go and Growth plans. Offer ends December 31, 2026."
 # Terms: promotion period Sep 15 - Dec 31, 2026; $500 max per project;
 # Enterprise projects ineligible; requires valid payment method.)
+# 2026-10-29: https://deepgram.com/pricing (static HTML and browser-rendered) no longer shows the
+# "Buy Flux TTS, get matching credits" banner; it was present through 2026-10-28. The promotion terms page
+# https://deepgram.com/promotions/2026-09/flux-tts-promo-terms-and-conditions is still live and still says
+# "The Promotion begins at 12:00 a.m. Pacific Time on September 15, 2026 and ends at 11:59 p.m. Pacific
+# Time on December 31, 2026". No early-termination notice found. Source switched to the terms page;
+# flagged to-be-verified until Deepgram confirms the match is still being granted.
 title: Deepgram Flux TTS Credit Match
 provider: Deepgram
 category: voice
 amount: $1 bonus credit per $1 of paid Flux TTS usage, up to $500 per eligible project; bonus stays in that project; other promotions require written stacking permission except the standard $200 signup credit (which does not earn a match)
 expiry_date: 2026-12-31
-source_url: https://deepgram.com/pricing
+source_url: https://deepgram.com/promotions/2026-09/flux-tts-promo-terms-and-conditions
 verified_date: 2026-09-30
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: required

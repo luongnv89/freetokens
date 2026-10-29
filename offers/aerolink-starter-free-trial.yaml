@@ -12,6 +12,8 @@
 # 2026-10-28: back on both https://aerolink.lat/pricing ("Try Aerolink with $ 5 in testing credits") and
 # /register ("$5 in testing credits after verification and abuse checks. Valid for 30 days."). Still
 # intermittent; kept to-be-verified.
+# 2026-10-29: absent again from /pricing (static HTML and browser-rendered) and /register. Still
+# intermittent; kept to-be-verified, no end date inferred.
 title: Aerolink $5 Testing Credit
 provider: Aerolink
 category: api_provider

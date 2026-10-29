@@ -5,10 +5,15 @@
 # (was "$10,000" in snapshots through 2026-10-27), OpenAI $1,000, Anthropic $500. Microsoft Azure is not
 # listed on the deals page in any snapshot since 2026-10-25 (only the 2025 launch blog mentions Azure);
 # the headline "Over $25,000" is unchanged. Amount corrected; flagged to-be-verified.
-title: YC AI Stack — $25K+ in AI & Cloud Credits for YC Event Attendees
+# 2026-10-29: the deals page headline changed from "Over $25,000 in free credits for AI tools and cloud
+# services." to "Free credits for your next idea. Build something great. YC has partnered with 20 companies
+# to offer free AI credits for eligible YC Events attendees." It lists "AWS $5,000 Cloud credits OpenAI
+# $1,000 API credits Anthropic $500 API credits Plus offers from 17 YC companies". No total is stated any
+# more; the $25,000+ total was removed from title/amount. Still to-be-verified (per-partner amounts after sign-in).
+title: YC AI Stack — Free AI & Cloud Credits for YC Event Attendees
 provider: Y Combinator
 category: student
-amount: Over $25,000 in free credits for AI tools and cloud services (deals page lists AWS $5,000, OpenAI $1,000, Anthropic $500, plus AI devtool credits; Azure not currently listed) for students who attend an eligible YC event; access lasts one year from the event
+amount: Free credits from 20 partners for students who attend an eligible YC event — AWS $5,000, OpenAI $1,000, Anthropic $500, plus offers from 17 YC companies (no overall total currently stated; Azure not listed); access lasts one year from the event
 expiry_date: null
 source_url: https://deals.ycombinator.com/students
 verified_date: 2026-10-16

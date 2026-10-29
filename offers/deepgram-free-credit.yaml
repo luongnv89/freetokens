@@ -6,6 +6,9 @@
 # ($1 credit per $1 spent, up to $500; Pay As You Go and Growth plans;
 # offer ends December 31, 2026). This deadline does not apply to signup credits.
 # Flux TTS free mention removed.
+# 2026-10-29: pricing now reads "Pay as you go No minimums, no expiration, and no credit card required.
+# Free $200 credit then pay-as-you-go"; the Flux TTS credit-match banner is no longer on this page (its
+# terms page still states Sep 15 - Dec 31, 2026). $200 signup credit unchanged.
 title: Deepgram $200 Free Credit
 provider: Deepgram
 category: voice
