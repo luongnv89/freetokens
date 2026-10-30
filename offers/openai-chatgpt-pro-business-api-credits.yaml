@@ -1,0 +1,13 @@
+# Hunted 2026-10-30 by offer-hunter; verified against https://developers.openai.com/api/docs/changelog
+# ("Eligible ChatGPT Pro and Business subscribers can now claim up to $500 per month in free API credits. Activate the benefit from ChatGPT or API Platform by linking an API organization you own.")
+# Lead: https://x.com/OpenAIDevs/status/2115583698074755078
+title: OpenAI API Credits for ChatGPT Pro and Business — Up to $500/Month
+provider: OpenAI
+category: api_provider
+amount: Up to $500 per month in free OpenAI API credits for eligible ChatGPT Pro and Business subscribers; activate from ChatGPT or the API Platform by linking an API organization you own
+expiry_date: null
+source_url: https://developers.openai.com/api/docs/changelog
+verified_date: 2026-10-30
+verification: social_proof
+review_status: under-review
+signup: required

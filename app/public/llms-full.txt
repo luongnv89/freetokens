@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-30T04:06:34Z — 118 of 223 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-30T21:07:21Z — 118 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### OpenAI API Credits for ChatGPT Pro and Business — Up to $500/Month
+- Provider: OpenAI
+- Category: api_provider
+- Amount: Up to $500 per month in free OpenAI API credits for eligible ChatGPT Pro and Business subscribers; activate from ChatGPT or the API Platform by linking an API organization you own
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-30 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://developers.openai.com/api/docs/changelog
+- Page: https://freetokens.custats.info/offers/openai-chatgpt-pro-business-api-credits.html
+- Summary: Per OpenAI's API changelog entry dated Oct 28, 2026, eligible ChatGPT Pro and Business subscribers can claim free monthly API credits. Pro gets $100, $200 or $500 per month depending on tier; Business gets $20 per paid Standard seat or $100 per paid Premium seat, pooled and capped at $500 per workspace per month. The subscription must be paid and at least seven days old: free trials, complimentary subscriptions and ChatGPT Enterprise do not qualify. The ChatGPT account and the API account must use the same email address, and you must own both the subscription (or Business workspace) and the API organization. Credits are issued when the subscription renews; unused credits expire at the end of the billing cycle and do not roll over.
+- Claim steps: Hold a paid ChatGPT Pro or Business subscription that is at least seven days old (not a trial, complimentary plan or Enterprise) | Use the same email address for your ChatGPT account and the API account that owns the receiving organization | Activate the benefit in ChatGPT billing settings or on the API Platform Billing page by linking an API organization you own | Credits are issued automatically when the subscription renews; unused credits expire at the end of each billing cycle
 ### Stability AI — 25 Free API Credits
 - Provider: Stability AI
 - Category: image
@@ -1175,16 +1185,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
 - Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
 - Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
-### LiveKit Startup Program
-- Provider: LiveKit
-- Category: startup_program
-- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://livekit.com/startups
-- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
-- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll. Applicants must be incorporated or actively incorporating and building for real end-users. The program targets net-new startup projects: free-plan evaluators/builders can apply, while projects running for a while or already paying/contractually committed may be declined and reviewed case by case.
-- Claim steps: Confirm the startup is incorporated or actively incorporating, is building for real end-users, and meets the net-new project rules; existing paid/committed users should explain their circumstances in the application. | Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
