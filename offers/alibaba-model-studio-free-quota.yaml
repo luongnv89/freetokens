@@ -4,6 +4,15 @@
 # is approved (whichever is later). After the quota expires or is exhausted,
 # you will be charged for continued use of the model inference service.")
 # No firsthand signup test; curator verification date and statuses retained.
+# 2026-10-30 daily check: the same page gained a "Removed free quotas" section:
+# "After removal, new users will no longer receive a free quota for the model;
+# quotas already issued to existing users remain available until they expire or
+# are exhausted. When new models are released, the platform will continue to
+# grant free quotas for the new models." Its "List of models with free quotas
+# removed 2026-10-29" names 209 model IDs, including qwen-max, qwen-plus,
+# qwen3.6-plus, qwen3-coder-plus, deepseek-v3.2, deepseek-v4-flash, glm-5.1,
+# glm-5.2 and Wan 2.x/2.7 video models. Flagged to-be-verified: confirm which
+# current models still carry a new-user quota.
 title: Alibaba Cloud Model Studio — Free Quota for New Users
 provider: Alibaba Cloud
 category: api_provider
@@ -12,5 +21,5 @@ expiry_date: null
 source_url: https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota
 verified_date: 2026-09-30
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: required

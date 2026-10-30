@@ -5,10 +5,19 @@
 # "No card. Sandbox keys never bill." Eligibility: under $10M raised,
 # incorporated fewer than seven years ago, not a current PyAI customer on
 # an annual contract, one award per company.)
+# 2026-10-30 daily check: https://pyai.com/startups and the program terms
+# (https://pyai.com/startups/terms, "Last updated October 29, 2026") now say
+# "Selected teams receive $5K–$100K in non-cash PyAI product credits." and
+# "The Program has four tiers: Starter ($5,000), Launch ($20,000), Growth
+# ($50,000), and Scale ($100,000). The tiers include managed phone allowances
+# of 1,000, 5,000, 10,000, and 20,000 minutes, respectively." Credits now
+# release in usage-gated tranches ("Starter and Launch awards use two
+# tranches, Growth uses three, and Scale uses four.") instead of 12 monthly
+# parts. Amount and detail copy updated; no signup test performed.
 title: PyAI for Startups
 provider: PyAI
 category: startup_program
-amount: $20K–$100K in voice AI credits over 12 months (Launch $20K / Growth $50K / Scale $100K) plus managed phone minutes
+amount: $5K–$100K in non-cash PyAI product credits over a 12-month term (Starter $5K / Launch $20K / Growth $50K / Scale $100K) plus 1k–20k managed phone minutes
 expiry_date: null
 source_url: https://pyai.com/startups
 verified_date: 2026-09-30

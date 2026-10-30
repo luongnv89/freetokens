@@ -1,31 +1,37 @@
 {
-  "summary": "PyAI for Startups puts a $10M pool behind 200+ voice-product startups. Three tiers: Launch $20,000 (400k Omni + 25k phone minutes), Growth $50,000 (1M Omni + 50k phone minutes), Scale $100,000 (2M Omni + 100k phone minutes). Credits cover AI meters on the PyAI rate card and release in 12 monthly parts over a one-year term; unused credit rolls forward within the term but expires 12 months after activation. Credits are non-transferable, non-refundable, tied to one organization, and have no cash value. Phone minutes beyond the included allowance cost $0.01/min and are not covered; phone numbers, SMS, carrier pass-through fees, taxes, anything outside the rate card, and enterprise add-ons (SSO, BAA, dedicated capacity) are also excluded. Eligibility: building a voice product live or launching within six months, working website, under $10M raised, incorporated fewer than seven years ago (or a team incorporating within 90 days), not a current PyAI customer on an annual or enterprise contract. No card required. Legal terms limit awards to one per company, corporate group or product; prior recipients cannot apply. Verify the application email to activate the single-organization award. Reselling, sublicensing, or sharing capacity, keys or minutes with another company or product forfeits the award.",
+  "summary": "PyAI for Startups is a $10M program for 200+ startups building with PyAI across speech, agents, translation and compliance. Program terms last updated October 29, 2026 list four tiers: Starter $5,000 (100k Omni + 1k phone minutes), Launch $20,000 (400k Omni + 5k phone minutes), Growth $50,000 (1M Omni + 10k phone minutes), Scale $100,000 (2M Omni + 20k phone minutes); PyAI picks the tier. Until that update the page listed only Launch, Growth and Scale, with 25k/50k/100k phone minutes released in 12 monthly parts. Credits now release in two to four usage-gated tranches (two for Starter/Launch, three for Growth, four for Scale): the first tranche and the full phone allowance land at activation, and each later tranche unlocks after 80% of released AI credit is used. The 12-month term starts at activation; remaining credit and phone allowance expire at its end. Credits are non-cash, non-transferable, non-refundable and tied to one organization. Phone minutes beyond the allowance, phone numbers, SMS, carrier pass-through fees, taxes, items outside the rate card and enterprise add-ons (SSO, BAA, dedicated capacity) bill at published rates. Eligibility: product using PyAI live or launching within six months, working website, under $10M raised, incorporated fewer than seven years ago (or incorporating within 90 days), not a current PyAI customer on an annual or enterprise contract; one award per company, corporate group or product, and prior recipients are ineligible. No card required. Reselling, sublicensing, or sharing capacity, keys or minutes with another company or product forfeits the award.",
   "claim_steps": [
     "Apply at pyai.com/startups with company, product, stage, funding, and a demo link, two-minute video, or deck.",
     "Check the legal terms: annual or enterprise-contract customers and prior recipients are excluded. One award per company, corporate group or product; no resale, sublicensing or sharing capacity, keys or minutes with another company or product.",
-    "A person reviews within five business days (two via partner VC/accelerator).",
+    "A person reviews within five business days (two via partner VC/accelerator) and assigns the tier: Starter $5K, Launch $20K, Growth $50K or Scale $100K. The requested tier is only a suggestion.",
     "On acceptance, create or sign in to the PyAI account with the application email and verify it. The award binds to one organization; no card is needed.",
-    "Credits release in 12 monthly parts; unused credit rolls forward only within the term and expires 12 months after activation. The award is non-transferable, non-refundable, tied to one organization, and has no cash value.",
-    "Budget separately for phone minutes beyond your allowance ($0.01/min), phone numbers, SMS, carrier pass-through fees, taxes, anything outside the PyAI rate card, and enterprise add-ons (SSO, BAA, dedicated capacity); the award does not cover them."
+    "The first tranche and full phone allowance arrive at activation; later tranches unlock after 80% of released AI credit is used. Remaining credit and minutes expire 12 months after activation. Credits are non-cash, non-transferable and non-refundable.",
+    "Budget separately for phone minutes beyond your allowance, phone numbers, SMS, carrier pass-through fees, taxes, anything outside the PyAI rate card, and enterprise add-ons (SSO, BAA, dedicated capacity); these bill at published rates."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://pyai.com/startups",
       "title": "PyAI for Startups",
-      "text": "PyAI is putting $10 million behind 200+ startups. Selected teams receive $20K–$100K in voice AI credit, including the first phone minutes. Released in 12 monthly parts over a one-year term. No card. Sandbox keys never bill."
+      "text": "A $10 million program for 200+ ambitious startups building Consumer, Prosumer, Enterprise, Education, and Social Impact products. ... Selected teams receive $5K–$100K in non-cash PyAI product credits. No equity. No card required."
     },
     {
       "type": "link",
-      "url": "https://pyai.com/startups",
-      "title": "PyAI startup credit validity and ownership",
-      "text": "Unused credit rolls forward inside the term; whatever is left at twelve months expires. ... Credits are non-transferable, have no cash value, and expire 12 months after activation."
+      "url": "https://pyai.com/startups/terms",
+      "title": "PyAI for Startups program terms (last updated October 29, 2026) — tiers",
+      "text": "The Program has four tiers: Starter ($5,000), Launch ($20,000), Growth ($50,000), and Scale ($100,000). The tiers include managed phone allowances of 1,000, 5,000, 10,000, and 20,000 minutes, respectively. PyAI selects the tier; the tier requested on the application is a suggestion."
+    },
+    {
+      "type": "link",
+      "url": "https://pyai.com/startups/terms",
+      "title": "PyAI startup credit release and expiry",
+      "text": "Starter and Launch awards use two tranches, Growth uses three, and Scale uses four. Each later tranche unlocks automatically after eligible AI usage reaches 80% of the AI credit already released. ... The term is twelve months from activation; any credit remaining at the end of the term expires."
     },
     {
       "type": "link",
       "url": "https://pyai.com/startups",
       "title": "PyAI startup award — excluded charges",
-      "text": "NOT COVERED Phone minutes past your allowance (billed at the listed $0.01/min) Phone numbers, SMS, and carrier pass-through fees Taxes, and anything outside the PyAI rate card Enterprise add-ons: SSO, BAA, dedicated capacity"
+      "text": "NOT COVERED Phone minutes past your allowance, billed at published rates Phone numbers, SMS, and carrier pass-through fees Taxes, and anything outside the PyAI rate card Enterprise add-ons: SSO, BAA, dedicated capacity"
     },
     {
       "type": "link",

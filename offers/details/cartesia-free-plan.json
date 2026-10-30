@@ -1,18 +1,18 @@
 {
-  "summary": "Cartesia's $0 Free plan includes a shared 20,000-credit monthly pool for Sonic text-to-speech (about 27 minutes) or Ink speech-to-text (about 1h51m), not both full allowances together. It separately includes $1/month in prepaid Managed Agents usage, advertised as approximately 17 call minutes before telephony charges. Agent calls cost $0.06/minute; using a Cartesia-provided phone number adds $0.014/minute for telephony. Free has a limit of one Cartesia-provisioned phone number, not one agent slot, and unlimited workspace seats. No card is required to start. A commercial-use license starts on paid Pro, not Free. Further Agent usage can continue at the same paid rate after the prepaid dollars are exhausted; confirm billing and overage settings before exceeding the $1 allowance.",
+  "summary": "Cartesia's $0 Free plan includes a shared 20,000-credit monthly pool for Sonic text-to-speech (about 27 minutes) or Ink speech-to-text (about 1h51m), not both full allowances together. It separately includes $1/month in prepaid Managed Agents usage, advertised as about 33 call minutes before telephony charges at the standard $0.03/minute agent rate (the pricing page showed $0.06/minute and about 17 minutes through 2026-10-29); using a Cartesia-provided phone number adds $0.014/minute for telephony. Free has a limit of one Cartesia-provisioned phone number, not one agent slot, and unlimited workspace seats. No card is required to start. A commercial-use license starts on paid Pro, not Free. Further Agent usage can continue at the same paid rate after the prepaid dollars are exhausted; confirm billing and overage settings before exceeding the $1 allowance.",
   "claim_steps": [
     "Open cartesia.ai/pricing and choose the Free plan ('Start free').",
     "Sign up at play.cartesia.ai - no credit card required to start.",
     "Generate speech with Sonic or transcribe with Ink from the playground or API; both draw from the same 20K monthly credit pool.",
     "Stay within the included monthly allowance. Free does not include a commercial-use license; paid Pro adds that license.",
-    "For Managed Agents, review the separate $1/month prepaid balance, $0.06/minute calls and $0.014/minute Cartesia-number telephony. Confirm billing/overage settings: usage beyond prepaid dollars continues at the same paid rate."
+    "For Managed Agents, review the separate $1/month prepaid balance (about 33 minutes at $0.03/minute) and $0.014/minute Cartesia-number telephony. Confirm billing/overage settings: calls keep running at your plan's agent rate after prepaid dollars are used."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://cartesia.ai/pricing",
       "title": "Cartesia pricing — separate prepaid Managed Agents balance",
-      "text": "The free plan has $1/mo of prepaid dollars to use towards voice agents."
+      "text": "Free includes $1 for voice agents. ... At the standard $0.03/minute rate, each plan's prepaid agent dollars cover about: Free: 33 minutes"
     },
     {
       "type": "link",
@@ -30,7 +30,7 @@
       "type": "link",
       "url": "https://cartesia.ai/pricing",
       "title": "Cartesia pricing — Agent call and telephony rates",
-      "text": "Call duration $0.06 per minute ... Telephony $0.014 per minute when using a Cartesia-provided phone number"
+      "text": "Call duration $0.03 per minute ... Telephony $0.014 per minute when using a Cartesia-provided phone number"
     }
   ]
 }
