@@ -1,10 +1,11 @@
 {
-  "summary": "Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation, model release, or model-request approval, whichever is later. Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry. Complete your account information before activation. Use a general-purpose pay-as-you-go API key; dedicated Token Plan/Coding Plan keys do not consume this quota. Pay-as-you-go billing starts automatically when the quota expires or is exhausted unless you enable Free Quota Only, which is disabled by default. Enable it before exhausting quota and wait for the setting to take effect; calls during the delay can still incur charges.",
+  "summary": "Alibaba Cloud Model Studio automatically grants new activations a free quota per eligible model — typically 1,000,000 tokens each — valid for 90 days from activation, model release, or model-request approval, whichever is later. Only models in the Singapore region with International service scope qualify, and the quota covers real-time inference only (no batch, fine-tuning, deployment, or storage fees). Quotas are per-model, cannot be shared across models, and unused quota is voided at expiry. On 2026-10-29 Alibaba removed new-user free quotas for 209 listed model IDs, including qwen-max, qwen-plus, qwen3.6-plus, qwen3-coder-plus, deepseek-v3.2, deepseek-v4-flash, glm-5.1, glm-5.2 and Wan 2.x video models; quotas already issued stay usable until they expire or run out, and newly released models continue to receive quotas. Check each model's Free Quota entry before relying on it. Complete your account information before activation. Use a general-purpose pay-as-you-go API key; dedicated Token Plan/Coding Plan keys do not consume this quota. Pay-as-you-go billing starts automatically when the quota expires or is exhausted unless you enable Free Quota Only, which is disabled by default. Enable it before exhausting quota and wait for the setting to take effect; calls during the delay can still incur charges.",
   "claim_steps": [
     "Create an Alibaba Cloud account, complete your account information, and open Alibaba Cloud Model Studio in the Singapore region with International service scope.",
     "Read and agree to the service agreement; activation and the free quota are automatic — no product purchase or manual claim needed.",
     "Wait up to ~2 hours for the quota to take effect; check the Free Quota tab on the model usage page.",
     "Check each model's quota validity: 90 days from activation, model release, or model-request approval, whichever is later.",
+    "Check the doc's 'Removed free quotas' list before choosing models: since 2026-10-29, 209 model IDs (for example qwen-max, qwen-plus, deepseek-v4-flash, glm-5.2) no longer grant new users a free quota.",
     "Before calling eligible models in real time, enable 'Free Quota Only' mode (disabled by default) so usage stops rather than automatically incurring pay-as-you-go charges when quota expires or is exhausted.",
     "Create/use a general-purpose pay-as-you-go API key: Token Plan or Coding Plan dedicated keys do not consume this free quota.",
     "After enabling Free Quota Only, wait for it to take effect before invoking; the delay can still cause charges. Enable it before the quota is exhausted and verify each model's remaining quota and protection status."
@@ -28,6 +29,12 @@
       "url": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota",
       "title": "Free-quota API key requirement",
       "text": "Note that Token Plan or Coding Plan dedicated API keys do not consume free quota; only a general-purpose pay-as-you-go API key draws from your free quota."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/new-free-quota",
+      "title": "Removed free quotas (list dated 2026-10-29)",
+      "text": "The free quotas of some models have been removed by the platform. After removal, new users will no longer receive a free quota for the model; quotas already issued to existing users remain available until they expire or are exhausted. When new models are released, the platform will continue to grant free quotas for the new models."
     },
     {
       "type": "link",
