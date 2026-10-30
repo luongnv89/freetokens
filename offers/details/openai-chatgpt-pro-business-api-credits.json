@@ -1,0 +1,23 @@
+{
+  "summary": "Per OpenAI's API changelog entry dated Oct 28, 2026, eligible ChatGPT Pro and Business subscribers can claim up to $500 per month in free API credits. The benefit is activated from ChatGPT or the API Platform by linking an API organization the subscriber owns. The changelog points to a guide at developers.openai.com/api/docs/guides/chatgpt-api-credits for credit amounts and eligibility (not loaded within budget).",
+  "claim_steps": [
+    "Hold an eligible ChatGPT Pro or Business subscription",
+    "Activate the benefit from ChatGPT or the API Platform",
+    "Link an API organization you own to receive the credits"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://developers.openai.com/api/docs/changelog",
+      "title": "Changelog",
+      "text": "Eligible ChatGPT Pro and Business subscribers can now claim up to $500 per month in free API credits. Activate the benefit from ChatGPT or API Platform by linking an API organization you own."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/OpenAIDevs/status/2115583698074755078",
+      "author": "OpenAI Developers",
+      "text": "Starting today, eligible ChatGPT Pro and Business subscribers can claim up to $500 per month in API credits to build apps and agents.",
+      "handle": "@OpenAIDevs"
+    }
+  ]
+}

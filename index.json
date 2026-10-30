@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-26T04:05:56Z",
-  "count": 261,
-  "active_count": 223,
+  "generated_at": "2026-10-30T06:07:45Z",
+  "count": 262,
+  "active_count": 224,
   "expired_count": 38,
   "offers": [
     {
@@ -3918,6 +3918,21 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "openai-chatgpt-pro-business-api-credits",
+      "title": "OpenAI API Credits for ChatGPT Pro and Business — Up to $500/Month",
+      "provider": "OpenAI",
+      "category": "api_provider",
+      "amount": "Up to $500 per month in free OpenAI API credits for eligible ChatGPT Pro and Business subscribers; activate from ChatGPT or the API Platform by linking an API organization you own",
+      "expiry_date": null,
+      "source_url": "https://developers.openai.com/api/docs/changelog",
+      "verified_date": "2026-10-30",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [
