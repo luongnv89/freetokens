@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-30T06:07:45Z — 118 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-30T21:07:21Z — 118 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -15,8 +15,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-10-30 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://developers.openai.com/api/docs/changelog
 - Page: https://freetokens.custats.info/offers/openai-chatgpt-pro-business-api-credits.html
-- Summary: Per OpenAI's API changelog entry dated Oct 28, 2026, eligible ChatGPT Pro and Business subscribers can claim up to $500 per month in free API credits. The benefit is activated from ChatGPT or the API Platform by linking an API organization the subscriber owns. The changelog points to a guide at developers.openai.com/api/docs/guides/chatgpt-api-credits for credit amounts and eligibility (not loaded within budget).
-- Claim steps: Hold an eligible ChatGPT Pro or Business subscription | Activate the benefit from ChatGPT or the API Platform | Link an API organization you own to receive the credits
+- Summary: Per OpenAI's API changelog entry dated Oct 28, 2026, eligible ChatGPT Pro and Business subscribers can claim free monthly API credits. Pro gets $100, $200 or $500 per month depending on tier; Business gets $20 per paid Standard seat or $100 per paid Premium seat, pooled and capped at $500 per workspace per month. The subscription must be paid and at least seven days old: free trials, complimentary subscriptions and ChatGPT Enterprise do not qualify. The ChatGPT account and the API account must use the same email address, and you must own both the subscription (or Business workspace) and the API organization. Credits are issued when the subscription renews; unused credits expire at the end of the billing cycle and do not roll over.
+- Claim steps: Hold a paid ChatGPT Pro or Business subscription that is at least seven days old (not a trial, complimentary plan or Enterprise) | Use the same email address for your ChatGPT account and the API account that owns the receiving organization | Activate the benefit in ChatGPT billing settings or on the API Platform Billing page by linking an API organization you own | Credits are issued automatically when the subscription renews; unused credits expire at the end of each billing cycle
 ### Stability AI — 25 Free API Credits
 - Provider: Stability AI
 - Category: image
