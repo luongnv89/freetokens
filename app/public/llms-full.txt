@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-30T21:07:21Z — 118 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-10-31T04:04:28Z — 117 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Monthly Claude API credits for Max, Ultra and Team plans
+- Provider: Anthropic
+- Category: api_provider
+- Amount: $100/month (Max) or $200/month (Ultra) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-10-31 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
+- Page: https://freetokens.custats.info/offers/claude-max-team-monthly-api-credits.html
+- Summary: Active Claude Max, Ultra and Team subscribers can claim monthly Claude Platform credits after seven days on an eligible plan: $100 on Max, $200 on Ultra (the tiers formerly named Max 5x and Max 20x), and on Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500 per month. Credits arrive after each plan payment, expire at the end of each billing cycle and do not roll over. They cover the Claude API (Messages and Message Batches), the Console Playground, Claude Managed Agents and the Claude Agent SDK, but not Claude Code interactive sessions, extra usage, or Claude on third-party clouds. Free, Pro and Enterprise plans are not eligible.
+- Claim steps: Keep an eligible Max, Ultra or Team subscription active and in good standing for at least seven days. You must be the Max or Ultra subscriber or a Team Owner/Primary Owner, and an Owner, Admin or Billing member of the receiving Console organization. | On claude.ai, go to Settings > Billing as a Max or Ultra subscriber or Organization settings > Billing as a Team Owner or Primary Owner. | In the API credits section, select 'Link organization.' | Choose the receiving Console organization carefully: one organization per plan and one plan per organization. You cannot change the linked organization yourself; contact support to change it. | Review the Supplemental Credit Terms, then Link organization. | No Console card is needed for the grant. Once it runs out, requests stop unless other credits, auto-reload, or invoiced billing are available; those can fund further paid usage.
 ### OpenAI API Credits for ChatGPT Pro and Business — Up to $500/Month
 - Provider: OpenAI
 - Category: api_provider
@@ -346,16 +356,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/codiv-openjev-free-api-tokens.html
 - Summary: Codiv serves OpenJev through a Jev-compatible API. The free public experiment supplies 100M input tokens per account and a separate 10M text-generation-token allowance, with 60 requests per minute per key. Signup is required; no credit card or paid plan is required. No enrollment end date is stated on the loaded official pages.
 - Claim steps: Sign up with Google, GitHub or email. | Open the dashboard and create an API key. | Call the Codiv API using the official quickstart.
-### Monthly Claude API credits for Max and Team plans
-- Provider: Anthropic
-- Category: api_provider
-- Amount: $100/month (Max 5x) or $200/month (Max 20x) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
-- Page: https://freetokens.custats.info/offers/claude-max-team-monthly-api-credits.html
-- Summary: Active Claude Max and Team subscribers can claim monthly Claude Platform credits after seven days on an eligible plan: $100 on Max 5x, $200 on Max 20x, and on Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500 per month. Credits arrive after each plan payment, expire at the end of each billing cycle and do not roll over. They cover the Claude API (Messages and Message Batches), the Console Playground, Claude Managed Agents and the Claude Agent SDK, but not Claude Code interactive sessions, extra usage, or Claude on third-party clouds. Free, Pro and Enterprise plans are not eligible.
-- Claim steps: Keep an eligible Max or Team subscription active and in good standing for at least seven days. You must be the Max subscriber or a Team Owner/Primary Owner, and an Owner, Admin or Billing member of the receiving Console organization. | On claude.ai, go to Settings > Billing as a Max subscriber or Organization settings > Billing as a Team Owner or Primary Owner. | In the API credits section, select 'Link organization.' | Choose the receiving Console organization carefully: one organization per plan and one plan per organization. You cannot change the linked organization yourself; contact support to change it. | Review the Supplemental Credit Terms, then Link organization. | No Console card is needed for the grant. Once it runs out, requests stop unless other credits, auto-reload, or invoiced billing are available; those can fund further paid usage.
 ### Baidu AI Studio — 1 Million Free Tokens
 - Provider: Baidu
 - Category: api_provider
@@ -1090,11 +1090,11 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Category: api_provider
 - Amount: $1 credit for 30 days (bank card required to onboard)
 - Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://docs.tokenfactory.nebius.com/other-capabilities/billing-new
 - Page: https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html
-- Summary: Nebius Token Factory grants $1 in trial credit upon first sign-up, valid for 30 days. Onboarding requires a billing account with a bank card and cannot be completed without it. Usage debits the balance in real time; the card is automatically charged to clear a negative balance at the start of the month or when the configured billing threshold is reached. This is a small trial credit, not a guarantee of zero-cost continued usage. Monitor usage, balance and billing settings; no fixed campaign end date is stated.
-- Claim steps: Sign up for a Nebius Token Factory account. | During onboarding, create a billing account — billing setup is mandatory and you cannot complete onboarding without it. | Set up the billing account with a bank card, which is required. | The $1 trial credit is applied automatically upon first sign-up and is valid for 30 days. | Monitor usage and balance: the card automatically settles a negative balance at month start or the configured billing threshold. Stop chargeable usage if you do not intend to pay beyond the trial.
+- Summary: As of 2026-10-31 Nebius's billing documentation no longer states the $1 trial credit, so its current availability is unconfirmed. Nebius Token Factory previously documented $1 in trial credit upon first sign-up, valid for 30 days. Onboarding requires a billing account with a bank card and cannot be completed without it. Usage debits the balance in real time; the card is automatically charged to clear a negative balance at the start of the month or when the configured billing threshold is reached. This is a small trial credit, not a guarantee of zero-cost continued usage. Monitor usage, balance and billing settings; no fixed campaign end date is stated.
+- Claim steps: Sign up for a Nebius Token Factory account. | During onboarding, create a billing account — billing setup is mandatory and you cannot complete onboarding without it. | Set up the billing account with a bank card, which is required. | Check your balance after onboarding: the docs stated a $1 trial credit valid for 30 days through 2026-10-30, but the billing page no longer mentions it, so do not assume it is granted. | Monitor usage and balance: the card automatically settles a negative balance at month start or the configured billing threshold. Stop chargeable usage if you do not intend to pay beyond the trial.
 ### Nebius AI Builder Program — $25 Token Factory + $25 Tavily Credits
 - Provider: Nebius
 - Category: startup_program
@@ -1175,16 +1175,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llm7-free-tier.html
 - Summary: LLM7 documents a free dashboard token for current tier:turbo text-generation models with usage_based_only:false, not every catalog model or Pro/paid-only models. Limits are 1 request per second, 60 per minute, 250 per hour, and 100,000 input-plus-output tokens per 24 hours. Its current limits page no longer documents anonymous access. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.
 - Claim steps: Obtain a free token from the LLM7 dashboard at dash.llm7.io. | Check https://api.llm7.io/v1/models and select a current text-generation model with tier:turbo and usage_based_only:false. Send an OpenAI-compatible request using that model ID and your free dashboard token; Pro or usage_based_only:true models require paid accounting. | Check live availability and dashboard allowance. Stay within 1 request/second, 60/minute, 250/hour and 100,000 input-plus-output tokens/24 hours; quotas may be reduced without notice. | Turbo pricing metadata is for paid usage accounting, not proof the documented free allowance has ended. Image/video allowance and balance rules are separate.
-### LlamaParse Startup Offer
-- Provider: LlamaIndex
-- Category: startup_program
-- Amount: $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.llamaindex.ai/startups
-- Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
-- Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
-- Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
