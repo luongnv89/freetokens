@@ -1,6 +1,10 @@
 # Verified 2026-09-04 against https://docs.tokenfactory.nebius.com/other-capabilities/billing-new
 # ("Upon first sign-up, you receive $1 in trial credit, valid for 30 days."
 # Billing setup with a bank card is mandatory during onboarding.)
+# 2026-10-31: the same billing page (still 200) no longer contains the "Upon first sign-up, you receive
+# $1 in trial credit, valid for 30 days." sentence (present on 2026-10-30), and llms-full.txt has no
+# remaining "trial" mention. No end notice found; flagged to-be-verified until a new account balance
+# or an official source confirms whether the $1 trial credit is still granted.
 title: Nebius Token Factory $1 trial credit
 provider: Nebius Token Factory
 category: api_provider
@@ -9,5 +13,5 @@ expiry_date: null
 source_url: https://docs.tokenfactory.nebius.com/other-capabilities/billing-new
 verified_date: 2026-09-30
 verification: social_proof
-review_status: under-review
+review_status: to-be-verified
 signup: required

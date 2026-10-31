@@ -4,13 +4,16 @@
 # Table: "Max 5x: $100", "Max 20x: $200", "Team (Standard seats): $20 per
 # seat", "Team (Premium seats): $100 per seat", team credits "capped at $500".
 # "Free, Pro, and Enterprise plans aren't eligible." No end date stated.)
-title: Monthly Claude API credits for Max and Team plans
+# 2026-10-31: article retitled "Monthly API credits for Max, Ultra, and Team plans"; table now reads
+# "Max $100", "Ultra $200" (claude.com/pricing: Max $100/month, Ultra $200/month). Team amounts and
+# the $500 pool cap are unchanged. Slug kept; the Max 5x/20x quotes above are historical wording.
+title: Monthly Claude API credits for Max, Ultra and Team plans
 provider: Anthropic
 category: api_provider
-amount: $100/month (Max 5x) or $200/month (Max 20x) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month
+amount: $100/month (Max) or $200/month (Ultra) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month
 expiry_date: null
 source_url: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
-verified_date: 2026-10-07
+verified_date: 2026-10-31
 verification: social_proof
 review_status: under-review
 signup: required
