@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-01T07:34:01Z — 118 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-01T07:45:17Z — 118 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -37,16 +37,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/nebius-startups-nvidia-inception-credits.html
 - Summary: Nebius for Startups offer for NVIDIA Inception members: $5,000 in introductory credits for training or inference on Nebius on demand, plus up to $150,000 in compute savings. Due to demand, selection is temporarily limited to AI-native startups with $5M+ in venture backing, with preference for startups backed by Nebius's partner VC firms. All applications go to a waitlist, acceptance is not guaranteed, and applicants should use a company email address.
 - Claim steps: Be an NVIDIA Inception member | Apply on the Nebius Inception offering page using a company email address | Wait for waitlist review and acceptance
-### Nebius AI Builder Program — $250 in Token Factory & Partner Credits
-- Provider: Nebius
-- Category: startup_program
-- Amount: $25 Nebius Token Factory + $100 LangSmith (LangChain) + $50 Toloka + $50 Tandem + $25 Tavily credits after registration and email verification (Nebius promo credits expire 90 days after issuance); launch blog cites $400+ in credits and discounts
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-01 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://nebius.com/builders-terms-and-conditions
-- Page: https://freetokens.custats.info/offers/nebius-ai-builder-program.html
-- Summary: The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Programme credits cannot be used for production workloads, large-scale commercial deployment, or revenue-generating activity beyond prototyping and experimentation. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.
-- Claim steps: Complete the Builder Program registration form (name, email, company or university, role, country, what you are building) and accept the program terms. | Verify your email via the double opt-in message — membership activates only after verification. | Redeem the issued promo codes: $25 for Nebius Token Factory and $25 for Tavily. Credits expire 90 days from issuance. | Use Programme credits for prototyping and experimentation, not production workloads, large-scale commercial deployment, or revenue-generating activity beyond that scope.
 ### HeyGen Voice Turbo Free (OpenRouter)
 - Provider: HeyGen
 - Category: voice
@@ -1115,6 +1105,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html
 - Summary: As of 2026-10-31 Nebius's billing documentation no longer states the $1 trial credit, so its current availability is unconfirmed. Nebius Token Factory previously documented $1 in trial credit upon first sign-up, valid for 30 days. Onboarding requires a billing account with a bank card and cannot be completed without it. Usage debits the balance in real time; the card is automatically charged to clear a negative balance at the start of the month or when the configured billing threshold is reached. This is a small trial credit, not a guarantee of zero-cost continued usage. Monitor usage, balance and billing settings; no fixed campaign end date is stated.
 - Claim steps: Sign up for a Nebius Token Factory account. | During onboarding, create a billing account — billing setup is mandatory and you cannot complete onboarding without it. | Set up the billing account with a bank card, which is required. | Check your balance after onboarding: the docs stated a $1 trial credit valid for 30 days through 2026-10-30, but the billing page no longer mentions it, so do not assume it is granted. | Monitor usage and balance: the card automatically settles a negative balance at month start or the configured billing threshold. Stop chargeable usage if you do not intend to pay beyond the trial.
+### Nebius AI Builder Program — $25 Token Factory + $25 Tavily Credits
+- Provider: Nebius
+- Category: startup_program
+- Amount: $25 Nebius Token Factory + $25 Tavily promo credits after registration and email verification (expire 90 days after issuance); marketing cites $400+ total in partner credits/discounts
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://nebius.com/builders-terms-and-conditions
+- Page: https://freetokens.custats.info/offers/nebius-ai-builder-program.html
+- Summary: The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Programme credits cannot be used for production workloads, large-scale commercial deployment, or revenue-generating activity beyond prototyping and experimentation. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.
+- Claim steps: Complete the Builder Program registration form (name, email, company or university, role, country, what you are building) and accept the program terms. | Verify your email via the double opt-in message — membership activates only after verification. | Redeem the issued promo codes: $25 for Nebius Token Factory and $25 for Tavily. Credits expire 90 days from issuance. | Use Programme credits for prototyping and experimentation, not production workloads, large-scale commercial deployment, or revenue-generating activity beyond that scope.
 ### Murf Startup Incubator Program
 - Provider: Murf AI
 - Category: startup_program
