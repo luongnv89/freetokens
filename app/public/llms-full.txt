@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-10-31T04:04:28Z — 117 of 224 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-01T04:04:47Z — 117 of 221 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Qoder International Free Daily Credits and Free Flash Models
+- Provider: Qoder
+- Category: coding
+- Amount: 100 free Credits per day (claim daily, each valid 30 days) plus a daily free-use allowance for Qwen3.8-Flash (number of uses unpublished; paid subscribers get more)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-01 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.qoder.com/events/100credits
+- Page: https://freetokens.custats.info/offers/qoder-daily-credits-free-models.html
+- Summary: Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is "to be announced". Qwen3.8-Flash also has a daily free usage allowance: within it the Credit rate is cut from 0.1x to 0.0x and the model works even with a zero balance. Qoder does not publish the number of free uses; paid subscribers get more than free users, and once the allowance is used up the model is billed at its normal Credit rate until the next day. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.
+- Claim steps: Download the Qoder desktop app and create or sign in to an individual Qoder International account. | During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later. | Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed. | For the free model, select Qwen3.8-Flash in the Qoder model picker; no claim is needed. Calls are free only within the daily free allowance (count unpublished); after that they use Credits at the normal rate until the next day.
 ### Monthly Claude API credits for Max, Ultra and Team plans
 - Provider: Anthropic
 - Category: api_provider
@@ -47,16 +57,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/valyu-new-account-search-credits.html
 - Summary: New accounts receive $10 of free credits, or $20 when signing up with a company email; no card is required. One shared credit balance covers Search, Contents and DeepResearch. While free credits remain, the account can use every source on Valyu's standard plans; licensed sources outside the standard plans still need separate access. Free credits expire 12 months after signup. After that, pay-as-you-go top-ups start at $10 (1,600 credits per $10) and monthly plans unlock more sources. There are no overage charges: when the balance cannot cover a request, the API returns 402 Payment Required and does not run it.
 - Claim steps: Sign up for a new Valyu account; use a company email for the officially stated $20 grant instead of $10. | Use the free balance to try Search, Contents and DeepResearch across standard-plan sources; licensed sources outside the standard plans need separate access. No card is required. | Spend the free credits within 12 months of signup. When the balance runs out, requests return 402 until you top up ($10 minimum) or choose a plan.
-### Qoder International Free Daily Credits and Free Flash Models
-- Provider: Qoder
-- Category: coding
-- Amount: 100 free Credits per day (claim daily, each valid 30 days) plus free Qwen3.8-Flash; DeepSeek-V4.1-Flash-1017 free until November 1, 00:00 UTC+8
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-10-21 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.qoder.com/events/100credits
-- Page: https://freetokens.custats.info/offers/qoder-daily-credits-free-models.html
-- Summary: Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is "to be announced". Qwen3.8-Flash is also free: its Credit rate is cut from 0.1x to 0.0x and it works even with a zero balance. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. Separately, Qoder's October 19 post made DeepSeek-V4.1-Flash-1017 cost 0.0x Credits for free and paid users through October 24; its October 24 post extends that window: the model stays at 0x credits until November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.
-- Claim steps: Download the Qoder desktop app and create or sign in to an individual Qoder International account. | During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later. | Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed. | For the free models, just select Qwen3.8-Flash or DeepSeek-V4.1-Flash-1017 (0x credits until November 1, 00:00 UTC+8) in the Qoder model picker; no claim is needed.
 ### MiMo V2.6 Flash Free on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -307,16 +307,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openai-chatgpt-for-teachers.html
 - Summary: Official sources accessed 2026-10-07 confirm educator-only eligibility, school/district-email verification and workspace onboarding. The free-service period runs through June 2028, but no exact enrollment deadline is stated, so expiry_date remains null. Payment-card requirements are not stated in the loaded pages. This is workspace access, not API credits. Unlimited applies to GPT-5.1 Auto messages, not every tool or feature.
 - Claim steps: Start educator verification at chatgpt.com/k12-verification using your school or district email address. | After verification, create a workspace or join an existing workspace tied to your district domain. | Follow educator onboarding prompts to set your role, subjects and grade levels.
-### OpenAI ChatGPT Back to School 2026 — Four Free Months of Plus
-- Provider: OpenAI
-- Category: student
-- Amount: 4 free months of ChatGPT Plus incl. Work ($80 value); SheerID-verified full-/part-time college/graduate students at eligible U.S. degree-granting institutions; payment method required; renews $20/mo unless canceled; new/direct-billed monthly Plus users eligible, store-billed users excluded
-- Status: active — enrollment deadline: 2026-10-31
-- Last checked: 2026-10-07 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://chatgpt.com/students/2026/
-- Page: https://freetokens.custats.info/offers/openai-chatgpt-back-to-school-2026.html
-- Summary: Official pages accessed 2026-10-07. Claim once while signed in to the intended ChatGPT account after SheerID enrollment verification. Previous student-promotion participation does not itself exclude eligibility. Apple App Store and Google Play subscriptions are excluded while store-billed. Cancellation retains access through the current billing period but forfeits remaining promotional months when it takes effect. This is a subscription promotion, not API or Codex credit.
-- Claim steps: Open the official Back to School offer page in a web or mobile web browser. | Sign in to the ChatGPT account where the offer should apply. | Verify enrollment through SheerID using a school-issued email while signed in to the intended ChatGPT account. Your ChatGPT account may use a different email. | Complete activation in the offer flow. New Plus subscriptions require a payment method; eligible existing directly billed Plus subscribers apply it to their current subscription. It renews at $20/month unless canceled.
 ### Mio — $50 Free Starter Credits
 - Provider: Mio
 - Category: coding
@@ -915,26 +905,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-lfm-2-5-2-6b-free.html
 - Summary: Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context).
 - Claim steps: Create or sign in to an OpenRouter account and create an API key. | Do not submit content you do not want retained or used for Liquid model training. | Call the OpenRouter chat-completions API with model liquid/lfm-2.5-2.6b:free.
-### Laguna XS 2.1 Free (OpenRouter)
-- Provider: OpenRouter
-- Category: coding
-- Amount: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context)
-- Status: active — enrollment deadline: 2026-10-31
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/poolside/laguna-xs-2.1:free
-- Page: https://freetokens.custats.info/offers/openrouter-laguna-xs-2-1-free.html
-- Summary: Free poolside/laguna-xs-2.1:free inference at $0 input and output (262K context). OpenRouter marks this model as going away October 31, 2026. Poolside may use free-endpoint inputs and outputs to train and improve its models; review the linked OpenMDW-1.1 License and Acceptable Use Policy before use.
-- Claim steps: Create or sign in to an OpenRouter account and create an API key. | Review the model's license, acceptable-use and data-use terms: Poolside may use free-endpoint inputs and outputs for model training and improvement. | Call the OpenRouter chat-completions API with model poolside/laguna-xs-2.1:free.
-### Laguna S 2.1 Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free poolside/laguna-s-2.1:free endpoint at $0 (262K context, 118B-A8B coding agent)
-- Status: active — enrollment deadline: 2026-10-31
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/poolside/laguna-s-2.1:free
-- Page: https://freetokens.custats.info/offers/openrouter-laguna-s-2-1-free.html
-- Summary: Laguna S 2.1 is Poolside's latest coding agent model — 118B total, 8B active, 70.2% Terminal-Bench 2.1 — free via OpenRouter's :free endpoint at $0 prompt / $0 completion with a 262K context. Created 2026-07-21; OpenRouter marks it as going away October 31, 2026. Poolside may use free-endpoint inputs and outputs to train and improve its models; review the linked OpenMDW-1.1 License and Acceptable Use Policy before use.
-- Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Review the model's license, acceptable-use and data-use terms: Poolside may use free-endpoint inputs and outputs for model training and improvement. | Call the chat completions API with model id poolside/laguna-s-2.1:free.
 ### Gemma 4 31B Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -1175,6 +1145,36 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llm7-free-tier.html
 - Summary: LLM7 documents a free dashboard token for current tier:turbo text-generation models with usage_based_only:false, not every catalog model or Pro/paid-only models. Limits are 1 request per second, 60 per minute, 250 per hour, and 100,000 input-plus-output tokens per 24 hours. Its current limits page no longer documents anonymous access. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.
 - Claim steps: Obtain a free token from the LLM7 dashboard at dash.llm7.io. | Check https://api.llm7.io/v1/models and select a current text-generation model with tier:turbo and usage_based_only:false. Send an OpenAI-compatible request using that model ID and your free dashboard token; Pro or usage_based_only:true models require paid accounting. | Check live availability and dashboard allowance. Stay within 1 request/second, 60/minute, 250/hour and 100,000 input-plus-output tokens/24 hours; quotas may be reduced without notice. | Turbo pricing metadata is for paid usage accounting, not proof the documented free allowance has ended. Image/video allowance and balance rules are separate.
+### LlamaParse Startup Offer
+- Provider: LlamaIndex
+- Category: startup_program
+- Amount: $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.llamaindex.ai/startups
+- Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
+- Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
+- Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
+### LiveKit Startup Program
+- Provider: LiveKit
+- Category: startup_program
+- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://livekit.com/startups
+- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
+- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll. Applicants must be incorporated or actively incorporating and building for real end-users. The program targets net-new startup projects: free-plan evaluators/builders can apply, while projects running for a while or already paying/contractually committed may be declined and reviewed case by case.
+- Claim steps: Confirm the startup is incorporated or actively incorporating, is building for real end-users, and meets the net-new project rules; existing paid/committed users should explain their circumstances in the application. | Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
+### Liner Startup Grant — up to $1,000 API Credits
+- Provider: Liner
+- Category: startup_program
+- Amount: Up to $1,000 in Liner Search/Search Agent API credits; no equity
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
+- Source: https://build.liner.com/blog/liner-startup-grant-program
+- Page: https://freetokens.custats.info/offers/liner-startup-grant.html
+- Summary: The Liner Startup Grant Program advertises up to $1,000 in credits with no equity taken and nothing to repay. Its blog describes broader Liner API coverage including Search API and Search Agent API, but the current linked application calls the grant Search Agent API credits; confirm the approved product scope before budgeting. The form requires company email, company name, company website and product interest. Liner reviews applications by email, with a confirmation message saying next steps include a link to book a 20-minute onboarding call. No grant-spend expiry is stated publicly.
+- Claim steps: Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes). | Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on. | Watch email for the review outcome and next steps, including a link to book a 20-minute onboarding call. Confirm which API products the approved credits cover; the form names Search Agent API while the blog describes broader API coverage.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
