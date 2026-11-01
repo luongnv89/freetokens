@@ -1,0 +1,21 @@
+{
+  "summary": "Xing4.0-29B-A4B is an open-weight mixture-of-experts language model from China Telecom's AI team (TeleAI), the successor to its TeleChat series, with 29B total and 4B active parameters. OpenRouter serves a free variant, xingchen-agi/xing4.0-29b-a4b:free, through Phala at $0 input and output with a 262,144-token context window (text in, text out).",
+  "claim_steps": [
+    "Create an OpenRouter account and API key",
+    "Call model xingchen-agi/xing4.0-29b-a4b:free through the OpenRouter API"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/xingchen-agi/xing4.0-29b-a4b:free/endpoints",
+      "title": "OpenRouter API — xingchen-agi/xing4.0-29b-a4b:free endpoints",
+      "text": "id: xingchen-agi/xing4.0-29b-a4b:free; name: XingChen: Xing4.0 29B A4B (free); description: \"Xing4.0-29B-A4B is an open-weight mixture-of-experts language model from China Telecom's AI team (TeleAI)\"; endpoint Phala | xingchen-agi/xing4.0-29b-a4b-20261015:free, context_length 262144, pricing {\"prompt\":\"0\",\"completion\":\"0\",\"discount\":0}, status 0, uptime 100."
+    },
+    {
+      "type": "link",
+      "url": "https://pinggy.io/blog/free_ai_model_apis_unlimited_tokens_openrouter/",
+      "title": "How to get Free AI Model APIs with 'Unlimited' Tokens",
+      "text": "Free models on OpenRouter (updated October 27, 2026): ... China Telecom Xing4.0 29B-A4B."
+    }
+  ]
+}
