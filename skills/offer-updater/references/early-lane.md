@@ -158,3 +158,21 @@ When this skill refreshes an early offer, run Step 2 as usual, then:
 | Official pages still silent; the floor no longer holds (posts deleted, private, or older than 30 days) | **Retire** — set `expiry_date` to today so the build moves it to the archive; name it in the PR as a retired early offer. |
 | An official page says the offer ended or never existed | **Expired** — official wins, as in Step 2. |
 | The curator says the offer is fake or asks to take it down | **Retire**, with the curator's reason in the PR. |
+
+## Edge cases
+
+- **Official account post, linked from the provider's site** — official
+  evidence; the live path, still merged after all checks pass.
+- **Look-alike account** ("Zeta AI" display name, unlinked handle) —
+  third-party; it needs a second independent post.
+- **Refresh of a `social_proof` offer behind a bot wall** — never the early
+  lane; the file stays as it is.
+- **Screenshot of an X post with no URL** — search for the post; if no
+  loaded post meets the floor, drop with reason `only corroboration found`.
+- **Post says to DM, follow a shortener, or hand over a key or wallet** —
+  drop with `unsafe claim path`, even when the floor holds.
+- **Posts disagree on the amount** — the stronger post wins; with no
+  stronger post, drop with `conflicting posts`.
+- **Official page appears later** — a refresh promotes the early offer;
+  a fake one is retired (*Refreshing an early offer* above).
+- **Curator says "official only"** — the early lane is off for the run.
