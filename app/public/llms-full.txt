@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-01T04:04:47Z — 117 of 221 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-01T07:34:01Z — 118 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -17,6 +17,56 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/qoder-daily-credits-free-models.html
 - Summary: Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is "to be announced". Qwen3.8-Flash also has a daily free usage allowance: within it the Credit rate is cut from 0.1x to 0.0x and the model works even with a zero balance. Qoder does not publish the number of free uses; paid subscribers get more than free users, and once the allowance is used up the model is billed at its normal Credit rate until the next day. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.
 - Claim steps: Download the Qoder desktop app and create or sign in to an individual Qoder International account. | During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later. | Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed. | For the free model, select Qwen3.8-Flash in the Qoder model picker; no claim is needed. Calls are free only within the daily free allowance (count unpublished); after that they use Credits at the normal rate until the next day.
+### Xing4.0 29B A4B Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free xingchen-agi/xing4.0-29b-a4b:free inference at $0 input and output (262K context)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-01 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/api/v1/models/xingchen-agi/xing4.0-29b-a4b:free/endpoints
+- Page: https://freetokens.custats.info/offers/openrouter-xing-4-0-29b-a4b-free.html
+- Summary: Xing4.0-29B-A4B is an open-weight mixture-of-experts language model from China Telecom's AI team (TeleAI), the successor to its TeleChat series, with 29B total and 4B active parameters. OpenRouter serves a free variant, xingchen-agi/xing4.0-29b-a4b:free, through Phala at $0 input and output with a 262,144-token context window (text in, text out).
+- Claim steps: Create an OpenRouter account and API key | Call model xingchen-agi/xing4.0-29b-a4b:free through the OpenRouter API
+### Nebius for Startups (NVIDIA Inception) — $5,000 Introductory Credits
+- Provider: Nebius
+- Category: startup_program
+- Amount: $5,000 in introductory credits plus up to $150,000 in compute savings for NVIDIA Inception members accepted to Nebius for Startups (currently limited to AI-native startups with $5M+ raised; applications are waitlisted, acceptance not guaranteed)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-01 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://nebius.com/nebius-nvidia-inception-credit-offering
+- Page: https://freetokens.custats.info/offers/nebius-startups-nvidia-inception-credits.html
+- Summary: Nebius for Startups offer for NVIDIA Inception members: $5,000 in introductory credits for training or inference on Nebius on demand, plus up to $150,000 in compute savings. Due to demand, selection is temporarily limited to AI-native startups with $5M+ in venture backing, with preference for startups backed by Nebius's partner VC firms. All applications go to a waitlist, acceptance is not guaranteed, and applicants should use a company email address.
+- Claim steps: Be an NVIDIA Inception member | Apply on the Nebius Inception offering page using a company email address | Wait for waitlist review and acceptance
+### Nebius AI Builder Program — $250 in Token Factory & Partner Credits
+- Provider: Nebius
+- Category: startup_program
+- Amount: $25 Nebius Token Factory + $100 LangSmith (LangChain) + $50 Toloka + $50 Tandem + $25 Tavily credits after registration and email verification (Nebius promo credits expire 90 days after issuance); launch blog cites $400+ in credits and discounts
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-01 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://nebius.com/builders-terms-and-conditions
+- Page: https://freetokens.custats.info/offers/nebius-ai-builder-program.html
+- Summary: The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Programme credits cannot be used for production workloads, large-scale commercial deployment, or revenue-generating activity beyond prototyping and experimentation. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.
+- Claim steps: Complete the Builder Program registration form (name, email, company or university, role, country, what you are building) and accept the program terms. | Verify your email via the double opt-in message — membership activates only after verification. | Redeem the issued promo codes: $25 for Nebius Token Factory and $25 for Tavily. Credits expire 90 days from issuance. | Use Programme credits for prototyping and experimentation, not production workloads, large-scale commercial deployment, or revenue-generating activity beyond that scope.
+### HeyGen Voice Turbo Free (OpenRouter)
+- Provider: HeyGen
+- Category: voice
+- Amount: Free heygen/heygen-voice-1-turbo:free text-to-speech at $0 via OpenRouter (10 default voices)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-01 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/api/v1/models/heygen/heygen-voice-1-turbo:free/endpoints
+- Page: https://freetokens.custats.info/offers/heygen-voice-turbo-free.html
+- Summary: HeyGen Voice Turbo is a lower-latency version of HeyGen Voice, HeyGen's text-to-speech model. OpenRouter serves a free variant, heygen/heygen-voice-1-turbo:free, that takes text and returns speech at $0. It has 10 default voices (nadine, tabitha, bram, gareth, noelle, meredith, sabrina, lucian, weston, vincent). Users can bring their own HeyGen key to use voice clones.
+- Claim steps: Create an OpenRouter account and API key | Call model heygen/heygen-voice-1-turbo:free through the OpenRouter API with text input and a voice
+### Eden AI Free Endpoints — Gemma 4 31B IT and Other $0 Models
+- Provider: Eden AI
+- Category: api_provider
+- Amount: Free $0 endpoints on select models, e.g. Gemma 4 31B IT (Google Cloud endpoint, $0 input/output, 262K context) and Gemma 4 26B A4B IT
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-01 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.edenai.co/models/gemma-4-31b-it
+- Page: https://freetokens.custats.info/offers/eden-ai-free-models.html
+- Summary: Eden AI's model catalog marks some models with a 'Free endpoint' tag at $0 per million input and output tokens. Gemma 4 31B IT is free on its Google Cloud (official) endpoint with a 262K context window, while other providers' endpoints for the same model are paid from $0.1 per million input tokens. Gemma 4 26B A4B IT, Gemma 7B IT Lora and Gemma 2B IT Lora are also listed at $0.
+- Claim steps: Create an Eden AI account and API key | Call a model marked 'Free endpoint' (e.g. Gemma 4 31B IT) through the Eden AI API, pinning the free endpoint or letting Eden AI route
 ### Monthly Claude API credits for Max, Ultra and Team plans
 - Provider: Anthropic
 - Category: api_provider
@@ -1065,16 +1115,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/nebius-token-factory-trial-credit.html
 - Summary: As of 2026-10-31 Nebius's billing documentation no longer states the $1 trial credit, so its current availability is unconfirmed. Nebius Token Factory previously documented $1 in trial credit upon first sign-up, valid for 30 days. Onboarding requires a billing account with a bank card and cannot be completed without it. Usage debits the balance in real time; the card is automatically charged to clear a negative balance at the start of the month or when the configured billing threshold is reached. This is a small trial credit, not a guarantee of zero-cost continued usage. Monitor usage, balance and billing settings; no fixed campaign end date is stated.
 - Claim steps: Sign up for a Nebius Token Factory account. | During onboarding, create a billing account — billing setup is mandatory and you cannot complete onboarding without it. | Set up the billing account with a bank card, which is required. | Check your balance after onboarding: the docs stated a $1 trial credit valid for 30 days through 2026-10-30, but the billing page no longer mentions it, so do not assume it is granted. | Monitor usage and balance: the card automatically settles a negative balance at month start or the configured billing threshold. Stop chargeable usage if you do not intend to pay beyond the trial.
-### Nebius AI Builder Program — $25 Token Factory + $25 Tavily Credits
-- Provider: Nebius
-- Category: startup_program
-- Amount: $25 Nebius Token Factory + $25 Tavily promo credits after registration and email verification (expire 90 days after issuance); marketing cites $400+ total in partner credits/discounts
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://nebius.com/builders-terms-and-conditions
-- Page: https://freetokens.custats.info/offers/nebius-ai-builder-program.html
-- Summary: The Nebius AI Builder Program is a free membership layer for AI builders. After completing the registration form and verifying your email (double opt-in), members receive promotional credit codes for USD $25 in Nebius Token Factory credits and USD $25 in Tavily partner credits; both expire 90 days from issuance. Programme credits cannot be used for production workloads, large-scale commercial deployment, or revenue-generating activity beyond prototyping and experimentation. Nebius marketing cites $400+ in total credits and discounts across partners (LangChain, Toloka, and more), plus member-rate $1 certifications, office hours, and community benefits. One account per verified email; disposable email domains are blocked and corporate/educational addresses preferred. Distinct from the existing $1 Nebius Token Factory trial credit.
-- Claim steps: Complete the Builder Program registration form (name, email, company or university, role, country, what you are building) and accept the program terms. | Verify your email via the double opt-in message — membership activates only after verification. | Redeem the issued promo codes: $25 for Nebius Token Factory and $25 for Tavily. Credits expire 90 days from issuance. | Use Programme credits for prototyping and experimentation, not production workloads, large-scale commercial deployment, or revenue-generating activity beyond that scope.
 ### Murf Startup Incubator Program
 - Provider: Murf AI
 - Category: startup_program
@@ -1145,36 +1185,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llm7-free-tier.html
 - Summary: LLM7 documents a free dashboard token for current tier:turbo text-generation models with usage_based_only:false, not every catalog model or Pro/paid-only models. Limits are 1 request per second, 60 per minute, 250 per hour, and 100,000 input-plus-output tokens per 24 hours. Its current limits page no longer documents anonymous access. The free-token allowance may be reduced without notice based on demand, capacity, model availability, fair use and abuse prevention; it is not guaranteed capacity. Image/video billing follows separate allowance/balance rules, not a promise of 100K free image/video tokens.
 - Claim steps: Obtain a free token from the LLM7 dashboard at dash.llm7.io. | Check https://api.llm7.io/v1/models and select a current text-generation model with tier:turbo and usage_based_only:false. Send an OpenAI-compatible request using that model ID and your free dashboard token; Pro or usage_based_only:true models require paid accounting. | Check live availability and dashboard allowance. Stay within 1 request/second, 60/minute, 250/hour and 100,000 input-plus-output tokens/24 hours; quotas may be reduced without notice. | Turbo pricing metadata is for paid usage accounting, not proof the documented free allowance has ended. Image/video allowance and balance rules are separate.
-### LlamaParse Startup Offer
-- Provider: LlamaIndex
-- Category: startup_program
-- Amount: $2,000 free platform credits for 1 year plus engineering Slack, bulk discounts, and early access (first-time customers, $250k–<$50M raised)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.llamaindex.ai/startups
-- Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
-- Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
-- Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
-### LiveKit Startup Program
-- Provider: LiveKit
-- Category: startup_program
-- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://livekit.com/startups
-- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
-- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll. Applicants must be incorporated or actively incorporating and building for real end-users. The program targets net-new startup projects: free-plan evaluators/builders can apply, while projects running for a while or already paying/contractually committed may be declined and reviewed case by case.
-- Claim steps: Confirm the startup is incorporated or actively incorporating, is building for real end-users, and meets the net-new project rules; existing paid/committed users should explain their circumstances in the application. | Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
-### Liner Startup Grant — up to $1,000 API Credits
-- Provider: Liner
-- Category: startup_program
-- Amount: Up to $1,000 in Liner Search/Search Agent API credits; no equity
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-09-30 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://build.liner.com/blog/liner-startup-grant-program
-- Page: https://freetokens.custats.info/offers/liner-startup-grant.html
-- Summary: The Liner Startup Grant Program advertises up to $1,000 in credits with no equity taken and nothing to repay. Its blog describes broader Liner API coverage including Search API and Search Agent API, but the current linked application calls the grant Search Agent API credits; confirm the approved product scope before budgeting. The form requires company email, company name, company website and product interest. Liner reviews applications by email, with a confirmation message saying next steps include a link to book a 20-minute onboarding call. No grant-spend expiry is stated publicly.
-- Claim steps: Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes). | Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on. | Watch email for the review outcome and next steps, including a link to book a 20-minute onboarding call. Confirm which API products the approved credits cover; the form names Search Agent API while the blog describes broader API coverage.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

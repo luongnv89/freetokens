@@ -18,6 +18,12 @@
       "url": "https://nebius.com/blog/posts/introducing-the-nebius-ai-builder-program",
       "title": "Introducing the Nebius AI Builder Program",
       "text": "The program is free. Here's what members get: Credits across the stack. $400+ in credits and discounts from Nebius Token Factory, LangChain, Toloka, Tavily, and more."
+    },
+    {
+      "type": "link",
+      "url": "https://dev.nebius.com/builders",
+      "title": "Nebius Builder Program",
+      "text": "You'll receive $25 in Nebius Token Factory credits, $100 in LangSmith credit from LangChain, $50 in Toloka and $50 in Tandem credit, and $25 in Tavily credit as well as access to a Nebius Academy certification for $1. The Builder Program is primarily intended for learning, testing, and experimentation."
     }
   ]
 }

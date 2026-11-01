@@ -1,0 +1,27 @@
+{
+  "summary": "HeyGen Voice Turbo is a lower-latency version of HeyGen Voice, HeyGen's text-to-speech model. OpenRouter serves a free variant, heygen/heygen-voice-1-turbo:free, that takes text and returns speech at $0. It has 10 default voices (nadine, tabitha, bram, gareth, noelle, meredith, sabrina, lucian, weston, vincent). Users can bring their own HeyGen key to use voice clones.",
+  "claim_steps": [
+    "Create an OpenRouter account and API key",
+    "Call model heygen/heygen-voice-1-turbo:free through the OpenRouter API with text input and a voice"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/heygen/heygen-voice-1-turbo:free/endpoints",
+      "title": "OpenRouter API — heygen/heygen-voice-1-turbo:free endpoints",
+      "text": "name: HeyGen: HeyGen Voice Turbo (free); description: \"HeyGen Voice Turbo is a lower-latency version of HeyGen Voice, HeyGen's text-to-speech model.\" modality text->speech; endpoint HeyGen | heygen/heygen-voice-1-turbo-20261009:free, pricing {\"prompt\":\"0\",\"completion\":\"0\",\"discount\":0}, status 0, uptime_last_1d 100."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/compare/heygen/heygen-voice-1-turbo:free",
+      "title": "HeyGen Voice Turbo (free) | OpenRouter compare",
+      "text": "HeyGen Voice Turbo (free) metrics summary — Price: Free"
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/heygen/heygen-voice-1-turbo:free",
+      "title": "OpenRouter APIs — HeyGen: HeyGen Voice Turbo (free) (heygen/heygen-voice-1-turbo)",
+      "text": "voice: \"nadine\" | \"tabitha\" | \"bram\" | \"gareth\" | \"noelle\" | \"meredith\" | \"sabrina\" | \"lucian\" | \"weston\" | \"vincent\""
+    }
+  ]
+}

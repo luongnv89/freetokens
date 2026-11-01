@@ -1,0 +1,21 @@
+{
+  "summary": "Eden AI's model catalog marks some models with a 'Free endpoint' tag at $0 per million input and output tokens. Gemma 4 31B IT is free on its Google Cloud (official) endpoint with a 262K context window, while other providers' endpoints for the same model are paid from $0.1 per million input tokens. Gemma 4 26B A4B IT, Gemma 7B IT Lora and Gemma 2B IT Lora are also listed at $0.",
+  "claim_steps": [
+    "Create an Eden AI account and API key",
+    "Call a model marked 'Free endpoint' (e.g. Gemma 4 31B IT) through the Eden AI API, pinning the free endpoint or letting Eden AI route"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.edenai.co/models/gemma-4-31b-it",
+      "title": "Gemma 4 31B IT API: Pricing, Providers & Performance | Eden AI",
+      "text": "Free endpoint. Input from $0 / 1M; Output from $0 / 1M; Context window 262K; including a free endpoint (paid endpoints from $0.1 per million input tokens). Google Cloud (official) Global: $0 input, $0 output, 262K."
+    },
+    {
+      "type": "link",
+      "url": "https://www.edenai.co/models/gemma4-31b",
+      "title": "Gemma4 31B API: Pricing, Providers & Performance | Eden AI",
+      "text": "Gemma 4 26B A4B IT: $0 input and output, 7 providers; Gemma 4 31B IT: $0 input and output; Gemma 7B IT Lora: $0, Free endpoint; Gemma 2B IT Lora: $0, Free endpoint."
+    }
+  ]
+}

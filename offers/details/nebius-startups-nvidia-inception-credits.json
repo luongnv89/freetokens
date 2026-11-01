@@ -1,0 +1,22 @@
+{
+  "summary": "Nebius for Startups offer for NVIDIA Inception members: $5,000 in introductory credits for training or inference on Nebius on demand, plus up to $150,000 in compute savings. Due to demand, selection is temporarily limited to AI-native startups with $5M+ in venture backing, with preference for startups backed by Nebius's partner VC firms. All applications go to a waitlist, acceptance is not guaranteed, and applicants should use a company email address.",
+  "claim_steps": [
+    "Be an NVIDIA Inception member",
+    "Apply on the Nebius Inception offering page using a company email address",
+    "Wait for waitlist review and acceptance"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://nebius.com/nebius-nvidia-inception-credit-offering",
+      "title": "Exclusive offer for NVIDIA Inception Members",
+      "text": "$5,000 in introductory credits. Free credits you can use immediately to start training models or running inference on Nebius on demand. Up to $150,000 in compute savings. Nebius for Startups currently accepts AI-native startup founders with $5M+ raised. All applications will be added to our waitlist for consideration."
+    },
+    {
+      "type": "link",
+      "url": "https://nebius.com/blog/posts/ai-lift-startups-innovation-with-nvidia",
+      "title": "Supercharging startups: Nebius accelerates AI-native innovation with NVIDIA",
+      "text": "offers eligible NVIDIA Inception members up to $150,000 in cloud credits ... $10,000 for inference-related workloads ... joining the Nebius startup program in the first three months"
+    }
+  ]
+}
