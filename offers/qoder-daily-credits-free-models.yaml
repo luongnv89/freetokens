@@ -10,13 +10,20 @@
 # "DeepSeek-V4.1-Flash-1017 stays at 0x credits in Qoder until Nov 1, 00:00 (UTC+8)."
 # 100credits and flashoffer docs rechecked 2026-10-25: end time still "To be announced"; Qwen3.8-Flash still free.
 # Ongoing allowance + dated promo: expiry_date stays null; the DeepSeek end date is in amount.
+# 2026-11-01: official https://docs.qoder.com/events/deepseek-flash-free states "Promotion period : October 20,
+# 2026 at 00:00 through October 31 at 24:00 (November 1 at 00:00)" (UTC+8), so the DeepSeek-Flash 0x window has
+# ended and was removed from amount/summary/claim steps (historical X quotes kept in the detail file).
+# Same day, https://docs.qoder.com/events/flashoffer now reads "a daily free usage allowance for Qwen3.8-Flash" /
+# "Each account receives a limited number of free uses each day. Paid subscribers receive more free uses than free
+# users." This wording was absent from the 2026-10-27 snapshot; the page does not date the change, so it is
+# recorded as a copy correction, not a dated policy change. 100credits page unchanged (end time "To be announced").
 title: Qoder International Free Daily Credits and Free Flash Models
 provider: Qoder
 category: coding
-amount: 100 free Credits per day (claim daily, each valid 30 days) plus free Qwen3.8-Flash; DeepSeek-V4.1-Flash-1017 free until November 1, 00:00 UTC+8
+amount: 100 free Credits per day (claim daily, each valid 30 days) plus a daily free-use allowance for Qwen3.8-Flash (number of uses unpublished; paid subscribers get more)
 expiry_date: null
 source_url: https://docs.qoder.com/events/100credits
-verified_date: 2026-10-21
+verified_date: 2026-11-01
 verification: social_proof
 review_status: under-review
 signup: required

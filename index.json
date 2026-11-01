@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-10-30T21:07:19Z",
+  "generated_at": "2026-11-01T04:04:34Z",
   "count": 262,
-  "active_count": 224,
-  "expired_count": 38,
+  "active_count": 221,
+  "expired_count": 41,
   "offers": [
     {
       "slug": "openai-chatgpt-pro-business-api-credits",
@@ -24,10 +24,10 @@
       "title": "Qoder International Free Daily Credits and Free Flash Models",
       "provider": "Qoder",
       "category": "coding",
-      "amount": "100 free Credits per day (claim daily, each valid 30 days) plus free Qwen3.8-Flash; DeepSeek-V4.1-Flash-1017 free until November 1, 00:00 UTC+8",
+      "amount": "100 free Credits per day (claim daily, each valid 30 days) plus a daily free-use allowance for Qwen3.8-Flash (number of uses unpublished; paid subscribers get more)",
       "expiry_date": null,
       "source_url": "https://docs.qoder.com/events/100credits",
-      "verified_date": "2026-10-21",
+      "verified_date": "2026-11-01",
       "added_date": "2026-10-21",
       "verification": "social_proof",
       "review_status": "under-review",
@@ -512,7 +512,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openai-chatgpt-for-teachers",
@@ -1487,7 +1487,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openrouter-lfm-2-5-2-6b-free",
@@ -1712,7 +1712,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openrouter-nemotron-3-5-lightning-free",

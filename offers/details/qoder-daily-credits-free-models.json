@@ -1,10 +1,10 @@
 {
-  "summary": "Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is \"to be announced\". Qwen3.8-Flash is also free: its Credit rate is cut from 0.1x to 0.0x and it works even with a zero balance. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. Separately, Qoder's October 19 post made DeepSeek-V4.1-Flash-1017 cost 0.0x Credits for free and paid users through October 24; its October 24 post extends that window: the model stays at 0x credits until November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.",
+  "summary": "Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is \"to be announced\". Qwen3.8-Flash also has a daily free usage allowance: within it the Credit rate is cut from 0.1x to 0.0x and the model works even with a zero balance. Qoder does not publish the number of free uses; paid subscribers get more than free users, and once the allowance is used up the model is billed at its normal Credit rate until the next day. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.",
   "claim_steps": [
     "Download the Qoder desktop app and create or sign in to an individual Qoder International account.",
     "During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later.",
     "Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed.",
-    "For the free models, just select Qwen3.8-Flash or DeepSeek-V4.1-Flash-1017 (0x credits until November 1, 00:00 UTC+8) in the Qoder model picker; no claim is needed."
+    "For the free model, select Qwen3.8-Flash in the Qoder model picker; no claim is needed. Calls are free only within the daily free allowance (count unpublished); after that they use Credits at the normal rate until the next day."
   ],
   "social_proof": [
     {
@@ -17,7 +17,13 @@
       "type": "link",
       "url": "https://docs.qoder.com/events/flashoffer",
       "title": "Qwen3.8-Flash: Free for a Limited Time - Qoder",
-      "text": "During the promotion, calls to this model consume no Credits, with the Credit rate reduced from 0.1x to 0.0x. ... Free accounts and accounts with a zero Credits balance are also eligible. ... Qwen3.8-Flash remains free after September 30. ... We will announce the end date on this page in advance."
+      "text": "Starting September 18, 2026 at 10:00, a daily free usage allowance for Qwen3.8-Flash is available for a limited time for all new and existing individual users of Qoder International. Within this allowance, calls to this model consume no Credits, with the Credit rate reduced from 0.1× to 0.0× . ... Free accounts and accounts with a zero Credits balance are also eligible. ... Each account receives a limited number of free uses each day. Paid subscribers receive more free uses than free users."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.qoder.com/events/deepseek-flash-free",
+      "title": "DeepSeek-Flash: Free for a Limited Time - Qoder (ended November 1, 00:00 UTC+8)",
+      "text": "Promotion period : October 20, 2026 at 00:00 through October 31 at 24:00 (November 1 at 00:00). The original end time of October 24 at 24:00 has been extended."
     },
     {
       "type": "x",
