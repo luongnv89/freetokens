@@ -23,6 +23,12 @@
       "url": "https://dev.to/freeourdays/a-fresh-free-llm-api-keyevery-morning-e8f",
       "title": "A fresh free LLM API key, every morning — historical 2026-10-06 snapshot",
       "text": "Y-API hands out a ready-to-use shared API key every day backed by a $20 quota pool for that day; sign in with GitHub or Google, open /daily-key. Article snapshot dated 2026-10-06."
+    },
+    {
+      "type": "link",
+      "url": "https://y-api.bestvirtualgoods.com/daily-key",
+      "title": "Daily Free API Key — Y-API",
+      "text": "One free API key, shared by the whole site. $20 of credit is refilled every day at 00:05 UTC ... Keys expire at rotation (00:05 UTC) ... Every account gets its own key plus $1 of starter credit ... This service is not available to users in mainland China."
     }
   ]
 }

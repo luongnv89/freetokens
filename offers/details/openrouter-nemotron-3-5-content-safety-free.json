@@ -18,6 +18,12 @@
       "url": "https://openrouter.ai/api/v1/models",
       "title": "OpenRouter Models API",
       "text": "nvidia/nemotron-3.5-content-safety:free listed at prompt:0, completion:0, context_length 128000, created 2026-06-04; input modalities text/image."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-content-safety:free/endpoints",
+      "title": "NVIDIA: Nemotron 3.5 Content Safety (free)",
+      "text": "id \"nvidia/nemotron-3.5-content-safety:free\"; context_length 128000; pricing prompt \"0\", completion \"0\""
     }
   ]
 }

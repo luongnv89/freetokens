@@ -24,6 +24,12 @@
       "url": "https://docs.fireworks.ai/faq/billing-pricing-usage/billing/credit-system",
       "title": "Credit system - Fireworks AI Docs",
       "text": "Fireworks operates on a pre-paid credits billing system. Add a valid payment method and billing address, then purchase credits before usage. If your credits reach zero and Auto Reload is disabled, usage pauses until you add credits."
+    },
+    {
+      "type": "link",
+      "url": "https://fireworks.ai/blog/best-llm-api-providers",
+      "title": "Best LLM API Providers in 2026: 8 Options Compared | Fireworks",
+      "text": "New accounts receive $1 in free credits."
     }
   ]
 }

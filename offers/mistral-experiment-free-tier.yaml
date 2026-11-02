@@ -9,7 +9,7 @@ category: api_provider
 amount: Included monthly API usage in Free mode plus Mistral Studio access; allowance and limits are shown on the account Limits page, with no current public dollar amount
 expiry_date: null
 source_url: https://docs.mistral.ai/admin/billing-usage/usage-limits
-verified_date: 2026-09-28
+verified_date: 2026-11-02
 verification: social_proof
 review_status: to-be-verified
 signup: required

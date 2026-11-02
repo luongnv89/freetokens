@@ -29,6 +29,12 @@
       "url": "https://openrouter.ai/docs/guides/community/jev",
       "title": "Official offer conditions and claim requirements",
       "text": "ScaleDown Classify-1 and Respan Span-01 take their own state shapes, so check the model page before you switch."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/respan/span-01-lite:free/endpoints",
+      "title": "Respan: Span-01 Lite (free)",
+      "text": "id \"respan/span-01-lite:free\"; description \"Span-01 Lite is the free, lighter tier of Span-01, a behavior scoring model from Respan.\"; pricing prompt \"0\", completion \"0\"; output_modalities [\"decisions\"]; status 0"
     }
   ]
 }

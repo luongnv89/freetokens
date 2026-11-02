@@ -16,6 +16,12 @@
       "url": "https://openrouter.ai/api/v1/models",
       "title": "OpenRouter Models API",
       "text": "cohere/north-mini-code:free listed at prompt:0, completion:0, context_length 256000, created 2026-06-17."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/cohere/north-mini-code:free/endpoints",
+      "title": "Cohere: North Mini Code (free)",
+      "text": "id \"cohere/north-mini-code:free\"; context_length 256000; pricing prompt \"0\", completion \"0\"; endpoint \"Cohere | cohere/north-mini-code-20260617:free\" status 0"
     }
   ]
 }

@@ -18,6 +18,12 @@
       "url": "https://openrouter.ai/api/v1/models",
       "title": "OpenRouter Models API",
       "text": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free listed at prompt:0, completion:0, context_length 256000, created 2026-04-28; input modalities text/audio/image/video."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free/endpoints",
+      "title": "NVIDIA: Nemotron 3 Nano Omni (free)",
+      "text": "id \"nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free\"; context_length 256000; pricing prompt \"0\", completion \"0\"; input_modalities [\"text\",\"audio\",\"image\",\"video\"]; output_modalities [\"text\"]"
     }
   ]
 }
