@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T03:19:53Z",
+  "generated_at": "2026-11-02T05:55:04Z",
   "count": 266,
   "active_count": 225,
   "expired_count": 41,
@@ -3440,6 +3440,21 @@
       "status": "active"
     },
     {
+      "slug": "ollama-cloud-free-tier",
+      "title": "Ollama Cloud Free Tier",
+      "provider": "Ollama",
+      "category": "api_provider",
+      "amount": "Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited",
+      "expiry_date": "2026-11-02",
+      "source_url": "https://ollama.com/pricing",
+      "verified_date": "2026-11-02",
+      "added_date": "2026-08-24",
+      "verification": "social_proof",
+      "review_status": "to-be-verified",
+      "signup": "required",
+      "status": "active"
+    },
+    {
       "slug": "siliconflow-free-models",
       "title": "SiliconFlow Free Models",
       "provider": "SiliconFlow",
@@ -3466,21 +3481,6 @@
       "added_date": "2026-08-24",
       "verification": "social_proof",
       "review_status": "unverified",
-      "signup": "required",
-      "status": "active"
-    },
-    {
-      "slug": "ollama-cloud-free-tier",
-      "title": "Ollama Cloud Free Tier",
-      "provider": "Ollama",
-      "category": "api_provider",
-      "amount": "Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited",
-      "expiry_date": null,
-      "source_url": "https://ollama.com/pricing",
-      "verified_date": "2026-09-30",
-      "added_date": "2026-08-24",
-      "verification": "social_proof",
-      "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
     },
