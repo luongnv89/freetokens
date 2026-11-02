@@ -22,6 +22,12 @@
       "url": "https://openrouter.ai/docs/quickstart",
       "title": "OpenRouter Quickstart Guide",
       "text": "Documents bearer-key use with the chat-completions API."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/google/gemma-4-31b-it:free/endpoints",
+      "title": "Google: Gemma 4 31B (free)",
+      "text": "id \"google/gemma-4-31b-it:free\"; context_length 262144; pricing prompt \"0\", completion \"0\"; endpoint \"Google AI Studio | google/gemma-4-31b-it-20260402:free\" status 0"
     }
   ]
 }

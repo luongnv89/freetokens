@@ -7,7 +7,7 @@ category: api_provider
 amount: 100M System One input tokens per account, plus 10M text-generation tokens, during the free public experiment; no credit card required
 expiry_date: null
 source_url: https://codiv.ai
-verified_date: 2026-10-07
+verified_date: 2026-11-02
 verification: social_proof
 review_status: under-review
 signup: required

@@ -11,6 +11,12 @@
       "url": "https://siliconflow.cn/pricing",
       "title": "SiliconFlow API Pricing",
       "text": "Hunyuan-MT-7B tencent/Hunyuan-MT-7B 免费 免费 ... PaddleOCR-VL-1.5 PaddlePaddle/PaddleOCR-VL-1.5 免费 免费 ... bge-m3 BAAI/bge-m3 免费 ... Kolors Kwai-Kolors/Kolors 生成图片 每图片 免费 ... Qwen3-ASR-1.7B Qwen/Qwen3-ASR-1.7B 输入音频时长（s） 每秒 ¥ 0.00022 ... SenseVoiceSmall FunAudioLLM/SenseVoiceSmall 输入 UTF-8 字节 每千字符（UTF-8） 免费"
+    },
+    {
+      "type": "link",
+      "url": "https://www.siliconflow.cn/pricing",
+      "title": "大模型 API 价格方案 - 硅基流动 SiliconFlow",
+      "text": "Hunyuan-MT-7B 免费 免费; PaddleOCR-VL-1.5 免费 免费; BAAI/bge-m3 免费; bge-reranker-v2-m3 免费; Kwai-Kolors/Kolors 生成图片 每图片 免费; XingChenAGI/XingChenASR-V3.2-Ultra 免费; FunAudioLLM/SenseVoiceSmall 免费"
     }
   ]
 }

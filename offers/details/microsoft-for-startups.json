@@ -39,6 +39,12 @@
       "url": "https://learn.microsoft.com/en-us/startups/application",
       "title": "Application guide automatic billing conversion",
       "text": "Your Azure Sponsorship subscription automatically converts to pay-as-you-go once your Azure credits are fully used or expired, whichever comes first."
+    },
+    {
+      "type": "link",
+      "url": "https://learn.microsoft.com/en-us/startups/investor-network-benefits/benefits",
+      "title": "Microsoft for Startups Investor Offer Benefits | Microsoft Learn",
+      "text": "Up to $150K in Startup credits over time as your startup demonstrates verified progress, service adoption, and sustained Azure usage. Eligible Investor Network-backed startups may unlock up to $200K in Startup credits and expanded support."
     }
   ]
 }
