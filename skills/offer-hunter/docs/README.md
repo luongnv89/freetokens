@@ -24,7 +24,7 @@
 | --- | --- |
 | "/offer-hunter" | Scout, verify, shortlist up to 10 offers, write them, open an issue and a PR |
 | "/offer-hunter --max 5 coding" | Same, capped at 5 and focused on coding offers |
-| "hunt for new offers, report only" | Scout, verify, and print the shortlist; no writes, no PR |
+| "hunt for new offers, report only" | Scout, verify, and print the shortlist; no catalog writes, no PR |
 
 Use `/offer-updater` to add one offer you already have, and `/daily-offer-check` to re-verify the existing catalog.
 
