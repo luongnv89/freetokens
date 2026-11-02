@@ -76,8 +76,9 @@ fits you.
 
 5. Open a pull request against `main`. Start the description with
    `Closes #<issue>` so the tracking issue closes automatically on merge.
-   Once the `validate` check is green, a maintainer squash-merges and the
-   deploy pipeline typically publishes the site within 1–2 minutes. (An
+   Once the required checks (`validate` and `node-tests`) are green, a
+   maintainer squash-merges and the deploy pipeline typically publishes
+   the site within 1–2 minutes. (An
    offer-updater PR carrying an X-first offer merges itself after the
    curator's approval, once every check passes.)
 

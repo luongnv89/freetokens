@@ -13,7 +13,7 @@ Configured via `PUT /repos/luongnv89/freetokens/branches/main/protection`
 | Setting | Value | Why |
 |---------|-------|-----|
 | Required pull request reviews | required (0 approvals minimum) | Direct pushes to `main` are rejected; all changes require a PR |
-| Required status checks | contexts `validate` and `node-tests`, strict = false | PRs merge only when both checks pass on the head commit: `validate` (offer-schema validation plus the full Python unit suite, `python3 -m unittest discover -s tests`) and `node-tests` (app unit tests, build and SEO checks) |
+| Required status checks | contexts `validate` and `node-tests`, strict = false | PRs merge only when both checks pass on the head commit: `validate` (offer-schema validation plus the full Python unit suite, `python3 -m unittest discover -s tests`) and `node-tests` (app unit tests, build, SEO checks, Lighthouse budgets and Playwright e2e) |
 | Allow force pushes | false | History on `main` is immutable |
 | Allow deletions | false | `main` cannot be deleted |
 | Enforce for administrators | false | Kept minimal per issue #12 scope |

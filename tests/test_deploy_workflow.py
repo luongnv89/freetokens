@@ -56,8 +56,10 @@ def assert_gates_full_suite(case, block):
     case.assertRegex(block, rf"(?m)^\s+run: {re.escape(DISCOVER)}\s*$")
     case.assertNotIn("continue-on-error", block)
     # GitHub treats a skipped required job as passing, so any `if:` in the
-    # job (job or step level) could turn the gate off without a failure.
+    # job (job or step level) could turn the gate off without a failure, and
+    # so could `needs:` on a job that gets skipped.
     case.assertNotRegex(block, r"(?m)^\s+(-\s+)?if:", "the validate job must not be conditional")
+    case.assertNotRegex(block, r"(?m)^\s+needs:", "the validate job must not depend on another job")
 
 
 class DeployWorkflowTests(unittest.TestCase):
@@ -100,15 +102,21 @@ class ValidateWorkflowTests(unittest.TestCase):
         block = job_block(self.WF.read_text(encoding="utf-8"), "validate")
         step = f"        run: {DISCOVER}"
         mutations = {
-            "job-level if": "    if: github.event_name != 'pull_request'\n" + block,
-            "step-level if": block.replace(step, "        if: false\n" + step),
-            "continue-on-error": block.replace(step, "        continue-on-error: true\n" + step),
-            "|| true": block.replace(step, step + " || true"),
-            "narrowed": block.replace(step, step + " -p 'test_validate*.py'"),
+            "job-level if": ("    if: github.event_name != 'pull_request'\n" + block, "conditional"),
+            "step-level if": (block.replace(step, "        if: false\n" + step), "conditional"),
+            "first-key if": (block.replace(step, "      - if: false\n" + step), "conditional"),
+            "needs": ("    needs: setup\n" + block, "depend on another job"),
+            "continue-on-error": (block.replace(step, "        continue-on-error: true\n" + step),
+                                  "continue-on-error"),
+            "|| true": (block.replace(step, step + " || true"), "run:"),
+            "narrowed": (block.replace(step, step + " -p 'test_validate*.py'"), "run:"),
         }
-        for label, mutated in mutations.items():
-            with self.subTest(label), self.assertRaises(AssertionError):
-                assert_gates_full_suite(self, mutated)
+        for label, (mutated, reason) in mutations.items():
+            with self.subTest(label):
+                self.assertNotEqual(mutated, block, "mutation did not change the job")
+                with self.assertRaises(AssertionError) as cm:
+                    assert_gates_full_suite(self, mutated)
+                self.assertIn(reason, str(cm.exception))
 
 
 if __name__ == "__main__":
