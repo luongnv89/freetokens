@@ -29,10 +29,11 @@ def job_block(text, job):
     next line at that indent.
     """
     lines = text.splitlines()
-    start = lines.index("jobs:")
+    start = next(i for i, line in enumerate(lines)
+                 if re.match(r"^jobs:\s*(#.*)?$", line))
     block, inside = [], False
     for line in lines[start + 1:]:
-        header = re.match(r"^  ([A-Za-z0-9_-]+):\s*$", line)
+        header = re.match(r"^  ([A-Za-z0-9_-]+):\s*(#.*)?$", line)
         if header:
             if inside:
                 break
@@ -41,6 +42,14 @@ def job_block(text, job):
         if inside:
             block.append(line)
     return "\n".join(block)
+
+
+def assert_gates_full_suite(case, block):
+    """The job runs the exact discover command, and a failure fails the job."""
+    case.assertTrue(block, "workflow must define a `validate` job")
+    # Exact line: no narrowing `-p`, no `|| true`, not commented out.
+    case.assertRegex(block, rf"(?m)^\s+run: {re.escape(DISCOVER)}\s*$")
+    case.assertNotIn("continue-on-error", block)
 
 
 class DeployWorkflowTests(unittest.TestCase):
@@ -64,7 +73,7 @@ class DeployWorkflowTests(unittest.TestCase):
     def test_runs_full_python_suite(self):
         # A fixed file list silently skips new test modules (#654).
         block = job_block(self.WF.read_text(encoding="utf-8"), "validate")
-        self.assertIn(f"run: {DISCOVER}", block)
+        assert_gates_full_suite(self, block)
         self.assertNotIn("unittest tests/", block)
 
 
@@ -75,10 +84,9 @@ class ValidateWorkflowTests(unittest.TestCase):
         # The required `validate` check gates PRs and the nightly auto-merge;
         # the suite must run inside it (#654).
         block = job_block(self.WF.read_text(encoding="utf-8"), "validate")
-        self.assertTrue(block, "validate.yml must define a `validate` job")
-        # A `name:` override would rename the required check.
-        self.assertNotRegex(block, r"(?m)^    name:")
-        self.assertIn(f"run: {DISCOVER}", block)
+        assert_gates_full_suite(self, block)
+        # A `name:` override or a matrix would rename the required check.
+        self.assertNotRegex(block, r"(?m)^    (name|strategy):")
 
 
 if __name__ == "__main__":
