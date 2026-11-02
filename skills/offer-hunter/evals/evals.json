@@ -42,7 +42,7 @@
       "name": "this-week-reddit-and-x",
       "kind": "happy-path",
       "prompt": "Scout Reddit and X for free LLM API credits people posted this week and propose the best ones for the site, but just show me the shortlist first.",
-      "expected_output": "Report-only branch with a 7-day lead window: leads from the reddit and x channels (web channel may also run), official verification, a shortlist table plus a Not included table with reasons, and no writes.",
+      "expected_output": "Report-only branch with a 7-day lead window: leads from the reddit and x channels (web channel may also run), official verification, a shortlist table plus a Not included table with reasons, and no catalog writes.",
       "files": [],
       "expectations": [
         "The run treated the request as report-only and wrote no files under offers/",
