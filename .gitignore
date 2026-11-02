@@ -50,6 +50,8 @@ needs_review/
 
 # local agent tooling
 .hermes/
+# offer-hunter run state and per-day work files (#651)
+.offer-hunter/
 .opencode/
 .pi/
 

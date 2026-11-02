@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # Preflight + run state for offer-hunter. Run after the Repo Sync section.
-# Writes <git-dir>/offer-hunter/state.env; every later step sources that file.
-# State lives in the git dir so concurrent runs in other clones never collide.
+# Writes <repo>/.offer-hunter/state.env plus the per-day work folder
+# <repo>/.offer-hunter/<today>/; every later step sources that file.
+# State lives in a git-ignored folder at the checkout root, never under .git/
+# (agents may not write there, #651). Each clone or worktree has its own folder,
+# and a rerun on the same day reuses that day's work folder.
 # Publish mode also cuts the hunt branch from origin/main.
 set -u
 
@@ -39,9 +42,13 @@ done
 command -v python3 >/dev/null || fail "python3 not found" "install Python 3"
 
 today="$(date +%F)"
-STATE_DIR="$(git rev-parse --absolute-git-dir)/offer-hunter"
+STATE_DIR="$REPO/.offer-hunter"
 W="$STATE_DIR/$today"
-mkdir -p "$W" || fail "cannot create $W" "check /tmp permissions"
+run="new"; [ -d "$W" ] && run="resumed"
+mkdir -p "$W" || fail "cannot create $W" "check that you can write to $REPO"
+# Self-ignoring folder: git skips it even on branches whose .gitignore predates it.
+[ -f "$STATE_DIR/.gitignore" ] || printf '*\n' > "$STATE_DIR/.gitignore" \
+  || fail "cannot write $STATE_DIR/.gitignore" "check that you can write to $REPO"
 branch="$(git rev-parse --abbrev-ref HEAD)"
 hunt_branch=""
 
@@ -81,4 +88,4 @@ web_tools_note="search/fetch: $search; browser retry: $retry"
     "$branch" "$hunt_branch" "$search" "$retry" "$web_tools_note"
 } > "$STATE_DIR/state.env"
 
-echo "OK start mode=$mode max=$max since=$since categories=${categories:-all} branch=${hunt_branch:-$branch} web=[$web_tools_note] state=$STATE_DIR/state.env"
+echo "OK start mode=$mode max=$max since=$since categories=${categories:-all} branch=${hunt_branch:-$branch} web=[$web_tools_note] run=$run work=$W state=$STATE_DIR/state.env"

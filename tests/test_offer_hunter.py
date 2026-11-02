@@ -3,6 +3,7 @@ import copy
 import datetime as dt
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -199,6 +200,37 @@ class OfferHunterTests(unittest.TestCase):
                                  '--categories', 'llm'], capture_output=True, text=True, cwd=REPO)
         self.assertEqual(result.returncode, 1)
         self.assertIn("unknown category 'llm'", result.stderr)
+
+    def test_start_run_keeps_state_out_of_git_dir(self):
+        repo = self.root / 'repo'
+        shutil.copytree(SKILL, repo / 'skills/offer-hunter')
+        (repo / 'scripts').mkdir()
+        shutil.copy(REPO / 'scripts/offer_model.py', repo / 'scripts/offer_model.py')
+        for cmd in (['init', '-q'], ['add', '-A'],
+                    ['-c', 'user.name=t', '-c', 'user.email=t@t', 'commit', '-qm', 'init']):
+            subprocess.run(['git', *cmd], cwd=repo, check=True, capture_output=True)
+
+        def start():
+            result = subprocess.run(['bash', 'skills/offer-hunter/scripts/start_run.sh', '--mode', 'report'],
+                                    cwd=repo, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            return result.stdout
+
+        self.assertIn('run=new', start())
+        work = repo / '.offer-hunter' / TODAY
+        self.assertTrue((repo / '.offer-hunter/state.env').is_file())
+        self.assertFalse((repo / '.git/offer-hunter').exists())
+        (work / 'leads-web.json').write_text('[]')
+        status = subprocess.run(['git', 'status', '--porcelain', '--untracked-files=all'], cwd=repo,
+                                capture_output=True, text=True, check=True).stdout
+        self.assertEqual(status, '')
+        self.assertIn('run=resumed', start())
+        self.assertEqual((work / 'leads-web.json').read_text(), '[]')
+        state_line = '. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1'
+        self.assertIn(state_line, (SKILL / 'SKILL.md').read_text())
+        bound = subprocess.run(['bash', '-c', state_line + '; printf "%s|%s" "$W" "$mode"'], cwd=repo / 'skills',
+                               capture_output=True, text=True)
+        self.assertEqual(bound.stdout, f'{work.resolve()}|report', bound.stderr)
 
     def test_render_escapes_untrusted_text(self):
         evil = copy.deepcopy(LIVE_NEW)

@@ -4,7 +4,7 @@ Read only in Step 8 of the Publish branch. Each shell call is a new shell:
 start every block with the state line, which also binds the counts.
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
 counts() { python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))[sys.argv[2]])' "$W/shortlist.json" "$1"; }
 new_count="$(counts new_count)"; update_count="$(counts update_count)"
 ```
