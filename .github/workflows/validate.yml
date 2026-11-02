@@ -33,6 +33,13 @@ jobs:
       - name: Validate offer schema
         run: python3 scripts/validate_offers.py
 
+      # Full Python unit suite (#654). `discover` runs every tests/test_*.py,
+      # so a new test module is gated without editing this file. The suite
+      # needs only the stdlib, git and bash: no Node, no app/node_modules, no
+      # network, no secrets. Adds ~20 s to this required check.
+      - name: Python unit tests
+        run: python3 -m unittest discover -s tests
+
   node-tests:
     needs: validate
     runs-on: ubuntu-latest

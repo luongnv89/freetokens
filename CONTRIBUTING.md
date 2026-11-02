@@ -12,9 +12,10 @@ fits you.
 ## Ground rules
 
 - **All changes arrive via pull request.** `main` is protected: direct pushes
-  are rejected and the required `validate` status check must pass before
-  merge. Settings and rationale live in
-  [docs/branch-protection.md](docs/branch-protection.md).
+  are rejected and the required `validate` and `node-tests` status checks
+  must pass before merge (`validate` runs offer validation plus the full
+  Python unit suite, `python3 -m unittest discover -s tests`). Settings and
+  rationale live in [docs/branch-protection.md](docs/branch-protection.md).
 - **Verify before you write.** Never invent an offer or reuse stale data.
   Every entry needs a real `source_url` you have visited and today's
   `verified_date`. Never guess missing fields.
@@ -75,8 +76,9 @@ fits you.
 
 5. Open a pull request against `main`. Start the description with
    `Closes #<issue>` so the tracking issue closes automatically on merge.
-   Once the `validate` check is green, a maintainer squash-merges and the
-   deploy pipeline typically publishes the site within 1–2 minutes. (An
+   Once the required checks (`validate` and `node-tests`) are green, a
+   maintainer squash-merges and the deploy pipeline typically publishes
+   the site within 1–2 minutes. (An
    offer-updater PR carrying an X-first offer merges itself after the
    curator's approval, once every check passes.)
 

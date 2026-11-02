@@ -145,12 +145,16 @@ cd app && npm test           # unit + budget tests (Vitest)
 npm run test:e2e             # Playwright end-to-end tests
 ```
 
-The content model has its own stdlib test suite at the repo root (no Node
-required):
+The content model and skill scripts have their own stdlib test suite at the
+repo root (no Node required):
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
+
+CI runs this whole suite in the required `validate` check on every pull
+request and again before every deploy, so a new `tests/test_*.py` module is
+gated without any workflow change.
 
 ### Search & category filtering
 
@@ -300,7 +304,8 @@ push built output by hand:
    main commits that have already deployed; the Pages environment is
    branch-restricted, so tag pushes do not (and cannot) deploy directly.
 2. **Build** — the workflow checks out the repo, runs
-   `python3 scripts/validate_offers.py` to validate all offers, then
+   `python3 scripts/validate_offers.py` to validate all offers and
+   `python3 -m unittest discover -s tests` for the Python unit suite, then
    `npm test` and `npm run build` in `app/` to prerender `index.html`,
    `archive.html`, `privacy.html`, `feed.xml`, `sitemap.xml`, and every offer detail page.
    Any validation or test failure aborts the deploy.

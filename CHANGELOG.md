@@ -5,6 +5,15 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Full Python unit suite gates every PR (#654):** the required `validate`
+  check in `validate.yml` now runs `python3 -m unittest discover -s tests`
+  after the offer validator, and `deploy.yml` runs the same command instead
+  of the two content-model files pinned in #135. Every `tests/test_*.py`
+  module (offer-hunter, daily-offer-check, site-health, SEO audit, skill
+  validator, workflow checks, validator) is now gated, and new modules are
+  picked up without a workflow edit. The check name is unchanged; it adds
+  about 20 s.
+
 - **Agent apply prompt on offer pages (#625):** each live offer page has an
   "Apply with an AI agent" panel. It builds an editable prompt for that offer
   (provider, amount and eligibility, official link, claim steps) that you can
