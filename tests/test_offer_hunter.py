@@ -2,7 +2,9 @@
 import copy
 import datetime as dt
 import json
+import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -10,6 +12,9 @@ import unittest
 
 REPO = Path(__file__).resolve().parents[1]
 SKILL = REPO / 'skills/offer-hunter'
+# CreateProcess searches System32 before PATH on Windows, which finds WSL's
+# bash instead of Git Bash. Resolving it once keeps the shell tests portable.
+BASH = shutil.which('bash') or 'bash'
 TODAY = dt.date.today().isoformat()
 
 EXISTING = ('# keep me\ntitle: Acme Free Tier\nprovider: Acme\ncategory: api_provider\n'
@@ -70,7 +75,7 @@ class OfferHunterTests(unittest.TestCase):
                      'references/web-tools.md', 'references/trust-and-value.md',
                      'references/publish.md', 'scripts/common.py', 'scripts/catalog_snapshot.py',
                      'scripts/shortlist.py', 'scripts/write_offers.py', 'scripts/check_scope.py',
-                     'scripts/render_pr.py', 'scripts/start_run.sh'):
+                     'scripts/render_pr.py', 'scripts/start_run.sh', 'scripts/state_path.sh'):
             with self.subTest(name=name):
                 self.assertTrue((SKILL / name).is_file(), name)
 
@@ -195,10 +200,38 @@ class OfferHunterTests(unittest.TestCase):
         self.assertIn('x-01: offer.provider', self.shortlist([bad], ok=False).stderr)
 
     def test_start_run_rejects_bad_category(self):
-        result = subprocess.run(['bash', str(SKILL / 'scripts/start_run.sh'), '--mode', 'report',
+        result = subprocess.run([BASH, str(SKILL / 'scripts/start_run.sh'), '--mode', 'report',
                                  '--categories', 'llm'], capture_output=True, text=True, cwd=REPO)
         self.assertEqual(result.returncode, 1)
         self.assertIn("unknown category 'llm'", result.stderr)
+
+    def test_start_run_state_lives_outside_git_dir(self):
+        with tempfile.TemporaryDirectory() as state_home:
+            env = dict(os.environ, XDG_STATE_HOME=state_home)
+
+            def run_start():
+                return subprocess.run(
+                    [BASH, str(SKILL / 'scripts/start_run.sh'), '--mode', 'report', '--max', '1'],
+                    capture_output=True, text=True, cwd=REPO, env=env)
+
+            first = run_start()
+            self.assertEqual(first.returncode, 0, first.stderr)
+            state_files = list(Path(state_home).rglob('state.env'))
+            self.assertEqual(len(state_files), 1, state_files)
+            state_file = state_files[0]
+            self.assertNotIn(str(REPO / '.git'), str(state_file))
+            work = subprocess.run(
+                [BASH, '-c', '. "$1" && printf "%s" "$W"', '_', str(state_file)],
+                capture_output=True, text=True, env=env).stdout
+            marker = Path(work) / 'keep.txt'
+            marker.write_text('kept')
+
+            second = run_start()
+            self.assertEqual(second.returncode, 0, second.stderr)
+            self.assertTrue(marker.exists())
+            status = subprocess.run(['git', 'status', '--porcelain'], cwd=REPO,
+                                    capture_output=True, text=True)
+            self.assertEqual(status.stdout.strip(), '')
 
     def test_render_escapes_untrusted_text(self):
         evil = copy.deepcopy(LIVE_NEW)
