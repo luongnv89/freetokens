@@ -56,10 +56,13 @@ TinyFish and Lightpanda are optional (`references/web-tools.md`).
   offers. Nothing outside it is written.
 - **fail-soft**: a dead page or crashed worker makes that candidate
   `unverifiable`; the run continues.
-- **state line**: `. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1`.
+- **state line**: `. "$(bash "$(git rev-parse --show-toplevel)/skills/offer-hunter/scripts/state_path.sh")" && cd "$REPO" || exit 1`.
   Each shell call is a new shell, so start every block after Step 1 with it.
   It binds `REPO`, `today`, `W` (work directory), `mode`, `max`, `since`,
-  `categories`, `branch`, `hunt_branch`, and `web_tools_note`.
+  `categories`, `branch`, `hunt_branch`, and `web_tools_note`. The state file
+  and `W` live under `${XDG_STATE_HOME:-$HOME/.local/state}/offer-hunter/`,
+  keyed by the clone's path: outside the repository, so writes are never
+  denied and `git status` stays clean.
 
 ## Step Completion Reports
 
@@ -102,7 +105,7 @@ lines and stop.
 ## Step 2 — Catalog snapshot (you, script)
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(bash "$(git rev-parse --show-toplevel)/skills/offer-hunter/scripts/state_path.sh")" && cd "$REPO" || exit 1
 S=skills/offer-hunter/scripts
 if [ "$mode" = publish ]; then
   gh pr list --state open --limit 200 --json number,files > "$W/pending.json" || exit 1
@@ -160,7 +163,7 @@ still missing get `{"id", "label", "verdict": "unverifiable", "action":
 ## Step 6 — Shortlist (you, script)
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(bash "$(git rev-parse --show-toplevel)/skills/offer-hunter/scripts/state_path.sh")" && cd "$REPO" || exit 1
 python3 skills/offer-hunter/scripts/shortlist.py --snapshot "$W/snapshot.json" \
   --candidates "$W/candidates.json" --verdicts "$W/verdicts.json" \
   --max "$max" --categories "$categories" > "$W/shortlist.json"
@@ -179,7 +182,7 @@ with the error as `reason`. Exit 2 is fatal: stop.
 ## Step 7 — Write and validate (you, scripts)
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(bash "$(git rev-parse --show-toplevel)/skills/offer-hunter/scripts/state_path.sh")" && cd "$REPO" || exit 1
 python3 skills/offer-hunter/scripts/write_offers.py --shortlist "$W/shortlist.json" > "$W/applied.json" &&
 (cd app && node scripts/load-offers.mjs --index-json ../index.json) &&
 (cd app && node scripts/generate-llms.mjs) &&
@@ -193,7 +196,7 @@ packages, run `cd app && npm ci` once and retry. On any other failure, roll
 back and stop:
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(bash "$(git rev-parse --show-toplevel)/skills/offer-hunter/scripts/state_path.sh")" && cd "$REPO" || exit 1
 git restore -- offers index.json app/public
 git ls-files -z --others --exclude-standard -- offers | xargs -0 rm -f --
 git switch "$branch" && git branch -D "$hunt_branch"

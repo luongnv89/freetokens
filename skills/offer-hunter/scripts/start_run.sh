@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Preflight + run state for offer-hunter. Run after the Repo Sync section.
-# Writes <git-dir>/offer-hunter/state.env; every later step sources that file.
-# State lives in the git dir so concurrent runs in other clones never collide.
+# Writes state.env beside the per-day work folder; every later step sources it.
+# State lives outside the repository (see scripts/state_path.sh), keyed by the
+# repository path, so unattended agents can write it and concurrent runs in
+# other clones never collide.
 # Publish mode also cuts the hunt branch from origin/main.
 set -u
 
@@ -39,7 +41,8 @@ done
 command -v python3 >/dev/null || fail "python3 not found" "install Python 3"
 
 today="$(date +%F)"
-STATE_DIR="$(git rev-parse --absolute-git-dir)/offer-hunter"
+STATE_FILE="$(bash "$S/scripts/state_path.sh")" || fail "cannot resolve the offer-hunter state path" "check that HOME is writable"
+STATE_DIR="$(dirname "$STATE_FILE")"
 W="$STATE_DIR/$today"
 mkdir -p "$W" || fail "cannot create $W" "check /tmp permissions"
 branch="$(git rev-parse --abbrev-ref HEAD)"
