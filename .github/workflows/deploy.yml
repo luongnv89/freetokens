@@ -42,8 +42,9 @@ jobs:
       - name: Validate offer schema
         run: python3 scripts/validate_offers.py
 
-      - name: Content-model tests
-        run: python3 -m unittest tests/test_validate_offers.py tests/test_skill_validator.py
+      # Same full suite the required `validate` PR check runs (#654).
+      - name: Python unit tests
+        run: python3 -m unittest discover -s tests
 
   build:
     needs: validate
