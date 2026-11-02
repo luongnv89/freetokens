@@ -14,6 +14,7 @@
         "Every selected offer's source_url is on the provider's own domain (not x.com, reddit.com, or news.ycombinator.com)",
         "No selected offer is below $5 in credit or 100,000 tokens per month-equivalent",
         "git status shows no change under offers/, index.json, or app/public/ after the run",
+        "Run files (state.env, snapshot.json, leads-*.json) were written under .offer-hunter/ at the checkout root, never under .git/, and git status --porcelain does not list them",
         "No branch was created, nothing was committed, and no issue or PR was opened",
         "The final output separates verified facts from leads (corroboration) and states that no approval is needed"
       ]
@@ -41,7 +42,7 @@
       "name": "this-week-reddit-and-x",
       "kind": "happy-path",
       "prompt": "Scout Reddit and X for free LLM API credits people posted this week and propose the best ones for the site, but just show me the shortlist first.",
-      "expected_output": "Report-only branch with a 7-day lead window: leads from the reddit and x channels (web channel may also run), official verification, a shortlist table plus a Not included table with reasons, and no writes.",
+      "expected_output": "Report-only branch with a 7-day lead window: leads from the reddit and x channels (web channel may also run), official verification, a shortlist table plus a Not included table with reasons, and no catalog writes.",
       "files": [],
       "expectations": [
         "The run treated the request as report-only and wrote no files under offers/",

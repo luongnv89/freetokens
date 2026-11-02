@@ -5,7 +5,7 @@ license: MIT
 effort: high
 compatibility: "Requires git, an authenticated GitHub CLI (gh), python3, node, and read-only web search and fetch. Optional: TinyFish (MCP server or tinyfish CLI) for search and page reads, the lightpanda CLI for a browser retry, curl for the X oEmbed lookup; each falls back when missing."
 metadata:
-  version: 1.2.0
+  version: 1.2.1
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
@@ -31,7 +31,7 @@ Pick one branch. When several rows match, the first wins.
 2. "Re-verify the catalog", "freshness sweep", stale listings → **Stop.**
    Point at `/daily-offer-check`.
 3. "Report only", "dry run", "just show me", "don't open a PR" →
-   **Report-only**: Steps 1–6 and 9. No branch, no writes, no PR.
+   **Report-only**: Steps 1–6 and 9. No branch, no catalog writes, no PR.
 4. `/offer-hunter`, "hunt for new offers", "find new free AI credits" →
    **Publish**: Steps 1–9, ending with an open PR.
 
@@ -56,10 +56,15 @@ TinyFish and Lightpanda are optional (`references/web-tools.md`).
   offers. Nothing outside it is written.
 - **fail-soft**: a dead page or crashed worker makes that candidate
   `unverifiable`; the run continues.
-- **state line**: `. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1`.
+- **state line**: `. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1`.
   Each shell call is a new shell, so start every block after Step 1 with it.
   It binds `REPO`, `today`, `W` (work directory), `mode`, `max`, `since`,
   `categories`, `branch`, `hunt_branch`, and `web_tools_note`.
+- **run folder**: `.offer-hunter/` at the checkout root holds `state.env`,
+  and `W` is its per-day work folder `.offer-hunter/<today>/`. Git ignores
+  the folder, so it never shows in `git status`. Never keep run files under
+  `.git/`: agents may not write there. Each clone or worktree has its own
+  folder, and a rerun on the same day reuses that day's `W`.
 
 ## Step Completion Reports
 
@@ -69,7 +74,8 @@ print the stderr and stop. Never report a skipped gate as passed.
 
 ## Repo Sync Before Edits (mandatory)
 
-**Report-only** writes nothing: run `git fetch origin` and continue.
+**Report-only** changes no tracked files (it writes only the git-ignored
+`.offer-hunter/` run folder): run `git fetch origin` and continue.
 **Publish** syncs the current branch before any edit:
 
 ```bash
@@ -96,13 +102,15 @@ TinyFish MCP tools are in your tool list. On Publish the script also checks
 `gh auth` and a clean tracked tree, and cuts `feat/offer-hunt-<today>` from
 `origin/main`.
 
-**Done when:** it prints `OK start …`. On exit 1, report its `Error`/`Fix`
-lines and stop.
+**Done when:** it prints `OK start …` with `run=new`, or `run=resumed` when
+today's work folder already holds files. Those files are kept, but every
+step rewrites its own outputs: an existing file never counts as done. On
+exit 1, report its `Error`/`Fix` lines and stop.
 
 ## Step 2 — Catalog snapshot (you, script)
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
 S=skills/offer-hunter/scripts
 if [ "$mode" = publish ]; then
   gh pr list --state open --limit 200 --json number,files > "$W/pending.json" || exit 1
@@ -160,7 +168,7 @@ still missing get `{"id", "label", "verdict": "unverifiable", "action":
 ## Step 6 — Shortlist (you, script)
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
 python3 skills/offer-hunter/scripts/shortlist.py --snapshot "$W/snapshot.json" \
   --candidates "$W/candidates.json" --verdicts "$W/verdicts.json" \
   --max "$max" --categories "$categories" > "$W/shortlist.json"
@@ -179,7 +187,7 @@ with the error as `reason`. Exit 2 is fatal: stop.
 ## Step 7 — Write and validate (you, scripts)
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
 python3 skills/offer-hunter/scripts/write_offers.py --shortlist "$W/shortlist.json" > "$W/applied.json" &&
 (cd app && node scripts/load-offers.mjs --index-json ../index.json) &&
 (cd app && node scripts/generate-llms.mjs) &&
@@ -193,7 +201,7 @@ packages, run `cd app && npm ci` once and retry. On any other failure, roll
 back and stop:
 
 ```bash
-. "$(git rev-parse --absolute-git-dir)/offer-hunter/state.env" && cd "$REPO" || exit 1
+. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
 git restore -- offers index.json app/public
 git ls-files -z --others --exclude-standard -- offers | xargs -0 rm -f --
 git switch "$branch" && git branch -D "$hunt_branch"
