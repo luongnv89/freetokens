@@ -11,13 +11,23 @@
 # set dollar amount of usage credits each month. Pay as you go accounts pay for each request with
 # usage credits." The starter-credit / "On the Free plan" wording quoted above is absent. Claimability
 # of any included free cloud usage is unresolved; no end date inferred. Flagged to-be-verified.
+# 2026-11-02: EXPIRED (#649, curator-approved). Re-checked https://ollama.com/pricing (static fetch,
+# 05:34 UTC): still no Free plan. The $0 card reads "Pay as you go $0 Pay per token for every cloud
+# model. Includes: Run models locally No subscription 3 concurrent requests No service fees"; the
+# FAQ says "Pro, Max, and Team plans include a set dollar amount of usage credits each month. Pay
+# as you go accounts pay for each request with usage credits." and "Every plan, including Pay as
+# you go, can buy usage credits." The page never uses the word "free". The Free plan was first seen
+# missing on 2026-10-27; expiry_date is set to today per the daily-offer-check expired convention.
+# Not covered by this listing: https://ollama.com/blog/reflection-beam (2026-10-16) advertises a
+# separate, time-limited free cloud model ("Reflection's Beam is freely available on Ollama for a
+# limited time"); that is a different offer.
 title: Ollama Cloud Free Tier
 provider: Ollama
 category: api_provider
 amount: Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited
-expiry_date: null
+expiry_date: 2026-11-02
 source_url: https://ollama.com/pricing
-verified_date: 2026-09-30
+verified_date: 2026-11-02
 # Verification & sign-up tags (#97): conservative defaults.
 verification: social_proof
 review_status: to-be-verified

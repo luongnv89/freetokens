@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-02T03:19:53Z — 120 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-02T05:58:22Z — 120 of 225 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -757,6 +757,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openai-chatgpt-pro-business-api-credits.html
 - Summary: Per OpenAI's API changelog entry dated Oct 28, 2026, eligible ChatGPT Pro and Business subscribers can claim free monthly API credits. Pro gets $100, $200 or $500 per month depending on tier; Business gets $20 per paid Standard seat or $100 per paid Premium seat, pooled and capped at $500 per workspace per month. The subscription must be paid and at least seven days old: free trials, complimentary subscriptions and ChatGPT Enterprise do not qualify. The ChatGPT account and the API account must use the same email address, and you must own both the subscription (or Business workspace) and the API organization. Credits are issued when the subscription renews; unused credits expire at the end of the billing cycle and do not roll over.
 - Claim steps: Hold a paid ChatGPT Pro or Business subscription that is at least seven days old (not a trial, complimentary plan or Enterprise) | Use the same email address for your ChatGPT account and the API account that owns the receiving organization | Activate the benefit in ChatGPT billing settings or on the API Platform Billing page by linking an API organization you own | Credits are issued automatically when the subscription renews; unused credits expire at the end of each billing cycle
+### Ollama Cloud Free Tier
+- Provider: Ollama
+- Category: api_provider
+- Amount: Starter usage credits on the $0 Free plan for starter models (add credits to unlock all models), usage resets monthly, local runs unlimited
+- Status: active — enrollment deadline: 2026-11-02
+- Last checked: 2026-11-02 — review_status=to-be-verified · verification=social_proof · signup=required
+- Source: https://ollama.com/pricing
+- Page: https://freetokens.custats.info/offers/ollama-cloud-free-tier.html
+- Summary: Ollama previously listed a $0 Free plan with starter usage credits for starter cloud models, resetting monthly from the signup date. As of 2026-10-27 the pricing page instead shows a $0 Pay as you go plan (pay per token for every cloud model, 3 concurrent requests) and says only Pro, Max and Team include monthly usage credits. Whether new accounts still receive any included free cloud usage is unconfirmed. Running models locally remains free and unlimited.
+- Claim steps: Check https://ollama.com/pricing and your account balance first: as of 2026-10-27 the page lists Pay as you go ($0, pay per token) instead of a Free plan with starter credits, so new accounts may get no included cloud usage. | Create or sign in to an Ollama account. | Use an included starter cloud model through Ollama, or create an API key for direct cloud API access. | Monitor your included starter usage credits and stay within the one-concurrent-request Free limit. | Included usage resets monthly on your signup date and does not roll over. Buying additional usage credits to unlock all models is optional paid usage, not part of the free allowance.
 ### Ocean Network Inference — First 6 H200 Hours Free
 - Provider: Ocean Network
 - Category: api_provider
@@ -1196,16 +1206,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/hume-free-tier-credits.html
 - Summary: Hume is sunsetting TTS and EVI: access ends November 13, 2026 at 12:01 a.m. EST, with both APIs fully supported until then. This is a service shutdown, not a signup campaign deadline; account data is permanently deleted after November 13. Voice API billing docs still state that new accounts start on the free tier with $20 in credits. The pricing URL now redirects to the Hume homepage; the previously listed 10,000 monthly TTS characters and 5 EVI minutes could not be reverified. The TTS FAQ limits Free and Starter tiers to non-commercial use. Confirm new-account availability and allowances in the billing portal before relying on the grant.
 - Claim steps: Confirm that Hume still accepts new Voice API accounts before signing up; new-account availability has not been tested. | Billing docs still state that new accounts start on the free tier with $20 in credits; confirm the grant and current allowances in https://app.hume.ai/billing. | Use Free-tier TTS only for non-commercial evaluation. Export needed data before TTS/EVI access ends November 13, 2026 at 12:01 a.m. EST.
-### HeyGen Voice Turbo Free (OpenRouter)
-- Provider: HeyGen
-- Category: voice
-- Amount: Free heygen/heygen-voice-1-turbo:free text-to-speech at $0 via OpenRouter (10 default voices)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-02 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/api/v1/models/heygen/heygen-voice-1-turbo:free/endpoints
-- Page: https://freetokens.custats.info/offers/heygen-voice-turbo-free.html
-- Summary: HeyGen Voice Turbo is a lower-latency version of HeyGen Voice, HeyGen's text-to-speech model. OpenRouter serves a free variant, heygen/heygen-voice-1-turbo:free, that takes text and returns speech at $0. It has 10 default voices (nadine, tabitha, bram, gareth, noelle, meredith, sabrina, lucian, weston, vincent). Users can bring their own HeyGen key to use voice clones.
-- Claim steps: Create an OpenRouter account and API key | Call model heygen/heygen-voice-1-turbo:free through the OpenRouter API with text input and a voice
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
