@@ -45,11 +45,19 @@ def job_block(text, job):
 
 
 def assert_gates_full_suite(case, block):
-    """The job runs the exact discover command, and a failure fails the job."""
+    """The job runs the exact discover command, and a failure fails the job.
+
+    Deliberately strict: quoting the command, a `run: |` block, a trailing
+    comment or an extra flag such as `-v` fails this check. Update DISCOVER
+    and these assertions together if the step must change.
+    """
     case.assertTrue(block, "workflow must define a `validate` job")
     # Exact line: no narrowing `-p`, no `|| true`, not commented out.
     case.assertRegex(block, rf"(?m)^\s+run: {re.escape(DISCOVER)}\s*$")
     case.assertNotIn("continue-on-error", block)
+    # GitHub treats a skipped required job as passing, so any `if:` in the
+    # job (job or step level) could turn the gate off without a failure.
+    case.assertNotRegex(block, r"(?m)^\s+(-\s+)?if:", "the validate job must not be conditional")
 
 
 class DeployWorkflowTests(unittest.TestCase):
@@ -87,6 +95,20 @@ class ValidateWorkflowTests(unittest.TestCase):
         assert_gates_full_suite(self, block)
         # A `name:` override or a matrix would rename the required check.
         self.assertNotRegex(block, r"(?m)^    (name|strategy):")
+
+    def test_guard_rejects_ways_to_skip_or_soften_the_suite(self):
+        block = job_block(self.WF.read_text(encoding="utf-8"), "validate")
+        step = f"        run: {DISCOVER}"
+        mutations = {
+            "job-level if": "    if: github.event_name != 'pull_request'\n" + block,
+            "step-level if": block.replace(step, "        if: false\n" + step),
+            "continue-on-error": block.replace(step, "        continue-on-error: true\n" + step),
+            "|| true": block.replace(step, step + " || true"),
+            "narrowed": block.replace(step, step + " -p 'test_validate*.py'"),
+        }
+        for label, mutated in mutations.items():
+            with self.subTest(label), self.assertRaises(AssertionError):
+                assert_gates_full_suite(self, mutated)
 
 
 if __name__ == "__main__":
