@@ -31,7 +31,7 @@ Pick one branch. When several rows match, the first wins.
 2. "Re-verify the catalog", "freshness sweep", stale listings → **Stop.**
    Point at `/daily-offer-check`.
 3. "Report only", "dry run", "just show me", "don't open a PR" →
-   **Report-only**: Steps 1–6 and 9. No branch, no writes, no PR.
+   **Report-only**: Steps 1–6 and 9. No branch, no catalog writes, no PR.
 4. `/offer-hunter`, "hunt for new offers", "find new free AI credits" →
    **Publish**: Steps 1–9, ending with an open PR.
 
@@ -74,7 +74,8 @@ print the stderr and stop. Never report a skipped gate as passed.
 
 ## Repo Sync Before Edits (mandatory)
 
-**Report-only** writes nothing: run `git fetch origin` and continue.
+**Report-only** changes no tracked files (it writes only the git-ignored
+`.offer-hunter/` run folder): run `git fetch origin` and continue.
 **Publish** syncs the current branch before any edit:
 
 ```bash
@@ -102,8 +103,9 @@ TinyFish MCP tools are in your tool list. On Publish the script also checks
 `origin/main`.
 
 **Done when:** it prints `OK start …` with `run=new`, or `run=resumed` when
-today's work folder already exists (its files are kept). On exit 1, report
-its `Error`/`Fix` lines and stop.
+today's work folder already holds files. Those files are kept, but every
+step rewrites its own outputs: an existing file never counts as done. On
+exit 1, report its `Error`/`Fix` lines and stop.
 
 ## Step 2 — Catalog snapshot (you, script)
 

@@ -216,10 +216,17 @@ class OfferHunterTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             return result.stdout
 
-        self.assertIn('run=new', start())
-        work = repo / '.offer-hunter' / TODAY
+        legacy = repo / '.git/offer-hunter/state.env'
+        legacy.parent.mkdir()
+        legacy.write_text('today=2020-01-01\n')
+        out = start()
+        self.assertIn('run=new', out)
+        work = Path(out.split(' work=', 1)[1].split()[0])  # the script's own date, not the test's
+        self.assertEqual(work.parent, (repo / '.offer-hunter').resolve())
         self.assertTrue((repo / '.offer-hunter/state.env').is_file())
-        self.assertFalse((repo / '.git/offer-hunter').exists())
+        self.assertFalse(legacy.exists())  # pre-1.2.1 state is retired, never read
+        self.assertEqual(len(list(legacy.parent.glob('state.env.retired-*'))), 1)
+        self.assertIn('run=new', start())  # an empty work folder is not a resumed run
         (work / 'leads-web.json').write_text('[]')
         status = subprocess.run(['git', 'status', '--porcelain', '--untracked-files=all'], cwd=repo,
                                 capture_output=True, text=True, check=True).stdout

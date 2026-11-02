@@ -44,11 +44,20 @@ command -v python3 >/dev/null || fail "python3 not found" "install Python 3"
 today="$(date +%F)"
 STATE_DIR="$REPO/.offer-hunter"
 W="$STATE_DIR/$today"
-run="new"; [ -d "$W" ] && run="resumed"
+# Resumed only when an earlier start today left files; a start that failed its
+# Publish preflight leaves an empty folder, which still counts as new.
+run="new"; [ -n "$(ls -A "$W" 2>/dev/null)" ] && run="resumed"
 mkdir -p "$W" || fail "cannot create $W" "check that you can write to $REPO"
 # Self-ignoring folder: git skips it even on branches whose .gitignore predates it.
 [ -f "$STATE_DIR/.gitignore" ] || printf '*\n' > "$STATE_DIR/.gitignore" \
   || fail "cannot write $STATE_DIR/.gitignore" "check that you can write to $REPO"
+# Retire state left by versions before 1.2.1 under the git dir, so an outdated
+# installed SKILL.md fails on its state line instead of reading old values.
+legacy="$(git rev-parse --absolute-git-dir)/offer-hunter/state.env"
+if [ -f "$legacy" ]; then
+  mv "$legacy" "$legacy.retired-$today" 2>/dev/null \
+    || echo "Note: could not retire the old state file $legacy; delete it by hand." >&2
+fi
 branch="$(git rev-parse --abbrev-ref HEAD)"
 hunt_branch=""
 
