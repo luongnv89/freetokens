@@ -47,8 +47,9 @@ do not reference or run it.
 - Dev server: `cd app && npm run dev`
 - Build: `cd app && npm run build` (loads and validates all offers, bundles, prerenders)
 - Tests: `cd app && npm test` (Vitest unit + budget gates), `npm run test:e2e` (Playwright)
-- Content gate: `python3 scripts/validate_offers.py`; content-model tests:
-  `python3 -m unittest discover -s tests -v`
+- Content gate: `python3 scripts/validate_offers.py`; Python unit tests:
+  `python3 -m unittest discover -s tests -v` (CI runs the whole suite in the
+  required `validate` check on every PR and before every deploy)
 
 Adding an offer is unchanged by the migration: one YAML file in `offers/`
 (schema: docs/schema.md), verified against its `source_url`, then a PR.

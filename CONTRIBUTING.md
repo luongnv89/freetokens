@@ -12,8 +12,9 @@ fits you.
 ## Ground rules
 
 - **All changes arrive via pull request.** `main` is protected: direct pushes
-  are rejected and the required `validate` status check must pass before
-  merge. Settings and rationale live in
+  are rejected and the required `validate` status check (offer validation
+  plus the full Python unit suite, `python3 -m unittest discover -s tests`)
+  must pass before merge. Settings and rationale live in
   [docs/branch-protection.md](docs/branch-protection.md).
 - **Verify before you write.** Never invent an offer or reuse stale data.
   Every entry needs a real `source_url` you have visited and today's

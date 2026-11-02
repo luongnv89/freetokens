@@ -13,7 +13,7 @@ Configured via `PUT /repos/luongnv89/freetokens/branches/main/protection`
 | Setting | Value | Why |
 |---------|-------|-----|
 | Required pull request reviews | required (0 approvals minimum) | Direct pushes to `main` are rejected; all changes require a PR |
-| Required status checks | context `validate`, strict = false | PRs merge only when the offer-schema validation check passes on the head commit |
+| Required status checks | context `validate`, strict = false | PRs merge only when the `validate` check (offer-schema validation plus the full Python unit suite, `python3 -m unittest discover -s tests`) passes on the head commit |
 | Allow force pushes | false | History on `main` is immutable |
 | Allow deletions | false | `main` cannot be deleted |
 | Enforce for administrators | false | Kept minimal per issue #12 scope |
@@ -37,8 +37,8 @@ trigger with `paths: ["offers/**"]`. GitHub keeps a path-filtered workflow in
 permanently blocks such PRs once the check is required (see GitHub's
 [troubleshooting required status checks](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/troubleshooting-required-status-checks)).
 The `paths:` filter was therefore removed from the `pull_request` trigger; the
-`push` trigger keeps it. Validation takes seconds, so running it on every PR is
-cheap insurance.
+`push` trigger keeps it. Validation plus the Python unit suite (#654) takes
+about half a minute, so running it on every PR is cheap insurance.
 
 ## Verify current settings
 
