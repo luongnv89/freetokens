@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-03T03:25:14Z",
-  "count": 268,
-  "active_count": 226,
+  "generated_at": "2026-11-03T22:29:44Z",
+  "count": 270,
+  "active_count": 228,
   "expired_count": 42,
   "offers": [
     {
@@ -27,6 +27,36 @@
       "amount": "Junie Lite: a free AI model in the Junie coding agent, always on in every JetBrains account (no trial, no card)",
       "expiry_date": null,
       "source_url": "https://junie.jetbrains.com/",
+      "verified_date": "2026-11-03",
+      "added_date": "2026-11-03",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-crouton-alpha-free",
+      "title": "Crouton Alpha Free on OpenCode Zen",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free Crouton Alpha model access on OpenCode Zen for one week (1M context, multimodal; limited to certain regions)",
+      "expiry_date": "2026-11-10",
+      "source_url": "https://x.com/opencode/status/2117717721458843711",
+      "verified_date": "2026-11-03",
+      "added_date": "2026-11-03",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-crouton-alpha-free",
+      "title": "Crouton Alpha Free on OpenRouter",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free model access - $0 per million input and output tokens on stealth/crouton-alpha during the stealth preview (1M context)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/stealth/crouton-alpha",
       "verified_date": "2026-11-03",
       "added_date": "2026-11-03",
       "verification": "social_proof",

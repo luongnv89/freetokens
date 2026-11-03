@@ -1,0 +1,17 @@
+# Verified 2026-11-03 against https://x.com/opencode/status/2117717721458843711
+# ("Crouton Alpha (stealth model) is free for the next week - 1M Context -
+# Multi-modal - No training on data - Limited to certain regions" — @opencode, 2026-11-03)
+# Corroborated by https://opencode.ai/zen/v1/models: id crouton-alpha-free,
+# "Crouton Alpha Free", release_date 2026-11-03, cost input 0 / output 0 /
+# cache read 0, context 1048576.
+# expiry_date derived from announcement: "free for the next week" -> 2026-11-10.
+title: Crouton Alpha Free on OpenCode Zen
+provider: OpenCode
+category: coding
+amount: Free Crouton Alpha model access on OpenCode Zen for one week (1M context, multimodal; limited to certain regions)
+expiry_date: 2026-11-10
+source_url: https://x.com/opencode/status/2117717721458843711
+verified_date: 2026-11-03
+verification: social_proof
+review_status: under-review
+signup: required

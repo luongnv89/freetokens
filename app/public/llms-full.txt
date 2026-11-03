@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-03T03:25:14Z — 120 of 226 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-03T22:29:44Z — 120 of 228 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -687,6 +687,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html
 - Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Current page and API announce a December 31, 2026 sunset. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
 - Claim steps: Sign up at openrouter.ai and create an API key (OpenRouter :free models do not require purchasing credits). | Call the chat completions API with model id dots-studio/dots-3-note-preview:free.
+### Crouton Alpha Free on OpenRouter
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free model access - $0 per million input and output tokens on stealth/crouton-alpha during the stealth preview (1M context)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-03 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/stealth/crouton-alpha
+- Page: https://freetokens.custats.info/offers/openrouter-crouton-alpha-free.html
+- Summary: OpenRouter lists the stealth model Crouton Alpha (stealth/crouton-alpha) at $0 per million input and output tokens during the anonymous-provider preview, released November 3, 2026. It takes text, image, video, file and audio input with a 1,048,576-token context. OpenRouter states prompts and completions may be retained by the provider but are not used for training. No end date is stated; earlier stealth models lost their free price once the preview ended.
+- Claim steps: Sign in or create an account at openrouter.ai. | Create an API key at openrouter.ai/settings/keys. | Call the model with slug stealth/crouton-alpha via the OpenAI-compatible API at https://openrouter.ai/api/v1 (or pick it in any OpenRouter-supported app).
 ### MiMo V2.6 Flash Free on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -717,6 +727,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/opencode-deepseek-v4-1-flash-free.html
 - Summary: OpenCode made DeepSeek V4.1 Flash free on 2026-10-15 and updated it to DeepSeek's 1017 release on 2026-10-19, keeping the same model ID. OpenCode's Console docs list DeepSeek V4.1 Flash Free (deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-19 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash (deepseek-v4.1-flash, $0.30/$1.20 per 1M input/output tokens) and its OpenCode Go plan listing are separate, so pick the Free variant.
 - Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select DeepSeek V4.1 Flash Free (opencode/deepseek-v4.1-flash-free), not the paid DeepSeek V4.1 Flash. Existing setups pick up the 1017 update automatically; OpenCode says no changes are needed. | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-19), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
+### Crouton Alpha Free on OpenCode Zen
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Crouton Alpha model access on OpenCode Zen for one week (1M context, multimodal; limited to certain regions)
+- Status: active — enrollment deadline: 2026-11-10
+- Last checked: 2026-11-03 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://x.com/opencode/status/2117717721458843711
+- Page: https://freetokens.custats.info/offers/opencode-crouton-alpha-free.html
+- Summary: Crouton Alpha is a stealth model that is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-11-03 as "free for the next week" (through ~2026-11-10), with 1M context, multi-modal input, and no training on data. The free period is limited to certain regions. OpenCode's Zen model list shows id crouton-alpha-free at $0 input, output, and cached reads.
+- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen and copy your API key. | In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key. | Run /models and select Crouton Alpha Free (model id: crouton-alpha-free).
 ### Beam Free (formerly Cat Jam) on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -1186,26 +1206,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/ideogram-free-plan.html
 - Summary: Ideogram's current official pricing FAQ says eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft; the amount may vary, and no fixed free credit number is published. The current comparison table is headed Pay as you go at 1 cent per credit alongside paid subscription plans, rather than a Free/$0 column, so its PAYG concurrency cell should not be attributed to free-account entitlement. Confirm the weekly allowance and available queue/features in your account. AI-powered editing features require priority credits and are not available in the slow queue. No global end date for the FAQ-described weekly free-account credits is stated.
 - Claim steps: Open https://ideogram.ai/pricing/ and review the FAQ about discounts/free trials. Use the site's Sign up or Sign in link; do not select a paid subscription or assume Pay as you go credit purchases are the weekly free-account benefit. | Sign in or create an Ideogram account — sign in with Google, Apple, or Microsoft to be eligible for weekly credits (per the page FAQ). | Check that your eligible account actually shows its weekly free credits, remaining balance and available generation queue/features before generating; the amount may vary. Do not treat the pricing table's Pay as you go concurrency limit as a verified free-account limit. | Wait for the weekly credit refresh to continue generating; note AI-powered editing features require priority credits and are not available in the slow queue.
-### IBM watsonx.ai Free Tier
-- Provider: IBM
-- Category: api_provider
-- Amount: Up to 300,000 foundation-model tokens/month + 20 CUH/month machine-learning tools + 100 text-extraction docs/month
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-03 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.ibm.com/products/watsonx-ai/pricing
-- Page: https://freetokens.custats.info/offers/ibm-watsonx-ai-free-tier.html
-- Summary: IBM watsonx.ai's Free Toolbox playground includes up to 300,000 foundation-model tokens per month, up to 20 Compute Usage Hours (CUH) per month of machine-learning tools, and up to 100 text-extraction documents per month.
-- Claim steps: Create an IBM account and start the free trial from https://www.ibm.com/products/watsonx-ai/pricing. | Use the Free Toolbox playground: foundation models up to 300,000 tokens/month, ML tools up to 20 CUH/month, text extraction up to 100 docs/month.
-### HeyGen Voice Turbo Free (OpenRouter)
-- Provider: HeyGen
-- Category: voice
-- Amount: Free heygen/heygen-voice-1-turbo:free text-to-speech at $0 via OpenRouter (10 default voices)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-03 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/api/v1/models/heygen/heygen-voice-1-turbo:free/endpoints
-- Page: https://freetokens.custats.info/offers/heygen-voice-turbo-free.html
-- Summary: HeyGen Voice Turbo is a lower-latency version of HeyGen Voice, HeyGen's text-to-speech model. OpenRouter serves a free variant, heygen/heygen-voice-1-turbo:free, that takes text and returns speech at $0. It has 10 default voices (nadine, tabitha, bram, gareth, noelle, meredith, sabrina, lucian, weston, vincent). Users can bring their own HeyGen key to use voice clones.
-- Claim steps: Create an OpenRouter account and API key | Call model heygen/heygen-voice-1-turbo:free through the OpenRouter API with text input and a voice
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
