@@ -18,6 +18,12 @@
       "url": "https://ai.google.dev/gemini-api/terms",
       "title": "Gemini API Additional Terms — regional use and data treatment",
       "text": "You may use only Paid Services when making API Clients available to users in the European Economic Area, Switzerland, or the United Kingdom."
+    },
+    {
+      "type": "link",
+      "url": "https://aistudio.google.com/docs/pricing",
+      "title": "Gemini Developer API pricing",
+      "text": "Free input & output tokens"
     }
   ]
 }

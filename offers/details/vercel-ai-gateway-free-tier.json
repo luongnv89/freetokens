@@ -11,6 +11,12 @@
       "url": "https://vercel.com/docs/ai-gateway/pricing",
       "title": "AI Gateway Pricing — Vercel Docs",
       "text": "Monthly credit $5 /month included. The free tier includes a subset of models, not the full catalog. Your free credits start when you make your first AI Gateway request. Once you purchase credits, your account transitions to the paid tier and the monthly free credit no longer applies."
+    },
+    {
+      "type": "link",
+      "url": "https://vercel.com/docs/ai-gateway/faq",
+      "title": "AI Gateway FAQ",
+      "text": "No. The free tier is a monthly included credit, not an expiring trial. It covers a subset of models with lower per-model rate limits."
     }
   ]
 }

@@ -23,6 +23,12 @@
       "url": "https://docs.hapuppy.com/guides/faq.md",
       "title": "Official offer conditions and claim requirements",
       "text": "There is no free tier and no subscription, and any paid account can call every model."
+    },
+    {
+      "type": "link",
+      "url": "https://hapuppy.com/en/pricing",
+      "title": "Hapuppy · One API Key for Every AI Model",
+      "text": "Free users get 200K credits on sign-up."
     }
   ]
 }
