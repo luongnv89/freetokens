@@ -2,36 +2,131 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://freetokens.custats.info/schemas/unverified-lead.schema.json",
   "title": "Unverified lead",
-  "description": "One unverified/<slug>.yaml file (#660): an offer the offer-hunter found on X, Reddit, or the web but could not confirm on an official page. Leads are never offers and never reach index.json, the llms files, or offer pages. scripts/lead_model.py enforces this schema plus the safe-claim-path rules (no links in the claim, no link shorteners or forms, no DM/secret/payment instructions); scripts/validate_offers.py cross-checks the enums against it.",
+  "description": "One unverified/<slug>.yaml file (#660): an offer the offer-hunter found on X, Reddit, or the web but could not confirm on an official page. Leads are never offers and never reach index.json, the llms files, or offer pages. A lead is listed only while its newest dated source post is at most fresh_days (3) days old; a lead with no dated source is invalid. scripts/lead_model.py and app/scripts/load-leads.mjs enforce this schema plus the shared rules in schemas/unverified-lead.rules.json: unsafe claim wording (DMs, forms, keys, payment, wallets), no domain other than the provider's own in any text field, plain https URLs only (no userinfo, port or backslash), no link shorteners or forms. scripts/validate_offers.py cross-checks the enums against this schema.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["slug", "provider", "title", "claim", "amount_claimed", "sources", "first_seen", "last_seen", "reason", "reason_detail", "official_urls_tried"],
+  "required": [
+    "slug",
+    "provider",
+    "title",
+    "claim",
+    "amount_claimed",
+    "sources",
+    "first_seen",
+    "last_seen",
+    "reason",
+    "reason_detail",
+    "official_urls_tried"
+  ],
   "properties": {
-    "slug": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "Equals the file name without .yaml; never the slug of an offer."},
-    "provider": {"type": "string", "minLength": 1, "maxLength": 80},
-    "title": {"type": "string", "minLength": 1, "maxLength": 120},
-    "claim": {"type": "string", "minLength": 1, "maxLength": 300, "description": "What is claimed, as posted, short. No links."},
-    "amount_claimed": {"type": ["string", "null"], "minLength": 1, "maxLength": 120},
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Equals the file name without .yaml; never the slug of an offer."
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "description": "What is claimed, as posted, short. No links and no domain other than the provider's own."
+    },
+    "amount_claimed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 120
+    },
     "sources": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["url", "type", "author", "handle", "date"],
+        "required": [
+          "url",
+          "type",
+          "author",
+          "handle",
+          "date"
+        ],
         "properties": {
-          "url": {"type": "string", "pattern": "^https://"},
-          "type": {"enum": ["x", "reddit", "web"]},
-          "author": {"type": ["string", "null"]},
-          "handle": {"type": ["string", "null"]},
-          "date": {"type": ["string", "null"], "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}
+          "url": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "type": {
+            "enum": [
+              "x",
+              "reddit",
+              "web"
+            ]
+          },
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "handle": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          }
         }
-      }
+      },
+      "description": "At least one source must carry a date; the lead is listed until the newest date + 3 days."
     },
-    "first_seen": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
-    "last_seen": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "description": "The lead is removed 30 days after this date."},
-    "reason": {"enum": ["bot_walled", "official_silent", "no_amount", "single_source", "other"]},
-    "reason_detail": {"type": "string", "minLength": 1, "maxLength": 400},
-    "official_urls_tried": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^https://"}}
+    "first_seen": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "First day the hunt spotted the lead (shown as 'First spotted by our hunt')."
+    },
+    "last_seen": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "Last day the hunt checked the lead (shown as 'Last checked'). Never extends freshness."
+    },
+    "reason": {
+      "enum": [
+        "bot_walled",
+        "official_silent",
+        "no_amount",
+        "single_source",
+        "other"
+      ]
+    },
+    "reason_detail": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "official_urls_tried": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^https://"
+      }
+    }
   }
 }

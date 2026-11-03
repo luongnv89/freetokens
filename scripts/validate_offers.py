@@ -143,15 +143,16 @@ def check_lead_schema_matches_model(schema: dict) -> None:
 
 
 def validate_leads(leads_dir: str, offer_slugs: set, today=None) -> tuple:
-    """Validate unverified/*.yaml; return (leads, stale slugs).
+    """Validate unverified/*.yaml; return (leads, stale leads).
 
-    A stale lead (last_seen more than 30 days ago) is a warning, not a failure:
-    the build already hides it and the next offer-hunter run removes the file,
-    so an unrelated PR never turns red just because the calendar moved.
+    A stale lead (newest dated source post more than 3 days old) is a
+    warning, not a failure: the build already hides it and the next
+    offer-hunter run deletes the file, so an unrelated PR never turns red just
+    because the calendar moved.
     """
     leads = lead_model.load_leads(leads_dir, offer_slugs, today)
     day = today or lead_model.dt.date.today()
-    stale = [lead["slug"] for lead in leads if lead_model.is_stale(lead, day)]
+    stale = [lead for lead in leads if lead_model.is_stale(lead, day)]
     return leads, stale
 
 
@@ -283,11 +284,11 @@ def main(argv=None) -> int:
         print(f"validation failed: {exc}", file=sys.stderr)
         return 1
 
-    for slug in stale:
+    for lead in stale:
         print(
-            f"warning: unverified lead {slug!r} was last seen more than "
-            f"{lead_model.STALE_DAYS} days ago; the build hides it and the next "
-            "offer-hunter run removes it",
+            f"warning: unverified lead {lead['slug']!r}: newest source post "
+            f"{lead_model.newest_post(lead)} is more than {lead_model.FRESH_DAYS} "
+            "days old; the build hides it and the next offer-hunter run deletes it",
             file=sys.stderr,
         )
     print(f"validated {len(offers)} offers against {args.schema}: OK")
