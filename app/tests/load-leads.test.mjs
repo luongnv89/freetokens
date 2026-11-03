@@ -2,31 +2,57 @@ import { describe, expect, it } from "vitest";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { loadLeads, parseLeadText, LeadError } from "../scripts/load-leads.mjs";
+import {
+  loadLeads,
+  parseLeadText,
+  validateLead,
+  urlHost,
+  LeadError,
+} from "../scripts/load-leads.mjs";
 import { runPipeline } from "../scripts/load-offers.mjs";
 
 // Unverified leads (#660): loader contract mirrored from scripts/lead_model.py.
-function leadText(slug, overrides = {}) {
-  const data = {
+// The probes are shared with tests/test_unverified_leads.py so both gates
+// reject exactly the same inputs (review B2).
+const PROBES = JSON.parse(
+  readFileSync(
+    path.resolve(import.meta.dirname, "../../tests/fixtures/unsafe-lead-probes.json"),
+    "utf8",
+  ),
+);
+const TODAY = "2026-11-03";
+
+function leadData(slug, overrides = {}) {
+  return {
     slug,
-    provider: '"Acme AI"',
-    title: '"Free tokens"',
-    claim: '"1M free tokens for new accounts."',
-    amount_claimed: "null",
-    sources:
-      '[{"url": "https://x.com/a/status/1", "type": "x", "author": null, "handle": "@a", "date": "2026-11-01"}]',
+    provider: "Acme AI",
+    title: "Free tokens",
+    claim: "1M free tokens for new accounts.",
+    amount_claimed: null,
+    sources: [
+      { url: "https://x.com/a/status/1", type: "x", author: null, handle: "@a", date: "2026-11-01" },
+    ],
     first_seen: "2026-11-01",
     last_seen: "2026-11-02",
     reason: "official_silent",
-    reason_detail: '"Pricing page is silent."',
-    official_urls_tried: '["https://acme.example/pricing"]',
+    reason_detail: "Pricing page is silent.",
+    official_urls_tried: ["https://acme.example/pricing"],
     ...overrides,
   };
+}
+
+function leadText(slug, overrides = {}) {
+  const data = leadData(slug, overrides);
   return (
     "# Unverified lead\n" +
     Object.entries(data)
-      .filter(([, v]) => v !== undefined)
-      .map(([k, v]) => `${k}: ${v}`)
+      .map(([k, v]) =>
+        v === null
+          ? `${k}: null`
+          : ["slug", "first_seen", "last_seen", "reason"].includes(k)
+            ? `${k}: ${v}`
+            : `${k}: ${JSON.stringify(v)}`,
+      )
       .join("\n") +
     "\n"
   );
@@ -35,42 +61,76 @@ function leadText(slug, overrides = {}) {
 function leadsDir(files) {
   const dir = mkdtempSync(path.join(tmpdir(), "ft-leads-"));
   for (const [name, text] of Object.entries(files)) {
-    writeFileSync(path.join(dir, `${name}.yaml`), text);
+    writeFileSync(path.join(dir, name.includes(".") ? name : `${name}.yaml`), text);
   }
   return dir;
 }
 
+const check = (overrides) =>
+  validateLead(leadData("acme-free", overrides), "acme-free.yaml", TODAY);
+
 describe("load-leads (#660)", () => {
-  it("parses JSON-valued flat lines", () => {
+  it("parses JSON-valued flat lines and adds the newest post date", () => {
     const data = parseLeadText(leadText("acme-free"), "acme-free.yaml");
     expect(data.sources[0].handle).toBe("@a");
-    expect(data.amount_claimed).toBeNull();
+    expect(check({}).posted).toBe("2026-11-01");
   });
 
-  it("sorts newest last_seen first and drops leads stale after 30 days", async () => {
+  it("lists a lead only while its newest post is at most 3 days old, newest post first", async () => {
+    const post = (date) => [
+      { url: `https://x.com/a/status/${date}`, type: "x", author: null, handle: null, date },
+    ];
     const dir = leadsDir({
-      "old-lead": leadText("old-lead", { first_seen: "2026-09-01", last_seen: "2026-10-03" }),
-      "edge-lead": leadText("edge-lead", { first_seen: "2026-10-04", last_seen: "2026-10-04" }),
-      "new-lead": leadText("new-lead", { last_seen: "2026-11-03" }),
+      "old-post": leadText("old-post", { sources: post("2026-10-30"), first_seen: "2026-10-30", last_seen: "2026-11-03" }),
+      "edge-post": leadText("edge-post", { sources: post("2026-10-31"), first_seen: "2026-10-31", last_seen: "2026-10-31" }),
+      "new-post": leadText("new-post", { sources: post("2026-11-03"), first_seen: "2026-11-03", last_seen: "2026-11-03" }),
     });
-    const leads = await loadLeads(dir, "2026-11-03");
-    expect(leads.map((l) => l.slug)).toEqual(["new-lead", "edge-lead"]);
+    const leads = await loadLeads(dir, TODAY);
+    expect(leads.map((l) => l.slug)).toEqual(["new-post", "edge-post"]);
     rmSync(dir, { recursive: true });
   });
 
-  it("fails naming the file when a lead has no source", async () => {
-    const dir = leadsDir({ "no-src": leadText("no-src", { sources: "[]" }) });
-    await expect(loadLeads(dir, "2026-11-03")).rejects.toThrow(
-      /no-src\.yaml: sources must list at least one/,
-    );
-    rmSync(dir, { recursive: true });
+  it("rejects an undated lead and a lead with no source", () => {
+    expect(() =>
+      check({ sources: [{ url: "https://x.com/a/status/1", type: "x", author: null, handle: null, date: null }] }),
+    ).toThrow(/undated source/);
+    expect(() => check({ sources: [] })).toThrow(/sources must list at least one/);
+  });
+
+  it("rejects every unsafe claim probe and accepts the safe ones", () => {
+    for (const claim of PROBES.claims) {
+      expect(() => check({ claim }), claim).toThrow(LeadError);
+    }
+    for (const claim of PROBES.safe_claims) {
+      expect(() => check({ claim }), claim).not.toThrow();
+    }
+    expect(() => check({ provider: PROBES.provider_with_url })).toThrow(/provider names/);
+    expect(() => check({ reason_detail: PROBES.reason_detail_with_url })).toThrow(/reason_detail names/);
+  });
+
+  it("rejects crafted source URLs the browser would resolve elsewhere", () => {
+    for (const url of PROBES.bad_source_urls) {
+      expect(() => check({ sources: [{ url, type: "x", author: null, handle: null, date: "2026-11-01" }] }), url).toThrow(
+        LeadError,
+      );
+    }
+    expect(urlHost("https://bit.ly\\@x.com/a")).toBeNull();
+    expect(urlHost("https://www.x.com/a/status/1")).toBe("x.com");
+  });
+
+  it("handles a missing or empty folder and rejects stray files", async () => {
+    expect(await loadLeads(path.join(tmpdir(), "ft-no-such-leads-dir"), TODAY)).toEqual([]);
+    const empty = leadsDir({});
+    expect(await loadLeads(empty, TODAY)).toEqual([]);
+    rmSync(empty, { recursive: true });
+    const stray = leadsDir({ "acme.yml": leadText("acme") });
+    await expect(loadLeads(stray, TODAY)).rejects.toThrow(/unexpected file/);
+    rmSync(stray, { recursive: true });
   });
 
   it("rejects a lead whose slug is also an offer", async () => {
     const dir = leadsDir({ "acme-free": leadText("acme-free") });
-    await expect(loadLeads(dir, "2026-11-03", ["acme-free"])).rejects.toBeInstanceOf(
-      LeadError,
-    );
+    await expect(loadLeads(dir, TODAY, ["acme-free"])).rejects.toBeInstanceOf(LeadError);
     rmSync(dir, { recursive: true });
   });
 
@@ -86,10 +146,7 @@ describe("load-leads (#660)", () => {
         "review_status: under-review\nsignup: required\n",
     );
     mkdirSync(path.join(root, "unverified"));
-    writeFileSync(
-      path.join(root, "unverified", "acme-free.yaml"),
-      leadText("acme-free", { last_seen: "2026-11-02" }),
-    );
+    writeFileSync(path.join(root, "unverified", "acme-free.yaml"), leadText("acme-free"));
     const outDir = path.join(root, "out");
     await runPipeline({ offersDir, outDir, now: new Date("2026-11-03T00:00:00Z") });
     const leads = JSON.parse(readFileSync(path.join(outDir, "unverified.json"), "utf8"));

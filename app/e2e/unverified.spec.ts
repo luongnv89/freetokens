@@ -21,6 +21,11 @@ test("Unverified page is linked from home and warns before the leads", async ({
 
   const sources = page.locator(".lead-sources a");
   const count = await sources.count();
+  if ((await page.locator(".lead-card").count()) === 0) {
+    await expect(
+      page.getByRole("heading", { name: "Nothing unconfirmed right now" }),
+    ).toBeVisible();
+  }
   for (let i = 0; i < count; i++) {
     await expect(sources.nth(i)).toHaveAttribute(
       "rel",

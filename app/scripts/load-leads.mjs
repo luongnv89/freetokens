@@ -1,16 +1,27 @@
 // Unverified leads (#660): reads unverified/*.yaml and returns the list the
-// Unverified page renders. Mirrors scripts/lead_model.py — that Python
-// validator is the content gate (CI `validate`); this loader re-checks the
-// shape it relies on so a malformed file fails the build naming file+field.
+// Unverified page renders. Mirrors scripts/lead_model.py, the CI content gate,
+// check for check: both load the same safety and freshness rules from
+// schemas/unverified-lead.rules.json, so a lead the gate would reject also
+// fails the build (fail closed) instead of reaching the page.
 //
 // Leads are NEVER offers: they go to src/data/unverified.json only, never
-// into offers.json / index.json / llms*.txt / offer detail pages. A lead last
-// seen more than STALE_DAYS days before the build is dropped here, the same
-// build-clock rule the catalog uses for expiry (ADR 0001).
+// into offers.json / index.json / llms*.txt / offer detail pages. A lead is
+// listed only while its newest dated source post is at most `fresh_days` (3)
+// days old against the build clock; older ones are hidden here, the same
+// build-time rule the catalog uses for expiry (ADR 0001).
 
-import { readdir, readFile } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { readdir, readFile, stat } from "node:fs/promises";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const here = path.dirname(fileURLToPath(import.meta.url));
+export const RULES = JSON.parse(
+  readFileSync(
+    path.join(here, "..", "..", "schemas", "unverified-lead.rules.json"),
+    "utf8",
+  ),
+);
 
 export const LEAD_FIELDS = [
   "slug",
@@ -33,9 +44,84 @@ export const LEAD_REASONS = [
   "other",
 ];
 const SOURCE_TYPES = ["x", "reddit", "web"];
-export const STALE_DAYS = 30;
+const SOURCE_KEYS = ["url", "type", "author", "handle", "date"];
+export const FRESH_DAYS = RULES.fresh_days;
+const TEXT_FIELDS = [
+  "provider",
+  "title",
+  "claim",
+  "amount_claimed",
+  "reason_detail",
+];
+const SHOWN_FIELDS = ["title", "claim", "amount_claimed"];
+const UNSAFE_RE = new RegExp(
+  RULES.unsafe_claim_patterns.map((p) => `(?:${p})`).join("|"),
+  "i",
+);
+const AUTHORITY_RE = new RegExp(RULES.url_authority_pattern, "i");
+const NON_DOMAIN = new Set(RULES.non_domain_suffixes);
 
 export class LeadError extends Error {}
+
+const on = (host, hosts) =>
+  hosts.some((h) => host === h || host.endsWith(`.${h}`));
+const stripWww = (host) => (host.startsWith("www.") ? host.slice(4) : host);
+
+/**
+ * Host of a plain https URL, or null. Same subset as lead_model.url_host:
+ * no userinfo, port, backslash or whitespace, and the WHATWG parser must
+ * agree with the literal authority, so a link can never render to a host
+ * the gate did not check.
+ */
+export function urlHost(url) {
+  if (typeof url !== "string" || url.length > 500) return null;
+  if (/[^\x21-\x7e]/.test(url) || url.includes("\\")) return null;
+  const match = AUTHORITY_RE.exec(url);
+  if (!match) return null;
+  const host = match[1].toLowerCase();
+  if (
+    !host.includes(".") ||
+    host.startsWith(".") ||
+    host.endsWith(".") ||
+    host.includes("..")
+  ) {
+    return null;
+  }
+  let parsed;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return null;
+  }
+  if (
+    parsed.protocol !== "https:" ||
+    parsed.hostname !== host ||
+    parsed.port !== "" ||
+    parsed.username ||
+    parsed.password
+  ) {
+    return null;
+  }
+  return stripWww(host);
+}
+
+export function foreignDomains(text, officialHosts) {
+  const found = [];
+  const re = new RegExp(RULES.domain_pattern, "gi");
+  for (const match of String(text ?? "").matchAll(re)) {
+    const token = stripWww(match[1].toLowerCase());
+    if (NON_DOMAIN.has(token.split(".").pop())) continue;
+    if (
+      officialHosts.some(
+        (h) => token === h || token.endsWith(`.${h}`) || h.endsWith(`.${token}`),
+      )
+    ) {
+      continue;
+    }
+    found.push(token);
+  }
+  return found;
+}
 
 function parseValue(raw, filename, lineno) {
   const value = raw.trim();
@@ -81,56 +167,99 @@ const isDate = (v) =>
   DATE_RE.test(v) &&
   new Date(`${v}T00:00:00Z`).toISOString().slice(0, 10) === v;
 const isText = (v) => typeof v === "string" && v.trim().length > 0;
-const isHttps = (v) => {
-  try {
-    return typeof v === "string" && new URL(v).protocol === "https:";
-  } catch {
-    return false;
-  }
-};
 
-export function validateLead(data, filename) {
+/** Newest dated source post (YYYY-MM-DD), or null when every source is undated. */
+export function newestPost(lead) {
+  const dates = (lead.sources ?? []).map((s) => s?.date).filter(Boolean);
+  return dates.length ? dates.sort().at(-1) : null;
+}
+
+export function validateLead(data, filename, today) {
+  const fail = (msg) => {
+    throw new LeadError(`${filename}: ${msg}`);
+  };
   const missing = LEAD_FIELDS.filter((f) => !(f in data));
-  if (missing.length) {
-    throw new LeadError(`${filename}: missing required field(s): ${missing.join(", ")}`);
-  }
+  if (missing.length) fail(`missing required field(s): ${missing.join(", ")}`);
   const extra = Object.keys(data).filter((k) => !LEAD_FIELDS.includes(k));
-  if (extra.length) {
-    throw new LeadError(`${filename}: unknown field(s): ${extra.join(", ")}`);
-  }
+  if (extra.length) fail(`unknown field(s): ${extra.join(", ")}`);
   for (const f of ["slug", "provider", "title", "claim", "reason_detail"]) {
-    if (!isText(data[f])) throw new LeadError(`${filename}: ${f} must be a non-empty string`);
+    if (!isText(data[f])) fail(`${f} must be a non-empty string`);
   }
   if (data.amount_claimed !== null && !isText(data.amount_claimed)) {
-    throw new LeadError(`${filename}: amount_claimed must be a non-empty string or null`);
+    fail("amount_claimed must be a non-empty string or null");
   }
-  if (path.basename(filename).replace(/\.ya?ml$/, "") !== data.slug) {
-    throw new LeadError(`${filename}: slug must match the file name`);
+  if (path.basename(filename).replace(/\.yaml$/, "") !== data.slug) {
+    fail("slug must match the file name");
   }
   for (const f of ["first_seen", "last_seen"]) {
-    if (!isDate(data[f])) throw new LeadError(`${filename}: ${f} must be a YYYY-MM-DD date`);
+    if (!isDate(data[f])) fail(`${f} must be a YYYY-MM-DD date`);
   }
+  if (data.first_seen > data.last_seen) fail("first_seen is after last_seen");
+  if (today && data.last_seen > today) fail("last_seen is in the future");
   if (!LEAD_REASONS.includes(data.reason)) {
-    throw new LeadError(`${filename}: reason must be one of ${LEAD_REASONS.join(", ")}`);
+    fail(`reason must be one of ${LEAD_REASONS.join(", ")}`);
   }
-  if (!Array.isArray(data.sources) || data.sources.length === 0) {
-    throw new LeadError(`${filename}: sources must list at least one public post or page`);
+
+  const officialHosts = [];
+  if (!Array.isArray(data.official_urls_tried) || !data.official_urls_tried.length) {
+    fail("official_urls_tried must list at least one official URL");
   }
-  data.sources.forEach((s, i) => {
-    if (!s || !isHttps(s.url) || !SOURCE_TYPES.includes(s.type)) {
-      throw new LeadError(`${filename}: sources[${i}] needs an https url and type x|reddit|web`);
+  data.official_urls_tried.forEach((url, i) => {
+    const host = urlHost(url);
+    if (!host) fail(`official_urls_tried[${i}] must be a plain https URL`);
+    if (on(host, RULES.shortener_hosts) || on(host, RULES.form_hosts)) {
+      fail(`official_urls_tried[${i}] is a link shortener or form`);
     }
-    if (s.date !== null && !isDate(s.date)) {
-      throw new LeadError(`${filename}: sources[${i}].date must be YYYY-MM-DD or null`);
+    if (on(host, RULES.social_hosts)) {
+      fail(`official_urls_tried[${i}] is a social site, not an official page`);
     }
+    officialHosts.push(host);
   });
-  if (
-    !Array.isArray(data.official_urls_tried) ||
-    data.official_urls_tried.length === 0 ||
-    !data.official_urls_tried.every(isHttps)
-  ) {
-    throw new LeadError(`${filename}: official_urls_tried must list https URLs`);
+
+  if (!Array.isArray(data.sources) || data.sources.length === 0) {
+    fail("sources must list at least one public post or page");
   }
+  const seen = new Set();
+  data.sources.forEach((s, i) => {
+    const label = `sources[${i}]`;
+    if (
+      !s ||
+      typeof s !== "object" ||
+      Object.keys(s).sort().join() !== [...SOURCE_KEYS].sort().join()
+    ) {
+      fail(`${label} must have exactly the keys ${SOURCE_KEYS.join(", ")}`);
+    }
+    const host = urlHost(s.url);
+    if (!host) fail(`${label}.url must be a plain https URL`);
+    if (on(host, RULES.shortener_hosts) || on(host, RULES.form_hosts)) {
+      fail(`${label}.url is a link shortener or form (unsafe claim path)`);
+    }
+    if (!SOURCE_TYPES.includes(s.type)) fail(`${label}.type must be x|reddit|web`);
+    if (
+      (s.type === "x") !== on(host, RULES.x_hosts) ||
+      (s.type === "reddit") !== on(host, RULES.reddit_hosts)
+    ) {
+      fail(`${label}.type ${s.type} does not match host ${host}`);
+    }
+    if (s.date !== null && !isDate(s.date)) fail(`${label}.date must be YYYY-MM-DD or null`);
+    if (today && s.date && s.date > today) fail(`${label}.date is in the future`);
+    if (seen.has(s.url)) fail(`${label}.url is listed twice`);
+    seen.add(s.url);
+  });
+  if (!newestPost(data)) fail("undated source: at least one source needs a post date");
+
+  for (const f of TEXT_FIELDS) {
+    const value = data[f];
+    if (!value) continue;
+    const domains = foreignDomains(value, officialHosts);
+    if (domains.length) fail(`${f} names ${domains[0]}, not the provider's own domain`);
+    if (SHOWN_FIELDS.includes(f)) {
+      if (/https?:\/\//i.test(value)) fail(`${f} carries a link (unsafe claim path)`);
+      const bad = UNSAFE_RE.exec(value);
+      if (bad) fail(`${f} asks for a DM, a form, a secret, or payment details (${bad[0]})`);
+    }
+  }
+
   return {
     slug: data.slug,
     provider: data.provider,
@@ -144,6 +273,7 @@ export function validateLead(data, filename) {
       handle: s.handle ?? null,
       date: s.date ?? null,
     })),
+    posted: newestPost(data),
     first_seen: data.first_seen,
     last_seen: data.last_seen,
     reason: data.reason,
@@ -151,40 +281,44 @@ export function validateLead(data, filename) {
   };
 }
 
-/** True once last_seen is more than STALE_DAYS days before `today`. */
+/** True once `today` is past the newest post + FRESH_DAYS (undated = stale). */
 export function isStaleLead(lead, today) {
+  const posted = newestPost(lead);
+  if (!posted) return true;
   const days =
-    (Date.parse(`${today}T00:00:00Z`) - Date.parse(`${lead.last_seen}T00:00:00Z`)) /
+    (Date.parse(`${today}T00:00:00Z`) - Date.parse(`${posted}T00:00:00Z`)) /
     86_400_000;
-  return days > STALE_DAYS;
+  return days > FRESH_DAYS;
 }
 
-/** Newest last_seen first, then newest first_seen, then slug. */
+/** Newest post first, then most recently checked, then slug. */
 export function sortLeads(leads) {
   return [...leads].sort(
     (a, b) =>
+      b.posted.localeCompare(a.posted) ||
       b.last_seen.localeCompare(a.last_seen) ||
-      b.first_seen.localeCompare(a.first_seen) ||
       a.slug.localeCompare(b.slug),
   );
 }
 
 /**
- * Load every lead under `leadsDir`. A missing folder is an empty list. A lead
- * whose slug names an offer fails: publishing a lead removes its file.
+ * Load every lead under `leadsDir`. A missing or empty folder is an empty
+ * list. Any non-.yaml file, an invalid lead, or a lead whose slug names an
+ * offer fails the build.
  */
 export async function loadLeads(leadsDir, today, offerSlugs = []) {
   if (!existsSync(leadsDir)) return [];
   const taken = new Set(offerSlugs);
-  const files = (await readdir(leadsDir))
-    .filter((f) => /\.ya?ml$/.test(f))
-    .sort();
   const leads = [];
-  for (const file of files) {
+  for (const file of (await readdir(leadsDir)).sort()) {
     const filename = path.join(leadsDir, file);
+    if (!file.endsWith(".yaml") || !(await stat(filename)).isFile()) {
+      throw new LeadError(`${filename}: unexpected file; leads are <slug>.yaml files only`);
+    }
     const lead = validateLead(
       parseLeadText(await readFile(filename, "utf8"), filename),
       filename,
+      today,
     );
     if (taken.has(lead.slug)) {
       throw new LeadError(`${filename}: slug ${lead.slug} is also an offer`);

@@ -3344,6 +3344,8 @@ figure.proof-screenshot {
 }
 .lead-grid > li {
   display: block;
+  /* Like Archive: no rise-in animation, so cards paint at once (LCP). */
+  animation: none;
 }
 .lead-provider,
 .lead-label {

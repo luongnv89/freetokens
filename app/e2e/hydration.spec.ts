@@ -43,6 +43,24 @@ test("home hydrates with no React hydration errors at a localhost origin", async
   expect(errors, `hydration errors: ${errors.join(" | ")}`).toEqual([]);
 });
 
+test("unverified page hydrates from its own leads JSON with no React hydration errors (#660)", async ({
+  page,
+}) => {
+  const errors = collectHydrationErrors(page);
+  const leadsRequests = [];
+  page.on("request", (request) => {
+    if (/unverified-[A-Za-z0-9_-]+\.json/.test(request.url())) {
+      leadsRequests.push(request.url());
+    }
+  });
+  await page.goto("/unverified.html");
+  await page.waitForLoadState("networkidle");
+  expect(errors, `hydration errors: ${errors.join(" | ")}`).toEqual([]);
+  // Route-guarded fetch: only this page asks for the leads artifact.
+  expect(leadsRequests.length).toBeGreaterThan(0);
+  expect(await page.locator("h1").textContent()).toBe("Unverified offers");
+});
+
 test("detail page hydrates with no React hydration errors at a localhost origin", async ({
   page,
 }) => {
@@ -69,7 +87,9 @@ test("home and archive never request the details data chunk", async ({
   page,
 }) => {
   const jsRequests = [];
+  const allRequests = [];
   page.on("request", (request) => {
+    allRequests.push(request.url());
     if (request.url().endsWith(".js")) jsRequests.push(request.url());
   });
   for (const route of ["/index.html", "/archive.html"]) {
@@ -79,6 +99,10 @@ test("home and archive never request the details data chunk", async ({
   expect(
     jsRequests.filter((url) => /details/i.test(path.basename(url))),
     `details chunk requested on listing routes: ${jsRequests.join(", ")}`,
+  ).toEqual([]);
+  expect(
+    allRequests.filter((url) => /unverified-[A-Za-z0-9_-]+\.json/.test(url)),
+    "leads JSON requested on listing routes",
   ).toEqual([]);
 });
 

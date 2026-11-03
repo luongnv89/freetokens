@@ -26,6 +26,8 @@ export interface Lead {
   claim: string;
   amount_claimed: string | null;
   sources: LeadSource[];
+  /** Newest dated source post (YYYY-MM-DD); the lead is listed for 3 days after it. */
+  posted: string;
   first_seen: string;
   last_seen: string;
   reason: LeadReason;
