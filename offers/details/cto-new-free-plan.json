@@ -1,0 +1,21 @@
+{
+  "summary": "cto.new is a platform for starting or growing a company by chatting with an AI team, including a website and app builder. Its Free plan is listed as free forever with free frontier AI models, unlimited AI businesses and agent chats, and free API and MCP integrations, with no credit card or API keys required. Premium starts from $20 with at least 5x usage and premium models.",
+  "claim_steps": [
+    "Go to cto.new",
+    "Start for free; no credit card or API keys are required"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cto.new/pricing",
+      "title": "cto.new | Pricing",
+      "text": "Free forever. Frontier AI models: Free. AI Businesses: Unlimited. Agent chats: Unlimited. API and MCP Integrations: Free. No credit card or API keys required. Go Premium from $20."
+    },
+    {
+      "type": "link",
+      "url": "https://cto.new/",
+      "title": "cto - Build businesses with AI. Free forever.",
+      "text": "Free to start. No credit card or API keys required. Build and publish a website or app by chatting with your AI team."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "summary": "Junie by JetBrains is a coding agent installed from the terminal. Its homepage announces Junie Lite as a free AI layer with no trial and no card, described in the pricing section as a free model that is always on in every JetBrains account. The Free to Start plan is listed as Free, with other AI usage billed separately; bring-your-own-key usage is billed at provider rates with zero markup.",
+  "claim_steps": [
+    "Open a terminal and run the install command from junie.jetbrains.com: curl -fsSL https://junie.jetbrains.com/install.sh | bash",
+    "Sign in with your JetBrains Account to use the free Junie Lite model"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://junie.jetbrains.com/",
+      "title": "Junie by JetBrains",
+      "text": "New: Junie Lite – free AI layer, no trial, no card. ... A free model, always on, in every JetBrains account."
+    }
+  ]
+}
