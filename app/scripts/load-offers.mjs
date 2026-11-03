@@ -28,6 +28,7 @@ import {
   validateIndexData,
   validateJsonlText,
 } from "./validate-artifacts.mjs";
+import { defaultLeadsDir, loadLeads } from "./load-leads.mjs";
 
 const REQUIRED_FIELDS = [
   "title",
@@ -449,6 +450,7 @@ export async function runPipeline({
   outDir,
   now = new Date(),
   alwaysFreePath = defaultAlwaysFreePath(offersDir),
+  leadsDir = defaultLeadsDir(offersDir),
 }) {
   const today = todayISO(now);
   const offers = await loadOffers(offersDir, today);
@@ -486,6 +488,18 @@ export async function runPipeline({
   await writeFile(
     path.join(outDir, "details.json"),
     `${JSON.stringify(details, null, 2)}\n`,
+  );
+
+  // Unverified leads (#660) ship in their own artifact so they can never leak
+  // into offers.json, index.json, the llms files or offer pages.
+  const leads = await loadLeads(
+    leadsDir,
+    today,
+    offers.map((o) => o.slug),
+  );
+  await writeFile(
+    path.join(outDir, "unverified.json"),
+    `${JSON.stringify({ generated_at: index.generated_at, count: leads.length, leads }, null, 2)}\n`,
   );
 
   await validateWrittenArtifacts(outDir);

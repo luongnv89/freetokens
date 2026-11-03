@@ -123,6 +123,19 @@ await build({
         // Aggregated details map (issue #128). Sibling of --data when present,
         // else the generated src/data/details.json. Empty object if neither
         // exists so a synthetic --data-only prerender still bundles.
+        // Unverified leads (#660): sibling of --data when present, else the
+        // generated src/data/unverified.json, else an empty list.
+        b.onLoad({ filter: /(?:^|\/)src\/data\/unverified\.json$/ }, async () => {
+          const sibling = path.join(path.dirname(dataFile), "unverified.json");
+          const fallback = path.join(here, "..", "src", "data", "unverified.json");
+          const file = existsSync(sibling) ? sibling : fallback;
+          return {
+            contents: existsSync(file)
+              ? await readFile(file, "utf8")
+              : '{"generated_at":"","count":0,"leads":[]}',
+            loader: "json",
+          };
+        });
         b.onLoad({ filter: /(?:^|\/)src\/data\/details\.json$/ }, async () => {
           const sibling = path.join(path.dirname(dataFile), "details.json");
           const fallback = path.join(here, "..", "src", "data", "details.json");
@@ -348,6 +361,22 @@ try {
     }),
   );
   written.push("archive.html");
+
+  // Unverified leads (/unverified.html, #660). No Markdown twin: leads stay
+  // out of every agent-facing text artifact (llms*.txt, *.md).
+  await writeFile(
+    path.join(distDir, "unverified.html"),
+    fillPage({
+      markup: await renderRoute({ page: "unverified" }, origin),
+      title: "Unverified offers · Free AI Credits",
+      description:
+        "Free AI credit offers spotted on X or the web but not yet confirmed on the provider's official pages. Unconfirmed: they may be inaccurate or have ended.",
+      canonical: `${origin}/unverified.html`,
+      page: "unverified",
+      baseUrl: origin,
+    }),
+  );
+  written.push("unverified.html");
 
   // Privacy policy (/privacy.html).
   await writeFile(

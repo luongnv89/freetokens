@@ -6,8 +6,10 @@ import { renderToPipeableStream } from "react-dom/server";
 import App from "../App";
 import indexData from "../data/offers.json";
 import detailsData from "../data/details.json";
+import leadsData from "../data/unverified.json";
 import type { OffersIndex } from "../lib/offers";
 import type { DetailsMap } from "../lib/offerDetails";
+import type { LeadsIndex } from "../lib/leads";
 import type { Route } from "../routes";
 
 const index = indexData as OffersIndex;
@@ -15,6 +17,8 @@ const index = indexData as OffersIndex;
 // so the aggregate details map never reaches the client chunk. The client
 // (main.tsx) loads it via a route-guarded dynamic import instead (#369).
 const details = detailsData as DetailsMap;
+// Unverified leads (#660): their own artifact, rendered only on that route.
+const leads = leadsData as LeadsIndex;
 
 /**
  * Stream render: renderToPipeableStream (NOT renderToStaticMarkup).
@@ -41,6 +45,7 @@ export async function renderRoute(
       <App
         index={index}
         details={details}
+        leads={route.page === "unverified" ? leads : undefined}
         route={route}
         baseUrl={baseUrl}
       />,

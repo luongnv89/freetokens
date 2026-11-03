@@ -15,6 +15,10 @@ type BreadcrumbsProps =
       baseUrl?: string;
     }
   | {
+      page: "unverified";
+      baseUrl?: string;
+    }
+  | {
       page: "privacy";
       baseUrl?: string;
     }
@@ -45,6 +49,13 @@ function buildBreadcrumbItems(props: BreadcrumbsProps): BreadcrumbItem[] {
     return [
       { name: "Offers", href: "./index.html", item: `${baseUrl}/` },
       { name: "Archive", item: `${baseUrl}/archive.html` },
+    ];
+  }
+
+  if (props.page === "unverified") {
+    return [
+      { name: "Offers", href: "./index.html", item: `${baseUrl}/` },
+      { name: "Unverified", item: `${baseUrl}/unverified.html` },
     ];
   }
 

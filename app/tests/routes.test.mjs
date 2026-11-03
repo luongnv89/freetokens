@@ -214,7 +214,7 @@ describe("static route coverage (#123)", () => {
     expect(document.documentElement.namespaceURI).toBe(SITEMAP_NAMESPACE);
 
     const urls = [...document.getElementsByTagNameNS(SITEMAP_NAMESPACE, "url")];
-    expect(urls).toHaveLength(index.offers.length + 6);
+    expect(urls).toHaveLength(index.offers.length + 7);
     expect(
       urls.map(
         (url) =>
@@ -223,6 +223,7 @@ describe("static route coverage (#123)", () => {
     ).toEqual([
       "https://freetokens.custats.info/",
       "https://freetokens.custats.info/archive.html",
+      "https://freetokens.custats.info/unverified.html",
       "https://freetokens.custats.info/privacy.html",
       "https://freetokens.custats.info/about.html",
       "https://freetokens.custats.info/brand-showcase.html",
@@ -240,6 +241,41 @@ describe("static route coverage (#123)", () => {
       )[0].textContent;
       expect(lastmod).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(lastmod <= today).toBe(true);
+    }
+  });
+
+  it("prerenders the Unverified page from its own artifact only (#660)", () => {
+    const html = readFileSync(path.join(outDir, "unverified.html"), "utf8");
+    expect(html).toContain('data-page="unverified"');
+    expect(html).toContain("<h1>Unverified offers</h1>");
+    expect(html).toContain("not confirmed on an official page");
+    expect(headOf(html)).toContain(
+      '<link rel="canonical" href="https://freetokens.custats.info/unverified.html"',
+    );
+    const { leads } = JSON.parse(
+      readFileSync(path.join(APP_ROOT, "src/data/unverified.json"), "utf8"),
+    );
+    const sourceTags = [...html.matchAll(/<a href="([^"]+)" rel="([^"]*)"/g)];
+    for (const lead of leads) {
+      expect(html).toContain(htmlText(lead.title));
+      for (const source of lead.sources) {
+        const tag = sourceTags.find(([, href]) => href === htmlAttr(source.url));
+        expect(tag?.[2]).toBe("nofollow ugc noopener noreferrer");
+      }
+      // Leads never reach the offer listing, the catalog or offer pages.
+      expect(index.offers.some((o) => o.slug === lead.slug)).toBe(false);
+      expect(existsSync(path.join(outDir, "offers", `${lead.slug}.html`))).toBe(
+        false,
+      );
+      expect(
+        readFileSync(path.join(outDir, "index.html"), "utf8"),
+      ).not.toContain(lead.sources[0].url);
+    }
+    // Every page links the new tab beside Archive.
+    for (const file of ["index.html", "archive.html", "about.html"]) {
+      expect(readFileSync(path.join(outDir, file), "utf8")).toContain(
+        'href="unverified.html"',
+      );
     }
   });
 

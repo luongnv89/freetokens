@@ -121,6 +121,7 @@ export function buildSitemap(index, baseUrl = DEFAULT_BASE_URL, options = {}) {
   const fixedEntries = [
     { path: "/", lastmod: generatedDate },
     { path: "/archive.html", lastmod: generatedDate },
+    { path: "/unverified.html", lastmod: generatedDate },
     { path: "/privacy.html", lastmod: generatedDate },
     { path: "/about.html", lastmod: generatedDate },
     { path: "/brand-showcase.html", lastmod: generatedDate },
