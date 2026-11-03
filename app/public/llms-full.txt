@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-03T21:59:42Z — 120 of 228 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-03T22:29:44Z — 120 of 228 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -736,7 +736,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Source: https://x.com/opencode/status/2117717721458843711
 - Page: https://freetokens.custats.info/offers/opencode-crouton-alpha-free.html
 - Summary: Crouton Alpha is a stealth model that is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-11-03 as "free for the next week" (through ~2026-11-10), with 1M context, multi-modal input, and no training on data. The free period is limited to certain regions. OpenCode's Zen model list shows id crouton-alpha-free at $0 input, output, and cached reads.
-- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen and copy your API key. | In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key. | Run /models and select Crouton Alpha Free (model id: crouton-alpha-free). | Availability is limited to certain regions.
+- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen and copy your API key. | In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key. | Run /models and select Crouton Alpha Free (model id: crouton-alpha-free).
 ### Beam Free (formerly Cat Jam) on OpenCode
 - Provider: OpenCode
 - Category: coding

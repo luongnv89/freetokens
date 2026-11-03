@@ -3,8 +3,7 @@
   "claim_steps": [
     "Sign in to OpenCode Zen at opencode.ai/zen and copy your API key.",
     "In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key.",
-    "Run /models and select Crouton Alpha Free (model id: crouton-alpha-free).",
-    "Availability is limited to certain regions."
+    "Run /models and select Crouton Alpha Free (model id: crouton-alpha-free)."
   ],
   "social_proof": [
     {

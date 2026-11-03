@@ -2,7 +2,7 @@
 # ("Price Free · Context 1.0M · Released Nov 3, 2026"; stealth FAQ: "Crouton Alpha
 # is available at no cost through the OpenRouter API.")
 # API check: /api/v1/models/stealth/crouton-alpha/endpoints -> pricing prompt "0",
-# completion "0". No end date stated; earlier stealth previews ended after ~1 week.
+# completion "0". No end date stated, so expiry_date is null.
 title: Crouton Alpha Free on OpenRouter
 provider: OpenRouter
 category: api_provider
