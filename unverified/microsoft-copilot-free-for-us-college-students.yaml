@@ -1,0 +1,13 @@
+# Unverified lead (offer-hunter): seen on X, Reddit, or the web; not confirmed on an official page.
+# Never an offer: it is listed only on the Unverified page.
+slug: microsoft-copilot-free-for-us-college-students
+provider: "Microsoft"
+title: "Copilot free for US college students"
+claim: "US college students can get 3 months of Microsoft Copilot AI free."
+amount_claimed: "3 months of Microsoft Copilot"
+sources: [{"url": "https://www.tomsguide.com/ai/us-college-students-can-get-3-months-of-microsoft-copilot-ai-free-heres-how", "type": "web", "author": null, "handle": null, "date": null}]
+first_seen: 2026-11-03
+last_seen: 2026-11-03
+reason: bot_walled
+reason_detail: "Microsoft's college-student pricing and Microsoft 365 for students pages timed out twice, so no official page could confirm the offer."
+official_urls_tried: ["https://www.microsoft.com/en-us/microsoft-365/college-student-pricing", "https://www.microsoft.com/en-us/microsoft-365/microsoft-365-for-students"]
