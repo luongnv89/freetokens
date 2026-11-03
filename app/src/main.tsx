@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import type { OffersIndex } from "./lib/offers.ts";
 import type { DetailsMap } from "./lib/offerDetails.ts";
+import type { LeadsIndex } from "./lib/leads.ts";
 import { resolveRoute } from "./routes.ts";
 import { scheduleAnalyticsInit } from "./lib/analytics.ts";
 import { registerWebMcpTools } from "./lib/webmcp.ts";
@@ -53,6 +54,26 @@ async function boot() {
         skipHydration = true;
       }
     }
+    // Unverified leads (#660) ship in their own JSON, fetched only on that
+    // route; same skip-hydration-on-failure rule as details above.
+    let leads: LeadsIndex | undefined;
+    if (route.page === "unverified") {
+      try {
+        const leadsUrl = new URL("./data/unverified.json", import.meta.url)
+          .href;
+        const lres = await fetch(leadsUrl, { credentials: "same-origin" });
+        if (!lres.ok) {
+          throw new Error(`leads request failed: ${lres.status}`);
+        }
+        leads = (await lres.json()) as LeadsIndex;
+      } catch (error) {
+        console.error(
+          "Unable to load unverified leads; prerendered content remains available.",
+          error,
+        );
+        skipHydration = true;
+      }
+    }
     if (!skipHydration) {
       // The prerenderer stamps the production base URL on #root; reading it
       // keeps StructuredData's JSON-LD byte-identical across prerender and
@@ -64,6 +85,7 @@ async function boot() {
           <App
             index={index}
             details={details}
+            leads={leads}
             baseUrl={root.dataset.baseUrl}
           />
         </StrictMode>,

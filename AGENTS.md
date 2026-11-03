@@ -53,3 +53,12 @@ do not reference or run it.
 
 Adding an offer is unchanged by the migration: one YAML file in `offers/`
 (schema: docs/schema.md), verified against its `source_url`, then a PR.
+
+Offers the offer-hunter could not verify are kept as leads in
+`unverified/<slug>.yaml` (schema: `schemas/unverified-lead.schema.json`,
+validated by `validate_offers.py`). Leads render only on `/unverified.html`,
+only for 3 days after their newest dated post, and must never reach
+`index.json`, the llms files, or offer pages; only
+`skills/offer-hunter/scripts/write_leads.py` writes them, and
+`scripts/lead_model.py remove-match` deletes one when its offer is published
+(#660).

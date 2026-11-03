@@ -10,6 +10,7 @@ const BASE = "https://example.com/freetokens";
 const FIXED_PATHS = [
   "/",
   "/archive.html",
+  "/unverified.html",
   "/privacy.html",
   "/about.html",
   "/brand-showcase.html",
@@ -68,6 +69,7 @@ describe("sitemap generation", () => {
       "2026-08-21",
       "2026-08-21",
       "2026-08-21",
+      "2026-08-21",
       "2026-08-20",
       "2026-08-01",
     ]);
@@ -118,6 +120,7 @@ describe("sitemap generation", () => {
     const entries = sitemapEntries(xml);
 
     expect(entries.map(({ lastmod }) => lastmod)).toEqual([
+      "2026-08-29",
       "2026-08-29",
       "2026-08-29",
       "2026-08-29",
@@ -200,7 +203,7 @@ describe("sitemap generation", () => {
   });
 
   it("rejects a URL set above the sitemap protocol limit", () => {
-    const offers = Array.from({ length: MAX_SITEMAP_URLS - 6 }, (_, index) =>
+    const offers = Array.from({ length: MAX_SITEMAP_URLS - FIXED_PATHS.length }, (_, index) =>
       offer(`offer-${index}`),
     );
     expect(() =>

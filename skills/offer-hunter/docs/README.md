@@ -14,6 +14,7 @@
 - Three parallel scouts search X (via web search plus the X oEmbed lookup), Reddit (public JSON search), and the wider web (Hacker News, search, curated lists).
 - Parallel verifiers confirm every lead on the provider's own pages; official information wins every conflict, and anything unconfirmed is dropped.
 - A deterministic shortlist script enforces the value floor ($5 in credit or 100,000 tokens per month-equivalent), rejects duplicates of the catalog and of open PRs, ranks, and caps at 10.
+- Unverifiable offers with a safe claim path are kept as leads in `unverified/` and shown on the site's Unverified page; a lead is listed only for 3 days after its newest dated post; each run adds, refreshes, re-checks up to 5, and deletes stale, promoted, or contradicted leads.
 - New offers land as `verification: social_proof`, `review_status: under-review`, with a reference trace and the lead embedded as social proof.
 - Uses TinyFish for search and page reads and Lightpanda for a browser retry when installed; falls back to the host's built-in web tools otherwise.
 - Opens a tracking issue and one PR; it never merges. Your merge is what publishes.

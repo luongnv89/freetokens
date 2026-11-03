@@ -11,6 +11,7 @@ import type { OfferDetail } from "../lib/offerDetails";
 type StructuredDataProps =
   | { page: "home"; index: OffersIndex; baseUrl?: string }
   | { page: "archive"; index: OffersIndex; baseUrl?: string }
+  | { page: "unverified"; baseUrl?: string }
   | { page: "about"; baseUrl?: string }
   | { page: "privacy"; baseUrl?: string }
   | {
@@ -34,6 +35,9 @@ function normalizeBaseUrl(baseUrl?: string): string {
 // blanket "verified" claim belongs in machine-readable metadata (#507).
 const SITE_DESCRIPTION =
   "Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page.";
+
+export const UNVERIFIED_DESCRIPTION =
+  "Free AI credit offers spotted on X or the web but not yet confirmed on the provider's official pages. Unconfirmed: they may be inaccurate or have ended.";
 
 function safeJsonLd(value: unknown): string {
   return (JSON.stringify(value) ?? "").replace(/[&<>\u2028\u2029]/g, (ch) => {
@@ -147,6 +151,18 @@ export function StructuredData(props: StructuredDataProps) {
         })),
       };
     }
+  } else if (props.page === "unverified") {
+    // Plain WebPage: leads are unconfirmed, so no ItemList advertises them
+    // to crawlers as offers (#660).
+    pageNode = {
+      "@type": "WebPage",
+      "@id": `${base}/unverified.html#webpage`,
+      url: `${base}/unverified.html`,
+      name: "Unverified offers · Free AI Credits",
+      description: UNVERIFIED_DESCRIPTION,
+      isPartOf: { "@id": `${base}/#website` },
+      inLanguage: "en",
+    };
   } else if (props.page === "about") {
     pageNode = {
       "@type": "AboutPage",

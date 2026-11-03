@@ -15,7 +15,8 @@ See @prd.md and @tasks.md for scope. Epic: #31.
 - Deploys run automatically on push to main. Never push directly to main (branch protection).
 
 ## Architecture map
-- `offers/*.yaml` — one file per offer; the entire content model
+- `offers/*.yaml` — one file per offer; the offer content model
+- `unverified/*.yaml` — unverified leads only (#660): never offers, shown only on `/unverified.html`, listed for 3 days after the newest dated post; schema `schemas/unverified-lead.schema.json` + `schemas/unverified-lead.rules.json`, written only by `skills/offer-hunter/scripts/write_leads.py`
 - `app/src/components/` — React components (HomePage, OfferRow, ConsentBanner, …)
 - `app/src/lib/` — data loading, analytics, URL state, personal state helpers
 - `app/src/routes.ts` + `app/src/prerender/` — routing and build-time prerender to static HTML
@@ -33,7 +34,7 @@ See @prd.md and @tasks.md for scope. Epic: #31.
 - IMPORTANT: never record raw search queries in analytics — `search` events carry `query_length` only
 - IMPORTANT: pin all GitHub Actions to full commit SHAs, never floating tags
 - Expired offers disappear at build time only (#9); never add client-clock filtering without revisiting ADR #11
-- Never invent an offer or reuse stale data — unverifiable offers are dropped (no `needs_review` draft), never published. One exception: the offer-updater **early lane** publishes an offer official pages are silent about as `verification: unverified` when named public posts back it (`skills/offer-updater/references/early-lane.md`)
+- Never invent an offer or reuse stale data — unverifiable offers are dropped (no `needs_review` draft), never published. One exception: the offer-updater **early lane** publishes an offer official pages are silent about as `verification: unverified` when named public posts back it (`skills/offer-updater/references/early-lane.md`). Second exception (#660): the offer-hunter keeps an `unverifiable` candidate with a safe claim path and a dated post at most 3 days old as an **unverified lead** in `unverified/`; leads never reach `offers/`, `index.json`, the llms files, search, or offer pages, and are deleted once stale
 - Never commit `.env` or credentials
 
 ## Workflow preferences

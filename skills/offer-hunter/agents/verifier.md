@@ -101,3 +101,41 @@ Field rules:
   lead, fill `author`/`handle` from the oEmbed lookup in
   `references/web-tools.md` when it succeeds.
 - `value`: see `references/trust-and-value.md` → *Value*.
+- `lead_slug`: copy it from the candidate when present (an open unverified
+  lead); otherwise omit it. With it, `live` publishes the offer and
+  `expired`/`duplicate` removes the lead.
+
+## Unverified leads
+
+Every `unverifiable` record also carries:
+
+- `official_contradicts`: `true` when an official page says the program
+  ended, never existed, was replaced, or has other terms; else `false`.
+- `unverified_lead`: an object, or `null` plus `unverified_drop` (one
+  sentence naming the failed rule). Without `unverified_drop`, a `null`
+  means "check failed" and an open lead is kept.
+
+Fill the object only when **all** hold: `official_contradicts` is
+`false`; the lead names an identifiable provider with an official domain;
+it has a public post URL with a post date within the last 3 days (an
+undated or older post → `null`, drop `undated source` or `stale post`);
+and its claim path is safe per
+`skills/offer-updater/references/early-lane.md` → *Safe claim path* (no
+DMs, replies, forms, link shorteners, other domains, keys, wallets, or
+payment details). A paid prerequisite is not free: drop it. There is no
+minimum number of posts.
+
+```json
+"official_contradicts": false,
+"unverified_lead": {"provider": "Provider", "title": "Program name",
+  "claim": "What the lead claims, as posted, at most 300 chars, links replaced by [link removed]",
+  "amount_claimed": "$25 in API credits", "reason": "bot_walled",
+  "reason_detail": "One or two plain sentences on what was tried and why it failed.",
+  "official_urls_tried": ["https://provider.example/pricing"]}
+```
+
+`reason`: `bot_walled` (official pages unreadable) | `official_silent` |
+`no_amount` (official page confirms a free tier but no amount) |
+`single_source` | `other`. `amount_claimed` is `null` when the lead states
+none. Name no domain but the provider's own in any field. Take every value
+from the lead and the pages you loaded; never invent one.

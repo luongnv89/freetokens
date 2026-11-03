@@ -64,6 +64,21 @@ def not_included(rejected):
     return rows
 
 
+def leads_section(report):
+    """Unverified leads (#660): the N added / M refreshed / K removed line plus details."""
+    if report is None:
+        return []
+    added, refreshed, removed = report['added'], report['refreshed'], report['removed']
+    out = ['', '## Unverified leads', '',
+           f'{len(added)} leads added / {len(refreshed)} refreshed / {len(removed)} removed '
+           f'({len(report["dropped"])} dropped). Leads list only on the Unverified page, never as offers.']
+    out += [f'- Added `{s}`' for s in added] + [f'- Refreshed `{s}`' for s in refreshed]
+    out += [f'- Removed `{r["slug"]}`: {esc(r["reason"], 200)}' for r in removed]
+    out += [f'- Dropped {esc(d["label"], 120)}: {esc(d["reason"], 200)}' for d in report['dropped']]
+    out += [f'- Kept `{k["slug"]}` for review: {esc(k["reason"], 200)}' for k in report.get('kept', [])]
+    return out
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--shortlist', required=True)
@@ -71,6 +86,7 @@ def main():
     parser.add_argument('--issue', type=int, help='tracking issue number (pr mode)')
     parser.add_argument('--checks', default='', help='semicolon-separated local check results (pr mode)')
     parser.add_argument('--web-tools', default='', help='one-line note on web-tool fallbacks used')
+    parser.add_argument('--leads', help='write_leads.py report JSON (unverified leads)')
     args = parser.parse_args()
     if args.mode == 'pr' and not args.issue:
         die('--mode pr needs --issue <number>', 'create the tracking issue first, then pass its number')
@@ -96,6 +112,7 @@ def main():
                   '- [ ] a human reviewer approves the PR']
     else:
         lines += ['', '## Evidence'] + evidence(selected) + not_included(rejected)
+    lines += leads_section(load_json(args.leads, 'leads report') if args.leads else None)
     if args.web_tools:
         lines += ['', f'Web tools: {esc(args.web_tools)}']
     if args.mode == 'pr':

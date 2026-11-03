@@ -5,6 +5,7 @@
 export type Route =
   | { page: "home" }
   | { page: "archive" }
+  | { page: "unverified" }
   | { page: "privacy" }
   | { page: "about" }
   | { page: "detail"; slug: string };
@@ -22,6 +23,8 @@ export function resolveRoute(doc?: Document): Route {
   switch (root?.dataset.page) {
     case "archive":
       return { page: "archive" };
+    case "unverified":
+      return { page: "unverified" };
     case "privacy":
       return { page: "privacy" };
     case "about":

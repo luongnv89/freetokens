@@ -239,6 +239,32 @@
         "index.json, app/public/llms.txt, and app/public/llms-full.txt are regenerated and committed",
         "The merge runs only after gh pr checks --watch --fail-fast succeeds, without --admin"
       ]
+    },
+    {
+      "id": 18,
+      "name": "publish-removes-matching-unverified-lead",
+      "kind": "edge",
+      "prompt": "Here's the official page for Acme's Free tokens week (acme.example/free-tokens): 1M free tokens for new accounts. unverified/acme-ai-free-tokens-week.yaml already lists it as an unverified lead. Add it.",
+      "expected_output": "After the curator says yes, the offer is published in offers/ and `python3 scripts/lead_model.py remove-match --provider \"Acme AI\" --program \"Free tokens week\"` deletes unverified/acme-ai-free-tokens-week.yaml; only that deletion is staged (via the remove-match | xargs git add line in references/early-lane.md → Present and ship), in the same PR.",
+      "files": [],
+      "expectations": [
+        "The offer file was written to offers/ only after the curator's explicit yes",
+        "scripts/lead_model.py remove-match ran with the offer's provider and program",
+        "unverified/acme-ai-free-tokens-week.yaml was deleted and only that path was staged, in the same commit as the offer"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "publish-with-no-unverified-folder",
+      "kind": "edge",
+      "prompt": "Add this offer: Acme's official pricing page (acme.example/pricing) gives every new account $10 in API credits. (The repo has no unverified/ folder: no leads are open.)",
+      "expected_output": "After the curator says yes, the offer is published as usual. remove-match prints 'no matching lead' and stages nothing; no git command fails on the missing unverified/ pathspec, and the regenerate-and-stage step, commit, push and PR proceed normally.",
+      "files": [],
+      "expectations": [
+        "scripts/lead_model.py remove-match ran and printed 'no matching lead'",
+        "No git command failed with \"pathspec 'unverified' did not match\" and nothing under unverified/ was staged",
+        "index.json and the llms files were regenerated and staged, and the PR opened normally"
+      ]
     }
   ]
 }

@@ -29,7 +29,7 @@ export function SiteHeader({
   pageViews = true,
 }: {
   depth?: number;
-  current?: "home" | "archive" | "privacy" | "about";
+  current?: "home" | "archive" | "unverified" | "privacy" | "about";
   pageViews?: boolean;
 }) {
   const up = "../".repeat(depth);
@@ -78,6 +78,13 @@ export function SiteHeader({
               <path d="M10 12h4" />
             </svg>
             Archive
+          </a>
+          <a
+            href={`${up}unverified.html`}
+            title="Offers spotted but not confirmed on an official page"
+            aria-current={current === "unverified" ? "page" : undefined}
+          >
+            Unverified
           </a>
           <a
             href={`${up}about.html`}

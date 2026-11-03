@@ -5,6 +5,26 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Unverified tab (#660):** a new static page, `/unverified.html`
+  ("Unverified" in the nav beside Archive), lists offers the daily
+  offer-hunter spotted on X, Reddit or the web but could not confirm on an
+  official page — X is sometimes ahead of the official page, and some offers
+  never reach it. A lead is listed only for **3 days after its newest dated
+  post**; undated leads are never listed. A banner warns that each may be
+  inaccurate, never happen, or have ended, and to claim only inside the
+  provider's own site. Cards show the provider, "Posted <date>", the claim,
+  why it could not be verified, `nofollow ugc` source links, and the hunt's
+  "First spotted" / "Last checked" dates, newest post first. Leads live in
+  the new `unverified/` folder (schema `schemas/unverified-lead.schema.json`,
+  shared safety rules `schemas/unverified-lead.rules.json`, checked by
+  `validate_offers.py` and again by the build) and never reach the offer
+  list, search, `index.json`, the llms files or offer pages. The
+  offer-hunter skill (v1.3.0) writes, refreshes, re-checks and deletes leads
+  in its hunt PR (a leads-only PR when only stale leads go) and reports
+  `N leads added / M refreshed / K removed`; offer-updater (v2.5.0) deletes
+  the lead an offer it publishes replaces. Ships empty: none of the
+  2026-11-03 hunt's 11 unverifiable leads had a post from the last 3 days.
+
 - **Full Python unit suite gates every PR (#654):** the required `validate`
   check in `validate.yml` now runs `python3 -m unittest discover -s tests`
   after the offer validator, and `deploy.yml` runs the same command instead

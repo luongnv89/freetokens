@@ -6,6 +6,7 @@ test.use({ viewport: { width: 320, height: 690 } });
 const ROUTES = [
   "/index.html",
   "/archive.html",
+  "/unverified.html",
   "/privacy.html",
   "/offers/cursor-hobby-plan.html",
 ] as const;
@@ -37,6 +38,8 @@ for (const route of ROUTES) {
       await expect(page.locator("h1")).toHaveText(
         /Expired offer archive|The archive is empty/,
       );
+    } else if (route === "/unverified.html") {
+      await expect(page.locator("h1")).toHaveText("Unverified offers");
     } else if (route === "/privacy.html") {
       await expect(page.locator("h1")).toHaveText("Privacy Policy");
     } else {

@@ -3,7 +3,8 @@
 
 Allowed: new top-level offers/<slug>.yaml; edits to an existing one that touch
 only title, amount, expiry_date, signup, verified_date (and comments); new or
-append-only offers/details/<slug>.json; the three generated artifacts.
+append-only offers/details/<slug>.json; the three generated artifacts; and
+unverified/<slug>.yaml lead files added, refreshed, or removed (#660).
 """
 import json
 from pathlib import PurePosixPath
@@ -11,6 +12,9 @@ import subprocess
 import sys
 
 from common import ARTIFACTS, REPO, UPDATABLE, OfferError, normalize_url, parse_offer_text
+
+sys.path.insert(0, str(REPO / 'scripts'))
+import lead_model  # noqa: E402
 
 EDITABLE = set(UPDATABLE) | {'verified_date'}
 
@@ -45,6 +49,13 @@ def check(status, path):
         changed = {k for k in set(old) | set(new) if old.get(k) != new.get(k)}
         bad = sorted(changed - EDITABLE)
         return f'{path}: changes {bad}, outside {sorted(EDITABLE)}' if bad else None
+    if len(parts) == 2 and parts[0] == 'unverified' and path.endswith('.yaml'):
+        if status == 'D':
+            return None
+        if status not in ('A', 'M'):
+            return f'{path}: status {status} is out of scope (only add, refresh, or remove leads)'
+        lead_model.validate_lead(lead_model.parse_lead_text(git('show', ':' + path), path), path)
+        return None
     if len(parts) == 3 and parts[:2] == ('offers', 'details') and path.endswith('.json'):
         if status == 'A':
             return None
@@ -58,7 +69,7 @@ def check(status, path):
             if key in old and old[key] != new.get(key):
                 return f'{path}: rewrites curated {key}'
         return None
-    return f'{path}: not an offer, detail, or generated artifact path'
+    return f'{path}: not an offer, detail, lead, or generated artifact path'
 
 
 def main():

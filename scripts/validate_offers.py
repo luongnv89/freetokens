@@ -26,6 +26,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import offer_model as build  # noqa: E402
+import lead_model  # noqa: E402
 
 SLUG_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
@@ -121,6 +122,40 @@ def check_detail_schema_matches_build(schema: dict) -> None:
         )
 
 
+def check_lead_schema_matches_model(schema: dict) -> None:
+    """Cross-check schemas/unverified-lead.schema.json against lead_model (#660)."""
+    if schema.get("$schema") != "https://json-schema.org/draft/2020-12/schema":
+        raise SchemaMismatch("unverified-lead schema must declare the 2020-12 draft $schema")
+    if set(schema.get("required", [])) != set(lead_model.FIELDS) or set(
+        schema.get("properties", {})
+    ) != set(lead_model.FIELDS):
+        raise SchemaMismatch(
+            "unverified-lead schema required/properties do not match lead_model.FIELDS"
+        )
+    props = schema["properties"]
+    if props.get("reason", {}).get("enum") != list(lead_model.REASONS):
+        raise SchemaMismatch("unverified-lead reason enum does not match lead_model.REASONS")
+    kinds = props.get("sources", {}).get("items", {}).get("properties", {})
+    if kinds.get("type", {}).get("enum") != list(lead_model.SOURCE_TYPES):
+        raise SchemaMismatch(
+            "unverified-lead sources type enum does not match lead_model.SOURCE_TYPES"
+        )
+
+
+def validate_leads(leads_dir: str, offer_slugs: set, today=None) -> tuple:
+    """Validate unverified/*.yaml; return (leads, stale leads).
+
+    A stale lead (newest dated source post more than 3 days old) is a
+    warning, not a failure: the build already hides it and the next
+    offer-hunter run deletes the file, so an unrelated PR never turns red just
+    because the calendar moved.
+    """
+    leads = lead_model.load_leads(leads_dir, offer_slugs, today)
+    day = today or lead_model.utc_today()
+    stale = [lead for lead in leads if lead_model.is_stale(lead, day)]
+    return leads, stale
+
+
 def check_slug(slug: str, filename: str) -> None:
     if not SLUG_RE.match(slug):
         raise build.OfferError(
@@ -211,6 +246,14 @@ def main(argv=None) -> int:
         "--detail-schema", default="schemas/offer-detail.schema.json"
     )
     parser.add_argument(
+        "--unverified-dir",
+        default=None,
+        help="unverified leads folder (default: <offers-dir>/../unverified)",
+    )
+    parser.add_argument(
+        "--lead-schema", default="schemas/unverified-lead.schema.json"
+    )
+    parser.add_argument(
         "--always-free",
         default=None,
         help="curated Always-free list (default: <offers-dir>/../config/always-free.yaml)",
@@ -228,6 +271,12 @@ def main(argv=None) -> int:
             args.offers_dir, os.pardir, "config", "always-free.yaml"
         )
         validate_always_free(always_free, {o["slug"] for o in offers})
+        if os.path.exists(args.lead_schema):
+            check_lead_schema_matches_model(load_schema(args.lead_schema))
+        leads_dir = args.unverified_dir or os.path.join(
+            args.offers_dir, os.pardir, "unverified"
+        )
+        leads, stale = validate_leads(leads_dir, {o["slug"] for o in offers})
     except SchemaMismatch as exc:
         print(f"validation failed: {exc}", file=sys.stderr)
         return 1
@@ -235,7 +284,16 @@ def main(argv=None) -> int:
         print(f"validation failed: {exc}", file=sys.stderr)
         return 1
 
+    for lead in stale:
+        print(
+            f"warning: unverified lead {lead['slug']!r}: newest source post "
+            f"{lead_model.newest_post(lead)} is more than {lead_model.FRESH_DAYS} "
+            "days old; the build hides it and the next offer-hunter run deletes it",
+            file=sys.stderr,
+        )
     print(f"validated {len(offers)} offers against {args.schema}: OK")
+    if leads:
+        print(f"validated {len(leads)} unverified leads: OK")
     return 0
 
 

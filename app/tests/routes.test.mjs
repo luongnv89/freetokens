@@ -1,6 +1,9 @@
 import { describe, it, expect, beforeAll } from "vitest";
 import { execFileSync } from "node:child_process";
 import {
+  copyFileSync,
+  cpSync,
+  mkdirSync,
   readdirSync,
   readFileSync,
   rmSync,
@@ -214,7 +217,7 @@ describe("static route coverage (#123)", () => {
     expect(document.documentElement.namespaceURI).toBe(SITEMAP_NAMESPACE);
 
     const urls = [...document.getElementsByTagNameNS(SITEMAP_NAMESPACE, "url")];
-    expect(urls).toHaveLength(index.offers.length + 6);
+    expect(urls).toHaveLength(index.offers.length + 7);
     expect(
       urls.map(
         (url) =>
@@ -223,6 +226,7 @@ describe("static route coverage (#123)", () => {
     ).toEqual([
       "https://freetokens.custats.info/",
       "https://freetokens.custats.info/archive.html",
+      "https://freetokens.custats.info/unverified.html",
       "https://freetokens.custats.info/privacy.html",
       "https://freetokens.custats.info/about.html",
       "https://freetokens.custats.info/brand-showcase.html",
@@ -242,6 +246,93 @@ describe("static route coverage (#123)", () => {
       expect(lastmod <= today).toBe(true);
     }
   });
+
+  it("prerenders the Unverified page from its own artifact only (#660)", () => {
+    const html = readFileSync(path.join(outDir, "unverified.html"), "utf8");
+    expect(html).toContain('data-page="unverified"');
+    expect(html).toContain("<h1>Unverified offers</h1>");
+    expect(html).toContain("not confirmed on an official page");
+    expect(headOf(html)).toContain(
+      '<link rel="canonical" href="https://freetokens.custats.info/unverified.html"',
+    );
+    const { leads } = JSON.parse(
+      readFileSync(path.join(APP_ROOT, "src/data/unverified.json"), "utf8"),
+    );
+    if (leads.length === 0) {
+      // Empty or missing unverified/: empty state, banner still shown.
+      expect(html).toContain("Nothing unconfirmed right now");
+      expect(html).toContain("Leads appear here for 3 days after someone posts them");
+    }
+    for (const lead of leads) {
+      expect(html).toContain(htmlText(lead.title));
+      expect(index.offers.some((o) => o.slug === lead.slug)).toBe(false);
+      expect(existsSync(path.join(outDir, "offers", `${lead.slug}.html`))).toBe(false);
+    }
+    // Every page links the new tab beside Archive.
+    for (const file of ["index.html", "archive.html", "about.html"]) {
+      expect(readFileSync(path.join(outDir, file), "utf8")).toContain(
+        'href="unverified.html"',
+      );
+    }
+  });
+
+  it("renders fixture leads newest post first with nofollow ugc sources, only on /unverified.html", () => {
+    const dataDir = path.join(tmpdir(), `ft-routes-leads-data-${process.pid}`);
+    const leadsDist = path.join(tmpdir(), `ft-routes-leads-${process.pid}`);
+    rmSync(dataDir, { recursive: true, force: true });
+    mkdirSync(dataDir, { recursive: true });
+    for (const name of ["offers.json", "details.json"]) {
+      copyFileSync(path.join(APP_ROOT, "src/data", name), path.join(dataDir, name));
+    }
+    const source = (n, date) => ({
+      url: `https://x.com/fixture/status/${n}`,
+      type: "x",
+      author: "Fixture",
+      handle: "@fixture",
+      date,
+    });
+    const fixtureLead = (slug, title, posted) => ({
+      slug,
+      provider: "Fixture AI",
+      title,
+      claim: `Fixture claim for ${title}.`,
+      amount_claimed: "$5 in credits",
+      sources: [source(slug.length, posted)],
+      posted,
+      first_seen: posted,
+      last_seen: posted,
+      reason: "bot_walled",
+      reason_detail: "The pricing page returned HTTP 403.",
+    });
+    writeFileSync(
+      path.join(dataDir, "unverified.json"),
+      JSON.stringify({
+        generated_at: "2026-11-03T00:00:00Z",
+        count: 2,
+        leads: [
+          fixtureLead("fixture-newer", "Fixture newer lead", "2026-11-03"),
+          fixtureLead("fixture-older-one", "Fixture older lead", "2026-11-01"),
+        ],
+      }),
+    );
+    rmSync(leadsDist, { recursive: true, force: true });
+    cpSync(outDir, leadsDist, { recursive: true });
+    prerender(leadsDist, path.join(dataDir, "offers.json"));
+    const html = readFileSync(path.join(leadsDist, "unverified.html"), "utf8");
+    expect(html.indexOf("Fixture newer lead")).toBeGreaterThan(0);
+    expect(html.indexOf("Fixture newer lead")).toBeLessThan(html.indexOf("Fixture older lead"));
+    expect(html).toContain('Posted <time datetime="2026-11-03">Nov 3, 2026</time>');
+    expect(html).toContain("First spotted by our hunt");
+    const tags = [...html.matchAll(/<a href="(https:\/\/x\.com\/fixture[^"]*)" rel="([^"]*)"/g)];
+    expect(tags).toHaveLength(2);
+    for (const [, , rel] of tags) expect(rel).toBe("nofollow ugc noopener noreferrer");
+    for (const file of ["index.html", "archive.html", "about.html", "privacy.html"]) {
+      expect(readFileSync(path.join(leadsDist, file), "utf8")).not.toContain("Fixture newer lead");
+    }
+    expect(readdirSync(path.join(leadsDist, "offers")).some((f) => f.startsWith("fixture-"))).toBe(false);
+    rmSync(leadsDist, { recursive: true, force: true });
+    rmSync(dataDir, { recursive: true, force: true });
+  }, 120_000);
 
   it("stamps each document so hydration lands on the right page", () => {
     expect(readFileSync(path.join(outDir, "index.html"), "utf8")).toContain(

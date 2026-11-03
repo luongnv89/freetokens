@@ -3328,3 +3328,66 @@ figure.proof-screenshot {
     min-height: 44px;
   }
 }
+
+/* ---- Unverified leads (#660) -------------------------------------------- */
+/* The warning banner states the risk in words; colour is decoration only. */
+.lead-banner {
+  border: 1.5px solid var(--color-danger);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  margin: 0 0 1.5rem;
+  background: color-mix(in srgb, var(--color-danger) 6%, var(--paper));
+  color: var(--ink);
+}
+.lead-banner p {
+  margin: 0.25rem 0;
+}
+.lead-grid > li {
+  display: block;
+  /* Like Archive: no rise-in animation, so cards paint at once (LCP). */
+  animation: none;
+}
+.lead-provider,
+.lead-label {
+  color: var(--gray);
+  font-size: 0.8rem;
+}
+.lead-provider {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.lead-claim,
+.lead-amount,
+.lead-reason {
+  margin: 0.5rem 0 0;
+  overflow-wrap: anywhere;
+}
+.lead-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+}
+.lead-meta div {
+  display: flex;
+  gap: 0.35rem;
+}
+.lead-meta dt {
+  color: var(--gray);
+}
+.lead-meta dd {
+  margin: 0;
+}
+.lead-sources {
+  margin: 0.15rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+.lead-sources a {
+  color: var(--ink);
+  text-decoration-color: var(--green);
+  text-underline-offset: 3px;
+}

@@ -4,7 +4,7 @@ description: "Publish or refresh a few free-AI-credit offers from screenshots, X
 license: MIT
 compatibility: "Requires git, gh, python3, and read-only web search and fetch. Optional: TinyFish (MCP server or tinyfish CLI) for search and page reads, the lightpanda CLI for the browser retry, curl for the X oEmbed lookup; each falls back when missing."
 metadata:
-  version: "2.4.0"
+  version: "2.5.0"
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   issues: "#20,#21"
   epic: "#31"
@@ -287,18 +287,18 @@ without the curator's explicit yes.**
      what is free, amount, expiry, source URL, the **References verified**
      list, any "How to claim" steps, and the verification date.
   2. Branch `<type>/<issue>-<slug>` from current `main`.
-  3. Regenerate and stage `index.json` and the llms files (command in
-     `references/early-lane.md` → *Present and ship*; CI fails without
-     them). Commit with a Conventional Commits message referencing the
+  3. Regenerate and stage `index.json`, the llms files, and any replaced
+     unverified lead (commands in `references/early-lane.md` → *Present
+     and ship*; CI fails without them). Commit with a Conventional Commits message referencing the
      issue, e.g. `feat(offers): add <Provider> offer (#<issue>)`, and push.
   4. Open the PR whose body starts with `Closes #<issue>` and includes the
      verdict + evidence quote, the **References verified** list, the
      **Early offers**, **Conflicts settled**, and **Dropped** sections when
      non-empty, and the local-check results (validator,
      `scripts/offer_model.py`, test suite).
-  5. If the PR carries an X-first offer, merge it after all checks pass,
-     exactly as `references/early-lane.md` → *Present and ship* specifies. Otherwise
-     leave the PR for the curator to merge.
+  5. Merge a PR carrying an X-first offer after all checks pass, exactly
+     as `references/early-lane.md` → *Present and ship* specifies; the
+     curator merges any other PR.
 - On NO / no answer: leave the draft in `needs_review/`, say so, and stop.
   Re-running the skill later resumes from Step 2.
 
