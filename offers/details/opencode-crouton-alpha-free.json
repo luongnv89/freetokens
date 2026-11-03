@@ -1,0 +1,24 @@
+{
+  "summary": "Crouton Alpha is a stealth model that is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-11-03 as \"free for the next week\" (through ~2026-11-10), with 1M context, multi-modal input, and no training on data. The free period is limited to certain regions. OpenCode's Zen model list shows id crouton-alpha-free at $0 input, output, and cached reads.",
+  "claim_steps": [
+    "Sign in to OpenCode Zen at opencode.ai/zen and copy your API key.",
+    "In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key.",
+    "Run /models and select Crouton Alpha Free (model id: crouton-alpha-free).",
+    "Availability is limited to certain regions."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2117717721458843711",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "Crouton Alpha (stealth model) is free for the next week\n\n1M Context\nMulti-modal\nNo training on data \n\nLimited to certain regions"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/zen/v1/models",
+      "title": "OpenCode Zen models API",
+      "text": "id: crouton-alpha-free, name: Crouton Alpha Free, description: Stealth reasoning model with text, image, video and PDF input and tool use, release_date: 2026-11-03, cost: input 0, output 0, cache read 0, context limit 1048576."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "summary": "OpenRouter lists the stealth model Crouton Alpha (stealth/crouton-alpha) at $0 per million input and output tokens during the anonymous-provider preview, released November 3, 2026. It takes text, image, video, file and audio input with a 1,048,576-token context. OpenRouter states prompts and completions may be retained by the provider but are not used for training. No end date is stated; earlier stealth models lost their free price once the preview ended.",
+  "claim_steps": [
+    "Sign in or create an account at openrouter.ai.",
+    "Create an API key at openrouter.ai/settings/keys.",
+    "Call the model with slug stealth/crouton-alpha via the OpenAI-compatible API at https://openrouter.ai/api/v1 (or pick it in any OpenRouter-supported app)."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/stealth/crouton-alpha",
+      "title": "Crouton Alpha - API Pricing & Providers | OpenRouter",
+      "text": "Crouton Alpha is a stealth model. It is developed and operated by a third-party provider who has chosen to remain anonymous during this preview. Prompts and completions may be retained by the provider but are not used for training. Price: Free. Context: 1.0M. Released: Nov 3, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/stealth",
+      "title": "Stealth API and Models | OpenRouter",
+      "text": "Which Stealth models are free on OpenRouter? Crouton Alpha is available at no cost through the OpenRouter API."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/stealth/crouton-alpha/endpoints",
+      "title": "OpenRouter API - stealth/crouton-alpha endpoints",
+      "text": "provider_name: Stealth, context_length: 1048576, pricing: prompt 0, completion 0."
+    },
+    {
+      "type": "link",
+      "url": "https://cellcog.ai/blog/what-is-crouton-alpha/",
+      "title": "What Is Crouton Alpha? OpenRouter's Stealth Model, Graded - CellCog",
+      "text": "A free stealth model on OpenRouter since November 3, 2026: 1,048,576-token context, text, image, video, file and audio input, built for repeated agent sub-tasks."
+    }
+  ]
+}
