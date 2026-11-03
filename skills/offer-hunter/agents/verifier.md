@@ -101,3 +101,32 @@ Field rules:
   lead, fill `author`/`handle` from the oEmbed lookup in
   `references/web-tools.md` when it succeeds.
 - `value`: see `references/trust-and-value.md` → *Value*.
+- `lead_slug`: copy it from the candidate when present (a re-checked
+  unverified lead); otherwise omit it. For a re-check, `live` publishes
+  the offer and `expired`/`duplicate` removes the lead.
+
+## Unverified leads
+
+Every `unverifiable` record also carries `unverified_lead` — an object, or
+`null` plus `unverified_drop` (one sentence naming the failed rule). Fill
+the object only when **all** hold: the lead names an identifiable provider
+with an official domain; it has a public post or page URL; no official
+page contradicts it (says it ended, never existed, or has other terms);
+and its claim path is safe per
+`skills/offer-updater/references/early-lane.md` → *Safe claim path* (no
+DMs, forms, link shorteners, off-domain URLs, keys, wallets, or payment
+details). There is no minimum number of posts.
+
+```json
+"unverified_lead": {"provider": "Provider", "title": "Program name",
+  "claim": "What the lead claims, as posted, at most 300 chars, links replaced by [link removed]",
+  "amount_claimed": "$25 in API credits", "reason": "bot_walled",
+  "reason_detail": "One or two plain sentences on what was tried and why it failed.",
+  "official_urls_tried": ["https://provider.example/pricing"]}
+```
+
+`reason`: `bot_walled` (official pages unreadable) | `official_silent` |
+`no_amount` (official page confirms a free tier but no amount) |
+`single_source` | `other`. `amount_claimed` is `null` when the lead states
+none. Take every value from the lead and the pages you loaded; never
+invent one.

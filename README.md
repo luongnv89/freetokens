@@ -326,8 +326,11 @@ workflow**.
 ```
 offers/    # One YAML file per free-AI-credit offer (schema: docs/schema.md)
            # plus optional offers/details/<slug>.json detail documents
+unverified/ # One YAML per unverified lead the offer-hunter could not confirm
+           # (schema: schemas/unverified-lead.schema.json); shown only on
+           # /unverified.html, never as an offer
 app/       # Vite + React source: components, lib, tests, prerender scripts
-scripts/   # offer_model.py (frozen schema/validation core) + validate_offers.py
+scripts/   # offer_model.py + lead_model.py (schema/validation cores) + validate_offers.py
 tests/     # Content-model test suite (unittest)
 docs/      # Schema docs, ADRs, outreach kit, decision records, QA notes
 index.json # Frozen generated index: every offer with build-time active/expired status

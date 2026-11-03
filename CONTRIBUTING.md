@@ -59,10 +59,16 @@ fits you.
    screenshots). Field reference and rules:
    [docs/schema.md](docs/schema.md#detail-files-offersdetailsslugjson--optional).
 
+   Do not add offers you could not verify to `offers/`. The offer-hunter
+   skill keeps those as leads in `unverified/<slug>.yaml` (schema:
+   `schemas/unverified-lead.schema.json`); they appear only on the site's
+   Unverified page and are removed 30 days after they were last seen. Edit
+   them through `skills/offer-hunter/scripts/write_leads.py`, not by hand.
+
 3. Check everything locally before pushing:
 
    ```bash
-   python3 scripts/validate_offers.py         # validates offers/ against the schema
+   python3 scripts/validate_offers.py         # validates offers/ and unverified/ against their schemas
    (cd app && npm test)                       # app unit + budget tests (Vitest)
    ```
 

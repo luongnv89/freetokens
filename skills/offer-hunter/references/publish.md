@@ -32,12 +32,15 @@ Append `issue=<N>` to the state file. Done when
 
 ## 2. Stage and scope
 
-Stage only the applied paths plus the three artifacts. Never `git add .`
+Stage only the applied offer and lead paths (lead removals included)
+plus the three artifacts. Never `git add .`
 or `git add -A`:
 
 ```bash
-python3 -c 'import json,sys; print("\0".join(json.load(open(sys.argv[1]))["applied"]), end="")' \
-  "$W/applied.json" | xargs -0 git add --
+for f in "$W/applied.json" "$W/leads.json"; do
+  python3 -c 'import json,sys; print("\0".join(json.load(open(sys.argv[1]))["applied"]), end="")' \
+    "$f" | xargs -0 -r git add -A --
+done
 git add -- index.json app/public/llms.txt app/public/llms-full.txt
 python3 skills/offer-hunter/scripts/check_scope.py
 ```
@@ -63,7 +66,7 @@ output.
 python3 skills/offer-hunter/scripts/render_pr.py \
   --shortlist "$W/shortlist.json" --mode pr --issue "$issue" \
   --checks "validate_offers.py exit 0; check_scope.py OK scope; index.json and llms files regenerated" \
-  --web-tools "$web_tools_note" > "$W/pr-body.md"
+  --web-tools "$web_tools_note" --leads "$W/leads.json" > "$W/pr-body.md"
 gh pr create --base main --head "$hunt_branch" \
   --title "feat(offers): offer hunt $today ($new_count new, $update_count updated)" \
   --body-file "$W/pr-body.md"

@@ -33,6 +33,7 @@
         "scripts/check_scope.py printed OK scope on the staged diff",
         "New offer YAMLs carry verification social_proof and review_status under-review",
         "The PR body was produced by render_pr.py --mode pr and starts with 'Closes #'",
+        "Unverified leads were written, refreshed, or removed only by scripts/write_leads.py, and the run report and PR body state 'N leads added / M refreshed / K removed'",
         "The run did not merge the PR or push main",
         "The final report names the PR and says merging it publishes the offers"
       ]
@@ -99,6 +100,23 @@
       "expectations": [
         "No offer-hunter scripts were run",
         "The output points to daily-offer-check"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "unverified-leads-lifecycle",
+      "kind": "edge",
+      "prompt": "/offer-hunter — unverified/ already holds 6 leads (one last seen 35 days ago); a scout re-finds one of them in a new X post, and a verifier marks a new X-only offer unverifiable because the provider's pricing page returns HTTP 403.",
+      "expected_output": "Step 4 appends the 5 oldest open leads from write_leads.py --queue 5 as re-check candidates. Step 7 runs write_leads.py: the bot-walled X-only offer becomes a new unverified/<slug>.yaml with reason bot_walled, the re-found lead gets last_seen = today and the new post as a source, the 35-day-old lead is removed, and any lead verified live and published this run is removed in the same PR. Leads failing the safe claim path or contradicted by an official page are dropped with a reason, never written. The PR body and report state 'N leads added / M refreshed / K removed'.",
+      "files": [],
+      "expectations": [
+        "write_leads.py --queue 5 ran in Step 4 and its candidates kept their lead_slug",
+        "Unverifiable verdicts carried an unverified_lead object, or null plus an unverified_drop reason",
+        "The new bot-walled offer was written as unverified/<slug>.yaml, never as an offers/ file",
+        "The re-found lead's last_seen became today and its sources gained the new post",
+        "The lead last seen 35 days ago was deleted and the deletion was staged",
+        "check_scope.py printed OK scope with the lead paths staged",
+        "The PR body contains an 'Unverified leads' section with 'N leads added / M refreshed / K removed'"
       ]
     }
   ]

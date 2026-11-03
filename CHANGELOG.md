@@ -5,6 +5,21 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Unverified tab (#660):** a new static page, `/unverified.html`
+  ("Unverified" in the nav beside Archive), lists offers the daily
+  offer-hunter spotted on X, Reddit or the web but could not confirm on an
+  official page — X is sometimes ahead of the official page, and some offers
+  never reach it. A banner warns that each may be inaccurate, never happen,
+  or have ended, and to claim only inside the provider's own site. Cards show
+  the provider, the claim, first/last seen, why it could not be verified, and
+  `nofollow ugc` source links. Leads live in the new `unverified/` folder
+  (schema `schemas/unverified-lead.schema.json`, checked by
+  `validate_offers.py`) and never reach the offer list, search, `index.json`,
+  the llms files or offer pages. The offer-hunter skill (v1.3.0) now writes,
+  refreshes, re-checks and removes leads (30 days after last seen) in its
+  hunt PR and reports `N leads added / M refreshed / K removed`. Seeded with
+  7 leads from the 2026-11-03 hunt.
+
 - **Full Python unit suite gates every PR (#654):** the required `validate`
   check in `validate.yml` now runs `python3 -m unittest discover -s tests`
   after the offer validator, and `deploy.yml` runs the same command instead

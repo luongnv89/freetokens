@@ -5,7 +5,7 @@ license: MIT
 effort: high
 compatibility: "Requires git, an authenticated GitHub CLI (gh), python3, node, and read-only web search and fetch. Optional: TinyFish (MCP server or tinyfish CLI) for search and page reads, the lightpanda CLI for a browser retry, curl for the X oEmbed lookup; each falls back when missing."
 metadata:
-  version: 1.2.1
+  version: 1.3.0
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
@@ -54,6 +54,12 @@ TinyFish and Lightpanda are optional (`references/web-tools.md`).
   month-equivalent, or unlimited use. Offers below it are ignored.
 - **shortlist**: `scripts/shortlist.py` output, at most `$max` ranked
   offers. Nothing outside it is written.
+- **unverified lead**: an `unverifiable` candidate kept in
+  `unverified/<slug>.yaml` and shown only on the site's Unverified page,
+  never as an offer. The verifier decides inclusion (`agents/verifier.md`);
+  `scripts/write_leads.py` is its only writer and applies the lifecycle:
+  re-seen → `last_seen` bumped and source added; published, expired,
+  duplicate, or contradicted → removed; 30 days after `last_seen` → removed.
 - **fail-soft**: a dead page or crashed worker makes that candidate
   `unverifiable`; the run continues.
 - **state line**: `. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1`.
@@ -142,8 +148,17 @@ failing → its channel is `[]` and the report names it.
 Concatenate the leads. Merge leads that name the same provider and
 program into one candidate: keep the newest lead, and a `claimed_url` on
 the provider's domain. Keep at most **20**, preferring bigger claimed
-amounts, then newer leads. Save to `$W/candidates.json`. With zero
-candidates, go to Step 9.
+amounts, then newer leads. Then append up to 5 open unverified leads for
+re-check (they do not count toward the 20; on Report-only skip this):
+
+```bash
+. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
+python3 skills/offer-hunter/scripts/write_leads.py --queue 5 --today "$today" > "$W/recheck.json"
+```
+
+Merge its objects into the list unchanged (each keeps its `lead_slug`;
+drop a scout candidate for the same provider and program). Save to
+`$W/candidates.json`. With zero candidates, go to Step 9.
 
 **Done when:** `$W/candidates.json` parses, ids are unique, and its length
 is 1–20 (or the zero-lead exit fired).
@@ -180,7 +195,9 @@ with the error as `reason`. Exit 2 is fatal: stop.
 
 - **Report-only:** run `render_pr.py --shortlist "$W/shortlist.json"
   --mode report --web-tools "$web_tools_note"`, print it, go to Step 9.
-- **Zero selected** (Publish): go to Step 9.
+- **Zero selected** (Publish): run `write_leads.py --dry-run` with Step
+  7's arguments; with no lead changes go to Step 9, otherwise run Step 7
+  (it writes no offers) and Step 8.
 
 **Done when:** exit 0 with `OK selected N of M` on stderr.
 
@@ -189,21 +206,24 @@ with the error as `reason`. Exit 2 is fatal: stop.
 ```bash
 . "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
 python3 skills/offer-hunter/scripts/write_offers.py --shortlist "$W/shortlist.json" > "$W/applied.json" &&
+python3 skills/offer-hunter/scripts/write_leads.py --verdicts "$W/verdicts.json" \
+  --shortlist "$W/shortlist.json" --today "$today" > "$W/leads.json" &&
 (cd app && node scripts/load-offers.mjs --index-json ../index.json) &&
 (cd app && node scripts/generate-llms.mjs) &&
 python3 scripts/validate_offers.py
 ```
 
-`write_offers.py` is the only writer; never hand-edit an offer file. It
-writes nothing when it fails. If it names ids, re-run Step 6 with one
+`write_offers.py` and `write_leads.py` are the only writers; never
+hand-edit an offer or lead file. Each writes nothing when it fails, and
+`write_leads.py` prints `OK leads N added / M refreshed / K removed`. If it names ids, re-run Step 6 with one
 `--exclude <id>=<reason>` per id, then Step 7 once more. If `node` lacks
 packages, run `cd app && npm ci` once and retry. On any other failure, roll
 back and stop:
 
 ```bash
 . "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
-git restore -- offers index.json app/public
-git ls-files -z --others --exclude-standard -- offers | xargs -0 rm -f --
+git restore -- offers unverified index.json app/public
+git ls-files -z --others --exclude-standard -- offers unverified | xargs -0 rm -f --
 git switch "$branch" && git branch -D "$hunt_branch"
 ```
 
@@ -212,8 +232,8 @@ removes only files this run created.
 
 **Done when:** every command exits 0, `writes` in `$W/applied.json` is
 twice the selected count, and `git status --porcelain` shows only those
-paths, `index.json`, the two llms files, and untracked files the user
-already had.
+paths, the `applied` paths in `$W/leads.json`, `index.json`, the two llms
+files, and untracked files the user already had.
 
 ## Step 8 — Publish (you, gh)
 
@@ -235,6 +255,7 @@ Put the result first. Expected output:
   Candidates verified:    √ C/C
   Shortlist:              √ N selected (A new, U updated), K not included
   Writes + validation:    √ / — skipped (report-only or none selected)
+  Unverified leads:       √ N leads added / M refreshed / K removed
   Issue / PR:             √ #<n> / <url>, or — skipped
   ____________________________
   Result:                 PASS | PARTIAL | FAIL
@@ -273,6 +294,9 @@ Optional and propose-only. After the run's result is delivered, run this check:
 
 - Every selected offer passed `shortlist.py`: a live official quote on the
   `source_url` site, the value floor, no catalog or open-PR duplicate.
+- Lead files changed only through `write_leads.py`; only `unverifiable`
+  verdicts with an `unverified_lead` block become leads, and the run report
+  and PR body state `N leads added / M refreshed / K removed`.
 - Offer files changed only through `write_offers.py`. New YAMLs carry
   `verification: social_proof` and `review_status: under-review`. Updates
   change only `title`, `amount`, `expiry_date`, `signup`, `verified_date`.
