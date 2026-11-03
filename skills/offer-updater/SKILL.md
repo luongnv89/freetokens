@@ -287,22 +287,18 @@ without the curator's explicit yes.**
      what is free, amount, expiry, source URL, the **References verified**
      list, any "How to claim" steps, and the verification date.
   2. Branch `<type>/<issue>-<slug>` from current `main`.
-  3. Delete the unverified lead this offer replaces:
-     `python3 scripts/lead_model.py remove-match --provider "<provider>"
-     --program "<program>"` (no match lists the provider's leads; rerun
-     with `--slug`), then `git add -A -- unverified`. Regenerate and stage
-     `index.json` and the llms files (command in
-     `references/early-lane.md` → *Present and ship*; CI fails without
-     them). Commit with a Conventional Commits message referencing the
+  3. Regenerate and stage `index.json`, the llms files, and any replaced
+     unverified lead (commands in `references/early-lane.md` → *Present
+     and ship*; CI fails without them). Commit with a Conventional Commits message referencing the
      issue, e.g. `feat(offers): add <Provider> offer (#<issue>)`, and push.
   4. Open the PR whose body starts with `Closes #<issue>` and includes the
      verdict + evidence quote, the **References verified** list, the
      **Early offers**, **Conflicts settled**, and **Dropped** sections when
      non-empty, and the local-check results (validator,
      `scripts/offer_model.py`, test suite).
-  5. If the PR carries an X-first offer, merge it after all checks pass,
-     exactly as `references/early-lane.md` → *Present and ship* specifies. Otherwise
-     leave the PR for the curator to merge.
+  5. Merge a PR carrying an X-first offer after all checks pass, exactly
+     as `references/early-lane.md` → *Present and ship* specifies; the
+     curator merges any other PR.
 - On NO / no answer: leave the draft in `needs_review/`, say so, and stop.
   Re-running the skill later resumes from Step 2.
 

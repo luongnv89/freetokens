@@ -125,13 +125,22 @@ every check passes.
   each shows as an "early (unconfirmed)" offer, and end the decision line
   with: `"yes" commits, opens the PR, and merges it once all checks pass.`
 - **Step 6.** The commit gate is unchanged: nothing ships without the
-  curator's explicit yes. Before pushing, regenerate and stage the build
-  artifacts (CI compares them with the offers):
+  curator's explicit yes. Before pushing, delete the unverified lead the
+  offer replaces (#660), then regenerate and stage the build artifacts (CI
+  compares them with the offers). These commands apply to every published
+  offer, not only early ones:
 
   ```bash
+  python3 scripts/lead_model.py remove-match --provider "<provider>" --program "<program>" |
+    sed -n 's/^removed //p' | xargs -r git add -A --
   (cd app && npm ci && node scripts/load-offers.mjs --index-json ../index.json && npm run gen:llms)
   git add -- index.json app/public/llms.txt app/public/llms-full.txt
   ```
+
+  `remove-match` stages only the file it deleted. With no lead, or no
+  `unverified/` folder at all, it prints `no matching lead` and stages
+  nothing. When the provider has leads but none matches exactly, it lists
+  them: rerun with `--slug <lead-slug>` if one is this offer.
 
   After the PR opens, with `pr` set to its number, wait for every check —
   not only the required one — then merge:

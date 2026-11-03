@@ -235,13 +235,15 @@ back and stop:
 
 ```bash
 . "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
-git restore -- offers unverified index.json app/public
+git restore -- offers index.json app/public
+git ls-files --error-unmatch unverified >/dev/null 2>&1 && git restore -- unverified
 git ls-files -z --others --exclude-standard -- offers unverified | xargs -0 rm -f --
 git switch "$branch" && git branch -D "$hunt_branch"
 ```
 
-Start already refused untracked files under `offers/`, so the second line
-removes only files this run created.
+Start already refused untracked files under `offers/`, so the
+`ls-files --others` line removes only files this run created. The guarded
+`unverified` restore skips the folder when `main` has no leads yet.
 
 **Done when:** every command exits 0, `writes` in `$W/applied.json` is
 twice the selected count, and `git status --porcelain` shows only those
