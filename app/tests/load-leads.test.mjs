@@ -7,6 +7,9 @@ import {
   parseLeadText,
   validateLead,
   urlHost,
+  foreignDomains,
+  unsafeWording,
+  registrable,
   LeadError,
 } from "../scripts/load-leads.mjs";
 import { runPipeline } from "../scripts/load-offers.mjs";
@@ -116,6 +119,39 @@ describe("load-leads (#660)", () => {
     }
     expect(urlHost("https://bit.ly\\@x.com/a")).toBeNull();
     expect(urlHost("https://www.x.com/a/status/1")).toBe("x.com");
+  });
+
+  it("agrees with Python on Unicode input: NFKC first, ASCII word boundaries (F4)", () => {
+    expect(foreignDomains("Claim at caf\u00e9free.xyz", ["acme.example"])).toEqual(["free.xyz"]);
+    expect(foreignDomains("Claim at \uff41\uff43\uff4d\uff45.xyz", ["acme.example"])).toEqual(["acme.xyz"]);
+    expect(unsafeWording("\uff24\uff2d me")).toBe("DM");
+    expect(() => check({ claim: "Caf\u00e9 owners get 1M free tokens." })).not.toThrow();
+  });
+
+  it("compares registrable domains and keeps payment wording action-shaped (F3)", () => {
+    expect(registrable("docs.acme.co.uk")).toBe("acme.co.uk");
+    expect(registrable("api.acme.example")).toBe("acme.example");
+    expect(foreignDomains("shop.acme.co.uk", ["www.acme.co.uk"])).toEqual([]);
+    expect(foreignDomains("other.co.uk", ["www.acme.co.uk"])).toEqual(["other.co.uk"]);
+    expect(foreignDomains("Free for IBM watsonx.ai users", ["acme.example"])).toEqual([]);
+    expect(foreignDomains("Claim at free-grok.ai", ["acme.example"])).toEqual(["free-grok.ai"]);
+    expect(unsafeWording("Link quota, no credit card needed.")).toBeNull();
+    expect(unsafeWording("Add a credit card to unlock")).toBe("Add a credit card");
+  });
+
+  it("allows one day of timezone slack on lead dates (F5)", () => {
+    const post = (date) => [{ url: "https://x.com/a/status/9", type: "x", author: null, handle: null, date }];
+    expect(() => check({ last_seen: "2026-11-04", sources: post("2026-11-04") })).not.toThrow();
+    expect(() => check({ last_seen: "2026-11-05" })).toThrow(/in the future/);
+    expect(() => check({ sources: post("2026-11-05") })).toThrow(/in the future/);
+  });
+
+  it("checks wording on every rendered field, links only on claim fields (F6)", () => {
+    expect(() => check({ reason_detail: "The post says to DM the bot for a code." })).toThrow(
+      /reason_detail asks for a DM/,
+    );
+    expect(() => check({ provider: "Acme DM bot" })).toThrow(/provider asks for a DM/);
+    expect(() => check({ reason_detail: "https://acme.example/pricing returned HTTP 403." })).not.toThrow();
   });
 
   it("handles a missing or empty folder and rejects stray files", async () => {

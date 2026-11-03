@@ -46,6 +46,8 @@ export const LEAD_REASONS = [
 const SOURCE_TYPES = ["x", "reddit", "web"];
 const SOURCE_KEYS = ["url", "type", "author", "handle", "date"];
 export const FRESH_DAYS = RULES.fresh_days;
+// Every rendered text field gets the domain and wording checks (F6); only
+// the fields quoting the post are barred from carrying a full link.
 const TEXT_FIELDS = [
   "provider",
   "title",
@@ -53,13 +55,37 @@ const TEXT_FIELDS = [
   "amount_claimed",
   "reason_detail",
 ];
-const SHOWN_FIELDS = ["title", "claim", "amount_claimed"];
-const UNSAFE_RE = new RegExp(
-  RULES.unsafe_claim_patterns.map((p) => `(?:${p})`).join("|"),
-  "i",
-);
+const CLAIM_FIELDS = ["title", "claim", "amount_claimed"];
+// No u flag: \b and case folding stay ASCII, matching Python's re.ASCII (F4).
+const joined = (list) => list.map((p) => `(?:${p})`).join("|");
+const UNSAFE_RE = new RegExp(joined(RULES.unsafe_claim_patterns), "i");
+const PAYMENT_RE = new RegExp(joined(RULES.payment_patterns), "gi");
+const NEGATION_RE = new RegExp(RULES.negation_pattern, "i");
+const NEGATION_WORD_RE = new RegExp(RULES.negation_word_pattern, "i");
+const LINK_CUE_RE = new RegExp(RULES.link_cue_pattern, "i");
 const AUTHORITY_RE = new RegExp(RULES.url_authority_pattern, "i");
 const NON_DOMAIN = new Set(RULES.non_domain_suffixes);
+const SECOND_LEVEL = new Set(RULES.second_level_suffixes);
+const PRODUCT_TLDS = new Set(RULES.product_tlds);
+
+/** NFKC-normalise before matching, as lead_model.nfkc does. */
+export const nfkc = (text) => String(text ?? "").normalize("NFKC");
+
+/** Last two labels, or three under a known second-level suffix (co.uk). */
+export function registrable(host) {
+  const labels = host.toLowerCase().replace(/^\.+|\.+$/g, "").split(".");
+  if (labels.length >= 3 && SECOND_LEVEL.has(labels.slice(-2).join("."))) {
+    return labels.slice(-3).join(".");
+  }
+  return labels.slice(-2).join(".");
+}
+
+/** One day ahead of `today` (YYYY-MM-DD): the same timezone slack offers get (F5). */
+function tomorrowOf(today) {
+  return new Date(Date.parse(`${today}T00:00:00Z`) + 86_400_000)
+    .toISOString()
+    .slice(0, 10);
+}
 
 export class LeadError extends Error {}
 
@@ -105,22 +131,45 @@ export function urlHost(url) {
   return stripWww(host);
 }
 
+/** Mirrors lead_model.foreign_domains: registrable-domain comparison. */
 export function foreignDomains(text, officialHosts) {
+  const value = nfkc(text);
+  const allowed = new Set(officialHosts.map(registrable));
   const found = [];
   const re = new RegExp(RULES.domain_pattern, "gi");
-  for (const match of String(text ?? "").matchAll(re)) {
-    const token = stripWww(match[1].toLowerCase());
-    if (NON_DOMAIN.has(token.split(".").pop())) continue;
-    if (
-      officialHosts.some(
-        (h) => token === h || token.endsWith(`.${h}`) || h.endsWith(`.${token}`),
-      )
-    ) {
-      continue;
-    }
+  for (const match of value.matchAll(re)) {
+    const start = match.index + match[0].indexOf(match[1]);
+    const end = start + match[1].length;
+    if (start > 0 && value[start - 1] === ".") continue;
+    const raw = match[1].toLowerCase();
+    const token = stripWww(raw);
+    const tld = token.split(".").pop();
+    if (NON_DOMAIN.has(tld) || allowed.has(registrable(token))) continue;
+    const linked =
+      raw !== token ||
+      value[end] === "/" ||
+      value.slice(Math.max(0, start - 3), start) === "://" ||
+      LINK_CUE_RE.test(value.slice(Math.max(0, start - 20), start));
+    if (PRODUCT_TLDS.has(tld) && !linked) continue;
     found.push(token);
   }
   return found;
+}
+
+/** Mirrors lead_model.unsafe_wording: payment wording only when not negated. */
+export function unsafeWording(text) {
+  const value = nfkc(text);
+  const match = UNSAFE_RE.exec(value);
+  if (match) return match[0];
+  for (const pay of value.matchAll(PAYMENT_RE)) {
+    if (
+      !NEGATION_RE.test(value.slice(0, pay.index)) &&
+      !NEGATION_WORD_RE.test(pay[0])
+    ) {
+      return pay[0];
+    }
+  }
+  return null;
 }
 
 function parseValue(raw, filename, lineno) {
@@ -195,7 +244,8 @@ export function validateLead(data, filename, today) {
     if (!isDate(data[f])) fail(`${f} must be a YYYY-MM-DD date`);
   }
   if (data.first_seen > data.last_seen) fail("first_seen is after last_seen");
-  if (today && data.last_seen > today) fail("last_seen is in the future");
+  const latest = today ? tomorrowOf(today) : null;
+  if (latest && data.last_seen > latest) fail("last_seen is in the future");
   if (!LEAD_REASONS.includes(data.reason)) {
     fail(`reason must be one of ${LEAD_REASONS.join(", ")}`);
   }
@@ -242,7 +292,7 @@ export function validateLead(data, filename, today) {
       fail(`${label}.type ${s.type} does not match host ${host}`);
     }
     if (s.date !== null && !isDate(s.date)) fail(`${label}.date must be YYYY-MM-DD or null`);
-    if (today && s.date && s.date > today) fail(`${label}.date is in the future`);
+    if (latest && s.date && s.date > latest) fail(`${label}.date is in the future`);
     if (seen.has(s.url)) fail(`${label}.url is listed twice`);
     seen.add(s.url);
   });
@@ -253,11 +303,11 @@ export function validateLead(data, filename, today) {
     if (!value) continue;
     const domains = foreignDomains(value, officialHosts);
     if (domains.length) fail(`${f} names ${domains[0]}, not the provider's own domain`);
-    if (SHOWN_FIELDS.includes(f)) {
-      if (/https?:\/\//i.test(value)) fail(`${f} carries a link (unsafe claim path)`);
-      const bad = UNSAFE_RE.exec(value);
-      if (bad) fail(`${f} asks for a DM, a form, a secret, or payment details (${bad[0]})`);
+    if (CLAIM_FIELDS.includes(f) && /https?:\/\//i.test(nfkc(value))) {
+      fail(`${f} carries a link (unsafe claim path)`);
     }
+    const bad = unsafeWording(value);
+    if (bad) fail(`${f} asks for a DM, a form, a secret, or payment details (${bad})`);
   }
 
   return {
