@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-02T05:55:04Z",
-  "count": 266,
-  "active_count": 225,
-  "expired_count": 41,
+  "generated_at": "2026-11-03T03:09:21Z",
+  "count": 268,
+  "active_count": 226,
+  "expired_count": 42,
   "offers": [
     {
       "slug": "eden-ai-free-models",
@@ -3452,7 +3452,7 @@
       "verification": "social_proof",
       "review_status": "to-be-verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "siliconflow-free-models",
@@ -3993,6 +3993,36 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "cto-new-free-plan",
+      "title": "cto.new Free Plan — Free Frontier AI Models",
+      "provider": "cto.new",
+      "category": "coding",
+      "amount": "Free forever plan: frontier AI models free, unlimited AI businesses and agent chats, free API and MCP integrations; website and app builder; no credit card or API keys required",
+      "expiry_date": null,
+      "source_url": "https://cto.new/pricing",
+      "verified_date": "2026-11-03",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "jetbrains-junie-lite-free",
+      "title": "JetBrains Junie Lite — Free AI Coding Agent Model",
+      "provider": "JetBrains",
+      "category": "coding",
+      "amount": "Junie Lite: a free AI model in the Junie coding agent, always on in every JetBrains account (no trial, no card)",
+      "expiry_date": null,
+      "source_url": "https://junie.jetbrains.com/",
+      "verified_date": "2026-11-03",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [
