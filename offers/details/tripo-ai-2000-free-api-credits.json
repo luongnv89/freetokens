@@ -17,6 +17,12 @@
       "url": "https://www.tripo3d.ai/blog/announcement-tripo-openapi-platform-payment-system",
       "title": "Historical OpenAPI launch reward — superseded",
       "text": "Historical announcement offered 2,000 credits on first API key generation; current pricing instead advertises 300 free credits. Do not rely on the old grant amount."
+    },
+    {
+      "type": "link",
+      "url": "https://developers.tripo3d.ai/en/docs/codex-plugin",
+      "title": "Codex Plugin — Tripo Developers",
+      "text": "A Tripo account. New accounts receive free credits."
     }
   ]
 }

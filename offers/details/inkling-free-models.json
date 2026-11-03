@@ -31,6 +31,18 @@
       "url": "https://openrouter.ai/thinkingmachines/inkling:free",
       "title": "Inkling (free) - API Pricing & Benchmarks | OpenRouter",
       "text": "Thinking Machines: Inkling (free). PRICE Free. CONTEXT 1.0M."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-small:free/endpoints",
+      "title": "Thinking Machines: Inkling Small",
+      "text": "\"pricing\":{\"prompt\":\"0\",\"completion\":\"0\",\"discount\":0}"
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/thinkingmachines/inkling:free/endpoints",
+      "title": "Thinking Machines: Inkling",
+      "text": "\"pricing\":{\"prompt\":\"0\",\"completion\":\"0\",\"discount\":0}"
     }
   ]
 }
