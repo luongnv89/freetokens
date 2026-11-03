@@ -151,7 +151,7 @@ def validate_leads(leads_dir: str, offer_slugs: set, today=None) -> tuple:
     because the calendar moved.
     """
     leads = lead_model.load_leads(leads_dir, offer_slugs, today)
-    day = today or lead_model.dt.date.today()
+    day = today or lead_model.utc_today()
     stale = [lead for lead in leads if lead_model.is_stale(lead, day)]
     return leads, stale
 

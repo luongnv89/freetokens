@@ -132,6 +132,130 @@ class LeadSchemaTests(unittest.TestCase):
             validate_offers.check_lead_schema_matches_model(json.load(fh))
 
 
+class LeadRulesRound2Tests(unittest.TestCase):
+    """PR #661 round-2 review: F3 narrowing, F4 Unicode parity, F5 slack, F6 fields."""
+
+    def test_backfill_claims_and_real_offer_wording_pass(self):  # F3
+        for claim in ("$5 free API credits for new users, no credit card or subscription needed.",
+                      "Every new account receives 5 million free tokens on signup without a credit card, "
+                      "valid for 30 days.",
+                      "Link quota, no credit card needed.", "No need to add a credit card."):
+            with self.subTest(claim=claim):
+                check(lead(claim=claim))
+        with self.assertRaisesRegex(OfferError, "Add a credit card"):
+            check(lead(claim="Add a credit card to unlock"))
+
+    def test_registrable_domains_and_suffixes(self):  # F3
+        self.assertEqual(lead_model.registrable("docs.acme.co.uk"), "acme.co.uk")
+        self.assertEqual(lead_model.registrable("api.acme.example"), "acme.example")
+        uk = ["https://www.acme.co.uk/pricing"]
+        check(lead(official_urls_tried=uk, claim="Claim inside shop.acme.co.uk after sign-up."))
+        with self.assertRaisesRegex(OfferError, "names 'other.co.uk'"):
+            check(lead(official_urls_tried=uk, claim="Claim inside other.co.uk after sign-up."))
+        # The provider's other official domains (any official_urls_tried host) are allowed.
+        check(lead(official_urls_tried=["https://acme.example/pricing", "https://acme.dev/docs"],
+                   reason_detail="acme.dev/docs and acme.example returned HTTP 403."))
+        # A product-TLD name passes as text, but not as a link target.
+        check(lead(claim="Free credits for IBM watsonx.ai users."))
+        with self.assertRaisesRegex(OfferError, "names 'free-grok.ai'"):
+            check(lead(claim="Claim at free-grok.ai"))
+
+    def test_unicode_is_normalised_and_ascii_bounded(self):  # F4
+        self.assertEqual(lead_model.foreign_domains("Claim at caf\u00e9free.xyz", {"acme.example"}),
+                         ["free.xyz"])
+        self.assertEqual(lead_model.foreign_domains("Claim at \uff41\uff43\uff4d\uff45.xyz", {"acme.example"}),
+                         ["acme.xyz"])
+        self.assertEqual(lead_model.unsafe_wording("\uff24\uff2d me"), "DM")
+        check(lead(claim="Caf\u00e9 owners get 1M free tokens."))
+
+    def test_dates_allow_one_day_of_timezone_slack(self):  # F5
+        tomorrow = (TODAY + dt.timedelta(days=1)).isoformat()
+        check(lead(last_seen=tomorrow, sources=[src(date=tomorrow)]))
+        later = (TODAY + dt.timedelta(days=2)).isoformat()
+        with self.assertRaisesRegex(OfferError, "in the future"):
+            check(lead(last_seen=later))
+        with self.assertRaisesRegex(OfferError, "in the future"):
+            check(lead(sources=[src(date=later)]))
+        self.assertEqual(lead_model.utc_today(), dt.datetime.now(dt.timezone.utc).date())
+
+    def test_wording_is_checked_on_every_rendered_field(self):  # F6
+        with self.assertRaisesRegex(OfferError, "reason_detail asks for a DM"):
+            check(lead(reason_detail="The post says to DM the bot for a code."))
+        with self.assertRaisesRegex(OfferError, "provider asks for a DM"):
+            check(lead(provider="Acme DM bot"))
+        # reason_detail may cite official pages with a scheme; claim fields may not.
+        check(lead(reason_detail="https://acme.example/pricing returned HTTP 403."))
+
+
+class DocCommandTests(unittest.TestCase):
+    """F1/F2: the documented git commands work while main has no unverified/ folder."""
+
+    def git(self, *args, check=True):
+        return subprocess.run(["git", *args], cwd=self.repo, capture_output=True, text=True, check=check)
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.repo = self.tmp.name
+        for rel, text in (("offers/a.yaml", "a: 1\n"), ("index.json", "{}\n"),
+                          ("app/public/llms.txt", "x\n"), ("scripts/lead_model.py", "")):
+            Path(self.repo, rel).parent.mkdir(parents=True, exist_ok=True)
+            Path(self.repo, rel).write_text(text, encoding="utf-8")
+        self.git("init", "-q")
+        self.git("add", "-A")
+        self.git("-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "init")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    @staticmethod
+    def block(path, marker):
+        text = (REPO / path).read_text(encoding="utf-8")
+        for chunk in text.split("```bash")[1:]:
+            body = chunk.split("```")[0]
+            if marker in body:
+                return body
+        raise AssertionError(f"no bash block with {marker!r} in {path}")
+
+    def test_hunter_rollback_restores_without_unverified(self):
+        body = self.block("skills/offer-hunter/SKILL.md", "git restore -- offers")
+        lines = [ln for ln in body.splitlines() if ln.startswith(("git restore", "git ls-files"))]
+        self.assertTrue(any("--error-unmatch unverified" in ln for ln in lines))
+        Path(self.repo, "offers/a.yaml").write_text("a: 2\n", encoding="utf-8")
+        Path(self.repo, "index.json").write_text("{\"x\": 1}\n", encoding="utf-8")
+        Path(self.repo, "offers/new.yaml").write_text("n: 1\n", encoding="utf-8")
+        for line in lines:
+            subprocess.run(["bash", "-c", line], cwd=self.repo, check=False)
+        self.assertEqual(self.git("status", "--porcelain").stdout, "")
+
+    def test_updater_lead_staging_is_a_noop_without_leads(self):
+        body = self.block("skills/offer-updater/references/early-lane.md", "remove-match")
+        cmd = body[body.index("python3 scripts/lead_model.py"):body.index("(cd app")].replace("\\\n", "\n")
+        Path(self.repo, "scripts/lead_model.py").write_text(
+            (REPO / "scripts/lead_model.py").read_text(encoding="utf-8"), encoding="utf-8")
+        for name in ("offer_model.py",):
+            Path(self.repo, "scripts", name).write_text((REPO / "scripts" / name).read_text(encoding="utf-8"),
+                                                        encoding="utf-8")
+        Path(self.repo, "schemas").mkdir()
+        Path(self.repo, "schemas/unverified-lead.rules.json").write_text(
+            (REPO / "schemas/unverified-lead.rules.json").read_text(encoding="utf-8"), encoding="utf-8")
+        filled = cmd.replace("<provider>", "Acme AI").replace("<program>", "Free tokens week")
+        proc = subprocess.run(["bash", "-c", "set -o pipefail; " + filled], cwd=self.repo,
+                              capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual(self.git("diff", "--cached", "--name-only").stdout, "")
+        # With a matching lead it deletes and stages exactly that file.
+        Path(self.repo, "unverified").mkdir()
+        Path(self.repo, "unverified/acme-free-tokens.yaml").write_text(lead_model.dump_lead(lead()),
+                                                                      encoding="utf-8")
+        self.git("add", "-A")
+        self.git("-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "lead")
+        proc = subprocess.run(["bash", "-c", "set -o pipefail; " + filled], cwd=self.repo,
+                              capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual(self.git("diff", "--cached", "--name-status").stdout.split(),
+                         ["D", "unverified/acme-free-tokens.yaml"])
+
+
 class ValidatorCliTests(unittest.TestCase):
     """validate_offers.py gates unverified/ beside offers/."""
 

@@ -31,6 +31,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 from urllib.parse import urlsplit
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -61,16 +62,32 @@ SOURCE_KEYS = ("url", "type", "author", "handle", "date")
 # A lead is listed only while its newest dated source post is this fresh.
 FRESH_DAYS = int(RULES["fresh_days"])
 LIMITS = {"provider": 80, "title": 120, "claim": 300, "amount_claimed": 120, "reason_detail": 400}
+# Every text field is rendered on the page, so every one gets the domain and
+# unsafe-wording checks (F6): reason_detail is verifier prose, but a lead whose
+# own explanation says "DM the bot" is exactly the lead to drop.
 TEXT_FIELDS = ("provider", "title", "claim", "amount_claimed", "reason_detail")
-# Wording shown verbatim to visitors: checked against the unsafe-claim rules.
-SHOWN_FIELDS = ("title", "claim", "amount_claimed")
+# Fields quoting the post: never a full link. reason_detail may cite the
+# official pages tried (still domain-checked against official_urls_tried).
+CLAIM_FIELDS = ("title", "claim", "amount_claimed")
+# Like offers (offer_model), a date may be one day ahead of the UTC "today"
+# so a hunter east of UTC never fails CI between local and UTC midnight.
+FUTURE_SLACK = dt.timedelta(days=1)
 
 SLUG_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-UNSAFE_CLAIM_RE = re.compile("|".join(f"(?:{p})" for p in RULES["unsafe_claim_patterns"]), re.IGNORECASE)
-DOMAIN_RE = re.compile(RULES["domain_pattern"], re.IGNORECASE)
-AUTHORITY_RE = re.compile(RULES["url_authority_pattern"], re.IGNORECASE)
+# re.ASCII: \b and IGNORECASE behave exactly like JavaScript without the u
+# flag, so Python (CI) and Node (build) agree on every input (F4).
+_FLAGS = re.IGNORECASE | re.ASCII
+UNSAFE_CLAIM_RE = re.compile("|".join(f"(?:{p})" for p in RULES["unsafe_claim_patterns"]), _FLAGS)
+PAYMENT_RE = re.compile("|".join(f"(?:{p})" for p in RULES["payment_patterns"]), _FLAGS)
+NEGATION_RE = re.compile(RULES["negation_pattern"], _FLAGS)
+NEGATION_WORD_RE = re.compile(RULES["negation_word_pattern"], _FLAGS)
+LINK_CUE_RE = re.compile(RULES["link_cue_pattern"], _FLAGS)
+DOMAIN_RE = re.compile(RULES["domain_pattern"], _FLAGS)
+AUTHORITY_RE = re.compile(RULES["url_authority_pattern"], _FLAGS)
 NON_DOMAIN_SUFFIXES = frozenset(RULES["non_domain_suffixes"])
+SECOND_LEVEL_SUFFIXES = frozenset(RULES["second_level_suffixes"])
+PRODUCT_TLDS = frozenset(RULES["product_tlds"])
 SHORTENER_HOSTS = frozenset(RULES["shortener_hosts"])
 FORM_HOSTS = frozenset(RULES["form_hosts"])
 X_HOSTS = frozenset(RULES["x_hosts"])
@@ -84,6 +101,23 @@ def _on(host: str, hosts) -> bool:
 
 def strip_www(host: str) -> str:
     return host[4:] if host.startswith("www.") else host
+
+
+def nfkc(text) -> str:
+    """NFKC-normalise before matching (fullwidth 'ＤＭ' -> 'DM'), as Node does."""
+    return unicodedata.normalize("NFKC", str(text or ""))
+
+
+def utc_today() -> dt.date:
+    return dt.datetime.now(dt.timezone.utc).date()
+
+
+def registrable(host: str) -> str:
+    """Last two labels, or three under a known second-level suffix (co.uk)."""
+    labels = host.lower().strip(".").split(".")
+    if len(labels) >= 3 and ".".join(labels[-2:]) in SECOND_LEVEL_SUFFIXES:
+        return ".".join(labels[-3:])
+    return ".".join(labels[-2:])
 
 
 def url_host(url) -> str | None:
@@ -181,21 +215,46 @@ def _text(data: dict, field: str, filename: str) -> str:
 
 
 def foreign_domains(text: str, official_hosts) -> list:
-    """Domain-like tokens in *text* that are not the provider's own domain."""
+    """Domain-like tokens in *text* whose registrable domain is not official.
+
+    Skips suffixes ('.edu.au'), file names ('Node.js'), and product names on
+    a product TLD ('IBM watsonx.ai') unless link-shaped (a path follows, or a
+    cue such as 'claim at' precedes it).
+    """
+    text = nfkc(text)
+    allowed = {registrable(h) for h in official_hosts}
     found = []
-    for match in DOMAIN_RE.finditer(text or ""):
-        token = strip_www(match.group(1).lower())
-        if token.rsplit(".", 1)[-1] in NON_DOMAIN_SUFFIXES:
+    for match in DOMAIN_RE.finditer(text):
+        start, end = match.span(1)
+        if start > 0 and text[start - 1] == ".":
             continue
-        if any(token == h or token.endswith("." + h) or h.endswith("." + token) for h in official_hosts):
+        raw = match.group(1).lower()
+        token = strip_www(raw)
+        tld = token.rsplit(".", 1)[-1]
+        if tld in NON_DOMAIN_SUFFIXES or registrable(token) in allowed:
+            continue
+        linked = (raw != token or text[end:end + 1] == "/" or text[max(0, start - 3):start] == "://"
+                  or LINK_CUE_RE.search(text[max(0, start - 20):start]))
+        if tld in PRODUCT_TLDS and not linked:
             continue
         found.append(token)
     return found
 
 
 def unsafe_wording(text: str):
-    match = UNSAFE_CLAIM_RE.search(text or "")
-    return match.group(0) if match else None
+    """The first unsafe instruction in *text*, or None.
+
+    Card/payment/bank wording counts only as an instruction ('add a credit
+    card') and never when negated ('no need to add a card').
+    """
+    text = nfkc(text)
+    match = UNSAFE_CLAIM_RE.search(text)
+    if match:
+        return match.group(0)
+    for match in PAYMENT_RE.finditer(text):
+        if not (NEGATION_RE.search(text[:match.start()]) or NEGATION_WORD_RE.search(match.group(0))):
+            return match.group(0)
+    return None
 
 
 def newest_post(lead: dict):
@@ -216,10 +275,11 @@ def is_stale(lead: dict, today: dt.date) -> bool:
 def validate_lead(data: dict, filename: str, today: dt.date | None = None) -> dict:
     """Return the validated lead or raise OfferError naming file and field.
 
-    Time-independent except for "no date in the future": staleness is
+    Time-independent except for "no date after tomorrow (UTC)": staleness is
     reported by is_stale(), never raised here.
     """
-    today = today or dt.date.today()
+    today = today or utc_today()
+    latest = today + FUTURE_SLACK
     missing = [f for f in FIELDS if f not in data]
     if missing:
         raise OfferError(f"{filename}: missing required field(s): {', '.join(missing)}")
@@ -245,7 +305,7 @@ def validate_lead(data: dict, filename: str, today: dt.date | None = None) -> di
     last = _date(data["last_seen"], "last_seen", filename)
     if first > last:
         raise OfferError(f"{filename}: first_seen {first} is after last_seen {last}")
-    if last > today:
+    if last > latest:
         raise OfferError(f"{filename}: last_seen {last} is in the future")
 
     if data["reason"] not in REASONS:
@@ -280,7 +340,7 @@ def validate_lead(data: dict, filename: str, today: dt.date | None = None) -> di
             if src[key] is not None and (not isinstance(src[key], str) or not src[key].strip()):
                 raise OfferError(f"{filename}: {label}.{key} must be a non-empty string or null")
         when = _date(src["date"], f"{label}.date", filename, nullable=True)
-        if when and when > today:
+        if when and when > latest:
             raise OfferError(f"{filename}: {label}.date {when} is in the future")
         if src["url"] in seen:
             raise OfferError(f"{filename}: {label}.url is listed twice")
@@ -297,14 +357,13 @@ def validate_lead(data: dict, filename: str, today: dt.date | None = None) -> di
         if domains:
             raise OfferError(f"{filename}: {field} names {domains[0]!r}, which is not the provider's "
                              "own domain (unsafe claim path); remove it or write [link removed]")
-        if field in SHOWN_FIELDS and re.search(r"https?://", value, re.IGNORECASE):
+        if field in CLAIM_FIELDS and re.search(r"https?://", nfkc(value), re.IGNORECASE):
             raise OfferError(f"{filename}: {field} carries a link (unsafe claim path); "
                              "replace it with [link removed] and list the post under sources")
-        if field in SHOWN_FIELDS:
-            bad = unsafe_wording(value)
-            if bad:
-                raise OfferError(f"{filename}: {field} asks for a DM, a form, a secret, or payment "
-                                 f"details ({bad!r}) (unsafe claim path); such leads are dropped")
+        bad = unsafe_wording(value)
+        if bad:
+            raise OfferError(f"{filename}: {field} asks for a DM, a form, a secret, or payment "
+                             f"details ({bad!r}) (unsafe claim path); such leads are dropped")
     return dict(data)
 
 

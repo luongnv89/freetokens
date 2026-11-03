@@ -244,7 +244,8 @@ def main():
     mode.add_argument('--queue', type=int, metavar='N', help='print up to N open leads as candidates')
     mode.add_argument('--verdicts', help='verdicts.json from Step 5 ([] only prunes stale leads)')
     parser.add_argument('--shortlist', help='shortlist.json from Step 6 (ids published this run)')
-    parser.add_argument('--today', default=dt.date.today().isoformat())
+    parser.add_argument('--today', default=lead_model.utc_today().isoformat(),
+                        help='run date, YYYY-MM-DD (default: today in UTC)')
     parser.add_argument('--dry-run', action='store_true', help='report without writing files')
     parser.add_argument('--leads-dir', default=str(LEADS_DIR), help=argparse.SUPPRESS)
     parser.add_argument('--offers-dir', default=str(OFFERS_DIR), help=argparse.SUPPRESS)

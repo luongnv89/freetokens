@@ -1,5 +1,5 @@
 {
-  "$comment": "B2 probes from the PR #661 review (#660). Every claim must be rejected by scripts/lead_model.py AND app/scripts/load-leads.mjs; every URL must be rejected as a source URL by both.",
+  "$comment": "Probes for the lead safety rules (#660, PR #661 reviews). Every 'claims' entry must be rejected and every 'safe_claims' entry accepted by scripts/lead_model.py AND app/scripts/load-leads.mjs (lead provider 'Acme AI', official URL https://acme.example/pricing); every 'bad_source_urls' entry must be rejected as a source URL by both.",
   "claims": [
     "DM @promo_bot to get your $5 code",
     "DM for the code",
@@ -13,7 +13,15 @@
     "Reply with your email",
     "Follow and RT",
     "Connect your wallet and enter your seed phrase",
-    "Get $5 via https://acme.example/claim"
+    "Get $5 via https://acme.example/claim",
+    "Claim at caféfree.xyz",
+    "Claim at ａｃｍｅ.xyz",
+    "ＤＭ me for the code",
+    "No KYC, just DM me",
+    "No need to verify, just add a credit card",
+    "Join our Telegram group for the code",
+    "Claim at free-grok.ai",
+    "Wire it via bank transfer"
   ],
   "provider_with_url": "Acme (acme-free-credits.xyz)",
   "reason_detail_with_url": "Only acme-free-credits.xyz mentions it.",
@@ -28,6 +36,21 @@
   "safe_claims": [
     "Acme gives 1M free tokens to every new account this week.",
     "Startups get up to $5,000 in credits; apply on acme.example.",
-    "Free GPT-4.1 and Node.js sandbox for 7 days, no card needed."
+    "Free GPT-4.1 and Node.js sandbox for 7 days, no card needed.",
+    "$5 free API credits for new users, no credit card or subscription needed.",
+    "Every new account receives 5 million free tokens on signup without a credit card, valid for 30 days.",
+    "No credit card required to start.",
+    "Generate an API key from the dashboard.",
+    "$5 free credits after adding a verified payment method.",
+    "$0.1 free credit in Wallet after register.",
+    "Sign up through Google or Discord.",
+    "Long-Form voice synthesis up to 100,000 characters.",
+    "Apply through the AI Developer Program sign-up form.",
+    "IBM watsonx.ai Free Tier with monthly credits.",
+    "Z.ai's GLM free for a week.",
+    "Students with .ac.uk, .edu.au or .edu.in email get free credits.",
+    "No need to add a credit card.",
+    "Café owners get 1M free tokens.",
+    "Free access via docs.acme.example and api.acme.example."
   ]
 }
