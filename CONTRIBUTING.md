@@ -62,8 +62,11 @@ fits you.
    Do not add offers you could not verify to `offers/`. The offer-hunter
    skill keeps those as leads in `unverified/<slug>.yaml` (schema:
    `schemas/unverified-lead.schema.json`); they appear only on the site's
-   Unverified page and are removed 30 days after they were last seen. Edit
-   them through `skills/offer-hunter/scripts/write_leads.py`, not by hand.
+   Unverified page for 3 days after their newest dated post, then deleted.
+   Edit them through `skills/offer-hunter/scripts/write_leads.py`, not by
+   hand. When you publish an offer an open lead named, delete that lead in
+   the same PR (`python3 scripts/lead_model.py remove-match --provider ...
+   --program ...`).
 
 3. Check everything locally before pushing:
 
