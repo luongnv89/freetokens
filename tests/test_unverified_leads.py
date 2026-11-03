@@ -242,6 +242,7 @@ class DocCommandTests(unittest.TestCase):
         proc = subprocess.run(["bash", "-c", "set -o pipefail; " + filled], cwd=self.repo,
                               capture_output=True, text=True)
         self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertIn("no matching lead", proc.stderr)
         self.assertEqual(self.git("diff", "--cached", "--name-only").stdout, "")
         # With a matching lead it deletes and stages exactly that file.
         Path(self.repo, "unverified").mkdir()
@@ -502,7 +503,7 @@ class RemoveMatchTests(unittest.TestCase):  # N6: offer-updater publishes the of
             self.assertEqual([Path(p).name for p in removed], ["acme-free-tokens.yaml"])
             self.assertEqual(remaining, ["acme-other: Other program"])
             out = io.StringIO()
-            with redirect_stdout(out):
+            with redirect_stderr(out):  # G4: on stderr, so it survives the documented pipe
                 lead_model.main(["remove-match", "--provider", "Acme AI", "--program", "nope",
                                  "--leads-dir", tmp])
             self.assertIn("open leads for Acme AI: acme-other: Other program", out.getvalue())

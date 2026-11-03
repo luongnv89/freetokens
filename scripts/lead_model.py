@@ -447,7 +447,7 @@ def main(argv=None) -> int:
         print(f"removed {os.path.relpath(path)}")
     if not removed:
         print("no matching lead" + (f"; open leads for {args.provider}: " + "; ".join(remaining)
-                                    if remaining else ""))
+                                    if remaining else ""), file=sys.stderr)
     return 0
 
 

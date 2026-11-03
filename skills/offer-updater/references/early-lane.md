@@ -138,9 +138,11 @@ every check passes.
   ```
 
   `remove-match` stages only the file it deleted. With no lead, or no
-  `unverified/` folder at all, it prints `no matching lead` and stages
-  nothing. When the provider has leads but none matches exactly, it lists
-  them: rerun with `--slug <lead-slug>` if one is this offer.
+  `unverified/` folder at all, it prints `no matching lead` (on stderr,
+  so it shows through the pipe) and stages nothing. When the provider has
+  leads but none matches exactly, that stderr line lists them: if one is
+  this offer, rerun the same line with `--slug <lead-slug>` in place of
+  `--program "<program>"`, so the deletion is staged.
 
   After the PR opens, with `pr` set to its number, wait for every check —
   not only the required one — then merge:
