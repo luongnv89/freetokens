@@ -239,6 +239,19 @@
         "index.json, app/public/llms.txt, and app/public/llms-full.txt are regenerated and committed",
         "The merge runs only after gh pr checks --watch --fail-fast succeeds, without --admin"
       ]
+    },
+    {
+      "id": 18,
+      "name": "publish-removes-matching-unverified-lead",
+      "kind": "edge",
+      "prompt": "Here's the official page for Acme's Free tokens week (acme.example/free-tokens): 1M free tokens for new accounts. unverified/acme-ai-free-tokens-week.yaml already lists it as an unverified lead. Add it.",
+      "expected_output": "After the curator says yes, the offer is published in offers/ and `python3 scripts/lead_model.py remove-match --provider \"Acme AI\" --program \"Free tokens week\"` deletes unverified/acme-ai-free-tokens-week.yaml; the deletion is staged in the same PR.",
+      "files": [],
+      "expectations": [
+        "The offer file was written to offers/ only after the curator's explicit yes",
+        "scripts/lead_model.py remove-match ran with the offer's provider and program",
+        "unverified/acme-ai-free-tokens-week.yaml was deleted and the deletion staged with git add -A -- unverified in the same commit"
+      ]
     }
   ]
 }

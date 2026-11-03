@@ -4,7 +4,7 @@ description: "Publish or refresh a few free-AI-credit offers from screenshots, X
 license: MIT
 compatibility: "Requires git, gh, python3, and read-only web search and fetch. Optional: TinyFish (MCP server or tinyfish CLI) for search and page reads, the lightpanda CLI for the browser retry, curl for the X oEmbed lookup; each falls back when missing."
 metadata:
-  version: "2.4.0"
+  version: "2.5.0"
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   issues: "#20,#21"
   epic: "#31"
@@ -287,7 +287,11 @@ without the curator's explicit yes.**
      what is free, amount, expiry, source URL, the **References verified**
      list, any "How to claim" steps, and the verification date.
   2. Branch `<type>/<issue>-<slug>` from current `main`.
-  3. Regenerate and stage `index.json` and the llms files (command in
+  3. Delete the unverified lead this offer replaces:
+     `python3 scripts/lead_model.py remove-match --provider "<provider>"
+     --program "<program>"` (no match lists the provider's leads; rerun
+     with `--slug`), then `git add -A -- unverified`. Regenerate and stage
+     `index.json` and the llms files (command in
      `references/early-lane.md` → *Present and ship*; CI fails without
      them). Commit with a Conventional Commits message referencing the
      issue, e.g. `feat(offers): add <Provider> offer (#<issue>)`, and push.

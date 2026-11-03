@@ -106,17 +106,33 @@
       "id": 8,
       "name": "unverified-leads-lifecycle",
       "kind": "edge",
-      "prompt": "/offer-hunter — unverified/ already holds 6 leads (one last seen 35 days ago); a scout re-finds one of them in a new X post, and a verifier marks a new X-only offer unverifiable because the provider's pricing page returns HTTP 403.",
-      "expected_output": "Step 4 appends the 5 oldest open leads from write_leads.py --queue 5 as re-check candidates. Step 7 runs write_leads.py: the bot-walled X-only offer becomes a new unverified/<slug>.yaml with reason bot_walled, the re-found lead gets last_seen = today and the new post as a source, the 35-day-old lead is removed, and any lead verified live and published this run is removed in the same PR. Leads failing the safe claim path or contradicted by an official page are dropped with a reason, never written. The PR body and report state 'N leads added / M refreshed / K removed'.",
+      "prompt": "/offer-hunter — unverified/ holds 6 open leads (one whose newest post is 5 days old); a scout re-finds one of them in a new X post dated today, and a verifier marks a new X-only offer posted yesterday unverifiable because the provider's pricing page returns HTTP 403.",
+      "expected_output": "Step 4 runs write_leads.py --open and --queue 5, tags the re-found scout candidate with its lead_slug, and appends the re-check leads. Step 7 runs write_leads.py: the bot-walled X-only offer becomes unverified/<slug>.yaml with reason bot_walled, the re-found lead gets last_seen = today and the new post as a source, and the lead whose newest post is 5 days old is deleted as stale. The PR body and report state 'N leads added / M refreshed / K removed'.",
       "files": [],
       "expectations": [
-        "write_leads.py --queue 5 ran in Step 4 and its candidates kept their lead_slug",
-        "Unverifiable verdicts carried an unverified_lead object, or null plus an unverified_drop reason",
+        "write_leads.py --open and --queue 5 ran in Step 4 and the re-found scout candidate carried the open lead's lead_slug",
+        "Unverifiable verdicts carried official_contradicts plus an unverified_lead object, or null plus an unverified_drop reason",
         "The new bot-walled offer was written as unverified/<slug>.yaml, never as an offers/ file",
         "The re-found lead's last_seen became today and its sources gained the new post",
-        "The lead last seen 35 days ago was deleted and the deletion was staged",
+        "The lead whose newest post is 5 days old was deleted (stale) and the deletion was staged",
         "check_scope.py printed OK scope with the lead paths staged",
         "The PR body contains an 'Unverified leads' section with 'N leads added / M refreshed / K removed'"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "unverified-leads-drops",
+      "kind": "edge",
+      "prompt": "/offer-hunter — the verifiers return five unverifiable candidates: (a) an X post from yesterday saying 'DM @promo_bot for your $50 code'; (b) a program whose official pricing page says it ended last month; (c) a third-party blog post from 40 days ago claiming 5M free tokens; (d) a news headline with no date about free credits; (e) an open lead whose scout re-find now verifies live on the provider's official page and is shortlisted.",
+      "expected_output": "None of (a)–(d) becomes a lead file; each is listed as dropped with its reason in the PR body's Unverified leads section: (a) unsafe claim path (a DM), (b) official page contradicts it (official_contradicts true), (c) stale post older than 3 days, (d) undated source. (e) is published as a normal offer by write_offers.py and its lead file is deleted in the same PR with the reason 'verified live and published as an offer in this PR'.",
+      "files": [],
+      "expectations": [
+        "No unverified/ file was written for the DM lead, and the PR body lists it as dropped for an unsafe claim path",
+        "The ended program's verdict had official_contradicts true and the PR body lists it as dropped because an official page contradicts it",
+        "The 40-day-old post was dropped with a stale-post reason (newest post more than 3 days old)",
+        "The undated headline was dropped with the reason 'undated source'",
+        "The re-found lead was published as an offer and its unverified/<slug>.yaml deletion was staged in the same PR, with the removal reason in the PR body",
+        "No lead was removed without a verdict, an explicit unverified_drop, or staleness"
       ]
     }
   ]

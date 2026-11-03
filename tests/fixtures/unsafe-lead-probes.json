@@ -1,0 +1,33 @@
+{
+  "$comment": "B2 probes from the PR #661 review (#660). Every claim must be rejected by scripts/lead_model.py AND app/scripts/load-leads.mjs; every URL must be rejected as a source URL by both.",
+  "claims": [
+    "DM @promo_bot to get your $5 code",
+    "DM for the code",
+    "Send your API key to the bot",
+    "Paste your OpenAI key into the form",
+    "Enter your payment details to activate",
+    "Add a credit card to unlock",
+    "Claim at acme-free-credits.xyz",
+    "Join t.me/acmefree",
+    "Fill out the Google Form",
+    "Reply with your email",
+    "Follow and RT",
+    "Connect your wallet and enter your seed phrase",
+    "Get $5 via https://acme.example/claim"
+  ],
+  "provider_with_url": "Acme (acme-free-credits.xyz)",
+  "reason_detail_with_url": "Only acme-free-credits.xyz mentions it.",
+  "bad_source_urls": [
+    "https://bit.ly\\@x.com/a",
+    "https://user@x.com/acme/status/1",
+    "https://x.com:8443/acme/status/1",
+    "https://t.co/abc123",
+    "http://x.com/acme/status/1",
+    "https://x.com /acme/status/1"
+  ],
+  "safe_claims": [
+    "Acme gives 1M free tokens to every new account this week.",
+    "Startups get up to $5,000 in credits; apply on acme.example.",
+    "Free GPT-4.1 and Node.js sandbox for 7 days, no card needed."
+  ]
+}

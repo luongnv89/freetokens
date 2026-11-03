@@ -56,10 +56,14 @@ TinyFish and Lightpanda are optional (`references/web-tools.md`).
   offers. Nothing outside it is written.
 - **unverified lead**: an `unverifiable` candidate kept in
   `unverified/<slug>.yaml` and shown only on the site's Unverified page,
-  never as an offer. The verifier decides inclusion (`agents/verifier.md`);
-  `scripts/write_leads.py` is its only writer and applies the lifecycle:
-  re-seen → `last_seen` bumped and source added; published, expired,
-  duplicate, or contradicted → removed; 30 days after `last_seen` → removed.
+  never as an offer. **Fresh** = its newest dated source post is at most
+  3 days old; an undated lead is never admitted, a stale one is deleted.
+  The verifier decides inclusion (`agents/verifier.md`); only
+  `scripts/write_leads.py` writes leads and applies the lifecycle: re-seen
+  or re-checked → `last_seen` = today, a new post appended (only a new
+  dated post extends freshness); published, expired, duplicate,
+  contradicted, or an explicit `unverified_drop` → removed; a failed
+  re-check keeps the lead.
 - **fail-soft**: a dead page or crashed worker makes that candidate
   `unverifiable`; the run continues.
 - **state line**: `. "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1`.
@@ -148,22 +152,28 @@ failing → its channel is `[]` and the report names it.
 Concatenate the leads. Merge leads that name the same provider and
 program into one candidate: keep the newest lead, and a `claimed_url` on
 the provider's domain. Keep at most **20**, preferring bigger claimed
-amounts, then newer leads. Then append up to 5 open unverified leads for
-re-check (they do not count toward the 20; on Report-only skip this):
+amounts, then newer leads. Then match and re-check open unverified leads
+(on Report-only skip this):
 
 ```bash
 . "$(git rev-parse --show-toplevel)/.offer-hunter/state.env" && cd "$REPO" || exit 1
-python3 skills/offer-hunter/scripts/write_leads.py --queue 5 --today "$today" > "$W/recheck.json"
+S=skills/offer-hunter/scripts
+python3 $S/write_leads.py --open --today "$today" > "$W/open-leads.json" &&
+python3 $S/write_leads.py --queue 5 --today "$today" > "$W/recheck.json"
 ```
 
-Merge its objects into the list (each keeps its `lead_slug`). When a
-scout candidate names the same provider and program, drop it and put its
-newer `lead` into the queued object. Save to
-`$W/candidates.json`. With zero candidates, go to Step 9.
+Give every scout candidate naming the same provider and program as a row
+of `open-leads.json` that row's `lead_slug`. Append the `recheck.json`
+objects whose `lead_slug` no candidate carries yet (they do not count
+toward the 20). Save to `$W/candidates.json`. With zero candidates, prune
+stale leads: write `[]` to `$W/candidates.json` and `$W/verdicts.json`,
+run Step 6, then run `write_leads.py` with Step 7's arguments plus
+`--dry-run`; when it removes anything, run Steps 7–8 (a leads-only PR),
+otherwise go to Step 9.
 
 **Done when:** `$W/candidates.json` parses, ids are unique, and it holds
-1–20 scout candidates plus at most 5 re-check leads (or the zero-lead exit
-fired).
+1–20 scout candidates plus at most 5 re-check leads (or the zero-candidate
+path ran).
 
 ## Step 5 — Verify (workers, parallel)
 
@@ -217,7 +227,8 @@ python3 scripts/validate_offers.py
 
 `write_offers.py` and `write_leads.py` are the only writers; never
 hand-edit an offer or lead file. Each writes nothing when it fails, and
-`write_leads.py` prints `OK leads N added / M refreshed / K removed`. If it names ids, re-run Step 6 with one
+`write_leads.py` prints `OK leads N added / M refreshed / K removed`.
+If `write_offers.py` names ids, re-run Step 6 with one
 `--exclude <id>=<reason>` per id, then Step 7 once more. If `node` lacks
 packages, run `cd app && npm ci` once and retry. On any other failure, roll
 back and stop:

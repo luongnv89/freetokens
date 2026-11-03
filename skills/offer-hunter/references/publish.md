@@ -9,6 +9,11 @@ counts() { python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))[sys.a
 new_count="$(counts new_count)"; update_count="$(counts update_count)"
 ```
 
+**Leads-only run** (both counts 0, only `$W/leads.json` applied paths):
+title the issue `Offer hunt $today: unverified leads only` and use
+`chore(unverified): refresh unverified leads $today (#$issue)` as the
+commit message and PR title instead of the offer titles below.
+
 ## 1. Tracking issue
 
 Reuse an open issue from an earlier attempt today:

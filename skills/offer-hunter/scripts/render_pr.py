@@ -75,6 +75,7 @@ def leads_section(report):
     out += [f'- Added `{s}`' for s in added] + [f'- Refreshed `{s}`' for s in refreshed]
     out += [f'- Removed `{r["slug"]}`: {esc(r["reason"], 200)}' for r in removed]
     out += [f'- Dropped {esc(d["label"], 120)}: {esc(d["reason"], 200)}' for d in report['dropped']]
+    out += [f'- Kept `{k["slug"]}` for review: {esc(k["reason"], 200)}' for k in report.get('kept', [])]
     return out
 
 
