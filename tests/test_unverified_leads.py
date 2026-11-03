@@ -228,6 +228,22 @@ class WriteLeadsLifecycleTests(unittest.TestCase):
         self.assertEqual([c["lead_slug"] for c in queue], ["acme-ai-free-tokens-week", "acme-ai-other"])
         self.assertEqual(queue[0]["id"], "lead-01")
 
+    def test_recheck_with_new_post_refreshes_and_bad_merge_is_dropped(self):
+        """Re-checks (lead_slug) stay valid and count a newer post as a sighting."""
+        self.apply_verdicts([self.verdict()], today="2026-11-01")
+        recheck = dict(self.verdict(rid="lead-01", url="https://x.com/new/status/9"),
+                       lead_slug="acme-ai-free-tokens-week")
+        report = self.apply_verdicts([recheck], today="2026-11-04")
+        self.assertEqual(report["refreshed"], ["acme-ai-free-tokens-week"])
+        self.assertEqual(report["removed"], [])
+        stored = lead_model.load_leads(str(self.leads), today=dt.date(2026, 11, 4))[0]
+        self.assertEqual(stored["last_seen"], "2026-11-04")
+
+        bad = dict(self.verdict(rid="lead-01", reason="made_up"), lead_slug="acme-ai-free-tokens-week")
+        report = self.apply_verdicts([bad], today="2026-11-05")
+        self.assertIn("re-check not applied", report["dropped"][0]["reason"])
+        lead_model.load_leads(str(self.leads), today=dt.date(2026, 11, 5))  # still valid
+
 
 class BackfillTests(unittest.TestCase):
     def test_committed_leads_are_valid_and_never_offers(self):

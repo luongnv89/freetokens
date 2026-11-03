@@ -156,12 +156,14 @@ re-check (they do not count toward the 20; on Report-only skip this):
 python3 skills/offer-hunter/scripts/write_leads.py --queue 5 --today "$today" > "$W/recheck.json"
 ```
 
-Merge its objects into the list unchanged (each keeps its `lead_slug`;
-drop a scout candidate for the same provider and program). Save to
+Merge its objects into the list (each keeps its `lead_slug`). When a
+scout candidate names the same provider and program, drop it and put its
+newer `lead` into the queued object. Save to
 `$W/candidates.json`. With zero candidates, go to Step 9.
 
-**Done when:** `$W/candidates.json` parses, ids are unique, and its length
-is 1–20 (or the zero-lead exit fired).
+**Done when:** `$W/candidates.json` parses, ids are unique, and it holds
+1–20 scout candidates plus at most 5 re-check leads (or the zero-lead exit
+fired).
 
 ## Step 5 — Verify (workers, parallel)
 

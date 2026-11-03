@@ -74,8 +74,10 @@ def source_from(lead):
             'handle': lead.get('handle') or None, 'date': lead.get('date') or None}
 
 
-def queue(existing, limit):
-    open_leads = sorted(existing.values(), key=lambda lead: (lead['last_seen'], lead['slug']))
+def queue(existing, limit, today):
+    # Stale leads are deleted by this run anyway; never spend a slot on them.
+    open_leads = sorted((lead for lead in existing.values() if not lead_model.is_stale(lead, today)),
+                        key=lambda lead: (lead['last_seen'], lead['slug']))
     out = []
     for n, lead in enumerate(open_leads[:limit], 1):
         src = lead['sources'][-1]
@@ -121,8 +123,20 @@ def apply(verdicts, existing, selected_ids, today, offers_dir=OFFERS_DIR):
             elif verdict == 'unverifiable' and not entry:
                 removed[slug] = v.get('unverified_drop') or 'failed the inclusion rules on re-check'
             elif verdict == 'unverifiable':
-                merge_fields(leads[slug], entry)
-                if leads[slug] != existing[slug] and slug not in refreshed:
+                lead = copy.deepcopy(leads[slug])
+                merge_fields(lead, entry)
+                try:
+                    # A scout re-found it: its newer post replaced the queued lead.
+                    source = source_from(v.get('lead'))
+                    if source['url'] not in {s['url'] for s in lead['sources']}:
+                        lead['sources'].append(source)
+                        lead['last_seen'] = max(lead['last_seen'], iso)
+                    lead_model.validate_lead(lead, f'{slug}.yaml', today)
+                except OfferError as exc:
+                    dropped.append({'id': rid, 'label': label, 'reason': f're-check not applied: {exc}'})
+                    continue
+                leads[slug] = lead
+                if lead != existing[slug] and slug not in refreshed:
                     refreshed.append(slug)
             continue
         if verdict != 'unverifiable':
@@ -203,7 +217,7 @@ def main():
     leads_dir = Path(args.leads_dir)
     existing = load_existing(leads_dir, today)
     if args.queue is not None:
-        json.dump(queue(existing, max(0, args.queue)), sys.stdout, indent=1, ensure_ascii=False)
+        json.dump(queue(existing, max(0, args.queue), today), sys.stdout, indent=1, ensure_ascii=False)
         sys.stdout.write('\n')
         return
     verdicts = load_json(args.verdicts, 'verdicts')
