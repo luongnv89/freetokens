@@ -71,7 +71,11 @@ export default defineConfig({
     minify: "esbuild",
     sourcemap: false,
     chunkSizeWarningLimit: 400,
-    assetsInlineLimit: 4096,
+    // Data JSON (offers/details/unverified) always ships as its own file:
+    // a small unverified.json would otherwise be inlined as a data: URI into
+    // the main bundle every page loads (#660).
+    assetsInlineLimit: (filePath: string) =>
+      filePath.endsWith(".json") ? false : undefined,
     rollupOptions: {
       output: {
         manualChunks: undefined,

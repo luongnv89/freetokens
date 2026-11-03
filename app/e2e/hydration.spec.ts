@@ -48,16 +48,21 @@ test("unverified page hydrates from its own leads JSON with no React hydration e
 }) => {
   const errors = collectHydrationErrors(page);
   const leadsRequests = [];
+  const loadErrors = [];
   page.on("request", (request) => {
     if (/unverified-[A-Za-z0-9_-]+\.json/.test(request.url())) {
       leadsRequests.push(request.url());
     }
   });
+  page.on("console", (message) => {
+    if (/unverified leads/i.test(message.text())) loadErrors.push(message.text());
+  });
   await page.goto("/unverified.html");
   await page.waitForLoadState("networkidle");
   expect(errors, `hydration errors: ${errors.join(" | ")}`).toEqual([]);
-  // Route-guarded fetch: only this page asks for the leads artifact.
+  // Route-guarded fetch of a separate file (never inlined into the bundle).
   expect(leadsRequests.length).toBeGreaterThan(0);
+  expect(loadErrors).toEqual([]);
   expect(await page.locator("h1").textContent()).toBe("Unverified offers");
 });
 
