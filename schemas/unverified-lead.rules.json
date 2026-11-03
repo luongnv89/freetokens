@@ -1,13 +1,14 @@
 {
-  "$comment": "Shared rules for unverified/<slug>.yaml leads (#660). Loaded by scripts/lead_model.py (CI content gate) and app/scripts/load-leads.mjs (build), so both fail closed on the same inputs. Text is NFKC-normalised before matching; patterns are case-insensitive, ASCII word boundaries (Python re.ASCII, JS without the u flag). Unsafe patterns are action-shaped (an instruction to hand something over or go somewhere), never bare nouns: 'no credit card required' or 'Generate an API key' are ordinary offer wording. payment_patterns (card, payment, bank) are ignored when negation_pattern matches the clause text just before the match ('no need to add a card') or negation_word_pattern occurs inside it ('Link quota, no credit card'); unsafe_claim_patterns never are ('No KYC, just DM me').",
-  "$comment_domains": "A bare domain in any text field must share a registrable domain (last two labels, or three under second_level_suffixes) with an official_urls_tried host. Tokens right after a dot ('.edu.au') are suffixes, not domains. A token on a product_tlds TLD ('IBM watsonx.ai', 'Z.ai') is treated as a product name unless it is link-shaped: it has a path, or link_cue_pattern matches just before it ('claim at free-grok.ai').",
+  "$comment": "Shared rules for unverified/<slug>.yaml leads (#660). Loaded by scripts/lead_model.py (CI content gate) and app/scripts/load-leads.mjs (build), so both fail closed on the same inputs. Text is NFKC-normalised before matching; patterns are case-insensitive, ASCII word boundaries (Python re.ASCII, JS without the u flag). Unsafe patterns are action-shaped (an instruction to hand something over or go somewhere), never bare nouns: 'no credit card required' or 'Generate an API key' are ordinary offer wording. payment_patterns (card, CVV, billing, payment, bank) are ignored only when a negation governs the verb directly (negation_pattern on the text just before the match: 'no need to add a card') or modifies the noun directly (negation_word_pattern inside the match: 'Link quota, no credit card'); 'No catch - just enter your payment details' and 'Add a no-fee credit card' still count; unsafe_claim_patterns never are ('No KYC, just DM me').",
+  "$comment_domains": "A bare domain in any text field must share a registrable domain (last two labels, or three under second_level_suffixes) with an official_urls_tried host. Tokens right after a dot ('.edu.au') are suffixes, not domains. A token in product_domains ('IBM watsonx.ai', 'Z.ai') is a product name, allowed unless it is link-shaped: it has a path, or link_cue_pattern matches just before it. There is no TLD-wide exemption: a genuine provider's own .ai host passes through official_urls_tried, and any other .ai domain is rejected.",
   "fresh_days": 3,
   "unsafe_claim_patterns": [
     "\\bDMs?\\b",
     "\\bdirect[ -]?messages?\\b",
-    "\\b(send|paste|share|submit|enter|give|post)\\s+(us\\s+|me\\s+)?(your|the|an?)\\b[^.!?;]{0,30}\\b(api[ -]?keys?|keys?|tokens?|passwords?|secrets?|credentials?|seed[ -]?phrases?)\\b",
+    "\\b(send|paste|share|submit|enter|give|post|drop|dm)\\s+(in\\s+|over\\s+)?(us\\s+|me\\s+)?(your|the|an?)\\b[^.!?;]{0,30}\\b(api[ -]?keys?|keys?|tokens?|passwords?|secrets?|credentials?|seed[ -]?phrases?)\\b",
     "\\bprivate[ -]?keys?\\b",
-    "\\b(connect|link|verify)\\s+(your\\s+)?(crypto\\s+|web3\\s+)?wallets?\\b",
+    "\\b(connect|link|verify)\\s+(your\\s+)?([a-z0-9]+\\s+)?wallets?\\b",
+    "\\b(sign|approve)\\b[^.!?;]{0,30}\\bwallets?\\b|\\bwallet\\s+connections?\\b",
     "\\bmetamask\\b",
     "\\bseed[ -]?phrases?\\b",
     "\\brecovery[ -]?phrases?\\b",
@@ -20,15 +21,16 @@
     "\\btypeform\\b",
     "\\btally\\.so\\b",
     "\\bjotform\\b",
-    "\\b(join|message|dm)\\b[^.!?;]{0,20}\\b(telegram|discord|whatsapp)\\b",
-    "\\b(telegram|discord|whatsapp)\\s+(groups?|channels?|bots?|servers?)\\b"
+    "\\b(join|message|dm|ping|text|contact|hop\\s+in(to)?|ask)\\b[^.!?;]{0,20}\\b(telegram|discord|whatsapp|signal|tg)\\b",
+    "\\b(telegram|discord|whatsapp|signal|tg)\\s+(groups?|channels?|bots?|servers?|chats?)\\b",
+    "\\b(in|on|via)\\s+(our|my)\\s+(telegram|discord|whatsapp|signal|tg)\\b"
   ],
   "payment_patterns": [
-    "\\b(add|enter|provide|send|share|submit|link|paste|give|post)\\b[^.!?;]{0,25}\\b((credit|debit)[ -]?cards?|card\\s+(details|numbers?|info)|payment\\s+(details|info|information|methods?))\\b",
+    "\\b(add|enter|provide|send|share|submit|link|paste|give|post)\\b[^.!?;]{0,25}\\b((credit|debit)[ -]?cards?|cards?(\\s+(details|numbers?|info))?|cvv|billing\\s+(details|info|information)|payment\\s+(details|info|information|methods?))\\b",
     "\\bbank\\s+(details|accounts?|transfers?|logins?)\\b"
   ],
-  "negation_pattern": "\\b(no|not|without|never|don't|doesn't|zero)\\b[^.!?;:,]{0,25}$",
-  "negation_word_pattern": "\\b(no|not|without|never|don't|doesn't|zero)\\b",
+  "negation_pattern": "\\b(no\\s+need\\s+to|never|not|don't|doesn't|do\\s+not|does\\s+not|without)(\\s+(need|needing|have|having|required)\\s+to)?\\s+(even\\s+|ever\\s+)?$",
+  "negation_word_pattern": "\\b(no|without|zero)\\s+((credit|debit)[ -]?cards?|cards?|payment)\\b",
   "domain_pattern": "\\b((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z]{2,63})\\b",
   "second_level_suffixes": [
     "co.uk",
@@ -65,8 +67,10 @@
     "com.tr",
     "edu.tr"
   ],
-  "product_tlds": [
-    "ai"
+  "product_domains": [
+    "watsonx.ai",
+    "z.ai",
+    "claude.ai"
   ],
   "link_cue_pattern": "\\b(at|via|visit|open|join|go\\s+to|head\\s+to|sign\\s+up\\s+(at|on))\\s+$",
   "non_domain_suffixes": [

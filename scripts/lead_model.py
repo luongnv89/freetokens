@@ -87,7 +87,7 @@ DOMAIN_RE = re.compile(RULES["domain_pattern"], _FLAGS)
 AUTHORITY_RE = re.compile(RULES["url_authority_pattern"], _FLAGS)
 NON_DOMAIN_SUFFIXES = frozenset(RULES["non_domain_suffixes"])
 SECOND_LEVEL_SUFFIXES = frozenset(RULES["second_level_suffixes"])
-PRODUCT_TLDS = frozenset(RULES["product_tlds"])
+PRODUCT_DOMAINS = frozenset(RULES["product_domains"])
 SHORTENER_HOSTS = frozenset(RULES["shortener_hosts"])
 FORM_HOSTS = frozenset(RULES["form_hosts"])
 X_HOSTS = frozenset(RULES["x_hosts"])
@@ -217,9 +217,9 @@ def _text(data: dict, field: str, filename: str) -> str:
 def foreign_domains(text: str, official_hosts) -> list:
     """Domain-like tokens in *text* whose registrable domain is not official.
 
-    Skips suffixes ('.edu.au'), file names ('Node.js'), and product names on
-    a product TLD ('IBM watsonx.ai') unless link-shaped (a path follows, or a
-    cue such as 'claim at' precedes it).
+    Skips suffixes ('.edu.au'), file names ('Node.js'), and the exact product
+    names in product_domains ('IBM watsonx.ai') unless link-shaped (a path
+    follows, or a cue such as 'claim at' precedes it).
     """
     text = nfkc(text)
     allowed = {registrable(h) for h in official_hosts}
@@ -235,7 +235,7 @@ def foreign_domains(text: str, official_hosts) -> list:
             continue
         linked = (raw != token or text[end:end + 1] == "/" or text[max(0, start - 3):start] == "://"
                   or LINK_CUE_RE.search(text[max(0, start - 20):start]))
-        if tld in PRODUCT_TLDS and not linked:
+        if token in PRODUCT_DOMAINS and not linked:
             continue
         found.append(token)
     return found

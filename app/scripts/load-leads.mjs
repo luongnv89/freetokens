@@ -66,7 +66,7 @@ const LINK_CUE_RE = new RegExp(RULES.link_cue_pattern, "i");
 const AUTHORITY_RE = new RegExp(RULES.url_authority_pattern, "i");
 const NON_DOMAIN = new Set(RULES.non_domain_suffixes);
 const SECOND_LEVEL = new Set(RULES.second_level_suffixes);
-const PRODUCT_TLDS = new Set(RULES.product_tlds);
+const PRODUCT_DOMAINS = new Set(RULES.product_domains);
 
 /** NFKC-normalise before matching, as lead_model.nfkc does. */
 export const nfkc = (text) => String(text ?? "").normalize("NFKC");
@@ -150,7 +150,7 @@ export function foreignDomains(text, officialHosts) {
       value[end] === "/" ||
       value.slice(Math.max(0, start - 3), start) === "://" ||
       LINK_CUE_RE.test(value.slice(Math.max(0, start - 20), start));
-    if (PRODUCT_TLDS.has(tld) && !linked) continue;
+    if (PRODUCT_DOMAINS.has(token) && !linked) continue;
     found.push(token);
   }
   return found;
