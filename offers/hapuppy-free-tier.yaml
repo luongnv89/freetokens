@@ -7,10 +7,10 @@
 title: Hapuppy Free Tier
 provider: Hapuppy
 category: api_provider
-amount: "Unconfirmed: terms still advertise a one-time 200K-credit signup bonus (basic models, 10 RPM), but current docs say there is no free tier or free credits; confirm eligibility before relying on a grant"
+amount: "One-time 200K-credit sign-up bonus for free users (not refilled, does not reset daily); paid one-time credit packs from $9.99"
 expiry_date: null
 source_url: https://hapuppy.com/en/terms
-verified_date: 2026-11-03
+verified_date: 2026-11-04
 verification: social_proof
 review_status: "to-be-verified"
 signup: required

@@ -23,6 +23,12 @@
       "url": "https://www.amd.com/en/registration/ai-dev-program-sign-up-form.html",
       "title": "AI Developer Program Sign Up Form",
       "text": "Create your free AMD account and complete the AI Developer Program Sign Up Form, then verify your email."
+    },
+    {
+      "type": "link",
+      "url": "https://developer.amd.com/member-perks/",
+      "title": "Member Perks - AMD AI Developer Program",
+      "text": "Expires: 30 days after activation"
     }
   ]
 }

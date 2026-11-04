@@ -25,6 +25,18 @@
       "url": "https://gemini.google/students/",
       "title": "Gemini for Students : l'IA de Google qui vous aide à réviser",
       "text": "Profitez de l'offre étudiante Gemini : 1 an de Google AI Plus sans frais. Valable jusqu'au 31 décembre 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://gemini.google/us/students/",
+      "title": "Gemini for Students — your AI study buddy from Google",
+      "text": "Free student plan for 1 year. The free Google AI Pro student offer is available to eligible U.S. college students ages 18+. Redeem until December 31, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://gemini.google/fr/students/",
+      "title": "Gemini for Students : l'IA de Google qui vous aide à réviser",
+      "text": "1 an de Google AI Plus sans frais. Valable jusqu'au 31 décembre 2026."
     }
   ]
 }
