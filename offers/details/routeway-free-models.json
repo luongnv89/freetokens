@@ -1,0 +1,30 @@
+{
+  "summary": "Routeway models with ':free' appended to their ID (for example deepseek-r1:free) cost $0.00. They are capped at 200 requests per day, which resets at 00:00 UTC, and requests over the limit return 429. The docs FAQ gives a 20 requests/minute cap while the rate-limits page gives 5 RPM. The caps cannot be raised. Free models are intended for development, testing, and experimentation only, with no uptime or latency guarantees. Dropping the ':free' suffix switches to the paid pay-as-you-go model.",
+  "claim_steps": [
+    "Sign up or log in at routeway.ai/dashboard",
+    "Open the API Keys tab",
+    "Click Create API Key, give it a name, and confirm",
+    "Copy and store the key securely — it won't be shown again",
+    "Call a model ID with the :free suffix (e.g. deepseek-r1:free)"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.routeway.ai/getting-started/faq",
+      "title": "Frequently Asked Questions",
+      "text": "They cost $0.00 but are rate-limited to 20 requests/minute and 200 requests/day. The daily limit (200 RPD) resets at 00:00 UTC each day. There are no uptime or latency guarantees on free models."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.routeway.ai/getting-started/rate-limits.md",
+      "title": "Rate Limits",
+      "text": "Free models (e.g., deepseek-r1:free) are subject to the following rate limits: 5 Requests Per Minute (RPM), 200 Requests Per Day (RPD). Once exceeded, requests to free models will return a 429 status code."
+    },
+    {
+      "type": "link",
+      "url": "https://aifree.dev/offers",
+      "title": "240 Free AI Tools & API Credits (Oct 2026)",
+      "text": "Routeway | Free Models | 200 requests/day | Verified Oct 31, 2026"
+    }
+  ]
+}

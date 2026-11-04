@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-03T22:29:44Z",
-  "count": 270,
-  "active_count": 228,
+  "generated_at": "2026-11-04T03:08:23Z",
+  "count": 275,
+  "active_count": 233,
   "expired_count": 42,
   "offers": [
     {
@@ -4053,6 +4053,81 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "anyscale-100-signup-credits",
+      "title": "Anyscale $100 Signup Credit",
+      "provider": "Anyscale",
+      "category": "api_provider",
+      "amount": "$100 in Anyscale Credits to get started on a free Anyscale account (CPU/GPU compute on the Anyscale platform)",
+      "expiry_date": null,
+      "source_url": "https://www.anyscale.com/pricing",
+      "verified_date": "2026-11-04",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "commandcode-crouton-alpha-free",
+      "title": "Crouton Alpha Free on Command Code",
+      "provider": "Command Code",
+      "category": "coding",
+      "amount": "Free Crouton Alpha stealth preview: $0/M input and output tokens, up to 1000 requests a day per account (1M context, image input); requires >=$1 credit balance in account to start a session; prompts and outputs may be kept by the provider",
+      "expiry_date": null,
+      "source_url": "https://commandcode.ai/docs/resources/pricing-limits",
+      "verified_date": "2026-11-04",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "iteracompute-free-qwen3-8-27b",
+      "title": "IteraCompute Free Qwen3.8-27B — 30M Tokens/Month",
+      "provider": "IteraCompute",
+      "category": "api_provider",
+      "amount": "30M free tokens per month on Qwen3.8-27B (input + output incl. reasoning), 128K context, 160K TPM, no credit card or recharge",
+      "expiry_date": "2026-11-23",
+      "source_url": "https://iteracompute.com/free",
+      "verified_date": "2026-11-04",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-pulse-alpha-free",
+      "title": "Pulse Alpha Free on OpenCode",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free Pulse Alpha stealth model access in OpenCode (free input, output and cached reads; limited time; not available in some regions, including the EU and Russia); collected data may be retained and used to improve the model",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-11-04",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
+      "status": "active"
+    },
+    {
+      "slug": "routeway-free-models",
+      "title": "Routeway Free Models — 200 Requests/Day",
+      "provider": "Routeway",
+      "category": "api_provider",
+      "amount": "Free :free models at $0.00, capped at 200 requests per day (resets 00:00 UTC); for development, testing, and experimentation",
+      "expiry_date": null,
+      "source_url": "https://docs.routeway.ai/getting-started/faq",
+      "verified_date": "2026-11-04",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

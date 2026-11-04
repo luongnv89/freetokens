@@ -1,0 +1,22 @@
+{
+  "summary": "Crouton Alpha is a lightweight model for coding, agentic sub-tasks, tool use, and document analysis, with a 1M token context, image input, and low, medium, high, xhigh, and max reasoning effort. Its maker has chosen to stay anonymous for the preview. Requests cost no credits: input and output are both $0.00 per million tokens. It is available to all customers (Go, GOAT, Pro, Max, Ultra, and Team Pro), with 1000 requests a day per account and a quota that resets at midnight UTC. You need $1 of credits in your account to start a session. The provider may keep your prompts and outputs, so Crouton Alpha won't run in a CMD_ZDR=1 session. A stealth preview can change or end without notice.",
+  "claim_steps": [
+    "Sign in to Command Code and keep at least $1 of credits in your account",
+    "Pick crouton-alpha (switch any time with /model in interactive mode)"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://commandcode.ai/docs/resources/pricing-limits",
+      "title": "Pricing Limits | Command Code - Command Code Docs",
+      "text": "Crouton Alpha is a free stealth preview. crouton-alpha is free, up to 1000 requests a day. Requests cost no credits: Input and output are both $0.00 per million tokens. 1000 requests a day, per account: the quota resets at midnight UTC. Need to have $1 of credits in your account to start a session."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/CommandCodeAI/status/2117784140598698248",
+      "author": "Command Code",
+      "text": "Crouton Alpha (new stealth model) is now FREE in Command Code. 1M token context. Multimodal with reasoning. $ cmd --model stealth/crouton-alpha",
+      "handle": "@CommandCodeAI"
+    }
+  ]
+}
