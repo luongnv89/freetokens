@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T03:26:08Z",
+  "generated_at": "2026-11-04T03:32:50Z",
   "count": 275,
   "active_count": 233,
   "expired_count": 42,
@@ -875,21 +875,6 @@
       "status": "active"
     },
     {
-      "slug": "hapuppy-free-tier",
-      "title": "Hapuppy Free Tier",
-      "provider": "Hapuppy",
-      "category": "api_provider",
-      "amount": "One-time 200K-credit sign-up bonus for free users (not refilled, does not reset daily); paid one-time credit packs from $9.99",
-      "expiry_date": null,
-      "source_url": "https://hapuppy.com/en/terms",
-      "verified_date": "2026-11-04",
-      "added_date": "2026-09-29",
-      "verification": "social_proof",
-      "review_status": "to-be-verified",
-      "signup": "required",
-      "status": "active"
-    },
-    {
       "slug": "ibm-watsonx-ai-free-tier",
       "title": "IBM watsonx.ai Free Tier",
       "provider": "IBM",
@@ -928,6 +913,21 @@
       "expiry_date": null,
       "source_url": "https://www.speechmatics.com/pricing",
       "verified_date": "2026-11-04",
+      "added_date": "2026-09-29",
+      "verification": "social_proof",
+      "review_status": "to-be-verified",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "hapuppy-free-tier",
+      "title": "Hapuppy Free Tier",
+      "provider": "Hapuppy",
+      "category": "api_provider",
+      "amount": "Unconfirmed: terms still advertise a one-time 200K-credit signup bonus (basic models, 10 RPM), but current docs say there is no free tier or free credits; confirm eligibility before relying on a grant",
+      "expiry_date": null,
+      "source_url": "https://hapuppy.com/en/terms",
+      "verified_date": "2026-11-03",
       "added_date": "2026-09-29",
       "verification": "social_proof",
       "review_status": "to-be-verified",
