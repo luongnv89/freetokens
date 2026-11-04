@@ -1,0 +1,16 @@
+{
+  "summary": "Pulse Alpha Free (model id pulse-alpha-free) is a stealth model that is free on OpenCode for a limited time. The OpenCode team is using the free period to collect feedback and improve the model. Input, output and cached reads are all listed as Free. During the free period, collected data may be retained and used to improve the model. It is not available in several regions, including the European Union and Russia. Free models can be hidden by setting OPENCODE_DISABLE_FREE_MODELS=1.",
+  "claim_steps": [
+    "Open OpenCode",
+    "Run /models to see the available models",
+    "Select Pulse Alpha Free"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models",
+      "text": "Pulse Alpha Free is a stealth model that's free on OpenCode for a limited time. The team is using this time to collect feedback and improve the model. | Pulse Alpha Free | Free | Free | Free | - | Pulse Alpha Free: During its free period, collected data may be retained and used to improve the model."
+    }
+  ]
+}

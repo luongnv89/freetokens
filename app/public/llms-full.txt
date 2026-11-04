@@ -2,11 +2,61 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-03T22:29:44Z — 120 of 228 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-04T03:08:23Z — 121 of 233 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Routeway Free Models — 200 Requests/Day
+- Provider: Routeway
+- Category: api_provider
+- Amount: Free :free models at $0.00, capped at 200 requests per day (resets 00:00 UTC); for development, testing, and experimentation
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.routeway.ai/getting-started/faq
+- Page: https://freetokens.custats.info/offers/routeway-free-models.html
+- Summary: Routeway models with ':free' appended to their ID (for example deepseek-r1:free) cost $0.00. They are capped at 200 requests per day, which resets at 00:00 UTC, and requests over the limit return 429. The docs FAQ gives a 20 requests/minute cap while the rate-limits page gives 5 RPM. The caps cannot be raised. Free models are intended for development, testing, and experimentation only, with no uptime or latency guarantees. Dropping the ':free' suffix switches to the paid pay-as-you-go model.
+- Claim steps: Sign up or log in at routeway.ai/dashboard | Open the API Keys tab | Click Create API Key, give it a name, and confirm | Copy and store the key securely — it won't be shown again | Call a model ID with the :free suffix (e.g. deepseek-r1:free)
+### Pulse Alpha Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Pulse Alpha stealth model access in OpenCode (free input, output and cached reads; limited time; not available in some regions, including the EU and Russia); collected data may be retained and used to improve the model
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-pulse-alpha-free.html
+- Summary: Pulse Alpha Free (model id pulse-alpha-free) is a stealth model that is free on OpenCode for a limited time. The OpenCode team is using the free period to collect feedback and improve the model. Input, output and cached reads are all listed as Free. During the free period, collected data may be retained and used to improve the model. It is not available in several regions, including the European Union and Russia. Free models can be hidden by setting OPENCODE_DISABLE_FREE_MODELS=1.
+- Claim steps: Open OpenCode | Run /models to see the available models | Select Pulse Alpha Free
+### IteraCompute Free Qwen3.8-27B — 30M Tokens/Month
+- Provider: IteraCompute
+- Category: api_provider
+- Amount: 30M free tokens per month on Qwen3.8-27B (input + output incl. reasoning), 128K context, 160K TPM, no credit card or recharge
+- Status: active — enrollment deadline: 2026-11-23
+- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://iteracompute.com/free
+- Page: https://freetokens.custats.info/offers/iteracompute-free-qwen3-8-27b.html
+- Summary: IteraCompute gives 30M free tokens per month on Qwen3.8-27B, with no credit card or recharge required. The model has zero input, cached-input, and output token prices. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, output is capped at 8,192 tokens, and throughput is 160K TPM. There is no automatic paid overage: an exhausted quota returns 429 until reset. Fair-use rate limits apply, there is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.
+- Claim steps: Register and verify your email, or sign in with Google | Open API Keys, create a key that allows qwen/qwen3.8-27b and save the secret shown once | Replace your-api-key with your key in the sample call and run it | Success means a non-empty choices[0].message.content; registration or HTTP 200 alone does not complete activation
+### Crouton Alpha Free on Command Code
+- Provider: Command Code
+- Category: coding
+- Amount: Free Crouton Alpha stealth preview: $0/M input and output tokens, up to 1000 requests a day per account (1M context, image input); requires >=$1 credit balance in account to start a session; prompts and outputs may be kept by the provider
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://commandcode.ai/docs/resources/pricing-limits
+- Page: https://freetokens.custats.info/offers/commandcode-crouton-alpha-free.html
+- Summary: Crouton Alpha is a lightweight model for coding, agentic sub-tasks, tool use, and document analysis, with a 1M token context, image input, and low, medium, high, xhigh, and max reasoning effort. Its maker has chosen to stay anonymous for the preview. Requests cost no credits: input and output are both $0.00 per million tokens. It is available to all customers (Go, GOAT, Pro, Max, Ultra, and Team Pro), with 1000 requests a day per account and a quota that resets at midnight UTC. You need $1 of credits in your account to start a session. The provider may keep your prompts and outputs, so Crouton Alpha won't run in a CMD_ZDR=1 session. A stealth preview can change or end without notice.
+- Claim steps: Sign in to Command Code and keep at least $1 of credits in your account | Pick crouton-alpha (switch any time with /model in interactive mode)
+### Anyscale $100 Signup Credit
+- Provider: Anyscale
+- Category: api_provider
+- Amount: $100 in Anyscale Credits to get started on a free Anyscale account (CPU/GPU compute on the Anyscale platform)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.anyscale.com/pricing
+- Page: https://freetokens.custats.info/offers/anyscale-100-signup-credits.html
+- Summary: Anyscale's pricing page and homepage both advertise $100 in Anyscale Credits for getting started. The pricing page says to 'Start building with a free Anyscale account and access to dozens of code templates on Anyscale Platform.' The pricing page publishes no expiry, card, or eligibility terms for the credit.
+- Claim steps: Open https://www.anyscale.com/pricing and click 'Get started with $100 credit' | Sign up for a free Anyscale account
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1166,46 +1216,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/inworld-on-demand-free.html
 - Summary: Inworld AI's On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT) for free, with voice and Inworld Inference access. Usage is metered: current pricing and billing describe a shared credit balance across TTS, STT, Inference and Realtime rather than a blanket separately billed LLM exclusion. Confirm your actual balance and model eligibility; this does not promise unlimited inference or a fixed free LLM token allowance. Some premium LLMs require a card and a credit purchase or paid-plan upgrade even with an existing balance. Professional voice cloning on On-Demand also requires a payment method.
 - Claim steps: Create an Inworld account. | Choose the On-Demand plan (Start free) at platform.inworld.ai/billing. | Use the up-to-70-min TTS or 400-min STT allowance and check the actual Billing balance. Inference is charged per token from the shared credit balance at the selected model rate; confirm free-credit eligibility and premium-model payment requirements before calling it.
-### Inkling + Inkling Small Free (OpenRouter)
-- Provider: Thinking Machines
-- Category: coding
-- Amount: Inkling and Inkling Small at $0 via OpenRouter, 1M-token context
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-03 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/thinkingmachines/inkling-small:free
-- Page: https://freetokens.custats.info/offers/inkling-free-models.html
-- Summary: Thinking Machines offers Inkling and Inkling Small on OpenRouter at $0 prompt and completion, with a 1M-token context window. The free endpoints are restricted to agentic-harness use, not unrestricted chat. Do not send confidential information or personal data, including voices or images of people's faces. Prompts and outputs are logged and used for model training/improvement and to improve products and services; session data is disassociated from account identifiers before that use. Use constitutes agreement to the TML Free Research API terms. No hard end date is listed.
-- Claim steps: Sign in to OpenRouter at openrouter.ai. | Configure an agentic harness with thinkingmachines/inkling:free or thinkingmachines/inkling-small:free; the free endpoints are only available for agentic-harness use. | Review the TML Free Research API terms linked on the model page. Using the endpoint agrees to logging prompts and outputs for model training/improvement and service improvement. | Never send confidential information or personal data, including voices or images of people's faces. | Send eligible harness requests within OpenRouter's free-model limits; prompt and completion prices are $0.
-### InferAll Free — 25 NIM Trial + $0 OSS Models
-- Provider: InferAll
-- Category: api_provider
-- Amount: 25 free NVIDIA NIM calls on signup (no card); $0 in/out on 10+ NIM open models within daily caps — Free card and FAQ say 25 calls/day free after the trial, 50 chat/day after a one-time $5 activation (Activation card still says $5 unlocks ongoing free use)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-03 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://inferall.ai/pricing
-- Page: https://freetokens.custats.info/offers/inferall-free-nim-models.html
-- Summary: InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. The current pricing FAQ says open models then stay free at 25 calls a day (reset 00:00 UTC), and a one-time $5 activation (which becomes spendable balance, not a fee) raises that to the free plan's 50 chat calls a day. As of 2026-10-27 the Free plan card says the same, but the Activation card still calls the $5 the "cheapest path to unlock ongoing free use", so the no-payment 25/day allowance needs confirmation. The 10+ NIM open-source models (Nemotron, GLM 5.3 and others; consult the live catalog) are $0 input/output within daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate per day. Catalog presence and zero listed prices are not a redeemed inference test.
-- Claim steps: Create an account and get an API key at inferall.ai/keys — no card for the first 25 NIM calls. | Check https://api.inferall.ai/ai/v1/models for currently listed $0 NIM model IDs, then call the OpenAI-compatible or Anthropic-compatible endpoint with one of those IDs. | After the 25-call trial, the Free card and FAQ say open models stay free at 25 calls a day (reset 00:00 UTC). A one-time $5 activation raises chat to 50 calls a day and becomes spendable balance; the Activation card still says it unlocks ongoing free use.
-### Inception Mercury 2 — 100M Free API Tokens
-- Provider: Inception
-- Category: api_provider
-- Amount: 100 million API tokens (one-time credit, no payment details required)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-03 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.inceptionlabs.ai/blog/mercury-2-10x-free-tokens
-- Page: https://freetokens.custats.info/offers/inception-mercury-2-100m-free-tokens.html
-- Summary: New Inception accounts receive a one-time credit of 100 million API tokens shared across available models rather than per model; no payment details are required to start. Current documentation includes Mercury 2.5, Mercury 2, Mercury Edit 2 and Mercury Decide. Mercury Voice is enterprise-gated and requires enablement, so the signup credit is not a guarantee of access to it. The free tier is limited per minute to 1,000 requests, 1,000,000 input tokens and 100,000 output tokens. Add payment information when the shared balance runs low.
-- Claim steps: Create a new account or sign in at platform.inceptionlabs.ai. | Open API Keys and create an Inception API key. | Use the key with the OpenAI-compatible base URL https://api.inceptionlabs.ai/v1 and model mercury-2. | Monitor the shared one-time balance and per-minute free-tier limits; check the current models documentation for supported endpoints and availability. Mercury Voice requires enterprise enablement. Add billing details only if you want paid usage after the free credit.
-### Ideogram Free Plan — Weekly Slow Credits
-- Provider: Ideogram
-- Category: image
-- Amount: Free plan ($0) with weekly slow credits for eligible accounts; amount may vary
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-03 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://ideogram.ai/pricing/
-- Page: https://freetokens.custats.info/offers/ideogram-free-plan.html
-- Summary: Ideogram's current official pricing FAQ says eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft; the amount may vary, and no fixed free credit number is published. The current comparison table is headed Pay as you go at 1 cent per credit alongside paid subscription plans, rather than a Free/$0 column, so its PAYG concurrency cell should not be attributed to free-account entitlement. Confirm the weekly allowance and available queue/features in your account. AI-powered editing features require priority credits and are not available in the slow queue. No global end date for the FAQ-described weekly free-account credits is stated.
-- Claim steps: Open https://ideogram.ai/pricing/ and review the FAQ about discounts/free trials. Use the site's Sign up or Sign in link; do not select a paid subscription or assume Pay as you go credit purchases are the weekly free-account benefit. | Sign in or create an Ideogram account — sign in with Google, Apple, or Microsoft to be eligible for weekly credits (per the page FAQ). | Check that your eligible account actually shows its weekly free credits, remaining balance and available generation queue/features before generating; the amount may vary. Do not treat the pricing table's Pay as you go concurrency limit as a verified free-account limit. | Wait for the weekly credit refresh to continue generating; note AI-powered editing features require priority credits and are not available in the slow queue.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

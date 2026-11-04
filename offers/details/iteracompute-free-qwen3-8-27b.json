@@ -1,0 +1,23 @@
+{
+  "summary": "IteraCompute gives 30M free tokens per month on Qwen3.8-27B, with no credit card or recharge required. The model has zero input, cached-input, and output token prices. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, output is capped at 8,192 tokens, and throughput is 160K TPM. There is no automatic paid overage: an exhausted quota returns 429 until reset. Fair-use rate limits apply, there is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.",
+  "claim_steps": [
+    "Register and verify your email, or sign in with Google",
+    "Open API Keys, create a key that allows qwen/qwen3.8-27b and save the secret shown once",
+    "Replace your-api-key with your key in the sample call and run it",
+    "Success means a non-empty choices[0].message.content; registration or HTTP 200 alone does not complete activation"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://iteracompute.com/free",
+      "title": "Free Qwen API for OpenCode and Your Apps | IteraCompute",
+      "text": "Start with Qwen3.8-27B: 30M free tokens per month, no credit card or recharge, 128K total context. No recharge required: 30M tokens/month, 128K total context and 160K TPM. The free Qwen3.8-27B promotion ends at 00:00 Pacific Time on November 24, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://aifree.dev/offer/iteracompute-free-qwen3-8-27b",
+      "title": "IteraCompute free Qwen3.8-27B",
+      "text": "\"Qwen3.8-27B free - 30M tokens/month, no card\". Free tier counts input + output including reasoning; \"$0 per token on input, cached input and output.\" Email or Google sign-in; 128K context, 8K max output, 160,000 TPM cap; no SLA. \"Brand-new operator (domain registered Aug 2026, identity not disclosed)\" — \"treat it as untrusted infrastructure.\" Verified Oct 19, 2026."
+    }
+  ]
+}

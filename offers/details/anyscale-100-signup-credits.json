@@ -1,0 +1,27 @@
+{
+  "summary": "Anyscale's pricing page and homepage both advertise $100 in Anyscale Credits for getting started. The pricing page says to 'Start building with a free Anyscale account and access to dozens of code templates on Anyscale Platform.' The pricing page publishes no expiry, card, or eligibility terms for the credit.",
+  "claim_steps": [
+    "Open https://www.anyscale.com/pricing and click 'Get started with $100 credit'",
+    "Sign up for a free Anyscale account"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.anyscale.com/pricing",
+      "title": "Pricing | Anyscale",
+      "text": "Get started with $100 in Anyscale Credits. Start building with a free Anyscale account and access to dozens of code templates on Anyscale Platform."
+    },
+    {
+      "type": "link",
+      "url": "https://www.anyscale.com/",
+      "title": "Production-scale AI with Ray | Anyscale",
+      "text": "Get started with $100 credit"
+    },
+    {
+      "type": "link",
+      "url": "https://aifree.dev/offer/anyscale-free-signup-credits",
+      "title": "Anyscale $100 Free Signup Credit",
+      "text": "Anyscale $100 Free Signup Credit — \"Get started with $100 in Anyscale Credits\". $100 in platform credits for CPU and GPU compute on Ray. Sign up with Google, GitHub, or email; credits attach to an organization. Card requirement not published on pricing page. Expiry not published. Listed Sep 12, 2026; terms updated Oct 21, 2026; verified Oct 31, 2026."
+    }
+  ]
+}
