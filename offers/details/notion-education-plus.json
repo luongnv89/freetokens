@@ -1,5 +1,5 @@
 {
-  "summary": "Notion gives eligible college/university students and teachers a free individual Education plan for a one-member workspace, with unlimited pages, blocks and file uploads, 30-day version history and up to 100 guests. Eligibility requires an active WHED-recognized higher-education institution email as the account's main email; K–12 is not eligible. Each school email can claim the Education Plan once, for one workspace. Upgrading that workspace to Plus, Business or Enterprise permanently ends its Education eligibility. You must re-verify your status with your school email once a year; if you can no longer verify a valid education email, the workspace and content move to the Free plan. Claim the plan on web or desktop, not mobile.",
+  "summary": "Notion gives eligible college/university students and teachers a free individual Education plan for a one-member workspace, with included pages & blocks, file uploads, 30-day version history and up to 100 guests. Eligibility requires an active WHED-recognized higher-education institution email as the account's main email; K–12 is not eligible. Each school email can claim the Education Plan once, for one workspace. Upgrading that workspace to Plus, Business or Enterprise permanently ends its Education eligibility. You must re-verify your status with your school email once a year; if you can no longer verify a valid education email, the workspace and content move to the Free plan. Claim the plan on web or desktop, not mobile.",
   "claim_steps": [
     "Use your active WHED-recognized college/university email as the main email on your Notion account, and keep only one workspace member for the individual Education plan. K–12 is not eligible.",
     "On web or desktop (not mobile), go to Settings → Upgrade plan → Get free Education plan. Each school email may claim once, for one workspace.",
@@ -17,8 +17,8 @@
     {
       "type": "link",
       "url": "https://www.notion.com/help/notion-for-education",
-      "title": "Notion Education — one-time claim and permanent loss after paid upgrade",
-      "text": "Each school email can claim the Education Plan once, for one workspace. Upgrading it to a Plus, Business, or Enterprise plan permanently ends that workspace's Education eligibility."
+      "title": "Get the Education Plan for students & teachers",
+      "text": "With the Education Plan, students can organize plans, tasks and notes across school and life with included pages & blocks, file uploads, more features to customize and publish your site, and 30-day version history"
     }
   ]
 }

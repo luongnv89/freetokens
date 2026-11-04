@@ -10,7 +10,7 @@ category: api_provider
 amount: One shared OpenAI-compatible API key per day backed by a $20 credit pool, refilled at 00:05 UTC; first-come first-served until the pool drains; previous day's key expires at rotation. All catalog models supported (currently 48+); unavailable to users in mainland China. Own accounts also get $1 starter credit.
 expiry_date: null
 source_url: https://y-api.bestvirtualgoods.com/daily-key
-verified_date: 2026-11-03
+verified_date: 2026-11-04
 verification: social_proof
 review_status: under-review
 signup: required
