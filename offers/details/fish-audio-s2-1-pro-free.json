@@ -1,9 +1,11 @@
 {
-  "summary": "Fish Audio offers s2.1-pro-free — the same TTS model as the paid S2.1-Pro — at $0 for development, testing, prototyping, and smaller businesses. Same quality and 83-language coverage as s2.1-pro, under fair-use limits, with no TTFA or DPA guarantees and no published end date. Starter accounts below $100 in total prepaid amount have a five-concurrent-request API limit shared across all account keys and API requests, including speech-to-text. This is not a fixed QPM allowance; exceeding the native API limit returns 429 without Retry-After, so use exponential backoff. Payment is not required to use the free model.",
+  "summary": "Fish Audio offers s2.1-pro-free — the same TTS model as the paid S2.1-Pro — at $0 for development, testing, and prototyping. Same quality and 83-language coverage as s2.1-pro, under fair-use limits, with no TTFA or DPA guarantees and no published end date. Fish Audio's terms limit non-paying users to internal, personal, non-commercial use; commercial use needs a paid Fish plan. The same free model is also served on OpenRouter as fish-audio/s2.1-pro-free:free at $0. On Fish's native API, Starter accounts below $100 in total prepaid amount have a five-concurrent-request API limit shared across all account keys and API requests, including speech-to-text. This is not a fixed QPM allowance; exceeding the native API limit returns 429 without Retry-After, so use exponential backoff. Payment is not required to use the free model.",
   "claim_steps": [
     "Create an account and API key at fish.audio.",
     "Call POST https://api.fish.audio/v1/tts with your Bearer API key and the exact HTTP header model: s2.1-pro-free. Do not omit or misspell the model header: missing or unrecognized values fall back to paid s2.1-pro.",
-    "On Starter (below $100 total prepaid), keep all keys and API workloads within the shared five-concurrent-request limit. On native API 429 responses, retry with exponential backoff; no Retry-After header is returned."
+    "On Starter (below $100 total prepaid), keep all keys and API workloads within the shared five-concurrent-request limit. On native API 429 responses, retry with exponential backoff; no Retry-After header is returned.",
+    "Or use OpenRouter: with an OpenRouter API key, call POST https://openrouter.ai/api/v1/audio/speech with model fish-audio/s2.1-pro-free:free (free endpoints are rate-limited).",
+    "Free use is limited to personal, non-commercial projects; get a paid Fish Audio plan for commercial use."
   ],
   "social_proof": [
     {
@@ -23,6 +25,24 @@
       "url": "https://docs.fish.audio/developer-guide/models-pricing/pricing-and-rate-limits.md",
       "title": "Fish Audio account-wide concurrency",
       "text": "Speech-to-text requests count against the same concurrency limit as your other\nAPI requests, shared by all API keys on your account."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/fish-audio/s2.1-pro-free:free/endpoints",
+      "title": "OpenRouter API — fish-audio/s2.1-pro-free:free endpoints",
+      "text": "Fish Audio: S2.1 Pro Free (free) — \"the no-cost variant of Fish Audio S2.1 Pro, intended for testing, prototyping, and low-volume applications\". One endpoint, provider Fish Audio, pricing prompt 0, completion 0."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models?output_modalities=speech",
+      "title": "OpenRouter API — speech models list",
+      "text": "id: fish-audio/s2.1-pro-free:free, pricing prompt 0, completion 0, endpoints: [\"/api/v1/audio/speech\"]."
+    },
+    {
+      "type": "link",
+      "url": "https://fish.audio/terms",
+      "title": "Terms of Service | Fish Audio",
+      "text": "You will only use the Services for your own internal, personal, non-commercial use ... Notwithstanding the foregoing, if you are a user of Paid Services, you are licensed to use the Services for commercial uses."
     }
   ]
 }
