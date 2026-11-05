@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-05T03:36:34Z — 122 of 238 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-05T03:45:37Z — 122 of 238 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1019,7 +1019,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 ### MindsHub Free Tier — MindsHub Air and Jev Models
 - Provider: MindsHub
 - Category: api_provider
-- Amount: MindsHub Air free for non-coding knowledge work and Jev free for classification, routing and scoring via the Decisions API, both on the $0 Free plan under daily fair-use limits (not published as numbers); no credit card required
+- Amount: MindsHub Air free for non-coding knowledge work within an organization-specific recurring weighted allowance (absolute size unpublished); Jev $0 launch promotion with 100,000 tokens and 100 requests refilled continuously over 24 hours for unfunded organizations while shared free capacity lasts; no card needed for these free allowances
 - Status: active — enrollment deadline: none (ongoing)
 - Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://mindshub.ai/pricing

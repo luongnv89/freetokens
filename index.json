@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T03:36:34Z",
+  "generated_at": "2026-11-05T03:45:37Z",
   "count": 280,
   "active_count": 238,
   "expired_count": 42,
@@ -564,7 +564,7 @@
       "title": "MindsHub Free Tier — MindsHub Air and Jev Models",
       "provider": "MindsHub",
       "category": "api_provider",
-      "amount": "MindsHub Air free for non-coding knowledge work and Jev free for classification, routing and scoring via the Decisions API, both on the $0 Free plan under daily fair-use limits (not published as numbers); no credit card required",
+      "amount": "MindsHub Air free for non-coding knowledge work within an organization-specific recurring weighted allowance (absolute size unpublished); Jev $0 launch promotion with 100,000 tokens and 100 requests refilled continuously over 24 hours for unfunded organizations while shared free capacity lasts; no card needed for these free allowances",
       "expiry_date": null,
       "source_url": "https://mindshub.ai/pricing",
       "verified_date": "2026-11-05",
