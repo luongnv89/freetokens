@@ -1,0 +1,23 @@
+{
+  "summary": "Google Cloud Text-to-Speech includes a monthly free usage limit per voice type: 4 million characters each for Standard and WaveNet voices, and 1 million characters each for Neural2, Studio, Chirp 3: HD and Polyglot (Preview) voices. Billing must be enabled to use the API, and usage above the free amount is charged automatically. Gemini-TTS and Instant custom voice have no free usage. Voices cover many languages, for example fr-FR and vi-VN Neural2, WaveNet, Standard and Chirp 3: HD voices. Publishing terms are unclear: neither the pricing page nor Google Cloud's terms say anything either way about publishing audio generated in the free tier, so check with Google before relying on it.",
+  "claim_steps": [
+    "Create a Google Cloud project and enable billing on it.",
+    "Enable the Cloud Text-to-Speech API in that project and create credentials for it.",
+    "Synthesize speech with a voice from the supported voices list; usage under each voice type's monthly free limit is not charged.",
+    "Set a budget alert, because characters beyond the free amount are billed automatically."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cloud.google.com/text-to-speech/pricing",
+      "title": "Text-to-Speech pricing | Google Cloud",
+      "text": "You must enable billing to use Text-to-Speech, and will be automatically charged if your usage exceeds the number of free characters allowed per month. Free usage limit: WaveNet 0 to 4 million characters; Standard 0 to 4 million; Neural2 0 to 1 million; Studio 0 to 1 million; Chirp 3: HD 0 to 1 million."
+    },
+    {
+      "type": "link",
+      "url": "https://cloud.google.com/text-to-speech/docs/list-voices-and-types",
+      "title": "Supported voices and languages | Cloud Text-to-Speech",
+      "text": "Vietnamese (Vietnam) vi-VN: vi-VN-Neural2-A (FEMALE), vi-VN-Neural2-D (MALE), vi-VN-Wavenet-A to D, vi-VN-Chirp3-HD-Achernar (FEMALE). French (France) fr-FR: fr-FR-Neural2-F (FEMALE), fr-FR-Neural2-G (MALE), fr-FR-Studio-A, fr-FR-Studio-D."
+    }
+  ]
+}

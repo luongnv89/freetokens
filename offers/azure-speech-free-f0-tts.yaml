@@ -1,0 +1,19 @@
+# Verified 2026-11-05 against https://azure.microsoft.com/en-us/pricing/details/cognitive-services/speech-services/
+# (Free (F0) table: "Text to Speech (per character billing) | Neural |
+# 0.5 million characters free per month")
+# Voices per https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts
+# (e.g. vi-VN-HoaiMyNeural (Female), vi-VN-NamMinhNeural (Male),
+# fr-FR-DeniseNeural (Female), fr-FR-HenriNeural (Male)).
+# Publishing terms unclear for F0: neither page says whether F0 audio may be
+# published; a Microsoft Q&A answer (learn.microsoft.com/en-us/answers/questions/5987029)
+# says the audio output-use rights come with the paid tier.
+title: Azure Speech Free (F0) — Neural Text to Speech
+provider: Microsoft
+category: voice
+amount: 0.5 million neural text-to-speech characters free per month on the Azure Speech Free (F0) tier; publishing rights for F0 audio unclear (Microsoft Q&A ties output-use rights to the paid tier)
+expiry_date: null
+source_url: https://azure.microsoft.com/en-us/pricing/details/cognitive-services/speech-services/
+verified_date: 2026-11-05
+verification: social_proof
+review_status: under-review
+signup: required

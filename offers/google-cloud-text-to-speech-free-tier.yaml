@@ -1,0 +1,18 @@
+# Verified 2026-11-05 against https://cloud.google.com/text-to-speech/pricing
+# ("You must enable billing to use Text-to-Speech, and will be automatically
+# charged if your usage exceeds the number of free characters allowed per
+# month." Free usage limit: Chirp 3: HD "0 to 1 million characters"; WaveNet
+# "0 to 4 million"; Studio "0 to 1 million"; Standard "0 to 4 million";
+# Neural2 "0 to 1 million"; Polyglot (Preview) "0 to 1 million".)
+# Publishing terms unclear: neither the pricing page nor https://cloud.google.com/terms
+# says anything either way about publishing free-tier audio.
+title: Google Cloud Text-to-Speech Free Tier
+provider: Google Cloud
+category: voice
+amount: Free characters every month — 4M each on Standard and WaveNet voices, 1M each on Neural2, Studio, Chirp 3 HD and Polyglot voices; billing must be enabled; publishing rights for the audio not stated
+expiry_date: null
+source_url: https://cloud.google.com/text-to-speech/pricing
+verified_date: 2026-11-05
+verification: social_proof
+review_status: under-review
+signup: required
