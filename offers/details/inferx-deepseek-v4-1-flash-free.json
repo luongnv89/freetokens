@@ -1,0 +1,22 @@
+{
+  "summary": "InferX's endpoint pricing page shows the DeepSeek V4.1 Flash 1017 Basic endpoint at $0 for input, output and cached input tokens (100% off), with a 262,144-token context. The page marks it as a free promotional model and does not state an end date. Starting requires an InferX account (Start Free links to the model.inferx.net login).",
+  "claim_steps": [
+    "Open inferx.net and choose Start Free",
+    "Sign in or create an InferX account",
+    "Use the DeepSeek V4.1 Flash 1017 Basic endpoint"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://inferx.net/pricing/endpoints",
+      "title": "Endpoint Pricing | InferX",
+      "text": "DeepSeek V4.1 Flash 1017 is live — free. DeepSeek V4.1 Flash 1017 Basic: Input $0 (100% off), Output $0 (100% off), Cached input $0 (100% off), Context 262,144. Free promotional models show their original rate crossed out with the active InferX price."
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "InferX, DeepSeek V4.1 Flash 1017 Basic: $0 per 1M input, output and cached input tokens. Not published (\"until further notice\"). Oct 31, 2026 (post); verified Nov 2, 2026."
+    }
+  ]
+}

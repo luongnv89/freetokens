@@ -2,11 +2,61 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-04T03:42:06Z — 121 of 233 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-05T03:18:23Z — 121 of 238 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### SCNet MaaS New-User Pack — 10M GLM-5.3-Flash Tokens
+- Provider: SCNet
+- Category: api_provider
+- Amount: 10,000,000 free GLM-5.3-Flash tokens for accounts newly registered on SCNet during the campaign; one claim per account; tokens valid 30 days after credit; limited supply, first come first served; model may be swapped based on supply; usage after the gift is deducted from cash balance
+- Status: active — enrollment deadline: 2026-11-10
+- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.scnet.cn/home/subject/maas/index.html
+- Page: https://freetokens.custats.info/offers/scnet-maas-new-user-10m-tokens.html
+- Summary: SCNet (超算互联网) runs a MaaS special-offer campaign from 2026-08-13 00:00 to 2026-11-10 23:59. Accounts first registered on SCNet during the campaign can claim a free 10,000,000-token GLM-5.3-Flash pack (1024K context) once per account; it is credited immediately and valid for 30 days. Total supply is limited, first come first served. The granted model may be changed to another specification based on supply. Gifted tokens are used first; after they run out, the cash balance is charged automatically, so stop before the gift is used up to avoid charges.
+- Claim steps: Register a new SCNet account during the campaign period. | On the MaaS campaign page, click 免费领取 (claim for free) on the 10,000,000-token new-user pack; tokens are credited immediately. | Use the tokens within 30 days; stop before they run out to avoid cash-balance charges.
+### Qiniu Cloud Conatus Free — 100M Tokens per Day
+- Provider: Qiniu Cloud
+- Category: api_provider
+- Amount: 100M free tokens per day on the qiniu/conatus-free model for logged-in, real-name-verified users (1B per day after a single credited top-up over ¥100); quota resets daily at 00:00 and unused quota does not carry over
+- Status: active — enrollment deadline: 2026-11-30
+- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.qiniu.com/ai/free-models/conatus-2026
+- Page: https://freetokens.custats.info/offers/qiniu-cloud-conatus-free.html
+- Summary: Qiniu Cloud's Conatus Free event (model ID qiniu/conatus-free) runs from Oct 24, 2026 00:00 to Nov 30, 2026 23:59. Logged-in users who complete real-name verification get 100 million free tokens per day; a single credited top-up over ¥100 raises this to 1 billion per day (multiple top-ups do not add up). Quota resets daily at 00:00 and does not carry over. Unverified or logged-out users get 0 tokens. All API keys under one account share the quota, and calls stop when it is used up. No separate event application is needed.
+- Claim steps: Log in to your Qiniu Cloud account and complete real-name verification in the console | Create an API key on the console's model page (all keys on the account share the free quota) | Call qiniu/conatus-free through the unified API
+### Recursive Flint Free on OpenRouter
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free recursive/flint-v1.0:free inference at $0 prompt and completion (262K context; 40B-total / 2.5B-active MoE for coding agents)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/api/v1/models/recursive/flint-v1.0:free/endpoints
+- Page: https://freetokens.custats.info/offers/openrouter-flint-v1-0-free.html
+- Summary: OpenRouter lists Recursive: Flint (free), recursive/flint-v1.0:free, served by Recursive at $0 for prompt and completion tokens with a 262,144-token context and up to 235,929 completion tokens. Flint is an open-weight mixture-of-experts model from Recursive with about 2.5B active of 40B total parameters, built for coding agents. No end date is published.
+- Claim steps: Create an OpenRouter account and API key | Call the model recursive/flint-v1.0:free
+### InferX — DeepSeek V4.1 Flash 1017 Basic Free
+- Provider: InferX
+- Category: api_provider
+- Amount: DeepSeek V4.1 Flash 1017 Basic endpoint free: $0 per 1M input, output and cached input tokens (100% off promotional pricing, 262,144-token context); end date not published
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://inferx.net/pricing/endpoints
+- Page: https://freetokens.custats.info/offers/inferx-deepseek-v4-1-flash-free.html
+- Summary: InferX's endpoint pricing page shows the DeepSeek V4.1 Flash 1017 Basic endpoint at $0 for input, output and cached input tokens (100% off), with a 262,144-token context. The page marks it as a free promotional model and does not state an end date. Starting requires an InferX account (Start Free links to the model.inferx.net login).
+- Claim steps: Open inferx.net and choose Start Free | Sign in or create an InferX account | Use the DeepSeek V4.1 Flash 1017 Basic endpoint
+### Articul8 Bivia — 1B Free Tokens for Early Adopters
+- Provider: Articul8 AI
+- Category: api_provider
+- Amount: 1 billion free tokens for the first 10,000 early adopters of the Bivia decision-model API; no subscription required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://articul8.ai/bivia/
+- Page: https://freetokens.custats.info/offers/articul8-bivia-1b-free-tokens.html
+- Summary: Bivia by Articul8 is a compact multimodal decision model called over HTTP or via SDKs (Python, Node.js, Go, Rust), also offered as an MCP server/CLI, desktop app, browser extension and Workspace add-on. Its launch offer gives the first 10,000 early adopters 1 billion tokens free with no subscription. Listed pricing is $0.042 per million input tokens and $0 for output tokens. The page states no end date and no further eligibility terms.
+- Claim steps: Sign up on the Articul8 platform (app.articul8.ai registration) and create a key. | Grab a key and make your first call in under five minutes.
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1166,56 +1216,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/inferall-free-nim-models.html
 - Summary: InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. The current pricing FAQ says open models then stay free at 25 calls a day (reset 00:00 UTC), and a one-time $5 activation (which becomes spendable balance, not a fee) raises that to the free plan's 50 chat calls a day. As of 2026-10-27 the Free plan card says the same, but the Activation card still calls the $5 the "cheapest path to unlock ongoing free use", so the no-payment 25/day allowance needs confirmation. The 10+ NIM open-source models (Nemotron, GLM 5.3 and others; consult the live catalog) are $0 input/output within daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate per day. Catalog presence and zero listed prices are not a redeemed inference test.
 - Claim steps: Create an account and get an API key at inferall.ai/keys — no card for the first 25 NIM calls. | Check https://api.inferall.ai/ai/v1/models for currently listed $0 NIM model IDs, then call the OpenAI-compatible or Anthropic-compatible endpoint with one of those IDs. | After the 25-call trial, the Free card and FAQ say open models stay free at 25 calls a day (reset 00:00 UTC). A one-time $5 activation raises chat to 50 calls a day and becomes spendable balance; the Activation card still says it unlocks ongoing free use.
-### Inception Mercury 2 — 100M Free API Tokens
-- Provider: Inception
-- Category: api_provider
-- Amount: 100 million API tokens (one-time credit, no payment details required)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.inceptionlabs.ai/blog/mercury-2-10x-free-tokens
-- Page: https://freetokens.custats.info/offers/inception-mercury-2-100m-free-tokens.html
-- Summary: New Inception accounts receive a one-time credit of 100 million API tokens shared across available models rather than per model; no payment details are required to start. Current documentation includes Mercury 2.5, Mercury 2, Mercury Edit 2 and Mercury Decide. Mercury Voice is enterprise-gated and requires enablement, so the signup credit is not a guarantee of access to it. The free tier is limited per minute to 1,000 requests, 1,000,000 input tokens and 100,000 output tokens. Add payment information when the shared balance runs low.
-- Claim steps: Create a new account or sign in at platform.inceptionlabs.ai. | Open API Keys and create an Inception API key. | Use the key with the OpenAI-compatible base URL https://api.inceptionlabs.ai/v1 and model mercury-2. | Monitor the shared one-time balance and per-minute free-tier limits; check the current models documentation for supported endpoints and availability. Mercury Voice requires enterprise enablement. Add billing details only if you want paid usage after the free credit.
-### Ideogram Free Plan — Weekly Slow Credits
-- Provider: Ideogram
-- Category: image
-- Amount: Free plan ($0) with weekly slow credits for eligible accounts; amount may vary
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://ideogram.ai/pricing/
-- Page: https://freetokens.custats.info/offers/ideogram-free-plan.html
-- Summary: Ideogram's current official pricing FAQ says eligible free accounts receive weekly credits when signing in with Google, Apple, or Microsoft; the amount may vary, and no fixed free credit number is published. The current comparison table is headed Pay as you go at 1 cent per credit alongside paid subscription plans, rather than a Free/$0 column, so its PAYG concurrency cell should not be attributed to free-account entitlement. Confirm the weekly allowance and available queue/features in your account. AI-powered editing features require priority credits and are not available in the slow queue. No global end date for the FAQ-described weekly free-account credits is stated.
-- Claim steps: Open https://ideogram.ai/pricing/ and review the FAQ about discounts/free trials. Use the site's Sign up or Sign in link; do not select a paid subscription or assume Pay as you go credit purchases are the weekly free-account benefit. | Sign in or create an Ideogram account — sign in with Google, Apple, or Microsoft to be eligible for weekly credits (per the page FAQ). | Check that your eligible account actually shows its weekly free credits, remaining balance and available generation queue/features before generating; the amount may vary. Do not treat the pricing table's Pay as you go concurrency limit as a verified free-account limit. | Wait for the weekly credit refresh to continue generating; note AI-powered editing features require priority credits and are not available in the slow queue.
-### IBM watsonx.ai Free Tier
-- Provider: IBM
-- Category: api_provider
-- Amount: Up to 300,000 foundation-model tokens/month + 20 CUH/month machine-learning tools + 100 text-extraction docs/month
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.ibm.com/products/watsonx-ai/pricing
-- Page: https://freetokens.custats.info/offers/ibm-watsonx-ai-free-tier.html
-- Summary: IBM watsonx.ai's Free Toolbox playground includes up to 300,000 foundation-model tokens per month, up to 20 Compute Usage Hours (CUH) per month of machine-learning tools, and up to 100 text-extraction documents per month.
-- Claim steps: Create an IBM account and start the free trial from https://www.ibm.com/products/watsonx-ai/pricing. | Use the Free Toolbox playground: foundation models up to 300,000 tokens/month, ML tools up to 20 CUH/month, text extraction up to 100 docs/month.
-### HeyGen Voice Turbo Free (OpenRouter)
-- Provider: HeyGen
-- Category: voice
-- Amount: Free heygen/heygen-voice-1-turbo:free text-to-speech at $0 via OpenRouter (10 default voices)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/api/v1/models/heygen/heygen-voice-1-turbo:free/endpoints
-- Page: https://freetokens.custats.info/offers/heygen-voice-turbo-free.html
-- Summary: HeyGen Voice Turbo is a lower-latency version of HeyGen Voice, HeyGen's text-to-speech model. OpenRouter serves a free variant, heygen/heygen-voice-1-turbo:free, that takes text and returns speech at $0. It has 10 default voices (nadine, tabitha, bram, gareth, noelle, meredith, sabrina, lucian, weston, vincent). Users can bring their own HeyGen key to use voice clones.
-- Claim steps: Create an OpenRouter account and API key | Call model heygen/heygen-voice-1-turbo:free through the OpenRouter API with text input and a voice
-### Hetzner Experiments Inference API
-- Provider: Hetzner
-- Category: api_provider
-- Amount: Free OpenAI-compatible inference while in experimental status (Qwen3.6-35B-A3B-FP8, Qwen3.8-27B); 4M input / 100k output tokens per 60s, 10 req/60s
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-04 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.hetzner.com/general/company-and-policy/experiments/inference/
-- Page: https://freetokens.custats.info/offers/hetzner-experiments-inference-api.html
-- Summary: Hetzner's experimental Inference API exposes open-weight LLMs through an OpenAI-compatible REST API (base URL https://inference.hetzner.com/api/v1 exposing /v1/models, /v1/completions and /v1/chat/completions) and is free of charge while in experimental status — performance and availability are not guaranteed and it is not intended for production. Current models: Qwen/Qwen3.6-35B-A3B-FP8 (MoE, 35B total / 3B active, vision) and Qwen3.8-27B (dense), both with 262,144-token context and text+image input. Rate limits per API key: 4M input and 100k output tokens per 60 seconds, plus 10 requests per 60 seconds; the /v1/models response is the definitive live model list.
-- Claim steps: Create a Hetzner account and API token at experiments.hetzner.com (per curator input; docs confirm Bearer-token auth; no card mentioned). | Call https://inference.hetzner.com/api/v1 with any OpenAI-compatible SDK or curl using 'Authorization: Bearer <token>'. | List live models via GET /v1/models — the response is the definitive model list during the experiment.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
