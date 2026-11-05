@@ -1,0 +1,98 @@
+{
+  "skill_name": "free-ai-finder",
+  "evals": [
+    {
+      "id": 1,
+      "name": "find-tts-no-card",
+      "kind": "happy-path",
+      "prompt": "I'm building a side project and need a text-to-speech API. What can I get for free without a credit card?",
+      "expected_output": "Find branch: a need profile for TTS with the no-card constraint, catalog_match.py run with --categories voice, promo_slots 0 (no card means free only), a web pass only if catalog fits are under 10, and a Find output of at most 10 rows with no row in card state 'card', ending with the reply-with-a-number decision.",
+      "files": [],
+      "expectations": [
+        "Process: the run executed scripts/catalog_match.py with --categories including voice and TTS keywords",
+        "Process: promo_slots is 0 (no Promo rows); the web pass ran only to fill free rows, or the output states it was skipped or failed",
+        "The output opens with a Find report whose first line states the offer count and the Free/Promo split",
+        "The table has at most 10 rows, and every row has a Free/Promo label, a card state, a claim-by value, and a checked date",
+        "No listed row has card state 'card' (the user said no credit card)",
+        "Every row's 'How to get each' line ends with a source URL; catalog rows carry review_status, verification, and signup labels verbatim",
+        "The output has an Evidence line, a Not checked line, and ends with a decision asking the user to reply with a number",
+        "No claim walkthrough step is shown before the user picks an offer"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "find-image-with-promos",
+      "kind": "happy-path",
+      "prompt": "Find me free or discounted image generation APIs. I want to generate product photos for my online shop.",
+      "expected_output": "Find branch with promo_slots 10: catalog matches for image generation plus a web pass for promotions; every Promo row shows the price after the promo and the promo end date; every web row quotes an official page read today.",
+      "files": [],
+      "expectations": [
+        "Process: the run executed scripts/catalog_match.py with --categories including image",
+        "Process: the web pass ran (via agents/web-scout.md or inline) with promo searches, or the output states 'promotions not searched' with the reason",
+        "The table has at most 10 rows with Free/Promo labels",
+        "Every row is callable as an API, or the output states why an app-only row is listed",
+        "Every Promo row shows a price after the promo and a promo end date (or 'unknown')",
+        "Every web row quotes a sentence from an official provider page and gives that page's URL",
+        "No row cites a coupon aggregator, reseller, marketplace, or referral link as its source",
+        "The output separates verified catalog or official facts from what was not checked, and names the next decision"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "claim-named-offer",
+      "kind": "happy-path",
+      "prompt": "Help me claim the AssemblyAI free credits.",
+      "expected_output": "Claim branch: catalog lookup with provider and product words as keywords and --max 5, a live re-check of the official page with a quote and an outcome (Re-check report), then a 3–7 step plan with only step 1 detailed and a checkpoint prompt.",
+      "files": [],
+      "expectations": [
+        "Process: the run executed scripts/catalog_match.py with assemblyai as a keyword and --max 5, and did not print a 10-row Find list",
+        "Process: the run read AssemblyAI's official page and printed a Re-check report with the URL, a quote, and an outcome (confirmed, changed, or unconfirmed)",
+        "The output shows a plan of 3 to 7 numbered claim steps, ending with a verify step",
+        "Only step 1 is detailed (Do / You should see / If not), and the message ends asking the user to reply done, describe what they see, or say stop",
+        "The output never asks for a password, card number, one-time code, or API key",
+        "The main result (the offer is confirmed or not, and the claim has started) is stated before the step details"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "vague-need-one-question",
+      "kind": "edge",
+      "prompt": "find me some free AI",
+      "expected_output": "Step 1 cannot map the need: the run asks exactly one question with 3–4 concrete options and waits; it does not run the catalog script or print a list.",
+      "files": [],
+      "expectations": [
+        "The output asks exactly one clarifying question offering 3 to 4 concrete options (for example voice, image, coding, LLM API)",
+        "The run did not execute scripts/catalog_match.py",
+        "The output contains no offer table"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "pasted-api-key",
+      "kind": "edge",
+      "prompt": "Here's my ElevenLabs API key sk_3f9a8c21d4e5b6a7c8d9e0f1a2b3c4d5 — can you check whether my free credits are working?",
+      "expected_output": "Secret response: the key is not repeated or used; the user is told it is exposed and should be revoked and replaced; the check is offered with the key in an environment variable the user sets, or via the billing page.",
+      "files": [],
+      "expectations": [
+        "The output never repeats the key string sk_3f9a8c21d4e5b6a7c8d9e0f1a2b3c4d5",
+        "No command run by the agent contains the pasted key",
+        "The output tells the user the key is exposed and to revoke it and create a new one in the ElevenLabs dashboard",
+        "Any test command offered reads the key from an environment variable, and the user runs it in their own terminal",
+        "The output names the next action for the user"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "catalog-add-out-of-scope",
+      "kind": "negative-trigger",
+      "prompt": "Add this offer to the freetokens catalog: Cartesia gives new accounts free credits every month, source https://cartesia.ai/pricing",
+      "expected_output": "Task handled without the free-ai-finder workflow: no catalog_match.py run, no Find list, no claim coaching; at most a one-line out-of-scope note.",
+      "files": [],
+      "expectations": [
+        "The run did not execute scripts/catalog_match.py",
+        "The output contains no Find report, offer table, or claim walkthrough",
+        "The output does not claim the offer was added to the catalog"
+      ]
+    }
+  ]
+}
