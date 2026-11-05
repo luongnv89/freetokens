@@ -30,7 +30,13 @@
       "type": "link",
       "url": "https://openrouter.ai/api/v1/models/fish-audio/s2.1-pro-free:free/endpoints",
       "title": "OpenRouter API — fish-audio/s2.1-pro-free:free endpoints",
-      "text": "Fish Audio: S2.1 Pro Free (free) — \"the no-cost variant of Fish Audio S2.1 Pro, intended for testing, prototyping, and low-volume applications\". One endpoint, provider Fish Audio, pricing prompt 0, completion 0; request path /api/v1/audio/speech."
+      "text": "Fish Audio: S2.1 Pro Free (free) — \"the no-cost variant of Fish Audio S2.1 Pro, intended for testing, prototyping, and low-volume applications\". One endpoint, provider Fish Audio, pricing prompt 0, completion 0."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models?output_modalities=speech",
+      "title": "OpenRouter API — speech models list",
+      "text": "id: fish-audio/s2.1-pro-free:free, pricing prompt 0, completion 0, endpoints: [\"/api/v1/audio/speech\"]."
     },
     {
       "type": "link",
