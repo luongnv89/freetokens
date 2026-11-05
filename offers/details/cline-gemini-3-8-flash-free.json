@@ -37,6 +37,12 @@
       "url": "https://docs.cline.bot/getting-started/authorizing-with-cline",
       "title": "Authorization - Cline",
       "text": "Cline (usage-billing) (recommended): sign in with Google/GitHub/email, no API key setup. Built-in billing and free model options."
+    },
+    {
+      "type": "link",
+      "url": "https://cdn.syndication.twimg.com/tweet-result?id=2103165327815450815&token=a",
+      "title": "@cline post on X (syndication JSON, id 2103165327815450815)",
+      "text": "Gemini 3.8 Flash is free in Cline. It scores 41 on the Artificial Analysis Intelligence Index, the highest of any model in its price tier. 291 tok/s, 1M context"
     }
   ]
 }

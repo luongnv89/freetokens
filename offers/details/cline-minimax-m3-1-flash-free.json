@@ -25,6 +25,12 @@
       "url": "https://docs.cline.bot/getting-started/free-models",
       "title": "Cline Free Models - Cline",
       "text": "Free model promotions are offered on a rotating, limited-time basis. Free models are available to any user with a Cline account. Free model usage is not supported through the Cline API. Free model usage may be used to help improve model performance and quality."
+    },
+    {
+      "type": "link",
+      "url": "https://cdn.syndication.twimg.com/tweet-result?id=2112220504258224605&token=a",
+      "title": "@cline post on X (syndication JSON, id 2112220504258224605)",
+      "text": "MiniMax M3.1 Flash goes toe-to-toe with Opus and GPT on coding at ~25x lower cost. ... Free in Cline now!"
     }
   ]
 }
