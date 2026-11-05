@@ -1,5 +1,5 @@
 {
-  "summary": "Azure Speech's Free (F0) pricing tier includes 0.5 million neural text-to-speech characters free per month, using Azure's prebuilt neural voices across many languages, for example vi-VN-HoaiMyNeural and vi-VN-NamMinhNeural for Vietnamese, and fr-FR-DeniseNeural and fr-FR-HenriNeural for French. The same free tier also includes 5 audio hours per month of real-time speech to text. F0 quotas and limits aren't adjustable. The pricing page doesn't say whether audio generated on the free tier may be published, so check Microsoft's terms first.",
+  "summary": "Azure Speech's Free (F0) pricing tier includes 0.5 million neural text-to-speech characters free per month, using Azure's prebuilt neural voices across many languages, for example vi-VN-HoaiMyNeural and vi-VN-NamMinhNeural for Vietnamese, and fr-FR-DeniseNeural and fr-FR-HenriNeural for French. The same free tier also includes 5 audio hours per month of real-time speech to text. F0 quotas and limits aren't adjustable. Publishing terms are unclear for F0: the pricing page doesn't say whether free-tier audio may be published, and a Microsoft Q&A answer says the right to use the generated audio, including commercially, comes with the paid tier. Check Microsoft's Product Terms before publishing F0 audio, and disclose that the voice is synthetic.",
   "claim_steps": [
     "Sign in to the Azure portal with an Azure account.",
     "Create an Azure Speech (Foundry Tools) resource and choose the Free (F0) pricing tier.",
@@ -23,6 +23,12 @@
       "url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-services-quotas-and-limits",
       "title": "Azure Speech quotas and limits",
       "text": "For the Free (F0) pricing tier, see the monthly allowances on the pricing page. The quotas and limits for Free (F0) Azure Speech resources aren't adjustable."
+    },
+    {
+      "type": "link",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/5987029/can-audio-generated-with-azure-text-to-speech-be-p",
+      "title": "Microsoft Q&A — Can audio generated with Azure Text-to-Speech be publicly redistributed?",
+      "text": "If you are using the paid tier of Azure Text-to-Speech with prebuilt neural voices, Microsoft's Product Terms explicitly allow customers to use the generated audio output, including for commercial purposes. ... The service should be used under a paid Azure tier for the applicable output-use rights."
     }
   ]
 }
