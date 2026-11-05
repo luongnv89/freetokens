@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-04T03:42:06Z",
-  "count": 275,
-  "active_count": 233,
-  "expired_count": 42,
+  "generated_at": "2026-11-05T03:10:34Z",
+  "count": 280,
+  "active_count": 239,
+  "expired_count": 41,
   "offers": [
     {
       "slug": "anyscale-100-signup-credits",
@@ -440,6 +440,21 @@
       "status": "active"
     },
     {
+      "slug": "autoclaw-weekly-perks-glm-5-3-flash-tokens",
+      "title": "AutoClaw Weekly Perks — 40M Tokens (up to 80M)",
+      "provider": "AutoClaw (Z.ai)",
+      "category": "coding",
+      "amount": "Log in to AutoClaw between Oct 31 and Nov 8 (UTC+8) to claim 40M Tokens (4,000 credits), one claim per account; claim last week's unclaimed reward too for up to 80M Tokens (8,000 credits) in total. These credits expire Nov 8 at 23:59 (UTC+8).",
+      "expiry_date": "2026-11-08",
+      "source_url": "https://autoclaw.z.ai/blog/news/Weekly-Perks-M10W2/",
+      "verified_date": "2026-11-05",
+      "added_date": "2026-10-13",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
       "slug": "brave-search-api-monthly-free-credits",
       "title": "Brave Search API — $5 Free Credits Every Month",
       "provider": "Brave",
@@ -541,21 +556,6 @@
       "added_date": "2026-10-13",
       "verification": "social_proof",
       "review_status": "to-be-verified",
-      "signup": "required",
-      "status": "expired"
-    },
-    {
-      "slug": "autoclaw-weekly-perks-glm-5-3-flash-tokens",
-      "title": "AutoClaw Weekly Perks — 8M GLM-5.3-Flash Tokens Daily",
-      "provider": "AutoClaw (Z.ai)",
-      "category": "coding",
-      "amount": "Log in daily Oct 13-16 to claim 8M GLM-5.3-Flash tokens (800 Credits) per day, up to 32M total; each day's reward expires at midnight (UTC+8) on the day it is claimed. Paid members get extra daily rewards.",
-      "expiry_date": "2026-10-16",
-      "source_url": "https://autoclaw.z.ai/blog/news/Weekly-Perks-M10W2/",
-      "verified_date": "2026-10-13",
-      "added_date": "2026-10-13",
-      "verification": "social_proof",
-      "review_status": "under-review",
       "signup": "required",
       "status": "expired"
     },
@@ -4128,6 +4128,81 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "articul8-bivia-1b-free-tokens",
+      "title": "Articul8 Bivia — 1B Free Tokens for Early Adopters",
+      "provider": "Articul8 AI",
+      "category": "api_provider",
+      "amount": "1 billion free tokens for the first 10,000 early adopters of the Bivia decision-model API; no subscription required",
+      "expiry_date": null,
+      "source_url": "https://articul8.ai/bivia/",
+      "verified_date": "2026-11-05",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "inferx-deepseek-v4-1-flash-free",
+      "title": "InferX — DeepSeek V4.1 Flash 1017 Basic Free",
+      "provider": "InferX",
+      "category": "api_provider",
+      "amount": "DeepSeek V4.1 Flash 1017 Basic endpoint free: $0 per 1M input, output and cached input tokens (100% off promotional pricing, 262,144-token context); end date not published",
+      "expiry_date": null,
+      "source_url": "https://inferx.net/pricing/endpoints",
+      "verified_date": "2026-11-05",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-flint-v1-0-free",
+      "title": "Recursive Flint Free on OpenRouter",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free recursive/flint-v1.0:free inference at $0 prompt and completion (262K context; 40B-total / 2.5B-active MoE for coding agents)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/api/v1/models/recursive/flint-v1.0:free/endpoints",
+      "verified_date": "2026-11-05",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "qiniu-cloud-conatus-free",
+      "title": "Qiniu Cloud Conatus Free — 100M Tokens per Day",
+      "provider": "Qiniu Cloud",
+      "category": "api_provider",
+      "amount": "100M free tokens per day on the qiniu/conatus-free model for logged-in, real-name-verified users (1B per day after a single credited top-up over ¥100); quota resets daily at 00:00 and unused quota does not carry over",
+      "expiry_date": "2026-11-30",
+      "source_url": "https://www.qiniu.com/ai/free-models/conatus-2026",
+      "verified_date": "2026-11-05",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "scnet-maas-new-user-10m-tokens",
+      "title": "SCNet MaaS New-User Pack — 10M GLM-5.3-Flash Tokens",
+      "provider": "SCNet",
+      "category": "api_provider",
+      "amount": "10,000,000 free GLM-5.3-Flash tokens for accounts newly registered on SCNet during the campaign; one claim per account; tokens valid 30 days after credit; limited supply, first come first served; model may be swapped based on supply; usage after the gift is deducted from cash balance",
+      "expiry_date": "2026-11-10",
+      "source_url": "https://www.scnet.cn/home/subject/maas/index.html",
+      "verified_date": "2026-11-05",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

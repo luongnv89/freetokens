@@ -1,0 +1,27 @@
+{
+  "summary": "OpenRouter lists Recursive: Flint (free), recursive/flint-v1.0:free, served by Recursive at $0 for prompt and completion tokens with a 262,144-token context and up to 235,929 completion tokens. Flint is an open-weight mixture-of-experts model from Recursive with about 2.5B active of 40B total parameters, built for coding agents. No end date is published.",
+  "claim_steps": [
+    "Create an OpenRouter account and API key",
+    "Call the model recursive/flint-v1.0:free"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/recursive/flint-v1.0:free/endpoints",
+      "title": "Recursive: Flint (free)",
+      "text": "id: recursive/flint-v1.0:free; name: Recursive: Flint (free); Flint is an open-weight mixture-of-experts model from Recursive, with about 2.5B active parameters out of 40B total. Endpoint Recursive | recursive/flint-v1.0-20261021:free: pricing prompt \"0\", completion \"0\"; context_length 262144; max_completion_tokens 235929."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/recursive/flint-v1.0:free",
+      "title": "OpenRouter APIs — Recursive: Flint (free) (recursive/flint-v1.0)",
+      "text": "Recursive: Flint (free) (recursive/flint-v1.0)"
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "Recursive, Flint (recursive/flint-v1.0:free): $0 for prompt and completion tokens. End date not published. Date shown Oct 22, 2026."
+    }
+  ]
+}

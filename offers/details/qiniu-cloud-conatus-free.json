@@ -1,0 +1,22 @@
+{
+  "summary": "Qiniu Cloud's Conatus Free event (model ID qiniu/conatus-free) runs from Oct 24, 2026 00:00 to Nov 30, 2026 23:59. Logged-in users who complete real-name verification get 100 million free tokens per day; a single credited top-up over ¥100 raises this to 1 billion per day (multiple top-ups do not add up). Quota resets daily at 00:00 and does not carry over. Unverified or logged-out users get 0 tokens. All API keys under one account share the quota, and calls stop when it is used up. No separate event application is needed.",
+  "claim_steps": [
+    "Log in to your Qiniu Cloud account and complete real-name verification in the console",
+    "Create an API key on the console's model page (all keys on the account share the free quota)",
+    "Call qiniu/conatus-free through the unified API"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.qiniu.com/ai/free-models/conatus-2026",
+      "title": "Conatus Free",
+      "text": "已认证用户每日 1 亿 Token，任意一笔大于 100 元且已到账的充值（多笔不累计）后提升至每日 10 亿 Token。开始 2026 年 10 月 24 日 00:00；结束 2026 年 11 月 30 日 23:59。登录并完成实名认证后可免费调用，仅支持活动免费额度，额度用完即停止调用。"
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "Qiniu Cloud, Conatus Free (qiniu/conatus-free): 100M tokens per day (1B after a top-up over ¥100). End: Nov 30, 2026, 23:59 (UTC+8). Date shown Oct 25, 2026."
+    }
+  ]
+}

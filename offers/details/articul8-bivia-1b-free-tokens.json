@@ -1,0 +1,21 @@
+{
+  "summary": "Bivia by Articul8 is a compact multimodal decision model called over HTTP or via SDKs (Python, Node.js, Go, Rust), also offered as an MCP server/CLI, desktop app, browser extension and Workspace add-on. Its launch offer gives the first 10,000 early adopters 1 billion tokens free with no subscription. Listed pricing is $0.042 per million input tokens and $0 for output tokens. The page states no end date and no further eligibility terms.",
+  "claim_steps": [
+    "Sign up on the Articul8 platform (app.articul8.ai registration) and create a key.",
+    "Grab a key and make your first call in under five minutes."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://articul8.ai/bivia/",
+      "title": "Bivia by Articul8. The decision layer for your AI.",
+      "text": "Launch offer · First 10,000 early adopters Get 1 billion tokens free No subscription Claim yours →"
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "Articul8 AI, Bivia: Up to 1B tokens for the first 10,000 early adopters. End date not published. Date shown Oct 31, 2026."
+    }
+  ]
+}

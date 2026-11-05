@@ -1,0 +1,13 @@
+# Hunted 2026-11-05 by offer-hunter; verified against https://www.qiniu.com/ai/free-models/conatus-2026
+# ("已认证用户每日 1 亿 Token，任意一笔大于 100 元且已到账的充值（多笔不累计）后提升至每日 10 亿 Token。")
+# Lead: https://freeai.alexai.top/
+title: Qiniu Cloud Conatus Free — 100M Tokens per Day
+provider: Qiniu Cloud
+category: api_provider
+amount: 100M free tokens per day on the qiniu/conatus-free model for logged-in, real-name-verified users (1B per day after a single credited top-up over ¥100); quota resets daily at 00:00 and unused quota does not carry over
+expiry_date: 2026-11-30
+source_url: https://www.qiniu.com/ai/free-models/conatus-2026
+verified_date: 2026-11-05
+verification: social_proof
+review_status: under-review
+signup: required
