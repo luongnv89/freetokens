@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-05T03:10:34Z — 121 of 239 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-05T03:18:23Z — 121 of 238 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -47,16 +47,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/inferx-deepseek-v4-1-flash-free.html
 - Summary: InferX's endpoint pricing page shows the DeepSeek V4.1 Flash 1017 Basic endpoint at $0 for input, output and cached input tokens (100% off), with a 262,144-token context. The page marks it as a free promotional model and does not state an end date. Starting requires an InferX account (Start Free links to the model.inferx.net login).
 - Claim steps: Open inferx.net and choose Start Free | Sign in or create an InferX account | Use the DeepSeek V4.1 Flash 1017 Basic endpoint
-### AutoClaw Weekly Perks — 40M Tokens (up to 80M)
-- Provider: AutoClaw (Z.ai)
-- Category: coding
-- Amount: Log in to AutoClaw between Oct 31 and Nov 8 (UTC+8) to claim 40M Tokens (4,000 credits), one claim per account; claim last week's unclaimed reward too for up to 80M Tokens (8,000 credits) in total. These credits expire Nov 8 at 23:59 (UTC+8).
-- Status: active — enrollment deadline: 2026-11-08
-- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://autoclaw.z.ai/blog/news/Weekly-Perks-M10W2/
-- Page: https://freetokens.custats.info/offers/autoclaw-weekly-perks-glm-5-3-flash-tokens.html
-- Summary: AutoClaw Weekly Perks (Oct 12-16, UTC+8): on Oct 12 all users could claim 100M GLM-5.3-Flash tokens (expired at midnight Oct 12). From Oct 13 to 16, all users can log in each day to claim 8M GLM-5.3-Flash tokens (800 Credits); each daily reward expires at midnight on the day of claim. AutoClaw Monthly Subscription, Group Subscription and GLM Coding Plan Individual members can claim an additional daily reward by tier (5M-80M tokens). One claim per account per day; AutoClaw may revoke rewards for fraud or automated abuse.
-- Claim steps: Log in to AutoClaw after 12:00 AM (UTC+8) each day from Oct 13 to Oct 16 | Claim the daily 8M GLM-5.3-Flash token reward and use it before midnight that day
 ### Articul8 Bivia — 1B Free Tokens for Early Adopters
 - Provider: Articul8 AI
 - Category: api_provider
@@ -1216,6 +1206,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/inkling-free-models.html
 - Summary: Thinking Machines offers Inkling and Inkling Small on OpenRouter at $0 prompt and completion, with a 1M-token context window. The free endpoints are restricted to agentic-harness use, not unrestricted chat. Do not send confidential information or personal data, including voices or images of people's faces. Prompts and outputs are logged and used for model training/improvement and to improve products and services; session data is disassociated from account identifiers before that use. Use constitutes agreement to the TML Free Research API terms. No hard end date is listed.
 - Claim steps: Sign in to OpenRouter at openrouter.ai. | Configure an agentic harness with thinkingmachines/inkling:free or thinkingmachines/inkling-small:free; the free endpoints are only available for agentic-harness use. | Review the TML Free Research API terms linked on the model page. Using the endpoint agrees to logging prompts and outputs for model training/improvement and service improvement. | Never send confidential information or personal data, including voices or images of people's faces. | Send eligible harness requests within OpenRouter's free-model limits; prompt and completion prices are $0.
+### InferAll Free — 25 NIM Trial + $0 OSS Models
+- Provider: InferAll
+- Category: api_provider
+- Amount: 25 free NVIDIA NIM calls on signup (no card); $0 in/out on 10+ NIM open models within daily caps — Free card and FAQ say 25 calls/day free after the trial, 50 chat/day after a one-time $5 activation (Activation card still says $5 unlocks ongoing free use)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-04 — review_status=to-be-verified · verification=social_proof · signup=required
+- Source: https://inferall.ai/pricing
+- Page: https://freetokens.custats.info/offers/inferall-free-nim-models.html
+- Summary: InferAll is an OpenAI/Anthropic-compatible AI gateway. New accounts get 25 free NVIDIA NIM calls with no card. The current pricing FAQ says open models then stay free at 25 calls a day (reset 00:00 UTC), and a one-time $5 activation (which becomes spendable balance, not a fee) raises that to the free plan's 50 chat calls a day. As of 2026-10-27 the Free plan card says the same, but the Activation card still calls the $5 the "cheapest path to unlock ongoing free use", so the no-payment 25/day allowance needs confirmation. The 10+ NIM open-source models (Nemotron, GLM 5.3 and others; consult the live catalog) are $0 input/output within daily caps of 50 chat / 100 text / 20 image-analyze / 10 image-generate / 5 video-generate per day. Catalog presence and zero listed prices are not a redeemed inference test.
+- Claim steps: Create an account and get an API key at inferall.ai/keys — no card for the first 25 NIM calls. | Check https://api.inferall.ai/ai/v1/models for currently listed $0 NIM model IDs, then call the OpenAI-compatible or Anthropic-compatible endpoint with one of those IDs. | After the 25-call trial, the Free card and FAQ say open models stay free at 25 calls a day (reset 00:00 UTC). A one-time $5 activation raises chat to 50 calls a day and becomes spendable balance; the Activation card still says it unlocks ongoing free use.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

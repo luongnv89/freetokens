@@ -1,14 +1,13 @@
-# Refreshed 2026-11-05 by offer-hunter against https://autoclaw.z.ai/blog/news/M11W1/ ("Log in to AutoClaw during the event to claim 4,000 credits ... claim a new 40M Tokens (4,000 credits) reward ... Event period: October 31, 00:00 – November 8, …")
 # Hunted 2026-10-13 by offer-hunter; verified against https://autoclaw.z.ai/blog/news/Weekly-Perks-M10W2/
 # ("Oct 13-16, Tuesday-Friday | All users | Log in each day to claim 8 Million GLM-5.3-Flash Tokens (800 Credits) | Each daily reward expires at midnight on the day of claim")
 # Lead: https://x.com/nahid_pro09/status/2101883347412930561
-title: AutoClaw Weekly Perks — 40M Tokens (up to 80M)
+title: AutoClaw Weekly Perks — 8M GLM-5.3-Flash Tokens Daily
 provider: AutoClaw (Z.ai)
 category: coding
-amount: Log in to AutoClaw between Oct 31 and Nov 8 (UTC+8) to claim 40M Tokens (4,000 credits), one claim per account; claim last week's unclaimed reward too for up to 80M Tokens (8,000 credits) in total. These credits expire Nov 8 at 23:59 (UTC+8).
-expiry_date: 2026-11-08
+amount: Log in daily Oct 13-16 to claim 8M GLM-5.3-Flash tokens (800 Credits) per day, up to 32M total; each day's reward expires at midnight (UTC+8) on the day it is claimed. Paid members get extra daily rewards.
+expiry_date: 2026-10-16
 source_url: https://autoclaw.z.ai/blog/news/Weekly-Perks-M10W2/
-verified_date: 2026-11-05
+verified_date: 2026-10-13
 verification: social_proof
 review_status: under-review
 signup: required
