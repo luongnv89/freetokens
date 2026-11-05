@@ -39,6 +39,18 @@
       "url": "https://docs.mindshub.ai/inference/models/",
       "title": "MindsHub Inference models — API aliases",
       "text": "mindshub_air MindsHub Air Tracks the newest release. No fixed alias of its own. ... jev Jev Decision model. Currently jev-1.13.0; jev-latest is an accepted synonym. Uses /v1/decisions."
+    },
+    {
+      "type": "link",
+      "url": "https://www.mindshub.ai/pricing",
+      "title": "Plans and pricing: reduce your AI spend — MindsHub",
+      "text": "Always free, for knowledge work with agents. $0 / month. No credit card required. The MindsHub Air model ... for non-coding work. Classify, route and score with Jev. Daily limits under fair use."
+    },
+    {
+      "type": "link",
+      "url": "https://www.mindshub.ai/fair-use-policy",
+      "title": "Fair-use policy — MindsHub",
+      "text": "MindsDB protects the free tier with daily rate limits and other measures. The limits are not published as numbers."
     }
   ]
 }
