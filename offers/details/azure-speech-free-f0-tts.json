@@ -1,0 +1,28 @@
+{
+  "summary": "Azure Speech's Free (F0) pricing tier includes 0.5 million neural text-to-speech characters free per month, using Azure's prebuilt neural voices across many languages, for example vi-VN-HoaiMyNeural and vi-VN-NamMinhNeural for Vietnamese, and fr-FR-DeniseNeural and fr-FR-HenriNeural for French. The same free tier also includes 5 audio hours per month of real-time speech to text. F0 quotas and limits aren't adjustable. The pricing page doesn't say whether audio generated on the free tier may be published, so check Microsoft's terms first.",
+  "claim_steps": [
+    "Sign in to the Azure portal with an Azure account.",
+    "Create an Azure Speech (Foundry Tools) resource and choose the Free (F0) pricing tier.",
+    "Copy the resource key and region, then call the text to speech REST API or Speech SDK with a prebuilt neural voice name such as fr-FR-DeniseNeural or vi-VN-HoaiMyNeural."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/speech-services/",
+      "title": "Azure Speech in Foundry Tools pricing",
+      "text": "Free (F0): Speech to Text, Standard: Real-time Transcription: 5 audio hours free per month. Text to Speech (per character billing), Neural: 0.5 million characters free per month."
+    },
+    {
+      "type": "link",
+      "url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts",
+      "title": "Language and voice support for Azure Speech",
+      "text": "vi-VN Vietnamese (Vietnam): vi-VN-HoaiMyNeural (Female), vi-VN-NamMinhNeural (Male). fr-FR French (France): fr-FR-DeniseNeural (Female), fr-FR-HenriNeural (Male), among others."
+    },
+    {
+      "type": "link",
+      "url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-services-quotas-and-limits",
+      "title": "Azure Speech quotas and limits",
+      "text": "For the Free (F0) pricing tier, see the monthly allowances on the pricing page. The quotas and limits for Free (F0) Azure Speech resources aren't adjustable."
+    }
+  ]
+}
