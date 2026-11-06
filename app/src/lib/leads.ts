@@ -70,6 +70,17 @@ export function sourceLabel(source: LeadSource): string {
   }
 }
 
+/**
+ * A lead page's description (#683): its claim, flagged unconfirmed and capped
+ * at 160 chars. One string for the meta tag (prerender.mjs) and the WebPage
+ * JSON-LD, so the two never diverge.
+ */
+export function leadMetaDescription(claim: string): string {
+  const text =
+    claim.length > 160 ? claim.slice(0, 157).trimEnd() + "..." : claim;
+  return `Unconfirmed: ${text}`;
+}
+
 /** Relative href of a lead's own page (#660), from a root-level document. */
 export function leadHref(slug: string): string {
   return `unverified/${slug}.html`;

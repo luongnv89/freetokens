@@ -12,6 +12,10 @@ import type { DetailsMap } from "../lib/offerDetails";
 import type { LeadsIndex } from "../lib/leads";
 import type { Route } from "../routes";
 
+// Shared with prerender.mjs so the lead meta description and its JSON-LD
+// description are one string (#683).
+export { leadMetaDescription } from "../lib/leads";
+
 const index = indexData as OffersIndex;
 // Node-side only: this entry is bundled separately by scripts/prerender.mjs,
 // so the aggregate details map never reaches the client chunk. The client

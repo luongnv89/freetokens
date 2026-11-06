@@ -151,7 +151,9 @@ await build({
 });
 
 try {
-  const { renderRoute } = await import(pathToFileURL(outfile).href);
+  const { renderRoute, leadMetaDescription } = await import(
+    pathToFileURL(outfile).href
+  );
   const indexPath = path.join(distDir, "index.html");
   if (!existsSync(indexPath)) {
     console.error(`error: ${indexPath} not found; run \`vite build\` first`);
@@ -462,15 +464,12 @@ try {
   await rm(leadsDir, { recursive: true, force: true });
   if (leads.length > 0) await mkdir(leadsDir, { recursive: true });
   for (const lead of leads) {
-    const claim = lead.claim.length > 160
-      ? lead.claim.slice(0, 157).trimEnd() + "..."
-      : lead.claim;
     await writeFile(
       path.join(leadsDir, `${lead.slug}.html`),
       fillPage({
         markup: await renderRoute({ page: "lead", slug: lead.slug }, origin),
         title: `${lead.title} (unverified) · Free AI Credits`,
-        description: `Unconfirmed: ${claim}`,
+        description: leadMetaDescription(lead.claim),
         canonical: `${origin}/unverified/${lead.slug}.html`,
         depth: 1,
         page: "lead",

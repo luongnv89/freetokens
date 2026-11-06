@@ -245,12 +245,7 @@ export default function LeadDetailPage({
         </main>
         <SiteFooter depth={1} current="unverified" />
       </div>
-      <StructuredData
-        page="lead"
-        slug={lead?.slug ?? slug}
-        title={lead?.title ?? "Lead not found"}
-        baseUrl={baseUrl}
-      />
+      <StructuredData page="lead" lead={lead ?? null} baseUrl={baseUrl} />
     </>
   );
 }
