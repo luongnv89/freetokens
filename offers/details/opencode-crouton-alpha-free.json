@@ -24,6 +24,12 @@
       "url": "https://cdn.syndication.twimg.com/tweet-result?id=2117717721458843711&token=a",
       "title": "@opencode post on X (syndication JSON, id 2117717721458843711)",
       "text": "Crouton Alpha (stealth model) is free for the next week 1M Context Multi-modal No training on data Limited to certain regions"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models",
+      "text": "Crouton Alpha Free is a stealth model that's free on OpenCode for a limited time. It's not available in the European Union, Afghanistan, Belarus, China (including Hong Kong and Macau),"
     }
   ]
 }

@@ -12,7 +12,7 @@ category: api_provider
 amount: Free OpenAI-compatible API — 5 listed free models (roster rotates), 10 RPM + 60 weighted units/day shared (20 RPM + 120/day with credit), subject to a site-wide 20 RPM cap; no credit card
 expiry_date: null
 source_url: https://bazaarlink.ai/free
-verified_date: 2026-11-05
+verified_date: 2026-11-06
 verification: social_proof
 review_status: under-review
 signup: required
