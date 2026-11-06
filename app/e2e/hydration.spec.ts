@@ -66,6 +66,20 @@ test("unverified page hydrates from its own leads JSON with no React hydration e
   expect(await page.locator("h1").textContent()).toBe("Unverified offers");
 });
 
+test("lead detail page hydrates from the leads JSON with no React hydration errors (#660)", async ({
+  page,
+}) => {
+  const { leads } = JSON.parse(
+    readFileSync(path.join(APP_ROOT, "src/data/unverified.json"), "utf8"),
+  );
+  test.skip(leads.length === 0, "no fresh unverified leads in this build");
+  const errors = collectHydrationErrors(page);
+  await page.goto(`/unverified/${leads[0].slug}.html`);
+  await page.waitForLoadState("networkidle");
+  expect(errors, `hydration errors: ${errors.join(" | ")}`).toEqual([]);
+  expect(await page.locator("h1").textContent()).toBe(leads[0].title);
+});
+
 test("detail page hydrates with no React hydration errors at a localhost origin", async ({
   page,
 }) => {

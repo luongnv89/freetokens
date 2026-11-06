@@ -171,3 +171,20 @@ export function HotBadge() {
     </span>
   );
 }
+
+/**
+ * Status badge for an unverified lead (#660). Same shape and paint as the
+ * offer ReviewStatusBadge for `unverified`, but a lead has no review_status
+ * field — it is unconfirmed by construction, so the badge is fixed.
+ */
+export function UnverifiedLeadBadge() {
+  return (
+    <span
+      className="badge badge-review-status badge-review-status-unverified"
+      title="Spotted in public posts but not confirmed on the provider's own pages. Treat every term as unconfirmed."
+    >
+      {tagIcon("unverified")}
+      <span>unconfirmed</span>
+    </span>
+  );
+}

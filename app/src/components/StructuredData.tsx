@@ -12,6 +12,7 @@ type StructuredDataProps =
   | { page: "home"; index: OffersIndex; baseUrl?: string }
   | { page: "archive"; index: OffersIndex; baseUrl?: string }
   | { page: "unverified"; baseUrl?: string }
+  | { page: "lead"; slug: string; title: string; baseUrl?: string }
   | { page: "about"; baseUrl?: string }
   | { page: "privacy"; baseUrl?: string }
   | {
@@ -159,6 +160,19 @@ export function StructuredData(props: StructuredDataProps) {
       "@id": `${base}/unverified.html#webpage`,
       url: `${base}/unverified.html`,
       name: "Unverified offers · Free AI Credits",
+      description: UNVERIFIED_DESCRIPTION,
+      isPartOf: { "@id": `${base}/#website` },
+      inLanguage: "en",
+    };
+  } else if (props.page === "lead") {
+    // One lead's page: a plain WebPage, never an Offer — the claim is
+    // unconfirmed, so nothing advertises it to crawlers as an offer (#660).
+    const url = `${base}/unverified/${props.slug}.html`;
+    pageNode = {
+      "@type": "WebPage",
+      "@id": `${url}#webpage`,
+      url,
+      name: `${props.title} (unverified) · Free AI Credits`,
       description: UNVERIFIED_DESCRIPTION,
       isPartOf: { "@id": `${base}/#website` },
       inLanguage: "en",

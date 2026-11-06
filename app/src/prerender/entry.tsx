@@ -45,7 +45,11 @@ export async function renderRoute(
       <App
         index={index}
         details={details}
-        leads={route.page === "unverified" ? leads : undefined}
+        leads={
+          route.page === "unverified" || route.page === "lead"
+            ? leads
+            : undefined
+        }
         route={route}
         baseUrl={baseUrl}
       />,

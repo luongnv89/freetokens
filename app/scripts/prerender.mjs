@@ -447,6 +447,40 @@ try {
   }
   written.push(`offers/*.html (${index.offers.length})`);
 
+  // One page per unverified lead (#660) at unverified/<slug>.html — never in
+  // offers/, never in the sitemap, feed or llms files, and no Markdown twin.
+  // Same source as the bundled leads (sibling of --data, else the generated
+  // src/data/unverified.json); a missing file means no lead pages.
+  const leadsSibling = path.join(path.dirname(dataFile), "unverified.json");
+  const leadsFallback = path.join(here, "..", "src", "data", "unverified.json");
+  const leadsPath = existsSync(leadsSibling) ? leadsSibling : leadsFallback;
+  const leads = existsSync(leadsPath)
+    ? (JSON.parse(await readFile(leadsPath, "utf8")).leads ?? [])
+    : [];
+  const leadsDir = path.join(distDir, "unverified");
+  // Rebuilt from scratch so a lead that went stale leaves no page behind.
+  await rm(leadsDir, { recursive: true, force: true });
+  if (leads.length > 0) await mkdir(leadsDir, { recursive: true });
+  for (const lead of leads) {
+    const claim = lead.claim.length > 160
+      ? lead.claim.slice(0, 157).trimEnd() + "..."
+      : lead.claim;
+    await writeFile(
+      path.join(leadsDir, `${lead.slug}.html`),
+      fillPage({
+        markup: await renderRoute({ page: "lead", slug: lead.slug }, origin),
+        title: `${lead.title} (unverified) · Free AI Credits`,
+        description: `Unconfirmed: ${claim}`,
+        canonical: `${origin}/unverified/${lead.slug}.html`,
+        depth: 1,
+        page: "lead",
+        slug: lead.slug,
+        baseUrl: origin,
+      }),
+    );
+  }
+  written.push(`unverified/*.html (${leads.length})`);
+
   // RSS at the previous URL, absolute links off DEFAULT_BASE_URL (#27).
   await writeFile(path.join(distDir, "feed.xml"), buildFeed(index, baseUrl));
   written.push("feed.xml");
@@ -460,7 +494,7 @@ try {
 
   const kb = (n) => (n / 1024).toFixed(1);
   console.log(
-    `prerendered ${written.length + index.offers.length - 1} routes -> ` +
+    `prerendered ${written.length + index.offers.length + leads.length - 2} routes -> ` +
       `${written.join(", ")} (${kb(Buffer.byteLength(template))} KB shell)`,
   );
 } finally {

@@ -321,11 +321,34 @@ describe("static route coverage (#123)", () => {
     const html = readFileSync(path.join(leadsDist, "unverified.html"), "utf8");
     expect(html.indexOf("Fixture newer lead")).toBeGreaterThan(0);
     expect(html.indexOf("Fixture newer lead")).toBeLessThan(html.indexOf("Fixture older lead"));
-    expect(html).toContain('Posted <time datetime="2026-11-03">Nov 3, 2026</time>');
-    expect(html).toContain("First spotted by our hunt");
-    const tags = [...html.matchAll(/<a href="(https:\/\/x\.com\/fixture[^"]*)" rel="([^"]*)"/g)];
-    expect(tags).toHaveLength(2);
+    // Listing: offer-style rows linking to each lead's own page.
+    expect(html).toContain('posted<!-- --> <time datetime="2026-11-03">Nov 3, 2026</time>');
+    expect(html).toContain('href="unverified/fixture-newer.html"');
+    expect(html).not.toContain("https://x.com/fixture");
+    // Each lead gets its own page under unverified/, with the sources.
+    expect(readdirSync(path.join(leadsDist, "unverified")).sort()).toEqual([
+      "fixture-newer.html",
+      "fixture-older-one.html",
+    ]);
+    const leadHtml = readFileSync(
+      path.join(leadsDist, "unverified", "fixture-newer.html"),
+      "utf8",
+    );
+    expect(leadHtml).toContain('data-page="lead"');
+    expect(leadHtml).toContain('data-slug="fixture-newer"');
+    expect(leadHtml).toContain("<h1>Fixture newer lead</h1>");
+    expect(leadHtml).toContain("First spotted");
+    expect(headOf(leadHtml)).toContain(
+      '<link rel="canonical" href="https://freetokens.custats.info/unverified/fixture-newer.html"',
+    );
+    expect(headOf(leadHtml)).not.toContain("Markdown version of this page");
+    const tags = [...leadHtml.matchAll(/<a href="(https:\/\/x\.com\/fixture[^"]*)" rel="([^"]*)"/g)];
+    expect(tags).toHaveLength(1);
     for (const [, , rel] of tags) expect(rel).toBe("nofollow ugc noopener noreferrer");
+    expect(leadHtml).not.toContain("data-ft-offer-id");
+    expect(readFileSync(path.join(leadsDist, "sitemap.xml"), "utf8")).not.toContain(
+      "/unverified/",
+    );
     for (const file of ["index.html", "archive.html", "about.html", "privacy.html"]) {
       expect(readFileSync(path.join(leadsDist, file), "utf8")).not.toContain("Fixture newer lead");
     }

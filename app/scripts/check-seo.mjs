@@ -145,12 +145,13 @@ function collectHtmlFiles(distDir) {
       files.push(path.join(distDir, entry.name));
     }
   }
-  // Nested HTML (e.g. offers/*.html)
-  const offersDir = path.join(distDir, "offers");
-  if (existsSync(offersDir)) {
-    for (const entry of readdirSync(offersDir, { withFileTypes: true })) {
+  // Nested HTML: offers/*.html and unverified lead pages (#660).
+  for (const sub of ["offers", "unverified"]) {
+    const nestedDir = path.join(distDir, sub);
+    if (!existsSync(nestedDir)) continue;
+    for (const entry of readdirSync(nestedDir, { withFileTypes: true })) {
       if (entry.isFile() && entry.name.endsWith(".html")) {
-        files.push(path.join(offersDir, entry.name));
+        files.push(path.join(nestedDir, entry.name));
       }
     }
   }

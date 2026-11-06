@@ -55,9 +55,10 @@ async function boot() {
       }
     }
     // Unverified leads (#660) ship in their own JSON, fetched only on that
-    // route; same skip-hydration-on-failure rule as details above.
+    // route and each lead's own page (unverified/<slug>.html); same
+    // skip-hydration-on-failure rule as details above.
     let leads: LeadsIndex | undefined;
-    if (route.page === "unverified") {
+    if (route.page === "unverified" || route.page === "lead") {
       try {
         const leadsUrl = new URL("./data/unverified.json", import.meta.url)
           .href;

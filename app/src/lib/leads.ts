@@ -32,6 +32,8 @@ export interface Lead {
   last_seen: string;
   reason: LeadReason;
   reason_detail: string;
+  /** Official pages the hunt checked (validated to the provider's own hosts). */
+  official_urls_tried?: string[];
 }
 
 export interface LeadsIndex {
@@ -66,4 +68,9 @@ export function sourceLabel(source: LeadSource): string {
   } catch {
     return "Web page";
   }
+}
+
+/** Relative href of a lead's own page (#660), from a root-level document. */
+export function leadHref(slug: string): string {
+  return `unverified/${slug}.html`;
 }

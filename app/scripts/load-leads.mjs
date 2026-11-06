@@ -328,6 +328,7 @@ export function validateLead(data, filename, today) {
     last_seen: data.last_seen,
     reason: data.reason,
     reason_detail: data.reason_detail,
+    official_urls_tried: [...data.official_urls_tried],
   };
 }
 

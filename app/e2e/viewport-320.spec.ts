@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { expect, test } from "@playwright/test";
 import "./http-preview";
 
@@ -9,7 +11,16 @@ const ROUTES = [
   "/unverified.html",
   "/privacy.html",
   "/offers/cursor-hobby-plan.html",
-] as const;
+];
+
+// One lead page (#660) when the build has a fresh lead.
+const LEAD: { slug: string; title: string } | undefined = JSON.parse(
+  readFileSync(
+    path.resolve(import.meta.dirname, "../src/data/unverified.json"),
+    "utf8",
+  ),
+).leads[0];
+if (LEAD) ROUTES.push(`/unverified/${LEAD.slug}.html`);
 
 async function assertNoHorizontalOverflow(
   page: import("@playwright/test").Page,
@@ -40,6 +51,8 @@ for (const route of ROUTES) {
       );
     } else if (route === "/unverified.html") {
       await expect(page.locator("h1")).toHaveText("Unverified offers");
+    } else if (route.startsWith("/unverified/")) {
+      await expect(page.locator("h1")).toHaveText(LEAD!.title);
     } else if (route === "/privacy.html") {
       await expect(page.locator("h1")).toHaveText("Privacy Policy");
     } else {
