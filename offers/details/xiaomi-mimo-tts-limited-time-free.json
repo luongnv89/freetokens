@@ -1,0 +1,17 @@
+{
+  "summary": "Xiaomi's MiMo API pricing page marks its TTS series as limited-time free in both the domestic and overseas pricing sections: mimo-v2.5-tts, mimo-v2.5-tts-voiceclone (voice cloning) and mimo-v2.5-tts-voicedesign (voice design). No end date is given.",
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go",
+      "title": "Xiaomi MiMo — API 定价",
+      "text": "TTS 系列 — 限时免费：mimo-v2.5-tts、mimo-v2.5-tts-voiceclone、mimo-v2.5-tts-voicedesign"
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "Xiaomi MiMo: TTS series (mimo-v2.5-tts and variants) marked free for a limited time. Verified Oct 23, 2026."
+    }
+  ]
+}

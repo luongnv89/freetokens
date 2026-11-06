@@ -1,0 +1,15 @@
+{
+  "summary": "Huawei Cloud's CodeArts (码道) code agent has a free Experience plan (体验版) supporting 50 seats with 5M session-model tokens per month, a 5,000-file Codebase index and 500MB knowledge space. It is a limited trial of the agent's basic capabilities (Q&A, coding, MCP, Rules, Skills), with access via AI IDE, CLI/TUI, JetBrains and VSCode plugins and a built-in GLM model. Paid Basic ($20/seat/month) and Pro ($60/seat/month) plans offer larger allowances.",
+  "claim_steps": [
+    "Open the CodeArts pricing page and sign in or register a Huawei Cloud account",
+    "Choose the free 体验版 (Experience) plan and click 立即开通 (Activate now)"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.huaweicloud.com/intl/zh-cn/product/codearts/pricing.html",
+      "title": "华为云码道CodeArts代码智能体_选型与定价_华为云",
+      "text": "体验版: 免费; 支持50席位; 会话模型用量 500万 Tokens/月; Codebase 代码库索引 5000 个文件; 知识空间 500MB 文件存储容量; 限量体验Agent基础能力（问答/编码/MCP/Rules/Skills）"
+    }
+  ]
+}

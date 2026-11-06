@@ -1,0 +1,22 @@
+{
+  "summary": "AutoClaw's official blog announces a Halloween login campaign: from October 31, 00:00 to November 8, 23:59 (UTC+8), logging in to AutoClaw claims 40M tokens (4,000 credits), one claim per account. These credits expire on November 8 at 23:59 (UTC+8). The post adds that accounts that had not yet claimed the previous week's reward could claim both for up to 80M tokens (8,000 credits). A separate one-off 100M-token bonus ran only from November 4, 07:00 to November 5, 07:00 (UTC+8) and has ended. The post does not name the model(s) the tokens apply to.",
+  "claim_steps": [
+    "Log in to AutoClaw between October 31, 00:00 and November 8, 23:59 (UTC+8).",
+    "Claim the 4,000-credit (40M token) reward for this week's campaign (one claim per account).",
+    "Use the credits before November 8 at 23:59 (UTC+8), when they expire."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://autoclaw.z.ai/blog/news/M11W1/",
+      "title": "Halloween Surprise: Claim Up to 80M Tokens!",
+      "text": "From October 31 to November 8 , log in to AutoClaw and get 40 million Tokens ! ... Event period: October 31, 00:00 – November 8, 23:59 (UTC+8). How it works: Log in to AutoClaw during the event to claim 4,000 credits for this week's campaign — one claim per account. These credits expire on November 8 at 23:59 (UTC+8)."
+    },
+    {
+      "type": "link",
+      "url": "https://autoclaw.z.ai/blog/",
+      "title": "AutoClaw Blog",
+      "text": "Halloween Surprise: Claim Up to 80M Tokens! Nov 3, 2026."
+    }
+  ]
+}

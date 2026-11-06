@@ -1,0 +1,22 @@
+{
+  "summary": "KRAFTON offers its Raon-1 mini preview model (30B-A4B) through an API that is free for a limited time to celebrate the model's release. Per-user limits on token usage and the number of requests may apply, and any future charges will be announced separately. No end date is given.",
+  "claim_steps": [
+    "Apply on the Raon page with your name, email, affiliation, role and intended use.",
+    "KRAFTON emails you an invitation to the Raon console right away.",
+    "Open the invitation, verify your email and set a password; then issue an API key, try the Playground and read the API docs."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://raon-mini.krafton.ai/en",
+      "title": "Raon — Korean Intelligence for a More Open World",
+      "text": "To celebrate the release of KRAFTON's model, we're offering the API service free for a limited time. ... Per-user limits on token usage and the number of requests may apply. Any future charges and related policies will be announced separately."
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "KRAFTON AI: Raon-1 mini API free for a limited time (preview released Oct 21, 2026). Verified Oct 21, 2026."
+    }
+  ]
+}

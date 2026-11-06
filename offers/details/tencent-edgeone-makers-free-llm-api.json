@@ -1,0 +1,28 @@
+{
+  "summary": "EdgeOne Makers offers an OpenAI-compatible LLM gateway. New accounts receive 500K free tokens as a limited-time offer, shared across all projects under the same account, with no credit card or payment method required for the free tier. Built-in models such as @makers/deepseek-v4-flash (DeepSeek, MiniMax, and Hunyuan) can be called without a provider key; bring-your-own-key vendors are billed only on the vendor's own platform, and Makers adds no fees.",
+  "claim_steps": [
+    "Sign up at the Makers console and create your gateway API key.",
+    "Set the base URL to the Makers gateway endpoint in any OpenAI-compatible SDK.",
+    "Send requests with your chosen built-in model parameter, e.g. @makers/deepseek-v4-flash."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://pages.edgeone.ai/use-cases/free-llm-api",
+      "title": "Free LLM API | Access Free LLM API Providers - EdgeOne Makers",
+      "text": "New accounts receive 500K free tokens (limited-time offer). No credit card, no payment method required for the free LLM API tier. The free quota is shared across all projects under the same account. The free LLM API includes access to DeepSeek, MiniMax, and Hunyuan built-in models."
+    },
+    {
+      "type": "link",
+      "url": "https://pages.edgeone.ai/document/models",
+      "title": "Unified AI Model Access with Makers Models - EdgeOne Makers",
+      "text": "Built-in models are provided, which can be invoked without binding your own provider keys."
+    },
+    {
+      "type": "link",
+      "url": "https://pages.edgeone.ai/document/models-faqs",
+      "title": "Makers Models vs. Vendor APIs: Cost, Usage & Error Handling - EdgeOne Makers",
+      "text": "The Makers Models feature is completely free. This platform does not charge any additional fees."
+    }
+  ]
+}

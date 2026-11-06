@@ -1,0 +1,22 @@
+{
+  "summary": "OVHcloud's AI Endpoints page advertises a limited 'Public Cloud Free Trial' special offer: US$200 in free credit for the first-time setup and use of a Public Cloud project, which can be spent on AI Endpoints (token-billed access to hosted AI models). New and existing customers qualify if they have never created a Public Cloud project. One voucher per person, for one project; once activated it is valid for one month or until the balance is used up. A valid payment method must be saved in the OVHcloud customer account. The voucher is non-exchangeable, non-refundable, and non-redeemable.",
+  "claim_steps": [
+    "Create or sign in to an OVHcloud customer account and save a valid payment method",
+    "Create your first Public Cloud project to activate the US$200 Public Cloud Free Trial voucher",
+    "Use AI Endpoints from that project within one month of activation"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/",
+      "title": "AI Endpoints: Generative AI API | OVHcloud Worldwide",
+      "text": "Launch your first project today with US$ 200 free credit. Get US$ 200 in free credit to launch your first Public Cloud project. Limited 'Public Cloud Free Trial' special offer applicable to all first-time setup and use of a Public Cloud project."
+    },
+    {
+      "type": "link",
+      "url": "https://aifree.dev/offer/ovhcloud-ai-endpoints-free-tier",
+      "title": "92 Free AI API credits, verified Oct 2026",
+      "text": "OVHcloud; AI Endpoints Free Tier; $200 one-time; verified Oct 12, 2026. (Snapshot has an archived/expired OVHcloud AI Endpoints Free Tier entry.)"
+    }
+  ]
+}
