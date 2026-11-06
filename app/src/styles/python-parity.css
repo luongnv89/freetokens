@@ -3342,43 +3342,18 @@ figure.proof-screenshot {
 .lead-banner p {
   margin: 0.25rem 0;
 }
-.lead-grid > li {
-  display: block;
-  /* Like Archive: no rise-in animation, so cards paint at once (LCP). */
+/* Lead rows reuse the offer ledger row as-is; like Archive they skip the
+   rise-in animation so rows paint at once (LCP). No category, so the spine
+   takes the warning hue instead of a category hue. */
+[data-page="unverified"] .grid > li {
   animation: none;
+  --row-hue: var(--color-danger);
 }
-.lead-provider,
-.lead-label {
-  color: var(--gray);
-  font-size: 0.8rem;
+.lead-detail .lead-banner {
+  margin: 0 0 1rem;
 }
-.lead-provider {
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-.lead-claim,
-.lead-amount,
-.lead-reason {
-  margin: 0.5rem 0 0;
-  overflow-wrap: anywhere;
-}
-.lead-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1.25rem;
-  margin: 0.5rem 0 0;
-  font-size: 0.85rem;
-}
-.lead-meta div {
-  display: flex;
-  gap: 0.35rem;
-}
-.lead-meta dt {
-  color: var(--gray);
-}
-.lead-meta dd {
-  margin: 0;
+[data-page="lead"] .od-related-card {
+  --row-hue: var(--color-danger);
 }
 .lead-sources {
   margin: 0.15rem 0 0;

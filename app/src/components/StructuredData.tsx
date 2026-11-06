@@ -7,11 +7,13 @@ import {
   type OffersIndex,
 } from "../lib/offers";
 import type { OfferDetail } from "../lib/offerDetails";
+import { leadMetaDescription, type Lead } from "../lib/leads";
 
 type StructuredDataProps =
   | { page: "home"; index: OffersIndex; baseUrl?: string }
   | { page: "archive"; index: OffersIndex; baseUrl?: string }
   | { page: "unverified"; baseUrl?: string }
+  | { page: "lead"; lead: Lead | null; baseUrl?: string }
   | { page: "about"; baseUrl?: string }
   | { page: "privacy"; baseUrl?: string }
   | {
@@ -160,6 +162,20 @@ export function StructuredData(props: StructuredDataProps) {
       url: `${base}/unverified.html`,
       name: "Unverified offers · Free AI Credits",
       description: UNVERIFIED_DESCRIPTION,
+      isPartOf: { "@id": `${base}/#website` },
+      inLanguage: "en",
+    };
+  } else if (props.page === "lead" && props.lead) {
+    // One lead's page: a plain WebPage, never an Offer — the claim is
+    // unconfirmed, so nothing advertises it to crawlers as an offer (#660).
+    // Unknown slug: no page node at all, like the offer not-found state.
+    const url = `${base}/unverified/${props.lead.slug}.html`;
+    pageNode = {
+      "@type": "WebPage",
+      "@id": `${url}#webpage`,
+      url,
+      name: `${props.lead.title} (unverified) · Free AI Credits`,
+      description: leadMetaDescription(props.lead.claim),
       isPartOf: { "@id": `${base}/#website` },
       inLanguage: "en",
     };

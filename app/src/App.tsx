@@ -4,6 +4,7 @@ import { type Route, resolveRoute } from "./routes";
 import HomePage from "./components/HomePage";
 import ArchivePage from "./components/ArchivePage";
 import UnverifiedPage from "./components/UnverifiedPage";
+import LeadDetailPage from "./components/LeadDetailPage";
 import { EMPTY_LEADS, type LeadsIndex } from "./lib/leads";
 import PrivacyPage from "./components/PrivacyPage";
 import AboutPage from "./components/AboutPage";
@@ -21,7 +22,7 @@ export default function App({
   index: OffersIndex;
   /** Aggregate details map; undefined when the client never loaded it. */
   details?: DetailsMap;
-  /** Unverified leads (#660); loaded only on the unverified route. */
+  /** Unverified leads (#660); loaded only on the unverified + lead routes. */
   leads?: LeadsIndex;
   route?: Route;
   baseUrl?: string;
@@ -34,6 +35,15 @@ export default function App({
       break;
     case "unverified":
       page = <UnverifiedPage leads={leads ?? EMPTY_LEADS} baseUrl={baseUrl} />;
+      break;
+    case "lead":
+      page = (
+        <LeadDetailPage
+          leads={leads ?? EMPTY_LEADS}
+          slug={r.slug}
+          baseUrl={baseUrl}
+        />
+      );
       break;
     case "privacy":
       page = <PrivacyPage baseUrl={baseUrl} />;

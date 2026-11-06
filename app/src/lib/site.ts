@@ -14,11 +14,11 @@ export const DEFAULT_BASE_URL = "https://freetokens.custats.info";
 export function currentBaseUrl(): string {
   if (typeof window === "undefined") return DEFAULT_BASE_URL;
   const { origin, pathname } = window.location;
-  const offersIdx = pathname.indexOf("/offers/");
-  const basePath =
-    offersIdx >= 0
-      ? pathname.slice(0, offersIdx)
-      : pathname.replace(/[^/]*$/, "");
+  // Depth-1 documents live under offers/ or unverified/ (#660).
+  const nested = /\/(?:offers|unverified)\//.exec(pathname);
+  const basePath = nested
+    ? pathname.slice(0, nested.index)
+    : pathname.replace(/[^/]*$/, "");
   return `${origin}${basePath.replace(/\/+$/, "")}`;
 }
 

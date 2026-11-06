@@ -5,6 +5,20 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Unverified leads look like offers (#683):** each lead on
+  `/unverified.html` is now an offer-style row (provider and an
+  "unconfirmed" badge, title, claimed amount, why it is unverified and how
+  many sources, then posted date, "checked <ago>" and a Details link)
+  instead of a custom card. Each fresh lead also gets its own prerendered
+  page at `unverified/<slug>.html` in the offer detail layout, with a
+  "Before you claim" warning where offers have a Claim button, the claim,
+  why it is not verified, where it was posted, the official pages checked,
+  and "More unverified offers". Lead pages carry plain `WebPage` JSON-LD
+  described by the claim, have no markdown copy, and stay out of `offers/`,
+  the sitemap, the RSS feed and the llms files; `dist/unverified/` is
+  rebuilt on every build so a stale lead leaves no page. An unknown lead
+  slug shows "Lead not found".
+
 - **Unverified tab (#660):** a new static page, `/unverified.html`
   ("Unverified" in the nav beside Archive), lists offers the daily
   offer-hunter spotted on X, Reddit or the web but could not confirm on an

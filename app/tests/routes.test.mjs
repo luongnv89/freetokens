@@ -137,6 +137,21 @@ function breadcrumbData(html) {
   throw new Error("document has no breadcrumb JSON-LD");
 }
 
+function graphData(html) {
+  const marker = '<script type="application/ld+json">';
+  let cursor = 0;
+  while (true) {
+    const start = html.indexOf(marker, cursor);
+    if (start < 0) break;
+    const end = html.indexOf("</script>", start);
+    if (end < 0) break;
+    const parsed = JSON.parse(html.slice(start + marker.length, end));
+    if (Array.isArray(parsed["@graph"])) return parsed["@graph"];
+    cursor = end + "</script>".length;
+  }
+  throw new Error("document has no @graph JSON-LD");
+}
+
 function breadcrumbNames(html) {
   const document = new DOMParser().parseFromString(html, "text/html");
   const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
@@ -303,6 +318,7 @@ describe("static route coverage (#123)", () => {
       last_seen: posted,
       reason: "bot_walled",
       reason_detail: "The pricing page returned HTTP 403.",
+      official_urls_tried: ["https://fixture.example/pricing"],
     });
     writeFileSync(
       path.join(dataDir, "unverified.json"),
@@ -317,15 +333,62 @@ describe("static route coverage (#123)", () => {
     );
     rmSync(leadsDist, { recursive: true, force: true });
     cpSync(outDir, leadsDist, { recursive: true });
+    // A page left by a lead that has since gone stale must not survive (#683).
+    mkdirSync(path.join(leadsDist, "unverified"), { recursive: true });
+    writeFileSync(path.join(leadsDist, "unverified", "fixture-stale.html"), "stale");
     prerender(leadsDist, path.join(dataDir, "offers.json"));
+    // The llms and Markdown generators run after prerender in postbuild.
+    const generated = ["--data", path.join(dataDir, "offers.json"),
+      "--details", path.join(dataDir, "details.json"), "--dist", leadsDist];
+    execFileSync(process.execPath, ["scripts/generate-llms.mjs", ...generated,
+      "--public-dir", path.join(dataDir, "public")], { cwd: APP_ROOT, stdio: "pipe" });
+    execFileSync(process.execPath, ["scripts/generate-markdown.mjs", ...generated],
+      { cwd: APP_ROOT, stdio: "pipe" });
     const html = readFileSync(path.join(leadsDist, "unverified.html"), "utf8");
     expect(html.indexOf("Fixture newer lead")).toBeGreaterThan(0);
     expect(html.indexOf("Fixture newer lead")).toBeLessThan(html.indexOf("Fixture older lead"));
-    expect(html).toContain('Posted <time datetime="2026-11-03">Nov 3, 2026</time>');
-    expect(html).toContain("First spotted by our hunt");
-    const tags = [...html.matchAll(/<a href="(https:\/\/x\.com\/fixture[^"]*)" rel="([^"]*)"/g)];
-    expect(tags).toHaveLength(2);
+    // Listing: offer-style rows linking to each lead's own page.
+    expect(html).toContain('posted<!-- --> <time datetime="2026-11-03">Nov 3, 2026</time>');
+    expect(html).toContain('href="unverified/fixture-newer.html"');
+    expect(html).not.toContain("https://x.com/fixture");
+    // Each lead gets its own page under unverified/, with the sources.
+    expect(readdirSync(path.join(leadsDist, "unverified")).sort()).toEqual([
+      "fixture-newer.html",
+      "fixture-older-one.html",
+    ]);
+    const leadHtml = readFileSync(
+      path.join(leadsDist, "unverified", "fixture-newer.html"),
+      "utf8",
+    );
+    expect(leadHtml).toContain('data-page="lead"');
+    expect(leadHtml).toContain('data-slug="fixture-newer"');
+    expect(leadHtml).toContain("<h1>Fixture newer lead</h1>");
+    expect(leadHtml).toContain("First spotted");
+    expect(headOf(leadHtml)).toContain(
+      '<link rel="canonical" href="https://freetokens.custats.info/unverified/fixture-newer.html"',
+    );
+    expect(headOf(leadHtml)).not.toContain("Markdown version of this page");
+    const tags = [...leadHtml.matchAll(/<a href="(https:\/\/x\.com\/fixture[^"]*)" rel="([^"]*)"/g)];
+    expect(tags).toHaveLength(1);
     for (const [, , rel] of tags) expect(rel).toBe("nofollow ugc noopener noreferrer");
+    expect(leadHtml).not.toContain("data-ft-offer-id");
+    expect(leadHtml).toContain("Official pages we checked");
+    expect(leadHtml).toContain('href="https://fixture.example/pricing"');
+    // JSON-LD: a plain WebPage whose description is the meta description.
+    const graph = graphData(leadHtml);
+    expect(graph.some((n) => n["@type"] === "Offer")).toBe(false);
+    const webPage = graph.find((n) => n["@type"] === "WebPage");
+    expect(webPage.url).toBe("https://freetokens.custats.info/unverified/fixture-newer.html");
+    expect(metaContents(leadHtml, "name", "description")).toEqual([
+      htmlAttr(webPage.description),
+    ]);
+    expect(webPage.description).toBe("Unconfirmed: Fixture claim for Fixture newer lead.");
+    for (const file of ["sitemap.xml", "feed.xml", "llms.txt", "llms-full.txt"]) {
+      const text = readFileSync(path.join(leadsDist, file), "utf8");
+      expect(text, file).not.toContain("/unverified/");
+      expect(text, file).not.toContain("fixture-newer");
+    }
+    expect(existsSync(path.join(leadsDist, "unverified", "fixture-newer.md"))).toBe(false);
     for (const file of ["index.html", "archive.html", "about.html", "privacy.html"]) {
       expect(readFileSync(path.join(leadsDist, file), "utf8")).not.toContain("Fixture newer lead");
     }

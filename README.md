@@ -328,8 +328,9 @@ offers/    # One YAML file per free-AI-credit offer (schema: docs/schema.md)
            # plus optional offers/details/<slug>.json detail documents
 unverified/ # One YAML per unverified lead the offer-hunter could not confirm
            # (schema: schemas/unverified-lead.schema.json); shown only on
-           # /unverified.html for 3 days after the newest post, never as an
-           # offer. Often absent or empty.
+           # /unverified.html and its own unverified/<slug>.html page for 3
+           # days after the newest post, never as an offer. Often absent or
+           # empty.
 app/       # Vite + React source: components, lib, tests, prerender scripts
 scripts/   # offer_model.py + lead_model.py (schema/validation cores) + validate_offers.py
 tests/     # Content-model test suite (unittest)

@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { render, screen, within } from "@testing-library/react";
 import App from "../App";
 import UnverifiedPage, { FRESH_DAYS, LEAD_SOURCE_REL } from "./UnverifiedPage";
+import LeadDetailPage from "./LeadDetailPage";
 import type { Lead, LeadsIndex } from "../lib/leads";
 import type { OffersIndex } from "../lib/offers";
 import indexData from "../data/offers.json";
@@ -47,8 +48,18 @@ function leadsIndex(leads: Lead[]): LeadsIndex {
   return { generated_at: "2026-11-03T00:00:00Z", count: leads.length, leads };
 }
 
+/** Nodes of the page's StructuredData @graph (not the breadcrumb block). */
+function graphNodes(): Array<Record<string, unknown>> {
+  const blocks = [
+    ...document.querySelectorAll('script[type="application/ld+json"]'),
+  ].map((s) => JSON.parse(s.textContent ?? "{}"));
+  const graph = blocks.find((b) => Array.isArray(b["@graph"]));
+  if (!graph) throw new Error("no @graph JSON-LD block");
+  return graph["@graph"];
+}
+
 describe("UnverifiedPage (#660)", () => {
-  it("shows the banner, then a card with posted date, claim, reason, sources and hunt dates", () => {
+  it("shows the banner, then each lead as an offer-style row linking to its own page", () => {
     render(<UnverifiedPage leads={leadsIndex([lead()])} />);
     const banner = screen.getByRole("note", { name: "Before you claim" });
     expect(banner.textContent).toContain(
@@ -57,27 +68,88 @@ describe("UnverifiedPage (#660)", () => {
     expect(banner.textContent).toContain("never DM anyone");
     expect(banner.textContent).toMatch(/never\s+share API keys/i);
 
-    const card = screen.getByRole("listitem", { name: "Free tokens week" });
-    const text = card.textContent ?? "";
-    expect(card.querySelector(".lead-posted")?.textContent).toBe("Posted Nov 1, 2026");
-    expect(text).toContain("Acme AI");
-    expect(text).toContain("1M free tokens to every new account");
-    expect(text).toContain("First spotted by our hunt");
-    expect(text).toContain("Last checked");
-    expect(text).toContain("Nov 2, 2026");
-    expect(text).toContain("Official pages say nothing about it");
+    // Same ledger-row skeleton as OfferRow.
+    const row = document.querySelector("ol.grid > li > article.card")!;
+    expect(row).toBeTruthy();
+    expect(row.querySelector(".row-eyebrow .r-prov")?.textContent).toBe("Acme AI");
+    expect(
+      row.querySelector(".row-eyebrow .badge-review-status-unverified")?.textContent,
+    ).toBe("unconfirmed");
+    expect(row.querySelector(".card-title")?.textContent).toBe("Free tokens week");
+    expect(row.querySelector(".r-amount")?.textContent).toBe("1M tokens");
+    expect(row.querySelector(".row-quiet")?.textContent).toContain(
+      "Official pages say nothing about it",
+    );
+    expect(row.querySelector(".row-rail .status")?.textContent).toBe(
+      "posted Nov 1, 2026",
+    );
+    expect(row.querySelector(".row-rail .r-vfd")?.textContent).toBe(
+      "checked yesterday",
+    );
 
-    const links = within(card).getAllByRole("link");
-    expect(links.map((a) => a.getAttribute("href"))).toEqual([
+    // Links go only to the lead's own page; no source links, no offer hooks.
+    const links = within(row as HTMLElement).getAllByRole("link");
+    expect(new Set(links.map((a) => a.getAttribute("href")))).toEqual(
+      new Set(["unverified/acme-free-tokens.html"]),
+    );
+    expect(row.querySelector("[data-ft-offer-id]")).toBeNull();
+    expect(row.querySelector("button")).toBeNull();
+  });
+
+  it("renders a lead's own page in the offer-detail layout, with nofollow ugc sources", () => {
+    const leads = leadsIndex([
+      lead({ official_urls_tried: ["https://acme.example/pricing"] }),
+      lead({ slug: "other-lead", title: "Other lead", posted: "2026-10-31" }),
+    ]);
+    render(<LeadDetailPage leads={leads} slug="acme-free-tokens" />);
+    expect(screen.getByRole("heading", { level: 1 }).textContent).toBe(
+      "Free tokens week",
+    );
+    expect(document.querySelector("article.offer-detail .od-rail .od-facts")).toBeTruthy();
+    expect(screen.getByRole("note", { name: "Before you claim" })).toBeTruthy();
+    const facts = document.querySelector(".od-table")!.textContent ?? "";
+    expect(facts).toContain("Amount claimed1M tokens");
+    expect(facts).toContain("First spottedNov 1, 2026");
+    expect(facts).toContain("Last checkedNov 2, 2026");
+    expect(document.body.textContent).toContain("1M free tokens to every new account");
+    expect(document.body.textContent).toContain("says nothing about free tokens");
+
+    const sources = [...document.querySelectorAll(".lead-sources:not(.lead-official) a")];
+    expect(sources.map((a) => a.getAttribute("href"))).toEqual([
       "https://x.com/acme_fan/status/1",
       "https://blog.example.com/acme",
     ]);
-    for (const a of links) {
-      expect(a.getAttribute("rel")).toBe(LEAD_SOURCE_REL);
-    }
-    expect(LEAD_SOURCE_REL).toBe("nofollow ugc noopener noreferrer");
-    expect(links[0].textContent).toContain("@acme_fan on X");
-    expect(links[1].textContent).toContain("blog.example.com");
+    for (const a of sources) expect(a.getAttribute("rel")).toBe(LEAD_SOURCE_REL);
+    expect(sources[0].textContent).toContain("@acme_fan on X");
+    expect(
+      document.querySelector(".lead-official a")?.getAttribute("href"),
+    ).toBe("https://acme.example/pricing");
+
+    // No claim CTA / apply prompt / offer_click hooks on a lead.
+    expect(document.querySelector(".od-cta, [data-ft-offer-id]")).toBeNull();
+    expect(
+      screen.getByRole("link", { name: "View details for Other lead" }).getAttribute("href"),
+    ).toBe("other-lead.html");
+
+    // JSON-LD: a plain WebPage carrying the claim, the same text as the
+    // page's meta description (#683) — never an Offer.
+    const nodes = graphNodes();
+    expect(nodes.some((n) => n["@type"] === "Offer")).toBe(false);
+    const webPage = nodes.find((n) => n["@type"] === "WebPage");
+    expect(webPage?.url).toMatch(/\/unverified\/acme-free-tokens\.html$/);
+    expect(webPage?.description).toBe(
+      "Unconfirmed: Acme gives 1M free tokens to every new account this week.",
+    );
+  });
+
+  it("shows a not-found state for an unknown lead slug", () => {
+    render(<LeadDetailPage leads={leadsIndex([lead()])} slug="gone" />);
+    expect(screen.getByRole("heading", { level: 2, name: "Lead not found" })).toBeTruthy();
+    // No page node for a lead that does not exist: only org + site (#683).
+    expect(graphNodes().map((n) => n["@type"])).toEqual([
+      "Organization",
+      "WebSite",
+    ]);
   });
 
   it("keeps the loader's order (newest post first) and says so in the tagline", () => {
@@ -106,7 +178,7 @@ describe("UnverifiedPage (#660)", () => {
     expect(document.body.textContent).toContain(
       `Leads appear here for ${FRESH_DAYS} days after someone posts them, and are checked every night.`,
     );
-    expect(document.querySelector(".lead-grid")).toBeNull();
+    expect(document.querySelector("#ft-unverified-grid")).toBeNull();
   });
 
   it("uses the same freshness window as the shared rules", () => {
@@ -130,5 +202,14 @@ describe("UnverifiedPage (#660)", () => {
     );
     expect(home).not.toContain("Free tokens week");
     expect(home).toContain('href="unverified.html"');
+    const detail = renderToStaticMarkup(
+      <App
+        index={index}
+        leads={leads}
+        route={{ page: "lead", slug: "acme-free-tokens" }}
+      />,
+    );
+    expect(detail).toContain("<h1>Free tokens week</h1>");
+    expect(detail).toContain('href="../unverified.html"');
   });
 });

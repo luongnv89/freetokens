@@ -19,6 +19,12 @@ type BreadcrumbsProps =
       baseUrl?: string;
     }
   | {
+      page: "lead";
+      slug: string;
+      title: string;
+      baseUrl?: string;
+    }
+  | {
       page: "privacy";
       baseUrl?: string;
     }
@@ -56,6 +62,21 @@ function buildBreadcrumbItems(props: BreadcrumbsProps): BreadcrumbItem[] {
     return [
       { name: "Offers", href: "./index.html", item: `${baseUrl}/` },
       { name: "Unverified", item: `${baseUrl}/unverified.html` },
+    ];
+  }
+
+  if (props.page === "lead") {
+    return [
+      { name: "Offers", href: "../index.html", item: `${baseUrl}/` },
+      {
+        name: "Unverified",
+        href: "../unverified.html",
+        item: `${baseUrl}/unverified.html`,
+      },
+      {
+        name: props.title || "Lead not found",
+        item: `${baseUrl}/unverified/${props.slug || "not-found"}.html`,
+      },
     ];
   }
 
