@@ -7,7 +7,7 @@ category: api_provider
 amount: "Free nvidia/nemotron-3.5-super-vl:free at $0 input/output (1M context, 120B-A12B multimodal MoE); rate-limited trial/internal evaluation only, not production"
 expiry_date: null
 source_url: https://openrouter.ai/nvidia/nemotron-3.5-super-vl:free
-verified_date: 2026-11-05
+verified_date: 2026-11-06
 verification: social_proof
 review_status: under-review
 signup: required

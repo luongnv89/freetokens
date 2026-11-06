@@ -9,7 +9,7 @@ category: api_provider
 amount: User's first team receives $10 immediately in the signup month, resetting to $10 each calendar month without rollover, plus a one-time non-expiring $10 bonus after dashboard onboarding
 expiry_date: null
 source_url: https://exa.ai/docs/admin/billing
-verified_date: 2026-11-05
+verified_date: 2026-11-06
 verification: social_proof
 review_status: unverified
 signup: required
