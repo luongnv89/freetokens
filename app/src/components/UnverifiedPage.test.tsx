@@ -48,6 +48,16 @@ function leadsIndex(leads: Lead[]): LeadsIndex {
   return { generated_at: "2026-11-03T00:00:00Z", count: leads.length, leads };
 }
 
+/** Nodes of the page's StructuredData @graph (not the breadcrumb block). */
+function graphNodes(): Array<Record<string, unknown>> {
+  const blocks = [
+    ...document.querySelectorAll('script[type="application/ld+json"]'),
+  ].map((s) => JSON.parse(s.textContent ?? "{}"));
+  const graph = blocks.find((b) => Array.isArray(b["@graph"]));
+  if (!graph) throw new Error("no @graph JSON-LD block");
+  return graph["@graph"];
+}
+
 describe("UnverifiedPage (#660)", () => {
   it("shows the banner, then each lead as an offer-style row linking to its own page", () => {
     render(<UnverifiedPage leads={leadsIndex([lead()])} />);
@@ -120,11 +130,26 @@ describe("UnverifiedPage (#660)", () => {
     expect(
       screen.getByRole("link", { name: "View details for Other lead" }).getAttribute("href"),
     ).toBe("other-lead.html");
+
+    // JSON-LD: a plain WebPage carrying the claim, the same text as the
+    // page's meta description (#683) — never an Offer.
+    const nodes = graphNodes();
+    expect(nodes.some((n) => n["@type"] === "Offer")).toBe(false);
+    const webPage = nodes.find((n) => n["@type"] === "WebPage");
+    expect(webPage?.url).toMatch(/\/unverified\/acme-free-tokens\.html$/);
+    expect(webPage?.description).toBe(
+      "Unconfirmed: Acme gives 1M free tokens to every new account this week.",
+    );
   });
 
   it("shows a not-found state for an unknown lead slug", () => {
     render(<LeadDetailPage leads={leadsIndex([lead()])} slug="gone" />);
     expect(screen.getByRole("heading", { level: 2, name: "Lead not found" })).toBeTruthy();
+    // No page node for a lead that does not exist: only org + site (#683).
+    expect(graphNodes().map((n) => n["@type"])).toEqual([
+      "Organization",
+      "WebSite",
+    ]);
   });
 
   it("keeps the loader's order (newest post first) and says so in the tagline", () => {

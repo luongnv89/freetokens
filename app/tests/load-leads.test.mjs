@@ -93,7 +93,14 @@ describe("load-leads (#660)", () => {
     rmSync(dir, { recursive: true });
   });
 
-  it("rejects an undated lead and a lead with no source", () => {
+  it("passes official_urls_tried through to the emitted lead (#683)", async () => {
+    const dir = leadsDir({ "acme-free": leadText("acme-free") });
+    const [lead] = await loadLeads(dir, TODAY);
+    expect(lead.official_urls_tried).toEqual(["https://acme.example/pricing"]);
+    rmSync(dir, { recursive: true });
+  });
+
+    it("rejects an undated lead and a lead with no source", () => {
     expect(() =>
       check({ sources: [{ url: "https://x.com/a/status/1", type: "x", author: null, handle: null, date: null }] }),
     ).toThrow(/undated source/);
