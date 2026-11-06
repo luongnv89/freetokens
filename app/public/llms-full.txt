@@ -2,11 +2,70 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-05T16:32:43Z — 122 of 240 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-06T08:56:40Z — 122 of 246 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Xiaomi MiMo TTS — Limited-Time Free API
+- Provider: Xiaomi
+- Category: voice
+- Amount: MiMo TTS series API free for a limited time: mimo-v2.5-tts, mimo-v2.5-tts-voiceclone and mimo-v2.5-tts-voicedesign (no end date announced)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go
+- Page: https://freetokens.custats.info/offers/xiaomi-mimo-tts-limited-time-free.html
+- Summary: Xiaomi's MiMo API pricing page marks its TTS series as limited-time free in both the domestic and overseas pricing sections: mimo-v2.5-tts, mimo-v2.5-tts-voiceclone (voice cloning) and mimo-v2.5-tts-voicedesign (voice design). No end date is given.
+### EdgeOne Makers Free LLM API — 500K Free Tokens
+- Provider: Tencent EdgeOne
+- Category: api_provider
+- Amount: 500K free tokens for new accounts (limited-time offer) on built-in DeepSeek, MiniMax, and Hunyuan models via an OpenAI-compatible gateway; no payment method required; quota shared across all projects in the account
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://pages.edgeone.ai/use-cases/free-llm-api
+- Page: https://freetokens.custats.info/offers/tencent-edgeone-makers-free-llm-api.html
+- Summary: EdgeOne Makers offers an OpenAI-compatible LLM gateway. New accounts receive 500K free tokens as a limited-time offer, shared across all projects under the same account, with no credit card or payment method required for the free tier. Built-in models such as @makers/deepseek-v4-flash (DeepSeek, MiniMax, and Hunyuan) can be called without a provider key; bring-your-own-key vendors are billed only on the vendor's own platform, and Makers adds no fees.
+- Claim steps: Sign up at the Makers console and create your gateway API key. | Set the base URL to the Makers gateway endpoint in any OpenAI-compatible SDK. | Send requests with your chosen built-in model parameter, e.g. @makers/deepseek-v4-flash.
+### OVHcloud Public Cloud Free Trial — US$200 Credit (AI Endpoints)
+- Provider: OVHcloud
+- Category: api_provider
+- Amount: US$200 free credit for your first Public Cloud project, usable on AI Endpoints; voucher valid one month after activation, one per person; valid payment method required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.ovhcloud.com/en/public-cloud/ai-endpoints/
+- Page: https://freetokens.custats.info/offers/ovhcloud-public-cloud-free-trial-200-credit.html
+- Summary: OVHcloud's AI Endpoints page advertises a limited 'Public Cloud Free Trial' special offer: US$200 in free credit for the first-time setup and use of a Public Cloud project, which can be spent on AI Endpoints (token-billed access to hosted AI models). New and existing customers qualify if they have never created a Public Cloud project. One voucher per person, for one project; once activated it is valid for one month or until the balance is used up. A valid payment method must be saved in the OVHcloud customer account. The voucher is non-exchangeable, non-refundable, and non-redeemable.
+- Claim steps: Create or sign in to an OVHcloud customer account and save a valid payment method | Create your first Public Cloud project to activate the US$200 Public Cloud Free Trial voucher | Use AI Endpoints from that project within one month of activation
+### KRAFTON Raon-1 mini Preview — Free API (Limited Time)
+- Provider: KRAFTON AI
+- Category: api_provider
+- Amount: Raon-1 mini preview (30B-A4B) API free for a limited time at launch; per-user token and request limits may apply; future pricing to be announced
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://raon-mini.krafton.ai/en
+- Page: https://freetokens.custats.info/offers/krafton-raon-1-mini-api-free-preview.html
+- Summary: KRAFTON offers its Raon-1 mini preview model (30B-A4B) through an API that is free for a limited time to celebrate the model's release. Per-user limits on token usage and the number of requests may apply, and any future charges will be announced separately. No end date is given.
+- Claim steps: Apply on the Raon page with your name, email, affiliation, role and intended use. | KRAFTON emails you an invitation to the Raon console right away. | Open the invitation, verify your email and set a password; then issue an API key, try the Playground and read the API docs.
+### Huawei Cloud CodeArts Agent (码道) — Free Experience Plan
+- Provider: Huawei Cloud
+- Category: coding
+- Amount: Free Experience plan (体验版): 5M session-model tokens per month, up to 50 seats, Codebase index of 5,000 files and 500MB knowledge space; limited trial of basic agent capabilities (Q&A, coding, MCP, Rules, Skills)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.huaweicloud.com/intl/zh-cn/product/codearts/pricing.html
+- Page: https://freetokens.custats.info/offers/huawei-cloud-codearts-agent-free-plan.html
+- Summary: Huawei Cloud's CodeArts (码道) code agent has a free Experience plan (体验版) supporting 50 seats with 5M session-model tokens per month, a 5,000-file Codebase index and 500MB knowledge space. It is a limited trial of the agent's basic capabilities (Q&A, coding, MCP, Rules, Skills), with access via AI IDE, CLI/TUI, JetBrains and VSCode plugins and a built-in GLM model. Paid Basic ($20/seat/month) and Pro ($60/seat/month) plans offer larger allowances.
+- Claim steps: Open the CodeArts pricing page and sign in or register a Huawei Cloud account | Choose the free 体验版 (Experience) plan and click 立即开通 (Activate now)
+### AutoClaw Halloween Surprise — 40M Tokens for Logging In
+- Provider: AutoClaw (Z.ai)
+- Category: coding
+- Amount: Log in to AutoClaw between Oct 31 00:00 and Nov 8 23:59, 2026 (UTC+8) to claim 40M tokens (4,000 credits), one claim per account; the credits expire Nov 8 at 23:59 (UTC+8). The post says accounts that had not claimed the previous week's reward could claim both, for up to 80M tokens (8,000 credits).
+- Status: active — enrollment deadline: 2026-11-08
+- Last checked: 2026-11-06 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://autoclaw.z.ai/blog/news/M11W1/
+- Page: https://freetokens.custats.info/offers/autoclaw-halloween-login-40m-tokens.html
+- Summary: AutoClaw's official blog announces a Halloween login campaign: from October 31, 00:00 to November 8, 23:59 (UTC+8), logging in to AutoClaw claims 40M tokens (4,000 credits), one claim per account. These credits expire on November 8 at 23:59 (UTC+8). The post adds that accounts that had not yet claimed the previous week's reward could claim both for up to 80M tokens (8,000 credits). A separate one-off 100M-token bonus ran only from November 4, 07:00 to November 5, 07:00 (UTC+8) and has ended. The post does not name the model(s) the tokens apply to.
+- Claim steps: Log in to AutoClaw between October 31, 00:00 and November 8, 23:59 (UTC+8). | Claim the 4,000-credit (40M token) reward for this week's campaign (one claim per account). | Use the credits before November 8 at 23:59 (UTC+8), when they expire.
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1166,66 +1225,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/kilo-code-free-models.html
 - Summary: Kilo's AI Gateway allows unauthenticated access to models tagged :free, limited to 200 requests per hour per IP. Availability rotates; check the live catalog for current free IDs. NVIDIA free endpoints are trial-only: do not submit personal or confidential data, and usage is logged for security and to improve NVIDIA products and services. Zero pricing is not a blanket production-use or privacy waiver.
 - Claim steps: Check https://api.kilo.ai/api/gateway/models for a currently available :free model and its pricing, capabilities and provider terms; availability and model IDs can change. | For NVIDIA free endpoints, use them only for trials and never submit personal or confidential data. Usage is logged for security and to improve NVIDIA products and services; zero pricing does not waive provider usage or data restrictions. | Call the gateway without an Authorization header, or use a Kilo API key if preferred. | Stay within the 200 requests per hour per IP anonymous limit.
-### Jina AI — 10M Free Tokens
-- Provider: Jina AI
-- Category: api_provider
-- Amount: 10M free tokens with every new API key; Reader page lists 500 RPM Reader and 100 RPM / 100K TPM embeddings/rerank, but current official OpenAPI lists 500 RPM / 1M TPM embeddings/rerank; published limit conflict unresolved
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-05 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://jina.ai/en-US/reader/
-- Page: https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html
-- Summary: Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Limits are endpoint-specific: the Reader page lists embeddings/rerank at 100 RPM and 100K TPM, while the current official OpenAPI spec lists 500 RPM and 1M TPM for those endpoints and different chat limits. The conflicting published limits require confirmation; do not apply one blanket rate or concurrency limit to all APIs. Once the grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.
-- Claim steps: Sign up at jina.ai and get your API key from jina.ai/api-dashboard/key-manager — new keys auto-receive 10M free tokens. | Authenticate with 'Authorization: Bearer jina_<key>' against api.jina.ai endpoints (embeddings, rerank, reader via r.jina.ai, etc.). | When free tokens run out, buy more on the key's 'Buy tokens' tab — the free grant is one-time.
-### JetBrains Student Pack — All IDEs Free
-- Provider: JetBrains
-- Category: student
-- Amount: All JetBrains IDEs free for verified full-time students in programs lasting at least one year (annual renewal; non-commercial use only; 40% graduation discount)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-05 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://www.jetbrains.com/academy/student-pack/
-- Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
-- Summary: JetBrains Student Pack provides verified full-time students in programs lasting at least one year free JetBrains IDEs and .NET tools, with annual renewal. Educational licenses cannot be used for commercial work. Verify using university email, ISIC/ITIC or GitHub Student Developer Pack; general uploaded school documents are no longer accepted. The current Student Pack page includes coding courses and an AI Pro trial, not a perpetual free AI subscription. Official help confirms a 40% personal-subscription graduation discount valid for two years after the student license expires.
-- Claim steps: Go to https://www.jetbrains.com/academy/student-pack/ and click Apply. | Confirm full-time enrollment in a program lasting one year or more and verify via university email, ISIC/ITIC or GitHub Student Developer Pack. General uploaded school enrollment documents are not accepted. | Confirm the verification email link to activate approval. | Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled.
-### JetBrains Junie Lite — Free AI Coding Agent Model
-- Provider: JetBrains
-- Category: coding
-- Amount: Junie Lite: a free AI model in the Junie coding agent, always on in every JetBrains account (no trial, no card)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://junie.jetbrains.com/
-- Page: https://freetokens.custats.info/offers/jetbrains-junie-lite-free.html
-- Summary: Junie by JetBrains is a coding agent installed from the terminal. Its homepage announces Junie Lite as a free AI layer with no trial and no card, described in the pricing section as a free model that is always on in every JetBrains account. The Free to Start plan is listed as Free, with other AI usage billed separately; bring-your-own-key usage is billed at provider rates with zero markup.
-- Claim steps: Open a terminal and run the install command from junie.jetbrains.com: curl -fsSL https://junie.jetbrains.com/install.sh | bash | Sign in with your JetBrains Account to use the free Junie Lite model
-### IteraCompute Free Qwen3.8-27B — 30M Tokens/Month
-- Provider: IteraCompute
-- Category: api_provider
-- Amount: 30M free tokens per month on Qwen3.8-27B (input + output incl. reasoning), 128K context, 160K TPM, no credit card or recharge
-- Status: active — enrollment deadline: 2026-11-23
-- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://iteracompute.com/free
-- Page: https://freetokens.custats.info/offers/iteracompute-free-qwen3-8-27b.html
-- Summary: IteraCompute gives 30M free tokens per month on Qwen3.8-27B, with no credit card or recharge required. The model has zero input, cached-input, and output token prices. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, output is capped at 8,192 tokens, and throughput is 160K TPM. There is no automatic paid overage: an exhausted quota returns 429 until reset. Fair-use rate limits apply, there is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.
-- Claim steps: Register and verify your email, or sign in with Google | Open API Keys, create a key that allows qwen/qwen3.8-27b and save the secret shown once | Replace your-api-key with your key in the sample call and run it | Success means a non-empty choices[0].message.content; registration or HTTP 200 alone does not complete activation
-### Inworld On-Demand Free
-- Provider: Inworld AI
-- Category: voice
-- Amount: Free On-Demand plan with up to 70 min TTS (or 400 min STT) included
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-05 — review_status=verified · verification=social_proof · signup=required
-- Source: https://inworld.ai/pricing
-- Page: https://freetokens.custats.info/offers/inworld-on-demand-free.html
-- Summary: Inworld AI's On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT) for free, with voice and Inworld Inference access. Usage is metered: current pricing and billing describe a shared credit balance across TTS, STT, Inference and Realtime rather than a blanket separately billed LLM exclusion. Confirm your actual balance and model eligibility; this does not promise unlimited inference or a fixed free LLM token allowance. Some premium LLMs require a card and a credit purchase or paid-plan upgrade even with an existing balance. Professional voice cloning on On-Demand also requires a payment method.
-- Claim steps: Create an Inworld account. | Choose the On-Demand plan (Start free) at platform.inworld.ai/billing. | Use the up-to-70-min TTS or 400-min STT allowance and check the actual Billing balance. Inference is charged per token from the shared credit balance at the selected model rate; confirm free-credit eligibility and premium-model payment requirements before calling it.
-### InferX — DeepSeek V4.1 Flash 1017 Basic Free
-- Provider: InferX
-- Category: api_provider
-- Amount: DeepSeek V4.1 Flash 1017 Basic endpoint free: $0 per 1M input, output and cached input tokens (100% off promotional pricing, 262,144-token context); end date not published
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-05 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://inferx.net/pricing/endpoints
-- Page: https://freetokens.custats.info/offers/inferx-deepseek-v4-1-flash-free.html
-- Summary: InferX's endpoint pricing page shows the DeepSeek V4.1 Flash 1017 Basic endpoint at $0 for input, output and cached input tokens (100% off), with a 262,144-token context. The page marks it as a free promotional model and does not state an end date. Starting requires an InferX account (Start Free links to the model.inferx.net login).
-- Claim steps: Open inferx.net and choose Start Free | Sign in or create an InferX account | Use the DeepSeek V4.1 Flash 1017 Basic endpoint
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
