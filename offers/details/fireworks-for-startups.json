@@ -31,6 +31,12 @@
       "url": "https://docs.fireworks.ai/faq/billing-pricing-usage/billing/credit-system",
       "title": "Official offer conditions and claim requirements",
       "text": "If your balance reaches"
+    },
+    {
+      "type": "link",
+      "url": "https://fireworks.ai/blog/fireworks-startup-program-credits",
+      "title": "Fireworks for Startups Program: Credits and AI Engineers | Fireworks",
+      "text": "Build Credits : Unlock credits and options for higher rate limits to help you prototype and scale without worrying about upfront costs."
     }
   ]
 }
