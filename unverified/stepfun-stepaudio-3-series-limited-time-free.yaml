@@ -7,7 +7,7 @@ claim: "StepFun: StepAudio 3 series free until Nov 8, 2026 23:59:59 (UTC+8). Las
 amount_claimed: "StepAudio 3 series models free until 2026-11-08 23:59:59 (UTC+8)"
 sources: [{"url": "https://freeai.alexai.top/", "type": "web", "author": null, "handle": null, "date": "2026-11-04"}]
 first_seen: 2026-11-06
-last_seen: 2026-11-06
+last_seen: 2026-11-07
 reason: official_silent
-reason_detail: "The official pricing page confirms a limited-time free offer ending 23:59:59 on November 8, 2026 (UTC+8), but does not say which models it covers, and lists paid unit prices for every StepAudio 3 model. The platform home page mentions only pay-as-you-go."
-official_urls_tried: ["https://platform.stepfun.ai/", "https://platform.stepfun.ai/docs/en/pricing/details"]
+reason_detail: "The official pricing page confirms a limited-time free offer ending 23:59:59 on November 8, 2026 (UTC+8) but does not say which models it covers, and lists paid unit prices for every StepAudio 3 model. The Audio Models guide does not mention free access."
+official_urls_tried: ["https://platform.stepfun.ai/", "https://platform.stepfun.ai/docs/en/pricing/details", "https://platform.stepfun.ai/docs/en/guides/pricing/details", "https://platform.stepfun.ai/docs/en/guides/models/audio"]
