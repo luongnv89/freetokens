@@ -18,6 +18,12 @@
       "url": "https://ai.google.dev/gemini-api/docs/billing?hl=en",
       "title": "AI Studio paid-key billing caveat",
       "text": "AI Studio usage remains free of charge unless users link a paid API key for access to paid features."
+    },
+    {
+      "type": "link",
+      "url": "https://aistudio.google.com/docs/pricing",
+      "title": "Gemini Developer API pricing - Gemini API | Google AI Studio",
+      "text": "Google AI Studio usage is free of charge in all available regions."
     }
   ]
 }
