@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-07T03:33:48Z",
-  "count": 288,
-  "active_count": 245,
-  "expired_count": 43,
+  "generated_at": "2026-11-09T06:19:32Z",
+  "count": 293,
+  "active_count": 248,
+  "expired_count": 45,
   "offers": [
     {
       "slug": "autoclaw-halloween-login-40m-tokens",
@@ -17,7 +17,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "huawei-cloud-codearts-agent-free-plan",
@@ -257,7 +257,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "none",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "routeway-free-models",
@@ -4323,6 +4323,81 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "digitalocean-managed-agents-5-credit",
+      "title": "DigitalOcean Managed Agents — $5 Starter Credit",
+      "provider": "DigitalOcean",
+      "category": "api_provider",
+      "amount": "$5 credit to try Managed Agents (Public Preview), available to new DigitalOcean customers only",
+      "expiry_date": null,
+      "source_url": "https://www.digitalocean.com/products/managed-agents",
+      "verified_date": "2026-11-09",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "gonka-broker-free-llm-api",
+      "title": "Gonka Broker Free LLM API — 1M Tokens per Month",
+      "provider": "Gonka Broker",
+      "category": "api_provider",
+      "amount": "Monthly free tier of at least 1M tokens of any catalog model (cheaper models yield more), granted again on the 1st of each month; rate-limited, no credit card",
+      "expiry_date": null,
+      "source_url": "https://gonkabroker.com/free-llm-api/",
+      "verified_date": "2026-11-09",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "ibm-cloud-200-free-credit",
+      "title": "IBM Cloud — USD 200 Free Credit",
+      "provider": "IBM",
+      "category": "api_provider",
+      "amount": "USD 200 credit for 30 days, usable on any IBM Cloud product (not third-party offerings); first-time Pay-as-you-go accounts only, upgrade to Pay-as-you-go required",
+      "expiry_date": null,
+      "source_url": "https://www.ibm.com/products/cloud/free",
+      "verified_date": "2026-11-09",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "infomaniak-ai-services-1m-free-credits",
+      "title": "Infomaniak AI Services — 1M Free Credits for One Month",
+      "provider": "Infomaniak",
+      "category": "api_provider",
+      "amount": "1 million free credits (1 credit = 1 LLM token) to test the sovereign AI Services API for one month; credit card required",
+      "expiry_date": null,
+      "source_url": "https://www.infomaniak.com/en/support/faq/2845/getting-started-guide-ai-services-sovereign-ai-services",
+      "verified_date": "2026-11-09",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "sensenova-token-plan-free-beta",
+      "title": "SenseNova Token Plan — Free Public Beta",
+      "provider": "SenseNova",
+      "category": "api_provider",
+      "amount": "Free Token Plan (¥0/month) during the public beta for SenseNova 6.8 Flash Lite and SenseNova U1 Fast, up to 20 API keys; no quota published",
+      "expiry_date": null,
+      "source_url": "https://www.sensenova.cn/token-plan",
+      "verified_date": "2026-11-09",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

@@ -1,0 +1,22 @@
+{
+  "summary": "DigitalOcean Managed Agents (Public Preview) offers a $5 credit to new DigitalOcean customers; existing customers can start on a paid plan (Pro $50/month, Team $200/month). Public Preview is available to customers who opt in to the preview terms.",
+  "claim_steps": [
+    "Create a new DigitalOcean account",
+    "Opt in to the Managed Agents Public Preview terms",
+    "Use the $5 new-customer credit to run an agent"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.digitalocean.com/products/managed-agents",
+      "title": "Managed Agents | DigitalOcean",
+      "text": "$5 credit* ... *Available to new DigitalOcean customers only. Existing customers can start on any paid plan. Managed Agents is available in Public Preview to all customers who opt in to the preview terms."
+    },
+    {
+      "type": "link",
+      "url": "https://dev.to/digitalocean/where-can-i-get-free-credits-to-test-llm-inference-2l0h",
+      "title": "Where can I get free credits to test LLM inference",
+      "text": "New DigitalOcean customers get $5 in free credit, no credit card required, to test inference through Managed Agents. It's sized for testing, and Managed Agents is in Public Preview. It's a starter credit for new customers rather than an ongoing free tier. Frontier models such as Claude and GPT bill at list price; access is suspended when credits run out."
+    }
+  ]
+}
