@@ -152,8 +152,9 @@ function graphData(html) {
   throw new Error("document has no @graph JSON-LD");
 }
 
-function breadcrumbNames(html) {
-  const document = new DOMParser().parseFromString(html, "text/html");
+// Takes the already-parsed page: jsdom parsing dominates the breadcrumb walk
+// over every offer page, so each page is parsed once, not twice (#676).
+function breadcrumbNames(document) {
   const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
   if (!nav) throw new Error("document has no breadcrumb nav");
   return [...nav.querySelectorAll('a, [aria-current="page"]')].map(
@@ -161,7 +162,16 @@ function breadcrumbNames(html) {
   );
 }
 
-describe("static route coverage (#123)", () => {
+// Most tests here spawn a real `vite build` and/or `prerender.mjs`, or walk
+// every prerendered page; measured on a 2-vCPU host that takes ~4-30 s per
+// test, longer while other test files share the CPU, and it grows with the
+// catalogue. The default 5 s (and the old 10/15/60 s overrides) failed them
+// on slow runs (#676). The builds run through execFileSync, which blocks the
+// event loop, so a timeout cannot interrupt a hung build anyway; it only
+// fails a test that finished late.
+const ROUTE_TEST_TIMEOUT = 120_000;
+
+describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => {
   const outDir = path.join(tmpdir(), `ft-routes-${process.pid}`);
   let index;
 
@@ -219,7 +229,7 @@ describe("static route coverage (#123)", () => {
     viteBuild(outDir);
     prerender(outDir);
     expect(readRobots()).toBe(first);
-  }, 10000);
+  });
 
   it("emits an absolute sitemap for fixed and offer routes", () => {
     const sitemap = readFileSync(path.join(outDir, "sitemap.xml"), "utf8");
@@ -459,7 +469,7 @@ describe("static route coverage (#123)", () => {
     expect(detail).not.toContain("data-ft-share");
   });
 
-  it("emits crawlable breadcrumbs aligned with JSON-LD on every non-home route", { timeout: 60000 }, () => {
+  it("emits crawlable breadcrumbs aligned with JSON-LD on every non-home route", () => {
     const rootPages = [
       {
         file: "archive.html",
@@ -495,7 +505,7 @@ describe("static route coverage (#123)", () => {
       expect(nav?.querySelector('a[href="./index.html"]')).not.toBeNull();
       expect(nav?.querySelector('a[aria-current="page"]')).toBeNull();
       expect(nav?.querySelector('[aria-current="page"]')).not.toBeNull();
-      expect(breadcrumbNames(html)).toEqual(page.names);
+      expect(breadcrumbNames(document)).toEqual(page.names);
 
       const data = breadcrumbData(html);
       expect(data["@type"]).toBe("BreadcrumbList");
@@ -514,7 +524,7 @@ describe("static route coverage (#123)", () => {
       expect(nav).not.toBeNull();
       expect(nav?.querySelector('a[href="../index.html"]')).not.toBeNull();
       expect(nav?.querySelector('a[aria-current="page"]')).toBeNull();
-      expect(breadcrumbNames(html)).toEqual(["Offers", offer.title]);
+      expect(breadcrumbNames(document)).toEqual(["Offers", offer.title]);
 
       const data = breadcrumbData(html);
       expect(data["@type"]).toBe("BreadcrumbList");
@@ -1086,7 +1096,6 @@ describe("static route coverage (#123)", () => {
 
   it(
     "does not duplicate metadata when prerender runs again",
-    { timeout: 15_000 },
     () => {
       const files = [
         "index.html",
