@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-09T07:31:48Z — 123 of 248 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-09T07:45:17Z — 123 of 248 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -494,7 +494,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-11-09 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://docs.qoder.com/events/100credits
 - Page: https://freetokens.custats.info/offers/qoder-daily-credits-free-models.html
-- Summary: Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is "to be announced". The separate Qwen3.8-Flash daily free usage allowance (Credit rate cut from 0.1x to 0.0x) has ended: free access ended at 00:00 on November 7, 2026 (midnight at the end of November 6), and the model is now billed in Credits at its normal rate. A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.
+- Summary: Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is "to be announced". The separate Qwen3.8-Flash daily free usage allowance (Credit rate cut from 0.1x to 0.0x) has ended: free access ended at 00:00 on November 7, 2026 (UTC+8; midnight at the end of November 6). A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.
 - Claim steps: Download the Qoder desktop app and create or sign in to an individual Qoder International account. | During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later. | Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed.
 ### Qiniu Cloud Conatus Free — 100M Tokens per Day
 - Provider: Qiniu Cloud
