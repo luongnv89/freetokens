@@ -1,0 +1,16 @@
+{
+  "summary": "SenseNova's Token Plan page lists a Free · 公测 (public beta) plan at ¥0 per month, labelled 限时放量 (time-limited expanded volume). It covers SenseNova 6.8 Flash Lite and SenseNova U1 Fast, supports up to 20 API keys, and the page says the plan is completely free during the public beta while paid tiers are coming soon. No quota, rate limit, or end date is published.",
+  "claim_steps": [
+    "Open the SenseNova Token Plan page",
+    "Click 立即开始 on the Free · 公测 plan to go to the console API keys page",
+    "Sign in or register and create an API key"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.sensenova.cn/token-plan",
+      "title": "日日新 - 商汤科技大模型平台 | SenseNova",
+      "text": "Free · 公测 — 限时放量 — ¥ 0/月 — SenseNova 6.8 Flash Lite 与 SenseNova U1 Fast — 最多 20 个 API Key. 公测期完全免费开放，付费档位即将上线"
+    }
+  ]
+}
