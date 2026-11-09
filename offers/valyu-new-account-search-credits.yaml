@@ -11,7 +11,7 @@ category: api_provider
 amount: "$10 free credits for new accounts ($20 with a company email), no card required; one balance for Search, Contents and DeepResearch across standard-plan sources; credits expire 12 months after signup"
 expiry_date: null
 source_url: https://docs.valyu.ai/pricing
-verified_date: 2026-11-07
+verified_date: 2026-11-09
 verification: social_proof
 review_status: under-review
 signup: required

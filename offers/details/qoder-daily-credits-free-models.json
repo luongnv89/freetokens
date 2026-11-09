@@ -1,23 +1,22 @@
 {
-  "summary": "Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is \"to be announced\". Qwen3.8-Flash also has a daily free usage allowance: within it the Credit rate is cut from 0.1x to 0.0x and the model works even with a zero balance. Qoder does not publish the number of free uses; paid subscribers get more than free users, and once the allowance is used up the model is billed at its normal Credit rate until the next day. That offer was extended past September 30, and Qoder says the end date will be announced in advance; responses may be slower at peak times. A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.",
+  "summary": "Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is \"to be announced\". The separate Qwen3.8-Flash daily free usage allowance (Credit rate cut from 0.1x to 0.0x) has ended: free access ended at 00:00 on November 7, 2026 (UTC+8; midnight at the end of November 6). A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.",
   "claim_steps": [
     "Download the Qoder desktop app and create or sign in to an individual Qoder International account.",
     "During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later.",
-    "Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed.",
-    "For the free model, select Qwen3.8-Flash in the Qoder model picker; no claim is needed. Calls are free only within the daily free allowance (count unpublished); after that they use Credits at the normal rate until the next day."
+    "Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://docs.qoder.com/events/100credits",
-      "title": "Claim 100 Credits Every Day - Qoder",
-      "text": "Starting September 18, 2026 at 10:00, individual users of Qoder International can claim 100 Credits every day in the Qoder desktop app. Both free users and paid individual subscribers are eligible. ... End time : To be announced. ... Teams and Enterprise subscribers are not eligible."
+      "title": "Claim 100 Credits Every Day",
+      "text": "can claim 100 Credits every day in the Qoder desktop app. ... Each reward is valid for 30 days from the date you claim it."
     },
     {
       "type": "link",
       "url": "https://docs.qoder.com/events/flashoffer",
       "title": "Qwen3.8-Flash: Free for a Limited Time - Qoder",
-      "text": "Starting September 18, 2026 at 10:00, a daily free usage allowance for Qwen3.8-Flash is available for a limited time for all new and existing individual users of Qoder International. Within this allowance, calls to this model consume no Credits, with the Credit rate reduced from 0.1× to 0.0× . ... Free accounts and accounts with a zero Credits balance are also eligible. ... Each account receives a limited number of free uses each day. Paid subscribers receive more free uses than free users."
+      "text": "End of free promotion: Free access to Qwen3.8-Flash ends at 00:00 on November 7, 2026 (midnight at the end of November 6)."
     },
     {
       "type": "link",

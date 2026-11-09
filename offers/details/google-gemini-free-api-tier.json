@@ -24,6 +24,12 @@
       "url": "https://aistudio.google.com/docs/pricing",
       "title": "Gemini Developer API pricing",
       "text": "Free input & output tokens"
+    },
+    {
+      "type": "link",
+      "url": "https://aistudio.google.com/docs/terms",
+      "title": "Gemini API Additional Terms of Service",
+      "text": "You must be 18 years of age or older to use the APIs. You may only access the Services (or make API Clients available to users) within an available region. You may use only Paid Services when making API Clients available to users in the European Economic Area, Switzerland, or the United Kingdom."
     }
   ]
 }

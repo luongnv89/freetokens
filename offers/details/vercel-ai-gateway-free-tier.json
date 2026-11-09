@@ -17,6 +17,12 @@
       "url": "https://vercel.com/docs/ai-gateway/faq",
       "title": "AI Gateway FAQ",
       "text": "No. The free tier is a monthly included credit, not an expiring trial. It covers a subset of models with lower per-model rate limits."
+    },
+    {
+      "type": "link",
+      "url": "https://vercel.com/kb/guide/how-i-use-opencode-with-vercel-ai-gateway-to-build-features-fast",
+      "title": "How I use OpenCode with Vercel AI Gateway to build features fast",
+      "text": "There's a free tier with $5/month in credits that resets every 30 days after your first request."
     }
   ]
 }

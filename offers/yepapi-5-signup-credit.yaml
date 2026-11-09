@@ -7,9 +7,9 @@ title: YepAPI $5 Signup Credit
 provider: YepAPI
 category: api_provider
 amount: $5 free credit on signup for multiple models via an OpenAI-compatible gateway; no credit card required
-expiry_date: null
+expiry_date: 2026-11-09
 source_url: https://www.yepapi.com/ai-api
-verified_date: 2026-11-07
+verified_date: 2026-11-09
 verification: social_proof
 review_status: under-review
 signup: required
