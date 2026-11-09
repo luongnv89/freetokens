@@ -43,6 +43,12 @@
       "url": "https://api.fxtwitter.com/GeminiApp/status/2090165248196252003",
       "title": "GeminiApp post (fxtwitter mirror)",
       "text": "US students: 1 year of Google AI Pro at no cost - 140+ countries: 1 year of Google AI Plus at no cost"
+    },
+    {
+      "type": "link",
+      "url": "https://gemini.google/us/students/?hl=en",
+      "title": "Gemini for Students — your AI study buddy from Google",
+      "text": "Free student plan for 1 year ... free 1-year Google AI Pro student plan ... available to eligible U.S. college students ages 18+ ... Redeem until December 31, 2026."
     }
   ]
 }
