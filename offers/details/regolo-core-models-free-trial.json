@@ -1,0 +1,22 @@
+{
+  "summary": "Regolo.ai's Free Trial gives 30 days of full access to all Regolo Core Models with a 1M tokens per day limit, stricter rate limits and fair usage throttling. No credit card is required. When the trial ends the account stays active and moves to Pay-as-you-Go with no automatic charge.",
+  "claim_steps": [
+    "Create a Regolo.ai account (no credit card required)",
+    "Use Core Models for 30 days within 1M tokens per day",
+    "Choose Pay-as-you-Go or a Subscription when the trial ends"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://regolo.ai/pricing/",
+      "title": "Pricing | Scalable Serverless AI Infrastructure",
+      "text": "Free Trial: Get full access to all Core Models. No credit card required, no commitment. 1M tokens per day. Full access for 30 days, then choose a plan. Stricter rate limits. Fair usage throttling applies."
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "Regolo (Seeweb), Core Models trial: 1M tokens per day; 30 days from sign-up. Last verified Oct 30, 2026."
+    }
+  ]
+}

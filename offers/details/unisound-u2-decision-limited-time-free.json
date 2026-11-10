@@ -1,0 +1,22 @@
+{
+  "summary": "Unisound's MaaS model hub lists the U2-Decision model as limited-time free (限时免费), priced at ¥0 per million tokens for input, cached input and output. The page does not publish an end date; it was last updated 2026-09-27.",
+  "claim_steps": [
+    "Get the model's call URL from the U2-Decision page",
+    "Obtain an API key on the Unisound MaaS platform",
+    "Call the U2-Decision model with the API key"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://maas.unisound.com/model-hub/u2-decision",
+      "title": "U2-Decision - 模型广场",
+      "text": "限时免费 — 输入 ￥0 /M tokens; 输入（缓存命中） ￥0 /M tokens; 输出 ￥0 /M tokens. 更新时间：2026年9月27日"
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "Unisound, U2-Decision: \"¥0 per 1M input, cached input and output tokens\". End date not published (\"限时免费\"). Last verified Oct 31, 2026."
+    }
+  ]
+}

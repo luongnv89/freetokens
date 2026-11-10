@@ -1,0 +1,16 @@
+{
+  "summary": "Subscribing to a Google One AI plan (Google AI Pro or Google AI Ultra) unlocks premium Google Developer Program benefits, including monthly GenAI and Google Cloud developer credits: $10 per month for Google AI Pro, $40 per month for Google AI Ultra 5x and $100 per month for Google AI Ultra 20x. Credits are claimed from the Google Developer Program Benefits page and applied to a Google Cloud billing account where you hold the required billing role. Credits are issued on the monthly anniversary of the date your developer benefits started and expire one year after they are granted. The AI plan itself is a paid subscription.",
+  "claim_steps": [
+    "Subscribe to a Google AI Pro or Google AI Ultra plan (paid)",
+    "Visit your Google Developer Program Benefits page to claim and manage your developer benefits",
+    "Select a Google Cloud billing account (where you hold the required billing role) to apply the credits, or use the promo code at the Google Cloud billing redemption page if no billing account drop-down appears"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://developers.google.com/profile/help/benefits",
+      "title": "Google Developer Program Benefits FAQ",
+      "text": "Google AI Pro: $10 USD per month in GenAI and Google Cloud developer credits. Google AI Ultra 5x: $40 USD per month in GenAI and Google Cloud developer credits. Google AI Ultra 20x: $100 USD per month in GenAI and Google Cloud developer credits."
+    }
+  ]
+}
