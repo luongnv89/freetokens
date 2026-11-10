@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-09T07:45:17Z",
-  "count": 293,
-  "active_count": 248,
-  "expired_count": 45,
+  "generated_at": "2026-11-10T03:09:11Z",
+  "count": 302,
+  "active_count": 255,
+  "expired_count": 47,
   "offers": [
     {
       "slug": "digitalocean-managed-agents-5-credit",
@@ -227,7 +227,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openrouter-flint-v1-0-free",
@@ -3407,7 +3407,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "anthropic-console-free-starter-credits",
@@ -4398,6 +4398,141 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "dahl-inference-100m-free-tokens",
+      "title": "Dahl Inference — First 100M Tokens Free",
+      "provider": "Dahl Inference",
+      "category": "api_provider",
+      "amount": "First 100 million tokens free via the sign-up grant; free tokens expire after 7 consecutive days without a request",
+      "expiry_date": null,
+      "source_url": "https://inference.dahl.global/",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "google-developer-program-ai-pro-ultra-cloud-credits",
+      "title": "Google Developer Program — Monthly Google Cloud Credits for Google AI Pro/Ultra",
+      "provider": "Google",
+      "category": "api_provider",
+      "amount": "$10/month (Google AI Pro), $40/month (Google AI Ultra 5x) or $100/month (Google AI Ultra 20x) in GenAI and Google Cloud developer credits; requires a paid Google AI Pro/Ultra subscription; each month's credits expire one year after grant",
+      "expiry_date": null,
+      "source_url": "https://developers.google.com/profile/help/benefits",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "llmtr-qwen3-8-max-free",
+      "title": "LLMTR — Free Qwen3.8-Max (3M Tokens)",
+      "provider": "LLMTR",
+      "category": "api_provider",
+      "amount": "Qwen3.8-Max (qwen/qwen3.8-max-free) free, up to 3 million tokens per account until 13 Nov 2026 03:00 Turkey time",
+      "expiry_date": "2026-11-13",
+      "source_url": "https://llmtr.com/models/qwen/qwen3.8-max-free",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "maritaca-ai-s5-free",
+      "title": "Maritaca AI S5 Free — Limited-Time Free Model",
+      "provider": "Maritaca AI",
+      "category": "api_provider",
+      "amount": "S5-free model with no token charges for a limited time (text only; 60 RPM, 256k input and 256k output TPM)",
+      "expiry_date": null,
+      "source_url": "https://docs.maritaca.ai/pt/precos",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "morph-startup-credits",
+      "title": "Morph Startup Credits — Up to $1,000 in API Credits",
+      "provider": "Morph",
+      "category": "startup_program",
+      "amount": "Up to $1,000 in Morph API credits for accelerator members and early-stage startups, plus priority technical support and a direct Slack channel",
+      "expiry_date": null,
+      "source_url": "https://www.morphllm.com/startups",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "nscale-serverless-5-free-credit",
+      "title": "Nscale Serverless Inference — $5 Free Credit",
+      "provider": "Nscale",
+      "category": "api_provider",
+      "amount": "$5 free credit for every new account to explore serverless inference models",
+      "expiry_date": null,
+      "source_url": "https://www.nscale.com/blog/introducing-nscale-serverless-inference-scalable-ai-without-infrastructure-hassles",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "regolo-core-models-free-trial",
+      "title": "Regolo.ai Free Trial — 1M Tokens/Day for 30 Days",
+      "provider": "Regolo.ai",
+      "category": "api_provider",
+      "amount": "30-day free trial with full access to all Core Models, 1M tokens per day, no credit card required (stricter rate limits, fair usage throttling)",
+      "expiry_date": null,
+      "source_url": "https://regolo.ai/pricing/",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "the-grid-signup-credit",
+      "title": "The Grid — $5 Signup Credit",
+      "provider": "The Grid",
+      "category": "api_provider",
+      "amount": "$5 signup credit for new accounts (unused signup credit expires 14 days after signup)",
+      "expiry_date": null,
+      "source_url": "https://thegrid.ai/",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "unisound-u2-decision-limited-time-free",
+      "title": "Unisound U2-Decision — Limited-Time Free API Access",
+      "provider": "Unisound",
+      "category": "api_provider",
+      "amount": "¥0 per 1M input, cached-input and output tokens on U2-Decision for a limited time",
+      "expiry_date": null,
+      "source_url": "https://maas.unisound.com/model-hub/u2-decision",
+      "verified_date": "2026-11-10",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

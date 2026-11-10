@@ -1,0 +1,23 @@
+{
+  "summary": "Morph offers startup credits of up to $1,000 in API credits to startups that are part of an accelerator or at an early stage, to power products with its code editing and search models. The program also includes priority technical support and a direct Slack channel with the Morph team. Credits are granted to an organization; organizations with a billing method are approved first. No application deadline or credit duration is stated. Separately, Morph's pricing page lists a free tier of 200 requests per month, where each API call to Fast Apply, WarpGrep, or Compact counts as one request.",
+  "claim_steps": [
+    "Create your Morph account",
+    "Name your org",
+    "Add a billing method (orgs with a billing method are approved first)",
+    "Apply for startup credits on the startups page"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.morphllm.com/startups",
+      "title": "Startup Credits Program | Morph | Morph",
+      "text": "Up to $1K in API credits for startups. If you're part of an accelerator or early-stage startup, apply for credits to power your product with the fastest code editing and search models. API credits up to $1,000."
+    },
+    {
+      "type": "link",
+      "url": "https://www.morphllm.com/pricing.md",
+      "title": "Morph Pricing — Free tier + usage-based, no per-seat fees",
+      "text": "Free tier: 200 requests/month. Each API call to Fast Apply, WarpGrep, or Compact counts as one request against the free-tier 200/mo cap."
+    }
+  ]
+}

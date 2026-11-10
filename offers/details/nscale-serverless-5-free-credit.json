@@ -1,0 +1,34 @@
+{
+  "summary": "Nscale Serverless Inference gives every new account $5 of free credit to explore its models. When ready to scale, users add a payment card to purchase additional credit. The docs quickstart separately notes early users may be eligible for free credits and to check for promotional offers.",
+  "claim_steps": [
+    "Sign up for an Nscale account",
+    "Claim your free credit and create your API key",
+    "Add a payment card later to purchase additional credit"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.nscale.com/blog/introducing-nscale-serverless-inference-scalable-ai-without-infrastructure-hassles",
+      "title": "Introducing Nscale Serverless Inference: Scalable AI without infrastructure hassles",
+      "text": "Cost-effective inference at production scale: Sign up and claim $5 free credits. To help you start building, every new user can claim $5 of free credit to explore our models."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.nscale.com/changelog/changelog.md",
+      "title": "Changelog | Nscale Docs",
+      "text": "July 2025 (Serverless Fine-tuning): every new account still gets $5 free credit to experiment. March 2025: Every account starts with $5 free credit."
+    },
+    {
+      "type": "link",
+      "url": "https://www.nscale.com/blog/from-idea-to-inference-in-minutes-welcome-to-nscale-serverless",
+      "title": "From idea to Inference in minutes: Welcome to Nscale Serverless",
+      "text": "Claim your free credit and create your API key"
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "Nscale, Serverless Inference: $5 of free credit. End date not published. Last verified Oct 27, 2026."
+    }
+  ]
+}

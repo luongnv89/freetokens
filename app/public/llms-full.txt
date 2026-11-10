@@ -2,11 +2,100 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-09T07:45:17Z — 123 of 248 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-10T03:09:11Z — 124 of 255 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Unisound U2-Decision — Limited-Time Free API Access
+- Provider: Unisound
+- Category: api_provider
+- Amount: ¥0 per 1M input, cached-input and output tokens on U2-Decision for a limited time
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://maas.unisound.com/model-hub/u2-decision
+- Page: https://freetokens.custats.info/offers/unisound-u2-decision-limited-time-free.html
+- Summary: Unisound's MaaS model hub lists the U2-Decision model as limited-time free (限时免费), priced at ¥0 per million tokens for input, cached input and output. The page does not publish an end date; it was last updated 2026-09-27.
+- Claim steps: Get the model's call URL from the U2-Decision page | Obtain an API key on the Unisound MaaS platform | Call the U2-Decision model with the API key
+### The Grid — $5 Signup Credit
+- Provider: The Grid
+- Category: api_provider
+- Amount: $5 signup credit for new accounts (unused signup credit expires 14 days after signup)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://thegrid.ai/
+- Page: https://freetokens.custats.info/offers/the-grid-signup-credit.html
+- Summary: The Grid is an inference API that routes requests by quality tier, with an OpenAI Chat Completions-compatible endpoint and a beta Anthropic Messages endpoint. Usage is prepaid: fund the account and spend credits per request. The homepage states new accounts get a $5 signup credit and that all unused signup credits and bonuses expire 14 days after signup. The docs quickstart separately mentions a $25 limited-time signup credit; the homepage figure is used here.
+- Claim steps: Sign up for a new account at https://app.thegrid.ai/sign-up | Use the signup credit within 14 days of signup
+### Regolo.ai Free Trial — 1M Tokens/Day for 30 Days
+- Provider: Regolo.ai
+- Category: api_provider
+- Amount: 30-day free trial with full access to all Core Models, 1M tokens per day, no credit card required (stricter rate limits, fair usage throttling)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://regolo.ai/pricing/
+- Page: https://freetokens.custats.info/offers/regolo-core-models-free-trial.html
+- Summary: Regolo.ai's Free Trial gives 30 days of full access to all Regolo Core Models with a 1M tokens per day limit, stricter rate limits and fair usage throttling. No credit card is required. When the trial ends the account stays active and moves to Pay-as-you-Go with no automatic charge.
+- Claim steps: Create a Regolo.ai account (no credit card required) | Use Core Models for 30 days within 1M tokens per day | Choose Pay-as-you-Go or a Subscription when the trial ends
+### Nscale Serverless Inference — $5 Free Credit
+- Provider: Nscale
+- Category: api_provider
+- Amount: $5 free credit for every new account to explore serverless inference models
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.nscale.com/blog/introducing-nscale-serverless-inference-scalable-ai-without-infrastructure-hassles
+- Page: https://freetokens.custats.info/offers/nscale-serverless-5-free-credit.html
+- Summary: Nscale Serverless Inference gives every new account $5 of free credit to explore its models. When ready to scale, users add a payment card to purchase additional credit. The docs quickstart separately notes early users may be eligible for free credits and to check for promotional offers.
+- Claim steps: Sign up for an Nscale account | Claim your free credit and create your API key | Add a payment card later to purchase additional credit
+### Morph Startup Credits — Up to $1,000 in API Credits
+- Provider: Morph
+- Category: startup_program
+- Amount: Up to $1,000 in Morph API credits for accelerator members and early-stage startups, plus priority technical support and a direct Slack channel
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.morphllm.com/startups
+- Page: https://freetokens.custats.info/offers/morph-startup-credits.html
+- Summary: Morph offers startup credits of up to $1,000 in API credits to startups that are part of an accelerator or at an early stage, to power products with its code editing and search models. The program also includes priority technical support and a direct Slack channel with the Morph team. Credits are granted to an organization; organizations with a billing method are approved first. No application deadline or credit duration is stated. Separately, Morph's pricing page lists a free tier of 200 requests per month, where each API call to Fast Apply, WarpGrep, or Compact counts as one request.
+- Claim steps: Create your Morph account | Name your org | Add a billing method (orgs with a billing method are approved first) | Apply for startup credits on the startups page
+### Maritaca AI S5 Free — Limited-Time Free Model
+- Provider: Maritaca AI
+- Category: api_provider
+- Amount: S5-free model with no token charges for a limited time (text only; 60 RPM, 256k input and 256k output TPM)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.maritaca.ai/pt/precos
+- Page: https://freetokens.custats.info/offers/maritaca-ai-s5-free.html
+- Summary: Maritaca AI's S5-free model is free for a limited time with no token charges. It accepts text only and excludes the Batch API, Flex and built-in tools. Limits are fixed across all tiers at 60 requests per minute and 256k input plus 256k output tokens per minute. Maritaca describes it as a temporary launch offer that may end at any time and recommends S5 for production use.
+### LLMTR — Free Qwen3.8-Max (3M Tokens)
+- Provider: LLMTR
+- Category: api_provider
+- Amount: Qwen3.8-Max (qwen/qwen3.8-max-free) free, up to 3 million tokens per account until 13 Nov 2026 03:00 Turkey time
+- Status: active — enrollment deadline: 2026-11-13
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://llmtr.com/models/qwen/qwen3.8-max-free
+- Page: https://freetokens.custats.info/offers/llmtr-qwen3-8-max-free.html
+- Summary: LLMTR is an OpenAI-compatible LLM gateway run by Knowhy (Istanbul) offering one API key for hosted and global models. Its model page states Qwen3.8 Max via model id qwen/qwen3.8-max-free is free until 13 November 2026 03:00 Turkey time, and may close earlier if free usage ends sooner. Each account may use 3 million tokens during the period; input, output and cache-read input count together and the allowance does not renew. During peak hours requests may be rejected with HTTP 503; wait for the Retry-After period before retrying. Requests authenticate with an LLMTR API key.
+- Claim steps: Get an LLMTR API key | Call the OpenAI-compatible endpoint with model qwen/qwen3.8-max-free before 13 Nov 2026 03:00 Turkey time
+### Google Developer Program — Monthly Google Cloud Credits for Google AI Pro/Ultra
+- Provider: Google
+- Category: api_provider
+- Amount: $10/month (Google AI Pro), $40/month (Google AI Ultra 5x) or $100/month (Google AI Ultra 20x) in GenAI and Google Cloud developer credits; requires a paid Google AI Pro/Ultra subscription; each month's credits expire one year after grant
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://developers.google.com/profile/help/benefits
+- Page: https://freetokens.custats.info/offers/google-developer-program-ai-pro-ultra-cloud-credits.html
+- Summary: Subscribing to a Google One AI plan (Google AI Pro or Google AI Ultra) unlocks premium Google Developer Program benefits, including monthly GenAI and Google Cloud developer credits: $10 per month for Google AI Pro, $40 per month for Google AI Ultra 5x and $100 per month for Google AI Ultra 20x. Credits are claimed from the Google Developer Program Benefits page and applied to a Google Cloud billing account where you hold the required billing role. Credits are issued on the monthly anniversary of the date your developer benefits started and expire one year after they are granted. The AI plan itself is a paid subscription.
+- Claim steps: Subscribe to a Google AI Pro or Google AI Ultra plan (paid) | Visit your Google Developer Program Benefits page to claim and manage your developer benefits | Select a Google Cloud billing account (where you hold the required billing role) to apply the credits, or use the promo code at the Google Cloud billing redemption page if no billing account drop-down appears
+### Dahl Inference — First 100M Tokens Free
+- Provider: Dahl Inference
+- Category: api_provider
+- Amount: First 100 million tokens free via the sign-up grant; free tokens expire after 7 consecutive days without a request
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://inference.dahl.global/
+- Page: https://freetokens.custats.info/offers/dahl-inference-100m-free-tokens.html
+- Summary: Dahl Inference's Open Models API homepage advertises 'First 100 million tokens free'. Per the official pricing page and Terms section 8, free tokens (the sign-up grant and free guest keys) expire after 7 consecutive days without a request; any API or chat request restarts the 7 days, and accounts that have topped up keep them. Dahl may change or stop free and bonus token offers at any time.
+- Claim steps: Sign in / create an account at inference.dahl.global | Get an API key | Make a request at least every 7 days so free tokens do not expire
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -37,16 +126,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/z-ai-free-models.html
 - Summary: Z.AI's pricing table lists GLM-4.7-Flash, GLM-4.5-Flash, and GLM-4.6V-Flash with Free input, cached input, cached input storage, and output prices.
 - Claim steps: Register or sign in to the Z.AI Open Platform. | Create an API key in the API Keys management page. | Call one of the free models through Z.AI's API.
-### YepAPI $5 Signup Credit
-- Provider: YepAPI
-- Category: api_provider
-- Amount: $5 free credit on signup for multiple models via an OpenAI-compatible gateway; no credit card required
-- Status: active — enrollment deadline: 2026-11-09
-- Last checked: 2026-11-09 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.yepapi.com/ai-api
-- Page: https://freetokens.custats.info/offers/yepapi-5-signup-credit.html
-- Summary: YepAPI grants $5 free credit on signup with no credit card. One API key accesses multiple models (GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and more) through a single OpenAI-compatible endpoint. After the credit, usage is pay-per-token with no subscription.
-- Claim steps: Sign up at yepapi.com (no credit card required). | Copy your API key — $5 credit is applied automatically. | Point an OpenAI-compatible client at YepAPI and use any listed model.
 ### YC AI Stack — Free AI & Cloud Credits for YC Event Attendees
 - Provider: Y Combinator
 - Category: student
@@ -1165,76 +1244,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/kilo-code-free-models.html
 - Summary: Kilo's AI Gateway allows unauthenticated access to models tagged :free, limited to 200 requests per hour per IP. Availability rotates; check the live catalog for current free IDs. NVIDIA free endpoints are trial-only: do not submit personal or confidential data, and usage is logged for security and to improve NVIDIA products and services. Zero pricing is not a blanket production-use or privacy waiver.
 - Claim steps: Check https://api.kilo.ai/api/gateway/models for a currently available :free model and its pricing, capabilities and provider terms; availability and model IDs can change. | For NVIDIA free endpoints, use them only for trials and never submit personal or confidential data. Usage is logged for security and to improve NVIDIA products and services; zero pricing does not waive provider usage or data restrictions. | Call the gateway without an Authorization header, or use a Kilo API key if preferred. | Stay within the 200 requests per hour per IP anonymous limit.
-### Jina AI — 10M Free Tokens
-- Provider: Jina AI
-- Category: api_provider
-- Amount: 10M free tokens with every new API key; Reader page lists 500 RPM Reader and 100 RPM / 100K TPM embeddings/rerank, but current official OpenAPI lists 500 RPM / 1M TPM embeddings/rerank; published limit conflict unresolved
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-09 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://jina.ai/en-US/reader/
-- Page: https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html
-- Summary: Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Limits are endpoint-specific: the Reader page lists embeddings/rerank at 100 RPM and 100K TPM, while the current official OpenAPI spec lists 500 RPM and 1M TPM for those endpoints and different chat limits. The conflicting published limits require confirmation; do not apply one blanket rate or concurrency limit to all APIs. Once the grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.
-- Claim steps: Sign up at jina.ai and get your API key from jina.ai/api-dashboard/key-manager — new keys auto-receive 10M free tokens. | Authenticate with 'Authorization: Bearer jina_<key>' against api.jina.ai endpoints (embeddings, rerank, reader via r.jina.ai, etc.). | When free tokens run out, buy more on the key's 'Buy tokens' tab — the free grant is one-time.
-### JetBrains Student Pack — All IDEs Free
-- Provider: JetBrains
-- Category: student
-- Amount: All JetBrains IDEs free for verified full-time students in programs lasting at least one year (annual renewal; non-commercial use only; 40% graduation discount)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-09 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://www.jetbrains.com/academy/student-pack/
-- Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
-- Summary: JetBrains Student Pack provides verified full-time students in programs lasting at least one year free JetBrains IDEs and .NET tools, with annual renewal. Educational licenses cannot be used for commercial work. Verify using university email, ISIC/ITIC or GitHub Student Developer Pack; general uploaded school documents are no longer accepted. The current Student Pack page includes coding courses and an AI Pro trial, not a perpetual free AI subscription. Official help confirms a 40% personal-subscription graduation discount valid for two years after the student license expires.
-- Claim steps: Go to https://www.jetbrains.com/academy/student-pack/ and click Apply. | Confirm full-time enrollment in a program lasting one year or more and verify via university email, ISIC/ITIC or GitHub Student Developer Pack. General uploaded school enrollment documents are not accepted. | Confirm the verification email link to activate approval. | Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled.
-### JetBrains Junie Lite — Free AI Coding Agent Model
-- Provider: JetBrains
-- Category: coding
-- Amount: Junie Lite: a free AI model in the Junie coding agent, always on in every JetBrains account (no trial, no card)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-09 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://junie.jetbrains.com/
-- Page: https://freetokens.custats.info/offers/jetbrains-junie-lite-free.html
-- Summary: Junie by JetBrains is a coding agent installed from the terminal. Its homepage announces Junie Lite as a free AI layer with no trial and no card, described in the pricing section as a free model that is always on in every JetBrains account. The Free to Start plan is listed as Free, with other AI usage billed separately; bring-your-own-key usage is billed at provider rates with zero markup.
-- Claim steps: Open a terminal and run the install command from junie.jetbrains.com: curl -fsSL https://junie.jetbrains.com/install.sh | bash | Sign in with your JetBrains Account to use the free Junie Lite model
-### IteraCompute Free Qwen3.8-27B — 30M Tokens/Month
-- Provider: IteraCompute
-- Category: api_provider
-- Amount: 30M free tokens per month on Qwen3.8-27B (input + output incl. reasoning), 128K context, 160K TPM, no credit card or recharge
-- Status: active — enrollment deadline: 2026-11-23
-- Last checked: 2026-11-09 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://iteracompute.com/free
-- Page: https://freetokens.custats.info/offers/iteracompute-free-qwen3-8-27b.html
-- Summary: IteraCompute gives 30M free tokens per month on Qwen3.8-27B, with no credit card or recharge required. The model has zero input, cached-input, and output token prices. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, output is capped at 8,192 tokens, and throughput is 160K TPM. There is no automatic paid overage: an exhausted quota returns 429 until reset. Fair-use rate limits apply, there is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.
-- Claim steps: Register and verify your email, or sign in with Google | Open API Keys, create a key that allows qwen/qwen3.8-27b and save the secret shown once | Replace your-api-key with your key in the sample call and run it | Success means a non-empty choices[0].message.content; registration or HTTP 200 alone does not complete activation
-### Inworld On-Demand Free
-- Provider: Inworld AI
-- Category: voice
-- Amount: Free On-Demand plan with up to 70 min TTS (or 400 min STT) included
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-09 — review_status=verified · verification=social_proof · signup=required
-- Source: https://inworld.ai/pricing
-- Page: https://freetokens.custats.info/offers/inworld-on-demand-free.html
-- Summary: Inworld AI's On-Demand plan includes up to 70 minutes of TTS (or 400 minutes of STT) for free, with voice and Inworld Inference access. Usage is metered: current pricing and billing describe a shared credit balance across TTS, STT, Inference and Realtime rather than a blanket separately billed LLM exclusion. Confirm your actual balance and model eligibility; this does not promise unlimited inference or a fixed free LLM token allowance. Some premium LLMs require a card and a credit purchase or paid-plan upgrade even with an existing balance. Professional voice cloning on On-Demand also requires a payment method.
-- Claim steps: Create an Inworld account. | Choose the On-Demand plan (Start free) at platform.inworld.ai/billing. | Use the up-to-70-min TTS or 400-min STT allowance and check the actual Billing balance. Inference is charged per token from the shared credit balance at the selected model rate; confirm free-credit eligibility and premium-model payment requirements before calling it.
-### Infomaniak AI Services — 1M Free Credits for One Month
-- Provider: Infomaniak
-- Category: api_provider
-- Amount: 1 million free credits (1 credit = 1 LLM token) to test the sovereign AI Services API for one month; credit card required
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-09 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.infomaniak.com/en/support/faq/2845/getting-started-guide-ai-services-sovereign-ai-services
-- Page: https://freetokens.custats.info/offers/infomaniak-ai-services-1m-free-credits.html
-- Summary: Infomaniak's sovereign AI Services include one million free credits to test the service without commitment for one month. Each request consumes one credit or LLM token, billing is usage-based afterwards, and a credit card is required to start using the API.
-- Claim steps: Create or sign in to an Infomaniak account | Order AI Services and add a credit card | Use the one million free credits during the first month
-### InferX — DeepSeek V4.1 Flash 1017 Basic Free
-- Provider: InferX
-- Category: api_provider
-- Amount: DeepSeek V4.1 Flash 1017 Basic endpoint free: $0 per 1M input, output and cached input tokens (100% off promotional pricing, 262,144-token context); end date not published
-- Status: active — enrollment deadline: 2026-11-09
-- Last checked: 2026-11-09 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://inferx.net/pricing/endpoints
-- Page: https://freetokens.custats.info/offers/inferx-deepseek-v4-1-flash-free.html
-- Summary: InferX's endpoint pricing page shows the DeepSeek V4.1 Flash 1017 Basic endpoint at $0 for input, output and cached input tokens (100% off), with a 262,144-token context. The page marks it as a free promotional model and does not state an end date. Starting requires an InferX account (Start Free links to the model.inferx.net login).
-- Claim steps: Open inferx.net and choose Start Free | Sign in or create an InferX account | Use the DeepSeek V4.1 Flash 1017 Basic endpoint
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
