@@ -1,10 +1,12 @@
 # Verified 2026-09-04 against https://fireworks.ai/pricing
 # ("Pay per token, with high rate limits and postpaid billing. Get started
 # with $1 in free credits.")
+# Unverifiable 2026-11-10: https://fireworks.ai/pricing no longer mentions this free credit
+# ("Usage draws down prepaid credits."). Kept live; official silence is not an end notice.
 title: $1 in free credits for new Fireworks AI accounts
 provider: Fireworks AI
 category: api_provider
-amount: $1 in free credits
+amount: "$1 in free credits; unconfirmed: the official page no longer mentions it (rechecked 2026-11-10)"
 expiry_date: null
 source_url: https://fireworks.ai/pricing
 verified_date: 2026-11-07

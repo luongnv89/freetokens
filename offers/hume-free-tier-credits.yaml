@@ -4,10 +4,12 @@
 # Service sunset: TTS/EVI access ends November 13, 2026 at 12:01 a.m. EST.
 # expiry_date records the API shutdown, not a signup campaign deadline.
 # https://dev.hume.ai/voice/intro.md; monthly quotas remain unconfirmed.
+# Unverifiable 2026-11-10: https://dev.hume.ai/docs/resources/billing no longer mentions this free credit
+# (the URL now shows Audio Decisions API docs). Kept live; official silence is not an end notice.
 title: Hume Free Tier — $20 Credits
 provider: Hume AI
 category: voice
-amount: $20 in credits for new accounts per Voice API billing docs; TTS/EVI access ends November 13, 2026 at 12:01 a.m. EST; current monthly quotas unconfirmed
+amount: "$20 in credits for new accounts per Voice API billing docs; TTS/EVI access ends November 13, 2026 at 12:01 a.m. EST; the $20 credit and monthly quotas are unconfirmed (billing page gone, rechecked 2026-11-10)"
 expiry_date: 2026-11-13
 source_url: https://dev.hume.ai/docs/resources/billing
 verified_date: 2026-11-02

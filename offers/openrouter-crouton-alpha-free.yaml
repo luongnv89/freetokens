@@ -2,14 +2,17 @@
 # ("Price Free · Context 1.0M · Released Nov 3, 2026"; stealth FAQ: "Crouton Alpha
 # is available at no cost through the OpenRouter API.")
 # API check: /api/v1/models/stealth/crouton-alpha/endpoints -> pricing prompt "0",
-# completion "0". No end date stated, so expiry_date is null.
+# completion "0". No end date stated at the time.
+# Ended: rechecked 2026-11-10, the model page says "The stealth period has ended;
+# use Muse Ember at https://openrouter.ai/meta/muse-ember" and the endpoints API
+# lists no provider. No end date published, so expiry_date is the day of the check.
 title: Crouton Alpha Free on OpenRouter
 provider: OpenRouter
 category: api_provider
 amount: Free model access - $0 per million input and output tokens on stealth/crouton-alpha during the stealth preview (1M context)
-expiry_date: null
+expiry_date: 2026-11-10
 source_url: https://openrouter.ai/stealth/crouton-alpha
-verified_date: 2026-11-09
+verified_date: 2026-11-10
 verification: social_proof
 review_status: under-review
 signup: required
