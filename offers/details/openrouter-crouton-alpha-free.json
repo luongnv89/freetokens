@@ -1,6 +1,7 @@
 {
-  "summary": "OpenRouter lists the stealth model Crouton Alpha (stealth/crouton-alpha) at $0 per million input and output tokens during the anonymous-provider preview, released November 3, 2026. It takes text, image, video, file and audio input with a 1,048,576-token context. OpenRouter states prompts and completions may be retained by the provider but are not used for training. No end date is stated; earlier stealth models lost their free price once the preview ended.",
+  "summary": "OpenRouter lists the stealth model Crouton Alpha (stealth/crouton-alpha) at $0 per million input and output tokens during the anonymous-provider preview, released November 3, 2026. It takes text, image, video, file and audio input with a 1,048,576-token context. OpenRouter states prompts and completions may be retained by the provider but are not used for training. No end date is stated; earlier stealth models lost their free price once the preview ended. The stealth period has ended: on November 10, 2026 the model page said \"The stealth period has ended; use Muse Ember\", and OpenRouter no longer served the model.",
   "claim_steps": [
+    "Ended November 10, 2026: the stealth period is over and stealth/crouton-alpha is no longer served. The steps below describe how it was claimed during the preview.",
     "Sign in or create an account at openrouter.ai.",
     "Create an API key at openrouter.ai/settings/keys.",
     "Call the model with slug stealth/crouton-alpha via the OpenAI-compatible API at https://openrouter.ai/api/v1 (or pick it in any OpenRouter-supported app)."
@@ -10,7 +11,7 @@
       "type": "link",
       "url": "https://openrouter.ai/stealth/crouton-alpha",
       "title": "Crouton Alpha - API Pricing & Providers | OpenRouter",
-      "text": "Crouton Alpha is a stealth model. It is developed and operated by a third-party provider who has chosen to remain anonymous during this preview. Prompts and completions may be retained by the provider but are not used for training. Price: Free. Context: 1.0M. Released: Nov 3, 2026."
+      "text": "The stealth period has ended; use Muse Ember at https://openrouter.ai/meta/muse-ember (rechecked 2026-11-10). Earlier, on 2026-11-03: Price Free, Context 1.0M, Released Nov 3, 2026; prompts and completions not used for training."
     },
     {
       "type": "link",

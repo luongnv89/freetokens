@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-10T03:53:19Z",
+  "generated_at": "2026-11-10T08:30:27Z",
   "count": 302,
-  "active_count": 255,
-  "expired_count": 47,
+  "active_count": 256,
+  "expired_count": 46,
   "offers": [
     {
       "slug": "dahl-inference-100m-free-tokens",
@@ -535,9 +535,9 @@
       "provider": "OpenRouter",
       "category": "api_provider",
       "amount": "Free model access - $0 per million input and output tokens on stealth/crouton-alpha during the stealth preview (1M context)",
-      "expiry_date": null,
+      "expiry_date": "2026-11-10",
       "source_url": "https://openrouter.ai/stealth/crouton-alpha",
-      "verified_date": "2026-11-09",
+      "verified_date": "2026-11-10",
       "added_date": "2026-11-03",
       "verification": "social_proof",
       "review_status": "under-review",
@@ -665,6 +665,21 @@
       "status": "active"
     },
     {
+      "slug": "opencode-minimax-m3-1-flash-free",
+      "title": "MiniMax M3.1 Flash Free on OpenCode",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free MiniMax M3.1 Flash in the OpenCode app (free input, output and cached reads; limited time, tightly rate-limited)",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-11-10",
+      "added_date": "2026-10-20",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
+      "status": "active"
+    },
+    {
       "slug": "vercel-reflection-beam-free",
       "title": "Beam 1.0 Free (Vercel AI Gateway)",
       "provider": "Vercel",
@@ -693,21 +708,6 @@
       "review_status": "to-be-verified",
       "signup": "required",
       "status": "active"
-    },
-    {
-      "slug": "opencode-minimax-m3-1-flash-free",
-      "title": "MiniMax M3.1 Flash Free on OpenCode",
-      "provider": "OpenCode",
-      "category": "coding",
-      "amount": "Free MiniMax M3.1 Flash in the OpenCode app (free input, output and cached reads; limited time)",
-      "expiry_date": "2026-10-22",
-      "source_url": "https://opencode.ai/v2/docs/console/models/",
-      "verified_date": "2026-10-23",
-      "added_date": "2026-10-20",
-      "verification": "social_proof",
-      "review_status": "under-review",
-      "signup": "none",
-      "status": "expired"
     },
     {
       "slug": "openrouter-minimax-m3-1-flash-free",
