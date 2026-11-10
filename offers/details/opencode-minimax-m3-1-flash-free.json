@@ -1,9 +1,9 @@
 {
-  "summary": "MiniMax M3.1 Flash is free in OpenCode again: @opencode announced on November 10, 2026 that \"MiniMax M3.1 Flash is now free in OpenCode\". OpenCode's docs say \"MiniMax M3.1 Flash Free is free on OpenCode for a limited time\", and its model list shows minimax-m3.1-flash-free with free input, output and cached reads and a 1M-token context. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app, and it is tightly rate-limited: a keyless API call on November 10 returned HTTP 429, and users replying to the announcement reported very low free limits. An earlier free promotion ran from October 19 to October 22, 2026, when OpenCode switched to the paid MiniMax M3.1 Flash. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny.",
+  "summary": "MiniMax M3.1 Flash is free in OpenCode again: @opencode announced on November 10, 2026 that \"MiniMax M3.1 Flash is now free in OpenCode\". OpenCode's docs say \"MiniMax M3.1 Flash Free is free on OpenCode for a limited time\", and its model list shows minimax-m3.1-flash-free with free input, output and cached reads and a 1M-token context. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app: a keyless API call on November 10 was refused with \"Free models work in OpenCode\". Users replying to the announcement reported very low free limits. An earlier free promotion ended on October 22, 2026, when OpenCode switched to the paid MiniMax M3.1 Flash. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny.",
   "claim_steps": [
     "Install the OpenCode app from https://opencode.ai.",
     "Run /models and select MiniMax M3.1 Flash Free (opencode/minimax-m3.1-flash-free).",
-    "The free tier only works from within OpenCode; direct API calls from other clients are rejected.",
+    "The free tier only works from within OpenCode; direct API calls from other clients are refused (HTTP 429 FreeUsageLimitError, tested 2026-11-10).",
     "Expect tight rate limits on the free tier; the free period is limited-time with no published end date."
   ],
   "social_proof": [

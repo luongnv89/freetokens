@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-10T08:11:37Z — 123 of 256 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-10T08:30:27Z — 123 of 256 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -784,8 +784,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=none
 - Source: https://opencode.ai/v2/docs/console/models/
 - Page: https://freetokens.custats.info/offers/opencode-minimax-m3-1-flash-free.html
-- Summary: MiniMax M3.1 Flash is free in OpenCode again: @opencode announced on November 10, 2026 that "MiniMax M3.1 Flash is now free in OpenCode". OpenCode's docs say "MiniMax M3.1 Flash Free is free on OpenCode for a limited time", and its model list shows minimax-m3.1-flash-free with free input, output and cached reads and a 1M-token context. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app, and it is tightly rate-limited: a keyless API call on November 10 returned HTTP 429, and users replying to the announcement reported very low free limits. An earlier free promotion ran from October 19 to October 22, 2026, when OpenCode switched to the paid MiniMax M3.1 Flash. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny.
-- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select MiniMax M3.1 Flash Free (opencode/minimax-m3.1-flash-free). | The free tier only works from within OpenCode; direct API calls from other clients are rejected. | Expect tight rate limits on the free tier; the free period is limited-time with no published end date.
+- Summary: MiniMax M3.1 Flash is free in OpenCode again: @opencode announced on November 10, 2026 that "MiniMax M3.1 Flash is now free in OpenCode". OpenCode's docs say "MiniMax M3.1 Flash Free is free on OpenCode for a limited time", and its model list shows minimax-m3.1-flash-free with free input, output and cached reads and a 1M-token context. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app: a keyless API call on November 10 was refused with "Free models work in OpenCode". Users replying to the announcement reported very low free limits. An earlier free promotion ended on October 22, 2026, when OpenCode switched to the paid MiniMax M3.1 Flash. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny.
+- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select MiniMax M3.1 Flash Free (opencode/minimax-m3.1-flash-free). | The free tier only works from within OpenCode; direct API calls from other clients are refused (HTTP 429 FreeUsageLimitError, tested 2026-11-10). | Expect tight rate limits on the free tier; the free period is limited-time with no published end date.
 ### MiMo V2.6 Flash Free on OpenCode
 - Provider: OpenCode
 - Category: coding

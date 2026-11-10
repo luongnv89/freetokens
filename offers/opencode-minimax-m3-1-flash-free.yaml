@@ -3,9 +3,9 @@
 # https://opencode.ai/zen/v1/models (minimax-m3.1-flash-free: input 0, output 0, cache read 0).
 # Relaunched 2026-11-10 per @opencode: "MiniMax M3.1 Flash is now free in OpenCode"
 # (https://x.com/opencode/status/2119982381021192354). A keyless API call on
-# 2026-11-10 returned HTTP 429 (rate limited); users replying to the post report
-# very tight free limits.
-# History: a first free promo ran 2026-10-19 to 2026-10-22 (ended by
+# 2026-11-10 returned HTTP 429 FreeUsageLimitError ("Free models work in OpenCode"),
+# so the free tier is app-only; users replying to the post report tight free limits.
+# History: an earlier free promo ended 2026-10-22 (ended by
 # https://github.com/anomalyco/opencode/pull/58102).
 title: MiniMax M3.1 Flash Free on OpenCode
 provider: OpenCode
