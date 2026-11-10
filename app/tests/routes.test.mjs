@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import { execFileSync } from "node:child_process";
+import { execFile } from "node:child_process";
 import {
   copyFileSync,
   cpSync,
@@ -12,6 +12,8 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { setImmediate as yieldToEventLoop } from "node:timers/promises";
+import { promisify } from "node:util";
 import { SITEMAP_NAMESPACE } from "../scripts/sitemap.mjs";
 
 // Routing + prerender contract (issue #123): the built output must contain
@@ -23,25 +25,37 @@ import { SITEMAP_NAMESPACE } from "../scripts/sitemap.mjs";
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
 const ROBOTS_SITEMAP = "Sitemap: https://freetokens.custats.info/sitemap.xml";
 
-function prerender(distDir, dataFile, baseUrl) {
+// Child processes run asynchronously (#676): a synchronous build blocks the
+// test worker's event loop, so vitest could neither enforce a timeout nor
+// answer its own worker RPC (which gives up after 60 s on a loaded host).
+const execFileAsync = promisify(execFile);
+
+async function runNode(args) {
+  // Kill the child once it has run for ROUTE_TEST_TIMEOUT. The timer starts
+  // with the child, so a hung build can outlive a timed-out test, but only
+  // for a bounded time, never indefinitely.
+  await execFileAsync(process.execPath, args, {
+    cwd: APP_ROOT,
+    timeout: ROUTE_TEST_TIMEOUT,
+    killSignal: "SIGKILL",
+  });
+}
+
+async function prerender(distDir, dataFile, baseUrl) {
   const args = ["scripts/prerender.mjs", "--dist", distDir];
   if (dataFile) args.push("--data", dataFile);
   if (baseUrl) args.push("--base-url", baseUrl);
-  execFileSync(process.execPath, args, { cwd: APP_ROOT, stdio: "pipe" });
+  await runNode(args);
 }
 
-function viteBuild(outDir) {
-  execFileSync(
-    process.execPath,
-    [
-      "node_modules/vite/bin/vite.js",
-      "build",
-      "--outDir",
-      outDir,
-      "--emptyOutDir",
-    ],
-    { cwd: APP_ROOT, stdio: "pipe" },
-  );
+async function viteBuild(outDir) {
+  await runNode([
+    "node_modules/vite/bin/vite.js",
+    "build",
+    "--outDir",
+    outDir,
+    "--emptyOutDir",
+  ]);
 }
 
 function headOf(html) {
@@ -152,8 +166,9 @@ function graphData(html) {
   throw new Error("document has no @graph JSON-LD");
 }
 
-function breadcrumbNames(html) {
-  const document = new DOMParser().parseFromString(html, "text/html");
+// Takes the already-parsed page: jsdom parsing dominates the breadcrumb walk
+// over every offer page, so each page is parsed once, not twice (#676).
+function breadcrumbNames(document) {
   const nav = document.querySelector('nav[aria-label="Breadcrumb"]');
   if (!nav) throw new Error("document has no breadcrumb nav");
   return [...nav.querySelectorAll('a, [aria-current="page"]')].map(
@@ -161,13 +176,19 @@ function breadcrumbNames(html) {
   );
 }
 
-describe("static route coverage (#123)", () => {
+// Most tests here spawn a real `vite build` and/or `prerender.mjs`, or walk
+// every prerendered page; measured on a 2-vCPU host that takes ~4-50 s per
+// test depending on load, and it grows with the catalogue. The default 5 s
+// (and the old 10/15/60 s overrides) failed them on slow runs (#676).
+const ROUTE_TEST_TIMEOUT = 120_000;
+
+describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => {
   const outDir = path.join(tmpdir(), `ft-routes-${process.pid}`);
   let index;
 
-  beforeAll(() => {
-    viteBuild(outDir);
-    prerender(outDir);
+  beforeAll(async () => {
+    await viteBuild(outDir);
+    await prerender(outDir);
     index = JSON.parse(
       readFileSync(path.join(APP_ROOT, "src/data/offers.json"), "utf8"),
     );
@@ -185,7 +206,7 @@ describe("static route coverage (#123)", () => {
     expect(emitted).toEqual(expected);
   });
 
-  it("copies the robots policy and keeps it stable across builds", () => {
+  it("copies the robots policy and keeps it stable across builds", async () => {
     const readRobots = () =>
       readFileSync(path.join(outDir, "robots.txt"), "utf8");
     const first = readRobots();
@@ -216,10 +237,10 @@ describe("static route coverage (#123)", () => {
       expect(first).toContain(`User-agent: ${bot}\nAllow: /\n`);
     }
 
-    viteBuild(outDir);
-    prerender(outDir);
+    await viteBuild(outDir);
+    await prerender(outDir);
     expect(readRobots()).toBe(first);
-  }, 10000);
+  });
 
   it("emits an absolute sitemap for fixed and offer routes", () => {
     const sitemap = readFileSync(path.join(outDir, "sitemap.xml"), "utf8");
@@ -291,7 +312,7 @@ describe("static route coverage (#123)", () => {
     }
   });
 
-  it("renders fixture leads newest post first with nofollow ugc sources, only on /unverified.html", () => {
+  it("renders fixture leads newest post first with nofollow ugc sources, only on /unverified.html", async () => {
     const dataDir = path.join(tmpdir(), `ft-routes-leads-data-${process.pid}`);
     const leadsDist = path.join(tmpdir(), `ft-routes-leads-${process.pid}`);
     rmSync(dataDir, { recursive: true, force: true });
@@ -336,14 +357,13 @@ describe("static route coverage (#123)", () => {
     // A page left by a lead that has since gone stale must not survive (#683).
     mkdirSync(path.join(leadsDist, "unverified"), { recursive: true });
     writeFileSync(path.join(leadsDist, "unverified", "fixture-stale.html"), "stale");
-    prerender(leadsDist, path.join(dataDir, "offers.json"));
+    await prerender(leadsDist, path.join(dataDir, "offers.json"));
     // The llms and Markdown generators run after prerender in postbuild.
     const generated = ["--data", path.join(dataDir, "offers.json"),
       "--details", path.join(dataDir, "details.json"), "--dist", leadsDist];
-    execFileSync(process.execPath, ["scripts/generate-llms.mjs", ...generated,
-      "--public-dir", path.join(dataDir, "public")], { cwd: APP_ROOT, stdio: "pipe" });
-    execFileSync(process.execPath, ["scripts/generate-markdown.mjs", ...generated],
-      { cwd: APP_ROOT, stdio: "pipe" });
+    await runNode(["scripts/generate-llms.mjs", ...generated,
+      "--public-dir", path.join(dataDir, "public")]);
+    await runNode(["scripts/generate-markdown.mjs", ...generated]);
     const html = readFileSync(path.join(leadsDist, "unverified.html"), "utf8");
     expect(html.indexOf("Fixture newer lead")).toBeGreaterThan(0);
     expect(html.indexOf("Fixture newer lead")).toBeLessThan(html.indexOf("Fixture older lead"));
@@ -459,7 +479,7 @@ describe("static route coverage (#123)", () => {
     expect(detail).not.toContain("data-ft-share");
   });
 
-  it("emits crawlable breadcrumbs aligned with JSON-LD on every non-home route", { timeout: 60000 }, () => {
+  it("emits crawlable breadcrumbs aligned with JSON-LD on every non-home route", async () => {
     const rootPages = [
       {
         file: "archive.html",
@@ -495,7 +515,7 @@ describe("static route coverage (#123)", () => {
       expect(nav?.querySelector('a[href="./index.html"]')).not.toBeNull();
       expect(nav?.querySelector('a[aria-current="page"]')).toBeNull();
       expect(nav?.querySelector('[aria-current="page"]')).not.toBeNull();
-      expect(breadcrumbNames(html)).toEqual(page.names);
+      expect(breadcrumbNames(document)).toEqual(page.names);
 
       const data = breadcrumbData(html);
       expect(data["@type"]).toBe("BreadcrumbList");
@@ -505,6 +525,9 @@ describe("static route coverage (#123)", () => {
     }
 
     for (const offer of index.offers) {
+      // Parsing every page with jsdom takes tens of seconds; yield between
+      // pages so the worker stays responsive (#676).
+      await yieldToEventLoop();
       const html = readFileSync(
         path.join(outDir, "offers", `${offer.slug}.html`),
         "utf8",
@@ -514,7 +537,7 @@ describe("static route coverage (#123)", () => {
       expect(nav).not.toBeNull();
       expect(nav?.querySelector('a[href="../index.html"]')).not.toBeNull();
       expect(nav?.querySelector('a[aria-current="page"]')).toBeNull();
-      expect(breadcrumbNames(html)).toEqual(["Offers", offer.title]);
+      expect(breadcrumbNames(document)).toEqual(["Offers", offer.title]);
 
       const data = breadcrumbData(html);
       expect(data["@type"]).toBe("BreadcrumbList");
@@ -538,10 +561,10 @@ describe("static route coverage (#123)", () => {
     expect(home).toContain("BreadcrumbList");
   });
 
-  it("uses the configured prerender base URL in breadcrumb JSON-LD", () => {
+  it("uses the configured prerender base URL in breadcrumb JSON-LD", async () => {
     const customDir = path.join(tmpdir(), `ft-routes-base-${process.pid}`);
-    viteBuild(customDir);
-    prerender(customDir, undefined, "https://example.test/subpath/");
+    await viteBuild(customDir);
+    await prerender(customDir, undefined, "https://example.test/subpath/");
 
     const archive = readFileSync(path.join(customDir, "archive.html"), "utf8");
     expect(
@@ -654,7 +677,7 @@ describe("static route coverage (#123)", () => {
         ],
       }),
     );
-    prerender(outDir, dataCopy);
+    await prerender(outDir, dataCopy);
     const page = path.join(outDir, "offers", "zz-synthetic-new-offer.html");
     expect(existsSync(page)).toBe(true);
     expect(readFileSync(page, "utf8")).toContain(
@@ -1062,7 +1085,7 @@ describe("static route coverage (#123)", () => {
     expect(headShape(home)).toEqual(headShape(shell));
   });
 
-  it("removes duplicate description and canonical tags from a prerender template", () => {
+  it("removes duplicate description and canonical tags from a prerender template", async () => {
     const indexPath = path.join(outDir, "index.html");
     const shell = readFileSync(indexPath, "utf8");
     writeFileSync(
@@ -1074,7 +1097,7 @@ describe("static route coverage (#123)", () => {
           "</head>",
       ),
     );
-    prerender(outDir);
+    await prerender(outDir);
     const home = readFileSync(indexPath, "utf8");
     const description =
       "Every currently-claimable free AI credit offer, labeled with review status, evidence level, and sign-up need, on one fast page.";
@@ -1086,8 +1109,7 @@ describe("static route coverage (#123)", () => {
 
   it(
     "does not duplicate metadata when prerender runs again",
-    { timeout: 15_000 },
-    () => {
+    async () => {
       const files = [
         "index.html",
         "archive.html",
@@ -1099,11 +1121,11 @@ describe("static route coverage (#123)", () => {
       ];
       // The synthetic-data test above intentionally changes this shared output;
       // reset it to the default dataset before comparing two real prerenders.
-      prerender(outDir);
+      await prerender(outDir);
       const before = files.map((file) =>
         readFileSync(path.join(outDir, file), "utf8"),
       );
-      prerender(outDir);
+      await prerender(outDir);
       const after = files.map((file) =>
         readFileSync(path.join(outDir, file), "utf8"),
       );
