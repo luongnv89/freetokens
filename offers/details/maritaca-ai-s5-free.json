@@ -1,0 +1,23 @@
+{
+  "summary": "Maritaca AI's S5-free model is free for a limited time with no token charges. It accepts text only and excludes the Batch API, Flex and built-in tools. Limits are fixed across all tiers at 60 requests per minute and 256k input plus 256k output tokens per minute. Maritaca describes it as a temporary launch offer that may end at any time and recommends S5 for production use.",
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.maritaca.ai/pt/precos",
+      "title": "Preços | Maritaca API Documentation",
+      "text": "O S5-free é gratuito por tempo limitado: não há cobrança de tokens. Aceita somente texto e não inclui Batch API, Flex nem ferramentas integradas. O S5 Free é uma oferta temporária de lançamento e pode ser encerrada a qualquer momento."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.maritaca.ai/pt/rate-limits",
+      "title": "Rate Limits | Maritaca API Documentation",
+      "text": "O S5-free (disponível por tempo limitado) tem limite fixo, igual em todos os tiers: 60 RPM, 256k TPM de input e 256k TPM de output (sem Batch API)."
+    },
+    {
+      "type": "link",
+      "url": "https://freeai.alexai.top/",
+      "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
+      "text": "Maritaca AI, S5 Free: \"não há cobrança de tokens\" (no token charges; no figure given). End date not published. Last verified Nov 7, 2026."
+    }
+  ]
+}

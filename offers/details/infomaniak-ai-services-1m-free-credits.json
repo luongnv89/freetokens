@@ -1,0 +1,22 @@
+{
+  "summary": "Infomaniak's sovereign AI Services include one million free credits to test the service without commitment for one month. Each request consumes one credit or LLM token, billing is usage-based afterwards, and a credit card is required to start using the API.",
+  "claim_steps": [
+    "Create or sign in to an Infomaniak account",
+    "Order AI Services and add a credit card",
+    "Use the one million free credits during the first month"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.infomaniak.com/en/support/faq/2845/getting-started-guide-ai-services-sovereign-ai-services",
+      "title": "Getting Started Guide: AI Services (sovereign AI services)",
+      "text": "One million free credits allow you to test the service without commitment for one month. A credit card is required to start using the API. Each request consumes one credit or LLM token."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/ai-gateways/awesome-free-ai-providers/tree/main",
+      "title": "awesome-free-ai-providers: Free tiers, free models, and signup credits from hosted AI model APIs",
+      "text": "Signup and trial credits — Infomaniak — 1M credits for one month (Verified 2026-11-03)"
+    }
+  ]
+}

@@ -1,17 +1,17 @@
 {
-  "summary": "IteraCompute gives 30M free tokens per month on Qwen3.8-27B, with no credit card or recharge required. The model has zero input, cached-input, and output token prices. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, output is capped at 8,192 tokens, and throughput is 160K TPM. There is no automatic paid overage: an exhausted quota returns 429 until reset. Fair-use rate limits apply, there is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.",
+  "summary": "IteraCompute gives 30M free tokens per month through its Auto model ID, which routes among currently listed open models such as Qwen3.8-27B and DeepSeek V4.1 as idle capacity becomes available. No credit card or recharge is required. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, and there is no RPM, TPM or daily token cap. There is no automatic paid overage: an exhausted quota returns 429 until reset. There is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.",
   "claim_steps": [
     "Register and verify your email, or sign in with Google",
-    "Open API Keys, create a key that allows qwen/qwen3.8-27b and save the secret shown once",
-    "Replace your-api-key with your key in the sample call and run it",
+    "Open API Keys, create a key that allows the Auto model ID and save the secret shown once",
+    "Replace your-api-key with your key in the sample call (using the Auto model ID) and run it",
     "Success means a non-empty choices[0].message.content; registration or HTTP 200 alone does not complete activation"
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://iteracompute.com/free",
-      "title": "Free Qwen API for OpenCode and Your Apps | IteraCompute",
-      "text": "Start with Qwen3.8-27B: 30M free tokens per month, no credit card or recharge, 128K total context. No recharge required: 30M tokens/month, 128K total context and 160K TPM. The free Qwen3.8-27B promotion ends at 00:00 Pacific Time on November 24, 2026."
+      "title": "Try Auto for Free — No Credit Card | IteraCompute",
+      "text": "Get 30M free tokens per month with one Auto model ID. Auto routes among currently listed open models such as Qwen3.8-27B and DeepSeek V4.1 as idle capacity becomes available. There is no RPM, TPM or daily token cap, and no call-count or UTC-date upgrade requirement. This free promotion ends at 00:00 Pacific Time on November 24, 2026. Monthly allowances count input and output, including reasoning, across all API keys on your account. No credit card or recharge is needed."
     },
     {
       "type": "link",

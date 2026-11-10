@@ -42,6 +42,18 @@
       "url": "https://sales.jetbrains.com/hc/en-gb/articles/207241195-Do-you-offer-free-educational-licenses-for-students-and-teachers",
       "title": "Do you offer free educational licenses for students and teachers? – Licensing and Purchasing FAQ",
       "text": "It includes IntelliJ IDEA Ultimate, ReSharper, and all other JetBrains IDEs and .NET tools. Just note that educational licenses can't be used for commercial work. For students, we also offer a 40% graduation discount you can use to buy a personal subscription"
+    },
+    {
+      "type": "link",
+      "url": "https://www.jetbrains.com/legal/docs/toolbox/license_educational/",
+      "title": "Toolbox Subscription Agreement - Students and Teachers",
+      "text": "studies full-time at a recognized educational institution (university, college, high school) ... enrolled full-time or part-time in a vocational educational program that lasts no less than 1 year ... for non-commercial, educational purposes only"
+    },
+    {
+      "type": "link",
+      "url": "https://www.jetbrains.com/lp/edu-program-user-flow/",
+      "title": "JetBrains Educational License and Graduation Discount",
+      "text": "Applicants must participate in a one-year or multi-year full-time educational program involving programming courses/majors."
     }
   ]
 }

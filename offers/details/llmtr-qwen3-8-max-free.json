@@ -1,0 +1,27 @@
+{
+  "summary": "LLMTR is an OpenAI-compatible LLM gateway run by Knowhy (Istanbul) offering one API key for hosted and global models. Its model page states Qwen3.8 Max via model id qwen/qwen3.8-max-free is free until 13 November 2026 03:00 Turkey time, and may close earlier if free usage ends sooner. Each account may use 3 million tokens during the period; input, output and cache-read input count together and the allowance does not renew. During peak hours requests may be rejected with HTTP 503; wait for the Retry-After period before retrying. Requests authenticate with an LLMTR API key.",
+  "claim_steps": [
+    "Get an LLMTR API key",
+    "Call the OpenAI-compatible endpoint with model qwen/qwen3.8-max-free before 13 Nov 2026 03:00 Turkey time"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://llmtr.com/models/qwen/qwen3.8-max-free",
+      "title": "Qwen3.8-Max (Ücretsiz) - LLMTR üzerinden erişim",
+      "text": "Qwen3.8 Max, 13 Kasım 2026 03:00'e (TSİ) kadar ücretsizdir; ücretsiz kullanım daha önce sona ererse o tarihten önce kapanır. Her hesap dönem boyunca 3 milyon token kullanabilir; girdi, çıktı ve önbellekten okunan girdi birlikte sayılır, hak yenilenmez."
+    },
+    {
+      "type": "link",
+      "url": "https://llmtr.com/models",
+      "title": "AI Model Kataloğu | LLMTR",
+      "text": "Qwen3.8-Max (Ücretsiz) qwen/qwen3.8-max-free 2026-11-09"
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/mvalentsev/awesome-free-ai-coding",
+      "title": "GitHub - mvalentsev/awesome-free-ai-coding: Legal free LLM APIs & coding agents",
+      "text": "2026-11-09: LLMTR added qwen3.8-max; free until 2026-11-13."
+    }
+  ]
+}

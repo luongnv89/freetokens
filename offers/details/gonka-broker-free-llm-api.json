@@ -1,0 +1,22 @@
+{
+  "summary": "Gonka Broker gives every account a monthly free tier sized as 1M tokens of its most expensive model, so cheaper models yield more (about 1M for MiniMax M2, about 1.2M each for DeepSeek V4 Flash and GLM-5.3-Flash, about 6M for BGE-M3). The allowance renews on the 1st of each calendar month; unused tokens expire. Free-tier requests are rate-limited for fair use. No credit card is needed; beyond the free tier, usage is prepaid per token in USD and free tokens are consumed before any paid balance.",
+  "claim_steps": [
+    "Sign up with email or Google",
+    "Create an API key in the dashboard",
+    "Call the OpenAI-compatible API; the free tier renews on the 1st of each month"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://gonkabroker.com/free-llm-api/",
+      "title": "Free LLM API — 1M Tokens of Any Model Every Month | Gonka Broker",
+      "text": "Every Gonka Broker account includes a monthly free tier: at least 1M tokens of any model in the catalog. The free tier is granted again on the 1st of every calendar month. No credit card, no expiring trial credit. Sign up with email or Google and create an API key. That's it."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/ai-gateways/awesome-free-ai-providers/tree/main",
+      "title": "awesome-free-ai-providers: Free tiers, free models, and signup credits from hosted AI model APIs",
+      "text": "Routers and community networks — Gonka Broker — at least 1M tokens/month (Verified 2026-11-03). Separately, a Free-LLM November 4, 2026 roundup seen in search results lists GonkaRouter: 1M free tokens for new users."
+    }
+  ]
+}

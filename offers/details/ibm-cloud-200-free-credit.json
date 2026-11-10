@@ -1,0 +1,23 @@
+{
+  "summary": "IBM Cloud gives new users credit for their first USD 200 of apps and services, usable on any IBM Cloud product for 30 days. To receive it you must upgrade to a Pay-as-you-go account; the credit is for first-time Pay-as-you-go accounts only, cannot be used with third-party offerings, and is applied automatically (it may take a few hours to appear). Separately, IBM Cloud offers 40+ always-free Lite plan products, including IBM Watson APIs.",
+  "claim_steps": [
+    "Create an IBM Cloud account",
+    "Upgrade the account to Pay-as-you-go",
+    "The USD 200 promotional credit is applied automatically (may take a few hours)",
+    "Use the credit on any IBM Cloud product within 30 days"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.ibm.com/products/cloud/free",
+      "title": "IBM Cloud Free Tier",
+      "text": "You get credit for your first USD 200 of apps and services on us. Try any IBM Cloud product with this credit, available for 30 days. To receive the USD 200 credit, you first need to upgrade to a Pay-as-you-go account. The credit is available for first-time Pay-as-you-go accounts only and cannot be used with third-party offerings."
+    },
+    {
+      "type": "link",
+      "url": "https://aifree.dev/free-api-credits",
+      "title": "93 Free AI API credits, verified Nov 2026",
+      "text": "IBM Cloud free tier — $200"
+    }
+  ]
+}

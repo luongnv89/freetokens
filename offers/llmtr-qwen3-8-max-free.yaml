@@ -1,0 +1,13 @@
+# Hunted 2026-11-10 by offer-hunter; verified against https://llmtr.com/models/qwen/qwen3.8-max-free
+# ("Qwen3.8 Max, 13 Kasım 2026 03:00'e (TSİ) kadar ücretsizdir; ücretsiz kullanım daha önce sona ererse o tarihten önce kapanır. Her hesap dönem boyunca 3 milyon token kullanabilir;")
+# Lead: https://github.com/mvalentsev/awesome-free-ai-coding
+title: LLMTR — Free Qwen3.8-Max (3M Tokens)
+provider: LLMTR
+category: api_provider
+amount: Qwen3.8-Max (qwen/qwen3.8-max-free) free, up to 3 million tokens per account until 13 Nov 2026 03:00 Turkey time
+expiry_date: 2026-11-13
+source_url: https://llmtr.com/models/qwen/qwen3.8-max-free
+verified_date: 2026-11-10
+verification: social_proof
+review_status: under-review
+signup: required

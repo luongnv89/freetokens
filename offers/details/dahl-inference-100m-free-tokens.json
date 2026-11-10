@@ -1,0 +1,34 @@
+{
+  "summary": "Dahl Inference's Open Models API homepage advertises 'First 100 million tokens free'. Per the official pricing page and Terms section 8, free tokens (the sign-up grant and free guest keys) expire after 7 consecutive days without a request; any API or chat request restarts the 7 days, and accounts that have topped up keep them. Dahl may change or stop free and bonus token offers at any time.",
+  "claim_steps": [
+    "Sign in / create an account at inference.dahl.global",
+    "Get an API key",
+    "Make a request at least every 7 days so free tokens do not expire"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://inference.dahl.global/",
+      "title": "Open Models API — Dahl Inference",
+      "text": "Calculate how much you save ... First 100 million tokens free"
+    },
+    {
+      "type": "link",
+      "url": "https://inference.dahl.global/pricing/",
+      "title": "Pricing — Dahl Inference",
+      "text": "Free tokens (the sign-up grant and free guest keys) expire after 7 days without a request; accounts that have topped up keep them."
+    },
+    {
+      "type": "link",
+      "url": "https://inference.dahl.global/terms/",
+      "title": "Terms and Conditions — Dahl Inference",
+      "text": "This covers the sign-up grant and other free tokens in the pool. Free tokens expire after 7 consecutive days without a request. Dahl may end discretionary free access and may change or stop free and bonus token offers at any time."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/mvalentsev/awesome-free-ai-coding",
+      "title": "GitHub - mvalentsev/awesome-free-ai-coding: Legal free LLM APIs & coding agents",
+      "text": "Dahl Inference — Account allowance: 100M tokens. Duration not stated. (List badge: every row verified 2026-11-05 or later.)"
+    }
+  ]
+}

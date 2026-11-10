@@ -17,13 +17,13 @@
 # "Each account receives a limited number of free uses each day. Paid subscribers receive more free uses than free
 # users." This wording was absent from the 2026-10-27 snapshot; the page does not date the change, so it is
 # recorded as a copy correction, not a dated policy change. 100credits page unchanged (end time "To be announced").
-title: Qoder International Free Daily Credits and Free Flash Models
+title: Qoder International Free Daily Credits
 provider: Qoder
 category: coding
-amount: 100 free Credits per day (claim daily, each valid 30 days) plus a daily free-use allowance for Qwen3.8-Flash (number of uses unpublished; paid subscribers get more)
+amount: 100 free Credits per day (claim daily, each valid 30 days)
 expiry_date: null
 source_url: https://docs.qoder.com/events/100credits
-verified_date: 2026-11-07
+verified_date: 2026-11-10
 verification: social_proof
 review_status: under-review
 signup: required
