@@ -6,6 +6,8 @@
 # 2026-10-25: https://docs.tripo3d.ai/get-started/pricing.html (static + rendered; also /zh/) no longer shows the
 # 300-free-credit line or the V2 banner. It now says "Triop API for generation is a pay-before-you-go product. You need
 # to purchase API usage based on your application's need before using Tripo API." No end notice found; no expiry inferred.
+# Unverifiable 2026-11-10: https://docs.tripo3d.ai/get-started/pricing.html no longer mentions this free credit
+# ("$1.00 = 100 credits"). Kept live; official silence is not an end notice.
 title: Tripo AI 300 Free API Credits
 provider: Tripo AI
 category: image

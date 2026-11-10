@@ -5,10 +5,12 @@
 # $1 in trial credit, valid for 30 days." sentence (present on 2026-10-30), and llms-full.txt has no
 # remaining "trial" mention. No end notice found; flagged to-be-verified until a new account balance
 # or an official source confirms whether the $1 trial credit is still granted.
+# Unverifiable 2026-11-10: https://docs.tokenfactory.nebius.com/other-capabilities/billing-new no longer mentions this free credit
+# ("Setting up a billing account requires a bank card."). Kept live; official silence is not an end notice.
 title: Nebius Token Factory $1 trial credit
 provider: Nebius Token Factory
 category: api_provider
-amount: $1 credit for 30 days (bank card required to onboard)
+amount: "$1 credit for 30 days (bank card required to onboard); unconfirmed: the official page no longer mentions it (rechecked 2026-11-10)"
 expiry_date: null
 source_url: https://docs.tokenfactory.nebius.com/other-capabilities/billing-new
 verified_date: 2026-09-30

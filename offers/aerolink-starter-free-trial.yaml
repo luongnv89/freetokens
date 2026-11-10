@@ -14,10 +14,12 @@
 # intermittent; kept to-be-verified.
 # 2026-10-29: absent again from /pricing (static HTML and browser-rendered) and /register. Still
 # intermittent; kept to-be-verified, no end date inferred.
+# Unverifiable 2026-11-10: https://aerolink.lat/pricing no longer mentions this free credit
+# ("Top up from $100 in base credits"). Kept live; official silence is not an end notice.
 title: Aerolink $5 Testing Credit
 provider: Aerolink
 category: api_provider
-amount: $5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks
+amount: "$5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks; unconfirmed: the official page no longer mentions it (rechecked 2026-11-10)"
 expiry_date: null
 source_url: https://aerolink.lat/pricing
 verified_date: 2026-09-30
