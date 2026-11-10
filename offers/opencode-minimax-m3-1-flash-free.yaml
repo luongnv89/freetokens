@@ -1,21 +1,19 @@
-# Verified 2026-10-20 against https://opencode.ai/v2/docs/console/models/
-# ("MiniMax M3.1 Flash Free is free on OpenCode for a limited time. Its provider follows a
-# zero-retention policy and does not use your data for model training."
-# Pricing table: "MiniMax M3.1 Flash Free | Free | Free | Free | -"; model id minimax-m3.1-flash-free,
-# also present in https://opencode.ai/inference/v1/models.)
-# A keyless API call on 2026-10-20 05:39 UTC returned HTTP 403 FreeTierError "OpenCode's free tier
-# can only be used from within OpenCode."
-# Ended 2026-10-22: official merged PR https://github.com/anomalyco/opencode/pull/58102 (merged
-# 2026-10-22 14:57 UTC) "Ends the MiniMax M3.1 Flash Free promo" and replaces it with the paid MiniMax
-# M3.1 Flash. Rechecked 2026-10-23: the model is gone from the docs pricing table and /inference/v1/models,
-# and a keyless call returns HTTP 410 ModelDeprecated ("Use deepseek-v4.1-flash-free instead").
+# Verified 2026-11-10 against https://opencode.ai/v2/docs/console/models/
+# ("MiniMax M3.1 Flash Free is free on OpenCode for a limited time") and
+# https://opencode.ai/zen/v1/models (minimax-m3.1-flash-free: input 0, output 0, cache read 0).
+# Relaunched 2026-11-10 per @opencode: "MiniMax M3.1 Flash is now free in OpenCode"
+# (https://x.com/opencode/status/2119982381021192354). A keyless API call on
+# 2026-11-10 returned HTTP 429 (rate limited); users replying to the post report
+# very tight free limits.
+# History: a first free promo ran 2026-10-19 to 2026-10-22 (ended by
+# https://github.com/anomalyco/opencode/pull/58102).
 title: MiniMax M3.1 Flash Free on OpenCode
 provider: OpenCode
 category: coding
-amount: Free MiniMax M3.1 Flash in the OpenCode app (free input, output and cached reads; limited time)
-expiry_date: 2026-10-22
+amount: Free MiniMax M3.1 Flash in the OpenCode app (free input, output and cached reads; limited time, tightly rate-limited)
+expiry_date: null
 source_url: https://opencode.ai/v2/docs/console/models/
-verified_date: 2026-10-23
+verified_date: 2026-11-10
 verification: social_proof
 review_status: under-review
 signup: none

@@ -1,13 +1,19 @@
 {
-  "summary": "OpenCode lists MiniMax M3.1 Flash Free (minimax-m3.1-flash-free) with free input, output and cached reads for a limited time. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-20 was rejected with \"OpenCode's free tier can only be used from within OpenCode.\" No in-app request was tested, and whether the app needs an account is unconfirmed. The promotion ended on October 22, 2026: OpenCode merged a change that day ending the MiniMax M3.1 Flash Free promo and listing the paid MiniMax M3.1 Flash instead, and on October 23 the API answered the free model ID with HTTP 410 ModelDeprecated, pointing to deepseek-v4.1-flash-free. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny, whose separate one-week OpenCode promotion ended September 30.",
+  "summary": "MiniMax M3.1 Flash is free in OpenCode again: @opencode announced on November 10, 2026 that \"MiniMax M3.1 Flash is now free in OpenCode\". OpenCode's docs say \"MiniMax M3.1 Flash Free is free on OpenCode for a limited time\", and its model list shows minimax-m3.1-flash-free with free input, output and cached reads and a 1M-token context. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The free tier works only inside the OpenCode app, and it is tightly rate-limited: a keyless API call on November 10 returned HTTP 429, and users replying to the announcement reported very low free limits. An earlier free promotion ran from October 19 to October 22, 2026, when OpenCode switched to the paid MiniMax M3.1 Flash. MiniMax says M3.1 Flash is the released version of the earlier stealth model Space Bunny.",
   "claim_steps": [
-    "Ended October 22, 2026: minimax-m3.1-flash-free is deprecated (HTTP 410). The steps below describe how it was claimed during the promotion.",
     "Install the OpenCode app from https://opencode.ai.",
     "Run /models and select MiniMax M3.1 Flash Free (opencode/minimax-m3.1-flash-free).",
-    "Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-20).",
-    "Whether the in-app free tier needs an OpenCode account or billing details was not tested. The free period is limited-time."
+    "The free tier only works from within OpenCode; direct API calls from other clients are rejected.",
+    "Expect tight rate limits on the free tier; the free period is limited-time with no published end date."
   ],
   "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2119982381021192354",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "MiniMax M3.1 Flash is now free in OpenCode"
+    },
     {
       "type": "link",
       "url": "https://github.com/anomalyco/opencode/pull/58102",
@@ -22,9 +28,9 @@
     },
     {
       "type": "link",
-      "url": "https://opencode.ai/inference/v1/models",
-      "title": "OpenCode inference model catalog",
-      "text": "Live catalog lists id minimax-m3.1-flash-free, owned_by opencode. (A keyless chat call on 2026-10-20 returned HTTP 403 FreeTierError: \"OpenCode's free tier can only be used from within OpenCode.\")"
+      "url": "https://opencode.ai/zen/v1/models",
+      "title": "OpenCode Zen models API",
+      "text": "id: minimax-m3.1-flash-free, name: MiniMax M3.1 Flash Free, cost: input 0, output 0, cache read 0; context limit 1000000 (checked 2026-11-10)."
     },
     {
       "type": "link",
