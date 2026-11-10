@@ -31,7 +31,14 @@ const ROBOTS_SITEMAP = "Sitemap: https://freetokens.custats.info/sitemap.xml";
 const execFileAsync = promisify(execFile);
 
 async function runNode(args) {
-  await execFileAsync(process.execPath, args, { cwd: APP_ROOT });
+  // Kill the child once it reaches the per-test budget (ROUTE_TEST_TIMEOUT),
+  // so a hung build can't keep rewriting the shared outDir after its test
+  // has timed out.
+  await execFileAsync(process.execPath, args, {
+    cwd: APP_ROOT,
+    timeout: 120_000,
+    killSignal: "SIGKILL",
+  });
 }
 
 async function prerender(distDir, dataFile, baseUrl) {
