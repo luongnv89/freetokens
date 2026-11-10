@@ -1,10 +1,12 @@
 # Hunted 2026-10-13 by offer-hunter; verified against https://liner.com/developers
 # ("Get up to $15 for free. No purchase necessary. Just add your card. Claim now")
 # Lead: https://pricingsaas.com/feed?dimension=ai-themes&category=credits
+# Unverifiable 2026-11-10: https://liner.com/developers/docs/pricing no longer mentions this free credit
+# ("Credits are a prepaid balance used to pay for API use."). Kept live; official silence is not an end notice.
 title: Liner API — Up to $15 Free Credits on Sign-up
 provider: Liner
 category: api_provider
-amount: Up to $15 in free Liner API credits for new developer accounts; no purchase necessary, card required
+amount: "Up to $15 in free Liner API credits for new developer accounts; no purchase necessary, card required; unconfirmed: the official page no longer mentions it (rechecked 2026-11-10)"
 expiry_date: null
 source_url: https://liner.com/developers
 verified_date: 2026-11-05

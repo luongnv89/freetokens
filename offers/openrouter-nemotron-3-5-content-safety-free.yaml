@@ -4,13 +4,16 @@
 # completion:0, context_length 128000, created 2026-06-04. "compact
 # 4B-parameter multimodal guardrail model ... moderates both inputs to
 # and responses from LLMs and VLMs." No published end date.)
+# Ended: rechecked 2026-11-10, https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-content-safety:free/endpoints
+# returns an empty endpoints list (no provider serves the :free model). No end
+# date was published, so expiry_date is the day of the check.
 title: Nemotron 3.5 Content Safety Free (OpenRouter)
 provider: OpenRouter
 category: api_provider
 amount: "Free nvidia/nemotron-3.5-content-safety:free endpoint at $0 (128K context guardrail model); trial/internal evaluation only, not production"
-expiry_date: null
+expiry_date: 2026-11-10
 source_url: https://openrouter.ai/nvidia/nemotron-3.5-content-safety:free
-verified_date: 2026-11-05
+verified_date: 2026-11-10
 verification: social_proof
 review_status: under-review
 signup: required

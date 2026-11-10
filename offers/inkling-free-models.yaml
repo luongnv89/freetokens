@@ -9,13 +9,16 @@
 # restricted to agentic-harness use per TML terms; usage is logged for training.
 # NOTE: user flagged "meant for coding agents (Claude Code, Hermes, OpenClaw)" —
 # these are OpenRouter-hosted free models, no hard end date seen on page.
+# Ended: rechecked 2026-11-10, https://openrouter.ai/api/v1/models/thinkingmachines/inkling:free/endpoints and .../inkling-small:free/endpoints
+# returns an empty endpoints list (no provider serves the :free model). No end
+# date was published, so expiry_date is the day of the check.
 title: Inkling + Inkling Small Free (OpenRouter)
 provider: Thinking Machines
 category: coding
 amount: Inkling and Inkling Small at $0 via OpenRouter, 1M-token context
-expiry_date: null
+expiry_date: 2026-11-10
 source_url: https://openrouter.ai/thinkingmachines/inkling-small:free
-verified_date: 2026-11-04
+verified_date: 2026-11-10
 verification: social_proof
 review_status: under-review
 signup: required
