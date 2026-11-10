@@ -41,6 +41,12 @@
       "url": "https://cloud.google.com/startup",
       "title": "Current startup FAQ — credit product restrictions",
       "text": "Offer applies solely to Google-owned and built first-party (1P) Google Cloud Platform products billed on a pay-as-you-go (PayG) or consumption basis. All 1P products billed through subscription, pre-pay, or annual license are excluded, as are all third-party (3P) products and services, including any 3P offerings listed in Google Cloud Marketplace or Model Garden."
+    },
+    {
+      "type": "link",
+      "url": "https://startup.google.com/cloud/",
+      "title": "Google for Startups Cloud Program: Build faster. Go further.",
+      "text": "Up to $350,000 in Cloud credits over two years. AI startups: Year one: 100% up to $250,000 USD in Google Cloud credits; Year two: 20% credit on your Google Cloud spend in year two (up to an additional $100,000 in credits). For startups with Pre-Seed to Series A funding"
     }
   ]
 }
