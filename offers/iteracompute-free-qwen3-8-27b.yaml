@@ -1,13 +1,13 @@
 # Hunted 2026-11-04 by offer-hunter; verified against https://iteracompute.com/free
 # ("Start with Qwen3.8-27B: 30M free tokens per month, no credit card or recharge, 128K total context.")
 # Lead: https://aifree.dev/offer/iteracompute-free-qwen3-8-27b
-title: IteraCompute Free Qwen3.8-27B — 30M Tokens/Month
+title: IteraCompute Free Auto Model — 30M Tokens/Month
 provider: IteraCompute
 category: api_provider
-amount: 30M free tokens per month on Qwen3.8-27B (input + output incl. reasoning), 128K context, 160K TPM, no credit card or recharge
+amount: 30M free tokens per month via the Auto model ID, which routes among open models such as Qwen3.8-27B and DeepSeek V4.1 (input + output incl. reasoning), 128K context, no RPM/TPM/daily token cap, no credit card or recharge
 expiry_date: 2026-11-23
 source_url: https://iteracompute.com/free
-verified_date: 2026-11-09
+verified_date: 2026-11-10
 verification: social_proof
 review_status: under-review
 signup: required

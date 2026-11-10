@@ -48,6 +48,12 @@
       "url": "https://www.jetbrains.com/legal/docs/toolbox/license_educational/",
       "title": "Toolbox Subscription Agreement - Students and Teachers",
       "text": "studies full-time at a recognized educational institution (university, college, high school) ... enrolled full-time or part-time in a vocational educational program that lasts no less than 1 year ... for non-commercial, educational purposes only"
+    },
+    {
+      "type": "link",
+      "url": "https://www.jetbrains.com/lp/edu-program-user-flow/",
+      "title": "JetBrains Educational License and Graduation Discount",
+      "text": "Applicants must participate in a one-year or multi-year full-time educational program involving programming courses/majors."
     }
   ]
 }

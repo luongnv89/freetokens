@@ -7,7 +7,7 @@ category: api_provider
 amount: Monthly free tier of at least 1M tokens of any catalog model (cheaper models yield more), granted again on the 1st of each month; rate-limited, no credit card
 expiry_date: null
 source_url: https://gonkabroker.com/free-llm-api/
-verified_date: 2026-11-09
+verified_date: 2026-11-10
 verification: social_proof
 review_status: under-review
 signup: required

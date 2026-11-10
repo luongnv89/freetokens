@@ -5,13 +5,13 @@
 # or $20 when you sign up with a company email. No card is required. While you have free credits left,
 # your account can use every source on our standard plans... Licensed sources outside the standard plans
 # still need separate access. Free credits expire 12 months after signup." / "There are no overage charges.")
-title: Valyu — $10 Free API Credits ($20 with a Work Email)
+title: Valyu — 1,000 Free API Credits a Month (2,000 with a Work Email)
 provider: Valyu
 category: api_provider
-amount: "$10 free credits for new accounts ($20 with a company email), no card required; one balance for Search, Contents and DeepResearch across standard-plan sources; credits expire 12 months after signup"
+amount: "1,000 free credits/month (2,000 with a company email); work email needs no card, personal email must add a card (not charged) after month one; one balance for Search, Contents and DeepResearch; credits reset monthly, no rollover"
 expiry_date: null
 source_url: https://docs.valyu.ai/pricing
-verified_date: 2026-11-09
+verified_date: 2026-11-10
 verification: social_proof
 review_status: under-review
 signup: required
