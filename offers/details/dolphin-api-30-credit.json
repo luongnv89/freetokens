@@ -1,10 +1,10 @@
 {
-  "summary": "Dolphin's current public API page offers $10 in Dolphin API credit with coupon code API10. Redemption happens in app.dphn.ai: connect a wallet, verify it by signing a message (free, no transaction), authorize with the Telegram bot, then enter API10 under Redeem Code. The API is OpenAI-compatible (base URL https://lighthouse.dphn.ai/run/text-v/v1) and currently serves DeepSeek V4.1 Flash at $0.01/M input and $0.07/M output tokens. Copy checked 2026-10-14: no account redemption was tested, no enrollment deadline is published, and the historical API30 coupon's independent validity remains unknown.",
+  "summary": "Dolphin's current public API page offers $1 in Dolphin API credit with coupon code API01. Redemption happens in app.dphn.ai: connect a wallet, verify it by signing a message (free, no transaction), authorize with the Telegram bot, then enter API01 under Redeem Code. The API is OpenAI-compatible (base URL https://lighthouse.dphn.ai/run/text-v/v1) and currently serves DeepSeek V4.1 Flash at $0.01/M input and $0.07/M output tokens. Copy checked 2026-11-11: no account redemption was tested, no enrollment deadline is published, and the historical API30 coupon's independent validity remains unknown.",
   "claim_steps": [
     "Open app.dphn.ai and connect your wallet",
     "Click Verify Wallet and sign the message (free, no transaction)",
     "Click Open Telegram and press Start in the bot",
-    "Enter API10 in Redeem Code and click Redeem",
+    "Enter API01 in Redeem Code and click Redeem",
     "In API Keys, click Create Key and send your first request"
   ],
   "social_proof": [
