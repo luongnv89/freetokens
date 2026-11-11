@@ -50,6 +50,12 @@
       "url": "https://cdn.syndication.twimg.com/tweet-result?id=2092666316125864191&token=a",
       "title": "@cline post on X (syndication JSON, id 2092666316125864191)",
       "text": "GLM-5.3 Flash (Ox Alpha) is free in Cline. 320B params with 18B active, and beating frontier models on benchmarks."
+    },
+    {
+      "type": "link",
+      "url": "https://api.fxtwitter.com/cline/status/2092666316125864191",
+      "title": "@cline post (fxtwitter JSON mirror of x.com source; no HTML title)",
+      "text": "GLM-5.3 Flash (Ox Alpha) is free in Cline."
     }
   ]
 }

@@ -30,6 +30,12 @@
       "url": "https://www.upstage.ai/events/ai-initiative-2026-en",
       "title": "Upstage initiative Event Info — usage/program end, not a signup deadline",
       "text": "~March 31, 2027 11:00 PM (KST)"
+    },
+    {
+      "type": "link",
+      "url": "https://www.upstage.ai/events/ai-initiative-2025-en",
+      "title": "Upstage-AWS AI Initiative",
+      "text": "free access to Solar Pro 4 (LLM) and Document Parse models."
     }
   ]
 }

@@ -11,7 +11,7 @@ category: oss_program
 amount: "Free periodic security scans of your open-source repo by Anthropic's strongest models, with emailed reports, reproducers and proposed patches; core maintainers of established, security-critical projects only; enrollment via GitHub PR, approved case-by-case"
 expiry_date: null
 source_url: https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source
-verified_date: 2026-11-10
+verified_date: 2026-11-11
 verification: social_proof
 review_status: under-review
 signup: required

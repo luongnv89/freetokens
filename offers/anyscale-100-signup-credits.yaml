@@ -7,7 +7,7 @@ category: api_provider
 amount: $100 in Anyscale Credits to get started on a free Anyscale account (CPU/GPU compute on the Anyscale platform)
 expiry_date: null
 source_url: https://www.anyscale.com/pricing
-verified_date: 2026-11-10
+verified_date: 2026-11-11
 verification: social_proof
 review_status: under-review
 signup: required
