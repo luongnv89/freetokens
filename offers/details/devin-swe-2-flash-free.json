@@ -1,0 +1,27 @@
+{
+  "summary": "Cognition announced SWE-2 Flash on 2026-11-04. The model is available in Devin Desktop and CLI at one-fifth the price and 3x the speed of SWE-2, and its use is free through 11/30. Cognition is not sharing the weights publicly yet. The launch post states no usage limits and does not say which Devin plans qualify; Devin's pricing page lists limited model availability on the Free plan and full model availability on Pro.",
+  "claim_steps": [
+    "Sign in to Devin Desktop or the Devin CLI",
+    "Use the SWE-2 Flash model before 2026-11-30"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cognition.com/blog/swe-2-flash",
+      "title": "Introducing SWE-2 Flash | Cognition",
+      "text": "Free through 11/30. Try it today in Devin Desktop and CLI. It is available today in Devin Desktop and CLI, at one-fifth the price and 3x the speed of its much larger sibling, SWE-2."
+    },
+    {
+      "type": "link",
+      "url": "https://devin.ai/pricing",
+      "title": "Devin Plans and Pricing",
+      "text": "The Free plan includes a light quota to code with agents, limited model availability, unlimited inline edits, and unlimited Tab completions."
+    },
+    {
+      "type": "link",
+      "url": "https://rohitai.com/blog/swe-2-flash-devin-access-free-offer",
+      "title": "Cognition launches SWE-2 Flash with a free offer through November 30",
+      "text": "Cognition announced SWE-2 Flash on November 4, 2026, making a new coding model available in Devin Desktop and CLI. The company advertises free use through November 30. The offer concerns model use, not a free Devin subscription; eligibility and service limits are unspecified."
+    }
+  ]
+}
