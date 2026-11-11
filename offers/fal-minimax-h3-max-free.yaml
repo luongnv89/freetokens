@@ -4,6 +4,8 @@
 # "the first five generations a day are free" / "Sign in and run it in
 # the fal sandbox"). Previous "up to 15 free videos/day" figure no longer
 # on page; allowance resets on a rolling 24-hour window, sign-in required.
+# Rechecked 2026-11-11: "Turn a prompt into a 5-second, 768p video with
+# synchronized audio"; free clips are now 5 seconds, not up to 15.
 # T2V + I2V: "text-to-video and image-to-video" endpoints on the same model.
 title: fal — MiniMax H3 Max Free Generations (T2V + I2V)
 provider: fal
