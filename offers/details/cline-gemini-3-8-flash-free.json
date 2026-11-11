@@ -43,6 +43,12 @@
       "url": "https://cdn.syndication.twimg.com/tweet-result?id=2103165327815450815&token=a",
       "title": "@cline post on X (syndication JSON, id 2103165327815450815)",
       "text": "Gemini 3.8 Flash is free in Cline. It scores 41 on the Artificial Analysis Intelligence Index, the highest of any model in its price tier. 291 tok/s, 1M context"
+    },
+    {
+      "type": "link",
+      "url": "https://api.fxtwitter.com/cline/status/2103165327815450815",
+      "title": "@cline post (fxtwitter JSON mirror of x.com source; no HTML title)",
+      "text": "Gemini 3.8 Flash is free in Cline."
     }
   ]
 }

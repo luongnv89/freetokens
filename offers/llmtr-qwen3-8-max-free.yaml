@@ -7,7 +7,7 @@ category: api_provider
 amount: Qwen3.8-Max (qwen/qwen3.8-max-free) free, up to 3 million tokens per account until 13 Nov 2026 03:00 Turkey time
 expiry_date: 2026-11-13
 source_url: https://llmtr.com/models/qwen/qwen3.8-max-free
-verified_date: 2026-11-10
+verified_date: 2026-11-11
 verification: social_proof
 review_status: under-review
 signup: required
