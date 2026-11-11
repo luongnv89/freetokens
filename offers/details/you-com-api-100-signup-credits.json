@@ -1,0 +1,11 @@
+{
+  "summary": "You.com gives $100 in free API credits on signup, no credit card required. The same page describes a separate Startup Grant of up to $1,000 in API credits for AI startups (grant credits expire in six months); the signup credit is available before applying.",
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://you.com/startup-grant",
+      "title": "You.com | Startup Grant Program",
+      "text": "$100 free credits on signup, no credit card required. You also get $100 in credits just for signing up, before you even apply."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "summary": "Vectoree is a backend for AI coding agents: models, templates, tools, auth, database and storage. Its model gateway is OpenAI-compatible with one project key across providers including xAI, OpenAI, Google, Anthropic and DeepSeek. Sign-up and the basics are free with no monthly fee; after logging in with the CLI and linking a project, the account gets $5, enough to try models and Tool Hub. Further gateway use is paid from a Stripe-funded org wallet billed per model; an empty wallet cannot call the gateway.",
+  "claim_steps": [
+    "Sign up at vectoree.ai and create a project",
+    "Log in with the CLI: npx @vectoree/cli login --api-url https://vectoree.ai",
+    "Link the project with the CLI to receive the $5 welcome credit",
+    "Pick a model (e.g. vectoree/auto) and call the OpenAI-compatible gateway"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vectoree.ai",
+      "title": "Vectoree — Give Your Agent a Backend | Models, Auth, DB",
+      "text": "$5 welcome credit after CLI login + link · then top up the org wallet · billed per model. Sign-up and the basics are free. There is no monthly fee. After you link a project you get $5, enough to try models and Tool Hub."
+    },
+    {
+      "type": "link",
+      "url": "https://aitoolsrecap.com/Product/vectoree",
+      "title": "Vectoree - AIToolsRecap",
+      "text": "new accounts get $5 welcome credit after CLI login."
+    }
+  ]
+}

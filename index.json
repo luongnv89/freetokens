@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-10T08:58:30Z",
-  "count": 302,
-  "active_count": 256,
-  "expired_count": 46,
+  "generated_at": "2026-11-11T03:06:49Z",
+  "count": 305,
+  "active_count": 255,
+  "expired_count": 50,
   "offers": [
     {
       "slug": "dahl-inference-100m-free-tokens",
@@ -527,7 +527,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openrouter-crouton-alpha-free",
@@ -542,7 +542,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "eden-ai-free-models",
@@ -1907,7 +1907,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openrouter-nemotron-3-nano-omni-free",
@@ -3752,7 +3752,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "nvidia-nim-free-trial",
@@ -4533,6 +4533,51 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "devin-swe-2-flash-free",
+      "title": "Devin SWE-2 Flash — Free Through Nov 30",
+      "provider": "Cognition (Devin)",
+      "category": "coding",
+      "amount": "Free use of the SWE-2 Flash coding model in Devin Desktop and CLI through November 30, 2026 (usage limits and eligible plans not stated)",
+      "expiry_date": "2026-11-30",
+      "source_url": "https://cognition.com/blog/swe-2-flash",
+      "verified_date": "2026-11-11",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "vectoree-welcome-credit-5",
+      "title": "Vectoree — $5 Welcome Credit",
+      "provider": "Vectoree",
+      "category": "api_provider",
+      "amount": "$5 welcome credit after CLI login and linking a project, usable on the OpenAI-compatible model gateway (one key for xAI, OpenAI, Google, Anthropic and DeepSeek models) and Tool Hub; sign-up is free with no monthly fee, then pay-as-you-go wallet top-ups",
+      "expiry_date": null,
+      "source_url": "https://vectoree.ai",
+      "verified_date": "2026-11-11",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "you-com-api-100-signup-credits",
+      "title": "You.com API — $100 Free Signup Credits",
+      "provider": "You.com",
+      "category": "api_provider",
+      "amount": "$100 in free API credits on signup, no credit card required",
+      "expiry_date": null,
+      "source_url": "https://you.com/startup-grant",
+      "verified_date": "2026-11-11",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

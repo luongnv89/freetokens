@@ -2,11 +2,40 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-10T08:58:30Z — 123 of 256 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-11T03:06:49Z — 124 of 255 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### You.com API — $100 Free Signup Credits
+- Provider: You.com
+- Category: api_provider
+- Amount: $100 in free API credits on signup, no credit card required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-11 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://you.com/startup-grant
+- Page: https://freetokens.custats.info/offers/you-com-api-100-signup-credits.html
+- Summary: You.com gives $100 in free API credits on signup, no credit card required. The same page describes a separate Startup Grant of up to $1,000 in API credits for AI startups (grant credits expire in six months); the signup credit is available before applying.
+### Vectoree — $5 Welcome Credit
+- Provider: Vectoree
+- Category: api_provider
+- Amount: $5 welcome credit after CLI login and linking a project, usable on the OpenAI-compatible model gateway (one key for xAI, OpenAI, Google, Anthropic and DeepSeek models) and Tool Hub; sign-up is free with no monthly fee, then pay-as-you-go wallet top-ups
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-11 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://vectoree.ai
+- Page: https://freetokens.custats.info/offers/vectoree-welcome-credit-5.html
+- Summary: Vectoree is a backend for AI coding agents: models, templates, tools, auth, database and storage. Its model gateway is OpenAI-compatible with one project key across providers including xAI, OpenAI, Google, Anthropic and DeepSeek. Sign-up and the basics are free with no monthly fee; after logging in with the CLI and linking a project, the account gets $5, enough to try models and Tool Hub. Further gateway use is paid from a Stripe-funded org wallet billed per model; an empty wallet cannot call the gateway.
+- Claim steps: Sign up at vectoree.ai and create a project | Log in with the CLI: npx @vectoree/cli login --api-url https://vectoree.ai | Link the project with the CLI to receive the $5 welcome credit | Pick a model (e.g. vectoree/auto) and call the OpenAI-compatible gateway
+### Devin SWE-2 Flash — Free Through Nov 30
+- Provider: Cognition (Devin)
+- Category: coding
+- Amount: Free use of the SWE-2 Flash coding model in Devin Desktop and CLI through November 30, 2026 (usage limits and eligible plans not stated)
+- Status: active — enrollment deadline: 2026-11-30
+- Last checked: 2026-11-11 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://cognition.com/blog/swe-2-flash
+- Page: https://freetokens.custats.info/offers/devin-swe-2-flash-free.html
+- Summary: Cognition announced SWE-2 Flash on 2026-11-04. The model is available in Devin Desktop and CLI at one-fifth the price and 3x the speed of SWE-2, and its use is free through 11/30. Cognition is not sharing the weights publicly yet. The launch post states no usage limits and does not say which Devin plans qualify; Devin's pricing page lists limited model availability on the Free plan and full model availability on Pro.
+- Claim steps: Sign in to Devin Desktop or the Devin CLI | Use the SWE-2 Flash model before 2026-11-30
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -686,16 +715,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-lightning-free.html
 - Summary: Nemotron 3.5 Lightning is an open MoE from NVIDIA with 3B active of 30B total parameters for high-throughput agentic workloads — listed free via OpenRouter's :free endpoint at $0 prompt / $0 completion with a 1M context. Repeated provider-health checks found intermittent service from its sole provider; current successful inference remains unresolved. Check current provider health before use; recent successful traffic is not a guarantee for your request. No inference request was tested. Created 2026-08-11; no published end date. The free endpoint prohibits confidential information and personal data such as voices or faces; use is logged for security and NVIDIA product/service improvement under the NVIDIA API Trial Terms. The linked NVIDIA API Trial Terms permit free access and generated content only for internal testing and evaluation, not production use; production requires a separate subscription and its terms.
 - Claim steps: Sign up at openrouter.ai and create an API key (no card needed for :free models). | Use the free API service and generated content only for internal testing/evaluation, not production, under NVIDIA API Trial Terms sections 1.2 and 1.4. Production requires a separate subscription and its applicable terms. | Review the NVIDIA API Trial Terms; never submit confidential information or personal data, including voices or faces. | Check current provider health before calling chat completions with model id nvidia/nemotron-3.5-lightning:free. Repeated checks found intermittent service; recent successful traffic does not guarantee your request. No inference request was tested here.
-### Nemotron 3.5 Content Safety Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free nvidia/nemotron-3.5-content-safety:free endpoint at $0 (128K context guardrail model); trial/internal evaluation only, not production
-- Status: active — enrollment deadline: 2026-11-10
-- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/nvidia/nemotron-3.5-content-safety:free
-- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-content-safety-free.html
-- Summary: NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model (fine-tuned from Gemma-3-4B) that moderates inputs to and responses from LLMs and VLMs, accepting text and image input with a 128K context. Served free via OpenRouter's :free endpoint at $0 prompt / $0 completion. Listed since 2026-06-04; no published end date. The model page warns against confidential inputs: use is logged for security, and anonymous session data may improve NVIDIA products and services. Review its linked NVIDIA API Trial Terms before use. The linked NVIDIA API Trial Terms permit free access and generated content only for internal testing and evaluation, not production use; production requires a separate subscription and its terms. The free endpoint ended on November 10, 2026: OpenRouter's API listed no provider for it.
-- Claim steps: Ended November 10, 2026: OpenRouter no longer serves nvidia/nemotron-3.5-content-safety:free for free (no provider on the :free endpoint). The steps below describe how it was claimed. | Sign up at openrouter.ai and create an API key (no card needed for :free models). | Use the free API service and generated content only for internal testing/evaluation, not production, under NVIDIA API Trial Terms sections 1.2 and 1.4. Production requires a separate subscription and its applicable terms. | Review the model-page privacy notice and NVIDIA API Trial Terms; do not upload confidential information. | Call the chat completions API with model id nvidia/nemotron-3.5-content-safety:free.
 ### LFM2.5-2.6B Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -776,16 +795,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-dots-3-note-preview-free.html
 - Summary: Dots Studio's Dots3-Note Preview is served free through OpenRouter as dots-studio/dots-3-note-preview:free at $0 prompt / $0 completion with a 512K context window. Open-weight MoE (16B active / 280B total); text+image input, text output; tools, structured outputs, and reasoning parameters are listed. Hosted by AtlasCloud. Current page and API announce a December 31, 2026 sunset. Standard OpenRouter :free rate limits apply (see openrouter.ai/docs/api-reference/limits). Distinct from paid Dots 3 family endpoints.
 - Claim steps: Sign up at openrouter.ai and create an API key (OpenRouter :free models do not require purchasing credits). | Call the chat completions API with model id dots-studio/dots-3-note-preview:free.
-### Crouton Alpha Free on OpenRouter
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free model access - $0 per million input and output tokens on stealth/crouton-alpha during the stealth preview (1M context)
-- Status: active — enrollment deadline: 2026-11-10
-- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/stealth/crouton-alpha
-- Page: https://freetokens.custats.info/offers/openrouter-crouton-alpha-free.html
-- Summary: OpenRouter lists the stealth model Crouton Alpha (stealth/crouton-alpha) at $0 per million input and output tokens during the anonymous-provider preview, released November 3, 2026. It takes text, image, video, file and audio input with a 1,048,576-token context. OpenRouter states prompts and completions may be retained by the provider but are not used for training. No end date is stated; earlier stealth models lost their free price once the preview ended. The stealth period has ended: on November 10, 2026 the model page said "The stealth period has ended; use Muse Ember", and OpenRouter no longer served the model.
-- Claim steps: Ended November 10, 2026: the stealth period is over and stealth/crouton-alpha is no longer served. The steps below describe how it was claimed during the preview. | Sign in or create an account at openrouter.ai. | Create an API key at openrouter.ai/settings/keys. | Call the model with slug stealth/crouton-alpha via the OpenAI-compatible API at https://openrouter.ai/api/v1 (or pick it in any OpenRouter-supported app).
 ### MiniMax M3.1 Flash Free on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -826,16 +835,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/opencode-deepseek-v4-1-flash-free.html
 - Summary: OpenCode made DeepSeek V4.1 Flash free on 2026-10-15 and updated it to DeepSeek's 1017 release on 2026-10-19, keeping the same model ID. OpenCode's Console docs list DeepSeek V4.1 Flash Free (deepseek-v4.1-flash-free) with free input, output and cached reads for a limited time. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-19 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid DeepSeek V4.1 Flash (deepseek-v4.1-flash, $0.30/$1.20 per 1M input/output tokens) and its OpenCode Go plan listing are separate, so pick the Free variant.
 - Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select DeepSeek V4.1 Flash Free (opencode/deepseek-v4.1-flash-free), not the paid DeepSeek V4.1 Flash. Existing setups pick up the 1017 update automatically; OpenCode says no changes are needed. | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-19), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
-### Crouton Alpha Free on OpenCode Zen
-- Provider: OpenCode
-- Category: coding
-- Amount: Free Crouton Alpha model access on OpenCode Zen for one week (1M context, multimodal; limited to certain regions)
-- Status: active — enrollment deadline: 2026-11-10
-- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://x.com/opencode/status/2117717721458843711
-- Page: https://freetokens.custats.info/offers/opencode-crouton-alpha-free.html
-- Summary: Crouton Alpha is a stealth model that is free on OpenCode Zen for a limited time. Announced by @opencode on 2026-11-03 as "free for the next week" (through ~2026-11-10), with 1M context, multi-modal input, and no training on data. The free period is limited to certain regions. OpenCode's Zen model list shows id crouton-alpha-free at $0 input, output, and cached reads.
-- Claim steps: Sign in to OpenCode Zen at opencode.ai/zen and copy your API key. | In the OpenCode TUI, run /connect, select OpenCode Zen, and paste your API key. | Run /models and select Crouton Alpha Free (model id: crouton-alpha-free).
 ### Beam Free (formerly Cat Jam) on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -1234,6 +1233,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/kiro-startup-credits.html
 - Summary: Kiro for Startups gives early-stage to Series A startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Applicants must be 18 or older. Excluded residences: Argentina, Belarus, Brazil, China/GCR, Cuba, France, Germany, Iran, Italy, Mexico, North Korea, Poland, Russia, Spain, Syria, the region of Crimea, the so-called Donetsk People's Republic region (DNR), the so-called Luhansk People's Republic region (LNR), and the United Arab Emirates. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center. Choosing a plan above Pro+ or exceeding tier users can incur charges. Once credits are depleted, the AWS account automatically switches to standard Kiro Pro+ monthly billing on its card; continued use after expiry can also incur charges.
 - Claim steps: Confirm early-stage to Series A eligibility, age 18+, and residence outside the excluded locations listed above (including France and Germany); active AWS Activate credit holders are not eligible. | Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain. | Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30). | On approval, credits are deposited to the AWS account and activate on provisioning. | Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits. | Stay within the chosen tier and Pro+ plan. Monitor credits and stop/cancel unwanted billable access before depletion or expiry: standard Kiro Pro+ monthly billing starts automatically when credits run out.
+### Kimi API Free Trial (RMB 15)
+- Provider: Moonshot AI
+- Category: api_provider
+- Amount: RMB 15 API voucher for new users registering with a mainland China mobile number; valid 3 months from issuance
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-10 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.kimi.com/en/help/kimi-api/api-free-trial
+- Page: https://freetokens.custats.info/offers/kimi-api-free-trial.html
+- Summary: Kimi API grants newly registered users an RMB 15 voucher, valid for 3 months from issue and applied automatically to API usage before any top-up balance. Eligibility requires registering with a mainland China mobile number.
+- Claim steps: Register on the Kimi platform with a mainland China mobile number. | The RMB 15 voucher is granted automatically — no manual activation; it deducts before your top-up balance. | Track remaining voucher credit on the Cost Details page in the console.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
