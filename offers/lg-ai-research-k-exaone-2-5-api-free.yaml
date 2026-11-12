@@ -1,0 +1,13 @@
+# Hunted 2026-11-12 by offer-hunter; verified against https://docs.exaone.ai/ko/docs/changelog
+# ("본 서비스는 현재 무료로 제공됩니다. (The service is currently provided free of charge.) — 2026년 11월 9일, LLM(독자 파운데이션 모델): K-EXAONE 2.5(750B)")
+# Lead: https://tech-insider.org/lg-ai-research-k-exaone-2-5-api-free-70-percent-nvidia-2026/
+title: K-EXAONE 2.5 API — Free on EXAONE API Platform
+provider: LG AI Research
+category: api_provider
+amount: K-EXAONE 2.5 (750B) API currently free of charge on the EXAONE API Platform; API key required; non-commercial use only per platform terms; daily call limits apply (higher if you consent to usage records for training)
+expiry_date: null
+source_url: https://docs.exaone.ai/ko/docs/changelog
+verified_date: 2026-11-12
+verification: social_proof
+review_status: under-review
+signup: required
