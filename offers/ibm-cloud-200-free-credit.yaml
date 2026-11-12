@@ -7,7 +7,7 @@ category: api_provider
 amount: USD 200 credit for 30 days, usable on any IBM Cloud product (not third-party offerings); first-time Pay-as-you-go accounts only, upgrade to Pay-as-you-go required
 expiry_date: null
 source_url: https://www.ibm.com/products/cloud/free
-verified_date: 2026-11-11
+verified_date: 2026-11-12
 verification: social_proof
 review_status: under-review
 signup: required

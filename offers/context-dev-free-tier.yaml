@@ -11,10 +11,10 @@ category: api_provider
 # "Organizations created before concurrency limits keep per-minute limits per API key on every
 # plan: 30 on Free with a work email, 10 on Free with a personal email". The earlier
 # "new Free accounts 10 requests/minute" wording was not supported; no policy-change date inferred.
-amount: "1,000 API credits/month + 10K one-time Logo Link requests (2 concurrent core API requests, no per-minute cap by default; older organizations keep legacy per-minute limits; custom overrides may differ)"
+amount: "1,000 API credits/month + 10K one-time Logo Link requests (2 concurrent core API requests and 10 requests/minute for new Free organizations; older organizations keep legacy per-minute limits; custom overrides may differ)"
 expiry_date: null
 source_url: https://www.context.dev/pricing
-verified_date: 2026-11-11
+verified_date: 2026-11-12
 verification: social_proof
 review_status: to-be-verified
 signup: required
