@@ -1,0 +1,15 @@
+{
+  "summary": "OpenCode lists LongCat 2.5 Free (model ID longcat-2.5-free, endpoint https://opencode.ai/inference/openai/v1/chat/completions) as free for a limited time with a limit of 100 requests per day. Input, output and cached reads are priced Free. The model is hosted in China; its provider follows a zero-retention policy and does not use data for model training. No end date is published.",
+  "claim_steps": [
+    "Open OpenCode and choose the LongCat 2.5 Free model (model ID longcat-2.5-free)",
+    "Use it within the limit of 100 requests per day while the limited-time free period lasts"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models",
+      "text": "LongCat 2.5 Free is free on OpenCode for a limited time, with a limit of 100 requests per day. Its provider follows a zero-retention policy and does not use your data for model training. It's hosted in China. Pricing: LongCat 2.5 Free | Free | Free | Free | -"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-11T03:21:36Z",
-  "count": 305,
-  "active_count": 255,
-  "expired_count": 50,
+  "generated_at": "2026-11-12T03:06:48Z",
+  "count": 308,
+  "active_count": 257,
+  "expired_count": 51,
   "offers": [
     {
       "slug": "devin-swe-2-flash-free",
@@ -3317,7 +3317,7 @@
       "verification": "social_proof",
       "review_status": "unverified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "tavily-free-tier",
@@ -4578,6 +4578,51 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "lg-ai-research-k-exaone-2-5-api-free",
+      "title": "K-EXAONE 2.5 API — Free on EXAONE API Platform",
+      "provider": "LG AI Research",
+      "category": "api_provider",
+      "amount": "K-EXAONE 2.5 (750B) API currently free of charge on the EXAONE API Platform; API key required; non-commercial use only per platform terms; daily call limits apply (higher if you consent to usage records for training)",
+      "expiry_date": null,
+      "source_url": "https://docs.exaone.ai/ko/docs/changelog",
+      "verified_date": "2026-11-12",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-longcat-2-5-free",
+      "title": "LongCat 2.5 Free on OpenCode",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free LongCat 2.5 model access on OpenCode (free input, output and cached reads; limited time; 100 requests per day; hosted in China, prompts not used for training or retained)",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-11-12",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-nemotron-3-5-embed-free",
+      "title": "Nemotron 3.5 Embed 8B + 1B Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free nvidia/nemotron-3.5-embed-8b:free and nvidia/nemotron-3.5-embed-1b:free multimodal embedding endpoints at $0 (32,768-token context)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-embed-8b:free/endpoints",
+      "verified_date": "2026-11-12",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

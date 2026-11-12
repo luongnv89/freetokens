@@ -2,11 +2,41 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-11T03:21:36Z — 124 of 255 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-12T03:06:48Z — 124 of 257 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Nemotron 3.5 Embed 8B + 1B Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free nvidia/nemotron-3.5-embed-8b:free and nvidia/nemotron-3.5-embed-1b:free multimodal embedding endpoints at $0 (32,768-token context)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-12 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-embed-8b:free/endpoints
+- Page: https://freetokens.custats.info/offers/openrouter-nemotron-3-5-embed-free.html
+- Summary: NVIDIA's Nemotron 3.5 Embed 8B and Embed 1B, both added to OpenRouter on October 21, 2026, have free variants: nvidia/nemotron-3.5-embed-8b:free and nvidia/nemotron-3.5-embed-1b:free. Each is served by Nvidia at $0 for prompt and completion, with a 32,768-token context. OpenRouter describes both as multimodal embedding models from NVIDIA for multilingual retrieval over text and document page images such as tables, charts and infographics. Queries are text. Standard OpenRouter free-model rate limits apply.
+- Claim steps: Create an OpenRouter account and API key | Call the embeddings API with model nvidia/nemotron-3.5-embed-8b:free or nvidia/nemotron-3.5-embed-1b:free
+### LongCat 2.5 Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free LongCat 2.5 model access on OpenCode (free input, output and cached reads; limited time; 100 requests per day; hosted in China, prompts not used for training or retained)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-12 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-longcat-2-5-free.html
+- Summary: OpenCode lists LongCat 2.5 Free (model ID longcat-2.5-free, endpoint https://opencode.ai/inference/openai/v1/chat/completions) as free for a limited time with a limit of 100 requests per day. Input, output and cached reads are priced Free. The model is hosted in China; its provider follows a zero-retention policy and does not use data for model training. No end date is published.
+- Claim steps: Open OpenCode and choose the LongCat 2.5 Free model (model ID longcat-2.5-free) | Use it within the limit of 100 requests per day while the limited-time free period lasts
+### K-EXAONE 2.5 API — Free on EXAONE API Platform
+- Provider: LG AI Research
+- Category: api_provider
+- Amount: K-EXAONE 2.5 (750B) API currently free of charge on the EXAONE API Platform; API key required; non-commercial use only per platform terms; daily call limits apply (higher if you consent to usage records for training)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-12 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.exaone.ai/ko/docs/changelog
+- Page: https://freetokens.custats.info/offers/lg-ai-research-k-exaone-2-5-api-free.html
+- Summary: The EXAONE API Platform changelog entry dated November 9, 2026 lists K-EXAONE 2.5 (750B), LG AI Research's proprietary foundation model, and states the service is currently provided free of charge. API keys are issued from the platform. The rate-limits page applies per-second, per-minute and per-day call windows, with a higher daily call limit for users who consent to their usage records being used for model training and service improvement; the API can be used without consenting. The platform terms grant a non-exclusive, non-transferable, revocable non-commercial use right and bar for-profit use of the model or its outputs; if the service becomes paid, fees will be posted on the site.
+- Claim steps: Open the EXAONE API Platform at docs.exaone.ai | Select 'API Key 발급하기' (Issue API key) and request a key | Optionally consent to usage-record use for training to get a higher daily call limit
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -315,16 +345,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/speechmatics-100-free-credit.html
 - Summary: Speechmatics advertises $100 in free signup credits, no card required, valid for 12 months, with 55+ STT languages and 2 concurrent real-time sessions on Free. No-card Free API access pauses at credit exhaustion. Adding a payment card upgrades Free to Pro: granted credits are consumed first, then further usage is billed to the card. The current pricing page’s “How credits work” content explicitly says one balance covers Speech to Text, add-ons and Text to Speech. It also separately advertises the first 1 million TTS characters free; confirm in the account how that allowance and the signup balance are applied rather than treating them as two interchangeable cash grants. The earlier catalog assertion that public pricing does not establish a shared balance is no longer supported. This source check did not test signup or inference; curator verification tags and date are retained.
 - Claim steps: Sign up at https://portal.speechmatics.com/signup/ — the $100 signup offer states no card required. | Use the signup bonus within 12 months; confirm your account allowance and the Free limit of 2 concurrent real-time sessions. | Current pricing says one balance covers STT, add-ons and TTS, and separately offers the first 1 million TTS characters free. Confirm how both apply in your account; do not count the TTS allowance as a second $100 grant. | No-card Free API access pauses at credit exhaustion. Adding a card upgrades Free to Pro; granted credits are consumed first, then further usage is billed to your card.
-### SmarToken $5 Free API Credit Campaign
-- Provider: SmarToken
-- Category: api_provider
-- Amount: $5 one-time promotional API credit for eligible accounts
-- Status: active — enrollment deadline: 2026-11-11
-- Last checked: 2026-11-11 — review_status=unverified · verification=social_proof · signup=required
-- Source: https://thesmartoken.com/campaign/free-credit
-- Page: https://freetokens.custats.info/offers/smartoken-5-free-api-credit.html
-- Summary: SmarToken's campaign grants a one-time $5 promotional credit for OpenAI-compatible model calls to existing users and eligible new Google users. The campaign ends on December 31, 2026 at 23:59:59 UTC+8. New users must be low-risk Google users, pass the stated signup checks, and receive the credit once per account; no credit card is required.
-- Claim steps: Create or use a SmarToken account before December 31, 2026 at 23:59:59 UTC+8. | If you are a new user, sign in with Google and pass SmarToken's low-risk signup checks. | Use the one-time $5 promotional balance for OpenAI-compatible model calls; no credit card is required.
 ### Smallest.ai Startup Grants Program for Voice AI
 - Provider: Smallest.ai
 - Category: startup_program
@@ -1223,26 +1243,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/kimi-api-free-trial.html
 - Summary: Kimi API grants newly registered users an RMB 15 voucher, valid for 3 months from issue and applied automatically to API usage before any top-up balance. Eligibility requires registering with a mainland China mobile number.
 - Claim steps: Register on the Kimi platform with a mainland China mobile number. | The RMB 15 voucher is granted automatically — no manual activation; it deducts before your top-up balance. | Track remaining voucher credit on the Cost Details page in the console.
-### Kilo Code Free Models
-- Provider: Kilo Code
-- Category: api_provider
-- Amount: Free :free models without an API key, limited to 200 requests/hour per IP
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-11 — review_status=unverified · verification=social_proof · signup=none
-- Source: https://kilo.ai/docs/gateway/authentication
-- Page: https://freetokens.custats.info/offers/kilo-code-free-models.html
-- Summary: Kilo's AI Gateway allows unauthenticated access to models tagged :free, limited to 200 requests per hour per IP. Availability rotates; check the live catalog for current free IDs. NVIDIA free endpoints are trial-only: do not submit personal or confidential data, and usage is logged for security and to improve NVIDIA products and services. Zero pricing is not a blanket production-use or privacy waiver.
-- Claim steps: Check https://api.kilo.ai/api/gateway/models for a currently available :free model and its pricing, capabilities and provider terms; availability and model IDs can change. | For NVIDIA free endpoints, use them only for trials and never submit personal or confidential data. Usage is logged for security and to improve NVIDIA products and services; zero pricing does not waive provider usage or data restrictions. | Call the gateway without an Authorization header, or use a Kilo API key if preferred. | Stay within the 200 requests per hour per IP anonymous limit.
-### Jina AI — 10M Free Tokens
-- Provider: Jina AI
-- Category: api_provider
-- Amount: 10M free tokens with every new API key; Reader page lists 500 RPM Reader and 100 RPM / 100K TPM embeddings/rerank, but current official OpenAPI lists 500 RPM / 1M TPM embeddings/rerank; published limit conflict unresolved
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-11 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://jina.ai/en-US/reader/
-- Page: https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html
-- Summary: Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Limits are endpoint-specific: the Reader page lists embeddings/rerank at 100 RPM and 100K TPM, while the current official OpenAPI spec lists 500 RPM and 1M TPM for those endpoints and different chat limits. The conflicting published limits require confirmation; do not apply one blanket rate or concurrency limit to all APIs. Once the grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.
-- Claim steps: Sign up at jina.ai and get your API key from jina.ai/api-dashboard/key-manager — new keys auto-receive 10M free tokens. | Authenticate with 'Authorization: Bearer jina_<key>' against api.jina.ai endpoints (embeddings, rerank, reader via r.jina.ai, etc.). | When free tokens run out, buy more on the key's 'Buy tokens' tab — the free grant is one-time.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

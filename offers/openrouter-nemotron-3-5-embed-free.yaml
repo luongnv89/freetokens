@@ -1,0 +1,13 @@
+# Hunted 2026-11-12 by offer-hunter; verified against https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-embed-8b:free/endpoints
+# (""name":"NVIDIA: Nemotron 3.5 Embed 8B (free)" ... "name":"Nvidia | nvidia/nemotron-3.5-embed-8b-20261021:free","context_length":32768,"pricing":{"prompt":"0","completion":"0","discount":0}")
+# Lead: https://freellm.net/changelog/2026-10
+title: Nemotron 3.5 Embed 8B + 1B Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free nvidia/nemotron-3.5-embed-8b:free and nvidia/nemotron-3.5-embed-1b:free multimodal embedding endpoints at $0 (32,768-token context)
+expiry_date: null
+source_url: https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-embed-8b:free/endpoints
+verified_date: 2026-11-12
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,27 @@
+{
+  "summary": "NVIDIA's Nemotron 3.5 Embed 8B and Embed 1B, both added to OpenRouter on October 21, 2026, have free variants: nvidia/nemotron-3.5-embed-8b:free and nvidia/nemotron-3.5-embed-1b:free. Each is served by Nvidia at $0 for prompt and completion, with a 32,768-token context. OpenRouter describes both as multimodal embedding models from NVIDIA for multilingual retrieval over text and document page images such as tables, charts and infographics. Queries are text. Standard OpenRouter free-model rate limits apply.",
+  "claim_steps": [
+    "Create an OpenRouter account and API key",
+    "Call the embeddings API with model nvidia/nemotron-3.5-embed-8b:free or nvidia/nemotron-3.5-embed-1b:free"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-embed-8b:free/endpoints",
+      "title": "NVIDIA: Nemotron 3.5 Embed 8B (free)",
+      "text": "id: nvidia/nemotron-3.5-embed-8b:free; endpoint \"Nvidia | nvidia/nemotron-3.5-embed-8b-20261021:free\", provider Nvidia, context_length 32768, pricing {\"prompt\":\"0\",\"completion\":\"0\",\"discount\":0}. \"Nemotron 3.5 Embed 8B is a multimodal embedding model from NVIDIA for multilingual retrieval\""
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/nvidia/nemotron-3.5-embed-1b:free/endpoints",
+      "title": "NVIDIA: Nemotron 3.5 Embed 1B (free)",
+      "text": "id: nvidia/nemotron-3.5-embed-1b:free; endpoint \"Nvidia | nvidia/nemotron-3.5-embed-1b-20261021:free\", provider Nvidia, context_length 32768, pricing {\"prompt\":\"0\",\"completion\":\"0\",\"discount\":0}. \"Nemotron 3.5 Embed 1B is a multimodal embedding model from NVIDIA for multilingual retrieval over text and document page\""
+    },
+    {
+      "type": "link",
+      "url": "https://freellm.net/changelog/2026-10",
+      "title": "freellm.net changelog — October 2026",
+      "text": "October 22, 2026 — New (OpenRouter, released Oct 21, 2026, all free): NVIDIA: Nemotron 3.5 Embed 8B (free) /models/openrouter/nvidia-nemotron-3-5-embed-8b-20261021; NVIDIA: Nemotron 3.5 Embed 1B (free) /models/openrouter/nvidia-nemotron-3-5-embed-1b-20261021"
+    }
+  ]
+}
