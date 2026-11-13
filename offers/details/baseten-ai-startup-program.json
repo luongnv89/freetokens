@@ -24,6 +24,12 @@
       "url": "https://www.baseten.com/startup-program-legal-disclaimers",
       "title": "Official offer conditions and claim requirements",
       "text": "Company domain must not have been subscribed to a paid Baseten Service plan from within 31 days of applying to the Startup Program, to the day the benefit is requested. ... Credits ... expire if not consumed after 6 months."
+    },
+    {
+      "type": "link",
+      "url": "https://www.baseten.co/startup-program-legal-disclaimers/",
+      "title": "Startup Program legal disclaimers",
+      "text": "Credits granted as part of the Baseten startup program should be used within 6 months of their grant date and will expire if not consumed after 6 months."
     }
   ]
 }

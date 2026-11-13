@@ -49,6 +49,12 @@
       "url": "https://api.fxtwitter.com/cline/status/2103165327815450815",
       "title": "@cline post (fxtwitter JSON mirror of x.com source; no HTML title)",
       "text": "Gemini 3.8 Flash is free in Cline."
+    },
+    {
+      "type": "link",
+      "url": "https://publish.x.com/oembed?url=https://x.com/cline/status/2103165327815450815&omit_script=1",
+      "title": "Cline (@cline) on X",
+      "text": "Gemini 3.8 Flash is free in Cline. It scores 41 on the Artificial Analysis Intelligence Index, the highest of any model in its price tier. 291 tok/s, 1M context, and it beats GPT-5.6 Luna, DeepSeek v4.1 Flash, and Qwen3.8 on benchmarks. — Cline (@cline) September 24, 2026"
     }
   ]
 }

@@ -37,6 +37,12 @@
       "url": "https://api.fxtwitter.com/cline/status/2112220504258224605",
       "title": "@cline post (fxtwitter JSON mirror of x.com source; no HTML title)",
       "text": "MiniMax M3.1 Flash goes toe-to-toe with Opus and GPT on coding at ~25x lower cost. ... Free in Cline now!"
+    },
+    {
+      "type": "link",
+      "url": "https://publish.x.com/oembed?url=https://x.com/cline/status/2112220504258224605&omit_script=1",
+      "title": "Cline (@cline) on X",
+      "text": "MiniMax M3.1 Flash goes toe-to-toe with Opus and GPT on coding at ~25x lower cost. This was the model behind Space Bunny, the stealth model that's been topping usage leaderboards recently. Free in Cline now! — Cline (@cline) October 19, 2026"
     }
   ]
 }

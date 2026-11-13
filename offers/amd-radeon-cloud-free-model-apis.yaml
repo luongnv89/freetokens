@@ -14,7 +14,7 @@ category: api_provider
 amount: "15 public model APIs, all labelled FREE: Clef, d3, d3-flash, OmniVoice (non-commercial only) and MinerU2.5-Pro OCR, plus MiMo/DeepSeek/GLM/Qwen/Gemma/MiniCPM models; beta, per-account daily allowances apply"
 expiry_date: null
 source_url: https://developer.amd.com.cn/radeon/tokenfactory
-verified_date: 2026-09-30
+verified_date: 2026-11-13
 verification: social_proof
 review_status: to-be-verified
 signup: required
