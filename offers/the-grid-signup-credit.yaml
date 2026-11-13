@@ -1,10 +1,12 @@
 # Hunted 2026-11-10 by offer-hunter; verified against https://thegrid.ai/
 # ("New accounts get a $5 signup credit: https://app.thegrid.ai/sign-up.")
 # Lead: https://github.com/mvalentsev/awesome-free-ai-coding
+# Unconfirmed 2026-11-13: thegrid.ai, /pricing and /docs no longer mention a $5
+# signup credit ("Fund your account as needed and use credits as you make requests").
 title: The Grid — $5 Signup Credit
 provider: The Grid
 category: api_provider
-amount: $5 signup credit for new accounts (unused signup credit expires 14 days after signup)
+amount: "$5 signup credit for new accounts (unused signup credit expires 14 days after signup); unconfirmed: the official page no longer mentions it (rechecked 2026-11-13)"
 expiry_date: null
 source_url: https://thegrid.ai/
 verified_date: 2026-11-12
