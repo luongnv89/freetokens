@@ -1,13 +1,17 @@
 # Hunted 2026-11-04 by offer-hunter; verified against https://commandcode.ai/docs/resources/pricing-limits
 # ("Crouton Alpha is a free stealth preview.")
 # Lead: https://x.com/CommandCodeAI/status/2117784140598698248
+# Ended: rechecked 2026-11-13, the pricing page no longer lists crouton-alpha
+# (Glyph Cluster is now its free stealth model), commandcode.ai/models/crouton-alpha
+# redirects to /models, and OpenRouter ended the Crouton
+# stealth preview on 2026-11-10. No end date published; expiry = day of the check.
 title: Crouton Alpha Free on Command Code
 provider: Command Code
 category: coding
 amount: Free Crouton Alpha stealth preview: $0/M input and output tokens, up to 1000 requests a day per account (1M context, image input); requires >=$1 credit balance in account to start a session; prompts and outputs may be kept by the provider
-expiry_date: null
+expiry_date: 2026-11-13
 source_url: https://commandcode.ai/docs/resources/pricing-limits
-verified_date: 2026-11-10
+verified_date: 2026-11-13
 verification: social_proof
 review_status: under-review
 signup: required

@@ -1,5 +1,5 @@
 {
-  "summary": "The Grid is an inference API that routes requests by quality tier, with an OpenAI Chat Completions-compatible endpoint and a beta Anthropic Messages endpoint. Usage is prepaid: fund the account and spend credits per request. The homepage states new accounts get a $5 signup credit and that all unused signup credits and bonuses expire 14 days after signup. The docs quickstart separately mentions a $25 limited-time signup credit; the homepage figure is used here.",
+  "summary": "The Grid is an inference API that routes requests by quality tier, with an OpenAI Chat Completions-compatible endpoint and a beta Anthropic Messages endpoint. Usage is prepaid: fund the account and spend credits per request. The homepage states new accounts get a $5 signup credit and that all unused signup credits and bonuses expire 14 days after signup. The docs quickstart separately mentions a $25 limited-time signup credit; the homepage figure is used here. Unconfirmed as of November 13, 2026: The Grid's homepage, pricing, docs and quickstart no longer mention a signup credit (the earlier $5 and $25 figures are gone).",
   "claim_steps": [
     "Sign up for a new account at https://app.thegrid.ai/sign-up",
     "Use the signup credit within 14 days of signup"
