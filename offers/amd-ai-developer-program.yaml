@@ -1,9 +1,12 @@
 # Verified 2026-09-11 against https://developer.amd.com/ai-developer-program/
 # ("The program is free to join"; "Receive $100 in AMD Developer Cloud credits.")
+# Unconfirmed 2026-11-13: the program page and AMD's claim guide still offer
+# credits that "expire 30 days after activation", but no official page states $100 now
+# ("Complimentary compute credits from AMD Developer Cloud or Fireworks AI").
 title: AMD AI Developer Program — $100 Cloud Credits
 provider: AMD
 category: api_provider
-amount: $100 in AMD Developer Cloud credits (expire 30 days after activation)
+amount: "$100 in AMD Developer Cloud credits (expire 30 days after activation); unconfirmed: official pages no longer state the $100 amount (rechecked 2026-11-13)"
 expiry_date: null
 source_url: https://developer.amd.com/ai-developer-program/
 verified_date: 2026-11-09
