@@ -2,11 +2,41 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-12T03:23:53Z — 124 of 257 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-13T03:07:31Z — 125 of 260 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### VModel API — $10 Free Signup Credit
+- Provider: VModel
+- Category: api_provider
+- Amount: $10 free credit for new users upon signup, no credit card required; valid for all models (image, video, text, etc.)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://vmodel.ai/docs/api/pricing.html
+- Page: https://freetokens.custats.info/offers/vmodel-api-10-signup-credit.html
+- Summary: VModel's API pricing docs state new users receive a $10 free credit upon registration, with no credit card required. The credit is valid for all models, including image, video and text.
+- Claim steps: Register a new VModel account | The $10 free credit is granted on signup; no credit card required
+### HPC-AI Model APIs — $2 Free Launch Credit
+- Provider: HPC-AI
+- Category: api_provider
+- Amount: $2 in free Model API credits for all users, claimed as a voucher in the Models Console (official estimate: ~4.3M input + 1.07M output tokens in a typical agent workflow)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://cloud.hpc-ai.com/blog/Introducing-Model-API
+- Page: https://freetokens.custats.info/offers/hpc-ai-model-apis-2-free-credits.html
+- Summary: HPC-AI launched Model APIs on HPC-AI.COM and, to celebrate the launch, offers $2 in free trial credits to all users. Users register, then claim the free voucher in the Models Console. The launch post estimates $2 covers about 4.3M input and 1.07M output tokens under a typical agent workflow. No duration or end date is stated.
+- Claim steps: Register on HPC-AI.COM Model APIs | Go to the Models Console to claim the free voucher
+### deAPI — $5 Free Signup Credits
+- Provider: deAPI
+- Category: api_provider
+- Amount: $5 in free credits for new users on signup, usable across one API for open-source image, video, speech, transcription, music and embedding models
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-13 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://deapi.ai/
+- Page: https://freetokens.custats.info/offers/deapi-5-free-signup-credits.html
+- Summary: deAPI offers one API for open-source generative models (text-to-image, image-to-image, text-to-speech, text-to-video, image-to-video, audio-to-text, text-to-music, embeddings, upscaling and more). New users get $5 in free credits on signup to test the API.
+- Claim steps: Sign up for a deAPI account at deapi.ai | The $5 free credit is applied to the new account
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1223,26 +1253,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/kilo-code-free-models.html
 - Summary: Kilo's AI Gateway allows unauthenticated access to models tagged :free, limited to 200 requests per hour per IP. Availability rotates; check the live catalog for current free IDs. NVIDIA free endpoints are trial-only: do not submit personal or confidential data, and usage is logged for security and to improve NVIDIA products and services. Zero pricing is not a blanket production-use or privacy waiver.
 - Claim steps: Check https://api.kilo.ai/api/gateway/models for a currently available :free model and its pricing, capabilities and provider terms; availability and model IDs can change. | For NVIDIA free endpoints, use them only for trials and never submit personal or confidential data. Usage is logged for security and to improve NVIDIA products and services; zero pricing does not waive provider usage or data restrictions. | Call the gateway without an Authorization header, or use a Kilo API key if preferred. | Stay within the 200 requests per hour per IP anonymous limit.
-### Jina AI — 10M Free Tokens
-- Provider: Jina AI
-- Category: api_provider
-- Amount: 10M free tokens with every new API key; Reader page lists 500 RPM Reader and 100 RPM / 100K TPM embeddings/rerank, but current official OpenAPI lists 500 RPM / 1M TPM embeddings/rerank; published limit conflict unresolved
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-12 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://jina.ai/en-US/reader/
-- Page: https://freetokens.custats.info/offers/jina-ai-10m-free-tokens.html
-- Summary: Jina AI gives every new API key 10M free tokens usable across the Search Foundation APIs — embeddings, reranker, reader, classifier, and related endpoints. Limits are endpoint-specific: the Reader page lists embeddings/rerank at 100 RPM and 100K TPM, while the current official OpenAPI spec lists 500 RPM and 1M TPM for those endpoints and different chat limits. The conflicting published limits require confirmation; do not apply one blanket rate or concurrency limit to all APIs. Once the grant is consumed, additional tokens are purchased on the key. No credit card needed for the signup grant.
-- Claim steps: Sign up at jina.ai and get your API key from jina.ai/api-dashboard/key-manager — new keys auto-receive 10M free tokens. | Authenticate with 'Authorization: Bearer jina_<key>' against api.jina.ai endpoints (embeddings, rerank, reader via r.jina.ai, etc.). | When free tokens run out, buy more on the key's 'Buy tokens' tab — the free grant is one-time.
-### JetBrains Student Pack — All IDEs Free
-- Provider: JetBrains
-- Category: student
-- Amount: All JetBrains IDEs free for verified full-time students in programs lasting at least one year (annual renewal; non-commercial use only; 40% graduation discount)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-12 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://www.jetbrains.com/academy/student-pack/
-- Page: https://freetokens.custats.info/offers/jetbrains-student-pack.html
-- Summary: JetBrains Student Pack provides verified full-time students in programs lasting at least one year free JetBrains IDEs and .NET tools, with annual renewal. Educational licenses cannot be used for commercial work. Verify using university email, ISIC/ITIC or GitHub Student Developer Pack; general uploaded school documents are no longer accepted. The current Student Pack page includes coding courses and an AI Pro trial, not a perpetual free AI subscription. Official help confirms a 40% personal-subscription graduation discount valid for two years after the student license expires.
-- Claim steps: Go to https://www.jetbrains.com/academy/student-pack/ and click Apply. | Confirm full-time enrollment in a program lasting one year or more and verify via university email, ISIC/ITIC or GitHub Student Developer Pack. General uploaded school enrollment documents are not accepted. | Confirm the verification email link to activate approval. | Sign in to your JetBrains Account and download any IDE; student licenses last one year and renew while enrolled.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

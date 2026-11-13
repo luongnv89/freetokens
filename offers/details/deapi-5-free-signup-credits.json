@@ -1,0 +1,15 @@
+{
+  "summary": "deAPI offers one API for open-source generative models (text-to-image, image-to-image, text-to-speech, text-to-video, image-to-video, audio-to-text, text-to-music, embeddings, upscaling and more). New users get $5 in free credits on signup to test the API.",
+  "claim_steps": [
+    "Sign up for a deAPI account at deapi.ai",
+    "The $5 free credit is applied to the new account"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://deapi.ai/",
+      "title": "deAPI - One API for Open Source Generative AI Models",
+      "text": "$5 free credits when you sign up. ... New users get $5 in free credits to test the API instantly."
+    }
+  ]
+}
