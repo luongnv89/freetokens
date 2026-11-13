@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { execFile } from "node:child_process";
 import {
   copyFileSync,
@@ -29,6 +29,22 @@ const ROBOTS_SITEMAP = "Sitemap: https://freetokens.custats.info/sitemap.xml";
 // test worker's event loop, so vitest could neither enforce a timeout nor
 // answer its own worker RPC (which gives up after 60 s on a loaded host).
 const execFileAsync = promisify(execFile);
+
+// Every scratch path this file writes under tmpdir() (#702). Each is
+// registered by its exact path before anything creates it, so the afterAll
+// below removes it even when a build or assertion fails midway; nothing is
+// ever matched by pattern, so a concurrent run's folders are never touched.
+const scratchPaths = new Set();
+
+function scratch(name) {
+  const p = path.join(tmpdir(), name);
+  scratchPaths.add(p);
+  return p;
+}
+
+afterAll(() => {
+  for (const p of scratchPaths) rmSync(p, { recursive: true, force: true });
+});
 
 async function runNode(args) {
   // Kill the child once it has run for ROUTE_TEST_TIMEOUT. The timer starts
@@ -183,7 +199,7 @@ function breadcrumbNames(document) {
 const ROUTE_TEST_TIMEOUT = 120_000;
 
 describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => {
-  const outDir = path.join(tmpdir(), `ft-routes-${process.pid}`);
+  const outDir = scratch(`ft-routes-${process.pid}`);
   let index;
 
   beforeAll(async () => {
@@ -313,8 +329,8 @@ describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => 
   });
 
   it("renders fixture leads newest post first with nofollow ugc sources, only on /unverified.html", async () => {
-    const dataDir = path.join(tmpdir(), `ft-routes-leads-data-${process.pid}`);
-    const leadsDist = path.join(tmpdir(), `ft-routes-leads-${process.pid}`);
+    const dataDir = scratch(`ft-routes-leads-data-${process.pid}`);
+    const leadsDist = scratch(`ft-routes-leads-${process.pid}`);
     rmSync(dataDir, { recursive: true, force: true });
     mkdirSync(dataDir, { recursive: true });
     for (const name of ["offers.json", "details.json"]) {
@@ -562,7 +578,7 @@ describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => 
   });
 
   it("uses the configured prerender base URL in breadcrumb JSON-LD", async () => {
-    const customDir = path.join(tmpdir(), `ft-routes-base-${process.pid}`);
+    const customDir = scratch(`ft-routes-base-${process.pid}`);
     await viteBuild(customDir);
     await prerender(customDir, undefined, "https://example.test/subpath/");
 
@@ -651,7 +667,7 @@ describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => 
   });
 
   it("produces a new offer's page with no code edit (data-driven routes)", async () => {
-    const dataCopy = path.join(tmpdir(), `ft-data-${process.pid}.json`);
+    const dataCopy = scratch(`ft-data-${process.pid}.json`);
     writeFileSync(
       dataCopy,
       JSON.stringify({
