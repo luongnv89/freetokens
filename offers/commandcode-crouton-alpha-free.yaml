@@ -2,7 +2,8 @@
 # ("Crouton Alpha is a free stealth preview.")
 # Lead: https://x.com/CommandCodeAI/status/2117784140598698248
 # Ended: rechecked 2026-11-13, the pricing page no longer lists crouton-alpha
-# (Glyph Cluster is now its free stealth model), and OpenRouter ended the Crouton
+# (Glyph Cluster is now its free stealth model), commandcode.ai/models/crouton-alpha
+# redirects to /models, and OpenRouter ended the Crouton
 # stealth preview on 2026-11-10. No end date published; expiry = day of the check.
 title: Crouton Alpha Free on Command Code
 provider: Command Code
