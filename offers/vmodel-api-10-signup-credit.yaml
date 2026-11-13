@@ -1,0 +1,13 @@
+# Hunted 2026-11-13 by offer-hunter; verified against https://vmodel.ai/docs/api/pricing.html
+# ("$10 free credit for new users upon signup.")
+# Lead: https://vmodel.ai/docs/api/pricing.html
+title: VModel API — $10 Free Signup Credit
+provider: VModel
+category: api_provider
+amount: $10 free credit for new users upon signup, no credit card required; valid for all models (image, video, text, etc.)
+expiry_date: null
+source_url: https://vmodel.ai/docs/api/pricing.html
+verified_date: 2026-11-13
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,21 @@
+{
+  "summary": "HPC-AI launched Model APIs on HPC-AI.COM and, to celebrate the launch, offers $2 in free trial credits to all users. Users register, then claim the free voucher in the Models Console. The launch post estimates $2 covers about 4.3M input and 1.07M output tokens under a typical agent workflow. No duration or end date is stated.",
+  "claim_steps": [
+    "Register on HPC-AI.COM Model APIs",
+    "Go to the Models Console to claim the free voucher"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cloud.hpc-ai.com/blog/Introducing-Model-API",
+      "title": "Introducing Model APIs on HPC-AI.COM: Experience the Latest Open Models Instantly",
+      "text": "To celebrate the launch of Model APIs, we are offering $2 in free credits to all users. ... Go to Models Console to claim your free voucher. ... 4.3M input tokens ... 1.07M output tokens"
+    },
+    {
+      "type": "link",
+      "url": "https://hpc-ai.com/model-apis",
+      "title": "HPC-AI | Access World-Class AI Models via Single Unified API",
+      "text": "Start Free Trial"
+    }
+  ]
+}

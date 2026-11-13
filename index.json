@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-12T03:23:53Z",
-  "count": 308,
-  "active_count": 257,
+  "generated_at": "2026-11-13T03:07:31Z",
+  "count": 311,
+  "active_count": 260,
   "expired_count": 51,
   "offers": [
     {
@@ -4623,6 +4623,51 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "deapi-5-free-signup-credits",
+      "title": "deAPI — $5 Free Signup Credits",
+      "provider": "deAPI",
+      "category": "api_provider",
+      "amount": "$5 in free credits for new users on signup, usable across one API for open-source image, video, speech, transcription, music and embedding models",
+      "expiry_date": null,
+      "source_url": "https://deapi.ai/",
+      "verified_date": "2026-11-13",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "hpc-ai-model-apis-2-free-credits",
+      "title": "HPC-AI Model APIs — $2 Free Launch Credit",
+      "provider": "HPC-AI",
+      "category": "api_provider",
+      "amount": "$2 in free Model API credits for all users, claimed as a voucher in the Models Console (official estimate: ~4.3M input + 1.07M output tokens in a typical agent workflow)",
+      "expiry_date": null,
+      "source_url": "https://cloud.hpc-ai.com/blog/Introducing-Model-API",
+      "verified_date": "2026-11-13",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "vmodel-api-10-signup-credit",
+      "title": "VModel API — $10 Free Signup Credit",
+      "provider": "VModel",
+      "category": "api_provider",
+      "amount": "$10 free credit for new users upon signup, no credit card required; valid for all models (image, video, text, etc.)",
+      "expiry_date": null,
+      "source_url": "https://vmodel.ai/docs/api/pricing.html",
+      "verified_date": "2026-11-13",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

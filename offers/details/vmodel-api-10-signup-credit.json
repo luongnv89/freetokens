@@ -1,0 +1,15 @@
+{
+  "summary": "VModel's API pricing docs state new users receive a $10 free credit upon registration, with no credit card required. The credit is valid for all models, including image, video and text.",
+  "claim_steps": [
+    "Register a new VModel account",
+    "The $10 free credit is granted on signup; no credit card required"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vmodel.ai/docs/api/pricing.html",
+      "title": "Pricing & Billing Overview | Vmodel API Docs",
+      "text": "$10 free credit for new users upon signup. No credit card required. Valid for all models (image, video, text, etc.)."
+    }
+  ]
+}
