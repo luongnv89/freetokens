@@ -38,6 +38,18 @@
       "author": "Samgor",
       "handle": "@biggor888",
       "text": "AMD 免费的 API 在这里：https://developer.amd.com.cn/radeon/tokenfactory"
+    },
+    {
+      "type": "link",
+      "url": "https://amd-aim.github.io/radeon-cloud-docs/guides/token-factory/",
+      "title": "Token Factory | Radeon Cloud Docs",
+      "text": "Token Factory is free, but usage is capped: A daily usage cap, counted in points (pts), resets at 00:00 Beijing time (UTC+8). Token Factory is a free trial and development service, not for production."
+    },
+    {
+      "type": "link",
+      "url": "https://amd-aim.github.io/radeon-cloud-docs/",
+      "title": "AMD Radeon Cloud | Radeon Cloud Docs",
+      "text": "Models hosted by the platform behind an OpenAI-compatible API. Copy your API key and send a request, free."
     }
   ]
 }

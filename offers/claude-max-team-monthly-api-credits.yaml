@@ -13,7 +13,7 @@ category: api_provider
 amount: $100/month (Max) or $200/month (Ultra) in Claude API credits; Team $20 per Standard seat and $100 per Premium seat, pooled and capped at $500/month
 expiry_date: null
 source_url: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
-verified_date: 2026-11-12
+verified_date: 2026-11-13
 verification: social_proof
 review_status: under-review
 signup: required

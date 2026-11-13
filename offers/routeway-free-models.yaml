@@ -7,7 +7,7 @@ category: api_provider
 amount: Free :free models at $0.00, capped at 200 requests per day (resets 00:00 UTC); for development, testing, and experimentation
 expiry_date: null
 source_url: https://docs.routeway.ai/getting-started/faq
-verified_date: 2026-11-12
+verified_date: 2026-11-13
 verification: social_proof
 review_status: under-review
 signup: required

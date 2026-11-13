@@ -7,7 +7,7 @@ category: coding
 amount: Free LongCat 2.5 model access on OpenCode (free input, output and cached reads; limited time; 100 requests per day; hosted in China, prompts not used for training or retained)
 expiry_date: null
 source_url: https://opencode.ai/v2/docs/console/models/
-verified_date: 2026-11-12
+verified_date: 2026-11-13
 verification: social_proof
 review_status: under-review
 signup: none

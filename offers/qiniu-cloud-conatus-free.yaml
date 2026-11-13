@@ -7,7 +7,7 @@ category: api_provider
 amount: 100M free tokens per day on the qiniu/conatus-free model for logged-in, real-name-verified users (1B per day after a single credited top-up over ¥100); quota resets daily at 00:00 and unused quota does not carry over
 expiry_date: 2026-11-30
 source_url: https://www.qiniu.com/ai/free-models/conatus-2026
-verified_date: 2026-11-12
+verified_date: 2026-11-13
 verification: social_proof
 review_status: under-review
 signup: required

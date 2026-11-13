@@ -5,9 +5,9 @@ title: Xing4.0 29B A4B Free (OpenRouter)
 provider: OpenRouter
 category: api_provider
 amount: Free xingchen-agi/xing4.0-29b-a4b:free inference at $0 input and output (262K context)
-expiry_date: null
+expiry_date: 2026-11-13
 source_url: https://openrouter.ai/api/v1/models/xingchen-agi/xing4.0-29b-a4b:free/endpoints
-verified_date: 2026-11-10
+verified_date: 2026-11-13
 verification: social_proof
 review_status: under-review
 signup: required

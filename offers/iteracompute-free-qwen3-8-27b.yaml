@@ -7,7 +7,7 @@ category: api_provider
 amount: 30M free tokens per month via the Auto model ID, which routes among open models such as Qwen3.8-27B and DeepSeek V4.1 (input + output incl. reasoning), 128K context, no RPM/TPM/daily token cap, no credit card or recharge
 expiry_date: 2026-11-23
 source_url: https://iteracompute.com/free
-verified_date: 2026-11-12
+verified_date: 2026-11-13
 verification: social_proof
 review_status: under-review
 signup: required

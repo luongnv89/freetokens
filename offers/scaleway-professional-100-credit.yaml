@@ -11,7 +11,7 @@ category: api_provider
 amount: €100 ex-VAT free credit voucher for new Business accounts, valid 30 days after activation for Scaleway services; valid payment method required and no previous invoice (even €0)
 expiry_date: null
 source_url: https://www.scaleway.com/en/signup-trial/
-verified_date: 2026-11-11
+verified_date: 2026-11-13
 verification: social_proof
 review_status: to-be-verified
 signup: required

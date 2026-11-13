@@ -19,10 +19,10 @@
 title: Aerolink $5 Testing Credit
 provider: Aerolink
 category: api_provider
-amount: "$5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks; unconfirmed: the official page no longer mentions it (rechecked 2026-11-10)"
+amount: "$5 one-time testing credit for eligible new accounts, valid 30 days after verification and abuse checks"
 expiry_date: null
 source_url: https://aerolink.lat/pricing
-verified_date: 2026-09-30
+verified_date: 2026-11-13
 verification: social_proof
 review_status: to-be-verified
 signup: required

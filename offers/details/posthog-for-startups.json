@@ -26,6 +26,12 @@
       "url": "https://posthog.com/startups",
       "title": "PostHog for Startups FAQ — one-time credits (checked 2026-10-28)",
       "text": "Can I get credits more than once? No. We issue startup credits only once per founder and once per organization, whichever comes first."
+    },
+    {
+      "type": "link",
+      "url": "https://posthog.com/pricing.md",
+      "title": "PostHog Pricing",
+      "text": "$50,000 in free credits for 12 months. Eligible if less than 2 years old and less than $5M raised."
     }
   ]
 }
