@@ -152,6 +152,34 @@ function applyStateToPage(state: UrlState): boolean {
   }
 }
 
+export type OfferSearchInput = Record<string, unknown>;
+
+/**
+ * The single search/filter path every agent surface shares — the #535
+ * `search_offers` tool and the ui-sdk `offer-search` primitive (#726) — so
+ * agents see exactly what the on-page toolbar would list.
+ */
+export function runOfferSearch(index: OffersIndex, input: OfferSearchInput) {
+  const state = stateFromInput(input);
+  const matched = applySort(activeOffers(index), state.sort, {
+    today: buildDate(index.generated_at),
+  }).filter((offer) => offerMatches(offer, state));
+  const serialized = serializeState(state);
+  return {
+    total: matched.length,
+    offers: matched.map(offerSummary),
+    applied_state: serialized
+      ? Object.fromEntries(new URLSearchParams(serialized))
+      : {},
+    results_url: `${currentBaseUrl()}/${serialized ? `?${serialized}` : ""}`,
+    page_updated: applyStateToPage(state),
+  };
+}
+
+export function hasModelContext(): boolean {
+  return resolveModelContext() !== undefined;
+}
+
 type Navigate = (url: string) => void;
 
 function defaultNavigate(url: string) {
@@ -225,22 +253,7 @@ function buildTools(index: OffersIndex, navigate: Navigate): ModelContextTool[] 
         "Optional filters; omitting everything lists all live offers.",
       ),
       annotations: { untrustedContentHint: true },
-      execute: async (input) => {
-        const state = stateFromInput(input ?? {});
-        const matched = applySort(activeOffers(index), state.sort, {
-          today: buildDate(index.generated_at),
-        }).filter((offer) => offerMatches(offer, state));
-        const serialized = serializeState(state);
-        return {
-          total: matched.length,
-          offers: matched.map(offerSummary),
-          applied_state: serialized
-            ? Object.fromEntries(new URLSearchParams(serialized))
-            : {},
-          results_url: `${currentBaseUrl()}/${serialized ? `?${serialized}` : ""}`,
-          page_updated: applyStateToPage(state),
-        };
-      },
+      execute: async (input) => runOfferSearch(index, input ?? {}),
     },
     {
       name: "get_offer",
