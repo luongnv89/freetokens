@@ -11,7 +11,7 @@ category: api_provider
 amount: "1,000 free credits/month (2,000 with a company email); work email needs no card, personal email must add a card (not charged) after month one; one balance for Search, Contents and DeepResearch; credits reset monthly, no rollover"
 expiry_date: null
 source_url: https://docs.valyu.ai/pricing
-verified_date: 2026-11-13
+verified_date: 2026-11-14
 verification: social_proof
 review_status: under-review
 signup: required

@@ -7,7 +7,7 @@ category: api_provider
 amount: $5 credit to try Managed Agents (Public Preview), available to new DigitalOcean customers only
 expiry_date: null
 source_url: https://www.digitalocean.com/products/managed-agents
-verified_date: 2026-11-13
+verified_date: 2026-11-14
 verification: social_proof
 review_status: under-review
 signup: required
