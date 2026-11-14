@@ -1,5 +1,5 @@
 // ui-sdk trial (#726): publishes ui-sdk's snapshot/query/act WebMCP tools.
-// main.tsx imports this lazily, only when the browser exposes modelContext,
+// main.tsx imports this lazily, only when the browser exposes document.modelContext,
 // so visitors without WebMCP never download the bridge.
 import { createAgent, registerTools } from "@ui-sdk/react/agent";
 
