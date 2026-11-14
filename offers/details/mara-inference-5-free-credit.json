@@ -1,0 +1,16 @@
+{
+  "summary": "On MARA's plans page, all developers get $5 of free credit to start testing and building with MARA Inference Service, and initial credits expire in 30 days. The Free plan lists $5 in free API credits, access to production models, and no credit card required to start. The Developer plan is pay as you go for token usage, and you add a card when credits run out. The page says the credit translates to millions of tokens on leading open-source models.",
+  "claim_steps": [
+    "Open cloud.mara.com/plans and choose Get Started on the Free plan",
+    "Sign up; no credit card is required",
+    "Use the $5 credit within 30 days"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cloud.mara.com/plans",
+      "title": "Plan and Billing",
+      "text": "Get $5 credit to explore our models when you signup. All Developers will get $5 of Free Credit to start testing and building with MARA Inference Service. Initial credits will expire in 30 days."
+    }
+  ]
+}
