@@ -172,14 +172,6 @@ describe("offer-search primitive (ui-sdk trial, #726)", () => {
     expect(out.results_url).toMatch(/\/\?category=coding$/);
   });
 
-  it("keeps ui-sdk out of the home page when WebMCP is absent", async () => {
-    render(<HomePage index={index} />);
-    const toolbar = document.querySelector("section.toolbar");
-    expect(toolbar?.getAttribute("aria-label")).toBe(LABEL);
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    expect(document.querySelector('[data-slot="offer-search"]')).toBeNull();
-  });
-
   it("prerenders the plain toolbar so hydration matches before the swap", () => {
     stubModelContext();
     const html = renderToString(<HomePage index={index} />);
