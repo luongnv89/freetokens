@@ -35,6 +35,8 @@ import {
   writeSavedSlugs,
 } from "../lib/personalState";
 import { TAG_ICONS } from "../lib/tagIcons";
+import { filtersFromState, type OfferFilters } from "../lib/offerSearchPrimitive";
+import { OfferSearchRoot } from "./OfferSearchRoot";
 import { PAGE_SIZE, pageCount } from "../lib/pagination";
 import { hotViewCounts, hottestSlugs, useOfferViews } from "../lib/offerStats";
 import type { RankContext } from "../lib/ranking";
@@ -136,6 +138,8 @@ function SearchGlyph() {
 }
 
 function Toolbar({
+  index,
+  filters,
   total,
   shown,
   pageRange,
@@ -155,6 +159,8 @@ function Toolbar({
   onToggleSavedOnly,
   onRestoreDismissed,
 }: {
+  index: OffersIndex;
+  filters: OfferFilters;
   total: number;
   shown: number;
   pageRange: { start: number; end: number } | null;
@@ -196,7 +202,12 @@ function Toolbar({
     event.currentTarget.scrollIntoView({ inline: "nearest", block: "nearest" });
   }
   return (
-    <section className="toolbar" aria-label="Search and filter offers">
+    <OfferSearchRoot
+      index={index}
+      value={filters}
+      className="toolbar"
+      aria-label="Search and filter offers"
+    >
       <div className="field field-search">
         <label className="tool-label sr-only" htmlFor="ft-search">
           Search
@@ -341,7 +352,7 @@ function Toolbar({
           Clear all filters
         </Button>
       </div>
-    </section>
+    </OfferSearchRoot>
   );
 }
 
@@ -431,6 +442,7 @@ export default function HomePage({
     () => ({ today: buildDay, hotViews }),
     [buildDay, hotViews],
   );
+  const agentFilters = useMemo(() => filtersFromState(state), [state]);
 
   const shownList = visibleOffers(offers, state, rankContext, {
     savedOnly,
@@ -754,6 +766,8 @@ export default function HomePage({
           {offers.length > 0 ? (
             <>
               <Toolbar
+                index={index}
+                filters={agentFilters}
                 total={offers.length}
                 shown={shownList.length}
                 pageRange={
