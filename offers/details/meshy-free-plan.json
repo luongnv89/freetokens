@@ -18,6 +18,12 @@
       "url": "https://www.meshy.ai/pricing",
       "title": "Meshy Free plan comparison — usage and API scope",
       "text": "100 monthly credits 1 concurrent task Low queue priority ... Download limit / month Free 10 Meshy 6 Lite ... API access Free —"
+    },
+    {
+      "type": "link",
+      "url": "https://docs.meshy.ai/en/webapp/pricing",
+      "title": "Meshy Pricing & Credits: Plans and Usage | Meshy Docs",
+      "text": "The Free plan includes 100 credits per month, enough to try Meshy and create a few models. Monthly credits reset at 00:00 UTC on the first day of each month. Models made on the Free plan are licensed under CC BY 4.0."
     }
   ]
 }
