@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import type { StateOf } from "@ui-sdk/core";
 import {
   usePart,
@@ -5,16 +6,18 @@ import {
   type PartProps,
 } from "@ui-sdk/react/primitive";
 import type { OffersIndex } from "../lib/offers";
-import { offerSearch, type OfferFilters } from "../lib/offerSearchPrimitive";
+import { filtersFromState, offerSearch } from "../lib/offerSearchPrimitive";
+import type { UrlState } from "../lib/urlState";
 
 export function OfferSearchRoot({
   index,
-  value,
+  state,
   ...props
-}: { index: OffersIndex; value: OfferFilters } & PartProps<
+}: { index: OffersIndex; state: UrlState } & PartProps<
   "section",
   StateOf<typeof offerSearch, "root">
 >) {
+  const value = useMemo(() => filtersFromState(state), [state]);
   const handle = usePrimitive(offerSearch, { index, value });
   return usePart(handle, "root", {}, props, "section");
 }

@@ -34,6 +34,14 @@ const EMPTY: OfferFilters = {
   sort: "",
 };
 
+const NO_OFFERS: OffersIndex = {
+  generated_at: "",
+  count: 0,
+  active_count: 0,
+  expired_count: 0,
+  offers: [],
+};
+
 export const offerSearch = definePrimitive({
   name: "offer-search",
   options: { index: "value", value: "value" },
@@ -41,8 +49,7 @@ export const offerSearch = definePrimitive({
   sync: (options) => (options.value === undefined ? {} : { value: options.value }),
   api: (context) => ({
     search(input?: OfferSearchInput) {
-      const { index } = context.options();
-      if (!index) return { total: 0, offers: [], page_updated: false };
+      const { index = NO_OFFERS } = context.options();
       return runOfferSearch(index, input && typeof input === "object" ? input : {});
     },
   }),
