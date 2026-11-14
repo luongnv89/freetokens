@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-13T16:48:11Z",
-  "count": 311,
-  "active_count": 260,
-  "expired_count": 51,
+  "generated_at": "2026-11-14T03:06:56Z",
+  "count": 314,
+  "active_count": 259,
+  "expired_count": 55,
   "offers": [
     {
       "slug": "deapi-5-free-signup-credits",
@@ -182,7 +182,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "maritaca-ai-s5-free",
@@ -572,7 +572,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "iteracompute-free-qwen3-8-27b",
@@ -737,7 +737,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openai-chatgpt-pro-business-api-credits",
@@ -1772,7 +1772,7 @@
       "verification": "social_proof",
       "review_status": "to-be-verified",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "opencode-space-bunny-free",
@@ -4668,6 +4668,51 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "future-agi-startup-program",
+      "title": "Future AGI Startup Program — $6,000 Platform Credits",
+      "provider": "Future AGI",
+      "category": "startup_program",
+      "amount": "$6,000 in platform credits for one year plus 6 months of Pro Plan access, for startups with under $10M raised, under 5 years old, building with LLMs or AI agents and with a live product or working prototype",
+      "expiry_date": null,
+      "source_url": "https://futureagi.com/startups/",
+      "verified_date": "2026-11-14",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "mara-inference-5-free-credit",
+      "title": "MARA Inference — $5 Free Credit",
+      "provider": "MARA",
+      "category": "api_provider",
+      "amount": "$5 in free API credits at signup on the MARA Inference Free plan, with access to production models. Initial credits expire in 30 days. No credit card required to start.",
+      "expiry_date": null,
+      "source_url": "https://cloud.mara.com/plans",
+      "verified_date": "2026-11-14",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "vercel-parallel-decisions-fast-free",
+      "title": "Parallel Decisions Fast Free (Vercel AI Gateway)",
+      "provider": "Vercel",
+      "category": "api_provider",
+      "amount": "Parallel Decisions Fast (parallel/parallel-decisions-fast) free on AI Gateway through November 23, 2026. It is a web-search decision model that returns probabilities and cited evidence. No separate Parallel account is required.",
+      "expiry_date": "2026-11-23",
+      "source_url": "https://vercel.com/changelog/parallel-decisions-now-available-on-ai-gateway-for-free",
+      "verified_date": "2026-11-14",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

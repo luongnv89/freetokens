@@ -1,0 +1,15 @@
+{
+  "summary": "Vercel published this changelog entry on November 13, 2026. Parallel Decisions Fast, a model from Parallel, is available on Vercel AI Gateway and is free through November 23, 2026. It searches the live web to answer typed questions about companies, products, policies, and other changing information, and it returns probabilities with cited evidence. It supports three question types: boolean, choice, and score. Use the model name parallel/parallel-decisions-fast. No separate Parallel account is required. AI Gateway records these requests in logs and spend budgets alongside other model requests.",
+  "claim_steps": [
+    "Sign in to Vercel and open AI Gateway",
+    "Call the model parallel/parallel-decisions-fast through AI Gateway (AI SDK or OpenAI-compatible API) before November 23, 2026"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://vercel.com/changelog/parallel-decisions-now-available-on-ai-gateway-for-free",
+      "title": "Parallel Decisions now available on AI Gateway for free",
+      "text": "Parallel Decisions Fast from Parallel is now available on AI Gateway and is free through November 23, 2026. Use parallel/parallel-decisions-fast as the model name. No separate Parallel account is required."
+    }
+  ]
+}
