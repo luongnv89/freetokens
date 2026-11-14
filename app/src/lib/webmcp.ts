@@ -176,8 +176,12 @@ export function runOfferSearch(index: OffersIndex, input: OfferSearchInput) {
   };
 }
 
-export function hasModelContext(): boolean {
-  return resolveModelContext() !== undefined;
+// ui-sdk's registerTools only uses document.modelContext, so the ui-sdk
+// path gates on it alone; the #535 tools keep the navigator fallback.
+export function hasDocumentModelContext(): boolean {
+  if (typeof document === "undefined") return false;
+  const mc = (document as ModelContextCarrier).modelContext;
+  return !!mc && typeof mc.registerTool === "function";
 }
 
 type Navigate = (url: string) => void;
