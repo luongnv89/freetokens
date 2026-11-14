@@ -1,13 +1,14 @@
 import { cleanup, render, waitFor } from "@testing-library/react";
 import { renderToString } from "react-dom/server";
-import { createAgent, registerTools } from "@ui-sdk/react/agent";
+import { createAgent } from "@ui-sdk/react/agent";
+import { usePart, usePrimitive } from "@ui-sdk/react/primitive";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import HomePage from "../components/HomePage";
 import { OfferSearchRoot } from "../components/OfferSearchRoot";
 import type { OffersIndex } from "./offers";
-import { filtersFromState } from "./offerSearchPrimitive";
+import { offerSearch } from "./offerSearchPrimitive";
 import { emptyState } from "./urlState";
-import { runOfferSearch } from "./webmcp";
+import { registerWebMcpTools, runOfferSearch } from "./webmcp";
 
 // #726 ui-sdk trial: the toolbar's offer-search primitive must expose one
 // `search` action to ui-sdk's agent bridge that returns exactly what the
@@ -67,6 +68,22 @@ const index: OffersIndex = {
 const LABEL = "Search and filter offers";
 const agent = createAgent();
 
+type SearchResult = ReturnType<typeof runOfferSearch>;
+type Tool = { name: string; execute: (input: object) => Promise<unknown> };
+
+function stubModelContext() {
+  const tools: Record<string, Tool> = {};
+  const registerTool = vi.fn(async (tool: Tool) => {
+    tools[tool.name] = tool;
+  });
+  Object.defineProperty(document, "modelContext", {
+    value: { registerTool },
+    configurable: true,
+    writable: true,
+  });
+  return tools;
+}
+
 afterEach(() => {
   cleanup();
   window.history.replaceState({}, "", "/");
@@ -75,13 +92,17 @@ afterEach(() => {
 
 function renderToolbar() {
   return render(
-    <OfferSearchRoot
-      index={index}
-      value={filtersFromState(emptyState())}
-      aria-label={LABEL}
-    />,
+    <OfferSearchRoot index={index} state={emptyState()} aria-label={LABEL} />,
   );
 }
+
+function UnindexedProbe() {
+  const handle = usePrimitive(offerSearch, {});
+  return usePart(handle, "root", {}, { "aria-label": "Unindexed probe" }, "section");
+}
+
+const rows = () =>
+  document.querySelectorAll("#ft-grid article[id^='offer-']").length;
 
 describe("offer-search primitive (ui-sdk trial, #726)", () => {
   it("shows up in the agent snapshot by its accessible name with only `search`", () => {
@@ -101,14 +122,17 @@ describe("offer-search primitive (ui-sdk trial, #726)", () => {
     });
   });
 
-  it("search returns the same compact offers as search_offers", async () => {
+  it("search returns exactly what the registered search_offers tool returns", async () => {
+    const tools = stubModelContext();
+    registerWebMcpTools(index)?.abort();
     renderToolbar();
     const input = { query: "beta", category: "coding" };
     const result = await agent.act({
       steps: [{ ref: LABEL, action: "search", args: [input] }],
     });
     expect(result.ok, result.error?.message).toBe(true);
-    const out = result.steps[0].result as ReturnType<typeof runOfferSearch>;
+    const out = result.steps[0].result as SearchResult;
+    expect(out).toEqual(await tools.search_offers.execute(input));
     expect(out).toEqual(runOfferSearch(index, input));
     expect(out.total).toBe(1);
     expect(out.offers[0]).toMatchObject({
@@ -127,35 +151,56 @@ describe("offer-search primitive (ui-sdk trial, #726)", () => {
     expect(out.applied_state).toEqual({});
   });
 
-  it("registers ui-sdk's tools only when document.modelContext exists", () => {
-    expect(() => registerTools(agent, { allow: () => true })()).not.toThrow();
-    const registerTool = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(document, "modelContext", {
-      value: { registerTool },
-      configurable: true,
-      writable: true,
-    });
-    const unregister = registerTools(agent, { allow: () => true });
-    const names = registerTool.mock.calls.map(([tool]) => tool.name).sort();
-    expect(names).toEqual(["act", "query", "snapshot"]);
-    unregister();
-  });
-
-  it("applies the agent's filters to the visible home listing", async () => {
-    render(<HomePage index={index} />);
-    const rows = () =>
-      [...document.querySelectorAll("#ft-grid article[id^='offer-']")].length;
-    expect(rows()).toBe(2);
+  it("returns the full result shape even without an index", async () => {
+    render(<UnindexedProbe />);
     const result = await agent.act({
       steps: [
-        { ref: LABEL, action: "search", args: [{ category: "coding" }] },
+        { ref: "Unindexed probe", action: "search", args: [{ category: "coding" }] },
       ],
     });
     expect(result.ok, result.error?.message).toBe(true);
-    expect(
-      (result.steps[0].result as ReturnType<typeof runOfferSearch>)
-        .page_updated,
-    ).toBe(true);
+    const out = result.steps[0].result as SearchResult;
+    expect(Object.keys(out).sort()).toEqual(
+      Object.keys(runOfferSearch(index, {})).sort(),
+    );
+    expect(out).toMatchObject({
+      total: 0,
+      offers: [],
+      applied_state: { category: "coding" },
+      page_updated: false,
+    });
+    expect(out.results_url).toMatch(/\/\?category=coding$/);
+  });
+
+  it("keeps ui-sdk out of the home page when WebMCP is absent", async () => {
+    render(<HomePage index={index} />);
+    const toolbar = document.querySelector("section.toolbar");
+    expect(toolbar?.getAttribute("aria-label")).toBe(LABEL);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    expect(document.querySelector('[data-slot="offer-search"]')).toBeNull();
+  });
+
+  it("prerenders the plain toolbar so hydration matches before the swap", () => {
+    stubModelContext();
+    const html = renderToString(<HomePage index={index} />);
+    expect(html).toContain('class="toolbar" aria-label="Search and filter offers"');
+    expect(html).not.toContain("offer-search");
+  });
+
+  it("swaps in the primitive after hydration and applies agent filters to the list", async () => {
+    stubModelContext();
+    render(<HomePage index={index} />);
+    await waitFor(() =>
+      expect(
+        document.querySelector('section.toolbar[data-slot="offer-search"]'),
+      ).not.toBeNull(),
+    );
+    expect(rows()).toBe(2);
+    const result = await agent.act({
+      steps: [{ ref: LABEL, action: "search", args: [{ category: "coding" }] }],
+    });
+    expect(result.ok, result.error?.message).toBe(true);
+    expect((result.steps[0].result as SearchResult).page_updated).toBe(true);
     await waitFor(() => expect(rows()).toBe(1));
     expect(window.location.search).toBe("?category=coding");
     const entry = agent
@@ -164,11 +209,11 @@ describe("offer-search primitive (ui-sdk trial, #726)", () => {
     expect(entry?.value).toMatchObject({ category: "coding" });
   });
 
-  it("server-renders the toolbar root without touching browser APIs", () => {
+  it("server-renders the primitive root without touching browser APIs", () => {
     const html = renderToString(
       <OfferSearchRoot
         index={index}
-        value={filtersFromState(emptyState())}
+        state={emptyState()}
         aria-label={LABEL}
         className="toolbar"
       />,
