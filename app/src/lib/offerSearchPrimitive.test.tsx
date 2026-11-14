@@ -1,7 +1,8 @@
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, render, waitFor } from "@testing-library/react";
 import { renderToString } from "react-dom/server";
 import { createAgent, registerTools } from "@ui-sdk/react/agent";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import HomePage from "../components/HomePage";
 import { OfferSearchRoot } from "../components/OfferSearchRoot";
 import type { OffersIndex } from "./offers";
 import { filtersFromState } from "./offerSearchPrimitive";
@@ -68,6 +69,7 @@ const agent = createAgent();
 
 afterEach(() => {
   cleanup();
+  window.history.replaceState({}, "", "/");
   delete (document as { modelContext?: unknown }).modelContext;
 });
 
@@ -137,6 +139,29 @@ describe("offer-search primitive (ui-sdk trial, #726)", () => {
     const names = registerTool.mock.calls.map(([tool]) => tool.name).sort();
     expect(names).toEqual(["act", "query", "snapshot"]);
     unregister();
+  });
+
+  it("applies the agent's filters to the visible home listing", async () => {
+    render(<HomePage index={index} />);
+    const rows = () =>
+      [...document.querySelectorAll("#ft-grid article[id^='offer-']")].length;
+    expect(rows()).toBe(2);
+    const result = await agent.act({
+      steps: [
+        { ref: LABEL, action: "search", args: [{ category: "coding" }] },
+      ],
+    });
+    expect(result.ok, result.error?.message).toBe(true);
+    expect(
+      (result.steps[0].result as ReturnType<typeof runOfferSearch>)
+        .page_updated,
+    ).toBe(true);
+    await waitFor(() => expect(rows()).toBe(1));
+    expect(window.location.search).toBe("?category=coding");
+    const entry = agent
+      .snapshot()
+      .find((e) => e.component === "offer-search" && !e.offPage);
+    expect(entry?.value).toMatchObject({ category: "coding" });
   });
 
   it("server-renders the toolbar root without touching browser APIs", () => {
