@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T03:24:02Z",
+  "generated_at": "2026-11-14T12:28:39Z",
   "count": 314,
   "active_count": 259,
   "expired_count": 55,
@@ -3384,7 +3384,7 @@
       "title": "Baseten AI Startup Program — up to $27.5K",
       "provider": "Baseten",
       "category": "startup_program",
-      "amount": "Up to $25,000 for Dedicated Deployments or Training plus up to $2,500 for Model APIs",
+      "amount": "Up to $25,000 for Dedicated Deployments or Training plus up to $2,500 for Model APIs; awarded credits expire six months from grant",
       "expiry_date": null,
       "source_url": "https://www.baseten.co/startup-program/",
       "verified_date": "2026-11-14",
