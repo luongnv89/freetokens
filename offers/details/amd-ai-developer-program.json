@@ -41,6 +41,12 @@
       "url": "https://www.amd.com/en/developer/resources/cloud-access/amd-developer-cloud.html",
       "title": "AMD Developer Cloud",
       "text": "AMD AI Developer Program members receive a complimentary $100 in AMD Developer Cloud credits to accelerate development and prototyping. Complimentary credit hours expire thirty (30) days from the date of deposit in your developer cloud account unless stated otherwise in your credit confirmation email."
+    },
+    {
+      "type": "link",
+      "url": "https://developer.amd.com/cloud-credit/",
+      "title": "Cloud Credits - AMD AI Developer Program",
+      "text": "Expires: 30 days after activation AMD Instinct Developer Cloud Terms and Conditions A total of one hundred dollars ($100), roughly equivalent to 50 hours, in complimentary credit hours will be issued"
     }
   ]
 }
