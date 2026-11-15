@@ -1,0 +1,34 @@
+{
+  "summary": "Kilo lists Tencent: Hy3 (free) at $0.00 per 1M input and output tokens and states the model is currently available at no cost in Kilo Code. Kilo's 2026-07-06 blog post announcing Hy3's general availability says it is totally free for a limited time everywhere you use Kilo, with high limits thanks to compute from Novita; no end date is given. Official pages do not say whether Hy3 is reachable through the gateway's unauthenticated :free access, so signup is recorded as required.",
+  "claim_steps": [
+    "Open Kilo (Kilo Code or another Kilo surface)",
+    "Select Tencent Hy3 from the model dropdown"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://kilo.ai/models/tencent-hy3-free",
+      "title": "Tencent: Hy3 (free) Coding Benchmark | Kilo Code",
+      "text": "Input Price: $0.00 per 1M tokens. Output Price: $0.00 per 1M tokens. This model is currently available at no cost in Kilo Code."
+    },
+    {
+      "type": "link",
+      "url": "https://blog.kilo.ai/p/from-preview-to-production-tencents",
+      "title": "From Preview to Production: Tencent's Hy3 Model Has Arrived",
+      "text": "Hy3 is totally free for a limited time everywhere you use Kilo, with high limits thanks to compute from Novita. Just select Tencent Hy3 from the model dropdown wherever you use Kilo."
+    },
+    {
+      "type": "link",
+      "url": "https://kilo.ai/docs/gateway/authentication",
+      "title": "Authentication",
+      "text": "The gateway allows unauthenticated access for free models only. Anonymous requests are identified by IP address and are subject to rate limiting (200 requests per hour per IP)."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/kilocode/status/2074191895815672108",
+      "author": "Kilo (acq. by Anaconda)",
+      "text": "FREE AI CODING MODEL ALERT! @TencentHunyuan's latest model, HY3, is now FREE in Kilo Code for a limited time. Here are the one-shot results when we prompted Opus, Fable, and HY3 to \"Create a 3D HTML visualizer of Earth spinning in space\" in Kilo's Agent Manager",
+      "handle": "@kilocode"
+    }
+  ]
+}

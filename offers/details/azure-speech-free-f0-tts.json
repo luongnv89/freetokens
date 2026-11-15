@@ -29,6 +29,12 @@
       "url": "https://learn.microsoft.com/en-us/answers/questions/5987029/can-audio-generated-with-azure-text-to-speech-be-p",
       "title": "Microsoft Q&A — Can audio generated with Azure Text-to-Speech be publicly redistributed?",
       "text": "If you are using the paid tier of Azure Text-to-Speech with prebuilt neural voices, Microsoft's Product Terms explicitly allow customers to use the generated audio output, including for commercial purposes. ... The service should be used under a paid Azure tier for the applicable output-use rights."
+    },
+    {
+      "type": "link",
+      "url": "https://azure.microsoft.com/en-us/pricing/details/speech/",
+      "title": "Pricing - Azure Speech in Foundry Tools | Microsoft Azure",
+      "text": "Free (F0) ... Text to Speech (per character billing) Neural 0.5 million characters free per month"
     }
   ]
 }
