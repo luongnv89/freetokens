@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-15T07:39:46Z — 124 of 260 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-15T07:40:26Z — 124 of 260 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1241,7 +1241,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-11-15 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://iteracompute.com/free
 - Page: https://freetokens.custats.info/offers/iteracompute-free-qwen3-8-27b.html
-- Summary: IteraCompute gives 30M free tokens per month through its Auto model ID, which routes among currently listed open models such as Qwen3.8-27B and DeepSeek V4.1 as idle capacity becomes available. No credit card or recharge is required. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, and there is no daily token cap, but requests share idle server capacity, so queues and rate limits apply. There is no automatic paid overage: an exhausted quota returns 429 until reset. There is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.
+- Summary: IteraCompute gives 30M free tokens per month through its Auto model ID, which routes among currently listed open models such as Qwen3.8-27B and DeepSeek V4.1 as idle capacity becomes available. No credit card or recharge is required. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, and there is no RPM, TPM or daily token cap. There is no automatic paid overage: an exhausted quota returns 429 until reset. There is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.
 - Claim steps: Register and verify your email, or sign in with Google | Open API Keys, create a key that allows the Auto model ID and save the secret shown once | Replace your-api-key with your key in the sample call (using the Auto model ID) and run it | Success means a non-empty choices[0].message.content; registration or HTTP 200 alone does not complete activation
 ## Pages
 
