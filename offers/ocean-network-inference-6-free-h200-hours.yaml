@@ -1,13 +1,16 @@
 # Verified 2026-09-12 against https://oncompute.ai/blog/ocean-network-inference-is-on-your-first-6-hours-are-on-us
 # ("To mark the launch, we are giving away 6 hours of H200 inference in
 # complimentary tokens." — launch post dated September 10, 2026)
+# Rechecked 2026-11-15: the launch post is still live with no end notice, but
+# oncompute.ai/inference no longer mentions free hours; a new one-time $7.30
+# subsidy (blog, November 11, 2026) is announced without saying it ends this promo.
 title: Ocean Network Inference — First 6 H200 Hours Free
 provider: Ocean Network
 category: api_provider
-amount: 6 complimentary hours of H200 inference (launch promo; OpenAI-compatible endpoints, curated models, templates)
-expiry_date: 2026-11-15
+amount: 6 complimentary hours of H200 inference (launch promo; OpenAI-compatible endpoints, curated models, templates) — unconfirmed, the official inference page no longer mentions it (rechecked 2026-11-15)
+expiry_date: null
 source_url: https://oncompute.ai/blog/ocean-network-inference-is-on-your-first-6-hours-are-on-us
-verified_date: 2026-11-15
+verified_date: 2026-11-13
 verification: social_proof
 review_status: "to-be-verified"
 signup: required
