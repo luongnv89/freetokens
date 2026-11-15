@@ -35,6 +35,7 @@ import {
   writeSavedSlugs,
 } from "../lib/personalState";
 import { TAG_ICONS } from "../lib/tagIcons";
+import { ToolbarRoot } from "./ToolbarRoot";
 import { PAGE_SIZE, pageCount } from "../lib/pagination";
 import { hotViewCounts, hottestSlugs, useOfferViews } from "../lib/offerStats";
 import type { RankContext } from "../lib/ranking";
@@ -136,6 +137,8 @@ function SearchGlyph() {
 }
 
 function Toolbar({
+  index,
+  urlState,
   total,
   shown,
   pageRange,
@@ -155,6 +158,8 @@ function Toolbar({
   onToggleSavedOnly,
   onRestoreDismissed,
 }: {
+  index: OffersIndex;
+  urlState: UrlState;
   total: number;
   shown: number;
   pageRange: { start: number; end: number } | null;
@@ -196,7 +201,7 @@ function Toolbar({
     event.currentTarget.scrollIntoView({ inline: "nearest", block: "nearest" });
   }
   return (
-    <section className="toolbar" aria-label="Search and filter offers">
+    <ToolbarRoot index={index} state={urlState}>
       <div className="field field-search">
         <label className="tool-label sr-only" htmlFor="ft-search">
           Search
@@ -341,7 +346,7 @@ function Toolbar({
           Clear all filters
         </Button>
       </div>
-    </section>
+    </ToolbarRoot>
   );
 }
 
@@ -754,6 +759,8 @@ export default function HomePage({
           {offers.length > 0 ? (
             <>
               <Toolbar
+                index={index}
+                urlState={state}
                 total={offers.length}
                 shown={shownList.length}
                 pageRange={

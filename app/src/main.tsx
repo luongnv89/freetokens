@@ -7,7 +7,7 @@ import type { DetailsMap } from "./lib/offerDetails.ts";
 import type { LeadsIndex } from "./lib/leads.ts";
 import { resolveRoute } from "./routes.ts";
 import { scheduleAnalyticsInit } from "./lib/analytics.ts";
-import { registerWebMcpTools } from "./lib/webmcp.ts";
+import { hasDocumentModelContext, registerWebMcpTools } from "./lib/webmcp.ts";
 
 // Keep the catalog out of the executable bundle: it changes with every offer
 // while the application code does not. Resolve against this module URL so
@@ -97,6 +97,13 @@ async function boot() {
     // feature-detects document/navigator.modelContext and no-ops where the
     // draft API is absent; registration is cheap and runs on every page.
     registerWebMcpTools(index);
+    // ui-sdk trial (#726): its snapshot/query/act tools drive the toolbar's
+    // offer-search primitive. Loaded only where document.modelContext exists.
+    if (hasDocumentModelContext()) {
+      import("./lib/uiSdkAgent.ts")
+        .then(({ registerUiSdkAgent }) => registerUiSdkAgent())
+        .catch(() => {});
+    }
   } catch (error) {
     console.error(
       "Unable to hydrate FreeTokens; prerendered content remains available.",
