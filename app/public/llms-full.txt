@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-15T03:27:25Z — 124 of 260 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-15T07:39:46Z — 124 of 260 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -835,16 +835,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openai-chatgpt-pro-business-api-credits.html
 - Summary: Per OpenAI's API changelog entry dated Oct 28, 2026, eligible ChatGPT Pro and Business subscribers can claim free monthly API credits. Pro gets $100, $200 or $500 per month depending on tier; Business gets $20 per paid Standard seat or $100 per paid Premium seat, pooled and capped at $500 per workspace per month. The subscription must be paid and at least seven days old: free trials, complimentary subscriptions and ChatGPT Enterprise do not qualify. The ChatGPT account and the API account must use the same email address, and you must own both the subscription (or Business workspace) and the API organization. Credits are issued when the subscription renews; unused credits expire at the end of the billing cycle and do not roll over.
 - Claim steps: Hold a paid ChatGPT Pro or Business subscription that is at least seven days old (not a trial, complimentary plan or Enterprise) | Use the same email address for your ChatGPT account and the API account that owns the receiving organization | Activate the benefit in ChatGPT billing settings or on the API Platform Billing page by linking an API organization you own | Credits are issued automatically when the subscription renews; unused credits expire at the end of each billing cycle
-### Ocean Network Inference — First 6 H200 Hours Free
-- Provider: Ocean Network
-- Category: api_provider
-- Amount: 6 complimentary hours of H200 inference (launch promo; OpenAI-compatible endpoints, curated models, templates)
-- Status: active — enrollment deadline: 2026-11-15
-- Last checked: 2026-11-15 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://oncompute.ai/blog/ocean-network-inference-is-on-your-first-6-hours-are-on-us
-- Page: https://freetokens.custats.info/offers/ocean-network-inference-6-free-h200-hours.html
-- Summary: Ocean Network (oncompute.ai) launched its Inference product on September 10, 2026 and is giving away 6 hours of H200 inference in complimentary tokens to mark the launch. Inference runs OpenAI-compatible models from Hugging Face Hub on dedicated node-operator GPUs with per-hour pricing shown before launch (H200 listed at $2.16/hr). Requires a funded wallet on Base — either an external wallet or the built-in Smart Wallet with email/social login and fiat on-ramp.
-- Claim steps: Open the official launch announcement and follow “Claim yours here” to https://dashboard.oncompute.ai/grant/details. | Log in using an external wallet or the Smart Wallet; the grant-details page requires an authenticated account. | Confirm that the six-hour H200 grant is available to your account and read its conditions before booking a session. Private eligibility and caps have not been tested; the public announcement states no global end date. | Then open https://dashboard.oncompute.ai/inference and select a curated/custom model, service or template. The published runtime flow uses a funded wallet on Base; do not assume the grant removes every funding requirement.
 ### NVIDIA NIM Free Trial (Developer Program)
 - Provider: NVIDIA
 - Category: api_provider
@@ -1243,6 +1233,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/jetbrains-junie-lite-free.html
 - Summary: Junie by JetBrains is a coding agent installed from the terminal. Its homepage announces Junie Lite as a free AI layer with no trial and no card, described in the pricing section as a free model that is always on in every JetBrains account. The Free to Start plan is listed as Free, with other AI usage billed separately; bring-your-own-key usage is billed at provider rates with zero markup.
 - Claim steps: Open a terminal and run the install command from junie.jetbrains.com: curl -fsSL https://junie.jetbrains.com/install.sh | bash | Sign in with your JetBrains Account to use the free Junie Lite model
+### IteraCompute Free Auto Model — 30M Tokens/Month
+- Provider: IteraCompute
+- Category: api_provider
+- Amount: 30M free tokens per month via the Auto model ID, which routes among open models such as Qwen3.8-27B and DeepSeek V4.1 (input + output incl. reasoning), 128K context, no daily token cap (shared capacity; queues and rate limits apply), no credit card or recharge
+- Status: active — enrollment deadline: 2026-11-23
+- Last checked: 2026-11-15 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://iteracompute.com/free
+- Page: https://freetokens.custats.info/offers/iteracompute-free-qwen3-8-27b.html
+- Summary: IteraCompute gives 30M free tokens per month through its Auto model ID, which routes among currently listed open models such as Qwen3.8-27B and DeepSeek V4.1 as idle capacity becomes available. No credit card or recharge is required. The monthly allowance counts input and output, including reasoning, across all API keys on the account. Context is 128K total, and there is no daily token cap, but requests share idle server capacity, so queues and rate limits apply. There is no automatic paid overage: an exhausted quota returns 429 until reset. There is no SLA on free capacity, and free accounts may queue during busy periods. The free promotion ends at 00:00 Pacific Time on November 24, 2026.
+- Claim steps: Register and verify your email, or sign in with Google | Open API Keys, create a key that allows the Auto model ID and save the secret shown once | Replace your-api-key with your key in the sample call (using the Auto model ID) and run it | Success means a non-empty choices[0].message.content; registration or HTTP 200 alone does not complete activation
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
