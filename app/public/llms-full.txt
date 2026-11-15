@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-14T03:06:56Z — 124 of 259 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-15T03:06:38Z — 125 of 260 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Kilo Code — Tencent Hy3 Free (Limited Time)
+- Provider: Kilo Code
+- Category: coding
+- Amount: Tencent Hy3 free in Kilo for a limited time ($0.00 per 1M input and output tokens), with high limits on Novita compute; no end date announced
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-15 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://kilo.ai/models/tencent-hy3-free
+- Page: https://freetokens.custats.info/offers/kilo-code-tencent-hy3-free.html
+- Summary: Kilo lists Tencent: Hy3 (free) at $0.00 per 1M input and output tokens and states the model is currently available at no cost in Kilo Code. Kilo's 2026-07-06 blog post announcing Hy3's general availability says it is totally free for a limited time everywhere you use Kilo, with high limits thanks to compute from Novita; no end date is given. Official pages do not say whether Hy3 is reachable through the gateway's unauthenticated :free access, so signup is recorded as required.
+- Claim steps: Open Kilo (Kilo Code or another Kilo surface) | Select Tencent Hy3 from the model dropdown
 ### Parallel Decisions Fast Free (Vercel AI Gateway)
 - Provider: Vercel
 - Category: api_provider
