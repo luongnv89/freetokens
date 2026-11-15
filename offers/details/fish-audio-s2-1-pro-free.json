@@ -43,6 +43,12 @@
       "url": "https://fish.audio/terms",
       "title": "Terms of Service | Fish Audio",
       "text": "You will only use the Services for your own internal, personal, non-commercial use ... Notwithstanding the foregoing, if you are a user of Paid Services, you are licensed to use the Services for commercial uses."
+    },
+    {
+      "type": "link",
+      "url": "https://fish.audio/plan/",
+      "title": "Pricing & Plans - Fish Audio",
+      "text": "Free plan users can only use generated content for personal, non-commercial projects. the S2.1 Pro Free model can be called without any credit."
     }
   ]
 }

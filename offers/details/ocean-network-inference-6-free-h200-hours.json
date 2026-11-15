@@ -18,6 +18,24 @@
       "url": "https://oncompute.ai/blog/ocean-network-inference-is-on-your-first-6-hours-are-on-us",
       "title": "Ocean Network Inference Is ON. Your First 6 Hours Are On Us.",
       "text": "To mark the launch, we are giving away 6 hours of H200 inference in complimentary tokens. Claim yours and start generating."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.oncompute.ai/ocean-network-dashboard/get-your-subsidy",
+      "title": "Get Your Subsidy | Ocean Network docs",
+      "text": "Run your first AI models for free, then get 50% off every week. Ocean Network helps pay for your runs. Get 50% off every week, up to $10 off, plus $7.3 to start. ... Free credit: 100% of your first runs, paid for you — 7.3 USDC in total, one time."
+    },
+    {
+      "type": "link",
+      "url": "https://oncompute.ai/blog/ocean-network-subsidy",
+      "title": "NEW: Ocean Network Subsidy (November 11, 2026)",
+      "text": "The first $7.30 is on us, once. ... This is awarded once per person and does not renew."
+    },
+    {
+      "type": "link",
+      "url": "https://oncompute.ai/inference",
+      "title": "Ocean Network Inference",
+      "text": "H200 snapshot, per hour, per card — Ocean Network: $2.16. You pay a node operator directly for the hardware and the minutes you use. (No free hours or complimentary tokens mentioned.)"
     }
   ]
 }
