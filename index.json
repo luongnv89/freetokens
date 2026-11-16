@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-15T07:40:26Z",
-  "count": 315,
-  "active_count": 260,
+  "generated_at": "2026-11-16T02:05:02Z",
+  "count": 317,
+  "active_count": 262,
   "expired_count": 55,
   "offers": [
     {
@@ -4728,6 +4728,36 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "callmissed-free-plan-1000-credits",
+      "title": "CallMissed Free Plan — 1,000 API Credits",
+      "provider": "CallMissed",
+      "category": "api_provider",
+      "amount": "1,000 free API credits on signup (≈US$10.40; 1 credit = ₹1 ≈ US$0.0104), Free plan with 11 free-tier models (6 LLMs, 1 STT, 2 TTS, 2 embedding) at 60 requests per minute",
+      "expiry_date": null,
+      "source_url": "https://www.callmissed.com/pricing",
+      "verified_date": "2026-11-16",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "retell-ai-10-free-credits",
+      "title": "Retell AI — $10 Free Voice Agent Credits",
+      "provider": "Retell AI",
+      "category": "voice",
+      "amount": "$10 in free credits on signup, plus 20 concurrent calls included free on every account",
+      "expiry_date": null,
+      "source_url": "https://www.retellai.com/pricing",
+      "verified_date": "2026-11-16",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [
