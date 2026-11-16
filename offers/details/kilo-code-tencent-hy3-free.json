@@ -1,5 +1,5 @@
 {
-  "summary": "Kilo lists Tencent: Hy3 (free) at $0.00 per 1M input and output tokens and states the model is currently available at no cost in Kilo Code. Kilo's 2026-07-06 blog post announcing Hy3's general availability says it is totally free for a limited time everywhere you use Kilo, with high limits thanks to compute from Novita; no end date is given. Official pages do not say whether Hy3 is reachable through the gateway's unauthenticated :free access, so signup is recorded as required.",
+  "summary": "Kilo listed Tencent: Hy3 (free) at $0.00 per 1M input and output tokens, and its 2026-07-06 blog post said Hy3 was totally free for a limited time everywhere you use Kilo, with high limits thanks to compute from Novita. As of 2026-11-16 the free model has ended: Kilo's live gateway returns HTTP 404 model_not_found for tencent/hy3:free and its model list carries only the paid tencent/hy3. The kilo.ai model page still says the model is available at no cost, but the newer live API response is used. No official end date was announced.",
   "claim_steps": [
     "Open Kilo (Kilo Code or another Kilo surface)",
     "Select Tencent Hy3 from the model dropdown"
@@ -29,6 +29,12 @@
       "author": "Kilo (acq. by Anaconda)",
       "text": "FREE AI CODING MODEL ALERT! @TencentHunyuan's latest model, HY3, is now FREE in Kilo Code for a limited time. Here are the one-shot results when we prompted Opus, Fable, and HY3 to \"Create a 3D HTML visualizer of Earth spinning in space\" in Kilo's Agent Manager",
       "handle": "@kilocode"
+    },
+    {
+      "type": "link",
+      "url": "https://api.kilo.ai/api/gateway/models",
+      "title": "Kilo Gateway models API",
+      "text": "469 models listed on 2026-11-16; Tencent entries are tencent/hy3 (prompt 0.000000132, completion 0.000000528, discount 0), tencent/hy3-preview, tencent/hy4, tencent/hy4-flash and others — no tencent/hy3:free. Requesting tencent/hy3:free returns HTTP 404: \"The requested model 'tencent/hy3:free' does not exist.\""
     }
   ]
 }

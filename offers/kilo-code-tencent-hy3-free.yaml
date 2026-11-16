@@ -1,11 +1,20 @@
 # Hunted 2026-11-15 by offer-hunter; verified against https://kilo.ai/models/tencent-hy3-free
 # ("This model is currently available at no cost in Kilo Code.")
 # Lead: https://x.com/kilocode/status/2074191895815672108
+# 2026-11-16 re-check: EXPIRED. Kilo's live gateway no longer serves the free model. A request for
+# model "tencent/hy3:free" to https://api.kilo.ai/api/gateway/chat/completions returned HTTP 404
+# model_not_found ("The requested model 'tencent/hy3:free' does not exist. Please use an exact model
+# id as listed on /api/gateway/models."); a control :free model returned HTTP 200. The gateway model
+# list https://api.kilo.ai/api/gateway/models (469 models) lists only paid tencent/hy3
+# ($0.132/$0.528 per 1M, discount 0). Newer live API response used; no official end date stated,
+# so expiry_date = date of this check.
+# Known conflict: https://kilo.ai/models/tencent-hy3-free says "This model is currently available at
+# no cost in Kilo Code." (model id tencent/hy3:free)
 title: Kilo Code — Tencent Hy3 Free (Limited Time)
 provider: Kilo Code
 category: coding
-amount: Tencent Hy3 free in Kilo for a limited time ($0.00 per 1M input and output tokens), with high limits on Novita compute; no end date announced
-expiry_date: null
+amount: Tencent Hy3 free in Kilo for a limited time ($0.00 per 1M input and output tokens), with high limits on Novita compute; ended — the free model ID is no longer served (2026-11-16)
+expiry_date: 2026-11-16
 source_url: https://kilo.ai/models/tencent-hy3-free
 verified_date: 2026-11-16
 verification: social_proof
