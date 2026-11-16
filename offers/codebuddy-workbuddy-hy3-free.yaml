@@ -4,6 +4,12 @@
 # (2026-09-10 → 2026-09-23). Hy3 promo removed from the official page, so this
 # offer is marked expired on that basis. The $0/mo WorkBuddy free tier
 # (100 credits/month, 30/day reward, 5,000 completions) remains live.
+# 2026-11-16 re-check: still expired. Tencent's Hy4 launch post
+# https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/
+# (2026-11-04) says "From November 4 to 15, WorkBuddy and CodeBuddy will be available for free." —
+# that window has also ended. News reports of a WorkBuddy Hy4 flash free window (2026-11-16 to 11-30)
+# could not be confirmed on an official page (workbuddy.ai is JS-rendered; its pricing bundle still
+# carries only the old Hy4 preview banner), so it is not listed.
 title: CodeBuddy / WorkBuddy Hy3 Free (Tencent)
 provider: Tencent
 category: coding

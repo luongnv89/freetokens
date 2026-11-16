@@ -1,0 +1,42 @@
+{
+  "summary": "OpenCode made Tencent's Hy4 flash free on 2026-11-16, announcing near-unlimited usage for the next 2 weeks. Hy4 flash is Hy's fastest and most cost-efficient model, with a 1M-token context window and image input. OpenCode's Console docs list Hy4 flash Free (hy4-flash-free) with free input, output and cached reads for a limited time, and its provider follows a zero-retention policy. No exact end date is published: the 2026-11-30 expiry is derived from \"the next 2 weeks\" in the announcement and is approximate. The free tier works only inside the OpenCode app. The Inference API docs say other clients receive HTTP 403, even with an API key, and a keyless direct call on 2026-11-16 was rejected (HTTP 429, \"Free models work in OpenCode\"). No in-app request was tested.",
+  "claim_steps": [
+    "Install the OpenCode app from https://opencode.ai.",
+    "Run /models and select Hy4 flash Free (opencode/hy4-flash-free).",
+    "Use it from inside OpenCode only. Per OpenCode's Inference API docs, other clients receive HTTP 403 for free-tier models, even with an API key.",
+    "The free period is about 2 weeks from 2026-11-16 (\"for the next 2 weeks\"); OpenCode has not published an exact end date."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models | OpenCode",
+      "text": "Hy4 flash Free is free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training. Pricing: Hy4 flash | Free | Free | Free | - (model id hy4-flash-free)"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/zen/v1/models",
+      "title": "OpenCode Zen models API",
+      "text": "{\"id\": \"hy4-flash-free\", \"name\": \"Hy4 flash Free\", \"canonical_id\": \"tencent/hy4-flash\", \"release_date\": \"2026-11-16\", \"limit\": {\"context\": 1048576}, \"cost\": {\"text\": {\"input\": {\"price\": 0, \"cache\": {\"read\": 0}}, \"output\": {\"price\": 0}}}}"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/api/inference/",
+      "title": "Inference API | OpenCode",
+      "text": "Paid models require the header. Free-tier chat models are only available from within OpenCode; other clients receive HTTP 403, even with an API key. Use paid models or a Go subscription from other clients."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/opencode/status/2122231173720224224",
+      "author": "OpenCode",
+      "handle": "@opencode",
+      "text": "Hy4 flash is free with near-unlimited usage for the next 2 weeks\n\n1M context · Multimodal · ZDR\n\nHy's fastest and most cost-efficient model"
+    },
+    {
+      "type": "link",
+      "url": "https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models",
+      "title": "Tencent Launches Hy4, Joining the Ranks of the World's Leading Open-Source AI Models - Tencent",
+      "text": "Additionally, the model's API is being made available via third-party platforms such as OpenRouter, Hermes, and OpenCode."
+    }
+  ]
+}

@@ -4,10 +4,18 @@
 # claimed. ... can be claimed only once per account per model" /
 # "10 USD will be automatically frozen in your account" per claim/enable /
 # "This campaign is valid until December 31, 2026.")
+# 2026-11-16: Hy4 flash added. https://www.tencentcloud.com/act/pro/tokenhub says "Hy4 Flash Is Now
+# Live on Token Plan ... Tencent Hy4 flash Free Trial ... Exclusive for new users · Up to 1 million
+# free tokens, valid for 90 days"; model list https://intl.cloud.tencent.com/document/product/1300/81315
+# lists "Hy4 flash hy4-flash". Tencent's Hy4 launch post (2026-11-04) adds that paid Hy4 is "50% off
+# its standard pricing, with this offer running through December 31, 2026" (a discount, not free).
+# Known conflict: https://www.tencentcloud.com/act/pro/tokenhub says "Up to 1 million free tokens,
+# valid for 90 days" (undated promo page); the trial doc (source_url, last updated 2026-10-21) wins
+# the tie-break and still says "valid for 1 year".
 title: Tencent Cloud TokenHub — New User Free Trial
 provider: Tencent Cloud
 category: api_provider
-amount: 1,000,000 free tokens per eligible language model, valid 1 year from claim (one claim per model per root account; USD 10 balance frozen per claim/enable)
+amount: 1,000,000 free tokens per eligible language model, now incl. Hy4 flash; valid 1 year from claim per the docs (the TokenHub promo page says 90 days) — one claim per model per root account; USD 10 balance frozen per claim/enable
 expiry_date: 2026-12-31
 source_url: https://intl.cloud.tencent.com/document/product/1300/80423
 verified_date: 2026-11-16

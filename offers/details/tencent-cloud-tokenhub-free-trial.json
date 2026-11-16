@@ -1,5 +1,5 @@
 {
-  "summary": "Tencent Cloud TokenHub gives root accounts a one-time free trial quota per eligible model. Each eligible language model gets 1,000,000 free tokens valid 1 year from claim; the campaign enrollment end is December 31, 2026, distinct from the quota's usage validity. Other model types may have different validity periods; confirm the claimed package. TokenHub is an OpenAI-compatible gateway serving DeepSeek, GLM, Kimi, MiniMax and other models. Claiming or enabling postpaid for a model freezes USD 10 of account balance, returned after resources are terminated. Postpaid is optional: without it, service stops when the free quota is exhausted or expires.",
+  "summary": "Tencent Cloud TokenHub gives root accounts a one-time free trial quota per eligible model. Each eligible language model gets 1,000,000 free tokens valid 1 year from claim; the campaign enrollment end is December 31, 2026, distinct from the quota's usage validity. Other model types may have different validity periods; confirm the claimed package. TokenHub is an OpenAI-compatible gateway serving Tencent Hy4 and Hy4 flash, DeepSeek, GLM, Kimi, MiniMax and other models. As of 2026-11-16, TokenHub's promo page advertises a Hy4 flash Free Trial for new users (up to 1 million free tokens); that page says the tokens are valid for 90 days while the trial doc still says 1 year, so use them early. Paid Hy4 is 50% off through December 31, 2026, which is a discount, not part of the free trial. Claiming or enabling postpaid for a model freezes USD 10 of account balance, returned after resources are terminated. Postpaid is optional: without it, service stops when the free quota is exhausted or expires.",
   "claim_steps": [
     "Log in to the TokenHub console and activate the platform.",
     "On the Model Gallery page, click 'New User Free Trial', select models, then 'Claim Now'. Free trial can also be auto-claimed on first invocation of a supported model. Each root account can claim once per model.",
@@ -13,6 +13,24 @@
       "url": "https://intl.cloud.tencent.com/document/product/1300/80423",
       "title": "New User Free Trial Package",
       "text": "All language models provide a free trial quota of 1 million Tokens, valid for 1 year. ... Each time you claim a free resource package for a model or enable postpaid service for a model, 10 USD will be automatically frozen in your account. ... This campaign is valid until December 31, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://www.tencentcloud.com/act/pro/tokenhub",
+      "title": "TokenHub – One API for DeepSeek, GLM, Kimi & More | Tencent Cloud",
+      "text": "Hy4 Flash Is Now Live on Token Plan ... Tencent Hy4 flash Free Trial ... Exclusive for new users · Up to 1 million free tokens, valid for 90 days"
+    },
+    {
+      "type": "link",
+      "url": "https://intl.cloud.tencent.com/document/product/1300/81315",
+      "title": "Token Plan Overview",
+      "text": "Model Name Model ID: Hy4 flash hy4-flash; Hy4 hy4; Hy4 preview (to be discontinued on 2026-12-07) hy4-preview"
+    },
+    {
+      "type": "link",
+      "url": "https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models",
+      "title": "Tencent Launches Hy4, Joining the Ranks of the World's Leading Open-Source AI Models - Tencent",
+      "text": "In addition, Hy4 will be available on Tencent Cloud TokenHub at 50% off its standard pricing, with this offer running through December 31, 2026."
     }
   ]
 }

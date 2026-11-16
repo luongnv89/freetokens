@@ -1,0 +1,25 @@
+# Verified 2026-11-16 against https://opencode.ai/v2/docs/console/models/
+# ("Hy4 flash Free is free on OpenCode for a limited time. Its provider follows a zero-retention
+# policy and does not use your data for model training."
+# Pricing table: "Hy4 flash | Free | Free | Free | -"; model id hy4-flash-free.)
+# Live model list https://opencode.ai/zen/v1/models (2026-11-16): id "hy4-flash-free",
+# canonical_id "tencent/hy4-flash", context 1048576, input/output/cache-read price 0.
+# Announced by @opencode 2026-11-16: https://x.com/opencode/status/2122231173720224224
+# ("Hy4 flash is free with near-unlimited usage for the next 2 weeks / 1M context · Multimodal · ZDR /
+# Hy's fastest and most cost-efficient model").
+# expiry_date is APPROXIMATE: derived as post date + 14 days from "for the next 2 weeks" in the
+# 2026-11-16 post. OpenCode has published no exact end date.
+# Free-tier models only work inside the OpenCode app: https://opencode.ai/v2/docs/console/api/inference/
+# says "Free-tier chat models are only available from within OpenCode; other clients receive HTTP 403,
+# even with an API key." A keyless call on 2026-11-16 08:10 UTC returned HTTP 429 FreeUsageLimitError
+# ("Free models work in OpenCode").
+title: Hy4 flash Free on OpenCode
+provider: OpenCode
+category: coding
+amount: Free Tencent Hy4 flash in the OpenCode app (1M context, multimodal; free input, output and cached reads; near-unlimited usage for about 2 weeks)
+expiry_date: 2026-11-30
+source_url: https://opencode.ai/v2/docs/console/models/
+verified_date: 2026-11-16
+verification: social_proof
+review_status: under-review
+signup: none
