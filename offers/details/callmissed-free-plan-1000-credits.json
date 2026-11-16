@@ -1,0 +1,21 @@
+{
+  "summary": "CallMissed is a multi-model API platform (LLM, speech-to-text, text-to-speech, embeddings) billed in prepaid credits. New accounts start with 1,000 free API credits (1 credit = ₹1 ≈ US$0.0104). The Free plan is free forever and includes 11 free-tier models (6 LLMs, 1 speech-to-text, 2 text-to-speech, 2 embedding models; no image model) with a limit of 60 requests per minute.",
+  "claim_steps": [
+    "Sign up at console.callmissed.com with email or Google",
+    "Create an API key under Settings → API Keys"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.callmissed.com/pricing",
+      "title": "CallMissed pricing — plans, credits and model rates",
+      "text": "Every account gets 1,000 free API credits on signup. The Free plan is free forever with 1,000 API credits — that is your trial. The Free plan includes 11 free-tier models: 6 LLMs, 1 speech-to-text, 2 text-to-speech and 2 embedding models. 1 credit = ₹1 ≈ US$0.0104 (US$1 = ₹96)."
+    },
+    {
+      "type": "link",
+      "url": "https://www.callmissed.com/help-center/getting-started",
+      "title": "Getting started in 5 minutes",
+      "text": "Sign up at console.callmissed.com with email or Google. Add credits from the Billing page — a free tier is available for testing. Create an API key under Settings → API Keys."
+    }
+  ]
+}

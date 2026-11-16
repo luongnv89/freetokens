@@ -1,0 +1,21 @@
+{
+  "summary": "Retell AI, a platform for building AI phone/voice agents, gives new accounts $10 in free credits on signup. Every account also includes 20 concurrent calls for free.",
+  "claim_steps": [
+    "Sign up for a Retell AI account from the pricing page",
+    "The $10 in free credits are applied when you sign up"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.retellai.com/pricing",
+      "title": "AI Phone Agent Pricing | Retell AI",
+      "text": "Go live in minutes with $10 in free credits. Every account includes 20 concurrent calls for free."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.retellai.com/test/testing-pricing",
+      "title": "Testing pricing",
+      "text": "$10 in free credits when you sign up."
+    }
+  ]
+}
