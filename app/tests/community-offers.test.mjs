@@ -238,4 +238,25 @@ describe("llms exports label community entries", () => {
       "- Listing: community giveaway — not verified by freetokens",
     );
   });
+
+  it("the llms-full byte budget never truncates a community entry away", () => {
+    const [community] = buildIndex(
+      [load(GIVEAWAY)],
+      new Date("2026-11-17T12:00:00Z"),
+    ).offers;
+    const filler = Array.from({ length: 600 }, (_, i) => ({
+      ...community,
+      slug: `filler-${String(i).padStart(3, "0")}`,
+      title: `Filler ${i}`,
+      amount: `$${i} credits ${"x".repeat(300)}`,
+      verification: "social_proof",
+      review_status: "under-review",
+      listing_type: undefined,
+      community: undefined,
+      verified_date: "2026-11-17",
+    })).map((o) => JSON.parse(JSON.stringify(o)));
+    const { full } = run([...filler, community]);
+    expect(full).toContain("truncated to stay under the 200KB");
+    expect(full).toContain("### Devin Max giveaway");
+  });
 });

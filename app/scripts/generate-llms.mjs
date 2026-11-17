@@ -287,7 +287,14 @@ const llmsTxt = buildLlmsTxt();
 // entries — never slice mid-entry or lose the Pages/Feed footer (issue: PR
 // #475 review). The header reports the emitted count honestly when truncated.
 const MAX_FULL_BYTES = 200 * 1024;
-const offerBlocks = activeOffers.map(buildOfferBlock);
+// Community entries (#748) lead the full export: they are few and short-lived,
+// and each block is labelled "not verified", so the byte budget must never be
+// what drops one.
+const fullOrder = [
+  ...activeCommunity,
+  ...activeOffers.filter((o) => !isCommunity(o)),
+];
+const offerBlocks = fullOrder.map(buildOfferBlock);
 const fullFooter = buildFullFooter();
 const assembleFull = (emitted) =>
   buildFullHeader(emitted) + offerBlocks.slice(0, emitted).join("") + fullFooter;
