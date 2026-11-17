@@ -1,0 +1,13 @@
+# Hunted 2026-11-17 by offer-hunter; verified against https://isaacus.com/pricing
+# ("All new users to the Isaacus API receive $100 in free credits immediately upon adding a payment method to their Isaacus Platform account to be redeemed within two months.")
+# Lead: https://docs.isaacus.com/pricing/credits.md
+title: Isaacus API — $100 Free Credits for New Users
+provider: Isaacus
+category: api_provider
+amount: $100 in free API credits for new users after adding a payment method, redeemable within two months
+expiry_date: null
+source_url: https://isaacus.com/pricing
+verified_date: 2026-11-17
+verification: social_proof
+review_status: under-review
+signup: required

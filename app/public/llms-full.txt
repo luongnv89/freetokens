@@ -2,11 +2,101 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-16T08:15:41Z — 123 of 263 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-17T02:08:19Z — 125 of 271 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Nemotron 3 Ultra Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free NVIDIA Nemotron 3 Ultra model access in the OpenCode app (free input, output and cached reads; limited time; NVIDIA free endpoint, trial use only, do not submit personal or confidential data; use is logged)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-nemotron-3-ultra-free.html
+- Summary: OpenCode's models page lists Nemotron 3 Ultra Free (model ID nemotron-3-ultra-free) as available for a limited time, priced free input, output and cached reads. Nemotron 3 Ultra Free (NVIDIA free endpoints): Trial use only — do not submit personal or confidential data. Your use is logged for security purposes and to improve NVIDIA products and services. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.
+- Claim steps: Open OpenCode and run /models | Select Nemotron 3 Ultra Free (opencode/nemotron-3-ultra-free) | Use it while the limited-time free period lasts; free-tier models work only from within OpenCode
+### Nemotron 3.5 Super VL Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free NVIDIA Nemotron 3.5 Super VL model access in the OpenCode app (free input, output and cached reads; limited time; NVIDIA free endpoint, trial use only, do not submit personal or confidential data; use is logged)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-nemotron-3-5-super-vl-free.html
+- Summary: OpenCode's models page lists Nemotron 3.5 Super VL Free (model ID nemotron-3.5-super-vl-free) as available for a limited time, priced free input, output and cached reads. Nemotron 3.5 Super VL Free (NVIDIA free endpoints): Trial use only — do not submit personal or confidential data. Your use is logged for security purposes and to improve NVIDIA products and services. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.
+- Claim steps: Open OpenCode and run /models | Select Nemotron 3.5 Super VL Free (opencode/nemotron-3.5-super-vl-free) | Use it while the limited-time free period lasts; free-tier models work only from within OpenCode
+### Nemotron 3.5 Lightning Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free NVIDIA Nemotron 3.5 Lightning model access in the OpenCode app (free input, output and cached reads; limited time; NVIDIA free endpoint, trial use only, do not submit personal or confidential data; use is logged)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-nemotron-3-5-lightning-free.html
+- Summary: OpenCode's models page lists Nemotron 3.5 Lightning Free (model ID nemotron-3.5-lightning-free) as available for a limited time, priced free input, output and cached reads. Nemotron 3.5 Lightning Free (NVIDIA free endpoints): Trial use only — do not submit personal or confidential data. Your use is logged for security purposes and to improve NVIDIA products and services. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.
+- Claim steps: Open OpenCode and run /models | Select Nemotron 3.5 Lightning Free (opencode/nemotron-3.5-lightning-free) | Use it while the limited-time free period lasts; free-tier models work only from within OpenCode
+### Jev 1.13 Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Jev 1.13 model access in the OpenCode app (free input and output; limited time; model ID jev-1.13-free instead of paid jev-1.13)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-jev-1-13-free.html
+- Summary: OpenCode's models page lists Jev 1.13 Free (model ID jev-1.13-free) as available for a limited time, priced free input and output. Use `jev-1.13-free` instead of `jev-1.13` to use the limited-time free model. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.
+- Claim steps: Open OpenCode and run /models | Select Jev 1.13 Free (opencode/jev-1.13-free) | Use it while the limited-time free period lasts; free-tier models work only from within OpenCode
+### Inkling 2 Small Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Inkling 2 Small model access in the OpenCode app (free input, output and cached reads; limited time; not available in the EU, Iceland, Liechtenstein, Norway, Cuba, Iran, North Korea, Russia, Ukraine or Venezuela); provider retains data and may use it for model training
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-inkling-2-small-free.html
+- Summary: OpenCode's models page lists Inkling 2 Small Free (model ID inkling-2-small-free) as available for a limited time, priced free input, output and cached reads. Its provider retains your data and may use it for model training. It's not available in the European Union, Iceland, Liechtenstein, Norway, Cuba, Iran, North Korea, Russia, Ukraine, or Venezuela. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.
+- Claim steps: Open OpenCode and run /models | Select Inkling 2 Small Free (opencode/inkling-2-small-free) | Use it while the limited-time free period lasts; free-tier models work only from within OpenCode
+### Iceman Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Iceman stealth model access in the OpenCode app (free input, output and cached reads; limited time); collected data is retained and used to improve the model
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-iceman-free.html
+- Summary: OpenCode's models page lists Iceman Free (model ID iceman-free) as available for a limited time, priced free input, output and cached reads. Iceman Free: During its free period, collected data is retained and used to improve the model. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.
+- Claim steps: Open OpenCode and run /models | Select Iceman Free (opencode/iceman-free) | Use it while the limited-time free period lasts; free-tier models work only from within OpenCode
+### Flint 40B Free on OpenCode
+- Provider: OpenCode
+- Category: coding
+- Amount: Free Flint 40B model access in the OpenCode app (free input, output and cached reads; limited time); collected data may be used to improve the model and is retained for 30 days
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://opencode.ai/v2/docs/console/models/
+- Page: https://freetokens.custats.info/offers/opencode-flint-40b-free.html
+- Summary: OpenCode's models page lists Flint 40B Free (model ID flint-40b-free) as available for a limited time, priced free input, output and cached reads. Flint 40B Free: During its free period, collected data may be used to improve the model. Data is retained for 30 days. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.
+- Claim steps: Open OpenCode and run /models | Select Flint 40B Free (opencode/flint-40b-free) | Use it while the limited-time free period lasts; free-tier models work only from within OpenCode
+### Isaacus API — $100 Free Credits for New Users
+- Provider: Isaacus
+- Category: api_provider
+- Amount: $100 in free API credits for new users after adding a payment method, redeemable within two months
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://isaacus.com/pricing
+- Page: https://freetokens.custats.info/offers/isaacus-new-user-100-credits.html
+- Summary: Isaacus offers a legal AI API. All new users receive $100 in free credits immediately upon adding a payment method to their Isaacus Platform account; the credits must be redeemed within two months. Startups can separately apply to the Isaacus Startup Program, and academics or non-profits may request additional credits.
+- Claim steps: Create an Isaacus Platform account | Add a payment method to the account to receive the $100 in free credits | Use the credits within two months
+### GonkaRouter — 1M Free Tokens for New Users
+- Provider: GonkaRouter
+- Category: api_provider
+- Amount: 1M free tokens for new accounts, used before your paid balance, on an OpenAI- and Anthropic-compatible router on the Gonka network; no credit card required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://gonkarouter.io/pricing
+- Page: https://freetokens.custats.info/offers/gonkarouter-1m-free-tokens.html
+- Summary: GonkaRouter is an AI model router on the Gonka network, with OpenAI- and Anthropic-compatible APIs and paid pricing from $0.0061 per 1M tokens. New accounts automatically receive 1M free tokens, which are used before any paid balance. No credit card is required and there is no subscription. Sign-in is by email or Google.
+- Claim steps: Sign in to GonkaRouter with email or Google | Copy your API key | Point your OpenAI SDK at the GonkaRouter API; the 1M free tokens are used before any paid balance
 ### ZCode / BigModel New-User Trial
 - Provider: ZCode (Z.ai)
 - Category: coding
@@ -1163,76 +1253,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/lambda-research-grant.html
 - Summary: Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement. The linked application requires contact name/email, research problem, relevance/novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. Applicants must answer whether they are willing to co-write a Lambda blog; a required yes/no question is not evidence that yes is mandatory. Company, related publications and profile links are optional. No ORCID or institutional affiliation requirement was found in the current form.
 - Claim steps: Review the current grant CTA at https://lambda.ai/research and open its linked Research Grant application. | Prepare required first/last name, email, research problem, relevance and novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. | Answer the required yes/no question about willingness to co-write a Lambda blog. Company, related publications, GitHub/Scholar/social profiles and partnerships are optional; do not invent an ORCID or affiliation prerequisite. | Submit only your own accurate research application. If awarded, use the up-to-$5,000 credits on Lambda’s on-demand GPU Instances; exact award and expiry are not guaranteed by the public form.
-### KRAFTON Raon-1 mini Preview — Free API (Limited Time)
-- Provider: KRAFTON AI
-- Category: api_provider
-- Amount: Raon-1 mini preview (30B-A4B) API free for a limited time at launch; per-user token and request limits may apply; future pricing to be announced
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-16 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://raon-mini.krafton.ai/en
-- Page: https://freetokens.custats.info/offers/krafton-raon-1-mini-api-free-preview.html
-- Summary: KRAFTON offers its Raon-1 mini preview model (30B-A4B) through an API that is free for a limited time to celebrate the model's release. Per-user limits on token usage and the number of requests may apply, and any future charges will be announced separately. No end date is given.
-- Claim steps: Apply on the Raon page with your name, email, affiliation, role and intended use. | KRAFTON emails you an invitation to the Raon console right away. | Open the invitation, verify your email and set a password; then issue an API key, try the Playground and read the API docs.
-### Kong for Startups
-- Provider: Kong
-- Category: startup_program
-- Amount: Up to $100K Kong Konnect Plus credits (12 months; typically $25K–$100K) plus 50% off list for 2 years after; spend across AI Gateway, API Gateway, Mesh, Event Gateway
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-16 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://konghq.com/solutions/startup-program
-- Page: https://freetokens.custats.info/offers/kong-for-startups.html
-- Summary: Kong for Startups gives selected early-stage AI/API teams up to $100,000 in Kong Konnect Plus credits, valid 12 months from the date they land in the Konnect org (unused credits do not roll over). Most early-stage startups receive between $25K and $100K upfront. Credits spend across AI Gateway, API Gateway, Metering and Billing, Mesh, and Event Gateway. After credits expire or for usage beyond the balance, accepted startups pay 50% of Konnect Plus list pricing for 24 months. Eligibility: typically pre-seed through Series A, under $10M total funding, in production or launching within 6 months. YC companies are pre-qualified for the full $100K plus the two-year discount. Kong reviews applications (typically within 5 business days); credits land within 24 hours of acceptance. Existing Kong customers who qualify can have their balance increased.
-- Claim steps: Apply on konghq.com/solutions/startup-program with what you are building and which Kong products you will use (about 5 minutes). YC companies should indicate their batch. | Wait for Kong review (typically within 5 business days). | On acceptance, credits land in your Konnect org within 24 hours; the 50% discount auto-applies on invoices after credits run out.
-### Kiro Students — 1,000 Credits/Month for 1 Year
-- Provider: Kiro
-- Category: student
-- Amount: 1,000 Kiro credits per month free for one year for verified students at participating universities; includes premium models and Kiro Web; credits do not roll over; content collection for service improvement and model training is enabled by default, with opt-out
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-16 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://kiro.dev/students/
-- Page: https://freetokens.custats.info/offers/kiro-students-1000-credits-month.html
-- Summary: Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. Amazon's September 2026 announcement expands the program to 132 universities across 18 countries (a 12x scale-up from the 11-university pilot). Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.
-- Claim steps: Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email. | Open the account page and select the “You are eligible for Kiro Students” verification banner. | Verify student status through SheerID; proof such as a student ID or enrollment letter may be requested. | After approval, use 1,000 credits per month for 12 months. Unused credits do not roll over. | To opt out of content use, open Settings → User → Application → Telemetry and Content, then disable Content Collection for Service Improvement.
-### Kiro Startup Credits — up to 1 year Pro+
-- Provider: Kiro
-- Category: startup_program
-- Amount: Up to 1 year of Kiro Pro+ credits (Starter ≤2 users / Growth ≤10 / Scale ≤30); credits expire 1 year after issuance; AWS Activate credit holders not eligible
-- Status: active — enrollment deadline: 2026-12-31
-- Last checked: 2026-11-16 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://kiro.dev/startups/
-- Page: https://freetokens.custats.info/offers/kiro-startup-credits.html
-- Summary: Kiro for Startups gives early-stage to Series A startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Applicants must be 18 or older. Excluded residences: Argentina, Belarus, Brazil, China/GCR, Cuba, France, Germany, Iran, Italy, Mexico, North Korea, Poland, Russia, Spain, Syria, the region of Crimea, the so-called Donetsk People's Republic region (DNR), the so-called Luhansk People's Republic region (LNR), and the United Arab Emirates. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center. Choosing a plan above Pro+ or exceeding tier users can incur charges. Once credits are depleted, the AWS account automatically switches to standard Kiro Pro+ monthly billing on its card; continued use after expiry can also incur charges.
-- Claim steps: Confirm early-stage to Series A eligibility, age 18+, and residence outside the excluded locations listed above (including France and Germany); active AWS Activate credit holders are not eligible. | Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain. | Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30). | On approval, credits are deposited to the AWS account and activate on provisioning. | Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits. | Stay within the chosen tier and Pro+ plan. Monitor credits and stop/cancel unwanted billable access before depletion or expiry: standard Kiro Pro+ monthly billing starts automatically when credits run out.
-### Kimi API Free Trial (RMB 15)
-- Provider: Moonshot AI
-- Category: api_provider
-- Amount: RMB 15 API voucher for new users registering with a mainland China mobile number; valid 3 months from issuance
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-16 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.kimi.com/en/help/kimi-api/api-free-trial
-- Page: https://freetokens.custats.info/offers/kimi-api-free-trial.html
-- Summary: Kimi API grants newly registered users an RMB 15 voucher, valid for 3 months from issue and applied automatically to API usage before any top-up balance. Eligibility requires registering with a mainland China mobile number.
-- Claim steps: Register on the Kimi platform with a mainland China mobile number. | The RMB 15 voucher is granted automatically — no manual activation; it deducts before your top-up balance. | Track remaining voucher credit on the Cost Details page in the console.
-### Kilo Code — Tencent Hy3 Free (Limited Time)
-- Provider: Kilo Code
-- Category: coding
-- Amount: Tencent Hy3 free in Kilo for a limited time ($0.00 per 1M input and output tokens), with high limits on Novita compute; ended — the free model ID is no longer served (2026-11-16)
-- Status: active — enrollment deadline: 2026-11-16
-- Last checked: 2026-11-16 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://kilo.ai/models/tencent-hy3-free
-- Page: https://freetokens.custats.info/offers/kilo-code-tencent-hy3-free.html
-- Summary: Kilo listed Tencent: Hy3 (free) at $0.00 per 1M input and output tokens, and its 2026-07-06 blog post said Hy3 was totally free for a limited time everywhere you use Kilo, with high limits thanks to compute from Novita. As of 2026-11-16 the free model has ended: Kilo's live gateway returns HTTP 404 model_not_found for tencent/hy3:free and its model list carries only the paid tencent/hy3. The kilo.ai model page still says the model is available at no cost, but the newer live API response is used. No official end date was announced.
-- Claim steps: Open Kilo (Kilo Code or another Kilo surface) | Select Tencent Hy3 from the model dropdown
-### Kilo Code Free Models
-- Provider: Kilo Code
-- Category: api_provider
-- Amount: Free :free models without an API key, limited to 200 requests/hour per IP
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-16 — review_status=unverified · verification=social_proof · signup=none
-- Source: https://kilo.ai/docs/gateway/authentication
-- Page: https://freetokens.custats.info/offers/kilo-code-free-models.html
-- Summary: Kilo's AI Gateway allows unauthenticated access to models tagged :free, limited to 200 requests per hour per IP. Availability rotates; check the live catalog for current free IDs. NVIDIA free endpoints are trial-only: do not submit personal or confidential data, and usage is logged for security and to improve NVIDIA products and services. Zero pricing is not a blanket production-use or privacy waiver.
-- Claim steps: Check https://api.kilo.ai/api/gateway/models for a currently available :free model and its pricing, capabilities and provider terms; availability and model IDs can change. | For NVIDIA free endpoints, use them only for trials and never submit personal or confidential data. Usage is logged for security and to improve NVIDIA products and services; zero pricing does not waive provider usage or data restrictions. | Call the gateway without an Authorization header, or use a Kilo API key if preferred. | Stay within the 200 requests per hour per IP anonymous limit.
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.

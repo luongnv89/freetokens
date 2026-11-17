@@ -1,0 +1,28 @@
+{
+  "summary": "OpenCode's models page lists Nemotron 3.5 Super VL Free (model ID nemotron-3.5-super-vl-free) as available for a limited time, priced free input, output and cached reads. Nemotron 3.5 Super VL Free (NVIDIA free endpoints): Trial use only — do not submit personal or confidential data. Your use is logged for security purposes and to improve NVIDIA products and services. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.",
+  "claim_steps": [
+    "Open OpenCode and run /models",
+    "Select Nemotron 3.5 Super VL Free (opencode/nemotron-3.5-super-vl-free)",
+    "Use it while the limited-time free period lasts; free-tier models work only from within OpenCode"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models",
+      "text": "Nemotron 3.5 Super VL Free is available on OpenCode for a limited time. Nemotron 3.5 Super VL Free (NVIDIA free endpoints): Trial use only — do not submit personal or confidential data. Your use is logged for security purposes and to improve NVIDIA products and services. Pricing: Nemotron 3.5 Super VL Free | Free | Free | Free | -"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/product",
+      "title": "OpenCode | Desktop, terminal, mobile, SDK and extensions",
+      "text": "OpenCode comes with a set of free models that you can use without creating an account."
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/docs/console/models/",
+      "title": "Models (OpenCode docs)",
+      "text": "Nemotron 3.5 Super VL Free is available on OpenCode for a limited time. Trial use only — do not submit personal or confidential data."
+    }
+  ]
+}

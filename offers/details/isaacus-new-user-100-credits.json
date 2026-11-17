@@ -1,0 +1,22 @@
+{
+  "summary": "Isaacus offers a legal AI API. All new users receive $100 in free credits immediately upon adding a payment method to their Isaacus Platform account; the credits must be redeemed within two months. Startups can separately apply to the Isaacus Startup Program, and academics or non-profits may request additional credits.",
+  "claim_steps": [
+    "Create an Isaacus Platform account",
+    "Add a payment method to the account to receive the $100 in free credits",
+    "Use the credits within two months"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://isaacus.com/pricing",
+      "title": "Pricing - Isaacus",
+      "text": "All new users to the Isaacus API receive $100 in free credits immediately upon adding a payment method to their Isaacus Platform account to be redeemed within two months."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.isaacus.com/pricing/credits.md",
+      "title": "Isaacus pricing — credits",
+      "text": "New users get $100 in free credits after adding a payment method, to be redeemed within two months. (Seen in search result snippet; page not loaded.)"
+    }
+  ]
+}
