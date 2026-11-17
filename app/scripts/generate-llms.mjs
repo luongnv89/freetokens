@@ -226,9 +226,28 @@ function buildFullHeader(emittedCount) {
     `Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at ${baseUrl}/llms.txt. ${ENROLLMENT_DEADLINE_NOTE}`,
   );
   lines.push("");
+  if (activeCommunity.length) {
+    lines.push(
+      `Community offers: ${activeCommunity.length} promo code or giveaway ${activeCommunity.length === 1 ? "listing" : "listings"} a person shared, NOT verified by freetokens, in their own section after the offers below. They have reserved space: truncation only ever drops offers from this list, never a community entry.`,
+    );
+    lines.push("");
+  }
   lines.push("## Offers (full)");
   lines.push("");
   return lines.join("\n");
+}
+
+/** The llms-full community section (#748): after the offers, never truncated. */
+function buildFullCommunitySection() {
+  if (!activeCommunity.length) return "";
+  const lines = [];
+  lines.push("## Community offers (not verified by freetokens)");
+  lines.push("");
+  lines.push(
+    "Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.",
+  );
+  lines.push("");
+  return lines.join("\n") + activeCommunity.map(buildOfferBlock).join("");
 }
 
 function buildOfferBlock(offer) {
@@ -287,25 +306,29 @@ const llmsTxt = buildLlmsTxt();
 // entries — never slice mid-entry or lose the Pages/Feed footer (issue: PR
 // #475 review). The header reports the emitted count honestly when truncated.
 const MAX_FULL_BYTES = 200 * 1024;
-// Community entries (#748) lead the full export: they are few and short-lived,
-// and each block is labelled "not verified", so the byte budget must never be
-// what drops one.
-const fullOrder = [
-  ...activeCommunity,
-  ...activeOffers.filter((o) => !isCommunity(o)),
-];
-const offerBlocks = fullOrder.map(buildOfferBlock);
+// Community entries (#748) sit in their own section AFTER the offers, and the
+// budget is spent on offers only: the section's bytes are reserved up front,
+// so truncation drops trailing offers and never a community entry, and the
+// community section never displaces an offer that the reservation leaves room
+// for.
+const regularOffers = activeOffers.filter((o) => !isCommunity(o));
+const offerBlocks = regularOffers.map(buildOfferBlock);
+const communitySection = buildFullCommunitySection();
 const fullFooter = buildFullFooter();
 const assembleFull = (emitted) =>
-  buildFullHeader(emitted) + offerBlocks.slice(0, emitted).join("") + fullFooter;
-let emittedFull = activeOffers.length;
+  buildFullHeader(emitted + activeCommunity.length) +
+  offerBlocks.slice(0, emitted).join("") +
+  communitySection +
+  fullFooter;
+let emittedOffers = regularOffers.length;
 while (
-  emittedFull > 0 &&
-  Buffer.byteLength(assembleFull(emittedFull), "utf8") >= MAX_FULL_BYTES
+  emittedOffers > 0 &&
+  Buffer.byteLength(assembleFull(emittedOffers), "utf8") >= MAX_FULL_BYTES
 ) {
-  emittedFull--;
+  emittedOffers--;
 }
-const llmsFullTxt = assembleFull(emittedFull);
+const emittedFull = emittedOffers + activeCommunity.length;
+const llmsFullTxt = assembleFull(emittedOffers);
 const fullBytes = Buffer.byteLength(llmsFullTxt, "utf8");
 
 await mkdir(publicDir, { recursive: true });

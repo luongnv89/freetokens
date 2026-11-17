@@ -258,5 +258,72 @@ describe("llms exports label community entries", () => {
     const { full } = run([...filler, community]);
     expect(full).toContain("truncated to stay under the 200KB");
     expect(full).toContain("### Devin Max giveaway");
+    expect(Buffer.byteLength(full, "utf8")).toBeLessThan(200 * 1024);
+    // Offers come first; the community entry sits in its own section after
+    // them, before the Pages footer — it never leads the offers list.
+    const offersAt = full.indexOf("## Offers (full)");
+    const communityAt = full.indexOf(
+      "## Community offers (not verified by freetokens)",
+    );
+    const pagesAt = full.indexOf("## Pages");
+    expect(offersAt).toBeGreaterThan(-1);
+    expect(communityAt).toBeGreaterThan(offersAt);
+    expect(pagesAt).toBeGreaterThan(communityAt);
+    expect(full.slice(offersAt, communityAt)).not.toContain(
+      "### Devin Max giveaway",
+    );
+    expect(full.slice(communityAt, pagesAt)).toContain(
+      "### Devin Max giveaway",
+    );
+    const emitted = countOffers(full);
+    expect(emitted).toBeGreaterThan(0);
+    expect(emitted).toBeLessThan(filler.length);
+    // The header counts the emitted offers plus the community entry.
+    expect(full).toContain(
+      `— ${emitted + 1} of ${filler.length + 1} active offers (truncated`,
+    );
+  });
+
+  it("the community section costs the offers list only its own bytes", () => {
+    // Without the community entry the filler emits N offers; with it, the
+    // list loses at most the few blocks the section's bytes displace (its
+    // reserved space), never more.
+    const filler = fillerOffers();
+    const without = countOffers(run(filler).full);
+    const withCommunity = countOffers(run([...filler, giveaway()]).full);
+    expect(withCommunity).toBeLessThanOrEqual(without);
+    expect(without - withCommunity).toBeLessThanOrEqual(3);
   });
 });
+
+/** Offer blocks in the "## Offers (full)" section of an llms-full text. */
+function countOffers(full) {
+  const start = full.indexOf("## Offers (full)");
+  const community = full.indexOf("## Community offers");
+  const end = community > -1 ? community : full.indexOf("## Pages");
+  return (full.slice(start, end).match(/^### /gm) ?? []).length;
+}
+
+function giveaway() {
+  return buildIndex([load(GIVEAWAY)], new Date("2026-11-17T12:00:00Z"))
+    .offers[0];
+}
+
+function fillerOffers() {
+  const community = giveaway();
+  return Array.from({ length: 600 }, (_, i) =>
+    JSON.parse(
+      JSON.stringify({
+        ...community,
+        slug: `filler-${String(i).padStart(3, "0")}`,
+        title: `Filler ${i}`,
+        amount: `$${i} credits ${"x".repeat(300)}`,
+        verification: "social_proof",
+        review_status: "under-review",
+        listing_type: undefined,
+        community: undefined,
+        verified_date: "2026-11-17",
+      }),
+    ),
+  );
+}
