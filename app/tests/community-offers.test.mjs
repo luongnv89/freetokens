@@ -22,7 +22,7 @@ const TODAY = "2026-11-17";
 
 const GIVEAWAY = {
   title: "Devin Max giveaway",
-  provider: "Devin (Cognition)",
+  provider: "Cognition (Devin)",
   category: "coding",
   amount: "one month of Devin Max per code ($200 value each)",
   expiry_date: "2026-11-20",

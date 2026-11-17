@@ -22,7 +22,7 @@ import validate_offers  # noqa: E402
 
 GIVEAWAY = (
     'title: Devin Max giveaway\n'
-    'provider: Devin (Cognition)\n'
+    'provider: Cognition (Devin)\n'
     'category: coding\n'
     'amount: one month of Devin Max per code ($200 value each)\n'
     'expiry_date: 2026-11-20\n'

@@ -1,13 +1,17 @@
 # Community offer (#748): a giveaway a person shared on X. NOT verified by
 # freetokens: added by Luong from the post link, never re-checked by the
-# daily-offer-check, never touched by the offer-hunter. Every fact below is
-# quoted from the post by @ben_ai_eng (Ben Newell), 2026-11-17 09:04 UTC:
+# daily-offer-check, never touched by the offer-hunter. Every term below is
+# quoted from the post text by @ben_ai_eng:
 # https://x.com/ben_ai_eng/status/2122616807404052781
 #   "I have 10 codes to give away, each covering one month of Devin Max
 #    ($200 value each)." / "Payment card required to redeem." /
 #   "Entries close Friday November 20." (no time zone given)
+# Not in the post text: the display name "Ben Newell" (shared_by_name) and the
+# post time 2026-11-17 09:04:17 UTC (shared_by_post_date) come from the post's
+# author/timestamp metadata — author.name and created_at as returned by
+# https://api.fxtwitter.com/ben_ai_eng/status/2122616807404052781
 title: Devin Max giveaway — 10 codes for one month each
-provider: Devin (Cognition)
+provider: Cognition (Devin)
 category: coding
 amount: one month of Devin Max per code ($200 value each)
 expiry_date: 2026-11-20

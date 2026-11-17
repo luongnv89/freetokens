@@ -1,12 +1,12 @@
 {
-  "summary": "A community giveaway shared on X, not verified by freetokens. Ben Newell (@ben_ai_eng) wrote on 2026-11-17: \"I have 10 codes to give away, each covering one month of Devin Max ($200 value each).\" He says: \"I'll pick 10 builders based on a clear goal and how they'd use the month.\" Terms quoted from the post: \"These codes are for the Devin Max subscription. One month per person. Payment card required to redeem. Entries close Friday November 20.\" The post gives no time zone.",
+  "summary": "A community giveaway shared on X, not verified by freetokens. The post by @ben_ai_eng (display name Ben Newell), dated 2026-11-17, says: “I have 10 codes to give away, each covering one month of Devin Max ($200 value each).” On how winners are chosen, the post says: “I’ll pick 10 builders based on a clear goal and how they’d use the month.” Its terms, quoted: “These codes are for the Devin Max subscription.” “One month per person. Payment card required to redeem.” “Entries close Friday November 20.” The post gives no time zone.",
   "claim_steps": [
     "Open the post by @ben_ai_eng on X: https://x.com/ben_ai_eng/status/2122616807404052781",
-    "Reply to it with, in the post's words: \"What you're building\", \"How Devin would help\" and \"What you'd aim to ship in a month\".",
-    "Optional, per the post: \"Demos, screenshots, repos, or an idea you're ready to start would be a nice touch\".",
-    "Reply before entries close: \"Entries close Friday November 20.\" The post gives no time zone.",
-    "Winners are picked by the poster: \"I'll pick 10 builders based on a clear goal and how they'd use the month.\"",
-    "A winning code is \"for the Devin Max subscription. One month per person. Payment card required to redeem.\""
+    "The post says: “Reply with: • What you’re building • How Devin would help • What you’d aim to ship in a month”.",
+    "The post adds: “Demos, screenshots, repos, or an idea you’re ready to start would be a nice touch :)”",
+    "On timing, the post says: “Entries close Friday November 20.” It gives no time zone.",
+    "On selection, the post says: “I’ll pick 10 builders based on a clear goal and how they’d use the month.”",
+    "On the codes, the post says: “These codes are for the Devin Max subscription.” “One month per person. Payment card required to redeem.”"
   ],
   "social_proof": [
     {
@@ -14,7 +14,7 @@
       "url": "https://x.com/ben_ai_eng/status/2122616807404052781",
       "author": "Ben Newell",
       "handle": "@ben_ai_eng",
-      "text": "I have 10 codes to give away, each covering one month of Devin Max ($200 value each). Reply with: • What you're building • How Devin would help • What you'd aim to ship in a month. [...] These codes are for the Devin Max subscription. One month per person. Payment card required to redeem. Entries close Friday November 20."
+      "text": "I have 10 codes to give away, each covering one month of Devin Max ($200 value each). Reply with: • What you’re building • How Devin would help • What you’d aim to ship in a month […] These codes are for the Devin Max subscription. One month per person. Payment card required to redeem. Entries close Friday November 20."
     }
   ]
 }
