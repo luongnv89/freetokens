@@ -9,8 +9,8 @@
     {
       "type": "link",
       "url": "https://openrouter.ai/liquid/lfm-2.5-2.6b:free",
-      "title": "LFM2.5-2.6B (free) - API Pricing & Providers | OpenRouter",
-      "text": "Prompts and outputs may be retained and used to train Liquid models. The pricing shown on this page is zero."
+      "title": "LFM2.5-2.6B - API Pricing & Benchmarks | OpenRouter",
+      "text": "Is LFM2.5-2.6B free? Yes. The pricing shown on this page for LFM2.5-2.6B is zero, so you are not charged for prompt or completion tokens. ... LFM2.5-2.6B has a 131,072 token context window."
     },
     {
       "type": "link",
