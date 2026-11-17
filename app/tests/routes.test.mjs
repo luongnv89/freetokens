@@ -946,7 +946,13 @@ describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => 
       path.join(outDir, "offers", `${offer.slug}.html`),
       "utf8",
     );
-    const expected = offerMetaDescription(offer, details[offer.slug]);
+    // Attribute-escaped exactly as prerender's htmlAttr() writes it: a
+    // summary may quote a post (#748), and its quotes are escaped.
+    const expected = offerMetaDescription(offer, details[offer.slug])
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
     expect(detail).toContain(`<title>${offer.title} · Free AI Credits</title>`);
     expect(detail).toContain(`content="${expected}"`);
     expect(detail).toContain(

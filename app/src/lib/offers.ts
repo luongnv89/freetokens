@@ -159,6 +159,54 @@ export function relativeDate(iso: string, today: string): string {
   return humanDate(iso);
 }
 
+/**
+ * Community listings (#748): promo codes and giveaways a person shared
+ * publicly. freetokens does not verify them, so every surface that shows one
+ * says so with COMMUNITY_BADGE_LABEL.
+ */
+export type Community = NonNullable<Offer["community"]>;
+
+export const COMMUNITY_BADGE_LABEL = "Community · not verified by freetokens";
+export const COMMUNITY_BADGE_TITLE =
+  "Shared publicly by a person, not checked by freetokens. Every detail is quoted from their post; claim at your own judgment.";
+
+export function isCommunity(
+  offer: Offer,
+): offer is Offer & { listing_type: "community"; community: Community } {
+  return offer.listing_type === "community" && !!offer.community;
+}
+
+/** "@handle" for display; handles are stored bare. */
+export function atHandle(handle: string): string {
+  return `@${handle}`;
+}
+
+/** True when the post lives on X (twitter.com links count too). */
+export function isXPost(url: string): boolean {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    return host === "x.com" || host === "twitter.com";
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * The giveaway summary line, e.g. "10 codes · entries close Nov 20, 2026".
+ * Either half is left out when the post does not state it.
+ */
+export function giveawayLine(community: Community): string {
+  const parts: string[] = [];
+  if (typeof community.codes_available === "number") {
+    const n = community.codes_available;
+    parts.push(`${n} code${n === 1 ? "" : "s"}`);
+  }
+  if (community.entries_close) {
+    parts.push(`entries close ${humanDate(community.entries_close)}`);
+  }
+  return parts.join(" · ");
+}
+
 /** Expired entries never reach the default visitor list (#25). */
 export function activeOffers(index: OffersIndex): Offer[] {
   return index.offers.filter((o) => o.status !== "expired");
@@ -171,7 +219,14 @@ export function activeOffers(index: OffersIndex): Offer[] {
  * amount) — offers have no description field.
  */
 export function offerMatches(offer: Offer, state: UrlState): boolean {
+  if (state.community === "hide" && isCommunity(offer)) return false;
+  if (state.community === "only" && !isCommunity(offer)) return false;
   if (state.category && offer.category !== state.category) return false;
+  // The evidence-level filter never matches a community listing (#748): its
+  // `verification: unverified` is a schema placeholder, not the "early
+  // (unconfirmed)" evidence level, and its rows show no evidence tag. Use
+  // ?community=only to list community entries.
+  if (state.verification && isCommunity(offer)) return false;
   if (state.verification && offer.verification !== state.verification)
     return false;
   if (state.signup && offer.signup !== state.signup) return false;

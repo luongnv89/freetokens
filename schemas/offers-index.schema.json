@@ -133,6 +133,85 @@
           "type": "string",
           "enum": ["active", "expired"],
           "description": "Build-time expiry verdict (ADR 0001): computed against the BUILD clock, never a client clock."
+        },
+        "listing_type": {
+          "type": "string",
+          "enum": ["community"],
+          "description": "Present only on community entries (#748): a promo code or giveaway a person shared, NOT verified by freetokens. Absent on regular offers."
+        },
+        "community": { "$ref": "#/$defs/Community" }
+      },
+      "dependentRequired": {
+        "listing_type": ["community"],
+        "community": ["listing_type"]
+      }
+    },
+    "Community": {
+      "title": "Community",
+      "description": "Community listing details (#748), re-nested from the flat offers/*.yaml keys. Facts are quoted from the post; keys the post did not state are absent.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subtype", "added_by", "shared_by"],
+      "properties": {
+        "subtype": {
+          "type": "string",
+          "enum": ["promo_code", "giveaway"],
+          "description": "promo_code = a code anyone can redeem; giveaway = codes handed out to people who enter."
+        },
+        "added_by": {
+          "type": "string",
+          "enum": ["luong"],
+          "description": "Who added the entry."
+        },
+        "shared_by": { "$ref": "#/$defs/SharedBy" },
+        "promo_code": {
+          "type": "string",
+          "minLength": 1,
+          "description": "promo_code subtype: the code as the post gives it."
+        },
+        "codes_available": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "giveaway subtype: how many codes the post gives away."
+        },
+        "entries_close": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "giveaway subtype: the day entries close, YYYY-MM-DD (equals expiry_date)."
+        },
+        "timezone_note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The post's time zone quoted, or 'no time zone given'."
+        }
+      }
+    },
+    "SharedBy": {
+      "title": "SharedBy",
+      "description": "Who shared a community entry, and where.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["handle", "post_url", "post_date"],
+      "properties": {
+        "handle": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_]{1,30}$",
+          "description": "Bare account handle of the poster (no @)."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Poster's display name, when the post shows one."
+        },
+        "post_url": {
+          "type": "string",
+          "pattern": "^https?://",
+          "description": "Link to the post (the entry's source_url)."
+        },
+        "post_date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Date of the post, YYYY-MM-DD."
         }
       }
     }

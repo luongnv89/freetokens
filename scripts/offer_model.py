@@ -140,6 +140,84 @@ SIGNUP_TITLES = {
 }
 NULL_TOKENS = {"null", "~", ""}
 
+# --- Community offers (#748) -------------------------------------------------
+# Promo codes and giveaways that a person shared publicly. freetokens does NOT
+# verify them: only Luong adds one (a small entry PR through the normal gates),
+# the offer-hunter and the daily-offer-check never create, edit or re-check one,
+# and every fact is quoted from the post. The YAML parser is flat by design, so
+# the "shared by" record is spelled as shared_by_* keys; the post link is the
+# offer's own source_url (the index re-nests both as community.shared_by).
+# Every field below is OPTIONAL on a regular offer's schema but only valid when
+# listing_type is community; regular offers need no change.
+LISTING_TYPE_COMMUNITY = "community"
+LISTING_TYPES = (LISTING_TYPE_COMMUNITY,)
+COMMUNITY_SUBTYPES = ("promo_code", "giveaway")
+COMMUNITY_ADDED_BY = ("luong",)
+COMMUNITY_FIELDS = (
+    "listing_type",
+    "community_subtype",
+    "added_by",
+    "shared_by_handle",
+    "shared_by_name",
+    "shared_by_post_date",
+    "promo_code",
+    "codes_available",
+    "entries_close",
+    "timezone_note",
+)
+COMMUNITY_REQUIRED = (
+    "community_subtype",
+    "added_by",
+    "shared_by_handle",
+    "shared_by_post_date",
+)
+# Only one subtype may carry each of these.
+COMMUNITY_SUBTYPE_ONLY = {
+    "promo_code": "promo_code",
+    "codes_available": "giveaway",
+    "entries_close": "giveaway",
+}
+# A community entry is never checked by freetokens, so its two trust labels
+# are pinned to the honest value rather than left to the author.
+COMMUNITY_VERIFICATION = "unverified"
+COMMUNITY_REVIEW_STATUS = "unverified"
+HANDLE_RE = re.compile(r"^[A-Za-z0-9_]{1,30}$")
+PROMO_CODE_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")
+CODES_AVAILABLE_RE = re.compile(r"^[1-9][0-9]{0,5}$")
+COMMUNITY_TEXT_MAX_CHARS = 200
+
+
+def is_community(offer: dict) -> bool:
+    """True for a community listing (#748): shared by a person, not verified."""
+    return offer.get("listing_type") == LISTING_TYPE_COMMUNITY
+
+
+def _iso(value):
+    return value.isoformat() if isinstance(value, dt.date) else value
+
+
+def community_entry(offer: dict) -> dict:
+    """The index's nested ``community`` object for one validated entry (#748).
+
+    Mirrors communityEntry() in app/scripts/load-offers.mjs: the flat
+    ``shared_by_*`` keys re-nest as ``shared_by`` and the post link is the
+    entry's ``source_url``. Keys the post did not state are omitted.
+    """
+    shared_by = {"handle": offer["shared_by_handle"]}
+    if "shared_by_name" in offer:
+        shared_by["name"] = offer["shared_by_name"]
+    shared_by["post_url"] = offer["source_url"]
+    shared_by["post_date"] = _iso(offer["shared_by_post_date"])
+    entry = {
+        "subtype": offer["community_subtype"],
+        "added_by": offer["added_by"],
+        "shared_by": shared_by,
+    }
+    for key in ("promo_code", "codes_available", "entries_close", "timezone_note"):
+        if key in offer:
+            entry[key] = _iso(offer[key])
+    return entry
+
 
 # --- Tag system: one hue + one glyph per tag, every tag a filter -----------
 # Three tag families ride every offer row (category / verification / signup)
@@ -428,7 +506,9 @@ def validate_offer(data: dict, filename: str) -> dict:
     missing = [f for f in REQUIRED_FIELDS if f not in data]
     if missing:
         raise OfferError(f"{filename}: missing required fields: {', '.join(missing)}")
-    unknown = [k for k in data if k not in REQUIRED_FIELDS]
+    unknown = [
+        k for k in data if k not in REQUIRED_FIELDS and k not in COMMUNITY_FIELDS
+    ]
     if unknown:
         raise OfferError(f"{filename}: unknown fields: {', '.join(sorted(unknown))}")
 
@@ -479,7 +559,109 @@ def validate_offer(data: dict, filename: str) -> dict:
     url = data["source_url"]
     if not isinstance(url, str) or not url.startswith(("http://", "https://")):
         raise OfferError(f"{filename}: source_url must be an http(s) URL, got {url!r}")
+    _validate_community(data, filename)
     return data
+
+
+def _validate_community(data: dict, filename: str) -> None:
+    """Rules for listing_type: community (#748); a no-op on regular offers."""
+    present = [k for k in COMMUNITY_FIELDS if k in data]
+    if "listing_type" not in data:
+        if present:
+            raise OfferError(
+                f"{filename}: {', '.join(present)} only valid with "
+                "listing_type: community"
+            )
+        return
+    if data["listing_type"] not in LISTING_TYPES:
+        raise OfferError(
+            f"{filename}: listing_type must be {'|'.join(LISTING_TYPES)} "
+            f"(omit it for a regular offer), got {data['listing_type']!r}"
+        )
+    missing = [k for k in COMMUNITY_REQUIRED if data.get(k) is None]
+    if missing:
+        raise OfferError(
+            f"{filename}: community offer missing required fields: "
+            f"{', '.join(missing)}"
+        )
+    subtype = data["community_subtype"]
+    if subtype not in COMMUNITY_SUBTYPES:
+        raise OfferError(
+            f"{filename}: community_subtype must be one of "
+            f"{'|'.join(COMMUNITY_SUBTYPES)}, got {subtype!r}"
+        )
+    if data["added_by"] not in COMMUNITY_ADDED_BY:
+        raise OfferError(
+            f"{filename}: added_by must be {'|'.join(COMMUNITY_ADDED_BY)} "
+            f"(only Luong adds community offers), got {data['added_by']!r}"
+        )
+    if data["verification"] != COMMUNITY_VERIFICATION:
+        raise OfferError(
+            f"{filename}: verification must be {COMMUNITY_VERIFICATION} on a "
+            "community offer (freetokens does not verify it)"
+        )
+    if data["review_status"] != COMMUNITY_REVIEW_STATUS:
+        raise OfferError(
+            f"{filename}: review_status must be {COMMUNITY_REVIEW_STATUS} on a "
+            "community offer (freetokens does not verify it)"
+        )
+    if not HANDLE_RE.match(str(data["shared_by_handle"])):
+        raise OfferError(
+            f"{filename}: shared_by_handle must be the bare account handle "
+            f"(letters, digits, underscore; no @), got {data['shared_by_handle']!r}"
+        )
+    for field in ("shared_by_name", "timezone_note"):
+        if field in data:
+            _check_str(data[field], field, filename, COMMUNITY_TEXT_MAX_CHARS)
+    data["shared_by_post_date"] = _validate_date(
+        data["shared_by_post_date"], "shared_by_post_date", filename
+    )
+    if data["shared_by_post_date"] > dt.date.today() + dt.timedelta(days=1):
+        raise OfferError(
+            f"{filename}: shared_by_post_date is in the future "
+            f"({data['shared_by_post_date']})"
+        )
+    for field, owner in COMMUNITY_SUBTYPE_ONLY.items():
+        if field in data and subtype != owner:
+            raise OfferError(
+                f"{filename}: {field} is only valid on a {owner} community offer"
+            )
+    if subtype == "promo_code":
+        code = data.get("promo_code")
+        if not isinstance(code, str) or not PROMO_CODE_RE.match(code):
+            raise OfferError(
+                f"{filename}: promo_code is required on a promo_code community "
+                "offer (letters, digits, - or _; quoted from the post), "
+                f"got {code!r}"
+            )
+        return
+    if "codes_available" in data:
+        raw = data["codes_available"]
+        if not isinstance(raw, str) or not CODES_AVAILABLE_RE.match(raw):
+            raise OfferError(
+                f"{filename}: codes_available must be a positive whole number, "
+                f"got {raw!r}"
+            )
+        data["codes_available"] = int(raw)
+    if "entries_close" in data:
+        data["entries_close"] = _validate_date(
+            data["entries_close"], "entries_close", filename
+        )
+        # The post either names a time zone or it does not; the entry must say
+        # which, so "end of day" is never silently read as someone's local day.
+        if "timezone_note" not in data:
+            raise OfferError(
+                f"{filename}: timezone_note is required with entries_close "
+                "(quote the post's time zone, or write: no time zone given)"
+            )
+        # The build expires a giveaway through expiry_date, so the two must
+        # agree: the entry disappears the day after entries close (end of
+        # that day on the UTC build clock when the post names no time zone).
+        if data["expiry_date"] != data["entries_close"]:
+            raise OfferError(
+                f"{filename}: expiry_date must equal entries_close "
+                f"({data['entries_close']}) on a giveaway"
+            )
 
 
 def _yaml_paths(offers_dir: str) -> list:
@@ -714,23 +896,33 @@ def build_index(offers: list, today: dt.date | None = None) -> dict:
         "expired_count": sum(1 for o in stamped if o["status"] == "expired"),
         "offers": [
             {
-                "slug": o["slug"],
-                "title": o["title"],
-                "provider": o["provider"],
-                "category": o["category"],
-                "amount": o["amount"],
-                "expiry_date": o["expiry_date"].isoformat()
-                if o["expiry_date"]
-                else None,
-                "source_url": o["source_url"],
-                "verified_date": o["verified_date"].isoformat(),
-                "verification": o["verification"],
-                "review_status": o["review_status"],
-                "signup": o["signup"],
-                "status": o["status"],
+                **_index_row(o),
+                **(
+                    {"listing_type": o["listing_type"], "community": community_entry(o)}
+                    if is_community(o)
+                    else {}
+                ),
             }
             for o in stamped
         ],
+    }
+
+
+def _index_row(o: dict) -> dict:
+    """The fields every index entry carries, community or not."""
+    return {
+        "slug": o["slug"],
+        "title": o["title"],
+        "provider": o["provider"],
+        "category": o["category"],
+        "amount": o["amount"],
+        "expiry_date": o["expiry_date"].isoformat() if o["expiry_date"] else None,
+        "source_url": o["source_url"],
+        "verified_date": o["verified_date"].isoformat(),
+        "verification": o["verification"],
+        "review_status": o["review_status"],
+        "signup": o["signup"],
+        "status": o["status"],
     }
 
 

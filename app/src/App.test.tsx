@@ -82,7 +82,10 @@ describe("App home listing prerender", () => {
   });
 
   it("renders the visible tag families as buttons with labels", () => {
-    const visibleVerificationTags = firstPage.length;
+    // Community rows (#748) carry no evidence-level tag.
+    const visibleVerificationTags = firstPage.filter(
+      (o) => o.listing_type !== "community",
+    ).length;
     expect(markup.match(/data-ft-tag="category"/g)?.length).toBe(
       firstPage.length,
     );
@@ -164,7 +167,10 @@ describe("App tag icon sprite (lucide mapping)", () => {
     // Category, review status, and sign-up are visible on every row.
     const grid =
       markup.match(/<ol class="grid" id="ft-grid"[\s\S]*?<\/ol>/)?.[0] ?? "";
-    const visibleVerificationTags = firstPage.length;
+    // Community rows (#748) carry no evidence-level tag.
+    const visibleVerificationTags = firstPage.filter(
+      (o) => o.listing_type !== "community",
+    ).length;
     expect(
       grid.match(/<svg class="tag-i"[^>]*aria-hidden="true"/g)?.length,
     ).toBe(firstPage.length * 3 + visibleVerificationTags);
@@ -249,10 +255,23 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
       expect(row).toContain(`class="r-amount">${escapeHtml(offer.amount)}<`);
       expect(row).toContain(`badge-category-${offer.category}`);
       expect(row).toContain(`>${CATEGORY_LABELS[offer.category]}<`);
-      expect(row).toContain(`badge-verification-${offer.verification}`);
-      expect(row).toContain(`>${VERIFICATION_LABELS[offer.verification]}<`);
-      expect(row).toContain(`badge-review-status-${offer.review_status}`);
-      expect(row).toContain(`>${REVIEW_STATUS_LABELS[offer.review_status]}<`);
+      if (offer.listing_type === "community") {
+        // Community listings (#748) are never reviewed or corroborated: their
+        // own badge replaces both the review-status and evidence-level tags.
+        expect(row).toContain("badge-community");
+        expect(row).toContain(">Community · not verified by freetokens<");
+        expect(row).not.toContain("badge-verification");
+        expect(row).not.toContain("badge-review-status");
+      } else {
+        expect(row).toContain(`badge-verification-${offer.verification}`);
+        expect(row).toContain(
+          `>${VERIFICATION_LABELS[offer.verification]}<`,
+        );
+        expect(row).toContain(`badge-review-status-${offer.review_status}`);
+        expect(row).toContain(
+          `>${REVIEW_STATUS_LABELS[offer.review_status]}<`,
+        );
+      }
       expect(row).toContain(`badge-signup-${offer.signup}`);
       expect(row).toContain(`>${SIGNUP_LABELS[offer.signup]}<`);
       if (offer.expiry_date) {
@@ -355,7 +374,10 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
   });
 
   it("composes visible tags through shadcn Badge (data-slot) as real buttons", () => {
-    const visibleVerificationTags = firstPage.length;
+    // Community rows (#748) carry no evidence-level tag.
+    const visibleVerificationTags = firstPage.filter(
+      (o) => o.listing_type !== "community",
+    ).length;
     expect(markup.match(/data-slot="badge"/g)?.length).toBe(
       firstPage.length * 2 + visibleVerificationTags,
     );

@@ -5,7 +5,7 @@ license: MIT
 effort: high
 compatibility: "Requires git, GitHub CLI (gh), python3, node, read-only web tools, and the issue-creator and issue-pr-review skills. Run gh auth status to verify. Optional: TinyFish (MCP server or tinyfish CLI) for page reads and the lightpanda CLI for a browser retry; each falls back when missing."
 metadata:
-  version: 2.3.0
+  version: 2.4.0
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
@@ -136,13 +136,20 @@ Save stdout to `/tmp/daily-offer-check-$today-inventory.json` (outside the repo)
 
 If the user named slugs that `skipped_expired` absorbed, say so in the report (named-but-expired is not a successful empty sweep).
 
+Community listings (#748, `listing_type: community`) are **never checked**:
+`list_active.py` moves them to `skipped_community` — no verdict, no
+`verified_date` bump, no `unverifiable`, no conflict. They still expire at
+build time on their own end date. `check_scope.py` rejects any change to a
+community listing or its detail file, so a sweep can never touch one; a
+named community slug is reported as skipped, not as a sweep result.
+
 If `active_count` is 0: print the Step 1 report, skip to Step 9, no PR.
 
 ```
 ◆ Inventory (step 1 of 9)
 ··································································
   Script exit 0:          √
-  Active listed:          √ N (skipped_expired=M)
+  Active listed:          √ N (skipped_expired=M, skipped_community=C)
   Oldest-first:           √
   ____________________________
   Result:                 PASS

@@ -17,6 +17,7 @@ describe("parseState / serializeState", () => {
       category: "coding",
       verification: "social_proof",
       signup: "required",
+      community: "",
       page: 1,
     });
     const params = paramsOf(state);

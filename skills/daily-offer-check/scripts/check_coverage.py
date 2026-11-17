@@ -107,7 +107,8 @@ def references(row, verdict):
 
 def coverage(inventory, verdicts):
     if not isinstance(inventory, dict) or set(inventory) != {
-            'today', 'offers_dir', 'active_count', 'skipped_expired', 'offers'}:
+            'today', 'offers_dir', 'active_count', 'skipped_expired', 'skipped_community',
+            'offers'}:
         raise ValueError('invalid inventory object')
     today = date(inventory['today'])
     if not nonempty(inventory['offers_dir']) or not Path(inventory['offers_dir']).is_absolute():
@@ -118,6 +119,11 @@ def coverage(inventory, verdicts):
     skipped = inventory['skipped_expired']
     if not isinstance(skipped, list) or any(not isinstance(s, str) or not SLUG.fullmatch(s) for s in skipped) or len(set(skipped)) != len(skipped):
         raise ValueError('invalid skipped_expired slugs')
+    community = inventory['skipped_community']
+    if (not isinstance(community, list) or len(set(community)) != len(community)
+            or any(not isinstance(s, str) or not SLUG.fullmatch(s) or s in skipped for s in community)):
+        raise ValueError('invalid skipped_community slugs')
+    skipped = set(skipped) | set(community)
     expected, paths, sources = set(), set(), {}
     for row in offers:
         if not isinstance(row, dict) or set(row) != set(FIELDS) | {'slug', 'path', 'sha256'}:

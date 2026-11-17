@@ -41,7 +41,13 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // dimmed inert steps at the ends, the sub-30rem label collapse and tighter
 // spacing, the coarse-pointer 44px targets, and the programmatic-focus and
 // scroll-margin rules — measured 57,457 raw, so the ceiling moves to 58,000.
-const PYTHON_INLINE_CSS_BYTES = 58_000;
+//
+// 2026-11-17 (#748): community offers — the dashed "Community · not verified
+// by freetokens" badge, the row's extra community grid area (wide and narrow
+// layouts), the shared-by / giveaway / promo-code line with its copy control,
+// and the detail page's dashed community panel — measured about 58,250 raw,
+// so the ceiling moves to 58,500.
+const PYTHON_INLINE_CSS_BYTES = 58_500;
 
 function cssBytesIn(dir) {
   let total = 0;

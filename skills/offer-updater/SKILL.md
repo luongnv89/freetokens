@@ -4,7 +4,7 @@ description: "Publish or refresh a few free-AI-credit offers from screenshots, X
 license: MIT
 compatibility: "Requires git, gh, python3, and read-only web search and fetch. Optional: TinyFish (MCP server or tinyfish CLI) for search and page reads, the lightpanda CLI for the browser retry, curl for the X oEmbed lookup; each falls back when missing."
 metadata:
-  version: "2.5.0"
+  version: "2.6.0"
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   issues: "#20,#21"
   epic: "#31"
@@ -49,6 +49,14 @@ tracking issue, and one PR for the kept set — the curator may approve a
 subset by naming it. If every offer is dropped, the run ends at Step 5 with
 the Dropped list.
 
+**Community offers (Luong sends a link).** A promo code or giveaway a
+person shared in a public post is a *community offer* (#748): not verified,
+added only by Luong, every fact quoted from the post. It skips Steps 2's
+verification entirely and follows `references/community.md`: one small entry
+PR (offer YAML + detail file + regenerated `index.json`/llms files) through
+the normal gates. Never turn an ordinary offer into one, and never add one
+for anyone else.
+
 ## The frozen schema (F5)
 
 | Field           | Rule                                                                  |
@@ -63,6 +71,11 @@ the Dropped list.
 | `verification` | Evidence level: `social_proof` (official + social) or `unverified` (early offers: social only). |
 | `review_status` | Curator testing state: `verified`, `unverified`, `under-review`, or `to-be-verified`. |
 | `signup` | Whether claiming needs an account: `none` or `required`. |
+
+Community offers add `listing_type: community` and their own optional
+fields (`community_subtype`, `added_by`, `shared_by_*`, `promo_code`,
+`codes_available`, `entries_close`, `timezone_note`) — see
+`references/community.md`. Regular offers never carry them.
 
 ## Pipeline
 

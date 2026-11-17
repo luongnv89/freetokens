@@ -1,9 +1,38 @@
 {
-  "generated_at": "2026-11-17T02:36:31Z",
-  "count": 327,
-  "active_count": 271,
+  "generated_at": "2026-11-17T15:43:26Z",
+  "count": 328,
+  "active_count": 272,
   "expired_count": 56,
   "offers": [
+    {
+      "slug": "devin-max-one-month-code-giveaway",
+      "title": "Devin Max giveaway — 10 codes for one month each",
+      "provider": "Cognition (Devin)",
+      "category": "coding",
+      "amount": "one month of Devin Max per code ($200 value each)",
+      "expiry_date": "2026-11-20",
+      "source_url": "https://x.com/ben_ai_eng/status/2122616807404052781",
+      "verified_date": "2026-11-17",
+      "added_date": "2026-11-17",
+      "verification": "unverified",
+      "review_status": "unverified",
+      "signup": "required",
+      "status": "active",
+      "listing_type": "community",
+      "community": {
+        "subtype": "giveaway",
+        "added_by": "luong",
+        "shared_by": {
+          "handle": "ben_ai_eng",
+          "name": "Ben Newell",
+          "post_url": "https://x.com/ben_ai_eng/status/2122616807404052781",
+          "post_date": "2026-11-17"
+        },
+        "codes_available": 10,
+        "entries_close": "2026-11-20",
+        "timezone_note": "no time zone given"
+      }
+    },
     {
       "slug": "gonkarouter-1m-free-tokens",
       "title": "GonkaRouter — 1M Free Tokens for New Users",

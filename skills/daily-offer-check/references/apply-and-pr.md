@@ -9,7 +9,8 @@ the writer; this is not permission to publish fixture data.
 
 Inventory is an object with exactly `today` (YYYY-MM-DD), `offers_dir`
 (canonical absolute root), `active_count` (integer), `skipped_expired` (slug
-array), and `offers` (array). Each offer has exactly slug, path (relative to
+array), `skipped_community` (slug array: community listings, #748, never
+checked), and `offers` (array). Each offer has exactly slug, path (relative to
 that root), title, provider, amount, expiry_date (date or null), source_url,
 verified_date, verification (`social_proof` | `unverified`), sha256 (hash of
 original bytes). Sort is verified_date then slug.

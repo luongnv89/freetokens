@@ -30,10 +30,12 @@ def render(inventory, verdicts, applied, pr_issue, checks, evidence_limit=160, d
     if pr_issue is not None:
         lines += [f'Closes #{pr_issue}', '']
     counts = Counter(v['verdict'] for v in verdicts)
+    community = len(inventory.get('skipped_community', []))
     lines += [
         '## Summary',
         f"- Inventory: {inventory['active_count']} active offers "
-        f"({len(inventory['skipped_expired'])} skipped as expired)",
+        f"({len(inventory['skipped_expired'])} skipped as expired"
+        + (f", {community} community listings never checked)" if community else ")"),
         f"- Verdicts: {counts['live']} live, {counts['expired']} expired, "
         f"{counts['conflict']} conflict, {counts['unverifiable']} unverifiable",
     ]

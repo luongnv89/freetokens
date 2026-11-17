@@ -5,6 +5,23 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Community offers (#748):** a new listing type, `listing_type:
+  community`, for promo codes (`community_subtype: promo_code`) and
+  giveaways (`giveaway`) that a person shared in a public post. They are not
+  verified by freetokens: rows carry a "Community · not verified by
+  freetokens" badge, who shared it (handle + post link), the code with a
+  Copy code button or "N codes · entries close <date>" plus a "Reply on X"
+  link, and "added" instead of "checked"; detail pages add a community panel
+  above the claim steps. The toolbar gets "Community only" / "Hide
+  community" chips (`?community=only|hide`). Only Luong adds them
+  (`added_by: luong`, enforced); the offer-hunter and daily-offer-check
+  never create, edit or re-check one. They expire at build time on their
+  `entries_close` day or the code's stated expiry. `index.json` gains
+  `listing_type` + a nested `community` object on those entries, and the
+  llms files list them in their own "not verified" section. First entry: the
+  Devin Max giveaway by @ben_ai_eng (10 one-month codes, entries close
+  2026-11-20, no time zone given).
+
 - **Unverified leads look like offers (#683):** each lead on
   `/unverified.html` is now an offer-style row (provider and an
   "unconfirmed" badge, title, claimed amount, why it is unverified and how

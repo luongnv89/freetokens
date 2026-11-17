@@ -5,6 +5,10 @@ Allowed: new top-level offers/<slug>.yaml; edits to an existing one that touch
 only title, amount, expiry_date, signup, verified_date (and comments); new or
 append-only offers/details/<slug>.json; the three generated artifacts; and
 unverified/<slug>.yaml lead files added, refreshed, or removed (#660).
+
+Never allowed: creating, editing or removing a community listing (#748,
+``listing_type: community``) or its details file. Only Luong adds one, in its
+own small entry PR.
 """
 import json
 from pathlib import PurePosixPath
@@ -33,8 +37,34 @@ def proof_keys(doc):
             for p in doc.get('social_proof') or []}
 
 
+def is_community_text(text, path):
+    return parse_offer_text(text, path).get('listing_type') is not None
+
+
+def community_problem(status, path, slug):
+    """Reject any hunt change that creates or touches a community listing."""
+    candidates = []
+    for ref in (':', 'HEAD:'):
+        for suffix in ('.yaml', '.yml'):
+            candidates.append(ref + 'offers/' + slug + suffix)
+    for spec in candidates:
+        result = subprocess.run(['git', 'cat-file', '-e', spec], cwd=str(REPO),
+                                capture_output=True, text=True)
+        if result.returncode:
+            continue
+        if is_community_text(git('show', spec), spec):
+            return (f'{path}: community listing (listing_type: community); the offer-hunter '
+                    'never creates or edits one; only Luong adds them in an entry PR')
+    return None
+
+
 def check(status, path):
     parts = PurePosixPath(path).parts
+    if (len(parts) == 2 and parts[0] == 'offers' and path.endswith(('.yaml', '.yml'))) or (
+            len(parts) == 3 and parts[:2] == ('offers', 'details') and path.endswith('.json')):
+        problem = community_problem(status, path, PurePosixPath(path).stem)
+        if problem:
+            return problem
     if path in ARTIFACTS:
         return None if status == 'M' else f'{path}: generated artifact must be modified, not {status}'
     if len(parts) == 2 and parts[0] == 'offers' and path.endswith('.yaml'):

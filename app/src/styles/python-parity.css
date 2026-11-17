@@ -413,6 +413,12 @@ h1 {
 .badge-signup-required {
   --tag-hue: var(--t-required);
 }
+/* Community listings (#748): the unverified hue, plus a dashed edge so the
+   "not verified by freetokens" badge never reads as a review verdict. */
+.badge-community {
+  --tag-hue: var(--t-unverified);
+  border-style: dashed;
+}
 
 /* Archive "Expired" badge (#26): the word itself carries the meaning —
    the muted styling is decoration only, never the sole signal. */
@@ -1237,7 +1243,8 @@ a:focus-visible {
   color: var(--gray);
 }
 
-.row-meta .sep {
+.row-meta .sep,
+.r-community .sep {
   color: var(--hairline);
 }
 
@@ -1264,6 +1271,60 @@ a:focus-visible {
 
 .row-quiet .tag-i {
   display: none;
+}
+
+/* Community row line (#748): who shared it, then the code or the giveaway
+   terms. Its own grid area, between the amount and the quiet filters. */
+.card[data-listing-type="community"] {
+  grid-template-areas:
+    "eyebrow   rail"
+    "title     rail"
+    "amount    rail"
+    "community rail"
+    "meta      rail";
+}
+.r-community {
+  grid-area: community;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 0.45rem;
+  margin: 0.2rem 0;
+  font-size: 0.76rem;
+  color: var(--gray);
+}
+.r-community a,
+.od-community a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
+.c-giveaway {
+  color: var(--ink);
+  font-weight: 600;
+}
+.c-tz {
+  color: var(--gray);
+  font-weight: 400;
+}
+.c-code {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.c-code-value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--ink);
+  border: 1px dashed var(--hairline-strong);
+  border-radius: 6px;
+  padding: 0.05rem 0.4rem;
+}
+.od-community {
+  border: 1px dashed var(--hairline-strong);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1.2rem;
 }
 
 /* Apply-prompt link (#625): same quiet weight as the filters beside it. */
@@ -1438,6 +1499,9 @@ a:focus-visible {
   .card {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "eyebrow" "title" "amount" "meta" "rail";
+  }
+  .card[data-listing-type="community"] {
+    grid-template-areas: "eyebrow" "title" "amount" "community" "meta" "rail";
   }
   .row-rail {
     text-align: left;

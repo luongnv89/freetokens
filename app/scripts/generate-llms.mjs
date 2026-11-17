@@ -73,7 +73,55 @@ const activeOffers = index.offers
     if (a.verified_date === b.verified_date) return a.slug < b.slug ? 1 : -1;
     return a.verified_date < b.verified_date ? 1 : -1;
   });
-const top20 = activeOffers.slice(0, 20);
+// Community listings (#748) — promo codes and giveaways a person shared, NOT
+// verified by freetokens — never take a slot among the offers above; they get
+// their own clearly labelled section so an AI consumer cannot mistake one for
+// a checked offer.
+const isCommunity = (o) => o.listing_type === "community" && !!o.community;
+const top20 = activeOffers.filter((o) => !isCommunity(o)).slice(0, 20);
+const activeCommunity = activeOffers.filter(isCommunity);
+
+/** One-line community facts, all quoted from the post. */
+function communityFacts(offer) {
+  const c = offer.community;
+  const by = c.shared_by;
+  const parts = [
+    `community ${c.subtype} — not verified by freetokens`,
+    `shared by @${by.handle}${by.name ? ` (${by.name})` : ""} on ${by.post_date}: ${by.post_url}`,
+  ];
+  if (c.promo_code) parts.push(`code: ${c.promo_code}`);
+  if (typeof c.codes_available === "number")
+    parts.push(`${c.codes_available} codes`);
+  if (c.entries_close) parts.push(`entries close ${c.entries_close}`);
+  if (c.timezone_note) parts.push(`time zone: ${c.timezone_note}`);
+  return parts.join(" · ");
+}
+
+/**
+ * The community section (#748), identical in llms.txt and llms-full.txt: one
+ * compact line per entry, after the offers. In llms-full it is kept small on
+ * purpose — its bytes are reserved before the offers fill the 200KB budget,
+ * so a full block per entry would push verified offers out of the cut. The
+ * summary and claim steps live on the linked page. Empty when there are none.
+ */
+function communitySection() {
+  if (!activeCommunity.length) return "";
+  const lines = [
+    "## Community offers (not verified by freetokens)",
+    "",
+    "Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.",
+    "",
+  ];
+  for (const offer of activeCommunity) {
+    const url = `${baseUrl}/offers/${offer.slug}.html`;
+    const title = offer.title.replace(/]/g, "\\]");
+    lines.push(
+      `- [${title}](${url}): ${offer.provider} — ${offer.amount.replace(/\s+/g, " ").trim()} · ${communityFacts(offer)} · ${trustFields(offer)}`,
+    );
+  }
+  lines.push("");
+  return lines.join("\n");
+}
 
 function offerDescription(offer) {
   // Keep short but trailing description after colon satisfies audit requiring ": Description".
@@ -138,6 +186,7 @@ function buildLlmsTxt() {
     lines.push(`- [${title}](${url}): ${offerDescription(offer)}`);
   }
   lines.push("");
+  if (activeCommunity.length) lines.push(communitySection());
   lines.push("## Pages");
   lines.push("");
   lines.push(
@@ -248,18 +297,31 @@ const llmsTxt = buildLlmsTxt();
 // entries — never slice mid-entry or lose the Pages/Feed footer (issue: PR
 // #475 review). The header reports the emitted count honestly when truncated.
 const MAX_FULL_BYTES = 200 * 1024;
-const offerBlocks = activeOffers.map(buildOfferBlock);
+// Community entries (#748) sit in their own section AFTER the offers, and the
+// budget is spent on offers only: the section's bytes are reserved up front,
+// so truncation drops trailing offers and never a community entry, and the
+// community section never displaces an offer that the reservation leaves room
+// for.
+const regularOffers = activeOffers.filter((o) => !isCommunity(o));
+const offerBlocks = regularOffers.map(buildOfferBlock);
+const fullCommunitySection = activeCommunity.length
+  ? `\n${communitySection()}`
+  : "";
 const fullFooter = buildFullFooter();
 const assembleFull = (emitted) =>
-  buildFullHeader(emitted) + offerBlocks.slice(0, emitted).join("") + fullFooter;
-let emittedFull = activeOffers.length;
+  buildFullHeader(emitted + activeCommunity.length) +
+  offerBlocks.slice(0, emitted).join("") +
+  fullCommunitySection +
+  fullFooter;
+let emittedOffers = regularOffers.length;
 while (
-  emittedFull > 0 &&
-  Buffer.byteLength(assembleFull(emittedFull), "utf8") >= MAX_FULL_BYTES
+  emittedOffers > 0 &&
+  Buffer.byteLength(assembleFull(emittedOffers), "utf8") >= MAX_FULL_BYTES
 ) {
-  emittedFull--;
+  emittedOffers--;
 }
-const llmsFullTxt = assembleFull(emittedFull);
+const emittedFull = emittedOffers + activeCommunity.length;
+const llmsFullTxt = assembleFull(emittedOffers);
 const fullBytes = Buffer.byteLength(llmsFullTxt, "utf8");
 
 await mkdir(publicDir, { recursive: true });

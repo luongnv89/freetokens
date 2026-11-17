@@ -58,6 +58,41 @@ const SIGNUP_MODES = ["none", "required"];
 const NULL_TOKENS = new Set(["null", "~", ""]);
 const DETAILS_DIRNAME = "details";
 
+// Community offers (#748): promo codes and giveaways a person shared. Mirrors
+// scripts/offer_model.py (COMMUNITY_* constants, _validate_community) — the
+// Python content gate and this loader enforce the same rules. freetokens does
+// not verify these, so both trust labels are pinned to "unverified".
+export const LISTING_TYPE_COMMUNITY = "community";
+const COMMUNITY_SUBTYPES = ["promo_code", "giveaway"];
+const COMMUNITY_ADDED_BY = ["luong"];
+export const COMMUNITY_FIELDS = [
+  "listing_type",
+  "community_subtype",
+  "added_by",
+  "shared_by_handle",
+  "shared_by_name",
+  "shared_by_post_date",
+  "promo_code",
+  "codes_available",
+  "entries_close",
+  "timezone_note",
+];
+const COMMUNITY_REQUIRED = [
+  "community_subtype",
+  "added_by",
+  "shared_by_handle",
+  "shared_by_post_date",
+];
+const COMMUNITY_SUBTYPE_ONLY = {
+  promo_code: "promo_code",
+  codes_available: "giveaway",
+  entries_close: "giveaway",
+};
+const HANDLE_RE = /^[A-Za-z0-9_]{1,30}$/;
+const PROMO_CODE_RE = /^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/;
+const CODES_AVAILABLE_RE = /^[1-9][0-9]{0,5}$/;
+const COMMUNITY_TEXT_MAX_CHARS = 200;
+
 export class OfferError extends Error {}
 
 function parseScalar(raw) {
@@ -133,7 +168,9 @@ export function validateOffer(data, filename, today) {
       `${filename}: missing required fields: ${missing.join(", ")}`,
     );
   }
-  const unknown = Object.keys(data).filter((k) => !REQUIRED_FIELDS.includes(k));
+  const unknown = Object.keys(data).filter(
+    (k) => !REQUIRED_FIELDS.includes(k) && !COMMUNITY_FIELDS.includes(k),
+  );
   if (unknown.length) {
     throw new OfferError(
       `${filename}: unknown fields: ${unknown.sort().join(", ")}`,
@@ -186,7 +223,155 @@ export function validateOffer(data, filename, today) {
       `${filename}: source_url must be an http(s) URL, got ${JSON.stringify(url)}`,
     );
   }
+  validateCommunity(data, filename, today);
   return data;
+}
+
+function tomorrowISO(today) {
+  const day = new Date(`${today}T00:00:00Z`);
+  day.setUTCDate(day.getUTCDate() + 1);
+  return day.toISOString().slice(0, 10);
+}
+
+/** Rules for `listing_type: community` (#748); a no-op on regular offers. */
+function validateCommunity(data, filename, today) {
+  const present = COMMUNITY_FIELDS.filter((k) => k in data);
+  if (!("listing_type" in data)) {
+    if (present.length) {
+      throw new OfferError(
+        `${filename}: ${present.join(", ")} only valid with listing_type: community`,
+      );
+    }
+    return;
+  }
+  if (data.listing_type !== LISTING_TYPE_COMMUNITY) {
+    throw new OfferError(
+      `${filename}: listing_type must be ${LISTING_TYPE_COMMUNITY} (omit it for a regular offer), got ${JSON.stringify(data.listing_type)}`,
+    );
+  }
+  const missing = COMMUNITY_REQUIRED.filter((k) => data[k] == null);
+  if (missing.length) {
+    throw new OfferError(
+      `${filename}: community offer missing required fields: ${missing.join(", ")}`,
+    );
+  }
+  const subtype = data.community_subtype;
+  if (!COMMUNITY_SUBTYPES.includes(subtype)) {
+    throw new OfferError(
+      `${filename}: community_subtype must be one of ${COMMUNITY_SUBTYPES.join("|")}, got ${JSON.stringify(subtype)}`,
+    );
+  }
+  if (!COMMUNITY_ADDED_BY.includes(data.added_by)) {
+    throw new OfferError(
+      `${filename}: added_by must be ${COMMUNITY_ADDED_BY.join("|")} (only Luong adds community offers), got ${JSON.stringify(data.added_by)}`,
+    );
+  }
+  for (const field of ["verification", "review_status"]) {
+    if (data[field] !== "unverified") {
+      throw new OfferError(
+        `${filename}: ${field} must be unverified on a community offer (freetokens does not verify it)`,
+      );
+    }
+  }
+  if (!HANDLE_RE.test(String(data.shared_by_handle))) {
+    throw new OfferError(
+      `${filename}: shared_by_handle must be the bare account handle (letters, digits, underscore; no @), got ${JSON.stringify(data.shared_by_handle)}`,
+    );
+  }
+  for (const field of ["shared_by_name", "timezone_note"]) {
+    if (!(field in data)) continue;
+    const value = data[field];
+    if (typeof value !== "string" || !value.trim()) {
+      throw new OfferError(`${filename}: ${field} must be a non-empty string`);
+    }
+    if (value.length > COMMUNITY_TEXT_MAX_CHARS) {
+      throw new OfferError(
+        `${filename}: ${field} exceeds ${COMMUNITY_TEXT_MAX_CHARS} characters (${value.length} given)`,
+      );
+    }
+  }
+  data.shared_by_post_date = parseDate(
+    data.shared_by_post_date,
+    "shared_by_post_date",
+    filename,
+  );
+  if (data.shared_by_post_date > tomorrowISO(today)) {
+    throw new OfferError(
+      `${filename}: shared_by_post_date is in the future (${data.shared_by_post_date})`,
+    );
+  }
+  for (const [field, owner] of Object.entries(COMMUNITY_SUBTYPE_ONLY)) {
+    if (field in data && subtype !== owner) {
+      throw new OfferError(
+        `${filename}: ${field} is only valid on a ${owner} community offer`,
+      );
+    }
+  }
+  if (subtype === "promo_code") {
+    const code = data.promo_code;
+    if (typeof code !== "string" || !PROMO_CODE_RE.test(code)) {
+      throw new OfferError(
+        `${filename}: promo_code is required on a promo_code community offer (letters, digits, - or _; quoted from the post), got ${JSON.stringify(code ?? null)}`,
+      );
+    }
+    return;
+  }
+  if ("codes_available" in data) {
+    const raw = data.codes_available;
+    if (typeof raw !== "string" || !CODES_AVAILABLE_RE.test(raw)) {
+      throw new OfferError(
+        `${filename}: codes_available must be a positive whole number, got ${JSON.stringify(raw)}`,
+      );
+    }
+    data.codes_available = Number(raw);
+  }
+  if ("entries_close" in data) {
+    data.entries_close = parseDate(data.entries_close, "entries_close", filename);
+    if (!("timezone_note" in data)) {
+      throw new OfferError(
+        `${filename}: timezone_note is required with entries_close (quote the post's time zone, or write: no time zone given)`,
+      );
+    }
+    // A giveaway expires through expiry_date, so the two must agree: the
+    // build drops the entry once entries_close has ended on its UTC clock.
+    if (data.expiry_date !== data.entries_close) {
+      throw new OfferError(
+        `${filename}: expiry_date must equal entries_close (${data.entries_close}) on a giveaway`,
+      );
+    }
+  }
+}
+
+/** True for a community listing (#748): shared by a person, not verified. */
+export function isCommunity(offer) {
+  return offer.listing_type === LISTING_TYPE_COMMUNITY;
+}
+
+/**
+ * The index's nested `community` object (#748), mirroring
+ * scripts/offer_model.py community_entry(): the flat shared_by_* keys re-nest
+ * as `shared_by`, and the post link is the entry's source_url. Keys the post
+ * did not state are omitted, never filled in.
+ */
+export function communityEntry(offer) {
+  const sharedBy = { handle: offer.shared_by_handle };
+  if ("shared_by_name" in offer) sharedBy.name = offer.shared_by_name;
+  sharedBy.post_url = offer.source_url;
+  sharedBy.post_date = offer.shared_by_post_date;
+  const entry = {
+    subtype: offer.community_subtype,
+    added_by: offer.added_by,
+    shared_by: sharedBy,
+  };
+  for (const key of [
+    "promo_code",
+    "codes_available",
+    "entries_close",
+    "timezone_note",
+  ]) {
+    if (key in offer) entry[key] = offer[key];
+  }
+  return entry;
 }
 
 export function isExpired(offer, today) {
@@ -441,6 +626,9 @@ export function buildIndex(offers, now = new Date(), addedDates = {}) {
       review_status: o.review_status,
       signup: o.signup,
       status: o.status,
+      ...(isCommunity(o)
+        ? { listing_type: o.listing_type, community: communityEntry(o) }
+        : {}),
     })),
   };
 }
