@@ -11,10 +11,11 @@
 #    Terms apply."
 # The bit.ly link redirects to
 # https://admin.mistral.ai/subscription/upgrade/redeem?redeem_code=LECHONK
-# (checked 2026-11-17 with curl -I; it then asks you to log in).
-# No end date is given, so expiry_date is left empty. Replies under the post
-# (not from Mistral) said within ~45 minutes that the code was no longer
-# available; that is not an official notice, so the entry stays live.
+# (checked 2026-11-17 with curl -I; it then asks you to log in). The redirect
+# target is NOT in the post, so the detail file links only the bit.ly URL.
+# No end date is given, so expiry_date is null. Replies from other users under
+# the post said within ~45 minutes that the code was no longer available; that
+# is not in Mistral's posts, so the entry does not state it (flagged to Luong).
 # shared_by_post_date: 2026-11-17 15:28 UTC, from the post's created_at at
 # https://api.fxtwitter.com/2/conversation/2122713540666806397
 title: Mistral Vibe Pro free for 3 months — code LECHONK (Europe)
@@ -33,4 +34,4 @@ added_by: luong
 shared_by_handle: MistralAI
 shared_by_name: Mistral AI
 shared_by_post_date: 2026-11-17
-code: LECHONK
+promo_code: LECHONK
