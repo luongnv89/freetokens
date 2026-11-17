@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-17T02:25:31Z — 126 of 271 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-17T02:36:31Z — 126 of 271 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -64,7 +64,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-11-17 — review_status=to-be-verified · verification=social_proof · signup=required
 - Source: https://deals.ycombinator.com/students
 - Page: https://freetokens.custats.info/offers/y-combinator-ai-stack-student-credits.html
-- Summary: YC's AI Stack gives students who attend an eligible YC event (starting Fall 2025) free credits from 20 partner companies. The deals page lists $5,000 in AWS cloud credits (down from $10,000 as of 2026-10-28), $1,000 in OpenAI API credits and $500 in Anthropic API credits, plus offers from 17 YC companies such as Langfuse, Firecrawl, Vapi, Browser Use, Deepgram, Supabase and Gumloop. Until 2026-10-28 the page advertised "Over $25,000" in total; it no longer states an overall total. Access lasts one year from the qualifying event. The 2025 launch blog also mentioned Azure credits, but Azure is not listed on the current deals page.
+- Summary: YC's AI Stack gives students who attend an eligible YC event (starting Fall 2025) free credits from 19 partner companies. The deals page lists $5,000 in AWS cloud credits (down from $10,000 as of 2026-10-28), $1,000 in OpenAI API credits and $500 in Anthropic API credits, plus offers from other YC companies such as Langfuse, Firecrawl, Vapi, Browser Use, Deepgram, Supabase and Gumloop. Until 2026-10-28 the page advertised "Over $25,000" in total; it no longer states an overall total. Access lasts one year from the qualifying event. The 2025 launch blog also mentioned Azure credits, but Azure is not listed on the current deals page.
 - Claim steps: Attend an eligible YC event (Fall 2025 onward), RSVPing with your Hacker News account | Watch for the confirmation email after the event | Sign in at deals.ycombinator.com/students with the same Hacker News account to check eligibility | Check each partner's current amount after sign-in: on 2026-10-29 the page listed AWS $5,000 (previously $10,000), OpenAI $1,000, Anthropic $500 and 17 YC-company offers, with no Azure deal and no stated total. | Browse and redeem each partner deal
 ### Y-API Daily Shared Free API Key — $20/Day Pool
 - Provider: Y-API
@@ -733,7 +733,7 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=required
 - Source: https://openrouter.ai/liquid/lfm-2.5-2.6b:free
 - Page: https://freetokens.custats.info/offers/openrouter-lfm-2-5-2-6b-free.html
-- Summary: Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context).
+- Summary: Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (131,072-token context).
 - Claim steps: Create or sign in to an OpenRouter account and create an API key. | Do not submit content you do not want retained or used for Liquid model training. | Call the OpenRouter chat-completions API with model liquid/lfm-2.5-2.6b:free.
 ### Gemma 4 31B Free (OpenRouter)
 - Provider: OpenRouter
