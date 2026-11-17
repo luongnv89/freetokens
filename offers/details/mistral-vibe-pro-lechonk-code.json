@@ -1,0 +1,26 @@
+{
+  "summary": "A promo code shared on X by Mistral AI itself (@MistralAI), not verified by freetokens. The post, dated 2026-11-17, says: “we’re making Vibe free in Europe for the first 3 months.” and “Use code LECHONK via link in 🧵. Limited time, first-come, first-served.” A reply in the same thread says: “Limited offer for developers in Europe: Start with Vibe Pro free for three months with the code LECHONK via link […] Terms apply.” The post gives no end date. Within about 45 minutes, several replies from other users said the code was no longer available; Mistral has not posted an end notice.",
+  "claim_steps": [
+    "Open the redeem link from Mistral’s thread: https://bit.ly/VibeProLimitedOffer (it goes to https://admin.mistral.ai/subscription/upgrade/redeem?redeem_code=LECHONK).",
+    "Log in to, or create, your Mistral account when asked.",
+    "Use code LECHONK if it is not already filled in. The thread says: “Start with Vibe Pro free for three months with the code LECHONK”.",
+    "Who can use it, per the thread: “Limited offer for developers in Europe”. The post adds: “Limited time, first-come, first-served.” and “Terms apply.”",
+    "The post gives no end date. Replies from other users within about 45 minutes said the code no longer worked."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/MistralAI/status/2122713540666806397",
+      "author": "Mistral AI",
+      "handle": "@MistralAI",
+      "text": "To celebrate Mistral Vibe + Le Chonk becoming the world’s best open model-harness duo, we’re making Vibe free in Europe for the first 3 months. (Yes, it’s actually better than GLM / DeepSeek at coding). Use code LECHONK via link in 🧵. Limited time, first-come, first-served."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/MistralAI/status/2122713550774804919",
+      "author": "Mistral AI",
+      "handle": "@MistralAI",
+      "text": "Limited offer for developers in Europe: Start with Vibe Pro free for three months with the code LECHONK via link: https://bit.ly/VibeProLimitedOffer. Terms apply."
+    }
+  ]
+}

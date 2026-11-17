@@ -1,0 +1,36 @@
+# Community offer (#750): a promo code Mistral AI itself shared on X. NOT
+# verified by freetokens: added by Luong from the post link, never re-checked
+# by the daily-offer-check, never touched by the offer-hunter. Every term below
+# is quoted from @MistralAI's thread:
+# https://x.com/MistralAI/status/2122713540666806397
+#   "we're making Vibe free in Europe for the first 3 months." / "Use code
+#    LECHONK via link in 🧵. Limited time, first-come, first-served."
+# Thread reply https://x.com/MistralAI/status/2122713550774804919:
+#   "Limited offer for developers in Europe: Start with Vibe Pro free for three
+#    months with the code LECHONK via link: https://bit.ly/VibeProLimitedOffer.
+#    Terms apply."
+# The bit.ly link redirects to
+# https://admin.mistral.ai/subscription/upgrade/redeem?redeem_code=LECHONK
+# (checked 2026-11-17 with curl -I; it then asks you to log in).
+# No end date is given, so expiry_date is left empty. Replies under the post
+# (not from Mistral) said within ~45 minutes that the code was no longer
+# available; that is not an official notice, so the entry stays live.
+# shared_by_post_date: 2026-11-17 15:28 UTC, from the post's created_at at
+# https://api.fxtwitter.com/2/conversation/2122713540666806397
+title: Mistral Vibe Pro free for 3 months — code LECHONK (Europe)
+provider: Mistral AI
+category: coding
+amount: Vibe Pro free for the first three months with code LECHONK (developers in Europe)
+expiry_date: null
+source_url: https://x.com/MistralAI/status/2122713540666806397
+verified_date: 2026-11-17
+verification: unverified
+review_status: unverified
+signup: required
+listing_type: community
+community_subtype: promo_code
+added_by: luong
+shared_by_handle: MistralAI
+shared_by_name: Mistral AI
+shared_by_post_date: 2026-11-17
+code: LECHONK
