@@ -1,5 +1,5 @@
 {
-  "summary": "Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (65,536-token context).",
+  "summary": "Free liquid/lfm-2.5-2.6b:free inference at $0 input and output (131,072-token context).",
   "claim_steps": [
     "Create or sign in to an OpenRouter account and create an API key.",
     "Do not submit content you do not want retained or used for Liquid model training.",
