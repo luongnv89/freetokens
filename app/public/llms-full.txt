@@ -2,22 +2,11 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-17T14:53:33Z — 126 of 272 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-17T15:43:26Z — 127 of 272 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
-### Devin Max giveaway — 10 codes for one month each
-- Provider: Devin (Cognition)
-- Category: coding
-- Amount: one month of Devin Max per code ($200 value each)
-- Status: active — enrollment deadline: 2026-11-20
-- Last checked: 2026-11-17 — review_status=unverified · verification=unverified · signup=required
-- Listing: community giveaway — not verified by freetokens · shared by @ben_ai_eng (Ben Newell) on 2026-11-17: https://x.com/ben_ai_eng/status/2122616807404052781 · 10 codes · entries close 2026-11-20 · time zone: no time zone given
-- Source: https://x.com/ben_ai_eng/status/2122616807404052781
-- Page: https://freetokens.custats.info/offers/devin-max-one-month-code-giveaway.html
-- Summary: A community giveaway shared on X, not verified by freetokens. Ben Newell (@ben_ai_eng) wrote on 2026-11-17: "I have 10 codes to give away, each covering one month of Devin Max ($200 value each)." He says: "I'll pick 10 builders based on a clear goal and how they'd use the month." Terms quoted from the post: "These codes are for the Devin Max subscription. One month per person. Payment card required to redeem. Entries close Friday November 20." The post gives no time zone.
-- Claim steps: Open the post by @ben_ai_eng on X: https://x.com/ben_ai_eng/status/2122616807404052781 | Reply to it with, in the post's words: "What you're building", "How Devin would help" and "What you'd aim to ship in a month". | Optional, per the post: "Demos, screenshots, repos, or an idea you're ready to start would be a nice touch". | Reply before entries close: "Entries close Friday November 20." The post gives no time zone. | Winners are picked by the poster: "I'll pick 10 builders based on a clear goal and how they'd use the month." | A winning code is "for the Devin Max subscription. One month per person. Payment card required to redeem."
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1264,6 +1253,22 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/lg-ai-research-k-exaone-2-5-api-free.html
 - Summary: The EXAONE API Platform changelog entry dated November 9, 2026 lists K-EXAONE 2.5 (750B), LG AI Research's proprietary foundation model, and states the service is currently provided free of charge. API keys are issued from the platform. The rate-limits page applies per-second, per-minute and per-day call windows, with a higher daily call limit for users who consent to their usage records being used for model training and service improvement; the API can be used without consenting. The platform terms grant a non-exclusive, non-transferable, revocable non-commercial use right and bar for-profit use of the model or its outputs; if the service becomes paid, fees will be posted on the site.
 - Claim steps: Open the EXAONE API Platform at docs.exaone.ai | Select 'API Key 발급하기' (Issue API key) and request a key | Optionally consent to usage-record use for training to get a higher daily call limit
+### Lemonfox 1-Month Free Trial
+- Provider: Lemonfox.ai
+- Category: voice
+- Amount: 1 month free trial — 10M credits (30 hours speech-to-text or 2M TTS chars)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-17 — review_status=verified · verification=social_proof · signup=required
+- Source: https://www.lemonfox.ai/
+- Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
+- Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
+- Claim steps: Go to lemonfox.ai and click Get Started / Start Your Free Trial. | Sign up for an account. | Trial covers the $5/month credit bundle for 1 month.
+
+## Community offers (not verified by freetokens)
+
+Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.
+
+- [Devin Max giveaway — 10 codes for one month each](https://freetokens.custats.info/offers/devin-max-one-month-code-giveaway.html): Cognition (Devin) — one month of Devin Max per code ($200 value each) · community giveaway — not verified by freetokens · shared by @ben_ai_eng (Ben Newell) on 2026-11-17: https://x.com/ben_ai_eng/status/2122616807404052781 · 10 codes · entries close 2026-11-20 · time zone: no time zone given · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
