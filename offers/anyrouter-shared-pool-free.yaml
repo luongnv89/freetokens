@@ -1,0 +1,13 @@
+# Provider-submitted 2026-11-17; curator should verify against the official pages below.
+# Official site: https://anyrouter.dev — look-alike domains (anyrouter.top,
+# any-router.com, anyrouters.pages.dev) are not affiliated and are not sources.
+title: AnyRouter Shared Pool — Go and $0 model requests with one donated key
+provider: AnyRouter
+category: api_provider
+amount: Go plan (normally $2/month) and $0 Pool-served model requests while one donated key stays valid; free models need Go or higher
+expiry_date: null
+source_url: https://anyrouter.dev/pool
+verified_date: 2026-11-17
+verification: social_proof
+review_status: under-review
+signup: required

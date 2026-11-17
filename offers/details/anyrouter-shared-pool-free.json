@@ -1,0 +1,29 @@
+{
+  "summary": "AnyRouter is an OpenAI-compatible model router. Donate one eligible provider key in Dashboard > BYOK and, while the key stays valid, the account gets the Go plan and every request the shared Pool serves costs $0. Donation is opt-in per key, your own requests take priority over the pool, and you can withdraw the key at any time. The Free plan gets a 5-request lifetime trial on free and decision models; without a donated key, free models require Go ($2/month). There is no payout, percentage back or extra donor credit.",
+  "claim_steps": [
+    "Sign up at https://anyrouter.dev (free, no card required).",
+    "Open Dashboard > BYOK at https://anyrouter.dev/dashboard/byok and add a provider key that AnyRouter can route.",
+    "Flip 'Donate to pool' on that key and confirm the 'Key verified' step.",
+    "Check the dashboard: Go is active and models the Pool can serve are requested at $0. Browse them at https://anyrouter.dev/models?free=true."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://anyrouter.dev/pool",
+      "title": "AnyRouter Shared Pool",
+      "text": "Donate a provider key you do not fully use, and the community can route requests through it. In return you get the Go plan and free Pool access: while the key stays valid, every request the pool serves for you costs $0."
+    },
+    {
+      "type": "link",
+      "url": "https://anyrouter.dev/docs/features/shared-pool",
+      "title": "Share a Key to the Shared Pool — documentation",
+      "text": "Opt-in per key; your own requests take priority; a model the pool serves goes only to the pool at $0; withdraw the key any time."
+    },
+    {
+      "type": "link",
+      "url": "https://anyrouter.dev/blog/free-llm-api-for-students",
+      "title": "Free LLM API for students",
+      "text": "Free-account and student-oriented walkthrough of free model access on AnyRouter."
+    }
+  ]
+}
