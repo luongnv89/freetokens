@@ -229,6 +229,26 @@ class DailyOfferCheckTests(unittest.TestCase):
         result = self.run_cli('check_coverage.py', inv, verdicts, ok=False)
         self.assertIn('extra=[\'devin\']', result.stderr)
 
+    def test_apply_refuses_a_hand_edited_inventory_row(self):
+        offers = self.root / 'offers'
+        offers.mkdir()
+        (offers / 'devin.yaml').write_text(GIVEAWAY)
+        before = (offers / 'devin.yaml').read_bytes()
+        sys.path.insert(0, str(self.SCRIPTS))
+        from list_active import record  # noqa: E402
+        row, _ = record(offers.resolve(), offers.resolve() / 'devin.yaml')
+        inventory = dict(today=dt.date.today().isoformat(), offers_dir=str(offers.resolve()),
+                         active_count=1, skipped_expired=[], skipped_community=[], offers=[row])
+        verdict = {'slug': 'devin', 'verdict': 'unverifiable', 'evidence_url': '', 'quote': '',
+                   'reason': 'r', 'updates': {}, 'references': []}
+        inv, ver = self.root / 'inv.json', self.root / 'v.json'
+        inv.write_text(json.dumps(inventory))
+        ver.write_text(json.dumps([verdict]))
+        result = self.run_cli('apply_verdicts.py', '--today', inventory['today'], '--offers-dir',
+                              offers, '--inventory', inv, '--verdicts', ver, ok=False)
+        self.assertIn('community listing in inventory', result.stderr)
+        self.assertEqual((offers / 'devin.yaml').read_bytes(), before)
+
     def make_repo(self):
         repo = self.root / 'repo'
         (repo / 'offers/details').mkdir(parents=True)

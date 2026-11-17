@@ -11,7 +11,7 @@ import sys
 
 from check_coverage import UPDATABLE, coverage, normalize_url, read_json
 from list_active import REPO, date, record, safe_path, safe_root
-from offer_model import NULL_TOKENS, parse_offer_text, validate_detail, validate_offer
+from offer_model import NULL_TOKENS, is_community, parse_offer_text, validate_detail, validate_offer
 
 PROOF_MAX = 10
 EARLY_REASON = 'early offer — refresh with offer-updater'
@@ -128,7 +128,11 @@ def apply(inventory, verdicts, today, offers_dir):
     # Preflight the entire batch, including skipped verdicts, before any write.
     for row in inventory['offers']:
         path = safe_path(root, row['path'])
-        current, _ = record(root, path)
+        current, data = record(root, path)
+        if is_community(data):
+            # Community listings (#748) are never checked; list_active.py
+            # skips them, so one here means a hand-edited inventory.
+            raise ValueError('community listing in inventory: ' + row['slug'] + '; the sweep never touches one')
         if current != row:
             raise ValueError('stale inventory: ' + row['slug'] + '; regenerate inventory and re-verify')
         raw = path.read_bytes()
