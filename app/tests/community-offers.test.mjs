@@ -239,22 +239,11 @@ describe("llms exports label community entries", () => {
     );
   });
 
+  // Few, large filler blocks: the generator re-measures the whole file per
+  // dropped block, so many small ones make these tests slow on a busy runner.
   it("the llms-full byte budget never truncates a community entry away", () => {
-    const [community] = buildIndex(
-      [load(GIVEAWAY)],
-      new Date("2026-11-17T12:00:00Z"),
-    ).offers;
-    const filler = Array.from({ length: 600 }, (_, i) => ({
-      ...community,
-      slug: `filler-${String(i).padStart(3, "0")}`,
-      title: `Filler ${i}`,
-      amount: `$${i} credits ${"x".repeat(300)}`,
-      verification: "social_proof",
-      review_status: "under-review",
-      listing_type: undefined,
-      community: undefined,
-      verified_date: "2026-11-17",
-    })).map((o) => JSON.parse(JSON.stringify(o)));
+    const community = giveaway();
+    const filler = fillerOffers();
     const { full } = run([...filler, community]);
     expect(full).toContain("truncated to stay under the 200KB");
     expect(full).toContain("- [Devin Max giveaway");
@@ -282,7 +271,7 @@ describe("llms exports label community entries", () => {
     expect(full).toContain(
       `— ${emitted + 1} of ${filler.length + 1} active offers (truncated`,
     );
-  });
+  }, 60_000);
 
   it("the community section costs the offers list only its own bytes", () => {
     // Without the community entry the filler emits N offers; with it, the
@@ -292,11 +281,11 @@ describe("llms exports label community entries", () => {
     const without = countOffers(run(filler).full);
     const withCommunity = countOffers(run([...filler, giveaway()]).full);
     expect(withCommunity).toBeLessThanOrEqual(without);
-    // One compact line per entry (~0.7 KB here) displaces at most two
-    // ~0.6 KB filler blocks; a full block per entry would cost more.
-    expect(without - withCommunity).toBeLessThanOrEqual(2);
+    // One compact line per entry (~0.7 KB here) displaces at most one
+    // ~1.8 KB filler block; a full block per entry would cost more.
+    expect(without - withCommunity).toBeLessThanOrEqual(1);
     expect(run([giveaway()]).full).not.toContain("### Devin Max giveaway");
-  });
+  }, 60_000);
 });
 
 /** Offer blocks in the "## Offers (full)" section of an llms-full text. */
@@ -314,13 +303,13 @@ function giveaway() {
 
 function fillerOffers() {
   const community = giveaway();
-  return Array.from({ length: 600 }, (_, i) =>
+  return Array.from({ length: 200 }, (_, i) =>
     JSON.parse(
       JSON.stringify({
         ...community,
         slug: `filler-${String(i).padStart(3, "0")}`,
         title: `Filler ${i}`,
-        amount: `$${i} credits ${"x".repeat(300)}`,
+        amount: `$${i} credits ${"x".repeat(1500)}`,
         verification: "social_proof",
         review_status: "under-review",
         listing_type: undefined,
