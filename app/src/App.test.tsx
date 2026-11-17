@@ -251,8 +251,17 @@ describe("App listing fields, order, and shadcn slots (#124)", () => {
       expect(row).toContain(`>${CATEGORY_LABELS[offer.category]}<`);
       expect(row).toContain(`badge-verification-${offer.verification}`);
       expect(row).toContain(`>${VERIFICATION_LABELS[offer.verification]}<`);
-      expect(row).toContain(`badge-review-status-${offer.review_status}`);
-      expect(row).toContain(`>${REVIEW_STATUS_LABELS[offer.review_status]}<`);
+      if (offer.listing_type === "community") {
+        // Community listings (#748) are never reviewed: their own badge
+        // replaces the review-status one.
+        expect(row).toContain("badge-community");
+        expect(row).toContain(">Community · not verified by freetokens<");
+      } else {
+        expect(row).toContain(`badge-review-status-${offer.review_status}`);
+        expect(row).toContain(
+          `>${REVIEW_STATUS_LABELS[offer.review_status]}<`,
+        );
+      }
       expect(row).toContain(`badge-signup-${offer.signup}`);
       expect(row).toContain(`>${SIGNUP_LABELS[offer.signup]}<`);
       if (offer.expiry_date) {

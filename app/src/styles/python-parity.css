@@ -1275,7 +1275,7 @@ a:focus-visible {
 
 /* Community row line (#748): who shared it, then the code or the giveaway
    terms. Its own grid area, between the amount and the quiet filters. */
-.card-community {
+.card[data-listing-type="community"] {
   grid-template-areas:
     "eyebrow   rail"
     "title     rail"
@@ -1500,7 +1500,7 @@ a:focus-visible {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "eyebrow" "title" "amount" "meta" "rail";
   }
-  .card-community {
+  .card[data-listing-type="community"] {
     grid-template-areas: "eyebrow" "title" "amount" "community" "meta" "rail";
   }
   .row-rail {

@@ -171,7 +171,7 @@ function buildLlmsTxt() {
       const url = `${baseUrl}/offers/${offer.slug}.html`;
       const title = offer.title.replace(/]/g, "\\]");
       lines.push(
-        `- [${title}](${url}): ${offer.provider} — ${offer.amount.replace(/\s+/g, " ").trim()} · ${communityFacts(offer)}`,
+        `- [${title}](${url}): ${offer.provider} — ${offer.amount.replace(/\s+/g, " ").trim()} · ${communityFacts(offer)} · ${trustFields(offer)}`,
       );
     }
     lines.push("");

@@ -155,7 +155,7 @@ export function OfferRow({
       data-category={offer.category}
     >
       <article
-        className={community ? "card card-community" : "card"}
+        className="card"
         id={`offer-${offer.slug}`}
         data-listing-type={community ? "community" : undefined}
         data-category={offer.category}
