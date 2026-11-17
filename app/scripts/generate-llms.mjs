@@ -97,6 +97,32 @@ function communityFacts(offer) {
   return parts.join(" · ");
 }
 
+/**
+ * The community section (#748), identical in llms.txt and llms-full.txt: one
+ * compact line per entry, after the offers. In llms-full it is kept small on
+ * purpose — its bytes are reserved before the offers fill the 200KB budget,
+ * so a full block per entry would push verified offers out of the cut. The
+ * summary and claim steps live on the linked page. Empty when there are none.
+ */
+function communitySection() {
+  if (!activeCommunity.length) return "";
+  const lines = [
+    "## Community offers (not verified by freetokens)",
+    "",
+    "Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.",
+    "",
+  ];
+  for (const offer of activeCommunity) {
+    const url = `${baseUrl}/offers/${offer.slug}.html`;
+    const title = offer.title.replace(/]/g, "\\]");
+    lines.push(
+      `- [${title}](${url}): ${offer.provider} — ${offer.amount.replace(/\s+/g, " ").trim()} · ${communityFacts(offer)} · ${trustFields(offer)}`,
+    );
+  }
+  lines.push("");
+  return lines.join("\n");
+}
+
 function offerDescription(offer) {
   // Keep short but trailing description after colon satisfies audit requiring ": Description".
   // The trust fields are appended, not summarised away (issue #509): a short
@@ -160,22 +186,7 @@ function buildLlmsTxt() {
     lines.push(`- [${title}](${url}): ${offerDescription(offer)}`);
   }
   lines.push("");
-  if (activeCommunity.length) {
-    lines.push("## Community offers (not verified by freetokens)");
-    lines.push("");
-    lines.push(
-      "Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.",
-    );
-    lines.push("");
-    for (const offer of activeCommunity) {
-      const url = `${baseUrl}/offers/${offer.slug}.html`;
-      const title = offer.title.replace(/]/g, "\\]");
-      lines.push(
-        `- [${title}](${url}): ${offer.provider} — ${offer.amount.replace(/\s+/g, " ").trim()} · ${communityFacts(offer)} · ${trustFields(offer)}`,
-      );
-    }
-    lines.push("");
-  }
+  if (activeCommunity.length) lines.push(communitySection());
   lines.push("## Pages");
   lines.push("");
   lines.push(
@@ -226,28 +237,9 @@ function buildFullHeader(emittedCount) {
     `Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at ${baseUrl}/llms.txt. ${ENROLLMENT_DEADLINE_NOTE}`,
   );
   lines.push("");
-  if (activeCommunity.length) {
-    lines.push(
-      `Community offers: ${activeCommunity.length} promo code or giveaway ${activeCommunity.length === 1 ? "listing" : "listings"} a person shared, NOT verified by freetokens, in their own section after the offers below. They have reserved space: truncation only ever drops offers from this list, never a community entry.`,
-    );
-    lines.push("");
-  }
   lines.push("## Offers (full)");
   lines.push("");
   return lines.join("\n");
-}
-
-/** The llms-full community section (#748): after the offers, never truncated. */
-function buildFullCommunitySection() {
-  if (!activeCommunity.length) return "";
-  const lines = [];
-  lines.push("## Community offers (not verified by freetokens)");
-  lines.push("");
-  lines.push(
-    "Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.",
-  );
-  lines.push("");
-  return lines.join("\n") + activeCommunity.map(buildOfferBlock).join("");
 }
 
 function buildOfferBlock(offer) {
@@ -272,7 +264,6 @@ function buildOfferBlock(offer) {
   lines.push(
     `- ${LAST_CHECKED.label}: ${offer.verified_date} — ${trustFieldPairs(offer).join(" · ")}`,
   );
-  if (isCommunity(offer)) lines.push(`- Listing: ${communityFacts(offer)}`);
   lines.push(`- Source: ${offer.source_url}`);
   lines.push(`- Page: ${url}`);
   if (summary) lines.push(`- Summary: ${summary}`);
@@ -313,12 +304,14 @@ const MAX_FULL_BYTES = 200 * 1024;
 // for.
 const regularOffers = activeOffers.filter((o) => !isCommunity(o));
 const offerBlocks = regularOffers.map(buildOfferBlock);
-const communitySection = buildFullCommunitySection();
+const fullCommunitySection = activeCommunity.length
+  ? `\n${communitySection()}`
+  : "";
 const fullFooter = buildFullFooter();
 const assembleFull = (emitted) =>
   buildFullHeader(emitted + activeCommunity.length) +
   offerBlocks.slice(0, emitted).join("") +
-  communitySection +
+  fullCommunitySection +
   fullFooter;
 let emittedOffers = regularOffers.length;
 while (

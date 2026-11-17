@@ -235,7 +235,7 @@ describe("llms exports label community entries", () => {
     expect(communityPart).toContain("shared by @ben_ai_eng (Ben Newell)");
     expect(communityPart).toContain("10 codes · entries close 2026-11-20");
     expect(full).toContain(
-      "- Listing: community giveaway — not verified by freetokens",
+      "## Community offers (not verified by freetokens)\n\nPromo codes",
     );
   });
 
@@ -257,7 +257,7 @@ describe("llms exports label community entries", () => {
     })).map((o) => JSON.parse(JSON.stringify(o)));
     const { full } = run([...filler, community]);
     expect(full).toContain("truncated to stay under the 200KB");
-    expect(full).toContain("### Devin Max giveaway");
+    expect(full).toContain("- [Devin Max giveaway");
     expect(Buffer.byteLength(full, "utf8")).toBeLessThan(200 * 1024);
     // Offers come first; the community entry sits in its own section after
     // them, before the Pages footer — it never leads the offers list.
@@ -270,10 +270,10 @@ describe("llms exports label community entries", () => {
     expect(communityAt).toBeGreaterThan(offersAt);
     expect(pagesAt).toBeGreaterThan(communityAt);
     expect(full.slice(offersAt, communityAt)).not.toContain(
-      "### Devin Max giveaway",
+      "Devin Max giveaway",
     );
     expect(full.slice(communityAt, pagesAt)).toContain(
-      "### Devin Max giveaway",
+      "- [Devin Max giveaway",
     );
     const emitted = countOffers(full);
     expect(emitted).toBeGreaterThan(0);
@@ -292,7 +292,10 @@ describe("llms exports label community entries", () => {
     const without = countOffers(run(filler).full);
     const withCommunity = countOffers(run([...filler, giveaway()]).full);
     expect(withCommunity).toBeLessThanOrEqual(without);
-    expect(without - withCommunity).toBeLessThanOrEqual(3);
+    // One compact line per entry (~0.7 KB here) displaces at most two
+    // ~0.6 KB filler blocks; a full block per entry would cost more.
+    expect(without - withCommunity).toBeLessThanOrEqual(2);
+    expect(run([giveaway()]).full).not.toContain("### Devin Max giveaway");
   });
 });
 
