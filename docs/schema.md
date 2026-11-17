@@ -158,6 +158,11 @@ In the generated `index.json` a community entry carries `listing_type:
 `codes_available`, `entries_close`, `timezone_note` when present.
 Regular entries carry neither key.
 
+On the site the community badge is the entry's only trust label: no
+evidence-level tag, no review-status badge. Because `verification:
+unverified` is a placeholder here, the `?verification=` filter never matches
+a community entry; `?community=only` / `?community=hide` select them.
+
 ## Detail files (`offers/details/<slug>.json`) — optional
 
 Summary cards stay lean; richer per-offer content lives in an **optional**

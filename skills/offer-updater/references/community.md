@@ -35,6 +35,25 @@ daily-offer-check never re-checks one (`list_active.py` skips it, its
   both pinned to `unverified` (the validator enforces it).
 - `source_url` is the post itself. `verified_date` is the day it was added;
   nobody bumps it later, and the site labels it "added", not "checked".
+- Facts that are not in the post text — the poster's display name, the exact
+  post time — may come from the post's author/timestamp metadata (on X,
+  `author.name` and `created_at` from
+  `https://api.fxtwitter.com/<handle>/status/<id>`). Say so in the YAML
+  comment, and never present them as quoted.
+- In the detail file, quote the post wherever possible and attribute every
+  paraphrase ("the post says …"). No sentence may state anything the post
+  does not; keep the post's own characters (curly apostrophes included).
+- `provider` uses the same spelling as the provider's existing offers
+  (e.g. `Cognition (Devin)`), so the entry groups with them.
+
+## Trust labels on the site
+
+The community badge is a community entry's **only** trust label: its rows and
+detail page show no evidence-level tag ("early (unconfirmed)" describes an
+offer the provider's own site is silent about, not a person's giveaway) and
+no review-status badge. Its `verification: unverified` is a schema
+placeholder, so the `?verification=` filter never matches a community entry;
+`?community=only` lists them.
 
 ## Fields (flat YAML, beside the ten regular ones)
 

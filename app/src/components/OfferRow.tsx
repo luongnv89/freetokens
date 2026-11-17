@@ -193,17 +193,25 @@ export function OfferRow({
           <CommunityRowLine community={community} title={offer.title} />
         ) : null}
         <p className="row-meta row-quiet">
-          <TagButton
-            dimension="verification"
-            value={offer.verification}
-            label={VERIFICATION_LABELS[offer.verification]}
-            title={VERIFICATION_TITLES[offer.verification]}
-            pressed={pressed.verification === offer.verification}
-            onToggle={onToggleTag}
-          />
-          <span className="sep" aria-hidden="true">
-            &middot;
-          </span>
+          {/* A community row carries no evidence-level tag (#748): "early
+              (unconfirmed)" describes an offer the provider's own site is
+              silent about, not a person's giveaway, so the community badge
+              above is its only trust label. */}
+          {community ? null : (
+            <>
+              <TagButton
+                dimension="verification"
+                value={offer.verification}
+                label={VERIFICATION_LABELS[offer.verification]}
+                title={VERIFICATION_TITLES[offer.verification]}
+                pressed={pressed.verification === offer.verification}
+                onToggle={onToggleTag}
+              />
+              <span className="sep" aria-hidden="true">
+                &middot;
+              </span>
+            </>
+          )}
           <TagButton
             dimension="signup"
             value={offer.signup}

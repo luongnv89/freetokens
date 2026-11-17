@@ -222,6 +222,11 @@ export function offerMatches(offer: Offer, state: UrlState): boolean {
   if (state.community === "hide" && isCommunity(offer)) return false;
   if (state.community === "only" && !isCommunity(offer)) return false;
   if (state.category && offer.category !== state.category) return false;
+  // The evidence-level filter never matches a community listing (#748): its
+  // `verification: unverified` is a schema placeholder, not the "early
+  // (unconfirmed)" evidence level, and its rows show no evidence tag. Use
+  // ?community=only to list community entries.
+  if (state.verification && isCommunity(offer)) return false;
   if (state.verification && offer.verification !== state.verification)
     return false;
   if (state.signup && offer.signup !== state.signup) return false;

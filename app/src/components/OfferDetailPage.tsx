@@ -223,14 +223,19 @@ export default function OfferDetailPage({
                   <span className="sep" aria-hidden="true">
                     &middot;
                   </span>
-                  <VerificationBadge offer={offer} hrefPrefix="../" />
-                  <span className="sep" aria-hidden="true">
-                    &middot;
-                  </span>
+                  {/* Community listings (#748) show the community badge as
+                      their only trust label: no evidence level, no review
+                      status — freetokens checks neither. */}
                   {community ? (
                     <CommunityBadge />
                   ) : (
-                    <ReviewStatusBadge offer={offer} />
+                    <>
+                      <VerificationBadge offer={offer} hrefPrefix="../" />
+                      <span className="sep" aria-hidden="true">
+                        &middot;
+                      </span>
+                      <ReviewStatusBadge offer={offer} />
+                    </>
                   )}
                   <span className="sep" aria-hidden="true">
                     &middot;
@@ -302,18 +307,32 @@ export default function OfferDetailPage({
                           )}
                         </td>
                       </tr>
-                      <tr>
-                        <th scope="row">Verification</th>
-                        <td>
-                          <VerificationBadge offer={offer} hrefPrefix="../" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Review status</th>
-                        <td>
-                          <ReviewStatusBadge offer={offer} />
-                        </td>
-                      </tr>
+                      {community ? (
+                        <tr>
+                          <th scope="row">Listing</th>
+                          <td>
+                            <CommunityBadge />
+                          </td>
+                        </tr>
+                      ) : (
+                        <>
+                          <tr>
+                            <th scope="row">Verification</th>
+                            <td>
+                              <VerificationBadge
+                                offer={offer}
+                                hrefPrefix="../"
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Review status</th>
+                            <td>
+                              <ReviewStatusBadge offer={offer} />
+                            </td>
+                          </tr>
+                        </>
+                      )}
                       <tr>
                         <th scope="row">
                           {community ? "Added" : "Last checked"}

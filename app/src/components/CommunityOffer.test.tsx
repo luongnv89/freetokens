@@ -15,6 +15,7 @@ import {
   type Offer,
   type OffersIndex,
 } from "../lib/offers";
+import { buildApplyPrompt } from "../lib/applyPrompt";
 import { emptyState, parseState, serializeState } from "../lib/urlState";
 
 const POST = "https://x.com/ben_ai_eng/status/2122616807404052781";
@@ -37,7 +38,7 @@ const REGULAR: Offer = {
 const GIVEAWAY: Offer = {
   slug: "devin-max-one-month-code-giveaway",
   title: "Devin Max giveaway — 10 codes for one month each",
-  provider: "Devin (Cognition)",
+  provider: "Cognition (Devin)",
   category: "coding",
   amount: "one month of Devin Max per code ($200 value each)",
   expiry_date: "2026-11-20",
@@ -138,6 +139,23 @@ describe("community helpers", () => {
     expect(offerMatches(REGULAR, { ...state, community: "only" })).toBe(false);
   });
 
+  it("keeps community entries out of the evidence-level filter", () => {
+    // `verification: unverified` on a community entry is a schema placeholder,
+    // not the "early (unconfirmed)" evidence level, so the filter that names
+    // that level never mixes community entries in.
+    const early: Offer = { ...REGULAR, slug: "early", verification: "unverified" };
+    const state = { ...emptyState(), verification: "unverified" };
+    expect(offerMatches(early, state)).toBe(true);
+    expect(offerMatches(GIVEAWAY, state)).toBe(false);
+    expect(offerMatches(PROMO, state)).toBe(false);
+    expect(
+      offerMatches(GIVEAWAY, { ...emptyState(), verification: "social_proof" }),
+    ).toBe(false);
+    expect(offerMatches(GIVEAWAY, { ...emptyState(), community: "only" })).toBe(
+      true,
+    );
+  });
+
   it("round-trips ?community= and drops unknown values", () => {
     expect(parseState("?community=hide").community).toBe("hide");
     expect(parseState("?community=only").community).toBe("only");
@@ -168,6 +186,13 @@ describe("community listing row", () => {
     expect(screen.getByText(/^added/)).toBeInTheDocument();
     // The review-status badge is replaced, not shown beside the community one.
     expect(document.querySelector(".badge-review-status")).toBeNull();
+    // No evidence-level tag either: "early (unconfirmed)" describes an offer
+    // the provider's site is silent about, not a person's giveaway (#748).
+    expect(document.querySelector(".badge-verification")).toBeNull();
+    expect(document.querySelector('[data-ft-tag="verification"]')).toBeNull();
+    expect(screen.queryByText("early (unconfirmed)")).toBeNull();
+    // The sign-up tag stays.
+    expect(document.querySelector('[data-ft-tag="signup"]')).not.toBeNull();
     expect(document.querySelector("article")).toHaveAttribute(
       "data-listing-type",
       "community",
@@ -192,6 +217,7 @@ describe("community listing row", () => {
 
   it("regular rows are unchanged", () => {
     row(REGULAR);
+    expect(document.querySelector('[data-ft-tag="verification"]')).not.toBeNull();
     expect(screen.queryByText(COMMUNITY_BADGE_LABEL)).toBeNull();
     expect(document.querySelector(".r-community")).toBeNull();
     expect(screen.getByText(/^checked/)).toBeInTheDocument();
@@ -241,5 +267,37 @@ describe("offer detail page for a community entry", () => {
     expect(html).toContain("Reply with what you&#x27;re building.");
     expect(html).toContain("Not verified by freetokens.");
     expect(html).not.toContain("Claim at Devin");
+    // The community badge is the page's only trust label (#748): no
+    // evidence-level badge, no link to ?verification=unverified, no
+    // "not yet on the provider's own site" tooltip, no review-status badge.
+    // (The generic trust legend below the article still defines every label.)
+    const page = html.split('class="policy trust-legend"')[0];
+    expect(page).not.toContain("badge-verification");
+    expect(page).not.toContain("verification=unverified");
+    expect(page).not.toContain("early (unconfirmed)");
+    expect(page).not.toContain("provider&#x27;s own site");
+    expect(page).not.toContain("badge-review-status");
+    expect(page).not.toContain(">Verification</th>");
+    expect(page).toContain(">Listing</th>");
+    expect(page.split(COMMUNITY_BADGE_LABEL).length - 1).toBeGreaterThanOrEqual(2);
+  });
+
+  it("keeps the evidence and review badges on a regular offer", () => {
+    const html = renderToStaticMarkup(
+      <OfferDetailPage index={index([REGULAR])} slug={REGULAR.slug} />,
+    );
+    expect(html).toContain("badge-verification");
+    expect(html).toContain(">Verification</th>");
+    expect(html).not.toContain(COMMUNITY_BADGE_LABEL);
+  });
+});
+
+describe("apply prompt for a community entry", () => {
+  it("names the post and never calls it an early official offer", () => {
+    const prompt = buildApplyPrompt(GIVEAWAY, null, null, "https://x.test/o");
+    expect(prompt).toContain(`The post that shared it (start here): ${POST}`);
+    expect(prompt).toContain("freetokens has not verified it");
+    expect(prompt).not.toContain("Official page");
+    expect(prompt).not.toContain("early listing");
   });
 });
