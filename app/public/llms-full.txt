@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-17T15:43:26Z — 127 of 272 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-17T18:38:50Z — 128 of 273 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1268,7 +1268,9 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 
 Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.
 
+- [Mistral Vibe Pro free for 3 months — code LECHONK (Europe)](https://freetokens.custats.info/offers/mistral-vibe-pro-lechonk-code.html): Mistral AI — Vibe Pro free for the first three months with code LECHONK (developers in Europe) · community promo_code — not verified by freetokens · shared by @MistralAI (Mistral AI) on 2026-11-17: https://x.com/MistralAI/status/2122713540666806397 · code: LECHONK · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
 - [Devin Max giveaway — 10 codes for one month each](https://freetokens.custats.info/offers/devin-max-one-month-code-giveaway.html): Cognition (Devin) — one month of Devin Max per code ($200 value each) · community giveaway — not verified by freetokens · shared by @ben_ai_eng (Ben Newell) on 2026-11-17: https://x.com/ben_ai_eng/status/2122616807404052781 · 10 codes · entries close 2026-11-20 · time zone: no time zone given · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
+
 ## Pages
 
 - [Home](https://freetokens.custats.info/): Main listing of active offers.
