@@ -1,0 +1,28 @@
+{
+  "summary": "OpenCode's models page lists Jev 1.13 Free (model ID jev-1.13-free) as available for a limited time, priced free input and output. Use `jev-1.13-free` instead of `jev-1.13` to use the limited-time free model. Free-tier chat models only work from within OpenCode. OpenCode's product FAQ says its free models can be used without creating an account. No end date is published.",
+  "claim_steps": [
+    "Open OpenCode and run /models",
+    "Select Jev 1.13 Free (opencode/jev-1.13-free)",
+    "Use it while the limited-time free period lasts; free-tier models work only from within OpenCode"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Models",
+      "text": "Jev 1.13 Free is available on OpenCode for a limited time. Use `jev-1.13-free` instead of `jev-1.13` to use the limited-time free model. Pricing: Jev 1.13 Free | Free | Free | - | -"
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/product",
+      "title": "OpenCode | Desktop, terminal, mobile, SDK and extensions",
+      "text": "OpenCode comes with a set of free models that you can use without creating an account."
+    },
+    {
+      "type": "link",
+      "url": "https://opencode.ai/docs/console/models/",
+      "title": "Models (OpenCode docs)",
+      "text": "Jev 1.13 Free is available on OpenCode for a limited time."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "summary": "GonkaRouter is an AI model router on the Gonka network, with OpenAI- and Anthropic-compatible APIs and paid pricing from $0.0061 per 1M tokens. New accounts automatically receive 1M free tokens, which are used before any paid balance. No credit card is required and there is no subscription. Sign-in is by email or Google.",
+  "claim_steps": [
+    "Sign in to GonkaRouter with email or Google",
+    "Copy your API key",
+    "Point your OpenAI SDK at the GonkaRouter API; the 1M free tokens are used before any paid balance"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://gonkarouter.io/pricing",
+      "title": "Pricing — from $0.0061 per 1M tokens | GonkaRouter",
+      "text": "1 million free tokens to get started, used before your paid balance. No credit card required. New accounts automatically receive 1M free tokens."
+    },
+    {
+      "type": "link",
+      "url": "https://gonkarouter.io",
+      "title": "AI Model Router on the Gonka Network | GonkaRouter",
+      "text": "1M free tokens to start. OpenAI compatible. Anthropic compatible. No subscription. Start with 1M free tokens. Sign in, copy your API key, and point your OpenAI SDK at GonkaRouter."
+    },
+    {
+      "type": "link",
+      "url": "https://free-llm.com/guides/free-llm-apis-november-2026-what-changed",
+      "title": "Free LLM APIs November 2026: what changed",
+      "text": "Free-LLM's November 4, 2026 roundup lists GonkaRouter: 1M free tokens for new users. (Seen in search result snippet; the page itself returned HTTP 403 on fetch. Snapshot has Gonka Broker 1M tokens/month; may be a different Gonka gateway.)"
+    }
+  ]
+}
