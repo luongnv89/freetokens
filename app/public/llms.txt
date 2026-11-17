@@ -29,7 +29,7 @@ In one line: corroborated = evidence level · reviewed / tested = review status 
 
 ## Offers
 
-Top 20 currently active offers (newest checked first) from 271 active listings. Every line ends with the offer's own review status, evidence level, sign-up need and last-checked date. Full directory at https://freetokens.custats.info/.
+Top 20 currently active offers (newest checked first) from 272 active listings. Every line ends with the offer's own review status, evidence level, sign-up need and last-checked date. Full directory at https://freetokens.custats.info/.
 
 - [Zed Pro for Students](https://freetokens.custats.info/offers/zed-student-pro.html): Zed — Zed Pro free for 1 year + $10/month in AI token credits (student) · review_status=verified · verification=social_proof · signup=required · last_checked=2026-11-17
 - [ZCode / BigModel New-User Trial](https://freetokens.custats.info/offers/zcode-bigmodel-new-user-trial.html): ZCode (Z.ai) — 8M tokens/day for the first 5 days (GLM-5.3 3M + GLM-5.3-Flash 5M) after connecting a BigModel account; then expires — not an ongoing free tier (coding) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-11-17
@@ -51,6 +51,12 @@ Top 20 currently active offers (newest checked first) from 271 active listings. 
 - [Valyu — 1,000 Free API Credits a Month (2,000 with a Work Email)](https://freetokens.custats.info/offers/valyu-new-account-search-credits.html): Valyu — 1,000 free credits/month (2,000 with a company email); work email needs no card, personal email must add a card (not charged) after month one; one balance for Search, Contents and DeepResearch; credits reset monthly, no rollover (api_provider) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-11-17
 - [Upstage Studio — Free Daily Organization Usage](https://freetokens.custats.info/offers/upstage-studio-agents-10-free-runs.html): Upstage — Free Studio plan with a daily-refilling organization-shared usage quota; no payment details required for Free; current numeric quota needs confirmation (official pricing shows 100-page reference volume, while docs contain a post-launch 10-page note) (api_provider) · review_status=to-be-verified · verification=social_proof · signup=required · last_checked=2026-11-17
 - [Upstage Free Access for Education & Public Interest](https://freetokens.custats.info/offers/upstage-education-public-interest-free.html): Upstage — Free Solar Pro 4 + Document Parse for approved K-12/university institutions, university hospitals and NPOs/NGOs; up to 1 year, with usage ending 2027-03-31 at 23:00 KST (Upstage x AWS AI Initiative) (student) · review_status=under-review · verification=social_proof · signup=required · last_checked=2026-11-17
+
+## Community offers (not verified by freetokens)
+
+Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.
+
+- [Devin Max giveaway — 10 codes for one month each](https://freetokens.custats.info/offers/devin-max-one-month-code-giveaway.html): Devin (Cognition) — one month of Devin Max per code ($200 value each) · community giveaway — not verified by freetokens · shared by @ben_ai_eng (Ben Newell) on 2026-11-17: https://x.com/ben_ai_eng/status/2122616807404052781 · 10 codes · entries close 2026-11-20 · time zone: no time zone given
 
 ## Pages
 
