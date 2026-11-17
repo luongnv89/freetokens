@@ -7,7 +7,7 @@ import sys
 
 from check_coverage import UPDATABLE, normalize_url, strict_loads
 from list_active import REPO
-from offer_model import parse_offer_text, validate_detail, validate_offer
+from offer_model import is_community, parse_offer_text, validate_detail, validate_offer
 
 ARTIFACTS = ('index.json', 'app/public/llms.txt', 'app/public/llms-full.txt')
 FIELDS_ALLOWED = set(UPDATABLE) | {'verified_date'}
@@ -43,6 +43,20 @@ def identities(doc):
     return result
 
 
+def community_slugs(repo, offer_paths, refs):
+    """Slugs that are community listings (#748) on either side of the diff."""
+    found = set()
+    for path in offer_paths:
+        for ref in refs:
+            try:
+                data = parse_offer_text(git(repo, 'show', ref + path), path)
+            except (RuntimeError, ValueError):
+                continue
+            if is_community(data):
+                found.add(Path(path).stem)
+    return found
+
+
 def scope(repo, staged, base, head):
     out, old_ref, new_ref = diff(repo, staged, base, head)
     fields = out.split('\0')
@@ -51,8 +65,12 @@ def scope(repo, staged, base, head):
         listed = git(repo, 'ls-files', '--', 'offers')
     else:
         listed = git(repo, 'ls-tree', '-r', '--name-only', head, '--', 'offers')
-    slugs = {Path(p).stem for p in listed.splitlines() if p.startswith('offers/')
-             and not p.startswith('offers/details/') and Path(p).suffix in ('.yaml', '.yml')}
+    offer_paths = [p for p in listed.splitlines() if p.startswith('offers/')
+                   and not p.startswith('offers/details/') and Path(p).suffix in ('.yaml', '.yml')]
+    slugs = {Path(p).stem for p in offer_paths}
+    touched = {Path(path).stem for _, path in entries if path.startswith('offers/')}
+    community = community_slugs(
+        repo, [p for p in offer_paths if Path(p).stem in touched], (old_ref, new_ref))
     violations = []
     counts = {'offer': 0, 'detail': 0, 'artifact': 0}
     for status, path in entries:
@@ -69,6 +87,11 @@ def scope(repo, staged, base, head):
             continue
         counts[kind] += 1
         blob = lambda ref: git(repo, 'show', ref + path)
+        if kind in ('offer', 'detail') and Path(path).stem in community:
+            # Community listings (#748) are added only by Luong in their own
+            # entry PR; the sweep never verifies, bumps or edits one.
+            violations.append(path + ': community listing; the sweep never touches one')
+            continue
         if kind == 'offer':
             if status != 'M':
                 violations.append(path + ': the sweep never adds or removes offers')

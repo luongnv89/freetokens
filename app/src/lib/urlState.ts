@@ -17,7 +17,14 @@
 export const SORT_MODES = ["recommended", "added", "expiring"] as const;
 export const DIMENSIONS = ["category", "verification", "signup"] as const;
 
+// Community listings (#748) — promo codes and giveaways people shared, not
+// verified by freetokens — are shown by default. `?community=hide` drops them,
+// `?community=only` lists nothing else. Not a tag dimension: every row is
+// either community or not, so the control is a show/hide switch.
+export const COMMUNITY_VIEWS = ["hide", "only"] as const;
+
 export type SortMode = (typeof SORT_MODES)[number];
+export type CommunityView = (typeof COMMUNITY_VIEWS)[number];
 export type FilterDimension = (typeof DIMENSIONS)[number];
 
 export type UrlState = {
@@ -26,6 +33,7 @@ export type UrlState = {
   category: string;
   verification: string;
   signup: string;
+  community: string;
   page: number;
 };
 
@@ -50,6 +58,7 @@ export function emptyState(): UrlState {
     category: "",
     verification: "",
     signup: "",
+    community: "",
     page: 1,
   };
 }
@@ -60,7 +69,13 @@ export function normalizeSort(value: string): string {
 
 /** True when a query or any filter dimension is active (sort is not a filter). */
 export function hasQueryOrFilters(state: UrlState): boolean {
-  return !!(state.q || state.category || state.verification || state.signup);
+  return !!(
+    state.q ||
+    state.category ||
+    state.verification ||
+    state.signup ||
+    state.community
+  );
 }
 
 export function parseState(search: string): UrlState {
@@ -72,6 +87,10 @@ export function parseState(search: string): UrlState {
     const value = params.get(dim) || "";
     state[dim] = VALID[dim].includes(value) ? value : "";
   }
+  const community = params.get("community") || "";
+  state.community = (COMMUNITY_VIEWS as readonly string[]).includes(community)
+    ? community
+    : "";
   // 1-based page (#548): only a bare positive integer counts — "0", "-1",
   // "2.5" and zero-padded "01" all fall back to the first page. There is no
   // upper clamp here; the listing clamps against its own result count.
@@ -88,6 +107,7 @@ export function serializeState(state: UrlState): string {
   for (const dim of DIMENSIONS) {
     if (state[dim]) params.set(dim, state[dim]);
   }
+  if (state.community) params.set("community", state.community);
   if (state.q) params.set("q", state.q);
   if (state.sort) params.set("sort", state.sort);
   if (state.page > 1) params.set("page", String(state.page));

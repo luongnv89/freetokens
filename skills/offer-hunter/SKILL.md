@@ -5,7 +5,7 @@ license: MIT
 effort: high
 compatibility: "Requires git, an authenticated GitHub CLI (gh), python3, node, and read-only web search and fetch. Optional: TinyFish (MCP server or tinyfish CLI) for search and page reads, the lightpanda CLI for a browser retry, curl for the X oEmbed lookup; each falls back when missing."
 metadata:
-  version: 1.3.0
+  version: 1.4.0
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   epic: "#31"
 ---
@@ -16,6 +16,14 @@ You are the orchestrator. Scouts find **leads**, verifiers confirm them on
 **official sources**, bundled scripts pick the **shortlist** and write it,
 and you carry the result to one PR. A human reviews and merges that PR;
 the merge is what publishes. You never merge and never push `main`.
+
+**Never create a community offer** (#748): a promo code or giveaway a person
+shared is added only by Luong, from a link he sends, in its own entry PR
+(`skills/offer-updater/references/community.md`). A hunt never writes
+`listing_type: community`, never edits or removes an existing community
+listing or its detail file, and `scripts/check_scope.py` fails the run if
+the staged diff does. A personal giveaway or code found while scouting is
+not a candidate: drop it.
 
 This skill is **user-invoked** and runs **unattended** up to the PR. Do
 not stop for confirmations. Unattended removes confirmations, never gates:

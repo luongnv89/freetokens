@@ -58,8 +58,11 @@ class SchemaConsistencyTests(unittest.TestCase):
         )
         self.assertEqual(self.schema["type"], "object")
         self.assertIs(self.schema["additionalProperties"], False)
+        # Every required field has a property; the only extra properties are
+        # the optional community fields (#748).
         self.assertEqual(
-            set(self.schema["properties"]), set(self.schema["required"])
+            set(self.schema["properties"]) - set(validate_offers.build.COMMUNITY_FIELDS),
+            set(self.schema["required"]),
         )
 
     def test_non_strict_root_fails_consistency_check(self):

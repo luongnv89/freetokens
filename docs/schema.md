@@ -8,7 +8,8 @@ it becomes the offer's identity in the JSON index and URLs.
 ## Fields
 
 Exactly ten fields. All are required; unknown fields are rejected by the
-build validator.
+build validator. Community offers (#748) add their own fields, listed under
+*Community offers* below.
 
 | Field           | Type                  | Required | Nullability | Description |
 |-----------------|-----------------------|----------|-------------|-------------|
@@ -122,6 +123,40 @@ app build too — locally and in the deploy workflow.
 
 A file that fails any rule above fails with the offending file and field
 named in the error (date errors include a `YYYY-MM-DD` format hint).
+
+## Community offers (`listing_type: community`) — #748
+
+Promo codes and giveaways a person shared in a public post. freetokens does
+**not** verify them; only Luong adds one (he sends a link, a small entry PR
+goes through the normal gates — `skills/offer-updater/references/community.md`).
+A regular offer never carries any of these fields; the validator rejects
+them without `listing_type: community`.
+
+| Field                 | Type               | Required                     | Description |
+|-----------------------|--------------------|------------------------------|-------------|
+| `listing_type`        | `community`        | yes (marks the entry)        | Omit on regular offers. |
+| `community_subtype`   | `promo_code` \| `giveaway` | yes                 | A code anyone can redeem, or codes handed to people who enter. |
+| `added_by`            | `luong`            | yes                          | The only allowed value. |
+| `shared_by_handle`    | string             | yes                          | Poster's bare handle, no `@`. |
+| `shared_by_name`      | string             | no                           | Display name as shown on the post. |
+| `shared_by_post_date` | date               | yes                          | `YYYY-MM-DD` (UTC) of the post. |
+| `promo_code`          | string             | `promo_code` only, required  | The code exactly as posted. |
+| `codes_available`     | whole number       | `giveaway` only, optional    | How many codes the post gives away. |
+| `entries_close`       | date               | `giveaway` only, optional    | Day entries close; `expiry_date` must equal it. |
+| `timezone_note`       | string             | required with `entries_close`| The post's time zone quoted, or `no time zone given`. |
+
+Rules the validator enforces on top: `verification` and `review_status` are
+both `unverified`; `source_url` is the post; `verified_date` is the day the
+entry was added (the site shows it as "added"). Expiry is ordinary
+build-time expiry through `expiry_date`: a giveaway is listed through the
+end of its `entries_close` day on the UTC build clock; a promo code expires
+on its stated date, or never (`null`).
+
+In the generated `index.json` a community entry carries `listing_type:
+"community"` and a nested `community` object — `subtype`, `added_by`,
+`shared_by { handle, name?, post_url, post_date }`, and `promo_code`,
+`codes_available`, `entries_close`, `timezone_note` when present.
+Regular entries carry neither key.
 
 ## Detail files (`offers/details/<slug>.json`) — optional
 

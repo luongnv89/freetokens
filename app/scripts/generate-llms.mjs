@@ -73,7 +73,29 @@ const activeOffers = index.offers
     if (a.verified_date === b.verified_date) return a.slug < b.slug ? 1 : -1;
     return a.verified_date < b.verified_date ? 1 : -1;
   });
-const top20 = activeOffers.slice(0, 20);
+// Community listings (#748) — promo codes and giveaways a person shared, NOT
+// verified by freetokens — never take a slot among the offers above; they get
+// their own clearly labelled section so an AI consumer cannot mistake one for
+// a checked offer.
+const isCommunity = (o) => o.listing_type === "community" && !!o.community;
+const top20 = activeOffers.filter((o) => !isCommunity(o)).slice(0, 20);
+const activeCommunity = activeOffers.filter(isCommunity);
+
+/** One-line community facts, all quoted from the post. */
+function communityFacts(offer) {
+  const c = offer.community;
+  const by = c.shared_by;
+  const parts = [
+    `community ${c.subtype} — not verified by freetokens`,
+    `shared by @${by.handle}${by.name ? ` (${by.name})` : ""} on ${by.post_date}: ${by.post_url}`,
+  ];
+  if (c.promo_code) parts.push(`code: ${c.promo_code}`);
+  if (typeof c.codes_available === "number")
+    parts.push(`${c.codes_available} codes`);
+  if (c.entries_close) parts.push(`entries close ${c.entries_close}`);
+  if (c.timezone_note) parts.push(`time zone: ${c.timezone_note}`);
+  return parts.join(" · ");
+}
 
 function offerDescription(offer) {
   // Keep short but trailing description after colon satisfies audit requiring ": Description".
@@ -138,6 +160,22 @@ function buildLlmsTxt() {
     lines.push(`- [${title}](${url}): ${offerDescription(offer)}`);
   }
   lines.push("");
+  if (activeCommunity.length) {
+    lines.push("## Community offers (not verified by freetokens)");
+    lines.push("");
+    lines.push(
+      "Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.",
+    );
+    lines.push("");
+    for (const offer of activeCommunity) {
+      const url = `${baseUrl}/offers/${offer.slug}.html`;
+      const title = offer.title.replace(/]/g, "\\]");
+      lines.push(
+        `- [${title}](${url}): ${offer.provider} — ${offer.amount.replace(/\s+/g, " ").trim()} · ${communityFacts(offer)}`,
+      );
+    }
+    lines.push("");
+  }
   lines.push("## Pages");
   lines.push("");
   lines.push(
@@ -215,6 +253,7 @@ function buildOfferBlock(offer) {
   lines.push(
     `- ${LAST_CHECKED.label}: ${offer.verified_date} — ${trustFieldPairs(offer).join(" · ")}`,
   );
+  if (isCommunity(offer)) lines.push(`- Listing: ${communityFacts(offer)}`);
   lines.push(`- Source: ${offer.source_url}`);
   lines.push(`- Page: ${url}`);
   if (summary) lines.push(`- Summary: ${summary}`);

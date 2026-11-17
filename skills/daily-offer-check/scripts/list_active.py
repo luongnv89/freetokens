@@ -20,7 +20,7 @@ def _repo_root(start):
 
 REPO = _repo_root(Path(__file__).resolve().parent)
 sys.path.insert(0, str(REPO / 'scripts'))
-from offer_model import parse_offer_text, validate_offer, is_expired
+from offer_model import parse_offer_text, validate_offer, is_community, is_expired
 
 FIELDS = ('title', 'provider', 'amount', 'expiry_date', 'source_url', 'verified_date',
           'verification')
@@ -75,7 +75,7 @@ def inventory(offers_dir, today, slugs=None):
         selected = slugs.split(',')
         if any(not SLUG.fullmatch(s) for s in selected) or len(set(selected)) != len(selected):
             raise ValueError('slugs must be unique comma-separated lowercase names')
-    records, expired, seen = [], [], set()
+    records, expired, community, seen = [], [], [], set()
     for directory, dirs, files in os.walk(root, followlinks=False):
         for name in dirs + files:
             if (Path(directory) / name).is_symlink():
@@ -91,7 +91,12 @@ def inventory(offers_dir, today, slugs=None):
             seen.add(row['slug'])
             if selected is not None and row['slug'] not in selected:
                 continue
-            if is_expired(data, today):
+            if is_community(data):
+                # Community listings (#748) are never re-checked: no verdict,
+                # no verified_date bump, no "unverifiable", no conflict. They
+                # still leave the site on their own end date at build time.
+                community.append(row['slug'])
+            elif is_expired(data, today):
                 expired.append(row['slug'])
             else:
                 records.append(row)
@@ -99,7 +104,8 @@ def inventory(offers_dir, today, slugs=None):
         raise ValueError('unknown slugs: ' + ', '.join(sorted(set(selected) - seen)))
     records.sort(key=lambda r: (r['verified_date'], r['slug']))
     return dict(today=today.isoformat(), offers_dir=str(root), active_count=len(records),
-                skipped_expired=sorted(expired), offers=records)
+                skipped_expired=sorted(expired), skipped_community=sorted(community),
+                offers=records)
 
 
 def main():

@@ -87,4 +87,60 @@ export interface Offer {
    * Build-time expiry verdict (ADR 0001): computed against the BUILD clock, never a client clock.
    */
   status: "active" | "expired";
+  /**
+   * Present only on community entries (#748): a promo code or giveaway a person shared, NOT verified by freetokens. Absent on regular offers.
+   */
+  listing_type?: "community";
+  community?: Community;
+}
+/**
+ * Community listing details (#748), re-nested from the flat offers/*.yaml keys. Facts are quoted from the post; keys the post did not state are absent.
+ */
+export interface Community {
+  /**
+   * promo_code = a code anyone can redeem; giveaway = codes handed out to people who enter.
+   */
+  subtype: "promo_code" | "giveaway";
+  /**
+   * Who added the entry.
+   */
+  added_by: "luong";
+  shared_by: SharedBy;
+  /**
+   * promo_code subtype: the code as the post gives it.
+   */
+  promo_code?: string;
+  /**
+   * giveaway subtype: how many codes the post gives away.
+   */
+  codes_available?: number;
+  /**
+   * giveaway subtype: the day entries close, YYYY-MM-DD (equals expiry_date).
+   */
+  entries_close?: string;
+  /**
+   * The post's time zone quoted, or 'no time zone given'.
+   */
+  timezone_note?: string;
+}
+/**
+ * Who shared a community entry, and where.
+ */
+export interface SharedBy {
+  /**
+   * Bare account handle of the poster (no @).
+   */
+  handle: string;
+  /**
+   * Poster's display name, when the post shows one.
+   */
+  name?: string;
+  /**
+   * Link to the post (the entry's source_url).
+   */
+  post_url: string;
+  /**
+   * Date of the post, YYYY-MM-DD.
+   */
+  post_date: string;
 }

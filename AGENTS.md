@@ -62,3 +62,16 @@ only for 3 days after their newest dated post, and must never reach
 `skills/offer-hunter/scripts/write_leads.py` writes them, and
 `scripts/lead_model.py remove-match` deletes one when its offer is published
 (#660).
+
+Community offers (#748) are promo codes and giveaways a person shared in a
+public post, listed with `listing_type: community` in `offers/` and shown
+with the badge "Community · not verified by freetokens". **Only Luong adds
+them**: he sends a link, and one small entry PR (offer YAML + detail file +
+regenerated `index.json` / llms files) goes through the normal gates. Every
+fact is quoted from the post and anything it does not state stays absent;
+every entry records `added_by: luong`. The offer-hunter never creates or
+edits one, and the daily-offer-check never re-checks one (both scope checks
+reject it). They expire at build time like any offer: a giveaway after its
+`entries_close` day ends (UTC build clock when the post names no time zone),
+a code on its stated expiry or never. Process and fields:
+`skills/offer-updater/references/community.md`; schema: docs/schema.md.

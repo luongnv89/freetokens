@@ -41,6 +41,8 @@ function offerValidator() {
     compiledOffer = new Ajv2020({ allErrors: true }).compile({
       ...root.$defs.Offer,
       $schema: root.$schema,
+      // Offer refers to sibling definitions (Community, SharedBy; #748).
+      $defs: root.$defs,
     });
   }
   return compiledOffer;

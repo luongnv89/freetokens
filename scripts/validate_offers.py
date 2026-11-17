@@ -63,13 +63,25 @@ def check_schema_matches_build(schema: dict) -> None:
     if not isinstance(props, dict):
         raise SchemaMismatch("schema 'properties' must be an object")
     property_names = set(props)
-    if property_names != set(build.REQUIRED_FIELDS):
-        missing = sorted(set(build.REQUIRED_FIELDS) - property_names)
-        extra = sorted(property_names - set(build.REQUIRED_FIELDS))
+    known = set(build.REQUIRED_FIELDS) | set(build.COMMUNITY_FIELDS)
+    if property_names != known:
+        missing = sorted(known - property_names)
+        extra = sorted(property_names - known)
         raise SchemaMismatch(
-            "schema 'properties' must cover exactly the required fields "
+            "schema 'properties' must cover exactly the required fields plus "
+            "the optional community fields "
             f"(schema-only: {extra or '{}'}; build-only: {missing or '{}'})"
         )
+    for field, values in (
+        ("listing_type", build.LISTING_TYPES),
+        ("community_subtype", build.COMMUNITY_SUBTYPES),
+        ("added_by", build.COMMUNITY_ADDED_BY),
+    ):
+        if props.get(field, {}).get("enum") != list(values):
+            raise SchemaMismatch(
+                f"schema {field} enum does not match build.py "
+                f"(schema: {props.get(field, {}).get('enum')}, build: {list(values)})"
+            )
     enum = props.get("category", {}).get("enum")
     if enum != list(build.CATEGORIES):
         raise SchemaMismatch(

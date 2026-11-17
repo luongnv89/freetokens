@@ -1,5 +1,12 @@
 import { useMemo } from "react";
-import { CATEGORY_LABELS, humanDate, type OffersIndex } from "../lib/offers";
+import {
+  CATEGORY_LABELS,
+  atHandle,
+  humanDate,
+  isCommunity,
+  isXPost,
+  type OffersIndex,
+} from "../lib/offers";
 import { ftFormatCount } from "../lib/analytics";
 import { useOfferViews } from "../lib/offerStats";
 import {
@@ -17,6 +24,7 @@ import {
 } from "./Badge";
 import { ApplyPrompt } from "./ApplyPrompt";
 import { ClaimChecklist } from "./ClaimChecklist";
+import { CommunityBadge, CommunityPanel } from "./CommunityOffer";
 import { CopyLinkButton } from "./CopyLinkButton";
 import { IconSprite } from "./OfferRow";
 import { SocialProofList } from "./SocialProofList";
@@ -44,6 +52,13 @@ function relatedOffers(index: OffersIndex, current: Offer, limit = 4): Offer[] {
  * same data-ft-* hooks, which is what attributes the GA4 offer_click event.
  */
 function ClaimCta({ offer }: { offer: Offer }) {
+  // A community listing's source is the post itself (#748), so the button
+  // names the post rather than promising a provider page.
+  const label = isCommunity(offer)
+    ? isXPost(offer.source_url)
+      ? `Open ${atHandle(offer.community.shared_by.handle)}'s post on X`
+      : `Open ${atHandle(offer.community.shared_by.handle)}'s post`
+    : `Claim at ${offer.provider}`;
   return (
     <a
       className="od-cta"
@@ -55,7 +70,7 @@ function ClaimCta({ offer }: { offer: Offer }) {
       data-ft-offer-category={offer.category}
       data-ft-outbound="true"
     >
-      Claim at {offer.provider} <span aria-hidden="true">&#8599;</span>
+      {label} <span aria-hidden="true">&#8599;</span>
     </a>
   );
 }
@@ -146,6 +161,7 @@ export default function OfferDetailPage({
   const viewSlug = useMemo(() => [slug], [slug]);
   const views = useOfferViews(viewSlug);
   const viewCount = offer ? views[offer.slug] : null;
+  const community = offer && isCommunity(offer) ? offer.community : null;
   return (
     <>
       <IconSprite />
@@ -211,11 +227,15 @@ export default function OfferDetailPage({
                   <span className="sep" aria-hidden="true">
                     &middot;
                   </span>
-                  <ReviewStatusBadge offer={offer} />
+                  {community ? (
+                    <CommunityBadge />
+                  ) : (
+                    <ReviewStatusBadge offer={offer} />
+                  )}
                   <span className="sep" aria-hidden="true">
                     &middot;
                   </span>
-                  checked{" "}
+                  {community ? "added" : "checked"}{" "}
                   <time dateTime={offer.verified_date}>
                     {humanDate(offer.verified_date)}
                   </time>
@@ -234,7 +254,9 @@ export default function OfferDetailPage({
                   <p className="od-hero-cta">
                     <ClaimCta offer={offer} />
                     <span className="od-cta-note">
-                      Opens {offer.provider}. This site takes no cut.
+                      {community
+                        ? "Opens the post. Not verified by freetokens."
+                        : `Opens ${offer.provider}. This site takes no cut.`}
                     </span>
                   </p>
                 ) : (
@@ -293,7 +315,9 @@ export default function OfferDetailPage({
                         </td>
                       </tr>
                       <tr>
-                        <th scope="row">Last checked</th>
+                        <th scope="row">
+                          {community ? "Added" : "Last checked"}
+                        </th>
                         <td>
                           <time dateTime={offer.verified_date}>
                             {humanDate(offer.verified_date)}
@@ -310,6 +334,9 @@ export default function OfferDetailPage({
                     <h2>The offer</h2>
                     <p className="od-summary">{detail.summary}</p>
                   </section>
+                ) : null}
+                {community ? (
+                  <CommunityPanel community={community} title={offer.title} />
                 ) : null}
                 <ClaimChecklist slug={offer.slug} steps={claimSteps(detail)} />
                 {/* Second CTA, at the end of the steps. Redundant on a desktop

@@ -65,12 +65,27 @@ const FILTER_LABELS: Record<FilterDimension, Record<string, string>> = {
   signup: SIGNUP_LABELS,
 };
 
+// The community show/hide switch (#748) is not a tag dimension, but an active
+// one is still named in the status line and removable like the others.
+type ActiveFilterKey = FilterDimension | "community";
+const COMMUNITY_FILTER_LABELS: Record<string, string> = {
+  hide: "Community hidden",
+  only: "Community only",
+};
+
 function namedFilters(state: UrlState) {
-  const out: { dim: FilterDimension; value: string; label: string }[] = [];
+  const out: { dim: ActiveFilterKey; value: string; label: string }[] = [];
   for (const dim of DIMENSIONS) {
     const value = state[dim];
     if (!value) continue;
     out.push({ dim, value, label: FILTER_LABELS[dim][value] || value });
+  }
+  if (state.community) {
+    out.push({
+      dim: "community",
+      value: state.community,
+      label: COMMUNITY_FILTER_LABELS[state.community] ?? state.community,
+    });
   }
   return out;
 }
@@ -145,6 +160,7 @@ function Toolbar({
   searchValue,
   sortValue,
   category,
+  community,
   active,
   clearHidden,
   savedCount,
@@ -153,6 +169,7 @@ function Toolbar({
   onSearchChange,
   onSortChange,
   onCategorySet,
+  onCommunitySet,
   onRemoveFilter,
   onClear,
   onToggleSavedOnly,
@@ -166,7 +183,8 @@ function Toolbar({
   searchValue: string;
   sortValue: string;
   category: string;
-  active: { dim: FilterDimension; value: string; label: string }[];
+  community: string;
+  active: { dim: ActiveFilterKey; value: string; label: string }[];
   clearHidden: boolean;
   savedCount: number;
   savedOnly: boolean;
@@ -174,7 +192,8 @@ function Toolbar({
   onSearchChange: (value: string) => void;
   onSortChange: (value: string) => void;
   onCategorySet: (category: string) => void;
-  onRemoveFilter: (dim: FilterDimension) => void;
+  onCommunitySet: (community: string) => void;
+  onRemoveFilter: (dim: ActiveFilterKey) => void;
   onClear: () => void;
   onToggleSavedOnly: () => void;
   onRestoreDismissed: () => void;
@@ -281,6 +300,30 @@ function Toolbar({
             <span>{CATEGORY_LABELS[cat] ?? cat}</span>
           </Button>
         ))}
+      </div>
+      {/* Community listings (#748): shown by default; the two chips toggle
+          "only community" and "hide community", pressing one again resets. */}
+      <div className="chips" role="group" aria-label="Community offers">
+        <Button
+          type="button"
+          variant="unstyled"
+          className="chip chip-community"
+          data-ft-community="only"
+          aria-pressed={community === "only" ? "true" : "false"}
+          onClick={() => onCommunitySet(community === "only" ? "" : "only")}
+        >
+          <span>Community only</span>
+        </Button>
+        <Button
+          type="button"
+          variant="unstyled"
+          className="chip chip-community"
+          data-ft-community="hide"
+          aria-pressed={community === "hide" ? "true" : "false"}
+          onClick={() => onCommunitySet(community === "hide" ? "" : "hide")}
+        >
+          <span>Hide community</span>
+        </Button>
       </div>
       <div className="chips" role="group" aria-label="Personal lists">
         <Button
@@ -697,12 +740,16 @@ export default function HomePage({
     commit({ category }, "filter");
   }
 
+  function onCommunitySet(community: string) {
+    commit({ community }, "filter");
+  }
+
   function onTagToggle(dim: FilterDimension, value: string) {
     const current = stateRef.current[dim];
     commit({ [dim]: current === value ? "" : value }, "filter");
   }
 
-  function onRemoveFilter(dim: FilterDimension) {
+  function onRemoveFilter(dim: ActiveFilterKey) {
     commit({ [dim]: "" }, "filter");
     pendingFocusRef.current = "next-pill";
   }
@@ -712,7 +759,10 @@ export default function HomePage({
       clearTimeout(debounceRef.current);
       debounceRef.current = null;
     }
-    commit({ q: "", category: "", verification: "", signup: "" }, "filter");
+    commit(
+      { q: "", category: "", verification: "", signup: "", community: "" },
+      "filter",
+    );
     setSearchInput("");
     pendingFocusRef.current = "search";
     document.getElementById("ft-search")?.focus();
@@ -774,6 +824,7 @@ export default function HomePage({
                 searchValue={searchInput}
                 sortValue={state.sort}
                 category={state.category}
+                community={state.community}
                 active={namedFilters(state)}
                 clearHidden={!hasQueryOrFilters(state)}
                 savedCount={saved.size}
@@ -782,6 +833,7 @@ export default function HomePage({
                 onSearchChange={onSearchChange}
                 onSortChange={onSortChange}
                 onCategorySet={onCategorySet}
+                onCommunitySet={onCommunitySet}
                 onRemoveFilter={onRemoveFilter}
                 onClear={onClear}
                 onToggleSavedOnly={onToggleSavedOnly}

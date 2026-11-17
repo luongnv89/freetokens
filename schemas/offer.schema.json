@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/luongnv89/freetokens/schemas/offer.schema.json",
   "title": "freetokens offer front-matter",
-  "description": "Strict schema for offers/*.yaml front-matter. One flat key/value document per offer; the file name (without extension) is the offer slug.",
+  "description": "Strict schema for offers/*.yaml front-matter. One flat key/value document per offer; the file name (without extension) is the offer slug. Regular offers carry only the required fields; the optional community fields (#748) are valid only together with listing_type: community.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -69,6 +69,100 @@
       "type": "string",
       "enum": ["none", "required"],
       "description": "Whether claiming needs an account: none = claimable without sign-up; required = needs a (free) account."
+    },
+    "listing_type": {
+      "type": "string",
+      "enum": ["community"],
+      "description": "Omit for a regular offer (the default). community = a promo code or giveaway a person shared publicly (#748): NOT verified by freetokens, added only by Luong through a small entry PR, never created, edited or re-checked by the offer-hunter or the daily-offer-check. source_url is the post itself. Every fact is quoted from the post; anything the post does not state stays absent."
+    },
+    "community_subtype": {
+      "type": "string",
+      "enum": ["promo_code", "giveaway"],
+      "description": "Community only. promo_code = a code anyone can redeem; giveaway = codes handed out to people who reply or enter."
+    },
+    "added_by": {
+      "type": "string",
+      "enum": ["luong"],
+      "description": "Community only. Who added the entry; Luong is the only one allowed."
+    },
+    "shared_by_handle": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_]{1,30}$",
+      "description": "Community only. The poster's bare account handle (no @). The index re-nests it as community.shared_by.handle."
+    },
+    "shared_by_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Community only, optional. The poster's display name as shown on the post."
+    },
+    "shared_by_post_date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "format": "date",
+      "description": "Community only. Date of the post, YYYY-MM-DD (UTC)."
+    },
+    "promo_code": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+      "description": "promo_code subtype only, and required there. The code exactly as the post gives it. Its stated expiry goes in expiry_date (null = the post states none)."
+    },
+    "codes_available": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,5}$",
+      "description": "giveaway subtype only, optional. How many codes the post says it gives away (a whole number; the flat YAML stores it as text, the index as an integer)."
+    },
+    "entries_close": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "format": "date",
+      "description": "giveaway subtype only, optional. The day entries close, YYYY-MM-DD. expiry_date must equal it: the build drops the entry once that day has ended on the UTC build clock (end of day when the post names no time zone)."
+    },
+    "timezone_note": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Community only; required with entries_close. The post's time zone quoted, or 'no time zone given'."
     }
-  }
+  },
+  "dependentRequired": {
+    "listing_type": ["community_subtype", "added_by", "shared_by_handle", "shared_by_post_date"],
+    "community_subtype": ["listing_type"],
+    "added_by": ["listing_type"],
+    "shared_by_handle": ["listing_type"],
+    "shared_by_name": ["listing_type"],
+    "shared_by_post_date": ["listing_type"],
+    "promo_code": ["listing_type"],
+    "codes_available": ["listing_type"],
+    "entries_close": ["listing_type", "timezone_note"],
+    "timezone_note": ["listing_type"]
+  },
+  "allOf": [
+    {
+      "if": { "required": ["listing_type"] },
+      "then": {
+        "properties": {
+          "verification": { "const": "unverified" },
+          "review_status": { "const": "unverified" }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": ["community_subtype"],
+        "properties": { "community_subtype": { "const": "promo_code" } }
+      },
+      "then": {
+        "required": ["promo_code"],
+        "not": { "anyOf": [{ "required": ["codes_available"] }, { "required": ["entries_close"] }] }
+      }
+    },
+    {
+      "if": {
+        "required": ["community_subtype"],
+        "properties": { "community_subtype": { "const": "giveaway" } }
+      },
+      "then": { "not": { "required": ["promo_code"] } }
+    }
+  ]
 }

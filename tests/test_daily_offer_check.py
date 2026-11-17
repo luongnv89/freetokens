@@ -682,7 +682,7 @@ class DailyOfferCheckTests(unittest.TestCase):
 
     def report_inventory(self, slugs=('one',)):
         return dict(today='2020-02-01', offers_dir=str(self.offers.resolve()),
-                    active_count=len(slugs), skipped_expired=[],
+                    active_count=len(slugs), skipped_expired=[], skipped_community=[],
                     offers=[dict(slug=s, path=f'{s}.yaml', sha256='0' * 64,
                                  title='T', provider='P', amount='$10', expiry_date=None,
                                  source_url='https://example.com/offer', verified_date='2020-01-01',

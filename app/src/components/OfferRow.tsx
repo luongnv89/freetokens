@@ -5,6 +5,7 @@ import {
   VERIFICATION_LABELS,
   VERIFICATION_TITLES,
   humanDate,
+  isCommunity,
   relativeDate,
   type Offer,
 } from "../lib/offers";
@@ -13,6 +14,7 @@ import { ftFormatCount } from "../lib/analytics";
 import type { FilterDimension } from "../lib/urlState";
 import { Badge } from "./ui/badge";
 import { HotBadge, ReviewStatusBadge } from "./Badge";
+import { CommunityBadge, CommunityRowLine } from "./CommunityOffer";
 
 // Tag glyphs ship as ONE inline <symbol> sprite per page, referenced by
 // <use> — mirrors build.py _icon_sprite/_SYMBOL so rows keep the same
@@ -136,6 +138,10 @@ export function OfferRow({
   hot?: boolean;
 }) {
   const detailHref = `offers/${offer.slug}.html`;
+  // Community listings (#748) carry their own badge in place of the review
+  // status (freetokens never reviews them), a line naming who shared them,
+  // and "added" instead of "checked": nobody re-checks them.
+  const community = isCommunity(offer) ? offer.community : null;
   return (
     // `data-category` is mirrored onto the <li> as well as the <article>: the
     // row's left hue spine is drawn as an ::after on the list item, which is
@@ -149,8 +155,9 @@ export function OfferRow({
       data-category={offer.category}
     >
       <article
-        className="card"
+        className={community ? "card card-community" : "card"}
         id={`offer-${offer.slug}`}
+        data-listing-type={community ? "community" : undefined}
         data-category={offer.category}
         data-verification={offer.verification}
         data-signup={offer.signup}
@@ -167,7 +174,7 @@ export function OfferRow({
             pressed={pressed.category === offer.category}
             onToggle={onToggleTag}
           />
-          <ReviewStatusBadge offer={offer} />
+          {community ? <CommunityBadge /> : <ReviewStatusBadge offer={offer} />}
           {hot ? <HotBadge /> : null}
         </p>
         <h2 className="card-title">
@@ -182,6 +189,9 @@ export function OfferRow({
           </a>
         </h2>
         <p className="r-amount">{offer.amount}</p>
+        {community ? (
+          <CommunityRowLine community={community} title={offer.title} />
+        ) : null}
         <p className="row-meta row-quiet">
           <TagButton
             dimension="verification"
@@ -236,9 +246,9 @@ export function OfferRow({
           )}
           <span
             className="r-vfd"
-            title={`checked ${humanDate(offer.verified_date)}`}
+            title={`${community ? "added" : "checked"} ${humanDate(offer.verified_date)}`}
           >
-            checked{" "}
+            {community ? "added" : "checked"}{" "}
             <time dateTime={offer.verified_date}>
               {relativeDate(offer.verified_date, buildDay)}
             </time>
