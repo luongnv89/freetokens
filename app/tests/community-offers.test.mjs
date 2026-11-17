@@ -258,6 +258,8 @@ describe("llms exports label community entries", () => {
     expect(offersAt).toBeGreaterThan(-1);
     expect(communityAt).toBeGreaterThan(offersAt);
     expect(pagesAt).toBeGreaterThan(communityAt);
+    // A blank line separates the community section from the Pages heading.
+    expect(full).toMatch(/\n\n## Pages\n/);
     expect(full.slice(offersAt, communityAt)).not.toContain(
       "Devin Max giveaway",
     );

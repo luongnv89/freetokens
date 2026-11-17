@@ -305,7 +305,9 @@ const MAX_FULL_BYTES = 200 * 1024;
 const regularOffers = activeOffers.filter((o) => !isCommunity(o));
 const offerBlocks = regularOffers.map(buildOfferBlock);
 const fullCommunitySection = activeCommunity.length
-  ? `\n${communitySection()}`
+  ? // communitySection() ends with a single newline; the trailing "\n" keeps a
+    // blank line before the footer's "## Pages" heading (#749 re-review nit).
+    `\n${communitySection()}\n`
   : "";
 const fullFooter = buildFullFooter();
 const assembleFull = (emitted) =>

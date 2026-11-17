@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-17T15:43:26Z",
-  "count": 328,
-  "active_count": 272,
+  "generated_at": "2026-11-17T18:35:46Z",
+  "count": 329,
+  "active_count": 273,
   "expired_count": 56,
   "offers": [
     {
@@ -62,6 +62,33 @@
       "review_status": "under-review",
       "signup": "required",
       "status": "active"
+    },
+    {
+      "slug": "mistral-vibe-pro-lechonk-code",
+      "title": "Mistral Vibe Pro free for 3 months — code LECHONK (Europe)",
+      "provider": "Mistral AI",
+      "category": "coding",
+      "amount": "Vibe Pro free for the first three months with code LECHONK (developers in Europe)",
+      "expiry_date": null,
+      "source_url": "https://x.com/MistralAI/status/2122713540666806397",
+      "verified_date": "2026-11-17",
+      "added_date": "2026-11-17",
+      "verification": "unverified",
+      "review_status": "unverified",
+      "signup": "required",
+      "status": "active",
+      "listing_type": "community",
+      "community": {
+        "subtype": "promo_code",
+        "added_by": "luong",
+        "shared_by": {
+          "handle": "MistralAI",
+          "name": "Mistral AI",
+          "post_url": "https://x.com/MistralAI/status/2122713540666806397",
+          "post_date": "2026-11-17"
+        },
+        "promo_code": "LECHONK"
+      }
     },
     {
       "slug": "opencode-flint-40b-free",
