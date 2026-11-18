@@ -1,0 +1,21 @@
+{
+  "summary": "Google's Gemini Developer API pricing page lists Gemini 4 Hydrogen (model ID gemini-4-hydrogen). On the Free Tier, input, output (including thinking tokens) and context caching are free of charge. On the Paid Tier they cost $1.50, $7.50 and $0.075 per 1M tokens. The Free plan gives limited access to certain models with free input and output tokens. Free-tier rate limits are not published on the rate-limits page and can be viewed in Google AI Studio.",
+  "claim_steps": [
+    "Sign in to Google AI Studio and create a Gemini API key on the Free tier",
+    "Call the model ID gemini-4-hydrogen; check your rate limits in Google AI Studio"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://aistudio.google.com/docs/pricing",
+      "title": "Gemini Developer API pricing",
+      "text": "Gemini 4 Hydrogen (gemini-4-hydrogen). Standard, per 1M tokens in USD — Input price: Free Tier 'Free of charge', Paid Tier '$1.50'; Output price (including thinking tokens): Free Tier 'Free of charge', Paid Tier '$7.50'; Context caching price: Free Tier 'Free of charge', Paid Tier '$0.075'. Free plan: 'Limited access to certain models', 'Free input & output tokens'."
+    },
+    {
+      "type": "link",
+      "url": "https://aistudio.google.com/docs/rate-limits",
+      "title": "Rate limits",
+      "text": "Rate limits depend on a variety of factors (such as your usage tier) and can be viewed in Google AI Studio."
+    }
+  ]
+}

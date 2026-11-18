@@ -1,0 +1,13 @@
+# Hunted 2026-11-18 by offer-hunter; verified against https://openrouter.ai/api/v1/models/inclusionai/ling-3.2-flash:free/endpoints
+# ("inclusionAI: Ling 3.2 Flash (free) — endpoint provider_name "Ant Digital", context_length 1048576, max_completion_tokens 262144, pricing prompt "0", completion "0"")
+# Lead: https://freellm.net/changelog
+title: Ling 3.2 Flash Free (OpenRouter)
+provider: OpenRouter
+category: api_provider
+amount: Free inclusionai/ling-3.2-flash:free inference at $0 prompt and completion (1,048,576-token context, up to 262,144 completion tokens; text + image input)
+expiry_date: null
+source_url: https://openrouter.ai/api/v1/models/inclusionai/ling-3.2-flash:free/endpoints
+verified_date: 2026-11-18
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,13 @@
+# Unverified lead (offer-hunter): seen on X, Reddit, or the web; not confirmed on an official page.
+# Never an offer: listed on the Unverified page for 3 days after the newest post.
+slug: trellis-data-agentaus-1-free-tier
+provider: "Trellis Data"
+title: "Agentaus 1 free tier"
+claim: "Trellis Data just launched Agentaus 1, Australia's own AI model, today. Co-founder Michael Gately: \"We built Australia's own AI model, and today it's open to the world.\" Live now, with a free tier to start; API US$1.15 per million input tokens. [link removed]"
+amount_claimed: null
+sources: [{"url": "https://x.com/AGTPinsights/status/2122820648104046826", "type": "x", "author": "AGTP", "handle": "@AGTPinsights", "date": "2026-11-17"}]
+first_seen: 2026-11-18
+last_seen: 2026-11-18
+reason: no_amount
+reason_detail: "The official pricing page confirms a $0 AUD/month Free plan with a daily allowance of prompts and a monthly Claude and ChatGPT credit top-up, but states no number or amount for either. The homepage and pricing page were both read."
+official_urls_tried: ["https://agentaus.com.au/", "https://agentaus.com.au/eng/docs/pricing"]

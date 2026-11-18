@@ -1,0 +1,13 @@
+# Hunted 2026-11-18 by offer-hunter; verified against https://aistudio.google.com/docs/pricing
+# ("Free of charge")
+# Lead: https://freellm.net/changelog
+title: Gemini 4 Hydrogen — Free on the Gemini API Free Tier
+provider: Google Gemini
+category: api_provider
+amount: Gemini 4 Hydrogen (gemini-4-hydrogen) input, output and context caching free of charge on the Gemini API Free tier. Rate limits are shown in Google AI Studio. Paid tier: $1.50 input / $7.50 output per 1M tokens.
+expiry_date: null
+source_url: https://aistudio.google.com/docs/pricing
+verified_date: 2026-11-18
+verification: social_proof
+review_status: under-review
+signup: required

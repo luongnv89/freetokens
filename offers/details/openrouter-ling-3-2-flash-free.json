@@ -1,0 +1,21 @@
+{
+  "summary": "Ling 3.2 Flash is a hybrid reasoning model from inclusionAI that accepts text and image input. OpenRouter lists the free variant (created 2026-11-13) served by Ant Digital at $0 prompt and completion, with a 1,048,576-token context and up to 262,144 completion tokens.",
+  "claim_steps": [
+    "Create an OpenRouter account and API key",
+    "Call the model ID inclusionai/ling-3.2-flash:free through the OpenRouter API"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/inclusionai/ling-3.2-flash:free/endpoints",
+      "title": "inclusionAI: Ling 3.2 Flash (free)",
+      "text": "inclusionAI: Ling 3.2 Flash (free) — endpoint provider_name \"Ant Digital\", context_length 1048576, max_completion_tokens 262144, pricing prompt \"0\", completion \"0\""
+    },
+    {
+      "type": "link",
+      "url": "https://freellm.net/changelog",
+      "title": "New Free LLM API Providers & Models (2026 Changelog)",
+      "text": "November 14, 2026 — New: OpenRouter — inclusionAI: Ling 3.2 Flash (free). Free; released Nov 13, 2026."
+    }
+  ]
+}

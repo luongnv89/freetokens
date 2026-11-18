@@ -1,0 +1,21 @@
+{
+  "summary": "Particle-1 is a token-efficient agentic coding model from Particle AI, post-trained on DeepSeek V4.1 Flash. OpenRouter lists the free variant (created 2026-10-28) served by Particle AI at $0 prompt and completion, with a 1,048,576-token context and up to 131,072 completion tokens.",
+  "claim_steps": [
+    "Create an OpenRouter account and API key",
+    "Call the model ID particle-ai/particle-1:free through the OpenRouter API"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/particle-ai/particle-1:free/endpoints",
+      "title": "Particle AI: Particle-1 (free)",
+      "text": "Particle AI: Particle-1 (free) — \"Particle-1 is a token-efficient agentic coding model from Particle AI, post-trained on DeepSeek V4.1 Flash.\" Endpoint provider_name \"Particle AI\", context_length 1048576, max_completion_tokens 131072, pricing prompt \"0\", completion \"0\""
+    },
+    {
+      "type": "link",
+      "url": "https://freellm.net/changelog",
+      "title": "New Free LLM API Providers & Models (2026 Changelog)",
+      "text": "November 13, 2026 — New: OpenRouter — Particle AI: Particle-1 (free). Free; released Oct 28, 2026. Status: Now free."
+    }
+  ]
+}

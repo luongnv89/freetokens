@@ -2,11 +2,61 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-17T18:38:50Z — 128 of 273 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-18T02:10:13Z — 129 of 278 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Particle-1 Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free particle-ai/particle-1:free inference at $0 prompt and completion (1,048,576-token context, up to 131,072 completion tokens; agentic coding model)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-18 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/api/v1/models/particle-ai/particle-1:free/endpoints
+- Page: https://freetokens.custats.info/offers/openrouter-particle-1-free.html
+- Summary: Particle-1 is a token-efficient agentic coding model from Particle AI, post-trained on DeepSeek V4.1 Flash. OpenRouter lists the free variant (created 2026-10-28) served by Particle AI at $0 prompt and completion, with a 1,048,576-token context and up to 131,072 completion tokens.
+- Claim steps: Create an OpenRouter account and API key | Call the model ID particle-ai/particle-1:free through the OpenRouter API
+### Ling 3.2 Flash Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free inclusionai/ling-3.2-flash:free inference at $0 prompt and completion (1,048,576-token context, up to 262,144 completion tokens; text + image input)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-18 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/api/v1/models/inclusionai/ling-3.2-flash:free/endpoints
+- Page: https://freetokens.custats.info/offers/openrouter-ling-3-2-flash-free.html
+- Summary: Ling 3.2 Flash is a hybrid reasoning model from inclusionAI that accepts text and image input. OpenRouter lists the free variant (created 2026-11-13) served by Ant Digital at $0 prompt and completion, with a 1,048,576-token context and up to 262,144 completion tokens.
+- Claim steps: Create an OpenRouter account and API key | Call the model ID inclusionai/ling-3.2-flash:free through the OpenRouter API
+### Inkling 2 Small Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free thinkingmachines/inkling-2-small:free inference at $0 prompt and completion (1,048,576-token context, up to 131,072 completion tokens; text + image input)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-18 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/api/v1/models/thinkingmachines/inkling-2-small:free/endpoints
+- Page: https://freetokens.custats.info/offers/openrouter-inkling-2-small-free.html
+- Summary: Inkling 2 Small is an open-weight multimodal mixture-of-experts reasoning model from Thinking Machines Lab, with 17B active parameters out of 594B total. OpenRouter lists the free variant (created 2026-11-09) served by Thinking Machines at $0 prompt and completion, with a 1,048,576-token context and up to 131,072 completion tokens.
+- Claim steps: Create an OpenRouter account and API key | Call the model ID thinkingmachines/inkling-2-small:free through the OpenRouter API
+### ERNIE-5.5-Flash-Preview Free (OpenRouter)
+- Provider: OpenRouter
+- Category: api_provider
+- Amount: Free baidu/ernie-5.5-flash-preview:free inference at $0 prompt and completion (1,024,000-token context, up to 921,600 completion tokens; text input)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-18 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://openrouter.ai/api/v1/models/baidu/ernie-5.5-flash-preview:free/endpoints
+- Page: https://freetokens.custats.info/offers/openrouter-ernie-5-5-flash-preview-free.html
+- Summary: ERNIE 5.5 Flash Preview is the latest foundation model in the ERNIE family, with improvements in coding, agentic capabilities, knowledge work, and deep research. OpenRouter lists the free variant (created 2026-11-10) served by Baidu at $0 prompt and completion, with a 1,024,000-token context and up to 921,600 completion tokens; text input only.
+- Claim steps: Create an OpenRouter account and API key | Call the model ID baidu/ernie-5.5-flash-preview:free through the OpenRouter API
+### Gemini 4 Hydrogen — Free on the Gemini API Free Tier
+- Provider: Google Gemini
+- Category: api_provider
+- Amount: Gemini 4 Hydrogen (gemini-4-hydrogen) input, output and context caching free of charge on the Gemini API Free tier. Rate limits are shown in Google AI Studio. Paid tier: $1.50 input / $7.50 output per 1M tokens.
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-18 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://aistudio.google.com/docs/pricing
+- Page: https://freetokens.custats.info/offers/google-gemini-4-hydrogen-free-tier.html
+- Summary: Google's Gemini Developer API pricing page lists Gemini 4 Hydrogen (model ID gemini-4-hydrogen). On the Free Tier, input, output (including thinking tokens) and context caching are free of charge. On the Paid Tier they cost $1.50, $7.50 and $0.075 per 1M tokens. The Free plan gives limited access to certain models with free input and output tokens. Free-tier rate limits are not published on the rate-limits page and can be viewed in Google AI Studio.
+- Claim steps: Sign in to Google AI Studio and create a Gemini API key on the Free tier | Call the model ID gemini-4-hydrogen; check your rate limits in Google AI Studio
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1223,46 +1273,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
 - Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
 - Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
-### LiveKit Startup Program
-- Provider: LiveKit
-- Category: startup_program
-- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://livekit.com/startups
-- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
-- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll. Applicants must be incorporated or actively incorporating and building for real end-users. The program targets net-new startup projects: free-plan evaluators/builders can apply, while projects running for a while or already paying/contractually committed may be declined and reviewed case by case.
-- Claim steps: Confirm the startup is incorporated or actively incorporating, is building for real end-users, and meets the net-new project rules; existing paid/committed users should explain their circumstances in the application. | Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
-### Liner Startup Grant — up to $1,000 API Credits
-- Provider: Liner
-- Category: startup_program
-- Amount: Up to $1,000 in Liner Search/Search Agent API credits; no equity
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-17 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://build.liner.com/blog/liner-startup-grant-program
-- Page: https://freetokens.custats.info/offers/liner-startup-grant.html
-- Summary: The Liner Startup Grant Program advertises up to $1,000 in credits with no equity taken and nothing to repay. Its blog describes broader Liner API coverage including Search API and Search Agent API, but the current linked application calls the grant Search Agent API credits; confirm the approved product scope before budgeting. The form requires company email, company name, company website and product interest. Liner reviews applications by email, with a confirmation message saying next steps include a link to book a 20-minute onboarding call. No grant-spend expiry is stated publicly.
-- Claim steps: Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes). | Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on. | Watch email for the review outcome and next steps, including a link to book a 20-minute onboarding call. Confirm which API products the approved credits cover; the form names Search Agent API while the blog describes broader API coverage.
-### K-EXAONE 2.5 API — Free on EXAONE API Platform
-- Provider: LG AI Research
-- Category: api_provider
-- Amount: K-EXAONE 2.5 (750B) API currently free of charge on the EXAONE API Platform; API key required; non-commercial use only per platform terms; daily call limits apply (higher if you consent to usage records for training)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-17 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.exaone.ai/ko/docs/changelog
-- Page: https://freetokens.custats.info/offers/lg-ai-research-k-exaone-2-5-api-free.html
-- Summary: The EXAONE API Platform changelog entry dated November 9, 2026 lists K-EXAONE 2.5 (750B), LG AI Research's proprietary foundation model, and states the service is currently provided free of charge. API keys are issued from the platform. The rate-limits page applies per-second, per-minute and per-day call windows, with a higher daily call limit for users who consent to their usage records being used for model training and service improvement; the API can be used without consenting. The platform terms grant a non-exclusive, non-transferable, revocable non-commercial use right and bar for-profit use of the model or its outputs; if the service becomes paid, fees will be posted on the site.
-- Claim steps: Open the EXAONE API Platform at docs.exaone.ai | Select 'API Key 발급하기' (Issue API key) and request a key | Optionally consent to usage-record use for training to get a higher daily call limit
-### Lemonfox 1-Month Free Trial
-- Provider: Lemonfox.ai
-- Category: voice
-- Amount: 1 month free trial — 10M credits (30 hours speech-to-text or 2M TTS chars)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-17 — review_status=verified · verification=social_proof · signup=required
-- Source: https://www.lemonfox.ai/
-- Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
-- Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
-- Claim steps: Go to lemonfox.ai and click Get Started / Start Your Free Trial. | Sign up for an account. | Trial covers the $5/month credit bundle for 1 month.
 
 ## Community offers (not verified by freetokens)
 
