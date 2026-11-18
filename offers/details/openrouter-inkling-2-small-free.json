@@ -1,0 +1,15 @@
+{
+  "summary": "Inkling 2 Small is an open-weight multimodal mixture-of-experts reasoning model from Thinking Machines Lab, with 17B active parameters out of 594B total. OpenRouter lists the free variant (created 2026-11-09) served by Thinking Machines at $0 prompt and completion, with a 1,048,576-token context and up to 131,072 completion tokens.",
+  "claim_steps": [
+    "Create an OpenRouter account and API key",
+    "Call the model ID thinkingmachines/inkling-2-small:free through the OpenRouter API"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-2-small:free/endpoints",
+      "title": "Thinking Machines: Inkling 2 Small (free)",
+      "text": "Thinking Machines | thinkingmachines/inkling-2-small-20261107:free — \"context_length\":1048576, \"pricing\":{\"prompt\":\"0\",\"completion\":\"0\"}, \"max_completion_tokens\":131072"
+    }
+  ]
+}

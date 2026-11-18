@@ -1,0 +1,21 @@
+{
+  "summary": "ERNIE 5.5 Flash Preview is the latest foundation model in the ERNIE family, with improvements in coding, agentic capabilities, knowledge work, and deep research. OpenRouter lists the free variant (created 2026-11-10) served by Baidu at $0 prompt and completion, with a 1,024,000-token context and up to 921,600 completion tokens; text input only.",
+  "claim_steps": [
+    "Create an OpenRouter account and API key",
+    "Call the model ID baidu/ernie-5.5-flash-preview:free through the OpenRouter API"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models/baidu/ernie-5.5-flash-preview:free/endpoints",
+      "title": "Baidu: ERNIE-5.5-Flash-Preview (free)",
+      "text": "Baidu | baidu/ernie-5.5-flash-preview-20261110:free — \"context_length\":1024000, \"pricing\":{\"prompt\":\"0\",\"completion\":\"0\"}, \"max_completion_tokens\":921600"
+    },
+    {
+      "type": "link",
+      "url": "https://freellm.net/changelog",
+      "title": "New Free LLM API Providers & Models (2026 Changelog)",
+      "text": "November 12, 2026 — New: OpenRouter — Baidu: ERNIE-5.5-Flash-Preview (free). Free; released Nov 10, 2026. Status: Now free."
+    }
+  ]
+}

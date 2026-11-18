@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-17T18:35:46Z",
-  "count": 329,
-  "active_count": 273,
+  "generated_at": "2026-11-18T02:10:13Z",
+  "count": 334,
+  "active_count": 278,
   "expired_count": 56,
   "offers": [
     {
@@ -4964,6 +4964,81 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "google-gemini-4-hydrogen-free-tier",
+      "title": "Gemini 4 Hydrogen — Free on the Gemini API Free Tier",
+      "provider": "Google Gemini",
+      "category": "api_provider",
+      "amount": "Gemini 4 Hydrogen (gemini-4-hydrogen) input, output and context caching free of charge on the Gemini API Free tier. Rate limits are shown in Google AI Studio. Paid tier: $1.50 input / $7.50 output per 1M tokens.",
+      "expiry_date": null,
+      "source_url": "https://aistudio.google.com/docs/pricing",
+      "verified_date": "2026-11-18",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-ernie-5-5-flash-preview-free",
+      "title": "ERNIE-5.5-Flash-Preview Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free baidu/ernie-5.5-flash-preview:free inference at $0 prompt and completion (1,024,000-token context, up to 921,600 completion tokens; text input)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/api/v1/models/baidu/ernie-5.5-flash-preview:free/endpoints",
+      "verified_date": "2026-11-18",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-inkling-2-small-free",
+      "title": "Inkling 2 Small Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free thinkingmachines/inkling-2-small:free inference at $0 prompt and completion (1,048,576-token context, up to 131,072 completion tokens; text + image input)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-2-small:free/endpoints",
+      "verified_date": "2026-11-18",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-ling-3-2-flash-free",
+      "title": "Ling 3.2 Flash Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free inclusionai/ling-3.2-flash:free inference at $0 prompt and completion (1,048,576-token context, up to 262,144 completion tokens; text + image input)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/api/v1/models/inclusionai/ling-3.2-flash:free/endpoints",
+      "verified_date": "2026-11-18",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "openrouter-particle-1-free",
+      "title": "Particle-1 Free (OpenRouter)",
+      "provider": "OpenRouter",
+      "category": "api_provider",
+      "amount": "Free particle-ai/particle-1:free inference at $0 prompt and completion (1,048,576-token context, up to 131,072 completion tokens; agentic coding model)",
+      "expiry_date": null,
+      "source_url": "https://openrouter.ai/api/v1/models/particle-ai/particle-1:free/endpoints",
+      "verified_date": "2026-11-18",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [
