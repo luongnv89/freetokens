@@ -1,16 +1,16 @@
 {
-  "summary": "Qoder International gives every individual account, including the $0 Free plan, 100 Credits per day that you claim manually in the Qoder desktop app. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is \"to be announced\". The separate Qwen3.8-Flash daily free usage allowance (Credit rate cut from 0.1x to 0.0x) has ended: free access ended at 00:00 on November 7, 2026 (UTC+8; midnight at the end of November 6). A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.",
+  "summary": "Qoder International gives 100 Credits per day, claimed manually in the Qoder desktop app, to users in a Pro trial and to individual paid subscribers (Lite, Pro, Pro+, Ultra). Starting November 19, 2026 at 10:00 (UTC+8), Free plan users can no longer claim the reward; Credits claimed before the change stay available for their original 30-day validity. Eligible new users get a free 14-day Pro Trial automatically after their first sign-in (once per user, through one account). When the trial or paid plan lapses, you are no longer eligible starting with the next claim window. Each claim is valid for 30 days, so unused Credits carry over until they expire; missed days cannot be claimed later. Teams and Enterprise subscribers are not eligible, and the end date is \"to be announced\". The separate Qwen3.8-Flash daily free usage allowance (Credit rate cut from 0.1x to 0.0x) has ended: free access ended at 00:00 on November 7, 2026 (UTC+8; midnight at the end of November 6). A separate DeepSeek-V4.1-Flash-1017 (DeepSeek-Flash) 0x promotion ran from October 20 and ended on November 1, 00:00 (UTC+8). Signup was not tested, so whether a card is required is unconfirmed, and data-use terms for free-model usage were not reviewed.",
   "claim_steps": [
-    "Download the Qoder desktop app and create or sign in to an individual Qoder International account.",
-    "During the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later.",
+    "Download the Qoder desktop app and create or sign in to an individual Qoder International account. Eligible new users get a free 14-day Pro Trial automatically after their first sign-in; otherwise subscribe to an individual Lite, Pro, Pro+ or Ultra plan. Free plan users cannot claim.",
+    "While the trial or paid plan is active, in the daily window (opens 10:00 Singapore time, UTC+8), open the Usage panel, click the gift icon in the lower-left corner, and claim 100 Credits. Missed days cannot be claimed later; after the trial or plan lapses, claiming stops from the next window.",
     "Use the Credits with the same account in the Qoder IDE, JetBrains plugin, CLI, Cloud Agents, mobile or web app. Each claim expires 30 days after it is claimed."
   ],
   "social_proof": [
     {
       "type": "link",
       "url": "https://docs.qoder.com/events/100credits",
-      "title": "Claim 100 Credits Every Day",
-      "text": "can claim 100 Credits every day in the Qoder desktop app. ... Each reward is valid for 30 days from the date you claim it."
+      "title": "Claim 100 Credits Every Day - Qoder",
+      "text": "Starting November 19, 2026 at 10:00, the promotion is open to users in a Pro trial and individual paid subscribers. Free users can no longer claim the reward. ... Each account can manually claim 100 general-purpose Credits once per window. ... Each reward is valid for 30 days from the date you claim it ... End time: To be announced."
     },
     {
       "type": "link",
@@ -37,6 +37,12 @@
       "author": "Qoder",
       "handle": "@qoder_ai_ide",
       "text": "The free window just got longer.🚀\n\nDeepSeek-V4.1-Flash-1017 stays at 0x credits in Qoder until Nov 1, 00:00 (UTC+8).\n\nKeep cooking.🔥"
+    },
+    {
+      "type": "link",
+      "url": "https://docs.qoder.com/account/pricing",
+      "title": "Qoder Pricing",
+      "text": "Eligible new users can receive a free 14-day Pro Trial with 300 Credits. ... Your trial is granted automatically after your first sign-in. ... Each user may receive the trial only once, through one account."
     }
   ]
 }

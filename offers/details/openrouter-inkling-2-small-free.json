@@ -9,7 +9,13 @@
       "type": "link",
       "url": "https://openrouter.ai/api/v1/models/thinkingmachines/inkling-2-small:free/endpoints",
       "title": "Thinking Machines: Inkling 2 Small (free)",
-      "text": "Thinking Machines | thinkingmachines/inkling-2-small-20261107:free — \"context_length\":1048576, \"pricing\":{\"prompt\":\"0\",\"completion\":\"0\"}, \"max_completion_tokens\":131072"
+      "text": "\"context_length\":1048576,\"pricing\":{\"prompt\":\"0\",\"completion\":\"0\" ... \"max_completion_tokens\":131072"
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "Thinking Machines: Inkling 2 Small (free)",
+      "text": "\"id\":\"thinkingmachines/inkling-2-small:free\" ... \"pricing\":{\"prompt\":\"0\",\"completion\":\"0\" ... \"context_length\":1048576 ... \"expiration_date\":\"2026-11-19\""
     }
   ]
 }
