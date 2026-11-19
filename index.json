@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-19T13:32:05Z",
-  "count": 337,
-  "active_count": 280,
+  "generated_at": "2026-11-19T22:19:54Z",
+  "count": 338,
+  "active_count": 281,
   "expired_count": 57,
   "offers": [
     {
@@ -57,6 +57,21 @@
         },
         "codes_available": 10000
       }
+    },
+    {
+      "slug": "exa-startup-program",
+      "title": "Exa for Startups — Up to $15,000 in API Credits",
+      "provider": "Exa",
+      "category": "startup_program",
+      "amount": "Up to $15,000 in Exa API credits for eligible startups (pre-seed to Series A, new to Exa paid plans); $2.5k starting credits on approval plus a 1:1 reload match up to $5,000, or $5k starting plus a match up to $10k with a partner code",
+      "expiry_date": null,
+      "source_url": "https://exa.ai/startups",
+      "verified_date": "2026-11-19",
+      "added_date": "2026-11-19",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     },
     {
       "slug": "gmi-cloud-scale-startup-program",
