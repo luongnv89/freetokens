@@ -1,9 +1,36 @@
 {
-  "generated_at": "2026-11-19T08:04:12Z",
-  "count": 336,
-  "active_count": 279,
+  "generated_at": "2026-11-19T13:28:53Z",
+  "count": 337,
+  "active_count": 280,
   "expired_count": 57,
   "offers": [
+    {
+      "slug": "context-dev-10k-credits-birthday-code",
+      "title": "Context.dev 10,000 free API credits — code YAHIAISINFINLANDONHISBIRTHDAY10K",
+      "provider": "Context.dev",
+      "category": "api_provider",
+      "amount": "10,000 free Context.dev API credits with code YAHIAISINFINLANDONHISBIRTHDAY10K (\"10,000 web searches\", \"10,000 web scrapes\", \"5000 company searches\", \"1000 people searches\", \"so much more\")",
+      "expiry_date": null,
+      "source_url": "https://x.com/mynameisyahia/status/2123294435694043603",
+      "verified_date": "2026-11-19",
+      "added_date": "2026-11-19",
+      "verification": "unverified",
+      "review_status": "unverified",
+      "signup": "required",
+      "status": "active",
+      "listing_type": "community",
+      "community": {
+        "subtype": "promo_code",
+        "added_by": "luong",
+        "shared_by": {
+          "handle": "mynameisyahia",
+          "name": "Yahia Bakour",
+          "post_url": "https://x.com/mynameisyahia/status/2123294435694043603",
+          "post_date": "2026-11-19"
+        },
+        "promo_code": "YAHIAISINFINLANDONHISBIRTHDAY10K"
+      }
+    },
     {
       "slug": "devin-bots-poke-giveaway",
       "title": "Devin Bots giveaway — pitch Poke for up to $10,000 in credits",
