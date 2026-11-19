@@ -30,6 +30,12 @@
       "url": "https://assets.ngc.nvidia.com/products/api-catalog/legal/NVIDIA%20API%20Trial%20Terms%20of%20Service.pdf",
       "title": "NVIDIA API Trial Terms — no production use",
       "text": "Sections 1.2 and 1.4 restrict trial API access and generated content to internal testing/evaluation, not production; production requires a separate subscription and its applicable terms."
+    },
+    {
+      "type": "link",
+      "url": "https://openrouter.ai/api/v1/models",
+      "title": "NVIDIA: Nemotron 3.5 Super VL (free)",
+      "text": "\"id\":\"nvidia/nemotron-3.5-super-vl:free\" ... \"pricing\":{\"prompt\":\"0\",\"completion\":\"0\" ... \"context_length\":1000000 ... \"expiration_date\":null"
     }
   ]
 }
