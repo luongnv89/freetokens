@@ -1,0 +1,19 @@
+# Verified 2026-11-19 against https://exa.ai/startups
+# ("For eligible startups: up to $15,000 in Exa credits, with starting credits on approval and more unlocked 1:1 as you grow.")
+# Startup plan (page default view): "$2.5k in credits on approval"; 1:1 match: "we match every dollar you reload, up to $5,000".
+# "With a partner code" plan (page toggle; values from the page's own plan data: upfront 5000, matchCap 10000):
+# "$5k in credits on approval" and 1:1 match up to "$10k". "Amounts vary by partner program."
+# Announced by @ExaAILabs 2026-11-19: "Exa now offers $15,000 in free credits to startups!"
+# (https://x.com/exaailabs/status/2123486577607479657, confirmed via publish.x.com oembed).
+# Separate from offers/exa-free-tier.yaml: the page says credits "can't be combined with other offers,
+# including the standard credit on our pricing page". No program end date published.
+title: Exa for Startups — Up to $15,000 in API Credits
+provider: Exa
+category: startup_program
+amount: Up to $15,000 in Exa API credits for eligible startups (pre-seed to Series A, new to Exa paid plans); $2.5k starting credits on approval plus a 1:1 reload match up to $5,000, or $5k starting plus a match up to $10k with a partner code
+expiry_date: null
+source_url: https://exa.ai/startups
+verified_date: 2026-11-19
+verification: social_proof
+review_status: under-review
+signup: required

@@ -1,0 +1,24 @@
+{
+  "summary": "Exa's startup program gives eligible startups up to $15,000 in Exa credits. It is open to startups from pre-seed through Series A that are building with AI and are new to Exa's paid plans; Exa decides eligibility, one per company. On the Startup plan you get $2.5k in credits on approval, plus a 1:1 match on every dollar you reload, up to $5,000. With a partner code (for example a16z speedrun, South Park Commons, On Deck) the page shows $5k on approval and a match up to $10k; amounts vary by partner program, and YC companies redeem via Bookface. Credits cover Search, Contents, Agent, Websets, Monitors and Snapshot at list price. Starting credits expire 6 months after they're issued; matched credits must be unlocked within 12 months of enrollment and expire 12 months after enrollment. Credits have no cash value and can't be combined with other offers, including the standard free credit on Exa's pricing page. Students can apply for $100 in credits instead, and educators and researchers for up to $1,000.",
+  "claim_steps": [
+    "Check eligibility: pre-seed to Series A, building with AI, and new to Exa's paid plans. One plan per company.",
+    "Create an Exa account and copy your Exa team ID from the dashboard.",
+    "Fill in the two-minute form at exa.ai/startups#apply: how you're backed, company details, what you're building, team ID and any partner code. YC companies redeem on Bookface instead.",
+    "Most applications are checked automatically within minutes; approved teams get their starting credits right away.",
+    "Reload your Exa balance to unlock the 1:1 match, within 12 months of enrollment."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://exa.ai/startups",
+      "title": "Exa for Startups",
+      "text": "For eligible startups: up to $15,000 in Exa credits, with starting credits on approval and more unlocked 1:1 as you grow."
+    },
+    {
+      "type": "link",
+      "url": "https://x.com/exaailabs/status/2123486577607479657",
+      "title": "Exa (@ExaAILabs) on X",
+      "text": "Exa now offers $15,000 in free credits to startups! Join our Startups program here: https://exa.ai/startups"
+    }
+  ]
+}
