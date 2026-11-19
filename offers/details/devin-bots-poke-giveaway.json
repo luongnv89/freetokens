@@ -1,0 +1,18 @@
+{
+  "summary": "A community giveaway shared on X, not verified by freetokens. The post by @walden_yan (display name Walden), dated 2026-11-18, says: “Fun experiment for the week! Text Poke, pitch your idea and earn a Devin Bot to help you build it.” On the amount, the post says: “10,000 accounts available, each up to $10,000”. The post gives no closing date beyond “for the week”.",
+  "claim_steps": [
+    "Open the post by @walden_yan on X: https://x.com/walden_yan/status/2123163580778635579",
+    "The post links to https://poke.com/bots and says: “Text Poke, pitch your idea and earn a Devin Bot to help you build it.”",
+    "On the amount, the post says: “10,000 accounts available, each up to $10,000”.",
+    "On timing, the post says only: “Fun experiment for the week!” It gives no end date."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/walden_yan/status/2123163580778635579",
+      "author": "Walden",
+      "handle": "@walden_yan",
+      "text": "Fun experiment for the week! Text Poke, pitch your idea and earn a Devin Bot to help you build it. 10,000 accounts available, each up to $10,000 (sadly Poke doesn’t think I need the credits) https://poke.com/bots"
+    }
+  ]
+}

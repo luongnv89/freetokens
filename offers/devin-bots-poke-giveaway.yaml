@@ -1,0 +1,38 @@
+# Community offer (#748): a giveaway a person shared on X. NOT verified by
+# freetokens: added by Luong from the post link, never re-checked by the
+# daily-offer-check, never touched by the offer-hunter. Every term below is
+# quoted from the post text by @walden_yan:
+# https://x.com/walden_yan/status/2123163580778635579
+#   "Fun experiment for the week!" / "Text Poke, pitch your idea and earn a
+#    Devin Bot to help you build it." / "10,000 accounts available, each up
+#    to $10,000" / "https://poke.com/bots"
+# entries_close is left empty: the post says only "for the week" and gives
+# no date. (poke.com/bots showed a "Promotion ends in 4d" countdown on
+# 2026-11-19; that is not in the post, so it is not used.)
+# Not in the post text: the display name "Walden" (shared_by_name) and the
+# post time 2026-11-18 21:16:58 UTC (shared_by_post_date) come from the post's
+# author/timestamp metadata — author.name and created_at as returned by
+# https://api.fxtwitter.com/walden_yan/status/2123163580778635579
+# Tip from freetokens (Luong, first-hand, 2026-11-19; kept out of the detail
+# file because community entries may state only what the post says): you
+# have to ASK Poke for the credit. Poke negotiates the amount; Luong's claim
+# ended at a "Final Offer" of $50, then Poke sent a devin.ai link to sign in
+# within 48 hours, and a Poke template sits at the bottom of the template
+# list under "New Devin Bot".
+title: Devin Bots giveaway — pitch Poke for up to $10,000 in credits
+provider: Cognition (Devin)
+category: coding
+amount: up to $10,000 per account (10,000 accounts)
+expiry_date: null
+source_url: https://x.com/walden_yan/status/2123163580778635579
+verified_date: 2026-11-19
+verification: unverified
+review_status: unverified
+signup: required
+listing_type: community
+community_subtype: giveaway
+added_by: luong
+shared_by_handle: walden_yan
+shared_by_name: Walden
+shared_by_post_date: 2026-11-18
+codes_available: 10000
