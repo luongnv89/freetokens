@@ -1,0 +1,22 @@
+{
+  "summary": "SCALE at GMI Cloud is a 6-week equity-free startup program for AI-native teams, focused on infrastructure, inference, and real-world scale. The official page advertises up to $40K+ in structured credits: $500 MaaS credits on acceptance, 1:1 credit matching up to $4,500, 20% off dedicated endpoints, and partner credits. Cohort 03 (Spring 2027, Mar-May) applications are open; the deadline is TBA, and Cohort 3 credit terms will be confirmed before kickoff. No equity, no fees.",
+  "claim_steps": [
+    "Open the SCALE at GMI Cloud page",
+    "Click 'Apply to Cohort 3' and submit the application",
+    "If accepted, receive $500 MaaS credits on acceptance"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.gmicloud.ai/en/company/scale",
+      "title": "SCALE at GMI Cloud | Equity-Free AI Startup Program",
+      "text": "6-week Equity-Free Startup Program for AI-native teams — focused on infrastructure, inference, and real-world scale. Up to $40K+ in Structured Credits. $500 MaaS Credits on acceptance to get your first integration live. 1:1 credit matching up to $4,500 to accelerate real usage. STATUS Cohort 03 applications open. Cohort 3 credit terms will be confirmed before kickoff. No equity, no fees. You keep full ownership of your company."
+    },
+    {
+      "type": "link",
+      "url": "https://www.gmicloud.ai/en/blog/equity-free-accelerators-for-ai-startups-how-founders-can-scale-without-giving-up-ownership",
+      "title": "Equity-Free Accelerators for AI Startups: How Founders Can Scale Without Giving Up Ownership",
+      "text": "A November 2026 roundup of accelerator and funding options also lists ... GMI Cloud SCALE (GPU credits, no equity)."
+    }
+  ]
+}
