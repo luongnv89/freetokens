@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-19T08:04:12Z — 128 of 279 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-19T13:32:05Z — 128 of 280 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1243,22 +1243,13 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
 - Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
 - Claim steps: Go to lemonfox.ai and click Get Started / Start Your Free Trial. | Sign up for an account. | Trial covers the $5/month credit bundle for 1 month.
-### Lambda Research Grant
-- Provider: Lambda
-- Category: api_provider
-- Amount: Up to $5,000 Lambda Cloud GPU (on-demand Instance) credits; research-and-mentorship framing on the grant hub
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-19 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://lambda.ai/research
-- Page: https://freetokens.custats.info/offers/lambda-research-grant.html
-- Summary: Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement. The linked application requires contact name/email, research problem, relevance/novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. Applicants must answer whether they are willing to co-write a Lambda blog; a required yes/no question is not evidence that yes is mandatory. Company, related publications and profile links are optional. No ORCID or institutional affiliation requirement was found in the current form.
-- Claim steps: Review the current grant CTA at https://lambda.ai/research and open its linked Research Grant application. | Prepare required first/last name, email, research problem, relevance and novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. | Answer the required yes/no question about willingness to co-write a Lambda blog. Company, related publications, GitHub/Scholar/social profiles and partnerships are optional; do not invent an ORCID or affiliation prerequisite. | Submit only your own accurate research application. If awarded, use the up-to-$5,000 credits on Lambda’s on-demand GPU Instances; exact award and expiry are not guaranteed by the public form.
 
 ## Community offers (not verified by freetokens)
 
 Promo codes and giveaways a person shared in a public post. freetokens does not verify them: every fact is quoted from the post, and each entry disappears after its stated end date.
 
 - [Devin Bots giveaway — pitch Poke for up to $10,000 in credits](https://freetokens.custats.info/offers/devin-bots-poke-giveaway.html): Cognition (Devin) — up to $10,000 per account (10,000 accounts) · community giveaway — not verified by freetokens · shared by @walden_yan (Walden) on 2026-11-18: https://x.com/walden_yan/status/2123163580778635579 · 10000 codes · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
+- [Context.dev 10,000 free API credits — code YAHIAISINFINLANDONHISBIRTHDAY10K](https://freetokens.custats.info/offers/context-dev-10k-credits-birthday-code.html): Context.dev — 10,000 free Context.dev API credits with code YAHIAISINFINLANDONHISBIRTHDAY10K (“10,000 web searches”, “10,000 web scrapes”, “5000 company searches”, “1000 people searches”, “so much more”) · community promo_code — not verified by freetokens · shared by @mynameisyahia (Yahia Bakour) on 2026-11-19: https://x.com/mynameisyahia/status/2123294435694043603 · code: YAHIAISINFINLANDONHISBIRTHDAY10K · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
 - [Mistral Vibe Pro free for 3 months — code LECHONK (Europe)](https://freetokens.custats.info/offers/mistral-vibe-pro-lechonk-code.html): Mistral AI — Vibe Pro free for the first three months with code LECHONK (developers in Europe) · community promo_code — not verified by freetokens · shared by @MistralAI (Mistral AI) on 2026-11-17: https://x.com/MistralAI/status/2122713540666806397 · code: LECHONK · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
 - [Devin Max giveaway — 10 codes for one month each](https://freetokens.custats.info/offers/devin-max-one-month-code-giveaway.html): Cognition (Devin) — one month of Devin Max per code ($200 value each) · community giveaway — not verified by freetokens · shared by @ben_ai_eng (Ben Newell) on 2026-11-17: https://x.com/ben_ai_eng/status/2122616807404052781 · 10 codes · entries close 2026-11-20 · time zone: no time zone given · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
 

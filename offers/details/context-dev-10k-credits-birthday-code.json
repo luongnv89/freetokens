@@ -1,0 +1,24 @@
+{
+  "summary": "A promo code shared on X by Yahia Bakour (@mynameisyahia), not verified by freetokens. The post, dated 2026-11-19, says: “It's my birthday, so everyone's getting 10,000 free https://context.dev API credits 🎂” and lists what they give: “10,000 web searches”, “10,000 web scrapes”, “5000 company searches”, “1000 people searches”, “so much more”. His reply gives the code YAHIAISINFINLANDONHISBIRTHDAY10K. The posts give no end date.",
+  "claim_steps": [
+    "The reply says: “signup at http://context.dev/signup”",
+    "The reply says: “redeem at http://context.dev/dashboard/redeem-credits”",
+    "The reply says: “use code YAHIAISINFINLANDONHISBIRTHDAY10K”. No end date is given."
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/mynameisyahia/status/2123294435694043603",
+      "author": "Yahia Bakour",
+      "handle": "@mynameisyahia",
+      "text": "It's my birthday, so everyone's getting 10,000 free https://context.dev API credits 🎂 This gives you > 10,000 web searches > 10,000 web scrapes > 5000 company searches > 1000 people searches > so much more Go build something cool :)"
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/mynameisyahia/status/2123294616661250421",
+      "author": "Yahia Bakour",
+      "handle": "@mynameisyahia",
+      "text": "Steps to redeem: > signup at http://context.dev/signup > redeem at http://context.dev/dashboard/redeem-credits > use code YAHIAISINFINLANDONHISBIRTHDAY10K > build a unicorn?"
+    }
+  ]
+}
