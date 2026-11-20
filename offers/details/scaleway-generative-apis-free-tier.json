@@ -18,6 +18,12 @@
       "url": "https://www.scaleway.com/en/generative-apis-signup/",
       "title": "Generative APIs | Scaleway",
       "text": "Every new customer gets 1,000,000 free tokens—start paying only from the 1,000,001st token. Set up your credit card and pass the KYC process to benefit from the official rate limits."
+    },
+    {
+      "type": "link",
+      "url": "https://www.scaleway.com/en/docs/generative-apis/faq/",
+      "title": "Generative APIs FAQ | Scaleway Documentation",
+      "text": "There is a Free Tier available for Serverless . The Free Tier allows you to process, without incurring any costs, up to: 1,000,000 tokens for models billed by tokens 60 minutes of audio transcription for models billed by audio minutes"
     }
   ]
 }

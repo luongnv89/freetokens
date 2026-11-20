@@ -59,6 +59,12 @@
       "url": "https://www.anthropic.com/legal/team-plan-for-scientists-terms",
       "title": "Scientists promotional terms — enrollment payment method and billing",
       "text": "To redeem the Promotion you must have an Anthropic account, be located in a region where the Plan is available, and provide a valid payment method."
+    },
+    {
+      "type": "link",
+      "url": "https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-ultra-and-team-plans",
+      "title": "Monthly API credits for Max, Ultra, and Team plans | Claude Help Center",
+      "text": "Available on Max, Ultra, and Team plans, including discounted Team plans. ... Discounted Team plans (Nonprofit, Scientists)"
     }
   ]
 }
