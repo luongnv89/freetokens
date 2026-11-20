@@ -1,0 +1,22 @@
+{
+  "summary": "Ona for Open Source gives maintainers and core contributors of active, well-established open-source projects up to $200 per month in Ona credits. The amount granted depends on the degree of the applicant's open-source contributions. Applicants submit a form with their GitHub profile and the repositories they maintain or contribute to; most applications are processed within a few days. No end date is stated.",
+  "claim_steps": [
+    "Open the Ona for Open Source page and start the application",
+    "Provide your GitHub profile and the repositories you maintain or contribute to",
+    "Wait for review (most applications are processed within a few days)"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://ona.com/open-source",
+      "title": "Ona for Open Source | Free Credits for Maintainers",
+      "text": "Up to $200 in monthly free credits for maintainers and contributors. You are a maintainer or core contributor of at least one active, well-established open-source project. Most applications are processed within a few days."
+    },
+    {
+      "type": "link",
+      "url": "https://ona.com/stories/ona-for-open-source",
+      "title": "Introducing Ona for Open Source",
+      "text": "Ona for Open Source \"gives open-source maintainers and contributors up to $200/month in free AI credits.\" \"If you maintain or contribute to an open-source project, you can apply here.\" Apply link points to ona.com/open-source. Duration not stated."
+    }
+  ]
+}

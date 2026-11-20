@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-19T22:19:54Z — 128 of 281 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-20T02:06:27Z — 128 of 280 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Ona for Open Source — Up to $200/Month in Credits
+- Provider: Ona
+- Category: oss_program
+- Amount: Up to $200/month in free Ona credits for maintainers and core contributors of at least one active, well-established open-source project; amount depends on the degree of open-source contributions; application required
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-20 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://ona.com/open-source
+- Page: https://freetokens.custats.info/offers/ona-for-open-source.html
+- Summary: Ona for Open Source gives maintainers and core contributors of active, well-established open-source projects up to $200 per month in Ona credits. The amount granted depends on the degree of the applicant's open-source contributions. Applicants submit a form with their GitHub profile and the repositories they maintain or contribute to; most applications are processed within a few days. No end date is stated.
+- Claim steps: Open the Ona for Open Source page and start the application | Provide your GitHub profile and the repositories you maintain or contribute to | Wait for review (most applications are processed within a few days)
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -715,16 +725,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/openrouter-ling-3-2-flash-free.html
 - Summary: Ling 3.2 Flash is a hybrid reasoning model from inclusionAI that accepts text and image input. OpenRouter lists the free variant (created 2026-11-13) served by Ant Digital at $0 prompt and completion, with a 1,048,576-token context and up to 262,144 completion tokens.
 - Claim steps: Create an OpenRouter account and API key | Call the model ID inclusionai/ling-3.2-flash:free through the OpenRouter API
-### Inkling 2 Small Free (OpenRouter)
-- Provider: OpenRouter
-- Category: api_provider
-- Amount: Free thinkingmachines/inkling-2-small:free inference at $0 prompt and completion (1,048,576-token context, up to 131,072 completion tokens; text + image input)
-- Status: active — enrollment deadline: 2026-11-19
-- Last checked: 2026-11-19 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://openrouter.ai/api/v1/models/thinkingmachines/inkling-2-small:free/endpoints
-- Page: https://freetokens.custats.info/offers/openrouter-inkling-2-small-free.html
-- Summary: Inkling 2 Small is an open-weight multimodal mixture-of-experts reasoning model from Thinking Machines Lab, with 17B active parameters out of 594B total. OpenRouter lists the free variant (created 2026-11-09) served by Thinking Machines at $0 prompt and completion, with a 1,048,576-token context and up to 131,072 completion tokens.
-- Claim steps: Create an OpenRouter account and API key | Call the model ID thinkingmachines/inkling-2-small:free through the OpenRouter API
 ### Gemma 4 31B Free (OpenRouter)
 - Provider: OpenRouter
 - Category: api_provider
@@ -885,16 +885,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/opencode-hy4-flash-free.html
 - Summary: OpenCode made Tencent's Hy4 flash free on 2026-11-16, announcing near-unlimited usage for the next 2 weeks. Hy4 flash is Hy's fastest and most cost-efficient model, with a 1M-token context window and image input. OpenCode's Console docs list Hy4 flash Free (hy4-flash-free) with free input, output and cached reads for a limited time, and its provider follows a zero-retention policy. No exact end date is published: the 2026-11-30 expiry is derived from "the next 2 weeks" in the announcement and is approximate. The free tier works only inside the OpenCode app. The Inference API docs say other clients receive HTTP 403, even with an API key, and a keyless direct call on 2026-11-16 was rejected (HTTP 429, "Free models work in OpenCode"). No in-app request was tested.
 - Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select Hy4 flash Free (opencode/hy4-flash-free). | Use it from inside OpenCode only. Per OpenCode's Inference API docs, other clients receive HTTP 403 for free-tier models, even with an API key. | The free period is about 2 weeks from 2026-11-16 ("for the next 2 weeks"); OpenCode has not published an exact end date.
-### GLM-5.3-Flash Free on OpenCode
-- Provider: OpenCode
-- Category: coding
-- Amount: Free GLM-5.3-Flash model access in the OpenCode app (free input, output and cached reads; limited time)
-- Status: active — enrollment deadline: 2026-11-19
-- Last checked: 2026-11-19 — review_status=under-review · verification=social_proof · signup=none
-- Source: https://opencode.ai/v2/docs/console/models/
-- Page: https://freetokens.custats.info/offers/opencode-glm-5-3-flash-free.html
-- Summary: OpenCode made GLM 5.3 Flash free on 2026-10-16. OpenCode's Console docs list GLM-5.3-Flash Free (model id glm-5.3-flash-free) with free input, output and cached reads for a limited time. The free tier works only inside the OpenCode app: a keyless direct API call on 2026-10-21 was rejected with "OpenCode's free tier can only be used from within OpenCode," although the Inference API docs still say free chat models can be called without an Authorization header. No in-app request was tested, and whether the app needs an account is unconfirmed. No end date is stated. Per OpenCode's docs, its provider follows a zero-retention policy and does not use your data for model training. The paid GLM 5.3 Flash model (glm-5.3-flash) is listed separately at $0.15/$0.50 per 1M input/output tokens, so pick the Free variant.
-- Claim steps: Install the OpenCode app from https://opencode.ai. | Run /models and select GLM-5.3-Flash Free (opencode/glm-5.3-flash-free), not the paid GLM 5.3 Flash. | Direct API calls to the free model from outside OpenCode are rejected (HTTP 403 FreeTierError, tested 2026-10-21), despite older wording in the Inference API docs. | Whether the in-app free tier needs an OpenCode account or billing details was not tested. | The free period is limited-time; use the exact -free model ID rather than the separately priced paid variant.
 ### Flint 40B Free on OpenCode
 - Provider: OpenCode
 - Category: coding
@@ -1243,6 +1233,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
 - Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
 - Claim steps: Go to lemonfox.ai and click Get Started / Start Your Free Trial. | Sign up for an account. | Trial covers the $5/month credit bundle for 1 month.
+### Lambda Research Grant
+- Provider: Lambda
+- Category: api_provider
+- Amount: Up to $5,000 Lambda Cloud GPU (on-demand Instance) credits; research-and-mentorship framing on the grant hub
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-19 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://lambda.ai/research
+- Page: https://freetokens.custats.info/offers/lambda-research-grant.html
+- Summary: Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement. The linked application requires contact name/email, research problem, relevance/novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. Applicants must answer whether they are willing to co-write a Lambda blog; a required yes/no question is not evidence that yes is mandatory. Company, related publications and profile links are optional. No ORCID or institutional affiliation requirement was found in the current form.
+- Claim steps: Review the current grant CTA at https://lambda.ai/research and open its linked Research Grant application. | Prepare required first/last name, email, research problem, relevance and novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. | Answer the required yes/no question about willingness to co-write a Lambda blog. Company, related publications, GitHub/Scholar/social profiles and partnerships are optional; do not invent an ORCID or affiliation prerequisite. | Submit only your own accurate research application. If awarded, use the up-to-$5,000 credits on Lambda’s on-demand GPU Instances; exact award and expiry are not guaranteed by the public form.
 
 ## Community offers (not verified by freetokens)
 

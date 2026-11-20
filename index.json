@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-19T22:19:54Z",
-  "count": 338,
-  "active_count": 281,
-  "expired_count": 57,
+  "generated_at": "2026-11-20T02:06:27Z",
+  "count": 339,
+  "active_count": 280,
+  "expired_count": 59,
   "offers": [
     {
       "slug": "context-dev-10k-credits-birthday-code",
@@ -131,7 +131,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openrouter-ling-3-2-flash-free",
@@ -1357,7 +1357,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "none",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "openrouter-nemotron-3-5-super-vl-free",
@@ -5123,6 +5123,21 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "ona-for-open-source",
+      "title": "Ona for Open Source — Up to $200/Month in Credits",
+      "provider": "Ona",
+      "category": "oss_program",
+      "amount": "Up to $200/month in free Ona credits for maintainers and core contributors of at least one active, well-established open-source project; amount depends on the degree of open-source contributions; application required",
+      "expiry_date": null,
+      "source_url": "https://ona.com/open-source",
+      "verified_date": "2026-11-20",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [
