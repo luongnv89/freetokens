@@ -11,7 +11,7 @@
       "type": "link",
       "url": "https://www.assemblyai.com/docs/billing-and-pricing",
       "title": "Billing and Pricing - AssemblyAI",
-      "text": "New accounts receive $50 in free credits for Pre-recorded STT, Real-time STT, Speech Understanding, and Guardrails. Credits do not expire."
+      "text": "New accounts receive $50 in free credits for Pre-recorded STT, Real-time STT, and Speech Understanding. Credits do not expire, and any unused credits are retained on your account when you upgrade by adding a credit card. LLM Gateway is not included in the free tier."
     },
     {
       "type": "link",

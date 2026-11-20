@@ -18,6 +18,12 @@
       "url": "https://freeai.alexai.top/",
       "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
       "text": "Maritaca AI, S5 Free: \"não há cobrança de tokens\" (no token charges; no figure given). End date not published. Last verified Nov 7, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.maritaca.ai/pt/modelos",
+      "title": "Modelos | Maritaca API Documentation",
+      "text": "Modelos descontinuados. Conforme lançamos modelos mais seguros e avançados, descontinuamos regularmente os modelos antigos. Modelo | Data de encerramento | Substituição recomendada. S5-free | 2026-11-18 | S5"
     }
   ]
 }
