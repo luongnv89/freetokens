@@ -1,0 +1,29 @@
+{
+  "summary": "AnyRouter is an OpenAI-compatible model router. On the Go plan ($2/month) or higher, free models cost $0 per token with no daily cap — no donated key is needed. Donating one eligible provider key in Dashboard > BYOK is an alternative way to get Go for free: while the key stays valid, the account gets Go and every request the shared Pool serves costs $0. Donation is opt-in per key, your own requests take priority over the pool, and the key can be withdrawn at any time. The Free plan gets a 5-request lifetime trial on free and decision models.",
+  "claim_steps": [
+    "Sign up at https://anyrouter.dev (free, no card required).",
+    "Subscribe to Go ($2/month) at https://anyrouter.dev/pricing to use free models at $0 without donating, or add an eligible provider key at https://anyrouter.dev/dashboard/byok and flip 'Donate to pool' to get Go free plus $0 Pool requests.",
+    "Create an inference key at https://anyrouter.dev/dashboard/keys if calling the API.",
+    "Call https://anyrouter.dev/api/v1/chat/completions with model 'anyrouter/free' or browse the list at https://anyrouter.dev/models?f=free."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://anyrouter.dev/docs/features/free-tier",
+      "title": "Free Tier documentation",
+      "text": "Free models need the Go plan or higher. Go is $2/mo, or free when you donate one working provider key to the shared Pool. The Free plan gets a 5-request trial on free and decision models, once per account."
+    },
+    {
+      "type": "link",
+      "url": "https://anyrouter.dev/pool",
+      "title": "AnyRouter Shared Pool",
+      "text": "Donate a provider key you do not fully use, and the community can route requests through it. In return you get the Go plan and free Pool access: while the key stays valid, every request the pool serves for you costs $0."
+    },
+    {
+      "type": "link",
+      "url": "https://anyrouter.dev/blog/free-llm-api-for-students",
+      "title": "Free LLM API for students",
+      "text": "Free-account and student-oriented walkthrough of free model access on AnyRouter."
+    }
+  ]
+}
