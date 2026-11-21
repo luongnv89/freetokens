@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-20T02:35:18Z",
-  "count": 339,
-  "active_count": 280,
-  "expired_count": 59,
+  "generated_at": "2026-11-21T02:13:22Z",
+  "count": 344,
+  "active_count": 282,
+  "expired_count": 62,
   "offers": [
     {
       "slug": "ona-for-open-source",
@@ -311,7 +311,7 @@
       "verification": "unverified",
       "review_status": "unverified",
       "signup": "required",
-      "status": "active",
+      "status": "expired",
       "listing_type": "community",
       "community": {
         "subtype": "giveaway",
@@ -652,7 +652,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "morph-startup-credits",
@@ -2467,7 +2467,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "cerebras-yc-startup-deal",
@@ -5138,6 +5138,81 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "baichuan-ai-signup-80-yuan-credit",
+      "title": "Baichuan AI — ¥80 Sign-up Credit",
+      "provider": "Baichuan AI",
+      "category": "api_provider",
+      "amount": "¥80 free credit for new accounts (equivalent to 10 million Baichuan 2-Turbo tokens), valid 3 months from registration",
+      "expiry_date": null,
+      "source_url": "https://platform.baichuan-ai.com/prices",
+      "verified_date": "2026-11-21",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "baidu-qianfan-new-user-free-tokens",
+      "title": "Baidu Qianfan — 1M Free Tokens per Model for New Users",
+      "provider": "Baidu",
+      "category": "api_provider",
+      "amount": "1,000,000 free tokens on each of 17 preset models (incl. ERNIE-4.5-Turbo, DeepSeek-R1/V3.1, Qwen3, Qwen3-Coder, Kimi-K2-Instruct), valid 3 months from first activation; online inference only, not batch",
+      "expiry_date": null,
+      "source_url": "https://cloud.baidu.com/doc/qianfan/s/Imi2rpirg",
+      "verified_date": "2026-11-21",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "blockrun-free-models",
+      "title": "BlockRun Free Models — Keyless Open-Source LLM API",
+      "provider": "BlockRun",
+      "category": "api_provider",
+      "amount": "9 open-source models (e.g. Nemotron 3.5 Lightning, Nemotron 3 Nano Omni, GPT-OSS 20B, Muse Glimmer 30B) free through the BlockRun API with no key and no wallet; free capacity is best-effort and may be served by another free model",
+      "expiry_date": null,
+      "source_url": "https://blockrun.ai/free",
+      "verified_date": "2026-11-21",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
+      "status": "active"
+    },
+    {
+      "slug": "braintrust-starter-10-monthly-model-credits",
+      "title": "Braintrust Starter — $10 Monthly Model Credits",
+      "provider": "Braintrust",
+      "category": "api_provider",
+      "amount": "$10 in model credits per month on the free Starter plan, for built-in models and AI features; unused credits do not roll over",
+      "expiry_date": null,
+      "source_url": "https://www.braintrust.dev/pricing",
+      "verified_date": "2026-11-21",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "merkium-free-api-models",
+      "title": "Merkium Free API Models (Ceres, Ganymede, Pluto)",
+      "provider": "Merkium",
+      "category": "api_provider",
+      "amount": "Current API models (ceres-1.0, ceres-1.0-pro, ganymede-1.1, pluto-1.1-flash, pluto-1.1-pro, pluto-1.2-flash, pluto-1.2-pro) free permanently via the API, no charge per request or per token; 30 requests/minute per API key; no credit card",
+      "expiry_date": null,
+      "source_url": "https://www.merkium.nl/docs/pricing",
+      "verified_date": "2026-11-21",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

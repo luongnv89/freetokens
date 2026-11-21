@@ -2,11 +2,61 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-20T02:35:18Z — 128 of 280 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-21T02:13:22Z — 128 of 282 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Merkium Free API Models (Ceres, Ganymede, Pluto)
+- Provider: Merkium
+- Category: api_provider
+- Amount: Current API models (ceres-1.0, ceres-1.0-pro, ganymede-1.1, pluto-1.1-flash, pluto-1.1-pro, pluto-1.2-flash, pluto-1.2-pro) free permanently via the API, no charge per request or per token; 30 requests/minute per API key; no credit card
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-21 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.merkium.nl/docs/pricing
+- Page: https://freetokens.custats.info/offers/merkium-free-api-models.html
+- Summary: Merkium's current models (ganymede-1.1, pluto-1.2-flash, pluto-1.2-pro, ceres-1.0, ceres-1.0-pro, pluto-1.1-flash, pluto-1.1-pro) are free permanently in Merkium chat and through the API, with no charge per request or per token. The free tier allows 30 requests per minute per API key. API keys are free and need no credit card. Future models may be paid.
+- Claim steps: Create a free API key in the Merkium Console at chat.merkium.nl (no credit card) | Use a free model ID (e.g. pluto-1.2-pro) as the model field of an API request
+### Braintrust Starter — $10 Monthly Model Credits
+- Provider: Braintrust
+- Category: api_provider
+- Amount: $10 in model credits per month on the free Starter plan, for built-in models and AI features; unused credits do not roll over
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-21 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://www.braintrust.dev/pricing
+- Page: https://freetokens.custats.info/offers/braintrust-starter-10-monthly-model-credits.html
+- Summary: Braintrust's free Starter plan ($0 / month, no credit card required) includes $10 in model credits each month. Monthly model credits cover built-in models, which you can use without providing your own API key, as well as AI features like Topics. Unused credits do not roll over. On Starter, the organization needs at least one owner with a work email address, or a payment method on file, to access built-in models. Calling built-in models directly through the gateway requires a Pro or Enterprise plan. If credits are exhausted and on-demand usage is not enabled, built-in model usage pauses until the next monthly cycle or until a card is added.
+- Claim steps: Sign up for Braintrust on the free Starter plan (no credit card required) | Make sure at least one organization owner uses a work email address (or add a payment method) to unlock built-in models | Use built-in models and Topics; $10 in credits applies each month and unused credits do not roll over
+### BlockRun Free Models — Keyless Open-Source LLM API
+- Provider: BlockRun
+- Category: api_provider
+- Amount: 9 open-source models (e.g. Nemotron 3.5 Lightning, Nemotron 3 Nano Omni, GPT-OSS 20B, Muse Glimmer 30B) free through the BlockRun API with no key and no wallet; free capacity is best-effort and may be served by another free model
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-21 — review_status=under-review · verification=social_proof · signup=none
+- Source: https://blockrun.ai/free
+- Page: https://freetokens.custats.info/offers/blockrun-free-models.html
+- Summary: BlockRun serves 9 open-source models free with no API key and no wallet. Free capacity is borrowed, not reserved: when a model is saturated the request may be answered by another free model, so check the returned model field. Free models run on upstream free tiers whose terms may let the host use prompts to improve its service, so avoid sending sensitive data. Paid models are pay-per-call from a wallet or with an API key.
+- Claim steps: Call a free model listed on blockrun.ai/free through the BlockRun API without a key | Read the returned model field to see which free model answered
+### Baidu Qianfan — 1M Free Tokens per Model for New Users
+- Provider: Baidu
+- Category: api_provider
+- Amount: 1,000,000 free tokens on each of 17 preset models (incl. ERNIE-4.5-Turbo, DeepSeek-R1/V3.1, Qwen3, Qwen3-Coder, Kimi-K2-Instruct), valid 3 months from first activation; online inference only, not batch
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-21 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://cloud.baidu.com/doc/qianfan/s/Imi2rpirg
+- Page: https://freetokens.custats.info/offers/baidu-qianfan-new-user-free-tokens.html
+- Summary: Baidu's official Qianfan documentation (updated 2026-11-11) states that since 24 October 2025, when a user first visits the Qianfan model platform and agrees to the user agreement, the platform is activated automatically and a new-user free token quota is issued: 1 million tokens on each of 17 designated models, valid for 3 months. Models: ERNIE-4.5-Turbo-128K, ERNIE-4.5-Turbo-32K, ERNIE-4.5-Turbo-VL, ERNIE-X1-Turbo-32K, DeepSeek-R1, DeepSeek-R1-250528, DeepSeek-V3-250324, DeepSeek-V3.1-250821, DeepSeek-V3.1-Think-250821, Kimi-K2-Instruct, Qwen3-235B-A22B-Instruct-2507, Qwen3-30B-A3B-Instruct-2507, Qwen3-Coder-30B-A3B-Instruct, Qwen3-Coder-480B-A35B-Instruct, bge-large-en, bge-large-zh, qianfan-sug-8k. The quota only covers online inference on preset model services, not batch inference. Remaining quota and time can be checked on the model version details page in the console.
+- Claim steps: Visit the Baidu Qianfan model platform and read and agree to the user agreement | The platform activates automatically and issues 1M free tokens per designated model, valid 3 months | Check remaining quota on the model version details page via the console model square
+### Baichuan AI — ¥80 Sign-up Credit
+- Provider: Baichuan AI
+- Category: api_provider
+- Amount: ¥80 free credit for new accounts (equivalent to 10 million Baichuan 2-Turbo tokens), valid 3 months from registration
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-21 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://platform.baichuan-ai.com/prices
+- Page: https://freetokens.custats.info/offers/baichuan-ai-signup-80-yuan-credit.html
+- Summary: Baichuan AI's official pricing page states that users newly registered from the afternoon of 22 May 2024 receive ¥80 in free credit (raised from ¥8), equivalent to 10 million Baichuan 2-Turbo tokens, valid for 3 months and effective upon account registration. Baichuan2-Turbo (32k context) is priced at ¥0.008 per 1,000 tokens for input and output.
+- Claim steps: Register a new account on the Baichuan AI platform (platform.baichuan-ai.com) | The ¥80 free credit takes effect on registration and is valid for 3 months
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1164,15 +1214,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/meshy-free-plan.html
 - Summary: Meshy's Free web-app plan grants 100 credits every month for its 3D-generation tools (text-to-3D, image-to-3D, AI texturing), resetting at 00:00 UTC on the first of each month. Free includes one concurrent task, low queue priority, and ten Meshy 6 Lite model downloads per month; API access is not included. No credit card required; free-plan outputs are licensed under CC BY 4.0 (commercial use allowed with attribution).
 - Claim steps: Sign up free at https://www.meshy.ai — no credit card required. | Receive 100 credits/month; credits reset at 00:00 UTC on the first day of each month. | Use the web app within the Free limits: one concurrent task, low queue priority, and ten Meshy 6 Lite model downloads/month. The Free plan does not include API access. | Free-plan outputs carry a CC BY 4.0 license (commercial use allowed with attribution).
-### Maritaca AI S5 Free — Limited-Time Free Model
-- Provider: Maritaca AI
-- Category: api_provider
-- Amount: S5-free model with no token charges for a limited time (text only; 60 RPM, 256k input and 256k output TPM)
-- Status: active — enrollment deadline: 2026-11-20
-- Last checked: 2026-11-20 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.maritaca.ai/pt/precos
-- Page: https://freetokens.custats.info/offers/maritaca-ai-s5-free.html
-- Summary: Maritaca AI's S5-free model is free for a limited time with no token charges. It accepts text only and excludes the Batch API, Flex and built-in tools. Limits are fixed across all tiers at 60 requests per minute and 256k input plus 256k output tokens per minute. Maritaca describes it as a temporary launch offer that may end at any time and recommends S5 for production use.
 ### LlamaParse Startup Offer
 - Provider: LlamaIndex
 - Category: startup_program
@@ -1213,36 +1254,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/lg-ai-research-k-exaone-2-5-api-free.html
 - Summary: The EXAONE API Platform changelog entry dated November 9, 2026 lists K-EXAONE 2.5 (750B), LG AI Research's proprietary foundation model, and states the service is currently provided free of charge. API keys are issued from the platform. The rate-limits page applies per-second, per-minute and per-day call windows, with a higher daily call limit for users who consent to their usage records being used for model training and service improvement; the API can be used without consenting. The platform terms grant a non-exclusive, non-transferable, revocable non-commercial use right and bar for-profit use of the model or its outputs; if the service becomes paid, fees will be posted on the site.
 - Claim steps: Open the EXAONE API Platform at docs.exaone.ai | Select 'API Key 발급하기' (Issue API key) and request a key | Optionally consent to usage-record use for training to get a higher daily call limit
-### Lemonfox 1-Month Free Trial
-- Provider: Lemonfox.ai
-- Category: voice
-- Amount: 1 month free trial — 10M credits (30 hours speech-to-text or 2M TTS chars)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-20 — review_status=verified · verification=social_proof · signup=required
-- Source: https://www.lemonfox.ai/
-- Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
-- Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
-- Claim steps: Go to lemonfox.ai and click Get Started / Start Your Free Trial. | Sign up for an account. | Trial covers the $5/month credit bundle for 1 month.
-### Lambda Research Grant
-- Provider: Lambda
-- Category: api_provider
-- Amount: Up to $5,000 Lambda Cloud GPU (on-demand Instance) credits; research-and-mentorship framing on the grant hub
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-20 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://lambda.ai/research
-- Page: https://freetokens.custats.info/offers/lambda-research-grant.html
-- Summary: Lambda's Research Grant offers qualifying researchers up to $5,000 in credits for Lambda on-demand GPU Instances. The research hub (lambda.ai/research) hosts the apply-for-a-grant CTA and describes the program as research and mentorship; the $5,000 figure is stated on Lambda's CVPR 2026 page and ICLR 2026 blog, which point applicants back to lambda.ai/research. The ICLR post addresses independent researchers who need compute; the official pages reviewed do not require venture backing or state a card requirement. The linked application requires contact name/email, research problem, relevance/novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. Applicants must answer whether they are willing to co-write a Lambda blog; a required yes/no question is not evidence that yes is mandatory. Company, related publications and profile links are optional. No ORCID or institutional affiliation requirement was found in the current form.
-- Claim steps: Review the current grant CTA at https://lambda.ai/research and open its linked Research Grant application. | Prepare required first/last name, email, research problem, relevance and novelty, challenges, GPU compute needs, notable achievements, roadmap and publishing plan. | Answer the required yes/no question about willingness to co-write a Lambda blog. Company, related publications, GitHub/Scholar/social profiles and partnerships are optional; do not invent an ORCID or affiliation prerequisite. | Submit only your own accurate research application. If awarded, use the up-to-$5,000 credits on Lambda’s on-demand GPU Instances; exact award and expiry are not guaranteed by the public form.
-### KRAFTON Raon-1 mini Preview — Free API (Limited Time)
-- Provider: KRAFTON AI
-- Category: api_provider
-- Amount: Raon-1 mini preview (30B-A4B) API free for a limited time at launch; per-user token and request limits may apply; future pricing to be announced
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-20 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://raon-mini.krafton.ai/en
-- Page: https://freetokens.custats.info/offers/krafton-raon-1-mini-api-free-preview.html
-- Summary: KRAFTON offers its Raon-1 mini preview model (30B-A4B) through an API that is free for a limited time to celebrate the model's release. Per-user limits on token usage and the number of requests may apply, and any future charges will be announced separately. No end date is given.
-- Claim steps: Apply on the Raon page with your name, email, affiliation, role and intended use. | KRAFTON emails you an invitation to the Raon console right away. | Open the invitation, verify your email and set a password; then issue an API key, try the Playground and read the API docs.
 
 ## Community offers (not verified by freetokens)
 
@@ -1251,7 +1262,6 @@ Promo codes and giveaways a person shared in a public post. freetokens does not 
 - [Devin Bots giveaway — pitch Poke for up to $10,000 in credits](https://freetokens.custats.info/offers/devin-bots-poke-giveaway.html): Cognition (Devin) — up to $10,000 per account (10,000 accounts) · community giveaway — not verified by freetokens · shared by @walden_yan (Walden) on 2026-11-18: https://x.com/walden_yan/status/2123163580778635579 · 10000 codes · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
 - [Context.dev 10,000 free API credits — code YAHIAISINFINLANDONHISBIRTHDAY10K](https://freetokens.custats.info/offers/context-dev-10k-credits-birthday-code.html): Context.dev — 10,000 free Context.dev API credits with code YAHIAISINFINLANDONHISBIRTHDAY10K (“10,000 web searches”, “10,000 web scrapes”, “5000 company searches”, “1000 people searches”, “so much more”) · community promo_code — not verified by freetokens · shared by @mynameisyahia (Yahia Bakour) on 2026-11-19: https://x.com/mynameisyahia/status/2123294435694043603 · code: YAHIAISINFINLANDONHISBIRTHDAY10K · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
 - [Mistral Vibe Pro free for 3 months — code LECHONK (Europe)](https://freetokens.custats.info/offers/mistral-vibe-pro-lechonk-code.html): Mistral AI — Vibe Pro free for the first three months with code LECHONK (developers in Europe) · community promo_code — not verified by freetokens · shared by @MistralAI (Mistral AI) on 2026-11-17: https://x.com/MistralAI/status/2122713540666806397 · code: LECHONK · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
-- [Devin Max giveaway — 10 codes for one month each](https://freetokens.custats.info/offers/devin-max-one-month-code-giveaway.html): Cognition (Devin) — one month of Devin Max per code ($200 value each) · community giveaway — not verified by freetokens · shared by @ben_ai_eng (Ben Newell) on 2026-11-17: https://x.com/ben_ai_eng/status/2122616807404052781 · 10 codes · entries close 2026-11-20 · time zone: no time zone given · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
 
 ## Pages
 
