@@ -7,7 +7,7 @@ category: api_provider
 amount: $100 in free API credits for new users after adding a payment method, redeemable within two months
 expiry_date: null
 source_url: https://isaacus.com/pricing
-verified_date: 2026-11-20
+verified_date: 2026-11-21
 verification: social_proof
 review_status: under-review
 signup: required

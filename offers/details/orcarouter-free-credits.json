@@ -30,6 +30,12 @@
       "url": "https://www.orcarouter.ai/models/orcarouter/free",
       "title": "OrcaRouter Free — difficulty-routed free models",
       "text": "Call orcarouter/free and it routes each request by difficulty across your workspace's free models — never touching your wallet, with free use capped by request rate rather than a fixed number of calls."
+    },
+    {
+      "type": "link",
+      "url": "https://www.orcarouter.ai/api/offers",
+      "title": "OrcaRouter offers API",
+      "text": "\"title\":\"Deepseek 4.1 Flash Unlimited\",\"blurb\":\"Deepseek UNLIMITED 100% Deposit Match\""
     }
   ]
 }
