@@ -10,8 +10,8 @@
     {
       "type": "link",
       "url": "https://developer.amd.com.cn/radeon/tokenfactory",
-      "title": "Radeon Cloud",
-      "text": "Public Free Model APIs — 15 models — Ready-to-use free API endpoints. FREE — Clef, d3, d3-flash, OmniVoice, MinerU2.5-Pro. OmniVoice: Non-commercial use only. Dedicated Model APIs — 3 models."
+      "title": "Token Factory · Radeon Cloud",
+      "text": "\"Model API calls are free.\" \"Every API key gets a free daily base allowance.\" The Token Factory catalog lists 12 models, each with badge \"Free\": Clef, d3, d3-flash, MiMo-V2.6-Flash, DeepSeek-V4-Flash, DeepSeek-V4.1-Flash, GLM-5.3-Flash, Qwen3.8-27B, Gemma-4-31B-IT, MiniCPM-V-4.7-1B, MiniCPM-V-4.7-35B-A3B, MiniCPM5-2B"
     },
     {
       "type": "link",
