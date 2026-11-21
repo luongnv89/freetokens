@@ -1,0 +1,22 @@
+{
+  "summary": "Baidu's official Qianfan documentation (updated 2026-11-11) states that since 24 October 2025, when a user first visits the Qianfan model platform and agrees to the user agreement, the platform is activated automatically and a new-user free token quota is issued: 1 million tokens on each of 17 designated models, valid for 3 months. Models: ERNIE-4.5-Turbo-128K, ERNIE-4.5-Turbo-32K, ERNIE-4.5-Turbo-VL, ERNIE-X1-Turbo-32K, DeepSeek-R1, DeepSeek-R1-250528, DeepSeek-V3-250324, DeepSeek-V3.1-250821, DeepSeek-V3.1-Think-250821, Kimi-K2-Instruct, Qwen3-235B-A22B-Instruct-2507, Qwen3-30B-A3B-Instruct-2507, Qwen3-Coder-30B-A3B-Instruct, Qwen3-Coder-480B-A35B-Instruct, bge-large-en, bge-large-zh, qianfan-sug-8k. The quota only covers online inference on preset model services, not batch inference. Remaining quota and time can be checked on the model version details page in the console.",
+  "claim_steps": [
+    "Visit the Baidu Qianfan model platform and read and agree to the user agreement",
+    "The platform activates automatically and issues 1M free tokens per designated model, valid 3 months",
+    "Check remaining quota on the model version details page via the console model square"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cloud.baidu.com/doc/qianfan/s/Imi2rpirg",
+      "title": "新用户免费额度",
+      "text": "2025年10月24日0点起，访问千帆大模型平台，阅读并同意用户协议后，系统将自动开通千帆大模型平台并发放新用户免费Tokens额度。首次开通千帆大模型时，平台将自动发放指定模型的免费使用额度…（每个模型 100万 Tokens，有效期 3个月）新用户免费额度仅支持抵扣预置模型服务在线推理（调用）消耗的Tokens，不支持抵扣批量推理（调用）消耗的Tokens。"
+    },
+    {
+      "type": "link",
+      "url": "https://dev.to/shiva_prasad_cc614c6ee026/new-free-llm-api-credits-added-in-mid-november-2026-4fbh",
+      "title": "New free LLM API credits added in mid-November 2026",
+      "text": "Baidu Qianfan (added November 16): The offer is one million free tokens on each of 17 models (ERNIE 4.5, DeepSeek, Qwen3, Kimi K2). One-time, valid three months; online inference only, not batch. Base URL https://qianfan.baidubce.com/v2."
+    }
+  ]
+}
