@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-20T02:35:18Z",
+  "generated_at": "2026-11-22T02:07:56Z",
   "count": 339,
-  "active_count": 280,
-  "expired_count": 59,
+  "active_count": 277,
+  "expired_count": 62,
   "offers": [
     {
       "slug": "ona-for-open-source",
@@ -311,7 +311,7 @@
       "verification": "unverified",
       "review_status": "unverified",
       "signup": "required",
-      "status": "active",
+      "status": "expired",
       "listing_type": "community",
       "community": {
         "subtype": "giveaway",
@@ -652,7 +652,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "morph-startup-credits",
@@ -2467,7 +2467,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "cerebras-yc-startup-deal",
