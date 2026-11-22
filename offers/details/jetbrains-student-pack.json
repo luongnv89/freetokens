@@ -54,6 +54,12 @@
       "url": "https://www.jetbrains.com/lp/edu-program-user-flow/",
       "title": "JetBrains Educational License and Graduation Discount",
       "text": "Applicants must participate in a one-year or multi-year full-time educational program involving programming courses/majors."
+    },
+    {
+      "type": "link",
+      "url": "https://lp.jetbrains.com/pycharm-for-students/",
+      "title": "Free PyCharm For Students",
+      "text": "All JetBrains IDEs are free for students, so you can experiment and expand your skill set. ... Be a full-time student at an accredited academic institution in a program lasting at least one year. Your Student Pack license is valid for one year. You can renew it each year as long as you remain a full-time student."
     }
   ]
 }

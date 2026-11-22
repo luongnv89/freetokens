@@ -7,7 +7,7 @@ category: api_provider
 amount: 1,000 free API credits on signup (≈US$10.40; 1 credit = ₹1 ≈ US$0.0104), Free plan with 11 free-tier models (6 LLMs, 1 STT, 2 TTS, 2 embedding) at 60 requests per minute
 expiry_date: null
 source_url: https://www.callmissed.com/pricing
-verified_date: 2026-11-20
+verified_date: 2026-11-22
 verification: social_proof
 review_status: under-review
 signup: required
