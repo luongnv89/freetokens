@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-22T02:39:00Z — 127 of 277 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-22T02:46:20Z — 127 of 277 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -763,8 +763,8 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Last checked: 2026-11-22 — review_status=verified · verification=social_proof · signup=required
 - Source: https://openrouter.ai/docs/api-reference/limits
 - Page: https://freetokens.custats.info/offers/openrouter-free-models.html
-- Summary: OpenRouter offers model variants ending in ':free' with zero token pricing, limited to 20 requests per minute and ordinarily 50 requests per day. The daily tier depends on all-time credits purchased, not the current held balance or the is_free_tier flag. The table lists a $10 purchase threshold for 1,000 requests/day, but the documented rounding/top-up-fee buffer grants that ceiling one credit below it (currently $9 in all-time purchases). Free access does not require buying credits to use the lower daily allowance. Model-specific restrictions still apply.
-- Claim steps: Create a free account at openrouter.ai and open the Keys page. | Create an API key. | Browse models filtered to the :free variants at openrouter.ai/models. | Call the OpenAI-compatible endpoint with your key, respecting model-specific restrictions and the 20 requests/minute and 50 requests/day lower allowance. | For the 1,000 requests/day tier, check all-time credits purchased rather than your held balance. The documented buffer starts it at one credit below the $10 table threshold, currently $9; purchases are optional for the lower tier.
+- Summary: OpenRouter offers model variants ending in ':free' with zero token pricing, limited to 20 requests per minute and ordinarily 50 requests per day. The daily tier depends on all-time credits purchased, not the current held balance or the is_free_tier flag. The 1,000 requests/day tier requires at least $10 in all-time purchased credits. Free access does not require buying credits to use the lower daily allowance. Model-specific restrictions still apply.
+- Claim steps: Create a free account at openrouter.ai and open the Keys page. | Create an API key. | Browse models filtered to the :free variants at openrouter.ai/models. | Call the OpenAI-compatible endpoint with your key, respecting model-specific restrictions and the 20 requests/minute and 50 requests/day lower allowance. | For the 1,000 requests/day tier, purchase at least $10 in credits; the tier checks all-time credits purchased rather than your held balance. Purchases are optional for the lower tier.
 ### OpenRouter for Startups
 - Provider: OpenRouter
 - Category: startup_program
