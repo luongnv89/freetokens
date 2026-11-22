@@ -237,7 +237,7 @@ class DailyOfferCheckTests(unittest.TestCase):
         sys.path.insert(0, str(self.SCRIPTS))
         from list_active import record  # noqa: E402
         row, _ = record(offers.resolve(), offers.resolve() / 'devin.yaml')
-        inventory = dict(today=dt.date.today().isoformat(), offers_dir=str(offers.resolve()),
+        inventory = dict(today='2026-11-18', offers_dir=str(offers.resolve()),
                          active_count=1, skipped_expired=[], skipped_community=[], offers=[row])
         verdict = {'slug': 'devin', 'verdict': 'unverifiable', 'evidence_url': '', 'quote': '',
                    'reason': 'r', 'updates': {}, 'references': []}
