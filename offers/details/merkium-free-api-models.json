@@ -1,0 +1,27 @@
+{
+  "summary": "Merkium's current models (ganymede-1.1, pluto-1.2-flash, pluto-1.2-pro, ceres-1.0, ceres-1.0-pro, pluto-1.1-flash, pluto-1.1-pro) are free permanently in Merkium chat and through the API, with no charge per request or per token. The free tier allows 30 requests per minute per API key. API keys are free and need no credit card. Future models may be paid.",
+  "claim_steps": [
+    "Create a free API key in the Merkium Console at chat.merkium.nl (no credit card)",
+    "Use a free model ID (e.g. pluto-1.2-pro) as the model field of an API request"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://www.merkium.nl/docs/pricing",
+      "title": "API docs: Pricing | Merkium",
+      "text": "The current Merkium models are free to use through the API, permanently. Free, with no charge per request or per token. 30 requests per minute per API key (one request every two seconds)."
+    },
+    {
+      "type": "link",
+      "url": "https://www.merkium.nl",
+      "title": "Merkium",
+      "text": "ganymede-1.1, pluto-1.2-flash, pluto-1.2-pro, ceres-1.0, ceres-1.0-pro, pluto-1.1-flash, pluto-1.1-pro are free permanently, in Merkium chat and through the API. Future models may be paid. No credit card required. API keys are free and created in the Console at chat.merkium.nl; no credit card."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/mvalentsev/awesome-free-ai-coding",
+      "title": "awesome-free-ai-coding: Legal free LLM APIs & coding agents",
+      "text": "Merkium: Added free models ceres-1.0, ceres-1.0-pro, ganymede-1.1, pluto-1.1-flash, pluto-1.1-pro, pluto-1.2-flash and pluto-1.2-pro. Current API models carry no per-request or per-token charge."
+    }
+  ]
+}

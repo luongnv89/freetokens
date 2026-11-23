@@ -118,6 +118,21 @@ class ValidateWorkflowTests(unittest.TestCase):
                     assert_gates_full_suite(self, mutated)
                 self.assertIn(reason, str(cm.exception))
 
+    def test_suites_rerun_with_the_clock_moved_forward(self):
+        # Time-bomb guard (#782): both suites run a second time with the wall
+        # clock at least 400 days ahead, unconditionally, in the gating jobs.
+        text = self.WF.read_text(encoding="utf-8")
+        shifted = r"(?m)^\s+run: (?:\.\./)?scripts/ci/run-clock-shifted\.sh --days (\d+) -- {}\s*$"
+        for job, command in (("validate", DISCOVER), ("node-tests", "npm test")):
+            with self.subTest(job):
+                block = job_block(text, job)
+                match = re.search(shifted.format(re.escape(command)), block)
+                self.assertIsNotNone(match, f"{job} must re-run `{command}` clock-shifted")
+                self.assertGreaterEqual(int(match.group(1)), 400)
+                self.assertNotIn("continue-on-error", block)
+                self.assertNotRegex(block, r"(?m)^\s+(-\s+)?if:")
+        self.assertTrue((REPO / "scripts/ci/clockshift.c").is_file())
+
 
 if __name__ == "__main__":
     unittest.main()

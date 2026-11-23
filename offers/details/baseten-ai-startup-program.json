@@ -1,5 +1,5 @@
 {
-  "summary": "Baseten's AI Startup Program offers accepted, net-new, VC-funded AI-first early-stage startups up to $25,000 in credits for Dedicated Inference or Training and up to $2,500 for Model APIs. Eligibility is selective: the program targets Seed-to-Series-A startups operating for less than five years, and applicants must not have previously received Baseten credits. Linked legal terms say awarded credits expire six months after grant. The company domain must not have been on a paid Baseten Service plan from 31 days before application through the benefit-request date. IPO/acquired companies, educational/government/nonprofit entities, personal blogs/content, dev shops, consultancies/agencies, crypto mining and non-compliant token distribution are excluded. The form requires business email, company website, funding/age details and use-case answers. Its Pre-Seed and No Funding choices are not proof of approval outside the marketing criteria; confirm such cases with Baseten.",
+  "summary": "Baseten's AI Startup Program offers accepted, net-new, VC-funded AI-first early-stage startups up to $25,000 in credits for Dedicated Deployments or Training and up to $2,500 for Model APIs. Eligibility is selective: the program targets Seed-to-Series-A startups operating for less than five years, and applicants must not have previously received Baseten credits. Linked legal terms say awarded credits expire six months after grant. The company domain must not have been on a paid Baseten Service plan from 31 days before application through the benefit-request date. IPO/acquired companies, educational/government/nonprofit entities, personal blogs/content, dev shops, consultancies/agencies, crypto mining and non-compliant token distribution are excluded. The form requires business email, company website, funding/age details and use-case answers. Its Pre-Seed and No Funding choices are not proof of approval outside the marketing criteria; confirm such cases with Baseten.",
   "claim_steps": [
     "Check AI-first/VC-funded, Seed-to-Series-A and under-five-year marketing criteria, net-new status and no previous Baseten credits. The form also has Pre-Seed/No Funding options; confirm exceptions rather than assuming eligibility.",
     "Read https://www.baseten.com/startup-program-legal-disclaimers for entity exclusions and the company-domain paid-plan restriction from 31 days before applying through the benefit-request date.",
@@ -17,7 +17,7 @@
       "type": "link",
       "url": "https://www.baseten.co/talk-to-us/startup-program/",
       "title": "Startup program",
-      "text": "If you are accepted into the program, you will get direct access to Baseten's platform and free credits."
+      "text": "If you are accepted into the program, you will get direct access to Baseten's platform and free credits. Up to $25,000 for Dedicated Deployments or Training and up to $2,500 for Model APIs."
     },
     {
       "type": "link",

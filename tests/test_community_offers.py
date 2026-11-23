@@ -194,6 +194,10 @@ def git(repo, *args):
 
 class DailyOfferCheckTests(unittest.TestCase):
     SCRIPTS = REPO / 'skills/daily-offer-check/scripts'
+    # One "today" for every CLI run (#782): inside the GIVEAWAY window
+    # (posted 2026-11-17, entries close 2026-11-20), never the real clock,
+    # so the fixtures cannot expire under the test.
+    TODAY = '2026-11-18'
 
     def setUp(self):
         tmp = tempfile.TemporaryDirectory()
@@ -211,12 +215,12 @@ class DailyOfferCheckTests(unittest.TestCase):
         offers.mkdir()
         (offers / 'devin.yaml').write_text(GIVEAWAY)
         (offers / 'regular.yaml').write_text(REGULAR)
-        inventory = json.loads(self.run_cli('list_active.py', '--today', '2026-11-18',
+        inventory = json.loads(self.run_cli('list_active.py', '--today', self.TODAY,
                                             '--offers-dir', offers).stdout)
         self.assertEqual([o['slug'] for o in inventory['offers']], ['regular'])
         self.assertEqual(inventory['skipped_community'], ['devin'])
         # Named explicitly, a community slug is still skipped, never checked.
-        named = json.loads(self.run_cli('list_active.py', '--today', '2026-11-18',
+        named = json.loads(self.run_cli('list_active.py', '--today', self.TODAY,
                                         '--offers-dir', offers, '--slugs', 'devin').stdout)
         self.assertEqual(named['offers'], [])
         # A verdict for it is a coverage error: the sweep cannot write to it.
@@ -237,7 +241,7 @@ class DailyOfferCheckTests(unittest.TestCase):
         sys.path.insert(0, str(self.SCRIPTS))
         from list_active import record  # noqa: E402
         row, _ = record(offers.resolve(), offers.resolve() / 'devin.yaml')
-        inventory = dict(today=dt.date.today().isoformat(), offers_dir=str(offers.resolve()),
+        inventory = dict(today=self.TODAY, offers_dir=str(offers.resolve()),
                          active_count=1, skipped_expired=[], skipped_community=[], offers=[row])
         verdict = {'slug': 'devin', 'verdict': 'unverifiable', 'evidence_url': '', 'quote': '',
                    'reason': 'r', 'updates': {}, 'references': []}

@@ -40,6 +40,13 @@ jobs:
       - name: Python unit tests
         run: python3 -m unittest discover -s tests
 
+      # Time-bomb guard (#782): the same suite again with the wall clock moved
+      # forward 400 days (scripts/ci/clockshift.c, an LD_PRELOAD shim built
+      # with the runner's cc; no downloads). A test that mixes a fixed
+      # calendar date with the real clock fails here, in the PR that adds it.
+      - name: Python unit tests (clock +400 days)
+        run: scripts/ci/run-clock-shifted.sh --days 400 -- python3 -m unittest discover -s tests
+
   node-tests:
     needs: validate
     runs-on: ubuntu-latest
@@ -67,6 +74,11 @@ jobs:
       - name: Run Node unit suites
         working-directory: app
         run: npm test
+
+      # Time-bomb guard (#782): see the matching Python step above.
+      - name: Run Node unit suites (clock +400 days)
+        working-directory: app
+        run: ../scripts/ci/run-clock-shifted.sh --days 400 -- npm test
 
       - name: Build with Vite
         working-directory: app
