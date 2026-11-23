@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Run a command with the wall clock moved forward (#782).
+#
+#   scripts/ci/run-clock-shifted.sh [--days N] -- <command> [args...]
+#
+# Builds scripts/ci/clockshift.c into a temp dir with the system C compiler
+# and runs <command> with it preloaded, so Python, Node and git (and every
+# subprocess they start) see "now" N days ahead (default 400). Monotonic
+# clocks are not shifted. Fails loudly if the shift does not take effect.
+set -euo pipefail
+
+days=400
+if [[ "${1:-}" == "--days" ]]; then
+  days="$2"
+  shift 2
+fi
+if [[ ! "$days" =~ ^-?[0-9]+$ ]] || (( days > -2 && days < 2 )); then
+  # The self-check below allows one day of slack, so it cannot prove a
+  # shift smaller than two days.
+  echo "clockshift: --days must be an integer with |days| >= 2 (got $days)" >&2
+  exit 2
+fi
+if [[ "${1:-}" == "--" ]]; then shift; fi
+if [[ $# -eq 0 ]]; then
+  echo "usage: $0 [--days N] -- <command> [args...]" >&2
+  exit 2
+fi
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+build="$(mktemp -d)"
+trap 'rm -rf "$build"' EXIT
+# glibc marks the time pointers nonnull; keep the shim's NULL guards.
+cc -shared -fPIC -O2 -fno-delete-null-pointer-checks -o "$build/libclockshift.so" "$here/clockshift.c" -ldl
+
+export CLOCKSHIFT_DAYS="$days"
+export LD_PRELOAD="$build/libclockshift.so${LD_PRELOAD:+:$LD_PRELOAD}"
+
+# Prove the shift reached every runtime before trusting a green run.
+real_today="$(env -u LD_PRELOAD date -u +%F)"
+want="$(env -u LD_PRELOAD date -u -d "$real_today + $days days" +%F)"
+py_today="$(python3 -c 'import datetime as d; print(d.date.today(), d.datetime.now(d.timezone.utc).date())')"
+# The validate job has no setup-node step; ubuntu-latest ships a node, but
+# skip that probe rather than fail if a runner ever lacks one.
+node_today=""
+if command -v node >/dev/null; then
+  node_today="$(node -e 'const d = new Date(); console.log(d.toISOString().slice(0, 10), new Date(Date.now()).toISOString().slice(0, 10))')"
+fi
+# A fixed identity: CI runners have no git user configured.
+git_epoch="$(GIT_COMMITTER_NAME=clockshift GIT_COMMITTER_EMAIL=clockshift@localhost \
+  git var GIT_COMMITTER_IDENT | awk '{print $(NF-1)}')"
+git_today="$(env -u LD_PRELOAD date -u -d "@$git_epoch" +%F)"
+for got in $py_today $node_today $git_today; do
+  # Allow one day of slack: the local zone and UTC can straddle midnight.
+  if [[ "$got" != "$want" && "$got" != "$(env -u LD_PRELOAD date -u -d "$want - 1 day" +%F)" && "$got" != "$(env -u LD_PRELOAD date -u -d "$want + 1 day" +%F)" ]]; then
+    echo "clockshift: shift did not take effect (want $want; python $py_today, node $node_today, git $git_today)" >&2
+    exit 3
+  fi
+done
+echo "clockshift: real $real_today -> $want (+${days}d; python $py_today, node $node_today, git $git_today)" >&2
+
+"$@"
