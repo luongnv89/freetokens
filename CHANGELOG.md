@@ -5,6 +5,16 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Test time-bomb guard (#782):** `test_community_offers.py` no longer
+  mixes its fixed 2026-11-20 giveaway dates with the real clock, which had
+  failed the required `validate` check and the scheduled deploy since
+  2026-11-21. The `validate` workflow now re-runs the Python and app unit
+  suites with the wall clock 400 days ahead via
+  `scripts/ci/run-clock-shifted.sh` (a small LD_PRELOAD shim,
+  `scripts/ci/clockshift.c`, built with the runner's C compiler), so a test
+  that only passes before some date fails in the PR that adds it. The deploy
+  and what it publishes are unchanged.
+
 - **Community offers (#748):** a new listing type, `listing_type:
   community`, for promo codes (`community_subtype: promo_code`) and
   giveaways (`giveaway`) that a person shared in a public post. They are not
