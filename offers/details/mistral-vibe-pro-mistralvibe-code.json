@@ -1,0 +1,18 @@
+{
+  "summary": "A promo code shared on X by Mistral AI itself (@MistralAI), not verified by freetokens. The post, dated 2026-11-23, says: “If you’re in Europe, you get a month of Vibe Pro for free.” and “Code: MISTRALVIBE.” It replaces last week’s capped drop: “We ran out of capacity in less than an hour. Today, we’re fixing that for good. No more capped drops.” The post gives no end date.",
+  "claim_steps": [
+    "Open the claim link from Mistral’s thread and sign in to Mistral: https://admin.mistral.ai/subscription/upgrade/redeem?redeem_code=MISTRALVIBE",
+    "Use the code MISTRALVIBE. The post says: “If you’re in Europe, you get a month of Vibe Pro for free.”",
+    "On who can use it, the post says: “For European builders.” and “No more capped drops.” No end date is given.",
+    "Get Vibe desktop from the link in the thread: https://mistral.ai/products/vibe"
+  ],
+  "social_proof": [
+    {
+      "type": "x",
+      "url": "https://x.com/MistralAI/status/2124905610386780451",
+      "author": "Mistral AI",
+      "handle": "@MistralAI",
+      "text": "Last week, we launched a promo for a free trial of Vibe Pro for builders in Europe. We ran out of capacity in less than an hour. Today, we’re fixing that for good. No more capped drops. If you’re in Europe, you get a month of Vibe Pro for free. European product, European model, European inference. For European builders. Code: MISTRALVIBE. Link in thread."
+    }
+  ]
+}
