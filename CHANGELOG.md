@@ -8,7 +8,10 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 - **Test time-bomb guard (#782):** `test_community_offers.py` no longer
   mixes its fixed 2026-11-20 giveaway dates with the real clock, which had
   failed the required `validate` check and the scheduled deploy since
-  2026-11-21. The `validate` workflow now re-runs the Python and app unit
+  2026-11-21, and `app/tests/load-offers.test.mjs` now rebuilds the catalog
+  as of the committed `index.json`'s `generated_at` instead of the real
+  clock, so an offer expiring after the last regen no longer fails the
+  deploy's `npm test`. The `validate` workflow now re-runs the Python and app unit
   suites with the wall clock 400 days ahead via
   `scripts/ci/run-clock-shifted.sh` (a small LD_PRELOAD shim,
   `scripts/ci/clockshift.c`, built with the runner's C compiler), so a test

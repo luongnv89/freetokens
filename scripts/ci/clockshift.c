@@ -22,14 +22,15 @@
 #include <time.h>
 
 static long long offset_seconds(void) {
-    static long long cached = -1;
+    static long long cached = 0;
     static int ready = 0;
-    if (!ready) {
+    if (!__atomic_load_n(&ready, __ATOMIC_ACQUIRE)) {
         const char *days = getenv("CLOCKSHIFT_DAYS");
-        cached = days ? atoll(days) * 86400LL : 0;
-        ready = 1;
+        /* Racing first calls compute the same value; publish it before ready. */
+        __atomic_store_n(&cached, days ? atoll(days) * 86400LL : 0, __ATOMIC_RELAXED);
+        __atomic_store_n(&ready, 1, __ATOMIC_RELEASE);
     }
-    return cached;
+    return __atomic_load_n(&cached, __ATOMIC_RELAXED);
 }
 
 static int is_wall_clock(clockid_t id) {

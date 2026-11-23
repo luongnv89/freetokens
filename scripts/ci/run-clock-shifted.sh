@@ -14,6 +14,12 @@ if [[ "${1:-}" == "--days" ]]; then
   days="$2"
   shift 2
 fi
+if [[ ! "$days" =~ ^-?[0-9]+$ ]] || (( days > -2 && days < 2 )); then
+  # The self-check below allows one day of slack, so it cannot prove a
+  # shift smaller than two days.
+  echo "clockshift: --days must be an integer with |days| >= 2 (got $days)" >&2
+  exit 2
+fi
 if [[ "${1:-}" == "--" ]]; then shift; fi
 if [[ $# -eq 0 ]]; then
   echo "usage: $0 [--days N] -- <command> [args...]" >&2
@@ -23,7 +29,8 @@ fi
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 build="$(mktemp -d)"
 trap 'rm -rf "$build"' EXIT
-cc -shared -fPIC -O2 -o "$build/libclockshift.so" "$here/clockshift.c" -ldl
+# glibc marks the time pointers nonnull; keep the shim's NULL guards.
+cc -shared -fPIC -O2 -fno-delete-null-pointer-checks -o "$build/libclockshift.so" "$here/clockshift.c" -ldl
 
 export CLOCKSHIFT_DAYS="$days"
 export LD_PRELOAD="$build/libclockshift.so${LD_PRELOAD:+:$LD_PRELOAD}"
@@ -32,7 +39,12 @@ export LD_PRELOAD="$build/libclockshift.so${LD_PRELOAD:+:$LD_PRELOAD}"
 real_today="$(env -u LD_PRELOAD date -u +%F)"
 want="$(env -u LD_PRELOAD date -u -d "$real_today + $days days" +%F)"
 py_today="$(python3 -c 'import datetime as d; print(d.date.today(), d.datetime.now(d.timezone.utc).date())')"
-node_today="$(node -e 'const d = new Date(); console.log(d.toISOString().slice(0, 10), new Date(Date.now()).toISOString().slice(0, 10))')"
+# The validate job has no setup-node step; ubuntu-latest ships a node, but
+# skip that probe rather than fail if a runner ever lacks one.
+node_today=""
+if command -v node >/dev/null; then
+  node_today="$(node -e 'const d = new Date(); console.log(d.toISOString().slice(0, 10), new Date(Date.now()).toISOString().slice(0, 10))')"
+fi
 # A fixed identity: CI runners have no git user configured.
 git_epoch="$(GIT_COMMITTER_NAME=clockshift GIT_COMMITTER_EMAIL=clockshift@localhost \
   git var GIT_COMMITTER_IDENT | awk '{print $(NF-1)}')"
