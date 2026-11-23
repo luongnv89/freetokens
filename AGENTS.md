@@ -50,6 +50,10 @@ do not reference or run it.
 - Content gate: `python3 scripts/validate_offers.py`; Python unit tests:
   `python3 -m unittest discover -s tests -v` (CI runs the whole suite in the
   required `validate` check on every PR and before every deploy)
+- Dates in tests: never mix fixed calendar dates with the real clock; derive
+  dates from one injected `today` (pass `--today` to CLIs, `now` to build
+  helpers). CI re-runs both suites with the clock at +400 days
+  (`scripts/ci/run-clock-shifted.sh -- <command>`, #782).
 
 Adding an offer is unchanged by the migration: one YAML file in `offers/`
 (schema: docs/schema.md), verified against its `source_url`, then a PR.
