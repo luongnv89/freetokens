@@ -173,17 +173,26 @@ describe("malformed input fails naming file and field", () => {
 
 describe("generated artifacts vs committed index.json", () => {
   let index;
+  let committed;
   beforeAll(async () => {
+    committed = JSON.parse(
+      await readFile(path.join(REPO_ROOT, "index.json"), "utf8"),
+    );
     const out = await mkdtemp(path.join(tmpdir(), "ft-out-"));
-    index = await runPipeline({ offersDir: OFFERS_DIR, outDir: out });
+    // Regenerate as of the committed index's own build time, not the real
+    // clock (#782): active/expired statuses were stamped then, so a later
+    // clock would flip any offer that expired since and fail the comparison.
+    index = await runPipeline({
+      offersDir: OFFERS_DIR,
+      outDir: out,
+      now: new Date(committed.generated_at),
+    });
     globalThis.__ftOut = out;
   });
 
   it("offers.json is deep-equal to committed index.json ignoring generated_at", async () => {
-    const committed = JSON.parse(
-      await readFile(path.join(REPO_ROOT, "index.json"), "utf8"),
-    );
-    delete committed.generated_at;
+    const expected = structuredClone(committed);
+    delete expected.generated_at;
     const generated = structuredClone(index);
     delete generated.generated_at;
     // Listing order is newest-git-add first and differs between local and
@@ -198,7 +207,7 @@ describe("generated artifacts vs committed index.json", () => {
         .map(({ added_date: _added, ...rest }) => rest)
         .sort((a, b) => (a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0)),
     });
-    expect(bySlug(generated)).toEqual(bySlug(committed));
+    expect(bySlug(generated)).toEqual(bySlug(expected));
   });
 
   it("offers.jsonl has one valid object per line and line count equals count", async () => {
