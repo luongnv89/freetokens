@@ -1,0 +1,34 @@
+# Community offer: a promo code Mistral AI itself shared on X. NOT verified by
+# freetokens: added by Luong from the post link, never re-checked by the
+# daily-offer-check, never touched by the offer-hunter. Every term below is
+# quoted from @MistralAI's post:
+# https://x.com/MistralAI/status/2124905610386780451
+#   "Last week, we launched a promo for a free trial of Vibe Pro for builders in
+#    Europe. We ran out of capacity in less than an hour. Today, we're fixing
+#    that for good. No more capped drops. If you're in Europe, you get a month
+#    of Vibe Pro for free. European product, European model, European
+#    inference. For European builders. Code: MISTRALVIBE. Link in thread."
+# Thread replies by @MistralAI:
+#   "Claim offer here: https://admin.mistral.ai/subscription/upgrade/redeem?redeem_code=MISTRALVIBE"
+#   "Get Vibe desktop from here: https://mistral.ai/products/vibe"
+# The claim URL redirects (302) to auth.mistral.ai, i.e. it asks you to log in
+# (checked 2026-11-23). No end date is given, so expiry_date is null.
+# Replaces the LECHONK entry (mistral-vibe-pro-lechonk-code), expired by this
+# same post. shared_by_post_date: 2026-11-23 16:39 UTC.
+title: Mistral Vibe Pro free for 1 month — code MISTRALVIBE (Europe)
+provider: Mistral AI
+category: coding
+amount: One month of Vibe Pro free with code MISTRALVIBE (builders in Europe)
+expiry_date: null
+source_url: https://x.com/MistralAI/status/2124905610386780451
+verified_date: 2026-11-23
+verification: unverified
+review_status: unverified
+signup: required
+listing_type: community
+community_subtype: promo_code
+added_by: luong
+shared_by_handle: MistralAI
+shared_by_name: Mistral AI
+shared_by_post_date: 2026-11-23
+promo_code: MISTRALVIBE

@@ -1,9 +1,36 @@
 {
-  "generated_at": "2026-11-23T11:38:54Z",
-  "count": 345,
-  "active_count": 283,
+  "generated_at": "2026-11-23T19:22:38Z",
+  "count": 346,
+  "active_count": 284,
   "expired_count": 62,
   "offers": [
+    {
+      "slug": "mistral-vibe-pro-mistralvibe-code",
+      "title": "Mistral Vibe Pro free for 1 month — code MISTRALVIBE (Europe)",
+      "provider": "Mistral AI",
+      "category": "coding",
+      "amount": "One month of Vibe Pro free with code MISTRALVIBE (builders in Europe)",
+      "expiry_date": null,
+      "source_url": "https://x.com/MistralAI/status/2124905610386780451",
+      "verified_date": "2026-11-23",
+      "added_date": "2026-11-23",
+      "verification": "unverified",
+      "review_status": "unverified",
+      "signup": "required",
+      "status": "active",
+      "listing_type": "community",
+      "community": {
+        "subtype": "promo_code",
+        "added_by": "luong",
+        "shared_by": {
+          "handle": "MistralAI",
+          "name": "Mistral AI",
+          "post_url": "https://x.com/MistralAI/status/2124905610386780451",
+          "post_date": "2026-11-23"
+        },
+        "promo_code": "MISTRALVIBE"
+      }
+    },
     {
       "slug": "nvidia-build-kimi-k3-1-pro-free",
       "title": "Kimi K3.1 Pro Free on NVIDIA Build",
@@ -423,7 +450,7 @@
       "provider": "Mistral AI",
       "category": "coding",
       "amount": "Vibe Pro free for the first three months with code LECHONK (developers in Europe)",
-      "expiry_date": null,
+      "expiry_date": "2026-11-23",
       "source_url": "https://x.com/MistralAI/status/2122713540666806397",
       "verified_date": "2026-11-17",
       "added_date": "2026-11-17",

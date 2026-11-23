@@ -18,11 +18,16 @@
 # is not in Mistral's posts, so the entry does not state it (flagged to Luong).
 # shared_by_post_date: 2026-11-17 15:28 UTC, from the post's created_at at
 # https://api.fxtwitter.com/2/conversation/2122713540666806397
+# ENDED 2026-11-23: Mistral confirmed the end in
+# https://x.com/MistralAI/status/2124905610386780451 : "Last week, we launched
+# a promo for a free trial of Vibe Pro for builders in Europe. We ran out of
+# capacity in less than an hour." expiry_date set to that confirmation date.
+# Successor entry: mistral-vibe-pro-mistralvibe-code (code MISTRALVIBE).
 title: Mistral Vibe Pro free for 3 months — code LECHONK (Europe)
 provider: Mistral AI
 category: coding
 amount: Vibe Pro free for the first three months with code LECHONK (developers in Europe)
-expiry_date: null
+expiry_date: 2026-11-23
 source_url: https://x.com/MistralAI/status/2122713540666806397
 verified_date: 2026-11-17
 verification: unverified
