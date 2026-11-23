@@ -1,0 +1,13 @@
+# Hunted 2026-11-23 by offer-hunter; verified against https://build.nvidia.com/index.md
+# ("Use Inference Endpoints — Free inference with leading models: nemotron-3.5-super-vl-120b-a12b, nemotron-3.5-lightning-30b-a3b, kimi-k3.1-pro, nemotron-3-ultra-550b-a55b")
+# Lead: https://x.com/AGTPinsights/status/2118747781384810943
+title: Kimi K3.1 Pro Free on NVIDIA Build
+provider: NVIDIA
+category: api_provider
+amount: Free Kimi K3.1 Pro inference endpoint on build.nvidia.com for NVIDIA Developer Program members (trial service governed by the NVIDIA API Trial Terms of Service; for prototyping)
+expiry_date: null
+source_url: https://build.nvidia.com/moonshotai/kimi-k3_1-pro
+verified_date: 2026-11-23
+verification: social_proof
+review_status: under-review
+signup: required

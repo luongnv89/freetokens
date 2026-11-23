@@ -1,0 +1,28 @@
+{
+  "summary": "NVIDIA's API catalog at build.nvidia.com lists Kimi K3.1 Pro (added 11/04/2026) among its free inference endpoints. NVIDIA says Developer Program membership enables NVIDIA-hosted NIM APIs for development and testing, with free access for unlimited prototyping. The trial service is governed by the NVIDIA API Trial Terms of Service; the model is governed by the NVIDIA Open Model Agreement and the Kimi K3.1 Pro License.",
+  "claim_steps": [
+    "Join the NVIDIA Developer Program",
+    "Open the Kimi K3.1 Pro page on build.nvidia.com",
+    "Use the hosted free inference endpoint for prototyping"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://build.nvidia.com/index.md",
+      "title": "build.nvidia.com",
+      "text": "Use Inference Endpoints. Free inference with leading models: nemotron-3.5-super-vl-120b-a12b, nemotron-3.5-lightning-30b-a3b, kimi-k3.1-pro, nemotron-3-ultra-550b-a55b."
+    },
+    {
+      "type": "link",
+      "url": "https://build.nvidia.com/moonshotai/kimi-k3_1-pro",
+      "title": "Kimi K3.1 Pro",
+      "text": "The trial service is governed by the NVIDIA API Trial Terms of Service. Build.NVIDIA.com: 11/04/2026"
+    },
+    {
+      "type": "link",
+      "url": "https://developer.nvidia.com/nim",
+      "title": "NIM for Developers | NVIDIA Developer",
+      "text": "Get free access to NIM API endpoints for unlimited prototyping, powered by DGX Cloud. Your membership to the NVIDIA Developer Program enables NVIDIA-hosted NIM APIs and containers for development and testing."
+    }
+  ]
+}
