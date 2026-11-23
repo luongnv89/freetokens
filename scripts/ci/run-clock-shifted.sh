@@ -33,7 +33,10 @@ real_today="$(env -u LD_PRELOAD date -u +%F)"
 want="$(env -u LD_PRELOAD date -u -d "$real_today + $days days" +%F)"
 py_today="$(python3 -c 'import datetime as d; print(d.date.today(), d.datetime.now(d.timezone.utc).date())')"
 node_today="$(node -e 'const d = new Date(); console.log(d.toISOString().slice(0, 10), new Date(Date.now()).toISOString().slice(0, 10))')"
-git_today="$(git -c log.showSignature=false var GIT_COMMITTER_IDENT | awk '{print $(NF-1)}' | xargs -I{} date -u -d @{} +%F)"
+# A fixed identity: CI runners have no git user configured.
+git_epoch="$(GIT_COMMITTER_NAME=clockshift GIT_COMMITTER_EMAIL=clockshift@localhost \
+  git var GIT_COMMITTER_IDENT | awk '{print $(NF-1)}')"
+git_today="$(env -u LD_PRELOAD date -u -d "@$git_epoch" +%F)"
 for got in $py_today $node_today $git_today; do
   # Allow one day of slack: the local zone and UTC can straddle midnight.
   if [[ "$got" != "$want" && "$got" != "$(env -u LD_PRELOAD date -u -d "$want - 1 day" +%F)" && "$got" != "$(env -u LD_PRELOAD date -u -d "$want + 1 day" +%F)" ]]; then
