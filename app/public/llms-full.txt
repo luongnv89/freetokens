@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-23T11:28:42Z — 126 of 282 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-23T11:38:54Z — 126 of 283 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -945,6 +945,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/nvidia-inception-startup-program.html
 - Summary: NVIDIA Inception is a free, rolling startup program (verified Sep 13, 2026): free cloud credits from NVIDIA and partners, free self-paced technical courses and discounted expert-led workshops, latest SDKs and model libraries, preferred pricing on NVIDIA hardware/software, investor exposure via Capital Connect, and go-to-market support. Any funding stage may apply; no application or membership fees, equity requirements, deadlines, or cohorts. Members must maintain a working website, be officially incorporated, be less than 10 years old, have a clear use case for NVIDIA technology, and be actively operated by at least one founder. The application requires a company pitch deck. The embedded Sep 13, 2026 X post is historical corroboration; its developer wording is not current official eligibility. Consulting/outsourced-development firms, cryptocurrency-associated companies, cloud providers, resellers/distributors, and public companies are ineligible. Applications are reviewed by NVIDIA; Capital Connect access depends on eligibility. Distinct from the NVIDIA NIM free trial and Inception Labs listings.
 - Claim steps: Confirm an incorporated startup under 10 years old with a working website, a clear NVIDIA-technology use case, and active operation by at least one founder. | Ineligible: consulting/outsourced-development firms, cryptocurrency-associated companies, cloud providers, resellers/distributors, and public companies. | Apply at nvidia.com/en-us/startups with business/product details and a company pitch deck; no fees, deadlines, or cohorts. | If accepted, access free cloud credits, free self-paced courses and discounted expert-led workshops, SDKs, and preferred hardware pricing; Capital Connect investor exposure depends on eligibility.
+### Kimi K3.1 Pro Free on NVIDIA Build
+- Provider: NVIDIA
+- Category: api_provider
+- Amount: Free Kimi K3.1 Pro inference endpoint on build.nvidia.com for NVIDIA Developer Program members (trial service governed by the NVIDIA API Trial Terms of Service; for prototyping)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-23 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://build.nvidia.com/moonshotai/kimi-k3_1-pro
+- Page: https://freetokens.custats.info/offers/nvidia-build-kimi-k3-1-pro-free.html
+- Summary: NVIDIA's API catalog at build.nvidia.com lists Kimi K3.1 Pro (added 11/04/2026) among its free inference endpoints. NVIDIA says Developer Program membership enables NVIDIA-hosted NIM APIs for development and testing, with free access for unlimited prototyping. The trial service is governed by the NVIDIA API Trial Terms of Service; the model is governed by the NVIDIA Open Model Agreement and the Kimi K3.1 Pro License.
+- Claim steps: Join the NVIDIA Developer Program | Open the Kimi K3.1 Pro page on build.nvidia.com | Use the hosted free inference endpoint for prototyping
 ### Nscale Serverless Inference — $5 Free Credit
 - Provider: Nscale
 - Category: api_provider
@@ -1224,16 +1234,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/kiro-startup-credits.html
 - Summary: Kiro for Startups gives early-stage to Series A startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Applicants must be 18 or older. Excluded residences: Argentina, Belarus, Brazil, China/GCR, Cuba, France, Germany, Iran, Italy, Mexico, North Korea, Poland, Russia, Spain, Syria, the region of Crimea, the so-called Donetsk People's Republic region (DNR), the so-called Luhansk People's Republic region (LNR), and the United Arab Emirates. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center. Choosing a plan above Pro+ or exceeding tier users can incur charges. Once credits are depleted, the AWS account automatically switches to standard Kiro Pro+ monthly billing on its card; continued use after expiry can also incur charges.
 - Claim steps: Confirm early-stage to Series A eligibility, age 18+, and residence outside the excluded locations listed above (including France and Germany); active AWS Activate credit holders are not eligible. | Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain. | Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30). | On approval, credits are deposited to the AWS account and activate on provisioning. | Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits. | Stay within the chosen tier and Pro+ plan. Monitor credits and stop/cancel unwanted billable access before depletion or expiry: standard Kiro Pro+ monthly billing starts automatically when credits run out.
-### Kimi API Free Trial (RMB 15)
-- Provider: Moonshot AI
-- Category: api_provider
-- Amount: RMB 15 API voucher for new users registering with a mainland China mobile number; valid 3 months from issuance
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-23 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://www.kimi.com/en/help/kimi-api/api-free-trial
-- Page: https://freetokens.custats.info/offers/kimi-api-free-trial.html
-- Summary: Kimi API grants newly registered users an RMB 15 voucher, valid for 3 months from issue and applied automatically to API usage before any top-up balance. Eligibility requires registering with a mainland China mobile number.
-- Claim steps: Register on the Kimi platform with a mainland China mobile number. | The RMB 15 voucher is granted automatically — no manual activation; it deducts before your top-up balance. | Track remaining voucher credit on the Cost Details page in the console.
 
 ## Community offers (not verified by freetokens)
 
