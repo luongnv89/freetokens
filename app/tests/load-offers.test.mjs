@@ -182,11 +182,26 @@ describe("generated artifacts vs committed index.json", () => {
     // Regenerate as of the committed index's own build time, not the real
     // clock (#782): active/expired statuses were stamped then, so a later
     // clock would flip any offer that expired since and fail the comparison.
-    index = await runPipeline({
-      offersDir: OFFERS_DIR,
-      outDir: out,
-      now: new Date(committed.generated_at),
-    });
+    try {
+      index = await runPipeline({
+        offersDir: OFFERS_DIR,
+        outDir: out,
+        now: new Date(committed.generated_at),
+      });
+    } catch (err) {
+      // An offer verified after the last regen is a stale index.json, not a
+      // bad verified_date: never backdate it, regenerate the index.
+      if (/verified_date is in the future/.test(String(err?.message))) {
+        throw new Error(
+          `committed index.json (generated_at ${committed.generated_at}) is ` +
+            "older than offers/ — regenerate it: " +
+            "(cd app && node scripts/load-offers.mjs --index-json ../index.json)" +
+            ` [${err.message}]`,
+          { cause: err },
+        );
+      }
+      throw err;
+    }
     globalThis.__ftOut = out;
   });
 

@@ -14,6 +14,16 @@
  * Python (time.time, date.today, datetime.now), Node (Date, Date.now) and git
  * all read the wall clock through these libc calls. Statically linked Go
  * binaries such as esbuild do not, which is fine: they never read dates.
+ *
+ * Known limits (none affects the suites today):
+ *  - A child started with a scrubbed environment (no LD_PRELOAD or
+ *    CLOCKSHIFT_DAYS) runs on the real clock: a coverage gap, never a false
+ *    failure. Pass dict(os.environ, ...) / {...process.env} to keep the shift.
+ *  - Absolute REALTIME deadlines (pthread_cond_timedwait on the default
+ *    clock, sem_timedwait) are not compensated and would land N days out.
+ *    Python and Node time their waits on monotonic clocks.
+ *  - Only fixed dates less than the shift (400 days) ahead are caught; a
+ *    fuse set further out still detonates later.
  */
 #define _GNU_SOURCE
 #include <dlfcn.h>
