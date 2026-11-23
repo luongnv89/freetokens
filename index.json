@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-20T02:35:18Z",
-  "count": 339,
-  "active_count": 280,
-  "expired_count": 59,
+  "generated_at": "2026-11-23T02:08:35Z",
+  "count": 340,
+  "active_count": 278,
+  "expired_count": 62,
   "offers": [
     {
       "slug": "ona-for-open-source",
@@ -311,7 +311,7 @@
       "verification": "unverified",
       "review_status": "unverified",
       "signup": "required",
-      "status": "active",
+      "status": "expired",
       "listing_type": "community",
       "community": {
         "subtype": "giveaway",
@@ -652,7 +652,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "morph-startup-credits",
@@ -2467,7 +2467,7 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "required",
-      "status": "active"
+      "status": "expired"
     },
     {
       "slug": "cerebras-yc-startup-deal",
@@ -5138,6 +5138,21 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "nvidia-build-kimi-k3-1-pro-free",
+      "title": "Kimi K3.1 Pro Free on NVIDIA Build",
+      "provider": "NVIDIA",
+      "category": "api_provider",
+      "amount": "Free Kimi K3.1 Pro inference endpoint on build.nvidia.com for NVIDIA Developer Program members (trial service governed by the NVIDIA API Trial Terms of Service; for prototyping)",
+      "expiry_date": null,
+      "source_url": "https://build.nvidia.com/moonshotai/kimi-k3_1-pro",
+      "verified_date": "2026-11-23",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

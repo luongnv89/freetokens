@@ -2,11 +2,21 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-20T02:35:18Z — 128 of 280 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-23T02:08:35Z — 128 of 278 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Kimi K3.1 Pro Free on NVIDIA Build
+- Provider: NVIDIA
+- Category: api_provider
+- Amount: Free Kimi K3.1 Pro inference endpoint on build.nvidia.com for NVIDIA Developer Program members (trial service governed by the NVIDIA API Trial Terms of Service; for prototyping)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-23 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://build.nvidia.com/moonshotai/kimi-k3_1-pro
+- Page: https://freetokens.custats.info/offers/nvidia-build-kimi-k3-1-pro-free.html
+- Summary: NVIDIA's API catalog at build.nvidia.com lists Kimi K3.1 Pro (added 11/04/2026) among its free inference endpoints. NVIDIA says Developer Program membership enables NVIDIA-hosted NIM APIs for development and testing, with free access for unlimited prototyping. The trial service is governed by the NVIDIA API Trial Terms of Service; the model is governed by the NVIDIA Open Model Agreement and the Kimi K3.1 Pro License.
+- Claim steps: Join the NVIDIA Developer Program | Open the Kimi K3.1 Pro page on build.nvidia.com | Use the hosted free inference endpoint for prototyping
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -1164,15 +1174,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/meshy-free-plan.html
 - Summary: Meshy's Free web-app plan grants 100 credits every month for its 3D-generation tools (text-to-3D, image-to-3D, AI texturing), resetting at 00:00 UTC on the first of each month. Free includes one concurrent task, low queue priority, and ten Meshy 6 Lite model downloads per month; API access is not included. No credit card required; free-plan outputs are licensed under CC BY 4.0 (commercial use allowed with attribution).
 - Claim steps: Sign up free at https://www.meshy.ai — no credit card required. | Receive 100 credits/month; credits reset at 00:00 UTC on the first day of each month. | Use the web app within the Free limits: one concurrent task, low queue priority, and ten Meshy 6 Lite model downloads/month. The Free plan does not include API access. | Free-plan outputs carry a CC BY 4.0 license (commercial use allowed with attribution).
-### Maritaca AI S5 Free — Limited-Time Free Model
-- Provider: Maritaca AI
-- Category: api_provider
-- Amount: S5-free model with no token charges for a limited time (text only; 60 RPM, 256k input and 256k output TPM)
-- Status: active — enrollment deadline: 2026-11-20
-- Last checked: 2026-11-20 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.maritaca.ai/pt/precos
-- Page: https://freetokens.custats.info/offers/maritaca-ai-s5-free.html
-- Summary: Maritaca AI's S5-free model is free for a limited time with no token charges. It accepts text only and excludes the Batch API, Flex and built-in tools. Limits are fixed across all tiers at 60 requests per minute and 256k input plus 256k output tokens per minute. Maritaca describes it as a temporary launch offer that may end at any time and recommends S5 for production use.
 ### LlamaParse Startup Offer
 - Provider: LlamaIndex
 - Category: startup_program
@@ -1243,6 +1244,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/krafton-raon-1-mini-api-free-preview.html
 - Summary: KRAFTON offers its Raon-1 mini preview model (30B-A4B) through an API that is free for a limited time to celebrate the model's release. Per-user limits on token usage and the number of requests may apply, and any future charges will be announced separately. No end date is given.
 - Claim steps: Apply on the Raon page with your name, email, affiliation, role and intended use. | KRAFTON emails you an invitation to the Raon console right away. | Open the invitation, verify your email and set a password; then issue an API key, try the Playground and read the API docs.
+### Kong for Startups
+- Provider: Kong
+- Category: startup_program
+- Amount: Up to $100K Kong Konnect Plus credits (12 months; typically $25K–$100K) plus 50% off list for 2 years after; spend across AI Gateway, API Gateway, Mesh, Event Gateway
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-20 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://konghq.com/solutions/startup-program
+- Page: https://freetokens.custats.info/offers/kong-for-startups.html
+- Summary: Kong for Startups gives selected early-stage AI/API teams up to $100,000 in Kong Konnect Plus credits, valid 12 months from the date they land in the Konnect org (unused credits do not roll over). Most early-stage startups receive between $25K and $100K upfront. Credits spend across AI Gateway, API Gateway, Metering and Billing, Mesh, and Event Gateway. After credits expire or for usage beyond the balance, accepted startups pay 50% of Konnect Plus list pricing for 24 months. Eligibility: typically pre-seed through Series A, under $10M total funding, in production or launching within 6 months. YC companies are pre-qualified for the full $100K plus the two-year discount. Kong reviews applications (typically within 5 business days); credits land within 24 hours of acceptance. Existing Kong customers who qualify can have their balance increased.
+- Claim steps: Apply on konghq.com/solutions/startup-program with what you are building and which Kong products you will use (about 5 minutes). YC companies should indicate their batch. | Wait for Kong review (typically within 5 business days). | On acceptance, credits land in your Konnect org within 24 hours; the 50% discount auto-applies on invoices after credits run out.
 
 ## Community offers (not verified by freetokens)
 
@@ -1251,7 +1262,6 @@ Promo codes and giveaways a person shared in a public post. freetokens does not 
 - [Devin Bots giveaway — pitch Poke for up to $10,000 in credits](https://freetokens.custats.info/offers/devin-bots-poke-giveaway.html): Cognition (Devin) — up to $10,000 per account (10,000 accounts) · community giveaway — not verified by freetokens · shared by @walden_yan (Walden) on 2026-11-18: https://x.com/walden_yan/status/2123163580778635579 · 10000 codes · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
 - [Context.dev 10,000 free API credits — code YAHIAISINFINLANDONHISBIRTHDAY10K](https://freetokens.custats.info/offers/context-dev-10k-credits-birthday-code.html): Context.dev — 10,000 free Context.dev API credits with code YAHIAISINFINLANDONHISBIRTHDAY10K (“10,000 web searches”, “10,000 web scrapes”, “5000 company searches”, “1000 people searches”, “so much more”) · community promo_code — not verified by freetokens · shared by @mynameisyahia (Yahia Bakour) on 2026-11-19: https://x.com/mynameisyahia/status/2123294435694043603 · code: YAHIAISINFINLANDONHISBIRTHDAY10K · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
 - [Mistral Vibe Pro free for 3 months — code LECHONK (Europe)](https://freetokens.custats.info/offers/mistral-vibe-pro-lechonk-code.html): Mistral AI — Vibe Pro free for the first three months with code LECHONK (developers in Europe) · community promo_code — not verified by freetokens · shared by @MistralAI (Mistral AI) on 2026-11-17: https://x.com/MistralAI/status/2122713540666806397 · code: LECHONK · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
-- [Devin Max giveaway — 10 codes for one month each](https://freetokens.custats.info/offers/devin-max-one-month-code-giveaway.html): Cognition (Devin) — one month of Devin Max per code ($200 value each) · community giveaway — not verified by freetokens · shared by @ben_ai_eng (Ben Newell) on 2026-11-17: https://x.com/ben_ai_eng/status/2122616807404052781 · 10 codes · entries close 2026-11-20 · time zone: no time zone given · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
 
 ## Pages
 
