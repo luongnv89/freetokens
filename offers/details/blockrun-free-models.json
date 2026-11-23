@@ -1,0 +1,21 @@
+{
+  "summary": "BlockRun serves 9 open-source models free with no API key and no wallet. Free capacity is borrowed, not reserved: when a model is saturated the request may be answered by another free model, so check the returned model field. Free models run on upstream free tiers whose terms may let the host use prompts to improve its service, so avoid sending sensitive data. Paid models are pay-per-call from a wallet or with an API key.",
+  "claim_steps": [
+    "Call a free model listed on blockrun.ai/free through the BlockRun API without a key",
+    "Read the returned model field to see which free model answered"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://blockrun.ai/free",
+      "title": "Free LLM API — Llama, Nemotron, vision models | BlockRun",
+      "text": "9 open-source models, free through BlockRun. No key. No wallet. Free capacity is borrowed, not reserved. Free models are served on free tiers whose terms may let the host use prompts to improve its service."
+    },
+    {
+      "type": "link",
+      "url": "https://github.com/mvalentsev/awesome-free-ai-coding",
+      "title": "awesome-free-ai-coding: Legal free LLM APIs & coding agents",
+      "text": "BlockRun (free models): Keyless OpenAI-compatible chat and tools. Newly added 2026-11-19, provisional."
+    }
+  ]
+}

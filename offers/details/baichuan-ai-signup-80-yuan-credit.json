@@ -1,0 +1,21 @@
+{
+  "summary": "Baichuan AI's official pricing page states that users newly registered from the afternoon of 22 May 2024 receive ¥80 in free credit (raised from ¥8), equivalent to 10 million Baichuan 2-Turbo tokens, valid for 3 months and effective upon account registration. Baichuan2-Turbo (32k context) is priced at ¥0.008 per 1,000 tokens for input and output.",
+  "claim_steps": [
+    "Register a new account on the Baichuan AI platform (platform.baichuan-ai.com)",
+    "The ¥80 free credit takes effect on registration and is valid for 3 months"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://platform.baichuan-ai.com/prices",
+      "title": "百川大模型-汇聚世界知识 创作妙笔生花-百川智能",
+      "text": "2024 年 5 月 22 日下午起新注册的用户，免费赠送金由 8 元提升至 80 元，相当于Baichuan 2 -Turbo 1000 万 Tokens，有效期 3 个月，账号注册后生效。 (Users newly registered from the afternoon of 2024-05-22: free credit raised from ¥8 to ¥80, equivalent to 10 million Baichuan 2-Turbo tokens, valid 3 months, effective on registration.) Baichuan2-Turbo: ¥0.008 per 1,000 tokens."
+    },
+    {
+      "type": "link",
+      "url": "https://dev.to/shiva_prasad_cc614c6ee026/new-free-llm-api-credits-added-in-mid-november-2026-4fbh",
+      "title": "New free LLM API credits added in mid-November 2026",
+      "text": "Baichuan AI: New accounts receive a one-time ¥80 sign-up credit, about 10 million Baichuan2-Turbo tokens, valid for three months. Added Nov 16."
+    }
+  ]
+}
