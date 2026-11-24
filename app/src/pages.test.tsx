@@ -394,7 +394,11 @@ describe("archive layout at 320 px (#129)", () => {
 
 describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
   it("server-renders real offer content for JS-off deep links", () => {
-    const live = index.offers[0];
+    // Pick a live offer: offers[0] can be one that is expired under the
+    // CI +400-day clock (#783), which renders the ended state with no claim link.
+    const live = index.offers.find((o) => o.status !== "expired");
+    expect(live).toBeDefined();
+    if (!live) return;
     const markup = renderToStaticMarkup(
       <OfferDetailPage index={index} slug={live.slug} />,
     );
