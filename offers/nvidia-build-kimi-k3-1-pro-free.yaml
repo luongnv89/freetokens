@@ -7,7 +7,7 @@ category: api_provider
 amount: Free Kimi K3.1 Pro inference endpoint on build.nvidia.com for NVIDIA Developer Program members (trial service governed by the NVIDIA API Trial Terms of Service; for prototyping)
 expiry_date: null
 source_url: https://build.nvidia.com/moonshotai/kimi-k3_1-pro
-verified_date: 2026-11-23
+verified_date: 2026-11-24
 verification: social_proof
 review_status: under-review
 signup: required

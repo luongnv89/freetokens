@@ -54,6 +54,12 @@
       "url": "https://help.figma.com/hc/en-us/articles/360041061214-verify-your-education-status",
       "title": "Figma for Education",
       "text": "Education plan users get 3,000 AI credits per month."
+    },
+    {
+      "type": "link",
+      "url": "https://help.figma.com/hc/en-us/articles/360041061214-Verify-your-education-status",
+      "title": "Figma for Education – Figma Learn - Help Center",
+      "text": "One year for students, two years for educators. Verified bootcamp/online students: Six months. Education plan users get 3,000 AI credits per month. K-12 and high school students and educators do not have access to AI tools, Figma Make, or Figma Sites"
     }
   ]
 }

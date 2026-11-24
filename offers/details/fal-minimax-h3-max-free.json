@@ -1,10 +1,10 @@
 {
-  "summary": "fal offers MiniMax H3 Max in its browser sandbox with five free videos per day, each a 5-second 768p clip with native audio. Both text-to-video (T2V) and image-to-video (I2V) are supported; fal advertises a 5-second video generated in under 3 seconds and identifies the leaderboard model as 768p. A fal account and sign-in are required; no installation or subscription is needed. The allowance resets every 24 hours. Announced by fal's Blendi (@blendibyl) on X. The free daily sandbox tier runs at 768p. API calls and usage beyond the sandbox allowance are pay-per-use; the daily free browser allowance is not a free API quota.",
+  "summary": "fal offers MiniMax H3 Max in its browser sandbox with free runs that depend on the active offer and your eligibility (the generator shows your remaining allowance and any refill time), each a 5-second 768p clip with native audio. Both text-to-video (T2V) and image-to-video (I2V) are supported; fal advertises a 5-second video generated in under 3 seconds and identifies the leaderboard model as 768p. A fal account and sign-in are required; no installation or subscription is needed. Announced by fal's Blendi (@blendibyl) on X. The free sandbox tier runs at 768p. API calls and usage beyond the sandbox allowance are pay-per-use; the free browser allowance is not a free API quota.",
   "claim_steps": [
     "Open https://fal.ai/minimax-h3-max and create a fal account or sign in.",
     "Describe the shot, camera move and sound, or attach an image for image-to-video.",
-    "Generate up to five free 768p sandbox clips per day (allowance resets every 24 hours), each a 5-second clip with synchronized audio. API calls are pay-per-use, not covered by this free browser allowance.",
-    "The free allowance resets every 24 hours; no subscription or installation is required."
+    "Generate free 768p sandbox clips while free runs are available (the generator shows your remaining allowance and any refill time), each a 5-second clip with synchronized audio. API calls are pay-per-use, not covered by this free browser allowance.",
+    "Free runs depend on the active offer and your eligibility; no subscription or installation is required."
   ],
   "social_proof": [
     {
@@ -18,7 +18,7 @@
       "type": "link",
       "url": "https://fal.ai/minimax-h3-max",
       "title": "MiniMax H3 Max: AI Video Generator, Ranked #1, Post-Trained by fal | fal",
-      "text": "Generate a 5-second, 768p clip on this page using available free runs or your fal account credits."
+      "text": "Generate on this page with any available free runs or your fal account credits. The generator shows any free allowance and refill time. Free runs depend on the active offer and your eligibility; it shows your remaining allowance and any refill time before you generate."
     }
   ]
 }

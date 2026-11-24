@@ -9,8 +9,8 @@
     {
       "type": "link",
       "url": "https://docs.hetzner.com/general/company-and-policy/experiments/inference/",
-      "title": "Inference API | Hetzner Docs",
-      "text": "As long as the Inference API remains in experimental status, it is free of charge. Should this status change, we will notify you in advance via email ... Current limits ... 60s: 4M input tokens / 100k output tokens ... 10 requests per 60s."
+      "title": "Inference API - Hetzner Docs",
+      "text": "Note: This Experiment will end on 8 December 2026. ... As long as the Inference API remains in experimental status, it is free of charge. ... Timeframe Input Tokens Output Tokens 60s 4M 100k ... Requests 60s 10"
     }
   ]
 }
