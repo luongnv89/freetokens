@@ -403,6 +403,7 @@ describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
       live,
       "index.json needs at least one live offer without expiry_date for this test",
     ).toBeDefined();
+    // Unreachable after the expect above; only narrows the type for TypeScript.
     if (!live) return;
     const markup = renderToStaticMarkup(
       <OfferDetailPage index={index} slug={live.slug} />,
