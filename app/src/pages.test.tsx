@@ -394,7 +394,17 @@ describe("archive layout at 320 px (#129)", () => {
 
 describe("OfferDetailPage (F2 shell, #123 / #128)", () => {
   it("server-renders real offer content for JS-off deep links", () => {
-    const live = index.offers[0];
+    // #791: an undated offer is live under any clock (CI also runs +400 days),
+    // so the live-state assertions below cannot hit the ended state.
+    const live = index.offers.find(
+      (o) => o.expiry_date == null && o.status !== "expired",
+    );
+    expect(
+      live,
+      "index.json needs at least one live offer without expiry_date for this test",
+    ).toBeDefined();
+    // Unreachable after the expect above; only narrows the type for TypeScript.
+    if (!live) return;
     const markup = renderToStaticMarkup(
       <OfferDetailPage index={index} slug={live.slug} />,
     );
