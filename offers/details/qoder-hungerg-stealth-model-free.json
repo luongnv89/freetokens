@@ -1,0 +1,24 @@
+{
+  "summary": "HungerG is a stealth model whose identity has not been disclosed. From November 23, 2026 at 24:00 to November 30, 2026 at 24:00 Singapore Time (UTC+8), new and existing individual Qoder International users (Free, Pro Trial, Lite, Pro, Pro+ and Ultra plans) can call HungerG for free with no Credits consumed and no daily usage limit, at any thinking intensity. No claim is needed. Only Qoder and Qoder IDE are covered; the Qoder JetBrains plugin, Qoder CLI, QoderWake, Qoder Cloud Agents, Qoder Mobile and the Qoder web app are not. Teams and Enterprise subscribers are ineligible. Requests may slow down or queue at peak times, with paid subscribers getting higher queue priority. Calls to other models invoked at runtime are billed at standard rates, and after the promotion HungerG is billed at its published Credit rate.",
+  "claim_steps": [
+    "Create or sign in to a Qoder International individual account.",
+    "Update to the latest version of Qoder or Qoder IDE.",
+    "Select HungerG in the model picker.",
+    "Use the model; calls consume no Credits during the promotion."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://docs.qoder.com/events/hungerg-free",
+      "title": "HungerG: Try the Stealth Model Free for a Limited Time - Qoder",
+      "text": "HungerG is a stealth model whose identity has yet to be disclosed. From November 23, 2026 at 24:00 to November 30, 2026 at 24:00 (Singapore Time, UTC+8), all new and existing individual users of Qoder International can try HungerG for free for a limited time. During the promotion, calls to HungerG consume no Credits and have no daily usage limit."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/ai_for_success/status/2124921314234548291",
+      "author": "AshutoshShrivastava",
+      "text": "HungerG is an anonymous AI model on Qoder that's FREE to use right now. I'm going to test it on a few 3D and interactive builds and see how it works out. still no idea which lab is behind it. any guesses?",
+      "handle": "@ai_for_success"
+    }
+  ]
+}

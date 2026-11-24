@@ -2,11 +2,31 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-23T19:22:38Z — 127 of 284 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-24T02:05:40Z — 126 of 283 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### Telnyx Pretrial Account — $25 AI Credits
+- Provider: Telnyx
+- Category: api_provider
+- Amount: $25 in AI credits on sign-up, no credit card or payment setup, usable across the Telnyx AI product suite (Telnyx Inference, AI Assistants and more) plus one free US local number; pretrial accounts cannot top up and usage stops when the credit runs out or the time window shown in the portal ends
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-24 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://support.telnyx.com/en/articles/14327893-telnyx-pretrial-accounts
+- Page: https://freetokens.custats.info/offers/telnyx-pretrial-25-ai-credits.html
+- Summary: Telnyx pretrial accounts get $25 in AI credits at sign-up with no credit card, no payment setup and no commitment. The credit covers the Telnyx AI product suite (examples named: Telnyx Inference, AI Assistants) and the account includes one US local phone number at no cost. Pretrial accounts are limited to the AI product suite and that one number, cannot top up their balance, and AI usage stops once the credit is exhausted. The portal shows remaining AI credits and the days left to use them; no fixed number of days is stated. Upgrading to a full account is done from the portal with LinkedIn or GitHub identity verification.
+- Claim steps: Register at telnyx.com/sign-up with your email address | Log in with the magic link sent to your inbox | Use the $25 AI credit on Telnyx AI products (Inference, AI Assistants); check remaining credit and days left in the portal | Optional: upgrade via profile icon > Account Level > Upgrade, verifying identity with LinkedIn or GitHub
+### Qoder HungerG Stealth Model — Free for a Limited Time
+- Provider: Qoder
+- Category: coding
+- Amount: Free HungerG stealth-model calls in Qoder and Qoder IDE (no Credits consumed, no daily usage limit) for new and existing Qoder International individual users, Nov 23–30, 2026 (SGT); requests may queue at peak times
+- Status: active — enrollment deadline: 2026-11-30
+- Last checked: 2026-11-24 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://docs.qoder.com/events/hungerg-free
+- Page: https://freetokens.custats.info/offers/qoder-hungerg-stealth-model-free.html
+- Summary: HungerG is a stealth model whose identity has not been disclosed. From November 23, 2026 at 24:00 to November 30, 2026 at 24:00 Singapore Time (UTC+8), new and existing individual Qoder International users (Free, Pro Trial, Lite, Pro, Pro+ and Ultra plans) can call HungerG for free with no Credits consumed and no daily usage limit, at any thinking intensity. No claim is needed. Only Qoder and Qoder IDE are covered; the Qoder JetBrains plugin, Qoder CLI, QoderWake, Qoder Cloud Agents, Qoder Mobile and the Qoder web app are not. Teams and Enterprise subscribers are ineligible. Requests may slow down or queue at peak times, with paid subscribers getting higher queue priority. Calls to other models invoked at runtime are billed at standard rates, and after the promotion HungerG is billed at its published Credit rate.
+- Claim steps: Create or sign in to a Qoder International individual account. | Update to the latest version of Qoder or Qoder IDE. | Select HungerG in the model picker. | Use the model; calls consume no Credits during the promotion.
 ### Zed Pro for Students
 - Provider: Zed
 - Category: student
@@ -125,16 +145,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/vercel-reflection-beam-free.html
 - Summary: Vercel's AI Gateway offers Reflection AI's Beam 1.0, formerly the stealth model stealth/cat-jam, free for a limited time during its launch period when Reflection AI serves the request. Beam is an open-weight (Apache 2.0) reasoning model for coding and agentic work, with 501B total and 23B active parameters, a 1M-token context, up to 131K output tokens, tool calling and structured outputs. Use reflection/beam-free, which stops serving when the offer ends, so it cannot turn into a bill. reflection/beam is also free when routed to Reflection, but switches to paid pricing when the offer ends, and other providers serving it bill at their own rates. Use is subject to Reflection's terms and privacy policy; Vercel's live endpoint data marks Reflection as neither zero-data-retention nor no-training, so avoid sensitive inputs. No end date is stated. Whether a payment method is needed to create an AI Gateway key was not tested.
 - Claim steps: Create a Vercel account and an AI Gateway API key. | Call model reflection/beam-free through the AI SDK, Chat Completions, Responses or Anthropic Messages API, or a coding agent connected to AI Gateway (npx vercel ai-gateway setup for Claude Code, Codex or Hermes). | Prefer reflection/beam-free: it stops serving when the free period ends instead of billing. If you use reflection/beam, pin provider reflection with only in the gateway provider options, and expect paid pricing after the launch period. | Reflection's terms and privacy policy apply; its endpoint is not marked zero-data-retention or no-training, so avoid sensitive code or data.
-### Parallel Decisions Fast Free (Vercel AI Gateway)
-- Provider: Vercel
-- Category: api_provider
-- Amount: Parallel Decisions Fast (parallel/parallel-decisions-fast) free on AI Gateway through November 23, 2026. It is a web-search decision model that returns probabilities and cited evidence. No separate Parallel account is required.
-- Status: active — enrollment deadline: 2026-11-23
-- Last checked: 2026-11-23 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://vercel.com/changelog/parallel-decisions-now-available-on-ai-gateway-for-free
-- Page: https://freetokens.custats.info/offers/vercel-parallel-decisions-fast-free.html
-- Summary: Vercel published this changelog entry on November 13, 2026. Parallel Decisions Fast, a model from Parallel, is available on Vercel AI Gateway and is free through November 23, 2026. It searches the live web to answer typed questions about companies, products, policies, and other changing information, and it returns probabilities with cited evidence. It supports three question types: boolean, choice, and score. Use the model name parallel/parallel-decisions-fast. No separate Parallel account is required. AI Gateway records these requests in logs and spend budgets alongside other model requests.
-- Claim steps: Sign in to Vercel and open AI Gateway | Call the model parallel/parallel-decisions-fast through AI Gateway (AI SDK or OpenAI-compatible API) before November 23, 2026
 ### Vercel for Startups — Up to $30K Platform Credits
 - Provider: Vercel
 - Category: startup_program
@@ -1224,16 +1234,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/kiro-students-1000-credits-month.html
 - Summary: Kiro Students gives eligible students at participating universities 1,000 credits per month for one year at no cost, including premium models and Kiro Web. Amazon's September 2026 announcement expands the program to 132 universities across 18 countries (a 12x scale-up from the 11-university pilot). Applicants must be at least 18, use a participating university email, and verify enrollment through SheerID. No credit card is required. Credits do not roll over, add-ons are unavailable, and the account downgrades to Kiro Free after the benefit period. Kiro enables content collection for service improvement by default for Free Tier and individual users; this content may be used for model training, and users can opt out.
 - Claim steps: Open Kiro Students and sign up or log in with Google, GitHub, or AWS Builder ID using an eligible university-affiliated email. | Open the account page and select the “You are eligible for Kiro Students” verification banner. | Verify student status through SheerID; proof such as a student ID or enrollment letter may be requested. | After approval, use 1,000 credits per month for 12 months. Unused credits do not roll over. | To opt out of content use, open Settings → User → Application → Telemetry and Content, then disable Content Collection for Service Improvement.
-### Kiro Startup Credits — up to 1 year Pro+
-- Provider: Kiro
-- Category: startup_program
-- Amount: Up to 1 year of Kiro Pro+ credits (Starter ≤2 users / Growth ≤10 / Scale ≤30); credits expire 1 year after issuance; AWS Activate credit holders not eligible
-- Status: active — enrollment deadline: 2026-12-31
-- Last checked: 2026-11-23 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://kiro.dev/startups/
-- Page: https://freetokens.custats.info/offers/kiro-startup-credits.html
-- Summary: Kiro for Startups gives early-stage to Series A startups up to one year of Kiro Pro+ credits in three tiers (Starter ≤2 users, Growth ≤10, Scale ≤30). Applications are open April 7 – December 31, 2026. Requires an AWS Account ID with a business email matching the startup's domain; startups holding active AWS Activate credits are not eligible. Applicants must be 18 or older. Excluded residences: Argentina, Belarus, Brazil, China/GCR, Cuba, France, Germany, Iran, Italy, Mexico, North Korea, Poland, Russia, Spain, Syria, the region of Crimea, the so-called Donetsk People's Republic region (DNR), the so-called Luhansk People's Republic region (LNR), and the United Arab Emirates. Credits deposit to the AWS account on approval and expire 1 year after issuance; redeeming requires login via AWS IAM Identity Center. Choosing a plan above Pro+ or exceeding tier users can incur charges. Once credits are depleted, the AWS account automatically switches to standard Kiro Pro+ monthly billing on its card; continued use after expiry can also incur charges.
-- Claim steps: Confirm early-stage to Series A eligibility, age 18+, and residence outside the excluded locations listed above (including France and Germany); active AWS Activate credit holders are not eligible. | Apply at aws.amazon.com/startups/credits/kiro with your AWS Account ID and business email matching your startup domain. | Choose a tier: Starter (≤2 users), Growth (≤10) or Scale (≤30). | On approval, credits are deposited to the AWS account and activate on provisioning. | Access Kiro via AWS IAM Identity Center (not Builder ID or social logins) to redeem credits. | Stay within the chosen tier and Pro+ plan. Monitor credits and stop/cancel unwanted billable access before depletion or expiry: standard Kiro Pro+ monthly billing starts automatically when credits run out.
 
 ## Community offers (not verified by freetokens)
 
@@ -1242,7 +1242,6 @@ Promo codes and giveaways a person shared in a public post. freetokens does not 
 - [Mistral Vibe Pro free for 1 month — code MISTRALVIBE (Europe)](https://freetokens.custats.info/offers/mistral-vibe-pro-mistralvibe-code.html): Mistral AI — One month of Vibe Pro free with code MISTRALVIBE (builders in Europe) · community promo_code — not verified by freetokens · shared by @MistralAI (Mistral AI) on 2026-11-23: https://x.com/MistralAI/status/2124905610386780451 · code: MISTRALVIBE · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-23
 - [Devin Bots giveaway — pitch Poke for up to $10,000 in credits](https://freetokens.custats.info/offers/devin-bots-poke-giveaway.html): Cognition (Devin) — up to $10,000 per account (10,000 accounts) · community giveaway — not verified by freetokens · shared by @walden_yan (Walden) on 2026-11-18: https://x.com/walden_yan/status/2123163580778635579 · 10000 codes · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
 - [Context.dev 10,000 free API credits — code YAHIAISINFINLANDONHISBIRTHDAY10K](https://freetokens.custats.info/offers/context-dev-10k-credits-birthday-code.html): Context.dev — 10,000 free Context.dev API credits with code YAHIAISINFINLANDONHISBIRTHDAY10K (“10,000 web searches”, “10,000 web scrapes”, “5000 company searches”, “1000 people searches”, “so much more”) · community promo_code — not verified by freetokens · shared by @mynameisyahia (Yahia Bakour) on 2026-11-19: https://x.com/mynameisyahia/status/2123294435694043603 · code: YAHIAISINFINLANDONHISBIRTHDAY10K · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
-- [Mistral Vibe Pro free for 3 months — code LECHONK (Europe)](https://freetokens.custats.info/offers/mistral-vibe-pro-lechonk-code.html): Mistral AI — Vibe Pro free for the first three months with code LECHONK (developers in Europe) · community promo_code — not verified by freetokens · shared by @MistralAI (Mistral AI) on 2026-11-17: https://x.com/MistralAI/status/2122713540666806397 · code: LECHONK · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-17
 
 ## Pages
 
