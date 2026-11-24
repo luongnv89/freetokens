@@ -23,6 +23,12 @@
       "url": "https://dev.to/shiva_prasad_cc614c6ee026/new-free-llm-api-credits-added-in-mid-november-2026-4fbh",
       "title": "New free LLM API credits added in mid-November 2026",
       "text": "Braintrust's $0 Starter plan includes $10 of built-in model credits each month that do not roll over."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.braintrust.dev/plans-and-limits.md",
+      "title": "Plans and limits",
+      "text": "10 / month ($1/credit after) ... Unused credits don't roll over."
     }
   ]
 }

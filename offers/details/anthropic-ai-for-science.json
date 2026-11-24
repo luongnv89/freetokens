@@ -26,6 +26,12 @@
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSfwDGfVg2lHJ0cc0oF_ilEnjvr_r4_paYi7VLlr5cLNXASdvA/viewform?usp=header",
       "title": "Current public AI for Science application — conflicting Claude.ai terms",
       "text": "Note: The AI for Science program offers extra usage credits, which can be used across all Claude.ai tools, including Claude Science. The maximum award for the AI for Science program is $50,000 in credits."
+    },
+    {
+      "type": "link",
+      "url": "https://anthropic.com/news/expanding-support-for-scientists",
+      "title": "Expanding our support for scientists",
+      "text": "apply to our AI for Science program for up to $50,000 in credits per project ... any researcher is eligible to apply"
     }
   ]
 }

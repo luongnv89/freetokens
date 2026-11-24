@@ -7,7 +7,7 @@ category: api_provider
 amount: Current API models (ceres-1.0, ceres-1.0-pro, ganymede-1.1, pluto-1.1-flash, pluto-1.1-pro, pluto-1.2-flash, pluto-1.2-pro) free permanently via the API, no charge per request or per token; 30 requests/minute per API key; no credit card
 expiry_date: null
 source_url: https://www.merkium.nl/docs/pricing
-verified_date: 2026-11-21
+verified_date: 2026-11-24
 verification: social_proof
 review_status: under-review
 signup: required
