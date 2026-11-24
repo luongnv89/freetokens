@@ -1,0 +1,17 @@
+{
+  "summary": "Telnyx pretrial accounts get $25 in AI credits at sign-up with no credit card, no payment setup and no commitment. The credit covers the Telnyx AI product suite (examples named: Telnyx Inference, AI Assistants) and the account includes one US local phone number at no cost. Pretrial accounts are limited to the AI product suite and that one number, cannot top up their balance, and AI usage stops once the credit is exhausted. The portal shows remaining AI credits and the days left to use them; no fixed number of days is stated. Upgrading to a full account is done from the portal with LinkedIn or GitHub identity verification.",
+  "claim_steps": [
+    "Register at telnyx.com/sign-up with your email address",
+    "Log in with the magic link sent to your inbox",
+    "Use the $25 AI credit on Telnyx AI products (Inference, AI Assistants); check remaining credit and days left in the portal",
+    "Optional: upgrade via profile icon > Account Level > Upgrade, verifying identity with LinkedIn or GitHub"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://support.telnyx.com/en/articles/14327893-telnyx-pretrial-accounts",
+      "title": "Telnyx Pretrial Accounts",
+      "text": "Sign up, get $25 in AI credits, and start building right away. $25 in AI credits — covers usage across the entire Telnyx AI product suite. ... no credit card, no payment setup, and no commitment. Pretrial accounts cannot top up their balance. One US local phone number — included at no cost."
+    }
+  ]
+}

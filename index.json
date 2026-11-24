@@ -1,9 +1,39 @@
 {
-  "generated_at": "2026-11-24T03:18:53Z",
-  "count": 346,
-  "active_count": 281,
+  "generated_at": "2026-11-24T06:26:59Z",
+  "count": 348,
+  "active_count": 283,
   "expired_count": 65,
   "offers": [
+    {
+      "slug": "qoder-hungerg-stealth-model-free",
+      "title": "Qoder HungerG Stealth Model — Free for a Limited Time",
+      "provider": "Qoder",
+      "category": "coding",
+      "amount": "Free HungerG stealth-model calls in Qoder and Qoder IDE (no Credits consumed, no daily usage limit) for new and existing Qoder International individual users, Nov 23–30, 2026 (SGT); requests may queue at peak times",
+      "expiry_date": "2026-11-30",
+      "source_url": "https://docs.qoder.com/events/hungerg-free",
+      "verified_date": "2026-11-24",
+      "added_date": "2026-11-24",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "telnyx-pretrial-25-ai-credits",
+      "title": "Telnyx Pretrial Account — $25 AI Credits",
+      "provider": "Telnyx",
+      "category": "api_provider",
+      "amount": "$25 in AI credits on sign-up, no credit card or payment setup, usable across the Telnyx AI product suite (Telnyx Inference, AI Assistants and more) plus one free US local number; pretrial accounts cannot top up and usage stops when the credit runs out or the time window shown in the portal ends",
+      "expiry_date": null,
+      "source_url": "https://support.telnyx.com/en/articles/14327893-telnyx-pretrial-accounts",
+      "verified_date": "2026-11-24",
+      "added_date": "2026-11-24",
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
     {
       "slug": "baichuan-ai-signup-80-yuan-credit",
       "title": "Baichuan AI — ¥80 Sign-up Credit",
