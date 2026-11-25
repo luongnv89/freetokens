@@ -1,0 +1,21 @@
+{
+  "summary": "Cognition released SWE-2.1, an upgrade over SWE-2 trained with reinforcement learning on Kimi K3. The launch post says the model is free through 12/8 on Devin Desktop and CLI, and available in Devin Desktop, Cloud and CLI at a discounted price until 1/30. The post does not state usage caps or which plans are eligible.",
+  "claim_steps": [
+    "Sign in to Devin Desktop or the Devin CLI",
+    "Select the SWE-2.1 model before December 8"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://cognition.com/blog/swe-2-1",
+      "title": "Introducing SWE-2.1",
+      "text": "We're releasing SWE-2.1, a major upgrade over SWE-2. ... Free through 12/8 on Desktop and CLI. Available in Devin Desktop, Cloud, and CLI at a discounted price until 1/30."
+    },
+    {
+      "type": "link",
+      "url": "https://devin.ai/pricing",
+      "title": "Devin Plans and Pricing",
+      "text": "The Free plan includes a light quota to code with agents, limited model availability, unlimited inline edits, and unlimited Tab completions."
+    }
+  ]
+}

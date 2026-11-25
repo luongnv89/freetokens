@@ -1,0 +1,22 @@
+{
+  "summary": "Parallel for Startups gives early-stage teams building on live web data credits usable across any Parallel API. Founders in YC, a16z speedrun, Neo, Entrepreneurs First, Founders Inc and Null Fellows have a program-set offer; founders who apply directly start with $250. Credits expire six months after they are issued (Founders Inc credits do not expire). The startups page headline reads '250,000 searches on us'.",
+  "claim_steps": [
+    "Create a Parallel account at platform.parallel.ai and copy your org ID",
+    "Apply with the form at parallel.ai/startups, describing what you are building",
+    "YC founders redeem via Bookface Deals; a16z speedrun founders via the speedrun partner portal"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://parallel.ai/blog/parallel-for-startups",
+      "title": "Announcing Parallel for Startups",
+      "text": "Your program sets the amount, and founders who apply directly start with $250. ... Credits expire six months after they're issued, except Founders Inc credits, which don't expire."
+    },
+    {
+      "type": "link",
+      "url": "https://parallel.ai/startups",
+      "title": "Parallel for Startups",
+      "text": "250,000 searches on us. Redeem your credits, use them across any Parallel API, and start building today. Create a Parallel account. Credits go to your Parallel org, so you'll need your org ID."
+    }
+  ]
+}

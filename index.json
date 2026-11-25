@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-24T06:26:59Z",
-  "count": 348,
-  "active_count": 283,
+  "generated_at": "2026-11-25T02:06:11Z",
+  "count": 350,
+  "active_count": 285,
   "expired_count": 65,
   "offers": [
     {
@@ -5285,6 +5285,36 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "devin-swe-2-1-free",
+      "title": "Devin SWE-2.1 — Free Through Dec 8",
+      "provider": "Cognition (Devin)",
+      "category": "coding",
+      "amount": "Free use of the SWE-2.1 coding model in Devin Desktop and CLI through December 8, 2026 (usage limits and eligible plans not stated); discounted in Desktop, Cloud and CLI until January 30",
+      "expiry_date": "2026-12-08",
+      "source_url": "https://cognition.com/blog/swe-2-1",
+      "verified_date": "2026-11-25",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "parallel-startups-250-credits",
+      "title": "Parallel for Startups — $250 API Credits",
+      "provider": "Parallel",
+      "category": "startup_program",
+      "amount": "$250 in Parallel API credits for founders who apply directly (accelerator partner programs set their own amount); credits expire six months after issue",
+      "expiry_date": null,
+      "source_url": "https://parallel.ai/blog/parallel-for-startups",
+      "verified_date": "2026-11-25",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [
