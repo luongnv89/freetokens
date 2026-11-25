@@ -24,6 +24,12 @@
       "url": "https://aistudio.google.com/docs/pricing",
       "title": "Gemini Developer API pricing - Gemini API | Google AI Studio",
       "text": "Google AI Studio usage is free of charge in all available regions."
+    },
+    {
+      "type": "link",
+      "url": "https://aistudio.google.com/docs/image-generation",
+      "title": "Nano Banana image generation",
+      "text": "Try in Google AI Studio"
     }
   ]
 }

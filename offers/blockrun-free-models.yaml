@@ -4,10 +4,10 @@
 title: BlockRun Free Models — Keyless Open-Source LLM API
 provider: BlockRun
 category: api_provider
-amount: 9 open-source models (e.g. Nemotron 3.5 Lightning, Nemotron 3 Nano Omni, GPT-OSS 20B, Muse Glimmer 30B) free through the BlockRun API with no key and no wallet; free capacity is best-effort and may be served by another free model
+amount: 8 open-source models (e.g. Nemotron 3.5 Lightning, Nemotron 3 Nano Omni, Nemotron 3.5 Super 120B, Muse Glimmer 30B) free through the BlockRun API with no key and no wallet; free capacity is best-effort and may be served by another free model
 expiry_date: null
 source_url: https://blockrun.ai/free
-verified_date: 2026-11-24
+verified_date: 2026-11-25
 verification: social_proof
 review_status: under-review
 signup: none

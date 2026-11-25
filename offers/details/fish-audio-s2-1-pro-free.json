@@ -11,8 +11,8 @@
     {
       "type": "link",
       "url": "https://docs.fish.audio/developer-guide/models-pricing/models-overview",
-      "title": "Models Overview | Fish Audio Docs",
-      "text": "Fish Audio S2.1-Pro Free — The same model as S2.1-Pro, available at $0 for development and testing. Free to use under fair-use limits. No TTFA or DPA guarantees. Same model quality and language coverage as s2.1-pro (83 languages)."
+      "title": "Models Overview - Fish Audio",
+      "text": "Fish Audio S2.1-Pro Free - The same model as S2.1-Pro, available at $0 for development and testing"
     },
     {
       "type": "link",
@@ -49,6 +49,18 @@
       "url": "https://fish.audio/plan/",
       "title": "Pricing & Plans - Fish Audio",
       "text": "Free plan users can only use generated content for personal, non-commercial projects. the S2.1 Pro Free model can be called without any credit."
+    },
+    {
+      "type": "link",
+      "url": "https://fish.audio/developers/",
+      "title": "Developers - Fish Audio",
+      "text": "S2.1 Pro Free is free through November 30, 2026, with no SLA, and requests may be used to improve model quality."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.fish.audio/developer-guide/models-pricing/pricing-and-rate-limits",
+      "title": "Pricing & Rate Limits - Fish Audio",
+      "text": "s2.1-pro-free $0.00 / M UTF-8 bytes"
     }
   ]
 }

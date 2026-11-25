@@ -24,6 +24,12 @@
       "url": "https://console.upstage.ai/docs/resources/changelog",
       "title": "Changelog — Solar Pro 3 deprecation and Solar Pro 4 transition",
       "text": "Solar Pro 3 (the solar-pro3 alias and all of its versions) will be fully deprecated on October 30, 2026 (KST). This also applies to organizations in the Upstage x AWS AI Initiative. Requests naming it will return an error after that date."
+    },
+    {
+      "type": "link",
+      "url": "https://console.upstage.ai/",
+      "title": "Upstage Console",
+      "text": "Unlock your $10 credit! To help us better understand your business needs, please complete the form below. A $10 credit will be granted upon submission to support your evaluation process."
     }
   ]
 }
