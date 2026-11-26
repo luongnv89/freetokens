@@ -7,7 +7,7 @@ category: api_provider
 amount: $25 in AI credits on sign-up, no credit card or payment setup, usable across the Telnyx AI product suite (Telnyx Inference, AI Assistants and more) plus one free US local number; pretrial accounts cannot top up and usage stops when the credit runs out or the time window shown in the portal ends
 expiry_date: null
 source_url: https://support.telnyx.com/en/articles/14327893-telnyx-pretrial-accounts
-verified_date: 2026-11-24
+verified_date: 2026-11-26
 verification: social_proof
 review_status: under-review
 signup: required

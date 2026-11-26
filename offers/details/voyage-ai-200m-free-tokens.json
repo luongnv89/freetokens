@@ -9,8 +9,8 @@
     {
       "type": "link",
       "url": "https://docs.voyageai.com/docs/pricing",
-      "title": "Pricing — Voyage AI documentation",
-      "text": "The first 200 million tokens for voyage-4-large, voyage-4, voyage-4-lite, voyage-context-4 ... are free for every account. Free token credits do not apply to Batch API usage."
+      "title": "Pricing",
+      "text": "The first 200 million tokens for voyage-4-large, voyage-4, voyage-4-lite, voyage-context-4, and voyage-code-4 ... or the first 50 million tokens for voyage-finance-2, and voyage-law-2 are free for every account. The first 200M text tokens and 150B pixels for voyage-multimodal-3.5 and voyage-multimodal-3 are free for every account. Free token credits do not apply to Batch API usage. Please note that we do not offer free tokens for them."
     }
   ]
 }
