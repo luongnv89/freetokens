@@ -6,10 +6,10 @@
 title: Voyage AI — First 200M Tokens Free
 provider: Voyage AI
 category: api_provider
-amount: "First 200M tokens free per account on eligible embedding/rerank models; specialized-model allowances vary (current table: 50M for finance-2/law-2/code-2); multimodal 200M text tokens + 150B pixels; Batch API excluded; conflicting legacy-model prose requires confirmation"
+amount: "First 200M tokens free per account on eligible embedding/rerank models; specialized-model allowances vary (current table: 50M for finance-2/law-2); multimodal 200M text tokens + 150B pixels; Batch API excluded; no free tokens for older models"
 expiry_date: null
 source_url: https://docs.voyageai.com/docs/pricing
-verified_date: 2026-11-24
+verified_date: 2026-11-26
 verification: social_proof
 review_status: to-be-verified
 signup: required

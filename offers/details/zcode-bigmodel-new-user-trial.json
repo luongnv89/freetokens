@@ -10,7 +10,7 @@
       "type": "link",
       "url": "https://zcode.z.ai/en/docs/configuration",
       "title": "Connect Models | ZCode Docs",
-      "text": "According to the Upgrade Plan page, the Start Plan lasts 5 days and provides 8 million tokens per day for GLM models: | GLM-5.4 | 3 million tokens / day | | GLM-5.3-Flash | 5 million tokens / day | Note: the trial lasts 5 days only and expires afterwards — it is not an ongoing daily allowance."
+      "text": "New users can claim a Start Plan after signing in to ZCode. ... According to the Upgrade Plan page, the Start Plan lasts 5 days and provides 8 million tokens per day for GLM models ... the trial lasts 5 days only and expires afterwards — it is not an ongoing daily allowance. The sign-in screen has no separate BigModel sign-in."
     }
   ]
 }

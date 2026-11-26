@@ -14,13 +14,13 @@
       "type": "link",
       "url": "https://mindshub.ai/pricing",
       "title": "Plans and pricing: reduce your AI spend — MindsHub",
-      "text": "Always free, for knowledge work with agents. $0 / month No credit card required. ... The MindsHub Air model ... for non-coding work ... Classify, route and score with Jev ... Call it through the Decisions API as jev with your MindsHub API key. Daily limits under fair use."
+      "text": "MindsHub Air for research, analysis and other non-coding work. You also get Jev for classification, routing and scoring through the Decisions API. There’s no time limit or credit card required. Daily usage limits and the fair-use policy at mindshub.ai/fair-use-policy apply."
     },
     {
       "type": "link",
       "url": "https://mindshub.ai/fair-use-policy",
-      "title": "Fair Use Policy — MindsHub (general policy; see specific Jev docs for numeric limits)",
-      "text": "A MindsHub account gives you access to the included models at no charge, with no credit card required. Currently included: The MindsHub Air model; Jev. ... MindsDB protects the free tier with daily rate limits and other measures. The limits are not published as numbers."
+      "title": "Fair Use Policy — MindsHub",
+      "text": "A MindsHub account gives you access to the included models at no charge, with no credit card required. Currently included: The MindsHub Air model Jev ... MindsDB protects the free tier with daily rate limits and other measures. The limits are not published as numbers."
     },
     {
       "type": "link",

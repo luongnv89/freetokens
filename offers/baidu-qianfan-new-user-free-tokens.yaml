@@ -7,7 +7,7 @@ category: api_provider
 amount: 1,000,000 free tokens on each of 17 preset models (incl. ERNIE-4.5-Turbo, DeepSeek-R1/V3.1, Qwen3, Qwen3-Coder, Kimi-K2-Instruct), valid 3 months from first activation; online inference only, not batch
 expiry_date: null
 source_url: https://cloud.baidu.com/doc/qianfan/s/Imi2rpirg
-verified_date: 2026-11-24
+verified_date: 2026-11-26
 verification: social_proof
 review_status: under-review
 signup: required
