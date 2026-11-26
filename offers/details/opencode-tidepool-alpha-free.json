@@ -1,0 +1,22 @@
+{
+  "summary": "Tidepool Alpha Free is a stealth model that's free on OpenCode for a limited time; the team is using this time to collect feedback and improve the model. Model ID tidepool-alpha-free, OpenAI-compatible endpoint https://opencode.ai/inference/openai/v1/chat/completions. Free input, output and cached reads. Free-tier chat models require OpenCode. During its free period, collected data is retained and used to improve the model.",
+  "claim_steps": [
+    "Open the OpenCode app",
+    "Select the Tidepool Alpha Free model (model ID tidepool-alpha-free)"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Console models",
+      "text": "Tidepool Alpha Free is a stealth model that's free on OpenCode for a limited time. The team is using this time to collect feedback and improve the model. Pricing: Tidepool Alpha Free | Free | Free | Free | -. Privacy: Tidepool Alpha Free: During its free period, collected data is retained and used to improve the model."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/Smlay_ero/status/2123248919765496025",
+      "author": "smlay",
+      "text": "A new limited-time free stealth model, Tidepool Alpha, just showed up on OpenCode Zen. Officially it’s marked Unknown, so which lab made it is still unclear. There are two main takes right now: one is that it’s GLM, and the other is that it leans Anthropic, because the system…",
+      "handle": "@Smlay_ero"
+    }
+  ]
+}
