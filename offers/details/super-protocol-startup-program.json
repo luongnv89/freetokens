@@ -1,0 +1,23 @@
+{
+  "summary": "Super for Startups gives early-stage teams $5,000 in confidential compute credits, valid for 12 months from the day they land in your console. Super Protocol takes no equity and asks for no exclusivity. The program targets pre-seed to Series A teams building AI on sensitive data such as patient records, financial transactions, legal documents, personal data or proprietary models, who are new to Super credits. Credits cover confidential GPU-hours, Confidential Router tokens and Marketplace apps at published prices; confidential mode, attestation and Deployment Evidence are included at no extra cost. Accepted teams also get Confidential Router access without the waitlist and a one-hour architecture session. Applications are reviewed; after the credits run out you pay as you go at published prices.",
+  "claim_steps": [
+    "Check fit: pre-seed to Series A, building AI on sensitive data (health records, financial data, legal documents, personal data or proprietary models), and new to Super credits.",
+    "Apply with the 5-minute form at https://superprotocol.com/developers/startups#apply (name, work email, company, website, stage, data type, what you are building).",
+    "Super Protocol reviews every application and gets in touch if it looks like a fit, sometimes with a short call first.",
+    "Once accepted, credits land in your console and Confidential Router access opens. Use them within 12 months; after that, usage is billed at published prices."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://superprotocol.com/developers/startups",
+      "title": "Startup program: $5,000 in compute credits | Super Protocol",
+      "text": "Confidential compute credits for early-stage teams building AI on health, financial or proprietary data. $5,000 in credits. 12 months to use them. 0% equity."
+    },
+    {
+      "type": "link",
+      "url": "https://superprotocol.com/developers/startups",
+      "title": "Super for Startups FAQ",
+      "text": "What do the credits cover? Confidential GPU-hours, Confidential Router tokens and Marketplace apps, at the prices on our pricing page. How long are they valid? Twelve months from the day they land in your console. Do you take equity? No."
+    }
+  ]
+}

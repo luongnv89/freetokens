@@ -1,0 +1,24 @@
+# Verified 2026-11-26 against https://superprotocol.com/developers/startups
+# ("$5,000 in credits" / "12 months to use them" / "0% equity")
+# ("Confidential compute credits for early-stage teams building AI on health,
+# financial or proprietary data.")
+# Who it's for: "Pre-seed to Series A"; "Building AI on sensitive data: patient
+# records, financial transactions, legal documents, personal data or
+# proprietary models"; "New to Super credits".
+# Covers: "Confidential GPU-hours, Confidential Router tokens and Marketplace
+# apps, at the prices on our pricing page."
+# Validity: "Twelve months from the day they land in your console."
+# Equity: "No. No equity, no exclusivity and no obligation to stay after the
+# credits run out."
+# Lead: third-party roundup https://x.com/nex_ify/status/2125791399501037742
+# (not an official account; not used as a source).
+title: Super Protocol for Startups — $5K confidential compute credits
+provider: Super Protocol
+category: startup_program
+amount: $5,000 in confidential compute credits, valid 12 months, no equity; for pre-seed to Series A teams building AI on sensitive data (health, financial, legal, personal or proprietary); application reviewed
+expiry_date: null
+source_url: https://superprotocol.com/developers/startups
+verified_date: 2026-11-26
+verification: social_proof
+review_status: verified
+signup: required
