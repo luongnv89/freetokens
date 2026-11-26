@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-26T02:29:16Z — 126 of 286 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-26T21:51:27Z — 127 of 287 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -245,6 +245,16 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/tavily-free-tier.html
 - Summary: Tavily's Researcher Free plan provides 1,000 free API credits every month. Credits reset on the first day of each month, requests stop after the monthly balance is exhausted, and no credit card is required. Tavily separately advertises a student path with four months of Project Plan access and 4,000 API credits per month.
 - Claim steps: Create a Tavily account and select the Researcher Free plan. | Use the 1,000 monthly API credits; they reset on the first day of each month. | Students can check Tavily's separate student account path for the advertised Project Plan benefit.
+### Super Protocol for Startups — $5K confidential compute credits
+- Provider: Super Protocol
+- Category: startup_program
+- Amount: $5,000 in confidential compute credits, valid 12 months, no equity; for pre-seed to Series A teams building AI on sensitive data (health, financial, legal, personal or proprietary); application reviewed
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-26 — review_status=verified · verification=social_proof · signup=required
+- Source: https://superprotocol.com/developers/startups
+- Page: https://freetokens.custats.info/offers/super-protocol-startup-program.html
+- Summary: Super for Startups gives early-stage teams $5,000 in confidential compute credits, valid for 12 months from the day they land in your console. Super Protocol takes no equity and asks for no exclusivity. The program targets pre-seed to Series A teams building AI on sensitive data such as patient records, financial transactions, legal documents, personal data or proprietary models, who are new to Super credits. Credits cover confidential GPU-hours, Confidential Router tokens and Marketplace apps at published prices; confidential mode, attestation and Deployment Evidence are included at no extra cost. Accepted teams also get Confidential Router access without the waitlist and a one-hour architecture session. Applications are reviewed; after the credits run out you pay as you go at published prices.
+- Claim steps: Check fit: pre-seed to Series A, building AI on sensitive data (health records, financial data, legal documents, personal data or proprietary models), and new to Super credits. | Apply with the 5-minute form at https://superprotocol.com/developers/startups#apply (name, work email, company, website, stage, data type, what you are building). | Super Protocol reviews every application and gets in touch if it looks like a fit, sometimes with a short call first. | Once accepted, credits land in your console and Confidential Router access opens. Use them within 12 months; after that, usage is billed at published prices.
 ### Suno Free Plan — 50 credits per day
 - Provider: Suno
 - Category: voice

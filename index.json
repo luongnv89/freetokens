@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-26T02:29:16Z",
-  "count": 351,
-  "active_count": 286,
+  "generated_at": "2026-11-26T21:51:27Z",
+  "count": 352,
+  "active_count": 287,
   "expired_count": 65,
   "offers": [
     {
@@ -17,6 +17,21 @@
       "verification": "social_proof",
       "review_status": "under-review",
       "signup": "none",
+      "status": "active"
+    },
+    {
+      "slug": "super-protocol-startup-program",
+      "title": "Super Protocol for Startups — $5K confidential compute credits",
+      "provider": "Super Protocol",
+      "category": "startup_program",
+      "amount": "$5,000 in confidential compute credits, valid 12 months, no equity; for pre-seed to Series A teams building AI on sensitive data (health, financial, legal, personal or proprietary); application reviewed",
+      "expiry_date": null,
+      "source_url": "https://superprotocol.com/developers/startups",
+      "verified_date": "2026-11-26",
+      "added_date": "2026-11-26",
+      "verification": "social_proof",
+      "review_status": "verified",
+      "signup": "required",
       "status": "active"
     },
     {
