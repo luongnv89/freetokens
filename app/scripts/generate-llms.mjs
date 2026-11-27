@@ -146,6 +146,8 @@ function dealsSection() {
     const title = deal.title.replace(/]/g, "\\]");
     const facts = [
       "kind=deal",
+      // Featured deals (#815) come first in the loader's order; say so.
+      deal.featured === true ? "featured=true" : null,
       `discount: ${deal.discount}`,
       deal.deal_price
         ? `price: ${deal.deal_price}${deal.regular_price ? ` (regular ${deal.regular_price})` : ""}`

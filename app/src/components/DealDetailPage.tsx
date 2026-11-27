@@ -6,7 +6,7 @@ import {
   dealsOf,
   type Deal,
 } from "../lib/deals";
-import { DealBadge, DiscountBadge } from "./Badge";
+import { DealBadge, DiscountBadge, FeaturedBadge } from "./Badge";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { DealBanner } from "./DealsPage";
 import { IconSprite } from "./OfferRow";
@@ -14,7 +14,7 @@ import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { StructuredData } from "./StructuredData";
 
-/** Other running deals, soonest-ending first (the loader's order). */
+/** Other running deals in the loader's order: featured first, then soonest-ending. */
 function OtherDeals({ current, deals }: { current: Deal; deals: Deal[] }) {
   const others = deals.filter((d) => d.slug !== current.slug).slice(0, 4);
   if (others.length === 0) return null;
@@ -87,6 +87,7 @@ export default function DealDetailPage({
               <header className="masthead masthead-offer">
                 <p className="kicker">
                   <DealBadge />
+                  {deal.featured ? <FeaturedBadge /> : null}
                 </p>
                 <h1>{deal.title}</h1>
                 <p className="count">{deal.provider}</p>

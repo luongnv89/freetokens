@@ -5,7 +5,7 @@ license: MIT
 effort: high
 compatibility: "Requires git, an authenticated GitHub CLI (gh), python3, node, and read-only web search and fetch."
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: "Luong NGUYEN <luongnv89@gmail.com>"
   issue: "#809"
 ---
@@ -116,7 +116,9 @@ verified_date: <today>
 ```
 
 Never write `amount`, `free`, `is_free` or any free wording. The validators
-reject them. Then run, each exit code checked:
+reject them. Never set `featured` (#815): it pins a deal to the top of
+`/deals.html`, and only Luong asks for it. When you edit an existing deal,
+keep its `featured` line exactly as it was; never add, remove or change it. Then run, each exit code checked:
 
 ```bash
 python3 scripts/deal_model.py validate --today "$today"
@@ -172,6 +174,7 @@ Add **Decision:** "Review PR <url>; merging publishes N deals on
   was used.
 - Deal files pass `scripts/deal_model.py validate`, and the PR passes
   `check_scope.py --mode deals`. The run never touches `offers/`.
+- The run never sets or changes `featured`; only Luong asks for it.
 - Exactly one PR. The run never merges.
 
 ## Edge Cases

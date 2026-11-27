@@ -1,6 +1,6 @@
 import { humanDate, relativeDate } from "../lib/offers";
 import { OCCASION_LABELS, dealHref, type Deal } from "../lib/deals";
-import { DealBadge, DiscountBadge } from "./Badge";
+import { DealBadge, DiscountBadge, FeaturedBadge } from "./Badge";
 
 /**
  * One deal as a ledger row (#809): the OfferRow skeleton — eyebrow, title,
@@ -31,6 +31,7 @@ export function DealRow({
         <p className="row-eyebrow">
           <span className="r-prov">{deal.provider}</span>
           <DealBadge />
+          {deal.featured ? <FeaturedBadge /> : null}
         </p>
         <h2 className="card-title">
           <a href={detailHref} aria-label={`View details for ${deal.title}`}>

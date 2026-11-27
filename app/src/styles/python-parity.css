@@ -3438,6 +3438,11 @@ figure.proof-screenshot {
   --tag-hue: var(--color-hot);
   font-weight: 600;
 }
+/* Featured deal (#815): a text label in the default ink hue; the deal
+   badge stays beside it. */
+.badge-featured {
+  font-weight: 600;
+}
 .deal-banner {
   border: 1.5px solid var(--color-hot);
   border-radius: 12px;
