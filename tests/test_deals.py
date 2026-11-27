@@ -117,11 +117,27 @@ class DealValidatorTests(unittest.TestCase):
             validate(expiry_note="Free until the window ends.")
 
     def test_promo_code_naming_the_deal_free_is_rejected(self):
-        for code in ("FREE", "free", "FREE50", "BFFREE", "GRATIS-2026", "NOCOST"):
+        for code in ("FREE", "free", "FREE50", "BFFREE", "GRATIS-2026", "NOCOST",
+                     # strict on purpose: a free word inside a longer code is rejected too
+                     "FREEDOM50", "CAREFREE",
+                     # 100% off
+                     "100OFF", "100-OFF", "100_OFF", "100off", "100POFF", "100PCTOFF",
+                     "100-PCT-OFF", "100PERCENTOFF", "BF100OFF", "BF-100-OFF"):
             with self.subTest(code=code):
                 with self.assertRaisesRegex(deal_model.DealError, "promo_code .* labels the deal free"):
                     validate(promo_code=code)
-        self.assertEqual(validate(promo_code="BF-50_OFF")["promo_code"], "BF-50_OFF")
+        for code in ("BF-50_OFF", "50OFF", "1000OFF", "2100OFF", "OFF100", "BF100", "100-PLAN"):
+            with self.subTest(code=code):
+                self.assertEqual(validate(promo_code=code)["promo_code"], code)
+
+    def test_length_limits_count_code_points(self):
+        # An emoji is one code point (Python len, JSON Schema maxLength) but two
+        # UTF-16 units; app/scripts/load-deals.mjs must count it the same way.
+        limit = deal_model.LIMITS["title"]
+        at_limit = "\N{PARTY POPPER}" + "a" * (limit - 1)
+        self.assertEqual(validate(title=at_limit)["title"], at_limit)
+        with self.assertRaisesRegex(deal_model.DealError, "title is longer than"):
+            validate(title=at_limit + "a")
 
     def test_deal_price_must_be_non_zero(self):
         for value in ("$0", "0.00 EUR", "$0/month"):

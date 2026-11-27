@@ -43,6 +43,10 @@ const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const PROMO_RE = /^[A-Za-z0-9_-]{1,40}$/;
 const NULL_TOKENS = new Set(["null", "~", ""]);
 
+// Length in Unicode code points, as Python's len() and JSON Schema maxLength
+// count it; String#length counts UTF-16 units, so an emoji would count twice.
+const codePointLength = (value) => [...value].length;
+
 export class DealError extends Error {}
 
 /** Same flat key/value subset as offers/*.yaml (scripts/offer_model.py). */
@@ -117,7 +121,7 @@ export function validateDeal(data, filename, today) {
       fail(`${field} must be a non-empty string`);
     }
     const limit = RULES.limits[field];
-    if (limit && value.length > limit) {
+    if (limit && codePointLength(value) > limit) {
       fail(`${field} is longer than ${limit} characters`);
     }
   }

@@ -54,7 +54,7 @@
     "promo_code": {
       "type": "string",
       "pattern": "^[A-Za-z0-9_-]{1,40}$",
-      "description": "Optional: the code to enter at checkout. A code that names the deal free (schemas/deal.rules.json promo_code_free_pattern, e.g. FREE50) is rejected."
+      "description": "Optional: the code to enter at checkout. A code that names the deal free or 100% off (schemas/deal.rules.json promo_code_free_pattern, e.g. FREE50, 100OFF) is rejected; the match is strict, so FREEDOM50 is rejected too."
     },
     "occasion": {
       "type": "string",

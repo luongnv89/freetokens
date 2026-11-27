@@ -150,10 +150,41 @@ describe("deal validator (#809)", () => {
     expect(() => check({ expiry_note: "Free until the window ends." })).toThrow(
       'expiry_note says "Free"',
     );
-    for (const promo_code of ["FREE", "free", "FREE50", "BFFREE", "GRATIS-2026", "NOCOST"]) {
+    for (const promo_code of [
+      "FREE",
+      "free",
+      "FREE50",
+      "BFFREE",
+      "GRATIS-2026",
+      "NOCOST",
+      // strict on purpose: a free word inside a longer code is rejected too
+      "FREEDOM50",
+      "CAREFREE",
+      // 100% off
+      "100OFF",
+      "100-OFF",
+      "100_OFF",
+      "100off",
+      "100POFF",
+      "100PCTOFF",
+      "100-PCT-OFF",
+      "100PERCENTOFF",
+      "BF100OFF",
+      "BF-100-OFF",
+    ]) {
       expect(() => check({ promo_code }), promo_code).toThrow("labels the deal free");
     }
-    expect(check({ promo_code: "BF-50_OFF" }).promo_code).toBe("BF-50_OFF");
+    for (const promo_code of ["BF-50_OFF", "50OFF", "1000OFF", "2100OFF", "OFF100", "BF100", "100-PLAN"]) {
+      expect(check({ promo_code }).promo_code, promo_code).toBe(promo_code);
+    }
+  });
+
+  it("counts field lengths in code points, like deal_model.py and the schema", () => {
+    const limit = RULES.limits.title;
+    const atLimit = "\u{1F389}" + "a".repeat(limit - 1);
+    expect(atLimit.length).toBe(limit + 1); // UTF-16 units: the emoji is two
+    expect(check({ title: atLimit }).title).toBe(atLimit);
+    expect(() => check({ title: atLimit + "a" })).toThrow("title is longer than");
   });
 
   it("rejects unknown fields and bad dates against the injected clock", () => {
