@@ -9,7 +9,7 @@
       "type": "link",
       "url": "https://blockrun.ai/free",
       "title": "Free LLM API — Llama, Nemotron, vision models | BlockRun",
-      "text": "8 open-source models, free through BlockRun. ... No key, no wallet, no subscription. Just call it. ... Free capacity is borrowed, not reserved ... When the one you named is, we answer with another free model instead of failing the request."
+      "text": "8 open-source models, free through BlockRun. No key. No wallet. ... NVIDIA retired its free GPT-OSS models in 2026: the 120B on September 3, the 20B on November 18. Calls to the old GPT-OSS IDs are now answered by Nemotron 3.5 Super 120B, an open-weights 120B MoE that reads images, and you can call it directly. ... When the one you named is, we answer with another free model instead of failing the request."
     },
     {
       "type": "link",
