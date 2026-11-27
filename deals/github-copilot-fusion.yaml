@@ -1,0 +1,10 @@
+# Verified 2026-11-27 against https://docs.github.com/copilot/concepts/models/copilot-fusion ("Through December 31, 2026, users on paid Copilot plans receive a 30% discount on model costs when using Copilot Fusion.") and the github.com/features/copilot/plans banner ("30% off Copilot Fusion usage until Dec 31."). Not labelled a Black Friday sale.
+title: GitHub Copilot Fusion usage — 30% off model costs
+provider: GitHub
+category: coding_agent
+discount: 30% off model costs when using Copilot Fusion on paid Copilot plans
+occasion: other
+expiry_date: 2026-12-31
+source_url: https://docs.github.com/copilot/concepts/models/copilot-fusion
+verified_date: 2026-11-27
+description: For users on paid Copilot plans (Pro, Pro+, Max). Each model is billed at its standard rate before the discount; Pro gets Fusion Standard only.

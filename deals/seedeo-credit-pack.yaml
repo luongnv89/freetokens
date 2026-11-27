@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://seedeo.ai/black-friday ("Get 20,000 non-expiring credits for $99 instead of $259.90—save $160.90 (62%) with no subscription." / "The offer ends November 30, 2026 at 11:59 PM PT.")
+title: Seedeo 20,000-credit pack — Black Friday
+provider: Seedeo
+category: ai_tool_api
+discount: 62% off a 20,000-credit pack
+regular_price: $259.90
+deal_price: $99 one time
+occasion: black_friday
+expiry_date: 2026-11-30
+source_url: https://seedeo.ai/black-friday
+verified_date: 2026-11-27
+description: One pack per customer; credits do not expire and work across Seedeo's video, image, music and voice models. Applied automatically at checkout.

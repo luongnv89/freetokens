@@ -1,0 +1,13 @@
+# Verified 2026-11-27 against https://1devtool.com/pricing ("50% off 1DevTool Pro, $29 → $14.50 one-time" "with code BFDEALS50 until Nov 29")
+title: 1DevTool Pro — Black Friday
+provider: 1DevTool
+category: coding_agent
+discount: 50% off 1DevTool Pro
+regular_price: $29 one-time
+deal_price: $14.50 one-time
+promo_code: BFDEALS50
+occasion: black_friday
+expiry_date: 2026-11-29
+source_url: https://1devtool.com/pricing
+verified_date: 2026-11-27
+description: Desktop workbench that runs several coding-agent CLIs side by side (Claude Code, Codex, Gemini CLI and more). One device, 12 months of updates.

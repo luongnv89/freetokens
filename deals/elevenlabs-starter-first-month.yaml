@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://elevenlabs.io/pricing ("First month for $1 Get your first month for only $1 Ends December 1" / Starter "$1 first month" "Then $6 per month" / FAQ: "First-month offers (Starter $1, Creator $11) can be used once."). The banner sits beside the Black Friday banner but is not itself labelled Black Friday.
+title: ElevenLabs Starter — first month for $1
+provider: ElevenLabs
+category: ai_tool_api
+discount: First month of Starter for $1
+regular_price: $6 per month
+deal_price: $1 first month
+occasion: other
+expiry_date: 2026-12-01
+source_url: https://elevenlabs.io/pricing
+verified_date: 2026-11-27
+description: First-month offers can be used once. Creator monthly also has a first month at $11, then $22 per month.

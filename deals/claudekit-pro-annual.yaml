@@ -1,0 +1,13 @@
+# Verified 2026-11-27 against https://claudekit.app/pricing ("Your first year of Pro annual for $20 ($1.67/month) instead of $28") and https://claudekit.app/black-friday FAQ ("December 2, 2026 at 07:59 UTC (December 1 at 11:59 PM Pacific).")
+title: ClaudeKit Pro annual — Black Friday
+provider: ClaudeKit
+category: ai_tool_api
+discount: First year of Pro annual for $20 instead of $28
+regular_price: $28/year
+deal_price: $20 first year
+occasion: black_friday
+expiry_date: 2026-12-01
+expiry_note: Ends 1 Dec 2026, 11:59 PM Pacific (2 Dec, 07:59 UTC).
+source_url: https://claudekit.app/black-friday
+verified_date: 2026-11-27
+description: Chrome extension for Claude.ai (not affiliated with Anthropic). No code needed; the price applies when you pick yearly in the extension. Renews at $28/year.

@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://help.manus.im/en/articles/18542127-how-does-the-manus-black-friday-2026-offer-work ("Max tiers above $200 receive the same 20% discount on their regular monthly or annual price for the first billing period." / table: Pro $90 first month, $900 first year; Max $160 first month, $1,600 first year / "The offer is available until 30 November 2026 at 23:59:59, Eastern Time (UTC−5).")
+title: Manus Pro and Max — Black Friday
+provider: Manus
+category: ai_subscription
+discount: 10% off Pro ($100 tier), 20% off Max ($200+ tiers), first billing period
+regular_price: $100/month (Pro)
+deal_price: $90 first month / $900 first year (Pro)
+occasion: black_friday
+expiry_date: 2026-11-30
+source_url: https://help.manus.im/en/articles/18542127-how-does-the-manus-black-friday-2026-offer-work
+verified_date: 2026-11-27
+description: Applies to the Pro $100 tier and Max $200+ tiers, monthly or annual; Pro tiers at $20 to $80 and Team plans are excluded. Ends 30 Nov 2026, 23:59:59 ET.

@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://www.cometapi.com/cometapi-black-friday-2026-is-live/ ("Get an extra 5%–10% off regular CometAPI prices on selected models." / "The Black Friday model discounts are valid only from 5:00:00 on Nov 24, 2026, to 05:00:00 on Dec 3, 2026, UTC.")
+title: CometAPI selected models — Black Friday
+provider: CometAPI
+category: ai_tool_api
+discount: Extra 5–10% off regular CometAPI prices on 14 selected models
+occasion: black_friday
+start_date: 2026-11-24
+expiry_date: 2026-12-03
+expiry_note: Ends 3 Dec 2026 at 05:00 UTC.
+source_url: https://www.cometapi.com/cometapi-black-friday-2026-is-live/
+verified_date: 2026-11-27
+description: No promo code; new and existing users. xAI models get 10% extra, Google and OpenAI 8%, DeepSeek, Z.AI, Moonshot and MiniMax 5%.
