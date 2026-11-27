@@ -1,0 +1,356 @@
+"""Deal offer kind and deal-hunt window (#809).
+
+Every date here is injected (``today=`` / ``--today`` / ``--date``): no test
+reads the real clock, so the suite passes under CI's +400-day clock shift.
+The only deal file used is the test fixture in tests/fixtures/deals/, a
+fictional example.com deal that is never published.
+"""
+
+import datetime as dt
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO / "scripts"))
+
+import deal_model  # noqa: E402
+import deal_window  # noqa: E402
+import validate_offers  # noqa: E402
+from offer_model import parse_offer_text  # noqa: E402
+
+FIXTURE = REPO / "tests" / "fixtures" / "deals" / "example-ai-pro-black-friday.yaml"
+FIXTURE_TEXT = FIXTURE.read_text(encoding="utf-8")
+TODAY = dt.date(2026, 11, 28)
+
+
+def fixture_data(**overrides):
+    data = parse_offer_text(FIXTURE_TEXT, str(FIXTURE))
+    for key, value in overrides.items():
+        if value is ...:
+            data.pop(key, None)
+        else:
+            data[key] = value
+    return data
+
+
+def validate(today=TODAY, name="example-ai-pro-black-friday.yaml", **overrides):
+    return deal_model.validate_deal(fixture_data(**overrides), name, today)
+
+
+def git(repo, *args):
+    env = dict(os.environ, GIT_AUTHOR_NAME="t", GIT_AUTHOR_EMAIL="t@t",
+               GIT_COMMITTER_NAME="t", GIT_COMMITTER_EMAIL="t@t")
+    result = subprocess.run(["git", "-c", "core.hooksPath=/dev/null", "-C", str(repo), *args],
+                            capture_output=True, text=True, env=env)
+    if result.returncode:
+        raise AssertionError(result.stderr)
+    return result.stdout
+
+
+class DealValidatorTests(unittest.TestCase):
+    def test_fixture_is_a_valid_deal(self):
+        deal = validate()
+        self.assertEqual(deal["slug"], "example-ai-pro-black-friday")
+        self.assertEqual(deal["discount"], "50% off the first year")
+        self.assertEqual(deal["occasion"], "black_friday")
+        self.assertNotIn("amount", deal)
+
+    def test_every_required_field_is_enforced(self):
+        for field in deal_model.REQUIRED_FIELDS:
+            with self.subTest(field=field):
+                with self.assertRaisesRegex(deal_model.DealError, f"missing required field.*{field}"):
+                    validate(**{field: ...})
+
+    def test_expiry_date_is_required_and_never_null(self):
+        with self.assertRaisesRegex(deal_model.DealError, "expiry_date is required and cannot be null"):
+            validate(expiry_date=None)
+        with self.assertRaisesRegex(deal_model.DealError, "expiry_date must be a YYYY-MM-DD"):
+            validate(expiry_date="2 Dec 2026")
+
+    def test_category_must_be_in_deal_scope(self):
+        for category in deal_model.CATEGORIES:
+            with self.subTest(ok=category):
+                self.assertEqual(validate(category=category)["category"], category)
+        for category in ("api_provider", "coding", "image", "student", "hardware", "vpn"):
+            with self.subTest(bad=category):
+                with self.assertRaisesRegex(deal_model.DealError, "outside the deal scope"):
+                    validate(category=category)
+
+    def test_occasion_enum(self):
+        for occasion in deal_model.OCCASIONS:
+            self.assertEqual(validate(occasion=occasion)["occasion"], occasion)
+        with self.assertRaisesRegex(deal_model.DealError, "occasion 'prime_day'"):
+            validate(occasion="prime_day")
+
+    def test_free_keys_are_rejected(self):
+        for key in ("amount", "is_free", "free"):
+            with self.subTest(key=key):
+                with self.assertRaisesRegex(deal_model.DealError, "a deal is never free"):
+                    validate(**{key: "free"})
+
+    def test_free_wording_is_rejected(self):
+        cases = {
+            "discount": ["Free for 3 months", "100% off", "first month FREE", "no-cost upgrade"],
+            "title": ["Example AI Pro free trial"],
+            "deal_price": ["Free"],
+            "description": ["Get it at no charge."],
+        }
+        for field, values in cases.items():
+            for value in values:
+                with self.subTest(field=field, value=value):
+                    with self.assertRaisesRegex(deal_model.DealError, "never .*free"):
+                        validate(**{field: value})
+        # "freedom" is not free wording.
+        self.assertEqual(validate(title="Freedom Plan — 30% off")["title"], "Freedom Plan — 30% off")
+
+    def test_deal_price_must_be_non_zero(self):
+        for value in ("$0", "0.00 EUR", "$0/month"):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(deal_model.DealError, "no non-zero amount"):
+                    validate(deal_price=value)
+        self.assertEqual(validate(deal_price="$10/month")["deal_price"], "$10/month")
+
+    def test_optional_fields_may_be_absent(self):
+        deal = validate(regular_price=..., deal_price=..., promo_code=..., start_date=...,
+                        expiry_note=..., description=...)
+        self.assertEqual(set(deal), {"slug", *deal_model.REQUIRED_FIELDS})
+
+    def test_unknown_fields_and_bad_values(self):
+        with self.assertRaisesRegex(deal_model.DealError, "unknown field.*verification"):
+            validate(verification="social_proof")
+        with self.assertRaisesRegex(deal_model.DealError, "start_date .* is after expiry_date"):
+            validate(start_date="2026-12-05")
+        with self.assertRaisesRegex(deal_model.DealError, "https"):
+            validate(source_url="http://example.com/pricing")
+        with self.assertRaisesRegex(deal_model.DealError, "promo_code"):
+            validate(promo_code="TWO WORDS")
+        with self.assertRaisesRegex(deal_model.DealError, "file name"):
+            validate(name="Bad_Name.yaml")
+
+    def test_verified_date_uses_the_injected_clock(self):
+        validate(today=dt.date(2026, 11, 27))
+        with self.assertRaisesRegex(deal_model.DealError, "verified_date 2026-11-27 is in the future"):
+            validate(today=dt.date(2026, 11, 26))
+
+    def test_expiry_boundaries(self):
+        deal = validate()
+        self.assertFalse(deal_model.is_expired(deal, dt.date(2026, 12, 2)))  # last day: shown
+        self.assertTrue(deal_model.is_expired(deal, dt.date(2026, 12, 3)))  # next day: hidden
+
+
+class DealLoaderTests(unittest.TestCase):
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.dir = Path(tmp.name) / "deals"
+        self.dir.mkdir()
+        shutil.copy(FIXTURE, self.dir / FIXTURE.name)
+        (self.dir / ".gitkeep").write_text("")
+
+    def test_loads_expired_deals_as_valid_files(self):
+        deals = deal_model.load_deals(str(self.dir), (), dt.date(2027, 6, 1))
+        self.assertEqual([d["slug"] for d in deals], ["example-ai-pro-black-friday"])
+
+    def test_missing_folder_is_empty(self):
+        self.assertEqual(deal_model.load_deals(str(self.dir / "nope"), (), TODAY), [])
+
+    def test_slug_may_not_name_an_offer(self):
+        with self.assertRaisesRegex(deal_model.DealError, "is also an offer"):
+            deal_model.load_deals(str(self.dir), {"example-ai-pro-black-friday"}, TODAY)
+
+    def test_stray_file_fails(self):
+        (self.dir / "notes.txt").write_text("x")
+        with self.assertRaisesRegex(deal_model.DealError, "unexpected entry"):
+            deal_model.load_deals(str(self.dir), (), TODAY)
+
+    def test_validate_offers_cli_gates_deals(self):
+        def run(*extra):
+            return subprocess.run(
+                [sys.executable, "scripts/validate_offers.py", "--deals-dir", str(self.dir),
+                 "--today", TODAY.isoformat(), *extra],
+                capture_output=True, text=True, cwd=str(REPO))
+        ok = run()
+        self.assertEqual(ok.returncode, 0, ok.stderr)
+        self.assertIn("validated 1 deals: OK", ok.stdout)
+        (self.dir / "bad-deal.yaml").write_text(FIXTURE_TEXT.replace("category: ai_subscription",
+                                                                     "category: image"))
+        bad = run()
+        self.assertEqual(bad.returncode, 1)
+        self.assertIn("bad-deal.yaml: category 'image' is outside the deal scope", bad.stderr)
+
+    def test_deal_model_cli(self):
+        result = subprocess.run(
+            [sys.executable, "scripts/deal_model.py", "validate", "--today", "2027-01-10", str(FIXTURE)],
+            capture_output=True, text=True, cwd=str(REPO))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("expired (hidden at build)", result.stdout)
+
+
+class DealSchemaTests(unittest.TestCase):
+    def test_schema_matches_model(self):
+        schema = validate_offers.load_schema(str(REPO / "schemas" / "deal.schema.json"))
+        validate_offers.check_deal_schema_matches_model(schema)
+        broken = json.loads(json.dumps(schema))
+        broken["properties"]["category"]["enum"].append("image")
+        with self.assertRaises(validate_offers.SchemaMismatch):
+            validate_offers.check_deal_schema_matches_model(broken)
+
+    def test_index_schema_marks_deals(self):
+        schema = json.loads((REPO / "schemas" / "offers-index.schema.json").read_text())
+        deal = schema["$defs"]["Deal"]
+        self.assertEqual(deal["properties"]["kind"], {"const": "deal", "description": deal["properties"]["kind"]["description"]})
+        self.assertEqual(deal["properties"]["category"]["enum"], list(deal_model.CATEGORIES))
+        self.assertNotIn("amount", deal["properties"])
+
+
+class DealWindowTests(unittest.TestCase):
+    def run_cli(self, *args):
+        result = subprocess.run([sys.executable, "scripts/deal_window.py", *args],
+                                capture_output=True, text=True, cwd=str(REPO))
+        payload = json.loads(result.stdout) if result.stdout.strip() else None
+        return result.returncode, payload, result.stderr
+
+    def test_black_friday_window_is_open(self):
+        code, payload, _ = self.run_cli("--date", "2026-11-27")
+        self.assertEqual(code, 0)
+        self.assertEqual(payload["occasion"], "black_friday")
+        self.assertEqual(payload["window_end"], "2026-12-03")
+        self.assertEqual(payload["covers"], ["black_friday", "cyber_monday"])
+
+    def test_window_edges_and_year_crossing(self):
+        cases = {
+            "2026-11-19": None, "2026-11-20": ("black_friday", "2026-12-03"),
+            "2026-12-03": ("black_friday", "2026-12-03"), "2026-12-04": None,
+            "2026-12-15": ("christmas_new_year", "2027-01-02"),
+            "2027-01-01": ("christmas_new_year", "2027-01-02"),
+            "2027-01-02": ("christmas_new_year", "2027-01-02"), "2027-01-03": None,
+            "2028-02-29": None, "2031-11-25": ("black_friday", "2031-12-03"),
+        }
+        for day, expected in cases.items():
+            with self.subTest(day=day):
+                code, payload, _ = self.run_cli("--date", day)
+                if expected is None:
+                    self.assertEqual(code, 3)
+                    self.assertEqual(payload, {"date": day, "occasion": "none", "window_end": None})
+                else:
+                    self.assertEqual(code, 0)
+                    self.assertEqual((payload["occasion"], payload["window_end"]), expected)
+
+    def test_bad_date_exits_2(self):
+        code, payload, err = self.run_cli("--date", "2026-02-30")
+        self.assertEqual(code, 2)
+        self.assertIsNone(payload)
+        self.assertIn("YYYY-MM-DD", err)
+
+    def test_config_is_validated(self):
+        bad = {
+            "overlap": '- id: black_friday\n  label: a\n  start: "11-20"\n  end: "12-03"\n  covers: black_friday\n'
+                       '- id: christmas_new_year\n  label: b\n  start: "12-01"\n  end: "12-31"\n  covers: christmas_new_year\n',
+            "unknown id": '- id: prime_day\n  label: a\n  start: "07-10"\n  end: "07-12"\n  covers: other\n',
+            "bad day": '- id: black_friday\n  label: a\n  start: "02-29"\n  end: "03-02"\n  covers: black_friday\n',
+            "missing key": '- id: black_friday\n  label: a\n  start: "11-20"\n  covers: black_friday\n',
+        }
+        for name, text in bad.items():
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp, "occasions.yaml")
+                path.write_text(text)
+                code, payload, err = self.run_cli("--date", "2026-11-27", "--config", str(path))
+                self.assertEqual(code, 2, err)
+                self.assertIn("Error:", err)
+
+    def test_repo_config_covers_only_deal_occasions(self):
+        windows = deal_window.load_occasions()
+        self.assertEqual({w["id"] for w in windows}, {"black_friday", "christmas_new_year"})
+        for window in windows:
+            self.assertTrue(set(window["covers"]) <= set(deal_model.OCCASIONS))
+
+
+class DealScopeTests(unittest.TestCase):
+    """check_scope.py --mode deals, run from a copy inside a throwaway repo."""
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.repo = Path(tmp.name).resolve() / "repo"
+        (self.repo / "scripts").mkdir(parents=True)
+        for name in ("offer_model.py", "lead_model.py", "deal_model.py"):
+            shutil.copy(REPO / "scripts" / name, self.repo / "scripts" / name)
+        shutil.copytree(REPO / "schemas", self.repo / "schemas")
+        shutil.copytree(REPO / "skills/offer-hunter/scripts", self.repo / "skills/offer-hunter/scripts")
+        (self.repo / "offers").mkdir()
+        (self.repo / "deals").mkdir()
+        (self.repo / "offers/regular.yaml").write_text(
+            "title: R\nprovider: R\ncategory: coding\namount: $5 in credits\nexpiry_date: null\n"
+            "source_url: https://r.example/\nverified_date: 2026-01-01\nverification: social_proof\n"
+            "review_status: verified\nsignup: none\n")
+        (self.repo / "index.json").write_text("{}\n")
+        git(self.repo, "init", "-q")
+        git(self.repo, "add", "-A")
+        git(self.repo, "commit", "-qm", "base")
+
+    def scope(self, *args):
+        git(self.repo, "add", "-A")
+        return subprocess.run(
+            [sys.executable, str(self.repo / "skills/offer-hunter/scripts/check_scope.py"), *args],
+            capture_output=True, text=True)
+
+    def test_deal_hunt_may_add_deals_and_regenerate_index(self):
+        shutil.copy(FIXTURE, self.repo / "deals" / FIXTURE.name)
+        (self.repo / "index.json").write_text('{"deals": []}\n')
+        result = self.scope("--mode", "deals", "--today", TODAY.isoformat())
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("OK scope (2 staged paths, deals)", result.stdout)
+
+    def test_deal_hunt_may_remove_a_deal(self):
+        shutil.copy(FIXTURE, self.repo / "deals" / FIXTURE.name)
+        git(self.repo, "add", "-A")
+        git(self.repo, "commit", "-qm", "deal")
+        (self.repo / "deals" / FIXTURE.name).unlink()
+        self.assertEqual(self.scope("--mode", "deals", "--today", TODAY.isoformat()).returncode, 0)
+
+    def test_deal_hunt_may_not_touch_offers(self):
+        (self.repo / "offers/regular.yaml").write_text(
+            (self.repo / "offers/regular.yaml").read_text().replace("$5", "$6"))
+        result = self.scope("--mode", "deals", "--today", TODAY.isoformat())
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("outside the deal-hunter scope", result.stderr)
+        self.assertIn("offers/regular.yaml: a deal hunt may only touch deals/", result.stderr)
+
+    def test_deal_hunt_rejects_an_invalid_deal(self):
+        (self.repo / "deals/free-thing.yaml").write_text(FIXTURE_TEXT.replace(
+            "discount: 50% off the first year", "discount: Free for a year"))
+        result = self.scope("--mode", "deals", "--today", TODAY.isoformat())
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("never labelled free", result.stderr)
+
+    def test_offer_hunt_may_not_touch_deals(self):
+        shutil.copy(FIXTURE, self.repo / "deals" / FIXTURE.name)
+        result = self.scope()
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("deal files belong to a deal hunt", result.stderr)
+
+
+class DealHunterSkillTests(unittest.TestCase):
+    SKILL = REPO / "skills" / "deal-hunter"
+
+    def test_skill_files_exist_and_name_matches(self):
+        text = (self.SKILL / "SKILL.md").read_text(encoding="utf-8")
+        self.assertTrue(text.startswith("---\nname: deal-hunter\n"))
+        self.assertTrue((self.SKILL / "references" / "brief.md").is_file())
+        for needle in ("deal_window.py", "check_scope.py --mode deals", "expiry_note",
+                       "scripts/deal_model.py validate"):
+            self.assertIn(needle, text)
+
+    def test_fixture_is_never_published(self):
+        self.assertFalse((REPO / "deals" / FIXTURE.name).exists())
+        self.assertFalse((REPO / "offers" / FIXTURE.name).exists())
+
+
+if __name__ == "__main__":
+    unittest.main()

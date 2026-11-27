@@ -9,7 +9,15 @@ unverified/<slug>.yaml lead files added, refreshed, or removed (#660).
 Never allowed: creating, editing or removing a community listing (#748,
 ``listing_type: community``) or its details file. Only Luong adds one, in its
 own small entry PR.
+
+``--mode deals`` (#809) checks a deal-hunt PR instead: it may only add, edit
+or remove ``deals/<slug>.yaml`` files (each added or edited one must pass
+``scripts/deal_model.py``) and modify the three generated artifacts. Offers,
+details, leads and every other path are out of scope for a deal hunt, and a
+deal file is out of scope for an offer hunt.
 """
+import argparse
+import datetime as dt
 import json
 from pathlib import PurePosixPath
 import subprocess
@@ -99,10 +107,39 @@ def check(status, path):
             if key in old and old[key] != new.get(key):
                 return f'{path}: rewrites curated {key}'
         return None
+    if len(parts) >= 1 and parts[0] == 'deals':
+        return f'{path}: deal files belong to a deal hunt (check_scope.py --mode deals), not an offer hunt'
     return f'{path}: not an offer, detail, lead, or generated artifact path'
 
 
-def main():
+def check_deal(status, path, today):
+    """Deal-hunt scope (#809): deals/<slug>.yaml plus the generated artifacts."""
+    import deal_model  # lazy: offer-hunt runs never need it
+
+    parts = PurePosixPath(path).parts
+    if path in ARTIFACTS:
+        return None if status == 'M' else f'{path}: generated artifact must be modified, not {status}'
+    if len(parts) == 2 and parts[0] == 'deals' and path.endswith('.yaml'):
+        if status == 'D':
+            return None
+        if status not in ('A', 'M'):
+            return f'{path}: status {status} is out of scope (only add, edit, or remove deals)'
+        deal_model.validate_deal(parse_offer_text(git('show', ':' + path), path), path, today)
+        return None
+    return f'{path}: a deal hunt may only touch deals/<slug>.yaml and the generated artifacts'
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description='Check the staged diff against a hunt scope.')
+    parser.add_argument('--mode', choices=('offers', 'deals'), default='offers',
+                        help='offers (default): an offer-hunt PR; deals: a deal-hunt PR (#809)')
+    parser.add_argument('--today', help='YYYY-MM-DD clock for deal date checks (default: UTC today)')
+    args = parser.parse_args(argv)
+    try:
+        today = (dt.date.fromisoformat(args.today) if args.today
+                 else dt.datetime.now(dt.timezone.utc).date())
+    except ValueError:
+        parser.error(f'--today must be YYYY-MM-DD, got {args.today!r}')
     out = git('diff', '--cached', '--name-status', '-z', '--no-renames')
     fields = out.split('\0')
     entries = [(fields[i], fields[i + 1]) for i in range(0, len(fields) - 1, 2)]
@@ -114,19 +151,21 @@ def main():
     violations = []
     for status, path in entries:
         try:
-            problem = check(status, path)
+            problem = (check_deal(status, path, today) if args.mode == 'deals'
+                       else check(status, path))
         except (OfferError, json.JSONDecodeError) as exc:
             problem = f'{path}: cannot parse ({exc})'
         if problem:
             violations.append(problem)
     if violations:
-        print('Error: the staged diff is outside the offer-hunter scope:', file=sys.stderr)
+        hunt = 'deal-hunter' if args.mode == 'deals' else 'offer-hunter'
+        print(f'Error: the staged diff is outside the {hunt} scope:', file=sys.stderr)
         for line in violations:
             print('  - ' + line, file=sys.stderr)
         print('Fix: unstage the listed paths (git restore --staged -- <path>); never widen the scope.',
               file=sys.stderr)
         sys.exit(1)
-    print(f'OK scope ({len(entries)} staged paths)')
+    print(f'OK scope ({len(entries)} staged paths{", deals" if args.mode == "deals" else ""})')
 
 
 if __name__ == '__main__':
