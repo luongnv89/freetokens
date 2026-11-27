@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://docs.base44.com/Getting-Started/black-friday-cyber-monday-sale ("Get 30% off the first year of a yearly Builder, Pro, or Elite plan in the Base44 Black Friday and Cyber Monday sale." / "The sale runs from November 26 at 8 AM until December 1, 2026 at 10 AM Eastern Time." / code BASE30 applied at checkout on the website)
+title: Base44 annual plans — Black Friday
+provider: Base44
+category: coding_agent
+discount: 30% off the first year of a yearly Builder, Pro or Elite plan
+promo_code: BASE30
+occasion: black_friday
+start_date: 2026-11-26
+expiry_date: 2026-12-01
+source_url: https://docs.base44.com/Getting-Started/black-friday-cyber-monday-sale
+verified_date: 2026-11-27
+description: The website applies BASE30 at checkout. Starter, monthly plans and shared workspaces are excluded; renews at the regular yearly price. Ends 1 Dec 2026, 10 AM ET.

@@ -1,0 +1,13 @@
+# Verified 2026-11-27 against https://www.meshy.ai/pricing ("From Nov 23 to Dec 2, 2026, Pro and Premium yearly plans are up to 50% off." / "Nov 23 – Dec 2, 2026. No promo code or coupon needed." / Pro "€19" → "€11.4/month", EUR shown for the fetch region)
+title: Meshy yearly plans — Black Friday
+provider: Meshy
+category: ai_tool_api
+discount: Up to 50% off Pro and Premium yearly plans
+regular_price: €19/month (Pro)
+deal_price: €11.4/month, billed yearly (Pro)
+occasion: black_friday
+start_date: 2026-11-23
+expiry_date: 2026-12-02
+source_url: https://www.meshy.ai/pricing
+verified_date: 2026-11-27
+description: 3D generative AI. No promo code needed. The exact discount depends on plan and region (Pro 40%, Premium 50%, Ultra 20% as shown).

@@ -1,0 +1,10 @@
+# Verified 2026-11-27 against https://pika.art/pricing ("Black Friday 60% off!" banner with a countdown; no end date or terms stated). The window end is used.
+title: Pika subscriptions — Black Friday
+provider: Pika
+category: ai_tool_api
+discount: 60% off
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date (countdown only); the Black Friday window end (3 Dec) is used.
+source_url: https://pika.art/pricing
+verified_date: 2026-11-27

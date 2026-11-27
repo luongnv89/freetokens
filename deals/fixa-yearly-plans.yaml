@@ -1,0 +1,13 @@
+# Verified 2026-11-27 against https://fixa.dev/black-friday ("Starter, yearly: $48 (normally $96)" / "Pro, yearly: $120 (normally $240)" / "Code BLACKFRIDAY is applied at checkout." / "The code works on yearly plans only and ends Dec 1 at 11:59 pm Pacific.")
+title: Fixa yearly plans — Black Friday
+provider: Fixa
+category: coding_agent
+discount: Half off the first year of a yearly Starter or Pro plan
+regular_price: $96/year (Starter)
+deal_price: $48 first year (Starter)
+promo_code: BLACKFRIDAY
+occasion: black_friday
+expiry_date: 2026-12-01
+source_url: https://fixa.dev/black-friday
+verified_date: 2026-11-27
+description: Hosted AI coding agent. Pro yearly is $120 (normally $240). Yearly plans only; renews at the regular price. Ends 1 Dec, 11:59 pm Pacific.

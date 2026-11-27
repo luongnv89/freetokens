@@ -1,0 +1,15 @@
+# Verified 2026-11-27 against https://perch.run/black-friday ("Until 1 Dec, the licence is 40% off for the first 500 orders." / "$17.40 instead of $29 one-time, solo or per team seat" / code BLACKFRIDAY2026 / "From 2 Nov until the end of 1 Dec 2026, Pacific time, or until 500 orders have used the code, whichever comes first.")
+title: Perch Mac licence — Black Friday
+provider: Perch
+category: coding_agent
+discount: 40% off the licence for the first 500 orders
+regular_price: $29 one-time
+deal_price: $17.40 one-time
+promo_code: BLACKFRIDAY2026
+occasion: black_friday
+start_date: 2026-11-02
+expiry_date: 2026-12-01
+expiry_note: Ends 1 Dec 2026 (Pacific time) or after 500 orders, whichever comes first.
+source_url: https://perch.run/black-friday
+verified_date: 2026-11-27
+description: Mac menu bar app that watches Claude Code, Codex, Cursor and other coding-agent sessions. Perch Pro (iPhone subscription) is excluded from the code.

@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://wovo.one/ ("50% off Pro, locked in for as long as you stay subscribed" / "Ends Dec 15" / Pro "$12/month" struck, "$6/month", "$72 billed once a year")
+title: Wovo Pro — Black Friday
+provider: Wovo
+category: ai_tool_api
+discount: 50% off Pro, kept for as long as you stay subscribed
+regular_price: $12/month
+deal_price: $6/month
+occasion: black_friday
+expiry_date: 2026-12-15
+source_url: https://wovo.one/
+verified_date: 2026-11-27
+description: Remote MCP server that connects Claude, ChatGPT, Cursor and other agents to your own computers. Pro covers up to 5 computers; yearly is shown as $72 billed once a year.
