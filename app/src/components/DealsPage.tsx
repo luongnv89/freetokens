@@ -76,7 +76,7 @@ export default function DealsPage({
             <p className="tagline">
               Seasonal discounts on AI subscriptions, coding agents, AI tools
               and compute for agents, each checked on the vendor&rsquo;s own
-              page &mdash; soonest-ending first.
+              page &mdash; featured deals first, then soonest-ending.
             </p>
             <p className="count" aria-live="polite">
               <strong>{shown.length}</strong>

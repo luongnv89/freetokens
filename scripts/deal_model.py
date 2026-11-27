@@ -12,7 +12,8 @@ build reject the same files:
 
 - required: title, provider, category, discount, occasion, expiry_date,
   source_url, verified_date; optional: regular_price, deal_price,
-  promo_code, start_date, expiry_note, description; nothing else
+  promo_code, start_date, expiry_note, description, and the boolean flag
+  ``featured`` (#815: ``true`` / ``false``; null = absent); nothing else
 - ``category`` is in the deal scope (AI subscriptions, coding agents / IDEs,
   AI tools & APIs, compute for agents); anything else is rejected
 - ``expiry_date`` is required and never null: a deal must end
@@ -69,7 +70,14 @@ OPTIONAL_FIELDS = (
     "expiry_note",
     "description",
 )
-FIELDS = REQUIRED_FIELDS + OPTIONAL_FIELDS
+# Optional flags (#815), listed in schemas/deal.rules.json. ``featured``
+# pins a deal above the rest of /deals.html; it defaults to false.
+BOOLEAN_FIELDS = tuple(RULES["boolean_fields"])
+STRING_FIELDS = REQUIRED_FIELDS + OPTIONAL_FIELDS
+FIELDS = STRING_FIELDS + BOOLEAN_FIELDS
+# The flat YAML subset parses every value as a string: only the bare tokens
+# true / false (or an already-parsed bool) are booleans.
+BOOLEAN_TOKENS = {"true": True, "false": False}
 # Deal scope (#809). Free-offer categories (api_provider, image, ...) are
 # deliberately absent: a deal outside this list is rejected.
 CATEGORIES = ("ai_subscription", "coding_agent", "ai_tool_api", "agent_compute")
@@ -146,7 +154,14 @@ def validate_deal(data: dict, filename: str, today: dt.date | None = None) -> di
     if unknown:
         raise DealError(f"{filename}: unknown field(s): {', '.join(unknown)}")
 
-    for field in FIELDS:
+    for field in BOOLEAN_FIELDS:
+        value = data.get(field)
+        if value is None or isinstance(value, bool):
+            continue
+        if not isinstance(value, str) or value not in BOOLEAN_TOKENS:
+            raise DealError(f"{filename}: {field} must be true or false, got {value!r}")
+
+    for field in STRING_FIELDS:
         value = data.get(field)
         if value is None:
             continue
@@ -199,9 +214,14 @@ def validate_deal(data: dict, filename: str, today: dt.date | None = None) -> di
             raise DealError(f"{filename}: {field} {value!r} has no non-zero amount; a deal is never free")
 
     deal = {"slug": slug}
-    for field in FIELDS:
+    for field in STRING_FIELDS:
         if data.get(field) is not None:
             deal[field] = data[field].strip()
+    for field in BOOLEAN_FIELDS:
+        value = data.get(field)
+        # Default false: the index carries a flag only when it is true.
+        if value is True or BOOLEAN_TOKENS.get(value) is True:
+            deal[field] = True
     return deal
 
 

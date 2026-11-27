@@ -330,6 +330,10 @@
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
           "description": "Day the deal was last checked on source_url, YYYY-MM-DD. Never in the future."
         },
+        "featured": {
+          "const": true,
+          "description": "Present (and true) only on a featured deal (#815): pinned above the others on /deals.html with a 'Featured' label. Still a paid discount, never a free offer. Absent means not featured."
+        },
         "description": {
           "type": "string",
           "minLength": 1,

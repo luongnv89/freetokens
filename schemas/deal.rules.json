@@ -8,6 +8,8 @@
   "promo_code_free_pattern": "free|gratis|complimentary|nocost|(?<![0-9])100[-_]?(?:pct|percent|pc|p)?[-_]?off",
   "free_keys": ["amount", "free", "is_free", "free_tier", "free_credits"],
   "nonzero_price_fields": ["deal_price"],
+  "boolean_fields_comment": "Optional flags (#815). The flat YAML subset parses every value as a string, so only the tokens true / false (bare or quoted; a parsed boolean too) are accepted; an empty, null or ~ value means absent (not featured), as for every optional field; anything else (yes, 1, True, on) is rejected by both checks. featured: true pins a deal above the rest of /deals.html; it is set only when Luong asks, never by the deal-hunter, and the field is omitted from index.json unless true.",
+  "boolean_fields": ["featured"],
   "limits": {
     "title": 120,
     "provider": 80,

@@ -206,6 +206,24 @@ export function DealBadge() {
   );
 }
 
+/**
+ * Featured deal label (#815): a deal Luong pinned to the top of /deals.html.
+ * Plain text, never "free"; it sits beside the "Deal · not free" badge,
+ * which still marks the deal as paid.
+ */
+export const FEATURED_BADGE_LABEL = "Featured";
+
+export function FeaturedBadge() {
+  return (
+    <span
+      className="badge badge-featured"
+      title="Pinned to the top of the deals list. Still a paid discount."
+    >
+      <span>{FEATURED_BADGE_LABEL}</span>
+    </span>
+  );
+}
+
 /** The discount itself, exactly as the vendor states it (#809). */
 export function DiscountBadge({ discount }: { discount: string }) {
   return (

@@ -5,6 +5,15 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Featured deals (#815):** an optional boolean `featured` deal field
+  (default `false`; `true` / `false` are accepted, an empty or null value
+  means not featured, and anything else is rejected, identically by
+  `scripts/deal_model.py` and `app/scripts/load-deals.mjs`). Featured deals
+  sort first on `/deals.html`, then the usual soonest-ending order, and show
+  a "Featured" label next to the "Deal · not free" badge on their card and
+  page. `index.json` carries `featured: true` and the llms files
+  `featured=true` on those deals only; free counts are unchanged. The
+  CUStats Black Friday deal is featured. The deal-hunter never sets the flag.
 - **Deals (#809):** a separate `deal` kind for time-limited DISCOUNTS on
   paid AI subscriptions, coding agents / IDEs, AI tools & APIs and compute
   for agents, kept apart from the free offers. Deals are

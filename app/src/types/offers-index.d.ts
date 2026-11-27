@@ -213,6 +213,10 @@ export interface Deal {
    */
   verified_date: string;
   /**
+   * Present (and true) only on a featured deal (#815): pinned above the others on /deals.html with a 'Featured' label. Still a paid discount, never a free offer. Absent means not featured.
+   */
+  featured?: true;
+  /**
    * Optional: one or two sentences of terms quoted or closely paraphrased from the official page (who qualifies, which plan).
    */
   description?: string;

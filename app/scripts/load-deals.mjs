@@ -30,6 +30,18 @@ export const REQUIRED_FIELDS = SCHEMA.required;
 export const FIELDS = Object.keys(SCHEMA.properties);
 export const DEAL_CATEGORIES = SCHEMA.properties.category.enum;
 export const OCCASIONS = SCHEMA.properties.occasion.enum;
+// Optional flags (#815) from the rules file; every other field is a string.
+export const BOOLEAN_FIELDS = RULES.boolean_fields;
+const STRING_FIELDS = FIELDS.filter((f) => !BOOLEAN_FIELDS.includes(f));
+// The flat YAML subset parses every value as a string: only the bare tokens
+// true / false (or an already-parsed boolean) are booleans, as in deal_model.py.
+const BOOLEAN_TOKENS = { true: true, false: false };
+const asBoolean = (value) =>
+  typeof value === "boolean"
+    ? value
+    : typeof value === "string" && Object.hasOwn(BOOLEAN_TOKENS, value)
+      ? BOOLEAN_TOKENS[value]
+      : undefined;
 // No u flag: \b stays ASCII, matching Python's re.ASCII. Whitespace is the
 // explicit {space} class from the rules file, never \s (JavaScript's \s is
 // Unicode-wide, Python's re.ASCII \s is not), so both match the same strings.
@@ -114,7 +126,13 @@ export function validateDeal(data, filename, today) {
   if (missing.length) fail(`missing required field(s): ${missing.join(", ")}`);
   const unknown = Object.keys(data).filter((k) => !FIELDS.includes(k));
   if (unknown.length) fail(`unknown field(s): ${unknown.sort().join(", ")}`);
-  for (const field of FIELDS) {
+  for (const field of BOOLEAN_FIELDS) {
+    const value = data[field];
+    if (value != null && asBoolean(value) === undefined) {
+      fail(`${field} must be true or false, got ${JSON.stringify(value)}`);
+    }
+  }
+  for (const field of STRING_FIELDS) {
     const value = data[field];
     if (value == null) continue;
     if (typeof value !== "string" || !value.trim()) {
@@ -172,8 +190,12 @@ export function validateDeal(data, filename, today) {
     }
   }
   const entry = { kind: "deal", slug };
-  for (const field of FIELDS) {
+  for (const field of STRING_FIELDS) {
     if (data[field] != null) entry[field] = data[field].trim();
+  }
+  // Default false: the index carries a flag only when it is true.
+  for (const field of BOOLEAN_FIELDS) {
+    if (asBoolean(data[field]) === true) entry[field] = true;
   }
   return entry;
 }
@@ -193,10 +215,11 @@ export function isListedDeal(deal, today) {
   return !isExpiredDeal(deal, today) && !isUpcomingDeal(deal, today);
 }
 
-/** Soonest-ending first, then provider, then slug. */
+/** Featured first (#815), then soonest-ending, then provider, then slug. */
 export function sortDeals(deals) {
   return [...deals].sort(
     (a, b) =>
+      Number(b.featured === true) - Number(a.featured === true) ||
       a.expiry_date.localeCompare(b.expiry_date) ||
       a.provider.localeCompare(b.provider) ||
       a.slug.localeCompare(b.slug),

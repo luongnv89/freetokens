@@ -187,6 +187,7 @@ offer. Schema: `schemas/deal.schema.json`; wording rules:
 | `source_url` | yes | The vendor's own `https://` page showing the discount. |
 | `verified_date` | yes | `YYYY-MM-DD`, not in the future. |
 | `description` | no | Short terms from the official page. |
+| `featured` | no | `true` or `false` (default `false`; empty or `null` means not featured; anything else, e.g. `yes` or `1`, is rejected). `true` pins the deal above the others on `/deals.html` (featured deals first, then soonest-ending) and adds a "Featured" label to its card and page; `index.json` and the llms files carry `featured: true` / `featured=true` only on such deals. Still a paid deal, never counted as free. Set only when Luong asks; the deal-hunter never sets it. |
 
 A deal is never labelled free: the keys `amount`, `free`, `is_free`
 (and the other `free_keys` in the rules file) are rejected, and so is free

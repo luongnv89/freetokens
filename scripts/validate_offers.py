@@ -172,6 +172,9 @@ def check_deal_schema_matches_model(schema: dict) -> None:
         raise SchemaMismatch("deal schema occasion enum does not match deal_model.OCCASIONS")
     if props["expiry_date"].get("type") != "string":
         raise SchemaMismatch("deal schema expiry_date must be a non-nullable string")
+    for field in deal_model.BOOLEAN_FIELDS:
+        if props[field].get("type") != "boolean" or props[field].get("default") is not False:
+            raise SchemaMismatch(f"deal schema {field} must be a boolean defaulting to false")
 
 
 def validate_leads(leads_dir: str, offer_slugs: set, today=None) -> tuple:

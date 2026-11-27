@@ -6,7 +6,9 @@ The only deal file used is the test fixture in tests/fixtures/deals/, a
 fictional example.com deal that is never published.
 """
 
+import contextlib
 import datetime as dt
+import io
 import json
 import os
 import re
@@ -237,6 +239,108 @@ class FreeWordingParityTests(unittest.TestCase):
         self.assertEqual(mismatches[:10], [])
 
 
+# featured (#815): raw values as the flat YAML parser hands them over.
+# Empty and the YAML null tokens are an absent field: not featured.
+FEATURED_NOT_FEATURED = ["false", "", "null", "~"]
+FEATURED_ACCEPTED = {"true": True, '"true"': True, "'true'": True,
+                     **dict.fromkeys(FEATURED_NOT_FEATURED, None)}
+FEATURED_REJECTED = ["yes", "no", "1", "0", "True", "FALSE", "on", "featured", "true!"]
+
+
+class FeaturedFlagTests(unittest.TestCase):
+    """Optional boolean ``featured`` (#815): default false, booleans only."""
+
+    def test_absent_means_not_featured(self):
+        self.assertNotIn("featured", validate())
+
+    def test_true_is_carried_and_false_is_dropped(self):
+        self.assertIs(validate(featured="true")["featured"], True)
+        self.assertNotIn("featured", validate(featured="false"))
+        self.assertIs(validate(featured=True)["featured"], True)
+        self.assertNotIn("featured", validate(featured=False))
+        # A null value is an absent optional field, as for every other field.
+        self.assertNotIn("featured", validate(featured=None))
+
+    def test_non_boolean_values_are_rejected(self):
+        for value in FEATURED_REJECTED + [1, 0, "", ["true"]]:
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(deal_model.DealError, "featured must be true or false"):
+                    validate(featured=value)
+
+    def test_flat_yaml_file_round_trip(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / FIXTURE.name
+            path.write_text(FIXTURE_TEXT + "featured: true\n", encoding="utf-8")
+            self.assertIs(deal_model.load_deal(str(path), TODAY)["featured"], True)
+            path.write_text(FIXTURE_TEXT + "featured: yes\n", encoding="utf-8")
+            with self.assertRaisesRegex(deal_model.DealError, "featured"):
+                deal_model.load_deal(str(path), TODAY)
+
+    def test_schema_declares_a_boolean_defaulting_to_false(self):
+        schema = validate_offers.load_schema(str(REPO / "schemas" / "deal.schema.json"))
+        self.assertEqual(schema["properties"]["featured"]["type"], "boolean")
+        self.assertIs(schema["properties"]["featured"]["default"], False)
+        self.assertNotIn("featured", schema["required"])
+        broken = json.loads(json.dumps(schema))
+        broken["properties"]["featured"]["type"] = "string"
+        with self.assertRaises(validate_offers.SchemaMismatch):
+            validate_offers.check_deal_schema_matches_model(broken)
+        index = json.loads((REPO / "schemas" / "offers-index.schema.json").read_text())
+        self.assertIs(index["$defs"]["Deal"]["properties"]["featured"]["const"], True)
+
+    def test_featured_label_is_not_free_wording(self):
+        self.assertIsNone(deal_model.free_wording("Featured"))
+
+    @unittest.skipUnless(shutil.which("node"), "node is not installed")
+    def test_python_and_node_agree(self):
+        values = list(FEATURED_ACCEPTED) + FEATURED_REJECTED
+        script = (
+            "import { parseDealText, validateDeal } from " + json.dumps(LOAD_DEALS.as_uri()) + ";"
+            "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{"
+            "const {text, file, today, values}=JSON.parse(s);"
+            "process.stdout.write(JSON.stringify(values.map(v=>{"
+            "try{return validateDeal(parseDealText(text+'featured: '+v+'\\n',file),file,today).featured??null}"
+            "catch(e){return 'rejected'}})))});"
+        )
+        payload = {"text": FIXTURE_TEXT, "file": str(FIXTURE), "today": TODAY.isoformat(), "values": values}
+        result = subprocess.run(["node", "--input-type=module", "-e", script],
+                                input=json.dumps(payload), capture_output=True, text=True,
+                                encoding="utf-8")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        node = json.loads(result.stdout)
+        python = []
+        for value in values:
+            data = parse_offer_text(FIXTURE_TEXT + f"featured: {value}\n", str(FIXTURE))
+            try:
+                python.append(deal_model.validate_deal(data, str(FIXTURE), TODAY).get("featured"))
+            except deal_model.DealError:
+                python.append("rejected")
+        self.assertEqual(python, node)
+        self.assertEqual(python[: len(FEATURED_ACCEPTED)], list(FEATURED_ACCEPTED.values()))
+        self.assertEqual(set(python[len(FEATURED_ACCEPTED):]), {"rejected"})
+        not_featured = dict(zip(values, python))
+        self.assertEqual([not_featured[v] for v in FEATURED_NOT_FEATURED],
+                         [None] * len(FEATURED_NOT_FEATURED))
+
+    def test_featuring_unfeaturing_or_removing_a_deal_file_stays_valid(self):
+        # Fixture-only: a published deal ending or losing its flag never fails CI.
+        with tempfile.TemporaryDirectory() as tmp:
+            deals_dir = Path(tmp) / "deals"
+            deals_dir.mkdir()
+            path = deals_dir / FIXTURE.name
+            argv = ["validate", "--deals-dir", str(deals_dir), "--today", TODAY.isoformat()]
+            path.write_text(FIXTURE_TEXT + "featured: true\n", encoding="utf-8")
+            self.assertEqual([d.get("featured") for d in deal_model.load_deals(str(deals_dir), (), TODAY)],
+                             [True])
+            path.write_text(FIXTURE_TEXT, encoding="utf-8")
+            self.assertEqual([d.get("featured") for d in deal_model.load_deals(str(deals_dir), (), TODAY)],
+                             [None])
+            path.unlink()
+            self.assertEqual(deal_model.load_deals(str(deals_dir), (), TODAY), [])
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(deal_model.main(argv), 0)
+
+
 class DealLoaderTests(unittest.TestCase):
     def setUp(self):
         tmp = tempfile.TemporaryDirectory()
@@ -459,7 +563,7 @@ class DealHunterSkillTests(unittest.TestCase):
         self.assertTrue(text.startswith("---\nname: deal-hunter\n"))
         self.assertTrue((self.SKILL / "references" / "brief.md").is_file())
         for needle in ("deal_window.py", "check_scope.py --mode deals", "expiry_note",
-                       "scripts/deal_model.py validate"):
+                       "scripts/deal_model.py validate", "Never set `featured`"):
             self.assertIn(needle, text)
 
     def test_fixture_is_never_published(self):

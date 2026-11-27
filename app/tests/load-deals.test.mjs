@@ -25,10 +25,12 @@ import {
   isUpcomingDeal,
   loadDeals,
   parseDealText,
+  sortDeals,
   validateDeal,
 } from "../scripts/load-deals.mjs";
 import { runPipeline } from "../scripts/load-offers.mjs";
 import DealsPage from "../src/components/DealsPage.tsx";
+import DealDetailPage from "../src/components/DealDetailPage.tsx";
 import HomePage from "../src/components/HomePage.tsx";
 
 const APP_ROOT = path.resolve(import.meta.dirname, "..");
@@ -80,8 +82,11 @@ function scratchRepo() {
   return root;
 }
 
-async function pipeline(now) {
+async function pipeline(now, extra = "") {
   const root = scratchRepo();
+  if (extra) {
+    writeFileSync(path.join(root, "deals", path.basename(FIXTURE)), FIXTURE_TEXT + extra);
+  }
   const out = path.join(root, "out");
   try {
     const index = await runPipeline({
@@ -335,60 +340,62 @@ describe("Deals UI from the built index (#809)", () => {
   });
 });
 
-describe("llms files mark deals as deals (#809)", () => {
-  function generate(deals) {
-    const root = mkdtempSync(path.join(tmpdir(), "ft-llms-deals-"));
-    try {
-      const dataFile = path.join(root, "offers.json");
-      writeFileSync(
-        dataFile,
-        JSON.stringify({
-          generated_at: "2026-11-28T00:00:00Z",
-          count: 1,
-          active_count: 1,
-          expired_count: 0,
-          offers: [
-            {
-              slug: "fixture-free-credits",
-              title: "Fixture Free Credits",
-              provider: "Fixture Co",
-              category: "coding",
-              amount: "$10 in credits",
-              expiry_date: null,
-              source_url: "https://fixture.example/credits",
-              verified_date: "2026-11-01",
-              verification: "social_proof",
-              review_status: "verified",
-              signup: "required",
-              status: "active",
-            },
-          ],
-          deals,
-        }),
-      );
-      execFileSync(
-        process.execPath,
-        [
-          "scripts/generate-llms.mjs",
-          "--data",
-          dataFile,
-          "--details",
-          path.join(root, "missing.json"),
-          "--public-dir",
-          path.join(root, "public"),
-          "--dist",
-          path.join(root, "missing-dist"),
+function generateLlms(deals) {
+  const root = mkdtempSync(path.join(tmpdir(), "ft-llms-deals-"));
+  try {
+    const dataFile = path.join(root, "offers.json");
+    writeFileSync(
+      dataFile,
+      JSON.stringify({
+        generated_at: "2026-11-28T00:00:00Z",
+        count: 1,
+        active_count: 1,
+        expired_count: 0,
+        offers: [
+          {
+            slug: "fixture-free-credits",
+            title: "Fixture Free Credits",
+            provider: "Fixture Co",
+            category: "coding",
+            amount: "$10 in credits",
+            expiry_date: null,
+            source_url: "https://fixture.example/credits",
+            verified_date: "2026-11-01",
+            verification: "social_proof",
+            review_status: "verified",
+            signup: "required",
+            status: "active",
+          },
         ],
-        { cwd: APP_ROOT, stdio: "pipe" },
-      );
-      return {
-        short: readFileSync(path.join(root, "public", "llms.txt"), "utf8"),
-        full: readFileSync(path.join(root, "public", "llms-full.txt"), "utf8"),
-      };
-    } finally {
-      rmSync(root, { recursive: true, force: true });
-    }
+        deals,
+      }),
+    );
+    execFileSync(
+      process.execPath,
+      [
+        "scripts/generate-llms.mjs",
+        "--data",
+        dataFile,
+        "--details",
+        path.join(root, "missing.json"),
+        "--public-dir",
+        path.join(root, "public"),
+        "--dist",
+        path.join(root, "missing-dist"),
+      ],
+      { cwd: APP_ROOT, stdio: "pipe" },
+    );
+    return {
+      short: readFileSync(path.join(root, "public", "llms.txt"), "utf8"),
+      full: readFileSync(path.join(root, "public", "llms-full.txt"), "utf8"),
+    };
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
+}
+
+describe("llms files mark deals as deals (#809)", () => {
+  const generate = generateLlms;
 
   it("lists running deals in their own section, marked kind=deal", () => {
     const { short, full } = generate([check({})]);
@@ -411,5 +418,108 @@ describe("llms files mark deals as deals (#809)", () => {
     const { short } = generate([]);
     expect(short).not.toContain("## Deals");
     expect(short).toContain("[Deals](https://freetokens.custats.info/deals.html)");
+  });
+});
+
+describe("featured deals (#815)", () => {
+  /** A minimal running deal for sort tests; only the sort keys matter. */
+  const deal = (slug, expiry_date, provider, featured) => ({
+    kind: "deal",
+    slug,
+    provider,
+    expiry_date,
+    ...(featured ? { featured: true } : {}),
+  });
+
+  it("accepts true / false, defaults to not featured, and rejects anything else", () => {
+    expect(check({})).not.toHaveProperty("featured");
+    expect(check({ featured: "true" }).featured).toBe(true);
+    expect(check({ featured: true }).featured).toBe(true);
+    expect(check({ featured: "false" })).not.toHaveProperty("featured");
+    expect(check({ featured: false })).not.toHaveProperty("featured");
+    expect(check({ featured: null })).not.toHaveProperty("featured");
+    for (const value of ["yes", "no", "1", "0", "True", "FALSE", "on", "featured", "", 1, 0, ["true"]]) {
+      expect(() => check({ featured: value }), JSON.stringify(value)).toThrow(
+        /featured must be true or false/,
+      );
+    }
+    expect(
+      validateDeal(parseDealText(`${FIXTURE_TEXT}featured: true\n`, FIXTURE), FIXTURE, TODAY)
+        .featured,
+    ).toBe(true);
+    expect(freeWording("Featured")).toBeNull();
+  });
+
+  it("sorts featured deals first, then by end date, provider and slug", () => {
+    const deals = [
+      deal("c-late", "2026-12-31", "Gamma", false),
+      deal("b-soon", "2026-11-29", "Beta", false),
+      deal("z-feat-late", "2026-12-20", "Zeta", true),
+      deal("a-soon", "2026-11-29", "Alpha", false),
+      deal("y-feat-soon", "2026-12-01", "Yota", true),
+      deal("x-feat-soon", "2026-12-01", "Yota", true),
+    ];
+    expect(sortDeals(deals).map((d) => d.slug)).toEqual([
+      // Featured, in the usual order among themselves (slug breaks the tie).
+      "x-feat-soon",
+      "y-feat-soon",
+      "z-feat-late",
+      // Then everything else, unchanged order rules.
+      "a-soon",
+      "b-soon",
+      "c-late",
+    ]);
+    // No featured deal: exactly the pre-#815 order.
+    const plain = deals.map(({ featured: _drop, ...rest }) => rest);
+    expect(sortDeals(plain).map((d) => d.slug)).toEqual([
+      "a-soon",
+      "b-soon",
+      "x-feat-soon",
+      "y-feat-soon",
+      "z-feat-late",
+      "c-late",
+    ]);
+  });
+
+  it("carries featured: true into index.deals without touching the free counts", async () => {
+    const plain = (await pipeline("2026-11-28T12:00:00Z")).index;
+    const { index, written, jsonl } = await pipeline("2026-11-28T12:00:00Z", "featured: true\n");
+    expect(plain.deals[0]).not.toHaveProperty("featured");
+    expect(index.deals[0]).toMatchObject({ kind: "deal", featured: true });
+    expect(written.deals[0].featured).toBe(true);
+    expect(jsonl).not.toContain("example-ai-pro");
+    for (const key of ["count", "active_count", "expired_count"]) {
+      expect(index[key]).toBe(plain[key]);
+    }
+  });
+
+  it("labels a featured deal on its card and page, keeping the not-free badge and note", async () => {
+    const { index } = await pipeline("2026-11-28T12:00:00Z", "featured: true\n");
+    const plain = (await pipeline("2026-11-28T12:00:00Z")).index;
+    const label = '<span class="badge badge-featured"';
+    for (const [name, render] of [
+      ["card", (idx) => createElement(DealsPage, { index: idx })],
+      ["page", (idx) => createElement(DealDetailPage, { index: idx, slug: "example-ai-pro-black-friday" })],
+    ]) {
+      const html = renderToStaticMarkup(render(index));
+      expect(html, name).toContain(label);
+      expect(html, name).toContain("<span>Featured</span>");
+      expect(html, name).toContain("Deal · not free");
+      expect(html, name).toContain("They are not free credits");
+      // The label itself (text and tooltip) never says free.
+      const badge = html.slice(html.indexOf(label), html.indexOf("</span></span>", html.indexOf(label)));
+      expect(badge, name).toContain("Featured");
+      expect(freeWording(badge), name).toBeNull();
+      expect(renderToStaticMarkup(render(plain)), name).not.toContain(label);
+    }
+  });
+
+  it("marks a featured deal in the llms deals section", () => {
+    const featured = generateLlms([check({ featured: "true" })]);
+    const plain = generateLlms([check({})]);
+    for (const text of [featured.short, featured.full]) {
+      expect(text).toContain("Example AI — kind=deal · featured=true · discount: 50% off the first year");
+    }
+    expect(plain.short).not.toContain("featured=");
   });
 });

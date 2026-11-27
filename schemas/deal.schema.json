@@ -87,6 +87,11 @@
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
       "description": "Day the deal was last checked on source_url, YYYY-MM-DD. Never in the future."
     },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Optional (#815): true pins the deal above the others on /deals.html (featured deals first, then the usual soonest-ending order) and shows a 'Featured' label on its card and page. Still a paid discount: never free wording, never counted as a free offer. Set only when Luong asks; the deal-hunter never sets it."
+    },
     "description": {
       "type": "string",
       "minLength": 1,
