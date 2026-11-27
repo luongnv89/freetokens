@@ -523,4 +523,3 @@ describe("featured deals (#815)", () => {
     expect(plain.short).not.toContain("featured=");
   });
 });
-

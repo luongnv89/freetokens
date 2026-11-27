@@ -13,7 +13,7 @@ build reject the same files:
 - required: title, provider, category, discount, occasion, expiry_date,
   source_url, verified_date; optional: regular_price, deal_price,
   promo_code, start_date, expiry_note, description, and the boolean flag
-  ``featured`` (#815: bare ``true`` / ``false`` only); nothing else
+  ``featured`` (#815: ``true`` / ``false``; null = absent); nothing else
 - ``category`` is in the deal scope (AI subscriptions, coding agents / IDEs,
   AI tools & APIs, compute for agents); anything else is rejected
 - ``expiry_date`` is required and never null: a deal must end

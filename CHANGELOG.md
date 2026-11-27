@@ -6,7 +6,8 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 ## Unreleased
 
 - **Featured deals (#815):** an optional boolean `featured` deal field
-  (default `false`; only bare `true` / `false` are accepted, by both
+  (default `false`; `true` / `false` are accepted, an empty or null value
+  means not featured, and anything else is rejected, identically by
   `scripts/deal_model.py` and `app/scripts/load-deals.mjs`). Featured deals
   sort first on `/deals.html`, then the usual soonest-ending order, and show
   a "Featured" label next to the "Deal · not free" badge on their card and
