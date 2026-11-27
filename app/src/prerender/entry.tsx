@@ -15,6 +15,11 @@ import type { Route } from "../routes";
 // Shared with prerender.mjs so the lead meta description and its JSON-LD
 // description are one string (#683).
 export { leadMetaDescription } from "../lib/leads";
+// Same for deals (#809): one description string for meta tag and JSON-LD.
+export {
+  DEALS_DESCRIPTION as dealsPageDescription,
+  dealMetaDescription,
+} from "../lib/deals";
 
 const index = indexData as OffersIndex;
 // Node-side only: this entry is bundled separately by scripts/prerender.mjs,

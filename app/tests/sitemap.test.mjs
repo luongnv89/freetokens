@@ -11,6 +11,7 @@ const FIXED_PATHS = [
   "/",
   "/archive.html",
   "/unverified.html",
+  "/deals.html",
   "/privacy.html",
   "/about.html",
   "/brand-showcase.html",
@@ -70,6 +71,7 @@ describe("sitemap generation", () => {
       "2026-08-21",
       "2026-08-21",
       "2026-08-21",
+      "2026-08-21",
       "2026-08-20",
       "2026-08-01",
     ]);
@@ -120,6 +122,7 @@ describe("sitemap generation", () => {
     const entries = sitemapEntries(xml);
 
     expect(entries.map(({ lastmod }) => lastmod)).toEqual([
+      "2026-08-29",
       "2026-08-29",
       "2026-08-29",
       "2026-08-29",
@@ -213,6 +216,43 @@ describe("sitemap generation", () => {
     ).not.toThrow();
     expect(() =>
       buildSitemap(indexFor([...offers, offer("too-many")]), BASE, {
+        now: new Date("2026-08-22T00:00:00Z"),
+      }),
+    ).toThrow(`maximum is ${MAX_SITEMAP_URLS}`);
+  });
+
+  it("lists running deals after the offers, under deals/ (#809)", () => {
+    const deal = (slug, verified_date) => ({
+      kind: "deal",
+      slug,
+      verified_date,
+      expiry_date: "2026-08-30",
+    });
+    const xml = buildSitemap(
+      {
+        ...indexFor([offer("active", { verified_date: "2026-08-20" })]),
+        deals: [deal("deal-a", "2026-08-19"), deal("deal-b", "not-a-date")],
+      },
+      BASE,
+      // No file-time fallback for deals: verified_date is required, and a
+      // bad one degrades straight to the build date.
+      {
+        now: new Date("2026-08-22T00:00:00Z"),
+        dealFileMtimes: new Map([["deal-b", new Date("2026-08-18T09:00:00Z")]]),
+      },
+    );
+    expect(sitemapEntries(xml).slice(-3)).toEqual([
+      { loc: `${BASE}/offers/active.html`, lastmod: "2026-08-20" },
+      { loc: `${BASE}/deals/deal-a.html`, lastmod: "2026-08-19" },
+      { loc: `${BASE}/deals/deal-b.html`, lastmod: "2026-08-21" },
+    ]);
+    // Deals count toward the protocol limit too.
+    const offers = Array.from(
+      { length: MAX_SITEMAP_URLS - FIXED_PATHS.length },
+      (_, i) => offer(`offer-${i}`),
+    );
+    expect(() =>
+      buildSitemap({ ...indexFor(offers), deals: [deal("one-more", "2026-08-19")] }, BASE, {
         now: new Date("2026-08-22T00:00:00Z"),
       }),
     ).toThrow(`maximum is ${MAX_SITEMAP_URLS}`);

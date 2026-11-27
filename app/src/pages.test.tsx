@@ -1006,18 +1006,18 @@ describe("shared header chrome (#112)", () => {
     );
   });
 
-  it("renders a clickable all-deals icon in the primary nav (#113)", () => {
+  it("renders a clickable archive icon in the primary nav (#113)", () => {
     for (const [, markup] of routes) {
       const nav =
         markup.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? "";
       expect(nav).toContain('class="nav-archive"');
       // The icon lives inside the archive anchor, so clicking it navigates
-      // to the all-deals page and inherits the same hover/focus styles.
+      // to the archive page and inherits the same hover/focus styles.
       expect(nav).toMatch(
         /<a class="nav-archive"[^>]*>\s*<svg[^>]*aria-hidden="true"[^>]*>[\s\S]*<\/svg>\s*Archive\s*<\/a>/,
       );
       // Accessible name contains the visible label "Archive" (WCAG 2.5.3).
-      expect(nav).toContain('aria-label="Archive: all deals"');
+      expect(nav).toContain('aria-label="Archive: expired offers"');
     }
   });
 

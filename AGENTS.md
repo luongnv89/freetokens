@@ -67,6 +67,21 @@ only for 3 days after their newest dated post, and must never reach
 `scripts/lead_model.py remove-match` deletes one when its offer is published
 (#660).
 
+Deals (#809) are time-limited discounts on paid AI subscriptions, coding
+agents / IDEs, AI tools & APIs and compute for agents: `deals/<slug>.yaml`
+(schema `schemas/deal.schema.json`, rules `schemas/deal.rules.json`,
+validated by `scripts/deal_model.py` and `validate_offers.py`). A deal is
+never a free offer: it never goes in `offers/` (the offer loader reads every
+subfolder there), never counts toward free totals, and is never labelled
+free. It needs an `expiry_date` and is hidden at build time the day after
+(and, with a future `start_date`, until that day).
+Deals render on `/deals.html` and `deals/<slug>.html` and ride in the
+separate `deals` section of `index.json` and the llms files. The
+`skills/deal-hunter` skill runs only while `scripts/deal_window.py --date
+<day>` exits 0 (`config/occasions.yaml`); its PRs pass
+`check_scope.py --mode deals`. The only example deal is the test fixture
+`tests/fixtures/deals/`; never publish it.
+
 Community offers (#748) are promo codes and giveaways a person shared in a
 public post, listed with `listing_type: community` in `offers/` and shown
 with the badge "Community · not verified by freetokens". **Only Luong adds

@@ -29,6 +29,7 @@ import {
   validateJsonlText,
 } from "./validate-artifacts.mjs";
 import { defaultLeadsDir, loadLeads } from "./load-leads.mjs";
+import { defaultDealsDir, loadDeals } from "./load-deals.mjs";
 
 const REQUIRED_FIELDS = [
   "title",
@@ -639,6 +640,7 @@ export async function runPipeline({
   now = new Date(),
   alwaysFreePath = defaultAlwaysFreePath(offersDir),
   leadsDir = defaultLeadsDir(offersDir),
+  dealsDir = defaultDealsDir(offersDir),
 }) {
   const today = todayISO(now);
   const offers = await loadOffers(offersDir, today);
@@ -649,6 +651,14 @@ export async function runPipeline({
   );
   index.always_free = await loadAlwaysFree(
     alwaysFreePath,
+    offers.map((o) => o.slug),
+  );
+  // Deals (#809): paid discounts, never free offers. Their own section, so
+  // count / active_count / offers / offers.jsonl never include one; expired
+  // deals are dropped here, at build time.
+  index.deals = await loadDeals(
+    dealsDir,
+    today,
     offers.map((o) => o.slug),
   );
 
@@ -723,13 +733,21 @@ async function main(argv) {
   let offersDir = path.join(here, "..", "..", "offers");
   let outDir = path.join(here, "..", "src", "data");
   let indexJsonPath = null;
+  // FREETOKENS_DEALS_DIR / --deals-dir point the build at another deals
+  // folder (local previews of a test fixture); never set in CI or deploys.
+  let dealsDir = process.env.FREETOKENS_DEALS_DIR || null;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--offers-dir") offersDir = argv[++i];
     else if (argv[i] === "--out") outDir = argv[++i];
     else if (argv[i] === "--index-json") indexJsonPath = argv[++i];
+    else if (argv[i] === "--deals-dir") dealsDir = argv[++i];
   }
   const started = Date.now();
-  const index = await runPipeline({ offersDir, outDir });
+  const index = await runPipeline({
+    offersDir,
+    outDir,
+    ...(dealsDir ? { dealsDir: path.resolve(dealsDir) } : {}),
+  });
   // --index-json additionally writes the committed repo-root index.json
   // (the artifact load-offers.test.mjs deep-equals against offers/).
   if (indexJsonPath) {
@@ -737,6 +755,7 @@ async function main(argv) {
   }
   console.log(
     `loaded ${index.count} offers (${index.active_count} active, ${index.expired_count} expired)` +
+      ` + ${index.deals.length} running deals` +
       ` -> ${path.join(outDir, "offers.json")}, offers.jsonl, details.json, details/*.json` +
       (indexJsonPath ? `, ${indexJsonPath}` : "") +
       ` in ${Date.now() - started}ms`,

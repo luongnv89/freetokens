@@ -1,0 +1,17 @@
+# TEST FIXTURE ONLY (#809) — a fictional deal used by the Python and Node
+# test suites and for local screenshots. It is NOT a real offer and must never
+# be copied into deals/. example.com is reserved for documentation (RFC 2606).
+title: Example AI Pro — Black Friday
+provider: Example AI
+category: ai_subscription
+discount: 50% off the first year
+regular_price: $240/year
+deal_price: $120/year
+promo_code: EXAMPLE50
+occasion: black_friday
+start_date: 2026-11-20
+expiry_date: 2026-12-02
+expiry_note: The page names no end date; the Black Friday window end (2 Dec) is used.
+source_url: https://example.com/pricing
+verified_date: 2026-11-27
+description: New Pro subscribers on the annual plan get half off their first year.

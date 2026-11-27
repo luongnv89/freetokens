@@ -151,7 +151,7 @@ await build({
 });
 
 try {
-  const { renderRoute, leadMetaDescription } = await import(
+  const { renderRoute, leadMetaDescription, dealMetaDescription, dealsPageDescription } = await import(
     pathToFileURL(outfile).href
   );
   const indexPath = path.join(distDir, "index.html");
@@ -380,6 +380,21 @@ try {
   );
   written.push("unverified.html");
 
+  // Deals page (/deals.html, #809): paid discounts, from offers.json's
+  // `deals` section only.
+  await writeFile(
+    path.join(distDir, "deals.html"),
+    fillPage({
+      markup: await renderRoute({ page: "deals" }, origin),
+      title: "AI deals (discounts, not free) · Free AI Credits",
+      description: dealsPageDescription,
+      canonical: `${origin}/deals.html`,
+      page: "deals",
+      baseUrl: origin,
+    }),
+  );
+  written.push("deals.html");
+
   // Privacy policy (/privacy.html).
   await writeFile(
     path.join(distDir, "privacy.html"),
@@ -480,6 +495,31 @@ try {
   }
   written.push(`unverified/*.html (${leads.length})`);
 
+  // Deal detail pages (deals/<slug>.html): one page per running deal (#809).
+  // The folder is rebuilt from scratch so a deal that has ended since the
+  // last build leaves no page behind.
+  const deals = index.deals ?? [];
+  const dealsDir = path.join(distDir, "deals");
+  await rm(dealsDir, { recursive: true, force: true });
+  if (deals.length > 0) await mkdir(dealsDir, { recursive: true });
+  for (const deal of deals) {
+    const dealPath = path.join(dealsDir, `${deal.slug}.html`);
+    await writeFile(
+      dealPath,
+      fillPage({
+        markup: await renderRoute({ page: "deal", slug: deal.slug }, origin),
+        title: `${deal.title} (deal) · Free AI Credits`,
+        description: dealMetaDescription(deal),
+        canonical: `${origin}/deals/${deal.slug}.html`,
+        depth: 1,
+        page: "deal",
+        slug: deal.slug,
+        baseUrl: origin,
+      }),
+    );
+  }
+  written.push(`deals/*.html (${deals.length})`);
+
   // RSS at the previous URL, absolute links off DEFAULT_BASE_URL (#27).
   await writeFile(path.join(distDir, "feed.xml"), buildFeed(index, baseUrl));
   written.push("feed.xml");
@@ -493,7 +533,7 @@ try {
 
   const kb = (n) => (n / 1024).toFixed(1);
   console.log(
-    `prerendered ${written.length + index.offers.length + leads.length - 2} routes -> ` +
+    `prerendered ${written.length + index.offers.length + leads.length + deals.length - 3} routes -> ` +
       `${written.join(", ")} (${kb(Buffer.byteLength(template))} KB shell)`,
   );
 } finally {

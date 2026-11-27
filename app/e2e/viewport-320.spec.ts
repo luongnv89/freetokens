@@ -9,6 +9,7 @@ const ROUTES = [
   "/index.html",
   "/archive.html",
   "/unverified.html",
+  "/deals.html",
   "/privacy.html",
   "/offers/cursor-hobby-plan.html",
 ];
@@ -51,6 +52,8 @@ for (const route of ROUTES) {
       );
     } else if (route === "/unverified.html") {
       await expect(page.locator("h1")).toHaveText("Unverified offers");
+    } else if (route === "/deals.html") {
+      await expect(page.locator("h1")).toHaveText("AI deals");
     } else if (route.startsWith("/unverified/")) {
       await expect(page.locator("h1")).toHaveText(LEAD!.title);
     } else if (route === "/privacy.html") {

@@ -22,7 +22,7 @@ export function SiteFooter({
   current,
 }: {
   depth?: number;
-  current?: "home" | "archive" | "unverified" | "privacy" | "about";
+  current?: "home" | "archive" | "unverified" | "deals" | "privacy" | "about";
 }) {
   const up = "../".repeat(depth);
   const homeHref = `${up || "./"}index.html`;
@@ -54,6 +54,13 @@ export function SiteFooter({
           aria-current={current === "unverified" ? "page" : undefined}
         >
           Unverified
+        </a>
+        <span aria-hidden="true">&middot;</span>
+        <a
+          href={`${up}deals.html`}
+          aria-current={current === "deals" ? "page" : undefined}
+        >
+          Deals
         </a>
         <span aria-hidden="true">&middot;</span>
         <a

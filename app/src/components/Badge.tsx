@@ -188,3 +188,30 @@ export function UnverifiedLeadBadge() {
     </span>
   );
 }
+
+/**
+ * Deal kind badge (#809): marks a paid discount so it can never be read as a
+ * free offer. Fixed text, never a colour alone.
+ */
+export const DEAL_BADGE_LABEL = "Deal · not free";
+
+export function DealBadge() {
+  return (
+    <span
+      className="badge badge-deal"
+      title="A discount on a paid plan: you still pay. Not a free offer."
+    >
+      <span>{DEAL_BADGE_LABEL}</span>
+    </span>
+  );
+}
+
+/** The discount itself, exactly as the vendor states it (#809). */
+export function DiscountBadge({ discount }: { discount: string }) {
+  return (
+    <span className="deal-discount">
+      <span className="sr-only">Discount: </span>
+      {discount}
+    </span>
+  );
+}

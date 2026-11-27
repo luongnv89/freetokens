@@ -1,0 +1,33 @@
+# Deal-hunt windows (#809) — data, reviewed like any content change.
+#
+# scripts/deal_window.py reads this file to decide whether a deal-hunt runs
+# on a given day: it prints the open window as JSON and exits 0, or exits 3
+# when no window is open (so the daily pipeline skips the deal-hunter at zero
+# cost outside the sales season).
+#
+# One block per window, in this exact shape (no other YAML is parsed):
+#
+#   - id: <deal occasion this window is named after>
+#     label: <plain words>
+#     start: "MM-DD"   first day, inclusive
+#     end: "MM-DD"     last day, inclusive; earlier than start = next year
+#     covers: <comma-separated deal occasions found in this window>
+#
+# id and every covers entry must be a deal `occasion` value other than
+# `other` (schemas/deal.schema.json). Windows may not overlap. To add an
+# occasion, add a block here and, if it is new, the value to the deal schema.
+
+# Black Friday falls between 23 and 29 Nov and Cyber Monday three days later
+# (26 Nov to 2 Dec); vendors start "Black Friday week" sales early, so the
+# window opens on 20 Nov and closes after the latest possible Cyber Monday.
+- id: black_friday
+  label: Black Friday to Cyber Monday
+  start: "11-20"
+  end: "12-03"
+  covers: black_friday, cyber_monday
+
+- id: christmas_new_year
+  label: Christmas and New Year
+  start: "12-15"
+  end: "01-02"
+  covers: christmas_new_year

@@ -64,6 +64,7 @@ Promo codes and giveaways a person shared in a public post. freetokens does not 
 
 - [Home](https://freetokens.custats.info/): Browse all currently active free AI credit offers, filterable by category and searchable — the site's main listing.
 - [Archive](https://freetokens.custats.info/archive.html): Reference archive of expired free AI credit offers, newest-expired first with original terms.
+- [Deals](https://freetokens.custats.info/deals.html): Seasonal discounts on paid AI plans (not free offers), each with its discount and end date.
 - [About](https://freetokens.custats.info/about.html): What the site is, how listings are reviewed and checked, and what the numbers mean.
 - [Privacy Policy](https://freetokens.custats.info/privacy.html): How the site handles data — consent-gated anonymized analytics, no forms, no personal data storage.
 - [Full export](https://freetokens.custats.info/llms-full.txt): the long-form companion to this file — every active offer with its summary, claim steps, source and detail links and the same trust fields, plus the build date and any truncation.

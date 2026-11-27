@@ -123,6 +123,46 @@ function communitySection() {
   return lines.join("\n");
 }
 
+// Deals (#809): paid discounts from offers.json's `deals` section, already
+// limited to running deals at build time. Never mixed into the offer lines.
+const deals = Array.isArray(index.deals) ? index.deals : [];
+
+/**
+ * The deals section, identical in llms.txt and llms-full.txt: one compact
+ * line per running deal, each marked kind=deal. Like the community section
+ * its bytes are reserved before the offers fill the llms-full budget. Empty
+ * when no deal is running.
+ */
+function dealsSection() {
+  if (!deals.length) return "";
+  const lines = [
+    "## Deals (discounts on paid plans, not free)",
+    "",
+    `Seasonal discounts on AI subscriptions, coding agents, AI tools and compute, each checked on the vendor's own page. A deal is paid: it is not a free offer and is not counted among the offers above. Every deal disappears after its end date. All deals: ${baseUrl}/deals.html.`,
+    "",
+  ];
+  for (const deal of deals) {
+    const url = `${baseUrl}/deals/${deal.slug}.html`;
+    const title = deal.title.replace(/]/g, "\\]");
+    const facts = [
+      "kind=deal",
+      `discount: ${deal.discount}`,
+      deal.deal_price
+        ? `price: ${deal.deal_price}${deal.regular_price ? ` (regular ${deal.regular_price})` : ""}`
+        : null,
+      deal.promo_code ? `code: ${deal.promo_code}` : null,
+      `occasion=${deal.occasion}`,
+      `category=${deal.category}`,
+      `ends ${deal.expiry_date}`,
+      `last_checked=${deal.verified_date}`,
+      `source: ${deal.source_url}`,
+    ].filter(Boolean);
+    lines.push(`- [${title}](${url}): ${deal.provider} — ${facts.join(" · ")}`);
+  }
+  lines.push("");
+  return lines.join("\n");
+}
+
 function offerDescription(offer) {
   // Keep short but trailing description after colon satisfies audit requiring ": Description".
   // The trust fields are appended, not summarised away (issue #509): a short
@@ -187,6 +227,7 @@ function buildLlmsTxt() {
   }
   lines.push("");
   if (activeCommunity.length) lines.push(communitySection());
+  if (deals.length) lines.push(dealsSection());
   lines.push("## Pages");
   lines.push("");
   lines.push(
@@ -194,6 +235,9 @@ function buildLlmsTxt() {
   );
   lines.push(
     `- [Archive](${baseUrl}/archive.html): Reference archive of expired free AI credit offers, newest-expired first with original terms.`,
+  );
+  lines.push(
+    `- [Deals](${baseUrl}/deals.html): Seasonal discounts on paid AI plans (not free offers), each with its discount and end date.`,
   );
   lines.push(
     `- [About](${baseUrl}/about.html): What the site is, how listings are reviewed and checked, and what the numbers mean.`,
@@ -282,6 +326,9 @@ function buildFullFooter() {
   lines.push(`- [Home](${baseUrl}/): Main listing of active offers.`);
   lines.push(`- [Archive](${baseUrl}/archive.html): Expired offers archive.`);
   lines.push(
+    `- [Deals](${baseUrl}/deals.html): Discounts on paid AI plans (not free).`,
+  );
+  lines.push(
     `- [About](${baseUrl}/about.html): About the site — methodology and trust labels.`,
   );
   lines.push(`- [Privacy Policy](${baseUrl}/privacy.html): Privacy policy.`);
@@ -309,11 +356,13 @@ const fullCommunitySection = activeCommunity.length
     // blank line before the footer's "## Pages" heading (#749 re-review nit).
     `\n${communitySection()}\n`
   : "";
+const fullDealsSection = deals.length ? `\n${dealsSection()}\n` : "";
 const fullFooter = buildFullFooter();
 const assembleFull = (emitted) =>
   buildFullHeader(emitted + activeCommunity.length) +
   offerBlocks.slice(0, emitted).join("") +
   fullCommunitySection +
+  fullDealsSection +
   fullFooter;
 let emittedOffers = regularOffers.length;
 while (
@@ -339,6 +388,6 @@ if (existsSync(distDir)) {
 
 console.log(
   `generate-llms: wrote llms.txt (${(Buffer.byteLength(llmsTxt, "utf8") / 1024).toFixed(1)} KB, ${top20.length} offers) ` +
-    `and llms-full.txt (${(fullBytes / 1024).toFixed(1)} KB, ${emittedFull}${emittedFull < activeOffers.length ? ` of ${activeOffers.length}` : ""} offers) -> ${publicDir}` +
+    `and llms-full.txt (${(fullBytes / 1024).toFixed(1)} KB, ${emittedFull}${emittedFull < activeOffers.length ? ` of ${activeOffers.length}` : ""} offers) + ${deals.length} deals -> ${publicDir}` +
     (existsSync(distDir) ? ` + ${distDir}` : ""),
 );

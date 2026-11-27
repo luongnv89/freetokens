@@ -15,6 +15,10 @@ import path from "node:path";
 import { setImmediate as yieldToEventLoop } from "node:timers/promises";
 import { promisify } from "node:util";
 import { SITEMAP_NAMESPACE } from "../scripts/sitemap.mjs";
+import { loadDeals } from "../scripts/load-deals.mjs";
+
+// The one deal fixture (#809): fictional, test-only, never published.
+const DEAL_FIXTURES = path.resolve(import.meta.dirname, "..", "..", "tests", "fixtures", "deals");
 
 // Routing + prerender contract (issue #123): the built output must contain
 // one HTML file per live route — /, /archive, /privacy, offers/<slug>.html
@@ -269,7 +273,7 @@ describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => 
     expect(document.documentElement.namespaceURI).toBe(SITEMAP_NAMESPACE);
 
     const urls = [...document.getElementsByTagNameNS(SITEMAP_NAMESPACE, "url")];
-    expect(urls).toHaveLength(index.offers.length + 7);
+    expect(urls).toHaveLength(index.offers.length + (index.deals ?? []).length + 8);
     expect(
       urls.map(
         (url) =>
@@ -279,12 +283,16 @@ describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => 
       "https://freetokens.custats.info/",
       "https://freetokens.custats.info/archive.html",
       "https://freetokens.custats.info/unverified.html",
+      "https://freetokens.custats.info/deals.html",
       "https://freetokens.custats.info/privacy.html",
       "https://freetokens.custats.info/about.html",
       "https://freetokens.custats.info/brand-showcase.html",
       "https://freetokens.custats.info/feed.xml",
       ...index.offers.map(
         (offer) => `https://freetokens.custats.info/offers/${offer.slug}.html`,
+      ),
+      ...(index.deals ?? []).map(
+        (deal) => `https://freetokens.custats.info/deals/${deal.slug}.html`,
       ),
     ]);
 
@@ -432,6 +440,82 @@ describe("static route coverage (#123)", { timeout: ROUTE_TEST_TIMEOUT }, () => 
     rmSync(leadsDist, { recursive: true, force: true });
     rmSync(dataDir, { recursive: true, force: true });
   }, 120_000);
+
+  it("prerenders the Deals page and one page per running deal, apart from the free offers (#809)", async () => {
+    const dataDir = scratch(`ft-routes-deals-data-${process.pid}`);
+    const dealsDist = scratch(`ft-routes-deals-${process.pid}`);
+    rmSync(dataDir, { recursive: true, force: true });
+    mkdirSync(dataDir, { recursive: true });
+    copyFileSync(path.join(APP_ROOT, "src/data", "details.json"), path.join(dataDir, "details.json"));
+    // Build clock injected: the fixture runs 2026-11-20..2026-12-02.
+    const deals = await loadDeals(DEAL_FIXTURES, "2026-11-28");
+    expect(deals.map((d) => d.slug)).toEqual(["example-ai-pro-black-friday"]);
+    const withDeals = { ...index, deals };
+    writeFileSync(path.join(dataDir, "offers.json"), JSON.stringify(withDeals));
+    rmSync(dealsDist, { recursive: true, force: true });
+    cpSync(outDir, dealsDist, { recursive: true });
+    // A page left by a deal that has since ended must not survive.
+    mkdirSync(path.join(dealsDist, "deals"), { recursive: true });
+    writeFileSync(path.join(dealsDist, "deals", "ended-deal.html"), "stale");
+    await prerender(dealsDist, path.join(dataDir, "offers.json"));
+
+    const html = readFileSync(path.join(dealsDist, "deals.html"), "utf8");
+    expect(html).toContain('data-page="deals"');
+    expect(html).toContain("<h1>AI deals</h1>");
+    expect(html).toContain("Deal · not free");
+    expect(html).toContain('class="deal-discount"');
+    expect(html).toContain("50% off the first year");
+    expect(html).toContain('ends<!-- --> <time datetime="2026-12-02">Dec 2, 2026</time>');
+    expect(html).toContain('aria-label="Filter by occasion"');
+    expect(html).toContain('href="deals/example-ai-pro-black-friday.html"');
+    expect(html).not.toContain("data-ft-offer-id");
+    expect(headOf(html)).toContain(
+      '<link rel="canonical" href="https://freetokens.custats.info/deals.html"',
+    );
+    expect(readdirSync(path.join(dealsDist, "deals"))).toEqual(["example-ai-pro-black-friday.html"]);
+    const dealHtml = readFileSync(
+      path.join(dealsDist, "deals", "example-ai-pro-black-friday.html"),
+      "utf8",
+    );
+    expect(dealHtml).toContain('data-page="deal"');
+    expect(dealHtml).toContain('data-slug="example-ai-pro-black-friday"');
+    expect(dealHtml).toContain("Example AI Pro — Black Friday</h1>");
+    expect(dealHtml).toContain('class="od-cta" href="https://example.com/pricing"');
+    expect(dealHtml).toContain("Get the deal at <!-- -->example.com");
+    expect(dealHtml).toContain("EXAMPLE50");
+    expect(dealHtml).toContain("the Black Friday window end (2 Dec) is used");
+    expect(dealHtml).not.toContain("data-ft-offer-id");
+    const graph = graphData(dealHtml);
+    expect(graph.some((n) => n["@type"] === "Offer")).toBe(false);
+    expect(metaContents(dealHtml, "name", "description")).toEqual([
+      htmlAttr("Deal (not free): 50% off the first year on Example AI — ends 2026-12-02."),
+    ]);
+    expect(breadcrumbNames(new DOMParser().parseFromString(dealHtml, "text/html"))).toEqual([
+      "Offers",
+      "Deals",
+      "Example AI Pro — Black Friday",
+    ]);
+    // Sitemap lists the deal page; the free surfaces never mention it.
+    const sitemap = readFileSync(path.join(dealsDist, "sitemap.xml"), "utf8");
+    expect(sitemap).toContain("/deals/example-ai-pro-black-friday.html");
+    expect(readFileSync(path.join(dealsDist, "feed.xml"), "utf8")).not.toContain("Example AI");
+    const home = readFileSync(path.join(dealsDist, "index.html"), "utf8");
+    expect(home).not.toContain("Example AI Pro");
+    expect(home).toContain('href="deals.html"');
+    expect(readdirSync(path.join(dealsDist, "offers")).some((f) => f.startsWith("example-ai"))).toBe(false);
+    rmSync(dealsDist, { recursive: true, force: true });
+    rmSync(dataDir, { recursive: true, force: true });
+  }, 120_000);
+
+  it("renders the Deals empty state when no deal is running (#809)", () => {
+    const html = readFileSync(path.join(outDir, "deals.html"), "utf8");
+    expect(html).toContain('data-page="deals"');
+    expect(html).toContain("Not free.");
+    if ((index.deals ?? []).length === 0) {
+      expect(html).toContain("No running deals right now");
+      expect(existsSync(path.join(outDir, "deals"))).toBe(false);
+    }
+  });
 
   it("stamps each document so hydration lands on the right page", () => {
     expect(readFileSync(path.join(outDir, "index.html"), "utf8")).toContain(

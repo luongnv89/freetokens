@@ -907,7 +907,7 @@ a:focus-visible {
   color: var(--ink);
 }
 
-/* All-deals icon link (#113): inline SVG stays on baseline */
+/* Archive icon link (#113): inline SVG stays on baseline */
 .site-nav .nav-archive {
   display: inline-flex;
   align-items: center;
@@ -3429,4 +3429,53 @@ figure.proof-screenshot {
   color: var(--ink);
   text-decoration-color: var(--green);
   text-underline-offset: 3px;
+}
+
+/* ---- Deals (#809) -------------------------------------------------------- */
+/* A deal is a paid discount: the badge and banner say "not free" in words;
+   the warm hue is decoration only and is never the free-offer green. */
+.badge-deal {
+  --tag-hue: var(--color-hot);
+  font-weight: 600;
+}
+.deal-banner {
+  border: 1.5px solid var(--color-hot);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  margin: 0 0 1.5rem;
+  background: color-mix(in srgb, var(--color-hot) 6%, var(--paper));
+  color: var(--ink);
+}
+.deal-banner p {
+  margin: 0.25rem 0;
+}
+.deal-detail .deal-banner {
+  margin: 1rem 0;
+}
+.deal-discount {
+  display: inline-block;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--color-hot);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--color-hot) 12%, var(--paper));
+}
+.deal-price s {
+  color: var(--gray);
+}
+[data-page="deals"] .grid > li,
+[data-page="deal"] .od-related-card {
+  animation: none;
+  --row-hue: var(--color-hot);
+}
+[data-page="deals"] .chips {
+  margin: 0 0 1rem;
+}
+/* Phones hide the Details pill (the title is the link); a deal row has no
+   Save / Hide, so its actions slot would show only its "·" separator. */
+@media (max-width: 48rem) {
+  .deal-card .r-actions {
+    display: none;
+  }
 }

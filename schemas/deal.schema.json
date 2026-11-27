@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://freetokens.custats.info/schemas/deal.schema.json",
+  "title": "Deal",
+  "description": "One deals/<slug>.yaml file (#809): a time-limited DISCOUNT on a paid AI product, not a free offer. Deals live apart from offers/ and never count as free offers: they are excluded from the offer listing, search, counts, feed and offer pages, and appear only on /deals.html, deals/<slug>.html and in a separate `deals` section of index.json and the llms files, each entry marked kind: deal. A deal must end (expiry_date is required) and is hidden at build time once that day has passed. Free wording (see schemas/deal.rules.json) is rejected in every text field, and the keys amount / free / is_free are rejected outright. scripts/deal_model.py and app/scripts/load-deals.mjs enforce this schema plus the rules file; scripts/validate_offers.py cross-checks the enums.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "provider",
+    "category",
+    "discount",
+    "occasion",
+    "expiry_date",
+    "source_url",
+    "verified_date"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Deal name as shown on cards, e.g. 'Example AI Pro — Black Friday'."
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Vendor selling the discounted product."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["ai_subscription", "coding_agent", "ai_tool_api", "agent_compute"],
+      "description": "Deal scope: ai_subscription = AI chat assistant subscriptions; coding_agent = coding agents and AI IDEs; ai_tool_api = AI tools and APIs; agent_compute = sandboxes, cloud VMs and compute for agents. Anything else is out of scope and rejected."
+    },
+    "discount": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "The discount exactly as the official page states it, e.g. '50% off the first year'."
+    },
+    "regular_price": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "description": "Optional: the regular price, only when the official page shows it."
+    },
+    "deal_price": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "description": "Optional: the discounted price, only when the official page shows it. Must contain a non-zero digit (a deal is never free)."
+    },
+    "promo_code": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,40}$",
+      "description": "Optional: the code to enter at checkout. A code that names the deal free or 100% off (schemas/deal.rules.json promo_code_free_pattern, e.g. FREE50, 100OFF) is rejected; the match is strict, so FREEDOM50 is rejected too."
+    },
+    "occasion": {
+      "type": "string",
+      "enum": ["black_friday", "cyber_monday", "christmas_new_year", "other"],
+      "description": "The sale event the deal belongs to (config/occasions.yaml names the windows)."
+    },
+    "start_date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "Optional: first day of the deal, YYYY-MM-DD. Not after expiry_date. A future start_date is valid; the build hides the deal until that day."
+    },
+    "expiry_date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "Last day of the deal, YYYY-MM-DD. Required and never null: a deal must end. Hidden at build time from the next day on."
+    },
+    "expiry_note": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Optional: set when the official page states no end date and the occasion window end was used instead; says so in plain words."
+    },
+    "source_url": {
+      "type": "string",
+      "pattern": "^https://",
+      "description": "The vendor's own page showing the discount (and its end date when stated)."
+    },
+    "verified_date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "Day the deal was last checked on source_url, YYYY-MM-DD. Never in the future."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "description": "Optional: one or two sentences of terms quoted or closely paraphrased from the official page (who qualifies, which plan)."
+    }
+  }
+}

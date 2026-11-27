@@ -47,7 +47,12 @@ const APP_ROOT = path.resolve(import.meta.dirname, "..");
 // layouts), the shared-by / giveaway / promo-code line with its copy control,
 // and the detail page's dashed community panel — measured about 58,250 raw,
 // so the ceiling moves to 58,500.
-const PYTHON_INLINE_CSS_BYTES = 58_500;
+//
+// 2026-11-27 (#809): deals — the "Deal · not free" badge, the not-free
+// banner, the discount pill with its struck-through regular price, and the
+// deals listing / related-card hue — measured 59,196 raw, so the ceiling
+// moves to 59,500.
+const PYTHON_INLINE_CSS_BYTES = 59_500;
 
 function cssBytesIn(dir) {
   let total = 0;

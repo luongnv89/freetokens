@@ -326,6 +326,9 @@ workflow**.
 ```
 offers/    # One YAML file per free-AI-credit offer (schema: docs/schema.md)
            # plus optional offers/details/<slug>.json detail documents
+deals/      # One YAML per deal (#809): a paid discount, never a free offer
+           # (schema: schemas/deal.schema.json); shown only on /deals.html
+           # and deals/<slug>.html, hidden after its expiry_date
 unverified/ # One YAML per unverified lead the offer-hunter could not confirm
            # (schema: schemas/unverified-lead.schema.json); shown only on
            # /unverified.html and its own unverified/<slug>.html page for 3

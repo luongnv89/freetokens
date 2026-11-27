@@ -27,6 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import offer_model as build  # noqa: E402
 import lead_model  # noqa: E402
+import deal_model  # noqa: E402
 
 SLUG_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
@@ -154,6 +155,25 @@ def check_lead_schema_matches_model(schema: dict) -> None:
         )
 
 
+def check_deal_schema_matches_model(schema: dict) -> None:
+    """Cross-check schemas/deal.schema.json against deal_model (#809)."""
+    if schema.get("$schema") != "https://json-schema.org/draft/2020-12/schema":
+        raise SchemaMismatch("deal schema must declare the 2020-12 draft $schema")
+    if schema.get("additionalProperties") is not False:
+        raise SchemaMismatch("deal schema must set additionalProperties: false")
+    if set(schema.get("required", [])) != set(deal_model.REQUIRED_FIELDS):
+        raise SchemaMismatch("deal schema required fields do not match deal_model.REQUIRED_FIELDS")
+    props = schema.get("properties", {})
+    if set(props) != set(deal_model.FIELDS):
+        raise SchemaMismatch("deal schema properties do not match deal_model.FIELDS")
+    if props["category"].get("enum") != list(deal_model.CATEGORIES):
+        raise SchemaMismatch("deal schema category enum does not match deal_model.CATEGORIES")
+    if props["occasion"].get("enum") != list(deal_model.OCCASIONS):
+        raise SchemaMismatch("deal schema occasion enum does not match deal_model.OCCASIONS")
+    if props["expiry_date"].get("type") != "string":
+        raise SchemaMismatch("deal schema expiry_date must be a non-nullable string")
+
+
 def validate_leads(leads_dir: str, offer_slugs: set, today=None) -> tuple:
     """Validate unverified/*.yaml; return (leads, stale leads).
 
@@ -266,6 +286,17 @@ def main(argv=None) -> int:
         "--lead-schema", default="schemas/unverified-lead.schema.json"
     )
     parser.add_argument(
+        "--deals-dir",
+        default=None,
+        help="deals folder (#809; default: <offers-dir>/../deals)",
+    )
+    parser.add_argument("--deal-schema", default="schemas/deal.schema.json")
+    parser.add_argument(
+        "--today",
+        default=None,
+        help="YYYY-MM-DD clock for deal date checks (default: UTC today)",
+    )
+    parser.add_argument(
         "--always-free",
         default=None,
         help="curated Always-free list (default: <offers-dir>/../config/always-free.yaml)",
@@ -289,6 +320,15 @@ def main(argv=None) -> int:
             args.offers_dir, os.pardir, "unverified"
         )
         leads, stale = validate_leads(leads_dir, {o["slug"] for o in offers})
+        if os.path.exists(args.deal_schema):
+            check_deal_schema_matches_model(load_schema(args.deal_schema))
+        deals_dir = args.deals_dir or os.path.join(
+            args.offers_dir, os.pardir, deal_model.DEALS_DIRNAME
+        )
+        day = deal_model.utc_today()
+        if args.today:
+            day = deal_model._date(args.today, "--today", "validate_offers")
+        deals = deal_model.load_deals(deals_dir, {o["slug"] for o in offers}, day)
     except SchemaMismatch as exc:
         print(f"validation failed: {exc}", file=sys.stderr)
         return 1
@@ -306,6 +346,14 @@ def main(argv=None) -> int:
     print(f"validated {len(offers)} offers against {args.schema}: OK")
     if leads:
         print(f"validated {len(leads)} unverified leads: OK")
+    if deals:
+        expired = sum(deal_model.is_expired(d, day) for d in deals)
+        upcoming = sum(deal_model.is_upcoming(d, day) for d in deals)
+        hidden = [f"{n} {label}" for n, label in ((expired, "expired"), (upcoming, "upcoming")) if n]
+        print(
+            f"validated {len(deals)} deals: OK"
+            + (f" ({', '.join(hidden)}, hidden at build)" if hidden else "")
+        )
     return 0
 
 

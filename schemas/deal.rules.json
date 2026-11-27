@@ -1,0 +1,21 @@
+{
+  "description": "Shared deal rules (#809), read by scripts/deal_model.py (the CI content gate) and app/scripts/load-deals.mjs (the build), so both reject the same files. A deal is a discount the buyer pays for; it is never free and never labelled free.",
+  "free_wording_space_comment": "Regex character-class body substituted for every {space} in free_wording_pattern. It is the union of JavaScript's \\s and Python's str.isspace() plus zero-width characters, spelled out so Python (re.ASCII) and JavaScript (no u flag) match exactly the same strings and both fail closed on Unicode spacing such as '100\\u00a0% off'.",
+  "free_wording_space": "\\t\\n\\v\\f\\r \\x1c-\\x1f\\x85\\xa0\\u1680\\u180e\\u2000-\\u200d\\u2028\\u2029\\u202f\\u205f\\u2060\\u3000\\ufeff",
+  "free_wording_pattern": "\\b(?:free|freebie|gratis|complimentary)\\b|\\bno[-{space}]+cost\\b|\\bat[{space}]+no[-{space}]+charge\\b|\\b100[{space}]*%[{space}]*off\\b",
+  "free_wording_fields": ["title", "discount", "deal_price", "regular_price", "expiry_note", "description"],
+  "promo_code_free_pattern_comment": "Matched anywhere in promo_code, case-insensitive: codes have no word breaks (FREE, FREE50, BFFREE), so a code that names the deal free is rejected even inside a longer code. Deliberately strict: a code that merely contains a free word (FREEDOM50, CAREFREE) is rejected too; that false positive is accepted (fail closed). The last branch rejects codes that mean 100% off (100OFF, 100-OFF, 100_OFF, 100POFF, 100PCTOFF, 100PERCENTOFF, BF100OFF); the 100 must stand alone as a number, so 1000OFF and 2100OFF pass. Fixed-width lookbehind only: Python re (re.ASCII) and JavaScript (no u flag) read it the same way.",
+  "promo_code_free_pattern": "free|gratis|complimentary|nocost|(?<![0-9])100[-_]?(?:pct|percent|pc|p)?[-_]?off",
+  "free_keys": ["amount", "free", "is_free", "free_tier", "free_credits"],
+  "nonzero_price_fields": ["deal_price"],
+  "limits": {
+    "title": 120,
+    "provider": 80,
+    "discount": 80,
+    "regular_price": 40,
+    "deal_price": 40,
+    "promo_code": 40,
+    "expiry_note": 200,
+    "description": 500
+  }
+}
