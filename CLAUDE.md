@@ -16,6 +16,7 @@ See @prd.md and @tasks.md for scope. Epic: #31.
 
 ## Architecture map
 - `offers/*.yaml` — one file per offer; the offer content model
+- `deals/*.yaml` — deals only (#809): paid discounts, never free offers; shown on `/deals.html` + `deals/<slug>.html` and in the separate `deals` section of `index.json` / llms files (`kind: deal`), never in free counts/listings; `expiry_date` required, hidden after it at build time; schema `schemas/deal.schema.json` + `schemas/deal.rules.json` (`scripts/deal_model.py`); hunted by `skills/deal-hunter` only while `scripts/deal_window.py` reports an open window from `config/occasions.yaml`
 - `unverified/*.yaml` — unverified leads only (#660): never offers, shown only on `/unverified.html`, listed for 3 days after the newest dated post; schema `schemas/unverified-lead.schema.json` + `schemas/unverified-lead.rules.json`, written only by `skills/offer-hunter/scripts/write_leads.py`
 - `app/src/components/` — React components (HomePage, OfferRow, ConsentBanner, …)
 - `app/src/lib/` — data loading, analytics, URL state, personal state helpers

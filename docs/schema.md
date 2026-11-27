@@ -163,6 +163,38 @@ evidence-level tag, no review-status badge. Because `verification:
 unverified` is a placeholder here, the `?verification=` filter never matches
 a community entry; `?community=only` / `?community=hide` select them.
 
+## Deals (`deals/<slug>.yaml`) — #809
+
+A deal is a time-limited **discount on a paid AI product**. It is a separate
+kind, not an offer: it lives in `deals/` (never `offers/`), renders only on
+`/deals.html` and `deals/<slug>.html`, and appears in the `deals` section of
+`index.json` and the llms files with `kind: "deal"`. It never counts as a free
+offer. Schema: `schemas/deal.schema.json`; wording rules:
+`schemas/deal.rules.json`; validator: `scripts/deal_model.py validate`.
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| `title` | yes | Card title. |
+| `provider` | yes | The vendor. |
+| `category` | yes | Deal scope only: `ai_subscription`, `coding_agent`, `ai_tool_api`, `agent_compute`. Anything else is rejected. |
+| `discount` | yes | As the official page states it, e.g. `50% off the first year`. |
+| `regular_price`, `deal_price` | no | Only when the page shows them; `deal_price` needs a non-zero amount. |
+| `promo_code` | no | 1-40 letters, digits, `-`, `_`. |
+| `occasion` | yes | `black_friday`, `cyber_monday`, `christmas_new_year`, `other`. |
+| `start_date` | no | `YYYY-MM-DD`, not after `expiry_date`. |
+| `expiry_date` | yes | `YYYY-MM-DD`, never `null`: a deal must end. Hidden at build time from the next day. |
+| `expiry_note` | no | When the page names no end date and the occasion window end (`scripts/deal_window.py`) was used. |
+| `source_url` | yes | The vendor's own `https://` page showing the discount. |
+| `verified_date` | yes | `YYYY-MM-DD`, not in the future. |
+| `description` | no | Short terms from the official page. |
+
+A deal is never labelled free: the keys `amount`, `free`, `is_free`
+(and the other `free_keys` in the rules file) are rejected, and so is free
+wording ("free", "100% off", "no cost") in the title, discount, prices or
+description. Sale windows live in `config/occasions.yaml`;
+`python3 scripts/deal_window.py --date YYYY-MM-DD` prints the open window as
+JSON (exit 0) or exits 3 when none is open.
+
 ## Detail files (`offers/details/<slug>.json`) — optional
 
 Summary cards stay lean; richer per-offer content lives in an **optional**

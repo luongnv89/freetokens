@@ -5,6 +5,25 @@ regenerated on every deploy; entries here cover behavior, not content edits.
 
 ## Unreleased
 
+- **Deals (#809):** a separate `deal` kind for time-limited DISCOUNTS on
+  paid AI subscriptions, coding agents / IDEs, AI tools & APIs and compute
+  for agents, kept apart from the free offers. Deals are
+  `deals/<slug>.yaml` files (schema `schemas/deal.schema.json`, shared
+  rules `schemas/deal.rules.json`, validated by `scripts/deal_model.py` and
+  `scripts/validate_offers.py`): `discount`, `occasion` and a required
+  `expiry_date`; out-of-scope categories, `amount` / `is_free` keys and any
+  free wording are rejected. The site gets a Deals page (`/deals.html`) with
+  a "Deal · not free" badge, the discount and end date on every card and an
+  occasion filter (`?occasion=`), plus one `deals/<slug>.html` page per
+  deal, all in the sitemap. Deals ride in a separate `deals` section of
+  `index.json` (each entry `kind: "deal"`) and of `llms.txt` /
+  `llms-full.txt`; they never enter the free-offer counts, listing, search,
+  feed or offer pages, and are dropped at build time after their end date.
+  New `config/occasions.yaml` + `scripts/deal_window.py --date YYYY-MM-DD`
+  (exit 0 with the open window as JSON, 3 when none), a `deal-hunter` skill,
+  and `check_scope.py --mode deals` for deal-hunt PRs. No deals are
+  published by this change; the only example deal is a test fixture.
+
 - **Test time-bomb guard (#782):** `test_community_offers.py` no longer
   mixes its fixed 2026-11-20 giveaway dates with the real clock, which had
   failed the required `validate` check and the scheduled deploy since
