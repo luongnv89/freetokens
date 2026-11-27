@@ -8,8 +8,8 @@
     {
       "type": "link",
       "url": "https://openrouter.ai/api/v1/models/particle-ai/particle-1:free/endpoints",
-      "title": "Particle AI: Particle-1 (free)",
-      "text": "Particle AI: Particle-1 (free) — \"Particle-1 is a token-efficient agentic coding model from Particle AI, post-trained on DeepSeek V4.1 Flash.\" Endpoint provider_name \"Particle AI\", context_length 1048576, max_completion_tokens 131072, pricing prompt \"0\", completion \"0\""
+      "title": "Particle AI: Particle-1",
+      "text": "\"context_length\":1048576 ... \"pricing\":{\"prompt\":\"0\",\"completion\":\"0\",\"discount\":0} ... \"max_completion_tokens\":943718"
     },
     {
       "type": "link",
