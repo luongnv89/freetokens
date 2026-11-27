@@ -1,0 +1,35 @@
+{
+  "summary": "Thinking Machines' Tinker pricing page lists a free tier for Inkling 2 Mini (MoE, 26.4B total, 5.4B active parameters), released Nov 20, 2026 with open weights. The free tier costs $0.00 per 1M tokens for prefill, cached prefill, sampling and training, is limited to 64K context, and is subject to rate limits; requests may be throttled when limits are reached. Prepaid accounts must have a positive balance to use the free tier. The paid Inkling 2 Mini tiers (64K and 256K context) remain available. No end date is stated.",
+  "claim_steps": [
+    "Sign in to Tinker; a prepaid account must have a positive balance to use the free tier",
+    "Select the model ID thinkingmachines/Inkling-2-Mini:peft:65536:free",
+    "Train and sample within the 64K context limit; requests may be throttled at rate limits"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://thinkingmachines.ai/tinker/pricing/",
+      "title": "Tinker Pricing - Thinking Machines Lab",
+      "text": "Inkling 2 Mini (free), 64K: $0.00 prefill, $0.00 cached prefill, $0.00 sample, $0.00 train. To use the free tier, select the model ID thinkingmachines/Inkling-2-Mini:peft:65536:free. Free training and sampling have a 64K context limit and are subject to rate limits. Requests may be throttled when those limits are reached. Prepaid accounts must have a positive balance to use the free tier."
+    },
+    {
+      "type": "link",
+      "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+      "title": "Introducing Inkling 2 Mini",
+      "text": "Inkling 2 Mini is released with open weights and is available on Tinker today for inference and customization."
+    },
+    {
+      "type": "link",
+      "url": "https://thinkingmachines.ai/tinker/",
+      "title": "Tinker - Thinking Machines Lab",
+      "text": "Inkling 2 Mini New. MoE · 26.4B total · 256K max context. Active parameters: 5.4B. Pay for actual tokens used, not inactive time."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/AGTPinsights/status/2125476162864402475",
+      "author": "AGTP",
+      "text": "Tinker just made Inkling 2 Mini free to train and sample today. Here's what you need to know. Tinker is the model customization API from Thinking Machines. To celebrate the Inkling 2 Mini release, all Tinker users with a positive balance can now train and sample on it for free,…",
+      "handle": "@AGTPinsights"
+    }
+  ]
+}

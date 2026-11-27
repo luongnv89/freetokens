@@ -1,0 +1,28 @@
+{
+  "summary": "New AWS customers receive USD $100 in Free Tier credits after creating an account, on either the Free or Paid account plan, and can earn up to USD $100 more by completing activities in the Explore AWS widget on the Console Home dashboard ($20 each: launch an EC2 instance, use a foundation model in the Amazon Bedrock playground, set up an AWS Budgets cost budget, build a Lambda web app, create an RDS database, create a DynamoDB table). The Free account plan costs nothing for up to six months and ends after six months or when credits are fully used, whichever comes first; free plans cannot use certain services that would rapidly consume the credit. Activity credits cannot be earned after activating advanced features, joining AWS Organizations, or setting up a Control Tower landing zone.",
+  "claim_steps": [
+    "Go to aws.amazon.com/free and choose Create free account.",
+    "Complete sign-up and choose the Free account plan or Paid account plan; $100 in credits is applied.",
+    "Open the Explore AWS widget on the AWS Console Home dashboard and complete activities (e.g. use a model in the Amazon Bedrock playground) to earn $20 each, up to $100."
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://aws.amazon.com/free/",
+      "title": "AWS Free Tier",
+      "text": "When you create a new AWS Free Tier account, you get $100 in credits immediately. As you explore key services, you can earn up to $100 more. The account closes on its own 6 months after you open it or when your credits run out, whichever comes first."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier.html",
+      "title": "Explore AWS services with AWS Free Tier - AWS Billing",
+      "text": "If you are new to AWS, you receive USD $100 in credits after you create an account, regardless of your account plan. You can also earn up to an additional USD $100 in credits by completing activities."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier-plans-activities.html",
+      "title": "Earning additional credits - AWS Billing",
+      "text": "Each activity earns USD $20 in credits, and you can choose the activities that best fit your use case. The maximum you can earn from activities is USD $100. [Activities include] Use a foundational model in the Amazon Bedrock playground."
+    }
+  ]
+}

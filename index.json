@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-26T21:51:27Z",
-  "count": 352,
-  "active_count": 287,
+  "generated_at": "2026-11-27T02:07:53Z",
+  "count": 355,
+  "active_count": 290,
   "expired_count": 65,
   "offers": [
     {
@@ -5345,6 +5345,51 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "aws-free-tier-200-credits",
+      "title": "AWS Free Tier — Up to $200 in Credits for New Accounts",
+      "provider": "AWS",
+      "category": "api_provider",
+      "amount": "$100 in credits when a new AWS account is created + up to $100 more ($20 per activity, e.g. using a foundation model in the Amazon Bedrock playground); new AWS customers only; the Free account plan ends after 6 months or when credits are used up, whichever comes first",
+      "expiry_date": null,
+      "source_url": "https://aws.amazon.com/free/",
+      "verified_date": "2026-11-27",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "opencode-seaglass-alpha-free",
+      "title": "Seaglass Alpha Free on OpenCode",
+      "provider": "OpenCode",
+      "category": "coding",
+      "amount": "Free Seaglass Alpha stealth model access in the OpenCode app (free input, output and cached reads; limited time); collected data is retained and used to improve the model",
+      "expiry_date": null,
+      "source_url": "https://opencode.ai/v2/docs/console/models/",
+      "verified_date": "2026-11-27",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "none",
+      "status": "active"
+    },
+    {
+      "slug": "thinking-machines-tinker-inkling-2-mini-free",
+      "title": "Inkling 2 Mini Free to Train and Sample on Tinker",
+      "provider": "Thinking Machines",
+      "category": "api_provider",
+      "amount": "Free training and sampling of Inkling 2 Mini on Tinker ($0 prefill, cached prefill, sample and train via model ID thinkingmachines/Inkling-2-Mini:peft:65536:free; 64K context limit, rate-limited; prepaid accounts must have a positive balance)",
+      "expiry_date": null,
+      "source_url": "https://thinkingmachines.ai/tinker/pricing/",
+      "verified_date": "2026-11-27",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [
