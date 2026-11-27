@@ -8,12 +8,19 @@ import {
 } from "../lib/offers";
 import type { OfferDetail } from "../lib/offerDetails";
 import { leadMetaDescription, type Lead } from "../lib/leads";
+import {
+  DEALS_DESCRIPTION,
+  dealMetaDescription,
+  type Deal,
+} from "../lib/deals";
 
 type StructuredDataProps =
   | { page: "home"; index: OffersIndex; baseUrl?: string }
   | { page: "archive"; index: OffersIndex; baseUrl?: string }
   | { page: "unverified"; baseUrl?: string }
   | { page: "lead"; lead: Lead | null; baseUrl?: string }
+  | { page: "deals"; baseUrl?: string }
+  | { page: "deal"; deal: Deal | null; baseUrl?: string }
   | { page: "about"; baseUrl?: string }
   | { page: "privacy"; baseUrl?: string }
   | {
@@ -176,6 +183,31 @@ export function StructuredData(props: StructuredDataProps) {
       url,
       name: `${props.lead.title} (unverified) · Free AI Credits`,
       description: leadMetaDescription(props.lead.claim),
+      isPartOf: { "@id": `${base}/#website` },
+      inLanguage: "en",
+    };
+  } else if (props.page === "deals") {
+    // Plain WebPage (#809): deals are paid discounts, so nothing here is
+    // advertised to crawlers as a free (price 0) Offer.
+    pageNode = {
+      "@type": "WebPage",
+      "@id": `${base}/deals.html#webpage`,
+      url: `${base}/deals.html`,
+      name: "AI deals · Free AI Credits",
+      description: DEALS_DESCRIPTION,
+      isPartOf: { "@id": `${base}/#website` },
+      inLanguage: "en",
+    };
+  } else if (props.page === "deal" && props.deal) {
+    // One deal's page: a plain WebPage, never a price-0 Offer (#809).
+    // Unknown slug: no page node at all, like the offer not-found state.
+    const url = `${base}/deals/${props.deal.slug}.html`;
+    pageNode = {
+      "@type": "WebPage",
+      "@id": `${url}#webpage`,
+      url,
+      name: `${props.deal.title} (deal) · Free AI Credits`,
+      description: dealMetaDescription(props.deal),
       isPartOf: { "@id": `${base}/#website` },
       inLanguage: "en",
     };

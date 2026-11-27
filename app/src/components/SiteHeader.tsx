@@ -29,7 +29,7 @@ export function SiteHeader({
   pageViews = true,
 }: {
   depth?: number;
-  current?: "home" | "archive" | "unverified" | "privacy" | "about";
+  current?: "home" | "archive" | "unverified" | "deals" | "privacy" | "about";
   pageViews?: boolean;
 }) {
   const up = "../".repeat(depth);
@@ -85,6 +85,13 @@ export function SiteHeader({
             aria-current={current === "unverified" ? "page" : undefined}
           >
             Unverified
+          </a>
+          <a
+            href={`${up}deals.html`}
+            title="Discounts on paid AI plans, not free offers"
+            aria-current={current === "deals" ? "page" : undefined}
+          >
+            Deals
           </a>
           <a
             href={`${up}about.html`}

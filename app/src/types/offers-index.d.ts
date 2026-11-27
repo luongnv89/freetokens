@@ -30,6 +30,10 @@ export interface OffersIndex {
    * Curated 'Always free' shelf (#612): offer slugs from config/always-free.yaml in the curator's order. Every slug names an offer in offers; the home page shows only the ones that are active and not verification: unverified.
    */
   always_free?: string[];
+  /**
+   * Deals (#809): time-limited DISCOUNTS on paid AI products, kept apart from the free offers. Never counted in count / active_count / expired_count, never in offers, offers.jsonl, search, the feed or offer pages. Only deals still running at build time are listed (a deal is hidden from the day after its expiry_date), soonest-ending first. Every entry carries kind: deal.
+   */
+  deals?: Deal[];
 }
 /**
  * One offer entry in the generated index. Mirrors the YAML source fields plus the slug and the build-time-computed status.
@@ -143,4 +147,73 @@ export interface SharedBy {
    * Date of the post, YYYY-MM-DD.
    */
   post_date: string;
+}
+/**
+ * One running deal in the generated index (#809): the deals/<slug>.yaml fields plus kind and slug. Mirrors schemas/deal.schema.json.
+ */
+export interface Deal {
+  /**
+   * Always 'deal': marks the entry as a paid discount, never a free offer.
+   */
+  kind: "deal";
+  /**
+   * File name of the source deals/<slug>.yaml without extension.
+   */
+  slug: string;
+  /**
+   * Deal name as shown on cards, e.g. 'Example AI Pro — Black Friday'.
+   */
+  title: string;
+  /**
+   * Vendor selling the discounted product.
+   */
+  provider: string;
+  /**
+   * Deal scope: ai_subscription = AI chat assistant subscriptions; coding_agent = coding agents and AI IDEs; ai_tool_api = AI tools and APIs; agent_compute = sandboxes, cloud VMs and compute for agents. Anything else is out of scope and rejected.
+   */
+  category: "ai_subscription" | "coding_agent" | "ai_tool_api" | "agent_compute";
+  /**
+   * The discount exactly as the official page states it, e.g. '50% off the first year'.
+   */
+  discount: string;
+  /**
+   * Optional: the regular price, only when the official page shows it.
+   */
+  regular_price?: string;
+  /**
+   * Optional: the discounted price, only when the official page shows it. Must contain a non-zero digit (a deal is never free).
+   */
+  deal_price?: string;
+  /**
+   * Optional: the code to enter at checkout.
+   */
+  promo_code?: string;
+  /**
+   * The sale event the deal belongs to (config/occasions.yaml names the windows).
+   */
+  occasion: "black_friday" | "cyber_monday" | "christmas_new_year" | "other";
+  /**
+   * Optional: first day of the deal, YYYY-MM-DD. Not after expiry_date.
+   */
+  start_date?: string;
+  /**
+   * Last day of the deal, YYYY-MM-DD. Required and never null: a deal must end. Hidden at build time from the next day on.
+   */
+  expiry_date: string;
+  /**
+   * Optional: set when the official page states no end date and the occasion window end was used instead; says so in plain words.
+   */
+  expiry_note?: string;
+  /**
+   * The vendor's own page showing the discount (and its end date when stated).
+   */
+  source_url: string;
+  /**
+   * Day the deal was last checked on source_url, YYYY-MM-DD. Never in the future.
+   */
+  verified_date: string;
+  /**
+   * Optional: one or two sentences of terms quoted or closely paraphrased from the official page (who qualifies, which plan).
+   */
+  description?: string;
 }

@@ -7,6 +7,8 @@ export type Route =
   | { page: "archive" }
   | { page: "unverified" }
   | { page: "lead"; slug: string }
+  | { page: "deals" }
+  | { page: "deal"; slug: string }
   | { page: "privacy" }
   | { page: "about" }
   | { page: "detail"; slug: string };
@@ -28,6 +30,10 @@ export function resolveRoute(doc?: Document): Route {
       return { page: "unverified" };
     case "lead":
       return { page: "lead", slug: root?.dataset.slug ?? "" };
+    case "deals":
+      return { page: "deals" };
+    case "deal":
+      return { page: "deal", slug: root?.dataset.slug ?? "" };
     case "privacy":
       return { page: "privacy" };
     case "about":

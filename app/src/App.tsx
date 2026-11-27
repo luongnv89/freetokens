@@ -5,6 +5,8 @@ import HomePage from "./components/HomePage";
 import ArchivePage from "./components/ArchivePage";
 import UnverifiedPage from "./components/UnverifiedPage";
 import LeadDetailPage from "./components/LeadDetailPage";
+import DealsPage from "./components/DealsPage";
+import DealDetailPage from "./components/DealDetailPage";
 import { EMPTY_LEADS, type LeadsIndex } from "./lib/leads";
 import PrivacyPage from "./components/PrivacyPage";
 import AboutPage from "./components/AboutPage";
@@ -44,6 +46,12 @@ export default function App({
           baseUrl={baseUrl}
         />
       );
+      break;
+    case "deals":
+      page = <DealsPage index={index} baseUrl={baseUrl} />;
+      break;
+    case "deal":
+      page = <DealDetailPage index={index} slug={r.slug} baseUrl={baseUrl} />;
       break;
     case "privacy":
       page = <PrivacyPage baseUrl={baseUrl} />;

@@ -46,6 +46,13 @@
       },
       "uniqueItems": true,
       "description": "Curated 'Always free' shelf (#612): offer slugs from config/always-free.yaml in the curator's order. Every slug names an offer in offers; the home page shows only the ones that are active and not verification: unverified."
+    },
+    "deals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Deal"
+      },
+      "description": "Deals (#809): time-limited DISCOUNTS on paid AI products, kept apart from the free offers. Never counted in count / active_count / expired_count, never in offers, offers.jsonl, search, the feed or offer pages. Only deals still running at build time are listed (a deal is hidden from the day after its expiry_date), soonest-ending first. Every entry carries kind: deal."
     }
   },
   "$defs": {
@@ -212,6 +219,122 @@
           "type": "string",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
           "description": "Date of the post, YYYY-MM-DD."
+        }
+      }
+    },
+    "Deal": {
+      "title": "Deal",
+      "description": "One running deal in the generated index (#809): the deals/<slug>.yaml fields plus kind and slug. Mirrors schemas/deal.schema.json.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "slug",
+        "title",
+        "provider",
+        "category",
+        "discount",
+        "occasion",
+        "expiry_date",
+        "source_url",
+        "verified_date"
+      ],
+      "properties": {
+        "kind": {
+          "const": "deal",
+          "description": "Always 'deal': marks the entry as a paid discount, never a free offer."
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "File name of the source deals/<slug>.yaml without extension."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "description": "Deal name as shown on cards, e.g. 'Example AI Pro — Black Friday'."
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "description": "Vendor selling the discounted product."
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "ai_subscription",
+            "coding_agent",
+            "ai_tool_api",
+            "agent_compute"
+          ],
+          "description": "Deal scope: ai_subscription = AI chat assistant subscriptions; coding_agent = coding agents and AI IDEs; ai_tool_api = AI tools and APIs; agent_compute = sandboxes, cloud VMs and compute for agents. Anything else is out of scope and rejected."
+        },
+        "discount": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "description": "The discount exactly as the official page states it, e.g. '50% off the first year'."
+        },
+        "regular_price": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "description": "Optional: the regular price, only when the official page shows it."
+        },
+        "deal_price": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "description": "Optional: the discounted price, only when the official page shows it. Must contain a non-zero digit (a deal is never free)."
+        },
+        "promo_code": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,40}$",
+          "description": "Optional: the code to enter at checkout."
+        },
+        "occasion": {
+          "type": "string",
+          "enum": [
+            "black_friday",
+            "cyber_monday",
+            "christmas_new_year",
+            "other"
+          ],
+          "description": "The sale event the deal belongs to (config/occasions.yaml names the windows)."
+        },
+        "start_date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Optional: first day of the deal, YYYY-MM-DD. Not after expiry_date."
+        },
+        "expiry_date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Last day of the deal, YYYY-MM-DD. Required and never null: a deal must end. Hidden at build time from the next day on."
+        },
+        "expiry_note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "Optional: set when the official page states no end date and the occasion window end was used instead; says so in plain words."
+        },
+        "source_url": {
+          "type": "string",
+          "pattern": "^https://",
+          "description": "The vendor's own page showing the discount (and its end date when stated)."
+        },
+        "verified_date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "Day the deal was last checked on source_url, YYYY-MM-DD. Never in the future."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Optional: one or two sentences of terms quoted or closely paraphrased from the official page (who qualifies, which plan)."
         }
       }
     }

@@ -122,14 +122,18 @@ export function buildSitemap(index, baseUrl = DEFAULT_BASE_URL, options = {}) {
     { path: "/", lastmod: generatedDate },
     { path: "/archive.html", lastmod: generatedDate },
     { path: "/unverified.html", lastmod: generatedDate },
+    { path: "/deals.html", lastmod: generatedDate },
     { path: "/privacy.html", lastmod: generatedDate },
     { path: "/about.html", lastmod: generatedDate },
     { path: "/brand-showcase.html", lastmod: generatedDate },
     { path: "/feed.xml", lastmod: generatedDate },
   ];
-  if (fixedEntries.length + index.offers.length > MAX_SITEMAP_URLS) {
+  // Deals (#809) get their own pages after the offers; never mixed into them.
+  const deals = Array.isArray(index.deals) ? index.deals : [];
+  const total = fixedEntries.length + index.offers.length + deals.length;
+  if (total > MAX_SITEMAP_URLS) {
     throw new Error(
-      `sitemap contains ${fixedEntries.length + index.offers.length} URLs; ` +
+      `sitemap contains ${total} URLs; ` +
         `maximum is ${MAX_SITEMAP_URLS}`,
     );
   }
@@ -144,6 +148,15 @@ export function buildSitemap(index, baseUrl = DEFAULT_BASE_URL, options = {}) {
         safeLastmod(fileMtime(options.fileMtimes, slug), today) ??
         generatedDate;
       return { path: `/offers/${slug}.html`, lastmod };
+    }),
+    ...deals.map((deal) => {
+      const slug = String(deal.slug ?? "").trim();
+      if (!slug) throw new Error("offers.json deal is missing a slug");
+      const lastmod =
+        safeLastmod(deal.verified_date, today) ??
+        safeLastmod(fileMtime(options.dealFileMtimes, slug), today) ??
+        generatedDate;
+      return { path: `/deals/${slug}.html`, lastmod };
     }),
   ];
   const body = entries

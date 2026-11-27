@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T02:27:44Z",
+  "generated_at": "2026-11-27T07:14:19Z",
   "count": 355,
   "active_count": 290,
   "expired_count": 65,
@@ -5397,5 +5397,6 @@
     "cline-ox-alpha-free",
     "cline-gemini-3-8-flash-free",
     "opencode-mimo-v2-6-flash-free"
-  ]
+  ],
+  "deals": []
 }

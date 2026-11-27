@@ -25,6 +25,16 @@ type BreadcrumbsProps =
       baseUrl?: string;
     }
   | {
+      page: "deals";
+      baseUrl?: string;
+    }
+  | {
+      page: "deal";
+      slug: string;
+      title: string;
+      baseUrl?: string;
+    }
+  | {
       page: "privacy";
       baseUrl?: string;
     }
@@ -76,6 +86,24 @@ function buildBreadcrumbItems(props: BreadcrumbsProps): BreadcrumbItem[] {
       {
         name: props.title || "Lead not found",
         item: `${baseUrl}/unverified/${props.slug || "not-found"}.html`,
+      },
+    ];
+  }
+
+  if (props.page === "deals") {
+    return [
+      { name: "Offers", href: "./index.html", item: `${baseUrl}/` },
+      { name: "Deals", item: `${baseUrl}/deals.html` },
+    ];
+  }
+
+  if (props.page === "deal") {
+    return [
+      { name: "Offers", href: "../index.html", item: `${baseUrl}/` },
+      { name: "Deals", href: "../deals.html", item: `${baseUrl}/deals.html` },
+      {
+        name: props.title || "Deal not found",
+        item: `${baseUrl}/deals/${props.slug || "not-found"}.html`,
       },
     ];
   }

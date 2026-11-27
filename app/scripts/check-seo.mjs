@@ -146,7 +146,7 @@ function collectHtmlFiles(distDir) {
     }
   }
   // Nested HTML: offers/*.html and unverified lead pages (#660).
-  for (const sub of ["offers", "unverified"]) {
+  for (const sub of ["offers", "unverified", "deals"]) {
     const nestedDir = path.join(distDir, sub);
     if (!existsSync(nestedDir)) continue;
     for (const entry of readdirSync(nestedDir, { withFileTypes: true })) {
