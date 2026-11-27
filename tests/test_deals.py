@@ -9,6 +9,7 @@ fictional example.com deal that is never published.
 import datetime as dt
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -26,6 +27,8 @@ from offer_model import parse_offer_text  # noqa: E402
 
 FIXTURE = REPO / "tests" / "fixtures" / "deals" / "example-ai-pro-black-friday.yaml"
 FIXTURE_TEXT = FIXTURE.read_text(encoding="utf-8")
+WORDING = json.loads((REPO / "tests" / "fixtures" / "deal-free-wording.json").read_text(encoding="utf-8"))
+LOAD_DEALS = REPO / "app" / "scripts" / "load-deals.mjs"
 TODAY = dt.date(2026, 11, 28)
 
 
@@ -109,6 +112,17 @@ class DealValidatorTests(unittest.TestCase):
         # "freedom" is not free wording.
         self.assertEqual(validate(title="Freedom Plan — 30% off")["title"], "Freedom Plan — 30% off")
 
+    def test_expiry_note_free_wording_is_rejected(self):
+        with self.assertRaisesRegex(deal_model.DealError, "expiry_note says 'Free'"):
+            validate(expiry_note="Free until the window ends.")
+
+    def test_promo_code_naming_the_deal_free_is_rejected(self):
+        for code in ("FREE", "free", "FREE50", "BFFREE", "GRATIS-2026", "NOCOST"):
+            with self.subTest(code=code):
+                with self.assertRaisesRegex(deal_model.DealError, "promo_code .* labels the deal free"):
+                    validate(promo_code=code)
+        self.assertEqual(validate(promo_code="BF-50_OFF")["promo_code"], "BF-50_OFF")
+
     def test_deal_price_must_be_non_zero(self):
         for value in ("$0", "0.00 EUR", "$0/month"):
             with self.subTest(value=value):
@@ -143,6 +157,69 @@ class DealValidatorTests(unittest.TestCase):
         self.assertFalse(deal_model.is_expired(deal, dt.date(2026, 12, 2)))  # last day: shown
         self.assertTrue(deal_model.is_expired(deal, dt.date(2026, 12, 3)))  # next day: hidden
 
+    def test_future_start_date_is_valid_but_hidden_until_it_starts(self):
+        # The validator accepts a deal that has not started yet ...
+        deal = validate(today=dt.date(2026, 11, 27), start_date="2026-11-30")
+        self.assertEqual(deal["start_date"], "2026-11-30")
+        # ... and the build lists it only from its start_date (fixture: 2026-11-20).
+        deal = validate()
+        for day, upcoming, listed in (
+            (dt.date(2026, 11, 19), True, False),  # day before start: hidden
+            (dt.date(2026, 11, 20), False, True),  # start day: shown
+            (dt.date(2026, 12, 2), False, True),  # expiry day: shown
+            (dt.date(2026, 12, 3), False, False),  # day after expiry: hidden
+        ):
+            with self.subTest(day=day):
+                self.assertEqual(deal_model.is_upcoming(deal, day), upcoming)
+                self.assertEqual(deal_model.is_listed(deal, day), listed)
+        no_start = validate(start_date=...)
+        self.assertFalse(deal_model.is_upcoming(no_start, dt.date(2000, 1, 1)))
+        self.assertTrue(deal_model.is_listed(no_start, dt.date(2000, 1, 1)))
+
+
+class FreeWordingParityTests(unittest.TestCase):
+    """deal_model.py and load-deals.mjs judge free wording identically (#809)."""
+
+    def test_shared_corpus(self):
+        for text in WORDING["free"]:
+            with self.subTest(text=text):
+                self.assertIsNotNone(deal_model.free_wording(text))
+        for text in WORDING["not_free"]:
+            with self.subTest(text=text):
+                self.assertIsNone(deal_model.free_wording(text))
+
+    def test_space_class_is_exactly_the_corpus_set(self):
+        space = re.compile("[" + deal_model.RULES["free_wording_space"] + "]")
+        matched = {cp for cp in range(0x110000) if space.fullmatch(chr(cp))}
+        self.assertEqual(matched, set(WORDING["space_codepoints"]))
+        # Every character Python calls whitespace is covered (fail closed).
+        native = {cp for cp in range(0x110000) if chr(cp).isspace()}
+        self.assertLessEqual(native, matched)
+        for cp in WORDING["space_codepoints"]:
+            with self.subTest(cp=hex(cp)):
+                self.assertIsNotNone(deal_model.free_wording(f"100{chr(cp)}% off"))
+        self.assertIsNotNone(deal_model.free_wording("100\u00a0% off"))
+
+    @unittest.skipUnless(shutil.which("node"), "node is not installed")
+    def test_python_and_node_agree_on_every_bmp_character(self):
+        texts = list(WORDING["free"]) + list(WORDING["not_free"])
+        for cp in range(0x10000):
+            c = chr(cp)
+            texts += [f"100{c}% off", f"no{c}cost", f"{c}free{c}"]
+        script = (
+            "import { freeWording } from " + json.dumps(LOAD_DEALS.as_uri()) + ";"
+            "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>"
+            "process.stdout.write(JSON.stringify(JSON.parse(s).map(t=>freeWording(t)!==null))));"
+        )
+        result = subprocess.run(["node", "--input-type=module", "-e", script],
+                                input=json.dumps(texts), capture_output=True, text=True,
+                                encoding="utf-8")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        node = json.loads(result.stdout)
+        python = [deal_model.free_wording(t) is not None for t in texts]
+        mismatches = [(ascii(t), p, n) for t, p, n in zip(texts, python, node) if p != n]
+        self.assertEqual(mismatches[:10], [])
+
 
 class DealLoaderTests(unittest.TestCase):
     def setUp(self):
@@ -159,6 +236,22 @@ class DealLoaderTests(unittest.TestCase):
 
     def test_missing_folder_is_empty(self):
         self.assertEqual(deal_model.load_deals(str(self.dir / "nope"), (), TODAY), [])
+
+    def test_validate_offers_counts_upcoming_deals(self):
+        result = subprocess.run(
+            [sys.executable, "scripts/validate_offers.py", "--deals-dir", str(self.dir),
+             "--today", "2026-11-27"],
+            capture_output=True, text=True, cwd=str(REPO))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("validated 1 deals: OK\n", result.stdout)
+        (self.dir / FIXTURE.name).write_text(FIXTURE_TEXT.replace("start_date: 2026-11-20",
+                                                                  "start_date: 2026-11-30"))
+        result = subprocess.run(
+            [sys.executable, "scripts/validate_offers.py", "--deals-dir", str(self.dir),
+             "--today", "2026-11-27"],
+            capture_output=True, text=True, cwd=str(REPO))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("validated 1 deals: OK (1 upcoming, hidden at build)", result.stdout)
 
     def test_slug_may_not_name_an_offer(self):
         with self.assertRaisesRegex(deal_model.DealError, "is also an offer"):
@@ -190,6 +283,12 @@ class DealLoaderTests(unittest.TestCase):
             capture_output=True, text=True, cwd=str(REPO))
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("expired (hidden at build)", result.stdout)
+        result = subprocess.run(
+            [sys.executable, "scripts/deal_model.py", "validate", "--today", "2026-11-27",
+             "--deals-dir", str(FIXTURE.parent)],
+            capture_output=True, text=True, cwd=str(REPO))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("active", result.stdout)
 
 
 class DealSchemaTests(unittest.TestCase):

@@ -16,11 +16,13 @@ build reject the same files:
 - ``category`` is in the deal scope (AI subscriptions, coding agents / IDEs,
   AI tools & APIs, compute for agents); anything else is rejected
 - ``expiry_date`` is required and never null: a deal must end
-- a deal is never labelled free: free wording and free-style keys
-  (``amount``, ``is_free``, ...) are rejected, and ``deal_price`` must carry
-  a non-zero digit
+- a deal is never labelled free: free wording, a promo code naming it free
+  and free-style keys (``amount``, ``is_free``, ...) are rejected, and
+  ``deal_price`` must carry a non-zero digit
 
-Expired deals stay valid files; the build hides them (``is_expired``).
+Expired deals and deals whose ``start_date`` is still ahead stay valid files;
+the build lists a deal only while it runs (``is_listed``): from its
+``start_date`` through its ``expiry_date``.
 Every date check takes an injected ``today`` so tests never read the clock.
 
 Stdlib only. CLI::
@@ -82,7 +84,14 @@ LIMITS = RULES["limits"]
 FREE_KEYS = tuple(RULES["free_keys"])
 FREE_WORDING_FIELDS = tuple(RULES["free_wording_fields"])
 NONZERO_PRICE_FIELDS = tuple(RULES["nonzero_price_fields"])
-FREE_WORDING_RE = re.compile(RULES["free_wording_pattern"], re.IGNORECASE | re.ASCII)
+# re.ASCII keeps \b ASCII-only like JavaScript without the u flag; the
+# whitespace the pattern allows is the explicit {space} class from the rules
+# file, so Python and JavaScript match the same strings (#809 parity).
+FREE_WORDING_RE = re.compile(
+    RULES["free_wording_pattern"].replace("{space}", RULES["free_wording_space"]),
+    re.IGNORECASE | re.ASCII,
+)
+PROMO_FREE_RE = re.compile(RULES["promo_code_free_pattern"], re.IGNORECASE | re.ASCII)
 SLUG_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 PROMO_RE = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
@@ -161,6 +170,11 @@ def validate_deal(data: dict, filename: str, today: dt.date | None = None) -> di
     promo = data.get("promo_code")
     if promo is not None and not PROMO_RE.match(promo):
         raise DealError(f"{filename}: promo_code must be 1-40 letters, digits, '-' or '_'")
+    if promo is not None and PROMO_FREE_RE.search(promo):
+        raise DealError(
+            f"{filename}: promo_code {promo!r} labels the deal free; a deal is never free "
+            "(free offers belong in offers/)"
+        )
 
     expiry = _date(data["expiry_date"], "expiry_date", filename)
     verified = _date(data["verified_date"], "verified_date", filename)
@@ -194,6 +208,17 @@ def validate_deal(data: dict, filename: str, today: dt.date | None = None) -> di
 def is_expired(deal: dict, today: dt.date) -> bool:
     """A deal is shown through its expiry day and hidden from the next day."""
     return dt.date.fromisoformat(deal["expiry_date"]) < today
+
+
+def is_upcoming(deal: dict, today: dt.date) -> bool:
+    """A deal with a start_date still ahead is hidden until that day."""
+    start = deal.get("start_date")
+    return start is not None and today < dt.date.fromisoformat(start)
+
+
+def is_listed(deal: dict, today: dt.date) -> bool:
+    """The build lists a deal from its start_date through its expiry_date."""
+    return not is_expired(deal, today) and not is_upcoming(deal, today)
 
 
 def deal_paths(deals_dir: str) -> list:
@@ -243,7 +268,12 @@ def main(argv=None) -> int:
         print(f"validation failed: {exc}", file=sys.stderr)
         return 1
     for deal in deals:
-        state = "expired (hidden at build)" if is_expired(deal, today) else "active"
+        if is_expired(deal, today):
+            state = "expired (hidden at build)"
+        elif is_upcoming(deal, today):
+            state = f"upcoming (hidden at build until {deal['start_date']})"
+        else:
+            state = "active"
         print(f"OK {deal['slug']}: {state}")
     print(f"validated {len(deals)} deals: OK")
     return 0

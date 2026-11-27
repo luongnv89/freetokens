@@ -18,7 +18,11 @@ regenerated on every deploy; entries here cover behavior, not content edits.
   deal, all in the sitemap. Deals ride in a separate `deals` section of
   `index.json` (each entry `kind: "deal"`) and of `llms.txt` /
   `llms-full.txt`; they never enter the free-offer counts, listing, search,
-  feed or offer pages, and are dropped at build time after their end date.
+  feed or offer pages, and are dropped at build time after their end date
+  (and before a future `start_date`). Free wording is matched with one
+  explicit whitespace class shared by the Python gate and the build, so
+  Unicode spaces (`100\u00a0% off`) fail both; `expiry_note` is checked
+  too, and a promo code naming the deal free (`FREE50`) is rejected.
   New `config/occasions.yaml` + `scripts/deal_window.py --date YYYY-MM-DD`
   (exit 0 with the open window as JSON, 3 when none), a `deal-hunter` skill,
   and `check_scope.py --mode deals` for deal-hunt PRs. No deals are

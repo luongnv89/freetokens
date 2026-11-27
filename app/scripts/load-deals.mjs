@@ -8,8 +8,9 @@
 // their own folder (the offer loader reads every subfolder of offers/), go to
 // index.deals only — never index.offers, offers.jsonl, counts, search, the
 // feed or offer pages — and each entry is marked kind: "deal". A deal is
-// listed through its expiry_date and hidden from the next day, judged against
-// the BUILD clock like offer expiry (ADR 0001); nothing filters on the client.
+// listed from its start_date (when set) through its expiry_date and hidden
+// outside that span, judged against the BUILD clock like offer expiry
+// (ADR 0001); nothing filters on the client.
 
 import { readdir, readFile, stat } from "node:fs/promises";
 import { existsSync, readFileSync } from "node:fs";
@@ -29,8 +30,14 @@ export const REQUIRED_FIELDS = SCHEMA.required;
 export const FIELDS = Object.keys(SCHEMA.properties);
 export const DEAL_CATEGORIES = SCHEMA.properties.category.enum;
 export const OCCASIONS = SCHEMA.properties.occasion.enum;
-// No u flag: \b stays ASCII, matching Python's re.ASCII.
-const FREE_RE = new RegExp(RULES.free_wording_pattern, "i");
+// No u flag: \b stays ASCII, matching Python's re.ASCII. Whitespace is the
+// explicit {space} class from the rules file, never \s (JavaScript's \s is
+// Unicode-wide, Python's re.ASCII \s is not), so both match the same strings.
+const FREE_RE = new RegExp(
+  RULES.free_wording_pattern.replaceAll("{space}", RULES.free_wording_space),
+  "i",
+);
+const PROMO_FREE_RE = new RegExp(RULES.promo_code_free_pattern, "i");
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const PROMO_RE = /^[A-Za-z0-9_-]{1,40}$/;
@@ -129,6 +136,12 @@ export function validateDeal(data, filename, today) {
   if (data.promo_code != null && !PROMO_RE.test(data.promo_code)) {
     fail("promo_code must be 1-40 letters, digits, '-' or '_'");
   }
+  if (data.promo_code != null && PROMO_FREE_RE.test(data.promo_code)) {
+    fail(
+      `promo_code ${JSON.stringify(data.promo_code)} labels the deal free; ` +
+        "a deal is never free (free offers belong in offers/)",
+    );
+  }
   for (const field of ["expiry_date", "verified_date", "start_date"]) {
     if (data[field] != null && !isDate(data[field])) {
       fail(`${field} must be a YYYY-MM-DD date, got ${JSON.stringify(data[field])}`);
@@ -166,6 +179,16 @@ export function isExpiredDeal(deal, today) {
   return deal.expiry_date < today;
 }
 
+/** A deal whose start_date is still ahead is hidden until that day (build clock). */
+export function isUpcomingDeal(deal, today) {
+  return deal.start_date != null && today < deal.start_date;
+}
+
+/** Listed from start_date (when set) through expiry_date. */
+export function isListedDeal(deal, today) {
+  return !isExpiredDeal(deal, today) && !isUpcomingDeal(deal, today);
+}
+
 /** Soonest-ending first, then provider, then slug. */
 export function sortDeals(deals) {
   return [...deals].sort(
@@ -177,9 +200,9 @@ export function sortDeals(deals) {
 }
 
 /**
- * Load every deal under `dealsDir` and return the ones still running on
- * `today`. A missing folder is an empty list; a stray file, an invalid deal,
- * or a deal slug that names an offer fails the build.
+ * Load every deal under `dealsDir` and return the ones running on `today`
+ * (started and not yet expired). A missing folder is an empty list; a stray
+ * file, an invalid deal, or a deal slug that names an offer fails the build.
  */
 export async function loadDeals(dealsDir, today, offerSlugs = []) {
   if (!dealsDir || !existsSync(dealsDir)) return [];
@@ -199,7 +222,7 @@ export async function loadDeals(dealsDir, today, offerSlugs = []) {
     if (taken.has(deal.slug)) {
       throw new DealError(`${filename}: slug ${deal.slug} is also an offer; deal slugs must be unique`);
     }
-    if (!isExpiredDeal(deal, today)) deals.push(deal);
+    if (isListedDeal(deal, today)) deals.push(deal);
   }
   return sortDeals(deals);
 }

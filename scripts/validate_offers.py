@@ -348,9 +348,11 @@ def main(argv=None) -> int:
         print(f"validated {len(leads)} unverified leads: OK")
     if deals:
         expired = sum(deal_model.is_expired(d, day) for d in deals)
+        upcoming = sum(deal_model.is_upcoming(d, day) for d in deals)
+        hidden = [f"{n} {label}" for n, label in ((expired, "expired"), (upcoming, "upcoming")) if n]
         print(
             f"validated {len(deals)} deals: OK"
-            + (f" ({expired} expired, hidden at build)" if expired else "")
+            + (f" ({', '.join(hidden)}, hidden at build)" if hidden else "")
         )
     return 0
 

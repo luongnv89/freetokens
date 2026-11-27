@@ -54,7 +54,7 @@
     "promo_code": {
       "type": "string",
       "pattern": "^[A-Za-z0-9_-]{1,40}$",
-      "description": "Optional: the code to enter at checkout."
+      "description": "Optional: the code to enter at checkout. A code that names the deal free (schemas/deal.rules.json promo_code_free_pattern, e.g. FREE50) is rejected."
     },
     "occasion": {
       "type": "string",
@@ -64,7 +64,7 @@
     "start_date": {
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
-      "description": "Optional: first day of the deal, YYYY-MM-DD. Not after expiry_date."
+      "description": "Optional: first day of the deal, YYYY-MM-DD. Not after expiry_date. A future start_date is valid; the build hides the deal until that day."
     },
     "expiry_date": {
       "type": "string",

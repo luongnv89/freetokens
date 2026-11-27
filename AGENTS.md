@@ -73,7 +73,8 @@ agents / IDEs, AI tools & APIs and compute for agents: `deals/<slug>.yaml`
 validated by `scripts/deal_model.py` and `validate_offers.py`). A deal is
 never a free offer: it never goes in `offers/` (the offer loader reads every
 subfolder there), never counts toward free totals, and is never labelled
-free. It needs an `expiry_date` and is hidden at build time the day after.
+free. It needs an `expiry_date` and is hidden at build time the day after
+(and, with a future `start_date`, until that day).
 Deals render on `/deals.html` and `deals/<slug>.html` and ride in the
 separate `deals` section of `index.json` and the llms files. The
 `skills/deal-hunter` skill runs only while `scripts/deal_window.py --date

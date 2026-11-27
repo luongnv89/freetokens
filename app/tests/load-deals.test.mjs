@@ -18,7 +18,11 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import {
   DealError,
+  RULES,
+  freeWording,
   isExpiredDeal,
+  isListedDeal,
+  isUpcomingDeal,
   loadDeals,
   parseDealText,
   validateDeal,
@@ -32,6 +36,13 @@ const FIXTURE_DIR = path.resolve(APP_ROOT, "..", "tests", "fixtures", "deals");
 const FIXTURE = path.join(FIXTURE_DIR, "example-ai-pro-black-friday.yaml");
 const FIXTURE_TEXT = readFileSync(FIXTURE, "utf8");
 const TODAY = "2026-11-28";
+// Shared with tests/test_deals.py so both implementations give one verdict.
+const WORDING = JSON.parse(
+  readFileSync(
+    path.resolve(APP_ROOT, "..", "tests", "fixtures", "deal-free-wording.json"),
+    "utf8",
+  ),
+);
 
 const OFFER_YAML = [
   "title: Fixture Free Credits",
@@ -135,6 +146,16 @@ describe("deal validator (#809)", () => {
     expect(check({ title: "Freedom Plan — 30% off" }).title).toBe("Freedom Plan — 30% off");
   });
 
+  it("rejects free wording in expiry_note and a promo_code naming the deal free", () => {
+    expect(() => check({ expiry_note: "Free until the window ends." })).toThrow(
+      'expiry_note says "Free"',
+    );
+    for (const promo_code of ["FREE", "free", "FREE50", "BFFREE", "GRATIS-2026", "NOCOST"]) {
+      expect(() => check({ promo_code }), promo_code).toThrow("labels the deal free");
+    }
+    expect(check({ promo_code: "BF-50_OFF" }).promo_code).toBe("BF-50_OFF");
+  });
+
   it("rejects unknown fields and bad dates against the injected clock", () => {
     expect(() => check({ verification: "social_proof" })).toThrow("unknown field");
     expect(() => check({ start_date: "2026-12-09" })).toThrow("is after expiry_date");
@@ -148,6 +169,47 @@ describe("deal validator (#809)", () => {
     expect(isExpiredDeal(deal, "2026-12-02")).toBe(false);
     expect(isExpiredDeal(deal, "2026-12-03")).toBe(true);
   });
+
+  it("accepts a future start_date but hides the deal until it starts", () => {
+    expect(check({ start_date: "2026-11-30" }, "2026-11-27").start_date).toBe("2026-11-30");
+    const deal = check({}); // start_date 2026-11-20, expiry_date 2026-12-02
+    for (const [day, upcoming, listed] of [
+      ["2026-11-19", true, false],
+      ["2026-11-20", false, true],
+      ["2026-12-02", false, true],
+      ["2026-12-03", false, false],
+    ]) {
+      expect(isUpcomingDeal(deal, day), day).toBe(upcoming);
+      expect(isListedDeal(deal, day), day).toBe(listed);
+    }
+    const noStart = check({ start_date: undefined });
+    expect(isUpcomingDeal(noStart, "2000-01-01")).toBe(false);
+    expect(isListedDeal(noStart, "2000-01-01")).toBe(true);
+  });
+});
+
+describe("free-wording parity with scripts/deal_model.py (#809)", () => {
+  it("gives the shared corpus verdicts", () => {
+    for (const text of WORDING.free) expect(freeWording(text), text).not.toBeNull();
+    for (const text of WORDING.not_free) expect(freeWording(text), text).toBeNull();
+  });
+
+  it("fails closed on every space the rules class lists, which covers JS \\s", () => {
+    const space = new RegExp(`^[${RULES.free_wording_space}]$`);
+    const matched = [];
+    for (let cp = 0; cp <= 0xffff; cp += 1) {
+      const c = String.fromCharCode(cp);
+      if (space.test(c)) matched.push(cp);
+      // Every character JavaScript calls whitespace is in the class.
+      if (/\s/.test(c)) expect(space.test(c), cp.toString(16)).toBe(true);
+    }
+    expect(matched).toEqual(WORDING.space_codepoints);
+    for (const cp of WORDING.space_codepoints) {
+      const text = `100${String.fromCharCode(cp)}% off`;
+      expect(freeWording(text), cp.toString(16)).not.toBeNull();
+    }
+    expect(freeWording("100\u00a0% off")).toBe("100\u00a0% off");
+  });
 });
 
 describe("loadDeals (#809)", () => {
@@ -156,6 +218,29 @@ describe("loadDeals (#809)", () => {
       "example-ai-pro-black-friday",
     ]);
     expect(await loadDeals(FIXTURE_DIR, "2026-12-03")).toEqual([]);
+  });
+
+  it("hides a deal before its start_date (build clock)", async () => {
+    const root = scratchRepo();
+    const dealsDir = path.join(root, "deals");
+    writeFileSync(
+      path.join(dealsDir, path.basename(FIXTURE)),
+      FIXTURE_TEXT.replace("start_date: 2026-11-20", "start_date: 2026-11-30"),
+    );
+    try {
+      expect(await loadDeals(dealsDir, "2026-11-29")).toEqual([]);
+      expect((await loadDeals(dealsDir, "2026-11-30")).map((d) => d.slug)).toEqual([
+        "example-ai-pro-black-friday",
+      ]);
+      const index = await runPipeline({
+        offersDir: path.join(root, "offers"),
+        outDir: path.join(root, "out"),
+        now: new Date("2026-11-29T12:00:00Z"),
+      });
+      expect(index.deals).toEqual([]);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 
   it("treats a missing folder as no deals and rejects stray files and offer slugs", async () => {

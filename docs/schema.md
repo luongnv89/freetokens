@@ -179,9 +179,9 @@ offer. Schema: `schemas/deal.schema.json`; wording rules:
 | `category` | yes | Deal scope only: `ai_subscription`, `coding_agent`, `ai_tool_api`, `agent_compute`. Anything else is rejected. |
 | `discount` | yes | As the official page states it, e.g. `50% off the first year`. |
 | `regular_price`, `deal_price` | no | Only when the page shows them; `deal_price` needs a non-zero amount. |
-| `promo_code` | no | 1-40 letters, digits, `-`, `_`. |
+| `promo_code` | no | 1-40 letters, digits, `-`, `_`; a code containing `free`, `gratis`, `complimentary` or `nocost` (e.g. `FREE50`) is rejected. |
 | `occasion` | yes | `black_friday`, `cyber_monday`, `christmas_new_year`, `other`. |
-| `start_date` | no | `YYYY-MM-DD`, not after `expiry_date`. |
+| `start_date` | no | `YYYY-MM-DD`, not after `expiry_date`. May be in the future: the file is valid, but the build hides the deal until that day. |
 | `expiry_date` | yes | `YYYY-MM-DD`, never `null`: a deal must end. Hidden at build time from the next day. |
 | `expiry_note` | no | When the page names no end date and the occasion window end (`scripts/deal_window.py`) was used. |
 | `source_url` | yes | The vendor's own `https://` page showing the discount. |
