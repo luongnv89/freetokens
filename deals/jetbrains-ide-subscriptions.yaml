@@ -1,0 +1,11 @@
+# Verified 2026-11-27 against https://blog.jetbrains.com/blog/2026/11/25/black-friday-2026/ ("you can get 40% off a new annual individual JetBrains IDE or ReSharper subscription, or an upgrade to an annual individual All Products Pack or dotUltimate one." / "use the promo code BF2026 at checkout" / "The offer is valid November 25 – December 2, 2026.")
+title: JetBrains IDE subscriptions — Black Friday
+provider: JetBrains
+category: coding_agent
+discount: 40% off a new annual individual IDE subscription or All Products Pack upgrade
+promo_code: BF2026
+occasion: black_friday
+start_date: 2026-11-25
+expiry_date: 2026-12-02
+source_url: https://blog.jetbrains.com/blog/2026/11/25/black-friday-2026/
+verified_date: 2026-11-27

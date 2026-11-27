@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-27T08:00:26Z — 127 of 290 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-27T10:10:38Z — 123 of 290 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1204,46 +1204,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Page: https://freetokens.custats.info/offers/llamaparse-startup-offer.html
 - Summary: The LlamaParse Startup Offer gives first-time LlamaIndex customers $2,000 in free platform credits available for one year, a priority Slack channel with a dedicated AI engineer, discounts on bulk credit purchases in production, early access to pre-release features, an alignment call with Jerry Liu, and a featured spotlight. Eligibility: first-time customers, at least $250k raised, less than $50M raised. Distinct from the public Free plan (10K credits/month on llamaindex.ai/pricing).
 - Claim steps: Confirm first-time customer status and funding between $250k and under $50M raised. | Apply on https://www.llamaindex.ai/startups (form on that page). | Credits are valid for one year; production bulk discounts and eng Slack are part of the accepted-startup package.
-### LiveKit Startup Program
-- Provider: LiveKit
-- Category: startup_program
-- Amount: Up to $23K in credits — 12 months Cloud Scale ($6K) + $10K Cloud credits + $7K inference partner credits
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-27 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://livekit.com/startups
-- Page: https://freetokens.custats.info/offers/livekit-startup-program.html
-- Summary: The LiveKit Startup Program provides up to $23K: one year of Cloud Scale free ($6K value, $500/mo waived), $10K in additional LiveKit Cloud credits, and $7K in inference credits ($1K with each participating partner — Deepgram, Inworld, Rime, Fish Audio, AssemblyAI, Gradium, plus Gemma 4 31B hosted by LiveKit). Credits expire 12 months from issuance. Eligibility: voice/video/physical AI core to the product, <50 employees, <$5M raised and pre-Series A ($5M+ case-by-case), live website with identifiable founding team, in production or launching within 6 months. A card on file is required to enroll. Applicants must be incorporated or actively incorporating and building for real end-users. The program targets net-new startup projects: free-plan evaluators/builders can apply, while projects running for a while or already paying/contractually committed may be declined and reviewed case by case.
-- Claim steps: Confirm the startup is incorporated or actively incorporating, is building for real end-users, and meets the net-new project rules; existing paid/committed users should explain their circumstances in the application. | Apply via the form at https://livekit.com/startups (no pitch deck required). | On approval you receive a promo code by email; enter it at checkout when starting your Cloud Scale plan. | A card on file is required to enroll. Credits expire 12 months from issuance. | YC-backed companies should apply at livekit.com/yc instead — offers cannot be combined.
-### Liner Startup Grant — up to $1,000 API Credits
-- Provider: Liner
-- Category: startup_program
-- Amount: Up to $1,000 in Liner Search/Search Agent API credits; no equity
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-27 — review_status=to-be-verified · verification=social_proof · signup=required
-- Source: https://build.liner.com/blog/liner-startup-grant-program
-- Page: https://freetokens.custats.info/offers/liner-startup-grant.html
-- Summary: The Liner Startup Grant Program advertises up to $1,000 in credits with no equity taken and nothing to repay. Its blog describes broader Liner API coverage including Search API and Search Agent API, but the current linked application calls the grant Search Agent API credits; confirm the approved product scope before budgeting. The form requires company email, company name, company website and product interest. Liner reviews applications by email, with a confirmation message saying next steps include a link to book a 20-minute onboarding call. No grant-spend expiry is stated publicly.
-- Claim steps: Open the application linked from build.liner.com/blog/liner-startup-grant-program (about two minutes). | Submit company email (company domain, not personal), company name, company website, and which Liner product you will build on. | Watch email for the review outcome and next steps, including a link to book a 20-minute onboarding call. Confirm which API products the approved credits cover; the form names Search Agent API while the blog describes broader API coverage.
-### K-EXAONE 2.5 API — Free on EXAONE API Platform
-- Provider: LG AI Research
-- Category: api_provider
-- Amount: K-EXAONE 2.5 (750B) API currently free of charge on the EXAONE API Platform; API key required; non-commercial use only per platform terms; daily call limits apply (higher if you consent to usage records for training)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-27 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://docs.exaone.ai/ko/docs/changelog
-- Page: https://freetokens.custats.info/offers/lg-ai-research-k-exaone-2-5-api-free.html
-- Summary: The EXAONE API Platform changelog entry dated November 9, 2026 lists K-EXAONE 2.5 (750B), LG AI Research's proprietary foundation model, and states the service is currently provided free of charge. API keys are issued from the platform. The rate-limits page applies per-second, per-minute and per-day call windows, with a higher daily call limit for users who consent to their usage records being used for model training and service improvement; the API can be used without consenting. The platform terms grant a non-exclusive, non-transferable, revocable non-commercial use right and bar for-profit use of the model or its outputs; if the service becomes paid, fees will be posted on the site.
-- Claim steps: Open the EXAONE API Platform at docs.exaone.ai | Select 'API Key 발급하기' (Issue API key) and request a key | Optionally consent to usage-record use for training to get a higher daily call limit
-### Lemonfox 1-Month Free Trial
-- Provider: Lemonfox.ai
-- Category: voice
-- Amount: 1 month free trial — 10M credits (30 hours speech-to-text or 2M TTS chars)
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-27 — review_status=verified · verification=social_proof · signup=required
-- Source: https://www.lemonfox.ai/
-- Page: https://freetokens.custats.info/offers/lemonfox-1-month-free-trial.html
-- Summary: Lemonfox.ai offers a 1-month free trial of its speech APIs: 10 million credits covering 30 hours of speech-to-text or 2 million text-to-speech characters.
-- Claim steps: Go to lemonfox.ai and click Get Started / Start Your Free Trial. | Sign up for an account. | Trial covers the $5/month credit bundle for 1 month.
 
 ## Community offers (not verified by freetokens)
 
@@ -1252,6 +1212,24 @@ Promo codes and giveaways a person shared in a public post. freetokens does not 
 - [Mistral Vibe Pro free for 1 month — code MISTRALVIBE (Europe)](https://freetokens.custats.info/offers/mistral-vibe-pro-mistralvibe-code.html): Mistral AI — One month of Vibe Pro free with code MISTRALVIBE (builders in Europe) · community promo_code — not verified by freetokens · shared by @MistralAI (Mistral AI) on 2026-11-23: https://x.com/MistralAI/status/2124905610386780451 · code: MISTRALVIBE · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-23
 - [Devin Bots giveaway — pitch Poke for up to $10,000 in credits](https://freetokens.custats.info/offers/devin-bots-poke-giveaway.html): Cognition (Devin) — up to $10,000 per account (10,000 accounts) · community giveaway — not verified by freetokens · shared by @walden_yan (Walden) on 2026-11-18: https://x.com/walden_yan/status/2123163580778635579 · 10000 codes · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
 - [Context.dev 10,000 free API credits — code YAHIAISINFINLANDONHISBIRTHDAY10K](https://freetokens.custats.info/offers/context-dev-10k-credits-birthday-code.html): Context.dev — 10,000 free Context.dev API credits with code YAHIAISINFINLANDONHISBIRTHDAY10K (“10,000 web searches”, “10,000 web scrapes”, “5000 company searches”, “1000 people searches”, “so much more”) · community promo_code — not verified by freetokens · shared by @mynameisyahia (Yahia Bakour) on 2026-11-19: https://x.com/mynameisyahia/status/2123294435694043603 · code: YAHIAISINFINLANDONHISBIRTHDAY10K · review_status=unverified · verification=unverified · signup=required · last_checked=2026-11-19
+
+
+## Deals (discounts on paid plans, not free)
+
+Seasonal discounts on AI subscriptions, coding agents, AI tools and compute, each checked on the vendor's own page. A deal is paid: it is not a free offer and is not counted among the offers above. Every deal disappears after its end date. All deals: https://freetokens.custats.info/deals.html.
+
+- [GPU Mart GPU servers — Black Friday](https://freetokens.custats.info/deals/gpu-mart-gpu-servers.html): GPU Mart — kind=deal · discount: Up to 60% off selected GPU VPS and dedicated servers · price: $11.60/mo (GPU VPS-2GB, 2 years) (regular $29.00/mo (GPU VPS-2GB)) · occasion=black_friday · category=agent_compute · ends 2026-11-28 · last_checked=2026-11-27 · source: https://www.gpu-mart.com/black-friday-gpu-hosting
+- [Colossyan Professional — Black Friday](https://freetokens.custats.info/deals/colossyan-professional.html): Colossyan — kind=deal · discount: 40% off your first year of Professional · code: BLACKFRIDAY40 · occasion=black_friday · category=ai_tool_api · ends 2026-11-30 · last_checked=2026-11-27 · source: https://www.colossyan.com/pricing/
+- [Sembly AI plans — Black Friday](https://freetokens.custats.info/deals/sembly-ai-plans.html): Sembly — kind=deal · discount: 20% off any plan for 12 months · code: BF2026 · occasion=black_friday · category=ai_tool_api · ends 2026-11-30 · last_checked=2026-11-27 · source: https://www.sembly.ai/black-friday-2026/
+- [TypingMind Lifetime Premium — Black Friday](https://freetokens.custats.info/deals/typingmind-lifetime-premium.html): TypingMind — kind=deal · discount: 60% off the Premium lifetime license · price: $79.20 (regular $198) · code: BLACKFRIDAY2026 · occasion=black_friday · category=ai_subscription · ends 2026-11-30 · last_checked=2026-11-27 · source: https://www.typingmind.com/buy
+- [DevIntern paid plans — Black Friday](https://freetokens.custats.info/deals/devintern-paid-plans.html): DevIntern — kind=deal · discount: 40% off your first invoice on any paid plan · price: $59.40 first month (Team) (regular $99/month (Team)) · code: BLACKFRIDAY26 · occasion=black_friday · category=coding_agent · ends 2026-12-01 · last_checked=2026-11-27 · source: https://devintern.com/pricing/
+- [ElevenLabs Creator and Pro annual — Black Friday](https://freetokens.custats.info/deals/elevenlabs-creator-pro-annual.html): ElevenLabs — kind=deal · discount: Up to 55% off the first year of Creator or Pro annual · price: $99 first year (Creator) (regular $18.33/mo billed yearly (Creator)) · occasion=black_friday · category=ai_tool_api · ends 2026-12-01 · last_checked=2026-11-27 · source: https://join.elevenlabs.io/bfcm
+- [JetBrains IDE subscriptions — Black Friday](https://freetokens.custats.info/deals/jetbrains-ide-subscriptions.html): JetBrains — kind=deal · discount: 40% off a new annual individual IDE subscription or All Products Pack upgrade · code: BF2026 · occasion=black_friday · category=coding_agent · ends 2026-12-02 · last_checked=2026-11-27 · source: https://blog.jetbrains.com/blog/2026/11/25/black-friday-2026/
+- [BoltAI licenses — Black Friday](https://freetokens.custats.info/deals/boltai-licenses.html): BoltAI — kind=deal · discount: Up to $160 off list price · price: $59 (Pro) (regular $99 (Pro)) · code: BFCM2026 · occasion=black_friday · category=ai_subscription · ends 2026-12-03 · last_checked=2026-11-27 · source: https://boltai.com/pricing
+- [Adobe Firefly plans — Black Friday](https://freetokens.custats.info/deals/adobe-firefly-plans.html): Adobe — kind=deal · discount: Up to 60% off select plans for 6 months; Firefly Pro is 50% off · price: US$9.99/mo (Firefly Pro) (regular US$19.99/mo (Firefly Pro)) · occasion=black_friday · category=ai_tool_api · ends 2026-12-06 · last_checked=2026-11-27 · source: https://www.adobe.com/products/firefly/plans.html
+- [Enconvo Lifetime and Cloud — Black Friday](https://freetokens.custats.info/deals/enconvo-lifetime-cloud.html): Enconvo — kind=deal · discount: 30% off Lifetime and the first month or year of Cloud · occasion=black_friday · category=ai_subscription · ends 2026-12-07 · last_checked=2026-11-27 · source: https://www.enconvo.com/
+- [MindPal annual plans — Black Friday](https://freetokens.custats.info/deals/mindpal-annual-plans.html): MindPal — kind=deal · discount: 60% off your first year on annual plans · price: $187.20 first year (Pro) (regular $468/year (Pro)) · code: BLACKFRIDAY2026 · occasion=black_friday · category=ai_tool_api · ends 2026-12-11 · last_checked=2026-11-27 · source: https://mindpal.space/pricing
+- [Hostinger VPS — Black Friday](https://freetokens.custats.info/deals/hostinger-vps.html): Hostinger — kind=deal · discount: Up to 70% off VPS plans on a 24-month term · price: $12.99/mo (KVM 4) (regular $42.99/mo (KVM 4)) · occasion=black_friday · category=agent_compute · ends 2026-12-14 · last_checked=2026-11-27 · source: https://www.hostinger.com/black-friday-vps-deals
 
 ## Pages
 

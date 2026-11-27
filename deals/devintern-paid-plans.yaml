@@ -1,0 +1,13 @@
+# Verified 2026-11-27 against https://devintern.com/pricing/ ("Code BLACKFRIDAY26 takes 40% off your first invoice on any paid plan, through 11:59 p.m. on December 1, 2026 in your own time zone." / Team "$99/month" "$59.40 first month with BLACKFRIDAY26")
+title: DevIntern paid plans — Black Friday
+provider: DevIntern
+category: coding_agent
+discount: 40% off your first invoice on any paid plan
+regular_price: $99/month (Team)
+deal_price: $59.40 first month (Team)
+promo_code: BLACKFRIDAY26
+occasion: black_friday
+start_date: 2026-11-20
+expiry_date: 2026-12-01
+source_url: https://devintern.com/pricing/
+verified_date: 2026-11-27
