@@ -1,0 +1,17 @@
+{
+  "description": "Shared deal rules (#809), read by scripts/deal_model.py (the CI content gate) and app/scripts/load-deals.mjs (the build), so both reject the same files. A deal is a discount the buyer pays for; it is never free and never labelled free.",
+  "free_wording_pattern": "\\b(?:free|freebie|gratis|complimentary)\\b|\\bno[- ]cost\\b|\\bat no charge\\b|\\b100\\s*%\\s*off\\b",
+  "free_wording_fields": ["title", "discount", "deal_price", "regular_price", "description"],
+  "free_keys": ["amount", "free", "is_free", "free_tier", "free_credits"],
+  "nonzero_price_fields": ["deal_price"],
+  "limits": {
+    "title": 120,
+    "provider": 80,
+    "discount": 80,
+    "regular_price": 40,
+    "deal_price": 40,
+    "promo_code": 40,
+    "expiry_note": 200,
+    "description": 500
+  }
+}
