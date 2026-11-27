@@ -1,0 +1,13 @@
+# Verified 2026-11-27 against https://boltai.com/pricing ("Save up to $160 off list price today with BFCM2026." / Pro "Regular price $99 Sale price $59" / renewals: "Black Friday: 64% off until Dec 1"). The new-license sale names no end date (countdown only), so the window end is used.
+title: BoltAI licenses — Black Friday
+provider: BoltAI
+category: ai_subscription
+discount: Up to $160 off list price
+regular_price: $99 (Pro)
+deal_price: $59 (Pro)
+promo_code: BFCM2026
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date for new licenses (countdown only); the Black Friday window end (3 Dec) is used.
+source_url: https://boltai.com/pricing
+verified_date: 2026-11-27

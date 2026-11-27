@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://www.gpu-mart.com/black-friday-gpu-hosting ("Black Friday GPU Deals 2026, up to 60% off" / "Black Friday 2026 · Nov 15 – 28" / GPU VPS-2GB "$11.60/ mo" "was $29.00", 2-year plan)
+title: GPU Mart GPU servers — Black Friday
+provider: GPU Mart
+category: agent_compute
+discount: Up to 60% off selected GPU VPS and dedicated servers
+regular_price: $29.00/mo (GPU VPS-2GB)
+deal_price: $11.60/mo (GPU VPS-2GB, 2 years)
+occasion: black_friday
+start_date: 2026-11-15
+expiry_date: 2026-11-28
+source_url: https://www.gpu-mart.com/black-friday-gpu-hosting
+verified_date: 2026-11-27

@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://www.hostinger.com/black-friday-vps-deals ("Black Friday Up to 70%" / KVM 4 "70% off" "$42.99" "$12.99/mo", 24-month term). In scope as agent compute: the page pitches the MCP-powered "Hostinger Agent" and one-click deploys of "OpenClaw, Hermes Agent, n8n, Docker, ... Claude Code". The page shows a countdown but no end date, so the window end is used.
+title: Hostinger VPS — Black Friday
+provider: Hostinger
+category: agent_compute
+discount: Up to 70% off VPS plans on a 24-month term
+regular_price: $42.99/mo (KVM 4)
+deal_price: $12.99/mo (KVM 4)
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date (countdown only); the Black Friday window end (3 Dec) is used.
+source_url: https://www.hostinger.com/black-friday-vps-deals
+verified_date: 2026-11-27

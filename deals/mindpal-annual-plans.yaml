@@ -1,0 +1,12 @@
+# Verified 2026-11-27 against https://mindpal.space/pricing ("60% off your first year on annual plans" / "Code BLACKFRIDAY2026, applied at checkout, until December 11." / Pro "Was $468 $187.20 billed yearly")
+title: MindPal annual plans — Black Friday
+provider: MindPal
+category: ai_tool_api
+discount: 60% off your first year on annual plans
+regular_price: $468/year (Pro)
+deal_price: $187.20 first year (Pro)
+promo_code: BLACKFRIDAY2026
+occasion: black_friday
+expiry_date: 2026-12-11
+source_url: https://mindpal.space/pricing
+verified_date: 2026-11-27
