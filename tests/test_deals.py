@@ -6,7 +6,9 @@ The only deal file used is the test fixture in tests/fixtures/deals/, a
 fictional example.com deal that is never published.
 """
 
+import contextlib
 import datetime as dt
+import io
 import json
 import os
 import re
@@ -238,7 +240,10 @@ class FreeWordingParityTests(unittest.TestCase):
 
 
 # featured (#815): raw values as the flat YAML parser hands them over.
-FEATURED_ACCEPTED = {"true": True, "false": None}
+# Empty and the YAML null tokens are an absent field: not featured.
+FEATURED_NOT_FEATURED = ["false", "", "null", "~"]
+FEATURED_ACCEPTED = {"true": True, '"true"': True, "'true'": True,
+                     **dict.fromkeys(FEATURED_NOT_FEATURED, None)}
 FEATURED_REJECTED = ["yes", "no", "1", "0", "True", "FALSE", "on", "featured", "true!"]
 
 
@@ -313,11 +318,27 @@ class FeaturedFlagTests(unittest.TestCase):
         self.assertEqual(python, node)
         self.assertEqual(python[: len(FEATURED_ACCEPTED)], list(FEATURED_ACCEPTED.values()))
         self.assertEqual(set(python[len(FEATURED_ACCEPTED):]), {"rejected"})
+        not_featured = dict(zip(values, python))
+        self.assertEqual([not_featured[v] for v in FEATURED_NOT_FEATURED],
+                         [None] * len(FEATURED_NOT_FEATURED))
 
-    def test_repo_custats_deal_is_featured(self):
-        deal = deal_model.load_deal(str(REPO / "deals" / "custats-black-friday-2026.yaml"),
-                                    dt.date(2026, 11, 27))
-        self.assertIs(deal["featured"], True)
+    def test_featuring_unfeaturing_or_removing_a_deal_file_stays_valid(self):
+        # Fixture-only: a published deal ending or losing its flag never fails CI.
+        with tempfile.TemporaryDirectory() as tmp:
+            deals_dir = Path(tmp) / "deals"
+            deals_dir.mkdir()
+            path = deals_dir / FIXTURE.name
+            argv = ["validate", "--deals-dir", str(deals_dir), "--today", TODAY.isoformat()]
+            path.write_text(FIXTURE_TEXT + "featured: true\n", encoding="utf-8")
+            self.assertEqual([d.get("featured") for d in deal_model.load_deals(str(deals_dir), (), TODAY)],
+                             [True])
+            path.write_text(FIXTURE_TEXT, encoding="utf-8")
+            self.assertEqual([d.get("featured") for d in deal_model.load_deals(str(deals_dir), (), TODAY)],
+                             [None])
+            path.unlink()
+            self.assertEqual(deal_model.load_deals(str(deals_dir), (), TODAY), [])
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(deal_model.main(argv), 0)
 
 
 class DealLoaderTests(unittest.TestCase):
