@@ -1,0 +1,13 @@
+# Hunted 2026-11-27 by offer-hunter; verified against https://aws.amazon.com/free/
+# ("When you create a new AWS Free Tier account, you get $100 in credits immediately. As you explore key services, you can earn up to $100 more.")
+# Lead: https://dev.to/owen_fox/free-llm-api-tiers-ranked-2026-gemini-xai-deepseek-aws-which-free-credits-are-actually-usable-4f3l
+title: AWS Free Tier — Up to $200 in Credits for New Accounts
+provider: AWS
+category: api_provider
+amount: $100 in credits when a new AWS account is created + up to $100 more ($20 per activity, e.g. using a foundation model in the Amazon Bedrock playground); new AWS customers only; the Free account plan ends after 6 months or when credits are used up, whichever comes first
+expiry_date: null
+source_url: https://aws.amazon.com/free/
+verified_date: 2026-11-27
+verification: social_proof
+review_status: under-review
+signup: required

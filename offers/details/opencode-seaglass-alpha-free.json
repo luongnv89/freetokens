@@ -1,0 +1,22 @@
+{
+  "summary": "OpenCode's console models page lists Seaglass Alpha Free (model ID seaglass-alpha-free), a stealth model that is free on OpenCode for a limited time, with free input, output and cached reads. The team is using the free period to collect feedback and improve the model; during the free period, collected data is retained and used to improve the model. OpenCode states all its models are hosted in the US and EU. No end date is stated.",
+  "claim_steps": [
+    "Open OpenCode and pick the Seaglass Alpha Free model (seaglass-alpha-free)",
+    "Use it while the limited-time free period lasts; collected data is retained and used to improve the model"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "title": "Console models",
+      "text": "Seaglass Alpha Free | seaglass-alpha-free | Free | Free | Free. Seaglass Alpha Free is a stealth model that's free on OpenCode for a limited time. The team is using this time to collect feedback and improve the model. Seaglass Alpha Free: During its free period, collected data is retained and used to improve the model."
+    },
+    {
+      "type": "x",
+      "url": "https://x.com/bebuu_ai/status/2125832056588702031",
+      "author": "bebu",
+      "text": "A new free model just landed on OpenCode! 👀 Seaglass Alpha Free is now available on OpenCode. No announcement or model details, just a quiet release. go and try!",
+      "handle": "@bebuu_ai"
+    }
+  ]
+}

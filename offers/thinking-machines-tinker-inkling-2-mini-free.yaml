@@ -1,0 +1,13 @@
+# Hunted 2026-11-27 by offer-hunter; verified against https://thinkingmachines.ai/tinker/pricing/
+# ("Free training and sampling have a 64K context limit and are subject to rate limits.")
+# Lead: https://x.com/AGTPinsights/status/2125476162864402475
+title: Inkling 2 Mini Free to Train and Sample on Tinker
+provider: Thinking Machines
+category: api_provider
+amount: Free training and sampling of Inkling 2 Mini on Tinker ($0 prefill, cached prefill, sample and train via model ID thinkingmachines/Inkling-2-Mini:peft:65536:free; 64K context limit, rate-limited; prepaid accounts must have a positive balance)
+expiry_date: null
+source_url: https://thinkingmachines.ai/tinker/pricing/
+verified_date: 2026-11-27
+verification: social_proof
+review_status: under-review
+signup: required
