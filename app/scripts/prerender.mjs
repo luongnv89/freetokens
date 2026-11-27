@@ -380,8 +380,8 @@ try {
   );
   written.push("unverified.html");
 
-  // Privacy policy (/privacy.html).
-  // Deals (#809): paid discounts, from offers.json's `deals` section only.
+  // Deals page (/deals.html, #809): paid discounts, from offers.json's
+  // `deals` section only.
   await writeFile(
     path.join(distDir, "deals.html"),
     fillPage({
@@ -395,6 +395,7 @@ try {
   );
   written.push("deals.html");
 
+  // Privacy policy (/privacy.html).
   await writeFile(
     path.join(distDir, "privacy.html"),
     fillPage({
@@ -494,14 +495,13 @@ try {
   }
   written.push(`unverified/*.html (${leads.length})`);
 
-  // RSS at the previous URL, absolute links off DEFAULT_BASE_URL (#27).
-  // One page per running deal (#809). The folder is rebuilt from scratch so
-  // a deal that has ended since the last build leaves no page behind.
+  // Deal detail pages (deals/<slug>.html): one page per running deal (#809).
+  // The folder is rebuilt from scratch so a deal that has ended since the
+  // last build leaves no page behind.
   const deals = index.deals ?? [];
   const dealsDir = path.join(distDir, "deals");
   await rm(dealsDir, { recursive: true, force: true });
   if (deals.length > 0) await mkdir(dealsDir, { recursive: true });
-  const dealFileMtimes = new Map();
   for (const deal of deals) {
     const dealPath = path.join(dealsDir, `${deal.slug}.html`);
     await writeFile(
@@ -517,20 +517,17 @@ try {
         baseUrl: origin,
       }),
     );
-    dealFileMtimes.set(deal.slug, (await stat(dealPath)).mtime);
   }
   written.push(`deals/*.html (${deals.length})`);
 
+  // RSS at the previous URL, absolute links off DEFAULT_BASE_URL (#27).
   await writeFile(path.join(distDir, "feed.xml"), buildFeed(index, baseUrl));
   written.push("feed.xml");
 
   // Sitemap covers every prerendered route, including expired offers (#205).
   await writeFile(
     path.join(distDir, "sitemap.xml"),
-    buildSitemap(index, baseUrl, {
-      fileMtimes: offerFileMtimes,
-      dealFileMtimes,
-    }),
+    buildSitemap(index, baseUrl, { fileMtimes: offerFileMtimes }),
   );
   written.push("sitemap.xml");
 

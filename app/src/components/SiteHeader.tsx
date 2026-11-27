@@ -56,8 +56,8 @@ export function SiteHeader({
           <a
             className="nav-archive"
             href={`${up}archive.html`}
-            title="All deals"
-            aria-label="Archive: all deals"
+            title="Expired offers"
+            aria-label="Archive: expired offers"
             aria-current={current === "archive" ? "page" : undefined}
           >
             <svg

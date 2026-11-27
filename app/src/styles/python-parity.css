@@ -907,7 +907,7 @@ a:focus-visible {
   color: var(--ink);
 }
 
-/* All-deals icon link (#113): inline SVG stays on baseline */
+/* Archive icon link (#113): inline SVG stays on baseline */
 .site-nav .nav-archive {
   display: inline-flex;
   align-items: center;

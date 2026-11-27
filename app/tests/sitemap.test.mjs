@@ -234,6 +234,8 @@ describe("sitemap generation", () => {
         deals: [deal("deal-a", "2026-08-19"), deal("deal-b", "not-a-date")],
       },
       BASE,
+      // No file-time fallback for deals: verified_date is required, and a
+      // bad one degrades straight to the build date.
       {
         now: new Date("2026-08-22T00:00:00Z"),
         dealFileMtimes: new Map([["deal-b", new Date("2026-08-18T09:00:00Z")]]),
@@ -242,7 +244,7 @@ describe("sitemap generation", () => {
     expect(sitemapEntries(xml).slice(-3)).toEqual([
       { loc: `${BASE}/offers/active.html`, lastmod: "2026-08-20" },
       { loc: `${BASE}/deals/deal-a.html`, lastmod: "2026-08-19" },
-      { loc: `${BASE}/deals/deal-b.html`, lastmod: "2026-08-18" },
+      { loc: `${BASE}/deals/deal-b.html`, lastmod: "2026-08-21" },
     ]);
     // Deals count toward the protocol limit too.
     const offers = Array.from(

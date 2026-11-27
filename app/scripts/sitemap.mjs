@@ -152,10 +152,9 @@ export function buildSitemap(index, baseUrl = DEFAULT_BASE_URL, options = {}) {
     ...deals.map((deal) => {
       const slug = String(deal.slug ?? "").trim();
       if (!slug) throw new Error("offers.json deal is missing a slug");
-      const lastmod =
-        safeLastmod(deal.verified_date, today) ??
-        safeLastmod(fileMtime(options.dealFileMtimes, slug), today) ??
-        generatedDate;
+      // verified_date is required on every deal (load-deals.mjs), so there
+      // is no file-time fallback; a bad value still degrades to the build date.
+      const lastmod = safeLastmod(deal.verified_date, today) ?? generatedDate;
       return { path: `/deals/${slug}.html`, lastmod };
     }),
   ];
