@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T09:59:52Z",
+  "generated_at": "2026-11-27T10:10:38Z",
   "count": 355,
   "active_count": 290,
   "expired_count": 65,
@@ -5519,26 +5519,11 @@
     },
     {
       "kind": "deal",
-      "slug": "hostinger-vps",
-      "title": "Hostinger VPS — Black Friday",
-      "provider": "Hostinger",
-      "category": "agent_compute",
-      "discount": "Up to 70% off VPS plans on a 24-month term",
-      "regular_price": "$42.99/mo (KVM 4)",
-      "deal_price": "$12.99/mo (KVM 4)",
-      "occasion": "black_friday",
-      "expiry_date": "2026-12-03",
-      "expiry_note": "The page names no end date (countdown only); the Black Friday window end (3 Dec) is used.",
-      "source_url": "https://www.hostinger.com/black-friday-vps-deals",
-      "verified_date": "2026-11-27"
-    },
-    {
-      "kind": "deal",
       "slug": "adobe-firefly-plans",
       "title": "Adobe Firefly plans — Black Friday",
       "provider": "Adobe",
       "category": "ai_tool_api",
-      "discount": "Up to 60% off select Firefly plans for the first 6 months",
+      "discount": "Up to 60% off select plans for 6 months; Firefly Pro is 50% off",
       "regular_price": "US$19.99/mo (Firefly Pro)",
       "deal_price": "US$9.99/mo (Firefly Pro)",
       "occasion": "black_friday",
@@ -5571,6 +5556,21 @@
       "occasion": "black_friday",
       "expiry_date": "2026-12-11",
       "source_url": "https://mindpal.space/pricing",
+      "verified_date": "2026-11-27"
+    },
+    {
+      "kind": "deal",
+      "slug": "hostinger-vps",
+      "title": "Hostinger VPS — Black Friday",
+      "provider": "Hostinger",
+      "category": "agent_compute",
+      "discount": "Up to 70% off VPS plans on a 24-month term",
+      "regular_price": "$42.99/mo (KVM 4)",
+      "deal_price": "$12.99/mo (KVM 4)",
+      "occasion": "black_friday",
+      "start_date": "2026-10-19",
+      "expiry_date": "2026-12-14",
+      "source_url": "https://www.hostinger.com/black-friday-vps-deals",
       "verified_date": "2026-11-27"
     }
   ]
