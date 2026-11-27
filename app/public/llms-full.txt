@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-27T10:10:38Z — 123 of 290 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-27T14:56:18Z — 123 of 290 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1220,6 +1220,7 @@ Seasonal discounts on AI subscriptions, coding agents, AI tools and compute, eac
 
 - [GPU Mart GPU servers — Black Friday](https://freetokens.custats.info/deals/gpu-mart-gpu-servers.html): GPU Mart — kind=deal · discount: Up to 60% off selected GPU VPS and dedicated servers · price: $11.60/mo (GPU VPS-2GB, 2 years) (regular $29.00/mo (GPU VPS-2GB)) · occasion=black_friday · category=agent_compute · ends 2026-11-28 · last_checked=2026-11-27 · source: https://www.gpu-mart.com/black-friday-gpu-hosting
 - [Colossyan Professional — Black Friday](https://freetokens.custats.info/deals/colossyan-professional.html): Colossyan — kind=deal · discount: 40% off your first year of Professional · code: BLACKFRIDAY40 · occasion=black_friday · category=ai_tool_api · ends 2026-11-30 · last_checked=2026-11-27 · source: https://www.colossyan.com/pricing/
+- [CUStats Mac + CUStats Go — Black Friday](https://freetokens.custats.info/deals/custats-black-friday-2026.html): CUStats — kind=deal · discount: Buy one CUStats app, get an App Store code for the other · occasion=black_friday · category=ai_tool_api · ends 2026-11-30 · last_checked=2026-11-27 · source: https://custats.info/black-friday
 - [Sembly AI plans — Black Friday](https://freetokens.custats.info/deals/sembly-ai-plans.html): Sembly — kind=deal · discount: 20% off any plan for 12 months · code: BF2026 · occasion=black_friday · category=ai_tool_api · ends 2026-11-30 · last_checked=2026-11-27 · source: https://www.sembly.ai/black-friday-2026/
 - [TypingMind Lifetime Premium — Black Friday](https://freetokens.custats.info/deals/typingmind-lifetime-premium.html): TypingMind — kind=deal · discount: 60% off the Premium lifetime license · price: $79.20 (regular $198) · code: BLACKFRIDAY2026 · occasion=black_friday · category=ai_subscription · ends 2026-11-30 · last_checked=2026-11-27 · source: https://www.typingmind.com/buy
 - [DevIntern paid plans — Black Friday](https://freetokens.custats.info/deals/devintern-paid-plans.html): DevIntern — kind=deal · discount: 40% off your first invoice on any paid plan · price: $59.40 first month (Team) (regular $99/month (Team)) · code: BLACKFRIDAY26 · occasion=black_friday · category=coding_agent · ends 2026-12-01 · last_checked=2026-11-27 · source: https://devintern.com/pricing/
