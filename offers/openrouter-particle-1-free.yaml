@@ -7,7 +7,7 @@ category: api_provider
 amount: Free particle-ai/particle-1:free inference at $0 prompt and completion (1,048,576-token context, up to 943,718 completion tokens; agentic coding model)
 expiry_date: null
 source_url: https://openrouter.ai/api/v1/models/particle-ai/particle-1:free/endpoints
-verified_date: 2026-11-27
+verified_date: 2026-11-28
 verification: social_proof
 review_status: under-review
 signup: required
