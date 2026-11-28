@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://www.getvoibe.com/pricing ("Black Friday: 25% off every plan with code BFCM26 · 64 of 100 spots left" / Voibe Dictation "$74.25 / year $99") and the vendor FAQ at https://www.getvoibe.com/resources/best-black-friday-ai-saas-deals-2026/ ("It takes 25% off every Voibe Dictation and Voibe Work plan until Cyber Monday, 30 November 2026.")
+title: Voibe plans — Black Friday
+provider: Voibe
+category: ai_tool_api
+discount: 25% off every plan (first 100 buyers)
+regular_price: $99/year per seat (Dictation)
+deal_price: $74.25/year per seat (Dictation)
+promo_code: BFCM26
+occasion: black_friday
+expiry_date: 2026-11-30
+source_url: https://www.getvoibe.com/pricing
+verified_date: 2026-11-28

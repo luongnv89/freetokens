@@ -1,0 +1,11 @@
+# Verified 2026-11-28 against https://fliki.ai/pricing ("Black Friday Sale! 50% off annual Standard & Premium plans with code FLIKIBFCM50, applied at checkout"). The page names no end date, so the window end is used.
+title: Fliki annual Standard and Premium — Black Friday
+provider: Fliki
+category: ai_tool_api
+discount: 50% off annual Standard and Premium plans
+promo_code: FLIKIBFCM50
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date; the Black Friday window end (3 Dec) is used.
+source_url: https://fliki.ai/pricing
+verified_date: 2026-11-28

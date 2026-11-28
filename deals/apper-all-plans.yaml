@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://apper.io/black-friday ("Black Friday 50% Off on all plans for 1 year" / "Lock in Black Friday pricing on Team and Company, monthly or annual." / Team "$15.99 Save 50% $8 / month, billed annually"). The page shows only a countdown, so the window end is used.
+title: Apper Team and Company plans — Black Friday
+provider: Apper
+category: coding_agent
+discount: 50% off all plans for 1 year
+regular_price: $15.99/month (Team)
+deal_price: $8/month billed annually (Team)
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date (countdown only); the Black Friday window end (3 Dec) is used.
+source_url: https://apper.io/black-friday
+verified_date: 2026-11-28

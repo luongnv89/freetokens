@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://www.kerlig.com/ ("Basic License Black Friday: 50% off $ 25 $ 49 /once" / "Pro License Black Friday: 50% off $ 40 $ 79 /once"). The page names no end date, so the window end is used.
+title: Kerlig Basic and Pro licenses — Black Friday
+provider: Kerlig
+category: ai_subscription
+discount: 50% off Basic and Pro licenses
+regular_price: $49 Basic / $79 Pro, once
+deal_price: $25 Basic / $40 Pro, once
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date; the Black Friday window end (3 Dec) is used.
+source_url: https://www.kerlig.com/
+verified_date: 2026-11-28
