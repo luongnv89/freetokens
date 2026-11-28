@@ -2,7 +2,7 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-28T10:10:02Z — 110 of 293 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-28T10:23:57Z — 110 of 293 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
@@ -1146,7 +1146,6 @@ Seasonal discounts on AI subscriptions, coding agents, AI tools and compute, eac
 - [Krisp AI Meeting Assistant annual plans — Black Friday](https://freetokens.custats.info/deals/krisp-annual-plans.html): Krisp — kind=deal · discount: 55% off annual plans · code: KRISPBF2026 · occasion=black_friday · category=ai_tool_api · ends 2026-12-03 · last_checked=2026-11-28 · source: https://krisp.ai/pricing/
 - [Pika subscriptions — Black Friday](https://freetokens.custats.info/deals/pika-subscriptions.html): Pika — kind=deal · discount: 60% off · occasion=black_friday · category=ai_tool_api · ends 2026-12-03 · last_checked=2026-11-27 · source: https://pika.art/pricing
 - [Pixara yearly plans — Black Friday](https://freetokens.custats.info/deals/pixara-yearly-plans.html): Pixara AI — kind=deal · discount: Up to 70% off yearly plans · occasion=black_friday · category=ai_tool_api · ends 2026-12-03 · last_checked=2026-11-28 · source: https://pixara.ai/pricing
-- [Runable Pro — Black Friday](https://freetokens.custats.info/deals/runable-pro.html): Runable — kind=deal · discount: 75% off the first month or first year · price: $5 first month (regular $20/month) · occasion=black_friday · category=ai_subscription · ends 2026-12-03 · last_checked=2026-11-28 · source: https://runable.com/offers/black-friday
 - [Submagic yearly plans — Black Friday](https://freetokens.custats.info/deals/submagic-yearly.html): Submagic — kind=deal · discount: Up to 60% off yearly plans · occasion=black_friday · category=ai_tool_api · ends 2026-12-03 · last_checked=2026-11-28 · source: https://submagic.co/pricing
 - [Wordfully Pro — Black Friday](https://freetokens.custats.info/deals/wordfully-pro.html): Wordfully — kind=deal · discount: 50% off Wordfully Pro · price: $4.50/month (regular $9/month) · code: BLACKFRIDAY2026 · occasion=black_friday · category=ai_tool_api · ends 2026-12-03 · last_checked=2026-11-28 · source: https://wordfully.ai/c/BLACKFRIDAY2026
 - [SnapDub plans — Black Friday](https://freetokens.custats.info/deals/snapdub-plans.html): SnapDub — kind=deal · discount: 20% off your first month on any plan · code: BLACKFRIDAY20 · occasion=black_friday · category=ai_tool_api · ends 2026-12-04 · last_checked=2026-11-28 · source: https://snapdub.ai/

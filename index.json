@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-28T10:10:02Z",
+  "generated_at": "2026-11-28T10:23:57Z",
   "count": 358,
   "active_count": 293,
   "expired_count": 65,
@@ -6301,22 +6301,6 @@
       "expiry_note": "The page names no end date; the Black Friday window end (3 Dec) is used.",
       "source_url": "https://pixara.ai/pricing",
       "verified_date": "2026-11-28"
-    },
-    {
-      "kind": "deal",
-      "slug": "runable-pro",
-      "title": "Runable Pro — Black Friday",
-      "provider": "Runable",
-      "category": "ai_subscription",
-      "discount": "75% off the first month or first year",
-      "regular_price": "$20/month",
-      "deal_price": "$5 first month",
-      "occasion": "black_friday",
-      "expiry_date": "2026-12-03",
-      "expiry_note": "The page names no end date; the Black Friday window end (3 Dec) is used.",
-      "source_url": "https://runable.com/offers/black-friday",
-      "verified_date": "2026-11-28",
-      "description": "One Pro plan bundling chat, image and video AI models. Applied at checkout with no code; yearly is billed $60 for the first year (normally $240), then the regular price."
     },
     {
       "kind": "deal",
