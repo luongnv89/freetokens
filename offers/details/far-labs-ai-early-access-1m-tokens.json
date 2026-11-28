@@ -1,0 +1,28 @@
+{
+  "summary": "FAR AI (by FAR Labs) opened early-access registration for AI builders on June 22, 2026. Builders who join the waitlist can claim 1 million free inference tokens. Applicants share their use case, current setup and monthly token volume; FAR AI reviews each request and sends an access path.",
+  "claim_steps": [
+    "Open the FAR AI 'Join as AI builder' page",
+    "Join the waitlist and share your use case, current setup, and monthly token volume",
+    "Wait for FAR AI to review the request and send your access path, then claim the 1M free tokens"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://farlabs.ai/join-as-ai-builder",
+      "title": "FAR AI | Turn your idle GPU into a revenue generating asset",
+      "text": "Claim 1M free tokens and start building on FAR AI. Join the wait list and get early access to reliable, lower-cost inference. Share your use case, current setup, and monthly token volume. We review your use case and send the right access path."
+    },
+    {
+      "type": "link",
+      "url": "https://farlabs.ai/blog/articles",
+      "title": "Latest News & Updates",
+      "text": "FAR AI Opens Early Access Registration for AI Builders (June 22nd 2026): Builders can now join the FAR AI waitlist and claim 1 million free inference tokens as part of the early access program."
+    },
+    {
+      "type": "link",
+      "url": "https://itbrief.com.au/story/far-labs-opens-access-to-cheaper-ai-inference-platform",
+      "title": "FAR Labs opens access to cheaper AI inference platform",
+      "text": "FAR Labs is offering 1 million free tokens for those joining the programme via early access registration for builders. FAR AI is currently in a testing stage with closed partners. (Older than the lead window; program missing from catalog.)"
+    }
+  ]
+}

@@ -2,11 +2,41 @@
 
 > Complete set of active free AI credit offers with summaries, claim context and source links — concatenated for LLM ingestion (Claude Code / Cursor). Generated at build time from src/data/offers.json and src/data/details.json.
 
-Source: https://freetokens.custats.info/ — generated 2026-11-27T18:08:15Z — 119 of 290 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
+Source: https://freetokens.custats.info/ — generated 2026-11-28T02:07:03Z — 121 of 293 active offers (truncated to stay under the 200KB llms-full budget; full directory at https://freetokens.custats.info/).
 
 Trust fields: review_status, verification, signup, last_checked — the same schema values the short index defines at https://freetokens.custats.info/llms.txt. An offer's expiry date is its enrollment deadline — the last date to claim — not how long the credits stay valid. When a provider states how long claimed credits last, that term is in the amount text.
 
 ## Offers (full)
+### packet.ai Token Factory — Free at Launch
+- Provider: packet.ai
+- Category: api_provider
+- Amount: Free OpenAI-compatible inference for one month at launch (DeepSeek V4.1 Flash NVFP4 and MiniMax M3.1 Flash with 1M context, Qwen2.5 1.5B Instruct with 32K context), then billed per 1M tokens; no card required; no published rate limit
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-28 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://packet.ai/token-factory
+- Page: https://freetokens.custats.info/offers/packet-ai-token-factory-free-launch.html
+- Summary: Token Factory is packet.ai's pay-per-token inference API. It serves open-weight models behind an OpenAI-compatible endpoint. The product page says it is free at launch for one month, then billed per 1M tokens. Input and output tokens are metered separately and drawn from the same wallet as GPU usage. The three live models are DeepSeek V4.1 Flash NVFP4 (1M-token context), MiniMax M3.1 Flash (1M-token context, built for agentic and coding tasks) and Qwen2.5 1.5B Instruct (32,768-token context). The 2026-11-17 launch post says no card is required, no public rate limit has been published for the free tier, and no exact end date for the free period has been announced.
+- Claim steps: Sign up at https://dash.packet.ai/signup (no card required) | Open the serverless models page in the dashboard (https://dash.packet.ai/serverless) | Call the OpenAI-compatible Token Factory endpoint with one of the three live models
+### FAR AI Early Access — 1M Free Inference Tokens
+- Provider: FAR Labs
+- Category: api_provider
+- Amount: 1 million free inference tokens for builders who join the FAR AI early-access waitlist (access granted after use-case review)
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-28 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://farlabs.ai/join-as-ai-builder
+- Page: https://freetokens.custats.info/offers/far-labs-ai-early-access-1m-tokens.html
+- Summary: FAR AI (by FAR Labs) opened early-access registration for AI builders on June 22, 2026. Builders who join the waitlist can claim 1 million free inference tokens. Applicants share their use case, current setup and monthly token volume; FAR AI reviews each request and sends an access path.
+- Claim steps: Open the FAR AI 'Join as AI builder' page | Join the waitlist and share your use case, current setup, and monthly token volume | Wait for FAR AI to review the request and send your access path, then claim the 1M free tokens
+### DeepInfra x NVIDIA Inception — 10B Free Nemotron Tokens
+- Provider: DeepInfra
+- Category: startup_program
+- Amount: $1,000 credit grant (10 billion tokens at Nemotron 3 Ultra cached-input prices) for the NVIDIA Nemotron family, valid 12 months from approval, for NVIDIA Inception startups that raised $250K–$10M and were founded in the last 5 years; stacks with DeepStart
+- Status: active — enrollment deadline: none (ongoing)
+- Last checked: 2026-11-28 — review_status=under-review · verification=social_proof · signup=required
+- Source: https://deepinfra.com/nvidia-inception
+- Page: https://freetokens.custats.info/offers/deepinfra-nvidia-inception-nemotron.html
+- Summary: DeepInfra gives approved NVIDIA Inception member startups a $1,000 credit grant, spendable across the NVIDIA Nemotron family at list prices. At Nemotron 3 Ultra cached-input prices ($0.10/M) that is 10,000,000,000 tokens; output and uncached input use the credits up faster. Credits are valid for 12 months from approval. To qualify, a startup must have raised between $250K and $10M USD, have been founded in the last 5 years, and hold NVIDIA Inception membership. It is available in most countries, but some regions are excluded by export regulations. Approved startups also receive the standard DeepStart grant (about 50B tokens), and one application covers both. Applications are reviewed within a few business days.
+- Claim steps: Open https://deepinfra.com/nvidia-inception and click Apply now | Provide your Inception membership URL so DeepInfra can confirm it (no member ID needed) | Tell DeepInfra about your startup | Wait for review (a few business days); approved startups receive the Nemotron grant plus the DeepStart grant
 ### Zed Student Plan
 - Provider: Zed
 - Category: student
@@ -1154,16 +1184,6 @@ Trust fields: review_status, verification, signup, last_checked — the same sch
 - Source: https://www.mio.xyz/pricing
 - Page: https://freetokens.custats.info/offers/mio-free-starter-50-credits.html
 - Summary: Mio's current public Free plan supplies the first $50 of work at $0 to start, without a credit card. It handles meeting prep, briefs and website fixes, including preparing code changes as pull requests. The homepage's free-start links point to https://app.mio.xyz/auth/sign-up, establishing account signup. Paid Team plans start from $50/month after trying the product. The loaded official pages state neither a first-100-companies restriction nor an enrollment deadline. The older $100 beta amount is not presented as currently claimable. The official FAQ also says Mio is in early access, onboarding a team a day, and users receive an email when it is their turn. Confirm account access before relying on the $50 allowance; immediate onboarding has not been verified.
-### MindsHub Free Tier — MindsHub Air and Jev Models
-- Provider: MindsHub
-- Category: api_provider
-- Amount: MindsHub Air free for research, analysis and other non-coding work, plus Jev free for classification, routing and scoring through the Decisions API, within daily usage limits under the fair-use policy; no time limit or credit card required
-- Status: active — enrollment deadline: none (ongoing)
-- Last checked: 2026-11-27 — review_status=under-review · verification=social_proof · signup=required
-- Source: https://mindshub.ai/pricing
-- Page: https://freetokens.custats.info/offers/mindshub-free-tier.html
-- Summary: MindsHub (by MindsDB, Inc.) advertises free access with no subscription or credit card for non-coding knowledge work with agents. MindsHub Air (API alias mindshub_air) uses a recurring, organization-specific weighted allowance whose absolute size is unpublished; an organization without a free grant has zero Air allowance. Air is an alias MindsHub can repoint to a different model. TypeSafe's Jev decision model (jev, through the Decisions API) costs $0 during a launch promotion, not guaranteed permanent free access. Unfunded organizations receive an allowance of 100,000 tokens and 100 requests while shared free capacity lasts; both refill continuously over 24 hours, capped at one day's allowance, rather than resetting at midnight. Jev does not consume Air's allowance. The broad fair-use policy says numeric daily limits are unpublished, but specific billing and Decisions docs publish Jev's limits; that statement must not be applied to Jev universally. Bulk pipelines, scripted volume traffic, scraping, reselling and multiple-account abuse are outside fair use and may lead to suspension. Air usage beyond its allowance is billed at published rates. No Jev promotion end date or completed API request was verified in the 2026-10-14 copy check.
-- Claim steps: Create a free MindsHub account and obtain your API key from https://console.mindshub.ai; no card is required for the advertised free allowances. | Use MindsHub Air for non-coding knowledge work in MindsHub Agents or through Unified Inference with the alias mindshub_air. Its absolute weighted allowance is unpublished; organizations without a free grant have zero allowance. | Check Air's remaining allowance with GET https://auth.mindshub.ai/v1/entitlements/me/ using your API key. Read included_percent_remaining and next_refresh_at for your organization's grant. | Call Jev with model jev at POST https://api.mindshub.ai/v1/decisions using your MindsHub key; no separate TypeSafe key is needed. Unfunded organizations have both 100,000 tokens and 100 requests, refilled continuously over 24 hours while shared free capacity lasts. | Past the Jev allowance, or if shared free capacity runs out first, requests return 402 wallet_empty before the model runs. Wait for refill and available capacity, or fund the organization if you choose paid setup. | Wallet credit, or a card with a completed top-up and no unresolved payment error, lifts the daily Jev cap during the $0 promotion. Adding a card alone does not. Organization access and rate limits still apply. | Respect fair use: do not use the free tier for bulk pipelines, scripted volume traffic, scraping, reselling or multiple-account abuse. Check current pricing and account entitlements before use.
 
 ## Community offers (not verified by freetokens)
 

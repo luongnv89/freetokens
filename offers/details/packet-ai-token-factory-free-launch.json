@@ -1,0 +1,22 @@
+{
+  "summary": "Token Factory is packet.ai's pay-per-token inference API. It serves open-weight models behind an OpenAI-compatible endpoint. The product page says it is free at launch for one month, then billed per 1M tokens. Input and output tokens are metered separately and drawn from the same wallet as GPU usage. The three live models are DeepSeek V4.1 Flash NVFP4 (1M-token context), MiniMax M3.1 Flash (1M-token context, built for agentic and coding tasks) and Qwen2.5 1.5B Instruct (32,768-token context). The 2026-11-17 launch post says no card is required, no public rate limit has been published for the free tier, and no exact end date for the free period has been announced.",
+  "claim_steps": [
+    "Sign up at https://dash.packet.ai/signup (no card required)",
+    "Open the serverless models page in the dashboard (https://dash.packet.ai/serverless)",
+    "Call the OpenAI-compatible Token Factory endpoint with one of the three live models"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://packet.ai/token-factory",
+      "title": "Token Factory: OpenAI-compatible LLM inference API | packet.ai",
+      "text": "Token Factory serves open-weight models behind an OpenAI-compatible endpoint, billed per token. Free at launch (one month), then billed per 1M tokens. Three models live."
+    },
+    {
+      "type": "link",
+      "url": "https://packet.ai/blog/token-factory-free-llm-api",
+      "title": "Token Factory is live: free LLM API for DeepSeek and MiniMax",
+      "text": "Token Factory is free for every user at launch. No public rate limit has been published for the free tier yet - check your dashboard for current limits. No end date for the free period has been announced. No card is required to use Token Factory."
+    }
+  ]
+}
