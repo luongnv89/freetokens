@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://clipy.online/pricing ("The Black Friday sale is live: get Pro Annual for $49 instead of $72" / "Applied at checkout for you, no code needed." No end date is stated.)
+title: Clipy Pro Annual — Black Friday
+provider: Clipy
+category: coding_agent
+discount: Pro Annual for $49 instead of $72 (first year)
+regular_price: $72/year
+deal_price: $49 first year
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page says only 'Ends soon' with no date; the Black Friday window end (3 Dec) is used.
+source_url: https://clipy.online/pricing
+verified_date: 2026-11-28
+description: Screen recorder whose share links give coding agents a transcript, summary and key moments. First year only, then $72.

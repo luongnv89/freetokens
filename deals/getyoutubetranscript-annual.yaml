@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://getyoutubetranscript.com/pricing (Annual plan: "Black Friday: 30% off the first year, applied at checkout (code BF26GYT)". No end date is stated for the annual code.)
+title: GetYouTubeTranscript annual plan — Black Friday
+provider: GetYouTubeTranscript
+category: ai_tool_api
+discount: 30% off the first year of the annual plan
+regular_price: $54/year
+promo_code: BF26GYT
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date for the annual code; the Black Friday window end (3 Dec) is used.
+source_url: https://getyoutubetranscript.com/pricing
+verified_date: 2026-11-28
+description: YouTube transcript API, MCP server and Chrome extension, billed in credits.

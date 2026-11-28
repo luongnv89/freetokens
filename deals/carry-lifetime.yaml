@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://carry.md/ ("Save $20 on a lifetime license — $59 $79 through Dec 1.")
+title: Carry lifetime license — Black Friday
+provider: Carry
+category: ai_tool_api
+discount: Save $20 on a lifetime license
+regular_price: $79 one-time
+deal_price: $59 one-time
+occasion: black_friday
+expiry_date: 2026-12-01
+source_url: https://carry.md/
+verified_date: 2026-11-28
+description: Chrome and Edge extension that saves ChatGPT, Claude, Gemini and Grok chats as local Markdown files.

@@ -1,0 +1,14 @@
+# Verified 2026-11-28 against https://postnitro.ai/black-friday-deals ("40% off Creator+ and Team+ yearly, 16.7% off monthly. Ends Nov 30." / "Valid on Creator+ and Team+ from November 1 to November 30.")
+title: PostNitro Creator+ and Team+ — Black Friday
+provider: PostNitro
+category: ai_tool_api
+discount: 40% off Creator+ and Team+ yearly, 16.7% off monthly
+regular_price: $30/month (Creator+)
+deal_price: $18/month billed yearly (Creator+)
+promo_code: BF26A
+occasion: black_friday
+start_date: 2026-11-01
+expiry_date: 2026-11-30
+source_url: https://postnitro.ai/black-friday-deals
+verified_date: 2026-11-28
+description: AI carousel and social post designer. Code BF26A for annual, BF26M for monthly; the discount recurs on every renewal.

@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://clipugc.com/black-friday ("Get 50% off your first 2 months on any plan." / "Offer valid on web subscriptions with code BLACKFRIDAY until December 6, 2026.")
+title: ClipUGC plans — Black Friday
+provider: ClipUGC
+category: ai_tool_api
+discount: 50% off your first 2 months on any plan
+regular_price: $14.99/month (Professional)
+deal_price: $7.50/month (Professional)
+promo_code: BLACKFRIDAY
+occasion: black_friday
+expiry_date: 2026-12-06
+source_url: https://clipugc.com/black-friday
+verified_date: 2026-11-28
+description: AI influencer UGC video maker. Web subscriptions only, monthly plans.

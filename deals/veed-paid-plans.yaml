@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://www.veed.io/tools/black-friday ("Take 30% off an annual plan or your first month on monthly with code BLACKFRIDAY30" / "Valid November 24 to December 2, 2026")
+title: VEED paid plans — Black Friday
+provider: VEED
+category: ai_tool_api
+discount: 30% off the first year of an annual plan or your first month on monthly
+promo_code: BLACKFRIDAY30
+occasion: black_friday
+start_date: 2026-11-24
+expiry_date: 2026-12-02
+source_url: https://www.veed.io/tools/black-friday
+verified_date: 2026-11-28
+description: Every paid plan except Enterprise, no country restrictions. The code works once per subscription; monthly plans renew at the regular price after the first month.

@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://pdfpals.com/buy ("Black Friday: Basic $59 $47.20 and Plus $99 $79.20, 20% off until December 1. Code BF20 is applied at checkout." / "For the first time, a lifetime license: $149 until December 1")
+title: PDF Pals licenses — Black Friday
+provider: PDF Pals
+category: ai_tool_api
+discount: 20% off Basic and Plus; Lifetime for $149 instead of $249
+regular_price: $249 (Lifetime)
+deal_price: $149 (Lifetime)
+promo_code: BF20
+occasion: black_friday
+expiry_date: 2026-12-01
+source_url: https://pdfpals.com/buy
+verified_date: 2026-11-28
+description: Mac app for chatting with PDFs. BF20 applies to Basic ($47.20) and Plus ($79.20); the Lifetime price needs no code.

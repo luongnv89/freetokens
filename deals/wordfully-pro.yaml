@@ -1,0 +1,14 @@
+# Verified 2026-11-28 against https://wordfully.ai/c/BLACKFRIDAY2026 ("Black Friday Get 50% off Wordfully Pro BLACKFRIDAY2026" / "Yearly 50% off first year" / Pro "$4.5 $9/ month")
+title: Wordfully Pro — Black Friday
+provider: Wordfully
+category: ai_tool_api
+discount: 50% off Wordfully Pro
+regular_price: $9/month
+deal_price: $4.50/month
+promo_code: BLACKFRIDAY2026
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date; the Black Friday window end (3 Dec) is used.
+source_url: https://wordfully.ai/c/BLACKFRIDAY2026
+verified_date: 2026-11-28
+description: AI writing assistant and grammar checker. For new paying customers only; cannot be combined with other offers.

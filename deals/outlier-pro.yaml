@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://outlier.host/download/ ("Outlier Pro: $39 once · Black Friday sale: $16.99 once through December 2. Then $39.")
+title: Outlier Pro — Black Friday
+provider: Outlier
+category: ai_tool_api
+discount: Pro for $16.99 once instead of $39
+regular_price: $39 one-time
+deal_price: $16.99 one-time
+occasion: black_friday
+expiry_date: 2026-12-02
+source_url: https://outlier.host/download/
+verified_date: 2026-11-28
+description: Local AI chat app for Apple Silicon Macs (M1 or newer, macOS 15 or later). The licence covers up to 3 Macs.

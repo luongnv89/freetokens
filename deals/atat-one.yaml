@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://atatapp.com/black-friday ("Through Dec 15, AtAt One is at its lowest price of the year." / Yearly "$39 first year, regularly $59" / "Ends Dec 15 at 11:59 PM UTC")
+title: AtAt One — Black Friday
+provider: AtAt
+category: ai_tool_api
+discount: $39 first year (yearly) or $89 lifetime
+regular_price: $59/year
+deal_price: $39 first year
+occasion: black_friday
+expiry_date: 2026-12-15
+source_url: https://atatapp.com/black-friday
+verified_date: 2026-11-28
+description: Mac app that calls an AI from any text field with @@. No code needed. Monthly stays $9 a month and is not part of the sale; Lifetime is $89 once, regularly $169.

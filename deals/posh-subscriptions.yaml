@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://poshtui.com/black-friday ("30% off POSH, for as long as you stay subscribed" / "Code BLACKFRIDAY2026 · until December 2, 2026")
+title: POSH subscriptions — Black Friday
+provider: POSH
+category: coding_agent
+discount: 30% off for as long as you stay subscribed
+regular_price: €45/year
+deal_price: €31.50/year
+promo_code: BLACKFRIDAY2026
+occasion: black_friday
+expiry_date: 2026-12-02
+source_url: https://poshtui.com/black-friday
+verified_date: 2026-11-28
+description: Version-matched Ruby and Rails docs for coding agents via a CLI and MCP server. New subscriptions only.

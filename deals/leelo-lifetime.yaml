@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://leelo-ai.com/black-friday ("Lifetime Pro for $149 instead of $199 (80,000 credits every month)" / "It runs from November 24, 00:00 to December 1, 23:59, Pacific time.")
+title: Leelo Lifetime — Black Friday
+provider: Leelo
+category: ai_tool_api
+discount: Lifetime Pro for $149 instead of $199; Lifetime Basic $59 instead of $79
+regular_price: $199 one-time (Lifetime Pro)
+deal_price: $149 one-time (Lifetime Pro)
+occasion: black_friday
+start_date: 2026-11-24
+expiry_date: 2026-12-01
+source_url: https://leelo-ai.com/black-friday
+verified_date: 2026-11-28
+description: AI voice studio (text-to-speech, cloning, dubbing). No code needed. Lifetime deals only for accounts without a plan or lifetime deal, 500 places each.
