@@ -29,6 +29,12 @@
       "url": "https://freeai.alexai.top/",
       "title": "Free AI API Credits & Free Model Offers (2026, Updated Weekly)",
       "text": "Nscale, Serverless Inference: $5 of free credit. End date not published. Last verified Oct 27, 2026."
+    },
+    {
+      "type": "link",
+      "url": "https://docs.nscale.com/docs/getting-started/overview",
+      "title": "Overview | Nscale Docs",
+      "text": "From the dashboard, add a minimum of $5 of credit to start using our service"
     }
   ]
 }
