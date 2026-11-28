@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-27T18:08:15Z",
-  "count": 355,
-  "active_count": 290,
+  "generated_at": "2026-11-28T02:07:03Z",
+  "count": 358,
+  "active_count": 293,
   "expired_count": 65,
   "offers": [
     {
@@ -5390,6 +5390,51 @@
       "review_status": "verified",
       "signup": "required",
       "status": "expired"
+    },
+    {
+      "slug": "deepinfra-nvidia-inception-nemotron",
+      "title": "DeepInfra x NVIDIA Inception — 10B Free Nemotron Tokens",
+      "provider": "DeepInfra",
+      "category": "startup_program",
+      "amount": "$1,000 credit grant (10 billion tokens at Nemotron 3 Ultra cached-input prices) for the NVIDIA Nemotron family, valid 12 months from approval, for NVIDIA Inception startups that raised $250K–$10M and were founded in the last 5 years; stacks with DeepStart",
+      "expiry_date": null,
+      "source_url": "https://deepinfra.com/nvidia-inception",
+      "verified_date": "2026-11-28",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "far-labs-ai-early-access-1m-tokens",
+      "title": "FAR AI Early Access — 1M Free Inference Tokens",
+      "provider": "FAR Labs",
+      "category": "api_provider",
+      "amount": "1 million free inference tokens for builders who join the FAR AI early-access waitlist (access granted after use-case review)",
+      "expiry_date": null,
+      "source_url": "https://farlabs.ai/join-as-ai-builder",
+      "verified_date": "2026-11-28",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
+    },
+    {
+      "slug": "packet-ai-token-factory-free-launch",
+      "title": "packet.ai Token Factory — Free at Launch",
+      "provider": "packet.ai",
+      "category": "api_provider",
+      "amount": "Free OpenAI-compatible inference for one month at launch (DeepSeek V4.1 Flash NVFP4 and MiniMax M3.1 Flash with 1M context, Qwen2.5 1.5B Instruct with 32K context), then billed per 1M tokens; no card required; no published rate limit",
+      "expiry_date": null,
+      "source_url": "https://packet.ai/token-factory",
+      "verified_date": "2026-11-28",
+      "added_date": null,
+      "verification": "social_proof",
+      "review_status": "under-review",
+      "signup": "required",
+      "status": "active"
     }
   ],
   "always_free": [

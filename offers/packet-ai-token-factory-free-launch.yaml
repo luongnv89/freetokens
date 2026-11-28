@@ -1,0 +1,13 @@
+# Hunted 2026-11-28 by offer-hunter; verified against https://packet.ai/token-factory
+# ("Free at launch (one month), then billed per 1M tokens.")
+# Lead: https://packet.ai/blog/token-factory-free-llm-api
+title: packet.ai Token Factory — Free at Launch
+provider: packet.ai
+category: api_provider
+amount: Free OpenAI-compatible inference for one month at launch (DeepSeek V4.1 Flash NVFP4 and MiniMax M3.1 Flash with 1M context, Qwen2.5 1.5B Instruct with 32K context), then billed per 1M tokens; no card required; no published rate limit
+expiry_date: null
+source_url: https://packet.ai/token-factory
+verified_date: 2026-11-28
+verification: social_proof
+review_status: under-review
+signup: required

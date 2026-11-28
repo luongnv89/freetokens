@@ -1,0 +1,17 @@
+{
+  "summary": "DeepInfra gives approved NVIDIA Inception member startups a $1,000 credit grant, spendable across the NVIDIA Nemotron family at list prices. At Nemotron 3 Ultra cached-input prices ($0.10/M) that is 10,000,000,000 tokens; output and uncached input use the credits up faster. Credits are valid for 12 months from approval. To qualify, a startup must have raised between $250K and $10M USD, have been founded in the last 5 years, and hold NVIDIA Inception membership. It is available in most countries, but some regions are excluded by export regulations. Approved startups also receive the standard DeepStart grant (about 50B tokens), and one application covers both. Applications are reviewed within a few business days.",
+  "claim_steps": [
+    "Open https://deepinfra.com/nvidia-inception and click Apply now",
+    "Provide your Inception membership URL so DeepInfra can confirm it (no member ID needed)",
+    "Tell DeepInfra about your startup",
+    "Wait for review (a few business days); approved startups receive the Nemotron grant plus the DeepStart grant"
+  ],
+  "social_proof": [
+    {
+      "type": "link",
+      "url": "https://deepinfra.com/nvidia-inception",
+      "title": "NVIDIA Inception x DeepStart | 10B free Nemotron tokens | DeepInfra",
+      "text": "10,000,000,000 free tokens* Usable on the NVIDIA Nemotron family. * at NVIDIA Nemotron 3 Ultra cached-input prices ($0.10/M). Your grant is $1,000 in credits, spendable across the Nemotron family at list prices. Valid for 12 months from approval. Approved Inception startups also receive the standard DeepStart grant. One application covers both."
+    }
+  ]
+}
