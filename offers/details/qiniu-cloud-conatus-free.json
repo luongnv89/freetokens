@@ -1,5 +1,5 @@
 {
-  "summary": "Qiniu Cloud's Conatus Free event (model ID qiniu/conatus-free) runs from Oct 24, 2026 00:00 to Nov 30, 2026 23:59. Logged-in users who complete real-name verification get 100 million free tokens per day; a single credited top-up over ¥100 raises this to 1 billion per day (multiple top-ups do not add up). Quota resets daily at 00:00 and does not carry over. Unverified or logged-out users get 0 tokens. All API keys under one account share the quota, and calls stop when it is used up. No separate event application is needed.",
+  "summary": "Qiniu Cloud's Conatus Free event (model ID qiniu/conatus-free) runs from Oct 24, 2026 00:00 to Dec 31, 2026 23:59 (Beijing time). Logged-in users who complete real-name verification get 100 million free tokens per day; a single credited top-up over ¥100 raises this to 1 billion per day (multiple top-ups do not add up). Quota resets daily at 00:00 and does not carry over. Unverified or logged-out users get 0 tokens. All API keys under one account share the quota, and calls stop when it is used up. No separate event application is needed.",
   "claim_steps": [
     "Log in to your Qiniu Cloud account and complete real-name verification in the console",
     "Create an API key on the console's model page (all keys on the account share the free quota)",
