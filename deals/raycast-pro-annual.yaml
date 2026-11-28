@@ -1,0 +1,11 @@
+# Verified 2026-11-28 against https://www.raycast.com/blog/black-friday-2026 ("30% off annual Individual Pro and Teams Pro plans with code BFPRO" / "15% off annual Individual Pro+ plans with code BFPROPLUS" / "This promotion is exclusively for new subscribers on annual plans. The offer is available from November 27, 2026, until December 1, 2026 at 23:59 UTC.")
+title: Raycast Pro annual — Black Friday
+provider: Raycast
+category: ai_subscription
+discount: 30% off annual Individual Pro and Teams Pro plans (new subscribers)
+promo_code: BFPRO
+occasion: black_friday
+start_date: 2026-11-27
+expiry_date: 2026-12-01
+source_url: https://www.raycast.com/blog/black-friday-2026
+verified_date: 2026-11-28

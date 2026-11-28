@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://fluentmac.app/ ("Black Friday: 25% off with code BF2026, until Dec 1" / "Basic $49 $36.75 1 Mac")
+title: Fluent 2 licenses — Black Friday
+provider: Fluent
+category: ai_subscription
+discount: 25% off
+regular_price: $49 (Basic)
+deal_price: $36.75 (Basic)
+promo_code: BF2026
+occasion: black_friday
+expiry_date: 2026-12-01
+source_url: https://fluentmac.app/
+verified_date: 2026-11-28
