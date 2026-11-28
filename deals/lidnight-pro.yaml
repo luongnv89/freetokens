@@ -1,0 +1,12 @@
+# Verified 2026-11-28 against https://lidnight.app/en/ ("Black Friday price through Dec 1 (regularly $9.99 for 1 Mac, $14.99 for 3)" / Pro "$4.99 for 1 Mac, $7.50 for 3 Macs")
+title: Lidnight Pro — Black Friday
+provider: Lidnight
+category: coding_agent
+discount: Pro for $4.99 (1 Mac) or $7.50 (3 Macs), one-time
+regular_price: $9.99 one-time (1 Mac)
+deal_price: $4.99 one-time (1 Mac)
+occasion: black_friday
+expiry_date: 2026-12-01
+source_url: https://lidnight.app/en/
+verified_date: 2026-11-28
+description: Mac menu bar app that keeps the Mac awake while Claude Code or Codex agents run and sends approvals to your phone. Apple Silicon, macOS 13 or later.

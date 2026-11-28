@@ -1,0 +1,11 @@
+# Verified 2026-11-28 against https://tryvoiceink.com/black-friday ("40% off VoiceInk, for life." / "Ends December 5 · use code BFVI2640 at checkout")
+title: VoiceInk — Black Friday
+provider: VoiceInk
+category: ai_tool_api
+discount: 40% off VoiceInk
+promo_code: BFVI2640
+occasion: black_friday
+expiry_date: 2026-12-05
+source_url: https://tryvoiceink.com/black-friday
+verified_date: 2026-11-28
+description: On-device dictation app for Mac, one-time purchase.

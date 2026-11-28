@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://transyncai.com/black-friday/ ("get $20 off a year of Personal Premium or a 100-hour time card" / "Orders created from Nov 24, 00:00 to Dec 1, 23:59 UTC qualify.")
+title: Transync AI Personal Premium — Black Friday
+provider: Transync AI
+category: ai_tool_api
+discount: $20 off a year of Personal Premium or a 100-hour time card
+regular_price: $89.99/year
+deal_price: $69.99 first year
+occasion: black_friday
+start_date: 2026-11-24
+expiry_date: 2026-12-01
+source_url: https://transyncai.com/black-friday/
+verified_date: 2026-11-28
+description: Real-time AI speech translation for meetings. New annual subscriptions only (renewals excluded), one per account; the 100-hour card is $49.99 instead of $69.99. Not available in the China region.

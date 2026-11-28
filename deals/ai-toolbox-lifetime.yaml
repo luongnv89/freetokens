@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://ai-toolbox.co/pricing ("Black Friday sale60% off Lifetime and All Access through November 30." / "Code BF2026 is applied automatically at checkout.")
+title: AI Toolbox Lifetime and All Access — Black Friday
+provider: AI Toolbox
+category: ai_tool_api
+discount: 60% off Lifetime and All Access
+regular_price: $99 one-time (ChatGPT Lifetime)
+deal_price: $39.60 one-time (ChatGPT Lifetime)
+promo_code: BF2026
+occasion: black_friday
+expiry_date: 2026-11-30
+source_url: https://ai-toolbox.co/pricing
+verified_date: 2026-11-28
+description: Chrome extension adding folders, search and export to ChatGPT, Gemini, Claude and Grok. Monthly, Annual and Teams plans are not included.

@@ -1,0 +1,14 @@
+# Verified 2026-11-28 against https://cutfac.com/pricing ("BF2026 takes 40% off new one-time licenses: $29.40 for one Mac, $41.40 for three, $59.40 for five.")
+title: Cutfac licenses — Black Friday
+provider: Cutfac
+category: ai_tool_api
+discount: 40% off new one-time licenses
+regular_price: $49 one-time (1 Mac)
+deal_price: $29.40 one-time (1 Mac)
+promo_code: BF2026
+occasion: black_friday
+expiry_date: 2026-12-03
+expiry_note: The page names no end date; the Black Friday window end (3 Dec) is used.
+source_url: https://cutfac.com/pricing
+verified_date: 2026-11-28
+description: Mac app that makes short-form videos with your coding agent (Claude Code or Codex). New licenses only.

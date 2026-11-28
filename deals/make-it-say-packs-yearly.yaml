@@ -1,0 +1,13 @@
+# Verified 2026-11-28 against https://makeitsay.com/pricing ("30% off Credit packs · Extra 40% off Pro & Studio yearly (1st yr)" / "Auto-applied at checkout (BF2026 & BF2026YEAR)" / "Ends Dec 1")
+title: Make It Say credit packs and yearly plans — Black Friday
+provider: Make It Say
+category: ai_tool_api
+discount: 30% off credit packs; extra 40% off Pro and Studio yearly (first year)
+regular_price: $10 (40 edits)
+deal_price: $7 (40 edits)
+promo_code: BF2026
+occasion: black_friday
+expiry_date: 2026-12-01
+source_url: https://makeitsay.com/pricing
+verified_date: 2026-11-28
+description: AI that edits text inside images in the same font. Codes BF2026 (packs) and BF2026YEAR (yearly) are applied at checkout; yearly renews at the regular rate.
